@@ -56,12 +56,16 @@ $(function(){
  * Behavior for the tabs widget.
  */
 $(function() {
-	const tab = '.tabs a';
+	const container = '.tabs-container'
+	const tab = '.tabs p a';
 	const content = '.tab-content';
 
-	// Add the active class to the first tab, in case it wasn't already set in the markup.
-	$(tab).removeClass('is-active');
-	$(tab + ':first').addClass('is-active');
+	// Add the active class to the first tab in each tab group,
+	// in case it wasn't already set in the markup.
+	$(container).each(function () {
+		$(tab, this).removeClass('is-active');
+		$(tab + ':first', this).addClass('is-active');
+	});
 
 	$(tab).on('click', function(e) {
 		e.preventDefault();
@@ -74,11 +78,12 @@ $(function() {
 		$(content).each(function(i) {
 			if (i === activeIndex) {
 				$(this).show();
-			} else {
-				$(this).hide();
+				$(this).siblings(content).hide();
 			}
 		});
+		console.log(activeIndex);
 	});
+
 });
 
 
@@ -204,5 +209,16 @@ $(document).ready( function() {
 		} else if ( pos <= 64 ){
 			$(element).css("top", pos + "px");
 		}
+	})
+})
+
+/*
+ * Nested left nav toggle behavior
+ */
+
+$(document).ready( function() {
+	$(".sidebar--children-toggle").click(function() {
+		$(this).toggleClass('open');
+		$(this).siblings('.sidebar--children').toggleClass('open');
 	})
 })

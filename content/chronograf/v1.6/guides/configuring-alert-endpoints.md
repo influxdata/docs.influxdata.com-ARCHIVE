@@ -88,7 +88,7 @@ The following steps describe how to create the API access token:
 
 Your token appears in the table just above the **Create new token** section:
 
-![HipChat token](/img/chronograf/1.6/g-eventhandlers-hipchattoken.png)
+![HipChat token](/img/chronograf/v1.6/g-eventhandlers-hipchattoken.png)
 
 
 ### Kafka

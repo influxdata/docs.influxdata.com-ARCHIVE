@@ -2,7 +2,6 @@
 title: Step 1 - Installing InfluxDB Enterprise meta nodes
 aliases:
     - /enterprise/v1.6/production_installation/meta_node_installation/
-
 menu:
   enterprise_influxdb_1_6:
     weight: 10
@@ -24,20 +23,18 @@ will need to reinstall InfluxDB Enterprise with the Production Installation
 process before using the product in a production environment.
 
 <br>
-# Meta Node Setup Description and Requirements
+# Meta node setup description and requirements
 
-The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node)
-and each meta node runs on its own server.
+The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node), with each meta node running on its own server.
 <br>
 You **must** have a minimum of three meta nodes in a cluster.
 InfluxDB Enterprise clusters require at least three meta nodes and an __**odd number**__
 of meta nodes for high availability and redundancy.
-We do not recommend having more than three meta nodes unless your servers
-and/or the communication between the servers have chronic reliability issues.
+InfluxData does not recommend having more than three meta nodes unless your servers
+or the communication between the servers have chronic reliability issues.
 <br>
-Note: that there is no requirement for each meta node to run on its own server.  But, obviously, deploying
-multiple meta nodes on the same server creates a larger point of potential failure if that particular node is unresponsive.
-Best practice is to deploy the meta nodes on relatively small footprint servers.
+Note: Deploying multiple meta nodes on the same server is strongly discouraged since it creates a larger point of potential failure if that particular server is unresponsive.
+InfluxData recommends deploying meta nodes on relatively small footprint servers.
 
 See the
 [Clustering Guide](/enterprise_influxdb/v1.6/concepts/clustering#optimal-server-counts)
@@ -101,23 +98,24 @@ Perform the following steps on each meta server.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.2-c1.6.2_amd64.deb
-sudo dpkg -i influxdb-meta_1.6.2-c1.6.2_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.4-c1.6.4_amd64.deb
+sudo dpkg -i influxdb-meta_1.6.4-c1.6.4_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.2_c1.6.2.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.6.2_c1.6.2.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
 ```
 
 ### II. Edit the configuration file
 
 In `/etc/influxdb/influxdb-meta.conf`:
 
-* uncomment and set `hostname` to the full hostname of the meta node
-* set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
+* Uncomment `hostname` and set to the full hostname of the meta node.
+* Uncomment `internal-shared-secret` in the `[meta]` section and set it to a long pass phrase to be used in JWT authentication for intra-node communication. This value must the same for all of your meta nodes and match the `[meta] meta-internal-shared-secret` settings in the configuration files of your data nodes.
+* Set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
 <dt>
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
@@ -202,9 +200,9 @@ The expected output is:
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.6.2-c1.6.2
-    enterprise-meta-02:8091   1.6.2-c1.6.2
-    enterprise-meta-03:8091   1.6.2-c1.6.2
+    enterprise-meta-01:8091   1.6.4-c1.6.4
+    enterprise-meta-02:8091   1.6.4-c1.6.4
+    enterprise-meta-03:8091   1.6.4-c1.6.4
 
 
 Note that your cluster must have at least three meta nodes.

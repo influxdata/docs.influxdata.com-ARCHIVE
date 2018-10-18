@@ -39,7 +39,7 @@ Examples:
 ```sh
   sudo systemctl start chronograf --develop --reporting-disabled
 ```
-* Mac OS X: Using shortcut options to set develop mode and disable reporting
+* macOS: Using shortcut options to set develop mode and disable reporting
 
 ```sh
   chronograf -d -r

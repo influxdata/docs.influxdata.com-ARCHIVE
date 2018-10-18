@@ -11,8 +11,8 @@ menu:
 ### Configuration file location by installation type
 
 > * Debian or RPM package: `/opt/chronograf/config.toml`
-> * OS X via Homebrew: `/usr/local/etc/chronograf.toml`
-> * Standalone OS X binary: `chronograf-0.x.x/chronograf.toml`
+> * macOS via Homebrew: `/usr/local/etc/chronograf.toml`
+> * Standalone macOS binary: `chronograf-0.x.x/chronograf.toml`
 
 ### Chronograf configuration file
 
