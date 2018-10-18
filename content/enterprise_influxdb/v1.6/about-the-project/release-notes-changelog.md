@@ -12,7 +12,7 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For de
 
 ### Breaking changes
 
-#### Require `internal-shared-secret` if meta auth enabled.
+#### Require `internal-shared-secret` if meta auth enabled
 
 If `[meta] auth-enabled` is set to `true`, the `[meta] internal-shared-secret` value must be set in the configuration.
 If it is not set, an error will be logged and `influxd-meta` will not start.
@@ -21,9 +21,9 @@ If it is not set, an error will be logged and `influxd-meta` will not start.
 #### Review production installation configurations
 
 The [Production Installation](/enterprise_influxdb/v1.6/production_installation/)
-documentation have been updated to fix errors in configuration settings, including the correct use of `shared-secret` instead of the required `internal-shared-secret` and missing steps for configuration settings for data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that you are using the correct configuration settings to properly enable JWT authentication for intra-node communication.
+documentation has been updated to fix errors in configuration settings, including changing `shared-secret` to `internal-shared-secret` and adding missing steps for configuration settings of data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that the configuration settings properly enable JWT authentication for intra-node communication.
 
-The following summarizes the expected settings for proper configuration  the use of JWT authentication for intra-node communication:
+The following summarizes the expected settings for proper configuration of JWT authentication for intra-node communication:
 
 ##### Data node configuration files (`influxdb.conf`)
 
