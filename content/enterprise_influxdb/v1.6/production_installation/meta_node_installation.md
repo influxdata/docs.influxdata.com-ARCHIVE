@@ -2,7 +2,6 @@
 title: Step 1 - Installing InfluxDB Enterprise meta nodes
 aliases:
     - /enterprise/v1.6/production_installation/meta_node_installation/
-
 menu:
   enterprise_influxdb_1_6:
     weight: 10
@@ -24,20 +23,18 @@ will need to reinstall InfluxDB Enterprise with the Production Installation
 process before using the product in a production environment.
 
 <br>
-# Meta Node Setup Description and Requirements
+# Meta node setup description and requirements
 
-The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node)
-and each meta node runs on its own server.
+The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node), with each meta node running on its own server.
 <br>
 You **must** have a minimum of three meta nodes in a cluster.
 InfluxDB Enterprise clusters require at least three meta nodes and an __**odd number**__
 of meta nodes for high availability and redundancy.
-We do not recommend having more than three meta nodes unless your servers
-and/or the communication between the servers have chronic reliability issues.
+InfluxData does not recommend having more than three meta nodes unless your servers
+or the communication between the servers have chronic reliability issues.
 <br>
-Note: that there is no requirement for each meta node to run on its own server.  But, obviously, deploying
-multiple meta nodes on the same server creates a larger point of potential failure if that particular node is unresponsive.
-Best practice is to deploy the meta nodes on relatively small footprint servers.
+Note: Deploying multiple meta nodes on the same server is strongly discouraged since it creates a larger point of potential failure if that particular server is unresponsive.
+InfluxData recommends deploying meta nodes on relatively small footprint servers.
 
 See the
 [Clustering Guide](/enterprise_influxdb/v1.6/concepts/clustering#optimal-server-counts)
