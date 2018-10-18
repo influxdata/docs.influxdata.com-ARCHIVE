@@ -6,6 +6,61 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.6.4 [2018-10-16]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
+
+### Breaking changes
+
+#### Require `internal-shared-secret` if meta auth enabled
+
+If `[meta] auth-enabled` is set to `true`, the `[meta] internal-shared-secret` value must be set in the configuration.
+If it is not set, an error will be logged and `influxd-meta` will not start.
+* Previously, authentication could be enabled without setting an `internal-shared-secret`. The security risk was that an unset (empty) value could be used for the `internal-shared-secret`, seriously weakening the JWT authentication used for intra-node communication.
+
+#### Review production installation configurations
+
+The [Production Installation](/enterprise_influxdb/v1.6/production_installation/)
+documentation has been updated to fix errors in configuration settings, including changing `shared-secret` to `internal-shared-secret` and adding missing steps for configuration settings of data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that the configuration settings properly enable JWT authentication for intra-node communication.
+
+The following summarizes the expected settings for proper configuration of JWT authentication for intra-node communication:
+
+##### Data node configuration files (`influxdb.conf`)
+
+**[http] section**
+
+* `auth-enabled = true`
+  - Enables authentication. Default value is false.
+
+**[meta] section**
+
+* `meta-auth-enabled = true`
+  - Must match for meta nodes' `[meta] auth-enabled` settings.
+- `meta-internal-shared-secret = "<long-pass-phrase>"`
+  - Must be the same pass phrase on all meta nodes' `[meta] internal-shared-secret` settings.
+  - Used by the internal API for JWT authentication. Default value is `""`.
+  - A long pass phrase is recommended for stronger security.
+
+##### Meta node configuration files (`meta-influxdb.conf`)
+
+**[meta]** section
+
+* `auth-enabled = true`
+  * Enables authentication. Default value is `false` .
+* `internal-shared-secret = "<long-pass-phrase>"`
+  * Must same pass phrase on all data nodes' `[meta] meta-internal-shared-secret`
+  settings.
+  * Used by the internal API for JWT authentication. Default value is
+`""`.
+  * A long pass phrase is recommended for better security.
+
+>**Note:** To provide encrypted intra-node communication, you must enable HTTPS. Although the JWT signature is encrypted, the the payload of a JWT token is encoded, but is not encrypted.
+
+### Bug fixes
+
+* Reject `influxd-ctl update-data` from one existing host to another.
+* Require `internal-shared-secret` if meta auth enabled.
+
 
 ## v1.6.2 [08-27-2018]
 
