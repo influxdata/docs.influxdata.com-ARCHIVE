@@ -71,7 +71,7 @@ Often in this scenario, rather than replacing the entire host, you just need to 
 Host information remains the same, but once started again, the `influxd` process doesn't know
 to communicate with the meta nodes so the AE process can't start the shard-sync process.
 
-To resolve this, log in to a meta node and use the `update-data` command
+To resolve this, log in to a meta node and use the [`influxd-ctl update-data`](/enterprise_influxdb/v1.6/administration/cluster-commands/#update-data command
 to [update the failed data node to itself](#2-replace-the-old-data-node-with-the-new-data-node).
 
 ```bash
