@@ -12,7 +12,13 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For de
 
 ### Breaking changes
 
+If `[meta] auth-enabled` is set to `true` and a `[meta] internal-shared-secret` value has not be set, this error is returned: "internal-shared-secret is blank and must be set in config when auth is enabled".
+* Previously, it was possible to enable authentication without setting an `internal-shared-secret`. This security risk is addressed by requiring a value to be assigned to the `internal-shared-secret` in the 
 
+### Bug fixes
+
+* Reject `influxd-ctl update-data` from one existing host to another.
+* Require `internal-shared-secret` if meta auth enabled.
 
 
 ## v1.6.2 [08-27-2018]

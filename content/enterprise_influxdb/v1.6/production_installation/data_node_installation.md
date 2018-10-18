@@ -87,7 +87,7 @@ installation.
 A healthy cluster requires that every meta and data node can communicate
 with every other meta and data node.
 
-## Step 2: Set up, configure, and start the data services
+## Step 2: Set up, configure, and start the data node services
 
 Perform the following steps on each data node.
 
@@ -107,14 +107,14 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.4_c1.6.4.x8
 sudo yum localinstall influxdb-data-1.6.4_c1.6.4.x86_64.rpm
 ```
 
-### II. Edit the configuration file
+### II. Edit the data node configuration files
 
 First, in `/etc/influxdb/influxdb.conf`:
 
 * Uncomment `hostname` at the top of the file and set it to the full hostname of the data node.
 * Uncomment `auth-enabled` in the `[http]` section and set it to `true`.
 * Uncomment `meta-auth-enabled` in the `[meta]` section and set it to `true`.
-* Uncomment `meta-internal-shared-secret` in the `[meta]` section and set it to a long pass phrase. The internal shared secret is used in JWT authentication for intra-node communication. This value must be same for all of your data nodes and match the `internal-shared-secret` value in the configuration files of your meta nodes.
+* Uncomment `meta-internal-shared-secret` in the `[meta]` section and set it to a long pass phrase. The internal shared secret is used in JWT authentication for intra-node communication. This value must be same for all of your data nodes and match the `[meta] internal-shared-secret` value in the configuration files of your meta nodes.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
