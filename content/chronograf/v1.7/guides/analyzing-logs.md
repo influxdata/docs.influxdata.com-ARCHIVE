@@ -38,25 +38,29 @@ Any tag values included with the log entry can be used as a filter.
 
 To remove filters, click the `×` next to the tag key by which you no longer want to filter.
 
+
+* Can search by a particular field/columns
+* Search operators, including negative matches
+* can search different Columns
+* option to truncate or expand
+
 ### Selecting specific times
 In the log viewer, you can select time ranges from which to view logs.
 By default, logs are streamed and displayed relative to "now," but it is possible to view logs from a past window of time.
-Timeframe selection allows you to go to to a specific event and see logs both preceding and following that event.
-When viewing logs from a previous time window, first select the target time, then select the offset.
-The offset is used to define the upper and lower thresholds of the window from which logs are pulled.
+Timeframe selection allows you to go to to a specific event and see logs for a time window both preceding and following that event. The default window is one minute, meaning the graph shows logs from thirty seconds before and he target time. Click the dropdown menu change the window.
 
 ![Selecting time ranges](/img/chronograf/v1.7/logs-time-range.gif)
 
 ## Configuring the log viewer
 The log viewer can be customized to fit your specific needs.
-Open the log viewer configuration options by clicking the gear button in the top right corner of the log viewer.
+Open the log viewer configuration options by clicking the gear button in the top right corner of the log viewer. Once done, click the "Save" button to apply the changes.
 
 <img src="/img/chronograf/v1.7/logs-log-viewer-config-options.png" alt="Log viewer configuration options" style="width:100%;max-width:819px;"/>
 
 ### Severity colors
 Every log severity is assigned a color which is used in the display of log entries.
 To customize colors, select a color from the available color dropdown.
-Once done, click the "Save" button to apply the changes.
+
 
 ### Table columns
 Columns in the log viewer are auto-populated with all fields and tags associated with your log data.
