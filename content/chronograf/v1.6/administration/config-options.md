@@ -402,6 +402,6 @@ Environment variable: `$GENERIC_API_URL`
 
 #### `--generic-api-key=`
 
-The key that returns OpenID UserInfo-compatible information.
+The JSON lookup key into OpenID UserInfo (Azure should be `userPrincipalName`).
 
 Environment variable: `$GENERIC_API_KEY`
