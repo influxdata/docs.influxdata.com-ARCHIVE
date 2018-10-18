@@ -1,5 +1,5 @@
 ---
-title: Analyzing logs with Chronograph
+title: Analyzing logs with Chronograf
 description: View, search, filter, visualize, and analyze log information using Chronograf and InfluxDB.
 menu:
   chronograf_1_7:
