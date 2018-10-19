@@ -12,7 +12,7 @@ The InfluxDB OSS Stats dashboard is useful for monitoring the health of your Inf
 
 > **Note:** The queries below use the `_internal` database, which is enabled by default on InfluxDB OSS instances.
 
-## Continuous Queries Executed / Minute
+## Continuous Queries Executed Per Minute
 
 ### Description
 
@@ -22,7 +22,7 @@ Displays the non-negative mean rate of change in continuous queries (CQs) execut
 
 `SELECT non_negative_derivative(mean(/.*/),60s) FROM "_internal".."cq" WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(null)"`
 
-### Metrics
+### Metric
 
 #### Continuous Queries
 
@@ -44,11 +44,11 @@ _______________
 
 Displays the current heap size.
 
-### Queries
+### Query
 
 `"SELECT mean("HeapInUse") FROM "_internal".."runtime" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Heap Size
 
@@ -74,7 +74,7 @@ Displays the number of shard write errors.
 
 `"SELECT non_negative_derivative(max("writeError"), 10s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### [Shard Write Errors]
 
@@ -96,11 +96,11 @@ ___________
 
 Displays the number of series (series cardinality) for the specified databases.
 
-### Queries
+### Query
 
 `"SELECT max("numSeries") AS "Series Cardinality" FROM "_internal".."database" WHERE time > :dashboardTime:  GROUP BY time(:interval:), "database" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Series Cardinality
 
@@ -178,17 +178,17 @@ Displays the duration, in nanoseconds, of the top 1% of HTTP requests.
 
 ____
 
-## Point Throughput / Minute by Hostname
+## Points Throughput Per Minute by Hostname
 
 ### Description
 
 Displays the number of points requested each minute, by hostname.
 
-### Queries
+### Query
 
 `"SELECT non_negative_derivative(max("pointReq"), 60s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
-### Metrics
+### Metric
 
 #### Point Requests
 
@@ -204,19 +204,19 @@ Displays the number of points requested each minute, by hostname.
 
 _____
 
-## Queries Executed / Minute
+## Queries Executed Per Minute
 
 ### Description
 
 Displays the number of queries executed per minute.
 
-### Queries
+### Query
 
 #### Queries Executed
 
  `"SELECT non_negative_derivative(mean("queriesExecuted"), 60s) AS "Queries Executed" FROM "_internal".."queryExecutor" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Queries Executed
 
@@ -232,7 +232,7 @@ Displays the number of queries executed per minute.
 
 _____
 
-## HTTP Requests / Minute
+## HTTP Requests Per Minute
 
 ### Description
 
