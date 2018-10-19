@@ -18,7 +18,7 @@ So that you don't have to constantly check the dashboard, you can create alerts 
 > When the `_internal` measurements are sent to the `telegraf` database using InfluxDB plugins, many
 > of the same field keys below are prepended with `infuxdb_`, but are otherwise the same field keys listed here.
 
-## Continuous Queries Executed / Minute
+## Continuous Queries Executed Per Minute
 
 Displays the non-negative mean rate of change in continuous queries (CQs) executed per minute.
 
@@ -46,7 +46,7 @@ _______________
 
 Displays the current heap size.
 
-### Queries
+### Query
 
 `"SELECT mean("HeapInUse") FROM "_internal".."runtime" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
@@ -172,17 +172,17 @@ Displays the duration, in nanoseconds, of the top 1% of HTTP requests.
 
 ____
 
-## Point Throughput / Minute by Hostname
+## Points Throughput Per Minute by Hostname
 
 Displays the number of points requested each minute, by hostname.
 
-### Queries
+### Query
 
 `"SELECT non_negative_derivative(max("pointReq"), 60s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
-### Metrics
+### Metric
 
-#### \[Point Requests\]
+#### Point Requests
 
  `non_negative_derivative(max("pointReq"), 60s)`
 
@@ -300,7 +300,7 @@ ____
 
 Displays the count of Anti-Entropy errors.
 
-### Queries
+### Query
 
 `"SELECT non_negative_derivative(mean("errors"),5m) AS "errors" FROM "_internal".""."ae" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
 
