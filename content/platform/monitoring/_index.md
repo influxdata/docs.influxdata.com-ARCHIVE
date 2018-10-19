@@ -26,10 +26,21 @@ and address anomalies as they happen.
 
 ## [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/dashboard-oss-monitoring/)
 
+The [InfluxDB OSS Cluster Stats monitoring dashboard](/platform/monitoring/dashboard-enterprise-monitoring) includes commonly monitored metrics that are important for monitoring and maintaining your InfluxDB OSS servers and for troubleshooting.
+
 ## [InfluxDB Enterprise Cluster Stats monitoring dashboard](/platform/monitoring/dashboard-enterprise-monitoring)
+
+The [InfluxDB Enterprise Cluster Stats monitoring dashboard](/platform/monitoring/dashboard-enterprise-monitoring) includes commonly monitored metrics that are important for monitoring and maintaining your InfluxDB Enterprise clusters and for troubleshooting.
 
 ## [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise dashboards](/platform/monitoring/measurements-internal/)
 
-## [Using the SHOW STATISTICS command to monitor InfluxDB](/platform/monitoring/show-statistics/)
+[Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise dashboards](/platform/monitoring/measurements-internal/) includes all available `_internal` database measurement statistics that can be used for monitoring, altering, and troubleshooting.
+
+## [Using the SHOW STATS command to monitor InfluxDB](/platform/monitoring/show-statistics/)
+
+[Using the SHOW STATS command to monitor InfluxDB](/platform/monitoring/show-statistics/) covers the use of the `SHOW STATS` command for current measurement statistics of InfluxDB servers and available (enabled) components.
 
 ## [Using the SHOW DIAGNOSTICS command to monitor InfluxDB](/platform/monitoring/show-diagnostics/)
+
+[Using the SHOW DIAGNOSTICS command to monitor InfluxDB](/platform/monitoring/show-diagnostics/)
+covers the use of the `SHOW DIAGNOSTICS` command to get current InfluxDB instance information, including build details, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics.
