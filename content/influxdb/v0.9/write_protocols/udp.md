@@ -14,7 +14,7 @@ To configure InfluxDB to support writes over UDP you must adjust your config fil
 
 Some OSes (most notably, Linux) place very restricive limits on the performance
 of UDP protocols.
-Recent versions of FreeBSD, OSX, and Windows do not have this
+Recent versions of FreeBSD, macOS, and Windows do not have this
 problem.
 It is _highly_ recommended that you increase these OS limits to
 8MB before trying to run large amounts of UDP traffic to your instance.

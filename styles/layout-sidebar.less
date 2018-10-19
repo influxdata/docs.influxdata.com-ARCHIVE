@@ -90,7 +90,14 @@
       a:hover {
         color: @sidebar-hover;
       }
+    }
 
+    ul {
+      padding-left: 3rem;
+      li {
+        position: relative;
+        margin-bottom: .25rem;
+      }
     }
   }
 }
@@ -135,13 +142,56 @@
     .gradient-h(@c-rainforest,@c-pool);
   }
 }
+
+ul.sidebar--children {
+  padding-left: 1.5rem;
+  margin-left: -.5rem;
+  height: 0;
+  overflow: hidden;
+
+  &.open {
+    height: auto;
+  }
+
+  & li:first-child {
+    margin-top: .25rem;
+  }
+}
+
+.sidebar--children-toggle {
+  position: absolute;
+  left: -2.25rem;
+  top: .2rem;
+  height: .9rem;
+  width: .9rem;
+  background: @sidebar-toggle-bg;
+  border-radius: 50%;
+  transition: all .2s;
+
+  &:before {
+    content: "+";
+    color: @sidebar-toggle-icon;
+    display: block;
+    text-align: center;
+  }
+
+  &.open:before {
+    content: "–";
+  }
+
+  &:hover {
+    background: @sidebar-title-color;
+    &:before {
+      color: @g20-white;
+    }
+  }
+}
+
 a.sidebar--page {
   &:link,
   &:active,
   &:visited {
     display: inline-block;
-    width: 100%;
-    padding: 0.125em 2rem 0.125em 3rem;
     color: @sidebar-text;
     font-weight: 500;
     text-indent: -1rem;

@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: SplunkMetric
     weight: 40
-    parent: Output
+    parent: Output data formats
 ---
 
 The SplunkMetric serializer formats and outputs the metric data in a format that can be consumed by a Splunk metrics index.

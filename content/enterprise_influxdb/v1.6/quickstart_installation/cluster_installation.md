@@ -107,14 +107,14 @@ Perform the following steps on all three servers.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.2-c1.6.2_amd64.deb
-sudo dpkg -i influxdb-meta_1.6.2-c1.6.2_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.3-c1.6.3_amd64.deb
+sudo dpkg -i influxdb-meta_1.6.3-c1.6.3_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)]
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.2_c1.6.2.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.6.2_c1.6.2.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.3_c1.6.3.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.6.3_c1.6.3.x86_64.rpm
 ```
 
 ### II. Edit the meta service configuration file
@@ -174,14 +174,14 @@ Perform the following steps on all three servers.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.2-c1.6.2_amd64.deb
-sudo dpkg -i influxdb-data_1.6.2-c1.6.2_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.3-c1.6.3_amd64.deb
+sudo dpkg -i influxdb-data_1.6.3-c1.6.3_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.2_c1.6.2.x86_64.rpm
-sudo yum localinstall influxdb-data-1.6.2_c1.6.2.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.3_c1.6.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.6.3_c1.6.3.x86_64.rpm
 ```
 
 ### II. Edit the data service configuration file
@@ -344,16 +344,16 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.6.2-c1.6.2
-4    quickstart-cluster-02:8088   1.6.2-c1.6.2
-6    quickstart-cluster-03:8088   1.6.2-c1.6.2
+2    quickstart-cluster-01:8088   1.6.3-c1.6.3
+4    quickstart-cluster-02:8088   1.6.3-c1.6.3
+6    quickstart-cluster-03:8088   1.6.3-c1.6.3
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.6.2-c1.6.2
-quickstart-cluster-02:8091   1.6.2-c1.6.2
-quickstart-cluster-03:8091   1.6.2-c1.6.2
+quickstart-cluster-01:8091   1.6.3-c1.6.3
+quickstart-cluster-02:8091   1.6.3-c1.6.3
+quickstart-cluster-03:8091   1.6.3-c1.6.3
 ```
 
 Your InfluxDB Enterprise cluster should have three data nodes and three meta nodes.

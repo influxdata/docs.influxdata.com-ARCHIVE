@@ -1,6 +1,6 @@
 ---
 title: Introduction to the InfluxData Platform
-description: The InfluxData Platform is the leading time-series platform designed from the ground up for modern metrics and events.
+description: The InfluxData Platform is the leading modern time-series platform designed from the ground up for metrics and events.
 aliases:
   - /platform/
 menu:
@@ -9,8 +9,8 @@ menu:
     weight: 1
 ---
 
-The InfluxData Platform is the leading [time series](/platform/faq/#what-is-time-series-data)
-platform designed from the ground up for modern metrics and events.
+The InfluxData Platform is the leading modern [time series](/platform/faq/#what-is-time-series-data)
+platform designed from the ground up for metrics and events.
 It is comprised of four core components: Telegraf, InfluxDB, Chronograf, and Kapacitor
 (often referred to as the [TICK stack](#the-tick-stack-open-source-components)).
 Each fulfills a specific role in managing your time-series data: data collection,
