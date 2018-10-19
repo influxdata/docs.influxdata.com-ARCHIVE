@@ -30,10 +30,6 @@ and address anomalies as they happen.
 
 ## [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise dashboards](/platform/monitoring/measurements-internal/)
 
-## [Using the /debug/vars HTTP endpoint to monitor InfluxDB](/platform/monitoring/debug-vars-endpoint-influxdb/)
-
-## [Using the /debug/vars HTTP endpoint to monitor Kapacitor](/platform/monitoring/debug-vars-endpoint-kapa/)
-
 ## [Using the SHOW STATISTICS command to monitor InfluxDB](/platform/monitoring/show-statistics/)
 
 ## [Using the SHOW DIAGNOSTICS command to monitor InfluxDB](/platform/monitoring/show-diagnostics/)

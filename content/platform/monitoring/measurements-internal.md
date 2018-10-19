@@ -197,7 +197,7 @@ In a cluster, each measurement in the `_internal` database has three tags:
 
 ### Measurements written to `telegraf`
 
-When 
+When
 
 
 ## Measuremments in the `_internal` database
@@ -210,25 +210,25 @@ The measurement statistics related to Anti-Entropy (AE) used in InfluxDB Enterpr
 
 #### bytesRx
 
-* ???
+* The number of bytes received by the data node.
 * Data type: integer
 
 #### errors
 
-* ???
-* Data type:
+* The total number of jobs that have resulted in errors.
+* Data type: integer
 * Used in "Anti-Entropy Errors"
 * Examples
   * "Anti-Entropy Errors" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#anti-entropy-errors) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#anti-entropy-errors) dashboards.
 
 #### jobs
 
-* ???
+* The total number of jobs executed by the data node.
 * Data type: integer
 
 #### jobsActive
 
-* Number of active jobs in Anti-Entropy (AE)
+* The current number of active (currently executing) jobs.
 * Data type: integer
 * Examples
   * "Anti-Entropy Jobs" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#anti-entropy-jobs) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#anti-entropy-jobs) dashboards.
@@ -384,14 +384,14 @@ The `hh_processor` measurement has two additional tags:
 
 #### bytesWritten
 
-* The size, in bytes, of points written to the Hinted Handoff queue.
+* The total number of bytes written to the Hinted Handoff queue.
 * Note that this statistic only tracks bytes written during the lifecycle of the current process.
 Upon restart or a crash, this statistic resets to zero, even if the Hinted Handoff queue was not empty.
 * Data type: integer
 
 #### queueBytes
 
-* The total size, in bytes, remaining in the queue.
+* The total number of bytes remaining in the queue.
 * This statistic should accurately and absolutely track the number of bytes of encoded data waiting to be sent to the remote node.
 * Data type: integer
 * This statistic should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (See https://github.com/influxdata/docs.influxdata.com/issues/780)
@@ -473,12 +473,12 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  pointsWrittenFail
 
-* The number of points accepted by the `/write` HTTP endpoint, but unable to be persisted.
+* The number of points accepted by the HTTP `/write` endpoint, but unable to be persisted.
 * Data type: integer
 
 ####  pointsWrittenOK
 
-* The number of points accepted by the `/write` HTTP endpoint and persisted successfully.
+* The number of points accepted by the HTTP `/write` endpoint and persisted successfully.
 * Data type: integer
 
 ####  promReadReq
@@ -559,7 +559,7 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  writeReqBytes
 
-* The total size, in bytes, of line protocol data received by write requests, using the HTTP `/write` endpoint.
+* The total number of bytes of line protocol data received by write requests, using the HTTP `/write` endpoint.
 * Data type: integer
 
 ####  writeReqDurationNs
@@ -675,18 +675,18 @@ The `rpc` measurement statistics are related to the use of RPC calls within Infl
 
 ### runtime
 
-The `runtime` measurement statistics include a subset of MemStats records statistics about the Go memory allocator.
+The `runtime` measurement statistics include a subset of MemStats records statistics about the Go memory allocator. The  `runtime` statistics can be useful to determine poor memory allocation strategies and related performance issues.
 
 The [Go runtime package](https://golang.org/pkg/runtime/) contains operations that interact with Go's runtime system, including functions used to control goroutines. It also includes the low-level type information used by the [Go reflect package](https://golang.org/pkg/reflect/).
 
 ####  Alloc
 
-* The size, in bytes, of allocated heap objects.
+* The currently allocated number of bytes of heap objects.
 * Data type: integer
 
 ####  Frees
 
-* The cumulative number of freed heap objects.
+* The cumulative number of freed (live) heap objects.
 * Data type: integer
 
 ####  HeapAlloc
@@ -696,12 +696,12 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 
 ####  HeapIdle
 
-* The size, in bytes, of idle heap objects.
+* The number of bytes of idle heap objects.
 * Data type: integer
 
 ####  HeapInUse
 
-* The size, in bytes, in in-use spans.
+* The number of bytes in in-use spans.
 * Data type: integer
 * Examples
   * "Heap Size" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#heap-size) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#heap-size) dashboards.
@@ -713,12 +713,12 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 
 #### HeapReleased
 
-* The size, in bytes, of physical memory returned to the OS.
+* The number of bytes of physical memory returned to the OS.
 * Data type: integer
 
 #### HeapSys
 
-* The size, in bytes, of heap memory obtained from the OS.
+* The number of bytes of heap memory obtained from the OS.
 * Measures the amount of virtual address space reserved for the heap.
 * Data type: integer
 
@@ -730,33 +730,34 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 
 #### Mallocs
 
-* The cumulative count of heap objects allocated.
-* The number of live objects is Mallocs - Frees.
+* The cumulative number of heap objects allocated.
+* The total number of live objects is Mallocs - Frees.
 * Data type: integer
 
 #### NumGC
 
+* The number of completed GC (garbage collection) cycles.
 * Data type: integer
 
 #### NumGoroutine
 
-* The number of Go routines.
+* The total number of Go routines.
 * Data type: integer
 
 #### PauseTotalNs
 
-* The length of total pause, in nanoseconds.
+* The total duration, in nanoseconds, of total GC (garbage collection) pauses.
 * Data type: integer
 
 #### Sys
 
-* The total bytes of memory obtained from the OS.
+* The total number of bytes of memory obtained from the OS.
 * Measures the virtual address space reserved by the Go runtime for the heap, stacks, and other internal data structures.
 * Data type: integer
 
 #### TotalAlloc
 
-* The cumulative bytes allocated for heap objects.
+* The cumulative number of bytes allocated for heap objects.
 * This statistic does not decrease when objects are freed.
 * Data type: integer
 
