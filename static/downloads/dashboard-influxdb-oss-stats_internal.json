@@ -25,7 +25,7 @@
         "y": 13,
         "w": 12,
         "h": 4,
-        "name": "CQs Executed/Min",
+        "name": "Continuous Queries Executed Per Minute",
         "queries": [
           {
             "query": "SELECT non_negative_derivative(mean(/.*/),60s) FROM \"_internal\"..\"cq\" WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(null)",
@@ -365,7 +365,7 @@
         "y": 5,
         "w": 6,
         "h": 4,
-        "name": "Series Cardinality by Database & Number of Measurements by Database",
+        "name": "Series Cardinality and Measurements by Database",
         "queries": [
           {
             "query": "SELECT max(\"numSeries\") AS \"Series Cardinality\" FROM \"_internal\"..\"database\" WHERE time > :dashboardTime:  GROUP BY time(:interval:), \"database\" fill(null)",
@@ -667,7 +667,7 @@
         "y": 0,
         "w": 4,
         "h": 5,
-        "name": "Per-Host Point Throughput/Min",
+        "name": "Points Throughput Per Min by Hostname",
         "queries": [
           {
             "query": "SELECT non_negative_derivative(max(\"pointReq\"), 60s) FROM \"_internal\"..\"write\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
@@ -775,7 +775,7 @@
         "y": 0,
         "w": 4,
         "h": 5,
-        "name": "Queries Executed/Min",
+        "name": "Queries Executed Per Minute",
         "queries": [
           {
             "query": "SELECT non_negative_derivative(mean(\"queriesExecuted\"), 60s) AS \"Queries Executed\" FROM \"_internal\"..\"queryExecutor\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)",
@@ -883,7 +883,7 @@
         "y": 0,
         "w": 4,
         "h": 5,
-        "name": "HTTP Requests/Min",
+        "name": "HTTP Requests Per Minute",
         "queries": [
           {
             "query": "SELECT non_negative_derivative(mean(\"queryReq\"), 60s) AS \"Query\" FROM \"_internal\"..\"httpd\" WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
@@ -1090,7 +1090,7 @@
         }
       }
     ],
-    "name": "InfluxDB OSS Stats: _internal",
+    "name": "InfluxDB OSS Stats",
     "organization": "default",
     "links": {
       "self": "/chronograf/v1/dashboards/4",
