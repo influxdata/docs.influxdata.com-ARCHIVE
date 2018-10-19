@@ -94,9 +94,9 @@ sudo pkg install telegraf
 
 The configuration file is located at `/usr/local/etc/telegraf.conf` with examples in `/usr/local/etc/telegraf.conf.sample`.
 
-### Mac OS X
+### macOS
 
-Users of OS X 10.8 and higher can install Telegraf using the [Homebrew](http://brew.sh/) package manager.
+Users of macOS 10.8 and higher can install Telegraf using the [Homebrew](http://brew.sh/) package manager.
 Once `brew` is installed, you can install Telegraf by running:
 
 ```bash
@@ -106,7 +106,7 @@ brew install telegraf
 
 ### Start the Telegraf service
 
-#### OS X (via Homebrew)
+#### macOS (via Homebrew)
 To have launchd start telegraf at login:
 ```
 ln -sfv /usr/local/opt/telegraf/*.plist ~/Library/LaunchAgents

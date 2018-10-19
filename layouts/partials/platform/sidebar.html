@@ -8,21 +8,31 @@
   </section>
   {{ $currentPage := . }}
   {{ range .Site.Menus.platform }}
-    {{ if .HasChildren }}
-      <section class="sidebar--section">
-        <div class="sidebar--section-title">
-          <a class="{{ if (in $currentPage.Permalink .URL ) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
-        </div>
-          {{ range .Children }}
-          <a class="sidebar--page{{ if or ($currentPage.IsMenuCurrent $currentPage.Section .) ($currentPage.HasMenuCurrent $currentPage.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+    <section class="sidebar--section">
+      <div class="sidebar--section-title">
+        <a class="{{ if (in $currentPage.Permalink .URL ) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+      </div>
+
+      {{ if .HasChildren }}
+        <ul>
+        {{ range .Children }}
+          {{ if .HasChildren }}
+            <li>
+              <a class="sidebar--children-toggle {{ if or ($currentPage.IsMenuCurrent $currentPage.Section .) ($currentPage.HasMenuCurrent $currentPage.Section .) }}open{{end}}" href="#"></a>
+              <a class="sidebar--page{{ if or ($currentPage.IsMenuCurrent $currentPage.Section .) ($currentPage.HasMenuCurrent $currentPage.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
+              <ul class="sidebar--children {{ if or ($currentPage.IsMenuCurrent $currentPage.Section .) ($currentPage.HasMenuCurrent $currentPage.Section .) }}open{{end}}">
+                  {{ range .Children }}
+                    <li><a class="sidebar--page{{ if or ($currentPage.IsMenuCurrent $currentPage.Section .) ($currentPage.HasMenuCurrent $currentPage.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a></li>
+                  {{ end }}
+              </ul>
+            </li>
+          {{ else }}
+            <li><a class="sidebar--page{{ if or ($currentPage.IsMenuCurrent $currentPage.Section .) ($currentPage.HasMenuCurrent $currentPage.Section .) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a></li>
           {{ end }}
-      </section>
-    {{else}}
-      <section class="sidebar--section">
-        <div class="sidebar--section-title">
-          <a class="{{ if (in $currentPage.Permalink .URL ) }} active{{end}}" href="{{ .URL }}">{{ .Name }}</a>
-        </div>
-      </section>
-    {{end}}
+        {{ end }}
+        </ul>
+      {{ end }}
+
+    </section>
   {{end}}
 </aside>

@@ -30,7 +30,7 @@ as a service, `stderr` is redirected to
 that file.  You can override this location by setting the variable
 `STDERR` in the file `/etc/default/influxdb`.
 
->**Note:** On OS X the logs, by default, are stored in the file `/usr/local/var/log/influxdb.log`
+>**Note:** On macOS the logs, by default, are stored in the file `/usr/local/var/log/influxdb.log`
 
 For example, if `/etc/default/influxdb` contains:
 

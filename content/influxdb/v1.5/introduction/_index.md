@@ -14,7 +14,7 @@ See the [InfluxData downloads page](https://influxdata.com/downloads/#influxdb) 
 
 ## [Installing InfluxDB OSS](/influxdb/v1.5/introduction/installation/)
 
-[Installing InfluxDB OSS](/influxdb/v1.5/introduction/installation/) provides instructions for installing InfluxDB on Ubuntu, Debian, Red Hat, CentOS, and Mac OS X.
+[Installing InfluxDB OSS](/influxdb/v1.5/introduction/installation/) provides instructions for installing InfluxDB on Ubuntu, Debian, Red Hat, CentOS, and macOS.
 
 ## [Getting started with InfluxDB OSS](/influxdb/v1.5/introduction/getting-started/)
 

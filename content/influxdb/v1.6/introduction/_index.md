@@ -14,7 +14,7 @@ Provides the location to download the latest stable and nightly builds of Influx
 
 ## [Installing InfluxDB OSS](/influxdb/v1.6/introduction/installation/)
 
-Provides instructions for installing InfluxDB on Ubuntu, Debian, Red Hat, CentOS, and OS X.
+Provides instructions for installing InfluxDB on Ubuntu, Debian, Red Hat, CentOS, and macOS.
 
 ## [Getting started with InfluxDB OSS](/influxdb/v1.6/introduction/getting-started/)
 

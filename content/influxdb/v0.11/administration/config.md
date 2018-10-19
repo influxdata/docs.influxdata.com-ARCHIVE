@@ -91,7 +91,7 @@ There will always be at least one hostname present.
 * `snapshots` contains the server's snapshots taken for the purpose of log compaction.
 * `raft.db` is the BoltDB database that contains the Raft log and snapshots.
 
->**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/meta`
+>**Note:** The default directory for macOS installations is `/Users/<username>/.influxdb/meta`
 
 ### hostname = "localhost"
 
@@ -170,7 +170,7 @@ Controls if the node holds time series data shards in the cluster.
 The directory where InfluxDB stores the data.
 This directory may be changed.
 
->**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/data`
+>**Note:** The default directory for macOS installations is `/Users/<username>/.influxdb/data`
 
 ### query-log-enabled = true
 
@@ -218,7 +218,7 @@ The hinted handoff directory.
 For best throughput, the HH directory and the WAL directory should be on different physical devices.
 If you have performance concerns, you will also want to make this setting different from the dir in the [[data]](/influxdb/v0.11/administration/config/#data) section.
 
->**Note:** The default directory for OSX installations is `/Users/<username>/.influxdb/hh`
+>**Note:** The default directory for macOS installations is `/Users/<username>/.influxdb/hh`
 
 ### max-size = 1073741824
 
