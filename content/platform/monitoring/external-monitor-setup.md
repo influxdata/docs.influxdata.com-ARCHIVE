@@ -1,6 +1,6 @@
 ---
 title: Set up an external monitor
-description: How to setup and external InfluxData TICK stack that monitors another Enterprise or OSS TICK stack.
+description: How to set up an external InfluxData TICK stack that monitors another Enterprise or OSS TICK stack.
 menu:
   platform:
     name: Set up an external monitor
