@@ -7,9 +7,9 @@ menu:
     weight: 50
 ---
 
-The InfluxDB Enterprise Cluster Stats dashboard is useful for monitoring the health of your InfluxDB Enterprise clusters. The dashboard visualizations cover commonly monitored metrics that are important for monitoring and maintaining your InfluxDB Enterprise clusters and for troubleshooting. So that you don't have to constantly check the dashboad, you can create alerts to notify you when attention is required.
+The InfluxDB Enterprise Cluster Stats dashboard is useful for monitoring the health of your InfluxDB Enterprise clusters. The dashboard visualizations cover commonly monitored metrics that are important for monitoring and maintaining your InfluxDB Enterprise clusters and for troubleshooting. So that you don't have to constantly check the dashboard, you can create alerts to notify you when attention is required.
 
-> **Note:** The queries below use the `_internal` database, which is enabled by default on InfluxDB nodes.  When using the "watcher of watcher (WoW)" configuration, data is written to the `telegraf` database. In the `telegraf` database, many of the same field keys below are prepended with `infuxdb_`, but are otherwise identical to the field keys used below.
+> **Note:** The queries below use the `_internal` database, which is enabled by default on InfluxDB nodes.  When using the "watcher of watcher (WoW)" configuration, data is written to the `telegraf` database. When the `_internal` measurements are sent to the `telegraf` database using InfluxDB plugins, many of the same field keys below are prepended with `infuxdb_`, but are otherwise the same field keys listed here.
 
 ## Continuous Queries Executed / Minute
 
@@ -23,7 +23,7 @@ Displays the non-negative mean rate of change in continuous queries (CQs) execut
 
 ### Metrics
 
-#### [Continuous Queries]
+#### Continuous Queries
 
 `non_negative_derivative(mean(/.*/),60s)`
 
@@ -47,7 +47,7 @@ Displays the current heap size.
 
 `"SELECT mean("HeapInUse") FROM "_internal".."runtime" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Heap Size
 
@@ -73,7 +73,7 @@ Displays the number of shard write errors.
 
 `"SELECT non_negative_derivative(max("writeError"), 10s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### [Shard Write Errors]
 
@@ -95,11 +95,11 @@ ___________
 
 Displays the number of series (series cardinality) for the specified databases.
 
-### Queries
+### Query
 
 `"SELECT max("numSeries") AS "Series Cardinality" FROM "_internal".."database" WHERE time > :dashboardTime:  GROUP BY time(:interval:), "database" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Series Cardinality
 
@@ -203,19 +203,19 @@ Displays the number of points requested each minute, by hostname.
 
 _____
 
-## Queries Executed / Minute
+## Queries Executed Per Minute
 
 ### Description
 
 Displays the number of queries executed per minute.
 
-### Queries
+### Query
 
 #### Queries Executed
 
  `"SELECT non_negative_derivative(mean("queriesExecuted"), 60s) AS "Queries Executed" FROM "_internal".."queryExecutor" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Queries Executed
 
@@ -293,9 +293,9 @@ Displays the size, in bytes, of Hinted Handoff (HH) queues, by hostname.
 
 `"SELECT mean("queueBytes") FROM "_internal".."hh_processor" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(0)"`
 
-### Metrics
+### Metric
 
-#### \[HH Queue Size\]
+#### HH Queue Size
 
 `mean("queueBytes")`
 
@@ -341,13 +341,13 @@ ____
 
 Displays the count of active Anti-Entry jobs.
 
-### Queries
+### Query
 
 `"SELECT count("jobs_active") AS \Active Jobs" FROM "_internal".."ae" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
 
-### Metrics
+### Metric
 
-#### \[Count of Jobs\]
+#### Count of Jobs
 
 `count("jobs_active")`
 

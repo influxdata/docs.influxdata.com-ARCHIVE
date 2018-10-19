@@ -9,7 +9,8 @@ menu:
 
 **On this page**
 * [Using the `_internal` database](#using-the-internal-database)
-* [Measurements in the `_internal` database](#internal-measurements-details)
+* [Enterprise cluster measurements](#enterprise-cluster-measurements)
+* [InfluxDB measurement statistics](#influxdb-measurement-statistics)
   * **[ae](#ae-enterprise-only)** (E)
     * [bytesRx](#bytesrx)
     * [errors](#errors)
@@ -169,7 +170,7 @@ menu:
   * **[write](#write)**
     * [pointReq](#pointreq)
     * [pointReqHH](#pointreqhh) (E)
-    * [pointReqLocal](#pointreqlocal)
+    * [pointReqLocal](#pointreqlocal) (E)
     * [pointReqRemote](#pointreqremote) (E)
     * [req](#req)
     * [subWriteDrop](#subwritedrop)
@@ -183,26 +184,21 @@ menu:
 
 ## Using the `_internal` database
 
-The `_internal` database
+By default, InfluxDB generates measurement statistics that are saved to the `_internal` database. These measurement statistics can be used in dashboards for monitoring your InfluxDB OSS servers and InfluxDB Enterprise clusters and for creating alerts to notify you when critical levels are reached.
+
+> **Note:** When using the "watcher of watcher (WoW)" configuration, InfluxDB measurement statistics are written to the `telegraf` database using the InfluxDB plugins. When the data is collected in the `telegraf` database using InfluxDB plugins, most of the field keys below are prepended with `infuxdb_`, but they are otherwise identical to the ones listed here.
 
 
-### Enterprise clusters
+## Enterprise cluster measurements
 
 In a cluster, each measurement in the `_internal` database has three tags:
 * `clusterID` - the UUID of the cluster recording the `_internal` metrics
 * `hostname` - the hostname of the node reporting the metrics.
   - The `hostname` is added to all statistics and should indicate the hostname as reported by the operating system.
 * `nodeID` - the hostname and port of the node reporting the metrics.
-  - The `nodeID` is set in closed source, and it looks like it should be set to the hostname or bind address as set in the config file.
+  - The `nodeID` is set in closed source, and  should be set to the hostname or bind address as set in the config file.
 
-### Measurements written to `telegraf`
-
-When
-
-
-## Measuremments in the `_internal` database
-
-
+## InfluxDB measurement statistics
 
 ### ae (E)
 
@@ -334,8 +330,6 @@ The statistics related to continuous queries (CQs).
 * Examples
   * "Series Cardinality By Database" metric in [InfluxDB OSS Stats](/platform/monitoring/dashboard-oss-monitoring#series-cardinality-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/dashboard-enterprise-monitoring#series-cardinality-by-database) dashboards.
 
-
-
 _____
 
 ### hh [Enterprise only]
@@ -357,8 +351,6 @@ The `hh` measurement has one additional tag:
 
 * The number of write requests for each point in the initial request to the Hinted Handoff engine for a remote node.
 * Data type: integer
-
-
 
 _____
 
@@ -1102,7 +1094,7 @@ The `write` measurement statistics are about writes to the data node, regardless
 
 * Data type: integer
 
-#### pointReqLocal
+#### pointReqLocal [Enterprise only]
 
 * The total number of point requests that have been attempted to be written into a shard on the same (local) node.
 * Data type: integer

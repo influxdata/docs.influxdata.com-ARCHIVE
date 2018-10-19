@@ -23,7 +23,7 @@ Displays the non-negative mean rate of change in continuous queries (CQs) execut
 
 ### Metrics
 
-#### [Continuous Queries]
+#### Continuous Queries
 
 `non_negative_derivative(mean(/.*/),60s)`
 
@@ -189,7 +189,7 @@ Displays the number of points requested each minute, by hostname.
 
 ### Metrics
 
-#### \[Point Requests\]
+#### Point Requests
 
  `non_negative_derivative(max("pointReq"), 60s)`
 
