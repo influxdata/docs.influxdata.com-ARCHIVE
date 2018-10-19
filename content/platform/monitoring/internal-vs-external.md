@@ -25,7 +25,7 @@ CPU usage, memory usage, disk usage, etc., and stores them in the `telegraf` dat
 InfluxDB also reports performance metrics about itself, such as continuous query statistics,
 internal goroutine statistics, write statistics, series cardinality, and others,
 and stores them in the `_internal` database.
-_See the recommendation about `_internal` databases [below](#disable-the-internal-database-in-production-clusters)._
+_For the recommendation about `_internal` databases, see [Disable the `_internal` database in production clusters](#disable-the-internal-database-in-production-clusters) below._
 
 [Monitoring dashboards](/platform/monitoring/monitoring-dashboards) are available
 that visualize the default metrics provided in each of these databases.
@@ -57,8 +57,7 @@ on a separate server or cluster.
 
 ---
 
-_See the [Setup an external monitor](/platform/monitoring/external-monitor-setup)
-guide for information about setting up an external monitoring TICK stack._
+_For information about setting up an external monitoring TICK stack, see [Setup an external monitor](/platform/monitoring/external-monitor-setup)._
 
 ---
 
