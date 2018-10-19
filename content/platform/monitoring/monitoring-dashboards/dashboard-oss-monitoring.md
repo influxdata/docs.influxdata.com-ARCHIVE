@@ -1,9 +1,10 @@
 ---
 title: InfluxDB OSS Stats monitoring dashboard
-description: Describes details about metrics that are monitored in the InfluxDb OSS monitoring dashboard.
+description: Describes metrics monitored in the InfluxDB OSS monitoring dashboard.
 menu:
   platform:
-    name: InfluxDB OSS Stats monitoring dashboard
+    name: InfluxDB OSS Stats dashboard
+    parent: Monitoring dashboards
     weight: 40
 ---
 
@@ -29,11 +30,11 @@ Displays the non-negative mean rate of change in continuous queries (CQs) execut
 
 ### Measurement
 
-[`cq`](/platform/monitoring/measurements-internal#cq)
+[`cq`](/platform/monitoring/tools/measurements-internal#cq)
 
 ### Field keys
 
-[`queryOk`](/platform/monitoring/measurements-internal#queryok), [`queryFail`](/platform/monitoring/measurements-internal#queryfail)
+[`queryOk`](/platform/monitoring/tools/measurements-internal#queryok), [`queryFail`](/platform/monitoring/tools/measurements-internal#queryfail)
 
 _______________
 
@@ -55,11 +56,11 @@ Displays the current heap size.
 
 ## Measurement
 
-[`runtime`](/platform/monitoring/measurements-internal#runtime)
+[`runtime`](/platform/monitoring/tools/measurements-internal#runtime)
 
 ### Field keys
 
-[`HeapInUse`](/platform/monitoring/measurements-internal#heapinuse)
+[`HeapInUse`](/platform/monitoring/tools/measurements-internal#heapinuse)
 
 _________
 
@@ -81,11 +82,11 @@ Displays the number of shard write errors.
 
 ### Measurement
 
-[`write`](/platform/monitoring/measurements-internal#write)
+[`write`](/platform/monitoring/tools/measurements-internal#write)
 
 ### Field keys
 
-[`writeError`](/platform/monitoring/measurements-internal#writeerror)
+[`writeError`](/platform/monitoring/tools/measurements-internal#writeerror)
 
 ___________
 
@@ -107,11 +108,11 @@ Displays the number of series (series cardinality) for the specified databases.
 
 ### Measurement
 
-[`database`](/platform/monitoring/measurements-internal#database)
+[`database`](/platform/monitoring/tools/measurements-internal#database)
 
 ### Field keys
 
-[`numSeries`](/platform/monitoring/measurements-internal#numseries)
+[`numSeries`](/platform/monitoring/tools/measurements-internal#numseries)
 
 _____
 
@@ -133,11 +134,11 @@ Displays the number of measurements, by database.
 
 ### Measurement
 
-[`database`](/platform/monitoring/measurements-internal#database)
+[`database`](/platform/monitoring/tools/measurements-internal#database)
 
 ### Field keys
 
-[`numMeasurements`](/platform/monitoring/measurements-internal#numeasurements)
+[`numMeasurements`](/platform/monitoring/tools/measurements-internal#numeasurements)
 
 _____
 
@@ -169,11 +170,11 @@ Displays the duration, in nanoseconds, of the top 1% of HTTP requests.
 
 ### Measurement
 
-[`httpd`](/platform/monitoring/measurements-internal#httpd)
+[`httpd`](/platform/monitoring/tools/measurements-internal#httpd)
 
 ### Field keys
 
-[`queryReq`](/platform/monitoring/measurements-internal#queryreq), [`queryReqDurationNs`](/platform/monitoring/measurements-internal#queryreqdurationns). [`writeReq`](/platform/monitoring/measurements-internal#writereq), [`writeReqDurationNs`](/platform/monitoring/measurements-internal#writereqdurationns)
+[`queryReq`](/platform/monitoring/tools/measurements-internal#queryreq), [`queryReqDurationNs`](/platform/monitoring/tools/measurements-internal#queryreqdurationns). [`writeReq`](/platform/monitoring/tools/measurements-internal#writereq), [`writeReqDurationNs`](/platform/monitoring/tools/measurements-internal#writereqdurationns)
 
 ____
 
@@ -195,11 +196,11 @@ Displays the number of points requested each minute, by hostname.
 
 ### Measurement
 
- [`write`](/platform/monitoring/measurements-internal#write)
+ [`write`](/platform/monitoring/tools/measurements-internal#write)
 
 ### Field keys
 
-[`pointReq`](/platform/monitoring/measurements-internal#pointreq)
+[`pointReq`](/platform/monitoring/tools/measurements-internal#pointreq)
 
 _____
 
@@ -223,11 +224,11 @@ Displays the number of queries executed per minute.
 
 ### Measurement
 
-[`queryExecutor`](/platform/monitoring/measurements-internal#queryexecutor)
+[`queryExecutor`](/platform/monitoring/tools/measurements-internal#queryexecutor)
 
 ### Field keys
 
-[`queriesExecuted`](/platform/monitoring/measurements-internal#queriesexecuted)
+[`queriesExecuted`](/platform/monitoring/tools/measurements-internal#queriesexecuted)
 
 _____
 
@@ -275,8 +276,8 @@ Displays the number of HTTP requests per minute.
 
 ### Measurement
 
-[`httpd`](/platform/monitoring/measurements-internal#httpd)
+[`httpd`](/platform/monitoring/tools/measurements-internal#httpd)
 
 ### Field keys
 
-[`queryReq`](/platform/monitoring/measurements-internal#querureq), [`writeReq`](/platform/monitoring/measurements-internal#writereq), [`serverError`](/platform/monitoring/measurements-internal#servererror), [`clientError`](/platform/monitoring/measurements-internal#clienterror)
+[`queryReq`](/platform/monitoring/tools/measurements-internal#querureq), [`writeReq`](/platform/monitoring/tools/measurements-internal#writereq), [`serverError`](/platform/monitoring/tools/measurements-internal#servererror), [`clientError`](/platform/monitoring/tools/measurements-internal#clienterror)

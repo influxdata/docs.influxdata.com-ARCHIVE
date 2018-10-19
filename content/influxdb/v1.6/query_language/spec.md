@@ -808,7 +808,7 @@ SHOW DATABASES
 
 Displays node information, such as build information, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics. 
 
-For more information on using the `SHOW DIAGNOSTICS` command, see [Using the SHOW DIAGNOSTICS command for monitoring InfluxDB](/platform/monitoring/show-diagnostics/).
+For more information on using the `SHOW DIAGNOSTICS` command, see [Using the SHOW DIAGNOSTICS command for monitoring InfluxDB](/platform/monitoring/tools/show-diagnostics/).
 
 ```sql
 show_diagnostics_stmt = "SHOW DIAGNOSTICS"
@@ -1007,7 +1007,7 @@ SHOW SHARDS
 
 Returns detailed statistics on available components of an InfluxDB node and available (enabled) components.
 
-For more information on using the `SHOW STATS` command, see [Using the SHOW STATS command to monitor InfluxDB](/platform/monitoring/show-stats/).
+For more information on using the `SHOW STATS` command, see [Using the SHOW STATS command to monitor InfluxDB](/platform/monitoring/tools/show-stats/).
 
 ```
 show_stats_stmt = "SHOW STATS [ FOR '<component>' | 'indexes' ]"
