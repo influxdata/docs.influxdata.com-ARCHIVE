@@ -26,14 +26,15 @@ and calculating the average of each window:
 
 ```js
 from(bucket:"telegraf/autogen")
-  |> range(start:-5m)
+  |> range(start:-1h)
   |> filter(fn:(r) => r._measurement == "cpu" AND r.cpu == "cpu-total")
   |> window(every:1m)
+  |> group(none:true)
   |> mean()
 ```
 
 ### Pipe-forward operator
-Flux uses the pipe-forward operator (`|>`) heavily. After each function or operation,
+Flux uses the pipe-forward operator (`|>`) extensively. After each function or operation,
 Flux returns a table of data. The pipe-forward pipes that table into the next
 function or operation where it will be further processed or manipulated.
 
