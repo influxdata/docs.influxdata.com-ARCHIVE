@@ -178,7 +178,7 @@ Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1
 
 This release is built with Go (golang) 1.7.4.
 It resolves a security vulnerability reported in Go (golang) version 1.7.3 which impacts all
-users currently running on the Mac OS X platform, powered by the Darwin operating system.
+users currently running on the macOS platform, powered by the Darwin operating system.
 
 #### Cluster-specific Bugfixes
 
@@ -364,7 +364,7 @@ development.
 
 This release is built with Go (golang) 1.7.4.
 It resolves a security vulnerability reported in Go (golang) version 1.7.3 which impacts all
-users currently running on the Mac OS X platform, powered by the Darwin operating system.
+users currently running on the macOS platform, powered by the Darwin operating system.
 
 ### Features
 

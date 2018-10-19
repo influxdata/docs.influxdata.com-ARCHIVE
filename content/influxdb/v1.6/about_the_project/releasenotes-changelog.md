@@ -6,6 +6,25 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.6.4 [2018-10-16]
+
+### Features
+
+-	Set maximum cache size using `-max-cache-size` in `buildtsi` when building TSI index.
+
+### Bug fixes
+
+-	Fix `tsi1` sketch locking.
+-	Fix subquery functionality when a function references a tag from the subquery.
+-	Strip tags from a subquery when the outer query does not group by that tag.
+-	Add `-series-file` flag to `dumptsi` command help.
+-	Cleanup failed TSM snapshots.
+-	Fix TSM1 panic on reader error.
+-	Fix series file tombstoning.
+-	Fixing the stream iterator to not ignore the error.
+-	Do not panic when a series ID iterator is nil.
+-	Fix append of possible nil iterator.
+
 
 ## v1.6.3 [2018-09-14]
 
@@ -15,16 +34,16 @@ menu:
 
 ### Bugfixes
 
--	Fix the inherited interval for derivative and others.  The inherited interval from an outer query should not have caused 
+-	Fix the inherited interval for derivative and others.  The inherited interval from an outer query should not have caused
 an inner query to fail because inherited intervals are only implicitly passed to inner queries that support group
-by time functionality. Since an inner query with a derivative doesn't support grouping by time and the inner query itself 
+by time functionality. Since an inner query with a derivative doesn't support grouping by time and the inner query itself
 doesn't specify a time, the outer query shouldn't have invalidated the inner query.
--	Fix the derivative and others time ranges for aggregate data. The derivative function and others similar to it would 
+-	Fix the derivative and others time ranges for aggregate data. The derivative function and others similar to it would
 preload themselves with data so that the first interval would be the start of the time range. That meant reading data outside
-of the time range. One change to the shard mapper made in v1.4.0 caused the shard mapper to constrict queries to the 
+of the time range. One change to the shard mapper made in v1.4.0 caused the shard mapper to constrict queries to the
 intervals given to the shard mapper. This was correct because the shard mapper can only deal with times it has mapped,
-but this broke the functionality of looking back into the past for the derivative and other functions that used that 
-functionality. The query compiler has been updated with an additional attribute that records how many intervals in the past 
+but this broke the functionality of looking back into the past for the derivative and other functions that used that
+functionality. The query compiler has been updated with an additional attribute that records how many intervals in the past
 will need to be read so that the shard mapper can include extra times that it may not necessarily read from,
 but may be queried because of the above described functionality.
 

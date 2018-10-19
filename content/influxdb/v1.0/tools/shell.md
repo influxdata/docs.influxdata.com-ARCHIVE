@@ -15,7 +15,7 @@ Use `influx` to write data (manually or from a file), query data interactively, 
 * [`influx` Commands](/influxdb/v1.0/tools/shell/#influx-commands)
 
 ## Launch `influx`
-If you [install](https://influxdata.com/downloads/) InfluxDB via a package manager, the CLI is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on OS X).
+If you [install](https://influxdata.com/downloads/) InfluxDB via a package manager, the CLI is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on macOS).
 
 To access the CLI, first launch the `influxd` database process and then launch `influx` in your terminal.
 Once you've entered the shell and successfully connected to an InfluxDB node, you'll see the following output:

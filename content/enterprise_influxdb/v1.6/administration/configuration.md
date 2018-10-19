@@ -265,8 +265,7 @@ Environment variable: `INFLUXDB_META_AUTH_ENABLED`
 
 ####  http-bind-address = ":8091"
 
-The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.6/features/cluster-commands/) and by data nodes to access the
-meta APIs.
+The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.6/features/cluster-commands/) and by data nodes to access the meta APIs.
 For simplicity we recommend using the same port on all meta nodes, but this
 is not necessary.
 
@@ -395,13 +394,13 @@ For example, [Continuous Queries](/influxdb/v1.6/concepts/glossary/#continuous-q
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
 
 #### shared-secret = ""
-The shared secret used by the API for JWT authentication.
+The shared secret to be used by the public API for creating custom JWT authentication.
 Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
 
 Environment variable: `INFLUXDB_META_SHARED_SECRET`
 
 #### internal-shared-secret = ""
-The shared secret used by the internal API for JWT authentication.
+The shared secret used by the internal API for JWT authentication. Set this to a long pass phrase. This value must be the same as the value of the [`[meta] meta-internal-shared-secret`](#meta-internal-shared-secret) in the data node configuration file.
 Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
 
 Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
@@ -528,8 +527,8 @@ Environment variable: `INFLUXDB_META_META_AUTH_ENABLED`
 
 #### meta-internal-shared-secret = ""
 
-The shared secret used by the internal API for JWT authentication.
-Set to the [`internal-shared-secret`](#internal-shared-secret) specified in the meta node configuration file.
+The shared secret used by the internal API for JWT authentication between InfluxDB nodes.
+This value must be the same as the [`internal-shared-secret`](#internal-shared-secret) specified in the meta node configuration file.
 
 Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
 
