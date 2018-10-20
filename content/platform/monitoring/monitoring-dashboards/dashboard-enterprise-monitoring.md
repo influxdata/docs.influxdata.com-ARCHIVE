@@ -4,7 +4,7 @@ description: Describes metrics monitored in the InfluxDB Enterprise monitoring d
 menu:
   platform:
     name: Enterprise Stats dashboard
-    parent: Monitoring dashboards
+    parent: Dashboards for monitoring
     weight: 50
 ---
 
@@ -18,7 +18,7 @@ So that you don't have to constantly check the dashboard, you can create alerts 
 > When the `_internal` measurements are sent to the `telegraf` database using InfluxDB plugins, many
 > of the same field keys below are prepended with `infuxdb_`, but are otherwise the same field keys listed here.
 
-## Continuous Queries Executed Per Minute
+## Continuous Queries Executed / Minute
 
 Displays the non-negative mean rate of change in continuous queries (CQs) executed per minute.
 
@@ -46,7 +46,7 @@ _______________
 
 Displays the current heap size.
 
-### Query
+### Queries
 
 `"SELECT mean("HeapInUse") FROM "_internal".."runtime" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
@@ -134,7 +134,7 @@ Displays the number of measurements, by database.
 
 ### Field keys
 
-[`numMeasurements`](/platform/monitoring/tools/measurements-internal#numeasurements)
+[`numMeasurements`](/platform/monitoring/tools/measurements-internal#nummeasurements)
 
 _____
 
@@ -172,17 +172,17 @@ Displays the duration, in nanoseconds, of the top 1% of HTTP requests.
 
 ____
 
-## Points Throughput Per Minute by Hostname
+## Point Throughput / Minute by Hostname
 
 Displays the number of points requested each minute, by hostname.
 
-### Query
+### Queries
 
 `"SELECT non_negative_derivative(max("pointReq"), 60s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
-### Metric
+### Metrics
 
-#### Point Requests
+#### \[Point Requests\]
 
  `non_negative_derivative(max("pointReq"), 60s)`
 
@@ -268,7 +268,7 @@ Displays the number of HTTP requests per minute.
 
 ### Field keys
 
-[`queryReq`](/platform/monitoring/tools/measurements-internal#querureq), [`writeReq`](/platform/monitoring/tools/measurements-internal#writereq), [`serverError`](/platform/monitoring/tools/measurements-internal#servererror), [`clientError`](/platform/monitoring/tools/measurements-internal#clienterror)
+[`queryReq`](/platform/monitoring/tools/measurements-internal#queryreq), [`writeReq`](/platform/monitoring/tools/measurements-internal#writereq), [`serverError`](/platform/monitoring/tools/measurements-internal#servererror), [`clientError`](/platform/monitoring/tools/measurements-internal#clienterror)
 
 ____
 
@@ -288,7 +288,7 @@ Displays the size, in bytes, of Hinted Handoff (HH) queues, by hostname.
 
 ### Measurement
 
-[`hh_processor`](/platform/monitoring/tools/measurements-internal#hh-processor)
+[`hh_processor`](/platform/monitoring/tools/measurements-internal#hh-processor-enterprise-only)
 
 ### Field keys
 
@@ -300,7 +300,7 @@ ____
 
 Displays the count of Anti-Entropy errors.
 
-### Query
+### Queries
 
 `"SELECT non_negative_derivative(mean("errors"),5m) AS "errors" FROM "_internal".""."ae" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
 
@@ -312,7 +312,7 @@ Displays the count of Anti-Entropy errors.
 
 ### Measurement
 
-[`ae`](/platform/monitoring/tools/measurements-internal#ae)
+[`ae`](/platform/monitoring/tools/measurements-internal#ae-e)
 
 ### Field keys
 
@@ -336,8 +336,8 @@ Displays the count of active Anti-Entry jobs.
 
 ### Measurement
 
-[`ae`](/platform/monitoring/tools/measurements-internal#ae)
+[`ae`](/platform/monitoring/tools/measurements-internal#ae-e)
 
 ### Field keys
 
-[`jobs_active`](/platform/monitoring/tools/measurements-internal#jobs-active)
+[`jobs_active`](/platform/monitoring/tools/measurements-internal#jobsactive)
