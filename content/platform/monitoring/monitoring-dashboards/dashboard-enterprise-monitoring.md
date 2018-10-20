@@ -1,19 +1,24 @@
 ---
-title: InfluxDB OSS Stats monitoring dashboard
-description: Describes details about metrics that are monitored in the InfluxDb OSS monitoring dashboard.
+title: InfluxDB Enterprise Cluster Stats monitoring dashboard
+description: Describes metrics monitored in the InfluxDB Enterprise monitoring dashboard.
 menu:
   platform:
-    name: InfluxDB OSS Stats monitoring dashboard
-    weight: 40
+    name: Enterprise Stats dashboard
+    parent: Monitoring dashboards
+    weight: 50
 ---
 
-The InfluxDB OSS Stats dashboard is useful for monitoring the health of your InfluxDB OSS instances. The dashboard visualizations cover commonly monitored metrics that are important for monitoring and maintaining your InfluxDB OSS instance and for troubleshooting. So that you don't have to constantly check the dashboard, you can create alerts to notify you when attention is required.
+The InfluxDB Enterprise Cluster Stats dashboard is useful for monitoring the health of your InfluxDB Enterprise clusters.
+The dashboard visualizations cover commonly monitored metrics that are important for
+monitoring and maintaining your InfluxDB Enterprise clusters and for troubleshooting.
+So that you don't have to constantly check the dashboard, you can create alerts to notify you when attention is required.
 
-> **Note:** The queries below use the `_internal` database, which is enabled by default on InfluxDB OSS instances.
+> **Note:** The queries below use the `_internal` database, which is enabled by default on InfluxDB nodes.
+> When using the "watcher of watcher (WoW)" configuration, data is written to the `telegraf` database.
+> When the `_internal` measurements are sent to the `telegraf` database using InfluxDB plugins, many
+> of the same field keys below are prepended with `infuxdb_`, but are otherwise the same field keys listed here.
 
-## Continuous Queries Executed / Minute
-
-### Description
+## Continuous Queries Executed Per Minute
 
 Displays the non-negative mean rate of change in continuous queries (CQs) executed per minute.
 
@@ -29,25 +34,23 @@ Displays the non-negative mean rate of change in continuous queries (CQs) execut
 
 ### Measurement
 
-[`cq`](/platform/monitoring/measurements-internal#cq)
+[`cq`](/platform/monitoring/tools/measurements-internal#cq)
 
 ### Field keys
 
-[`queryOk`](/platform/monitoring/measurements-internal#queryok), [`queryFail`](/platform/monitoring/measurements-internal#queryfail)
+[`queryOk`](/platform/monitoring/tools/measurements-internal#queryok), [`queryFail`](/platform/monitoring/tools/measurements-internal#queryfail)
 
 _______________
 
 ## Heap Size
 
-### Description
-
 Displays the current heap size.
 
-### Queries
+### Query
 
 `"SELECT mean("HeapInUse") FROM "_internal".."runtime" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Heap Size
 
@@ -55,17 +58,15 @@ Displays the current heap size.
 
 ## Measurement
 
-[`runtime`](/platform/monitoring/measurements-internal#runtime)
+[`runtime`](/platform/monitoring/tools/measurements-internal#runtime)
 
 ### Field keys
 
-[`HeapInUse`](/platform/monitoring/measurements-internal#heapinuse)
+[`HeapInUse`](/platform/monitoring/tools/measurements-internal#heapinuse)
 
 _________
 
 ## Shard Write Errors
-
-### Description
 
 Displays the number of shard write errors.
 
@@ -73,7 +74,7 @@ Displays the number of shard write errors.
 
 `"SELECT non_negative_derivative(max("writeError"), 10s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### [Shard Write Errors]
 
@@ -81,25 +82,23 @@ Displays the number of shard write errors.
 
 ### Measurement
 
-[`write`](/platform/monitoring/measurements-internal#write)
+[`write`](/platform/monitoring/tools/measurements-internal#write)
 
 ### Field keys
 
-[`writeError`](/platform/monitoring/measurements-internal#writeerror)
+[`writeError`](/platform/monitoring/tools/measurements-internal#writeerror)
 
 ___________
 
 ## Series Cardinality by Database
 
-### Description
-
 Displays the number of series (series cardinality) for the specified databases.
 
-### Queries
+### Query
 
 `"SELECT max("numSeries") AS "Series Cardinality" FROM "_internal".."database" WHERE time > :dashboardTime:  GROUP BY time(:interval:), "database" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Series Cardinality
 
@@ -107,17 +106,15 @@ Displays the number of series (series cardinality) for the specified databases.
 
 ### Measurement
 
-[`database`](/platform/monitoring/measurements-internal#database)
+[`database`](/platform/monitoring/tools/measurements-internal#database)
 
 ### Field keys
 
-[`numSeries`](/platform/monitoring/measurements-internal#numseries)
+[`numSeries`](/platform/monitoring/tools/measurements-internal#numseries)
 
 _____
 
 ## Number of Measurements by Database
-
-### Description
 
 Displays the number of measurements, by database.
 
@@ -133,17 +130,15 @@ Displays the number of measurements, by database.
 
 ### Measurement
 
-[`database`](/platform/monitoring/measurements-internal#database)
+[`database`](/platform/monitoring/tools/measurements-internal#database)
 
 ### Field keys
 
-[`numMeasurements`](/platform/monitoring/measurements-internal#numeasurements)
+[`numMeasurements`](/platform/monitoring/tools/measurements-internal#numeasurements)
 
 _____
 
 ## HTTP Request Duration (99th %)
-
-### Description
 
 Displays the duration, in nanoseconds, of the top 1% of HTTP requests.
 
@@ -169,25 +164,23 @@ Displays the duration, in nanoseconds, of the top 1% of HTTP requests.
 
 ### Measurement
 
-[`httpd`](/platform/monitoring/measurements-internal#httpd)
+[`httpd`](/platform/monitoring/tools/measurements-internal#httpd)
 
 ### Field keys
 
-[`queryReq`](/platform/monitoring/measurements-internal#queryreq), [`queryReqDurationNs`](/platform/monitoring/measurements-internal#queryreqdurationns). [`writeReq`](/platform/monitoring/measurements-internal#writereq), [`writeReqDurationNs`](/platform/monitoring/measurements-internal#writereqdurationns)
+[`queryReq`](/platform/monitoring/tools/measurements-internal#queryreq), [`queryReqDurationNs`](/platform/monitoring/tools/measurements-internal#queryreqdurationns). [`writeReq`](/platform/monitoring/tools/measurements-internal#writereq), [`writeReqDurationNs`](/platform/monitoring/tools/measurements-internal#writereqdurationns)
 
 ____
 
-## Point Throughput / Minute by Hostname
-
-### Description
+## Points Throughput Per Minute by Hostname
 
 Displays the number of points requested each minute, by hostname.
 
-### Queries
+### Query
 
 `"SELECT non_negative_derivative(max("pointReq"), 60s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
-### Metrics
+### Metric
 
 #### Point Requests
 
@@ -195,27 +188,25 @@ Displays the number of points requested each minute, by hostname.
 
 ### Measurement
 
- [`write`](/platform/monitoring/measurements-internal#write)
+ [`write`](/platform/monitoring/tools/measurements-internal#write)
 
 ### Field keys
 
-[`pointReq`](/platform/monitoring/measurements-internal#pointreq)
+[`pointReq`](/platform/monitoring/tools/measurements-internal#pointreq)
 
 _____
 
-## Queries Executed / Minute
-
-### Description
+## Queries Executed Per Minute
 
 Displays the number of queries executed per minute.
 
-### Queries
+### Query
 
 #### Queries Executed
 
  `"SELECT non_negative_derivative(mean("queriesExecuted"), 60s) AS "Queries Executed" FROM "_internal".."queryExecutor" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metrics
+### Metric
 
 #### Queries Executed
 
@@ -223,17 +214,15 @@ Displays the number of queries executed per minute.
 
 ### Measurement
 
-[`queryExecutor`](/platform/monitoring/measurements-internal#queryexecutor)
+[`queryExecutor`](/platform/monitoring/tools/measurements-internal#queryexecutor)
 
 ### Field keys
 
-[`queriesExecuted`](/platform/monitoring/measurements-internal#queriesexecuted)
+[`queriesExecuted`](/platform/monitoring/tools/measurements-internal#queriesexecuted)
 
 _____
 
 ## HTTP Requests / Minute
-
-### Description
 
 Displays the number of HTTP requests per minute.
 
@@ -275,8 +264,80 @@ Displays the number of HTTP requests per minute.
 
 ### Measurement
 
-[`httpd`](/platform/monitoring/measurements-internal#httpd)
+[`httpd`](/platform/monitoring/tools/measurements-internal#httpd)
 
 ### Field keys
 
-[`queryReq`](/platform/monitoring/measurements-internal#querureq), [`writeReq`](/platform/monitoring/measurements-internal#writereq), [`serverError`](/platform/monitoring/measurements-internal#servererror), [`clientError`](/platform/monitoring/measurements-internal#clienterror)
+[`queryReq`](/platform/monitoring/tools/measurements-internal#querureq), [`writeReq`](/platform/monitoring/tools/measurements-internal#writereq), [`serverError`](/platform/monitoring/tools/measurements-internal#servererror), [`clientError`](/platform/monitoring/tools/measurements-internal#clienterror)
+
+____
+
+## Hinted Handoff (HH) Queue Size
+
+Displays the size, in bytes, of Hinted Handoff (HH) queues, by hostname.
+
+### Query
+
+`"SELECT mean("queueBytes") FROM "_internal".."hh_processor" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(0)"`
+
+### Metric
+
+#### HH Queue Size
+
+`mean("queueBytes")`
+
+### Measurement
+
+[`hh_processor`](/platform/monitoring/tools/measurements-internal#hh-processor)
+
+### Field keys
+
+[`queueBytes`](/platform/monitoring/tools/measurements-internal#queuebytes)
+
+____
+
+## Anti-Entropy Errors
+
+Displays the count of Anti-Entropy errors.
+
+### Query
+
+`"SELECT non_negative_derivative(mean("errors"),5m) AS "errors" FROM "_internal".""."ae" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
+
+### Metric
+
+#### \[AE Errors\]
+
+`non_negative_derivative(mean("errors"),5m)`
+
+### Measurement
+
+[`ae`](/platform/monitoring/tools/measurements-internal#ae)
+
+### Field keys
+
+[`errors`](/platform/monitoring/tools/measurements-internal#errors)
+
+____
+
+## Anti-Entropy Jobs
+
+Displays the count of active Anti-Entry jobs.
+
+### Query
+
+`"SELECT count("jobs_active") AS \Active Jobs" FROM "_internal".."ae" WHERE time > :dashboardTime: GROUP BY time(:interval:) FILL(null)"`
+
+### Metric
+
+#### Count of Jobs
+
+`count("jobs_active")`
+
+### Measurement
+
+[`ae`](/platform/monitoring/tools/measurements-internal#ae)
+
+### Field keys
+
+[`jobs_active`](/platform/monitoring/tools/measurements-internal#jobs-active)

@@ -7,6 +7,8 @@ menu:
     parent: About the project
 ---
 
+
+
 ## v1.6.2 [08-27-2018]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
@@ -398,7 +400,7 @@ Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1
 
 This release is built with Go (golang) 1.7.4.
 It resolves a security vulnerability reported in Go (golang) version 1.7.3 which impacts all
-users currently running on the Mac OS X platform, powered by the Darwin operating system.
+users currently running on the macOS platform, powered by the Darwin operating system.
 
 #### Cluster-specific bug fixes
 

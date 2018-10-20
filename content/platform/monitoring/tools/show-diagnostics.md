@@ -1,31 +1,32 @@
 ---
-title: Using the SHOW DIAGNOSTICS command to monitoring InfluxDB
-description: Use the SHOW DIAGNOSTICS command to monitor InfluxDB instances.
+title: Using the SHOW DIAGNOSTICS statement to monitoring InfluxDB
+description: Use the SHOW DIAGNOSTICS statement to monitor InfluxDB instances.
 menu:
   platform:
-    name: Using SHOW DIAGNOSTICS to monitor InfluxDB
-    weight: 100
+    name: SHOW DIAGNOSTICS
+    parent: Monitoring tools
+    weight: 90
 ---
 
-Diagnostic information includes mostly information about your InfluxDB server that is not necessarily numerical in format. This diagnostic information is not stored in the [`_internal`](/platform/monitoring/measurements-internal/) database.
+Diagnostic information includes mostly information about your InfluxDB server that is not necessarily numerical in format. This diagnostic information is not stored in the [`_internal`](/platform/monitoring/tools/measurements-internal/) database.
 
-To see InfluxDB server or node diagnostic information, you can use the [`SHOW DIAGNOSTICS`](/influxdb/latest/query_language/spec#show-diagnostics) command. This command returns InfluxDB instance information, including build details, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics. This information is particularly useful to InfluxData Support, so be sure to include the output of this query anytime you file a support ticket or GitHub issue.
+To see InfluxDB server or node diagnostic information, you can use the [`SHOW DIAGNOSTICS`](/influxdb/latest/query_language/spec#show-diagnostics) statement. This statement returns InfluxDB instance information, including build details, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics. This information is particularly useful to InfluxData Support, so be sure to include the output of this query anytime you file a support ticket or GitHub issue.
 
 
 ## `SHOW DIAGNOSTICS` measurement details
 
-The `SHOW DIAGNOSTICS` command returns the following information.
+The `SHOW DIAGNOSTICS` statement returns the following information.
 
-build
+#### build
 * Branch
 * Build Time
 * Commit
 
-config
+#### config
 * bind-address
 * reporting-disabled
 
-config-coordinator
+#### config-coordinator
 * log-queries-after
 * max-concurrent-queries
 * max-select-buckets
@@ -34,12 +35,12 @@ config-coordinator
 * query-timeout
 * write-timeout
 
-config-cqs
+#### config-cqs
 * enabled
 * query-stats-enabled
 * run-interval
 
-config-data
+#### config-data
 * cache-max-memory-size
 * cache-snapshot-memory-size
 * cache-snapshot-write-cold-duration
@@ -52,7 +53,7 @@ config-data
 * wal-fsync-delay
 
 
-config-httpd
+#### config-httpd
 * access-log-path
 * bind-address
 * enabled
@@ -60,39 +61,39 @@ config-httpd
 * max-connection-limit
 * max-row-limit
 
-config-meta
+#### config-meta
 * dir
 
-config-monitor
+#### config-monitor
 * store-database
 * store-enabled
 * store-interval
 
-config-precreator
+#### config-precreator
 * advance-period
 * check-interval
 * enabled
 
-config-retention
+#### config-retention
 * check-interval
 * enabled
 
-config-subscriber
+#### config-subscriber
 * enabled
 * http-timeout
 * write-buffer-size
 * write-concurrency
 
-network
+#### network
 * hostname
 
-runtime
+#### runtime
 * GOARCH
 * GOMAXPROCS
 * GOOS
 * version
 
-system
+#### system
 * PID currentTime
 * started
 * uptime
@@ -100,7 +101,7 @@ system
 
 ## Example of `SHOW DIAGNOSTICS` output
 
-Here is an example of the output returned when running the `SHOW DIAGNOSTICS` command on an InfluxDB OSS server.
+Here is an example of the output returned when running the `SHOW DIAGNOSTICS` statement on an InfluxDB OSS server.
 
 ```
 > show diagnostics

@@ -19,7 +19,7 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 ## Configuration
 ### Configuration file location by installation type
 
-* OS X [Homebrew](http://brew.sh/): `/usr/local/etc/telegraf.conf`
+* macOS [Homebrew](http://brew.sh/): `/usr/local/etc/telegraf.conf`
 * Linux debian and RPM packages: `/etc/opt/telegraf/telegraf.conf`
 * Standalone Binary: see the next section for how to create a configuration file
 
@@ -38,7 +38,7 @@ telegraf -sample-config -filter cpu:mem -outputfilter influxdb > telegraf.conf
 
 ## Start the Telegraf Server
 Start the Telegraf server and direct it to the relevant configuration file:
-### OS X [Homebrew](http://brew.sh/)
+### macOS [Homebrew](http://brew.sh/)
 ```bash
 telegraf -config telegraf.conf
 ```

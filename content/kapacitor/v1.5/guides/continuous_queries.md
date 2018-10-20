@@ -193,7 +193,7 @@ batch
 #### Query Results
 | Query Method     | Time                 | Mean                  |
 |:------------     |:----                 |:----                  |
-| Continuous Query | 2017-03-13T22:29:00Z | 8.083532716666666e+08 |
+| Continuous Query | 2017-03-13T17:50:00Z | 8.083532716666666e+08 |
 | TICKscript       | 2017-03-13T17:51:00Z | 8.083532716666666e+08 |
 
 > Note the difference between the returned timestamps.

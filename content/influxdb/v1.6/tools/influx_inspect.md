@@ -59,9 +59,20 @@ influx_inspect buildtsi -datadir <data_dir> -waldir <wal_dir> [ options ]
 > or ensure that the permissions match after running the command.
 
 
-#### Options
+#### Arguments
 
 Optional arguments are in brackets.
+
+#### `[ -batch-size]`
+
+The size of the batches written to the index. Default value is `10000`.
+
+>**Warning:** Setting this value can have adverse effects on performance and heap size.
+
+#### `[ -concurrency]`
+
+The number of workers to dedicate to shard index building.
+Defaults to [`GOMAXPROCS`](/influxdb/v1.6/administration/config#gomaxprocs-environment-variable) value.
 
 #### `[ -database <db_name> ]`
 
@@ -70,6 +81,17 @@ The name of the database.
 #### `-datadir <data_dir>`
 
 The path to the `data` directory.
+
+#### `[ -max-cache-size ]`
+
+The maximum size of the cache before it starts rejecting writes.
+This value overrides the configuration setting for
+`[data] cache-max-memory-size`.
+Default value is `1073741824`.
+
+#### `[ -max-log-file-size ]`
+
+The maximum size of the log file. Default value is `1048576`.
 
 #### `[ -retention <rp_name> ]`
 
@@ -81,7 +103,7 @@ The identifier of the shard.
 
 #### `[ -v ]`
 
-Enable output in verbose mode.
+Flag to enable output in verbose mode.
 
 #### `-waldir <wal_dir>`
 
