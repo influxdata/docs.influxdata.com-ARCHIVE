@@ -20,4 +20,9 @@ and address anomalies as they happen.
 
 <!-- ## [Internal monitoring vs external monitoring](#) -->
 
+## [Setting up monitoring dashboards](#)
+
 ## [Dashboards for monitoring performance](/platform/monitoring/monitoring-dashboards/)
+
+## [Monitoring tools](/platform/monitoring/tools)
+The InfluxData platform provides tools to help you monitor and troubleshoot issues if they arise.
