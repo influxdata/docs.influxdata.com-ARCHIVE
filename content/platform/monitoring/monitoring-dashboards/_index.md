@@ -5,7 +5,7 @@ menu:
   platform:
     name: Dashboards for monitoring
     parent: Monitoring
-    weight: 1
+    weight: 3
 ---
 ## Overview
 
