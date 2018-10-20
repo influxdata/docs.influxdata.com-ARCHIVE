@@ -4,7 +4,7 @@ description: Describes metrics monitored in the InfluxDB OSS monitoring dashboar
 menu:
   platform:
     name: InfluxDB OSS Stats dashboard
-    parent: Monitoring dashboards
+    parent: Dashboards for monitoring
     weight: 40
 ---
 
@@ -12,7 +12,7 @@ The InfluxDB OSS Stats dashboard is useful for monitoring the health of your Inf
 
 > **Note:** The queries below use the `_internal` database, which is enabled by default on InfluxDB OSS instances.
 
-## Continuous Queries Executed Per Minute
+## Continuous Queries Executed / Minute
 
 ### Description
 
@@ -22,7 +22,7 @@ Displays the non-negative mean rate of change in continuous queries (CQs) execut
 
 `SELECT non_negative_derivative(mean(/.*/),60s) FROM "_internal".."cq" WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(null)"`
 
-### Metric
+### Metrics
 
 #### Continuous Queries
 
@@ -44,11 +44,11 @@ _______________
 
 Displays the current heap size.
 
-### Query
+### Queries
 
 `"SELECT mean("HeapInUse") FROM "_internal".."runtime" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metric
+### Metrics
 
 #### Heap Size
 
@@ -74,7 +74,7 @@ Displays the number of shard write errors.
 
 `"SELECT non_negative_derivative(max("writeError"), 10s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metric
+### Metrics
 
 #### [Shard Write Errors]
 
@@ -96,11 +96,11 @@ ___________
 
 Displays the number of series (series cardinality) for the specified databases.
 
-### Query
+### Queries
 
 `"SELECT max("numSeries") AS "Series Cardinality" FROM "_internal".."database" WHERE time > :dashboardTime:  GROUP BY time(:interval:), "database" fill(null)"`
 
-### Metric
+### Metrics
 
 #### Series Cardinality
 
@@ -138,7 +138,7 @@ Displays the number of measurements, by database.
 
 ### Field keys
 
-[`numMeasurements`](/platform/monitoring/tools/measurements-internal#numeasurements)
+[`numMeasurements`](/platform/monitoring/tools/measurements-internal#nummeasurements)
 
 _____
 
@@ -178,17 +178,17 @@ Displays the duration, in nanoseconds, of the top 1% of HTTP requests.
 
 ____
 
-## Points Throughput Per Minute by Hostname
+## Point Throughput / Minute by Hostname
 
 ### Description
 
 Displays the number of points requested each minute, by hostname.
 
-### Query
+### Queries
 
 `"SELECT non_negative_derivative(max("pointReq"), 60s) FROM "_internal".."write" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname""`
 
-### Metric
+### Metrics
 
 #### Point Requests
 
@@ -204,19 +204,19 @@ Displays the number of points requested each minute, by hostname.
 
 _____
 
-## Queries Executed Per Minute
+## Queries Executed / Minute
 
 ### Description
 
 Displays the number of queries executed per minute.
 
-### Query
+### Queries
 
 #### Queries Executed
 
  `"SELECT non_negative_derivative(mean("queriesExecuted"), 60s) AS "Queries Executed" FROM "_internal".."queryExecutor" WHERE time > :dashboardTime: GROUP BY time(:interval:), "hostname" fill(null)"`
 
-### Metric
+### Metrics
 
 #### Queries Executed
 
@@ -232,7 +232,7 @@ Displays the number of queries executed per minute.
 
 _____
 
-## HTTP Requests Per Minute
+## HTTP Requests / Minute
 
 ### Description
 
@@ -280,4 +280,4 @@ Displays the number of HTTP requests per minute.
 
 ### Field keys
 
-[`queryReq`](/platform/monitoring/tools/measurements-internal#querureq), [`writeReq`](/platform/monitoring/tools/measurements-internal#writereq), [`serverError`](/platform/monitoring/tools/measurements-internal#servererror), [`clientError`](/platform/monitoring/tools/measurements-internal#clienterror)
+[`queryReq`](/platform/monitoring/tools/measurements-internal#queryreq), [`writeReq`](/platform/monitoring/tools/measurements-internal#writereq), [`serverError`](/platform/monitoring/tools/measurements-internal#servererror), [`clientError`](/platform/monitoring/tools/measurements-internal#clienterror)
