@@ -283,7 +283,7 @@ continuous queries.
 The `meta` directory.
 Files in the `meta` directory include `meta.db`.
 
->**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/meta`
+>**Note:** The default directory for macOS installations is `/Users/<username>/.influxdb/meta`
 
 Environment variable: `INFLUXDB_META_DIR`
 
@@ -312,7 +312,7 @@ This section controls where the actual shard data for InfluxDB lives and how it 
 The directory where InfluxDB stores the data.
 This directory may be changed.
 
->**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/data`
+>**Note:** The default directory for macOS installations is `/Users/<username>/.influxdb/data`
 
 Environment variable: `INFLUXDB_DATA_DIR`
 

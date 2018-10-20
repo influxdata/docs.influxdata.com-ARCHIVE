@@ -38,7 +38,7 @@ If InfluxDB was installed using a prebuilt package, and then launched
 as a service, `stderr` is redirected to `/var/log/influxdb/influxd.log` and all log data will be written to that file.
 You can override this location by setting the environment variable `STDERR` in the InfluxDB configuration file `/etc/default/influxdb`.
 
->**Note:** Mac OS X logs are stored, by default, in the file `/usr/local/var/log/influxdb.log`.
+>**Note:** macOS logs are stored, by default, in the file `/usr/local/var/log/influxdb.log`.
 
 For example, if `/etc/default/influxdb` contains:
 

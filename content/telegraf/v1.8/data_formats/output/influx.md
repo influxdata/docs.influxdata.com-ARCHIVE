@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: InfluxDB Line Protocol
     weight: 20
-    parent: Output
+    parent: Output data formats
 ---
 
 The `influx` output data format outputs metrics into [InfluxDB Line Protocol][line protocol]. InfluxData recommends this data format unless another format is required for interoperability.

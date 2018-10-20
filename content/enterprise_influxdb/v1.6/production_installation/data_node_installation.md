@@ -87,33 +87,34 @@ installation.
 A healthy cluster requires that every meta and data node can communicate
 with every other meta and data node.
 
-## Step 2: Set up, configure, and start the data services
+## Step 2: Set up, configure, and start the data node services
 
-Perform the following steps on each data server.
+Perform the following steps on each data node.
 
 ### I. Download and install the data service
 
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.2-c1.6.2_amd64.deb
-sudo dpkg -i influxdb-data_1.6.2-c1.6.2_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.3-c1.6.3_amd64.deb
+sudo dpkg -i influxdb-data_1.6.3-c1.6.3_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.2_c1.6.2.x86_64.rpm
-sudo yum localinstall influxdb-data-1.6.2_c1.6.2.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.3_c1.6.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.6.3_c1.6.3.x86_64.rpm
 ```
 
-### II. Edit the configuration file
+### II. Edit the data node configuration files
 
-First, in `/etc/influxdb/influxdb.conf`, uncomment:
+First, in `/etc/influxdb/influxdb.conf`:
 
-* `hostname` at the top of the file and set it to the full hostname of the data node
-* `auth-enabled` in the `[http]` section and set it to `true`
-* `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. This value must be consistent across all data nodes.
+* Uncomment `hostname` at the top of the file and set it to the full hostname of the data node.
+* Uncomment `auth-enabled` in the `[http]` section and set it to `true`.
+* Uncomment `meta-auth-enabled` in the `[meta]` section and set it to `true`.
+* Uncomment `meta-internal-shared-secret` in the `[meta]` section and set it to a long pass phrase. The internal shared secret is used in JWT authentication for intra-node communication. This value must be same for all of your data nodes and match the `[meta] internal-shared-secret` value in the configuration files of your meta nodes.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
@@ -140,6 +141,9 @@ hostname="<enterprise-data-0x>" #✨
 [meta]
   # Where the cluster metadata is stored
   dir = "/var/lib/influxdb/meta" # data nodes do require a local meta directory
+...
+  # This setting must have the same value as the meta nodes' meta.auth-enabled configuration.
+  meta-auth-enabled - true
 
 [...]
 
@@ -221,16 +225,16 @@ The expected output is:
     Data Nodes
     ==========
     ID   TCP Address               Version
-    4    enterprise-data-01:8088   1.6.2-c1.6.2
-    5    enterprise-data-02:8088   1.6.2-c1.6.2
+    4    enterprise-data-01:8088   1.6.3-c1.6.3
+    5    enterprise-data-02:8088   1.6.3-c1.6.3
 
 >
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.6.2-c1.6.2
-    enterprise-meta-02:8091   1.6.2-c1.6.2
-    enterprise-meta-03:8091   1.6.2-c1.6.2
+    enterprise-meta-01:8091   1.6.3-c1.6.3
+    enterprise-meta-02:8091   1.6.3-c1.6.3
+    enterprise-meta-03:8091   1.6.3-c1.6.3
 
 
 The output should include every data node that was added to the cluster.

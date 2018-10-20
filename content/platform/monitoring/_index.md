@@ -23,5 +23,8 @@ or OSS TICK stack with the pros and cons of each.
 ## [Set up an external monitor](/platform/monitoring/external-monitor-setup)
 How to set up an external InfluxData TICK stack that monitors another Enterprise or OSS TICK stack.
 
-## [Dashboards for monitoring performance](/platform/monitoring/monitoring-dashboards/)
-Available dashboard templates for monitoring the performance and health of your TICK stack.
+## [Dashboards for monitoring](/platform/monitoring/monitoring-dashboards)
+Set up dashboards to help visualize and monitor the health and performance of your InfluxData TICK stack.
+
+## [Monitoring tools](/platform/monitoring/tools)
+The InfluxData platform provides tools to help you monitor and troubleshoot issues if they arise.

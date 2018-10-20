@@ -5,7 +5,7 @@ menu:
   telegraf_1_8:
     name: Nagios
     weight: 90
-    parent: Input
+    parent: Input data formats
 ---
 
 # Nagios
