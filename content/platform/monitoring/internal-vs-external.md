@@ -1,5 +1,5 @@
 ---
-title: Internal vs external monitoring
+title: Internal versus external monitoring
 description: An explanation of internal and external monitoring strategies for your Enterprise or OSS TICK stack with the pros and cons of each.
 menu:
   platform:
