@@ -25,7 +25,7 @@ It also includes a live stream of logs that can be searched, filtered, and pause
 Logs are pulled from the `syslog` measurement.
 _Other log inputs and alternate log measurement options will be available in future updates._
 
-<img src="/img/chronograf/v1.7/log-viewer-overview.png" alt="Chronograf log viewer" style="width:100%;max-width:1016px;"/>
+<img src="/img/chronograf/log-viewer-overview.png" alt="Chronograf log viewer" style="width:100%;max-width:1016px;"/>
 
 ### Searching and filtering logs
 Search for logs using keywords or regular expressions.
@@ -34,7 +34,7 @@ Any tag values included with the log entry can be used as a filter.
 
 You can also use search operators to filter your results. For example, if you want to find results with a severity of critical that don't mention RSS, you can enter: `severity == crit` and `-RSS`.
 
-![Searching and filtering logs](/img/chronograf/v1.7/logs-search-filter.gif)
+![Searching and filtering logs](/img/chronograf/log-viewer-search-filter.gif)
 
 > **Note:** The log search field is case-sensitive.
 
@@ -45,7 +45,7 @@ In the log viewer, you can select time ranges from which to view logs.
 By default, logs are streamed and displayed relative to "now," but it is possible to view logs from a past window of time.
 timeframe selection allows you to go to to a specific event and see logs for a time window both preceding and following that event. The default window is one minute, meaning the graph shows logs from thirty seconds before and the target time. Click the dropdown menu change the window.
 
-![Selecting time ranges](/img/chronograf/v1.7/logs-time-range.gif)
+![Selecting time ranges](/img/chronograf/log-viewer-specifc-time-range.gif)
 
 ## Configuring the log viewer
 The log viewer can be customized to fit your specific needs.
@@ -80,6 +80,6 @@ Select the **Truncate** or **Wrap** option to determine how text appears when it
 An incredibly powerful way to analyze log data is by creating dashboards that include log data.
 This is possible by using the [Table visualization type](/chronograf/v1.7/guides/visualization-types/#table) to display log data in your dashboard.
 
-![Correlating logs with other metrics](/img/chronograf/v1.7/logs-dashboard-correlation.gif)
+![Correlating logs with other metrics](/img/chronograf/log-viewer-dashboard.gif)
 
 This type of visualization allows you to quickly identify anomalies in other metrics and see logs associated with those anomalies.
