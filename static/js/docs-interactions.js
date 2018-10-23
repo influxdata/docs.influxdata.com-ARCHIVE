@@ -140,7 +140,7 @@ $(document).ready( function(){
 
 	// Remove heading border if not followed by a paragraph
 	$('h2').each(function() {
-		var hasParagraph = $(this).next('p, ol, ul, table, code, pre').length
+		var hasParagraph = $(this).next(':not(h1,h2)').length
 		if(hasParagraph == 0) {
 			$(this).addClass('no-paragraph');
 		};
