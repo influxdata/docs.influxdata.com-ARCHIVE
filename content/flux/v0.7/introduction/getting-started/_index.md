@@ -12,7 +12,9 @@ menu:
 Flux is InfluxData's new functional data scripting language designed for querying,
 analyzing, and acting on time series data.
 
-This multi-part guide walks through querying time series data from InfluxDB using Flux.
+This multi-part guide walks through important concepts related to Flux,
+how to query time series data from InfluxDB using Flux,
+and an introduction to Flux syntax and functions.
 
 ## What you will need
 
@@ -90,3 +92,7 @@ filter by tags without being limited to a measurement, etc.
 
 Something also important to note is that when multiple fields are returned,
 Flux will split each field into a separate tables by default.
+
+<div class="page-nav-btns">
+  <a class="btn next" href="/flux/v0.7/introduction/getting-started/query-influxdb/">Query InfluxDB with Flux</a>
+</div>
