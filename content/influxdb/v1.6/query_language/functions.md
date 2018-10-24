@@ -3556,7 +3556,7 @@ Returns the difference between subsequent field values associated with each fiel
 `DIFFERENCE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax-difference) section for how to use `DIFFERENCE()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-difference) section for how to use `DIFFERENCE()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
