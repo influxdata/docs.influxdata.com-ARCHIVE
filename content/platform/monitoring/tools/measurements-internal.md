@@ -13,12 +13,12 @@ menu:
 * [Using the `_internal` database](#using-the-internal-database)
 * [Enterprise cluster measurements](#enterprise-cluster-measurements)
 * [InfluxDB measurement statistics](#influxdb-measurement-statistics)
-  * [ae](#ae-e) (E)
+  * [ae](#ae-e) (Enterprise only)
       - [bytesRx](#bytesrx)
       - [errors](#errors)
       - [jobs](#jobs)
       - [jobsActive](#jobsactive)
-  * [cluster](#cluster-enterprise-only) (E)
+  * [cluster](#cluster-enterprise-only) (Enterprise only)
       - [copyShardReq](#copyshardreq)
       - [createIteratorReq](#createiteratorreq)
       - [expandSourcesReq](#expandsourcesreq)
@@ -34,10 +34,10 @@ menu:
   * [database](#database)
       - [numMeasurements](#nummeasurements)
       - [numSeries](#numseries)
-  * [hh](#hh-enterprise-only) (E)
+  * [hh](#hh-enterprise-only) (Enterprise only))
       - [writeShardReq](#writeshardreq)
       - [writeShardReqPoints](#writeshardreqpoints)
-  * [hh_processor](#hh-processor-enterprise-only) (E)
+  * [hh_processor](#hh-processor-enterprise-only) (Enterprise only))
       - [bytesRead](#bytesread)
       - [bytesWritten](#byteswritten)
       - [queueBytes](#queuebytes)
@@ -77,7 +77,7 @@ menu:
       * [queriesFinished](#queriesfinished)
       * [queryDurationNs](#querydurationns)
       * [recoveredPanics](#recoveredpanics)
-  * [rpc](#rpc-enterprise-only) (E)
+  * [rpc](#rpc-enterprise-only) (Enterprise only)
       * [idleStreams](#idlestreams)
       * [liveConnections](#liveconnections)
       * [liveStreams](#livestreams)
@@ -171,16 +171,16 @@ menu:
       * [writeOk](#writeok)
   * [write](#write)
       * [pointReq](#pointreq)
-      * [pointReqHH](#pointreqhh-enterprise-only) (E)
-      * [pointReqLocal](#pointreqlocal-enterprise-only) (E)
-      * [pointReqRemote](#pointreqremote-enterprise-only) (E)
+      * [pointReqHH](#pointreqhh-enterprise-only) (Enterprise only)
+      * [pointReqLocal](#pointreqlocal-enterprise-only) (Enterprise only)
+      * [pointReqRemote](#pointreqremote-enterprise-only) (Enterprise only)
       * [req](#req)
       * [subWriteDrop](#subwritedrop)
       * [subWriteOk](#subwriteok)
       * [writeDrop](#writedrop)
       * [writeError](#writeerror)
       * [writeOk](#writeok)
-      * [writePartial](#writepartial-enterprise-only) (E)
+      * [writePartial](#writepartial-enterprise-only) (Enterprise only)
       * [writeTimeout](#writetimeout)
 
 
@@ -202,9 +202,9 @@ In a cluster, each measurement in the `_internal` database has three tags:
 
 ## InfluxDB measurement statistics
 
-### ae (E)
+### ae (Enterprise only)
 
-The measurement statistics related to Anti-Entropy (AE) used in InfluxDB Enterprise clusters.
+The measurement statistics related to the Anti-Entropy (AE) engine in InfluxDB Enterprise clusters.
 
 #### bytesRx
 
@@ -226,21 +226,21 @@ The measurement statistics related to Anti-Entropy (AE) used in InfluxDB Enterpr
 
 #### jobsActive
 
-* The current number of active (currently executing) jobs.
+* The number of active (currently executing) jobs.
 * Data type: integer
 * Examples
   * "Anti-Entropy Jobs" metric in the [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#anti-entropy-jobs) dashboard.
 
 _____
 
-### cluster [Enterprise only]
+### cluster (Enterprise only)
 
 The `cluster` measurement tracks statistics related to the clustering features of the data nodes in InfluxDB Enterprise.
 The tags on the series indicate the source host of the stat.
 
 ####  copyShardReq
 
-* The number of internal request to copy a shard from _this_ data node to another data node.
+* The number of internal requests made to copy a shard from _this_ data node to another data node.
 * Data type: integer
 
 ####  createIteratorReq
@@ -251,18 +251,18 @@ The tags on the series indicate the source host of the stat.
 ####  expandSourcesReq
 
 * The number of remote node requests made to find measurements on this node that match a particular regular expression.
-Looks like this comment was meant for `expandSourcesReq` - and yes, that indicates a SELECT from a regex initiated on a different data node, which then sent an internal request to this node.
+Indicates a SELECT from a regex initiated on a different data node, which then sent an internal request to this node.
 * There is not currently a statistic tracking how many queries with a regex, instead of a fixed measurement, were initiated on a particular node.
 * Data type: integer
 
 ####  fieldDimensionsReq
 
-* The number of remote node requests for information about the fields and associated types, and tag keys, of measurements on this data node.
+* The number of remote node requests for information about the fields and associated types, and tag keys of measurements on this data node.
 * Data type: integer
 
 ####  iteratorCostReq
 
-*
+* The number of internal requests for iterator cost.
 * Data type: integer
 
 ####  removeShardReq
@@ -273,7 +273,7 @@ Looks like this comment was meant for `expandSourcesReq` - and yes, that indicat
 
 #### writeShardFail
 
-* The number of internal write requests from a remote node, and the write fails
+* The total number of internal write requests from a remote node that failed.
 * It's the cousin of OSS shard stat `writeReqErr`.
 * A write request over HTTP is received by Node A. Node A does not have the shard locally, so it creates an internal request to Node B instructing what to write and to which shard. If Node B sees the request and if anything goes wrong, Node B increments its own `writeShardFail`. Depending on what went wrong, in most circumstances Node B would also increment its `writeReqErr` stat inherited from OSS.
 * If Node A had the shard locally, there would be no internal request to write data to a remote node, so `writeShardFail` would not be incremented.
@@ -295,7 +295,7 @@ _____
 
 ### cq
 
-The statistics related to continuous queries (CQs).
+The measurement statistics related to continuous queries (CQs).
 
 #### queryFail
 
@@ -334,7 +334,7 @@ The statistics related to continuous queries (CQs).
 
 _____
 
-### hh [Enterprise only]
+### hh \[Enterprise only\]
 
 The `hh` measurement statistics track events resulting in new Hinted Handoff (HH) processors in InfluxDB Enterprise.
 
@@ -345,7 +345,7 @@ The `hh` measurement has one additional tag:
 
 * The number of initial write requests handled by the Hinted Handoff engine for a remote node.
 * Subsequent write requests to this node, destined for the same remote node, do not increment this statistics.
-* This statistic will be reset to `0` upon restart of `influxd`, regardless of the state the last time the process was alive. It is incremented when the HH "supersystem" is instructed to enqueue a write for the node, and the "subsystem" for the destination node doesn't exist and has to be created, and the "subsystem" created successfully.
+* This statistic resets to `0` upon restart of `influxd`, regardless of the state the last time the process was alive. It is incremented when the HH "supersystem" is instructed to enqueue a write for the node, and the "subsystem" for the destination node doesn't exist and has to be created, and the "subsystem" created successfully.
 * If HH files are on disk for a remote node at process startup, the branch that increments this stat will not be reached.
 * Data type: integer
 
@@ -356,7 +356,7 @@ The `hh` measurement has one additional tag:
 
 _____
 
-### hh_processor [Enterprise only]
+### hh_processor \[Enterprise only\]
 
 The `hh_processor` measurement statistics are related to the Hinted Handoff (HH) processors in InfluxDB Enterprise, one for each data node.
 
@@ -385,7 +385,7 @@ Upon restart or a crash, this statistic resets to zero, even if the Hinted Hando
 
 #### queueBytes
 
-* The total number of bytes remaining in the queue.
+* The total number of bytes remaining in the Hinted Handoff queue.
 * This statistic should accurately and absolutely track the number of bytes of encoded data waiting to be sent to the remote node.
 * Data type: integer
 * This statistic should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (See https://github.com/influxdata/docs.influxdata.com/issues/780)
@@ -402,12 +402,12 @@ Upon restart or a crash, this statistic resets to zero, even if the Hinted Hando
 
 ####  writeBlocked
 
-* The number of writes blocked (and thus ) because the number of concurrent HH requests exceeds the limit.
+* The number of writes blocked because the number of concurrent HH requests exceeds the limit.
 * Data type: integer
 
 ####  writeDropped
 
-* The number of writes dropped from the HH queue and appeared to be corrupted and was therefore dropped.
+* The number of writes dropped from the HH queue because the write appeared to be corrupted.
 * Data type: integer
 
 ####  writeNodeReq
@@ -417,12 +417,12 @@ Upon restart or a crash, this statistic resets to zero, even if the Hinted Hando
 
 ####  writeNodeReqFail
 
-* The total number of write requests that failed in writing a batch of data  from the HH queue to the destination node.
+* The total number of write requests that failed in writing a batch of data from the Hinted Handoff queue to the destination node.
 * Data type: integer
 
 ####  writeNodeReqPoints
 
-* The number of points successfully written from the HH queue to the destination node fr
+* The total number of points successfully written from the HH queue to the destination node fr
 * Data type: integer
 
 ####  writeShardReq
@@ -443,7 +443,7 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  authFail
 
-* The number of HTTP requests that were aborted due to authentication being required but not supplied or incorrect.
+* The number of HTTP requests that were aborted due to authentication being required, but not supplied or incorrect.
 * Data type: integer
 
 ####  clientError
@@ -503,17 +503,17 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 ####  queryRespBytes
 
-* The sum of all bytes returned in query responses.
+* The total number of bytes returned in query responses.
 * Data type: integer
 
 ####  recoveredPanics
 
-* The number of panics recovered by the HTTP handler.
+* The total number of panics recovered by the HTTP handler.
 * Data type: integer
 
 ####  req
 
-* The number of HTTP requests served.
+* The total number of HTTP requests served.
 * Data Type: integer
 
 ####  reqActive  
@@ -571,7 +571,7 @@ The `queryExecutor` statistics related to usage of the Query Executor of the Inf
 
 ####  queriesActive
 
-* The number of queries currently being handled.
+* The number of active queries currently being handled.
 * Data type: integer
 
 #####  queriesExecuted
@@ -601,7 +601,7 @@ The `queryExecutor` statistics related to usage of the Query Executor of the Inf
 
 _____
 
-### rpc [Enterprise only]
+### rpc (Enterprise only)
 
 The `rpc` measurement statistics are related to the use of RPC calls within InfluxDB Enterprise clusters.
 
@@ -627,12 +627,12 @@ The `rpc` measurement statistics are related to the use of RPC calls within Infl
 
 ####  rpcFailures
 
-* The total number of RPC failures, which are errors that did not recover.
+* The total number of RPC failures, which are RPCs that did not recover.
 * Data type: integer
 
 ####  rpcReadBytes
 
-* The total number of bytes read.
+* The total number of RPC bytes read.
 * Data type: integer
 
 ####  rpcRetries
@@ -642,7 +642,7 @@ The `rpc` measurement statistics are related to the use of RPC calls within Infl
 
 ####  rpcWriteBytes
 
-* The total number of bytes written.
+* The total number of RPC bytes written.
 * Data type: integer
 
 ####  singleUse
@@ -724,8 +724,8 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 
 #### Mallocs
 
-* The cumulative number of heap objects allocated.
-* The total number of live objects is Mallocs - Frees.
+* The total number of heap objects allocated.
+* The total number of live objects is [Frees](#Frees).
 * Data type: integer
 
 #### NumGC
@@ -751,7 +751,7 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 
 #### TotalAlloc
 
-* The cumulative number of bytes allocated for heap objects.
+* The total number of bytes allocated for heap objects.
 * This statistic does not decrease when objects are freed.
 * Data type: integer
 
@@ -767,45 +767,49 @@ The `shard` measurement statistics are related to working with shards in InfluxD
 * Data type: integer
 
 #### fieldsCreate
+
+* The number of fields created.
 * Data type: integer
 
 #### seriesCreate
 
+* Then number of series created.
 * Data type: integer
 
 #### writeBytes
 
+* The number of bytes written to the shard.
 * Data type: integer
 
 #### writePointsDropped
 
-* Incremented when a point is dropped from a write.
+* The number of requests to write points t dropped from a write.
 * Also, `http.pointsWrittentDropped` incremented when a point is dropped from a write. (See https://github.com/influxdata/docs.influxdata.com/issues/780)
 * Data type: integer
 
 #### writePointsErr
 
-*
+* The number of requests to write points that failed to be written due to errors.
 * Data type: integer
 
 #### writePointsOk
 
-*
+* The number of points written successfully.
 * Data type: integer
 
 #### writeReq
 
-*
+* The total number of write requests.
 * Data type: integer
 
 #### writeReqErr
 
-*
+* The total number of write requests that failed due to errors.
 * Data type: integer
 
 #### writeReqOk
 
-*
+* The total number of successful write requests.
 * Data type: integer
 
 ____
@@ -835,19 +839,33 @@ ______
 
 The `tsm1_cache` measurement statistics are related to the usage of the TSM cache.
 
-#### WALCompactionTimeMs
 
-* The total number of milliseconds (ms) spent compacting snapshots.
-* Data type: integer
+The following query example calculates various useful measurements related to the TSM cache.
+
+```
+SELECT
+     max(cacheAgeMs) / 1000.000 AS CacheAgeSeconds,
+     max(memBytes) AS MaxMemBytes, max(diskBytes) AS MaxDiskBytes,
+     max(snapshotCount) AS MaxSnapShotCount,
+     (last(cachedBytes) - first(cachedBytes)) / (last(WALCompactionTimeMs) - first(WALCompactionTimeMs)) * 1000.000 AS CompactedBytesPerSecond,
+     last(cachedBytes) AS CachedBytes,
+     (last(cachedBytes) - first(cachedBytes))/300 as CacheThroughputBytesPerSecond
+FROM _internal.monitor.tsm1_cache
+WHERE time > now() - 1h
+GROUP BY time(5m), path
+```
 
 #### cacheAgeMs
 
-* The number of milliseconds (ms) since cache was last snapshotted at sample time.
+* The duration, in milliseconds, since the cache was last snapshotted at sample time.
+* This statistic indicates how busy the cache is. Large numbers indicate a cache which is idle with respect to writes.
 * Data type: integer
 
 #### cachedBytes
 
-* The total number of bytes written into snapshots.
+* The total number of bytes that have been written into snapshots.
+* This statistic is updated during the creation of a snapshot.
+* The purpose of this statistic is to allow calculation of cache throughput between any two instances of time. The ratio of the difference between two samples of this statistic divided by the interval separating the samples is a measure of the cache throughput (more accurately, the rate at which data is being snapshotted). When combined with the `diskBytes` and `memBytes` statistics, it can also be used to calculate the rate at which data is entering the cache and rate at which is being purged from the cache. If the entry rate exceeds the exit rate for a sustained period of time, there is an issue that needs to be addressed.
 * Data type: integer
 
 #### diskBytes
@@ -862,29 +880,37 @@ The `tsm1_cache` measurement statistics are related to the usage of the TSM cach
 
 #### snapshotCount
 
-* The number of active snapshots.
+* The current level (number) of active snapshots.
+* In a healthy system, this number should be between 0 and 1. A system experiencing transient write errors might expect to see this number rise.
+* Data type: integer
+
+#### WALCompactionTimeMs
+
+* The duration, in milliseconds, that the commit lock is held while compacting snapshots.
+* The expression `(cachedBytes - diskBytes) / WALCompactionTime` provides an indication of how fast the WAL logs are being committed to TSM files.
+* The ratio of the difference between the start and end "WALCompactionTime" values for an interval divided by the length of the interval provides an indication of how much of maximum cache throughput is being consumed.
 * Data type: integer
 
 #### writeDropped
 
-*
+* The total number of writes dropped due to timeouts.
 * Data type: integer
 
 #### writeErr
 
-*
+* The total number of writes that failed.
 * Data type: integer
 
 #### writeOk
 
-*
+* The total number of successful writes.
 * Data type: integer
 
 ____
 
 ### tsm1_engine
 
-The `tsm1_engine` measurement statistics are related to the usage of the TSM storage engine.
+The `tsm1_engine` measurement statistics are related to the usage of a TSM storage engine with compressed blocks.
 
 #### cacheCompactionDuration       
 
@@ -1090,18 +1116,18 @@ The `write` measurement statistics are about writes to the data node, regardless
 * Examples
   * "Points Throughput / Minute by Hostname" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring/) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring/) dashboards
 
-#### pointReqHH [Enterprise only]
+#### pointReqHH (Enterprise only)
 
 * The total number of points received for write by this node and then enqueued into Hinted Handoff for the destination node.
 
 * Data type: integer
 
-#### pointReqLocal [Enterprise only]
+#### pointReqLocal (Enterprise only)
 
 * The total number of point requests that have been attempted to be written into a shard on the same (local) node.
 * Data type: integer
 
-#### pointReqRemote [Enterprise only]
+#### pointReqRemote (Enterprise only)
 
 * The total number of points received for write by this node but needed to be forwarded into a shard on a remote node.
 The `pointReqRemote` statistic is incremented immediately before the remote write attempt, which only happens if HH doesn't exist for that node. Then if the write attempt fails, we check again if HH exists, and if so, add the point to HH instead.
@@ -1140,7 +1166,7 @@ The `pointReqRemote` statistic is incremented immediately before the remote writ
 * The total number of batches of points written at the requested consistency level.
 * Data type: integer
 
-#### writePartial [Enterprise only]
+#### writePartial (Enterprise only)
 
 * The total number of batches of points written to at least one node but did not meet the requested consistency level.
 * Data type: integer
