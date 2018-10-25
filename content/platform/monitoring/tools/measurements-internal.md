@@ -13,7 +13,7 @@ menu:
 * [Using the `_internal` database](#using-the-internal-database)
 * [Enterprise cluster measurements](#enterprise-cluster-measurements)
 * [InfluxDB measurement statistics](#influxdb-measurement-statistics)
-  * [ae](#ae-e) (Enterprise only)
+  * [ae](#ae-enterprise-only) (Enterprise only)
       - [bytesRx](#bytesrx)
       - [errors](#errors)
       - [jobs](#jobs)
