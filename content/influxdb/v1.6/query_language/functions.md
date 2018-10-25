@@ -6206,7 +6206,6 @@ and the default hold period and warmup type.
 `CHANDE_MOMENTUM_OSCILLATOR()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `CHANDE_MOMENTUM_OSCILLATOR()` with a `GROUP BY time()` clause.
 
 ## EXPONENTIAL_MOVING_AVERAGE()
 An exponential moving average (EMA) is a type of moving average that is similar
@@ -6258,7 +6257,6 @@ and the default hold period and warmup type.
 `EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `EXPONENTIAL_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 ## DOUBLE_EXPONENTIAL_MOVING_AVERAGE()
 The Double Exponential Moving Average (DEMA) attempts to remove the inherent lag
@@ -6312,7 +6310,6 @@ and the default hold period and warmup type.
 `DOUBLE_EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `DOUBLE_EXPONENTIAL_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 ## KAUFMANS_EFFICIENCY_RATIO()
 Kaufman's Efficiency Ration, or simply "Efficiency Ratio" (ER), is calculated by
@@ -6367,7 +6364,6 @@ and the default hold period and warmup type.
 `KAUFMANS_EFFICIENCY_RATIO()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `KAUFMANS_EFFICIENCY_RATIO()` with a `GROUP BY time()` clause.
 
 
 ## KAUFMANS_ADAPTIVE_MOVING_AVERAGE()
@@ -6421,7 +6417,6 @@ and the default hold period and warmup type.
 `KAUFMANS_ADAPTIVE_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `KAUFMANS_ADAPTIVE_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 
 ## TRIPLE_EXPONENTIAL_MOVING_AVERAGE()
@@ -6476,7 +6471,6 @@ and the default hold period and warmup type.
 `TRIPLE_EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `TRIPLE_EXPONENTIAL_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 ## TRIPLE_EXPONENTIAL_DERIVATIVE()
 The triple exponential derivative indicator, commonly referred to as "TRIX," is
@@ -6538,7 +6532,6 @@ and the default hold period and warmup type.
 `TRIPLE_EXPONENTIAL_DERIVATIVE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `TRIPLE_EXPONENTIAL_DERIVATIVE()` with a `GROUP BY time()` clause.
 
 ## RELATIVE_STRENGTH_INDEX()
 The relative strength index (RSI) is a momentum indicator that compares the magnitude of recent increases and decreases over a specified time period to measure speed and change of data movements.
@@ -6587,7 +6580,6 @@ and the default hold period and warmup type.
 `RELATIVE_STRENGTH_INDEX()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `RELATIVE_STRENGTH_INDEX()` with a `GROUP BY time()` clause.
 
 
 # Other
