@@ -13,3 +13,5 @@ A quick introduction to Flux and its design principles.
 
 ## [Getting started with Flux](/flux/v0.7/introduction/getting-started)
 The best way to learn Flux is to walk through writing a flux script. This guide does just that.
+
+## [Flux language reference](/flux/v0.7/language)
