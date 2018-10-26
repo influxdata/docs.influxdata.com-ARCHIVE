@@ -6,3 +6,33 @@ menu:
     name: Flux language reference
     weight: 3
 ---
+
+The following document specifies the Flux language and query execution.
+
+This document is a living document and does not represent the current implementation of Flux.
+Any section that is not currently implemented is commented with a IMPL#XXX where XXX is an issue number tracking discussion and progress towards implementation.
+
+
+The Flux language is centered on querying and manipulating time series data.
+
+### Notation
+The syntax of the language is specified using Extended Backus-Naur Form (EBNF):
+
+    Production  = production_name "=" [ Expression ] "." .
+    Expression  = Alternative { "|" Alternative } .
+    Alternative = Term { Term } .
+    Term        = production_name | token [ "…" token ] | Group | Option | Repetition .
+    Group       = "(" Expression ")" .
+    Option      = "[" Expression "]" .
+    Repetition  = "{" Expression "}" .
+
+Productions are expressions constructed from terms and the following operators, in increasing precedence:
+
+    |   alternation
+    ()  grouping
+    []  option (0 or 1 times)
+    {}  repetition (0 to n times)
+
+Lower-case production names are used to identify lexical tokens.
+Non-terminals are in CamelCase.
+Lexical tokens are enclosed in double quotes "" or back quotes \`\`.
