@@ -22,7 +22,7 @@ yield(name: "custom-name")
 ## Parameters
 
 ### name
-A unique name to give to the yielded results.
+A unique name for the yielded results.
 
 _**Data type:** string_
 
