@@ -77,7 +77,7 @@ Given the following two streams of data:
 **SF_Temp**  
 
 | _time  | _field | _value  |
-|------- |:------:|--------:|
+| ------ |:------:| -------:|
 | 0001	 | "temp" | 70      |
 | 0002	 | "temp" | 75      |
 | 0003	 | "temp" | 72      |
@@ -85,7 +85,7 @@ Given the following two streams of data:
 **NY_Temp**  
 
 | _time  | _field | _value  |
-|------- |:------:|--------:|
+| ------ |:------:| -------:|
 | 0001	 | "temp" | 55      |
 | 0002	 | "temp" | 56      |
 | 0003	 | "temp" | 55      |
@@ -99,7 +99,7 @@ join(tables: {sf: SF_Temp, ny: NY_Temp}, on: ["_time", "_field"])
 The output will be:
 
 | _time | _field | _value_ny | _value_sf |
-|-------|--------|----------:|----------:|
+| ----- | ------ | ---------:| ---------:|
 | 0001  | "temp" | 55        | 70        |
 | 0002  | "temp" | 56        | 75        |
 | 0003  | "temp" | 55        | 72        |

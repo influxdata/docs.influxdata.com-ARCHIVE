@@ -7,3 +7,35 @@ menu:
     parent: Functions
     weight: 1
 ---
+
+The `sample()` function selects a subset of the records from the input table.
+
+_**Function type:** selector_  
+_**Output data type:** table_
+
+```js
+sample(n:5, pos: -1)
+```
+
+## Parameters
+
+### n
+Sample every Nth element.
+
+_**Data type:** integer_
+
+### pos
+The position offset from the start of results where sampling begins.
+`pos` must be less than `n`.
+If `pos` is less than 0, a random offset is used.
+Defaults to -1 (random offset).
+
+_**Data type:** integer_
+
+## Examples
+```js
+from(bucket:"telegraf/autogen")
+  |> range(start:-1d)
+  |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "usage_system")
+  |> sample(n: 5, pos: 1)
+```
