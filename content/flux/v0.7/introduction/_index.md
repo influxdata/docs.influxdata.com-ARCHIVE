@@ -29,8 +29,8 @@ from(bucket:"telegraf/autogen")
   |> range(start:-1h)
   |> filter(fn:(r) => r._measurement == "cpu" AND r.cpu == "cpu-total")
   |> window(every:1m)
-  |> group(none:true)
   |> mean()
+  |> group(none:true)
 ```
 
 ### Pipe-forward operator
