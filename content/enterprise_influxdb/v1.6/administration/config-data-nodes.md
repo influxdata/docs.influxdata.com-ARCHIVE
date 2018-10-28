@@ -115,6 +115,9 @@ Use the same license file for all nodes in the same cluster. The `license-key` a
 
 Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
+
+-----
+
 ### `[meta]`
 
 Settings related to how the data nodes interact with the meta nodes.
@@ -174,6 +177,9 @@ Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 Whether log messages are printed for the meta service.
 
 Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
+
+
+-----
 
 ### Data settings `[data]`
 
@@ -269,7 +275,9 @@ Value should be enclosed in double quotes.
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 
-### `[cluster]` Cluster settings
+-----
+
+### Cluster settings `[cluster]`
 
 Settings related to how the data nodes interact with other data nodes.
 Controls how data are shared across shards and the options for [query
@@ -352,7 +360,93 @@ The maximum number of group by time buckets a SELECT can create.  A value of `0`
 Environment variable: `INFLUXDB_CLUSTER_MAX_SELECT_BUCKETS`
 
 
-### `[anti-entropy]` Anti-Entropy (AE) settings
+-----
+
+### Hinted Handoff settings `[hinted-handoff]`
+
+Controls the hinted handoff (HH) queue, which allows data nodes to temporarily cache writes destined for another data node when that data node is unreachable.
+
+#### `batch-size = 512000`
+
+The maximum number of bytes to write to a shard in a single request.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_BATCH_SIZE`
+
+####  `dir = "/var/lib/influxdb/hh"`
+
+The hinted handoff directory where the durable queue will be stored on disk.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_DIR`
+
+####  `enabled = true`
+
+Set to `false` to disable hinted handoff.
+Disabling hinted handoff is not recommended and can lead to data loss if another data node is unreachable for any length of time.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
+
+####  `max-size = 10737418240`
+
+The maximum size of the hinted handoff queue.
+Each queue is for one and only one other data node in the cluster.
+If there are N data nodes in the cluster, each data node may have up to N-1 hinted handoff queues.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
+
+####  `max-age = "168h0m0s"`
+
+The time writes sit in the queue before they are purged. The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
+If another data node is unreachable for more than the `max-age` it can lead to data loss.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_AGE`
+
+####  `retry-concurrency = 20`
+
+The maximum number of hinted handoff blocks that the source data node attempts to write to each destination data node.
+Hinted handoff blocks are sets of data that belong to the same shard and have the same destination data node.
+
+If `retry-concurrency` is 20 and the source data node's hinted handoff has 25 blocks for destination data node A, then the source data node attempts to concurrently write 20 blocks to node A.
+If `retry-concurrency` is 20 and the source data node's hinted handoff has 25 blocks for destination data node A and 30 blocks for destination data node B, then the source data node attempts to concurrently write 20 blocks to node A and 20 blocks to node B.
+If the source data node successfully writes 20 blocks to a destination data node, it continues to write the remaining hinted handoff data to that destination node in sets of 20 blocks.
+
+If the source data node successfully writes data to destination data nodes, a higher `retry-concurrency` setting can accelerate the rate at which the source data node empties its hinted handoff queue.
+
+Note that increasing `retry-concurrency` also increases network traffic.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_CONCURRENCY`
+
+####  `retry-rate-limit = 0`
+
+The rate (in bytes per second) at which the hinted handoff retries writes.
+The `retry-rate-limit` option is no longer in use and will be removed from the configuration file in a future release.
+Changing the `retry-rate-limit` setting has no effect on your cluster.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_RATE_LIMIT`
+
+####  `retry-interval = "1s"`
+
+The time period after which the hinted handoff retries a write after the write fails.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_INTERVAL`
+
+####  `retry-max-interval = "10s"`
+
+The maximum interval after which the hinted handoff retries a write after the write fails.
+The `retry-max-interval` option is no longer in use and will be removed from the configuration file in a future release.
+Changing the `retry-max-interval` setting has no effect on your cluster.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_MAX_INTERVAL`
+
+####  `purge-interval = "1m0s"`
+
+The interval at which InfluxDB checks to purge data that are above `max-age`.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_PURGE_INTERVAL`
+
+
+-----
+
+### Anti-Entropy (AE) settings `[anti-entropy]`
 
 Controls the copying and repairing of shards to ensure that data nodes contain
 the shard data they are supposed to.
@@ -369,15 +463,13 @@ The interval of time when anti-entropy checks run on each data node.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_CHECK_INTERVAL`
 
-
-#### max-fetch = 10 ???
+#### `max-fetch = 10` ???
 
 The maximum number of shards that a single data node will copy or repair in parallel.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
 
-
-### `[retention]`
+### `[retention]` Retention policy settings
 
 Controls the enforcement of retention policies for evicting old data.
 
@@ -394,7 +486,9 @@ The interval of time when retention policy enforcement checks run.
 Environment variable: `INFLUXDB_RETENTION_CHECK_INTERVAL`
 
 
-### `[shard-precreation]`
+-----
+
+### Shard precreation settings `[shard-precreation]`
 
 Controls the precreation of shards, so they are available before data arrives.
 Only shards that, after creation, will have both a start- and end-time in the
@@ -419,7 +513,10 @@ The default period ahead of the endtime of a shard group that its successor grou
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
-### `[monitor]`
+
+-----
+
+### Monitor settings `[monitor]`
 
 By default, InfluxDB writes system monitoring data to the `_internal` database. If that database does not exist, InfluxDB creates it automatically. The `DEFAULT` retention policy on the `internal` database is seven days. To change the default seven-day retention policy, you must [create](/influxdb/v1.6/query_language/database_management/#retention-policy-management) it.
 
@@ -453,262 +550,404 @@ The time interval to poll other data nodes' stats when aggregating cluster stats
 Environment variable: `INFLUXDB_MONITOR_REMOTE_COLLECT_INTERVAL`
 
 
-### `[subscriber]`
+-----
 
-Controls the subscriptions, which can be used to fork a copy of all data received by the InfluxDB host.
+### HTTP endpoint settings `[http]`
+
+Controls how the HTTP endpoints are configured. These are the primary mechanism for getting data into and out of InfluxDB.
+
+For InfluxDB OSS, see the [OSS documentation](/influxdb/v1.6/administration/config/#http-endpoint-settings-http).
 
 ####  `enabled = true`
 
-See the [OSS documentation](/influxdb/v1.6/administration/config/#enabled-true-3).
+Enables HTTP endpoints.
 
-    Environment variable: `INFLUXDB_SUBSCRIBER_ENABLED`
+Environment variable: `INFLUXDB_HTTP_ENABLED`
 
-    ####  `http-timeout = "30s"`
+####  `bind-address = ":8086"`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#http-timeout-30s).
+The bind address used by the HTTP service.
 
-    Environment variable: `INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT`
+Environment variable: `INFLUXDB_HTTP_BIND_ADDRESS`
 
-    #### `insecure-skip-verify = false`
+####  `auth-enabled = false`
 
-    Allows insecure HTTPS connections to subscribers.
-    Use this option when testing with self-signed certificates.
+Enables HTTP authentication.
 
-    Environment variable: `INFLUXDB_SUBSCRIBER_INSECURE_SKIP_VERIFY`
+Environment variable: `INFLUXDB_HTTP_AUTH_ENABLED`
 
-    #### `ca-certs = ""`
+####  `realm = "InfluxDB"`
 
-    The path to the PEM encoded CA certs file. If the empty string, the default system certs will be used.
+The default realm sent back when issuing a basic authorization challenge.
 
-    Environment variable: `INFLUXDB_SUBSCRIBER_CA_CERTS`
+Environment variable: `INFLUXDB_HTTP_REALM`
 
-    #### `write-concurrency = 40`
+####  `log-enabled = true`
 
-    The number of writer Goroutines processing the write channel.
+Enables HTTP request logging.
 
-    Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_CONCURRENCY`
+Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
 
-    #### `write-buffer-size = 1000`
+#### `write-tracing = false`
 
-    The number of in-flight writes buffered in the write channel.
+Enables detailed write logging.
 
-    Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
+Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
 
-    ### `[http]`
+#### `pprof-enabled = true`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#http-endpoint-settings-http).
+Determines whether the `/pprof` endpoint is enabled.  This endpoint is used for troubleshooting and monitoring.
 
-    ####  `enabled = true`
+Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#enabled-true-4).
+#### `https-enabled = false`
 
-    Environment variable: `INFLUXDB_HTTP_ENABLED`
+Enables HTTPS.
 
-    ####  `bind-address = ":8086"`
+Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#bind-address-8086).
+#### `https-certificate = "/etc/ssl/influxdb.pem"`
 
-    Environment variable: `INFLUXDB_HTTP_BIND_ADDRESS`
+The SSL certificate to use when HTTPS is enabled.  
+The certificate should be a PEM-encoded bundle of the certificate and key.  
+If it is just the certificate, a key must be specified in `https-private-key`.
 
-    ####  `auth-enabled = false`
+Environment variable: `INFLUXDB_HTTP_HTTPS_CERTIFICATE`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#auth-enabled-false).
+#### `https-private-key = ""`
 
-    Environment variable: `INFLUXDB_HTTP_AUTH_ENABLED`
+The location of the separate private key.
 
-    ####  `log-enabled = true`
+Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#log-enabled-true).
+#### `shared-secret = ""`
 
-    Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
+The JWT authorization shared secret used to validate requests using JSON web tokens (JWTs).
 
-    ####  `write-tracing = false`
+Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#write-tracing-false).
+#### `max-row-limit = 0` ???
 
-    Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
+The default chunk size for result sets that should be chunked.
+The maximum number of rows that can be returned in a non-chunked query.
+The default setting of `0` allows for an unlimited number of rows.
+InfluxDB includes a `"partial":true` tag in the response body if query results exceed the `max-row-limit` setting.
 
-    #### `pprof-enabled = true`
+Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#pprof-enabled-true).
+#### `max-connection-limit = 0`
 
-    Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
+The maximum number of HTTP connections that may be open at once.  
+New connections that would exceed this limit are dropped.  
+The default value of `0` disables the limit.
 
-    ####  `https-enabled = false`
+Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#https-enabled-false).
+#### `unix-socket-enabled = false`
 
-    Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
+Enables the HTTP service over the UNIX domain socket.
 
-    ####  `https-certificate = "/etc/ssl/influxdb.pem"`
+Environment variable: `INFLUXDB_HTTP_UNIX_SOCKET_ENABLED`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#https-certificate-etc-ssl-influxdb-pem).
+#### `bind-socket = "/var/run/influxdb.sock"`
 
-    Environment variable: `INFLUXDB_HTTP_HTTPS_CERTIFICATE`
+The path of the UNIX domain socket.
 
-    ####  `https-private-key = ""`
+Environment variable: `INFLUXDB_HTTP_BIND_SOCKET`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#https-private-key).
+#### `max-concurrent-write-limit = 0`
 
-    Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
+The maximum number of writes processed concurrently.
+The default value of `0` disables the limit.
 
-    ####  `max-row-limit = 0`
+Environment variable: `INFLUXDB_HTTP_MAX_CONCURRENT_WRITE_LIMIT`
 
-    This limits the number of rows that can be returned in a non-chunked query.
-    The default setting (`0`) allows for an unlimited number of rows.
-    InfluxDB includes a `"partial":true` tag in the response body if query results exceed the `max-row-limit` setting.
+#### `max-enqueued-write-limit = 0`
 
-    Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
+The maximum number of writes queued for processing.
+The default value of `0` disables the limit.
 
-    ####  `max-connection-limit = 0`
+Environment variable: `INFLUXDB_HTTP_MAX_ENQUEUED_WRITE_LIMIT`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#max-connection-limit-0).
+#### `enqueued-write-timeout = 0`
 
-    Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
+The maximum duration for a write to wait in the queue to be processed. Setting this to `0` or setting `max-concurrent-write-limit` to `0` disables the limit.
 
-    ####  `shared-secret = ""`
+-----
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#shared-secret).
+### Logging settings `[logging]`
 
-    This setting is required and must match on each data node if the cluster is using the InfluxDB Enterprise Web Console.
+#### `format = "logfmt"`
 
-    Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
+Determines which log encoder to use for logs.
+Valid options are `auto`, `logfmt`, and `json`.
+A setting of `auto` will use a more a more user-friendly output format if the output terminal is a TTY, but the format is not as easily machine-readable.
+When the output is a non-TTY, `auto` will use `logfmt`.
 
-    ####  `realm = "InfluxDB"`
+#### `level = "info"`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#realm-influxdb).
+Determines which level of logs will be emitted.
 
-    Environment variable: `INFLUXDB_HTTP_REALM`
+#### `suppress-logo = false`
 
-    #### `unix-socket-enabled = false`
+Suppresses the logo output that is printed when the program is started.
 
-    Set to `true` to enable the http service over unix domain socket.
 
-    Environment variable: `INFLUXDB_HTTP_UNIX_SOCKET_ENABLED`
 
-    #### `bind-socket = "/var/run/influxdb.sock"`
+-----
 
-    The path of the UNIX domain socket.
+### Subscriber settings `[subscriber]`
 
-    Environment variable: `INFLUXDB_HTTP_BIND_SOCKET`
+Controls the subscriptions, which can be used to fork a copy of all data received by the InfluxDB host.
 
-    ### `[[graphite]]`
+#### `enabled = true`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#graphite-settings-graphite).
+Determines whether the subscriber service is enabled.
 
-    ### `[[collectd]]`
+Environment variable: `INFLUXDB_SUBSCRIBER_ENABLED`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#collectd-settings-collectd).
+#### `http-timeout = "30s"`
 
-    ### `[[opentsdb]]`
+The default timeout for HTTP writes to subscribers.
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#opentsdb-settings-opentsdb).
+Environment variable: `INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT`
 
-    ### `[[udp]]`
+#### `insecure-skip-verify = false`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#udp-settings-udp).
+Allows insecure HTTPS connections to subscribers.
+This option is useful when testing with self-signed certificates.
 
-    ### `[continuous_queries]`
+Environment variable: `INFLUXDB_SUBSCRIBER_INSECURE_SKIP_VERIFY`
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#continuous-queries-settings-continuous-queries).
+#### `ca-certs = ""`
 
-    ####  `log-enabled = true`
+The path to the PEM-encoded CA certs file.
+If the set to the empty string (`""`), the default system certs will used.
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#log-enabled-true-1).
+Environment variable: `INFLUXDB_SUBSCRIBER_CA_CERTS`
 
-    Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
+#### `write-concurrency = 40`
 
-    ####  `enabled = true`
+The number of writer Goroutines processing the write channel.
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#enabled-true-5).
+Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_CONCURRENCY`
 
-    Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_ENABLED`
+#### `write-buffer-size = 1000`
 
-    ####  `run-interval = "1s"`
+The number of in-flight writes buffered in the write channel.
 
-    See the [OSS documentation](/influxdb/v1.6/administration/config/#run-interval-1s).
+Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 
-    Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 
-    ### `[hinted-handoff]`
 
-    Controls the hinted handoff (HH) queue, which allows data nodes to temporarily cache writes destined for another data node when that data node is unreachable.
 
-    #### `batch-size = 512000`
+-----
 
-    The maximum number of bytes to write to a shard in a single request.
+### Graphite settings `[[graphite]]`
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_BATCH_SIZE`
+#### `enabled = false`
 
-    ####  `dir = "/var/lib/influxdb/hh"`
+Determines whether the graphite endpoint is enabled.
 
-    The hinted handoff directory where the durable queue will be stored on disk.
+# These next lines control how batching works. You should have this enabled
+# otherwise you could get dropped metrics or poor performance. Batching
+# will buffer points in memory if you have many coming in.
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_DIR`
+# database = "graphite"
+# retention-policy = ""
+# bind-address = ":2003"
+# protocol = "tcp"
+# consistency-level = "one"
 
-    ####  `enabled = true`
 
-    Set to `false` to disable hinted handoff.
-    Disabling hinted handoff is not recommended and can lead to data loss if another data node is unreachable for any length of time.
+#### `batch-size = 5000`
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
+Flush if this many points get buffered.
 
-    ####  `max-size = 10737418240`
+#### `batch-pending = 10`
 
-    The maximum size of the hinted handoff queue.
-    Each queue is for one and only one other data node in the cluster.
-    If there are N data nodes in the cluster, each data node may have up to N-1 hinted handoff queues.
+The number of batches that may be pending in memory.
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
+#### `batch-timeout = "1s"`
 
-    ####  `max-age = "168h0m0s"`
+Flush at least this often even if we haven't hit buffer limit.
 
-    The time writes sit in the queue before they are purged. The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
-    If another data node is unreachable for more than the `max-age` it can lead to data loss.
+#### `udp-read-buffer = 0`
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_AGE`
+UDP Read buffer size, `0` means OS default. UDP listener will fail if set above OS max.
 
-    ####  `retry-concurrency = 20`
+#### `separator = "."`
 
-    The maximum number of hinted handoff blocks that the source data node attempts to write to each destination data node.
-    Hinted handoff blocks are sets of data that belong to the same shard and have the same destination data node.
+This string joins multiple matching 'measurement' values providing more control over the final measurement name.
 
-    If `retry-concurrency` is 20 and the source data node's hinted handoff has 25 blocks for destination data node A, then the source data node attempts to concurrently write 20 blocks to node A.
-    If `retry-concurrency` is 20 and the source data node's hinted handoff has 25 blocks for destination data node A and 30 blocks for destination data node B, then the source data node attempts to concurrently write 20 blocks to node A and 20 blocks to node B.
-    If the source data node successfully writes 20 blocks to a destination data node, it continues to write the remaining hinted handoff data to that destination node in sets of 20 blocks.
+#### `tags = ["region=us-east", "zone=1c"]`
 
-    If the source data node successfully writes data to destination data nodes, a higher `retry-concurrency` setting can accelerate the rate at which the source data node empties its hinted handoff queue.
-    Note that increasing `retry-concurrency` also increases network traffic.
+Default tags that will be added to all metrics.  
+These can be overridden at the template level or by tags extracted from metric.
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_CONCURRENCY`
 
-    ####  `retry-rate-limit = 0`
+#### Templates pattern
 
-    The rate (in bytes per second) at which the hinted handoff retries writes.
-    The `retry-rate-limit` option is no longer in use and will be removed from the configuration file in a future release.
-    Changing the `retry-rate-limit` setting has no effect on your cluster.
+# templates = [
+#   "*.app env.service.resource.measurement",
+#   # Default template
+#   "server.*",
+# ]
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_RATE_LIMIT`
+Each template line requires a template pattern.  
+It can have an optional filter before the template and separated by spaces.  
+It can also have optional extra tags following the template.  
+Multiple tags should be separated by commas and no spaces similar to the line protocol format.  
+There can be only one default template.
 
-    ####  `retry-interval = "1s"`
 
-    The time period after which the hinted handoff retries a write after the write fails.
+-----
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_INTERVAL`
+### Collectd settings `[[collectd]]`
 
-    ####  `retry-max-interval = "10s"`
+# enabled = false
+# bind-address = ":25826"
+# database = "collectd"
+# retention-policy = ""
+# typesdb = "/usr/share/collectd/types.db"
 
-    The maximum interval after which the hinted handoff retries a write after the write fails.
-    The `retry-max-interval` option is no longer in use and will be removed from the configuration file in a future release.
-    Changing the `retry-max-interval` setting has no effect on your cluster.
+# The collectd security level can be "" or "none", "sign", or "encrypt".
+# security-level = ""
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_MAX_INTERVAL`
+# Path to the collectd auth file. Must be set if security level is sign or encrypt.
+# auth-file = ""
 
-    ####  `purge-interval = "1m0s"`
+# These next lines control how batching works. You should have this enabled
+# otherwise you could get dropped metrics or poor performance. Batching
+# will buffer points in memory if you have many coming in.
 
-    The interval at which InfluxDB checks to purge data that are above `max-age`.
+# Flush if this many points get buffered.
+# batch-size = 5000
 
-    Environment variable: `INFLUXDB_HINTED_HANDOFF_PURGE_INTERVAL`
+# Number of batches that may be pending in memory.
+# batch-pending = 10
+
+# Flush at least this often even if we haven't hit buffer limit.
+# batch-timeout = "10s"
+
+# UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
+# read-buffer = 0
+
+
+-----
+
+### OpenTSDB settings `[[opentsdb]]`
+
+# enabled = false
+# bind-address = ":4242"
+# database = "opentsdb"
+# retention-policy = ""
+# consistency-level = "one"
+# tls-enabled = false
+# certificate= "/etc/ssl/influxdb.pem"
+
+#### `log-point-errors = true`
+
+Log an error for every malformed point.
+
+#### Settings for batching
+
+These next lines control how batching works.
+You should have this enabled otherwise you could get dropped metrics or poor performance.
+Only points metrics received over the telnet protocol undergo batching.
+
+#### `batch-size = 1000`
+
+Flush if this many points get buffered.
+
+#### `batch-pending = 5`
+
+The number of batches that may be pending in memory.
+
+#### `batch-timeout = "1s"`
+
+Flush at least this often even if we haven't hit buffer limit.
+
+
+-----
+
+### UDP settings `[[udp]]`
+
+# enabled = false
+# bind-address = ":8089"
+# database = "udp"
+# retention-policy = ""
+
+# InfluxDB precision for timestamps on received points ("" or "n", "u", "ms", "s", "m", "h")
+# precision = ""
+
+# These next lines control how batching works. You should have this enabled
+# otherwise you could get dropped metrics or poor performance. Batching
+# will buffer points in memory if you have many coming in.
+
+# Flush if this many points get buffered.
+# batch-size = 5000
+
+# Number of batches that may be pending in memory.
+# batch-pending = 10
+
+# Will flush at least this often even if we haven't hit buffer limit.
+# batch-timeout = "1s"
+
+# UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
+# read-buffer = 0
+
+-----
+
+### Continuous queries settings `[continuous_queries]`
+
+Controls how continuous queries are run within InfluxDB.
+
+#### `enabled = true`
+
+Determines whether the continuous query service is enabled.
+
+Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_ENABLED`
+
+#### `log-enabled = true`
+
+Controls whether queries are logged when executed by the CQ service.
+
+Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
+
+#### `run-interval = "1s"`
+
+The interval for how often continuous queries will be checked whether they need to run.
+
+Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
+
+-----
+
+
+### TLS settings `[tls]` ???
+
+
+# ciphers = [
+#   "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+#   "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+# ]
+
+Determines the available set of cipher suites.
+See https://golang.org/pkg/crypto/tls/#pkg-constants for a list of available ciphers, which depends on the version of Go (use the query SHOW DIAGNOSTICS to see the version of Go used to build InfluxDB).
+If not specified, uses the default settings from Go's crypto/tls package.
+
+
+#### `min-version = "tls1.2"`
+
+Minimum version of the TLS protocol that will be negotiated.
+If not specified, uses the default settings from Go's `crypto/tls` package.
+
+#### `max-version = "tls1.2"`
+
+Maximum version of the TLS protocol that will be negotiated.
+If not specified, uses the default settings from Go's crypto/tls package.
+
+
 
 
     <!-- #### max-fetch = 10
