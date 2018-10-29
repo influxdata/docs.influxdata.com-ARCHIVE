@@ -25,7 +25,7 @@ percentile(columns: ["_value"], percentile: 0.99, method: "estimate_tdigest", co
 
 ### columns
 A list of columns on which to compute the percentile.
-Defaults to `["_value"]`
+Defaults to `["_value"]`.
 
 _**Data type:** array of strings_
 
