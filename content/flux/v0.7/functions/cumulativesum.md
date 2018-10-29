@@ -15,7 +15,7 @@ _**Function type:** aggregate_
 _**Output data type:** float_
 
 ```js
-covariance(columns: ["_value"])
+cumulativeSum(columns: ["_value"])
 ```
 
 ## Parameters
