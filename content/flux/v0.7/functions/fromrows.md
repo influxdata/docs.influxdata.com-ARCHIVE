@@ -15,7 +15,7 @@ _**Function type:** transformation_
 _**Output data type:** table(s)_
 
 ```js
-fromRows()
+fromRows("bucket-name")
 ```
 
 ## Parameters
