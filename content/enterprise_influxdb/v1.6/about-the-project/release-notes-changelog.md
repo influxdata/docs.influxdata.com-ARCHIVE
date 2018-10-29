@@ -58,9 +58,10 @@ The following summarizes the expected settings for proper configuration of JWT a
 
 ### Bug fixes
 
+* Only map shards that are reported ready.
+* Fix data race when shards are deleted and created concurrently.
 * Reject `influxd-ctl update-data` from one existing host to another.
 * Require `internal-shared-secret` if meta auth enabled.
-
 
 ## v1.6.2 [08-27-2018]
 
