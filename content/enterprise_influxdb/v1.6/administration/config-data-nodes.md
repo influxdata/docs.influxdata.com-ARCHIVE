@@ -1,8 +1,6 @@
 ---
 title: InfluxDB Enterprise data node configurations
 description: Covers the InfluxDB Enterprise data node configuration settings and environmental variables
-aliases:
-    - /enterprise/v1.6/administration/configuration/
 menu:
   enterprise_influxdb_1_6:
     name: Data node configurations
@@ -848,7 +846,7 @@ There can be only one default template.
 
 -----
 
-## Collectd settings
+## CollectD settings
 
 ### `[[collectd]]`
 
@@ -861,7 +859,7 @@ There can be only one default template.
 ```
 #### `security-level = ""`
 
-The collectd security level can be "" or "none", "sign", or "encrypt".
+The collectd security level can be "" (or "none"), "sign", or "encrypt".
 
 #### `auth-file = ""`
 
@@ -994,32 +992,53 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 
 -----
 
-
 ## TLS settings ???
 
-### `[tls]`  
+
+### `[tls]`
+
+Global configuration settings for Transport Layer Security (TLS) in InfluxDB.  
+
+If the TLS configuration settings is not specified, InfluxDB supports all of the cipher suite IDs listed and all TLS versions implemented in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants), depending on the version of Go used to build InfluxDB.
+Use the `SHOW DIAGNOSTICS` command to see the version of Go used to build InfluxDB.
+
+### Recommended server configuration for "modern compatibility"
+
+InfluxData recommends configuring your InfluxDB server's TLS settings for "modern compatibility" that provides a higher level of security and assumes that backward compatibility is not required.
+Our recommended TLS configuration settings for `ciphers`, `min-version`, and `max-version` are based on Mozilla's "modern compatibility" TLS server configuration described in [Security/Server Side TLS](https://wiki.mozilla.org/Security/Server_Side_TLS#Modern_compatibility).
+
+InfluxData's recommended TLS settings for "modern compatibility" are specified in the following configuration settings example.
+
+####
 
 ```
-# ciphers = [
-#   "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
-#   "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
-# ]
+ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+            "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
+            "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+            "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+            "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+            "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+]
+
+min-version = "tls1.2"
+
+max-version = "tls1.2"
+
 ```
-Determines the available set of cipher suites.
-See https://golang.org/pkg/crypto/tls/#pkg-constants for a list of available ciphers, which depends on the version of Go (use the query SHOW DIAGNOSTICS to see the version of Go used to build InfluxDB).
-If not specified, uses the default settings from Go's crypto/tls package.
 
+#### `min-version = "tls1.2"` ???
 
-#### `min-version = "tls1.2"`
+#### `min-version = "tls1.0"`
 
-The minimum version of the TLS protocol that will be negotiated.
-If not specified, uses the default settings from the Go `crypto/tls` package.
+Minimum version of the TLS protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, and `tls1.2`. If not specified, `min-version` is the minimum TLS version specified in the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants). In this example, `tls1.0` specifies the minimum version as TLS 1.0, which is consistent with the behavior of previous InfluxDB releases.
+
+Environment variable: `INFLUXDB_TLS_MIN_VERSION`
 
 #### `max-version = "tls1.2"`
 
-The maximum version of the TLS protocol that will be negotiated.
-If not specified, uses the default settings from the Go `crypto/tls` package.
+The maximum version of the TLS protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, and `tls1.2`. If not specified, `max-version` is the maximum TLS version specified in the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants). In this example, `tls1.2` specifies the maximum version as TLS 1.2, which is consistent with the behavior of previous InfluxDB releases.
 
+Environment variable: `INFLUXDB_TLS_MAX_VERSION`
 
 
 
