@@ -9,17 +9,8 @@ menu:
 ---
 
 This guide walks through the basics of using Flux to query data from InfluxDB.
-If you haven't already, make sure to install both InfluxDB v1.7+ and Chronograf v1.7+.
-
-The easiest way to write your first Flux script and see actual results is to use **Chronograf's Data Explorer**.
-Open the Data Explorer and click **Add a Query**.
-To the right of the source dropdown above the graph placeholder, select **Flux** as the source type.
-
-![Flux in the Data Explorer](/img/flux/flux-builder-start.gif)
-
-This will modify the user interface to provide a **Script** pane and an **Explore** pane.
-The Script pane is where you write your Flux script.
-The Explore pane allows you to explore your data.
+_**If you haven't already, make sure to install InfluxDB v1.7+ and choose a
+[tool for writing Flux queries](/flux/v0.7/introduction/getting-started#tools-for-working-with-flux).**_
 
 Every Flux query needs the following:
 
@@ -129,6 +120,6 @@ You have now queried data from InfluxDB using Flux.
 This is a barebones query that can now be transformed in other ways.
 
 <div class="page-nav-btns">
-  <a class="btn prev" href="/flux/v0.7/introduction/getting-started/query-influxdb/">Get started with Flux</a>
-  <a class="btn next" href="/flux/v0.7/introduction/getting-started/query-influxdb/">Transform your data</a>
+  <a class="btn prev" href="/flux/v0.7/introduction/getting-started/">Get started with Flux</a>
+  <a class="btn next" href="/flux/v0.7/introduction/getting-started/transform-data/">Transform your data</a>
 </div>
