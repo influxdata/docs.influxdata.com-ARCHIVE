@@ -110,5 +110,5 @@ and your own custom functions, but this is a good introduction into the basic sy
 
 <div class="page-nav-btns">
   <a class="btn prev" href="/flux/v0.7/introduction/getting-started/query-influxdb/">Query InfluxDB</a>
-  <a class="btn next" href="#">Placeholder</a>
+  <a class="btn next" href="/flux/v0.7/introduction/getting-started/syntax-basics/">Syntax basics</a>
 </div>
