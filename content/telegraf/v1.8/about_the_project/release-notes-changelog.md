@@ -10,6 +10,8 @@ menu:
 
 ## v1.8.3 [2018-10-30]
 
+### Bug fixes
+
 - Add DN attributes as tags in X.509 Certificate (`x509_cert`) input to avoid series overwrite.
 - Prevent connection leak by closing unused connections in AMQP (`amqp`) output.
 - Use default partition key when tag does not exist in Amazon Kinesis (`kinesis`) output.
