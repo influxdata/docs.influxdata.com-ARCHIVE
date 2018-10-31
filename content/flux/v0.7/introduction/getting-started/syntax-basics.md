@@ -120,6 +120,7 @@ Both single- and multi-line commands can be copied and pasted into the `influx` 
 
 {{% tab-content %}}
 ### Define data stream variables
+A common use case for variable assignments in Flux is creating variables for multiple filtered input data streams.
 
 ```js
 timeRange = -1h
@@ -140,7 +141,13 @@ memUsagePercent = from(bucket:"telegraf/autogen")
   )
 ```
 
+These variables can be used in other functions, such as  `join()`, while keeping the syntax minimal and flexible.
+
 ### Define custom functions
+Let's create a function that returns the `N` number rows in the input data stream with the highest `_value`s.
+To do this, pass the input stream (`table`) and the number of results to return (`n`) into a custom function.
+Then using Flux's `sort()` and `limit()` functions to find the top `n` results in the data set.
+
 ```js
 topN = (table=<-, n) => table
   |> sort(desc: true)
@@ -154,7 +161,6 @@ points with the custom `topN` function and yield the results.
 
 ```js
 cpuUsageUser
-  |> window(every:5m)
   |> topN(n:5)
   |> yield()
 ```
@@ -162,6 +168,7 @@ cpuUsageUser
 
 {{% tab-content %}}
 ### Define data stream variables
+A common use case for variable assignments in Flux is creating variables for multiple filtered input data streams.
 
 ```js
 timeRange = -1h
@@ -169,7 +176,13 @@ cpuUsageUser = from(bucket:"telegraf/autogen") |> range(start: timeRange) |> fil
 memUsagePercent = from(bucket:"telegraf/autogen") |> range(start: timeRange) |> filter(fn: (row) => row._measurement == "mem" AND row._field == "used_percent")
 ```
 
+These variables can be used in other functions, such as  `join()`, while keeping the syntax minimal and flexible.
+
 ### Define custom functions
+Let's create a function that returns the `N` number rows in the input data stream with the highest `_value`s.
+To do this, pass the input stream (`table`) and the number of results to return (`n`) into a custom function.
+Then using Flux's `sort()` and `limit()` functions to find the top `n` results in the data set.
+
 ```js
 topN = (table=<-, n) => table |> sort(desc: true) |> limit(n: n)
 ```
