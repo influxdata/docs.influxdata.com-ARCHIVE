@@ -82,10 +82,10 @@ Use the `AND` relational operator to chain multiple filters.
 (objectName) => (objectName.objectProperty comparisonOperator comparisonExpression)
 
 // Example with single filter
-(r) => (r._measurement == "cpu")
+(row) => (row._measurement == "cpu")
 
 // Example with multiple filters
-(r) => (r._measurement == "cpu") AND (r._field != "usage_system" )
+(row) => (row._measurement == "cpu") AND (r._field != "usage_system" )
 ```
 
 #### Use the following:
@@ -94,10 +94,10 @@ For this example, filter by the `cpu` measurement, the `usage_system` field, and
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -15m)
-  |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+  |> filter(fn: (row) =>
+    row._measurement == "cpu" AND
+    row._field == "usage_system" AND
+    row.cpu == "cpu-total")
 ```
 
 ## 4. Yield your queried data
@@ -106,10 +106,10 @@ Use Flux's `yield()` function to output the filtered tables as the result of the
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -15m)
-  |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+  |> filter(fn: (row) =>
+    row._measurement == "cpu" AND
+    row._field == "usage_system" AND
+    row.cpu == "cpu-total")
   |> yield()
 ```
 

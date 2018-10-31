@@ -101,6 +101,15 @@ Here is a simple function that squares the number passed using the `n` parameter
 > Flux does not have support positional arguments or parameters.
 > Parameters must always be named.
 
+### Pipe-forward operator
+Flux uses the pipe-forward operator (`|>`) extensively to chain operations together.
+After each function or operation, Flux returns a table or collection of tables containing data.
+The pipe-forward operator pipes those tables into the next function where it is further processed or manipulated.
+
+```js
+data |> someFunction() |> anotherFunction()
+```
+
 ## Real-world application of basic syntax
 This likely seems familiar if you've already been through through the other [getting started guides](/flux/v0.7/introduction/getting-started), which is by design.
 Flux's syntax is inspired by Javascript and other functional scripting languages.

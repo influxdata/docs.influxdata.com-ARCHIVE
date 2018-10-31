@@ -23,10 +23,10 @@ guide, but update the range to pull data from the last hour:
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+  |> filter(fn: (row) =>
+    row._measurement == "cpu" AND
+    row._field == "usage_system" AND
+    row.cpu == "cpu-total")
 ```
 
 ## Flux functions
@@ -49,10 +49,10 @@ For this example, window data in five minute intervals (`5m`).
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+  |> filter(fn: (row) =>
+    row._measurement == "cpu" AND
+    row._field == "usage_system" AND
+    row.cpu == "cpu-total")
   |> window(every: 5m)
 ```
 
@@ -68,10 +68,10 @@ Use the [`mean()` function](#) to average the `_values` of each table.
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+  |> filter(fn: (row) =>
+    row._measurement == "cpu" AND
+    row._field == "usage_system" AND
+    row.cpu == "cpu-total")
   |> window(every: 5m)
   |> mean()
 ```
@@ -89,10 +89,10 @@ and combine the aggregate rows into a single table.
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+  |> filter(fn: (row) =>
+    row._measurement == "cpu" AND
+    row._field == "usage_system" AND
+    row.cpu == "cpu-total")
   |> window(every: 5m)
   |> mean()
   |> group(none:true)
