@@ -101,6 +101,93 @@ Here is a simple function that squares the number passed using the `n` parameter
 > Flux does not have support positional arguments or parameters.
 > Parameters must always be named.
 
+## Real-world application of basic syntax
+This likely seems familiar if you've already been through through the other [getting started guides](/flux/v0.7/introduction/getting-started), which is by design.
+Flux's syntax is inspired by Javascript and other functional scripting languages.
+As you begin to apply these basic principles in real use cases such as creating data stream variables,
+custom functions, etc., the power of Flux and it's ability to query and process time series data is apparent.
+
+The examples below provide both multi-line and single-line versions of each input command.
+Carriage returns in Flux aren't necessary, but do help with readability.
+Both single- and multi-line commands can be copied and pasted into the `influx` CLI running in FLux mode.
+
+{{< tab-labels >}}
+  {{% tabs %}}
+  [Multi-line inputs](#)
+  [Single-line inputs](#)
+  {{% /tabs %}}
+{{< tab-content-container >}}
+
+{{% tab-content %}}
+### Define data stream variables
+
+```js
+timeRange = -1h
+
+cpuUsageUser = from(bucket:"telegraf/autogen")
+  |> range(start: timeRange)
+  |> filter(fn: (row) =>
+    row._measurement == "cpu" AND
+    row._field == "usage_user" AND
+    row.cpu == "cpu-total"
+  )
+
+memUsagePercent = from(bucket:"telegraf/autogen")
+  |> range(start: timeRange)
+  |> filter(fn: (row) =>
+    row._measurement == "mem" AND
+    row._field == "used_percent"
+  )
+```
+
+### Define custom functions
+```js
+topN = (table=<-, n) => table
+  |> sort(desc: true)
+  |> limit(n: n)
+```
+
+_More information about creating custom functions is available in the [Custom functions](#) documentation._
+
+Using the `cpuUsageUser` data stream variable defined above, find the top five data
+points with the custom `topN` function and yield the results.
+
+```js
+cpuUsageUser
+  |> window(every:5m)
+  |> topN(n:5)
+  |> yield()
+```
+{{% /tab-content %}}
+
+{{% tab-content %}}
+### Define data stream variables
+
+```js
+timeRange = -1h
+cpuUsageUser = from(bucket:"telegraf/autogen") |> range(start: timeRange) |> filter(fn: (row) => row._measurement == "cpu" AND row._field == "usage_user" AND row.cpu == "cpu-total")
+memUsagePercent = from(bucket:"telegraf/autogen") |> range(start: timeRange) |> filter(fn: (row) => row._measurement == "mem" AND row._field == "used_percent")
+```
+
+### Define custom functions
+```js
+topN = (table=<-, n) => table |> sort(desc: true) |> limit(n: n)
+```
+
+_More information about creating custom functions is available in the [Custom functions](#) documentation._
+
+Using the `cpuUsageUser` data stream variable defined [above](#define-data-stream-variables),
+Find the top five data points with the custom `topN` function and yield the results.
+
+```js
+cpuUsageUser |> topN(n:5) |> yield()
+```
+{{% /tab-content %}}
+{{< /tab-content-container >}}
+{{< /tab-labels >}}
+
+This query will return the five data points with the highest user CPU usage over the last hour.
+
 <div class="page-nav-btns">
   <a class="btn prev" href="/flux/v0.7/introduction/getting-started/transform-data/">Transform your data</a>
 </div>
