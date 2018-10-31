@@ -32,10 +32,10 @@ from(bucket:"telegraf/autogen")
   |> group(none:true)
 ```
 
-## Get started with Flux
+## [Enable Flux](/flux/v0.7/introduction/installation)
+Flux is packaged with InfluxDB v1.7+ and does not require any additional installation,
+however it does need to be enabled.
+
+## [Get started with Flux](/flux/v0.7/introduction/getting-started)
 The best way to familiarize yourself with Flux is to walk through creating a simple Flux query.
 The getting started documentation does just that.
-
-<div class="page-nav-btns">
-  <a class="btn next" href="/flux/v0.7/introduction/getting-started">Get started with Flux</a>
-</div>
