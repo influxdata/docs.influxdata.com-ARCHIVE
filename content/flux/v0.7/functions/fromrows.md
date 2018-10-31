@@ -15,7 +15,11 @@ _**Function type:** transformation_
 _**Output data type:** table(s)_
 
 ```js
-fromRows("bucket-name")
+fromRows(bucket: "bucket-name")
+
+// OR
+
+fromRows(bucketID: "0261d8287f4d6000")
 ```
 
 ## Parameters
@@ -37,6 +41,10 @@ fromRows = (bucket) => from(bucket:bucket)
 
 ## Examples
 ```js
-fromRows(bucket:"telegraf/autogen")
+fromRows(bucket: "telegraf/autogen")
+  |> range(start: 2018-05-22T19:53:26Z)
+```
+```js
+fromRows(bucketID: "0261d8287f4d6000")
   |> range(start: 2018-05-22T19:53:26Z)
 ```

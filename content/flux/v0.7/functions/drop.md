@@ -9,7 +9,7 @@ menu:
 ---
 
 The `drop()` function removes specified columns from a table.
-Columns be specified either through a list or a predicate function.
+Columns are specified either through a list or a predicate function.
 When a dropped column is part of the group key, it will be removed from the key.
 
 _**Function type:** transformation_  
