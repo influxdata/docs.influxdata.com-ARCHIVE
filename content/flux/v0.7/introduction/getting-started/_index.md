@@ -43,16 +43,14 @@ will install the latest version of each component of the TICK stack._
 Flux introduces important new concepts you should understand going in.
 
 ### Buckets
-Flux is designed around querying data from InfluxDB v2.0 which will change the way data
-is stored by introducing "buckets."
-
+Flux introduces "buckets," a new data storage concept for InfluxDB.
 A **bucket** is a named location where data is stored that has a retention policy.
 It's similar to an InfluxDB v1.x "database," but is a combination of both a database and a retention policy.
-When using multiple retention policies, each gets its own bucket.
+When using multiple retention policies, each is its own bucket.
 
 Flux's `from()` function, which defines an InfluxDB data source, requires a `bucket` parameter.
-With InfluxDB v1.x, the following bucket naming convention combines the database name
-and the retention policy into a single bucket name:
+With using Flux with InfluxDB v1.x, use the following bucket naming convention which combines
+the database name and retention policy into a single bucket name:
 
 _**InfluxDB v1.x bucket naming convention**_
 ```js
@@ -63,33 +61,11 @@ from(bucket:"<database>/<retention-policy>")
 from(bucket:"telegraf/autogen")
 ```
 
-### The pipe-forward operator
-Flux uses the pipe-forward operator (`|>`) extensively to chain operations together.
+### Pipe-forward operator
+Flux uses pipe-forward operators (`|>`) extensively to chain operations together.
 After each function or operation, Flux returns a table or collection of tables containing data.
 The pipe-forward operator pipes those tables into the next function or operation where
 it is further processed or manipulated.
-
-### Flat schemas
-As mentioned before, Flux is designed for InfluxDB v2.0, but is available for use with v1.x.
-Data schemas in InfluxDB v2.0 are not hierarchical, meaning fields and tags and not children of a measurement.
-Measurements, fields, and tags all still exist in v2.0 schemas, but are each treated as "attributes."
-Each row of data has a set of attributes that include the following:
-
-- `_measurement`
-- `_field`
-- `_value`
-- `_start`
-- `_stop`
-- `_time`
-- Tag keys
-
-> Attributes in the `_` namespace are reserved by InfluxData.
-
-This flat data structure allows you to perform cross-measurement joins, query or
-filter by tags without being limited to a measurement, etc.
-
-Something also important to note is that when multiple fields are returned,
-Flux will split each field into a separate tables by default.
 
 ## Tools for working with Flux
 
