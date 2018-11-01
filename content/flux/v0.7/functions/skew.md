@@ -25,3 +25,9 @@ Specifies a list of columns on which to operate. Defaults to `["_value"]`.
 _**Data type:** list of strings_
 
 ## Examples
+```js
+from(bucket: "telegraf/autogen")
+  |> range(start: -5m)
+  |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "usage_system")
+  |> skew()
+```

@@ -14,7 +14,7 @@ _**Function type:** generator_
 _**Output data type:** array of floats_
 
 ```js
-logrithmicBuckets()
+logrithmicBuckets(start:1.0, factor: 2.0, count: 10, infinity: true)
 ```
 
 ## Parameters
@@ -44,5 +44,5 @@ _**Data type:** boolean_
 ```js
 logarithmicBuckets(start: 1.0, factor: 2.0, count: 10, infinty: true)
 
-// Generate list: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, +Inf]
+// Generated list: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, +Inf]
 ```
