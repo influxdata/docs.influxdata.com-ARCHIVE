@@ -10,7 +10,7 @@ menu:
 ---
 
 Flux is InfluxData's new functional data scripting language designed for querying,
-analyzing, and acting on time series data.
+analyzing, and acting on data.
 
 This multi-part getting started guide walks through important concepts related to Flux,
 how to query time series data from InfluxDB using Flux, and an introduction to Flux syntax and functions.

@@ -9,7 +9,7 @@ menu:
 ---
 
 
-Flux, at its core, is scripting language, but designed specifically for working with time series data.
+Flux, at its core, is scripting language, but designed specifically for working with data.
 To illustrate this, this guide walks through a handful of simple expressions and what they mean in Flux.
 
 ## Use the influx CLI
@@ -21,13 +21,14 @@ When started with `-type=flux`, the `influx` CLI is an interactive read-eval-pri
 influx -type=flux
 ```
 
-> If using the [InfluxData Sandbox](/platform/installation/sandbox-install), use the
-> `./sandbox enter` command console into the `influxdb` container, where you can run `influx -type=flux`.
+> If using the [InfluxData Sandbox](/platform/installation/sandbox-install), use the `./sandbox enter`
+> command console into the `influxdb` container, where you can start the `influx` CLI in Flux mode.
+> You also need to specify the `host` as `influxdb` to connect to InfluxDB over the Docker network.
 >
 ```bash
 ./sandbox enter influxdb
 
-root@9bfc3c08579c:/# influx -type=flux
+root@9bfc3c08579c:/# influx -host influxdb -type=flux
 ```
 
 ## Basic Flux syntax
@@ -114,7 +115,7 @@ data |> someFunction() |> anotherFunction()
 This likely seems familiar if you've already been through through the other [getting started guides](/flux/v0.7/introduction/getting-started), which is by design.
 Flux's syntax is inspired by Javascript and other functional scripting languages.
 As you begin to apply these basic principles in real use cases such as creating data stream variables,
-custom functions, etc., the power of Flux and it's ability to query and process time series data is apparent.
+custom functions, etc., the power of Flux and it's ability to query and process data is apparent.
 
 The examples below provide both multi-line and single-line versions of each input command.
 Carriage returns in Flux aren't necessary, but do help with readability.
