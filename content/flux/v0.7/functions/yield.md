@@ -23,6 +23,7 @@ yield(name: "custom-name")
 
 ### name
 A unique name for the yielded results.
+Defaults to `"_results"`.
 
 _**Data type:** string_
 
