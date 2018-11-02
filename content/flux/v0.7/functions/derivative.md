@@ -49,3 +49,8 @@ from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> derivative(unit: 100ms, nonNegative: true)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[DERIVATIVE()](/influxdb/latest/query_language/functions/#derivative)

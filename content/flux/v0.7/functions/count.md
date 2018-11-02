@@ -38,3 +38,8 @@ from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> count(["_value"])
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[COUNT()](/influxdb/latest/query_language/functions/#count)

@@ -62,3 +62,8 @@ from(bucket:"telegraf/autogen")
   |> range(start:2018-05-22T23:30:00Z, stop: 2018-05-23T00:00:00Z)
   // ...
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[WHERE](/influxdb/latest/query_language/data_exploration/#the-where-clause)  

@@ -75,3 +75,9 @@ aggregateWindow = (every, fn, columns=["_value"], timeSrc="_stop", timeDst="_tim
 		|> duplicate(column:timeSrc, as:timeDst)
 		|> window(every:inf, timeCol:timeDst)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[InfluxQL aggregate functions](/influxdb/latest/query_language/functions/#aggregations)  
+[GROUP BY time()](/influxdb/latest/query_language/data_exploration/#the-group-by-clause)  

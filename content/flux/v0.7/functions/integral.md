@@ -38,3 +38,8 @@ from(bucket: "telegraf/autogen")
   |> filter(fn: (r) => r._measurement == "cpu" and r._field == "usage_system")
   |> integral(unit:10s)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[INTEGRAL()](/influxdb/latest/query_language/functions/#integral)

@@ -42,3 +42,8 @@ from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> difference(nonNegative: true)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[DIFFERENCE()](/influxdb/latest/query_language/functions/#difference)

@@ -97,3 +97,8 @@ from(bucket:"telegraf/autogen")
   |> range(start:-12h)
   |> window(intervals: intervals(every:1d, period:8h, offset:9h))
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[GROUP BY time()](/influxdb/latest/query_language/data_exploration/#the-group-by-clause)

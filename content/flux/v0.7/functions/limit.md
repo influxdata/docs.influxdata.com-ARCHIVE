@@ -33,3 +33,8 @@ from(bucket:"telegraf/autogen")
   |> range(start:-1h)
   |> limit(n:10)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[LIMIT](/influxdb/latest/query_language/data_exploration/#the-limit-and-slimit-clauses)  

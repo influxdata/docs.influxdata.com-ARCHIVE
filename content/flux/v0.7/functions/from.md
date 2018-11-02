@@ -43,3 +43,8 @@ from(bucket: "telegraf/autogen")
 ```js
 from(bucketID: "0261d8287f4d6000")
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[FROM](/influxdb/latest/query_language/data_exploration/#from-clause)

@@ -33,3 +33,8 @@ from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> yield(name: "1")
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SELECT AS](/influxdb/latest/query_language/data_exploration/#the-basic-select-statement) 

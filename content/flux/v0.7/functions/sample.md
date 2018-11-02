@@ -39,3 +39,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "usage_system")
   |> sample(n: 5, pos: 1)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SAMPLE()](/influxdb/latest/query_language/functions/#sample)  

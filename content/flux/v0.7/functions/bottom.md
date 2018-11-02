@@ -49,3 +49,8 @@ _sortLimit = (n, desc, cols=["_value"], table=<-) =>
 
 bottom = (n, cols=["_value"], table=<-) => _sortLimit(table:table, n:n, cols:cols, desc:false)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[BOTTOM()](/influxdb/latest/query_language/functions/#bottom)

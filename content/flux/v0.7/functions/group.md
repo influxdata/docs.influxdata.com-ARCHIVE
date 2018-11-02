@@ -55,3 +55,8 @@ from(bucket: "telegraf/autogen")
   |> range(start: -30m)
   |> group(except: ["_time"])
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[GROUP BY](/influxdb/latest/query_language/data_exploration/#the-group-by-clause) _(similar but different)_

@@ -32,3 +32,11 @@ from(bucket: "telegraf/autogen")
   |> range(start: -30m)
   |> keys(except: ["_time", "_start", "_stop", "_field", "_measurement", "_value"])
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SHOW MEASUREMENTS](/influxdb/latest/query_language/schema_exploration/#show-measurements)  
+[SHOW FIELD KEYS](/influxdb/latest/query_language/schema_exploration/#show-field-keys)  
+[SHOW TAG KEYS](/influxdb/latest/query_language/schema_exploration/#show-tag-keys)  
+[SHOW SERIES](/influxdb/latest/query_language/schema_exploration/#show-tag-keys)

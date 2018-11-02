@@ -24,3 +24,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "usage_system")
   |> last()
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[LAST()](/influxdb/latest/query_language/functions/#last)  

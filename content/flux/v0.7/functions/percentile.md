@@ -83,3 +83,8 @@ from(bucket: "telegraf/autogen")
     r._field == "usage_system")
 	|> percentile(percentile: 0.99, method: "exact_selector")
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[PERCENTILE()](/influxdb/latest/query_language/functions/#percentile)  

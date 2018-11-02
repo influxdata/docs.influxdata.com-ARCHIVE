@@ -32,3 +32,8 @@ from(bucket: "telegraf/autogen")
   |> filter(fn: (r) => r._measurement == "cpu" and r._field == "usage_system")
   |> stddev()
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[STDDEV()](/influxdb/latest/query_language/functions/#stddev)  

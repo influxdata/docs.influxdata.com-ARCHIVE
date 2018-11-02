@@ -31,3 +31,8 @@ from(bucket: "telegraf/autogen")
 	|> filter(fn: (r) => r._measurement == "cpu")
 	|> distinct(column: "host")
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[DISTINCT()](/influxdb/latest/query_language/functions/#distinct)

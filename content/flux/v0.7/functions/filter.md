@@ -36,3 +36,8 @@ from(bucket:"telegraf/autogen")
     r._field == "usage_system" AND
     r.cpu == "cpu-total")
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SELECT](/influxdb/latest/query_language/data_exploration/#the-basic-select-statement)

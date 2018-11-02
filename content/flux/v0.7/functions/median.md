@@ -71,3 +71,8 @@ from(bucket: "telegraf/autogen")
 median = (method="estimate_tdigest", compression=0.0, table=<-) =>
   percentile(table:table, percentile:0.5, method:method, compression:compression)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[MEDIAN()](/influxdb/latest/query_language/functions/#median)  

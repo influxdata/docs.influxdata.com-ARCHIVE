@@ -33,3 +33,8 @@ from(bucket: "telegraf/autogen")
   |> filter(fn: (r) => r._measurement == "disk" AND r._field == "used_percent")
   |> cumulativeSum(columns: ["_value"])
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[CUMULATIVE_SUM()](/influxdb/latest/query_language/functions/#cumulative-sum)

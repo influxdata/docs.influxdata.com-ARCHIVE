@@ -36,3 +36,8 @@ from(bucket: "telegraf/autogen")
   |> filter(fn: (r) => r._measurement == "cpu" and r._field == "usage_system")
   |> spread()
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SPREAD()](/influxdb/latest/query_language/functions/#spread)  

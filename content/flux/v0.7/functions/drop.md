@@ -53,3 +53,8 @@ from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> drop(fn: (col) => col =~ /usage*/)
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[DROP MEASUREMENT](/influxdb/latest/query_language/database_management/#delete-measurements-with-drop-measurement)

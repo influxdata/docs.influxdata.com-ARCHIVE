@@ -15,3 +15,8 @@ _**Function type:** Input_
 ```js
 buckets()
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SHOW DATABASES](/influxdb/latest/query_language/schema_exploration/#show-databases)

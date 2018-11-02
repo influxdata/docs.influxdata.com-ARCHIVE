@@ -35,3 +35,8 @@ from(bucket:"telegraf/autogen")
   |> window(every:10m)
   |> mean()
 ```
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[MEAN()](/influxdb/latest/query_language/functions/#mean)  
