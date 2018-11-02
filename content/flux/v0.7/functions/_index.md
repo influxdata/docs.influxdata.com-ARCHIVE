@@ -7,35 +7,22 @@ menu:
     weight: 10
 ---
 
-- [count](#)
-- [covariance](#)
-- [cumulativeSum](#)
-- [derivative](#)
-- [difference](#)
-- [distinct](#)
-- [filter](#)
-- [first](#)
-- [from](#)
-- [group](#)
-- [integral](#)
-- [join](#)
-- [last](#)
-- [limit](#)
-- [map](#)
-- [max](#)
-- [mean](#)
-- [min](#)
-- [percentile](#)
-- [range](#)
-- [to](#)
-- [sample](#)
-- [set](#)
-- [shift](#)
-- [skew](#)
-- [sort](#)
-- [spread](#)
-- [stateTracking](#)
-- [stddev](#)
-- [sum](#)
-- [window](#)
-- [yield](#)
+Flux's functional syntax allow you to retrieve, transform, process, and output data easily.
+There is a large library of built-in functions, but you can also create your own
+custom functions to perform operations that suit your needs.
+
+## [Custom functions](./custom-functions)
+Flux's functional syntax allows for custom functions.
+This guide walks through the basics of creating your own function.
+
+## [Input functions](./inputs)
+Input functions define or display information about data sources.
+
+## [Output functions](./outputs)
+Output functions yield results or send data to a specified output.
+
+## [Transformation functions](./transformations)
+Transformation functions transform or shape your data in specific ways.
+
+## [Miscellaneous functions](./misc)
+Functions that serve miscellaneous purposes when writing Flux scripts.
