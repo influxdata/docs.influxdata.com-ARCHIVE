@@ -32,11 +32,7 @@ _**Data type:** String_
 ## Function definition
 ```js
 fromRows = (bucket) => from(bucket:bucket)
-  |> pivot(
-    rowKey:["_time"],
-    colKey: ["_field"],
-    valueCol: "_value"
-  )
+  |> pivot(rowKey:["_time"], colKey: ["_field"], valueCol: "_value")
 ```
 
 ## Examples

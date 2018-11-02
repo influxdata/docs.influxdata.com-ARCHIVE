@@ -47,7 +47,8 @@ _sortLimit = (n, desc, cols=["_value"], table=<-) =>
     |> sort(cols:cols, desc:desc)
     |> limit(n:n)
 
-bottom = (n, cols=["_value"], table=<-) => _sortLimit(table:table, n:n, cols:cols, desc:false)
+bottom = (n, cols=["_value"], table=<-) =>
+  _sortLimit(table:table, n:n, cols:cols, desc:false)
 ```
 
 <hr style="margin-top:4rem"/>

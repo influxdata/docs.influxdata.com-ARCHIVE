@@ -58,12 +58,23 @@ Defaults to 1000.
 _**Data type:** Float_
 
 ## Examples
+
+###### Median as an aggregate
 ```js
 from(bucket: "telegraf/autogen")
   |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent")
   |> range(start:-12h)
   |> window(every:10m)
   |> median()
+```
+
+###### Median as a selector
+```js
+from(bucket: "telegraf/autogen")
+  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent")
+  |> range(start:-12h)
+  |> window(every:10m)
+  |> median(method: "exact_selector")
 ```
 
 ## Function definition

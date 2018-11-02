@@ -72,5 +72,5 @@ _**Data type:** Float_
 
 ##### Compute the 90th quantile
 ```js
-histogramQuantile(quantile:0.9)
+histogramQuantile(quantile: 0.9)
 ```
