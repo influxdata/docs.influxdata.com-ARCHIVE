@@ -5,7 +5,7 @@ menu:
   flux_0_7:
     name: Custom functions
     parent: Functions
-    weight: 1
+    weight: 6
 ---
 
 Flux's functional syntax allows for custom functions.
