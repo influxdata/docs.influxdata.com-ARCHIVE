@@ -11,8 +11,8 @@ menu:
 The `cumulativeSum()` function computes a running sum for non-null records in the table.
 The output table schema will be the same as the input table.
 
-_**Function type:** aggregate_  
-_**Output data type:** float_
+_**Function type:** Aggregate_  
+_**Output data type:** Float_
 
 ```js
 cumulativeSum(columns: ["_value"])
@@ -24,7 +24,7 @@ cumulativeSum(columns: ["_value"])
 A list of columns on which to operate.
 Defaults to `["_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

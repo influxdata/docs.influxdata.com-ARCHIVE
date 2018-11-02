@@ -10,8 +10,8 @@ menu:
 
 The `stddev()` function computes the standard deviation of non-null records in specified columns.
 
-_**Function type:** aggregate_  
-_**Output data type:** float_
+_**Function type:** Aggregate_  
+_**Output data type:** Float_
 
 ```js
 stddev(columns: ["_value"])
@@ -23,7 +23,7 @@ stddev(columns: ["_value"])
 Specifies a list of columns on which to operate.
 Defaults to `["_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

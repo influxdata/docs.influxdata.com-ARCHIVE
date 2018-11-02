@@ -10,8 +10,8 @@ menu:
 
 The `toTime()` function converts a value to a time.
 
-_**Function type:** type conversion_  
-_**Output data type:** time_
+_**Function type:** Type conversion_  
+_**Output data type:** Time_
 
 ```js
 toTime()

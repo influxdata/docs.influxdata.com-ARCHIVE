@@ -14,8 +14,8 @@ When using the `estimate_tdigest` or `exact_mean` methods, it outputs non-null r
 
 When using the `exact_selector` method, it outputs the non-null record with the value that represents the specified percentile.
 
-_**Function type:** aggregate and selector_  
-_**Output data type:** float_
+_**Function type:** Aggregate or Selector_  
+_**Output data type:** Float or Object_
 
 ```js
 percentile(columns: ["_value"], percentile: 0.99, method: "estimate_tdigest", compression: 1000)
@@ -27,17 +27,17 @@ percentile(columns: ["_value"], percentile: 0.99, method: "estimate_tdigest", co
 A list of columns on which to compute the percentile.
 Defaults to `["_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ### percentile
 A value between 0 and 1 indicating the desired percentile.
 
-_**Data type:** float_
+_**Data type:** Float_
 
 ### method
 Defines the method of computation.
 
-_**Data type:** string_
+_**Data type:** String_
 
 The available options are:
 
@@ -56,7 +56,7 @@ Indicates how many centroids to use when compressing the dataset.
 A larger number produces a more accurate result at the cost of increased memory requirements.
 Defaults to 1000.
 
-_**Data type:** float_
+_**Data type:** Float_
 
 ## Examples
 

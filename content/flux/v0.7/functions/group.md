@@ -11,8 +11,8 @@ menu:
 The `group()` function groups records based on their values for specific columns.
 It produces tables with new group keys based on provided properties.
 
-_**Function type:** transformation_  
-_**Output data type:** tables_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 group(by: ["host", "_measurement"])
@@ -26,19 +26,19 @@ group(none: true)
 List of columns by which to group.
 _Cannot be used with `except`._
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## except
 List of columns by which to **not** group.
 All other columns are used to group records.
 _Cannot be used with `by`._
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## none
 Remove existing groups as well as partitions created by the [`window()` function](../window).
 
-_**Data type:** boolean_
+_**Data type:** Boolean_
 
 ## Examples
 

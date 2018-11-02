@@ -15,8 +15,8 @@ The output tables are the result of applying the map function to each record of 
 When the output record contains a different value for the group key, the record is regrouped into the appropriate table.
 When the output record drops a column that was part of the group key, that column is removed from the group key.
 
-_**Function type:** transformation_  
-_**Output data type:** table_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 map(fn: (r) => r._value * r._value), mergeKey: true)
@@ -28,7 +28,7 @@ map(fn: (r) => r._value * r._value), mergeKey: true)
 A single argument function that to apply to each record.
 The return value must be an object.
 
-_**Data type:** function_
+_**Data type:** Function_
 
 ### mergeKey
 Indicates if the record returned from `fn` should be merged with the group key.
@@ -36,7 +36,7 @@ When merging, all columns on the group key will be added to the record giving pr
 When not merging, only columns defined on the returned record will be present on the output records.
 Defaults to `true`.
 
-_**Data type:** boolean_
+_**Data type:** Boolean_
 
 ## Examples
 

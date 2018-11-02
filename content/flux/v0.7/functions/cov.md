@@ -11,8 +11,8 @@ menu:
 The `cov()` function computes the covariance between two streams by first joining the streams,
 then performing the covariance operation.
 
-_**Function type:** transformation_  
-_**Output data type:** float_
+_**Function type:** Transformation_  
+_**Output data type:** Float_
 
 ```js
 cov(x: table1, y: table2, on: ["_time", "_field"], pearsonr: false)
@@ -23,24 +23,24 @@ cov(x: table1, y: table2, on: ["_time", "_field"], pearsonr: false)
 ### x
 One input stream used to calculate the covariance.
 
-_**Data type:** table object_
+_**Data type:** Object_
 
 ### y
 The other input table used to calculate the covariance.
 
-_**Data type:** table object_
+_**Data type:** Object_
 
 
 ### on
 The list of columns on which to join.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 
 ### pearsonr
 Indicates whether the result should be normalized to be the Pearson R coefficient.
 
-_**Data type:** boolean_
+_**Data type:** Boolean_
 
 
 ## Examples

@@ -11,8 +11,8 @@ menu:
 The `shift()` function adds a fixed duration to time columns.
 The output table schema is the same as the input table.
 
-_**Function type:** transformation_  
-_**Output data type:** table_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 shift(shift: 10h, columns: ["_start", "_stop", "_time"])
@@ -23,12 +23,12 @@ shift(shift: 10h, columns: ["_start", "_stop", "_time"])
 ### shift
 The amount of time to add to each time value. The shift may be a negative duration.
 
-_**Data type:** duration_
+_**Data type:** Duration_
 
 ### columns
 The list of all columns to be shifted. Defaults to `["_start", "_stop", "_time"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 

@@ -13,8 +13,8 @@ It returns a stream of tables from the specified [bucket](#parameters).
 Each unique series is contained within its own table.
 Each record in the table represents a single point in the series.
 
-_**Function type:** source_  
-_**Output data type:** table(s)_
+_**Function type:** Source_  
+_**Output data type:** Object_
 
 ```js
 from(bucket: "telegraf/autogen")
@@ -29,12 +29,12 @@ from(bucketID: "0261d8287f4d6000")
 ### bucket
 The name of the bucket to query.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### bucketID
 The string-encoded ID of the bucket to query.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ## Examples
 ```js

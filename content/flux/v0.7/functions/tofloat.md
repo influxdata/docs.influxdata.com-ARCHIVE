@@ -10,8 +10,8 @@ menu:
 
 The `toFloat()` function converts a value to a float.
 
-_**Function type:** type conversion_  
-_**Output data type:** float_
+_**Function type:** Type conversion_  
+_**Output data type:** Float_
 
 ```js
 toFloat()

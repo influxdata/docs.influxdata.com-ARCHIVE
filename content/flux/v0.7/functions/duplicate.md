@@ -10,8 +10,8 @@ menu:
 
 The `duplicate()` function duplicates a specified column in a table.
 
-_**Function type:** transformation_  
-_**Output data type:** table(s)_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 duplicate(column: "column-name", as: "duplicate-name")
@@ -22,12 +22,12 @@ duplicate(column: "column-name", as: "duplicate-name")
 ### column
 The column to duplicate.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### as
 The name assigned to the duplicate column.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ## Examples
 ```js

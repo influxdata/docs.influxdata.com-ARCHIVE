@@ -11,8 +11,8 @@ menu:
 The `keyValues()` function returns a table with the input table's group key plus two columns,
 `_key` and `_value`, that correspond to unique column + value pairs from the input table.
 
-_**Function type:** transformation_  
-_**Output data type:** table_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 keyValues(keyCols: ["usage_idle", "usage_user"])
@@ -30,13 +30,13 @@ keyValues(fn: (schema) => schema.columns |> filter(fn:(v) =>  v.label =~ /usage_
 A list of columns from which values are extracted.
 All columns indicated must be of the same type.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ### fn
 Function used to identify a set of columns.
 All columns indicated must be of the same type.
 
-_**Data type:** function_
+_**Data type:** Function_
 
 ## Examples
 

@@ -10,8 +10,8 @@ menu:
 
 The `max()` function selects record with the highest `_value` from the input table.
 
-_**Function type:** selector_  
-_**Output data type:** table_
+_**Function type:** Selector_  
+_**Output data type:** Object_
 
 ```js
 max()

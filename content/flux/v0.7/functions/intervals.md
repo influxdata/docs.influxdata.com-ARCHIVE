@@ -17,8 +17,8 @@ The set of intervals includes all intervals that intersect with the initial rang
 
 > The `intervals()` function is designed to be used with the intervals parameter of the [`window()` function](../window).
 
-_**Function type:** generator_  
-_**Output data type:** object_
+_**Function type:** Generator_  
+_**Output data type:** Object_
 
 ```js
 intervals()
@@ -31,7 +31,7 @@ The duration between starts of each of the intervals.
 The Nth interval start time is the initial start time plus the offset plus an Nth multiple of the every parameter.
 Defaults to the value of the `period` duration.
 
-_**Data type:** duration_
+_**Data type:** Duration_
 
 ### period
 The length of each interval.
@@ -39,14 +39,14 @@ Each interval's stop time is equal to the interval start time plus the period du
 It can be negative, indicating the start and stop boundaries are reversed.
 Defaults to the value of the `every` duration.
 
-_**Data type:** duration_
+_**Data type:** Duration_
 
 ### offset
 The offset duration relative to the location offset.
 It can be negative, indicating that the offset goes backwards in time.
 Defaults to `0h`.
 
-_**Data type:** duration_
+_**Data type:** Duration_
 
 ### filter
 A function that accepts an interval object and returns a boolean value.
@@ -54,7 +54,7 @@ Each potential interval is passed to the filter function.
 When the function returns false, that interval is excluded from the set of intervals.
 Defaults to include all intervals.
 
-_**Data type:** function_
+_**Data type:** Function_
 
 ## Examples
 

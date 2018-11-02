@@ -14,8 +14,8 @@ Those columns are added to the group key of the output tables.
 
 A single input record will be placed into zero or more output tables, depending on the specific windowing function.
 
-_**Function type:** transformation_  
-_**Output data type:** tables_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 window(every: 5m, period: 5m, offset: 12h, timeCol: "_time", startCol: "_start", stopCol: "_stop")
@@ -33,7 +33,7 @@ window(intervals: intervals(every: 5m, period: 5m, offset: 12h), timeCol: "_time
 Duration of time between windows.
 Defaults to `period` value.
 
-_**Data type:** duration_
+_**Data type:** Duration_
 
 ### period
 Duration of the window.
@@ -41,19 +41,19 @@ Period is the length of each interval.
 It can be negative, indicating the start and stop boundaries are reversed.
 Defaults to `every` value.
 
-_**Data type:** duration_
+_**Data type:** Duration_
 
 ### offset
 The offset duration relative to the [`location`](#) offset.
 It can be negative, indicating that the offset goes backwards in time.
 The default aligns the window boundaries with `now`.
 
-_**Data type:** duration_
+_**Data type:** Duration_
 
 ### intervals
 A function that returns an interval generator, a set of intervals used as windows.
 
-_**Data type:** function_
+_**Data type:** Function_
 
 ###### Example interval generator function
 ```js
@@ -66,19 +66,19 @@ intervals(every:1d, period:8h, offset:9h)
 The column containing time.
 Defaults to `"_time"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### startCol
 The column containing the window start time.
 Defaults to `"_start"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### stopCol
 The column containing the window stop time.
 Defaults to `"_stop"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ## Examples
 

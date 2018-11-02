@@ -12,8 +12,8 @@ The `sort()` function orders the records within each table.
 One output table is produced for each input table.
 The output tables will have the same schema as their corresponding input tables.
 
-_**Function type:** tranformation_  
-_**Output data type:** table(s)_
+_**Function type:** Tranformation_  
+_**Output data type:** Object_
 
 ```js
 sort(columns: ["_value"], desc: false)
@@ -26,13 +26,13 @@ List of columns by which to sort.
 Sort precedence is determined by list order (left to right).
 Default is `["_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ### desc
 Sort results in descending order.
 Default is `false`.
 
-_**Data type:** boolean_
+_**Data type:** Boolean_
 
 ## Examples
 ```js

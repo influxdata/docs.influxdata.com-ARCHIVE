@@ -10,8 +10,8 @@ menu:
 
 The `distinct()` function returns the unique values for a given column.
 
-_**Function type:** aggregate_  
-_**Output data type:** inherited from [column](#column) data type_
+_**Function type:** Aggregate_  
+_**Output data type:** Object_
 
 ```js
 distinct(column: "host")

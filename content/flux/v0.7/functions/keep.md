@@ -12,8 +12,8 @@ The `keep()` function returns a table containing only the specified columns, ign
 Only columns in the group key that are also specified in the `keep()` function will be kept in the resulting group key.
 _It is the inverse of [`drop`](../drop)._
 
-_**Function type:** transformation_  
-_**Output data type:** table(s)_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 keep(columns: ["col1", "col2"])
@@ -29,14 +29,14 @@ keep(fn: (col) => col =~ /inodes*/)
 Columns that should be included in the resulting table.
 Cannot be used with `fn`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ### fn
 A function which takes a column name as a parameter and returns a boolean indicating
 whether or not the column should be included in the resulting table.
 Cannot be used with `columns`.
 
-_**Data type:** function_
+_**Data type:** Function_
 
 ## Examples
 

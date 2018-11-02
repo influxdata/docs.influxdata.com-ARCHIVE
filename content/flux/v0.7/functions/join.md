@@ -13,8 +13,8 @@ a set of common columns, into a single output stream.
 The resulting schema is the union of the input schemas.
 The resulting group key is the union of the input group keys.
 
-_**Function type:** transformation_  
-_**Output data type:** table(s)_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 join(tables: {key1: table1, key2: table2}, on: ["_time", "_field"], method: "inner")
@@ -45,19 +45,19 @@ The resulting group keys for all tables will be: `{ _time, _field_d1, _field_d2 
 ### tables
 The map of streams to be joined. <span style="color:#FF8564; font-weight:700;">Required</span>.
 
-_**Data type:** object_
+_**Data type:** Object_
 
 > `join()` currently only supports two input streams.
 
 ### on
 The list of columns on which to join. <span style="color:#FF8564; font-weight:700;">Required</span>.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ### method
 The method used to join. Defaults to `"inner"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ###### Possible Values:
 - `inner`

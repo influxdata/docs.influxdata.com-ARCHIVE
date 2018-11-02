@@ -10,8 +10,8 @@ menu:
 
 The `toDuration()` function converts a value to a duration.
 
-_**Function type:** type conversion_  
-_**Output data type:** duration_
+_**Function type:** Type conversion_  
+_**Output data type:** Duration_
 
 ```js
 toDuration()

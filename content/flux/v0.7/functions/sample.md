@@ -10,8 +10,8 @@ menu:
 
 The `sample()` function selects a subset of the records from the input table.
 
-_**Function type:** selector_  
-_**Output data type:** table_
+_**Function type:** Selector_  
+_**Output data type:** Object_
 
 ```js
 sample(n:5, pos: -1)
@@ -22,7 +22,7 @@ sample(n:5, pos: -1)
 ### n
 Sample every Nth element.
 
-_**Data type:** integer_
+_**Data type:** Integer_
 
 ### pos
 The position offset from the start of results where sampling begins.
@@ -30,7 +30,7 @@ The position offset from the start of results where sampling begins.
 If `pos` is less than 0, a random offset is used.
 Defaults to -1 (random offset).
 
-_**Data type:** integer_
+_**Data type:** Integer_
 
 ## Examples
 ```js

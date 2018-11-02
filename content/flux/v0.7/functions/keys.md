@@ -11,8 +11,8 @@ menu:
 The `keys()` function returns a table with the input table's group key columns,
 plus a `_value` column containing the names of the input table's columns.
 
-_**Function type:** transformation_  
-_**Output data type:** table_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 keys(except: ["_time", "_value"])
@@ -24,7 +24,7 @@ keys(except: ["_time", "_value"])
 Exclude the specified column names in the output.
 Defaults to `["_time", "_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

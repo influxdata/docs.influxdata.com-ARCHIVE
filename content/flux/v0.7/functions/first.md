@@ -10,8 +10,8 @@ menu:
 
 The `first()` function selects the first non-null record from an input table.
 
-_**Function type:** selector_  
-_**Output data type:** table_
+_**Function type:** Selector_  
+_**Output data type:** Object_
 
 ```js
 first()

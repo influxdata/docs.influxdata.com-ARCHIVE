@@ -11,8 +11,8 @@ menu:
 The `pearsonr()` function computes the Pearson R correlation coefficient between two streams
 by first joining the streams, then performing the covariance operation normalized to compute R.
 
-_**Function type:** aggregate_  
-_**Output data type:** float_
+_**Function type:** Aggregate_  
+_**Output data type:** Float_
 
 ```js
 pearsonr(x: stream1, y: stream2, on: ["_time", "_field"])
@@ -21,19 +21,19 @@ pearsonr(x: stream1, y: stream2, on: ["_time", "_field"])
 ## Parameters
 
 ### x
-One input stream used to be used in the operation.
+First input stream used in the operation.
 
-_**Data type:** table_
+_**Data type:** Object_
 
 ### y
-The other input stream used to be used in the operation.
+Second input stream used in the operation.
 
-_**Data type:** table_
+_**Data type:** Object_
 
 ### on
 The list of columns on which to join.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

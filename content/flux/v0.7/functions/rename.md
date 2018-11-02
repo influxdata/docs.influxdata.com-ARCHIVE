@@ -16,8 +16,8 @@ There are two variants:
 - one which maps old column names to new column names
 - one which takes a mapping function.
 
-_**Function type:** transformation_  
-_**Output data type:** table(s)_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 rename(columns: {host: "server", facility: "datacenter"})
@@ -33,13 +33,13 @@ rename(fn: (col) => "{col}_new")
 A map of columns to rename and their corresponding new names.
 Cannot be used with `fn`.
 
-_**Data type:** map_
+_**Data type:** Map_
 
 ### fn
 A function which takes a single string parameter (the old column name) and returns a string representing the new column name.
 Cannot be used with `columns`.
 
-_**Data type:** function_
+_**Data type:** Function_
 
 ## Examples
 

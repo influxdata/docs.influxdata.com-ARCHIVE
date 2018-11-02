@@ -10,8 +10,8 @@ menu:
 
 The `toString()` function converts a value to a string.
 
-_**Function type:** type conversion_  
-_**Output data type:** string_
+_**Function type:** Type conversion_  
+_**Output data type:** String_
 
 ```js
 toString()

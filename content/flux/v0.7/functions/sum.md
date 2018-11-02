@@ -10,8 +10,8 @@ menu:
 
 The `sum()` function computes the sum of non-null records in specified columns.
 
-_**Function type:** aggregate_  
-_**Output data type:** integer, uinteger, or float (inherited from column type)_
+_**Function type:** Aggregate_  
+_**Output data type:** Integer, UInteger, or Float (inherited from column type)_
 
 ```js
 sum(columns: ["_value"])
@@ -23,7 +23,7 @@ sum(columns: ["_value"])
 Specifies a list of columns on which to operate.
 Defaults to `["_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

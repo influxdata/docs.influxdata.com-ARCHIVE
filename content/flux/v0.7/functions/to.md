@@ -10,8 +10,8 @@ menu:
 
 The `to()` function writes data to an **InfluxDB v2.0** bucket.
 
-_**Function type:** output_  
-_**Output data type:** tables_
+_**Function type:** Output_  
+_**Output data type:** Object_
 
 ```js
 to(bucket: "my-bucket", org: "my-org", host: "http://example.com:8086", token: "xxxxxx", timeColumn: "_time", tagColumns: ["tag1", "tag2", "tag3"], fieldFn: (r) => ({ [r._field]: r._value }))
@@ -28,19 +28,19 @@ to(bucketID: "1234567890", orgID: "0987654321", host: "http://example.com:8086",
 ### bucket
 The bucket to which data is written. Mutually exclusive with `bucketID`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### bucketID
 The ID of the bucket to which data is written. Mutually exclusive with `bucket`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### org
 The organization name of the specified [`bucket`](#bucket).
 Only required when writing to a remote host.
 Mutually exclusive with `orgID`
 
-_**Data type:** string_
+_**Data type:** String_
 
 > Specify either an `org` or an `orgID`, but not both.
 
@@ -49,39 +49,39 @@ The organization ID of the specified [`bucket`](#bucket).
 Only required when writing to a remote host.
 Mutually exclusive with `org`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### host
 The remote InfluxDB host to which to write.
 _If specified, a `token` is required._
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### token
 The authorization token to use when writing to a remote host.
 _Required when a `host` is specified._
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### timeColumn
 The time column of the output.
 Default is `"_time"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### tagColumns
 The tag columns of the output.
 Defaults to all columns with type `string`, excluding all value columns and the `_field` column if present.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ### fieldFn
 Function that takes a record from the input table and returns an object.
 For each record from the input table, `fieldFn` returns an object that maps output the field key to the output value.
 Default is `(r) => ({ [r._field]: r._value })`
 
-_**Data type:** function_
-_**Output data type:** object_
+_**Data type:** Function_
+_**Output data type:** Object_
 
 ## Examples
 

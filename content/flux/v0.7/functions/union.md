@@ -15,8 +15,8 @@ The output schemas of the `union()` function is the union of all input schemas.
 `union()` does not preserve the sort order of the rows within tables.
 A sort operation may be added if a specific sort order is needed.
 
-_**Function type:** transformation_
-_**Output data type:** table(s)_
+_**Function type:** Transformation_
+_**Output data type:** Object)_
 
 ```js
 union(tables: ["table1", "table2"])
@@ -28,7 +28,7 @@ union(tables: ["table1", "table2"])
 Specifies the streams to union together.
 There must be at least two streams.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

@@ -11,8 +11,8 @@ menu:
 The `filter()` function filters data based on conditions defined in a predicate function ([`fn`](#fn)).
 The output tables have the same schema as the corresponding input tables.
 
-_**Function type:** filter_  
-_**Output data type:** table_
+_**Function type:** Filter_  
+_**Output data type:** Object_
 
 ```js
 filter(fn: (r) => r._measurement == "cpu")
@@ -25,7 +25,7 @@ A single argument function that evaluates true or false.
 Records are passed to the function.
 Those that evaluate to true are included in the output tables.
 
-_**Data type:** function_
+_**Data type:** Function_
 
 ## Examples
 ```js

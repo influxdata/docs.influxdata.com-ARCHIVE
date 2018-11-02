@@ -10,8 +10,8 @@ menu:
 
 The `unique()` function returns all records containing unique values in a specified column.
 
-_**Function type:** ..._  
-_**Output data type:** ..._
+_**Function type:** Selector_  
+_**Output data type:** Object_
 
 ```js
 unique(column: "_value")
@@ -23,7 +23,7 @@ unique(column: "_value")
 The column searched for unique values.
 Defaults to `"_value"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ## Examples
 ```js

@@ -12,8 +12,8 @@ The `increase()` function returns the total non-negative difference between valu
 A main use case is tracking changes in counter values which may wrap over time when they hit a threshold or are reset.
 In the case of a wrap/reset, the function assumes the absolute delta between two points is at least their non-negative difference.
 
-_**Function type:** transformation_  
-_**Output data type:** float_
+_**Function type:** Aggregate_  
+_**Output data type:** Float_
 
 ```js
 increase(columns: ["_values"])
@@ -23,8 +23,9 @@ increase(columns: ["_values"])
 
 ### columns
 The list of columns for which the increase is calculated.
+Defaults to `["_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

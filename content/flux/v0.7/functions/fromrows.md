@@ -11,8 +11,8 @@ menu:
 The `fromRows()` function is a special application of the `pivot()` function that will
 automatically align fields within each measurement that have the same timestamp.
 
-_**Function type:** transformation_  
-_**Output data type:** table(s)_
+_**Function type:** Transformation_  
+_**Output data type:** Object_
 
 ```js
 fromRows(bucket: "bucket-name")
@@ -27,7 +27,7 @@ fromRows(bucketID: "0261d8287f4d6000")
 ### bucket
 The name of the bucket to query.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ## Function definition
 ```js

@@ -10,8 +10,8 @@ menu:
 
 The `systemTime()` function returns the current system time.
 
-_**Function type:** date/time_  
-_**Output data type:** timestamp_
+_**Function type:** Date/Time_  
+_**Output data type:** Timestamp_
 
 ```js
 systemTime()

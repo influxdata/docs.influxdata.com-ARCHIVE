@@ -10,8 +10,8 @@ menu:
 
 The `toBool()` function converts a value to a boolean.
 
-_**Function type:** type conversion_  
-_**Output data type:** boolean_
+_**Function type:** Type conversion_  
+_**Output data type:** Boolean_
 
 ```js
 toBool()

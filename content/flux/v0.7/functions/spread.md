@@ -15,8 +15,8 @@ The type of the output column depends on the type of input column:
 - For input columns with type `uint` or `int`, the output is an `int`
 - For input columns with type `float` the output is a float.
 
-_**Function type:** aggregate_  
-_**Output data type:** integer or float (inherited from input column type)_
+_**Function type:** Aggregate_  
+_**Output data type:** Integer or Float (inherited from input column type)_
 
 ```js
 spread(columns: ["_value"])
@@ -27,7 +27,7 @@ spread(columns: ["_value"])
 ### columns
 Specifies a list of columns on which to operate. Defaults to `["_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

@@ -12,8 +12,8 @@ The `yield()` function indicates the input tables received should be delivered a
 Yield outputs the input stream unmodified.
 A query may have multiple results, each identified by the name provided to the `yield()` function.
 
-_**Function type:** output_  
-_**Output data type:** table(s)_
+_**Function type:** Output_  
+_**Output data type:** Object_
 
 ```js
 yield(name: "custom-name")
@@ -25,7 +25,7 @@ yield(name: "custom-name")
 A unique name for the yielded results.
 Defaults to `"_results"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ## Examples
 ```js

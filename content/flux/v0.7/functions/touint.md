@@ -10,8 +10,8 @@ menu:
 
 The `toUInt()` function converts a value to an uinteger.
 
-_**Function type:** type conversion_  
-_**Output data type:** uinteger_
+_**Function type:** Type conversion_  
+_**Output data type:** UInteger_
 
 ```js
 toUInt()

@@ -10,8 +10,8 @@ menu:
 
 The `median()` function returns the median `_value` of an input table.
 
-_**Function type:** aggregate_  
-_**Output data type:** float_
+_**Function type:** Aggregate_  
+_**Output data type:** Object_
 
 ```js
 median()
@@ -33,5 +33,6 @@ from(bucket: "telegraf/autogen")
 
 ## Function definition
 ```js
-median = (method="estimate_tdigest", compression=0.0, table=<-) => percentile(table:table, percentile:0.5, method:method, compression:compression)
+median = (method="estimate_tdigest", compression=0.0, table=<-) =>
+  percentile(table:table, percentile:0.5, method:method, compression:compression)
 ```

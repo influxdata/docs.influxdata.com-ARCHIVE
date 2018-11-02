@@ -11,8 +11,8 @@ menu:
 The `integral()` function computes the area under the curve per [`unit`](#unit) of time of subsequent non-null records.
 The curve is defined using `_time` as the domain and record values as the range.
 
-_**Function type:** aggregate_  
-_**Output data type:** float_
+_**Function type:** Aggregate_  
+_**Output data type:** Float_
 
 ```js
 integral(unit: 10s, columns: ["_value"])
@@ -23,13 +23,13 @@ integral(unit: 10s, columns: ["_value"])
 ### unit
 The time duration used when computing the integral.
 
-_**Data type:** duration_
+_**Data type:** Duration_
 
 ### columns
 A list of columns on which to operate.
 Defaults to `["_value"]`.
 
-_**Data type:** array of strings_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

@@ -10,8 +10,9 @@ menu:
 
 The `count()` function outputs the number of non-null records in each aggregated column.
 
-**Output data type:** integer  
-**Function type:** aggregate
+
+_**Output data type:** Integer_  
+_**Function type:** Aggregate_
 
 ```js
 count(columns: ["_value"])
@@ -23,7 +24,7 @@ count(columns: ["_value"])
 A list of columns on which to operate
 Defaults to `["_value"]`.
 
-_**Data type: array of strings**_
+_**Data type: Array of strings**_
 
 ## Examples
 ```js

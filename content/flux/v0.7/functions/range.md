@@ -13,8 +13,8 @@ Each input table's records are filtered to contain only records that exist withi
 Each input table's group key value is modified to fit within the time bounds.
 Tables where all records exists outside the time bounds are filtered entirely.
 
-_**Function type:** filter_  
-_**Output data type:* table(s)_
+_**Function type:** Filter_  
+_**Output data type:* Object_
 
 ```js
 range(start: -15m, stop: now)
@@ -29,7 +29,7 @@ Relative start times are defined using negative durations.
 Negative durations are relative to now.
 Absolute start times are defined using timestamps.
 
-_**Data type:** duration or timestamp_
+_**Data type:** Duration or Timestamp_
 
 ### stop
 Specifies the exclusive newest time to be included in the results. Defaults to `now`.
@@ -38,7 +38,7 @@ Relative stop times are defined using negative durations.
 Negative durations are relative to now.
 Absolute stop times are defined using timestamps.
 
-_**Data type:** duration or timestamp_
+_**Data type:** Duration or Timestamp_
 
 ## Examples
 

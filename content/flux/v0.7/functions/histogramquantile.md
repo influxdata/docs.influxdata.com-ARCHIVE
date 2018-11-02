@@ -26,8 +26,8 @@ Columns not part of the group key are removed and a single value column of type 
 The count and upper bound columns must not be part of the group key.
 The value column represents the value of the desired quantile from the histogram.
 
-_**Function type:** transformation_  
-_**Output data type:** float_
+_**Function type:** Transformation_  
+_**Output data type:** Float_
 
 ```js
 histogramQuantile(quantile: 0.5, countColumn: "_value", upperBoundColumn: "le", valueColumn: "_value", minValue: 0)
@@ -38,27 +38,27 @@ histogramQuantile(quantile: 0.5, countColumn: "_value", upperBoundColumn: "le", 
 ### quantile
 A value between 0 and 1 indicating the desired quantile to compute.
 
-_**Data type:** float_
+_**Data type:** Float_
 
 ### countColumn
 The name of the column containing the histogram counts.
 The count column type must be float.
 Defaults to `"_value"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### upperBoundColumn
 The name of the column containing the histogram upper bounds.
 The upper bound column type must be float.
 Defaults to `"le"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### valueColumn
 The name of the output column which will contain the computed quantile.
 Defaults to `"_value"`.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ### minValue
 The assumed minimum value of the dataset.
@@ -66,7 +66,7 @@ When the quantile falls below the lowest upper bound, interpolation is performed
 When `minValue` is equal to negative infinity, the lowest upper bound is used.
 Defaults to `0`.
 
-_**Data type:** float_
+_**Data type:** Float_
 
 ## Examples
 

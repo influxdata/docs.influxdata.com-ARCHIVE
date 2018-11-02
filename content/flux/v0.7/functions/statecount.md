@@ -12,10 +12,10 @@ The `stateCount()` function computes the number of consecutive records in a give
 The state is defined via the function `fn`.
 For each consecutive point that evaluates as `true`, the state count will be incremented.
 When a point evaluates as `false`, the state count is reset.
-The state count will be added as an additional column to each record.
+The state count is added as an additional column to each record.
 
-_**Function type:** transformation_  
-_**Output data type:** integer_
+_**Function type:** Transformation_  
+_**Output data type:** Integer_
 
 ```js
 stateCount(fn: (r) => r._field == "state", label: "stateCount")
@@ -32,12 +32,12 @@ Records are passed to the function.
 Those that evaluate to `true` increment the state count.
 Those that evaluate to `false` reset the state count.
 
-_**Data type:** function_
+_**Data type:** Function_
 
 ### label
-The name of the column added to each record that contains the state count.
+The name of the column added to each record that contains the incremented state count.
 
-_**Data type:** string_
+_**Data type:** String_
 
 ## Examples
 ```js

@@ -10,8 +10,8 @@ menu:
 
 The `toInt()` function converts a value to an integer.
 
-_**Function type:** type conversion_  
-_**Output data type:** integer_
+_**Function type:** Type conversion_  
+_**Output data type:** Integer_
 
 ```js
 toInt()
