@@ -1,6 +1,6 @@
 ---
 title: toDuration() function
-description: placeholder
+description: The toDuration() function converts a value to a duration.
 menu:
   flux_0_7:
     name: toDuration

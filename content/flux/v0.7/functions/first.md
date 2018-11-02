@@ -1,6 +1,6 @@
 ---
 title: first() function
-description: placeholder
+description: The first() function selects the first non-null record from an input table.
 menu:
   flux_0_7:
     name: first

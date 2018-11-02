@@ -1,6 +1,6 @@
 ---
 title: Create custom Flux functions
-description:
+description: Create your own custom Flux functions to transform and manipulate data.
 menu:
   flux_0_7:
     name: Custom functions

@@ -1,6 +1,6 @@
 ---
 title: histogramQuantile() function
-description: placeholder
+description: The `histogramQuantile()` function approximates a quantile given a histogram that approximates the cumulative distribution of the dataset.
 menu:
   flux_0_7:
     name: histogramQuantile

@@ -1,6 +1,6 @@
 ---
 title: from() function
-description: placeholder
+description: The from() function retrieves data from an InfluxDB data source.
 menu:
   flux_0_7:
     name: from
@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-The `from()` function is used to retrieve data from an InfluxDB data source.
+The `from()` function retrieves data from an InfluxDB data source.
 It returns a stream of tables from the specified [bucket](#parameters).
 Each unique series is contained within its own table.
 Each record in the table represents a single point in the series.

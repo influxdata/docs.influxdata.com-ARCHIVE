@@ -1,6 +1,6 @@
 ---
 title: union() function
-description: placeholder
+description: The union() function concatenates two or more input streams into a single output stream.
 menu:
   flux_0_7:
     name: union
@@ -16,7 +16,7 @@ The output schemas of the `union()` function is the union of all input schemas.
 A sort operation may be added if a specific sort order is needed.
 
 _**Function type:** Transformation_
-_**Output data type:** Object)_
+_**Output data type:** Object_
 
 ```js
 union(tables: ["table1", "table2"])

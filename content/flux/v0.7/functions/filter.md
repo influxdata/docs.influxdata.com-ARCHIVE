@@ -1,6 +1,6 @@
 ---
 title: filter() function
-description: placeholder
+description: The filter() function filters data based on conditions defined in a predicate function (fn).
 menu:
   flux_0_7:
     name: filter

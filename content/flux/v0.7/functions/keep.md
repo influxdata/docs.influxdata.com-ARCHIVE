@@ -1,6 +1,6 @@
 ---
 title: keep() function
-description: placeholder
+description: The keep() function returns a table containing only the specified columns.
 menu:
   flux_0_7:
     name: keep

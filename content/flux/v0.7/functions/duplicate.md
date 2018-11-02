@@ -1,6 +1,6 @@
 ---
 title: duplicate() function
-description: placeholder
+description: The duplicate() function duplicates a specified column in a table.
 menu:
   flux_0_7:
     name: duplicate

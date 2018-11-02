@@ -1,6 +1,6 @@
 ---
 title: unique() function
-description: placeholder
+description: The unique() function returns all records containing unique values in a specified column.
 menu:
   flux_0_7:
     name: unique

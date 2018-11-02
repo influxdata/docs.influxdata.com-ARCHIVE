@@ -1,6 +1,6 @@
 ---
 title: keys() function
-description: placeholder
+description: The keys() function returns a table with the input table's group key columns, plus a _value column containing the names of the input table's columns.
 menu:
   flux_0_7:
     name: keys

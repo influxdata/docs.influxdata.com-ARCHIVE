@@ -1,6 +1,6 @@
 ---
 title: toInt() function
-description: placeholder
+description: The toInt() function converts a value to an integer.
 menu:
   flux_0_7:
     name: toInt

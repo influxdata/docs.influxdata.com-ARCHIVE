@@ -1,6 +1,6 @@
 ---
 title: linearBuckets() function
-description: placeholder
+description: The linearBuckets() function generates a list of linearly separated floats.
 menu:
   flux_0_7:
     name: linearBuckets

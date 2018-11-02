@@ -1,6 +1,6 @@
 ---
 title: cumulativeSum() function
-description: placeholder
+description: The cumulativeSum() function computes a running sum for non-null records in the table.
 menu:
   flux_0_7:
     name: cumulativeSum

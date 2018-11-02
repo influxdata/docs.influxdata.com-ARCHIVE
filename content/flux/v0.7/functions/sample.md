@@ -1,6 +1,6 @@
 ---
 title: sample() function
-description: placeholder
+description: The sample() function selects a subset of the records from the input table.
 menu:
   flux_0_7:
     name: sample

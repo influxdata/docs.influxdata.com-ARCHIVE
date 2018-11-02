@@ -1,6 +1,6 @@
 ---
 title: drop() function
-description: placeholder
+description: The drop() function removes specified columns from a table.
 menu:
   flux_0_7:
     name: drop

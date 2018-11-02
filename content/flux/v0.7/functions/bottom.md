@@ -1,6 +1,6 @@
 ---
 title: bottom() function
-description: placeholder
+description: The bottom() function sorts a table by columns and keeps only the bottom n records.
 menu:
   flux_0_7:
     name: bottom

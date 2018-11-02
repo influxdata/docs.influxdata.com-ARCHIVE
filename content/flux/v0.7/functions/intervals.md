@@ -1,6 +1,6 @@
 ---
 title: intervals() function
-description: placeholder
+description: The intervals() function generates a set of time intervals over a range of time.
 menu:
   flux_0_7:
     name: intervals

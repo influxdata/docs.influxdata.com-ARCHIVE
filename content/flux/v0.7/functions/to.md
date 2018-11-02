@@ -1,6 +1,6 @@
 ---
 title: to() function
-description: placeholder
+description: The to() function writes data to an InfluxDB v2.0 bucket.
 menu:
   flux_0_7:
     name: to

@@ -1,6 +1,6 @@
 ---
 title: increase() function
-description: placeholder
+description: The increase() function calculates the total non-negative difference between values in a table.
 menu:
   flux_0_7:
     name: increase
@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-The `increase()` function returns the total non-negative difference between values in a table.
+The `increase()` function calculates the total non-negative difference between values in a table.
 A main use case is tracking changes in counter values which may wrap over time when they hit a threshold or are reset.
 In the case of a wrap/reset, the function assumes the absolute delta between two points is at least their non-negative difference.
 

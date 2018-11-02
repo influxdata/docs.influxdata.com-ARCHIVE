@@ -1,6 +1,6 @@
 ---
 title: top() function
-description: placeholder
+description: The top() function sorts a table by columns and keeps only the top n records.
 menu:
   flux_0_7:
     name: top

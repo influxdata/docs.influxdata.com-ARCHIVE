@@ -1,6 +1,6 @@
 ---
 title: join() function
-description: placeholder
+description: The join() function merges two or more input streams whose values are equal on a set of common columns into a single output stream.
 menu:
   flux_0_7:
     name: join
@@ -8,8 +8,8 @@ menu:
     weight: 1
 ---
 
-The `join()` function merges two or more input streams, whose values are equal on
-a set of common columns, into a single output stream.
+The `join()` function merges two or more input streams whose values are equal on
+a set of common columns into a single output stream.
 The resulting schema is the union of the input schemas.
 The resulting group key is the union of the input group keys.
 

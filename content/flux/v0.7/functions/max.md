@@ -1,6 +1,6 @@
 ---
 title: max() function
-description: placeholder
+description: The max() function selects record with the highest _value from the input table.
 menu:
   flux_0_7:
     name: max

@@ -1,6 +1,6 @@
 ---
 title: last() function
-description: placeholder
+description: The last() function selects the last non-null record from an input table.
 menu:
   flux_0_7:
     name: last

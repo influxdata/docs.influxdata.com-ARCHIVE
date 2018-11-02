@@ -1,6 +1,6 @@
 ---
 title: percentile() function
-description: placeholder
+description: The percentile() function outputs non-null records with values that fall within the specified percentile or the non-null record with the value that represents the specified percentile.
 menu:
   flux_0_7:
     name: percentile

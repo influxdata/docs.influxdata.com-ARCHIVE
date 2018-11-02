@@ -1,6 +1,6 @@
 ---
 title: min() function
-description: placeholder
+description: The min() function selects record with the lowest _value from the input table.
 menu:
   flux_0_7:
     name: min

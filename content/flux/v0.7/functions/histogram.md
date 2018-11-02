@@ -1,6 +1,6 @@
 ---
 title: histogram() function
-description: placeholder
+description: The histogram() function approximates the cumulative distribution of a dataset by counting data frequencies for a list of buckets.
 menu:
   flux_0_7:
     name: histogram
@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-The `histogram()` function approximates the cumulative distribution function of a dataset by counting data frequencies for a list of buckets.
+The `histogram()` function approximates the cumulative distribution of a dataset by counting data frequencies for a list of buckets.
 A bucket is defined by an upper bound where all data points that are less than or equal to the bound are counted in the bucket.
 The bucket counts are cumulative.
 

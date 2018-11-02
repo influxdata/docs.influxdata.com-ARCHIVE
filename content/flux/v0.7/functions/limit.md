@@ -1,6 +1,6 @@
 ---
 title: limit() function
-description: placeholder
+description: The limit() function limits the number of records in output tables to a fixed number (n).
 menu:
   flux_0_7:
     name: limit

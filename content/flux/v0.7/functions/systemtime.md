@@ -1,6 +1,6 @@
 ---
 title: systemTime() function
-description: placeholder
+description: The systemTime() function returns the current system time.
 menu:
   flux_0_7:
     name: systemTime

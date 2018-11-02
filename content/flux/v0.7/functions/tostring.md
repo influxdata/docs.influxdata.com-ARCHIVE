@@ -1,6 +1,6 @@
 ---
 title: toString() function
-description: placeholder
+description: The toString() function converts a value to a string.
 menu:
   flux_0_7:
     name: toString

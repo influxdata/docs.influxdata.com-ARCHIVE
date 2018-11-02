@@ -1,6 +1,6 @@
 ---
 title: derivative() function
-description: placeholder
+description: The derivative() function computes the rate of change per unit of time between subsequent non-null records.
 menu:
   flux_0_7:
     name: derivative

@@ -1,6 +1,6 @@
 ---
 title: stddev() function
-description: placeholder
+description: The stddev() function computes the standard deviation of non-null records in specified columns.
 menu:
   flux_0_7:
     name: stddev

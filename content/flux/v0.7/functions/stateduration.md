@@ -1,6 +1,6 @@
 ---
 title: stateDuration() function
-description: placeholder
+description: The stateDuration() function computes the duration of a given state.
 menu:
   flux_0_7:
     name: stateDuration

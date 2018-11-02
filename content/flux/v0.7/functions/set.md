@@ -1,6 +1,6 @@
 ---
 title: set() function
-description: placeholder
+description: The set() function assigns a static value to each record in the input table.
 menu:
   flux_0_7:
     name: set

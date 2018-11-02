@@ -1,6 +1,6 @@
 ---
 title: logrithmicBuckets() function
-description: placeholder
+description: The logrithmicBuckets() function generates a list of exponentially separated floats.
 menu:
   flux_0_7:
     name: logrithmicBuckets

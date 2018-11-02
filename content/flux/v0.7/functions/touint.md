@@ -1,6 +1,6 @@
 ---
 title: toUInt() function
-description: placeholder
+description: The toUInt() function converts a value to an uinteger.
 menu:
   flux_0_7:
     name: toUInt
@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-The `toUInt()` function converts a value to an uinteger.
+The `toUInt()` function converts a value to an UInteger.
 
 _**Function type:** Type conversion_  
 _**Output data type:** UInteger_

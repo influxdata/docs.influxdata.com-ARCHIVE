@@ -1,6 +1,6 @@
 ---
 title: skew() function
-description: placeholder
+description: The skew() function outputs the skew of non-null records as a float.
 menu:
   flux_0_7:
     name: skew

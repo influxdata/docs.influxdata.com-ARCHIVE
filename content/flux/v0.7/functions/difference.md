@@ -1,6 +1,6 @@
 ---
 title: difference() function
-description: placeholder
+description: The difference() function computes the difference between subsequent non-null records.
 menu:
   flux_0_7:
     name: difference

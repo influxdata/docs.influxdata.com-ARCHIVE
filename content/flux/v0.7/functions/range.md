@@ -1,6 +1,6 @@
 ---
 title: range() function
-description: placeholder
+description: The range() function filters records based on time bounds.
 menu:
   flux_0_7:
     name: range

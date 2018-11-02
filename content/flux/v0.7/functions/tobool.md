@@ -1,6 +1,6 @@
 ---
 title: toBool() function
-description: placeholder
+description: The toBool() function converts a value to a boolean.
 menu:
   flux_0_7:
     name: toBool

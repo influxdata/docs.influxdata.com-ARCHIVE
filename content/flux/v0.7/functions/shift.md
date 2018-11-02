@@ -1,6 +1,6 @@
 ---
 title: shift() function
-description: placeholder
+description: The shift() function adds a fixed duration to time columns.
 menu:
   flux_0_7:
     name: shift

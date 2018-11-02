@@ -1,6 +1,6 @@
 ---
 title: group() function
-description: placeholder
+description: The group() function groups records based on their values for specific columns.
 menu:
   flux_0_7:
     name: group

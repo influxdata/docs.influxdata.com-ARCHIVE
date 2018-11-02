@@ -1,6 +1,6 @@
 ---
 title: spread() function
-description: placeholder
+description: The spread() function outputs the difference between the minimum and maximum values in each specified column.
 menu:
   flux_0_7:
     name: spread

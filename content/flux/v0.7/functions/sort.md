@@ -1,6 +1,6 @@
 ---
 title: sort() function
-description: placeholder
+description: The sort() function orders the records within each table.
 menu:
   flux_0_7:
     name: sort

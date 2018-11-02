@@ -1,6 +1,6 @@
 ---
 title: covariance() function
-description: placeholder
+description: The covariance() function computes the covariance between two columns.
 menu:
   flux_0_7:
     name: covariance

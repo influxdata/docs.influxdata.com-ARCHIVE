@@ -1,6 +1,6 @@
 ---
 title: median() function
-description: placeholder
+description: The median() function returns the median _value of an input table.
 menu:
   flux_0_7:
     name: median
@@ -10,7 +10,7 @@ menu:
 
 The `median()` function returns the median `_value` of an input table.
 
-_**Function type:** Aggregate_  
+_**Function type:** Selector_  
 _**Output data type:** Object_
 
 ```js

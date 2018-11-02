@@ -1,6 +1,6 @@
 ---
 title: pivot() function
-description: placeholder
+description: The pivot() function collects values stored vertically (column-wise) in a table and aligns them horizontally (row-wise) into logical sets.
 menu:
   flux_0_7:
     name: pivot

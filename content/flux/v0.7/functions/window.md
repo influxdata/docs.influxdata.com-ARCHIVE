@@ -1,6 +1,6 @@
 ---
 title: window() function
-description: placeholder
+description: The window() function groups records based on a time value.
 menu:
   flux_0_7:
     name: window

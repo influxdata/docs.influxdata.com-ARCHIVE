@@ -1,6 +1,6 @@
 ---
 title: sum() function
-description: placeholder
+description: The sum() function computes the sum of non-null records in specified columns.
 menu:
   flux_0_7:
     name: sum

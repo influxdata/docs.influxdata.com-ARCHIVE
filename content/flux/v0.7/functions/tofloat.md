@@ -1,6 +1,6 @@
 ---
 title: toFloat() function
-description: placeholder
+description: The toFloat() function converts a value to a float.
 menu:
   flux_0_7:
     name: toFloat

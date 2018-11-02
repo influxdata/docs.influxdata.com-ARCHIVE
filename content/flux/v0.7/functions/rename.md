@@ -1,6 +1,6 @@
 ---
 title: rename() function
-description: placeholder
+description: The rename() function renames specified columns in a table.
 menu:
   flux_0_7:
     name: rename

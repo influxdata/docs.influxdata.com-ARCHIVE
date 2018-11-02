@@ -1,6 +1,6 @@
 ---
 title: count() function
-description: placeholder
+description: The count() function outputs the number of non-null records in each aggregated column.
 menu:
   flux_0_7:
     name: count

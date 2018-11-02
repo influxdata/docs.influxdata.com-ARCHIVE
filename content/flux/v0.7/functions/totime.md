@@ -1,6 +1,6 @@
 ---
 title: toTime() function
-description: placeholder
+description: The toTime() function converts a value to a time.
 menu:
   flux_0_7:
     name: toTime

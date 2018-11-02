@@ -1,6 +1,6 @@
 ---
 title: mean() function
-description: placeholder
+description: The mean() function computes the mean or average of non-null records in the input table.
 menu:
   flux_0_7:
     name: mean

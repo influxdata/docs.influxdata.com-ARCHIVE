@@ -1,6 +1,6 @@
 ---
 title: fromRows() function
-description: placeholder
+description: The fromRows() function is pivots a table and automatically aligns fields within each measurement that have the same timestamp.
 menu:
   flux_0_7:
     name: fromRows
@@ -8,8 +8,8 @@ menu:
     weight: 1
 ---
 
-The `fromRows()` function is a special application of the `pivot()` function that will
-automatically align fields within each measurement that have the same timestamp.
+The `fromRows()` function is a special application of the `pivot()` function that
+automatically aligns fields within each measurement that have the same timestamp.
 
 _**Function type:** Transformation_  
 _**Output data type:** Object_

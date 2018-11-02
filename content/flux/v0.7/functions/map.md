@@ -1,6 +1,6 @@
 ---
 title: map() function
-description: placeholder
+description: The map() function applies a function to each record in the input tables.
 menu:
   flux_0_7:
     name: map

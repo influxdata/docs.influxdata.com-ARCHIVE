@@ -1,6 +1,6 @@
 ---
 title: distinct() function
-description: placeholder
+description: The distinct() function returns the unique values for a given column.
 menu:
   flux_0_7:
     name: distinct

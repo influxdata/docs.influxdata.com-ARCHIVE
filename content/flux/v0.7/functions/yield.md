@@ -1,6 +1,6 @@
 ---
 title: yield() function
-description: placeholder
+description: The yield() function indicates the input tables received should be delivered as a result of the query.
 menu:
   flux_0_7:
     name: yield
