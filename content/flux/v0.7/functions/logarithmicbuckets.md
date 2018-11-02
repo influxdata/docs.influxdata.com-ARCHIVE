@@ -1,20 +1,20 @@
 ---
-title: logrithmicBuckets() function
-description: The logrithmicBuckets() function generates a list of exponentially separated floats.
+title: logarithmicBuckets() function
+description: The logarithmicBuckets() function generates a list of exponentially separated floats.
 menu:
   flux_0_7:
-    name: logrithmicBuckets
+    name: logarithmicBuckets
     parent: Functions
     weight: 1
 ---
 
-The `logrithmicBuckets()` function generates a list of exponentially separated floats.
+The `logarithmicBuckets()` function generates a list of exponentially separated floats.
 
 _**Function type:** Generator_  
 _**Output data type:** Array of floats_
 
 ```js
-logrithmicBuckets(start:1.0, factor: 2.0, count: 10, infinity: true)
+logarithmicBuckets(start:1.0, factor: 2.0, count: 10, infinity: true)
 ```
 
 ## Parameters

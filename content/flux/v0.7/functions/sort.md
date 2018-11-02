@@ -12,7 +12,7 @@ The `sort()` function orders the records within each table.
 One output table is produced for each input table.
 The output tables will have the same schema as their corresponding input tables.
 
-_**Function type:** Tranformation_  
+_**Function type:** Transformation_  
 _**Output data type:** Object_
 
 ```js

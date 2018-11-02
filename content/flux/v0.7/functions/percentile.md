@@ -8,11 +8,9 @@ menu:
     weight: 1
 ---
 
-The `percentile()` function is both an aggregate and selector function depending on the [`method`](#method) used.
-
-When using the `estimate_tdigest` or `exact_mean` methods, it outputs non-null records with values that fall within the specified percentile.
-
-When using the `exact_selector` method, it outputs the non-null record with the value that represents the specified percentile.
+The `percentile()` function returns records from an input table with `_value`s that fall within
+a specified percentile or it returns the record with the `_value` that represents the specified percentile.
+Which it returns depends on the [method](#method) used.
 
 _**Function type:** Aggregate or Selector_  
 _**Output data type:** Float or Object_
@@ -20,6 +18,12 @@ _**Output data type:** Float or Object_
 ```js
 percentile(columns: ["_value"], percentile: 0.99, method: "estimate_tdigest", compression: 1000)
 ```
+
+When using the `estimate_tdigest` or `exact_mean` methods, it outputs non-null
+records with values that fall within the specified percentile.
+
+When using the `exact_selector` method, it outputs the non-null record with the
+value that represents the specified percentile.
 
 ## Parameters
 
