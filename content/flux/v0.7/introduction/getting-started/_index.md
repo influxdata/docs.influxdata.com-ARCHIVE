@@ -49,7 +49,7 @@ It's similar to an InfluxDB v1.x "database," but is a combination of both a data
 When using multiple retention policies, each is its own bucket.
 
 Flux's `from()` function, which defines an InfluxDB data source, requires a `bucket` parameter.
-With using Flux with InfluxDB v1.x, use the following bucket naming convention which combines
+When using Flux with InfluxDB v1.x, use the following bucket naming convention which combines
 the database name and retention policy into a single bucket name:
 
 _**InfluxDB v1.x bucket naming convention**_
@@ -66,6 +66,28 @@ Flux uses pipe-forward operators (`|>`) extensively to chain operations together
 After each function or operation, Flux returns a table or collection of tables containing data.
 The pipe-forward operator pipes those tables into the next function or operation where
 it is further processed or manipulated.
+
+### Tables
+Flux structures all data in tables.
+When data is streamed from data sources, Flux formats it as annotated CSV or tables.
+Functions then manipulate or process the them in some way and output new tables.
+
+#### Group Keys
+Every table has a **group key** which describes the content of the table.
+It's a list of columns for which every row in the table will have the same value.
+Columns with unique values in each row are **not** part of the group key.
+
+As functions process and transform data, each modifies the group keys of output tables.
+Understanding how tables and group keys are modified by functions is key to properly
+shaping your data for the desired output.
+
+###### Example group key
+```js
+[_start, _stop, _field, _measurement, host]
+```
+
+Note that `_time` and `_value` are excluded from the example group key because they
+are unique to each row.
 
 ## Tools for working with Flux
 

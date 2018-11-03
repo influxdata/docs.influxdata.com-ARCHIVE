@@ -40,7 +40,8 @@ A common type of function used when transforming data queried from InfluxDB is a
 Aggregate functions take a set of `_value`s within a given time window, aggregate them, and transform
 them into a new value.
 
-This example uses the `mean()` function to average values within time windows.
+This example uses the [`mean()` function](/flux/v0.7/functions/transformations/aggregates/mean)
+to average values within time windows.
 
 ## Window your data
 Flux's [`window()` function](/flux/v0.7/functions/transformations/window) partitions records based on a time value.
