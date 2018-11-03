@@ -7,7 +7,7 @@ menu:
     weight: 10
 ---
 
-Flux's functional syntax allow you to retrieve, transform, process, and output data easily.
+Flux's functional syntax allows you to retrieve, transform, process, and output data easily.
 There is a large library of built-in functions, but you can also create your own
 custom functions to perform operations that suit your needs.
 
