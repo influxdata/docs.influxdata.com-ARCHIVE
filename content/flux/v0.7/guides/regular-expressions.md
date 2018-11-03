@@ -27,7 +27,7 @@ When the expression on the left **MATCHES** the regular expression on the right,
 When the expression on the left **DOES NOT MATCH** the regular expression on the right, this evaluates to `true`.
 
 ## Regular expressions in Flux
-When using regex matching in your Flux scripts, enclose your regular expressions `//`.
+When using regex matching in your Flux scripts, enclose your regular expressions with `/`.
 The following is the basic regex comparison syntax:
 
 ###### Basic regex comparison syntax
