@@ -9,8 +9,8 @@ menu:
 ---
 
 This guide walks through the basics of using Flux to query data from InfluxDB.
-_**If you haven't already, make sure to install InfluxDB v1.7+ and choose a
-[tool for writing Flux queries](/flux/v0.7/introduction/getting-started#tools-for-working-with-flux).**_
+_**If you haven't already, make sure to install InfluxDB v1.7+, [enable Flux](/flux/v0.7/introduction/installation),
+and choose a [tool for writing Flux queries](/flux/v0.7/introduction/getting-started#tools-for-working-with-flux).**_
 
 Every Flux query needs the following:
 
@@ -20,8 +20,8 @@ Every Flux query needs the following:
 
 
 ## 1. Define your data source
-Flux's [`from()`](#) function defines an InfluxDB data source.
-It requires a [`bucket`](/flux/v0.7/introduction/getting-started/#buckets) property.
+Flux's [`from()`](/flux/v0.7/functions/inputs/from) function defines an InfluxDB data source.
+It requires a [`bucket`](/flux/v0.7/introduction/getting-started/#buckets) parameter.
 For this example, use `telegraf/autogen`, a combination of the default database and retention policy provided by the TICK stack.
 
 ```js
@@ -33,7 +33,7 @@ Flux requires a time range when querying time series data.
 "Unbounded" queries are very resource-intensive and as a protective measure,
 Flux will not query the database without a specified range.
 
-Use pipe forward operator (`|>`)to pipe data from your data source into the [`range()`](#)
+Use pipe forward operator (`|>`)to pipe data from your data source into the [`range()`](/flux/v0.7/functions/transformations/range)
 function, which specifies a time range for your query.
 It accepts two properties: `start` and `stop`.
 Ranges can be **relative** using negative [durations](#) or **absolute** using [timestamps](#).
@@ -69,7 +69,7 @@ from(bucket:"telegraf/autogen")
 ## 3. Filter your data
 Pass your ranged data into the `filter()` function to narrow results based on
 [data attributes](/flux/v0.7/introduction/getting-started/#flat-schemas).
-The `filter()` function has one property, `fn`, which expects an anonymous function
+The `filter()` function has one parameter, `fn`, which expects an anonymous function
 with logic that filters data based on columns or attributes.
 
 Flux's anonymous function syntax is very similar to Javascript's.

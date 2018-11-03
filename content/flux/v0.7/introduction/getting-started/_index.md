@@ -73,14 +73,15 @@ You have two options for writing and running Flux queries:
 
 ### 1. Chronograf's Data Explorer
 Chronograf's Data Explorer makes it easy to write your first Flux script and visualize the results.
-To use Chronograf's Flux UI, open the Data Explorer and click **Add a Query**.
-To the right of the source dropdown above the graph placeholder, select **Flux** as the source type.
+To use Chronograf's Flux UI, open the **Data Explorer** and to the right of the source
+dropdown above the graph placeholder, select **Flux** as the source type.
 
 ![Flux in the Data Explorer](/img/flux/flux-builder-start.gif)
 
-This will provide **Script** and **Explore** panes.
+This will provide **Schema**, **Script**, and **Functions** panes.
+The Schema pane allows you to explore your data.
 The Script pane is where you write your Flux script.
-The Explore pane allows you to explore your data.
+The Functions pane provides a list of functions available in your Flux queries.
 
 ### 2. The influx CLI
 The `influx` CLI is an interactive shell for querying InfluxDB.
