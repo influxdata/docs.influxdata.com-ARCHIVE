@@ -38,7 +38,6 @@ function, which specifies a time range for your query.
 It accepts two properties: `start` and `stop`.
 Ranges can be **relative** using negative [durations](#) or **absolute** using [timestamps](#).
 
-
 ###### Example relative time ranges
 ```js
 // Relative time range with start only. Stop defaults to now.

@@ -27,9 +27,7 @@ and calculating the average of each window:
 from(bucket:"telegraf/autogen")
   |> range(start:-1h)
   |> filter(fn:(row) => row._measurement == "cpu" AND row.cpu == "cpu-total")
-  |> window(every:1m)
-  |> mean()
-  |> group(none:true)
+  |> aggregateWindow(every: 1m, fn: mean)
 ```
 
 ## [Enable Flux](/flux/v0.7/introduction/installation)

@@ -81,7 +81,7 @@ from(bucket:"telegraf/autogen")
 As rows in each window are aggregated, their output table contains only a single row with the aggregate value.
 Windowed tables are all still separate and, when visualized, will appear as single, unconnected points.
 
-![](/img/flux/flux-windowed-aggregates.png)
+![Windowed aggregate data](/img/flux/flux-windowed-aggregates.png)
 
 ## Add times to your aggregates
 As values are aggregated, the resulting tables do not have a `_time` column because
@@ -101,7 +101,6 @@ from(bucket:"telegraf/autogen")
   |> mean()
   |> duplicate(column: "_stop", as: "_time")
 ```
-
 
 ## Unwindow aggregate tables
 
@@ -123,7 +122,7 @@ from(bucket:"telegraf/autogen")
 
 Once ungrouped and combined into a single table, the aggregate data points will appear connected in your visualization.
 
-![](/img/flux/flux-windowed-aggregates-ungrouped.png)
+![Unwindowed aggregate data](/img/flux/flux-windowed-aggregates-ungrouped.png)
 
 ## Helper functions
 This may seem like a lot of writing just to query and aggregate data, however going through the
