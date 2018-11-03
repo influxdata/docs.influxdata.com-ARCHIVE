@@ -1,6 +1,6 @@
 ---
 title: How to window and aggregate data with Flux
-description: This guide walks through windowing and aggregating data with Flux and outlines how it shapes your data in that process.
+description: This guide walks through windowing and aggregating data with Flux and outlines how it shapes your data in the process.
 menu:
   flux_0_7:
     name: Window and aggregate data
@@ -32,6 +32,7 @@ dataSet = from(bucket: "telegraf/autogen")
 
 `dataSet` can now be used to represent your base data, which will look similar to the following:
 
+{{% condense %}}
 ```
 Table: keys: [_start, _stop, _field, _measurement]
                    _start:time                      _stop:time           _field:string     _measurement:string                      _time:time                  _value:float
@@ -68,6 +69,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:54:50.000000000Z             64.49787616729736
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:55:00.000000000Z             64.49816226959229
 ```
+{{% /condense %}}
 
 ## Windowing data
 Use the [`window()` function](/flux/v0.7/functions/transformations/window) to group your data based on time bounds.
@@ -81,6 +83,7 @@ dataSet
 
 Each window of time is output in its own table containing all records that fall within the window.
 
+{{% condense %}}
 ###### window() output tables
 ```
 Table: keys: [_start, _stop, _field, _measurement]
@@ -143,6 +146,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 ------------------------------  ------------------------------  ----------------------  ----------------------  ------------------------------  ----------------------------
 2018-11-03T17:55:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:55:00.000000000Z             64.49816226959229
 ```
+{{% /condense %}}
 
 When visualized in [Chronograf](/chronograf/latest/), each window table is displayed in a different color.
 
@@ -165,6 +169,7 @@ dataSet
   |> mean()
 ```
 
+{{% condense %}}
 ###### mean() output tables
 ```
 Table: keys: [_start, _stop, _field, _measurement]
@@ -202,6 +207,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 ------------------------------  ------------------------------  ----------------------  ----------------------  ----------------------------
 2018-11-03T17:55:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem             64.49816226959229
 ```
+{{% /condense %}}
 
 Because each data point is contained in its own table, when visualized,
 they appear as single, unconnected points.
@@ -228,6 +234,7 @@ dataSet
   |> duplicate(column: "_stop", as: "_time")
 ```
 
+{{% condense %}}
 ###### duplicate() output tables
 ```
 Table: keys: [_start, _stop, _field, _measurement]
@@ -265,6 +272,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 ------------------------------  ------------------------------  ----------------------  ----------------------  ------------------------------  ----------------------------
 2018-11-03T17:55:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:55:00.000000000Z             64.49816226959229
 ```
+{{% /condense %}}
 
 ## "Unwindow" aggregate tables
 Keeping aggregate values in separate tables generally isn't the format in which you want your data.

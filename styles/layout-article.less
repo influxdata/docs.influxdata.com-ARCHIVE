@@ -412,6 +412,57 @@ a {
 }
 
 //
+// Content Condenser
+// --------------------------------------------------
+
+.condense {
+	position: relative;
+	margin-bottom: 3.5rem;
+
+	.condense-bottom {
+		position: absolute;
+		bottom: -30px;
+		width: 100%;
+		z-index: 100%;
+		height: auto;
+	}
+
+	a.condense-toggle {
+		display: block;
+		width: 90px;
+		margin: 0 auto;
+		color: @g20-white;
+		background: @default-link-color;
+		padding: .35rem;
+		text-align: center;
+		font-size: .75rem;
+		text-transform: uppercase;
+		border-radius: @radius;
+		&:before{
+			content: "Show Less"
+		}
+	}
+	&.closed {
+		min-height: 200px;
+		max-height: 25vh;
+		overflow: hidden;
+
+		.condense-bottom {
+			bottom: 0;
+			background-image: linear-gradient(to bottom, rgba(255,0,0,0), @article-bg);
+			height: 100px;
+		}
+
+		a.condense-toggle {
+			margin-top: 75px;
+			&:before {
+				content: "Show More"
+			}
+		}
+	}
+}
+
+//
 // Tooltips
 // --------------------------------------------------
 .tooltip {
