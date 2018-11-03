@@ -21,10 +21,10 @@ The links [below](#helpful-links) provide information about Go's regular express
 Flux provides two comparison operators for use with regular expressions.
 
 #### `=~`
-When the expression on the left **DOES** match the regular expression on the right, this evaluates to `true`.
+When the expression on the left **MATCHES** the regular expression on the right, this evaluates to `true`.
 
 #### `!~`
-When the expression on the left **DOES NOT** match the regular expression on the right, this evaluates to `true`.
+When the expression on the left **DOES NOT MATCH** the regular expression on the right, this evaluates to `true`.
 
 ## Regular expressions in Flux
 When using regex matching in your Flux scripts, enclose your regular expressions `//`.
