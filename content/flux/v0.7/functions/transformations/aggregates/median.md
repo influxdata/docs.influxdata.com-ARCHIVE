@@ -29,7 +29,7 @@ value that represents the 50th percentile.
 > The `median()` function can only be used with float value types.
 > It is a special application of the [`percentile()` function](../percentile) which
 > uses an approximation implementation that requires floats.
-> You can convert your value column to a float column using the [`toFloat()` function](../tofloat).
+> You can convert your value column to a float column using the [`toFloat()` function](../../type-conversions/tofloat).
 
 ## Parameters
 

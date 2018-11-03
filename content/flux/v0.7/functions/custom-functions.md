@@ -69,7 +69,7 @@ functionName = (table=<-) => table |> functionOperations
 ###### Multiply row values by x
 The example below defines a `multByX` function that multiplies the `_value` column
 of each row in the input table by the `x` parameter.
-It uses the [`map()` function](../map) to modify each `_value`.
+It uses the [`map()` function](../transformations/map) to modify each `_value`.
 
 ```js
 // Function definition
@@ -97,8 +97,8 @@ Defaults are overridden by explicitly defining the parameter in the function cal
 ###### Get the winner or the "winner"
 The example below defines a `getWinner` function that returns the record with the highest
 or lowest `_value` (winner versus "winner") depending on the `noSarcasm` parameter which defaults to `true`.
-It uses the [`sort()` function](../sort) to sort records in either descending or ascending order.
-It then uses the [`limit()` function](../limit) to return the first record from the sorted table.
+It uses the [`sort()` function](../transformations/sort) to sort records in either descending or ascending order.
+It then uses the [`limit()` function](../transformations/limit) to return the first record from the sorted table.
 
 ```js
 // Function definition

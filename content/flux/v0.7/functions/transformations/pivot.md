@@ -18,7 +18,7 @@ _**Output data type:** Object_
 pivot(rowKey:["_time"], colKey: ["_field"], valueCol: "_value")
 ```
 
-The group key of the resulting table is the same as the input tables, excluding columns found in the [`colKey`](#colkey) and [`valueCol`](#colvalue) parameters.
+The group key of the resulting table is the same as the input tables, excluding columns found in the [`colKey`](#colkey) and [`valueCol`](#valuecol) parameters.
 This is because these columns are not part of the resulting output table.  
 
 Every input row should have a 1:1 mapping to a particular row + column in the output table, determined by its values for the [`rowKey`](#rowkey) and [`colKey`](#colkey) parameters.   
