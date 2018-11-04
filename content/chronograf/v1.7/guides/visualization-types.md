@@ -8,7 +8,7 @@ menu:
     parent: Guides
 ---
 
-Chronograf's dashboard views support the following visualization types, which can be selected in the **Visualization Type** selection view.
+Chronograf's dashboard views support the following visualization types, which can be selected in the **Visualization Type** selection view of the [Data Explorer](/chronograf/latest/querying-data) . 
 
 [Visualization Type selector](/img/chronograf/chrono-viz-types-selector.png)
 

@@ -9,9 +9,14 @@ menu:
 
 Follow the links below to explore Chronograf's features.
 
+
+## [Exploring data in Chronograf](/chronograf/v1.7/guides/querying-data)
+
+Use Chronograf's Data Explorer to query and visualize your time series data.
+
 ## [Using pre-created dashboards](/chronograf/v1.7/guides/using-precreated-dashboards/)
 
-Pre-created dashboards are available when the required Telegraf input plugins are enabled. These applications make many useful metrics quickly available and are useful in giving you ideas about  
+Pre-created dashboards are available when the required Telegraf input plugins are enabled. These dashboards include cells with data visualizations for metrics that are relevant to data sources you are likely to be using.   
 
 ## [Using the TICKscript editor](/chronograf/v1.7/guides/tickscript-logging/)
 

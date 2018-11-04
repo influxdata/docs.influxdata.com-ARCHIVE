@@ -6,3 +6,4 @@ deploy
 node_modules
 *.log
 content/platform/introduction/getting-started.md
+content/chronograf/v1.7/guides/query-flux.md
