@@ -16,30 +16,27 @@ To create an InfluxDB connection in the Chronograf UI:
 
 1. Open Chronograf and click **Configuration** (wrench icon) in the navigation menu.
 2. Click **Add Connection**.
-
   ![Chronograf connections landing page](/img/chronograf/v1.7/connection-landing-page.png)
-
 3. Enter values for the following fields:
 
-    ![InfluxDB connection credentials](/img/chronograf/v1.7/connection-influxdb.png)
+    <img src="/img/chronograf/v1.7/influxdb-connection-config.png" style="width:100%; max-width:600px;">
 
-    * **Connection String**: Enter the hostname or IP address of the InfluxDB instance and the port. The field is prefilled with  `http://localhost:8086`.
-    * **Name**: Enter the name for this connection.
+    * **Connection URL**: Enter the hostname or IP address of the InfluxDB instance and the port. The field is prefilled with  `http://localhost:8086`.
+    * **Connection Name**: Enter the name for this connection.
     * **Username**: Enter the username that will be shared for this connection.
-      *Only required if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
+      *Required only if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
     * **Password**: Enter the password.
-      *Only required if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
-    * **Telegraf Database**: Enter the name of the Telegraf database. The field is prefilled with `telegraf`.
-    * **Default Retention Policy**: Enter the name of the default [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp). If none is provided, it assumes `autogen`.
-    * **Make this the default source**: By default, this option is selected and this InfluxDB connection will be used when Chronograf is launched.
+      *Required only if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
+    * **Telegraf Database* Name*: Enter the name of the Telegraf database. The field is prefilled with `telegraf`.
+    * **Default Retention Policy**: Enter the name of the default [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp). If none i s provided, it assumes `autogen`.
+    * **Make this the default connection**: When this option is selected, this InfluxDB connection will be used when Chronograf is launched.
 
-4. Click **Add Connection**.
-   If the connection is valid, the Configuration page displays, including the new InfluxDB connection.
-   If the connection cannot be created, the following error message appears:
+4. Click **Add Connection**
+   * If the connection is valid, the Dashboards window appears, allowing you to import dashboard templates you can use to display and analyze your data. For details, see [Creating dashboards](/chronograf/latest/create-a-dashboard).
+   * If the connection cannot be created, the following error message appears:
    "Unable to create source: Error contacting source."
    If this occurs, ensure all connection credentials are correct and that the InfluxDB instance is running and accessible.
 
->***Note:*** The **Switch Orgs** button at the bottom of the page will not save any fields you have filled out, but will open a list of your organizations to allow you to log into a different organization.
 
 ## Managing InfluxDB connections using .src files
 Chronograf stores InfluxDB connection details `.src` files that can also be created manually.
@@ -133,12 +130,11 @@ To create a Kapacitor connection using the Chronograf UI:
 
 1. Open Chronograf and click **Configuration** (wrench icon) in the navigation menu.
 2. Next to an existing [InfluxDB connection](#managing-influx-db-connections), click **Add Kapacitor Connection** if there are no existing Kapacitor connections or select **Add Kapacitor Connection** in the **Kapacitor Connection** dropdown list.
-
-![Add a new Kapacitor connection in Chronograf](/img/chronograf/v1.7/connection-kapacitor.png)
+  ![Add a new Kapacitor connection in Chronograf](/img/chronograf/v1.7/connection-kapacitor.png)
 
 3. In the **Connection Details** section, enter values for the following fields:
 
-    ![Add a new Kapacitor connection details in Chronograf](/img/chronograf/v1.7/connection-kapacitor-details.png)
+    <img src="/img/chronograf/v1.7/kapacitor-connection-config.png" style="width:100%; max-width:600px;">
 
     * **Kapacitor URL**: Enter the hostname or IP address of the Kapacitor instance and the port. The field is prefilled with  `http://localhost:9092`.
     * **Name**: Enter the name for this connection.
@@ -147,7 +143,7 @@ To create a Kapacitor connection using the Chronograf UI:
     * **Password**: Enter the password.
       *Only required if [authorization is enabled](/kapacitor/latest/administration/security/#kapacitor-authentication-and-authorization) on the Kapacitor instance or cluster to which you're connecting.*
 
-4. Click **Connect**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.7/guides/configuring-alert-endpoints/).
+4. Click **Continue**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.7/guides/configuring-alert-endpoints/).
 
 ## Managing Kapacitor connections using .kap files
 
