@@ -2,7 +2,7 @@
 title: Flux guides
 description:
 menu:
-  flux:
+  flux_0_7:
     name: Guides
     weight: 50
 ---
