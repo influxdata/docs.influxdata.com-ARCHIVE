@@ -58,6 +58,8 @@ menu:
       - [pointsWrittenOK](#pointswrittenok)
       - [promReadReq](#promreadreq)
       - [promWriteReq](#promwritereq)
+      - [fluxQueryReq](#fluxqueryreq)
+      - [fluxQueryDurationNs](#fluxquerydurationns)
       - [queryReq](#queryreq)
       - [queryReqDurationNs](#queryreqdurationns)
       - [queryRespBytes](#queryrespbytes)
