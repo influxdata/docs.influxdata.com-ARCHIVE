@@ -168,6 +168,13 @@ GET http://localhost:8086/ping
 HEAD http://localhost:8086/ping
 ```
 
+### `verbose` option
+
+By default, the `/ping` HTTP endpoint returns a simple HTTP 204 status response to let the client know that the server is running. Default value is `false`.
+When `verbose` option is set to `true` (`/ping?verbose=true`), an HTTP 200 status  is returned.
+The `verbose=true` option is required for health checks in the Google Kubernetes Cloud.
+
+
 ### Example
 
 You can use the `/ping` endpoint to find the build and version of an InfluxDB instance.
