@@ -5,8 +5,8 @@ menu:
   flux_0_7:
     parent: Flux language
     name: Variables
-    weight:
+    weight: 120
 ---
 
-A variable holds a value.
+A _variable_ holds a value.
 A variable can only hold values defined by its type.

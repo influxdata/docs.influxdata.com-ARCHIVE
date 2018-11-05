@@ -5,7 +5,7 @@ menu:
   flux_0_7:
     parent: Flux language
     name: Assignment and scope
-    weight:
+    weight: 20
 ---
 
 An assignment binds an identifier to a variable or function.
@@ -32,19 +32,23 @@ The package clause is not a assignment; the package name does not appear in any 
 Its purpose is to identify the files belonging to the same package and to specify the default package name for import declarations.
 
 
-[IMPL#247](https://github.com/influxdata/platform/issues/247) Add package/namespace support
+> To be implemented: [IMPL#247](https://github.com/influxdata/platform/issues/247) Add package/namespace support.
 
-#### Variable assignment
+## Variable assignment
 
 A variable assignment creates a variable bound to the identifier and gives it a type and value.
 When the identifier was previously assigned within the same block the identifier now holds the new value.
 An identifier cannot change type within the same block.
 
-    VarAssignment = identifier "=" Expression
+```
+VarAssignment = identifier "=" Expression
+```
 
-Examples:
+**Examples**
 
-    n = 1
-    n = 2
-    f = 5.4
-    r = z()
+```
+n = 1
+n = 2
+f = 5.4
+r = z()
+```

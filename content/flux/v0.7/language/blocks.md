@@ -5,15 +5,17 @@ menu:
   flux_0_7:
     parent: Flux language
     name: Blocks
-    weight:
+    weight: 30
 ---
 
-A _block_ is a possibly empty sequence of statements within matching brace brackets.
+A _block_ is a possibly empty sequence of statements within matching braces (`{}`).
 
-    Block = "{" StatementList "} .
-    StatementList = { Statement } .
+```
+Block = "{" StatementList "} .
+StatementList = { Statement } .
+```
 
-In addition to explicit blocks in the source code, there are implicit blocks:
+In addition to _explicit blocks_ in the source code, there are _implicit blocks_:
 
 1. The _options block_ is the top-level block for all Flux programs. All option declarations are contained in this block.
 2. The _universe block_ encompasses all Flux source text aside from option statements. It is nested directly inside of the _options block_.
