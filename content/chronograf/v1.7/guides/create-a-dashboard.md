@@ -8,9 +8,15 @@ menu:
     parent: Guides
 ---
 
-Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure.
-Use Chronograf's [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards) or create custom dashboards to meet your requirements.
-This guide shows you how to create custom Chronograf dashboards.
+Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure:
+* View [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards) from the Host List page. Dashboards are available depending on which Telegraf input plugins you have available. These pre-created dashboards cannot be cloned or edited.
+* Create custom dashboards from scratch by building queries in the Data Explorer, as described below.
+* Import dashboard templates when you [add or update a connection in [Chronograf](/chronograf/latest/administration/creating-connections):
+  1. From the Configuration page, click **Add Connection** or select an existing connection to edit it.
+  2. In the **InfluxDB Connection** window, enter or verify your connection details and click **Add** or **Update Connection**.
+  3. In the **Dashboards** window, select from the available dashboard templates to import.
+  4. Configure your dashboard as needed with the options described below. 
+
 
 By the end of this guide, you'll be aware of the tools available to you for creating dashboards similar to this example:
 
