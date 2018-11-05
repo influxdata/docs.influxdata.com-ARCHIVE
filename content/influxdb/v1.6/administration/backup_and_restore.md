@@ -89,7 +89,7 @@ Optional arguments are enclosed in brackets.
 
 - `[ -since <timestamp> ]`: Perform an incremental backup after the specified timestamp [RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt). Use `-start` instead, unless needed for legacy backup support.
 
-- `[ -skip-errors ]`: Optional flag to continue backing up the remaining shards when the current shard fails to backup.
+- `[ -skip-errors ]`: Optional flag to continue backing up the remaining shards when the current shard fails to back up.
 
 #### Backup examples
 
