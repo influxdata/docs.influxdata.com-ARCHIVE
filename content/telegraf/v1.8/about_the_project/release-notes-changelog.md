@@ -8,8 +8,19 @@ menu:
     parent: About the project
 ---
 
-## v1.8.2 [2018-10-17]
+## v1.8.3 [2018-10-30]
 
+### Bug fixes
+
+- Add DN attributes as tags in X.509 Certificate (`x509_cert`) input to avoid series overwrite.
+- Prevent connection leak by closing unused connections in AMQP (`amqp`) output.
+- Use default partition key when tag does not exist in Amazon Kinesis (`kinesis`) output.
+- Log the correct error in JTI OpenConfig (`jti_openconfig`).
+- Handle panic when IMPI input (`ipmi_sensor`) gets bad input.
+- Don't add unserializable fields to Jolokia2 (`jolokia2`) input.
+- Fix version check in PostgreSQL plugin (`postgresql_extensible`).
+
+## v1.8.2 [2018-10-17]
 
 ### Bug fixes
 
