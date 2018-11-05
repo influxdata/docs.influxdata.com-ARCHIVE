@@ -16,7 +16,7 @@ This guide demonstrates using [Flux functions](/flux/v0.7/functions) to transfor
 It walks through creating a Flux script that partitions data into windows of time,
 averages the `_value`s in each window, and outputs the averages as a new table.
 
-It's important how the "shape" of your data changes through each of these operations.
+It's important to understand how the "shape" of your data changes through each of these operations.
 
 ## Query data
 Use the query built in the previous [Query data from InfluxDB](/platform/introduction/getting-started/query-influxdb)
@@ -147,6 +147,13 @@ from(bucket:"telegraf/autogen")
 You have now constructed a Flux query that uses Flux functions to transform your data.
 There are many more ways to manipulate your data using both Flux's primitive functions
 and your own custom functions, but this is a good introduction into the basic syntax and query structure.
+
+---
+
+_For a deeper dive into windowing and aggregating data with example data output for each transformation,
+view the [Windowing and aggregating data](/flux/v0.7/guides/windowing-aggregating) guide._
+
+---
 
 <div class="page-nav-btns">
   <a class="btn prev" href="/flux/v0.7/introduction/getting-started/query-influxdb/">Query InfluxDB</a>
