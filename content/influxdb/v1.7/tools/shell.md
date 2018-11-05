@@ -12,8 +12,8 @@ InfluxDB's command line interface (`influx`) is an interactive shell for the HTT
 Use `influx` to write data (manually or from a file), query data interactively, and view query output in different formats.
 
 * [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx)
-* [`influx` Arguments](/influxdb/v1.7/tools/shell/#influx-arguments)
-* [`influx` Commands](/influxdb/v1.7/tools/shell/#influx-commands)
+* [`influx` options](/influxdb/v1.7/tools/shell/#influx-arguments)
+* [`influx` commands](/influxdb/v1.7/tools/shell/#influx-commands)
 
 ## Launch `influx`
 If you [install](https://influxdata.com/downloads/) InfluxDB via a package manager, the CLI is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on macOS).
@@ -30,7 +30,7 @@ InfluxDB shell version: 1.7.x
 
 > **Note:** The versions of InfluxDB and the CLI should be identical. If not, parsing issues can occur with queries.
 
-You can now enter InfluxQL queries as well as some CLI-specific commands directly in your terminal.
+You can now enter InfluxQL queries as well as some CLI-specific commands directly in your terminal. To enter Flux queries, you need to set the [-type](#type) option to `flux`.
 You can use `help` at any time to get a list of available commands. Use `Ctrl+C` to cancel if you want to cancel a long-running InfluxQL query.
 
 ## Environment Variables
@@ -65,11 +65,11 @@ NO_PROXY=123.45.67.89,123.45.67.90
 ```
 
 
-## `influx` Arguments
-There are several arguments you can pass into `influx` when starting.
-List them with `$ influx --help`.
+## `influx` options
+The `influx` shell includes options that you can pass into `influx` when starting.
+You can list them using `$ influx --help`.
 The list below offers a brief discussion of each option.
-We provide detailed information on `-execute`, `-format`, and `-import` at the end of this section.
+We provide detailed information on the `-execute`, `-format`, and `-import` options at the end of this section.
 
 `-compressed`
 Set to true if the import file is compressed.
@@ -81,7 +81,7 @@ Set the write consistency level.
 `-database 'database name'`
 The database to which `influx` connects.
 
-`-execute 'command'`
+`-execute '<command>'`
 Execute an [InfluxQL](/influxdb/v1.7/query_language/data_exploration/) command and quit.
 See [-execute](/influxdb/v1.7/tools/shell/#execute-an-influxql-command-and-quit-with-execute).
 
@@ -89,7 +89,7 @@ See [-execute](/influxdb/v1.7/tools/shell/#execute-an-influxql-command-and-quit-
 Specifies the format of the server responses.
 See [-format](/influxdb/v1.7/tools/shell/#specify-the-format-of-the-server-responses-with-format).
 
-`-host 'host name'`
+`-host '<hostname>'`
 The host to which `influx` connects.
 By default, InfluxDB runs on localhost.
 
@@ -97,13 +97,15 @@ By default, InfluxDB runs on localhost.
 Import new data from a file or import a previously [exported](https://github.com/influxdb/influxdb/blob/master/importer/README.md) database from a file.
 See [-import](/influxdb/v1.7/tools/shell/#import-data-from-a-file-with-import).
 
-`-password 'password'`
+`-password '<password>'`
+
 The password `influx` uses to connect to the server.
 `influx` will prompt for a password if you leave it blank (`-password ''`).
 Alternatively, set the password for the CLI with the `INFLUX_PASSWORD` environment
 variable.
 
 `-path`
+
 The path to the file to import.
 Use with `-import`.
 
@@ -112,6 +114,7 @@ The port to which `influx` connects.
 By default, InfluxDB runs on port `8086`.
 
 `-pps`
+
 How many points per second the import will allow.
 By default, pps is zero and influx will not throttle importing.
 Use with `-import`.
