@@ -128,6 +128,13 @@ Turns on pretty print for the `json` format.
 `-ssl`
 Use HTTPS for requests.
 
+`-type`
+
+Determines which interactive shell to use.
+Default value is `influxql`.
+To use the Flux REPL shell, set the value to `flux`.
+For details on using the Flux language shell, see
+
 `-username 'username'`
 The username that `influx` uses to connect to the server.
 Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment variable.

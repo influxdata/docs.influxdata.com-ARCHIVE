@@ -488,7 +488,7 @@ Environment variable: `INFLUXDB_HTTP_ENABLED`
 
 Determines whether the Flux query endpoint is enabled. To enable the use of Flux, set the value to `true`.
 
-Environment variable: `INFLUXDB_HTTP_FLUX_ENABLED=false`
+Environment variable: `INFLUXDB_HTTP_FLUX_ENABLED=true`
 
 ### `bind-address = ":8086"`
 

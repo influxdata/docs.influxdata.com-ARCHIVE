@@ -12,7 +12,7 @@ menu:
 
 ### Breaking changes
 
--	The `ifql` section in the configuration has been changed to `flux` and it is enabled by default on port `:8082`.
+???
 
 ### Features
 
