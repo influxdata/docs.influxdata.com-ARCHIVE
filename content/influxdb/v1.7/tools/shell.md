@@ -136,7 +136,7 @@ Use HTTPS for requests.
 Determines which interactive shell to use.
 Default value is `influxql`.
 To use the Flux REPL shell, set the value to `flux`.
-For details on using the Flux language shell, see
+For details on using Flux and the Flux language shell, see the [Flux documentation](/flux/v0.7/).
 
 `-username 'username'`
 The username that `influx` uses to connect to the server.
