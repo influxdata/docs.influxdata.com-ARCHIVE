@@ -312,7 +312,7 @@ Displays the count of Anti-Entropy errors.
 
 ### Measurement
 
-[`ae`](/platform/monitoring/tools/measurements-internal#ae-e)
+[`ae`](/platform/monitoring/tools/measurements-internal#ae-enterprise-only)
 
 ### Field keys
 
@@ -336,7 +336,7 @@ Displays the count of active Anti-Entry jobs.
 
 ### Measurement
 
-[`ae`](/platform/monitoring/tools/measurements-internal#ae-e)
+[`ae`](/platform/monitoring/tools/measurements-internal#ae-enterprise-only)
 
 ### Field keys
 

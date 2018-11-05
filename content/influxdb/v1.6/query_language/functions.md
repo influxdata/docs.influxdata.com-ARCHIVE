@@ -1884,7 +1884,7 @@ Returns the absolute values of field values associated with each field key in th
 `ABS()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `ABS()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-abs) section for how to use `ABS()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -1974,7 +1974,7 @@ The query returns the absolute values of field values associated with the `a` fi
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2018-06-24T12:00:00Z` and `2018-06-24T12:05:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of ABS()
 ```
 SELECT ABS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -2057,7 +2057,7 @@ Returns the arccosine of field values associated with each field key in the [mea
 `ACOS()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types) with values between -1 and 1.
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `ACOS()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-acos) section for how to use `ACOS()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -2158,7 +2158,7 @@ The query returns arccosine of field values associated with the `of_capacity` fi
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of ACOS()
 ```
 SELECT ACOS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -2234,7 +2234,7 @@ Returns the arcsine of field values associated with each field key in the [measu
 `ASIN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types) with values between -1 and 1.
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `ASIN()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-asin) section for how to use `ASIN()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -2335,7 +2335,7 @@ The query returns arcsine of field values associated with the `of_capacity` fiel
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of ASIN()
 ```
 SELECT ASIN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -2412,7 +2412,7 @@ Returns the arctangent of field values associated with each field key in the [me
 `ATAN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types) with values between -1 and 1.
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `ATAN()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-atan) section for how to use `ATAN()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -2513,7 +2513,7 @@ The query returns arctangent of field values associated with the `of_capacity` f
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2017-05-01T00:00:00Z` and `2017-05-09T00:00:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of ATAN()
 ```
 SELECT ATAN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -2592,7 +2592,7 @@ divided by field values associated with `field_key_x`.
 `ATAN2()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `ATAN2()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-atan2) section for how to use `ATAN2()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -2699,7 +2699,7 @@ The query returns the arctangent of field values associated with the `altitude_f
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2018-05-16T12:10:00Z` and `2018-05-16T12:10:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of ATAN2
 ```
 SELECT ATAN2(<function()>, <function()>) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -2781,7 +2781,7 @@ Returns the field values associated with each field key in the [measurement](/in
 `CEIL()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `CEIL()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-ceil) section for how to use `CEIL()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -2869,7 +2869,7 @@ The query returns field values associated with the `water_level` field key round
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of CEIL()
 ```
 SELECT CEIL(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -2944,7 +2944,7 @@ Returns the cosine of field values associated with each field key in the [measur
 `COS()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `COS()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-cos) section for how to use `COS()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -3033,7 +3033,7 @@ The query returns cosine of field values associated with the `water_level` field
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of COS()
 ```
 SELECT COS(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -3109,7 +3109,7 @@ Returns the running total of subsequent field values associated with each field 
 `CUMULATIVE_SUM()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `CUMULATIVE_SUM()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-cumulative-sum) section for how to use `CUMULATIVE_SUM()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -3197,7 +3197,7 @@ The query returns the running total of the field values associated with the `wat
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of CUMULATIVE_SUM()
 ```
 SELECT CUMULATIVE_SUM(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -3277,7 +3277,7 @@ Returns the rate of change between subsequent field values associated with each 
 `DERIVATIVE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax-1) section for how to use `DERIVATIVE()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-derivative) section for how to use `DERIVATIVE()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -3432,7 +3432,7 @@ InfluxDB calculates the difference between the field values and normalizes that 
 second field value - first field value
 ```
 
-### Advanced syntax
+### Advanced syntax of DERIVATIVE()
 ```
 SELECT DERIVATIVE(<function> ([ * | <field_key> | /<regular_expression>/ ]) [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -3556,7 +3556,7 @@ Returns the difference between subsequent field values associated with each fiel
 `DIFFERENCE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax-2) section for how to use `DIFFERENCE()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-difference) section for how to use `DIFFERENCE()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
@@ -3639,7 +3639,7 @@ The query returns the difference between the subsequent field values in the `wat
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 They query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to two and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of DIFFERENCE()
 ```
 SELECT DIFFERENCE(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -3880,7 +3880,7 @@ Returns the exponential of field values associated with each field key in the [m
 `EXP()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `EXP()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-exp) section for how to use `EXP()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -3970,7 +3970,7 @@ The query returns the exponentials of field values associated with the `water_le
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of EXP()
 ```
 SELECT EXP(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -4045,7 +4045,7 @@ Returns the field values associated with each field key in the [measurement](/in
 `FLOOR()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `FLOOR()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-floor) section for how to use `FLOOR()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -4133,7 +4133,7 @@ The query returns field values associated with the `water_level` field key round
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of FLOOR()
 ```
 SELECT FLOOR(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -4213,7 +4213,7 @@ Returns the natural logarithm of field values associated with each field key in 
 `LN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `LN()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-ln) section for how to use `LN()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -4303,7 +4303,7 @@ The query returns the natural logarithms of field values associated with the `wa
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of LN()
 ```
 SELECT LN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -4377,7 +4377,7 @@ Returns the logarithm of field values associated with each field key in the [mea
 `LOG()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `LOG()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-log) section for how to use `LOG()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -4467,7 +4467,7 @@ The query returns the logarithm base 4 of field values associated with the `wate
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of LOG()
 ```
 SELECT LOG(<function>( [ * | <field_key> ] ), <b>) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -4542,7 +4542,7 @@ Returns the logarithm of field values associated with each field key in the [mea
 `LOG2()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `LOG2()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-log2) section for how to use `LOG2()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -4632,7 +4632,7 @@ The query returns the logarithm base 2 of field values associated with the `wate
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of LOG2()
 ```
 SELECT LOG2(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -4707,7 +4707,7 @@ Returns the logarithm of field values associated with each field key in the [mea
 `LOG10()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `LOG10()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-log10) section for how to use `LOG10()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -4797,7 +4797,7 @@ The query returns the logarithm base 10 of field values associated with the `wat
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of LOG10()
 ```
 SELECT LOG10(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -4875,7 +4875,7 @@ Returns the rolling average across `N` field values associated with each field k
 `MOVING_AVERAGE()` int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax-3) section for how to use `MOVING_AVERAGE()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-moving-average) section for how to use `MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 The examples below use the following subsample of the [`NOAA_water_database` data](/influxdb/v1.6/query_language/data_download/):
@@ -4957,8 +4957,7 @@ The query returns the rolling average across a two-field-value window for the `w
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to two and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by three points.
 
-### Advanced syntax
-
+### Advanced syntax of MOVING_AVERAGE()
 ```
 SELECT MOVING_AVERAGE(<function> ([ * | <field_key> | /<regular_expression>/ ]) , N ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -5038,14 +5037,14 @@ Returns the non-negative rate of change between subsequent field values associat
 `NON_NEGATIVE_DERIVATIVE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax-4) section for how to use `NON_NEGATIVE_DERIVATIVE()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-non-negative-derivative) section for how to use `NON_NEGATIVE_DERIVATIVE()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
 See the examples in the [`DERIVATIVE()` documentation](#examples-of-basic-syntax-1).
 `NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
 
-### Advanced syntax
+### Advanced syntax of NON_NEGATIVE_DERIVATIVE()
 ```
 SELECT NON_NEGATIVE_DERIVATIVE(<function> ([ * | <field_key> | /<regular_expression>/ ]) [ , <unit> ] ) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -5100,14 +5099,15 @@ Returns the non-negative difference between subsequent field values associated w
 `NON_NEGATIVE_DIFFERENCE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax-5) section for how to use `NON_NEGATIVE_DIFFERENCE()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-non-negative-difference) section for how to use `NON_NEGATIVE_DIFFERENCE()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
 See the examples in the [`DIFFERENCE()` documentation](#examples-of-basic-syntax-2).
 `NON_NEGATIVE_DIFFERENCE()` behaves the same as the `DIFFERENCE()` function but `NON_NEGATIVE_DIFFERENCE()` returns only positive differences or differences that equal zero.
 
-### Advanced syntax
+### Advanced syntax of NON_NEGATIVE_DIFFERENCE()
+
 ```
 SELECT NON_NEGATIVE_DIFFERENCE(<function>( [ * | <field_key> | /<regular_expression>/ ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -5155,7 +5155,7 @@ Returns the field values associated with each field key in the [measurement](/in
 `POW()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `POW()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-pow) section for how to use `POW()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -5245,7 +5245,7 @@ The query returns field values associated with the `water_level` field key multi
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of POW()
 ```
 SELECT POW(<function>( [ * | <field_key> ] ), <x>) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -5320,7 +5320,7 @@ Returns the field values associated with each field key in the [measurement](/in
 `ROUND()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `ROUND()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-round) section for how to use `ROUND()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -5408,7 +5408,7 @@ The query returns field values associated with the `water_level` field key round
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of ROUND()
 ```
 SELECT ROUND(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -5483,7 +5483,7 @@ Returns the sine of field values associated with each field key in the [measurem
 `SIN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `SIN()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-sin) section for how to use `SIN()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -5572,7 +5572,7 @@ The query returns sine of field values associated with the `water_level` field k
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of SIN()
 ```
 SELECT SIN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -5647,7 +5647,7 @@ Returns the square root field values associated with each field key in the [meas
 `SQRT()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `SQRT()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-sqrt) section for how to use `SQRT()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -5737,7 +5737,8 @@ The query returns the square roots of field values associated with the `water_le
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of SQRT()
+
 ```
 SELECT SQRT(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -5812,7 +5813,7 @@ Returns the tangent of field values associated with each field key in the [measu
 `TAN()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `TAN()` with a `GROUP BY time()` clause.
+See the [Advanced Syntax](#advanced-syntax-of-tan) section for how to use `TAN()` with a `GROUP BY time()` clause.
 
 ### Examples of basic syntax
 
@@ -5901,7 +5902,7 @@ The query returns tangent of field values associated with the `water_level` fiel
 It covers the [time range](/influxdb/v1.6/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and returns results in [descending timestamp order](/influxdb/v1.6/query_language/data_exploration/#order-by-time-desc).
 The query also [limits](/influxdb/v1.6/query_language/data_exploration/#the-limit-and-slimit-clauses) the number of points returned to four and [offsets](/influxdb/v1.6/query_language/data_exploration/#the-offset-and-soffset-clauses) results by two points.
 
-### Advanced syntax
+### Advanced syntax of TAN()
 ```
 SELECT TAN(<function>( [ * | <field_key> ] )) [INTO_clause] FROM_clause [WHERE_clause] GROUP_BY_clause [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause]
 ```
@@ -6205,7 +6206,6 @@ and the default hold period and warmup type.
 `CHANDE_MOMENTUM_OSCILLATOR()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `CHANDE_MOMENTUM_OSCILLATOR()` with a `GROUP BY time()` clause.
 
 ## EXPONENTIAL_MOVING_AVERAGE()
 An exponential moving average (EMA) is a type of moving average that is similar
@@ -6257,7 +6257,6 @@ and the default hold period and warmup type.
 `EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `EXPONENTIAL_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 ## DOUBLE_EXPONENTIAL_MOVING_AVERAGE()
 The Double Exponential Moving Average (DEMA) attempts to remove the inherent lag
@@ -6311,7 +6310,6 @@ and the default hold period and warmup type.
 `DOUBLE_EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `DOUBLE_EXPONENTIAL_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 ## KAUFMANS_EFFICIENCY_RATIO()
 Kaufman's Efficiency Ration, or simply "Efficiency Ratio" (ER), is calculated by
@@ -6366,7 +6364,6 @@ and the default hold period and warmup type.
 `KAUFMANS_EFFICIENCY_RATIO()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `KAUFMANS_EFFICIENCY_RATIO()` with a `GROUP BY time()` clause.
 
 
 ## KAUFMANS_ADAPTIVE_MOVING_AVERAGE()
@@ -6420,7 +6417,6 @@ and the default hold period and warmup type.
 `KAUFMANS_ADAPTIVE_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `KAUFMANS_ADAPTIVE_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 
 ## TRIPLE_EXPONENTIAL_MOVING_AVERAGE()
@@ -6475,7 +6471,6 @@ and the default hold period and warmup type.
 `TRIPLE_EXPONENTIAL_MOVING_AVERAGE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `TRIPLE_EXPONENTIAL_MOVING_AVERAGE()` with a `GROUP BY time()` clause.
 
 ## TRIPLE_EXPONENTIAL_DERIVATIVE()
 The triple exponential derivative indicator, commonly referred to as "TRIX," is
@@ -6537,7 +6532,6 @@ and the default hold period and warmup type.
 `TRIPLE_EXPONENTIAL_DERIVATIVE()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `TRIPLE_EXPONENTIAL_DERIVATIVE()` with a `GROUP BY time()` clause.
 
 ## RELATIVE_STRENGTH_INDEX()
 The relative strength index (RSI) is a momentum indicator that compares the magnitude of recent increases and decreases over a specified time period to measure speed and change of data movements.
@@ -6586,7 +6580,6 @@ and the default hold period and warmup type.
 `RELATIVE_STRENGTH_INDEX()` supports int64 and float64 field value [data types](/influxdb/v1.6/write_protocols/line_protocol_reference/#data-types).
 
 The basic syntax supports `GROUP BY` clauses that [group by tags](/influxdb/v1.6/query_language/data_exploration/#group-by-tags) but not `GROUP BY` clauses that [group by time](/influxdb/v1.6/query_language/data_exploration/#group-by-time-intervals).
-See the [Advanced Syntax](#advanced-syntax) section for how to use `RELATIVE_STRENGTH_INDEX()` with a `GROUP BY time()` clause.
 
 
 # Other
