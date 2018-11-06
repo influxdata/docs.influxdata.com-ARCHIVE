@@ -661,7 +661,7 @@ When visualized, tables appear as individual, unconnected points.
 ![Group by CPU and time](/img/flux/grouping-by-cpu-time.png)
 
 Again, grouping by `cpu` and `_time` doesn't represent a real world use case,
-but it's a good illustration how grouping works.
+but it's a good illustration of how grouping works.
 
 ## In conclusion
 Grouping is a powerful way to shape your data into your desired output format.
