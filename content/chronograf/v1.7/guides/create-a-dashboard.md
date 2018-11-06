@@ -10,7 +10,7 @@ menu:
 
 Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure:
 * View [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards) from the Host List page. Dashboards are available depending on which Telegraf input plugins you have enabled. These pre-created dashboards cannot be cloned or edited.
-* Create custom dashboards from scratch by building queries in the Data Explorer, as described below.
+* Create custom dashboards from scratch by building queries in the Data Explorer, as described [below](#build-a-dashboard).
 * Import dashboard templates when you [add or update a connection in [Chronograf](/chronograf/latest/administration/creating-connections):
   1. From the Configuration page, click **Add Connection** or select an existing connection to edit it.
   2. In the **InfluxDB Connection** window, enter or verify your connection details and click **Add** or **Update Connection**.
@@ -83,7 +83,7 @@ Click **Save** (the green checkmark icon) to save your cell.
 * **Reset** your cell by double-clicking your mouse in the cell window
 
 > Note:
-These tips only apply to the line, stacked, step-plot, and line+stat [visualization types](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-visualization-types-does-chronograf-support).
+These tips only apply to the line, stacked, step-plot, and line+stat [visualization types](/chronograf/latest/guides/visualization-types/).
 
 #### Configure dashboard-wide settings:
 * You can change the dashboard's *auto-refresh interval* at the top of the page - the default interval selected is **Every 15 seconds**.
