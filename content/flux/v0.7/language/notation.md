@@ -8,6 +8,8 @@ menu:
     weight: 60
 ---
 
+> **Note:** This document is a living document and may not represent the current implementation of Flux.
+
 The syntax of the language is specified using [Extended Backus-Naur Form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form):
 
 ```
@@ -29,6 +31,6 @@ A _production_ is an expression constructed from terms and the following operato
 {}  repetition (0 to n times)
 ```
 
-Lower-case production names are used to identify lexical tokens.
-Non-terminals are in [camelCase](https://en.wikipedia.org/wiki/Camel_case).
-Lexical tokens are enclosed in double quotes `""` or back quotes \`\`.
+Lowercase production names are used to identify lexical tokens.
+Non-terminals are in [camel case](https://en.wikipedia.org/wiki/Camel_case).
+Lexical tokens are enclosed in double quotes (`""`) or back quotes (``).

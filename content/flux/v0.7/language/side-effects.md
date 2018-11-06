@@ -8,9 +8,11 @@ menu:
     weight: 90
 ---
 
+> **Note:** This document is a living document and may not represent the current implementation of Flux.
+
 Side effects can occur in one of two ways.
 
-1. By reassigning builtin options
+1. By reassigning built-in options
 2. By calling a function that produces side effects
 
 A function produces side effects when it is explicitly declared to have side effects or when it calls a function that itself produces side effects.

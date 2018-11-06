@@ -8,6 +8,9 @@ menu:
     weight: 110
 ---
 
+> **Note:** This document is a living document and may not represent the current implementation of Flux.
+Any section that is not currently implemented is commented with a `[IMPL#XXX]` where `XXX` is an issue number tracking discussion and progress towards implementation.
+
 A _type_ defines the set of values and operations on those values.
 Types are never explicitly declared as part of the syntax.
 Types are always inferred from the usage of the value.
@@ -43,9 +46,9 @@ The duration type name is `duration`.
 
 Durations can be added to times to produce a new time.
 
-**Examples**
+##### Examples of duration types
 
-```
+```js
 2018-07-01T00:00:00Z + 1mo // 2018-08-01T00:00:00Z
 2018-07-01T00:00:00Z + 2y  // 2020-07-01T00:00:00Z
 2018-07-01T00:00:00Z + 5h  // 2018-07-01T05:00:00Z
@@ -54,7 +57,7 @@ Durations can be added to times to produce a new time.
 ## String types
 
 A _string type_ represents a possibly empty sequence of characters.
-Strings are immutable: once created they cannot be modified.
+Strings are immutable and cannot be modified once created.
 The string type name is `string`.
 
 The length of a string is its size in bytes, not the number of characters, since a single character may be multiple bytes.
@@ -86,6 +89,6 @@ A _function type_ represents a set of all functions with the same argument and r
 ## Generator types
 
 A _generator type_ represents a value that produces an unknown number of other values.
-The generated values may be of any other type but must all be the same type.
+The generated values may be of any other type, but must all be the same type.
 
 To be implemented: [IMPL#658](https://github.com/influxdata/platform/query/issues/658) Implement Generators types.

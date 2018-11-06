@@ -8,6 +8,10 @@ menu:
     weight: 20
 ---
 
+> **Note:** This document is a living document and may not represent the current implementation of Flux.
+Any section that is not currently implemented is commented with a `[IMPL#XXX]` where `XXX` is an issue number tracking discussion and progress towards implementation.
+
+
 An assignment binds an identifier to a variable or function.
 Every identifier in a program must be assigned.
 An identifier may not change type via assignment within the same block.
@@ -26,9 +30,10 @@ An identifier assigned in a block may be reassigned in an inner block with the e
 While the identifier of the inner assignment is in scope, it denotes the entity assigned by the inner assignment.
 
 Option identifiers have default assignments that are automatically defined in the _options block_.
-Because the _options block_ is the top-level block of a Flux program, options are visible/available to any and all other blocks.
+Because the _options block_ is the top-level block of a Flux program, options are visible and available to any and all other blocks.
 
-The package clause is not a assignment; the package name does not appear in any scope.
+The package clause is not a assignment.
+The package name does not appear in any scope.
 Its purpose is to identify the files belonging to the same package and to specify the default package name for import declarations.
 
 
@@ -44,7 +49,7 @@ An identifier cannot change type within the same block.
 VarAssignment = identifier "=" Expression
 ```
 
-**Examples**
+##### Examples of variable assignment
 
 ```
 n = 1

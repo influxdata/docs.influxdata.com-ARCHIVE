@@ -8,6 +8,9 @@ menu:
     weight: 40
 ---
 
+> **Note:** This document is a living document and may not represent the current implementation of Flux.
+Any section that is not currently implemented is commented with a `[IMPL#XXX]` where `XXX` is an issue number tracking discussion and progress towards implementation.
+
 An _expression_ specifies the computation of a value by applying the operators and functions to operands.
 
 ## Operands
@@ -15,7 +18,7 @@ An _expression_ specifies the computation of a value by applying the operators a
 Operands denote the elementary values in an expression.
 An operand may be a literal, identifier denoting a variable, or a parenthesized expression.
 
-> To be added: Expression details
+> To be added: Expression details.
 
 PEG parsers don't understand operators precedence, so it difficult to express operators in expressions with the grammar.
 We should simplify it and use the EBNF grammar.
@@ -37,7 +40,7 @@ The function body must have a return statement if it is an explicit block, other
     FunctionBody       = Expression | Block .
 ```
 
-##### Examples
+##### Examples of function literals
 
 ```js
 () => 1 // function returns the value 1
@@ -68,7 +71,7 @@ Positional arguments are not supported.
 Argument order does not matter.
 When an argument has a default value, it is not required to be specified.
 
-##### Examples
+##### Examples of call expressions
 
 ```js
 f(a:1, b:9.6)
@@ -88,7 +91,7 @@ It is an error to use a pipe expression if the function does not declare a pipe 
 pipe_lit = "<-" .
 ```
 
-##### Examples
+##### Examples of pipe expressions
 
 ```js
 foo = () => // function body elided

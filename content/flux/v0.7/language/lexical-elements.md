@@ -8,6 +8,8 @@ menu:
     weight: 50
 ---
 
+> **Note:** This document is a living document and may not represent the current implementation of Flux.
+Any section that is not currently implemented is commented with a `[IMPL#XXX]` where `XXX` is an issue number tracking discussion and progress towards implementation.
 
 ## Comments
 
@@ -122,7 +124,7 @@ decimals  = decimal_digit { decimal_digit } .
 
 ##### Examples of floating-point literals
 
-```
+```js
 0.
 72.40
 072.40  // == 72.40
@@ -271,7 +273,7 @@ escaped_char     = `\` ( "n" | "r" | "t" | `\` | `"` ) .
 StringExpression = "{" Expression "}" .
 ```
 
-> To be added: TODO(nathanielc): With string interpolation `string_lit` is not longer a lexical token as part of a literal, but an entire expression in and of itself.
+> To be added: TODO: With string interpolation `string_lit` is not longer a lexical token as part of a literal, but an entire expression in and of itself.
 
 > To be implemented: [IMPL#252](https://github.com/influxdata/platform/issues/252) Parse string literals.
 
@@ -329,7 +331,7 @@ regexp_escape_char = `\` (`/` | `\`)
 
 ##### Examples of regular expression literals
 
-```
+```js
 /.*/
 /http:\/\/localhost:9999/
 /^\xe6\x97\xa5\xe6\x9c\xac\xe8\xaa\x9e(ZZ)?$/

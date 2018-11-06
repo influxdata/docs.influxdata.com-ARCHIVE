@@ -8,6 +8,9 @@ menu:
     weight: 80
 ---
 
+> **Note:** This document is a living document and may not represent the current implementation of Flux.
+
+
 Source code is encoded in UTF-8.
 The text need not be canonicalized.
 

@@ -8,6 +8,8 @@ menu:
     weight: 30
 ---
 
+> **Note:** This document is a living document and may not represent the current implementation of Flux.
+
 A _block_ is a possibly empty sequence of statements within matching braces (`{}`).
 
 ```
