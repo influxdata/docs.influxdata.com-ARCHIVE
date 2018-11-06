@@ -245,8 +245,7 @@ The visualization remains the same.
 ![Group by CPU](/img/flux/grouping-data-set.png)
 
 ### Group by time
-Admittedly, grouping data by the `_time` column isn't incredibly useful, but for the sake
-of demonstration, it illustrates well how grouping changes the structure of your data.
+Grouping data by the `_time` column is a good illustration of how grouping changes the structure of your data.
 
 ```js
 dataSet
@@ -370,8 +369,8 @@ Even though there are multiple records per timestamp, it will only visualize the
 
 ![Group by time](/img/flux/grouping-by-time.png)
 
-> With some further processing, you _could_ calculate the average CPU usage across all CPUs per point
-> of time and group them into a single table, but we won't cover that in this guide.
+> With some further processing, you could calculate the average CPU usage across all CPUs per point
+> of time and group them into a single table, but we won't cover that in this example.
 > If you're interested in running and visualizing this yourself, here's what the query would look like:
 >
 ```js
@@ -660,8 +659,7 @@ When visualized, tables appear as individual, unconnected points.
 
 ![Group by CPU and time](/img/flux/grouping-by-cpu-time.png)
 
-Again, grouping by `cpu` and `_time` doesn't represent a real world use case,
-but it's a good illustration of how grouping works.
+Grouping by `cpu` and `_time` is a good illustration of how grouping works.
 
 ## In conclusion
 Grouping is a powerful way to shape your data into your desired output format.
