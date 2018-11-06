@@ -1,6 +1,6 @@
 ---
 title: Get started with Flux
-description: placeholder
+description: Get started with Flux, InfluxData's new functional data scripting language. This step-by-step guide will walk you through the basics and get you on your way.
 menu:
   flux_0_7:
     name: Get started with Flux
@@ -21,13 +21,25 @@ how to query time series data from InfluxDB using Flux, and an introduction to F
 Flux v0.7 (technical preview) is built into InfluxDB v1.7 and can be used to query data stored in InfluxDB.
 InfluxDB v1.7's `influx` CLI also includes a new `-type=` option that, when set to `flux`, will start an
 interactive Flux Read-Eval-Print-Loop (REPL) allowing you to write and run Flux queries from the command line.
-_See the [InfluxDB installation instructions](/influxdb/v1.7/introduction/installation)._
+
+---
+
+_See the [InfluxDB installation instructions](/influxdb/v1.7/introduction/installation)
+for information about downloading and installing InfluxDB v1.7._
+
+---
 
 ##### Chronograf v1.7+
 **Not required but strongly recommended**.
 Chronograf v1.7's Data Explorer provides a user-interface (UI) for writing Flux scripts and visualizing results.
 Dashboards in Chronograf v1.7+ also support Flux queries.
-_See the [Chronograf installation instructions](/chronograf/v1.7/introduction/installation)._
+
+---
+
+_See the [Chronograf installation instructions](/chronograf/v1.7/introduction/installation)
+for information about downloading and installing Chronograf v1.7._
+
+---
 
 ![Flux Builder](/img/flux/flux-builder.png)
 
@@ -40,7 +52,7 @@ will install the latest version of each component of the TICK stack._
 
 
 ## Key concepts
-Flux introduces important new concepts you should understand going in.
+Flux introduces important new concepts you should understand as you get started.
 
 ### Buckets
 Flux introduces "buckets," a new data storage concept for InfluxDB.
@@ -48,7 +60,7 @@ A **bucket** is a named location where data is stored that has a retention polic
 It's similar to an InfluxDB v1.x "database," but is a combination of both a database and a retention policy.
 When using multiple retention policies, each is its own bucket.
 
-Flux's `from()` function, which defines an InfluxDB data source, requires a `bucket` parameter.
+Flux's [`from()` function](/flux/v0.7/functions/inputs/from), which defines an InfluxDB data source, requires a `bucket` parameter.
 When using Flux with InfluxDB v1.x, use the following bucket naming convention which combines
 the database name and retention policy into a single bucket name:
 
@@ -69,11 +81,11 @@ it is further processed or manipulated.
 
 ### Tables
 Flux structures all data in tables.
-When data is streamed from data sources, Flux formats it as annotated CSV or tables.
-Functions then manipulate or process the them in some way and output new tables.
+When data is streamed from data sources, Flux formats it as annotated CSV, i.e. tables.
+Functions then manipulate or process them and output new tables.
 
 #### Group Keys
-Every table has a **group key** which describes the content of the table.
+Every table has a **group key** which describes the contents of the table.
 It's a list of columns for which every row in the table will have the same value.
 Columns with unique values in each row are **not** part of the group key.
 
@@ -91,7 +103,8 @@ are unique to each row.
 
 ## Tools for working with Flux
 
-You have two options for writing and running Flux queries:
+You have multiple [options for writing and running Flux queries](/flux/v0.7/guides/executing-queries),
+but as you're getting started, we recommend using the following:
 
 ### 1. Chronograf's Data Explorer
 Chronograf's Data Explorer makes it easy to write your first Flux script and visualize the results.
@@ -112,13 +125,6 @@ With InfluxDB v1.7+, use the `-type=flux` option to open a Flux REPL where you w
 ```bash
 influx -type=flux
 ```
-
----
-
-**As you're working through the getting started guides, use either Chronograf's
-Flux UI or the `influx` CLI's Flux option to write and run Flux scripts.**
-
----
 
 <div class="page-nav-btns">
   <a class="btn next" href="/flux/v0.7/introduction/getting-started/query-influxdb/">Query InfluxDB with Flux</a>

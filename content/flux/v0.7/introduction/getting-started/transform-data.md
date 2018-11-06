@@ -32,12 +32,12 @@ from(bucket:"telegraf/autogen")
 ```
 
 ## Flux functions
-Flux provides a number of functions that perform a specific operations, transformations, and tasks.
+Flux provides a number of functions that perform specific operations, transformations, and tasks.
 You can also [create custom functions](/flux/v0.7/functions/custom-functions) in your Flux queries.
 _Functions are covered in detail in the [Flux functions](/flux/v0.7/functions) documentation._
 
 A common type of function used when transforming data queried from InfluxDB is an aggregate function.
-Aggregate functions take a set of `_value`s within a given time window, aggregate them, and transform
+Aggregate functions take a set of `_value` in a table, aggregate them, and transform
 them into a new value.
 
 This example uses the [`mean()` function](/flux/v0.7/functions/transformations/aggregates/mean)
@@ -65,7 +65,7 @@ When visualized, each table is assigned a unique color.
 ![Windowed data tables](/img/flux/flux-windowed-data.png)
 
 ## Aggregate windowed data
-Flux aggregate functions take the `_values` in each window table and aggregate them in some way.
+Flux aggregate functions take the `_values` in each table and aggregate them in some way.
 Use the [`mean()` function](/flux/v0.7/functions/transformations/aggregates/mean) to average the `_values` of each table.
 
 ```js
@@ -86,7 +86,10 @@ Windowed tables are all still separate and, when visualized, will appear as sing
 
 ## Add times to your aggregates
 As values are aggregated, the resulting tables do not have a `_time` column because
-the aggregated record does not inherit a time from the records used in the aggregation.
+the records used for the aggregation all have different timestamps.
+Aggregate functions don't infer what time should be used for the aggregate value,
+Therefore the `_time` column is dropped.
+
 A `_time` column is required in the [next operation](#unwindow-aggregate-tables).
 To add one, use the [`duplicate()` function](/flux/v0.7/functions/transformations/duplicate)
 to duplicate the `_stop` column as the `_time` column for each windowed table.
@@ -105,8 +108,8 @@ from(bucket:"telegraf/autogen")
 
 ## Unwindow aggregate tables
 
-Use the `window()` function with the `every: inf` parameter to gather all points into an infinite window.
-This essentially combines all the separate aggregate tables into a single table.
+Use the `window()` function with the `every: inf` parameter to gather all points
+into a single, infinite window.
 
 ```js
 from(bucket:"telegraf/autogen")
@@ -126,10 +129,10 @@ Once ungrouped and combined into a single table, the aggregate data points will 
 ![Unwindowed aggregate data](/img/flux/flux-windowed-aggregates-ungrouped.png)
 
 ## Helper functions
-This may seem like a lot of writing just to query and aggregate data, however going through the
-process helps to understand how the shape of data changes as it is passed through each function.
+This may seem like a lot of writing just to query that aggregates data, however going through the
+process helps to understand how data changes "shape" as it is passed through each function.
 
-Flux provides (and allows you to create) "helper" functions that abstract many of these steps away.
+Flux provides (and allows you to create) "helper" functions that abstract many of these steps.
 The same operation performed in this guide can be accomplished using the
 [`aggregateWindow()` function](/flux/v0.7/functions/transformations/aggregates/aggregatewindow).
 

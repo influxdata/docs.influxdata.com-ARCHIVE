@@ -33,10 +33,11 @@ Flux requires a time range when querying time series data.
 "Unbounded" queries are very resource-intensive and as a protective measure,
 Flux will not query the database without a specified range.
 
-Use pipe forward operator (`|>`)to pipe data from your data source into the [`range()`](/flux/v0.7/functions/transformations/range)
+Use pipe forward operator (`|>`) to pipe data from your data source into the [`range()`](/flux/v0.7/functions/transformations/range)
 function, which specifies a time range for your query.
 It accepts two properties: `start` and `stop`.
-Ranges can be **relative** using negative [durations](#) or **absolute** using [timestamps](#).
+Ranges can be **relative** using negative [durations](/flux/v0.7/language/lexical-elements#duration-literals)
+or **absolute** using [timestamps](/flux/v0.7/language/lexical-elements#date-and-time-literals).
 
 ###### Example relative time ranges
 ```js

@@ -10,10 +10,10 @@ menu:
 
 
 Flux, at its core, is scripting language, but designed specifically for working with data.
-To illustrate this, this guide walks through a handful of simple expressions and what they mean in Flux.
+This guide walks through a handful of simple expressions and how they are handled in Flux.
 
 ## Use the influx CLI
-Use the `influx` CLI in "Flux mode" when following this guide.
+Use the `influx` CLI in "Flux mode" as you follow this guide.
 When started with `-type=flux`, the `influx` CLI is an interactive read-eval-print-loop (REPL) that supports Flux syntax.
 
 ##### Start in the influx CLI in Flux mode
@@ -32,12 +32,12 @@ root@9bfc3c08579c:/# influx -host influxdb -type=flux
 ```
 
 ## Basic Flux syntax
-The code blocks below provide commands that illustrate the basic syntax of Flux
-that should be run in the `influx` shell in Flux mode.
+The code blocks below provide commands that illustrate the basic syntax of Flux.
+Run these commands in the `influx` CLI's Flux REPL.
 
 ### Simple expressions
-Flux is a scripting language and so basic expressions are supported.
-For example here is a simple addition:
+Flux is a scripting language that supports basic expressions.
+For example, simple addition:
 
 ```js
 > 1 + 1
@@ -45,7 +45,7 @@ For example here is a simple addition:
 ```
 
 ### Variables
-You can assign expressions to a variable.
+Assign expressions to a variable using the assignment operator, `=`.
 
 ```js
 > s = "this is a string"
@@ -53,7 +53,7 @@ You can assign expressions to a variable.
 > f = 2.0 // a floating point number
 ```
 
-Typing in the name of a variable will print its value:
+Type the name of a variable to print its value:
 
 ```js
 > s
@@ -65,13 +65,13 @@ this is a string
 ```
 
 ### Objects
-Flux also supports objects. Each value in an object can be a different type.
+Flux also supports objects. Each value in an object can be a different data type.
 
 ```js
 > o = {name:"Jim", age: 42}
 ```
 
-Access a property of an object using dot notation:
+Use dot notation to access a properties of an object :
 
 ```js
 > o.name
@@ -91,7 +91,7 @@ Flux supports lists. List values must be the same type.
 
 ### Functions
 Flux uses functions for most of its heavy lifting.
-Here is a simple function that squares the number passed using the `n` parameter.
+Below is a simple function that squares a number, `n`.
 
 ```js
 > square = (n) => n * n
@@ -99,8 +99,8 @@ Here is a simple function that squares the number passed using the `n` parameter
 9
 ```
 
-> Flux does not have support positional arguments or parameters.
-> Parameters must always be named.
+> Flux does not support positional arguments or parameters.
+> Parameters must always be named when calling a function.
 
 ### Pipe-forward operator
 Flux uses the pipe-forward operator (`|>`) extensively to chain operations together.
@@ -112,14 +112,14 @@ data |> someFunction() |> anotherFunction()
 ```
 
 ## Real-world application of basic syntax
-This likely seems familiar if you've already been through through the other [getting started guides](/flux/v0.7/introduction/getting-started), which is by design.
+This likely seems familiar if you've already been through through the other [getting started guides](/flux/v0.7/introduction/getting-started)n.
 Flux's syntax is inspired by Javascript and other functional scripting languages.
-As you begin to apply these basic principles in real use cases such as creating data stream variables,
-custom functions, etc., the power of Flux and it's ability to query and process data is apparent.
+As you begin to apply these basic principles in real world use cases such as creating data stream variables,
+custom functions, etc., the power of Flux and its ability to query and process data becomes apparent.
 
 The examples below provide both multi-line and single-line versions of each input command.
 Carriage returns in Flux aren't necessary, but do help with readability.
-Both single- and multi-line commands can be copied and pasted into the `influx` CLI running in FLux mode.
+Both single- and multi-line commands can be copied and pasted into the `influx` CLI running in Flux mode.
 
 {{< tab-labels >}}
   {{% tabs %}}
@@ -130,7 +130,8 @@ Both single- and multi-line commands can be copied and pasted into the `influx` 
 
 {{% tab-content %}}
 ### Define data stream variables
-A common use case for variable assignments in Flux is creating variables for multiple filtered input data streams.
+A common use case for variable assignments in Flux is creating variables for one
+or more input data streams.
 
 ```js
 timeRange = -1h
@@ -154,12 +155,12 @@ memUsagePercent = from(bucket:"telegraf/autogen")
 These variables can be used in other functions, such as  `join()`, while keeping the syntax minimal and flexible.
 
 ### Define custom functions
-Let's create a function that returns the `N` number rows in the input data stream with the highest `_value`s.
-To do this, pass the input stream (`table`) and the number of results to return (`n`) into a custom function.
+Create a function that returns the `N` number rows in the input stream with the highest `_value`s.
+To do this, pass the input stream (`tables`) and the number of results to return (`n`) into a custom function.
 Then using Flux's `sort()` and `limit()` functions to find the top `n` results in the data set.
 
 ```js
-topN = (table=<-, n) => table
+topN = (tables=<-, n) => tables
   |> sort(desc: true)
   |> limit(n: n)
 ```
@@ -190,11 +191,11 @@ These variables can be used in other functions, such as  `join()`, while keeping
 
 ### Define custom functions
 Let's create a function that returns the `N` number rows in the input data stream with the highest `_value`s.
-To do this, pass the input stream (`table`) and the number of results to return (`n`) into a custom function.
+To do this, pass the input stream (`tables`) and the number of results to return (`n`) into a custom function.
 Then using Flux's `sort()` and `limit()` functions to find the top `n` results in the data set.
 
 ```js
-topN = (table=<-, n) => table |> sort(desc: true) |> limit(n: n)
+topN = (tables=<-, n) => tables |> sort(desc: true) |> limit(n: n)
 ```
 
 _More information about creating custom functions is available in the [Custom functions](/flux/v0.7/functions/custom-functions) documentation._
