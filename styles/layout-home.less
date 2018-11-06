@@ -20,7 +20,7 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 
-	.cards-oss, .cards-enterprise {
+	.cards-special, .cards-oss, .cards-enterprise {
 		display: flex;
 		flex-direction: row;
 		width: 100%;
@@ -115,8 +115,9 @@
 				margin-top: 1rem;
 			}
 		}
+
 		// Themes
-		&.card-Telegraf {
+		&.card-telegraf {
 			.homepage--card-mask {
 				background-image: url(/img/home-telegraf.svg);
 				background-color: @c-curacao;
@@ -140,7 +141,7 @@
 				background-color: @g20-white;
 			}
 		}
-		&.card-InfluxDB {
+		&.card-influxdb {
 			.homepage--card-mask {
 				background-image: url(/img/home-influxdb.svg);
 				background-color: @c-ocean;
@@ -164,7 +165,7 @@
 				background-color: @g20-white;
 			}
 		}
-		&.card-Chronograf {
+		&.card-chronograf {
 			.homepage--card-mask {
 				background-image: url(/img/home-chronograf.svg);
 				background-color: @c-star;
@@ -188,7 +189,7 @@
 				background-color: @g20-white;
 			}
 		}
-		&.card-Kapacitor {
+		&.card-kapacitor {
 			.homepage--card-mask {
 				background-image: url(/img/home-kapacitor.svg);
 				background-color: @c-rainforest;
@@ -212,16 +213,42 @@
 				background-color: @g20-white;
 			}
 		}
-		&.card-Enterprise {
+
+		&.card-enterprise_kapacitor {
 			.homepage--card-mask {
-				background-image: url(/img/home-enterprise.svg);
-				background-color: @g5-pepper;
+				background-image: url(/img/home-kapacitor.svg);
+				background-color: @c-rainforest;
 			}
 			.homepage--card-description {
 				color: @g20-white;
 			}
 			.homepage--card-title {
-				color: @g14-chromium;
+				color: @c-rainforest;
+			}
+			a.homepage--card-link:link,
+			a.homepage--card-link:active,
+			a.homepage--card-link:visited {
+				color: @g20-white;
+				transition:
+					background-color 0.25s ease,
+					color 0.25s ease;
+			}
+			a.homepage--card-link:hover {
+				color: @c-rainforest;
+				background-color: @g20-white;
+			}
+		}
+
+		&.card-enterprise_influxdb {
+			.homepage--card-mask {
+				background-image: url(/img/home-influxdb.svg);
+				background-color: @c-ocean;
+			}
+			.homepage--card-description {
+				color: @g20-white;
+			}
+			.homepage--card-title {
+				color: @c-laser;
 			}
 			a.homepage--card-link:link,
 			a.homepage--card-link:active,
@@ -237,12 +264,40 @@
 			}
 		}
 
+		&.card-flux {
+			.homepage--card-mask {
+				background-image: url(/img/home-flux.svg);
+				background-color: #15a194;
+				opacity: 1;
+			}
+			.homepage--card-description {
+				color: @g20-white;
+			}
+			.homepage--card-title {
+				color: @g20-white ;
+			}
+			a.homepage--card-link:link,
+			a.homepage--card-link:active,
+			a.homepage--card-link:visited {
+				color: @g20-white;
+				transition:
+					background-color 0.25s ease,
+					color 0.25s ease;
+				&.download{
+					display: none;
+				}
+			}
+			a.homepage--card-link:hover {
+				color: @c-viridian;
+				background-color: @g20-white;
+			}
+		}
+
 		&.card-platform {
 			width: 100%;
 			background: linear-gradient(to right, @c-ocean, @c-pool);
 			display: flex;
 			align-items: center;
-			max-height: 280px;
 
 			.homepage--card-container {
 				padding-bottom: 3rem;
@@ -301,6 +356,7 @@
 @media (min-width: @breakpoint-small) {
 	.homepage--card {
 		width: 50%;
+		flex-grow: 1;
 	}
 }
 @media (min-width: @breakpoint-large) {
@@ -314,7 +370,12 @@
 		width: 25%;
 		height: auto;
 
-		&.enterprise {
+		&.card-platform {
+			width: 75%;
+		}
+
+		&.card-enterprise_influxdb,
+		&.card-enterprise_kapacitor {
 			width: 50%;
 		}
 	}
