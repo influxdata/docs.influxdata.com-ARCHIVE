@@ -10,9 +10,9 @@ menu:
 
 
 * [Data node configurations](#data-node-configurations)
-    * [Global settings](#global-settings)
-    * [Enterprise [enterprise]](#enterprise-1)
-    * [Meta [meta]](#meta-1)
+    * [Global](#global-settings)
+    * [Enterprise license [enterprise]](#enterprise-license-settings)
+    * [Meta node [meta]](#meta-node-settings)
     * [Data [data]](#data)
     * [Cluster [cluster]](#cluster)
     * [Retention [retention]](#retention)
