@@ -76,6 +76,8 @@ By default, text in Log Viewer columns is truncated if it exceeds the column wid
 
 Select the **Truncate** or **Wrap** option to determine how text appears when it exceeds the width of the cell.
 
+To copy the complete, untruncated log message, select the message cell and click **Copy**.
+
 ## Logs in dashboards
 An incredibly powerful way to analyze log data is by creating dashboards that include log data.
 This is possible by using the [Table visualization type](/chronograf/v1.7/guides/visualization-types/#table) to display log data in your dashboard.
