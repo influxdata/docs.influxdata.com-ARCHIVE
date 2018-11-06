@@ -30,6 +30,8 @@ The return value must be an object.
 
 _**Data type:** Function_
 
+> Objects evaluated in `fn` functions are represented by `r`, short for "record" or "row".
+
 ### mergeKey
 Indicates if the record returned from `fn` should be merged with the group key.
 When merging, all columns on the group key will be added to the record giving precedence to any columns already present on the record.

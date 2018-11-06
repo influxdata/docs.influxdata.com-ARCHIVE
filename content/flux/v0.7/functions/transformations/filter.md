@@ -27,6 +27,8 @@ Those that evaluate to true are included in the output tables.
 
 _**Data type:** Function_
 
+> Objects evaluated in `fn` functions are represented by `r`, short for "record" or "row".
+
 ## Examples
 ```js
 from(bucket:"telegraf/autogen")
