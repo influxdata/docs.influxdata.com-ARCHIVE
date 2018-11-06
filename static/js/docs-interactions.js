@@ -217,7 +217,8 @@ $(document).ready( function() {
  */
 
 $(document).ready( function() {
-	$(".sidebar--children-toggle").click(function() {
+	$(".sidebar--children-toggle").click(function(e) {
+		e.preventDefault()
 		$(this).toggleClass('open');
 		$(this).siblings('.sidebar--children').toggleClass('open');
 	})

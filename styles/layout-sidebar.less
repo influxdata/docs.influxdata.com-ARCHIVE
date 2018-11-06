@@ -144,13 +144,15 @@
 }
 
 ul.sidebar--children {
-  padding-left: 1.5rem;
-  margin-left: -.5rem;
+  // padding-left: 1.5rem;
+  margin-left: -1.85rem;
   height: 0;
   overflow: hidden;
 
   &.open {
     height: auto;
+    overflow: visible;
+    border-left: 2px solid @sidebar-divider;
   }
 
   & li:first-child {

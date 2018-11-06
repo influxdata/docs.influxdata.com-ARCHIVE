@@ -411,6 +411,50 @@ a {
 	}
 }
 
+.page-nav-btns {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	margin: 3em 0 2em;
+
+	a {
+		display: flex;
+		align-items: center;
+		color: @g20-white !important;
+		font-size: .95rem;
+		padding: .75rem 1rem;
+		margin: 0 .15rem;
+
+		&.prev {
+			position: absolute;
+			left: 0;
+			&:before {
+				content: '\e804';
+				font-family: 'icomoon';
+				font-size: .85rem;
+				font-weight: normal;
+				vertical-align: middle;
+				display: inline;
+				margin-right: .85rem;
+			}
+		}
+
+		&.next {
+			position: absolute;
+			right: 0;
+			&:after {
+				content: '\e805';
+				font-family: 'icomoon';
+				font-size: .85rem;
+				font-weight: normal;
+				vertical-align: middle;
+				display: inline;
+				margin-left: .85rem;
+			}
+		}
+	}
+}
+
 //
 // Content Condenser
 // --------------------------------------------------
