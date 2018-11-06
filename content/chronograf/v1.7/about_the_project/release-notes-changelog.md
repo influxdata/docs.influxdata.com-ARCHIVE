@@ -11,45 +11,44 @@ menu:
 
 ### Features
 
-* Add filestore-backed API for protodashboards
-* Add ability to copy expanded/untruncated log message
-* Add close button for logs popover
-* Add button on Data Explorer to send query to dashboard cell
-* Add search attributes to log viewer
-* Add Dynamic Source option to Cell Editor Overlay (CEO) source selector
-* Introduce note visualization type
-* Add time selector dropdown to CEO
-* Add Flux query editor to the Data Explorer and use same UI as CEO 
-* Add visualization options to the Data Explorer
-* Add ability to save a Flux query to a cell 
-* Add regex search for app name in log lines
-* Add loading status indicator to hosts page
-* Allow deep linking Flux script in Data Explorer
-* Add ability to use line graph, single stat, and table visualizations for Flux queries
-* Allow Flux dashboard cells to be exported
-* Save log line wrap/truncate preference
-* Add option to disable gzip compression
+* Add filestore-backed API for protodashboards.
+* Add loading status indicator to hosts page.
+* Add ability to copy expanded/untruncated log message.
+* Add close button for logs popover.
+* Add search attributes to log viewer.
+* Add regex search for app name in log lines.
+* Save log line wrap/truncate preference.
+* Add button on Data Explorer to send query to dashboard cell.
+* Introduce note visualization type.
+* Add Dynamic Source option to Cell Editor Overlay (CEO) source selector.
+* Add time selector dropdown to CEO.
+* Add visualization options to the Data Explorer.
+* Add Flux query editor to the Data Explorer and use same UI as CEO.
+* Add ability to save a Flux query to a cell.
+* Allow deep linking Flux script in Data Explorer.
+* Add ability to use line graph, single stat, and table visualizations for Flux queries.
+* Allow Flux dashboard cells to be exported.
+* Add option to disable gzip compression.
 
 ### UI Improvements
 
-* Redesign CEO for reuse in other parts of application
-* Clear logs after searching
-* Colorize entire single stat cell
-* Autofocus dashboard query editor
-* Fix query editor flickering on update
-* Add logs page loading spinner
-* Remove character count limit from prefix and suffix for single stat and gauge cells
-* Add button to encourage switching visualization type to table graph when query response is not supported by line graph
-* Positioned cloned cells adjacent to target cell
-* Add metaquery tempalte generator button to Data Explorer and CEO
-* Automatically scroll to the current measurement in the explorer
+* Clear logs after searching.
+* Add logs page loading spinner.
+
+* Autofocus dashboard query editor.
+* Fix query editor flickering on update.
+* Remove character count limit from prefix and suffix for single stat and gauge cells.
+* Add button to encourage switching visualization type to table graph when query response is not supported by line graph.
+* Colorize entire single stat cell.
+* Positioned cloned cells adjacent to target cell.
+* Add metaquery template generator button to Data Explorer and CEO.
+* Redesign CEO for reuse in other parts of application.
+* Automatically scroll to the current measurement in the Data Explorer.
 
 ### Bug Fixes
-* Render null data point values in alerts table as em dashes
-* Add validation to alert rule messages
-* Fix search results updating race condition 
-
-
+* Render null data point values in alerts table as em dashes.
+* Add validation to alert rule messages.
+* Fix search results updating race condition.
 
 ## v1.6.1 [2018-08-02]
 
