@@ -1,24 +1,14 @@
 cards:
 
-  # Platform Card
-  - id: platform
-    category: special
-    title: InfluxData Platform
-    description: The leading time-series platform built for metrics and events.
-    links:
-      - text: Start Here
-        href: /platform/introduction
-        type: absolute
-
   # Flux card
   - id: flux
-    category: special
+    category: oss
     title: Introducing Flux
     description: Flux is InfluxData's new functional data scripting language designed for querying, analyzing, and transforming data.
     links:
       - text: Get Started
         type: relative
-        href: /flux/latest/introduction/getting-started
+        href: /introduction/getting-started
       - text: Documentation
         type: relative
         href: /
@@ -52,6 +42,7 @@ cards:
         type: relative
         href: /introduction/getting-started
       - text: Documentation
+        type: relative
         href: /
 
   # Chronograf card
