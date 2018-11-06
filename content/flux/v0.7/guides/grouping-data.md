@@ -54,7 +54,7 @@ A boolean that removes all grouping and outputs everything as a single table.
 
 ---
 
-_View the [`group()` function](/flux/v0.7/functions/transformations/group) documentation for more information._
+_For more information, see the [`group()` function](/flux/v0.7/functions/transformations/group)._
 
 ---
 
