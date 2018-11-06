@@ -78,7 +78,7 @@ dataSet = from(bucket: "telegraf/autogen")
 
 > This example drops the `host` column from the returned data since the CPU data
 > is only tracked for a single host and it simplifies the output tables.
-> Don't drop the `host` column is if monitoring multiple hosts.
+> Don't drop the `host` column if monitoring multiple hosts.
 
 {{% condense %}}
 ```
