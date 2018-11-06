@@ -3,7 +3,7 @@ title: Expressions
 description:
 menu:
   flux_0_7:
-    parent: Flux language
+    parent: Language reference
     name: Expressions
     weight: 40
 ---

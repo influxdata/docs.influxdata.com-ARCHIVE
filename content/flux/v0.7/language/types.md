@@ -3,7 +3,7 @@ title: Types
 description:
 menu:
   flux_0_7:
-    parent: Flux language
+    parent: Language reference
     name: Types
     weight: 110
 ---

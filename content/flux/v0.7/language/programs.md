@@ -3,7 +3,7 @@ title: Programs
 description:
 menu:
   flux_0_7:
-    parent: Flux language
+    parent: Language reference
     name: Programs
     weight: 70
 ---

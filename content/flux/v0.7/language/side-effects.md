@@ -3,7 +3,7 @@ title: Side effects
 description:
 menu:
   flux_0_7:
-    parent: Flux language
+    parent: Language reference
     name: Side effects
     weight: 90
 ---

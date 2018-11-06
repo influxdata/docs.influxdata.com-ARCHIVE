@@ -16,7 +16,7 @@ Any section that is not currently implemented is commented with a `[IMPL#XXX]` w
 The Flux language is centered on querying and manipulating time series data.
 
 ### Notation
-The syntax of the language is specified using Extended Backus-Naur Form (EBNF):
+The syntax of the language is specified using [Extended Backus-Naur Form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form):
 
     Production  = production_name "=" [ Expression ] "." .
     Expression  = Alternative { "|" Alternative } .
@@ -34,5 +34,5 @@ Productions are expressions constructed from terms and the following operators, 
     {}  repetition (0 to n times)
 
 Lower-case production names are used to identify lexical tokens.
-Non-terminals are in CamelCase.
-Lexical tokens are enclosed in double quotes "" or back quotes \`\`.
+Non-terminals are in Camel case.
+Lexical tokens are enclosed in double quotes (`""`) or back quotes (``).

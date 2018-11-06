@@ -3,7 +3,7 @@ title: Blocks
 description:
 menu:
   flux_0_7:
-    parent: Flux language
+    parent: Language reference
     name: Blocks
     weight: 30
 ---
