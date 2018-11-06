@@ -15,6 +15,7 @@ This guide covers the different options:
 2. [Influx CLI in "Flux mode"](#influx-cli-in-flux-mode)
 3. [Influx CLI via parameter](#influx-cli-via-parameter)
 4. [Influx CLI via STDIN](#influx-cli-via-stdin)
+5. [InfluxDB API](#influxdb-api)
 
 > Before attempting these methods, make sure Flux is enabled by setting
 > `flux-enabled = true` in the `[http]` section of your InfluxDB configuration file.
@@ -51,3 +52,44 @@ Query results are otuput in your terminal.
 ```bash
 echo '<flux query>' | influx -type=flux
 ```
+
+## InfluxDB API
+Flux can be used to query InfluxDB through InfluxDB's `/api/v2/query` endpoint.
+Queried data is returned in annotated CSV format.
+
+In your request, set the following:
+
+- `accept` header to `application/csv`
+- `content-type` header to `application/vnd.flux`
+
+This allows you to POST the Flux query in plain text and receive the annotated CSV response.
+
+Below is an example `curl` command that queries InfluxDB using Flux:
+
+{{< tab-labels >}}
+{{% tabs %}}
+[Multi-line](#)
+[Single-line](#)
+{{% /tabs %}}
+
+{{< tab-content-container >}}
+
+{{% tab-content %}}
+```bash
+curl localhost:8086/api/v2/query -XPOST -sS \
+-H 'accept:application/csv' \
+-H 'content-type:application/vnd.flux' \
+-d 'from(bucket:"telegraf")
+      |> range(start:-5m)
+      |> filter(fn:(r) => r._measurement == "cpu")'
+```
+{{% /tab-content %}}
+
+{{% tab-content %}}
+```bash
+curl localhost:8086/api/v2/query -XPOST -sS -H 'accept:application/csv' -H 'content-type:application/vnd.flux' -d 'from(bucket:"telegraf") |> range(start:-5m) |> filter(fn:(r) => r._measurement == "cpu")'
+```
+{{% /tab-content %}}
+
+{{< /tab-content-container >}}
+{{< /tab-labels >}}
