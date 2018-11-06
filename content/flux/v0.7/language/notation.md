@@ -1,6 +1,6 @@
 ---
 title: Notation
-description:
+description: Notation principles for the Flux functional data scripting language.
 menu:
   flux_0_7:
     parent: Language reference

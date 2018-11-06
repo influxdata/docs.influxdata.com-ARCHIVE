@@ -1,6 +1,6 @@
 ---
 title: Blocks
-description:
+description: A block is a possibly empty sequence of statements within matching braces ({}).
 menu:
   flux_0_7:
     parent: Language reference

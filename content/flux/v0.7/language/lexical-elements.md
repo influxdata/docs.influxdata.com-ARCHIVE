@@ -1,6 +1,6 @@
 ---
 title: Lexical elements
-description:
+description: Descriptions of Flux comments, tokens, identifiers, keywords, and other lexical elements.
 menu:
   flux_0_7:
     parent: Language reference

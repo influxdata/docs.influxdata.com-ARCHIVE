@@ -1,6 +1,6 @@
 ---
 title: Representation
-description:
+description: Source code is encoded in UTF-8. The text need not be canonicalized.
 menu:
   flux_0_7:
     parent: Language reference

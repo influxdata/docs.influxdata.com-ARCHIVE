@@ -1,6 +1,6 @@
 ---
 title: Assignment and scope
-description:
+description: An assignment binds an identifier to a variable or function. Every identifier in a program must be assigned.
 menu:
   flux_0_7:
     parent: Language reference

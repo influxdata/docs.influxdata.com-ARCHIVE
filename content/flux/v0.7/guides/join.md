@@ -5,7 +5,7 @@ menu:
   flux_0_7:
     name: Join data
     parent: Guides
-    weight: 2
+    weight: 5
 ---
 
 The [`join()` function](/flux/v0.7/functions/transformations/join) merges two or more

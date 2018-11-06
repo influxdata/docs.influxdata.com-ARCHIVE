@@ -1,6 +1,6 @@
 ---
 title: Variables
-description:
+description: Flux variables hold values. A variable can only hold values defined by its type.
 menu:
   flux_0_7:
     parent: Language reference

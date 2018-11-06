@@ -1,6 +1,6 @@
 ---
 title: Programs
-description:
+description: A Flux program is a sequence of statements defined by the following syntax.
 menu:
   flux_0_7:
     parent: Language reference

@@ -1,6 +1,6 @@
 ---
 title: Expressions
-description:
+description: An expression specifies the computation of a value by applying the operators and functions to operands.
 menu:
   flux_0_7:
     parent: Language reference

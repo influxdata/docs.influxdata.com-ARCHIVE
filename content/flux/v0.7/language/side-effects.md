@@ -1,6 +1,6 @@
 ---
 title: Side effects
-description:
+description: A summary of side effects in the Flux functional data scripting language.
 menu:
   flux_0_7:
     parent: Language reference

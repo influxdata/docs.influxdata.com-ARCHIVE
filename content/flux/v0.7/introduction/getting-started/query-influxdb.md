@@ -67,8 +67,7 @@ from(bucket:"telegraf/autogen")
 ```
 
 ## 3. Filter your data
-Pass your ranged data into the `filter()` function to narrow results based on
-[data attributes](/flux/v0.7/introduction/getting-started/#flat-schemas).
+Pass your ranged data into the `filter()` function to narrow results based on data attributes or columns.
 The `filter()` function has one parameter, `fn`, which expects an anonymous function
 with logic that filters data based on columns or attributes.
 

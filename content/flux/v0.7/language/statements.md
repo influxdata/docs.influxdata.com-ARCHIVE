@@ -1,6 +1,6 @@
 ---
 title: Statements
-description:
+description: Statements control execution in the Flux functional data scripting language.
 menu:
   flux_0_7:
     parent: Language reference
