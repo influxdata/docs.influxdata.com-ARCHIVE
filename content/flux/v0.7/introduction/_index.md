@@ -12,8 +12,7 @@ Its takes the power of [InfluxQL](/influxdb/latest/query_language/spec/) and the
 
 > Flux v0.7 is a technical preview included with [InfluxDB v1.7](/influxdb/v1.7).
 > It is still in active development and many functions provided by InfluxQL and TICKscript
-> have yet to be implemented. View the [Flux roadmap](#) for information about the progress
-> of functions and features.
+> have yet to be implemented.
 
 ## Flux design principles
 Flux is designed to be usable, readable, flexible, composable, testable, contributable, and shareable.
@@ -26,21 +25,15 @@ and calculating the average of each window:
 
 ```js
 from(bucket:"telegraf/autogen")
-  |> range(start:-5m)
+  |> range(start:-1h)
   |> filter(fn:(r) => r._measurement == "cpu" AND r.cpu == "cpu-total")
-  |> window(every:1m)
-  |> mean()
+  |> aggregateWindow(every: 1m, fn: mean)
 ```
 
-### Pipe-forward operator
-Flux uses the pipe-forward operator (`|>`) heavily. After each function or operation,
-Flux returns a table of data. The pipe-forward pipes that table into the next
-function or operation where it will be further processed or manipulated.
+## [Enable Flux](/flux/v0.7/introduction/installation)
+Flux is packaged with InfluxDB v1.7+ and does not require any additional installation,
+however it does need to be enabled.
 
-## Get started with Flux
+## [Get started with Flux](/flux/v0.7/introduction/getting-started)
 The best way to familiarize yourself with Flux is to walk through creating a simple Flux query.
 The getting started documentation does just that.
-
-<span style="font-size:1.25em">
-  [Get started with Flux](/flux/v0.7/introduction/getting-started)
-</span>
