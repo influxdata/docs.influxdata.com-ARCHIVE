@@ -48,7 +48,7 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system" AND
-    r.service == "app-server")
+    r.cpu == "cpu-total")
   |> range(start:-12h)
   |> map(fn: (r) => r._value * r._value)
 ```
@@ -58,9 +58,11 @@ from(bucket:"telegraf/autogen")
 from(bucket:"telegraf/autogen")
     |> filter(fn: (r) =>
       r._measurement == "cpu" AND
-      r._field == "usage_system" AND
-      r.service == "app-server")
+      r._field == "usage_system" AND)
     |> range(start:-12h)
     // create a new table by copying each row into a new format
-    |> map(fn: (r) => ({_time: r._time, app_server: r.host}))
+    |> map(fn: (r) => ({
+      _time: r._time,
+      app_server: r.host
+    }))
 ```

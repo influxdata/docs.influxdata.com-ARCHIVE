@@ -108,11 +108,20 @@ The output will be:
 ```js
 data_1 = from(bucket:"telegraf/autogen")
   |> range(start:-15m)
-  |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "usage_system")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system"
+  )
 
 data_2 = from(bucket:"telegraf/autogen")
   |> range(start:-15m)
-  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent")
+  |> filter(fn: (r) =>
+    r._measurement == "mem" AND
+    r._field == "used_percent"
+  )
 
-join(tables: {d1: data_1, d2: data_2}, on: ["_time", "host"])
+join(
+  tables: {d1: data_1, d2: data_2},
+  on: ["_time", "host"]
+)
 ```
