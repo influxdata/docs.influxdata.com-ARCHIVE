@@ -29,12 +29,15 @@
 						{{ if eq .Identifier "kapacitor" }}
 							Kapacitor is InfluxData's open source data processing framework that makes it easy to create alerts, run ETL jobs, and detect anomalies.
 						{{ end }}
+						{{ if eq .Identifier "flux" }}
+							Flux is InfluxData's new functional data scripting language designed for querying, analyzing, and transforming data.
+						{{ end }}
 						<br/>
-						<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target="_blank">Download {{ .Name }}</a>
+						<a class="homepage--card-link download" href="https://influxdata.com/downloads/#{{ .Identifier }}" target="_blank">Download {{ .Name }}</a>
 						<br/>
-						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting-started/">Get started</a>
+						<a class="homepage--card-link get-started" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting-started/">Get started</a>
 						<br/>
-						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">Documentation</a>
+						<a class="homepage--card-link documentation" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">Documentation</a>
 					</p>
 				</div>
 				<div class="homepage--card-mask"></div>

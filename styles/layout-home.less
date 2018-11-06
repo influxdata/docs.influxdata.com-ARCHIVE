@@ -237,6 +237,43 @@
 			}
 		}
 
+		&.card-Flux {
+			width: 100%;
+			.homepage--card-mask {
+				background-image: url(/img/home-flux.svg);
+				background-color: #15a194;
+				opacity: 1;
+			}
+			.homepage--card-description {
+				color: @g20-white;
+				text-align: center;
+				max-width: 600px;
+			}
+			.homepage--card-title {
+				color: @g20-white;
+				text-align: center;
+				font-size: 2.15rem;
+				&:before{
+					content: "Introducing "
+				}
+			}
+			a.homepage--card-link:link,
+			a.homepage--card-link:active,
+			a.homepage--card-link:visited {
+				color: @g20-white;
+				transition:
+					background-color 0.25s ease,
+					color 0.25s ease;
+				&.download{
+					display: none;
+				}
+			}
+			a.homepage--card-link:hover {
+				color: @c-viridian;
+				background-color: @g20-white;
+			}
+		}
+
 		&.card-platform {
 			width: 100%;
 			background: linear-gradient(to right, @c-ocean, @c-pool);
