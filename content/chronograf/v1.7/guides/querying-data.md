@@ -31,9 +31,10 @@ Flux is InfluxData's new functional data scripting language designed for queryin
 
 1. Open the Data Explorer and click **Add a Query**.
 2. To the right of the source dropdown above the graph placeholder, select **Flux** as the source type.
- The **Schema** and **Script** panes appear.
+ The **Schema**, **Functions**, and **Script** panes appear.
 3. Use the **Schema** pane to explore your available data. Click the **+** sign next to a bucket name to expand its content.
-4. Use the **Script** pane to enter your Flux query.
+4. Use the **Functions** pane to view details about the available Flux functions.
+5. Use the **Script** pane to enter your Flux query.
   * To get started with your query, click the **Script Wizard**. In the wizard, you can select a bucket, measurement, fields and an aggregate.
   <img src="/img/chronograf/v1.7/flux-script-wizard.png" style="width:100%; max-width:300px;">
 
@@ -48,7 +49,7 @@ Flux is InfluxData's new functional data scripting language designed for queryin
   |> group(except: ["_time", "_start", "_stop", "_value"])
   ```
   * Alternatively, you can enter your entire script manually.
-4. Click **Run Script** in the top bar of the **Script** pane. You can then preview your graph in the above pane.
+6. Click **Run Script** in the top bar of the **Script** pane. You can then preview your graph in the above pane.
 
 ## Visualize your query
 
