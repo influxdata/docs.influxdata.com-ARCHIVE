@@ -11,5 +11,9 @@ menu:
 ## [Introduction to Flux](/flux/v0.7/introduction)
 A quick introduction to Flux and its design principles.
 
-## [Getting started with Flux](/flux/v0.7/introduction/getting-started)
+## [Enable Flux](/flux/v0.7/introduction/installation)
+Flux is packaged with InfluxDB v1.7+ and does not require any additional installation,
+however it does need to be enabled.
+
+## [Get started with Flux](/flux/v0.7/introduction/getting-started)
 The best way to learn Flux is to walk through writing a flux script. This guide does just that.
