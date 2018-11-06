@@ -27,17 +27,18 @@ influx_inspect [ [ command ] [ options ] ]`
 
 The `influx_inspect` commands are summarized here, with links to detailed information on each of the commands.
 
-* [`buildtsi`](#buildtsi): Convert in-memory (TSM-based) shards to TSI.
+* [`buildtsi`](#buildtsi): Converts in-memory (TSM-based) shards to TSI.
 * [`deletetsm`](#deletetsm): Bulk deletes a measurement from a raw TSM file.
-* [`dumptsi`](#dumptsi): Dump low-level details about TSI files.
-* [`dumptsm`](#dumptsm): Dump low-level details about TSM files.
+* [`dumptsi`](#dumptsi): Dumps low-level details about TSI files.
+* [`dumptsm`](#dumptsm): Dumps low-level details about TSM files.
 * [`dumptsmwal`](#dumptsmwal): Dump all data from a WAL file.  
-* [`export`](#export): Export raw data from a shard in Line Protocol format.
-* [`help`](#help): Display this help message format.
-* [`report`](#report): Display a shard level report.
-* [`verify`](#verify): Verify the integrity of TSM files.
-* [`verify-seriesfile`](#verify-seriesfile): Verify the integrity of series files.
-*
+* [`export`](#export): Exports raw data from a shard in Line Protocol format.
+* [`help`](#help): Displays this help message format.
+* [`report`](#report): Displays a shard level report.
+* [`reporttsi`](#reporttsi): Reports on cardinality for measurements and shards.
+* [`verify`](#verify): Verifies the integrity of TSM files.
+* [`verify-seriesfile`](#verify-seriesfile): Verifies the integrity of series files.
+
 
 ### `buildtsi`
 
@@ -422,6 +423,45 @@ The flag to report exact cardinality counts instead of estimates.
 Default value is `false`.
 Note: This can use a lot of memory.
 
+
+### `reporttsi`
+
+The report does the following:
+
+* Calculates the total exact series cardinality in the database.
+* Segments that cardinality by measurement, and emits those cardinality values.
+* Emits total exact cardinality for each shard in the database.
+* Segments for each shard the exact cardinality for each measurement in the shard.
+* Optionally limits the results in each shard to the "top n".
+
+The `reporttsi` command is primarily useful when there has been a change in cardinality
+and it's not clear which measurement is responsible for this change, and further, _when_
+that change happened. Estimating an accurate cardinality breakdown for each measurement
+and for each shard will help answer those questions.
+
+### Syntax
+
+```
+influx_inspect reporttsi [ options ]
+```
+
+#### Options
+
+Optional arguments are in brackets.
+
+#### `-db-path <path-to-db>`
+
+The path to the database.
+
+#### [ `-top <n>` ]
+
+Limits the results to the top specified number within each shard.
+
+#### Performance
+
+The `reporttsi` command uses simple slice/maps to store low cardinality measurements, which saves on the cost of initializing bitmaps.
+For high cardinality measurements the tool uses [roaring bitmaps](https://roaringbitmap.org/), which means we don't need to store all series IDs on the heap while running the tool.
+Conversion from low-cardinality to high-cardinality representations is done automatically while the tool runs.
 
 ### `verify`
 
