@@ -37,9 +37,9 @@ The function body must have a return statement if it is an explicit block, other
     FunctionBody       = Expression | Block .
 ```
 
-**Examples**
+##### Examples
 
-```
+```js
 () => 1 // function returns the value 1
 (a, b) => a + b // function returns the sum of a and b
 (x=1, y=1) => x * y // function with default values
@@ -63,13 +63,14 @@ Those variables are shared between the function literal and the surrounding bloc
 ## Call expressions
 
 A _call expression_ invokes a function with the provided arguments.
-Arguments must be specified using the argument name, positional arguments not supported.
+Arguments must be specified using the argument name.
+Positional arguments are not supported.
 Argument order does not matter.
 When an argument has a default value, it is not required to be specified.
 
-**Examples**
+##### Examples
 
-```
+```js
 f(a:1, b:9.6)
 float(v:1)
 ```
@@ -83,13 +84,13 @@ Pipe expressions pass the result of the left hand expression as the _pipe argume
 Function literals specify which if any argument is the pipe argument using the _pipe literal_ as the argument's default value.
 It is an error to use a pipe expression if the function does not declare a pipe argument.
 
-```
+```js
 pipe_lit = "<-" .
 ```
 
-**Examples**
+##### Examples
 
-```
+```js
 foo = () => // function body elided
 bar = (x=<-) => // function body elided
 baz = (y=<-) => // function body elided
