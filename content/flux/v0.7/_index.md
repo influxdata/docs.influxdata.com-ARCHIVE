@@ -17,3 +17,6 @@ however it does need to be enabled.
 
 ## [Get started with Flux](/flux/v0.7/introduction/getting-started)
 The best way to learn Flux is to walk through writing a flux script. This guide does just that.
+
+## [Flux language reference](/flux/v0.7/language)
+The specification for the Flux language and query execution.
