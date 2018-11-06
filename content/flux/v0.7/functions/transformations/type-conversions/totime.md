@@ -26,5 +26,7 @@ from(bucket: "telegraf")
 
 ## Function definition
 ```js
-toTime = (table=<-) => table |> map(fn:(r) => time(v:r._value))
+toTime = (tables=<-) =>
+  tables
+    |> map(fn:(r) => time(v:r._value))
 ```

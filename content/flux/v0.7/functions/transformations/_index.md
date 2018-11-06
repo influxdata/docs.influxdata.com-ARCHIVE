@@ -1,6 +1,6 @@
 ---
 title: Flux transformation functions
-description: placeholder
+description: Flux transformation functions transform and shape your data in specific ways.
 menu:
   flux_0_7:
     parent: Functions

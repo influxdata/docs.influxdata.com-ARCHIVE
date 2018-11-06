@@ -26,5 +26,7 @@ from(bucket: "telegraf")
 
 ## Function definition
 ```js
-toFloat = (table=<-) => table |> map(fn:(r) => float(v: r._value))
+toFloat = (tables=<-) =>
+  tables
+    |> map(fn:(r) => float(v: r._value))
 ```

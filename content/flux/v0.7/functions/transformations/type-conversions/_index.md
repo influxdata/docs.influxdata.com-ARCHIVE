@@ -1,6 +1,6 @@
 ---
 title: Flux type conversion functions
-description: placeholder
+description: Flux type conversion functions convert columns of the input table into a specific data type.
 menu:
   flux_0_7:
     parent: Transformations
@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-Flux type conversion functions convert the `_value` column of the input table into a specific data type.
+Flux type conversion functions convert columns of the input table into a specific data type.
 The following type conversion functions are available:
 
 - [toBool](./tobool)

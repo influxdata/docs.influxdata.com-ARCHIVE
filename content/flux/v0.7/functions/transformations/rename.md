@@ -24,7 +24,7 @@ rename(columns: {host: "server", facility: "datacenter"})
 
 // OR
 
-rename(fn: (col) => "{col}_new")
+rename(fn: (column) => "{column}_new")
 ```
 
 ## Parameters
@@ -54,5 +54,5 @@ from(bucket: "telegraf/autogen")
 ```js
 from(bucket: "telegraf/autogen")
     |> range(start: -5m)
-    |> rename(fn: (col) => "{col}_new")
+    |> rename(fn: (column) => "{column}_new")
 ```

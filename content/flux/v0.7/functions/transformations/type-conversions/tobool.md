@@ -26,5 +26,7 @@ from(bucket: "telegraf")
 
 ## Function definition
 ```js
-toBool = (table=<-) => table |> map(fn:(r) => bool(v: r._value))
+toBool = (tables=<-) =>
+  tables
+    |> map(fn:(r) => bool(v: r._value))
 ```

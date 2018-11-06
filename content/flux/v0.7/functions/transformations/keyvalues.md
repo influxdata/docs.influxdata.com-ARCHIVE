@@ -15,7 +15,7 @@ _**Function type:** Transformation_
 _**Output data type:** Object_
 
 ```js
-keyValues(keyCols: ["usage_idle", "usage_user"])
+keyValues(keyColumns: ["usage_idle", "usage_user"])
 
 // OR
 
@@ -24,9 +24,9 @@ keyValues(fn: (schema) => schema.columns |> filter(fn:(v) =>  v.label =~ /usage_
 
 ## Parameters
 
-> `keyCols` and `fn` are mutually exclusive. Only one may be used at a time.
+> `keyColumns` and `fn` are mutually exclusive. Only one may be used at a time.
 
-### keyCols
+### keyColumns
 A list of columns from which values are extracted.
 All columns indicated must be of the same type.
 
@@ -45,7 +45,7 @@ _**Data type:** Function_
 from(bucket: "telegraf/autogen")
   |> range(start: -30m)
   |> filter(fn: (r) => r._measurement == "cpu")
-  |> keyValues(keyCols: ["usage_idle", "usage_user"])
+  |> keyValues(keyColumns: ["usage_idle", "usage_user"])
 ```
 
 ##### Get key values from columns matching a regular expression

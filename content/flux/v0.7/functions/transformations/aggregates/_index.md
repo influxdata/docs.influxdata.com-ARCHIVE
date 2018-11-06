@@ -1,6 +1,6 @@
 ---
 title: Flux aggregate functions
-description: placeholder
+description: Flux aggregate functions take values from an input table and aggregate them in some way.
 menu:
   flux_0_7:
     parent: Transformations

@@ -79,8 +79,8 @@ from(bucket: "telegraf/autogen")
 
 ## Function definition
 ```js
-median = (method="estimate_tdigest", compression=0.0, table=<-) =>
-  percentile(table:table, percentile:0.5, method:method, compression:compression)
+median = (method="estimate_tdigest", compression=0.0, tables=<-) =>
+  percentile(percentile:0.5, method:method, compression:compression)
 ```
 
 <hr style="margin-top:4rem"/>

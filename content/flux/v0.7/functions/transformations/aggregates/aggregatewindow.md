@@ -1,6 +1,6 @@
 ---
 title: aggregateWindow() function
-description: placeholder
+description: The aggregateWindow() function applies an aggregate function to fixed windows of time.
 menu:
   flux_0_7:
     name: aggregateWindow
@@ -13,7 +13,7 @@ The `aggregateWindow()` function applies an aggregate function to fixed windows 
 _**Function type:** Aggregate_  
 
 ```js
-aggregateWindow(every: 1m, fn: mean, columns: ["_value"], timeSrc: "_stop", timeDst: "_time")
+aggregateWindow(every: 1m, fn: mean, columns: ["_value"], timeColumn: "_stop", timeDst: "_time")
 ```
 
 As data is windowed into separate tables and aggregated, the `_time` column is dropped from each group key.
@@ -46,8 +46,8 @@ Defaults to `["_value"]`.
 
 _**Data type:** Array of strings_
 
-### timeSrc
-The "time source" column from which time is copied for the aggregate record.
+### timeColumn
+The time column from which time is copied for the aggregate record.
 Defaults to `"_stop"`.
 
 _**Data type:** String_
@@ -68,12 +68,12 @@ from(bucket: "telegraf/autogen")
 
 ## Function definition
 ```js
-aggregateWindow = (every, fn, columns=["_value"], timeSrc="_stop", timeDst="_time", table=<-) =>
-	table
+aggregateWindow = (every, fn, columns=["_value"], timeColumn="_stop", timeDst="_time", tables=<-) =>
+	tables
 		|> window(every:every)
 		|> fn(columns:columns)
-		|> duplicate(column:timeSrc, as:timeDst)
-		|> window(every:inf, timeCol:timeDst)
+		|> duplicate(column:timeColumn, as:timeDst)
+		|> window(every:inf, timeColumn:timeDst)
 ```
 
 <hr style="margin-top:4rem"/>

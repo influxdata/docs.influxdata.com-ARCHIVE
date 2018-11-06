@@ -31,8 +31,9 @@ _**Data type:** String_
 
 ## Function definition
 ```js
-fromRows = (bucket) => from(bucket:bucket)
-  |> pivot(rowKey:["_time"], colKey: ["_field"], valueCol: "_value")
+fromRows = (bucket) =>
+  from(bucket:bucket)
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
 ## Examples

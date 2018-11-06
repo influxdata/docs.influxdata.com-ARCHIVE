@@ -56,12 +56,12 @@ Most Flux functions manipulate data pipe-forwarded into the function.
 In order for a custom function to process pipe-forwarded data, one of the function
 parameters must capture the input tables using the `<-` pipe expression.
 
-In the example below, the `table` parameter is assigned to the `<-` expression,
+In the example below, the `tables` parameter is assigned to the `<-` expression,
 which represents all data pipe-forwarded into the function.
-`table` is then pipe-forwarded into other operations in the function definition.
+`tables` is then pipe-forwarded into other operations in the function definition.
 
 ```js
-functionName = (table=<-) => table |> functionOperations
+functionName = (tables=<-) => tables |> functionOperations
 ```
 
 #### Pipe-forwardable function example
@@ -73,12 +73,14 @@ It uses the [`map()` function](../transformations/map) to modify each `_value`.
 
 ```js
 // Function definition
-multByX = (table=<-, x) => table |> map(fn: (row) => row._value * x)
+multByX = (tables=<-, x) =>
+  tables
+    |> map(fn: (r) => r._value * x)
 
 // Function usage
 from(bucket: "telegraf/autogen")
   |> range(start: -1m)
-  |> filter(fn: (row) => row._measurement == "mem" AND row._field == "used_percent" )
+  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent" )
   |> multByX(x:2.0)
 ```
 
@@ -102,18 +104,20 @@ It then uses the [`limit()` function](../transformations/limit) to return the fi
 
 ```js
 // Function definition
-getWinner = (table=<-, noSarcasm:true) => table |> sort(desc: noSarcasm) |> limit(n:1)
+getWinner = (tables=<-, noSarcasm:true) =>
+  tables
+    |> sort(desc: noSarcasm) |> limit(n:1)
 
 // Function usage
 // Get the winner
 from(bucket: "telegraf/autogen")
   |> range(start: -1m)
-  |> filter(fn: (row) => row._measurement == "mem" AND row._field == "used_percent" )
+  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent" )
   |> getWinner()
 
 // Get the "winner"
 from(bucket: "telegraf/autogen")
   |> range(start: -1m)
-  |> filter(fn: (row) => row._measurement == "mem" AND row._field == "used_percent" )
+  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent" )
   |> getWinner(noSarcasm: false)
 ```

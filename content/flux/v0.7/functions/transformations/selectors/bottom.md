@@ -14,7 +14,7 @@ _**Function type:** Selector_
 _**Output data type:** Object_
 
 ```js
-bottom(n:10, cols: ["_value"])
+bottom(n:10, columns: ["_value"])
 ```
 
 ## Parameters
@@ -42,13 +42,13 @@ from(bucket:"telegraf/autogen")
 ## Function definition
 ```js
 // _sortLimit is a helper function, which sorts and limits a table.
-_sortLimit = (n, desc, cols=["_value"], table=<-) =>
-  table
-    |> sort(cols:cols, desc:desc)
+_sortLimit = (n, desc, columns=["_value"], tables=<-) =>
+  tables
+    |> sort(columns:columns, desc:desc)
     |> limit(n:n)
 
-bottom = (n, cols=["_value"], table=<-) =>
-  _sortLimit(table:table, n:n, cols:cols, desc:false)
+bottom = (n, columns=["_value"], tables=<-) =>
+  _sortLimit(n:n, columns:columns, desc:false)
 ```
 
 <hr style="margin-top:4rem"/>

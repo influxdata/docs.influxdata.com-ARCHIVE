@@ -37,8 +37,8 @@ from(bucket: "telegraf/autogen")
 
 ## Function definition
 ```js
-increase = (table=<-, columns=["_value"]) =>
-	table
+increase = (tables=<-, columns=["_value"]) =>
+	tables
 		|> difference(nonNegative: true, columns:columns)
 		|> cumulativeSum()
 ```

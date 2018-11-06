@@ -1,6 +1,6 @@
 ---
 title: Flux miscellaneous functions
-description: placeholder
+description: Flux provides miscellaneous functions that serve purposes other than retrieving, transforming, or outputting data.
 menu:
   flux_0_7:
     parent: Functions

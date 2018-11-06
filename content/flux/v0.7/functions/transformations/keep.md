@@ -20,7 +20,7 @@ keep(columns: ["col1", "col2"])
 
 // OR
 
-keep(fn: (col) => col =~ /inodes*/)
+keep(fn: (column) => column =~ /inodes*/)
 ```
 
 ## Parameters
@@ -32,7 +32,7 @@ Cannot be used with `fn`.
 _**Data type:** Array of strings_
 
 ### fn
-A function which takes a column name as a parameter and returns a boolean indicating
+A function which takes a column name as a parameter (`column`) and returns a boolean indicating
 whether or not the column should be included in the resulting table.
 Cannot be used with `columns`.
 
@@ -51,5 +51,5 @@ from(bucket: "telegraf/autogen")
 ```js
 from(bucket: "telegraf/autogen")
     |> range(start: -5m)
-    |> keep(fn: (col) => col =~ /inodes*/)
+    |> keep(fn: (column) => column =~ /inodes*/)
 ```

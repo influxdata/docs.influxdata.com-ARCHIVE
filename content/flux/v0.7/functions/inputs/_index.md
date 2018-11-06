@@ -1,6 +1,6 @@
 ---
 title: Flux input functions
-description: placeholder
+description: Flux input functions define sources of data or or display information about data sources.
 menu:
   flux_0_7:
     parent: Functions
@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-Flux input functions define or display information about data sources.
+Flux input functions define sources of data or or display information about data sources.
 The following input functions are are available:
 
 - [buckets](./buckets)

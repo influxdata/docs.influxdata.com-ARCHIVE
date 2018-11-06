@@ -26,5 +26,7 @@ from(bucket: "telegraf")
 
 ## Function definition
 ```js
-toInt = (table=<-) => table |> map(fn:(r) => int(v: r._value))
+toInt = (tables=<-) =>
+  tables
+    |> map(fn:(r) => int(v: r._value))
 ```

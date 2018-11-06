@@ -50,5 +50,6 @@ pearsonr(x: stream1, y: stream2, on: ["_time", "_field"])
 
 ## Function definition
 ```js
-pearsonr = (x,y,on) => cov(x:x, y:y, on:on, pearsonr:true)
+pearsonr = (x,y,on) =>
+  cov(x:x, y:y, on:on, pearsonr:true)
 ```

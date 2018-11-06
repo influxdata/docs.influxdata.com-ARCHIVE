@@ -18,11 +18,11 @@ _**Function type:** Transformation_
 _**Output data type:** Object_
 
 ```js
-window(every: 5m, period: 5m, offset: 12h, timeCol: "_time", startCol: "_start", stopCol: "_stop")
+window(every: 5m, period: 5m, offset: 12h, timeColumn: "_time", startColumn: "_start", stopColumn: "_stop")
 
 // OR
 
-window(intervals: intervals(every: 5m, period: 5m, offset: 12h), timeCol: "_time", startCol: "_start", stopCol: "_stop")
+window(intervals: intervals(every: 5m, period: 5m, offset: 12h), timeColumn: "_time", startColumn: "_start", stopColumn: "_stop")
 ```
 
 ## Parameters
@@ -44,7 +44,7 @@ Defaults to `every` value.
 _**Data type:** Duration_
 
 ### offset
-The offset duration relative to the [`location`](#) offset.
+The offset duration relative to the [`location`](/flux/v0.7/language/statements#location) offset.
 It can be negative, indicating that the offset goes backwards in time.
 The default aligns the window boundaries with `now`.
 
@@ -62,19 +62,19 @@ intervals(every:1d, period:8h, offset:9h)
 
 > When `intervals` is used, `every`, `period`, and `offset` cannot be used or need to be set to 0.
 
-### timeCol
+### timeColumn
 The column containing time.
 Defaults to `"_time"`.
 
 _**Data type:** String_
 
-### startCol
+### startColumn
 The column containing the window start time.
 Defaults to `"_start"`.
 
 _**Data type:** String_
 
-### stopCol
+### stopColumn
 The column containing the window stop time.
 Defaults to `"_stop"`.
 

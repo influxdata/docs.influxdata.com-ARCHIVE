@@ -1,6 +1,6 @@
 ---
 title: Flux selector functions
-description: placeholder
+description: Flux selector functions return one or more records based on function logic.
 menu:
   flux_0_7:
     parent: Transformations
