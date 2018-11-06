@@ -8,7 +8,7 @@ menu:
 
 ## [Release notes](/flux/v0.7/about_the_project/releasenotes-changelog)
 
-## [Contributing to Flux](https://github.com/influxdata/flux/blob/master/CONTIBUTING.md)
+<!-- ## [Contributing to Flux](https://github.com/influxdata/flux/blob/master/CONTRIBUTING.md) -->
 
 ## [CLA](https://influxdata.com/community/cla/)
 
