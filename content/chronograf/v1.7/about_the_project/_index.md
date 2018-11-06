@@ -29,7 +29,7 @@ See the [open source license for Chronograf](https://github.com/influxdata/chron
 Chronograf is released under the GNU Affero General Public License. This Free Software Foundation license is fairly new,
 and differs from the more widely known and understood GPL.
 
-Our goal with using AGPL, much like MongoDB, is to preserve the concept of copyleft with Chronograf.
+Our goal with using AGPL is to preserve the concept of copyleft with Chronograf.
 With traditional GPL, copyleft was associated with the concept of distribution of software.
 The problem is that nowadays, distribution of software is rare: things tend to run in the cloud. AGPL fixes this “loophole”
 in GPL by saying that if you use the software over a network, you are bound by the copyleft. Other than that,
