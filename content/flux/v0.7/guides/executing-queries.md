@@ -13,7 +13,7 @@ This guide covers the different options:
 
 1. [Chronograf's Data Explorer](#chronograf-s-data-explorer)
 2. [Influx CLI in "Flux mode"](#influx-cli-in-flux-mode)
-3. [Influx CLI via paramenter](#influx-cli-via-parameter)
+3. [Influx CLI via parameter](#influx-cli-via-parameter)
 4. [Influx CLI via STDIN](#influx-cli-via-stdin)
 
 > Before attempting these methods, make sure Flux is enabled by setting
