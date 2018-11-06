@@ -1,6 +1,8 @@
 {{ partial "header.html" . }}
 <div class="homepage">
 
+	<div class="cards-oss">
+
 	<div class="homepage--card card-platform">
 		<div class="homepage--card-container">
 			<h1 class="homepage--card-title">InfluxData Platform</h1>
@@ -10,64 +12,58 @@
 		<div class="homepage--card-mask"></div>
 	</div>
 
-	<div class="cards-oss">
-	{{ range .Site.Menus.products }}
-		{{ if not (in .Identifier "enterprise") }}
-			<div class="homepage--card card-{{ .Name }}">
-				<div class="homepage--card-container">
-				  <a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
-					<p class="homepage--card-description">
-						{{ if eq .Identifier "telegraf" }}
-							Telegraf is InfluxData's open source plugin-driven server agent for collecting and reporting metrics.
-						{{ end }}
-						{{ if eq .Identifier "influxdb" }}
-							InfluxDB is InfluxData's open source time series database designed to handle high write and query loads.
-						{{ end }}
-						{{ if eq .Identifier "chronograf" }}
-							Chronograf is InfluxData's open source web application for infrastructure monitoring, alert management, data visualization, and database management.
-						{{ end }}
-						{{ if eq .Identifier "kapacitor" }}
-							Kapacitor is InfluxData's open source data processing framework that makes it easy to create alerts, run ETL jobs, and detect anomalies.
-						{{ end }}
-						<br/>
-						<a class="homepage--card-link" href="https://influxdata.com/downloads/#{{ .Identifier }}" target="_blank">Download {{ .Name }}</a>
-						<br/>
-						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting-started/">Get started</a>
-						<br/>
-						<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">Documentation</a>
-					</p>
-				</div>
-				<div class="homepage--card-mask"></div>
-			</div>
-		{{ end }}
-	{{ end }}
-	</div>
-
-	<div class="cards-enterprise">
-	{{ range .Site.Menus.products }}
-		{{ if (in .Identifier "enterprise")}}
-		<div class="homepage--card card-{{ .Name }} enterprise">
+	{{ range .Site.Data.home_cards.cards }}
+		{{ if eq .category "oss" }}
+		<div class="homepage--card card-{{ .id }}">
 			<div class="homepage--card-container">
-				<a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .Name }}</a>
+				<a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .title }}</a>
 				<p class="homepage--card-description">
-					{{ if eq .Identifier "enterprise_influxdb" }}
-						InfluxDB Enterprise offers proprietary extensions to the open source version of InfluxDB, and is designed to handle high write and query loads.
+					{{ .description }}
+
+					{{ $defaultVersion := (print .id "_semver") }}
+					{{ $component := .id }}
+
+					{{ range .links }}
+						{{ if eq .type "relative" }}
+							<br/><a class="homepage--card-link" href="/{{ $component }}/{{ index $.Site.Data.default_versions $defaultVersion }}{{ .href }}">{{ .text }}</a>
+						{{ else }}
+							<br/><a class="homepage--card-link" href="{{ .href }}" target="_blank">{{ .text }}</a>
+						{{ end }}
 					{{ end }}
-					{{ if eq .Identifier "enterprise_kapacitor" }}
-						Kapacitor Enterprise offers proprietary extensions to the open source version of Kapacitor.
-					{{ end }}
-					<br/>
-					<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/download/">Download {{ .Name }}</a>
-					<br/>
-					<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/introduction/getting-started/">Get started</a>
-					<br/>
-					<a class="homepage--card-link" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">Documentation</a>
 				</p>
 			</div>
 			<div class="homepage--card-mask"></div>
 		</div>
 		{{ end }}
 	{{ end }}
-	</div>
+	
 </div>
+
+<div class="cards-enterprise">
+{{ range .Site.Data.home_cards.cards }}
+	{{ if eq .category "enterprise" }}
+	<div class="homepage--card card-{{ .id }}">
+		<div class="homepage--card-container">
+			<a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .title }}</a>
+			<p class="homepage--card-description">
+				{{ .description }}
+
+				{{ $defaultVersion := (print .id "_semver") }}
+				{{ $component := .id }}
+
+				{{ range .links }}
+					{{ if eq .type "relative" }}
+						<br/><a class="homepage--card-link" href="/{{ $component }}/{{ index $.Site.Data.default_versions $defaultVersion }}{{ .href }}">{{ .text }}</a>
+					{{ else }}
+						<br/><a class="homepage--card-link" href="{{ .href }}" target="_blank">{{ .text }}</a>
+					{{ end }}
+				{{ end }}
+			</p>
+		</div>
+		<div class="homepage--card-mask"></div>
+	</div>
+	{{ end }}
+{{ end }}
+</div>
+
 {{ partial "footer.html" . }}
