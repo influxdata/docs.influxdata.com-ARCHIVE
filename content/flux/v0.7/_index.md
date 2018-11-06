@@ -1,5 +1,5 @@
 ---
-title: Flux v0.7 (alpha) documentation
+title: Flux v0.7 (technical preview) documentation
 description:
 menu:
   flux:
