@@ -221,7 +221,7 @@ Very useful for troubleshooting, but will log any sensitive data contained withi
 
 Environment variable: `INFLUXDB_DATA_QUERY_LOG_ENABLED`
 
-#### `wal-fsync-delay = "0s"` ???
+#### `wal-fsync-delay = "0s"`
 
 The amount of time that a write waits before fsyncing.
 Use a duration greater than 0 to batch up multiple fsync calls.
@@ -283,7 +283,7 @@ This limit can be disabled by setting it to `0`.
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
-#### `index-version = "inmem"` ???
+#### `index-version = "inmem"`
 
 The type of shard index to use for new shards.
 The default (`inmem`) is to use an in-memory index that is recreated at startup.
@@ -493,7 +493,7 @@ The interval of time when anti-entropy checks run on each data node.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_CHECK_INTERVAL`
 
-#### `max-fetch = 10` ???
+#### `max-fetch = 10`
 
 The maximum number of shards that a single data node will copy or repair in parallel.
 
@@ -577,7 +577,7 @@ The interval at which to record statistics.
 
 Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
 
-#### `remote-collect-interval = "10s"` ???
+#### `remote-collect-interval = "10s"`
 
 The time interval to poll other data nodes' stats when aggregating cluster stats.
 
@@ -662,7 +662,7 @@ The JWT authorization shared secret used to validate requests using JSON web tok
 
 Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
-#### `max-row-limit = 0` ???
+#### `max-row-limit = 0`
 
 The default chunk size for result sets that should be chunked.
 The maximum number of rows that can be returned in a non-chunked query.
@@ -990,7 +990,7 @@ Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 
 -----
 
-## TLS settings ???
+## TLS settings
 
 
 ### `[tls]`
@@ -1024,9 +1024,7 @@ max-version = "tls1.2"
 
 ```
 
-#### `min-version = "tls1.2"` ???
-
-#### `min-version = "tls1.0"`
+#### `min-version = "tls1.2"`
 
 Minimum version of the TLS protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, and `tls1.2`. If not specified, `min-version` is the minimum TLS version specified in the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants). In this example, `tls1.0` specifies the minimum version as TLS 1.0, which is consistent with the behavior of previous InfluxDB releases.
 
