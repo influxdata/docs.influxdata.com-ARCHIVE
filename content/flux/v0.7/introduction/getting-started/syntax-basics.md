@@ -9,7 +9,7 @@ menu:
 ---
 
 
-Flux, at its core, is scripting language, but designed specifically for working with data.
+Flux, at its core, is scripting language designed specifically for working with data.
 This guide walks through a handful of simple expressions and how they are handled in Flux.
 
 ## Use the influx CLI

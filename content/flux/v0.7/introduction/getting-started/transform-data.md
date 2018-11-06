@@ -129,7 +129,7 @@ Once ungrouped and combined into a single table, the aggregate data points will 
 ![Unwindowed aggregate data](/img/flux/flux-windowed-aggregates-ungrouped.png)
 
 ## Helper functions
-This may seem like a lot of writing just to query that aggregates data, however going through the
+This may seem like a lot of coding just to query that aggregates data, however going through the
 process helps to understand how data changes "shape" as it is passed through each function.
 
 Flux provides (and allows you to create) "helper" functions that abstract many of these steps.

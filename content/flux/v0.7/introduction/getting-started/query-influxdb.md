@@ -79,7 +79,7 @@ Use the `AND` relational operator to chain multiple filters.
 
 ```js
 // Pattern
-(objectName) => (objectName.objectProperty comparisonOperator comparisonExpression)
+(r) => (r.objectProperty comparisonOperator comparisonExpression)
 
 // Example with single filter
 (r) => (r._measurement == "cpu")
@@ -113,7 +113,9 @@ from(bucket:"telegraf/autogen")
   |> yield()
 ```
 
-> Chronograf automatically assumes a `yield()` function at the end of each script in order to visualized the data.
+> Chronograf and the `influx` CLI automatically assumes a `yield()` function at
+> the end of each script in order to output and visualize the data.
+> Best practice is to include a `yield()` function, but it is not always necessary.
 
 ## Congratulations!
 You have now queried data from InfluxDB using Flux.

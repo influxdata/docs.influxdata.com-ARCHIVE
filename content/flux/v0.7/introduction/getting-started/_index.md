@@ -24,20 +24,18 @@ interactive Flux Read-Eval-Print-Loop (REPL) allowing you to write and run Flux 
 
 ---
 
-_See the [InfluxDB installation instructions](/influxdb/v1.7/introduction/installation)
-for information about downloading and installing InfluxDB v1.7._
+_For information about downloading and installing InfluxDB v1.7, see [InfluxDB installation](/influxdb/v1.7/introduction/installation)._
 
 ---
 
 ##### Chronograf v1.7+
 **Not required but strongly recommended**.
-Chronograf v1.7's Data Explorer provides a user-interface (UI) for writing Flux scripts and visualizing results.
+Chronograf v1.7's Data Explorer provides a user interface (UI) for writing Flux scripts and visualizing results.
 Dashboards in Chronograf v1.7+ also support Flux queries.
 
 ---
 
-_See the [Chronograf installation instructions](/chronograf/v1.7/introduction/installation)
-for information about downloading and installing Chronograf v1.7._
+_For information about downloading and installing Chronograf v1.7, see [Chronograf installation](/chronograf/v1.7/introduction/installation)._
 
 ---
 
@@ -45,7 +43,7 @@ for information about downloading and installing Chronograf v1.7._
 
 ---
 
-_If using Docker, the [InfluxData Sandbox](/platform/installation/sandbox-install)
+_If your are using Docker, the [InfluxData Sandbox](/platform/installation/sandbox-install)
 will install the latest version of each component of the TICK stack._
 
 ---
@@ -58,13 +56,13 @@ Flux introduces important new concepts you should understand as you get started.
 Flux introduces "buckets," a new data storage concept for InfluxDB.
 A **bucket** is a named location where data is stored that has a retention policy.
 It's similar to an InfluxDB v1.x "database," but is a combination of both a database and a retention policy.
-When using multiple retention policies, each is its own bucket.
+When using multiple retention policies, each retention policy is treated as is its own bucket.
 
 Flux's [`from()` function](/flux/v0.7/functions/inputs/from), which defines an InfluxDB data source, requires a `bucket` parameter.
 When using Flux with InfluxDB v1.x, use the following bucket naming convention which combines
 the database name and retention policy into a single bucket name:
 
-_**InfluxDB v1.x bucket naming convention**_
+###### InfluxDB v1.x bucket naming convention**_
 ```js
 // Pattern
 from(bucket:"<database>/<retention-policy>")
@@ -81,10 +79,10 @@ it is further processed or manipulated.
 
 ### Tables
 Flux structures all data in tables.
-When data is streamed from data sources, Flux formats it as annotated CSV, i.e. tables.
+When data is streamed from data sources, Flux formats it as annotated comma-separated values (CSV), representing tables.
 Functions then manipulate or process them and output new tables.
 
-#### Group Keys
+#### Group keys
 Every table has a **group key** which describes the contents of the table.
 It's a list of columns for which every row in the table will have the same value.
 Columns with unique values in each row are **not** part of the group key.
