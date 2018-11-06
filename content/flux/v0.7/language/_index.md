@@ -9,8 +9,8 @@ menu:
 
 The following document specifies the Flux language and query execution.
 
-This document is a living document and does not represent the current implementation of Flux.
-Any section that is not currently implemented is commented with a IMPL#XXX where XXX is an issue number tracking discussion and progress towards implementation.
+This document is a living document and may not represent the current implementation of Flux.
+Any section that is not currently implemented is commented with a `[IMPL#XXX]` where `XXX` is an issue number tracking discussion and progress towards implementation.
 
 
 The Flux language is centered on querying and manipulating time series data.
