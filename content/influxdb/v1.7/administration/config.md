@@ -311,14 +311,14 @@ For more information on `GOMAXPROCS` environment variable, see [`GOMAXPROCS` env
 
 Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
-#### `compact-throughput = "48m"`  ???
+#### `compact-throughput = "48m"`
 
 The rate limit, in bytes per second, that we will allow TSM compactions to write to disk.
 Note that short bursts are allowed to happen at a possibly larger value, set by `compact-throughput-burst`.
 
 Environment variable: `INFLUXDB_DATA_COMPACT_THROUGHPUT`  
 
-#### `compact-throughput-burst = "48m"` ???
+#### `compact-throughput-burst = "48m"`
 
 The rate limit, in bytes per second, that we allow TSM compactions to write to disk.
 
@@ -593,7 +593,7 @@ Environment variable: `INFLUXDB_ACCESS_LOG_PATH`
 #### `access-log-status-filters = []`
 
 Filters which requests should be logged. Each filter is of the pattern `NNN`, `NNX`, or `NXX` where `N` is
-a number and `X` is a wildcard for any number. To filter all `5xx` responses, use the string `5xx`. 
+a number and `X` is a wildcard for any number. To filter all `5xx` responses, use the string `5xx`.
 If multiple filters are used, then only one has to match. The default is to have no filters which
 will cause every request to be printed.
 
