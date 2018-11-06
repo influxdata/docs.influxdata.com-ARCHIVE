@@ -60,7 +60,7 @@ influx_inspect buildtsi -datadir <data_dir> -waldir <wal_dir> [ options ]
 > or ensure that the permissions match after running the command.
 
 
-#### Arguments
+#### Options
 
 Optional arguments are in brackets.
 
@@ -163,7 +163,7 @@ All shards in the database:
 ./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
 ```
 
-#### Arguments
+#### Options
 
 Optional arguments are in brackets.
 
