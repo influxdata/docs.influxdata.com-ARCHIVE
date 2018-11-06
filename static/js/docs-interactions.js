@@ -223,3 +223,14 @@ $(document).ready( function() {
 		$(this).siblings('.sidebar--children').toggleClass('open');
 	})
 })
+
+/*
+ * Content condenser toggle
+ */
+
+$(document).ready( function() {
+	$(".article-content .condense-toggle").click(function(e) {
+		e.preventDefault()
+		$(this).closest('.condense').toggleClass('closed');
+	})
+})
