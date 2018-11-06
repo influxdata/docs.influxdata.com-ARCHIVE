@@ -20,7 +20,7 @@ InfluxDB with a default TICK stack installation - memory usage and processes.
 > "Dockerized" instances of the TICK stack, these measurements may not be available.
 
 In this guide, we'll join two data streams, one representing memory usage and the other representing the
-total number of running process, then calculate the average memory usage per running process.
+total number of running processes, then calculate the average memory usage per running process.
 
 ## Define stream variables
 In order to perform a join, you must have two streams of data.
