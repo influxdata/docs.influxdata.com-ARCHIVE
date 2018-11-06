@@ -138,17 +138,17 @@ timeRange = -1h
 
 cpuUsageUser = from(bucket:"telegraf/autogen")
   |> range(start: timeRange)
-  |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_user" AND
-    row.cpu == "cpu-total"
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_user" AND
+    r.cpu == "cpu-total"
   )
 
 memUsagePercent = from(bucket:"telegraf/autogen")
   |> range(start: timeRange)
-  |> filter(fn: (row) =>
-    row._measurement == "mem" AND
-    row._field == "used_percent"
+  |> filter(fn: (r) =>
+    r._measurement == "mem" AND
+    r._field == "used_percent"
   )
 ```
 
@@ -183,8 +183,8 @@ A common use case for variable assignments in Flux is creating variables for mul
 
 ```js
 timeRange = -1h
-cpuUsageUser = from(bucket:"telegraf/autogen") |> range(start: timeRange) |> filter(fn: (row) => row._measurement == "cpu" AND row._field == "usage_user" AND row.cpu == "cpu-total")
-memUsagePercent = from(bucket:"telegraf/autogen") |> range(start: timeRange) |> filter(fn: (row) => row._measurement == "mem" AND row._field == "used_percent")
+cpuUsageUser = from(bucket:"telegraf/autogen") |> range(start: timeRange) |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "usage_user" AND r.cpu == "cpu-total")
+memUsagePercent = from(bucket:"telegraf/autogen") |> range(start: timeRange) |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent")
 ```
 
 These variables can be used in other functions, such as  `join()`, while keeping the syntax minimal and flexible.

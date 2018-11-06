@@ -25,10 +25,10 @@ guide, but update the range to pull data from the last hour:
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_system" AND
-    row.cpu == "cpu-total")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system" AND
+    r.cpu == "cpu-total")
 ```
 
 ## Flux functions
@@ -52,10 +52,10 @@ For this example, window data in five minute intervals (`5m`).
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_system" AND
-    row.cpu == "cpu-total")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system" AND
+    r.cpu == "cpu-total")
   |> window(every: 5m)
 ```
 
@@ -72,9 +72,9 @@ Use the [`mean()` function](/flux/v0.7/functions/transformations/aggregates/mean
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_system" AND
-    row.cpu == "cpu-total")
+    r._measurement == "cpu" AND
+    r._field == "usage_system" AND
+    r.cpu == "cpu-total")
   |> window(every: 5m)
   |> mean()
 ```
@@ -97,10 +97,10 @@ to duplicate the `_stop` column as the `_time` column for each windowed table.
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_system" AND
-    row.cpu == "cpu-total")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system" AND
+    r.cpu == "cpu-total")
   |> window(every: 5m)
   |> mean()
   |> duplicate(column: "_stop", as: "_time")
@@ -114,10 +114,10 @@ into a single, infinite window.
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_system" AND
-    row.cpu == "cpu-total")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system" AND
+    r.cpu == "cpu-total")
   |> window(every: 5m)
   |> mean()
   |> duplicate(column: "_stop", as: "_time")
@@ -139,10 +139,10 @@ The same operation performed in this guide can be accomplished using the
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_system" AND
-    row.cpu == "cpu-total")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system" AND
+    r.cpu == "cpu-total")
   |> aggregateWindow(every: 5m, fn: mean)
 ```
 

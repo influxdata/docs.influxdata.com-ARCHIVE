@@ -73,8 +73,8 @@ The `filter()` function has one parameter, `fn`, which expects an anonymous func
 with logic that filters data based on columns or attributes.
 
 Flux's anonymous function syntax is very similar to Javascript's.
-Data tables are passed into the `filter()` function as an object.
-The anonymous function takes the object and evaluates each line to see if it matches the defined filters.
+Records or rows are passed into the `filter()` function as an object (`r`).
+The anonymous function takes the object and evaluates it to see if it matches the defined filters.
 Use the `AND` relational operator to chain multiple filters.
 
 ```js
@@ -82,10 +82,10 @@ Use the `AND` relational operator to chain multiple filters.
 (objectName) => (objectName.objectProperty comparisonOperator comparisonExpression)
 
 // Example with single filter
-(row) => (row._measurement == "cpu")
+(r) => (r._measurement == "cpu")
 
 // Example with multiple filters
-(row) => (row._measurement == "cpu") AND (r._field != "usage_system" )
+(r) => (r._measurement == "cpu") AND (r._field != "usage_system" )
 ```
 
 #### Use the following:
@@ -94,10 +94,10 @@ For this example, filter by the `cpu` measurement, the `usage_system` field, and
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -15m)
-  |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_system" AND
-    row.cpu == "cpu-total")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system" AND
+    r.cpu == "cpu-total")
 ```
 
 ## 4. Yield your queried data
@@ -106,10 +106,10 @@ Use Flux's `yield()` function to output the filtered tables as the result of the
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -15m)
-  |> filter(fn: (row) =>
-    row._measurement == "cpu" AND
-    row._field == "usage_system" AND
-    row.cpu == "cpu-total")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system" AND
+    r.cpu == "cpu-total")
   |> yield()
 ```
 

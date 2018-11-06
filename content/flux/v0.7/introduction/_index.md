@@ -26,7 +26,7 @@ and calculating the average of each window:
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start:-1h)
-  |> filter(fn:(row) => row._measurement == "cpu" AND row.cpu == "cpu-total")
+  |> filter(fn:(r) => r._measurement == "cpu" AND r.cpu == "cpu-total")
   |> aggregateWindow(every: 1m, fn: mean)
 ```
 
