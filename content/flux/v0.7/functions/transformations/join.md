@@ -28,8 +28,8 @@ Columns are renamed using the pattern `<column>_<table>` to prevent ambiguity in
 ##### Example:
 If you have two streams of data, **data_1** and **data_2**, with the following group keys:
 
-**data_1**: `{ _field }`  
-**data_2**: `{ _time, _field }`
+**data_1**: `[_time, _field]`  
+**data_2**: `[_time, _field]`
 
 And join them with:
 
@@ -37,7 +37,7 @@ And join them with:
 join(tables: {d1: data_1, d2: data_2}, on: ["_time"])
 ```
 
-The resulting group keys for all tables will be: `{ _time, _field_d1, _field_d2 }`
+The resulting group keys for all tables will be: `[_time, _field_d1, _field_d2]`
 
 
 ## Parameters
@@ -74,7 +74,7 @@ _**Data type:** String_
 
 Given the following two streams of data:
 
-**SF_Temp**  
+##### SF_Temp**  
 
 | _time  | _field | _value  |
 | ------ |:------:| -------:|
@@ -82,7 +82,7 @@ Given the following two streams of data:
 | 0002	 | "temp" | 75      |
 | 0003	 | "temp" | 72      |
 
-**NY_Temp**  
+##### NY_Temp**  
 
 | _time  | _field | _value  |
 | ------ |:------:| -------:|
@@ -93,7 +93,10 @@ Given the following two streams of data:
 And the following join query:
 
 ```js
-join(tables: {sf: SF_Temp, ny: NY_Temp}, on: ["_time", "_field"])
+join(
+  tables: {sf: SF_Temp, ny: NY_Temp},
+  on: ["_time", "_field"]
+)
 ```
 
 The output will be:
