@@ -5,7 +5,7 @@ menu:
   flux_0_7:
     name: Group data
     parent: Guides
-    weight: 4
+    weight: 3
 ---
 
 With Flux, data can be grouped by any column in your queried data set.

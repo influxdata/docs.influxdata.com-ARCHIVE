@@ -4,7 +4,7 @@ description:
 menu:
   flux_0_7:
     name: Guides
-    weight: 50
+    weight: 3
 ---
 
 ## [Regular expressions in Flux](/flux/v0.7/guides/regular-expressions)

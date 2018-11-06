@@ -4,7 +4,7 @@ description: Flux functions allows you to retrieve, transform, process, and outp
 menu:
   flux_0_7:
     name: Functions
-    weight: 10
+    weight: 4
 ---
 
 Flux's functional syntax allows you to retrieve, transform, process, and output data easily.

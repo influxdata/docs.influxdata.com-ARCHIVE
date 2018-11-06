@@ -4,7 +4,7 @@ description: Covers the current and future Flux functional data scripting langua
 menu:
   flux_0_7:
     name: Language reference
-    weight: 3
+    weight: 5
 ---
 
 The following document specifies the Flux language and query execution.

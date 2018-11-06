@@ -5,7 +5,7 @@ menu:
   flux_0_7:
     name: Execute Flux queries
     parent: Guides
-    weight: 5
+    weight: 1
 ---
 
 There are multiple ways to execute Flux queries with InfluxDB and Chronograf v1.7+.
