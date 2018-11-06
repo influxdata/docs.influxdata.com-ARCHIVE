@@ -11,11 +11,7 @@ menu:
 Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure:
 * View [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards) from the Host List page. Dashboards are available depending on which Telegraf input plugins you have enabled. These pre-created dashboards cannot be cloned or edited.
 * Create custom dashboards from scratch by building queries in the Data Explorer, as described [below](#build-a-dashboard).
-* Import dashboard templates when you [add or update a connection in [Chronograf](/chronograf/latest/administration/creating-connections):
-  1. From the Configuration page, click **Add Connection** or select an existing connection to edit it.
-  2. In the **InfluxDB Connection** window, enter or verify your connection details and click **Add** or **Update Connection**.
-  3. In the **Dashboards** window, select from the available dashboard templates to import.
-  4. Configure your dashboard as needed with the options described below. 
+* Import dashboard templates when you add or update a connection in Chronograf. See [Dashboard templates](#dashboard-templates) for details.
 
 
 By the end of this guide, you'll be aware of the tools available to you for creating dashboards similar to this example:
@@ -90,6 +86,20 @@ These tips only apply to the line, stacked, step-plot, and line+stat [visualizat
 * You can also modify the dashboard's *time range* at the top of the page - the default range is **Past 15 minutes**.
 
 Now, you are free to experiment and complete your dashboard by creating, editing, and repositioning more cells!
+
+## Dashboard templates
+
+Select from a variety of dashboard templates to import and customize based on which Telegraf plugins you have enabled.
+
+1. From the Configuration page, click **Add Connection** or select an existing connection to edit it.
+2. In the **InfluxDB Connection** window, enter or verify your connection details and click **Add** or **Update Connection**.
+3. In the **Dashboards** window, select from the available dashboard templates to import based on which Telegraf plugins you have enabled, such as the following examples:
+  * <img src="/img/chronograf/v1.7/protoboard-kubernetes.png" style="width:100%; max-width:600px;">
+  * <img src="/img/chronograf/v1.7/protoboard-mysql.png" style="width:100%; max-width:600px;">
+  * <img src="/img/chronograf/v1.7/protoboard-system.png" style="width:100%; max-width:600px;">
+  * <img src="/img/chronograf/v1.7/protoboard-vsphere.png" style="width:100%; max-width:600px;">
+4. Edit, clone, or configure the dashboards as needed.
+
 
 ## Extra Tips
 
