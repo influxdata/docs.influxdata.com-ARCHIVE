@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-Regular expressions (regex's) are incredibly powerful when matching patterns in large collections of data.
+Regular expressions (regexes) are incredibly powerful when matching patterns in large collections of data.
 With Flux, regular expressions are primarily used for evaluation logic in operations such as filtering rows,
 dropping and keeping columns, state detection, etc.
 This guide shows how to use regular expressions in your Flux scripts.
