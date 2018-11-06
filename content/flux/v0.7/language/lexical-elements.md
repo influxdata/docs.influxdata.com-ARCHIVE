@@ -21,13 +21,14 @@ Comments act like newlines.
 
 Flux is built up from tokens.
 There are four classes of tokens:
+
 * _identifiers_
 * _keywords_
 * _operators_
 * _literals_
 
 
-_White space_, formed from spaces, horizontal tabs, carriage returns, and newlines, is ignored except as it separates tokens that would otherwise combine into a single token.
+_White space_ formed from spaces, horizontal tabs, carriage returns, and newlines is ignored except as it separates tokens that would otherwise combine into a single token.
 While breaking the input into tokens, the next token is the longest sequence of characters that form a valid token.
 
 ## Identifiers
@@ -36,11 +37,11 @@ Identifiers name entities within a program.
 An _identifier_ is a sequence of one or more letters and digits.
 An identifier must start with a letter.
 
-```
+```js
     identifier = letter { letter | unicode_digit } .
 ```
 
-**Examples**
+##### Examples of identifiers
 
 ```
 a
@@ -77,12 +78,12 @@ The following character sequences represent operators:
 ## Numeric literals
 
 Numeric literals may be integers or floating point values.
-Literals have arbitrary precision and will be coerced to a specific type when used.
+Literals have arbitrary precision and are coerced to a specific type when used.
 
 The following coercion rules apply to numeric literals:
 
 * An integer literal can be coerced to an "int", "uint", or "float" type,
-* A float literal can be coerced to a "float" type,
+* A float literal can be coerced to a "float" type.
 * An error will occur if the coerced type cannot represent the literal value.
 
 
@@ -93,12 +94,12 @@ The following coercion rules apply to numeric literals:
 An integer literal is a sequence of digits representing an integer value.
 Only decimal integers are supported.
 
-```
+```js
     int_lit     = "0" | decimal_lit .
     decimal_lit = ( "1" … "9" ) { decimal_digit } .
 ```
 
-**Examples**
+##### Examples of integer literals
 
 ```
 0
@@ -113,13 +114,13 @@ It has an integer part, a decimal point, and a fractional part.
 The integer and fractional part comprise decimal digits.
 One of the integer part or the fractional part may be elided.
 
-```
+```js
 float_lit = decimals "." [ decimals ] |
     "." decimals .
 decimals  = decimal_digit { decimal_digit } .
 ```
 
-**Examples**
+##### Examples of floating-point literals
 
 ```
 0.
@@ -138,7 +139,7 @@ It has an integer part and a duration unit part.
 Multiple durations may be specified together and the resulting duration is the sum of each smaller part.
 When several durations are specified together, larger units must appear before smaller ones, and there can be no repeated units.
 
-```
+```js
 duration_lit  = { int_lit duration_unit } .
 duration_unit = "y" | "mo" | "w" | "d" | "h" | "m" | "s" | "ms" | "us" | "µs" | "ns" .
 ```
@@ -166,9 +167,9 @@ Durations can be combined via addition and subtraction.
 Durations can be multiplied by an integer value.
 These operations are performed on each time unit independently.
 
-**Examples**
+##### Examples of duration literals
 
-```
+```js
 1s
 10d
 1h15m // 1 hour and 15 minutes
@@ -181,9 +182,9 @@ Addition and subtraction of durations to date times do not commute and are left 
 Addition and subtraction of durations to date times applies months, days and seconds in that order.
 When months are added to a date times and the resulting date is past the end of the month, the day is rolled back to the last day of the month.
 
-**Examples**
+##### Examples of duration literals
 
-```
+```js
 2018-01-01T00:00:00Z + 1d       // 2018-01-02T00:00:00Z
 2018-01-01T00:00:00Z + 1mo      // 2018-02-01T00:00:00Z
 2018-01-01T00:00:00Z + 2mo      // 2018-03-01T00:00:00Z
@@ -213,10 +214,12 @@ When months are added to a date times and the resulting date is past the end of 
 A _date and time literal_ represents a specific moment in time.
 It has a date part, a time part and a time offset part.
 The format follows the [RFC 3339](https://tools.ietf.org/html/rfc3339) specification.
-The time is optional, when it is omitted the time is assumed to be midnight for the default location.
-The `time_offset` is optional, when it is omitted the location option is used to determine the offset.
+The time is optional.
+When it is omitted, the time is assumed to be midnight for the default location.
+The `time_offset` is optional.
+When it is omitted, the location option is used to determine the offset.
 
-```
+```js
 date_time_lit     = date [ "T" time ] .
 date              = year_lit "-" month "-" day .
 year              = decimal_digit decimal_digit decimal_digit decimal_digit .
@@ -230,9 +233,9 @@ fractional_second = "."  { decimal_digit } .
 time_offset       = "Z" | ("+" | "-" ) hour ":" minute .
 ```
 
-**Examples**
+##### Examples of date and time literals
 
-```
+```js
 1952-01-25T12:35:51Z
 2018-08-15T13:36:23-07:00
 2009-10-15T09:00:00       // October 15th 2009 at 9 AM in the default location
@@ -273,9 +276,9 @@ StringExpression = "{" Expression "}" .
 > To be implemented: [IMPL#252](https://github.com/influxdata/platform/issues/252) Parse string literals.
 
 
-**Examples**
+##### Examples of string literals
 
-```
+```js
 "abc"
 "string with double \" quote"
 "string with backslash \\"
@@ -284,7 +287,7 @@ StringExpression = "{" Expression "}" .
 ```
 
 String literals are also interpolated for embedded expressions to be evaluated as strings.
-Embedded expressions are enclosed in curly brackets "`{}`".
+Embedded expressions are enclosed in curly brackets (`{}`).
 The expressions are evaluated in the scope containing the string literal.
 The result of an expression is formatted as a string and replaces the string content between the brackets.
 All types are formatted as strings according to their literal representation.
@@ -294,14 +297,14 @@ To include the literal curly brackets within a string they must be escaped.
 
 > To be implemented: [IMPL#248](https://github.com/influxdata/platform/issues/248) Add printf function.
 
-**Example: Interpolation**
+##### Example: Interpolation
 
-```
-    n = 42
-    "the answer is {n}" // the answer is 42
-    "the answer is not {n+1}" // the answer is not 43
-    "openinng curly bracket \{" // openinng curly bracket {
-    "closing curly bracket \}" // closing curly bracket }
+```js
+n = 42
+"the answer is {n}" // the answer is 42
+"the answer is not {n+1}" // the answer is not 43
+"openinng curly bracket \{" // openinng curly bracket {
+"closing curly bracket \}" // closing curly bracket }
 ```
 [IMPL#251](https://github.com/influxdata/platform/issues/251) Add string interpolation support
 
@@ -324,7 +327,7 @@ regexp_lit         = "/" { unicode_char | byte_value | regexp_escape_char } "/" 
 regexp_escape_char = `\` (`/` | `\`)
 ```
 
-**Examples**
+##### Examples of regular expression literals
 
 ```
 /.*/
