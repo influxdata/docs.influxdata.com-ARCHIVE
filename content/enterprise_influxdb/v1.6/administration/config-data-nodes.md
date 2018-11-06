@@ -5,7 +5,7 @@ menu:
   enterprise_influxdb_1_6:
     name: Data node configurations
     weight: 12
-    parent: Configuring
+    parent: Administration
 ---
 
 
@@ -33,8 +33,6 @@ menu:
 
     The InfluxDB Enterprise data node configuration settings overlap significantly
     with the settings in InfluxDB OSS.
-    Where possible, the following sections link to the [configuration documentation](/influxdb/v1.6/administration/config/)
-    for InfluxDB's OSS.
 
     > **Note:**
     The system has internal defaults for every configuration file setting.

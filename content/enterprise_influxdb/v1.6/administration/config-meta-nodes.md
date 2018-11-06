@@ -5,19 +5,19 @@ menu:
   enterprise_influxdb_1_6:
     name: Meta node configurations
     weight: 16
-    parent: Configuring
+    parent: Administration
 ---
 
-* [Meta node configuration sections](#meta-node-configuration)
+* [Meta node configurations](#meta-node-configurations)
     * [Global options](#global-options)
     * [[enterprise]](#enterprise)
     * [[meta]](#meta)
 
-    ## Meta node configuration
+    ## Meta node configurations
 
     ### Global options
 
-    #### reporting-disabled = false
+    #### `reporting-disabled = false`
 
     InfluxData, the company, relies on reported data from running nodes primarily to
     track the adoption rates of different InfluxDB versions.
@@ -31,23 +31,23 @@ menu:
 
     > **Note:** No data from user databases are ever transmitted.
 
-    #### bind-address = ""
+    #### `bind-address = ""`
     This setting is not intended for use.
     It will be removed in future versions.
 
-    #### hostname = ""
+    #### `hostname = ""`
 
     The hostname of the [meta node](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node).
     This must be resolvable and reachable by all other members of the cluster.
 
     Environment variable: `INFLUXDB_HOSTNAME`
 
-    ### [enterprise]
+    ### `[enterprise]`
 
     The `[enterprise]` section contains the parameters for the meta node's
     registration with the [InfluxDB Enterprise License Portal](https://portal.influxdata.com/).
 
-    #### license-key = ""
+    #### `license-key = ""`
 
     The license key created for you on [InfluxPortal](https://portal.influxdata.com).
     The meta node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
@@ -66,7 +66,7 @@ menu:
 
     Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
 
-    #### license-path = ""
+    #### `license-path = ""`
 
     The local path to the permanent JSON license file that you received from InfluxData
     for instances that do not have access to the internet.
@@ -150,13 +150,13 @@ menu:
 
     Environment variable: `INFLUXDB_META_HTTPS_INSECURE_TLS`
 
-    ####  `gossip-frequency = "5s"`
+    #### `gossip-frequency = "5s"`
 
     The frequency at which meta nodes communicate the cluster membership state.
 
     Environment variable: `INFLUXDB_META_GOSSIP_FREQUENCY`
 
-    ####  `announcement-expiration = "30s"`
+    #### `announcement-expiration = "30s"`
 
     The rate at which the results of `influxd-ctl show` are updated when a meta
     node leaves the cluster.
@@ -174,7 +174,7 @@ menu:
 
     Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
-    ####  `election-timeout = "1s"`
+    #### `election-timeout = "1s"`
 
     The duration a Raft candidate spends in the candidate state without a leader
     before it starts an election.
@@ -184,7 +184,7 @@ menu:
 
     Environment variable: `INFLUXDB_META_ELECTION_TIMEOUT`
 
-    ####  `heartbeat-timeout = "1s"`
+    #### `heartbeat-timeout = "1s"`
 
     The heartbeat timeout is the amount of time a Raft follower remains in the
     follower state without a leader before it starts an election.
@@ -193,7 +193,7 @@ menu:
 
     Environment variable: `INFLUXDB_META_HEARTBEAT_TIMEOUT`
 
-    ####  `leader-lease-timeout = "500ms"`
+    #### `leader-lease-timeout = "500ms"`
 
     The leader lease timeout is the amount of time a Raft leader will remain leader
     if it does not hear from a majority of nodes.
@@ -207,7 +207,7 @@ menu:
 
     Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
 
-    ####  `commit-timeout = "50ms"`
+    #### `commit-timeout = "50ms"`
 
     The commit timeout is the amount of time a Raft node will tolerate between
     commands before issuing a heartbeat to tell the leader it is alive.
@@ -215,26 +215,26 @@ menu:
 
     Environment variable: `INFLUXDB_META_COMMIT_TIMEOUT`
 
-    ####  `cluster-tracing = false`
+    #### `cluster-tracing = false`
 
     Cluster tracing toggles the logging of Raft logs on Raft nodes.
     Enable this setting when debugging Raft consensus issues.
 
     Environment variable: `INFLUXDB_META_CLUSTER_TRACING`
 
-    ####  `logging-enabled = true`
+    #### `logging-enabled = true`
 
     Meta logging toggles the logging of messages from the meta service.
 
     Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
-    ####  `pprof-enabled = true`
+    #### `pprof-enabled = true`
 
     Set to `false` to disable the `/debug/pprof` endpoint for troubleshooting.
 
     Environment variable: `INFLUXDB_META_PPROF_ENABLED`
 
-    ####  `lease-duration = "1m0s"`
+    #### `lease-duration = "1m0s"`
 
     The default duration of the leases that data nodes acquire from the meta nodes.
     Leases automatically expire after the `lease-duration` is met.
