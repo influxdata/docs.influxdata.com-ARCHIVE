@@ -9,7 +9,7 @@ menu:
 ---
 
 Chronograf offers a complete dashboard solution for visualizing your data and monitoring your infrastructure:
-* View [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards) from the Host List page. Dashboards are available depending on which Telegraf input plugins you have available. These pre-created dashboards cannot be cloned or edited.
+* View [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards) from the Host List page. Dashboards are available depending on which Telegraf input plugins you have enabled. These pre-created dashboards cannot be cloned or edited.
 * Create custom dashboards from scratch by building queries in the Data Explorer, as described below.
 * Import dashboard templates when you [add or update a connection in [Chronograf](/chronograf/latest/administration/creating-connections):
   1. From the Configuration page, click **Add Connection** or select an existing connection to edit it.
