@@ -72,79 +72,89 @@ You can list them using `$ influx --help`.
 The list below offers a brief discussion of each option.
 We provide detailed information on the `-execute`, `-format`, and `-import` options at the end of this section.
 
-`-compressed`
+### `-compressed`
+
 Set to true if the import file is compressed.
 Use with `-import`.
 
-`-consistency 'any|one|quorum|all'`
+### `-consistency 'any|one|quorum|all'`
+
 Set the write consistency level.
 
-`-database 'database name'`
+### `-database 'database name'`
+
 The database to which `influx` connects.
 
-`-execute '<command>'`
+### `-execute '<command>'`
+
 Execute an [InfluxQL](/influxdb/v1.7/query_language/data_exploration/) command and quit.
 See [-execute](/influxdb/v1.7/tools/shell/#execute-an-influxql-command-and-quit-with-execute).
 
-`-format 'json|csv|column'`
+### `-format 'json|csv|column'`
+
 Specifies the format of the server responses.
 See [-format](/influxdb/v1.7/tools/shell/#specify-the-format-of-the-server-responses-with-format).
 
-`-host '<hostname>'`
+### `-host '<hostname>'`
+
 The host to which `influx` connects.
 By default, InfluxDB runs on localhost.
 
-`-import`
+### `-import`
+
 Import new data from a file or import a previously [exported](https://github.com/influxdb/influxdb/blob/master/importer/README.md) database from a file.
 See [-import](/influxdb/v1.7/tools/shell/#import-data-from-a-file-with-import).
 
-`-password '<password>'`
+### `-password '<password>'`
 
 The password `influx` uses to connect to the server.
 `influx` will prompt for a password if you leave it blank (`-password ''`).
 Alternatively, set the password for the CLI with the `INFLUX_PASSWORD` environment
 variable.
 
-`-path`
+### `-path`
 
 The path to the file to import.
 Use with `-import`.
 
-`-port 'port #'`
+### `-port 'port #'`
+
 The port to which `influx` connects.
 By default, InfluxDB runs on port `8086`.
 
-`-pps`
+### `-pps`
 
 How many points per second the import will allow.
 By default, pps is zero and influx will not throttle importing.
 Use with `-import`.
 
-`-precision 'rfc3339|h|m|s|ms|u|ns'`
+### `-precision 'rfc3339|h|m|s|ms|u|ns'`
 Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
 Precision defaults to nanoseconds.
 
 > **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) works with the `-execute` option, but it does not work with the `-import option`. All other precision formats (e.g., `h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options.
 
-`-pretty`
+### `-pretty`
 Turns on pretty print for the `json` format.
 
-`-ssl`
+### `-ssl`
 Use HTTPS for requests.
 
-`-type`
+### `-type`
 
 Determines which interactive shell to use.
 Default value is `influxql`.
 To use the Flux REPL shell, set the value to `flux`.
 For details on using Flux and the Flux language shell, see the [Flux documentation](/flux/v0.7/).
 
-`-username 'username'`
+###`-username 'username'`
+
 The username that `influx` uses to connect to the server.
 Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment variable.
 
-`-version`
-Display the InfluxDB version and exit.
+### `-version`
+
+Displays the InfluxDB version and exit.
 
 ### Execute an InfluxQL command and quit with `-execute`
 

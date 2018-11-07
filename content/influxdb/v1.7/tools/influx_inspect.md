@@ -64,13 +64,13 @@ influx_inspect buildtsi -datadir <data_dir> -waldir <wal_dir> [ options ]
 
 Optional arguments are in brackets.
 
-#### `[ -batch-size]`
+#### `[ -batch-size ]`
 
 The size of the batches written to the index. Default value is `10000`.
 
 >**Warning:** Setting this value can have adverse effects on performance and heap size.
 
-#### `[ -concurrency]`
+#### `[ -concurrency ]`
 
 The number of workers to dedicate to shard index building.
 Defaults to [`GOMAXPROCS`](/influxdb/v1.7/administration/config#gomaxprocs-environment-variable) value.
@@ -442,7 +442,7 @@ and for each shard will help answer those questions.
 ### Syntax
 
 ```
-influx_inspect reporttsi [ options ]
+influx_inspect reporttsi -db-path <path-to-db> [ options ]
 ```
 
 #### Options

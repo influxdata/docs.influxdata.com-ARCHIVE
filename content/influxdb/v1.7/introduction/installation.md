@@ -236,7 +236,7 @@ Make sure the directories in which data and the [write ahead log](/influxdb/v1.7
 
 > **Note:** If the data and WAL directories are not writable, the `influxd` service will not start.
 
-Information about `data` and `wal` directory paths is available in the [Data settings](/influxdb/v1.7/administration/config/#data-settings-data) section of the [Configuring InfluxDB](/influxdb/v1.7/administration/config/) documentation.
+Information about `data` and `wal` directory paths is available in the [Data settings](/influxdb/v1.7/administration/config/#data-settings) section of the [Configuring InfluxDB](/influxdb/v1.7/administration/config/) documentation.
 
 ## Hosting InfluxDB OSS on AWS
 

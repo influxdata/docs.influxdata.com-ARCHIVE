@@ -16,21 +16,32 @@ Chunked query was added into the Go client v2 interface. If you compiled against
 
 ### Features
 
+#### Flux v0.7 technical preview
+
+Support for the Flux language and queries has been added in this release. To begin exploring Flux 0.7 (technical preview):
+
+* Enable Flux using the new configuration setting [`[http] flux-enabled = true`](/influxdb/v1.7/administration/config/#flux-enabled-false).
+* Use the new [`influx -type=flux`](influxdb/v1.7/tools/shell/#type) option to enable the Flux REPL shell for creating Flux queries.
+* Read about Flux and the Flux language, enabling Flux, or jump into the getting started and other guides in the [Flux v0.7 (technical preview) documentation](/flux/v0.7/).
+
+#### Time Series Index (TSI) query performance and throughputs improvements
+
+    * Faster index planning for queries against indexes with many series that share tag pairs.
+    * Reduced index planning for queries that include previously queried tag pairs - the TSI
+      index now caches partial index results for later reuse.
+    * Performance improvements required a change in on-disk TSI format to be used.
+    * **To take advantage of these improvements**, rebuild your indexes or wait
+      for a TSI compaction of your indexes, at which point the new format will be applied.
+      Hot shards or new shards will immediately use the new TSI format.
+
+#### Other features
+
 * Enable the storage service by default.
 * Ensure read service regular expressions get optimized.
-* Add Flux support using the `-type` option to the influx CLI command.
 * Add chunked query into the Go client v2.
 * Add `access-log-status-filters` config setting to create an access log filter.
 * Compaction performance improvements for Time Series Index (TSI).
 * Add roaring bitmaps to TSI index files.
-* Time Series Index (TSI) query performance and throughputs improvements
-    * Queries against indexes with many series that share tag pairs will see faster index planning.
-    * Queries that include previously queried tag pairs will see reduced index planning times because
-      the TSI index can now cache partial index results for later reuse.
-    * Improvements required a change in on-disk TSI format to be used.
-    * **To take advantage of these improvements:** Rebuild your indexes or wait for a TSI compaction
-      of your indexes, at which point the new format will be applied. Hot shards or new shards will
-      immediately use the new TSI format.
 
 
 ### Bug fixes
@@ -661,7 +672,7 @@ The following new configuration options are available.
   In versions 1.2.0 through 1.2.1, we fixed that bug, but the fix caused a breaking change for Grafana and Kapacitor users; users who had not set `max-row-limit` to `0` experienced truncated/partial data due to the `10000` row limit.
   In version 1.2.2, we've changed the default `max-row-limit` setting to `0` to match the behavior in versions 1.0 and 1.1.
 
-### Bugfixes
+### Bug fixes
 
 - Change the default [`max-row-limit`](/influxdb/v1.3/administration/config#max-row-limit-0) setting from `10000` to `0` to prevent the absence of data in Grafana or Kapacitor.
 
