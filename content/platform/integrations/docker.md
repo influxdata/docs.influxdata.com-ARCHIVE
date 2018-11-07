@@ -1,6 +1,6 @@
 ---
 title: InfluxData Docker integrations
-description: placeholder
+description: InfluxData projects are well suited to be deployed in Docker containers. Containers for each project are published to DockerHub.
 menu:
   platform:
     name: Docker
