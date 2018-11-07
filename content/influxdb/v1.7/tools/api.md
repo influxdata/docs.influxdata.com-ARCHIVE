@@ -15,7 +15,7 @@ It uses HTTP response codes, HTTP authentication, JWT Tokens, and basic authenti
 
 The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
-Those settings [are configurable](/influxdb/v1.7/administration/config/#http-endpoints-settings-http).
+Those settings [are configurable](/influxdb/v1.7/administration/config/#http-endpoints-settings).
 
 ## InfluxDB HTTP endpoints
 

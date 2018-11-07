@@ -21,18 +21,19 @@ Chunked query was added into the Go client v2 interface. If you compiled against
 Support for the Flux language and queries has been added in this release. To begin exploring Flux 0.7 (technical preview):
 
 * Enable Flux using the new configuration setting [`[http] flux-enabled = true`](/influxdb/v1.7/administration/config/#flux-enabled-false).
-* Use the new [`influx -type=flux`](influxdb/v1.7/tools/shell/#type) option to enable the Flux REPL shell for creating Flux queries.
+* Use the new [`influx -type=flux`](/influxdb/v1.7/tools/shell#type) option to enable the Flux REPL shell for creating Flux queries.
 * Read about Flux and the Flux language, enabling Flux, or jump into the getting started and other guides in the [Flux v0.7 (technical preview) documentation](/flux/v0.7/).
 
 #### Time Series Index (TSI) query performance and throughputs improvements
 
-    * Faster index planning for queries against indexes with many series that share tag pairs.
-    * Reduced index planning for queries that include previously queried tag pairs - the TSI
-      index now caches partial index results for later reuse.
-    * Performance improvements required a change in on-disk TSI format to be used.
-    * **To take advantage of these improvements**, rebuild your indexes or wait
-      for a TSI compaction of your indexes, at which point the new format will be applied.
-      Hot shards or new shards will immediately use the new TSI format.
+* Faster index planning for queries against indexes with many series that share tag pairs.
+* Reduced index planning for queries that include previously queried tag pairs — the TSI
+  index now caches partial index results for later reuse.
+* Performance improvements required a change in on-disk TSI format to be used.
+* **To take advantage of these improvements**:
+  * Rebuild your indexes or wait for a TSI compaction of your indexes,
+    at which point the new TSI format will be applied.
+  * Hot shards and new shards immediately use the new TSI format.
 
 #### Other features
 
