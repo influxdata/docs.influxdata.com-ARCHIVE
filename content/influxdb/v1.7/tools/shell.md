@@ -12,7 +12,7 @@ InfluxDB's command line interface (`influx`) is an interactive shell for the HTT
 Use `influx` to write data (manually or from a file), query data interactively, and view query output in different formats.
 
 * [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx)
-* [`influx` options](/influxdb/v1.7/tools/shell/#influx-arguments)
+* [`influx` options](/influxdb/v1.7/tools/shell/#influx-options)
 * [`influx` commands](/influxdb/v1.7/tools/shell/#influx-commands)
 
 ## Launch `influx`
@@ -66,6 +66,7 @@ NO_PROXY=123.45.67.89,123.45.67.90
 
 
 ## `influx` options
+
 The `influx` shell includes options that you can pass into `influx` when starting.
 You can list them using `$ influx --help`.
 The list below offers a brief discussion of each option.

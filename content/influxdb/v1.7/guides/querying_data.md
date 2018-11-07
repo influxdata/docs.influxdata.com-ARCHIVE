@@ -157,4 +157,4 @@ curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlenc
 ### InfluxQL
 ---
 Now that you know how to query data, check out the [Data Exploration page](/influxdb/v1.7/query_language/data_exploration/) to get acquainted with InfluxQL.
-For more information about querying data with the HTTP API, please see the [API reference documentation](/influxdb/v1.7/tools/api/#query).
+For more information about querying data with the HTTP API, please see the [API reference documentation](/influxdb/v1.7/tools/api/#query-http-endpoint).
