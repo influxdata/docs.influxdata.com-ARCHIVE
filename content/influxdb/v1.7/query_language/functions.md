@@ -1004,7 +1004,7 @@ time                  bottom  location
 The query returns the smallest three values in the `water_level` field key for each 24-minute [interval](/influxdb/v1.7/query_language/data_exploration/#basic-group-by-time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:54:00Z`.
 It also returns results in [descending timestamp](/influxdb/v1.7/query_language/data_exploration/#order-by-time-desc) order.
 
-Notice that the [GROUP BY time() clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) does not override the points’ original timestamps. See [Issue 1](#issue-1-bottom-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
+Notice that the [GROUP BY time() clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) does not override the points’ original timestamps. See [Issue 1](#bottom-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 ### Common Issues with `BOTTOM()`
 
@@ -1650,7 +1650,7 @@ The query returns one randomly selected point from the `water_level` field key.
 It covers the [time range](/influxdb/v1.7/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and [groups](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) results into 18-minute intervals.
 
 Notice that the [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) does not override the points' original timestamps.
-See [Issue 1](#issue-1-sample-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
+See [Issue 1](#sample-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 ### Common Issues with `SAMPLE()`
 
@@ -1777,7 +1777,7 @@ The query returns the greatest three values in the `water_level` field key for e
 It also returns results in [descending timestamp](/influxdb/v1.7/query_language/data_exploration/#order-by-time-desc) order.
 
 Notice that the [GROUP BY time() clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) does not override the points’ original timestamps.
-See [Issue 1](#issue-1-top-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
+See [Issue 1](#top-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 ### Common Issues with `TOP()`
 

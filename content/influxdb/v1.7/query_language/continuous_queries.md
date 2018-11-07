@@ -821,7 +821,7 @@ To change a CQ, you must `DROP` and re`CREATE` it with the updated settings.
 ### Continuous Query Statistics
 
 If `query-stats-enabled` is set to `true` in your `influxdb.conf` or using the `INFLUXDB_CONTINUOUS_QUERIES_QUERY_STATS_ENABLED` environment variable, data will be written to `_internal` with information about when continuous queries ran and their duration.
-Information about CQ configuration settings is available in the [Configuration](/influxdb/v1.7/administration/config/#continuous-queries-settings-continuous-queries) documentation.
+Information about CQ configuration settings is available in the [Configuration](/influxdb/v1.7/administration/config/#continuous-queries-settings) documentation.
 
 > **Note:** `_internal` houses internal system data and is meant for internal use.
 The structure of and data stored in `_internal` can change at any time.

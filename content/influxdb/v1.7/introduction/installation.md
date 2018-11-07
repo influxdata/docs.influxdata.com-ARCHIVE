@@ -232,7 +232,7 @@ See the [Configuration](/influxdb/v1.7/administration/config/) documentation for
 
 ### Data and WAL directory permissions
 
-Make sure the directories in which data and the [write ahead log](/influxdb/v1.7/concepts/glossary/#wal-write-ahead-log) (WAL) are stored are writable for the user running the `influxd` service.
+Make sure the directories in which data and the [write ahead log](/influxdb/v1.7/concepts/glossary#wal-write-ahead-log) (WAL) are stored are writable for the user running the `influxd` service.
 
 > **Note:** If the data and WAL directories are not writable, the `influxd` service will not start.
 

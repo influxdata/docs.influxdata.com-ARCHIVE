@@ -12,14 +12,14 @@ menu:
 
 ### `8086`
 The default port that runs the InfluxDB HTTP service.
-[Configure this port](/influxdb/v1.7/administration/config/#bind-address-8086)
+[Configure this port](/influxdb/v1.7/administration/config#bind-address-8086)
 in the configuration file.
 
 **Resources** [API Reference](/influxdb/v1.7/tools/api/)
 
 ### 8088
 The default port that runs the RPC service for backup and restore.
-[Configure this port](/influxdb/v1.7/administration/config/#bind-address-127-0-0-1-8088)
+[Configure this port](/influxdb/v1.7/administration/config#bind-address-127-0-0-1-8088)
 in the configuration file.
 
 **Resources** [Backup and Restore](/influxdb/v1.7/administration/backup_and_restore/)
@@ -29,7 +29,7 @@ in the configuration file.
 ### 2003
 
 The default port that runs the Graphite service.
-[Enable and configure this port](/influxdb/v1.7/administration/config/#bind-address-2003)
+[Enable and configure this port](/influxdb/v1.7/administration/config#bind-address-2003)
 in the configuration file.
 
 **Resources** [Graphite README](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md)
@@ -37,7 +37,7 @@ in the configuration file.
 ### 4242
 
 The default port that runs the OpenTSDB service.
-[Enable and configure this port](/influxdb/v1.7/administration/config/#bind-address-4242)
+[Enable and configure this port](/influxdb/v1.7/administration/config#bind-address-4242)
 in the configuration file.
 
 **Resources** [OpenTSDB README](https://github.com/influxdata/influxdb/blob/master/services/opentsdb/README.md)
@@ -45,7 +45,7 @@ in the configuration file.
 ### 8089
 
 The default port that runs the UDP service.
-[Enable and configure this port](/influxdb/v1.7/administration/config/#bind-address-8089)
+[Enable and configure this port](/influxdb/v1.7/administration/config#bind-address-8089)
 in the configuration file.
 
 **Resources** [UDP README](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
@@ -53,7 +53,7 @@ in the configuration file.
 ### 25826
 
 The default port that runs the Collectd service.
-[Enable and configure this port](/influxdb/v1.7/administration/config/#bind-address-25826)
+[Enable and configure this port](/influxdb/v1.7/administration/config#bind-address-25826)
 in the configuration file.
 
 **Resources** [Collectd README](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md)

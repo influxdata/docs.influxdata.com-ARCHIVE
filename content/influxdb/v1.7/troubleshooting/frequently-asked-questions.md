@@ -273,7 +273,7 @@ For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with 
 
 Field values can be floats, integers, strings, or Booleans.
 Field value types cannot differ within a
-[shard](/influxdb/v1.7/concepts/glossary/#shard), but they can [differ](/influxdb/v1.7/write_protocols/line_protocol_reference/#example-7-attempt-to-write-a-string-to-a-field-that-previously-accepted-floats) across shards.
+[shard](/influxdb/v1.7/concepts/glossary/#shard), but they can [differ](/influxdb/v1.7/write_protocols/line_protocol_reference/#attempt-to-write-a-string-to-a-field-that-previously-accepted-floats) across shards.
 
 ### The SELECT statement
 
@@ -570,7 +570,7 @@ We list some of the most frequent cases below:
 
 The first and most common explanation involves [retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP).
 InfluxDB automatically queries data in a database’s `DEFAULT` RP.
-If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.7/query_language/data_exploration/#example-7-select-all-data-from-a-fully-qualified-measurement) the alternative RP.
+If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.7/query_language/data_exploration/#select-all-data-from-a-fully-qualified-measurement) the alternative RP.
 
 ### Tag keys in the SELECT clause
 
@@ -771,7 +771,7 @@ This can cause InfluxDB to overwrite [points](/influxdb/v1.7/concepts/glossary/#
 Include `GROUP BY *` in all `INTO` queries to preserve tags in the newly written data.
 
 Note that this behavior does not apply to queries that use the [`TOP()`](/influxdb/v1.7/query_language/functions/#top) or [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#bottom) functions.
-See the [`TOP()`](/influxdb/v1.7/query_language/functions/#issue-3-top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) documentation for more information.
+See the [`TOP()`](/influxdb/v1.7/query_language/functions/#top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#bottom-tags-and-the-into-clause) documentation for more information.
 
 #### Example
 

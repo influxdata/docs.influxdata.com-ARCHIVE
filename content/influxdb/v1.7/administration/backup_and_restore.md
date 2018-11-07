@@ -31,7 +31,7 @@ The online backup and restore processes execute over a TCP connection to the dat
 
 **To enable the port for the backup and restore service:**
 
-1. At the root level of the InfluxDB config file (`influxdb.conf`), uncomment the [`bind-address` configuration setting](/influxdb/v1.7/administration/config/#bind-address-127-0-0-1-8088) on the remote node.
+1. At the root level of the InfluxDB config file (`influxdb.conf`), uncomment the [`bind-address` configuration setting](/influxdb/v1.7/administration/config#bind-address-127-0-0-1-8088) on the remote node.
 
 2. Update the `bind-address` value to `<remote-node-IP>:8088`
 
