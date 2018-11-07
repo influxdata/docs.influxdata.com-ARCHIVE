@@ -89,16 +89,22 @@ Now, you are free to experiment and complete your dashboard by creating, editing
 
 ## Dashboard templates
 
-Select from a variety of dashboard templates to import and customize based on which Telegraf plugins you have enabled.
+Select from a variety of dashboard templates to import and customize based on which Telegraf plugins you have enabled, such as the following examples:
+
+* <img src="/img/chronograf/v1.7/protoboard-kubernetes.png" style="width:100%; max-width:600px;">
+* <img src="/img/chronograf/v1.7/protoboard-mysql.png" style="width:100%; max-width:600px;">
+* <img src="/img/chronograf/v1.7/protoboard-system.png" style="width:100%; max-width:600px;">
+* <img src="/img/chronograf/v1.7/protoboard-vsphere.png" style="width:100%; max-width:600px;">
+
+**To import dashboard templates:**
 
 1. From the Configuration page, click **Add Connection** or select an existing connection to edit it.
 2. In the **InfluxDB Connection** window, enter or verify your connection details and click **Add** or **Update Connection**.
-3. In the **Dashboards** window, select from the available dashboard templates to import based on which Telegraf plugins you have enabled, such as the following examples:
-  * <img src="/img/chronograf/v1.7/protoboard-kubernetes.png" style="width:100%; max-width:600px;">
-  * <img src="/img/chronograf/v1.7/protoboard-mysql.png" style="width:100%; max-width:600px;">
-  * <img src="/img/chronograf/v1.7/protoboard-system.png" style="width:100%; max-width:600px;">
-  * <img src="/img/chronograf/v1.7/protoboard-vsphere.png" style="width:100%; max-width:600px;">
-4. Edit, clone, or configure the dashboards as needed.
+3. In the **Dashboards** window, select from the available dashboard templates to import based on which Telegraf plugins you have enabled.
+
+    <img src="/img/chronograf/v1.7/protoboard-select.png" style="width:100%; max-width:500px;">
+4. Click **Create (x) Dashboards**.    
+5. Edit, clone, or configure the dashboards as needed.
 
 
 ## Extra Tips
