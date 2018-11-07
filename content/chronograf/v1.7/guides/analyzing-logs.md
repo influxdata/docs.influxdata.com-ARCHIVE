@@ -45,7 +45,7 @@ In the log viewer, you can select time ranges from which to view logs.
 By default, logs are streamed and displayed relative to "now," but it is possible to view logs from a past window of time.
 timeframe selection allows you to go to to a specific event and see logs for a time window both preceding and following that event. The default window is one minute, meaning the graph shows logs from thirty seconds before and the target time. Click the dropdown menu change the window.
 
-![Selecting time ranges](/img/chronograf/log-viewer-specifc-time-range.gif)
+![Selecting time ranges](/img/chronograf/log-viewer-specific-time.gif)
 
 ## Configuring the log viewer
 The log viewer can be customized to fit your specific needs.
