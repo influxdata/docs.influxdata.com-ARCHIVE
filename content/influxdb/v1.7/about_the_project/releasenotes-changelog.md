@@ -16,11 +16,22 @@ Chunked query was added into the Go client v2 interface. If you compiled against
 
 ### Features
 
--	Enable the storage service by default.
--	Ensure read service regular expressions get optimized.
--	Add Flux support using the `-type` option to the influx CLI command.
--	Add chunked query into the Go client v2.
--   Add `access-log-status-filters` config setting to create access log filter for the access log.
+* Enable the storage service by default.
+* Ensure read service regular expressions get optimized.
+* Add Flux support using the `-type` option to the influx CLI command.
+* Add chunked query into the Go client v2.
+* Add `access-log-status-filters` config setting to create an access log filter.
+* Compaction performance improvements for Time Series Index (TSI).
+* Add roaring bitmaps to TSI index files.
+* Time Series Index (TSI) query performance and throughputs improvements
+    * Queries against indexes with many series that share tag pairs will see faster index planning.
+    * Queries that include previously queried tag pairs will see reduced index planning times because
+      the TSI index can now cache partial index results for later reuse.
+    * Improvements required a change in on-disk TSI format to be used.
+    * **To take advantage of these improvements:** Rebuild your indexes or wait for a TSI compaction 
+      of your indexes, at which point the new format will be applied. Hot shards or new shards will 
+      immediately use the new TSI format.
+
 
 ### Bug fixes
 
