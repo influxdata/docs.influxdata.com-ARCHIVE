@@ -97,7 +97,7 @@ menu:
 - [csv](/telegraf/v1.8/data_formats/input/csv) - Contributed by @maxunt
 - [grok](/telegraf/v1.8/data_formats/input/grok/) - Contributed by @maxunt
 - [logfmt](/telegraf/v1.8/data_formats/input/logfmt/) - Contributed by @Ayrdrie & @maxunt
-- [wavefront](/telegraf/v1.8/data_formats/input/wavefrount/) - Contributed by @puckpuck
+- [wavefront](/telegraf/v1.8/data_formats/input/wavefront) - Contributed by @puckpuck
 
 ### New output data formats (serializers)
 
