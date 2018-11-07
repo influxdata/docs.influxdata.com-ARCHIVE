@@ -116,7 +116,7 @@ The Schema pane allows you to explore your data.
 The Script pane is where you write your Flux script.
 The Functions pane provides a list of functions available in your Flux queries.
 
-### 2. The influx CLI
+### 2. influx CLI
 The `influx` CLI is an interactive shell for querying InfluxDB.
 With InfluxDB v1.7+, use the `-type=flux` option to open a Flux REPL where you write and run Flux queries.
 

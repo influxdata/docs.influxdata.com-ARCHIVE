@@ -262,7 +262,7 @@ This table represents the average amount of memory in bytes per running process.
 
 ## Real world example
 The following function calculates the batch sizes written to an InfluxDB cluster by joining
-fields from `httpd` and `write` measurements in order to compare `_pointReq` and `_writeReq`.
+fields from `httpd` and `write` measurements in order to compare `pointReq` and `writeReq`.
 The results are grouped by cluster ID so you can make comparisons across clusters.
 
 ```js
