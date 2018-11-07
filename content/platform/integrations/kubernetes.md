@@ -15,9 +15,9 @@ has become a popular way to deploy and manage containers across multiple servers
 There are several ways use the InfluxData Platform (also known as the TICK
 stack) can be used with Kubernetes:
 
-- [Monitor Kubernetes](#monitor-kubernetes)
-- [Monitor applications running on Kubernetes](#monitor-kubernetes-apps)
-- [Deploy the TICK stack on Kubernetes](#deploy-the-tick-stack-on-kubernetes-platform-installation-kubernetes)
+- [Monitor Kubernetes](#monitor-kubernetes-https-www-influxdata-com-blog-monitoring-kubernetes-architecture)
+- [Monitor applications running on Kubernetes](#monitor-applications-running-on-kubernetes)
+- [Deploy the TICK stack on Kubernetes](#deploy-the-tick-stack-on-kubernetes-https-github-com-influxdata-tick-charts)
 - [Kubernetes recommendations](#kubernetes-recommendations)
 
 ## [Monitor Kubernetes](https://www.influxdata.com/blog/monitoring-kubernetes-architecture/)
@@ -40,7 +40,7 @@ or problems with mounted volumes.
 
 Still Kubernetes is an attractive deployment platform for applications of all types and InfluxData is working on several projects to make deployment on Kubernetes easier. These projects include:
 
-- An InfluxDB operator for easier deployment and operation of all TICK stack components. 
+- An InfluxDB operator for easier deployment and operation of all TICK stack components.
 - A comprehensive, tested configuration for monitoring Kubernetes with the TICK stack.
 - Integrations of the TICK stack with other Kubernetes-native applications.
 
