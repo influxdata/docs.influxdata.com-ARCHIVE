@@ -16,7 +16,7 @@
 		{{ if eq .category "oss" }}
 		<div class="homepage--card card-{{ .id }}">
 			<div class="homepage--card-container">
-				<a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .title }}</a>
+				<a class="homepage--card-title" href="/{{ .id }}/{{ index $.Site.Data.default_versions (print .id "_semver") }}/">{{ .title }}</a>
 				<p class="homepage--card-description">
 					{{ .description }}
 
@@ -36,7 +36,7 @@
 		</div>
 		{{ end }}
 	{{ end }}
-	
+
 </div>
 
 <div class="cards-enterprise">
@@ -44,7 +44,7 @@
 	{{ if eq .category "enterprise" }}
 	<div class="homepage--card card-{{ .id }}">
 		<div class="homepage--card-container">
-			<a class="homepage--card-title" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">{{ .title }}</a>
+			<a class="homepage--card-title" href="/{{ .id }}/{{ index $.Site.Data.default_versions (print .id "_semver") }}/">{{ .title }}</a>
 			<p class="homepage--card-description">
 				{{ .description }}
 
