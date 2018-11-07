@@ -1,9 +1,10 @@
 ---
-title: Chronograf license
+title: Open source license for InfluxDB
 menu:
   influxdb_1_6:
+    name: InfluxDB license
     weight: 50
     parent: About the project
 ---
 
-The [Chronograf license](https://github.com/influxdata/chronograf/blob/master/LICENSE) is available on GitHub.
+The [InfluxDB license](https://github.com/influxdata/influxdb/blob/master/DEPENDENCIES) is available on GitHub.

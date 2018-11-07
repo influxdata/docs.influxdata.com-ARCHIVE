@@ -58,6 +58,8 @@ menu:
       - [pointsWrittenOK](#pointswrittenok)
       - [promReadReq](#promreadreq)
       - [promWriteReq](#promwritereq)
+      - [fluxQueryReq](#fluxqueryreq)
+      - [fluxQueryDurationNs](#fluxquerydurationns)
       - [queryReq](#queryreq)
       - [queryReqDurationNs](#queryreqdurationns)
       - [queryRespBytes](#queryrespbytes)
@@ -453,6 +455,17 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 * Used in "HTTP Requests"
 * Examples:
   * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
+
+
+#### fluxQueryReq
+
+* The number of Flux query requests served.
+* Data type: integer
+
+#### fluxQueryReqDurationNs
+
+* The duration (wall-time), in nanoseconds, spent executing Flux query requests.
+* Data type: integer
 
 
 ####  pingReq

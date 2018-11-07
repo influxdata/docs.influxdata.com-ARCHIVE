@@ -113,7 +113,7 @@ $ influxd-ctl -auth-type jwt -secret oatclusters show
 ```
 The `influxd-ctl` utility uses JWT authentication with the shared secret `oatclusters`.
 
-If authentication is enabled in the cluster's [meta node configuration files](/enterprise_influxdb/v1.6/administration/configuration/#auth-enabled) and [data node configuration files](/enterprise_influxdb/v1.6/administration/configuration/#meta-auth-enabled) and the `influxd-ctl` command does not include authentication details, the system returns:
+If authentication is enabled in the cluster's [meta node configuration files](/enterprise_influxdb/v1.6/administration/config-meta-nodes#auth-enabled) and [data node configuration files](/enterprise_influxdb/v1.6/administration/config-data-nodes#meta-auth-enabled) and the `influxd-ctl` command does not include authentication details, the system returns:
 
 ```
 Error: unable to parse authentication credentials.
@@ -135,7 +135,7 @@ In the following example, the `influxd-ctl` utility uses basic authentication fo
 $ influxd-ctl -auth-type basic -user admini -pwd mouse show
 ```
 
-If authentication is enabled in the cluster's [meta node configuration files](/enterprise_influxdb/v1.6/administration/configuration/#auth-enabled) and [data node configuration files](/enterprise_influxdb/v1.6/administration/configuration/#meta-auth-enabled) and the `influxd-ctl` command does not include authentication details, the system returns:
+If authentication is enabled in the cluster's [meta node configuration files](/enterprise_influxdb/v1.6/administration/config-meta-nodes#auth-enabled) and [data node configuration files](/enterprise_influxdb/v1.6/administration/config-data-nodes#meta-auth-enabled) and the `influxd-ctl` command does not include authentication details, the system returns:
 
 ```
 Error: unable to parse authentication credentials.
