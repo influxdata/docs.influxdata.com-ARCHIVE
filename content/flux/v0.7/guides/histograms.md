@@ -15,8 +15,10 @@ menu:
 The [`histogram()` function](/flux/v0.7/functions/transformations/histogram)
 
 ## Helper functions
+Flux provides two helper functions for generating histogram buckets.
 
 ### linearBuckets()
+The
 
 ### logarithmicBuckets()
 
@@ -56,3 +58,6 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 2018-11-07T00:51:18.731928000Z  2018-11-07T00:56:18.731928000Z            used_percent                     mem               host1.local                            74                            30
 2018-11-07T00:51:18.731928000Z  2018-11-07T00:56:18.731928000Z            used_percent                     mem               host1.local                          74.5                            30
 ```
+
+> Values output by the `histogram` function represent points of data aggregated over time.
+> Since values do not represent single points in time, there is no `_time` column .
