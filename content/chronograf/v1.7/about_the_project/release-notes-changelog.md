@@ -7,6 +7,18 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.1 [2018-11-07]
+
+### Bug Fixes
+
+* Fix empty graph on alert rule creation page.
+* Add protoboard environment variables to build scripts.
+* Show manual refresh when paused.
+* Update Dockerfile to include protoboards.
+* Fix log columns not rendering.
+* Fix scroll loading indicator not hiding in logs.
+
+
 ## v1.7.0 [2018-11-06]
 
 ### Features
