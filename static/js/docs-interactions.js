@@ -225,12 +225,12 @@ $(document).ready( function() {
 })
 
 /*
- * Content condenser toggle
+ * Content Truncate toggle
  */
 
 $(document).ready( function() {
-	$(".article-content .condense-toggle").click(function(e) {
+	$(".article-content .truncate-toggle").click(function(e) {
 		e.preventDefault()
-		$(this).closest('.condense').toggleClass('closed');
+		$(this).closest('.truncate').toggleClass('closed');
 	})
 })

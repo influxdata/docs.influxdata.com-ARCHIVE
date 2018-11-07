@@ -80,7 +80,7 @@ dataSet = from(bucket: "telegraf/autogen")
 > is only tracked for a single host and it simplifies the output tables.
 > Don't drop the `host` column if monitoring multiple hosts.
 
-{{% condense %}}
+{{% truncate %}}
 ```
 Table: keys: [_start, _stop, _field, _measurement, cpu]
                    _start:time                      _stop:time           _field:string     _measurement:string              cpu:string                      _time:time                  _value:float
@@ -150,7 +150,7 @@ Table: keys: [_start, _stop, _field, _measurement, cpu]
 2018-11-05T21:34:00.000000000Z  2018-11-05T21:36:00.000000000Z            usage_system                     cpu                    cpu3  2018-11-05T21:35:50.000000000Z                           0.8
 2018-11-05T21:34:00.000000000Z  2018-11-05T21:36:00.000000000Z            usage_system                     cpu                    cpu3  2018-11-05T21:36:00.000000000Z                           0.9
 ```
-{{% /condense %}}
+{{% /truncate %}}
 
 **Note that the group key is output with each table: `Table: keys: <group-key>`.**
 
@@ -167,7 +167,7 @@ dataSet
 This won't actually change the structure of the data since it already has `cpu` in the group key and is therefore grouped by `cpu`.
 However, notice that it does change the group key:
 
-{{% condense %}}
+{{% truncate %}}
 ###### Group by CPU output tables
 ```
 Table: keys: [cpu]
@@ -238,7 +238,7 @@ Table: keys: [cpu]
                   cpu3  2018-11-05T21:36:00.000000000Z  2018-11-05T21:35:50.000000000Z                           0.8            usage_system                     cpu  2018-11-05T21:34:00.000000000Z
                   cpu3  2018-11-05T21:36:00.000000000Z  2018-11-05T21:36:00.000000000Z                           0.9            usage_system                     cpu  2018-11-05T21:34:00.000000000Z
 ```
-{{% /condense %}}
+{{% /truncate %}}
 
 The visualization remains the same.
 
@@ -255,7 +255,7 @@ dataSet
 When grouping by `_time`, all records that share a common `_time` value are grouped into individual tables.
 So each output table represents a single point in time.
 
-{{% condense %}}
+{{% truncate %}}
 ###### Group by time output tables
 ```
 Table: keys: [_time]
@@ -362,7 +362,7 @@ Table: keys: [_time]
 2018-11-05T21:36:00.000000000Z  2018-11-05T21:34:00.000000000Z  2018-11-05T21:36:00.000000000Z            6.4935064935064934            usage_system                     cpu                    cpu2
 2018-11-05T21:36:00.000000000Z  2018-11-05T21:34:00.000000000Z  2018-11-05T21:36:00.000000000Z                           0.9            usage_system                     cpu                    cpu3
 ```
-{{% /condense %}}
+{{% /truncate %}}
 
 Because each timestamp is a structured as a separate table, when visualized, they appear as individual, unconnected points.
 Even though there are multiple records per timestamp, it will only visualize the last record of the table.
@@ -390,7 +390,7 @@ dataSet
 
 This outputs a table for every unique `cpu` and `_time` combination:
 
-{{% condense %}}
+{{% truncate %}}
 ###### Group by CPU and time output tables
 ```
 Table: keys: [_time, cpu]
@@ -653,7 +653,7 @@ Table: keys: [_time, cpu]
 ------------------------------  ----------------------  ------------------------------  ----------------------------  ----------------------  ----------------------  ------------------------------
 2018-11-05T21:36:00.000000000Z                    cpu3  2018-11-05T21:36:00.000000000Z                           0.9            usage_system                     cpu  2018-11-05T21:34:00.000000000Z
 ```
-{{% /condense %}}
+{{% /truncate %}}
 
 When visualized, tables appear as individual, unconnected points.
 
