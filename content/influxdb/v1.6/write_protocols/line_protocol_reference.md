@@ -41,7 +41,7 @@ and timestamp.
 The sort should match the results from the
 [Go bytes.Compare function](http://golang.org/pkg/bytes/#Compare).
 * Use the coarsest
-[precision](/influxdb/v1.6/tools/api/#write) possible for timestamps.
+[precision](/influxdb/v1.6/tools/api/#write-http-endpoint) possible for timestamps.
 This can result in significant improvements in compression.
 * Use the Network Time Protocol (NTP) to synchronize time between hosts.
 InfluxDB uses a host's local time in UTC to assign timestamps to data; if
