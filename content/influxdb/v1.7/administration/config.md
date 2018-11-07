@@ -667,7 +667,7 @@ To enable HTTP service over the UNIX domain socket, set the value to `true`.
 
 Environment variable: `INFLUXDB_HTTP_UNIX_SOCKET_ENABLED`
 
-#### `bind-socket = "/var/run/influxdb.sock"`
+#### `bind-socket = "/run/influxdb/influxdb.sock"`
 
 The path of the UNIX domain socket.
 
