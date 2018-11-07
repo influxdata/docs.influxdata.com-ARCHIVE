@@ -4,7 +4,7 @@ description: How to use InfluxData's TICK stack to monitor itself and other TICK
 menu:
   platform:
     name: Monitoring
-    weight: 3
+    weight: 40
 ---
 
 One of the primary use cases for the InfluxData Platform is as server and infrastructure
