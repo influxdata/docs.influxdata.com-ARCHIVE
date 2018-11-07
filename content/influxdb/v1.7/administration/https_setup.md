@@ -70,7 +70,7 @@ sudo chmod 600 /etc/ssl/<private-key-file>
 #### Step 3: Review the TLS configuration settings
 
 By default, InfluxDB supports the values for TLS `ciphers`, `min-version`, and `max-version` listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depends on the version of Go used to build InfluxDB. You can configure InfluxDB to support a restricted list of TLS cipher suite IDs and versions.
-For more information, see [Transport Layer Security (TLS) configuration settings](/influxdb/v1.7/administration/config#transport-layer-security-tls-settings-tls).
+For more information, see [Transport Layer Security (TLS) configuration settings](/influxdb/v1.7/administration/config#transport-layer-security-tls-settings).
 
 
 #### Step 4: Enable HTTPS in the InfluxDB configuration file
@@ -141,7 +141,7 @@ both actions generate valid certificate files.
 
 #### Step 2: Review the TLS configuration settings
 
-By default, InfluxDB supports the values for TLS `ciphers`, `min-version`, and `max-version` listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depends on the version of Go used to build InfluxDB. You can configure InfluxDB to support a restricted list of TLS cipher suite IDs and versions. For more information, see [Transport Layer Security (TLS) settings `[tls]`](/influxdb/v1.7/administration/config#transport-layer-security-tls-settings-tls).
+By default, InfluxDB supports the values for TLS `ciphers`, `min-version`, and `max-version` listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depends on the version of Go used to build InfluxDB. You can configure InfluxDB to support a restricted list of TLS cipher suite IDs and versions. For more information, see [Transport Layer Security (TLS) settings `[tls]`](/influxdb/v1.7/administration/config#transport-layer-security-tls-settings).
 
 
 #### Step 3: Enable HTTPS in InfluxDB's configuration file

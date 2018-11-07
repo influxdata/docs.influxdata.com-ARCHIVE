@@ -63,13 +63,13 @@ Deletes sent to the Cache will clear out the given key or the specific time rang
 
 The Cache exposes a few controls for snapshotting behavior.
 The two most important controls are the memory limits.
-There is a lower bound, [`cache-snapshot-memory-size`](/influxdb/v1.7/administration/config/#cache-snapshot-memory-size-26214400), which when exceeded will trigger a snapshot to TSM files and remove the corresponding WAL segments.
-There is also an upper bound, [`cache-max-memory-size`](/influxdb/v1.7/administration/config/#cache-max-memory-size-1073741824), which when exceeded will cause the Cache to reject new writes.
+There is a lower bound, [`cache-snapshot-memory-size`](/influxdb/v1.7/administration/config#cache-snapshot-memory-size-26214400), which when exceeded will trigger a snapshot to TSM files and remove the corresponding WAL segments.
+There is also an upper bound, [`cache-max-memory-size`](/influxdb/v1.7/administration/config#cache-max-memory-size-1073741824), which when exceeded will cause the Cache to reject new writes.
 These configurations are useful to prevent out of memory situations and to apply back pressure to clients writing data faster than the instance can persist it.
 The checks for memory thresholds occur on every write.
 
 The other snapshot controls are time based.
-The idle threshold, [`cache-snapshot-write-cold-duration`](/influxdb/v1.7/administration/config/#cache-snapshot-write-cold-duration-10m), forces the Cache to snapshot to TSM files if it hasn't received a write within the specified interval.
+The idle threshold, [`cache-snapshot-write-cold-duration`](/influxdb/v1.7/administration/config#cache-snapshot-write-cold-duration-10m), forces the Cache to snapshot to TSM files if it hasn't received a write within the specified interval.
 
 The in-memory Cache is recreated on restart by re-reading the WAL files on disk.
 

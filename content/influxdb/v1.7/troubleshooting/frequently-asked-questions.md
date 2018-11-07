@@ -771,7 +771,7 @@ This can cause InfluxDB to overwrite [points](/influxdb/v1.7/concepts/glossary/#
 Include `GROUP BY *` in all `INTO` queries to preserve tags in the newly written data.
 
 Note that this behavior does not apply to queries that use the [`TOP()`](/influxdb/v1.7/query_language/functions/#top) or [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#bottom) functions.
-See the [`TOP()`](/influxdb/v1.7/query_language/functions/#issue-3-top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) documentation for more information.
+See the [`TOP()`](/influxdb/v1.7/query_language/functions/#top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#bottom-tags-and-the-into-clause) documentation for more information.
 
 #### Example
 

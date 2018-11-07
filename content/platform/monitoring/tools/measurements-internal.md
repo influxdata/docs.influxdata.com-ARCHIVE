@@ -738,7 +738,7 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 #### Mallocs
 
 * The total number of heap objects allocated.
-* The total number of live objects is [Frees](#Frees).
+* The total number of live objects is [Frees](#frees).
 * Data type: integer
 
 #### NumGC

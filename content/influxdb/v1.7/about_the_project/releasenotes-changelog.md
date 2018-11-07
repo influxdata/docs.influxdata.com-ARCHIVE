@@ -28,8 +28,8 @@ Chunked query was added into the Go client v2 interface. If you compiled against
     * Queries that include previously queried tag pairs will see reduced index planning times because
       the TSI index can now cache partial index results for later reuse.
     * Improvements required a change in on-disk TSI format to be used.
-    * **To take advantage of these improvements:** Rebuild your indexes or wait for a TSI compaction 
-      of your indexes, at which point the new format will be applied. Hot shards or new shards will 
+    * **To take advantage of these improvements:** Rebuild your indexes or wait for a TSI compaction
+      of your indexes, at which point the new format will be applied. Hot shards or new shards will
       immediately use the new TSI format.
 
 
@@ -507,7 +507,7 @@ With TSI, the number of series should be unbounded by the memory on the server h
 See Paul Dix's blogpost [Path to 1 Billion Time Series: InfluxDB High Cardinality Indexing Ready for Testing](https://www.influxdata.com/path-1-billion-time-series-influxdb-high-cardinality-indexing-ready-testing/) for additional information.
 
 TSI is disabled by default in version 1.3.
-To enable TSI, uncomment the [`index-version` setting](/influxdb/v1.3/administration/config/#index-version-inmem) and set it to `tsi1`.
+To enable TSI, uncomment the [`index-version` setting](/influxdb/v1.3/administration/config#index-version-inmem) and set it to `tsi1`.
 The `index-version` setting is in the `[data]` section of the configuration file.
 Next, restart your InfluxDB instance.
 
@@ -656,14 +656,14 @@ The following new configuration options are available.
 
 #### `[http]` Section
 
-* [`max-row-limit`](/influxdb/v1.3/administration/config/#max-row-limit-0) now defaults to `0`.
+* [`max-row-limit`](/influxdb/v1.3/administration/config#max-row-limit-0) now defaults to `0`.
   In versions 1.0 and 1.1, the default setting was `10000`, but due to a bug, the value in use in versions 1.0 and 1.1 was effectively `0`.
   In versions 1.2.0 through 1.2.1, we fixed that bug, but the fix caused a breaking change for Grafana and Kapacitor users; users who had not set `max-row-limit` to `0` experienced truncated/partial data due to the `10000` row limit.
   In version 1.2.2, we've changed the default `max-row-limit` setting to `0` to match the behavior in versions 1.0 and 1.1.
 
 ### Bugfixes
 
-- Change the default [`max-row-limit`](/influxdb/v1.3/administration/config/#max-row-limit-0) setting from `10000` to `0` to prevent the absence of data in Grafana or Kapacitor.
+- Change the default [`max-row-limit`](/influxdb/v1.3/administration/config#max-row-limit-0) setting from `10000` to `0` to prevent the absence of data in Grafana or Kapacitor.
 
 ## v1.2.1 [2017-03-08]
 

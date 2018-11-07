@@ -140,7 +140,7 @@ Authentication in InfluxDB is disabled by default.
 See [Authentication and Authorization](/influxdb/v1.7/administration/authentication_and_authorization/) for how to enable and set up authentication.
 
 #### Maximum Row Limit
-The [`max-row-limit` configuration option](/influxdb/v1.7/administration/config/#max-row-limit-0) allows users to limit the maximum number of returned results to prevent InfluxDB from running out of memory while it aggregates the results.
+The [`max-row-limit` configuration option](/influxdb/v1.7/administration/config#max-row-limit-0) allows users to limit the maximum number of returned results to prevent InfluxDB from running out of memory while it aggregates the results.
 The `max-row-limit` configuration option is set to `0` by default.
 That default setting allows for an unlimited number of rows returned per request.
 

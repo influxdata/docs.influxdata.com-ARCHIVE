@@ -18,20 +18,20 @@ The InfluxDB OSS configuration file contains configuration settings specific to 
 * [Using the configuration file](#using-the-configuration-file)
 * [Configuration settings](#configuration-settings)
   * [Global settings](#global-settings)
-  * [Metastore `[meta]`](#metastore-settings-meta)
-  * [Data `[data]`](#data-settings-data)
-  * [Query management `[coordinator]`](#query-management-settings-coordinator)
-  * [Retention policies `[retention]`](#retention-policies-settings-retention)
-  * [Shard precreation `[shard-precreation]`](#shard-precreation-shard-precreation)
-  * [Monitoring `[monitor]`](#monitoring-monitor)
-  * [HTTP endpoints `[http]`](#http-endpoint-settings-http)
-  * [Subscriber `[subscriber]`](#subscriber-subscriber)
-  * [Graphite `[[graphite]]`](#graphite-settings-graphite)
-  * [CollectD `[[collectd]]`](#collectd-settings-collectd)
-  * [OpenTSB `[[opentsdb]]`](#opentsdb-settings-opentsdb)
-  * [UDP `[[udp]]`](#udp-settings-udp)
-  * [Continuous queries  `[continuous_queries]`](#continuous-queries-settings-continuous-queries)
-  * [TLS `[tls]`](#tls-settings-tls)
+  * [Metastore `[meta]`](#metastore-settings)
+  * [Data `[data]`](#data-settings)
+  * [Query management `[coordinator]`](#query-management-settings)
+  * [Retention policies `[retention]`](#retention-policies-settings)
+  * [Shard precreation `[shard-precreation]`](#shard-precreation-settings)
+  * [Monitoring `[monitor]`](#monitoring-settings)
+  * [HTTP endpoints `[http]`](#http-endpoint-settings)
+  * [Subscriber `[subscriber]`](#subscriber-settings)
+  * [Graphite `[[graphite]]`](#graphite-settings)
+  * [CollectD `[[collectd]]`](#collectd-settings)
+  * [OpenTSB `[[opentsdb]]`](#opentsdb-settings)
+  * [UDP `[[udp]]`](#udp-settings)
+  * [Continuous queries `[continuous_queries]`](#continuous-queries-settings)
+  * [TLS `[tls]`](#tls-settings)
 
 ## Configuration overview
 
@@ -646,7 +646,7 @@ Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
 #### `max-row-limit = 0`
 
-The maximum number of rows that the system can return in a [non-chunked](/influxdb/v1.7/tools/api/#query-string-parameters) query.
+The maximum number of rows that the system can return in a [non-chunked](/influxdb/v1.7/tools/api#query-string-parameters) query.
 The default setting (`0`) allows for an unlimited number of rows.
 If the query results exceed a specified value, then InfluxDB includes a `"partial":true` tag in the response body.
 

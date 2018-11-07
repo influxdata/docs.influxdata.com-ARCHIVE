@@ -66,6 +66,7 @@ NO_PROXY=123.45.67.89,123.45.67.90
 
 
 ## `influx` options
+
 The `influx` shell includes options that you can pass into `influx` when starting.
 You can list them using `$ influx --help`.
 The list below offers a brief discussion of each option.

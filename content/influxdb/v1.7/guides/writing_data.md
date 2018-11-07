@@ -154,4 +154,4 @@ Content-Length: 45
 ### Next steps
 ---
 Now that you know how to write data with the built-in HTTP API discover how to query them with the [Querying Data](/influxdb/v1.7/guides/querying_data/) guide!
-For more information about writing data with the HTTP API, please see the [API reference documentation](/influxdb/v1.7/tools/api/#write).
+For more information about writing data with the HTTP API, please see the [API reference documentation](/influxdb/v1.7/tools/api/#write-http-endpoint).

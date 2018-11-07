@@ -8,9 +8,9 @@ menu:
         parent: Administration
 ---
 
--   [Upgrading InfluxDB 1.3 / 1.4 (no TSI Preview) to 1.7.x (TSI enabled)](#upgrading-influxdb-1-3-1-4-no-tsi-preview-to-1-6-x-tsi-enabled)
--   [Upgrading InfluxDB 1.3 - 1.4 (TSI Preview enabled) to 1.7.x (TSI enabled)](#upgrading-influxdb-1-3-1-4-tsi-preview-enabled-to-1-6-x-tsi-enabled)
--   [Upgrading InfluxDB 1.0 - 1.4 to 1.7.x](#upgrading-influxdb-1-0-1-4-to-1-6-x)
+-   [Upgrading InfluxDB 1.3 / 1.4 (no TSI Preview) to 1.7.x (TSI enabled)](#upgrading-influxdb-1-3-1-4-no-tsi-preview-to-1-7-x-tsi-enabled)
+-   [Upgrading InfluxDB 1.3 - 1.4 (TSI Preview enabled) to 1.7.x (TSI enabled)](#upgrading-influxdb-1-3-1-4-tsi-preview-enabled-to-1-7-x-tsi-enabled)
+-   [Upgrading InfluxDB 1.0 - 1.4 to 1.7.x](#upgrading-influxdb-1-0-1-4-to-1-7-x)
 -   [Upgrading InfluxDB Enterprise clusters](#upgrading-influxdb-enterprise-clusters)
 
 ## Upgrading InfluxDB 1.3 / 1.4 (no TSI Preview) to 1.7.x (TSI enabled)
@@ -49,7 +49,7 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4)
 
 4. Convert existing TSM-based shards to TSI-supported shards.
 
--   Use [influx_inspect buildtsi](/influxdb/v1.7/tools/influx_inspect/#influx-inspect#buildtsi) for converting your TSM-based shards to TSI-based shards.
+-   Use [influx_inspect buildtsi](/influxdb/v1.7/tools/influx_inspect/#buildtsi) for converting your TSM-based shards to TSI-based shards.
 
 5. Restart the `influxdb` service.
 
@@ -83,7 +83,7 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.3 and 1.4
 5. Convert existing shards to support TSI.
 
 -   When Time Series Index (TSI) is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
--   Run the [influx_inspect buildtsi](/influxdb/v1.7/tools/influx_inspect/#influx-inspect-buildtsi) command to convert existing TSM-based shards to TSI-based shards.
+-   Run the [influx_inspect buildtsi](/influxdb/v1.7/tools/influx_inspect/#buildtsi) command to convert existing TSM-based shards to TSI-based shards.
 
 5. Restart the `influxdb` service.
 

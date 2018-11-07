@@ -218,7 +218,7 @@ data that reside in an RP other than the `DEFAULT` RP.
 Between checks, `orders` may have data that are older than two hours.
 The rate at which InfluxDB checks to enforce an RP is a configurable setting,
 see
-[Database Configuration](/influxdb/v1.7/administration/config/#check-interval-30m0s).
+[Database Configuration](/influxdb/v1.7/administration/config#check-interval-30m0s).
 
 Using a combination of RPs and CQs, we've successfully set up our database to
 automatically keep the high precision raw data for a limited time, create lower

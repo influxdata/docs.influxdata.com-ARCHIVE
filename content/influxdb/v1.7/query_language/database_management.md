@@ -233,7 +233,7 @@ exist.
 
 The following sections cover how to create, alter, and delete retention policies.
 Note that when you create a database, InfluxDB automatically creates a retention policy named `autogen` which has infinite retention.
-You may rename that retention policy or disable its auto-creation in the [configuration file](/influxdb/v1.7/administration/config/#metastore-settings-meta).
+You may rename that retention policy or disable its auto-creation in the [configuration file](/influxdb/v1.7/administration/config/#metastore-settings).
 
 ### Create retention policies with CREATE RETENTION POLICY
 

@@ -40,7 +40,7 @@ memUsed = from(bucket: "telegraf/autogen")
   )
 ```
 
-{{% condense %}}
+{{% truncate %}}
 ###### memUsed data output
 ```
 Table: keys: [_start, _stop, _field, _measurement, host]
@@ -78,7 +78,7 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:54:50.000000000Z                 11248926720
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:55:00.000000000Z                 11292524544
 ```
-{{% /condense %}}
+{{% /truncate %}}
 
 ### Total processes variable
 Define a `procTotal` variable that filters on the `processes` measurement and the `total` field.
@@ -94,7 +94,7 @@ procTotal = from(bucket: "telegraf/autogen")
   )
 ```
 
-{{% condense %}}
+{{% truncate %}}
 ###### procTotal data output
 ```
 Table: keys: [_start, _stop, _field, _measurement, host]
@@ -132,7 +132,7 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                   total               processes               host1.local  2018-11-06T05:54:50.000000000Z                         471
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                   total               processes               host1.local  2018-11-06T05:55:00.000000000Z                         471
 ```
-{{% /condense %}}
+{{% /truncate %}}
 
 ## Join the two data streams
 With the two data streams defined, use the `join()` function to join them together.
@@ -153,7 +153,7 @@ join(
 )
 ```
 
-{{% condense %}}
+{{% truncate %}}
 ###### Joined output table
 ```
 Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _start, _stop, host]
@@ -191,7 +191,7 @@ Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _sta
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:54:50.000000000Z                 11248926720                         471
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:55:00.000000000Z                 11292524544                         471
 ```
-{{% /condense %}}
+{{% /truncate %}}
 
 Notice the output table includes the following columns:
 
@@ -217,7 +217,7 @@ join(tables: {mem:memUsed, proc:procTotal}, on: ["_time", "_stop", "_start", "ho
   }))
 ```
 
-{{% condense %}}
+{{% truncate %}}
 ###### Mapped table
 ```
 Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _start, _stop, host]
@@ -255,7 +255,7 @@ Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _sta
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:54:50.000000000Z                    23883071
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:55:00.000000000Z                    23975635
 ```
-{{% /condense %}}
+{{% /truncate %}}
 
 This table represents the average amount of memory in bytes per running process.
 

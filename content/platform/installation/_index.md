@@ -4,7 +4,7 @@ description: placeholder
 menu:
   platform:
     name: Installation and configuration
-    weight: 2
+    weight: 20
 ---
 
 There are multiple ways to install and configure the InfluxData Platform (also known

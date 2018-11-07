@@ -1707,7 +1707,7 @@ Note that both the `copy_NOAA_water_database` database and its `autogen` retenti
 See [Database Management](/influxdb/v1.7/query_language/database_management/)
 for how to manage databases and retention policies.
 
-The `GROUP BY *` clause [preserves tags](#issue-1-missing-data) in the source database as tags in the destination database.
+The `GROUP BY *` clause [preserves tags](#missing-data) in the source database as tags in the destination database.
 The following query does not maintain the series context for tags; tags will be stored as fields in the destination database (`copy_NOAA_water_database`):
 
 ```
@@ -2363,7 +2363,7 @@ SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_
 
 By default, InfluxDB stores and returns timestamps in UTC.
 The `tz()` clause includes the UTC offset or, if applicable, the UTC Daylight Savings Time (DST) offset to the query's returned timestamps.
-The returned timestamps must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#issue-3-configuring-the-returned-timestamps) for the UTC offset or UTC DST to appear.
+The returned timestamps must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#configuring-the-returned-timestamps) for the UTC offset or UTC DST to appear.
 The `time_zone` parameter follows the TZ syntax in the [Internet Assigned Numbers Authority time zone database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) and it requires single quotes.
 
 ### Examples
