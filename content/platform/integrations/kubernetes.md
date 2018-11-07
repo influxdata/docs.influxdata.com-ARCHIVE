@@ -1,6 +1,6 @@
 ---
 title: The InfluxData Platform and Kubernetes
-description: placeholder
+description: Deploy the TICK stack on Kubernetes and monitor Kubernetes.
 menu:
   platform:
     name: Kubernetes
@@ -10,6 +10,8 @@ menu:
 [Kubernetes](https://kubernetes.io/) is a container orchestration project that
 has become a popular way to deploy and manage containers across multiple servers and cloud providers.
 
+![InfluxDB Kubernetes Logos](/img/platform/flux-kube.png)
+
 There are several ways use the InfluxData Platform (also known as the TICK
 stack) can be used with Kubernetes:
 
@@ -18,13 +20,13 @@ stack) can be used with Kubernetes:
 - [Deploy the TICK stack on Kubernetes](#deploy-the-tick-stack-on-kubernetes-platform-installation-kubernetes)
 - [Kubernetes recommendations](#kubernetes-recommendations)
 
-## [Monitor Kubernetes](/platform/use-cases/monitor-kubernetes/)
+## [Monitor Kubernetes](https://www.influxdata.com/blog/monitoring-kubernetes-architecture/)
 The TICK stack is an easy and performant way to monitor the services that make up a Kubernetes cluster.
 
-## [Monitor applications running on Kubernetes](/platform/use-cases/monitor-kubernetes-apps/)
+## Monitor applications running on Kubernetes
 Discover how the TICK stack can be used to monitor applications running within a Kubernetes cluster.
 
-## [Deploy the TICK stack on Kubernetes](/platform/deployment/kubernetes)
+## [Deploy the TICK stack on Kubernetes](https://github.com/influxdata/tick-charts)
 Instructions for installing and configuring all components of the open source TICK stack – Telegraf, InfluxDB, Chronograf, and Kapacitor on Kubernetes.
 
 ## Kubernetes recommendations

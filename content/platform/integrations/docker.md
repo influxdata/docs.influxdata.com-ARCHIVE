@@ -1,5 +1,5 @@
 ---
-title: InfluxData Docker Integrations
+title: InfluxData Docker integrations
 description: placeholder
 menu:
   platform:

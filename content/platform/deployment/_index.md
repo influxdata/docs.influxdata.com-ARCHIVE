@@ -1,6 +1,7 @@
 ---
 title: Deploy the TICK stack
 description: Easy ways to deploy the TICK stack on the platform you use.
+draft: true
 menu:
   platform:
     name: Deployment
