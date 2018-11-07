@@ -12,14 +12,15 @@ menu:
 
 ### Breaking changes
 
-???
+Chunked query was added into the Go client v2 interface. If you compiled against the Go client v2 previously, you need to recompile using the updated interface.
 
 ### Features
 
 -	Enable the storage service by default.
 -	Ensure read service regular expressions get optimized.
--	Add Flux support to the influx CLI command.
+-	Add Flux support using the `-type` option to the influx CLI command.
 -	Add chunked query into the Go client v2.
+-   Add `access-log-status-filters` config setting to create access log filter for the access log.
 
 ### Bug fixes
 
