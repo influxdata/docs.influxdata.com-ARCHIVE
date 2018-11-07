@@ -33,7 +33,6 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 * [`dumptsm`](#dumptsm): Dumps low-level details about TSM files.
 * [`dumptsmwal`](#dumptsmwal): Dump all data from a WAL file.  
 * [`export`](#export): Exports raw data from a shard in Line Protocol format.
-* [`help`](#help): Displays this help message format.
 * [`report`](#report): Displays a shard level report.
 * [`reporttsi`](#reporttsi): Reports on cardinality for measurements and shards.
 * [`verify`](#verify): Verifies the integrity of TSM files.

@@ -62,7 +62,7 @@ Flux's [`from()` function](/flux/v0.7/functions/inputs/from), which defines an I
 When using Flux with InfluxDB v1.x, use the following bucket naming convention which combines
 the database name and retention policy into a single bucket name:
 
-###### InfluxDB v1.x bucket naming convention**_
+###### InfluxDB v1.x bucket naming convention
 ```js
 // Pattern
 from(bucket:"<database>/<retention-policy>")
@@ -75,7 +75,7 @@ from(bucket:"telegraf/autogen")
 Flux uses pipe-forward operators (`|>`) extensively to chain operations together.
 After each function or operation, Flux returns a table or collection of tables containing data.
 The pipe-forward operator pipes those tables into the next function or operation where
-it is further processed or manipulated.
+they are further processed or manipulated.
 
 ### Tables
 Flux structures all data in tables.

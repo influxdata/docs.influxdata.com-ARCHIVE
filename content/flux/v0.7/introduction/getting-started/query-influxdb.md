@@ -33,7 +33,7 @@ Flux requires a time range when querying time series data.
 "Unbounded" queries are very resource-intensive and as a protective measure,
 Flux will not query the database without a specified range.
 
-Use pipe forward operator (`|>`) to pipe data from your data source into the [`range()`](/flux/v0.7/functions/transformations/range)
+Use the pipe-forward operator (`|>`) to pipe data from your data source into the [`range()`](/flux/v0.7/functions/transformations/range)
 function, which specifies a time range for your query.
 It accepts two properties: `start` and `stop`.
 Ranges can be **relative** using negative [durations](/flux/v0.7/language/lexical-elements#duration-literals)
@@ -112,7 +112,7 @@ from(bucket:"telegraf/autogen")
   |> yield()
 ```
 
-> Chronograf and the `influx` CLI automatically assumes a `yield()` function at
+> Chronograf and the `influx` CLI automatically assume a `yield()` function at
 > the end of each script in order to output and visualize the data.
 > Best practice is to include a `yield()` function, but it is not always necessary.
 

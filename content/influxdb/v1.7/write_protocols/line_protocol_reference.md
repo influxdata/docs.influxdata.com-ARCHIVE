@@ -33,7 +33,7 @@ and timestamp.
 | [Measurement](/influxdb/v1.7/concepts/glossary/#measurement) | Required | The measurement name. InfluxDB accepts one measurement per point. | String
 | [Tag set](/influxdb/v1.7/concepts/glossary/#tag-set) | Optional | All tag key-value pairs for the point.  | [Tag keys](/influxdb/v1.7/concepts/glossary/#tag-key) and [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are both strings.
 | [Field set](/influxdb/v1.7/concepts/glossary/#field-set) | Required. Points must have at least one field. | All field key-value pairs for the point. | [Field keys](/influxdb/v1.7/concepts/glossary/#field-key) are strings. [Field values](/influxdb/v1.7/concepts/glossary/#field-value) can be floats, integers, strings, or Booleans.
-| [Timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) | Optional. InfluxDB uses the server's local nanosecond timestamp in UTC if the timestamp is not included with the point. | The timestamp for the data point. InfluxDB accepts one timestamp per point. | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.7/tools/api/#write).
+| [Timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) | Optional. InfluxDB uses the server's local nanosecond timestamp in UTC if the timestamp is not included with the point. | The timestamp for the data point. InfluxDB accepts one timestamp per point. | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.7/tools/api/#write-http-endpoint).
 
 > #### Performance and Setup Tips:
 >

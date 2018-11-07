@@ -6,3 +6,14 @@ deploy
 node_modules
 *.log
 content/chronograf/v1.7/guides/query-flux.md
+content/influxdb/v1.6/administration/upgrading.md
+content/influxdb/v1.6/administration/upgrading.md
+content/influxdb/v1.6/administration/upgrading.md
+content/influxdb/v1.6/concepts/tsi-details.md
+content/influxdb/v1.6/guides/querying_data.md
+content/influxdb/v1.6/guides/writing_data.md
+content/influxdb/v1.6/query_language/data_exploration.md
+content/influxdb/v1.6/troubleshooting/frequently-asked-questions.md
+content/influxdb/v1.6/troubleshooting/query_management.md
+content/influxdb/v1.6/write_protocols/line_protocol_reference.md
+content/influxdb/v1.6/write_protocols/line_protocol_tutorial.md

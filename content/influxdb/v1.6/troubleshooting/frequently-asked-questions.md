@@ -273,7 +273,7 @@ For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with 
 
 Field values can be floats, integers, strings, or Booleans.
 Field value types cannot differ within a
-[shard](/influxdb/v1.6/concepts/glossary/#shard), but they can [differ](/influxdb/v1.6/write_protocols/line_protocol_reference/#example-7-attempt-to-write-a-string-to-a-field-that-previously-accepted-floats) across shards.
+[shard](/influxdb/v1.6/concepts/glossary/#shard), but they can [differ](/influxdb/v1.6/write_protocols/line_protocol_reference) across shards.
 
 ### The SELECT statement
 
@@ -570,7 +570,11 @@ We list some of the most frequent cases below:
 
 The first and most common explanation involves [retention policies](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) (RP).
 InfluxDB automatically queries data in a database’s `DEFAULT` RP.
+<<<<<<< HEAD
+If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you specify the alternative RP.
+=======
 If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.6/query_language/data_exploration/#select-all-data-from-a-fully-qualified-measurement) the alternative RP.
+>>>>>>> master
 
 ### Tag keys in the SELECT clause
 

@@ -37,7 +37,7 @@ You can also [create custom functions](/flux/v0.7/functions/custom-functions) in
 _Functions are covered in detail in the [Flux functions](/flux/v0.7/functions) documentation._
 
 A common type of function used when transforming data queried from InfluxDB is an aggregate function.
-Aggregate functions take a set of `_value` in a table, aggregate them, and transform
+Aggregate functions take a set of `_value`s in a table, aggregate them, and transform
 them into a new value.
 
 This example uses the [`mean()` function](/flux/v0.7/functions/transformations/aggregates/mean)
@@ -45,7 +45,7 @@ to average values within time windows.
 
 ## Window your data
 Flux's [`window()` function](/flux/v0.7/functions/transformations/window) partitions records based on a time value.
-Use the `every` parameter to define a duration of time between windows.
+Use the `every` parameter to define a duration of time for each window.
 
 For this example, window data in five minute intervals (`5m`).
 
@@ -65,8 +65,8 @@ When visualized, each table is assigned a unique color.
 ![Windowed data tables](/img/flux/flux-windowed-data.png)
 
 ## Aggregate windowed data
-Flux aggregate functions take the `_values` in each table and aggregate them in some way.
-Use the [`mean()` function](/flux/v0.7/functions/transformations/aggregates/mean) to average the `_values` of each table.
+Flux aggregate functions take the `_value`s in each table and aggregate them in some way.
+Use the [`mean()` function](/flux/v0.7/functions/transformations/aggregates/mean) to average the `_value`s of each table.
 
 ```js
 from(bucket:"telegraf/autogen")
@@ -87,7 +87,7 @@ Windowed tables are all still separate and, when visualized, will appear as sing
 ## Add times to your aggregates
 As values are aggregated, the resulting tables do not have a `_time` column because
 the records used for the aggregation all have different timestamps.
-Aggregate functions don't infer what time should be used for the aggregate value,
+Aggregate functions don't infer what time should be used for the aggregate value.
 Therefore the `_time` column is dropped.
 
 A `_time` column is required in the [next operation](#unwindow-aggregate-tables).
@@ -129,7 +129,7 @@ Once ungrouped and combined into a single table, the aggregate data points will 
 ![Unwindowed aggregate data](/img/flux/flux-windowed-aggregates-ungrouped.png)
 
 ## Helper functions
-This may seem like a lot of coding just to query that aggregates data, however going through the
+This may seem like a lot of coding just to build a query that aggregates data, however going through the
 process helps to understand how data changes "shape" as it is passed through each function.
 
 Flux provides (and allows you to create) "helper" functions that abstract many of these steps.
