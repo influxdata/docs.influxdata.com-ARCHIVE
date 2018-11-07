@@ -9,7 +9,7 @@ menu:
 ---
 
 
-Flux, at its core, is scripting language designed specifically for working with data.
+Flux, at its core, is a scripting language designed specifically for working with data.
 This guide walks through a handful of simple expressions and how they are handled in Flux.
 
 ## Use the influx CLI
@@ -22,8 +22,8 @@ influx -type=flux
 ```
 
 > If using the [InfluxData Sandbox](/platform/installation/sandbox-install), use the `./sandbox enter`
-> command console into the `influxdb` container, where you can start the `influx` CLI in Flux mode.
-> You also need to specify the `host` as `influxdb` to connect to InfluxDB over the Docker network.
+> command to enter the `influxdb` container, where you can start the `influx` CLI in Flux mode.
+> You will also need to specify the `host` as `influxdb` to connect to InfluxDB over the Docker network.
 >
 ```bash
 ./sandbox enter influxdb
@@ -45,7 +45,7 @@ For example, simple addition:
 ```
 
 ### Variables
-Assign expressions to a variable using the assignment operator, `=`.
+Assign an expression to a variable using the assignment operator, `=`.
 
 ```js
 > s = "this is a string"
@@ -84,9 +84,10 @@ Jim
 Flux supports lists. List values must be the same type.
 
 ```js
-> l = [1,2,3,i]
+> n = 4
+> l = [1,2,3,n]
 > l
-[1, 2, 3, 1]
+[1, 2, 3, 4]
 ```
 
 ### Functions
@@ -105,17 +106,17 @@ Below is a simple function that squares a number, `n`.
 ### Pipe-forward operator
 Flux uses the pipe-forward operator (`|>`) extensively to chain operations together.
 After each function or operation, Flux returns a table or collection of tables containing data.
-The pipe-forward operator pipes those tables into the next function where it is further processed or manipulated.
+The pipe-forward operator pipes those tables into the next function where they are further processed or manipulated.
 
 ```js
 data |> someFunction() |> anotherFunction()
 ```
 
 ## Real-world application of basic syntax
-This likely seems familiar if you've already been through through the other [getting started guides](/flux/v0.7/introduction/getting-started)n.
+This likely seems familiar if you've already been through through the other [getting started guides](/flux/v0.7/introduction/getting-started).
 Flux's syntax is inspired by Javascript and other functional scripting languages.
-As you begin to apply these basic principles in real world use cases such as creating data stream variables,
-custom functions, etc., the power of Flux and its ability to query and process data becomes apparent.
+As you begin to apply these basic principles in real-world use cases such as creating data stream variables,
+custom functions, etc., the power of Flux and its ability to query and process data will become apparent.
 
 The examples below provide both multi-line and single-line versions of each input command.
 Carriage returns in Flux aren't necessary, but do help with readability.
@@ -136,20 +137,22 @@ or more input data streams.
 ```js
 timeRange = -1h
 
-cpuUsageUser = from(bucket:"telegraf/autogen")
-  |> range(start: timeRange)
-  |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_user" AND
-    r.cpu == "cpu-total"
-  )
+cpuUsageUser =
+  from(bucket:"telegraf/autogen")
+    |> range(start: timeRange)
+    |> filter(fn: (r) =>
+      r._measurement == "cpu" AND
+      r._field == "usage_user" AND
+      r.cpu == "cpu-total"
+    )
 
-memUsagePercent = from(bucket:"telegraf/autogen")
-  |> range(start: timeRange)
-  |> filter(fn: (r) =>
-    r._measurement == "mem" AND
-    r._field == "used_percent"
-  )
+memUsagePercent =
+  from(bucket:"telegraf/autogen")
+    |> range(start: timeRange)
+    |> filter(fn: (r) =>
+      r._measurement == "mem" AND
+      r._field == "used_percent"
+    )
 ```
 
 These variables can be used in other functions, such as  `join()`, while keeping the syntax minimal and flexible.
@@ -160,9 +163,10 @@ To do this, pass the input stream (`tables`) and the number of results to return
 Then using Flux's `sort()` and `limit()` functions to find the top `n` results in the data set.
 
 ```js
-topN = (tables=<-, n) => tables
-  |> sort(desc: true)
-  |> limit(n: n)
+topN = (tables=<-, n) =>
+  tables
+    |> sort(desc: true)
+    |> limit(n: n)
 ```
 
 _More information about creating custom functions is available in the [Custom functions](/flux/v0.7/functions/custom-functions) documentation._
@@ -201,7 +205,7 @@ topN = (tables=<-, n) => tables |> sort(desc: true) |> limit(n: n)
 _More information about creating custom functions is available in the [Custom functions](/flux/v0.7/functions/custom-functions) documentation._
 
 Using the `cpuUsageUser` data stream variable defined [above](#define-data-stream-variables),
-Find the top five data points with the custom `topN` function and yield the results.
+find the top five data points with the custom `topN` function and yield the results.
 
 ```js
 cpuUsageUser |> topN(n:5) |> yield()
