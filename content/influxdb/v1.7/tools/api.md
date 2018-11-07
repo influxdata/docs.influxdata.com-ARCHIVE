@@ -15,7 +15,7 @@ It uses HTTP response codes, HTTP authentication, JWT Tokens, and basic authenti
 
 The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
-Those settings [are configurable](/influxdb/v1.7/administration/config/#http-endpoint-settings-http).
+Those settings [are configurable](/influxdb/v1.7/administration/config/#http-endpoints-settings-http).
 
 ## InfluxDB HTTP endpoints
 
@@ -290,7 +290,7 @@ That behavior is configurable; see the [`max-row-limit`](/influxdb/v1.7/administ
 \** The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
-See below for an [example](#example-4-create-a-database-using-basic-authentication) of basic authentication.
+See below for an [example](#create-a-database-using-basic-authentication) of basic authentication.
 
 #### Examples
 
@@ -606,7 +606,7 @@ POST http://localhost:8086/write
 \* The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
-See below for an [example](#example-4-write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
+See below for an [example](#write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
 
 \*\* We recommend using the least precise precision possible as this can result
 in significant improvements in compression.

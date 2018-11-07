@@ -818,7 +818,7 @@ to calculate the average `index` for every possible
 [tag](/influxdb/v1.6/concepts/glossary/#tag) combination in the `h2o_quality`
 measurement.
 
-Note that the query results are identical to the results of the query in [Example 2](#example-2-group-query-results-by-more-than-one-tag)
+Note that the query results are identical to the results of the query in [Example 2](#examples-2)
 where we explicitly specified the `location` and `randtag` tag keys.
 This is because the `h2o_quality` measurement only has two tag keys.
 
@@ -1014,7 +1014,7 @@ second time boundary.
 
 The [advanced `GROUP BY time()` syntax](#advanced-group-by-time-syntax) allows users to shift
 the start time of InfluxDB's preset time boundaries.
-[Example 3](#example-3-group-query-results-into-12-minute-intervals-and-shift-the-preset-time-boundaries-forward)
+[Example 3](#examples-3)
 in the Advanced Syntax section continues with the query shown here;
 it shifts forward the preset time boundaries by six minutes such that
 InfluxDB returns:
@@ -1702,12 +1702,12 @@ time written
 Directly renaming a database in InfluxDB is not possible, so a common use for the `INTO` clause is to move data from one database to another.
 The query above writes all data in the `NOAA_water_database` and `autogen` retention policy to the `copy_NOAA_water_database` database and the `autogen` retention policy.
 
-The [backreference](#example-5-write-aggregated-results-for-more-than-one-measurement-to-a-different-database-downsampling-with-backreferencing) syntax (`:MEASUREMENT`) maintains the source measurement names in the destination database.
+The [backreference](#examples-5) syntax (`:MEASUREMENT`) maintains the source measurement names in the destination database.
 Note that both the `copy_NOAA_water_database` database and its `autogen` retention policy must exist prior to running the `INTO` query.
 See [Database Management](/influxdb/v1.6/query_language/database_management/)
 for how to manage databases and retention policies.
 
-The `GROUP BY *` clause [preserves tags](#issue-1-missing-data) in the source database as tags in the destination database.
+The `GROUP BY *` clause [preserves tags](#missing-data) in the source database as tags in the destination database.
 The following query does not maintain the series context for tags; tags will be stored as fields in the destination database (`copy_NOAA_water_database`):
 
 ```
@@ -2363,7 +2363,7 @@ SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_
 
 By default, InfluxDB stores and returns timestamps in UTC.
 The `tz()` clause includes the UTC offset or, if applicable, the UTC Daylight Savings Time (DST) offset to the query's returned timestamps.
-The returned timestamps must be in [RFC3339 format](/influxdb/v1.6/query_language/data_exploration/#issue-3-configuring-the-returned-timestamps) for the UTC offset or UTC DST to appear.
+The returned timestamps must be in [RFC3339 format](/influxdb/v1.6/query_language/data_exploration/#configuring-the-returned-timestamps) for the UTC offset or UTC DST to appear.
 The `time_zone` parameter follows the TZ syntax in the [Internet Assigned Numbers Authority time zone database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) and it requires single quotes.
 
 ### Examples
