@@ -11,4 +11,4 @@ menu:
 Flux output functions yield results or send data to a specified output destination.
 The following output functions are are available:
 
-- [yield](./yield)
+- [yield](/flux/v0.7/functions/outputs/yield)

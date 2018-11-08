@@ -11,6 +11,6 @@ menu:
 Flux input functions define sources of data or or display information about data sources.
 The following input functions are are available:
 
-- [buckets](./buckets)
-- [from](./from)
-- [fromRows](./fromrows)
+- [buckets](/flux/v0.7/functions/inputs/buckets)
+- [from](/flux/v0.7/functions/inputs/from)
+- [fromRows](/flux/v0.7/functions/inputs/fromrows)

@@ -13,15 +13,15 @@ The output table is different than the input table, but individual row values ar
 
 The following selector functions are available:
 
-- [bottom](./bottom)
-- [distinct](./distinct)
-- [first](./first)
-- [last](./last)
-- [max](./max)
-- [min](./min)
-- [sample](./sample)
-- [top](./top)
-- [unique](./unique)
+- [bottom](/flux/v0.7/functions/transformations/selectors/bottom)
+- [distinct](/flux/v0.7/functions/transformations/selectors/distinct)
+- [first](/flux/v0.7/functions/transformations/selectors/first)
+- [last](/flux/v0.7/functions/transformations/selectors/last)
+- [max](/flux/v0.7/functions/transformations/selectors/max)
+- [min](/flux/v0.7/functions/transformations/selectors/min)
+- [sample](/flux/v0.7/functions/transformations/selectors/sample)
+- [top](/flux/v0.7/functions/transformations/selectors/top)
+- [unique](/flux/v0.7/functions/transformations/selectors/unique)
 
 
 ### Selectors and aggregates

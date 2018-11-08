@@ -11,10 +11,10 @@ menu:
 Flux type conversion functions convert columns of the input table into a specific data type.
 The following type conversion functions are available:
 
-- [toBool](./tobool)
-- [toDuration](./toduration)
-- [toFloat](./tofloat)
-- [toInt](./toint)
-- [toString](./tostring)
-- [toTime](./totime)
-- [toUInt](./touint)
+- [toBool](/flux/v0.7/functions/transformations/type-conversions/tobool)
+- [toDuration](/flux/v0.7/functions/transformations/type-conversions/toduration)
+- [toFloat](/flux/v0.7/functions/transformations/type-conversions/tofloat)
+- [toInt](/flux/v0.7/functions/transformations/type-conversions/toint)
+- [toString](/flux/v0.7/functions/transformations/type-conversions/tostring)
+- [toTime](/flux/v0.7/functions/transformations/type-conversions/totime)
+- [toUInt](/flux/v0.7/functions/transformations/type-conversions/touint)
