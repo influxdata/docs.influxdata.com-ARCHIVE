@@ -35,7 +35,7 @@ from(bucket: "telegraf/autogen")
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -5m)
-  |> count(["_value"])
+  |> count(columns: ["_value"])
 ```
 
 <hr style="margin-top:4rem"/>

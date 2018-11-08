@@ -10,7 +10,7 @@ menu:
 
 The `keep()` function returns a table containing only the specified columns, ignoring all others.
 Only columns in the group key that are also specified in the `keep()` function will be kept in the resulting group key.
-_It is the inverse of [`drop`](../drop)._
+_It is the inverse of [`drop`](/flux/v0.7/functions/transformations/drop)._
 
 _**Function type:** Transformation_  
 _**Output data type:** Object_
@@ -40,14 +40,14 @@ _**Data type:** Function_
 
 ## Examples
 
-##### Keep a list of columns:
+##### Keep a list of columns
 ```js
 from(bucket: "telegraf/autogen")
     |> range(start: -5m)
     |> keep(columns: ["_time", "_value"])
 ```
 
-##### Keep all columns matching a predicate:
+##### Keep all columns matching a predicate
 ```js
 from(bucket: "telegraf/autogen")
     |> range(start: -5m)

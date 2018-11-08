@@ -16,7 +16,13 @@ _**Output data type:** Object_
 
 ```js
 group(by: ["host", "_measurement"])
+
+// OR
+
 group(except: ["_time"])
+
+// OR
+
 group(none: true)
 ```
 
@@ -36,7 +42,7 @@ _Cannot be used with `by`._
 _**Data type:** Array of strings_
 
 ## none
-Remove existing groups as well as partitions created by the [`window()` function](../window).
+Remove existing groups as well as partitions created by the [`window()` function](/flux/v0.7/functions/transformations/window).
 
 _**Data type:** Boolean_
 

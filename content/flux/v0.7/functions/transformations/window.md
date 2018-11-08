@@ -18,11 +18,23 @@ _**Function type:** Transformation_
 _**Output data type:** Object_
 
 ```js
-window(every: 5m, period: 5m, offset: 12h, timeColumn: "_time", startColumn: "_start", stopColumn: "_stop")
+window(
+  every: 5m,
+  period: 5m,
+  offset: 12h,
+  timeColumn: "_time",
+  startColumn: "_start",
+  stopColumn: "_stop"
+)
 
 // OR
 
-window(intervals: intervals(every: 5m, period: 5m, offset: 12h), timeColumn: "_time", startColumn: "_start", stopColumn: "_stop")
+window(
+  intervals: intervals(every: 5m, period: 5m, offset: 12h),
+  timeColumn: "_time",
+  startColumn: "_start",
+  stopColumn: "_stop"
+)
 ```
 
 ## Parameters
