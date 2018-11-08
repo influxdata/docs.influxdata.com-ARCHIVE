@@ -10,7 +10,7 @@ Explore and visualize your data in the **Data Explorer**. For both InfluxQL and 
 
 To open the **Data Explorer**, click the **Explore** icon in the navigation bar:
 
-<img src="/img/chronograf/v1.7/data-explorer-icon.png" style="width:100%; max-width:300px;">
+<img src="/img/chronograf/v1.7/data-explorer-icon.png" style="width:100%; max-width:400px; margin:2em auto; display: block;">
 
 ## Explore data with InfluxQL
 
@@ -35,20 +35,24 @@ Flux is InfluxData's new functional data scripting language designed for queryin
 3. Use the **Schema** pane to explore your available data. Click the **+** sign next to a bucket name to expand its content.
 4. Use the **Functions** pane to view details about the available Flux functions.
 5. Use the **Script** pane to enter your Flux query.
-  * To get started with your query, click the **Script Wizard**. In the wizard, you can select a bucket, measurement, fields and an aggregate.
-  <img src="/img/chronograf/v1.7/flux-script-wizard.png" style="width:100%; max-width:300px;">
+
+    * To get started with your query, click the **Script Wizard**. In the wizard, you can select a bucket, measurement, fields and an aggregate.
+
+      <img src="/img/chronograf/v1.7/flux-script-wizard.png" style="width:100%; max-width:400px; margin:2em auto; display:block;">
 
     For example, if you make the above selections, the wizard inserts the following script:
-  ```
-  from(bucket: "telegraf/autogen")
-  |> range(start: dashboardTime)
-  |> filter(fn: (r) => r._measurement == "cpu" and (r._field == "usage_system"))
-  |> window(every: autoInterval)
-  |> toFloat()
-  |> percentile(percentile: 0.95)
-  |> group(except: ["_time", "_start", "_stop", "_value"])
-  ```
-  * Alternatively, you can enter your entire script manually.
+
+    ```js
+    from(bucket: "telegraf/autogen")
+    |> range(start: dashboardTime)
+    |> filter(fn: (r) => r._measurement == "cpu" and (r._field == "usage_system"))
+    |> window(every: autoInterval)
+    |> toFloat()
+    |> percentile(percentile: 0.95)
+    |> group(except: ["_time", "_start", "_stop", "_value"])
+    ```
+    * Alternatively, you can enter your entire script manually.
+
 6. Click **Run Script** in the top bar of the **Script** pane. You can then preview your graph in the above pane.
 
 ## Visualize your query
@@ -61,7 +65,10 @@ To add your query and graph to a dashboard:
 
 1. Click **Send to Dashboard** in the upper right.
 2. In the **Target Dashboard(s)** dropdown, select at least one existing dashboard to send the cell to, or select **Send to a New Dashboard**.
-<img src="/img/chronograf/send-to-dashboard-target.png" style="width:100%; max-width:500px;">
+
+    <img src="/img/chronograf/send-to-dashboard-target.png" style="width:100%; max-width:597px; margin:0 auto; display: block;">
+
 3. Enter a name for the new cell and, if you created a new dashboard, the new dashboard.
 4. Click **Send to Dashboard(s)**.
-<img src="/img/chronograf/v1.7/send-to-dashboard-send.png" style="width:100%; max-width:500px;">
+
+    <img src="/img/chronograf/v1.7/send-to-dashboard-send.png" style="width:100%; max-width:597px; display:block; margin:2em auto;">
