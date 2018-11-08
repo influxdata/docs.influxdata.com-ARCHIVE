@@ -11,7 +11,7 @@ menu:
     parent: nodes
 ---
 
-The `log` node logs all data that passes through the it.
+The `log` node logs all data that passes through it.
 
 Example:
 
