@@ -63,49 +63,49 @@ influx_inspect buildtsi -datadir <data_dir> -waldir <wal_dir> [ options ]
 
 Optional arguments are in brackets.
 
-#### `[ -batch-size ]`
+##### `[ -batch-size ]`
 
 The size of the batches written to the index. Default value is `10000`.
 
 >**Warning:** Setting this value can have adverse effects on performance and heap size.
 
-#### `[ -concurrency ]`
+##### `[ -concurrency ]`
 
 The number of workers to dedicate to shard index building.
 Defaults to [`GOMAXPROCS`](/influxdb/v1.7/administration/config#gomaxprocs-environment-variable) value.
 
-#### `[ -database <db_name> ]`
+##### `[ -database <db_name> ]`
 
 The name of the database.
 
-#### `-datadir <data_dir>`
+##### `-datadir <data_dir>`
 
 The path to the `data` directory.
 
-#### `[ -max-cache-size ]`
+##### `[ -max-cache-size ]`
 
 The maximum size of the cache before it starts rejecting writes.
 This value overrides the configuration setting for
 `[data] cache-max-memory-size`.
 Default value is `1073741824`.
 
-#### `[ -max-log-file-size ]`
+##### `[ -max-log-file-size ]`
 
 The maximum size of the log file. Default value is `1048576`.
 
-#### `[ -retention <rp_name> ]`
+##### `[ -retention <rp_name> ]`
 
 The name of the retention policy.
 
-#### `[ -shard <shard_ID> ]`
+##### `[ -shard <shard_ID> ]`
 
 The identifier of the shard.
 
-#### `[ -v ]`
+##### `[ -v ]`
 
 Flag to enable output in verbose mode.
 
-#### `-waldir <wal_dir>`
+##### `-waldir <wal_dir>`
 
 The directory for the WAL (Write Ahead Log) files.
 
@@ -149,14 +149,14 @@ Path to the `.tsm` file, located by default in the `data` directory.
 
 When specifying the path, wildcards (`*`) can replace one or more characters.
 
-###### Examples
+#### Examples
 
-Single shard:
+##### Delete a measurement from a single shard
 
 ```
 ./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
 ```
-All shards in the database:
+##### Delete a measurement from all shards in the database
 
 ```
 ./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
@@ -237,12 +237,12 @@ Filter data by tag value regular expression.
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index
 ```
-##### Specifying paths to the `_series` directory and an `index` file**
+##### Specifying paths to the `_series` directory and an `index` file
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
 ```
-**Specifying paths to the `_series` directory and multiple `index` files**
+##### Specifying paths to the `_series` directory and multiple `index` files
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /path/to/index/file1 ...
@@ -333,7 +333,6 @@ Default value is `false`.
 The name of the database to export.
 Default value is `""`.
 
-
 ##### `-datadir <data_dir>`
 
 The path to the `data` directory.
@@ -357,7 +356,6 @@ The name of the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-p
 
 The timestamp for the start of the time range.
 The timestamp string must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#absolute-time).
-
 
 #### [ `-waldir <wal_dir>` ]
 
@@ -411,12 +409,12 @@ Optional arguments are in brackets.
 The regular expression or wildcard pattern to match included files.
 Default value is `""`.
 
-#### [ `-detailed` ]
+##### [ `-detailed` ]
 
 The flag to report detailed cardinality estimates.
 Default value is `false`.
 
-#### [ `-exact` ]
+##### [ `-exact` ]
 
 The flag to report exact cardinality counts instead of estimates.
 Default value is `false`.
@@ -448,11 +446,11 @@ influx_inspect reporttsi -db-path <path-to-db> [ options ]
 
 Optional arguments are in brackets.
 
-#### `-db-path <path-to-db>`
+##### `-db-path <path-to-db>`
 
 The path to the database.
 
-#### [ `-top <n>` ]
+##### [ `-top <n>` ]
 
 Limits the results to the top specified number within each shard.
 
