@@ -128,7 +128,7 @@ Property methods are marked using the `.` operator.
 
 ### Align
 
-Round times to the [StatsNode.Interval](/kapacitor/v1.5/nodes/stats_node/#interval) value.
+Round times to the StatsNode.Interval value.
 
 
 ```js

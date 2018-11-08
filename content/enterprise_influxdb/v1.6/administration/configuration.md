@@ -13,8 +13,8 @@ menu:
 This page contains general information about configuring InfluxDB Enterprise.
 For complete listings and descriptions of the configuration settings, see:
 
-* [Data node configurations](/enterprise_influxdb/v1.6/config-data-nodes)
-* [Meta node configurations](/enterprise_influxdb/v1.6/config-meta-nodes)
+* [Data node configurations](/enterprise_influxdb/v1.6/administration/config-data-nodes)
+* [Meta node configurations](/enterprise_influxdb/v1.6/administration/config-meta-nodes)
 
 ## Using configuration files
 
