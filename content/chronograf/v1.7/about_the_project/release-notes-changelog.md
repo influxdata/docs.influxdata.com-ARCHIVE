@@ -7,6 +7,12 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.2 [2018-11-08]
+
+### Bug Fixes
+
+* Remove hardcoded database/retention period from protoboards. 
+
 ## v1.7.1 [2018-11-07]
 
 ### Bug Fixes
