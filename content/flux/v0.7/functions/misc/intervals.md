@@ -15,7 +15,7 @@ The return value of intervals is another function that accepts start and stop ti
 The generator is then used to produce the set of intervals.
 The set of intervals includes all intervals that intersect with the initial range of time.
 
-> The `intervals()` function is designed to be used with the intervals parameter of the [`window()` function](../../transformations/window).
+> The `intervals()` function is designed to be used with the intervals parameter of the [`window()` function](/flux/v0.7/functions/transformations/window).
 
 _**Function type:** Miscellaneous_  
 _**Output data type:** Object_

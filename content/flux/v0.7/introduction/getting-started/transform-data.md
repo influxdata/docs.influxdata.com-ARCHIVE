@@ -28,7 +28,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+    r.cpu == "cpu-total"
+  )
 ```
 
 ## Flux functions
@@ -43,6 +44,10 @@ them into a new value.
 This example uses the [`mean()` function](/flux/v0.7/functions/transformations/aggregates/mean)
 to average values within time windows.
 
+> The following example walks through the steps required to window and aggregate data,
+> but there is a [`aggregateWindow()` helper function](#helper-functions) that does it for you.
+> It's just good to understand the steps in the process.
+
 ## Window your data
 Flux's [`window()` function](/flux/v0.7/functions/transformations/window) partitions records based on a time value.
 Use the `every` parameter to define a duration of time for each window.
@@ -55,7 +60,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+    r.cpu == "cpu-total"
+  )
   |> window(every: 5m)
 ```
 
@@ -74,7 +80,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (row) =>
     r._measurement == "cpu" AND
     r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+    r.cpu == "cpu-total"
+  )
   |> window(every: 5m)
   |> mean()
 ```
@@ -100,7 +107,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+    r.cpu == "cpu-total"
+  )
   |> window(every: 5m)
   |> mean()
   |> duplicate(column: "_stop", as: "_time")
@@ -117,7 +125,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+    r.cpu == "cpu-total"
+  )
   |> window(every: 5m)
   |> mean()
   |> duplicate(column: "_stop", as: "_time")
@@ -142,7 +151,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+    r.cpu == "cpu-total"
+  )
   |> aggregateWindow(every: 5m, fn: mean)
 ```
 

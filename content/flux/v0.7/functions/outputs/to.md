@@ -15,11 +15,27 @@ _**Function type:** Output_
 _**Output data type:** Object_
 
 ```js
-to(bucket: "my-bucket", org: "my-org", host: "http://example.com:8086", token: "xxxxxx", timeColumn: "_time", tagColumns: ["tag1", "tag2", "tag3"], fieldFn: (r) => ({ [r._field]: r._value }))
+to(
+  bucket: "my-bucket",
+  org: "my-org",
+  host: "http://example.com:8086",
+  token: "xxxxxx",
+  timeColumn: "_time", 
+  tagColumns: ["tag1", "tag2", "tag3"],
+  fieldFn: (r) => ({ [r._field]: r._value })
+)
 
 // OR
 
-to(bucketID: "1234567890", orgID: "0987654321", host: "http://example.com:8086", token: "xxxxxx", timeColumn: "_time", tagColumns: ["tag1", "tag2", "tag3"], fieldFn: (r) => ({ [r._field]: r._value }))
+to(
+  bucketID: "1234567890",
+  orgID: "0987654321",
+  host: "http://example.com:8086",
+  token: "xxxxxx",
+  timeColumn: "_time",
+  tagColumns: ["tag1", "tag2", "tag3"],
+  fieldFn: (r) => ({ [r._field]: r._value })
+)
 ```
 
 ## Parameters

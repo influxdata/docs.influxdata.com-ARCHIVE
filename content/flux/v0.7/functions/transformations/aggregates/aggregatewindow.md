@@ -13,7 +13,13 @@ The `aggregateWindow()` function applies an aggregate function to fixed windows 
 _**Function type:** Aggregate_  
 
 ```js
-aggregateWindow(every: 1m, fn: mean, columns: ["_value"], timeColumn: "_stop", timeDst: "_time")
+aggregateWindow(
+  every: 1m,
+  fn: mean,
+  columns: ["_value"],
+  timeColumn: "_stop",
+  timeDst: "_time"
+)
 ```
 
 As data is windowed into separate tables and aggregated, the `_time` column is dropped from each group key.
@@ -29,16 +35,8 @@ _**Data type:** Duration_
 
 ### fn
 The aggregate function used in the operation.
-The following values can be used:
 
-- `count`
-- `mean`
-- `skew`
-- `spread`
-- `stddev`
-- `sum`
-
-_**Data type:** String (unquoted)_
+_**Data type:** Function_
 
 ### columns
 List of columns on which to operate.
@@ -59,11 +57,34 @@ Defaults to `"_time"`.
 _**Data type:** String_
 
 ## Examples
+
+###### Using an aggregate function with default parameters
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: 1h)
-  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent")
-  |> aggregateWindow(every: 5m, fn: mean)
+  |> filter(fn: (r) =>
+    r._measurement == "mem" AND
+    r._field == "used_percent")
+  |> aggregateWindow(
+    every: 5m,
+    fn: mean
+  )
+```
+####### Specifying parameters of the aggregate function
+To use `aggregateWindow()` aggregate functions that don't provide defaults for required parameters,
+for the `fn` parameter, define an anonymous function with `columns` and `tables` parameters
+that pipe-forwards tables into the aggregate function with all required parameters defined:
+
+```js
+from(bucket: "telegraf/autogen")
+  |> range(start: 1h)
+  |> filter(fn: (r) =>
+    r._measurement == "mem" AND
+    r._field == "used_percent")
+  |> aggregateWindow(
+    every: 5m,
+    fn: (columns, tables=<-) => tables |> percentile(percentile: 0.99, columns:columns)
+  )
 ```
 
 ## Function definition

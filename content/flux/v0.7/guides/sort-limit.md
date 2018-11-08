@@ -15,7 +15,8 @@ from(bucket:"telegraf/autogen")
   |> range(start:-12h)
   |> filter(fn: (r) =>
     r._measurement == "system" AND
-    r._field == "uptime")
+    r._field == "uptime"
+  )
   |> sort(columns:["region", "host", "_value"])
 ```
 
@@ -34,7 +35,8 @@ from(bucket:"telegraf/autogen")
   |> range(start:-12h)
   |> filter(fn: (r) =>
     r._measurement == "system" AND
-    r._field == "uptime")
+    r._field == "uptime"
+  )
   |> sort(columns:["region", "host", "_value"])
   |> limit(n:10)
 ```

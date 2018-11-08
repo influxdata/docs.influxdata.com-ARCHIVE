@@ -39,11 +39,17 @@ _**Data type:** Array of strings_
 ```js
 stream1 = from(bucket:"telegraf/autogen")
   |> range(start:-15m)
-  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used")
+  |> filter(fn: (r) =>
+    r._measurement == "mem" AND
+    r._field == "used"
+  )
 
 stream2 = from(bucket:"telegraf/autogen")
   |> range(start:-15m)
-  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "available")
+  |> filter(fn: (r) => r
+    ._measurement == "mem" AND
+    r._field == "available"
+  )
 
 pearsonr(x: stream1, y: stream2, on: ["_time", "_field"])
 ```

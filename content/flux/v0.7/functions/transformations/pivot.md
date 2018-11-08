@@ -62,5 +62,9 @@ _**Data type:** String_
 from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "cpu-total")
-  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> pivot(
+    rowKey:["_time"],
+    columnKey: ["_field"],
+    valueColumn: "_value"
+  )
 ```

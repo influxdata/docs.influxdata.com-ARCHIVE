@@ -35,7 +35,10 @@ _**Data type:** Array of strings_
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start:-1h)
-  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent")
+  |> filter(fn: (r) =>
+    r._measurement == "mem" AND
+    r._field == "used_percent"
+  )
   |> bottom(n:10)
 ```
 

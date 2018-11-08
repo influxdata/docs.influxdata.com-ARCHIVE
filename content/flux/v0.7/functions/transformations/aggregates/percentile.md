@@ -71,7 +71,11 @@ from(bucket: "telegraf/autogen")
 	|> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system")
-	|> percentile(percentile: 0.99, method: "estimate_tdigest", compression: 1000)
+	|> percentile(
+    percentile: 0.99,
+    method: "estimate_tdigest",
+    compression: 1000
+  )
 ```
 
 ###### Percentile as a selector
@@ -81,7 +85,10 @@ from(bucket: "telegraf/autogen")
 	|> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system")
-	|> percentile(percentile: 0.99, method: "exact_selector")
+	|> percentile(
+    percentile: 0.99,
+    method: "exact_selector"
+  )
 ```
 
 <hr style="margin-top:4rem"/>

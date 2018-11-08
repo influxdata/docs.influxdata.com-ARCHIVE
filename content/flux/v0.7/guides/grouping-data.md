@@ -72,7 +72,8 @@ dataSet = from(bucket: "telegraf/autogen")
   |> range(start: -2m)
   |> filter(fn: (r) =>
     r._field == "usage_system" AND
-    r.cpu =~ /cpu[0-9*]/ )
+    r.cpu =~ /cpu[0-9*]/
+  )
   |> drop(columns: ["host"])
 ```
 

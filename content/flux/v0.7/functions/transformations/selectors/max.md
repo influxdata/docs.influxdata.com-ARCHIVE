@@ -21,7 +21,10 @@ max()
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start:-1h)
-  |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "usage_system")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system"
+  )
   |> max()
 ```
 

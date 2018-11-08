@@ -64,5 +64,7 @@ _**Data type:** Boolean_
 ##### Histogram with dynamically generated buckets
 ```js
 // Dynamically generate 10 buckets from 0,10,20,...,100
-histogram(buckets: linearBuckets(start:0.0, width:10.0, count:10))
+histogram(
+  buckets: linearBuckets(start:0.0, width:10.0, count:10)
+)
 ```
