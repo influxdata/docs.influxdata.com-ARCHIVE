@@ -10,7 +10,7 @@ Explore and visualize your data in the **Data Explorer**. For both InfluxQL and 
 
 To open the **Data Explorer**, click the **Explore** icon in the navigation bar:
 
-<img src="/img/chronograf/v1.7/data-explorer-icon.png" style="width:100%; max-width:400px; margin:2em auto; display: block;">
+<img src="/img/chronograf/v1.7/data-explorer-icon.png" style="width:100%; max-width:400px; margin:2em 0; display: block;">
 
 ## Explore data with InfluxQL
 
@@ -38,7 +38,7 @@ Flux is InfluxData's new functional data scripting language designed for queryin
 
     * To get started with your query, click the **Script Wizard**. In the wizard, you can select a bucket, measurement, fields and an aggregate.
 
-      <img src="/img/chronograf/v1.7/flux-script-wizard.png" style="width:100%; max-width:400px; margin:2em auto; display:block;">
+      <img src="/img/chronograf/v1.7/flux-script-wizard.png" style="width:100%; max-width:400px; margin:2em 0; display:block;">
 
     For example, if you make the above selections, the wizard inserts the following script:
 
@@ -66,9 +66,9 @@ To add your query and graph to a dashboard:
 1. Click **Send to Dashboard** in the upper right.
 2. In the **Target Dashboard(s)** dropdown, select at least one existing dashboard to send the cell to, or select **Send to a New Dashboard**.
 
-    <img src="/img/chronograf/send-to-dashboard-target.png" style="width:100%; max-width:597px; margin:0 auto; display: block;">
+    <img src="/img/chronograf/send-to-dashboard-target.png" style="width:100%; max-width:597px; margin:2em 0; display: block;">
 
 3. Enter a name for the new cell and, if you created a new dashboard, the new dashboard.
 4. Click **Send to Dashboard(s)**.
 
-    <img src="/img/chronograf/v1.7/send-to-dashboard-send.png" style="width:100%; max-width:597px; display:block; margin:2em auto;">
+    <img src="/img/chronograf/v1.7/send-to-dashboard-send.png" style="width:100%; max-width:597px; display:block; margin:2em 0;">
