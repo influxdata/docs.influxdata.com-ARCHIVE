@@ -400,6 +400,7 @@ The default location is `$HOME/.influxdb`.
 ```
 influx_inspect report [ options ]
 ```
+
 #### Options
 
 Optional arguments are in brackets.
@@ -512,7 +513,7 @@ Path to a specific series file; overrides `-db` and `-dir`.
 
 Enables verbose logging.
 
-# Caveats
+## Caveats
 
 The system does not have access to the metastore when exporting TSM shards.
 As such, it always creates the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) with infinite duration and replication factor of 1.  End users may want to change this prior to reimporting if they are importing to a cluster or want a different duration
