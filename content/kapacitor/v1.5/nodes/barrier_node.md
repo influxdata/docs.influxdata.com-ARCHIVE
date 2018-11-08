@@ -36,7 +36,7 @@ stream
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[barrier](#description)&nbsp;(&nbsp;)** | Create a new Barrier node that emits a BarrierMessage periodically  |
+| **barrier&nbsp;(&nbsp;)** | Create a new Barrier node that emits a BarrierMessage periodically  |
 
 ### Property Methods
 

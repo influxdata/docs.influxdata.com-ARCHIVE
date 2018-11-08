@@ -81,13 +81,13 @@ Meta nodes expose the `/debug/pprof` endpoints for profiling and troubleshooting
 
 ## Shard movement
 
-* [Copy Shard](/enterprise_influxdb/v1.6/features/cluster-commands/#copy-shard) support - copy a shard from one node to another
-* [Copy Shard Status](/enterprise_influxdb/v1.6/features/cluster-commands/#copy-shard-status) - query the status of a copy shard request
-* [Kill Copy Shard](/enterprise_influxdb/v1.6/features/cluster-commands/#kill-copy-shard) - kill a running shard copy
-* [Remove Shard](/enterprise_influxdb/v1.6/features/cluster-commands/#remove-shard) - remove a shard from a node (this deletes data)
-* [Truncate Shards](/enterprise_influxdb/v1.6/features/cluster-commands/#truncate-shards) - truncate all active shard groups and start new shards immediately (This is useful when adding nodes or changing replication factors.)
+* [Copy Shard](/enterprise_influxdb/v1.6/administration/cluster-commands/#copy-shard) support - copy a shard from one node to another
+* [Copy Shard Status](/enterprise_influxdb/v1.6/administration/cluster-commands/#copy-shard-status) - query the status of a copy shard request
+* [Kill Copy Shard](/enterprise_influxdb/v1.6/administration/cluster-commands/#kill-copy-shard) - kill a running shard copy
+* [Remove Shard](/enterprise_influxdb/v1.6/administration/cluster-commands/#remove-shard) - remove a shard from a node (this deletes data)
+* [Truncate Shards](/enterprise_influxdb/v1.6/administration/cluster-commands/#truncate-shards) - truncate all active shard groups and start new shards immediately (This is useful when adding nodes or changing replication factors.)
 
-This functionality is exposed via an API on the meta service and through [`influxd-ctl` sub-commands](/enterprise_influxdb/v1.6/features/cluster-commands/).
+This functionality is exposed via an API on the meta service and through [`influxd-ctl` sub-commands](/enterprise_influxdb/v1.6/administration/cluster-commands/).
 
 ## OSS conversion
 

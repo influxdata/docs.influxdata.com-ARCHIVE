@@ -10,19 +10,23 @@ menu:
     parent: Administration
 ---
 
-InfluxDB Enterprise includes two utilities for interacting with and managing your clusters. The [`influxd-ctl`](#influxd-ctl) utility provides commands for managing your InfluxDB Enterprise clusters. The [`influx` command line interface](#influx) is used for interacting with and managing your data.
+InfluxDB Enterprise includes two utilities for interacting with and managing your clusters.
+The [`influxd-ctl`](#influxd-ctl-cluster-management-utility) utility provides commands
+for managing your InfluxDB Enterprise clusters.
+The [`influx` command line interface](#influx-command-line-interface-cli) is used
+for interacting with and managing your data.
 
 #### Content
 
 * [`influxd-ctl` cluster management utility](#influxd-ctl-cluster-management-utility)
     * [Syntax](#syntax)
     * [Global options](#global-options)
-        * [`-auth-type`](#auth-type)
+        * [`-auth-type`](#auth-type-none-basic-jwt)
         * [`-bind-tls`](#bind-tls)
         * [`-config`](#config-path-to-configuration-file)
         * [`-pwd`](#pwd-password)
         * [`-k`](#k)
-        * [`-secret`](#secret-jwt-shard-secret)
+        * [`-secret`](#secret-jwt-shared-secret)
         * [`-user`](#user-username)
     * [Commands](#commands)
         * [`add-data`](#add-data)
@@ -113,7 +117,7 @@ $ influxd-ctl -auth-type jwt -secret oatclusters show
 ```
 The `influxd-ctl` utility uses JWT authentication with the shared secret `oatclusters`.
 
-If authentication is enabled in the cluster's [meta node configuration files](/enterprise_influxdb/v1.6/administration/config-meta-nodes#auth-enabled) and [data node configuration files](/enterprise_influxdb/v1.6/administration/config-data-nodes#meta-auth-enabled) and the `influxd-ctl` command does not include authentication details, the system returns:
+If authentication is enabled in the cluster's [meta node configuration files](/enterprise_influxdb/v1.6/administration/config-meta-nodes#auth-enabled-false) and [data node configuration files](/enterprise_influxdb/v1.6/administration/config-data-nodes#meta-auth-enabled-false) and the `influxd-ctl` command does not include authentication details, the system returns:
 
 ```
 Error: unable to parse authentication credentials.
@@ -135,7 +139,7 @@ In the following example, the `influxd-ctl` utility uses basic authentication fo
 $ influxd-ctl -auth-type basic -user admini -pwd mouse show
 ```
 
-If authentication is enabled in the cluster's [meta node configuration files](/enterprise_influxdb/v1.6/administration/config-meta-nodes#auth-enabled) and [data node configuration files](/enterprise_influxdb/v1.6/administration/config-data-nodes#meta-auth-enabled) and the `influxd-ctl` command does not include authentication details, the system returns:
+If authentication is enabled in the cluster's [meta node configuration files](/enterprise_influxdb/v1.6/administration/config-meta-nodes#auth-enabled-false) and [data node configuration files](/enterprise_influxdb/v1.6/administration/config-data-nodes#meta-auth-enabled-false) and the `influxd-ctl` command does not include authentication details, the system returns:
 
 ```
 Error: unable to parse authentication credentials.
@@ -952,7 +956,7 @@ updated data node 26 to cluster-data-node-01:8088
 #### `token`
 
 Generates a signed JSON Web Token (JWT) token.
-The token argument only works when using JWT authentication in the cluster and when using the [`-auth-type jwt`](#global-arguments) and [`-secret <shared-secret>`](#global-arguments) arguments.
+The token argument only works when using JWT authentication in the cluster and when using the [`-auth-type jwt`](#auth-type-none-basic-jwt) and [`-secret <shared-secret>`](#secret-jwt-shared-secret) arguments.
 
 #### Syntax
 

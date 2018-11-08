@@ -25,7 +25,7 @@ and does not have any children.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[noOp](#description)** | Has no constructor signature. |
+| **noOp** | Has no constructor signature. |
 
 ### Property Methods
 

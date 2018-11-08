@@ -13,20 +13,22 @@ menu:
     * [Global](#global-settings)
     * [Enterprise license [enterprise]](#enterprise-license-settings)
     * [Meta node [meta]](#meta-node-settings)
-    * [Data [data]](#data)
-    * [Cluster [cluster]](#cluster)
-    * [Retention [retention]](#retention)
-    * [Shard precreation [shard-precreation]](#shard-precreation)
-    * [Monitor [monitor]](#monitor)
-    * [Subscriber [subscriber]](#subscriber)
-    * [HTTP endpoints [http]](#http)
-    * [Graphite [graphite]](#graphite)
-    * [Collectd [collectd]](#collectd)
-    * [OpenTSDB [opentsdb]](#opentsdb)
-    * [UDP [udp]](#udp)
-    * [Continuous queries [continuous-queries]](#continuous-queries)
-    * [Hinted Handoff [hinted-handoff]](#hinted-handoff)
-    * [Anti-Entropy [anti-entropy]](#anti-entropy)
+    * [Data [data]](#data-settings)
+    * [Cluster [cluster]](#cluster-settings)
+    * [Retention [retention]](#retention-policy-settings)
+    * [Hinted Handoff [hinted-handoff]](#hinted-handoff-settings)
+    * [Anti-Entropy [anti-entropy]](#anti-entropy-settings)
+    * [Shard precreation [shard-precreation]](#shard-precreation-settings)
+    * [Monitor [monitor]](#monitor-settings)
+    * [HTTP endpoints [http]](#http-endpoint-settings)
+    * [Logging [logging]](#logging-settings)
+    * [Subscriber [subscriber]](subscriber-settings)
+    * [Graphite [graphite]](#graphite-settings)
+    * [Collectd [collectd]](#collectd-settings)
+    * [OpenTSDB [opentsdb]](#opentsdb-settings)
+    * [UDP [udp]](#udp-settings)
+    * [Continuous queries [continuous-queries]](#continuous-queries-settings)
+    * [TLS [tls]](#tls-settings)
 
 
     ## Data node configurations
@@ -85,7 +87,7 @@ The `[enterprise]` section contains the parameters for the meta node's registrat
 The license key created for you on [InfluxPortal](https://portal.influxdata.com). The meta node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
 The server caches the license file locally.
 The data process will only function for a limited time without a valid license file.
-You must use the [`license-path` setting](#license-path-1) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
+You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
 <dt>
 Use the same key for all nodes in the same cluster.  
@@ -164,7 +166,7 @@ Environment variable: `INFLUXDB_META_META_AUTH_ENABLED`
 #### `meta-internal-shared-secret = ""`
 
 The shared secret used by the internal API for JWT authentication between InfluxDB nodes.
-This value must be the same as the [`internal-shared-secret`](#internal-shared-secret) specified in the meta node configuration file.
+This value must be the same as the [`internal-shared-secret`](/enterprise_influxdb/v1.6/administration/config-meta-nodes/#internal-shared-secret) specified in the meta node configuration file.
 
 Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
 
@@ -499,7 +501,11 @@ The maximum number of shards that a single data node will copy or repair in para
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
 
-### `[retention]` Retention policy settings
+-----
+
+## Retention policy settings
+
+### `[retention]`
 
 Controls the enforcement of retention policies for evicting old data.
 

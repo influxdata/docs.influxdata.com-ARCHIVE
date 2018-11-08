@@ -39,7 +39,7 @@ Shift all data points 10s backward in time.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[shift](#description)&nbsp;(&nbsp;`shift`&nbsp;`time.Duration`)** | Create a new node that shifts the incoming points or batches in time.  |
+| **shift&nbsp;(&nbsp;`shift`&nbsp;`time.Duration`)** | Create a new node that shifts the incoming points or batches in time.  |
 
 ### Property Methods
 

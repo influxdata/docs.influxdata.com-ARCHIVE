@@ -81,7 +81,7 @@ Available Statistics:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[k8sAutoscale](#description)&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for a kubernetes cluster.  |
+| **k8sAutoscale&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for a kubernetes cluster.  |
 
 ### Property Methods
 

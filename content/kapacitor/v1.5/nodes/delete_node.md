@@ -33,7 +33,7 @@ Available Statistics:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[delete](#description)&nbsp;(&nbsp;)** | Create a node that can delete tags or fields.  |
+| **delete&nbsp;(&nbsp;)** | Create a node that can delete tags or fields.  |
 
 ### Property Methods
 

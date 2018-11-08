@@ -37,7 +37,7 @@ the tag `host` matches the regex `logger\d+`.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[from](#description)&nbsp;(&nbsp;)** | Creates a new stream node that can be further filtered using the Database, RetentionPolicy, Measurement and Where properties. From can be called multiple times to create multiple independent forks of the data stream.  |
+| **from&nbsp;(&nbsp;)** | Creates a new stream node that can be further filtered using the Database, RetentionPolicy, Measurement and Where properties. From can be called multiple times to create multiple independent forks of the data stream.  |
 
 ### Property Methods
 

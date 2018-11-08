@@ -351,7 +351,7 @@ Note that the basic syntax does not support using
 to change the value reported for intervals with no data.
 Basic syntax CQs ignore `fill()` if it's included in the CQ query.
 A possible workaround is to use the
-[advanced CQ syntax](#configuring-cq-time-ranges-and-filling-empty-results).
+[advanced CQ syntax](#example-4-configuring-cq-time-ranges-and-filling-empty-results).
 
 ##### Issue 2: Resampling previous time intervals
 <br>

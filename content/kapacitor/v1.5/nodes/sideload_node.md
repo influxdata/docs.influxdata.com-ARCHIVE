@@ -33,7 +33,7 @@ The files paths are checked then checked in order for the specified keys and the
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[sideload](#description)&nbsp;(&nbsp;)** | Create a node that can load data from external sources  |
+| **sideload&nbsp;(&nbsp;)** | Create a node that can load data from external sources  |
 
 ### Property Methods
 

@@ -30,7 +30,7 @@ stream.from()...
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[log](#description)&nbsp;(&nbsp;)** | Create a node that logs all data it receives.  |
+| **log&nbsp;(&nbsp;)** | Create a node that logs all data it receives.  |
 
 ### Property Methods
 
