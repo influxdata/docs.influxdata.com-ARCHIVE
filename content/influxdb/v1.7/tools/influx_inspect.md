@@ -338,26 +338,26 @@ Default value is `""`.
 The path to the `data` directory.
 Default value is `"$HOME/.influxdb/data"`.
 
-#### [ `-end <timestamp>` ]
+##### [ `-end <timestamp>` ]
 
 The timestamp for the end of the time range.
 The timestamp string must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#absolute-time).
 
-#### [ `-out <export_dir>` ]
+##### [ `-out <export_dir>` ]
 
 The location for the export file.
 Default value is `"$HOME/.influxdb/export"`.
 
-#### [ `-retention <rp_name> ` ]
+##### [ `-retention <rp_name> ` ]
 
 The name of the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) to export. Default value is `""`.
 
-#### [ `-start <timestamp>` ]
+##### [ `-start <timestamp>` ]
 
 The timestamp for the start of the time range.
 The timestamp string must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#absolute-time).
 
-#### [ `-waldir <wal_dir>` ]
+##### [ `-waldir <wal_dir>` ]
 
 Path to the [WAL](/influxdb/v1.7/concepts/glossary/#wal-write-ahead-log) directory.
 Default value is `"$HOME/.influxdb/wal"`.
@@ -376,7 +376,7 @@ influx_inspect export -compress
 influx_inspect export -database mydb -retention autogen
 ```
 
-##### Example of output
+##### Output file
 
 ```
 # DDL
