@@ -71,7 +71,7 @@ sudo systemctl restart influxdb-meta
 
 After performing the upgrade on ALL meta nodes, check your node version numbers using the
 `influxd-ctl show` command.
-The [`influxd-ctl` utility](/enterprise_influxdb/v1.6/features/cluster-commands/) is available on all meta nodes.
+The [`influxd-ctl` utility](/enterprise_influxdb/v1.6/administration/cluster-commands/) is available on all meta nodes.
 
 ```
 ~# influxd-ctl show
@@ -209,7 +209,7 @@ Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and
 
 Your cluster is now upgraded to InfluxDB Enterprise 1.6.
 Check your node version numbers using the `influxd-ctl show` command.
-The [`influxd-ctl`](/enterprise_influxdb/v1.6/features/cluster-commands/) utility is available on all meta nodes.
+The [`influxd-ctl`](/enterprise_influxdb/v1.6/administration/cluster-commands/) utility is available on all meta nodes.
 
 ```
 ~# influxd-ctl show

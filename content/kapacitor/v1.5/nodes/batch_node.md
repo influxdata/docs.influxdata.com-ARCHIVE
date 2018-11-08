@@ -40,7 +40,7 @@ Available Statistics:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[batch](#description)** | Has no constructor signature. |
+| **batch** | Has no constructor signature. |
 
 ### Property Methods
 

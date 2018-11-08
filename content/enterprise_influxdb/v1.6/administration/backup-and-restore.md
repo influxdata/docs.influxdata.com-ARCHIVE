@@ -49,7 +49,7 @@ influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/features/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Backup options:
@@ -180,7 +180,7 @@ The system automatically drops the `_internal` database when it performs a compl
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/features/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Restore options:
@@ -210,7 +210,7 @@ complete restore.
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/features/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Restore options:

@@ -312,7 +312,7 @@ ID  Database   Retention Policy  Desired Replicas  Shard Group  Start           
 6   foo        autogen           2                 4            2018-03-19T00:00:00Z  2018-03-26T00:00:00Z                        [{5 enterprise-data-02:8088} {4 enterprise-data-03:8088}]
 ```
 
-Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/config-data-nodes#check-interval-30s),
+Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/config-data-nodes#check-interval-10m),
 the AE service will begin copying shards from other shard owners to the new node.
 The time it takes for copying to complete is determined by the number of shards copied and how much data is stored in each.
 

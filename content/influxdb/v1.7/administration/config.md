@@ -21,17 +21,17 @@ The InfluxDB OSS configuration file contains configuration settings specific to 
   * [Metastore `[meta]`](#metastore-settings)
   * [Data `[data]`](#data-settings)
   * [Query management `[coordinator]`](#query-management-settings)
-  * [Retention policies `[retention]`](#retention-policies-settings)
+  * [Retention policies `[retention]`](#retention-policy-settings)
   * [Shard precreation `[shard-precreation]`](#shard-precreation-settings)
   * [Monitoring `[monitor]`](#monitoring-settings)
-  * [HTTP endpoints `[http]`](#http-endpoint-settings)
-  * [Subscriber `[subscriber]`](#subscriber-settings)
+  * [HTTP endpoints `[http]`](#http-endpoints-settings)
+  * [Subscriptions `[subscriber]`](#subscription-settings)
   * [Graphite `[[graphite]]`](#graphite-settings)
   * [CollectD `[[collectd]]`](#collectd-settings)
   * [OpenTSB `[[opentsdb]]`](#opentsdb-settings)
   * [UDP `[[udp]]`](#udp-settings)
   * [Continuous queries `[continuous_queries]`](#continuous-queries-settings)
-  * [TLS `[tls]`](#tls-settings)
+  * [TLS `[tls]`](#transport-layer-security-tls-settings)
 
 ## Configuration overview
 

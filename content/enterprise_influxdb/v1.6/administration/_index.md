@@ -11,13 +11,13 @@ menu:
 
 [Configuring InfluxDB Enterprise](/enterprise_influxdb/v1.6/administration/configuration/) covers the InfluxDB Enterprise configuration settings, including global options, meta node options, and data node options.
 
-## [Data node configurations](/enterprise_influxdb_v1.6/administration/config-data-nodes/)
+## [Data node configurations](/enterprise_influxdb/v1.6/administration/config-data-nodes/)
 
-The [Data node configurations](/enterprise_influxdb_v1.6/administration/config-data-nodes/) includes listings and descriptions of all data node configurations.
+The [Data node configurations](/enterprise_influxdb/v1.6/administration/config-data-nodes/) includes listings and descriptions of all data node configurations.
 
-## [Meta node configurations](/enterprise_influxdb_v1.6/administration/config-meta-nodes/)
+## [Meta node configurations](/enterprise_influxdb/v1.6/administration/config-meta-nodes/)
 
-The [Meta node configurations](/enterprise_influxdb_v1.6/administration/config-meta-nodes/) includes listings and descriptions of all meta node configurations.
+The [Meta node configurations](/enterprise_influxdb/v1.6/administration/config-meta-nodes/) includes listings and descriptions of all meta node configurations.
 
 ## [Authentication and authorization](/influxdb/v1.6/administration/authentication_and_authorization/)
 

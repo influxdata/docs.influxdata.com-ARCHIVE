@@ -62,7 +62,7 @@ that the resultant data is passed to a UDF or similar for custom processing.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[flatten](#description)&nbsp;(&nbsp;)** | Flatten points with similar times into a single point.  |
+| **flatten&nbsp;(&nbsp;)** | Flatten points with similar times into a single point.  |
 
 ### Property Methods
 
