@@ -21,7 +21,7 @@ Information about contributing to the InfluxDB OSS project, see [Contributing to
 Before contributing to the InfluxDB OSS project, you must complete and sign
 the [InfluxData Contributor License Agreement (CLA)](https://influxdata.com/community/cla/).
 
-## [Open source licenses](https://github.com/influxdata/influxdb/blob/master/LICENSE)
+## [InfluxDB open source license](https://github.com/influxdata/influxdb/blob/master/LICENSE)
 
 ## <a name="third_party">Third party software</a>
 
