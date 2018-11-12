@@ -12,13 +12,13 @@ menu:
 
 ### Bug fixes
 
-- Add DN attributes as tags in X.509 Certificate (`x509_cert`) input to avoid series overwrite.
-- Prevent connection leak by closing unused connections in AMQP (`amqp`) output.
-- Use default partition key when tag does not exist in Amazon Kinesis (`kinesis`) output.
-- Log the correct error in JTI OpenConfig (`jti_openconfig`).
-- Handle panic when IMPI input (`ipmi_sensor`) gets bad input.
-- Don't add unserializable fields to Jolokia2 (`jolokia2`) input.
-- Fix version check in PostgreSQL plugin (`postgresql_extensible`).
+- Add DN attributes as tags in X.509 Certificate (`x509_cert`) input plugin to avoid series overwrite.
+- Prevent connection leak by closing unused connections in AMQP (`amqp`) output plugin.
+- Use default partition key when tag does not exist in Amazon Kinesis (`kinesis`) output plugin.
+- Log the correct error in JTI OpenConfig Telemetry (`jti_openconfig_telemetry`).
+- Handle panic when IMPI Sensor (`ipmi_sensor`) input plugin gets bad input.
+- Don't add unserializable fields to Jolokia2 (`jolokia2`) input plugin.
+- Fix version check in PostgreSQL Extensible (`postgresql_extensible`) input plugin.
 
 ## v1.8.2 [2018-10-17]
 

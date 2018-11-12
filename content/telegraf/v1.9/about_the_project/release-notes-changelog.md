@@ -7,18 +7,95 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.9 [unreleased]
+
+#### Release Notes
+
+- The HTTP Listener (`http_listener`) input plugin has been renamed to
+  InfluxDB Listener (`influxdb_listener`) input plugin and
+  use of the original name is deprecated.  The new name better describes the
+  intended use of the plugin as an InfluxDB relay.  For general purpose
+  transfer of metrics in any format using HTTP, InfluxData recommends using
+  HTTP Listener v2 (`http_listener_v2`) input plugin.
+
+- Input plugins are no longer limited from adding metrics when the output is
+  writing and new metrics will move into the metric buffer as needed.  This
+  will provide more robust degradation and recovery when writing to a slow
+  output at high throughput.
+
+  To avoid overconsumption when reading from queue consumers:
+  Apache Kafka Consumer (`kafka_consumer`), AMQP Consumer (`amqp_consumer`),
+  MQTT Consumer (`mqtt_consumer`), NATS Consumer (`nats_consumer`), and
+  NSQ Consumer (`nsq_consumer`) use the new option `max_undelivered_messages`
+  to limit the number of outstanding unwritten metrics.
+
+#### New input plugins
+
+- [HTTP Listener v2 (`http_listener_v2`)](/plugins/inputs/http_listener_v2/README.md) - Contributed by @jul1u5
+- [IPVS (`ipvs`)](/plugins/inputs/ipvs/README.md) - Contributed by @amoghe
+- [Jenkins (`jenkins`)](/plugins/inputs/jenkins/README.md) - Contributed by @influxdata & @lpic10
+- [NGINX Plus API (`nginx_plus_api`)](/plugins/inputs/nginx_plus_api/README.md) - Contributed by @Bugagazavr
+- [NGINX VTS (`nginx_vts`)](/plugins/inputs/nginx_vts/README.md) - Contributed by @monder
+- [Wireless (`wireless`)](/plugins/inputs/wireless/README.md) - Contributed by @jamesmaidment
+
+#### New output plugins
+
+- [Stackdriver (stackdriver)](/plugins/outputs/stackdriver/README.md) - Contributed by @jamesmaidment
+
+#### Features
+
+- General
+  - Add ability to define a custom service name when installing as a Windows service.
+  - Add new configuration for CSV column explicit type conversion.
+  - Add Telegraf version to `User-Agent` header.
+  - Add ability to specify bytes options as strings with units.
+  - Add per output `flush_interval`, `metric_buffer_limit`, and `metric_batch_size`.
+- Amazon Kinesis (`kinesis`) output plugin
+  - Use `DescribeStreamSummary` in place of `ListStreams`.
+- DNS Query (`dns_query`) input plugin
+  - Query servers in parallel.
+- Datadog (`datadog`) output plugin
+  - Add an option to specify a custom URL.
+  - Use non-allocating field and tag accessors.
+- Filecount (`filecount`) input plugin
+  - Add per-directory file count.
+- HTTP Output (`http output`) plugin
+  - Add entity-body compression.
+- Memcached (`memcached`) input plugin
+  - Collect additional statistics.
+- NSQ (`nsq`) input plugin
+  - Add TLS configuration support.
+- Ping (`ping`) input plugin
+  - Add support for IPv6.
+- Procstat (`procstat`) input plugin
+  - Add Windows service name lookup.
+- Prometheus (`prometheus`) input plugin
+  - Add scraping for Prometheus annotation in Kubernetes.
+  - Allow connecting to Prometheus using UNIX socket.
+- Strings (`strings`) processor plugin
+  - Add `replace` function.
+- VMware vSphere (`vsphere`) input plugin
+  - Add LUN to data source translation.
+
+#### Bug fixes
+
+- Remove `time_key` from the field values in JSON parser.
+- Fix input time rounding when using a custom interval.
+- Fix potential deadlock or leaked resources on restart or reload.
+- Fix outputs block inputs when batch size is reached.
+- Fix potential missing datastore metrics in VMware vSphere (`vsphere`) input plugin.
 
 ## v1.8.3 [2018-10-30]
 
 ### Bug fixes
 
-- Add DN attributes as tags in X.509 Certificate (`x509_cert`) input to avoid series overwrite.
-- Prevent connection leak by closing unused connections in AMQP (`amqp`) output.
-- Use default partition key when tag does not exist in Amazon Kinesis (`kinesis`) output.
-- Log the correct error in JTI OpenConfig (`jti_openconfig`).
-- Handle panic when IMPI input (`ipmi_sensor`) gets bad input.
-- Don't add unserializable fields to Jolokia2 (`jolokia2`) input.
-- Fix version check in PostgreSQL plugin (`postgresql_extensible`).
+- Add DN attributes as tags in X.509 Certificate (`x509_cert`) input plugin to avoid series overwrite.
+- Prevent connection leak by closing unused connections in AMQP (`amqp`) output plugin.
+- Use default partition key when tag does not exist in Amazon Kinesis (`kinesis`) output plugin.
+- Log the correct error in JTI OpenConfig Telemetry (`jti_openconfig_telemetry`) input plugin.
+- Handle panic when IMPI Sensor (`ipmi_sensor`) input plugin gets bad input.
+- Don't add unserializable fields to Jolokia2 (`jolokia2`) input plugin.
+- Fix version check in PostgreSQL Exstensible (`postgresql_extensible`) plugin.
 
 ## v1.8.2 [2018-10-17]
 
