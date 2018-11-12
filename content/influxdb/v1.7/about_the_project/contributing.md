@@ -1,9 +1,12 @@
 ---
-title: Contributing to InfluxDB OSS
+title: Contributing to the InfluxDB OSS project
 menu:
   influxdb_1_7:
+    name: Contributing
     weight: 30
     parent: About the project
 ---
 
-[Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md) is available on GitHub.
+For details about contributing to the InfluxDB OSS project, see
+[Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
+in the GitHub repository.

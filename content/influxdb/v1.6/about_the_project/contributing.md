@@ -6,4 +6,6 @@ menu:
     parent: About the project
 ---
 
-[Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md) is available on GitHub.
+For details about contributing to the InfluxDB OSS project, see
+[Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
+in the GitHub repository.
