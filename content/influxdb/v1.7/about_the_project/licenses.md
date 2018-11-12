@@ -7,4 +7,4 @@ menu:
     parent: About the project
 ---
 
-The [InfluxDB license](https://github.com/influxdata/influxdb/blob/master/DEPENDENCIES) is available on GitHub.
+The [InfluxDB license](https://github.com/influxdata/influxdb/blob/master/DEPENDENCIES.md) is available on GitHub.
