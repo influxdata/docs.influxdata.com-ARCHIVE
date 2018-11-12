@@ -2,6 +2,7 @@
 title: Contributing to InfluxDB OSS
 menu:
   influxdb_1_6:
+    name: Contributing
     weight: 30
     parent: About the project
 ---
