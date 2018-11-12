@@ -35,7 +35,6 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
   * MacOS: `tar zxvf chronograf-1.6.2_darwin_amd64.tar.gz`
   * Ubuntu & Debian: `sudo dpkg -i chronograf_1.6.2_amd64.deb`
 
-For instructions on building from source, see Chronograf's [README](https://github.com/influxdata/chronograf/blob/master/README.md#from-source) on GitHub.
 
 ## Connect Chronograf to your InfluxDB instance or InfluxDB Enterprise cluster
 
