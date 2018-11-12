@@ -2,7 +2,7 @@
 title: Telegraf processor plugins
 description: Telegraf processor plugins work with InfluxData time series platform to process metrics and emit results based on the values processed.
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: Processor
     identifier: processors
     weight: 40
@@ -11,8 +11,8 @@ menu:
 
 Processor plugins process metrics as they pass through and immediately emit results based on the values they process.
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.8`.
->The [Release Notes/Changelog](/telegraf/v1.8/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.89`.
+>The [Telegraf release notes](/telegraf/v1.9/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 
 ## Supported Telegraf processor plugins

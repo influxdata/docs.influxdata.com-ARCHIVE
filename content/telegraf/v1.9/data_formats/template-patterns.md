@@ -2,7 +2,7 @@
 title: Telegraf template patterns
 description: Use template patterns to describe how dot-delimited strings should map to and from Telegraf metrics.
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: Template patterns
     weight: 30
     parent: Data formats
@@ -142,4 +142,4 @@ cpu.usage.idle.eu-east 100
 => cpu_usage,region=eu-east,datacenter=1a idle=100
 ```
 
-[metrics]: /telegraf/v1.8/concepts/metrics/
+[metrics]: /telegraf/v1.9/concepts/metrics/

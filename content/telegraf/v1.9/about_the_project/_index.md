@@ -2,12 +2,12 @@
  title: About the Telegraf project
 
  menu:
-   telegraf_1_8:
+   telegraf_1_9:
      name: About the project
      weight: 10
 ---
 
-## [Telegraf release notes](/telegraf/v1.8/about_the_project/release-notes-changelog/)
+## [Telegraf release notes](/telegraf/v1.9/about_the_project/release-notes-changelog/)
 
 ## [Contributing to Telegraf](https://github.com/influxdata/telegraf/blob/master/CONTRIBUTING.md)
 

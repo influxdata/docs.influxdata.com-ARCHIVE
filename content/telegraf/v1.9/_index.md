@@ -4,7 +4,7 @@ description: Documentation for Telegraf, the plugin-driven server agent of the I
 menu:
   telegraf:
     name: v1.8
-    identifier: telegraf_1_8
+    identifier: telegraf_1_9
     weight: 1
 ---
 

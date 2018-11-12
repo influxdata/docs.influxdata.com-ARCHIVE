@@ -2,7 +2,7 @@
 title: Telegraf output plugins
 descriptions: Use Telegraf output plugins to transform, decorate, and filter metrics. Supported output plugins include Datadog, Elasticsearch, Graphite, InfluxDB, Kafka, MQTT, Prometheus Client, Riemann, and Wavefront.
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: Output
     weight: 20
     parent: Plugins
@@ -10,8 +10,8 @@ menu:
 
 Telegraf allows users to specify multiple output sinks in the configuration file.
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.8`.
->The [Release notes and changelog](/telegraf/v1.8/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.9`.
+>The [Telegraf release notes](/telegraf/v1.9/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Supported Telegraf output plugins
 
@@ -99,7 +99,7 @@ The [Microsoft Azure Application Insights (`application_insights`) output plugin
 
 >**Note:** The Azure Monitor custom metrics service is currently in preview and not available in a subset of Azure regions.
 
-The [Microsoft Azure Monitor (`azure_monitor`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) sends custom metrics to [Microsoft Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/). Azure Monitor has a metric resolution of one minute. To handle this in Telegraf, the Azure Monitor output plugin automatically aggregates metrics into one minute buckets, which are then sent to Azure Monitor on every flush interval. 
+The [Microsoft Azure Monitor (`azure_monitor`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) sends custom metrics to [Microsoft Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/). Azure Monitor has a metric resolution of one minute. To handle this in Telegraf, the Azure Monitor output plugin automatically aggregates metrics into one minute buckets, which are then sent to Azure Monitor on every flush interval.
 
 For a Microsoft blog posting on using Telegraf with Microsoft Azure Monitor, see [Collect custom metrics for a Linux VM with the InfluxData Telegraf Agent](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/metrics-store-custom-linux-telegraf).
 
@@ -107,7 +107,7 @@ The metrics from each input plugin will be written to a separate Azure Monitor n
 
 ### [MQTT Producer  (`mqtt`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/mqtt/README.md)
 
-The [MQTT Producer (`mqtt`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/mqtt/README.md) writes to the MQTT server using [supported output data formats](/telegraf/v1.8/data_formats/output/).
+The [MQTT Producer (`mqtt`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/mqtt/README.md) writes to the MQTT server using [supported output data formats](/telegraf/v1.9/data_formats/output/).
 
 ### [NATS Output (`nats`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/nats/README.md)
 

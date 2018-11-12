@@ -2,7 +2,7 @@
  title: License
 
  menu:
-   telegraf_1_8:
+   telegraf_1_9:
      name: License
      parent: About the project
      weight: 40

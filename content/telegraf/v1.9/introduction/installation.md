@@ -2,7 +2,7 @@
 title: Installing Telegraf
 
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: Installing
     weight: 20
     parent: Introduction
@@ -16,7 +16,7 @@ Installation of the Telegraf package may require `root` or administrator privile
 
 ### Networking
 
-Telegraf offers multiple service [input plugins](/telegraf/v1.8/plugins/inputs/) that may
+Telegraf offers multiple service [input plugins](/telegraf/v1.9/plugins/inputs/) that may
 require custom ports.
 All port mappings can be modified through the configuration file,
 which is located at `/etc/telegraf/telegraf.conf` for default installations.
@@ -179,4 +179,4 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 ```
 
 For more advanced configuration details, see the
-[configuration documentation](/telegraf/v1.8/administration/configuration/).
+[configuration documentation](/telegraf/v1.9/administration/configuration/).

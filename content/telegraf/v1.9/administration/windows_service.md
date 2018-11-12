@@ -2,7 +2,7 @@
 title: Running Telegraf as a Windows service
 description: How to configure Telegraf as a Windows service.
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: Running as Windows service
     weight: 20
     parent: Administration

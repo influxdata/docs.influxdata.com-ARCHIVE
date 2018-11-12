@@ -2,7 +2,7 @@
 title: SplunkMetric output data format
 description: The SplunkMetric serializer formats and outputs data in a format that can be consumed by a Splunk metrics index.
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: SplunkMetric
     weight: 40
     parent: Output data formats

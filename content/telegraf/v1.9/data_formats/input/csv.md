@@ -2,7 +2,7 @@
 title: CSV input data format
 description: Use the "csv" input data format to parse a document containing comma-separated values into Telegraf metrics.
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: CSV
     weight: 20
     parent: Input data formats
