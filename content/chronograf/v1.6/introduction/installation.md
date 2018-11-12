@@ -48,7 +48,7 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 
 ## Connect Chronograf to Kapacitor
 
-1. In Chronograf, select the configuration (wrench) icon in the sidebar menu, then select **Add Config** in the **Active Kapacitator** column.
+1. In Chronograf, click the configuration (wrench) icon in the sidebar menu, then select **Add Config** in the **Active Kapacitator** column.
 2. In the **Kapacitor URL** field, enter the hostname or IP of the machine that Kapacitor is running on. Be sure to include Kapacitor's default port: `9092`.
 3. Enter a name for your connection.
 4. Leave the **Username** and **Password** fields blank unless you've specifically enabled authorization in Kapacitor.
