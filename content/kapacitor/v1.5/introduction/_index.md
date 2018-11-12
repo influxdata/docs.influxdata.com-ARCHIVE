@@ -1,6 +1,7 @@
 ---
 title: Introduction
-
+aliases:
+  - /kapacitor/v1.5/introduction/downloading
 menu:
   kapacitor_1_5:
     name: Introduction

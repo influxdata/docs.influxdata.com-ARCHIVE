@@ -70,7 +70,7 @@ Create the below snippet as the file `/tmp/prom/localhost.json`:
 Start the Prometheues node_exporter locally.
 
 Now startup Kapacitor and it will discover the localhost:9100 node_exporter target and begin scrapping it for metrics.
-For more details on the scraping and discovery systems see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/scraping).
+For more details on the scraping and discovery systems see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/pull_metrics/scraping-and-discovery/).
 
 The second major feature with this release, are changes to the alert topic system.
 The previous release introduce this new system as a technical preview, with this release the alerting service has been simplified.
