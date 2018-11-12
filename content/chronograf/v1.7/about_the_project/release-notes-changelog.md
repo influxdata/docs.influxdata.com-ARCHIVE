@@ -7,11 +7,21 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.3 [2018-11-12]
+
+### Bug Fixes
+
+* Get protoboards from multistore  if not able to find from ProtoboardsPath.
+* Handle basepath issue with missing slash.
+* Fix the  ping protoboard.
+* Save fieldOptions to cells created from Data Explorer page.
+* Fix grouping in canned dashboard queries
+
 ## v1.7.2 [2018-11-08]
 
 ### Bug Fixes
 
-* Remove hardcoded database/retention period from protoboards. 
+* Remove hardcoded database/retention period from protoboards.
 
 ## v1.7.1 [2018-11-07]
 
