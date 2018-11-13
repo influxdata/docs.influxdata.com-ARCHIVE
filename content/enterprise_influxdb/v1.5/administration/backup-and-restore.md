@@ -222,7 +222,7 @@ The system automatically drops the `_internal` database when it performs a compl
 
 #### Global options
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/administration/cluster-commands/#global-arguments)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/administration/cluster-commands/#global-options)
 for a complete list of the `influxd-ctl` global options.
 
 #### Arguments
