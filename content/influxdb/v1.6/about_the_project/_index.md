@@ -16,13 +16,13 @@ InfluxDB OSS releases are available in
 
 ## [Contributing to InfluxDB OSS](/influxdb/v1.6/about_the_project/contributing/)
 
-For details about how you can contribute to the InfluxDB OSS project, see [Contributing to InfluxDB OSS](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md) in the GitHub repository.
+To learn how you can contribute to the InfluxDB OSS project, see [Contributing to InfluxDB OSS](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md) in the GitHub repository.
 
 ## [InfluxData Contributor License Agreement (CLA)](https://influxdata.com/community/cla/)
 
 Before you can contribute to the InfluxDB OSS project, you must complete and sign
 the [InfluxData Contributor License Agreement (CLA)](https://influxdata.com/community/cla/),
-available on the InfluxData website.
+available at the InfluxData website.
 
 ## [Open source license for InfluxDB](https://github.com/influxdata/influxdb/blob/master/LICENSE)
 
@@ -42,4 +42,4 @@ Third party suppliers assume no liability for any claim that might arise with
 respect to such  third party software, nor for a customer’s use of or inability
 to use the  third party software.
 
-The [list of third party software components, including references to associated licenses and other materials](https://github.com/influxdata/influxdb/blob/1.5/LICENSE_OF_DEPENDENCIES.md), is maintained on a version by version basis.
+The [list of third party software components, including references to associated licenses and other materials](https://github.com/influxdata/influxdb/blob/1.6/LICENSE_OF_DEPENDENCIES.md), is maintained on a version by version basis.
