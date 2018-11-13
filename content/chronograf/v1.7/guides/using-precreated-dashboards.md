@@ -367,8 +367,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 
 ## system
 
- [System input plugin](/telegraf/latest/plugins/inputs/#system)
-
+ The `system` application includes metrics that require all of the listed plugins. If any of the following plugins aren't enabled, the metrics associated with the plugins will not display data.
 
 ### cpu
 
@@ -440,7 +439,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 
 ### system
 
-**Required Telegraf plugin:** [Procstat input plugin](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/procstat/README.md)
+**Required Telegraf plugin:** [Procstat input plugin](/telegraf/latest/plugins/inputs/#procstat)
 
 `load.json`
 
