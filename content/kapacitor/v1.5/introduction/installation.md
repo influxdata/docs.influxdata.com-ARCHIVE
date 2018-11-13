@@ -95,7 +95,8 @@ kapacitord config > kapacitor.generated.conf
 
 ### Time zone
 
-In order to be able to present time in alerts notifications in a time zone of your choice, you can either change time zone of the system that runs kapacitor, or set the kapacitor process' TZ environment variable.
+To display alerts notifications using a preferred time zone, either change the time zone
+of the host on which Kapcitor is running or set the Kapacitor process' `TZ` environment variable.
 
 #### systemd
 
@@ -108,4 +109,5 @@ Environment="TZ=Asia/Shanghai"
 
 #### docker
 
-Set the environment variable either when starting the container (`-e TZ=Asia/Shanghai`), or in docker-compose.yml.
+Set the environment variable using the `-e` flag when starting the container (`-e TZ=Asia/Shanghai`)
+or in your `docker-compose.yml`.
