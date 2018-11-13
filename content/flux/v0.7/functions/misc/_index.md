@@ -13,6 +13,6 @@ there are functions available that serve other purposes.
 The following functions are are available but don't fit within other function categories:
 
 - [intervals](/flux/v0.7/functions/misc/intervals)
-- [linearBuckets](/flux/v0.7/functions/misc/linearbuckets)
-- [logarithmicBuckets](/flux/v0.7/functions/misc/logarithmicbuckets)
+- [linearBins](/flux/v0.7/functions/misc/linearbins)
+- [logarithmicBins](/flux/v0.7/functions/misc/logarithmicbins)
 - [systemTime](/flux/v0.7/functions/misc/systemtime)
