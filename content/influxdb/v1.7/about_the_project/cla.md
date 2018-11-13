@@ -3,7 +3,7 @@ title: InfluxData Contributor License Agreement (CLA)
 menu:
   influxdb_1_7:
     name: Contributor license agreement
-    weight: 40
+    weight: 30
     parent: About the project
 ---
 

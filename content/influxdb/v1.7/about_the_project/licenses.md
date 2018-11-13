@@ -3,7 +3,7 @@ title: Open source license for InfluxDB
 menu:
   influxdb_1_7:
     name: InfluxDB license
-    weight: 50
+    weight: 40
     parent: About the project
 ---
 
