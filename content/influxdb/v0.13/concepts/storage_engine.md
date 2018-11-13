@@ -409,7 +409,7 @@ Encoded values are first encoded using zig zag encoding which is also used for s
 This interleaves positive and negative integers across a range of positive integers.
 
 For example, [-2,-1,0,1] becomes [3,1,0,2].
-See https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers for more information.
+See https://developers.google.com/protocol-buffers/docs/encoding#signed-integers for more information.
 
 If all the zig zag encoded values less than 1 << 60 - 1, they are compressed using the simple8b encoding.
 If any values is larger than the maximum value, then values are stored uncompressed in the block.

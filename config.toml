@@ -146,19 +146,19 @@ SectionPagesMenu = "products"
   name = "Technical Papers"
   identifier = "technicalpapers"
   weight = 10
-  url = "https://www.influxdata.com/technical-papers/"
+  url = "https://www.influxdata.com/_resources/techpapers-new/"
   parent = "external_resources"
 [[menu.influxdb_1_4]]
   name = "Meetup Videos"
   identifier = "meetupvideos"
   weight = 20
-  url = "https://www.influxdata.com/videos/"
+  url = "https://www.influxdata.com/_resources/videosnew//"
   parent = "external_resources"
 [[menu.influxdb_1_4]]
   name = "Virtual Training Videos"
   identifier = "virtualtrainingvideos"
   weight = 30
-  url = "https://www.influxdata.com/videos-training/"
+  url = "https://www.influxdata.com/_resources/videosnew/"
   parent = "external_resources"
 [[menu.influxdb_1_4]]
   name = "Virtual Training Schedule"
@@ -266,19 +266,19 @@ SectionPagesMenu = "products"
   name = "Technical Papers"
   identifier = "technicalpapers"
   weight = 10
-  url = "https://www.influxdata.com/technical-papers/"
+  url = "https://www.influxdata.com/_resources/techpapers-new/"
   parent = "external_resources"
 [[menu.influxdb_1_3]]
   name = "Meetup Videos"
   identifier = "meetupvideos"
   weight = 20
-  url = "https://www.influxdata.com/videos/"
+  url = "https://www.influxdata.com/_resources/videosnew//"
   parent = "external_resources"
 [[menu.influxdb_1_3]]
   name = "Virtual Training Videos"
   identifier = "virtualtrainingvideos"
   weight = 30
-  url = "https://www.influxdata.com/videos-training/"
+  url = "https://www.influxdata.com/_resources/videosnew/"
   parent = "external_resources"
 [[menu.influxdb_1_3]]
   name = "Virtual Training Schedule"
@@ -393,19 +393,19 @@ SectionPagesMenu = "products"
   name = "Technical Papers"
   identifier = "technicalpapers"
   weight = 10
-  url = "https://www.influxdata.com/technical-papers/"
+  url = "https://www.influxdata.com/_resources/techpapers-new/"
   parent = "external_resources"
 [[menu.influxdb_1_2]]
   name = "Meetup Videos"
   identifier = "meetupvideos"
   weight = 20
-  url = "https://www.influxdata.com/videos/"
+  url = "https://www.influxdata.com/_resources/videosnew//"
   parent = "external_resources"
 [[menu.influxdb_1_2]]
   name = "Virtual Training Videos"
   identifier = "virtualtrainingvideos"
   weight = 30
-  url = "https://www.influxdata.com/videos-training/"
+  url = "https://www.influxdata.com/_resources/videosnew/"
   parent = "external_resources"
 [[menu.influxdb_1_2]]
   name = "Virtual Training Schedule"
@@ -528,19 +528,19 @@ SectionPagesMenu = "products"
   name = "Technical Papers"
   identifier = "technicalpapers"
   weight = 10
-  url = "https://www.influxdata.com/technical-papers/"
+  url = "https://www.influxdata.com/_resources/techpapers-new/"
   parent = "external_resources"
 [[menu.influxdb_1_1]]
   name = "Meetup Videos"
   identifier = "meetupvideos"
   weight = 20
-  url = "https://www.influxdata.com/videos/"
+  url = "https://www.influxdata.com/_resources/videosnew//"
   parent = "external_resources"
 [[menu.influxdb_1_1]]
   name = "Virtual Training Videos"
   identifier = "virtualtrainingvideos"
   weight = 30
-  url = "https://www.influxdata.com/videos-training/"
+  url = "https://www.influxdata.com/_resources/videosnew/"
   parent = "external_resources"
 [[menu.influxdb_1_1]]
   name = "Virtual Training Schedule"

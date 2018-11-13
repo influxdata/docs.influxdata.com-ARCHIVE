@@ -195,11 +195,11 @@ Our implementation removes the timestamp encoding described in paper and only en
 #### Integers
 
 Integer encoding uses two different strategies depending on the range of values in the uncompressed data.
-Encoded values are first encoded using [ZigZag encoding](https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers).
+Encoded values are first encoded using [ZigZag encoding](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers).
 This interleaves positive and negative integers across a range of positive integers.
 
 For example, [-2,-1,0,1] becomes [3,1,0,2].
-See Google's [Protocol Buffers documentation](https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers) for more information.
+See Google's [Protocol Buffers documentation](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers) for more information.
 
 If all ZigZag encoded values are less than (1 << 60) - 1, they are compressed using simple8b encoding.
 If any values are larger than the maximum then all values are stored uncompressed in the block.
