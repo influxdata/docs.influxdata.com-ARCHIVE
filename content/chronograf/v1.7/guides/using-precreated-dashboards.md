@@ -11,9 +11,9 @@ menu:
 
 ## Overview
 
-Pre-created dashboards are delivered with Chronograf and are available depending on which Telegraf input plugins you have enabled. These dashboards include cells with data visualizations for metrics that are relevant to data sources you are likely to be using. The JSON files that are delivered include headings, queries, labels, and other information that can also be useful for helping you get started in [creating custom dashboards](/chronograf/latest/guides/create-a-dashboard/).
+Pre-created dashboards are delivered with Chronograf and are available depending on which Telegraf input plugins you have enabled. These dashboards include cells with data visualizations for metrics that are relevant to data sources you are likely to be using.
 
-> Note that these pre-created dashboards do not appear in the Dashboards tab, which only include custom dashboards that your organization has created or imported.
+Note that these pre-created dashboards cannot be cloned or customized. They do not appear in the Dashboards tab, which includes only custom dashboards that your organization has created or imported. If you want to customize a dashboard similar to the pre-created dashboards described here, you can import dashboard templates based on your enabled Telegraf plugins. For details, see [Dashboard templates](/chronograf/latest/guides/create-a-dashboard/#dashboard-templates).
 
 ## Requirements
 
