@@ -239,7 +239,7 @@ Plugin ID: `inputs.file`
 
 The [File input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/file/README.md) updates a list of files every interval and parses the contents using the selected input data format.
 
-Files will always be read in their entirety, if you wish to tail/follow a file use the [tail input plugin](#tail-tail-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-tail-readme-md) instead.
+Files will always be read in their entirety, if you wish to tail/follow a file use the [tail input plugin](#tail) instead.
 
 ### Filecount
 
@@ -917,7 +917,7 @@ All metrics are collected for each server configured.
 
 Plugin ID: `inputs.httpjson`
 
-> DEPRECATED as of version 1.6; use the [HTTP input plugin](#http-http-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-http-readme-md).
+> DEPRECATED as of version 1.6; use the [HTTP input plugin](#http).
 
 The [HTTP JSON input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/httpjson/README.md) collects data from HTTP URLs which respond with JSON.
 It flattens the JSON and finds all numeric values, treating them as floats.
@@ -926,7 +926,7 @@ It flattens the JSON and finds all numeric values, treating them as floats.
 
 Plugin ID: `inputs.jolokia`
 
-> DEPRECATED as of version 1.5; use the [Jolokia2 input plugin](#jolokia2-agent-jolokia2-agent-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-jolokia2-readme-md).
+> DEPRECATED as of version 1.5; use the [Jolokia2 input plugin](#jolokia2-agent).
 
 ### SNMP Legacy
 
@@ -940,10 +940,10 @@ The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 Plugin ID: `inputs.tcp_listener`
 
-> The [TCP Listener input plugin)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tcp_listener/README.md) is EPRECATED as of version 1.3; use the [Socket Listener input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-socket-listener-readme-md).
+> The [TCP Listener input plugin)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tcp_listener/README.md) is EPRECATED as of version 1.3; use the [Socket Listener input plugin](#socket-listener).
 
 ### UDP Listener
 
 Plugin ID: `inputs.udp_listener`
 
-> DEPRECATED as of version 1.3; use the [Socket Listener input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-blob-release-1-8-plugins-inputs-socket-listener-readme-md).
+> DEPRECATED as of version 1.3; use the [Socket Listener input plugin](#socket-listener).
