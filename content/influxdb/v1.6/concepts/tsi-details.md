@@ -38,7 +38,7 @@ If you have an existing TSI index that you want to rebuild, first delete the `in
 
 This command works at the server-level but you can optionally add database, retention policy and shard filters to only apply to a subset of shards.
 
-For details on this command, see [influx inspect buildtsi](/influxdb/v1.6/tools/influx_inspect/#influx-inspect-buildtsi).
+For details on this command, see [influx inspect buildtsi](/influxdb/v1.6/tools/influx_inspect/#buildtsi).
 
 
 ## Understanding TSI

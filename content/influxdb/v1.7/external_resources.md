@@ -10,16 +10,16 @@ Check out these resources to learn more about InfluxDB.
 Check out the InfluxData Blog for announcements, updates, and
 weekly [tech tips](https://www.influxdata.com/category/tech-tips/).
 
-## [Technical papers](https://www.influxdata.com/technical-papers/)
+## [Technical papers](https://www.influxdata.com/_resources/techpapers-new/)
 
 InfluxData's Technical Papers series offer in-depth analysis on performance, time series,
 and benchmarking InfluxDB vs. other popular databases.
 
-## [Meetup videos](https://www.influxdata.com/videos/)
+## [Meetup videos](https://www.influxdata.com/_resources/videosnew//)
 
 Check out our growing Meetup videos collection for introductory content, how-tos, and more.
 
-## [Virtual training videos](https://www.influxdata.com/videos-training/)
+## [Virtual training videos](https://www.influxdata.com/_resources/videosnew/)
 
 Watch the videos from our weekly training webinar.
 

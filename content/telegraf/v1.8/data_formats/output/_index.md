@@ -1,6 +1,8 @@
 ---
 title: Telegraf output data formats
 description: Telegraf serializes metrics into output data formats for InfluxDB Line Protocol, JSON, Graphite, and Splunk metrics.
+aliases:
+  - /telegraf/v1.8/concepts/data_formats_output/
 menu:
   telegraf_1_8:
     name: Output data formats

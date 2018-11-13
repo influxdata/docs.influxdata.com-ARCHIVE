@@ -19,7 +19,7 @@ averages the `_value`s in each window, and outputs the averages as a new table.
 It's important to understand how the "shape" of your data changes through each of these operations.
 
 ## Query data
-Use the query built in the previous [Query data from InfluxDB](/platform/introduction/getting-started/query-influxdb)
+Use the query built in the previous [Query data from InfluxDB](/flux/v0.7/introduction/getting-started/query-influxdb)
 guide, but update the range to pull data from the last hour:
 
 ```js

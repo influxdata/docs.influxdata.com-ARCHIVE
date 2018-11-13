@@ -75,7 +75,7 @@ sudo systemctl restart influxdb-meta
 
 After performing the upgrade on ALL meta nodes, check your node version numbers using the
 `influxd-ctl show` command.
-The [`influxd-ctl` utility](/enterprise_influxdb/v1.5/features/cluster-commands/) is available on all meta nodes.
+The [`influxd-ctl` utility](/enterprise_influxdb/v1.5/administration/cluster-commands/) is available on all meta nodes.
 
 ```
 ~# influxd-ctl show
@@ -179,7 +179,7 @@ The new configuration options are set to the default settings.
 2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
   - When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
-  - Run the [`influx_inspect buildtsi`](/influxdb/v1.5/tools/influx_inspect#influx-inspect-buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
+  - Run the [`influx_inspect buildtsi`](/influxdb/v1.5/tools/influx_inspect#buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
 > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
 > or ensure that the permissions match afterward.
@@ -210,7 +210,7 @@ Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and
 
 Your cluster is now upgraded to InfluxDB Enterprise 1.5.
 Check your node version numbers using the `influxd-ctl show` command.
-The [`influxd-ctl`](/enterprise_influxdb/v1.5/features/cluster-commands/) utility is available on all meta nodes.
+The [`influxd-ctl`](/enterprise_influxdb/v1.5/administration/cluster-commands/) utility is available on all meta nodes.
 
 ```
 ~# influxd-ctl show

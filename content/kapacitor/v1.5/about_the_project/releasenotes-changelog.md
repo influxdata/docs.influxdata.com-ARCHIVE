@@ -84,7 +84,7 @@ The `Combine` and `Flatten` nodes previously operated (erroneously) across batch
 - Added `logfmt` support and refactor logging.
 - Added support for exposing logs via the API. API is released as a technical preview.
 - Added support for `{{ .Duration }}` on Alert Message property.
-- Added support for [JSON lines](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) for steaming HTTP logs.
+- Added support for [JSON lines](https://en.wikipedia.org/wiki/JSON_Streaming#Line-delimited_JSON) for steaming HTTP logs.
 - Added new node `Sideload` that allows loading data from files into the stream of data. Data can be loaded using a hierarchy.
 - Promote Alert API to stable v1 path.
 - Change `WARN` level logs to `INFO` level.
@@ -183,7 +183,7 @@ Create the below snippet as the file `/tmp/prom/localhost.json`:
 Start the Prometheues `node_exporter` locally.
 
 Now, startup Kapacitor and it will discover the `localhost:9100` `node_exporter` target and begin scrapping it for metrics.
-For more details on the scraping and discovery systems, see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/scraping).
+For more details on the scraping and discovery systems, see the full documentation [here](/kapacitor/v1.3/pull_metrics/scraping-and-discovery/).
 
 The second major feature with this release are changes to the alert topic system.
 The previous release introduced this new system as a technical preview and with this release the alerting service has been simplified.

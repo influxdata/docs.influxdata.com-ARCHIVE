@@ -6430,7 +6430,7 @@ While the name implies that it's a triple exponential smoothing, it's actually a
 composite of a [single exponential moving average](#exponential-moving-average),
 a [double exponential moving average](#double-exponential-moving-average),
 and a triple exponential moving average.
-<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp#ixzz5GAX9rE9k " target="\_blank">Source</a>
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp " target="\_blank">Source</a>
 
 ### Basic syntax
 ```
@@ -6492,7 +6492,7 @@ When used as a momentum indicator, a positive value suggests momentum is increas
 while a negative value suggests momentum is decreasing.
 Many analysts believe that when the TRIX crosses above the zero line it gives a
 buy signal, and when it closes below the zero line, it gives a sell signal.
-<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/articles/technical/02/092402.asp#ixzz5GAe037bJ " target="\_blank">Source</a>
+<sup style="line-height:0; font-size:.7rem; font-style:italic; font-weight:normal;"><a href="https://www.investopedia.com/articles/technical/02/092402.asp " target="\_blank">Source</a>
 
 ### Basic syntax
 ```
