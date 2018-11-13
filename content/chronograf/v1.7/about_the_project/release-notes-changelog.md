@@ -7,7 +7,11 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v1.7.3 [2018-11-12]
+## v1.7.3 [2018-11-13]
+
+### UI Improvements
+
+* Add loading spinners while fetching protoboards.
 
 ### Bug Fixes
 
@@ -15,7 +19,10 @@ menu:
 * Handle basepath issue with missing slash.
 * Fix the  ping protoboard.
 * Save fieldOptions to cells created from Data Explorer page.
-* Fix grouping in canned dashboard queries
+* Fix grouping in canned dashboard queries.
+* Update canned dashboard queries so they all use database and retention policy.
+* Remove "dismiss" text from and add "X to dismiss" to wizard overlay steps.
+* Update Docker, InfluxDB, and PostgreSQL protoboards.
 
 ## v1.7.2 [2018-11-08]
 
