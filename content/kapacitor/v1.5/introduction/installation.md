@@ -96,7 +96,7 @@ kapacitord config > kapacitor.generated.conf
 ### Time zone
 
 To display alerts notifications using a preferred time zone, either change the time zone
-of the host on which Kapcitor is running or set the Kapacitor process' `TZ` environment variable.
+of the host on which Kapacitor is running or set the Kapacitor process' `TZ` environment variable.
 
 #### systemd
 
