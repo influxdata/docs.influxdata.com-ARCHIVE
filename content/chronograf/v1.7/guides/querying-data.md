@@ -1,6 +1,7 @@
 ---
 title: Explore data in Chronograf
-description:
+description: Query and visualize data in the Data Explorer.
+menu:
   chronograf_1_7:
     name: Explore data
     weight: 30
