@@ -162,7 +162,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 
 ## influxdb
 
-**Required Telegraf plugin:** [InfluxDB input plugin](/telegraf/latest/plugins/inputs/#influxdb)
+**Required Telegraf plugin:** [InfluxDB input plugin](/telegraf/latest/plugins/inputs/#influxdb-v-1)
 
 `influxdb_database.json`
 
@@ -297,7 +297,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 
 ## phpfpm
 
-**Required Telegraf plugin:** [PHPfpm input plugin](/telegraf/latest/plugins/inputs/#phpfpm)
+**Required Telegraf plugin:** [PHPfpm input plugin](/telegraf/latest/plugins/inputs/#php-fpm)
 
 `phpfpm.json`
 
@@ -456,7 +456,7 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 
 ## win_system
 
-**Required Telegraf plugin:** [Windows Performance Counters input plugin](/telegraf/latest/plugins/inputs/#win_perf_counters)
+**Required Telegraf plugin:** [Windows Performance Counters input plugin](/telegraf/latest/plugins/inputs/#windows-performance-counters)
 
 `win_cpu.json`
 
