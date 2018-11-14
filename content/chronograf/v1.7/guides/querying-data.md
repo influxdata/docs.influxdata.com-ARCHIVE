@@ -3,8 +3,8 @@ title: Explore data in Chronograf
 description: Query and visualize data in the Data Explorer.
 menu:
   chronograf_1_7:
-    name: Explore data
-    weight: 30
+    name: Exploring data in Chronograf
+    weight: 130
     parent: Guides
 ---
 Explore and visualize your data in the **Data Explorer**. For both InfluxQL and Flux, Chronograf allows you to move seamlessly between using the builder or templates and manually editing the query; when possible, the interface automatically populates the builder with the information from your raw query. Choose between [visualization types](/chronograf/latest/guides/visualization-types/) for your query.
