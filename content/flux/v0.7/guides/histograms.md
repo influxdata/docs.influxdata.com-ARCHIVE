@@ -1,6 +1,6 @@
 ---
 title: How to create histograms with Flux
-description: This guide walks through using the histogram() function to create histograms with Flux.
+description: This guide walks through using the histogram() function to create cumulative histograms with Flux.
 menu:
   flux_0_7:
     name: Create histograms
@@ -10,7 +10,7 @@ menu:
 
 
 Histograms provide valuable insight into the distribution of your data.
-This guide walks through using Flux's `histogram()` function to transform your data into a histograms.
+This guide walks through using Flux's `histogram()` function to transform your data into a **cumulative histogram**.
 
 ## histgram() function
 The [`histogram()` function](/flux/v0.7/functions/transformations/histogram) approximates the
