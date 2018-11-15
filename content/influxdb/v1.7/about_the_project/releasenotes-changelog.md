@@ -7,6 +7,13 @@ menu:
     parent: About the project
 ---
 
+## v1.7.1 [2018-11-14]
+
+### Bug fixes
+
+* Simple8B `EncodeAll` incorrectly encodes entries: For a run of `1s`, if the 120th or 240th entry is not a `1`, the run will be incorrectly encoded as selector `0` (`240 1s`) or selector `1` (`120 1s`), resulting in a loss of data for the 120th or 240th value. Manifests itself as consuming significant CPU resources and as compactions running indefinitely.
+
+
 ## v1.7.0 [2018-11-06]
 -------------------
 
