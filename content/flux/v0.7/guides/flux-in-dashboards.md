@@ -25,7 +25,7 @@ To use Flux in a dashboard cell, either create a new cell or edit an existing ce
 by clicking the **pencil** icon in the top right corner of the cell.
 To the right of the dropdown above the graph preview, select **Flux** as the source type.
 
-![Flux in Chronograf dashboard cells](/img/flux/flux-dashboard-cell.gif)
+![Flux in Chronograf dashboard cells](/img/flux/flux-dashboard-cell.png)
 
 This will provide **Schema**, **Script**, and **Functions** panes.
 The Schema pane allows you to explore your data.
