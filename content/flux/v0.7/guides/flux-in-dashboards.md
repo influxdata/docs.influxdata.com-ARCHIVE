@@ -25,14 +25,12 @@ To use Flux in a dashboard cell, either create a new cell or edit an existing ce
 by clicking the **pencil** icon in the top right corner of the cell.
 To the right of the dropdown above the graph preview, select **Flux** as the source type.
 
+![Flux in Chronograf dashboard cells](/img/flux/flux-dashboard-cell.gif)
+
 This will provide **Schema**, **Script**, and **Functions** panes.
 The Schema pane allows you to explore your data.
 The Script pane is where you write your Flux script.
 The Functions pane provides a list of functions available in your Flux queries.
-
-{{% truncate %}}
-![Flux in Chronograf dashboard cells](/img/flux/flux-dashboard-cell.gif)
-{{% /truncate %}}
 
 ## Template variables in Flux
 Chronograf [template variables](/chronograf/latest/guides/dashboard-template-variables/)
@@ -84,7 +82,7 @@ dataSet
 > potentially causing unnecessary load on InfluxDB.
 
 #### autoInterval
-The `autoInterval` template variable represents refresh interval of the dashboard
+The `autoInterval` template variable represents the refresh interval of the dashboard
 and is controlled by the refresh interval dropdown.
 It's typically used to align window intervals created in
 [windowing and aggregation](/flux/v0.7/guides/windowing-aggregating) operations with dashboard refreshes.
