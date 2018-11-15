@@ -27,8 +27,8 @@ The output should look like this:
 
 ```bash
 $ influx -precision rfc3339
-Connected to http://localhost:8086 version 1.4.x
-InfluxDB shell 1.4.x
+Connected to http://localhost:8086 version 1.7.x
+InfluxDB shell 1.7.x
 >
 ```
 
@@ -69,8 +69,8 @@ to display all existing databases:
 ```sql
 > SHOW DATABASES
 name: databases
----------------
 name
+----
 _internal
 mydb
 
