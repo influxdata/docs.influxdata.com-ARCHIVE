@@ -940,7 +940,7 @@ The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 Plugin ID: `inputs.tcp_listener`
 
-> The [TCP Listener input plugin)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tcp_listener/README.md) is EPRECATED as of version 1.3; use the [Socket Listener input plugin](#socket-listener).
+> The [TCP Listener input plugin)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tcp_listener/README.md) is DEPRECATED as of version 1.3; use the [Socket Listener input plugin](#socket-listener).
 
 ### UDP Listener
 
