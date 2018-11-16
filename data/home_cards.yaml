@@ -81,7 +81,7 @@ cards:
   - id: enterprise_influxdb
     category: enterprise
     title: InfluxDB Enterprise
-    description: Kapacitor Enterprise offers proprietary extensions to the open source version of Kapacitor.
+    description: InfluxDB Enterprise offers proprietary extensions to the open source version of InfluxDB, and is designed to handle high write and query loads.
     links:
       - text: Download Kapacitor Enterprise
         type: relative
@@ -97,7 +97,7 @@ cards:
   - id: enterprise_kapacitor
     category: enterprise
     title: Kapacitor Enterprise
-    description: InfluxDB Enterprise offers proprietary extensions to the open source version of InfluxDB, and is designed to handle high write and query loads.
+    description: Kapacitor Enterprise offers proprietary extensions to the open source version of Kapacitor.
     links:
       - text: Download InfluxDB Enterprise
         type: relative
