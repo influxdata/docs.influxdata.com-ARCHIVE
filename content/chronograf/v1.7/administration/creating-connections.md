@@ -27,7 +27,7 @@ To create an InfluxDB connection in the Chronograf UI:
       *Required only if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
     * **Password**: Enter the password.
       *Required only if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
-    * **Telegraf Database Name*: Enter the name of the Telegraf database. The field is prefilled with `telegraf`.
+    * **Telegraf Database Name**: Enter the name of your Telegraf database. This field specifies the database that Chronograf will use to for plugins that populate the Host List page. The field is prefilled with `telegraf`, which is the default name assigned to Telegraf databases. If you've specified a different name for your Telegraf database, enter that here instead.
     * **Default Retention Policy**: Enter the name of the default [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp). If none i s provided, it assumes `autogen`.
     * **Make this the default connection**: When this option is selected, this InfluxDB connection will be used when Chronograf is launched.
 
