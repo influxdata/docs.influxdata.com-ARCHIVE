@@ -127,8 +127,7 @@ from(bucket: "telegraf/autogen")
 ```
 
 ### Histograms
-The ability to generate histograms has been on InfluxQL's long-term roadmap for some time,
-but is not yet built into the query engine.
+The ability to generate histograms has been a highly requested feature for InfluxQL, but has never been supported.
 Flux's [`histogram()` function](/flux/v0.7/functions/transformations/histogram) uses input
 data to generate a cumulative histogram with support for other histogram types coming in the future.
 

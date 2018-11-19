@@ -4187,10 +4187,9 @@ time                   mean
 InfluxDB then rounds those averages down to the nearest integer.
 
 ## HISTOGRAM()
-`HISTOGRAM()` is not yet functional.
-
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+_InfluxQL does not currently support histogram generation.
+See [Flux's `histogram()` function](/flux/v0.7/functions/transformations/histogram)
+for information about creating histograms with data stored in InfluxDB._
 
 ## LN()
 Returns the natural logarithm of the field value.
