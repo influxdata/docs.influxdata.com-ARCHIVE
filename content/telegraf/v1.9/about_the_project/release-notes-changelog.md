@@ -1,5 +1,5 @@
 ---
-title: Telegraf 1.8 release notes
+title: Telegraf 1.9 release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
   telegraf_1_9:
