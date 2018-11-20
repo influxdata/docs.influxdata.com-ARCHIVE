@@ -195,4 +195,4 @@ The [Wavefront output plugin](https://github.com/influxdata/telegraf/blob/releas
 
 Plugin ID: `riemann_legacy`
 
-The [Riemann Legacy output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann_legacy) will be deprecated in a future release, see https://github.com/influxdata/telegraf/issues/1878 for more details & discussion.
+The [Riemann Legacy output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/riemann_legacy) will be deprecated in a future release, see https://github.com/influxdata/telegraf/issues/1878 for more details & discussion.
