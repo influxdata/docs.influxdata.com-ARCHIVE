@@ -34,7 +34,7 @@ independently.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[groupBy](#description)&nbsp;(&nbsp;`tag`&nbsp;`...interface{}`)** | Group the data by a set of tags.  |
+| **groupBy&nbsp;(&nbsp;`tag`&nbsp;`...interface{}`)** | Group the data by a set of tags.  |
 
 ### Property Methods
 

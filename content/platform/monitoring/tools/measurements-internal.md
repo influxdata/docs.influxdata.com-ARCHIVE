@@ -58,6 +58,8 @@ menu:
       - [pointsWrittenOK](#pointswrittenok)
       - [promReadReq](#promreadreq)
       - [promWriteReq](#promwritereq)
+      - [fluxQueryReq](#fluxqueryreq)
+      - [fluxQueryDurationNs](#fluxquerydurationns)
       - [queryReq](#queryreq)
       - [queryReqDurationNs](#queryreqdurationns)
       - [queryRespBytes](#queryrespbytes)
@@ -455,6 +457,17 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
   * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
 
 
+#### fluxQueryReq
+
+* The number of Flux query requests served.
+* Data type: integer
+
+#### fluxQueryReqDurationNs
+
+* The duration (wall-time), in nanoseconds, spent executing Flux query requests.
+* Data type: integer
+
+
 ####  pingReq
 
 * The number of times InfluxDB HTTP server served the `/ping` HTTP endpoint.
@@ -725,7 +738,7 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 #### Mallocs
 
 * The total number of heap objects allocated.
-* The total number of live objects is [Frees](#Frees).
+* The total number of live objects is [Frees](#frees).
 * Data type: integer
 
 #### NumGC

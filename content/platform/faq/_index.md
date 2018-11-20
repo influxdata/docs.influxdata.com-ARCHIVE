@@ -4,7 +4,7 @@ description: Frequently asked questions about time series data and the InfluxDat
 menu:
   platform:
     name: Frequently asked questions
-    weight: 30
+    weight: 70
 ---
 
 [What is time series data?](#what-is-time-series-data)  

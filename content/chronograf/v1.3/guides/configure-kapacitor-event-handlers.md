@@ -73,7 +73,7 @@ Your token appears in the table just above the `Create new token` section:
 ## Slack
 
 [Slack](https://slack.com/) is a messaging app for teams.
-Configure Chronograf to send alerts to an existing Slack channel or as a [direct message (DM)](https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages).
+Configure Chronograf to send alerts to an existing Slack channel or as a [direct message (DM)](https://get.slack.help/hc/en-us/articles/212281468-Direct-messages-and-group-DMs).
 The sections below describe each configuration option.
 
 ![Slack configuration](/img/chronograf/v1.3/g-eventhandlers-slack.png)

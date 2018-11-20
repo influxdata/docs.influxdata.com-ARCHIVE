@@ -377,7 +377,7 @@ The [OpenSMTPD (`opensmtpd`) input plugin](https://github.com/influxdata/telegra
 
 ### [Particle.io Webhooks (`particle`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/webhooks/particle/README.md)
 
-The [Particle.io Webhooks (`particle`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/webhooks/particle/README.md) enables [Particle webhooks](https://docs.particle.io/guide/tools-and-features/webhooks/) to gather Particle device data which gets routed through the Particle Device Cloud into InfluxDB. For more information on the Particle webhook integration, see [InfluxData Integration](https://docs.particle.io/tutorials/integrations/influxdata/core/).
+The [Particle.io Webhooks (`particle`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/webhooks/particle/README.md) enables [Particle webhooks](https://docs.particle.io/guide/tools-and-features/webhooks/) to gather Particle device data which gets routed through the Particle Device Cloud into InfluxDB. For more information on the Particle webhook integration, see [InfluxData Integration](https://docs.particle.io/tutorials/integrations/influxdata/).
 
 ### [Passenger (`passenger`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/passenger)
 
@@ -594,7 +594,7 @@ The [Zipkin (`zipkin`) input plugin](https://github.com/influxdata/telegraf/tree
 
 ### [Zookeeper (`zookeeper`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/zookeeper)
 
-The [Zookeeper (`zookeeper`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/zookeeper) collects variables outputted from the `mntr` command [Zookeeper Admin](https://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html).
+The [Zookeeper (`zookeeper`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/zookeeper) collects variables outputted from the `mntr` command [Zookeeper Admin](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html).
 
 ## Deprecated Telegraf input plugins
 
@@ -612,7 +612,7 @@ It flattens the JSON and finds all numeric values, treating them as floats.
 
 ### [Jolokia (`jolokia`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/jolokia)
 
-> DEPRECATED as of version 1.5; use the [Jolokia2 (`jolokia2`) input plugin](#jolokia2-agent-jolokia2-agent-https-github-com-influxdata-telegraf-tree-release-1-6-plugins-inputs-jolokia2-readme-md).
+> DEPRECATED as of version 1.5; use the [Jolokia2 (`jolokia2`) input plugin](#jolokia2-agent-jolokia2-agent-https-github-com-influxdata-telegraf-tree-release-1-7-plugins-inputs-jolokia2-readme-md).
 
 ### [SNMP Legacy (`snmp_legacy`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/snmp_legacy)
 
@@ -622,8 +622,8 @@ The SNMP Legacy input plugin gathers metrics from SNMP agents.
 
 ### [TCP Listener (`tcp_listener`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/tcp_listener)
 
-> DEPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-tree-release-1-6-plugins-inputs-socket-listener).
+> DEPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-tree-release-1-7-plugins-inputs-socket-listener).
 
 ### [UDP Listener (`udp_listener`)](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/udp_listener)
 
-> DEPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-tree-release-1-6-plugins-inputs-socket-listener).
+> DEPRECATED as of version 1.3; use the [Socket Listener (`socket_listener`) input plugin](#socket-listener-socket-listener-https-github-com-influxdata-telegraf-tree-release-1-7-plugins-inputs-socket-listener).

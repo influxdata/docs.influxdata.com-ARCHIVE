@@ -12,8 +12,8 @@ menu:
 ## Contents
 
 * [Integration with secure InfluxDB](#integration-with-secure-influxdb)
-   * [Securing InfluxDB meta Nodes](#secure-influxdb-meta-nodes)
-   * [Secure InfluxDB data Nodes](#secure-influxdb-data-nodes)
+   * [Securing InfluxDB meta Nodes](#securing-influxdb-meta-nodes)
+   * [Secure InfluxDB data Nodes](#securing-influxdb-data-nodes)
 * [Securing Kapacitor Enterprise](#securing-kapacitor-enterprise)
    * [Kapacitor Enterprise over TLS](#kapacitor-enterprise-over-tls)
    * [Kapacitor Enterprise with authentication](#kapacitor-enterprise-with-authentication)  

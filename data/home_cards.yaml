@@ -1,0 +1,110 @@
+cards:
+
+  # Flux card
+  - id: flux
+    category: oss
+    title: Introducing Flux
+    description: Flux is InfluxData's new functional data scripting language designed for querying, analyzing, and transforming data.
+    links:
+      - text: Get Started
+        type: relative
+        href: /introduction/getting-started
+      - text: Documentation
+        type: relative
+        href: /
+
+  # Telegraf card
+  - id: telegraf
+    category: oss
+    title: Telegraf
+    description: Telegraf is InfluxData's open source plugin-driven server agent for collecting and reporting metrics.
+    links:
+      - text: Download Telegraf
+        type: absolute
+        href: https://portal.influxdata.com/downloads
+      - text: Get Started
+        type: relative
+        href: /introduction/getting-started
+      - text: Documentation
+        type: relative
+        href: /
+
+  # InfluxDB card
+  - id: influxdb
+    category: oss
+    title: InfluxDB
+    description: InfluxDB is InfluxData's open source time series database designed to handle high write and query loads.
+    links:
+      - text: Download InfluxDB
+        type: absolute
+        href: https://portal.influxdata.com/downloads
+      - text: Get Started
+        type: relative
+        href: /introduction/getting-started
+      - text: Documentation
+        type: relative
+        href: /
+
+  # Chronograf card
+  - id: chronograf
+    category: oss
+    title: Chronograf
+    description: Chronograf is InfluxData's open source web application for infrastructure monitoring, alert management, data visualization, and database management.
+    links:
+      - text: Download Chronograf
+        type: absolute
+        href: https://portal.influxdata.com/downloads
+      - text: Get Started
+        type: relative
+        href: /introduction/getting-started
+      - text: Documentation
+        type: relative
+        href: /
+
+  # Kapacitor card
+  - id: kapacitor
+    category: oss
+    title: Kapacitor
+    description: Kapacitor is InfluxData's open source data processing framework that makes it easy to create alerts, run ETL jobs, and detect anomalies.
+    links:
+      - text: Download Kapacitor
+        type: absolute
+        href: https://portal.influxdata.com/downloads
+      - text: Get Started
+        type: relative
+        href: /introduction/getting-started
+      - text: Documentation
+        type: relative
+        href: /
+
+  # InfluxDB Enterprise card
+  - id: enterprise_influxdb
+    category: enterprise
+    title: InfluxDB Enterprise
+    description: InfluxDB Enterprise offers proprietary extensions to the open source version of InfluxDB, and is designed to handle high write and query loads.
+    links:
+      - text: Download Kapacitor Enterprise
+        type: relative
+        href: /introduction/download/
+      - text: Get Started
+        type: relative
+        href: /introduction/getting-started
+      - text: Documentation
+        type: relative
+        href: /
+
+  # Kapacitor Enterprise card
+  - id: enterprise_kapacitor
+    category: enterprise
+    title: Kapacitor Enterprise
+    description: Kapacitor Enterprise offers proprietary extensions to the open source version of Kapacitor.
+    links:
+      - text: Download InfluxDB Enterprise
+        type: relative
+        href: /introduction/download/
+      - text: Get Started
+        type: relative
+        href: /introduction/getting-started
+      - text: Documentation
+        type: relative
+        href: /

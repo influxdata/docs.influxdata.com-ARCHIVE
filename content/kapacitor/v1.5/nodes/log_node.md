@@ -11,7 +11,7 @@ menu:
     parent: nodes
 ---
 
-The `log` node logs all data that passes through the it.
+The `log` node logs all data that passes through it.
 
 Example:
 
@@ -30,7 +30,7 @@ stream.from()...
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[log](#description)&nbsp;(&nbsp;)** | Create a node that logs all data it receives.  |
+| **log&nbsp;(&nbsp;)** | Create a node that logs all data it receives.  |
 
 ### Property Methods
 

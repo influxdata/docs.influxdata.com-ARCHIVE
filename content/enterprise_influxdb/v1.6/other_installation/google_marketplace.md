@@ -20,7 +20,7 @@ This guide requires the following:
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
 - Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
 
-To deploy InfluxDB Enterprise on platforms other than GCP, please see [InfluxDB Enterprise installation options](enterprise_influxdb/v1.6/introduction/installation_guidelines).
+To deploy InfluxDB Enterprise on platforms other than GCP, please see [InfluxDB Enterprise installation options](/enterprise_influxdb/v1.6/introduction/installation_guidelines).
 
 ## Deploying a cluster
 
@@ -40,7 +40,7 @@ Click __Deploy__ to launch the InfluxDB Enterprise cluster.
 
 ![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/byol-intro-3.png)
 
-The cluster will take up to five minutes to fully deploy. If the deployment does not complete or reports an error, read through the list of [common deployment errors](#common-errors).
+The cluster will take up to five minutes to fully deploy. If the deployment does not complete or reports an error, read through the list of [common deployment errors](https://cloud.google.com/marketplace/docs/troubleshooting).
 
 ![GCP InfluxDB Enterprise deployment complete page](/img/enterprise/gcp/byol-intro-4.png)
 

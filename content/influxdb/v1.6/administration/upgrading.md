@@ -28,7 +28,7 @@ The upgrade steps below guide you in upgrading InfluxDB OSS and InfluxDB Enterpr
 
 Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4) that did not enable the TSI Preview to an InfluxDB 1.6 instance with Time Series Index (TSI) enabled.
 
-1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version 1.6.x and install the upgrade.
+1. [Download](https://portal.influxdata.com/downloads) InfluxDB version 1.6.x and install the upgrade.
 
 2. Update your InfluxDB configuration.
 
@@ -49,7 +49,7 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4)
 
 4. Convert existing TSM-based shards to TSI-supported shards.
 
--   Use [influx_inspect buildtsi](/influxdb/v1.6/tools/influx_inspect/#influx-inspect-buildtsi) for converting your TSM-based shards to TSI-based shards.
+-   Use [influx_inspect buildtsi](/influxdb/v1.6/tools/influx_inspect/#influx-inspect/#buildtsi) for converting your TSM-based shards to TSI-based shards.
 
 5. Restart the `influxdb` service.
 
@@ -57,7 +57,7 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4)
 
 Follow these steps to upgrade an earlier InfluxDB instance (versions 1.3 and 1.4) that had the TSI Preview enabled to an InfluxDB 1.6 instance with Time Series Index (TSI) enabled.
 
-1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB version
+1. [Download](https://portal.influxdata.com/downloads) InfluxDB version
    1.6 and install the upgrade.
 
 2. Update your InfluxDB configuration.
@@ -83,7 +83,7 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.3 and 1.4
 5. Convert existing shards to support TSI.
 
 -   When Time Series Index (TSI) is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
--   Run the [influx_inspect buildtsi](/influxdb/v1.6/tools/influx_inspect/#influx-inspect-buildtsi) command to convert existing TSM-based shards to TSI-based shards.
+-   Run the [influx_inspect buildtsi](/influxdb/v1.6/tools/influx_inspect/#buildtsi) command to convert existing TSM-based shards to TSI-based shards.
 
 5. Restart the `influxdb` service.
 
@@ -91,7 +91,7 @@ Follow these steps to upgrade an earlier InfluxDB instance (versions 1.3 and 1.4
 
 Follow these steps to upgrade an earlier InfluxDB instance (versions 1.0 to 1.4) using the default TSM in-memory indexing to an InfluxDB 1.6 instance.
 
-1. [Download](https://influxdata.com/downloads/#influxdb) InfluxDB 1.6.
+1. [Download](https://portal.influxdata.com/downloads) InfluxDB 1.6.
 
 2. [Install](/influxdb/v1.6/introduction/installation) InfluxDB 1.6.
 

@@ -17,7 +17,7 @@ from the previous point.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[changeDetect](#descr)&nbsp;(&nbsp;`field`&nbsp;`string`)** | Create a new node that only emits new points if different from the previous point  |
+| **changeDetect&nbsp;(&nbsp;`field`&nbsp;`string`)** | Create a new node that only emits new points if different from the previous point  |
 
 ### Property methods
 

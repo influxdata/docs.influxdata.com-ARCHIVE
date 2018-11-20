@@ -61,7 +61,7 @@ As a result, make sure the user is properly secured, as well as the configuratio
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[uDF](#description)** | Has no constructor signature. |
+| **uDF** | Has no constructor signature. |
 
 ### Property Methods
 

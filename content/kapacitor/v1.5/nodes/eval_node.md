@@ -38,7 +38,7 @@ Available Statistics:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[eval](#description)&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Create an eval node that will evaluate the given transformation function to each data point. A list of expressions may be provided and will be evaluated in the order they are given. The results are available to later expressions.  |
+| **eval&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Create an eval node that will evaluate the given transformation function to each data point. A list of expressions may be provided and will be evaluated in the order they are given. The results are available to later expressions.  |
 
 ### Property Methods
 

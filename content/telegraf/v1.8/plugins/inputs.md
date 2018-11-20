@@ -129,7 +129,7 @@ The [Chrony input plugin](https://github.com/influxdata/telegraf/blob/release-1.
 
 ### Conntrack `inputs.conntrack`
 
-The [Conntrack input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/conntrack/README.md) collects stats from Netfilter's conntrack-tools.
+The [Conntrack input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/conntrack/README.md) collects statistics from Netfilter's conntrack-tools.
 
 The conntrack-tools provide a mechanism for tracking various aspects of network connections as they are processed by netfilter.
 At runtime, conntrack exposes many of those connection statistics within `/proc/sys/net`.
@@ -190,7 +190,7 @@ The [DMCache input plugin](https://github.com/influxdata/telegraf/blob/release-1
 
 Plugin ID: `dns_query`
 
-The [DNS Query (`dns_query`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/dns_query/README.md) gathers DNS query times in milliseconds - like [Dig](https://en.wikipedia.org/wiki/Dig_(command)).
+The [DNS Query input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/dns_query/README.md) gathers DNS query times in milliseconds - like [Dig](https://en.wikipedia.org/wiki/Dig_(command)).
 
 ### Docker
 
@@ -211,7 +211,7 @@ see the [Dovecot documentation](http://wiki2.dovecot.org/Statistics).
 
 Plugin ID: `elasticsearch`
 
-The [Elasticsearch sinput plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/elasticsearch/README.md) queries endpoints to obtain [node](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
+The [Elasticsearch input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/elasticsearch/README.md) queries endpoints to obtain [node](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
 and optionally [cluster-health](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)
 or [cluster-stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-stats.html) metrics.
 
@@ -719,7 +719,6 @@ It fetches its data from the limits endpoint of the Salesforce REST API.
 ### Sensors
 
 Plugin ID: `sensors`
-
 The [Sensors input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/sensors/README.md) collects collects sensor metrics with the sensors executable from the `lm-sensor` package.
 
 ### SMART

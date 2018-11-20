@@ -53,7 +53,7 @@ If no data is sent, the StateDurationNode cannot evaluate the state and cannot c
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stateDuration](#description)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a node that tracks duration in a given state.  |
+| **stateDuration&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a node that tracks duration in a given state.  |
 
 ### Property Methods
 

@@ -39,7 +39,7 @@ InfluxQL functions.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[influxQL](#description)** | Has no constructor signature. |
+| **influxQL** | Has no constructor signature. |
 
 ### Property Methods
 

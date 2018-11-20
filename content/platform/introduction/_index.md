@@ -6,7 +6,7 @@ aliases:
 menu:
   platform:
     name: Introduction
-    weight: 1
+    weight: 10
 ---
 
 The InfluxData Platform is the leading modern [time series](/platform/faq/#what-is-time-series-data)

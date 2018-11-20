@@ -35,7 +35,7 @@ The Sensu Client `host:port` address.
 Default "Just-in-Time" (JIT) source.
 
 #### `handlers`
-List of [Sensu handlers](https://docs.sensu.io/sensu-core/1.3/guides/intro-to-handlers/#getting-started-with-handlers) to use.
+List of [Sensu handlers](https://docs.sensu.io/sensu-core/1.3/guides/intro-to-handlers/) to use.
 
 
 ## Options

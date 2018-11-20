@@ -39,7 +39,7 @@ logins
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[union](#description)&nbsp;(&nbsp;`node`&nbsp;`...Node`)** | Perform the union of this node and all other given nodes.  |
+| **union&nbsp;(&nbsp;`node`&nbsp;`...Node`)** | Perform the union of this node and all other given nodes.  |
 
 ### Property Methods
 
