@@ -21,7 +21,7 @@ _**Output data type:** Object_
 window(
   every: 5m,
   period: 5m,
-  offset: 12h,
+  start: 12h,
   timeColumn: "_time",
   startColumn: "_start",
   stopColumn: "_stop"
@@ -55,9 +55,9 @@ Defaults to `every` value.
 
 _**Data type:** Duration_
 
-### offset
-The offset duration relative to the [`location`](/flux/v0.7/language/statements#location) offset.
-It can be negative, indicating that the offset goes backwards in time.
+### start
+The start window time relative to the [`location`](/flux/v0.7/language/statements#location) offset.
+It can be negative, indicating that the start goes backwards in time.
 The default aligns the window boundaries with `now`.
 
 _**Data type:** Duration_
@@ -72,7 +72,7 @@ _**Data type:** Function_
 intervals(every:1d, period:8h, offset:9h)
 ```
 
-> When `intervals` is used, `every`, `period`, and `offset` cannot be used or need to be set to 0.
+> When `intervals` is used, `every`, `period`, and `start` cannot be used or need to be set to 0.
 
 ### timeColumn
 The column containing time.
