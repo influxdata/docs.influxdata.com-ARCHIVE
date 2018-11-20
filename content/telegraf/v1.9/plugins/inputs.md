@@ -69,7 +69,7 @@ multiple instances of Telegraf can read from the same topic in parallel.
 
 Plugin ID: `solr`
 
-The [Apache Solr (`solr`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/solr/README.md) collects stats using the MBean Request Handler.
+The [Apache Solr (`solr`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/solr/README.md) collects stats using the MBean Request Handler.
 
 ### Apache Tomcat
 
@@ -178,7 +178,7 @@ The [DiskIO input plugin](https://github.com/influxdata/telegraf/blob/release-1.
 
 Plugin ID: `disque`
 
-The [Disque input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/disque) gathers metrics from one or more [Disque](https://github.com/antirez/disque) servers.
+The [Disque input plugin](https://github.com/influxdata/plugins/inputs/disque) gathers metrics from one or more [Disque](https://github.com/antirez/disque) servers.
 
 ### DMCache
 
@@ -315,13 +315,13 @@ The [HTTP Response input plugin](https://github.com/influxdata/telegraf/blob/rel
 
 Plugin ID: `icinga2`
 
-The [Icinga2 input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/icinga2) gather status on running services and hosts using the [Icinga2 Remote API](https://docs.icinga.com/icinga2/latest/doc/module/icinga2/chapter/icinga2-api).
+The [Icinga2 input plugin](https://github.com/influxdata/plugins/inputs/icinga2) gather status on running services and hosts using the [Icinga2 Remote API](https://docs.icinga.com/icinga2/latest/doc/module/icinga2/chapter/icinga2-api).
 
 ### InfluxDB v1.x
 
 Plugin ID: `influxdb`
 
-The [InfluxDB v1.x input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/influxdb) gathers metrics from the exposed InfluxDB v1.x `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
+The [InfluxDB v1.x input plugin](https://github.com/influxdata/plugins/inputs/influxdb) gathers metrics from the exposed InfluxDB v1.x `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
 capturing and storing these metrics locally within the `_internal` database for production deployments.
 [Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
 
@@ -329,13 +329,13 @@ capturing and storing these metrics locally within the `_internal` database for 
 
 Plugin ID: `interrupts`
 
-The [Interrupts input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/interrupts) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
+The [Interrupts input plugin](https://github.com/influxdata/plugins/inputs/interrupts) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
 
 ### IPMI Sensor
 
 Plugin ID: `ipmi_sensor`
 
-The [IPMI Sensor input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/ipmi_sensor) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
+The [IPMI Sensor input plugin](https://github.com/influxdata/plugins/inputs/ipmi_sensor) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
 
 ### Ipset
 
@@ -374,7 +374,7 @@ The [Jolokia2 Agent input plugin](https://github.com/influxdata/telegraf/blob/re
 
 Plugin ID: `jolokia2_proxy`
 
-The [Jolokia2 Proxy input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/jolokia2/README.md) eads JMX metrics from one or more targets by interacting with a [Jolokia](https://jolokia.org/) proxy REST endpoint using the [Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
+The [Jolokia2 Proxy input plugin](https://github.com/influxdata/plugins/inputs/jolokia2/README.md) eads JMX metrics from one or more targets by interacting with a [Jolokia](https://jolokia.org/) proxy REST endpoint using the [Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
 
 ### JTI OpenConfig Telemetry
 
@@ -443,13 +443,13 @@ from log files, which also supports regular expression (regex) patterns.
 Plugin ID: `lustre2`
 
 Lustre Jobstats allows for RPCs to be tagged with a value, such as a job's ID.  This allows for per job statistics.
-The [Lustre2 input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/lustre2) collects statistics and tags the data with the `jobid`.
+The [Lustre2 input plugin](https://github.com/influxdata/plugins/inputs/lustre2) collects statistics and tags the data with the `jobid`.
 
 ### Mailchimp
 
 Plugin ID: `mailchimp`
 
-The [Mailchimp input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/mailchimp) gathers metrics from the `/3.0/reports` MailChimp API.
+The [Mailchimp input plugin](https://github.com/influxdata/plugins/inputs/mailchimp) gathers metrics from the `/3.0/reports` MailChimp API.
 
 ### Mcrouter
 
@@ -577,7 +577,7 @@ The [NGINX Plus API input plugin](https://github.com/influxdata/telegraf/blob/re
 
 Plugin ID: `nsq`
 
-The [NSQ input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/nsq) ...
+The [NSQ input plugin](https://github.com/influxdata/plugins/inputs/nsq) ...
 
 ### NSQ Consumer
 
@@ -667,7 +667,7 @@ version of PostgreSQL.
 
 Plugin ID: `postgresql_extensible`
 
-This [PostgreSQL Extensible input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/postgresql_extensible) provides metrics for your Postgres database. It has been designed to parse SQL queries in the plugin section of `telegraf.conf` files.
+This [PostgreSQL Extensible input plugin](https://github.com/influxdata/plugins/inputs/postgresql_extensible) provides metrics for your Postgres database. It has been designed to parse SQL queries in the plugin section of `telegraf.conf` files.
 
 ### PowerDNS
 
@@ -706,7 +706,7 @@ The [Prometheus Format input plugin](https://github.com/influxdata/telegraf/blob
 
 Plugin ID: `puppetagent`
 
-The [Puppet Agent input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/puppetagent) collects variables outputted from the `last_run_summary.yaml` file usually
+The [Puppet Agent input plugin](https://github.com/influxdata/plugins/inputs/puppetagent) collects variables outputted from the `last_run_summary.yaml` file usually
 located in `/var/lib/puppet/state/` Puppet Agent Runs. For more information, see [Puppet Monitoring: How  to Monitor the Success or Failure of Puppet Runs](https://puppet.com/blog/puppet-monitoring-how-to-monitor-success-or-failure-of-puppet-runs)
 
 ### RabbitMQ
@@ -735,7 +735,7 @@ Additionally the plugin also calculates the hit/miss ratio (`keyspace_hitrate`) 
 
 Plugin ID: `rethinkdb`
 
-The [RethinkDB input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/rethinkdb) works with RethinkDB 2.3.5+ databases that requires username, password authorization,
+The [RethinkDB input plugin](https://github.com/influxdata/plugins/inputs/rethinkdb) works with RethinkDB 2.3.5+ databases that requires username, password authorization,
 and Handshake protocol v1.0.
 
 ### Riak
@@ -806,7 +806,7 @@ The [Syslog input plugin](https://github.com/influxdata/telegraf/blob/release-1.
 
 Plugin ID: `sysstat`
 
-The [Sysstat input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/sysstat) collects [sysstat](https://github.com/sysstat/sysstat) system metrics with the sysstat
+The [Sysstat input plugin](https://github.com/influxdata/plugins/inputs/sysstat) collects [sysstat](https://github.com/sysstat/sysstat) system metrics with the sysstat
 collector utility `sadc` and parses the created binary data file with the `sadf` utility.
 
 ### System
@@ -831,7 +831,7 @@ The [Teamspeak 3 input plugin](https://github.com/influxdata/telegraf/blob/relea
 
 Plugin ID: `internal`
 
-The [Telegraf v1.x input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/internal) collects metrics about the Telegraf v1.x agent itself.
+The [Telegraf v1.x input plugin](https://github.com/influxdata/plugins/inputs/internal) collects metrics about the Telegraf v1.x agent itself.
 Note that some metrics are aggregates across all instances of one type of plugin.
 
 ### Temp
@@ -850,13 +850,13 @@ The [Tengine Web Server input plugin](https://github.com/influxdata/telegraf/blo
 
 Plugin ID: `trig`
 
-The [Trig input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/trig) inserts sine and cosine waves for demonstration purposes.
+The [Trig input plugin](https://github.com/influxdata/plugins/inputs/trig) inserts sine and cosine waves for demonstration purposes.
 
 ### Twemproxy
 
 Plugin ID: `twemproxy`
 
-The [Twemproxy input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/twemproxy) gathers data from Twemproxy instances, processes Twemproxy server statistics, processes pool data, and processes backend server (Redis/Memcached) statistics.
+The [Twemproxy input plugin](https://github.com/influxdata/plugins/inputs/twemproxy) gathers data from Twemproxy instances, processes Twemproxy server statistics, processes pool data, and processes backend server (Redis/Memcached) statistics.
 
 ### Unbound
 
@@ -889,10 +889,10 @@ The [Webhooks input plugin](https://github.com/influxdata/telegraf/blob/release-
 * [Mandrill](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/webhooks/mandrill/README.md)
 * [Papertrail](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/webhooks/papertrail/README.md)
 * [Particle.io](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/webhooks/particle/README.md)
-* [Rollbar](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/webhooks/rollbar)
+* [Rollbar](https://github.com/influxdata/plugins/inputs/webhooks/rollbar)
 
 #### Add new webhooks
-If you need a webhook that is not supported, consider [adding a new webhook](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/webhooks#adding-new-webhooks-plugin).
+If you need a webhook that is not supported, consider [adding a new webhook](https://github.com/influxdata/plugins/inputs/webhooks#adding-new-webhooks-plugin).
 
 
 ### Windows Performance Counters
@@ -901,7 +901,7 @@ Plugin ID: `win_perf_counters`
 
 Supports: Windows
 
-The way the [Windows Performance Counters input plugin](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/win_perf_counters) works is that on load of Telegraf, the plugin will be handed configuration
+The way the [Windows Performance Counters input plugin](https://github.com/influxdata/plugins/inputs/win_perf_counters) works is that on load of Telegraf, the plugin will be handed configuration
 from Telegraf.
 This configuration is parsed and then tested for validity such as if the Object, Instance and Counter existing.
 If it does not match at startup, it will not be fetched.
