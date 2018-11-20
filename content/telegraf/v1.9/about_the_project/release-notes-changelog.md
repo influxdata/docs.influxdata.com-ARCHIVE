@@ -177,7 +177,7 @@ menu:
 - [csv](/telegraf/v1.8/data_formats/input/csv) - Contributed by @maxunt
 - [grok](/telegraf/v1.8/data_formats/input/grok/) - Contributed by @maxunt
 - [logfmt](/telegraf/v1.8/data_formats/input/logfmt/) - Contributed by @Ayrdrie & @maxunt
-- [wavefront](/telegraf/v1.8/data_formats/input/wavefrount/) - Contributed by @puckpuck
+- [wavefront](/telegraf/v1.8/data_formats/input/wavefront/) - Contributed by @puckpuck
 
 ### New output data formats (serializers)
 
@@ -1285,7 +1285,7 @@ consistent with the behavior of `collection_jitter`.
 - Make DNS lookups for chrony configurable.
 - Allow wildcard filtering of varnish stats.
 - Support for glob patterns in exec plugin commands configuration.
-- RabbitMQ input: made url parameter optional by using DefaultURL (http://localhost:15672) if not specified.
+- RabbitMQ input: made url parameter optional by using DefaultURL (`http://localhost:15672`) if not specified.
 - Limit AWS GetMetricStatistics requests to 10 per second.
 - RabbitMQ/Apache/InfluxDB inputs: made url(s) parameter optional by using reasonable input defaults if not specified.
 - Refactor of flush_jitter argument.

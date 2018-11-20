@@ -7,6 +7,4 @@ menu:
     parent: Introduction
 ---
 
-
-
-Download the latest Telegraf release at the [InfluxData download page](https://influxdata.com/downloads/#telegraf).
+Download the latest Telegraf release at the [InfluxData download page](https://portal.influxdata.com/downloads).
