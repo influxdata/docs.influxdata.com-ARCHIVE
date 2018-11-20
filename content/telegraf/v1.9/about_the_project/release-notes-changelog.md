@@ -23,24 +23,27 @@ menu:
   will provide more robust degradation and recovery when writing to a slow
   output at high throughput.
 
-  To avoid overconsumption when reading from queue consumers:
-  Apache Kafka Consumer (`kafka_consumer`), AMQP Consumer (`amqp_consumer`),
-  MQTT Consumer (`mqtt_consumer`), NATS Consumer (`nats_consumer`), and
-  NSQ Consumer (`nsq_consumer`) use the new option `max_undelivered_messages`
-  to limit the number of outstanding unwritten metrics.
+  To avoid overconsumption when reading from queue consumers, the following
+  input plugins use the new option `max_undelivered_messages` to limit the number
+  of outstanding unwritten metrics:
+  * Apache Kafka Consumer (`kafka_consumer`)
+  * AMQP Consumer (`amqp_consumer`)
+  * MQTT Consumer (`mqtt_consumer`)
+  * NATS Consumer (`nats_consumer`)
+  * NSQ Consumer (`nsq_consumer`)
 
 #### New input plugins
 
-- [HTTP Listener v2 (`http_listener_v2`)](/plugins/inputs/http_listener_v2/README.md) - Contributed by @jul1u5
-- [IPVS (`ipvs`)](/plugins/inputs/ipvs/README.md) - Contributed by @amoghe
-- [Jenkins (`jenkins`)](/plugins/inputs/jenkins/README.md) - Contributed by @influxdata & @lpic10
-- [NGINX Plus API (`nginx_plus_api`)](/plugins/inputs/nginx_plus_api/README.md) - Contributed by @Bugagazavr
-- [NGINX VTS (`nginx_vts`)](/plugins/inputs/nginx_vts/README.md) - Contributed by @monder
-- [Wireless (`wireless`)](/plugins/inputs/wireless/README.md) - Contributed by @jamesmaidment
+- [HTTP Listener v2 (`http_listener_v2`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http_listener_v2/README.md) - Contributed by @jul1u5
+- [IPVS (`ipvs`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/ipvs/README.md) - Contributed by @amoghe
+- [Jenkins (`jenkins`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/jenkins/README.md) - Contributed by @influxdata & @lpic10
+- [NGINX Plus API (`nginx_plus_api`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nginx_plus_api/README.md) - Contributed by @Bugagazavr
+- [NGINX VTS (`nginx_vts`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nginx_vts/README.md) - Contributed by @monder
+- [Wireless (`wireless`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/wireless/README.md) - Contributed by @jamesmaidment
 
 #### New output plugins
 
-- [Stackdriver (stackdriver)](/plugins/outputs/stackdriver/README.md) - Contributed by @jamesmaidment
+- [Stackdriver (stackdriver)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/stackdriver/README.md) - Contributed by @jamesmaidment
 
 #### Features
 

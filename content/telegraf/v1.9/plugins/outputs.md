@@ -2,7 +2,7 @@
 title: Telegraf output plugins
 descriptions: Use Telegraf output plugins to transform, decorate, and filter metrics. Supported output plugins include Datadog, Elasticsearch, Graphite, InfluxDB, Kafka, MQTT, Prometheus Client, Riemann, and Wavefront.
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: Output
     weight: 20
     parent: Plugins
@@ -21,13 +21,13 @@ The [Amazon CloudWatch output plugin](https://github.com/influxdata/telegraf/blo
 
 Plugin ID: `kinesis`
 
-The [Amazon Kinesis output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/kinesis/README.md) is an experimental plugin that is still in the early stages of development. It will batch up all of the Points in one Put request to Kinesis. This should save the number of API requests by a considerable level.
+The [Amazon Kinesis output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/kinesis/README.md) is an experimental plugin that is still in the early stages of development. It will batch up all of the points into one `PUT` request to Kinesis. This should save the number of API requests by a considerable level.
 
 ### Amon
 
 Plugin ID: `amon`
 
-The [Amon output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/amon/README.md) writes metrics to an  [Amon server](https://github.com/amonapp/amon). For details on the Amon Agent, see [Monitoring Agent](https://docs.amon.cx/agent/) and requires a `apikey` and `amoninstance` URL.
+The [Amon output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/amon/README.md) writes metrics to an [Amon server](https://github.com/amonapp/amon). For details on the Amon Agent, see [Monitoring Agent](https://docs.amon.cx/agent/) and requires a `apikey` and `amoninstance` URL.
 
 If the point value being sent cannot be converted to a float64 value, the metric is skipped.
 
@@ -37,7 +37,7 @@ Metrics are grouped by converting any `_` characters to `.` in the Point Name.
 
 Plugin ID: `amqp`
 
-The [AMQP output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/amqp/README.md) writes to a AMQP 0-9-1 Exchange, a prominent implementation of this protocol being [RabbitMQ](https://www.rabbitmq.com/).
+The [AMQP output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/amqp/README.md) writes to an AMQP 0-9-1 exchange, a prominent implementation of the Advanced Message Queuing Protocol (AMQP) protocol being [RabbitMQ](https://www.rabbitmq.com/).
 
 Metrics are written to a topic exchange using `tag`, defined in configuration file as `RoutingTag`, as a routing key.
 
@@ -51,7 +51,7 @@ The [Apache Kafka output plugin](https://github.com/influxdata/telegraf/blob/rel
 
 Plugin ID: `cratedb`
 
-The [CrateDB output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/cratedb/README.md) writes to [CrateDB](https://crate.io/) using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
+The [CrateDB output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/cratedb/README.md) writes to [CrateDB](https://crate.io/), a real-time SQL database for machine data and IoT, using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
 
 ### Datadog
 
