@@ -10,8 +10,7 @@ menu:
 
 Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.9/administration/configuration/).
 
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.9`.
->The [Release Notes](/telegraf/v1.9/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
+
 
 ## Usage instructions
 
