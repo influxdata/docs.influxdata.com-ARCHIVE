@@ -300,7 +300,7 @@ This plugin allows Telegraf to serve as a proxy or router for the `/write` endpo
 
 Plugin ID: `http_listener_v2`
 
-The [HTTP Listener v2 input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http_listener/README.md) listens for messages sent via HTTP POST. Messages are expected in the [InfluxDB
+The [HTTP Listener v2 input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http_listener_v2/README.md) listens for messages sent via HTTP POST. Messages are expected in the [InfluxDB
 Line Protocol input data format](/telegraf/v1.9/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.9/data_formats/input/) are not supported).
 This plugin allows Telegraf to serve as a proxy or router for the `/write` endpoint of the InfluxDB v2110 HTTP API.
 
