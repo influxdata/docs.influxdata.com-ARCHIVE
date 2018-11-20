@@ -188,7 +188,7 @@ The [Socket Writer output plugin](https://github.com/influxdata/telegraf/blob/re
 Plugin ID: `stackdriver`
 
 The [Stackdriver output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/stackdriver/README.md) writes to the [Google Cloud Stackdriver API](https://cloud.google.com/monitoring/api/v3/)
-and requires [authentication](https://cloud.google.com/docs/authentication/getting-started) with Google Cloud using either a service account or user credentials. See the [Stackdriver documentation](https://cloud.google.com/stackdriver/pricing#stackdriver_monitoring_services) for details on pricing.
+and requires [Google Cloud authentication](https://cloud.google.com/docs/authentication/getting-started) with Google Cloud using either a service account or user credentials. For details on pricing, see the [Stackdriver documentation](https://cloud.google.com/stackdriver/pricing).
 
 Requires `project` to specify where Stackdriver metrics will be delivered to.
 

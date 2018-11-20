@@ -325,6 +325,28 @@ The [InfluxDB v1.x input plugin](https://github.com/influxdata/plugins/inputs/in
 capturing and storing these metrics locally within the `_internal` database for production deployments.
 [Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
 
+### InfluxDB Listener
+
+Plugin ID: `influxdb_listener`
+
+The [InfluxDB Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/influxdb_listener/README.md) listens for requests sent
+according to the [InfluxDB HTTP API](/influxdb/latest/guides/writing_data/).  The intent of the
+plugin is to allow Telegraf to serve as a proxy, or router, for the HTTP `/write`
+endpoint of the InfluxDB HTTP API.
+
+**Note:** This plugin was previously known as `http_listener`.  If you wish to
+send general metrics via HTTP, use the
+[HTTP Listener v2 input plugin](#http-listener-v2) instead.
+
+The `/write` endpoint supports the `precision` query parameter and can be set
+to one of `ns`, `u`, `ms`, `s`, `m`, `h`.  All other parameters are ignored and
+defer to the output plugins configuration.
+
+When chaining Telegraf instances using this plugin, `CREATE DATABASE` requests
+receive a `200 OK` response with message body `{"results":[]}` but they are not
+relayed. The output configuration of the Telegraf instance which ultimately
+submits data to InfluxDB determines the destination database.
+
 ### Interrupts
 
 Plugin ID: `interrupts`
@@ -980,6 +1002,7 @@ Line Protocol input data format](/telegraf/v1.9/data_formats/input/influx) ONLY 
 This plugin allows Telegraf to serve as a proxy or router for the `/write` endpoint of the InfluxDB HTTP API.
 
 > DEPRECATED as of version 1.9. Use either [HTTP Listener v2](#http-listener-v2) or the [InfluxDB Listener](#influxdb-listener)
+
 
 ### Jolokia
 
