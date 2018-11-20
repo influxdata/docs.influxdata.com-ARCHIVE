@@ -20,19 +20,19 @@ Processor plugins process metrics as they pass through and immediately emit resu
 
 ### Converter
 
-Plugin ID: `processors.converter`
+Plugin ID: `converter`
 
 The [Converter processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/converter/README.md) is used to change the type of tag or field values. In addition to changing field types, it can convert between fields and tags. Values that cannot be converted are dropped.
 
 ### Enum
 
-Plugin ID: `processors.enum`
+Plugin ID: `enum`
 
 The [Enum processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/enum/README.md) allows the configuration of value mappings for metric fields. The main use case for this is to rewrite status codes such as `red`, `amber`, and `green` by numeric values such as `0`, `1`, `2`. The plugin supports string and bool types for the field values. Multiple Fields can be configured with separate value mappings for each field. Default mapping values can be configured to be used for all values, which are not contained in the value_mappings. The processor supports explicit configuration of a destination field. By default the source field is overwritten.
 
 ### Override
 
-Plugin ID: `processors.override`
+Plugin ID: `override`
 
 The [Override processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/override/README.md) allows overriding all modifications that are supported by input plugins and aggregator plugins:
 
@@ -49,31 +49,31 @@ Use case of this plugin encompass ensuring certain tags or naming conventions ar
 
 ### Parser
 
-Plugin ID: `processors.parser`
+Plugin ID: `parser`
 
 The [Parser processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/parser/README.md) parses defined fields containing the specified data format and creates new metrics based on the contents of the field.
 
 ### Printer
 
-Plugin ID: `processors.printer`
+Plugin ID: `printer`
 
 The [Printer processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/printer/README.md) simply prints every metric passing through it.
 
 ### Regex
 
-Plugin ID: `processors.regex`
+Plugin ID: `regex`
 
 The [Regex processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/regex/README.md) transforms  -- NEW in v.1.8 tag and field values using a regular expression (regex) pattern. If `result_key `parameter is present, it can produce new tags and fields from existing ones.
 
 ### Rename
 
-Plugin ID: `processors.rename`
+Plugin ID: `rename`
 
 The [Rename processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/rename/README.md) renames InfluxDB measurements, fields, and tags.
 
 ### Strings
 
-Plugin ID: `processors.strings`
+Plugin ID: `strings`
 
 The [Strings processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/strings/README.md) maps certain Go string functions onto InfluxDB measurement, tag, and field values. Values can be modified in place or stored in another key.
 
@@ -91,7 +91,7 @@ Note that in this implementation these are processed in the order that they appe
 
 ### TopK
 
-Plugin ID: `processors.topk`
+Plugin ID: `topk`
 
 The [TopK processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/topk/README.md) is a filter designed to get the top series over a period of time. It can be tweaked to do its top `K` computation over a period of time, so spikes can be smoothed out.
 

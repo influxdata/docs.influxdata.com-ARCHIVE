@@ -2,11 +2,91 @@
 title: Telegraf 1.8 release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
-  telegraf_1_8:
+  telegraf_1_9:
     name: Release notes
     weight: 10
     parent: About the project
 ---
+## v1.9 [unreleased]
+
+#### Release Notes
+
+- The HTTP Listener (`http_listener`) input plugin has been renamed to
+  InfluxDB Listener (`influxdb_listener`) input plugin and
+  use of the original name is deprecated.  The new name better describes the
+  intended use of the plugin as an InfluxDB relay.  For general purpose
+  transfer of metrics in any format using HTTP, InfluxData recommends using
+  HTTP Listener v2 (`http_listener_v2`) input plugin.
+
+- Input plugins are no longer limited from adding metrics when the output is
+  writing and new metrics will move into the metric buffer as needed.  This
+  will provide more robust degradation and recovery when writing to a slow
+  output at high throughput.
+
+  To avoid overconsumption when reading from queue consumers, the following
+  input plugins use the new option `max_undelivered_messages` to limit the number
+  of outstanding unwritten metrics:
+  * Apache Kafka Consumer (`kafka_consumer`)
+  * AMQP Consumer (`amqp_consumer`)
+  * MQTT Consumer (`mqtt_consumer`)
+  * NATS Consumer (`nats_consumer`)
+  * NSQ Consumer (`nsq_consumer`)
+
+#### New input plugins
+
+- [HTTP Listener v2 (`http_listener_v2`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http_listener_v2/README.md) - Contributed by @jul1u5
+- [IPVS (`ipvs`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/ipvs/README.md) - Contributed by @amoghe
+- [Jenkins (`jenkins`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/jenkins/README.md) - Contributed by @influxdata & @lpic10
+- [NGINX Plus API (`nginx_plus_api`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nginx_plus_api/README.md) - Contributed by @Bugagazavr
+- [NGINX VTS (`nginx_vts`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nginx_vts/README.md) - Contributed by @monder
+- [Wireless (`wireless`)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/wireless/README.md) - Contributed by @jamesmaidment
+
+#### New output plugins
+
+- [Stackdriver (stackdriver)](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/stackdriver/README.md) - Contributed by @jamesmaidment
+
+#### Features
+
+- General
+  - Add ability to define a custom service name when installing as a Windows service.
+  - Add new configuration for CSV column explicit type conversion.
+  - Add Telegraf version to `User-Agent` header.
+  - Add ability to specify bytes options as strings with units.
+  - Add per output `flush_interval`, `metric_buffer_limit`, and `metric_batch_size`.
+- Amazon Kinesis (`kinesis`) output plugin
+  - Use `DescribeStreamSummary` in place of `ListStreams`.
+- DNS Query (`dns_query`) input plugin
+  - Query servers in parallel.
+- Datadog (`datadog`) output plugin
+  - Add an option to specify a custom URL.
+  - Use non-allocating field and tag accessors.
+- Filecount (`filecount`) input plugin
+  - Add per-directory file count.
+- HTTP Output (`http output`) plugin
+  - Add entity-body compression.
+- Memcached (`memcached`) input plugin
+  - Collect additional statistics.
+- NSQ (`nsq`) input plugin
+  - Add TLS configuration support.
+- Ping (`ping`) input plugin
+  - Add support for IPv6.
+- Procstat (`procstat`) input plugin
+  - Add Windows service name lookup.
+- Prometheus (`prometheus`) input plugin
+  - Add scraping for Prometheus annotation in Kubernetes.
+  - Allow connecting to Prometheus using UNIX socket.
+- Strings (`strings`) processor plugin
+  - Add `replace` function.
+- VMware vSphere (`vsphere`) input plugin
+  - Add LUN to data source translation.
+
+#### Bug fixes
+
+- Remove `time_key` from the field values in JSON parser.
+- Fix input time rounding when using a custom interval.
+- Fix potential deadlock or leaked resources on restart or reload.
+- Fix outputs block inputs when batch size is reached.
+- Fix potential missing datastore metrics in VMware vSphere (`vsphere`) input plugin.
 
 ## v1.8.3 [2018-10-30]
 
@@ -15,10 +95,10 @@ menu:
 - Add DN attributes as tags in X.509 Certificate (`x509_cert`) input plugin to avoid series overwrite.
 - Prevent connection leak by closing unused connections in AMQP (`amqp`) output plugin.
 - Use default partition key when tag does not exist in Amazon Kinesis (`kinesis`) output plugin.
-- Log the correct error in JTI OpenConfig Telemetry (`jti_openconfig_telemetry`).
+- Log the correct error in JTI OpenConfig Telemetry (`jti_openconfig_telemetry`) input plugin.
 - Handle panic when IMPI Sensor (`ipmi_sensor`) input plugin gets bad input.
 - Don't add unserializable fields to Jolokia2 (`jolokia2`) input plugin.
-- Fix version check in PostgreSQL Extensible (`postgresql_extensible`) input plugin.
+- Fix version check in PostgreSQL Exstensible (`postgresql_extensible`) plugin.
 
 ## v1.8.2 [2018-10-17]
 
@@ -97,7 +177,7 @@ menu:
 - [csv](/telegraf/v1.8/data_formats/input/csv) - Contributed by @maxunt
 - [grok](/telegraf/v1.8/data_formats/input/grok/) - Contributed by @maxunt
 - [logfmt](/telegraf/v1.8/data_formats/input/logfmt/) - Contributed by @Ayrdrie & @maxunt
-- [wavefront](/telegraf/v1.8/data_formats/input/wavefront) - Contributed by @puckpuck
+- [wavefront](/telegraf/v1.8/data_formats/input/wavefront/) - Contributed by @puckpuck
 
 ### New output data formats (serializers)
 
@@ -243,7 +323,7 @@ menu:
 
 - The Cassandra (`cassandra`) input plugin has been deprecated in favor of the Jolokia2 (`jolokia2`)
   input plugin which is much more configurable and more performant.  There is
-  an [example configuration](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/jolokia2/examples) to help you
+  an [example configuration](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/jolokia2/examples) to help you
   get started.
 
 - For plugins supporting TLS, you can now specify the certificate and keys
@@ -252,24 +332,24 @@ menu:
 
 ### New input plugins
 
-- [Aurora (`aurora`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/aurora/README.md) - Contributed by @influxdata
-- [Burrow (`burrow`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/burrow/README.md) - Contributed by @arkady-emelyanov
-- [`fibaro`](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/fibaro/README.md) - Contributed by @dynek
-- [`jti_openconfig_telemetry`](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/jti_openconfig_telemetry/README.md) - Contributed by @ajhai
-- [`mcrouter`](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mcrouter/README.md) - Contributed by @cthayer
-- [NVIDIA SMI (`nvidia_smi`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/nvidia_smi/README.md) - Contributed by @jackzampolin
-- [Syslog (`syslog`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/syslog/README.md) - Contributed by @influxdata
+- [Aurora (`aurora`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/aurora/README.md) - Contributed by @influxdata
+- [Burrow (`burrow`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/burrow/README.md) - Contributed by @arkady-emelyanov
+- [`fibaro`](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/fibaro/README.md) - Contributed by @dynek
+- [`jti_openconfig_telemetry`](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/jti_openconfig_telemetry/README.md) - Contributed by @ajhai
+- [`mcrouter`](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mcrouter/README.md) - Contributed by @cthayer
+- [NVIDIA SMI (`nvidia_smi`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/nvidia_smi/README.md) - Contributed by @jackzampolin
+- [Syslog (`syslog`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/syslog/README.md) - Contributed by @influxdata
 
 ### New processor plugins
 
-- [converter](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/converter/README.md) - Contributed by @influxdata
-- [regex](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/regex/README.md) - Contributed by @44px
-- [topk](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/topk/README.md) - Contributed by @mirath
+- [converter](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/converter/README.md) - Contributed by @influxdata
+- [regex](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/regex/README.md) - Contributed by @44px
+- [topk](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/topk/README.md) - Contributed by @mirath
 
 ### New output plugins
 
-- [HTTP (`http`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/http/README.md) - Contributed by @Dark0096
-- [Application Insights (`application_insights`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights/README.md): Contribute by @karolz-ms
+- [HTTP (`http`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/http/README.md) - Contributed by @Dark0096
+- [Application Insights (`application_insights`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/application_insights/README.md): Contribute by @karolz-ms
 
 ### Features
 
@@ -372,7 +452,7 @@ menu:
 
   To address this, we have introduced a new `metric_version` option to control
   enabling the new format.  
-  For in depth recommendations on upgrading, see [Metric version](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mysql#metric-version) in the MySQL input plugin documentation.
+  For in depth recommendations on upgrading, see [Metric version](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mysql#metric-version) in the MySQL input plugin documentation.
 
   You are encouraged to migrate to the new model when possible as the old version
   is deprecated and will be removed in a future version.
@@ -395,13 +475,13 @@ menu:
 
 ### New input plugins
 
-- [HTTP (`http`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/http/README.md) - Thanks to @grange74
-- [Ipset (`ipset`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/ipset/README.md) - Thanks to @sajoupa
-- [NATS Server Monitoring (`nats`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/nats/README.md) - Thanks to @mjs and @levex
+- [HTTP (`http`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/http/README.md) - Thanks to @grange74
+- [Ipset (`ipset`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/ipset/README.md) - Thanks to @sajoupa
+- [NATS Server Monitoring (`nats`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/nats/README.md) - Thanks to @mjs and @levex
 
 ### New processor plugins
 
-- [Override (`override`) processor plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/override/README.md) - Thanks to @KarstenSchnitter
+- [Override (`override`) processor plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/override/README.md) - Thanks to @KarstenSchnitter
 
 ### New parsers
 
@@ -529,7 +609,7 @@ menu:
 - [BasicStats (basicstats)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/aggregators/basicstats/README.md) - Thanks to @toni-moreno
 
 #### Output plugins
-- [CrateDB (cratedb)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/cratedb) - Thanks to @felixge
+- [CrateDB (cratedb)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/cratedb) - Thanks to @felixge
 - [Wavefront (wavefront)](https://github.com/influxdata/telegraf/tree/release-1.5/plugins/outputs/wavefront/README.md) - Thanks to @puckpuck
 
 
@@ -814,13 +894,13 @@ menu:
 
 #### Changes to the Windows ping plugin
 
-Users of the windows [ping plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/ping) will need to drop or migrate their measurements to continue using the plugin.
+Users of the windows [ping plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/ping) will need to drop or migrate their measurements to continue using the plugin.
 The reason for this is that the windows plugin was outputting a different type than the linux plugin.
 This made it impossible to use the `ping` plugin for both windows and linux machines.
 
 #### Changes to the Ceph plugin
 
-For the [Ceph plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/ceph), the `ceph_pgmap_state` metric content has been modified to use a unique field `count`, with each state expressed as a `state` tag.
+For the [Ceph plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/ceph), the `ceph_pgmap_state` metric content has been modified to use a unique field `count`, with each state expressed as a `state` tag.
 
 Telegraf < 1.3:
 
@@ -840,60 +920,60 @@ count           3           state=active+clean+scrubbing
 
 #### Rewritten Riemann plugin
 
-The [Riemann output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/riemann) has been rewritten
-and the [previous riemann plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/riemann_legacy) is _incompatible_ with the new one.
+The [Riemann output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann) has been rewritten
+and the [previous riemann plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann_legacy) is _incompatible_ with the new one.
 The reasons for this are outlined in issue [#1878](https://github.com/influxdata/telegraf/issues/1878).
 The previous Riemann output will still be available using `outputs.riemann_legacy` if needed, but that will eventually be deprecated.
 It is highly recommended that all users migrate to the new Riemann output plugin.
 
 #### New Socket Listener and Socket Writer plugins
 
-Generic [Socket Listener](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/socket_listener) and [Socket Writer](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/socket_writer) plugins have been implemented for receiving and sending UDP, TCP, unix, & unix-datagram data.
-These plugins will replace [udp_listener](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/udp_listener) and [tcp_listener](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tcp_listener), which are still available but will be deprecated eventually.
+Generic [Socket Listener](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/socket_listener) and [Socket Writer](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/socket_writer) plugins have been implemented for receiving and sending UDP, TCP, unix, & unix-datagram data.
+These plugins will replace [udp_listener](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/udp_listener) and [tcp_listener](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/tcp_listener), which are still available but will be deprecated eventually.
 
 ### Features
 
-- Add SASL options for the [Kafka output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/kafka).
-- Add SSL configuration for [HAproxy input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/haproxy).
-- Add the [Interrupts input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/interrupts).
-- Add generic [Socket Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/socket_listener) and [socket writer output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/socket_writer).
-- Extend the [HTTP Response input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/http_response) to support searching for a substring in response. Return 1 if found, else 0.
-- Add userstats to the [MySQL input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mysql).
-- Add more InnoDB metric to the [MySQL input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mysql).
-- For the [Ceph input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/ceph), `ceph_pgmap_state` metric now uses a single field `count`, with PG state published as `state` tag.
-- Use own client for improved through-put and less allocations in the [InfluxDB output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/influxdb).
+- Add SASL options for the [Kafka output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/kafka).
+- Add SSL configuration for [HAproxy input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/haproxy).
+- Add the [Interrupts input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/interrupts).
+- Add generic [Socket Listener input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/socket_listener) and [socket writer output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/socket_writer).
+- Extend the [HTTP Response input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/http_response) to support searching for a substring in response. Return 1 if found, else 0.
+- Add userstats to the [MySQL input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mysql).
+- Add more InnoDB metric to the [MySQL input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mysql).
+- For the [Ceph input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/ceph), `ceph_pgmap_state` metric now uses a single field `count`, with PG state published as `state` tag.
+- Use own client for improved through-put and less allocations in the [InfluxDB output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb).
 - Keep -config-directory when running as Windows service.
-- Rewrite the [Riemann output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/riemann).
+- Rewrite the [Riemann output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann).
 - Add support for name templates and udev tags to the [DiskIO input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/system/DISK_README.md#diskio-input-plugin).
-- Add integer metrics for [Consul](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/consul) check health state.
-- Add lock option to the [IPtables input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/iptables).
-- Support [ipmi_sensor input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/ipmi_sensor) querying local ipmi sensors.
+- Add integer metrics for [Consul](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/consul) check health state.
+- Add lock option to the [IPtables input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/iptables).
+- Support [ipmi_sensor input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/ipmi_sensor) querying local ipmi sensors.
 - Increment gather_errors for all errors emitted by inputs.
 - Use the official docker SDK.
-- Add [AMQP consumer input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/amqp_consumer).
+- Add [AMQP consumer input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/amqp_consumer).
 - Add pprof tool.
-- Support DEAD(X) state in the [system input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/system).
-- Add support for [MongoDB](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/mongodb) client certificates.
-- Support adding [SNMP](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/snmp) table indexes as tags.
-- Add [Elasticsearch 5.x output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/elasticsearch).
+- Support DEAD(X) state in the [system input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/system).
+- Add support for [MongoDB](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/mongodb) client certificates.
+- Support adding [SNMP](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/snmp) table indexes as tags.
+- Add [Elasticsearch 5.x output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/elasticsearch).
 - Add json timestamp units configurability.
 - Add support for Linux sysctl-fs metrics.
 - Support to include/exclude docker container labels as tags.
-- Add [DMCache input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/dmcache).
-- Add support for precision in [HTTP Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/http_listener).
-- Add `message_len_max` option to the [Kafka consumer input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kafka_consumer).
+- Add [DMCache input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/dmcache).
+- Add support for precision in [HTTP Listener input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/http_listener).
+- Add `message_len_max` option to the [Kafka consumer input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/kafka_consumer).
 - Add [collectd parser](/telegraf/v1.3/concepts/data_formats_input/#collectd).
 - Simplify plugin testing without outputs.
-- Check signature in the [GitHub webhook input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/webhooks/github).
-- Add [papertrail](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/webhooks/papertrail) support to webhooks.
-- Change [jolokia input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/jolokia) to use bulk requests.
+- Check signature in the [GitHub webhook input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/webhooks/github).
+- Add [papertrail](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/webhooks/papertrail) support to webhooks.
+- Change [jolokia input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/jolokia) to use bulk requests.
 - Add [DiskIO input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/system/DISK_README.md#diskio-input-plugin) for Darwin.
-- Add use_random_partitionkey option to the [Kinesis output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/kinesis).
-- Add tcp keep-alive to [Socket Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/socket_listener) and [Socket Writer output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/socket_writer).
-- Add [Kapacitor input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kapacitor).
+- Add use_random_partitionkey option to the [Kinesis output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/kinesis).
+- Add tcp keep-alive to [Socket Listener input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/socket_listener) and [Socket Writer output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/socket_writer).
+- Add [Kapacitor input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/kapacitor).
 - Use Go (golang) 1.8.1.
-- Add documentation for the [RabbitMQ input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/rabbitmq).
-- Make the [Logparser input plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/logparser) check for newly-created files.
+- Add documentation for the [RabbitMQ input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/rabbitmq).
+- Make the [Logparser input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/logparser) check for newly-created files.
 
 ### Bugfixes
 
@@ -1123,7 +1203,7 @@ continue sending logs to /var/log/telegraf/telegraf.log.
 ### Release Notes
 
 **Breaking Change** The SNMP plugin is being deprecated in it's current form.
-There is a [new SNMP plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/snmp)
+There is a [new SNMP plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/snmp)
 which fixes many of the issues and confusions
 of its predecessor. For users wanting to continue to use the deprecated SNMP
 plugin, you will need to change your config file from `[[inputs.snmp]]` to
