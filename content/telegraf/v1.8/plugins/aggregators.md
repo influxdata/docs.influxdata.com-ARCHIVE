@@ -18,13 +18,13 @@ Aggregators emit new aggregate metrics based on the metrics collected by the inp
 
 ### BasicStats
 
-Plugin ID: `aggregators.basicstats`
+Plugin ID: `basicstats`
 
 The [BasicStats aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/aggregators/basicstats/README.md) gives count, max, min, mean, s2(variance), and stdev for a set of values, emitting the aggregate every period seconds.
 
 ### Histogram
 
-Plugin ID: `aggregators.histogram`
+Plugin ID: `histogram`
 
 The [Histogram aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/aggregators/histogram/README.md) creates histograms containing the counts of field values within a range.
 
@@ -34,13 +34,13 @@ Like other Telegraf aggregator plugins, the metric is emitted every period secon
 
 ### MinMax
 
-Plugin ID:`aggregators.minmax`
+Plugin ID: `minmax`
 
 The [MinMax aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/aggregators/minmax/README.md) aggregates min and max values of each field it sees, emitting the aggegrate every period seconds.
 
 ### ValueCounter
 
-Plugin ID: `aggregators.valuecounter`
+Plugin ID: `valuecounter`
 
 The [ValueCounter aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/aggregators/valuecounter/README.md) counts the occurrence of values in fields and emits the counter once every 'period' seconds.
 

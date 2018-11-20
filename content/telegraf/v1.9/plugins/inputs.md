@@ -349,7 +349,6 @@ Plugin ID: `iptables`
 
 The [IPtables input plugin](https://github.com/influxdata/telegraf/blob/1.9.0/plugins/inputs/iptables/README.md) gathers packets and bytes counters for rules within a set of table and chain from the Linux iptables firewall.
 
-
 ### IPVS
 
 Plugin ID: `ipvs`

@@ -34,7 +34,7 @@ Like other Telegraf aggregator plugins, the metric is emitted every period secon
 
 ### MinMax
 
-Plugin ID:`minmax`
+Plugin ID: `minmax`
 
 The [MinMax aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/aggregators/minmax/README.md) aggregates min and max values of each field it sees, emitting the aggegrate every period seconds.
 
