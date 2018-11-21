@@ -26,6 +26,7 @@ menu:
   To avoid overconsumption when reading from queue consumers, the following
   input plugins use the new option `max_undelivered_messages` to limit the number
   of outstanding unwritten metrics:
+  
   * Apache Kafka Consumer (`kafka_consumer`)
   * AMQP Consumer (`amqp_consumer`)
   * MQTT Consumer (`mqtt_consumer`)
