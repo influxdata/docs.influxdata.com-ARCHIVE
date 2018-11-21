@@ -5,6 +5,17 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.2 [2018-11-26]
+
+### Features
+- Add barrier node support to join node.
+- Add ability to expire groups using the barrier node.
+- Add alert/persist-topics to config
+- Add multiple field support to the change detect node.
+
+### Bugfixes
+- Fix join not catching up fast enough after a pause in the data stream.
+
 ## v1.5.1 [2018-08-06]
 
 ### Bugfixes
