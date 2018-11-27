@@ -54,7 +54,7 @@ multiply = (x, y) => x * y
 ## Functions that manipulate pipe-forwarded data
 Most Flux functions manipulate data pipe-forwarded into the function.
 In order for a custom function to process pipe-forwarded data, one of the function
-parameters must capture the input tables using the `<-` pipe expression.
+parameters must capture the input tables using the `<-` pipe-receive expression.
 
 In the example below, the `tables` parameter is assigned to the `<-` expression,
 which represents all data pipe-forwarded into the function.
