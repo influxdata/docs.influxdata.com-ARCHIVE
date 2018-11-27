@@ -13,7 +13,7 @@ menu:
 The `changeDetect` node creates a new node that only emits new points if different from the previous point.
 The `changeDetect` node can monitor multiple fields.
 
-###### Example changeDetect node
+##### Example changeDetect node
 ```js
 stream
 	|from().measurement('packets')
