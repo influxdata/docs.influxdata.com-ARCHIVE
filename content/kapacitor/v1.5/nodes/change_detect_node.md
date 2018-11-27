@@ -4,7 +4,7 @@ description: ChangeDetectNode creates a new node that only emits new points if d
 
 menu:
   kapacitor_1_5:
-    name: ChangeDetect
+    name: ChangeDetectNode
     identifier: change_detect_node
     weight: 40
     parent: nodes
