@@ -2,7 +2,7 @@
 title: InfluxDB Enterprise data node configurations
 description: Covers the InfluxDB Enterprise data node configuration settings and environmental variables
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Data node configurations
     weight: 12
     parent: Administration
@@ -58,13 +58,13 @@ Change this option to true to disable reporting.
 
 #### `bind-address = ":8088"`
 
-The TCP bind address to use for cluster-internal services, including the RPC service for [backup and restore](/enterprise_influxdb/v1.6/administration/backup-and-restore/).
+The TCP bind address to use for cluster-internal services, including the RPC service for [backup and restore](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 #### `hostname = "localhost"`
 
-The hostname of the [data node](/enterprise_influxdb/v1.6/concepts/glossary/#data-node). This must be resolvable by all other nodes in the cluster.
+The hostname of the [data node](/enterprise_influxdb/v1.7/concepts/glossary/#data-node). This must be resolvable by all other nodes in the cluster.
 
 Environment variable: `INFLUXDB_HOSTNAME`
 
@@ -166,13 +166,13 @@ Environment variable: `INFLUXDB_META_META_AUTH_ENABLED`
 #### `meta-internal-shared-secret = ""`
 
 The shared secret used by the internal API for JWT authentication between InfluxDB nodes.
-This value must be the same as the [`internal-shared-secret`](/enterprise_influxdb/v1.6/administration/config-meta-nodes/#internal-shared-secret) specified in the meta node configuration file.
+This value must be the same as the [`internal-shared-secret`](/enterprise_influxdb/v1.7/administration/config-meta-nodes/#internal-shared-secret) specified in the meta node configuration file.
 
 Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
 
 #### `retention-autocreate = true`
 
-Automatically creates a default [retention policy](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+Automatically creates a default [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
 The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
 The system targets the `autogen` RP when a write or query does not specify an RP.
 Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
@@ -195,7 +195,7 @@ Controls where the actual shard data for InfluxDB lives and how it is compacted 
 "dir" may need to be changed to a suitable place for your system.
 The defaults should work for most systems.
 
-For InfluxDB OSS, see the [OSS documentation](/influxdb/v1.6/administration/config/#data-settings-data).
+For InfluxDB OSS, see the [OSS documentation](/influxdb/v1.7/administration/config/#data-settings-data).
 
 #### `dir = "/var/lib/influxdb/data"`
 
@@ -558,7 +558,7 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 By default, InfluxDB writes system monitoring data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
 The `DEFAULT` retention policy on the `internal` database is seven days.
-To change the default seven-day retention policy, you must [create](/influxdb/v1.6/query_language/database_management/#retention-policy-management) it.
+To change the default seven-day retention policy, you must [create](/influxdb/v1.7/query_language/database_management/#retention-policy-management) it.
 
 For InfluxDB Enterprise production systems, InfluxData recommends including a dedicated InfluxDB (OSS) monitoring instance for monitoring InfluxDB Enterprise cluster nodes.
 
@@ -597,7 +597,7 @@ Environment variable: `INFLUXDB_MONITOR_REMOTE_COLLECT_INTERVAL`
 
 Controls how the HTTP endpoints are configured. These are the primary mechanism for getting data into and out of InfluxDB.
 
-For InfluxDB OSS, see the [OSS documentation](/influxdb/v1.6/administration/config/#http-endpoint-settings-http).
+For InfluxDB OSS, see the [OSS documentation](/influxdb/v1.7/administration/config/#http-endpoint-settings-http).
 
 #### `enabled = true`
 

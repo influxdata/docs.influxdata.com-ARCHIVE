@@ -1,10 +1,10 @@
 ---
 title: Step 1 - Installing an InfluxDB Enterprise cluster
 aliases:
-    - /enterprise/v1.6/quickstart_installation/cluster_installation/
+    - /enterprise/v1.7/quickstart_installation/cluster_installation/
 
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     weight: 10
     parent: QuickStart installation
 ---
@@ -16,7 +16,7 @@ InfluxDB Enterprise cluster.
 
 > The QuickStart installation process **is not** designed for use
 in a production environment.
-Follow the instructions outlined in the [Production installation](/enterprise_influxdb/v1.6/production_installation/) section
+Follow the instructions outlined in the [Production installation](/enterprise_influxdb/v1.7/production_installation/) section
 if you wish to use InfluxDB Enterprise in a production environment.
 Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
 will need to reinstall InfluxDB Enterprise with the Production Installation
@@ -27,10 +27,10 @@ process before using the product in a production environment.
 ### Setup description
 
 The QuickStart installation process sets up an InfluxDB Enterprise cluster on three servers.
-Each server is a [meta node](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node) and
-a [data node](/enterprise_influxdb/v1.6/concepts/glossary/#data-node), that is, each server
-runs both the [meta service](/enterprise_influxdb/v1.6/concepts/glossary/#meta-service)
-and the [data service](/enterprise_influxdb/v1.6/concepts/glossary/#data-service).
+Each server is a [meta node](/enterprise_influxdb/v1.7/concepts/glossary/#meta-node) and
+a [data node](/enterprise_influxdb/v1.7/concepts/glossary/#data-node), that is, each server
+runs both the [meta service](/enterprise_influxdb/v1.7/concepts/glossary/#meta-service)
+and the [data service](/enterprise_influxdb/v1.7/concepts/glossary/#data-service).
 
 ### Requirements
 
@@ -57,7 +57,7 @@ setting in the meta node and data node configuration files.
 
 InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
-data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.6/tools/api/)).
+data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.7/tools/api/)).
 
 ## Step 1: Modify the `/etc/hosts` file in each of your servers
 
@@ -107,14 +107,14 @@ Perform the following steps on all three servers.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.4-c1.6.4_amd64.deb
-sudo dpkg -i influxdb-meta_1.6.4-c1.6.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.2-c1.7.2_amd64.deb
+sudo dpkg -i influxdb-meta_1.7.2-c1.7.2_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)]
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.2_c1.7.2.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.7.2_c1.7.2.x86_64.rpm
 ```
 
 ### II. Edit the meta service configuration file
@@ -174,14 +174,14 @@ Perform the following steps on all three servers.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.4-c1.6.4_amd64.deb
-sudo dpkg -i influxdb-data_1.6.4-c1.6.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.2-c1.7.2_amd64.deb
+sudo dpkg -i influxdb-data_1.7.2-c1.7.2_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.4_c1.6.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.6.4_c1.6.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.2_c1.7.2.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.2_c1.7.2.x86_64.rpm
 ```
 
 ### II. Edit the data service configuration file
@@ -262,7 +262,7 @@ You should see output similar to:
 >
     influxdb  2706  0.2  7.0 571008 35376 ?        Sl   15:37   0:16 /usr/bin/influxd -config /etc/influxdb/influxdb.conf
 >
-If you do not see the expected output, the process is either not launching or is exiting prematurely. Check the [logs](/enterprise_influxdb/v1.6/administration/logs/) for error messages and verify the previous setup steps are complete.
+If you do not see the expected output, the process is either not launching or is exiting prematurely. Check the [logs](/enterprise_influxdb/v1.7/administration/logs/) for error messages and verify the previous setup steps are complete.
 
 ## Step 4: Join the nodes to the cluster
 
@@ -344,21 +344,21 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.6.4-c1.6.4
-4    quickstart-cluster-02:8088   1.6.4-c1.6.4
-6    quickstart-cluster-03:8088   1.6.4-c1.6.4
+2    quickstart-cluster-01:8088   1.7.2-c1.7.2
+4    quickstart-cluster-02:8088   1.7.2-c1.7.2
+6    quickstart-cluster-03:8088   1.7.2-c1.7.2
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.6.4-c1.6.4
-quickstart-cluster-02:8091   1.6.4-c1.6.4
-quickstart-cluster-03:8091   1.6.4-c1.6.4
+quickstart-cluster-01:8091   1.7.2-c1.7.2
+quickstart-cluster-02:8091   1.7.2-c1.7.2
+quickstart-cluster-03:8091   1.7.2-c1.7.2
 ```
 
 Your InfluxDB Enterprise cluster should have three data nodes and three meta nodes.
 If you do not see your meta or data nodes in the output, please retry
 adding them to the cluster.
 
-Once all of your nodes are joined to the cluster, move on to the [next step](/enterprise_influxdb/v1.6/quickstart_installation/chrono_install)
+Once all of your nodes are joined to the cluster, move on to the [next step](/enterprise_influxdb/v1.7/quickstart_installation/chrono_install)
 in the QuickStart installation to set up Chronograf.

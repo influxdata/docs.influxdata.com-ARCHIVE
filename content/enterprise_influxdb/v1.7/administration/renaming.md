@@ -1,9 +1,9 @@
 ---
 title: Host renaming in InfluxDB Enterprise
 aliases:
-    - /enterprise/v1.6/administration/renaming/
+    - /enterprise/v1.7/administration/renaming/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Host renaming
     weight: 50
     parent: Administration

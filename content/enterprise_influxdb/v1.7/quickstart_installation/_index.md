@@ -1,9 +1,9 @@
 ---
 title: QuickStart installation
 aliases:
-    - /enterprise/v1.6/quickstart_installation/
+    - /enterprise/v1.7/quickstart_installation/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     weight: 30
 ---
 
@@ -13,7 +13,7 @@ evaluate the product.
 
 The QuickStart installation process **is not** designed for use
 in a production environment.
-Follow the instructions outlined in the [Production installation](/enterprise_influxdb/v1.6/production_installation/) section
+Follow the instructions outlined in the [Production installation](/enterprise_influxdb/v1.7/production_installation/) section
 if you wish to use InfluxDB Enterprise in a production environment.
 Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
 will need to reinstall InfluxDB Enterprise with the Production Installation
@@ -23,5 +23,5 @@ process before using the product in a production environment.
 
 Follow the links below to get up and running with InfluxDB Enterprise.
 
-### [Step 1 - Installing an InfluxDB Enterprise cluster](/enterprise_influxdb/v1.6/quickstart_installation/cluster_installation/)
-### [Step 2 - Installing Chronograf](/enterprise_influxdb/v1.6/quickstart_installation/chrono_install/)
+### [Step 1 - Installing an InfluxDB Enterprise cluster](/enterprise_influxdb/v1.7/quickstart_installation/cluster_installation/)
+### [Step 2 - Installing Chronograf](/enterprise_influxdb/v1.7/quickstart_installation/chrono_install/)

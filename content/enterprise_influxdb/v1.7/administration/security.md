@@ -1,7 +1,7 @@
 ---
 title: Managing security in InfluxDB Enterprise
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Managing security
     weight: 60
     parent: Administration
@@ -16,7 +16,7 @@ Password protect your InfluxDB Enterprise instance to keep any unauthorized indi
 from accessing your data.
 
 Resources:
-[Set up Authentication](/influxdb/v1.6/administration/authentication_and_authorization/#set-up-authentication)
+[Set up Authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication)
 
 ## Managing users and permissions
 
@@ -24,9 +24,9 @@ Restrict access by creating individual users and assigning them relevant
 read and/or write permissions.
 
 Resources:
-[User types and privileges](/influxdb/v1.6/administration/authentication_and_authorization/#user-types-and-privileges),
-[User management commands](/influxdb/v1.6/administration/authentication_and_authorization/#user-management-commands),
-[Fine-grained authorization](/enterprise_influxdb/v1.6/guides/fine-grained-authorization/)
+[User types and privileges](/influxdb/v1.7/administration/authentication_and_authorization/#user-types-and-privileges),
+[User management commands](/influxdb/v1.7/administration/authentication_and_authorization/#user-management-commands),
+[Fine-grained authorization](/enterprise_influxdb/v1.7/guides/fine-grained-authorization/)
 
 ## Enabling HTTPS
 
@@ -35,7 +35,7 @@ some cases, HTTPS verifies the authenticity of the InfluxDB server to clients (b
 The communicatio between the meta nodes and the data nodes are also secured via HTTPS.
 
 Resources:
-[Enabling HTTPS](/enterprise_influxdb/v1.6/guides/https_setup/)
+[Enabling HTTPS](/enterprise_influxdb/v1.7/guides/https_setup/)
 
 ## Secure your Host
 
@@ -43,7 +43,7 @@ Resources:
 For InfluxDB Enterprise Data Nodes, close all ports on each host except for port `8086`.
 You can also use a proxy to port `8086`.  By default, data nodes and meta nodes communicate with each other over '8088','8089',and'8091'
 
-For InfluxDB Enterprise, [backuping and restoring](/enterprise_influxdb/v1.6/administration/backup-and-restore/) is performed from the meta nodes.
+For InfluxDB Enterprise, [backuping and restoring](/enterprise_influxdb/v1.7/administration/backup-and-restore/) is performed from the meta nodes.
 
 
 ### AWS Recommendations

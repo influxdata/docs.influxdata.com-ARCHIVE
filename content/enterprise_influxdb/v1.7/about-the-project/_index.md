@@ -5,7 +5,7 @@ menu:
     weight: 10
 ---
 
-## [Release notes/changelog](/enterprise_influxdb/v1.6/about-the-project/release-notes-changelog/)
+## [Release notes/changelog](/enterprise_influxdb/v1.7/about-the-project/release-notes-changelog/)
 
 
 
@@ -22,7 +22,7 @@ Third party suppliers make no representation nor warranty with respect to such t
 Third party suppliers assume no liability for any claim that might arise with respect to such third party software, nor for a
 customer’s use of or inability to use the third party software.
 
-In addition to [third party software incorporated in InfluxDB](http://docs.influxdata.com/influxdb/v1.6/about_the_project/#third_party), InfluxDB Enterprise incorporates the following additional third party software:
+In addition to [third party software incorporated in InfluxDB](http://docs.influxdata.com/influxdb/v1.7/about_the_project/#third_party), InfluxDB Enterprise incorporates the following additional third party software:
 
 | Third Party / Open Source Software - Description | License Type                             |
 | ---------------------------------------- | ---------------------------------------- |

@@ -1,9 +1,9 @@
 ---
 title: Backing up and restoring in InfluxDB Enterprise
 aliases:
-    - /enterprise/v1.6/guides/backup-and-restore/
+    - /enterprise/v1.7/guides/backup-and-restore/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Backing up and restoring
     weight: 30
     parent: Administration
@@ -18,7 +18,7 @@ The primary use cases for backup and restore are:
 * Restoring clusters to a consistent state
 
 InfluxDB Enterprise supports backing up and restoring data in a cluster, a single database, a single database and retention policy, and
-single [shard](/influxdb/v1.6/concepts/glossary/#shard).
+single [shard](/influxdb/v1.7/concepts/glossary/#shard).
 
 > **Note:** You can use the [new `backup` and `restore` utilities in InfluxDB OSS 1.5](/influxdb/v1.5/administration/backup_and_restore/) to:
 > * Restore InfluxDB Enterprise 1.5 backup files to InfluxDB OSS 1.5.
@@ -26,7 +26,7 @@ single [shard](/influxdb/v1.6/concepts/glossary/#shard).
 
 ## Backup
 
-A backup creates a copy of the [metastore](/influxdb/v1.6/concepts/glossary/#metastore) and [shard](/influxdb/v1.6/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
+A backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#metastore) and [shard](/influxdb/v1.7/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
 All backups also include a manifest, a JSON file describing what was collected during the backup.
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
@@ -49,7 +49,7 @@ influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Backup options:
@@ -147,19 +147,19 @@ $ ls ./telegrafbackup
 ## Restore
 
 Restore a backup to an existing cluster or a new cluster.
-By default, a restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.6/concepts/glossary/#replication-factor).
+By default, a restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
 An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
 Restore supports both `-full` backups and incremental backups; the syntax for
 a restore differs depending on the backup type.
 
 > #### Restores from an existing cluster to a new cluster
 Restores from an existing cluster to a new cluster restore the existing cluster's
-[users](/influxdb/v1.6/concepts/glossary/#user), roles,
-[databases](/influxdb/v1.6/concepts/glossary/#database), and
-[continuous queries](/influxdb/v1.6/concepts/glossary/#continuous-query-cq) to
+[users](/influxdb/v1.7/concepts/glossary/#user), roles,
+[databases](/influxdb/v1.7/concepts/glossary/#database), and
+[continuous queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq) to
 the new cluster.
 >
-They do not restore Kapacitor [subscriptions](/influxdb/v1.6/concepts/glossary/#subscription).
+They do not restore Kapacitor [subscriptions](/influxdb/v1.7/concepts/glossary/#subscription).
 In addition, restores to a new cluster drop any data in the new cluster's
 `_internal` database and begin writing to that database anew.
 The restore does not write the existing cluster's `_internal` database to
@@ -180,7 +180,7 @@ The system automatically drops the `_internal` database when it performs a compl
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Restore options:
@@ -210,7 +210,7 @@ complete restore.
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Restore options:
@@ -302,7 +302,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 56.623615ms, transferred 588800 bytes
 ```
 
-Then, in the [`influx` client](/influxdb/v1.6/tools/shell/), use an [`INTO` query](/influxdb/v1.6/query_language/data_exploration/#the-into-clause) to copy the data from the new database into the existing `telegraf` database:
+Then, in the [`influx` client](/influxdb/v1.7/tools/shell/), use an [`INTO` query](/influxdb/v1.7/query_language/data_exploration/#the-into-clause) to copy the data from the new database into the existing `telegraf` database:
 
 ```
 $ influx

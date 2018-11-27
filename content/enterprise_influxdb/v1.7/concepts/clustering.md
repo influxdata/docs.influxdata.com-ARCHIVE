@@ -1,9 +1,9 @@
 ---
 title: Clustering in InfluxDB Enterprise
 aliases:
-    - /enterprise/v1.6/concepts/clustering/
+    - /enterprise/v1.7/concepts/clustering/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Clustering
     weight: 10
     parent: Concepts

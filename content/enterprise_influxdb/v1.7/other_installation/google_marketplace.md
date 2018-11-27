@@ -2,7 +2,7 @@
 title: Getting started on Google Cloud Platform Marketplace
 
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Google Cloud Platform Marketplace
     weight: 10
     parent: Other installation options
@@ -20,7 +20,7 @@ This guide requires the following:
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
 - Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
 
-To deploy InfluxDB Enterprise on platforms other than GCP, please see [InfluxDB Enterprise installation options](/enterprise_influxdb/v1.6/introduction/installation_guidelines).
+To deploy InfluxDB Enterprise on platforms other than GCP, see [InfluxDB Enterprise installation options](/enterprise_influxdb/v1.7/introduction/installation_guidelines).
 
 ## Deploying a cluster
 

@@ -1,12 +1,12 @@
 ---
 title: Installation options (⏰ Please Read!)
 aliases:
-  - /enterprise_influxdb/v1.6/introduction/meta_node_installation/
-  - /enterprise_influxdb/v1.6/introduction/data_node_installation/
+  - /enterprise_influxdb/v1.7/introduction/meta_node_installation/
+  - /enterprise_influxdb/v1.7/introduction/data_node_installation/
   - /chronograf/latest/introduction/installation
-  - /enterprise/v1.6/introduction/installation_guidelines/
+  - /enterprise/v1.7/introduction/installation_guidelines/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     weight: 20
     parent: Introduction
 ---
@@ -17,19 +17,19 @@ Please review the sections below before you begin working with InfluxDB Enterpri
 
 Two options are described for installing InfluxDB Enterprise.
 
-The [QuickStart installation](/enterprise_influxdb/v1.6/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
+The [QuickStart installation](/enterprise_influxdb/v1.7/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
 The QuickStart installation process **is not** intended for use
 in a production environment.
 
-The [Production installation](/enterprise_influxdb/v1.6/production_installation/) process is recommended for users intending to deploy the InfluxDB Enterprise installation in a production environment.
+The [Production installation](/enterprise_influxdb/v1.7/production_installation/) process is recommended for users intending to deploy the InfluxDB Enterprise installation in a production environment.
 
 > **Note:** If you install InfluxDB Enterprise with the QuickStart installation process you will need to reinstall InfluxDB Enterprise with the Production installation process before using the product in a production environment.
 
-There are [other installation options](/enterprise_influxdb/v1.6/other_installation/) available to easily install an InfluxDB Enterprise cluster in select environments.
+There are [other installation options](/enterprise_influxdb/v1.7/other_installation/) available to easily install an InfluxDB Enterprise cluster in select environments.
 
 ## Requirements for InfluxDB Enterprise clusters
 
-Review [Clustering Guide](/enterprise_influxdb/v1.6/concepts/clustering/)
+Review [Clustering Guide](/enterprise_influxdb/v1.7/concepts/clustering/)
 for an overview of the architecture and concepts in an InfluxDB Enterprise Cluster
 and the [Hardware sizing guide](http://docs.influxdata.com/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster) for information on provisioning the correct servers.
 

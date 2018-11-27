@@ -2,7 +2,7 @@
 title: Logging and tracing in InfluxDB Enterprise
 description: Covers logging locations, redirecting HTTP request logging, structured logging, and tracing.
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Logging and tracing
     weight: 40
     parent: Administration
@@ -117,16 +117,16 @@ You can view the file [here](https://github.com/influxdb/influxdb/blob/master/sc
 
 InfluxDB 1.5 introduces the option to log HTTP request traffic separately from the other InfluxDB log output. When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
 
-See [Redirecting HTTP request logging](/influxdb/v1.6/administration/logs/#redirecting-http-request-logging) in the InfluxDB OSS documentation.
+See [Redirecting HTTP request logging](/influxdb/v1.7/administration/logs/#redirecting-http-request-logging) in the InfluxDB OSS documentation.
 
 ## Structured logging
 
 With InfluxDB 1.5, structured logging is supported and enable machine-readable and more developer-friendly log output formats. The two new structured log formats, `logfmt` and `json`, provide easier filtering and searching with external tools and simplifies integration of InfluxDB logs  with Splunk, Papertrail, Elasticsearch, and other third party tools.
 
-See [Structured logging](/influxdb/v1.6/administration/logs/#structured-logging) in the InfluxDB OSS documentation.
+See [Structured logging](/influxdb/v1.7/administration/logs/#structured-logging) in the InfluxDB OSS documentation.
 
 ## Tracing
 
 Logging has been enhanced, starting in InfluxDB 1.5, to provide tracing of important InfluxDB operations. Tracing is useful for error reporting and discovering performance bottlenecks.
 
-See [Tracing](/influxdb/v1.6/administration/logs/#tracing) in the InfluxDB OSS documentation.
+See [Tracing](/influxdb/v1.7/administration/logs/#tracing) in the InfluxDB OSS documentation.

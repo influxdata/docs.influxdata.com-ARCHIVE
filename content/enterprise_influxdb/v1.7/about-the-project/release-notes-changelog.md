@@ -1,14 +1,29 @@
 ---
-title: InfluxDB Enterprise 1.6 release notes
+title: InfluxDB Enterprise 1.7 release notes
 
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     weight: 10
     parent: About the project
 ---
+## v.1.7.2 [2018-11-??]
+
+This release builds off of the InfluxDB OSS 1.7.0 through 1.7.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+
+* Flux 0.7 support.
+
+### Bug fixes
+
+* Meta node Raft port TLS
+* Implement meta node to meta node TLS on Raft port
+* All `_series` files are read if they exist: `inmem` and `tsi1`
+
+
 ## v1.6.4 [2018-10-23]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Breaking changes
 
@@ -20,7 +35,7 @@ If it is not set, an error will be logged and `influxd-meta` will not start.
 
 #### Review production installation configurations
 
-The [Production Installation](/enterprise_influxdb/v1.6/production_installation/)
+The [Production Installation](/enterprise_influxdb/v1.7/production_installation/)
 documentation has been updated to fix errors in configuration settings, including changing `shared-secret` to `internal-shared-secret` and adding missing steps for configuration settings of data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that the configuration settings properly enable JWT authentication for intra-node communication.
 
 The following summarizes the expected settings for proper configuration of JWT authentication for intra-node communication:
@@ -65,7 +80,7 @@ The following summarizes the expected settings for proper configuration of JWT a
 
 ## v1.6.2 [08-27-2018]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Features
 
@@ -114,12 +129,12 @@ This release builds off of the InfluxDB OSS 1.5.2 release. Please see the [Influ
 ## v1.5.1 [2018-03-20]
 
 This release builds off of the InfluxDB OSS 1.5.1 release. There are no Enterprise-specific changes.
-Please see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+Please see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ## v1.5.0 [2018-03-06]
 
 > ***Note:*** This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release
-> notes](https://docs.influxdata.com/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+> notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 For highlights of the InfluxDB 1.5 release, see [What's new in InfluxDB 1.5](/influxdb/v1.5/about_the_project/whats_new/).
 

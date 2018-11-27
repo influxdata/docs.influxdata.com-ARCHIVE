@@ -23,7 +23,7 @@ To use LDAP with an InfluxDB Enterprise cluster, you need to make the following 
 
 To enable LDAP support on your data nodes, make the following changes to the InfluxDB Enterprise configuration:
 
-* Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.6/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
+* Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
 * Provide a username and password as HTTP query parameters
   - `u`: username
   - `p`: password
@@ -37,7 +37,7 @@ To enable LDAP support on your data nodes, make the following changes to the Inf
 
 To enable LDAP support in InfluxDB Enterprise, make the following configuration settings on your meta nodes:
 
-* Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.6/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
+* Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
 * Provide a username and password as HTTP query parameters
   - `u`: username
   - `p`: password

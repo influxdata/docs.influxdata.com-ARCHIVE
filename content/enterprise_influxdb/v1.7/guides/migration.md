@@ -1,9 +1,9 @@
 ---
 title: Migrating InfluxDB OSS instances to InfluxDB Enterprise clusters
 aliases:
-    - /enterprise/v1.6/guides/migration/
+    - /enterprise/v1.7/guides/migration/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Migrating InfluxDB OSS to clusters
     weight: 10
     parent: Guides
@@ -15,7 +15,7 @@ instance into an InfluxDB Enterprise cluster.
 <dt>
 The process assumes that you already have a fully configured InfluxDB Enterprise cluster
 of three or more meta nodes and zero or more data nodes. If you need instructions for meta node installation:
-- [Production installation of meta nodes](/enterprise_influxdb/v1.6/production_installation/meta_node_installation/)
+- [Production installation of meta nodes](/enterprise_influxdb/v1.7/production_installation/meta_node_installation/)
 </dt>
 
 Please note that this migration process:
@@ -190,11 +190,11 @@ influxd-ctl show
 
 ### 2. Rebalance the cluster
 
-Increase the [replication factor](/enterprise_influxdb/v1.6/concepts/glossary/#replication-factor)
+Increase the [replication factor](/enterprise_influxdb/v1.7/concepts/glossary/#replication-factor)
 on all existing retention polices to the number of data nodes in your cluster.
-You can do this with [ALTER RETENTION POLICY](/influxdb/v1.6/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
+You can do this with [ALTER RETENTION POLICY](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
 
-Next, [rebalance](/enterprise_influxdb/v1.6/guides/rebalance/) your cluster manually to meet the desired
+Next, [rebalance](/enterprise_influxdb/v1.7/guides/rebalance/) your cluster manually to meet the desired
 replication factor for existing shards.
 
 Finally, if you were using [Chronograf](/chronograf/latest/), you can

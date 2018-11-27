@@ -2,7 +2,7 @@
 title: Replacing InfluxDB Enterprise cluster meta nodes and data nodes
 
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Replacing cluster nodes
     weight: 10
     parent: Guides
@@ -14,9 +14,9 @@ Nodes in an InfluxDB Enterprise cluster may need to be replaced at some point du
 This guide outlines processes for replacing both meta nodes and data nodes in an InfluxDB Enterprise cluster.
 
 ## Concepts
-Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.6/concepts/glossary/#shard) among nodes in the cluster.
+Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.7/concepts/glossary/#shard) among nodes in the cluster.
 They hold information about which data nodes own which shards; information on which the
-[anti-entropy](/enterprise_influxdb/v1.6/administration/anti-entropy/) (AE) process depends.
+[anti-entropy](/enterprise_influxdb/v1.7/administration/anti-entropy/) (AE) process depends.
 
 Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
 
@@ -71,7 +71,7 @@ Often in this scenario, rather than replacing the entire host, you just need to 
 Host information remains the same, but once started again, the `influxd` process doesn't know
 to communicate with the meta nodes so the AE process can't start the shard-sync process.
 
-To resolve this, log in to a meta node and use the [`influxd-ctl update-data`](/enterprise_influxdb/v1.6/administration/cluster-commands/#update-data) command
+To resolve this, log in to a meta node and use the [`influxd-ctl update-data`](/enterprise_influxdb/v1.7/administration/cluster-commands/#update-data) command
 to [update the failed data node to itself](#2-replace-the-old-data-node-with-the-new-data-node).
 
 ```bash
@@ -89,7 +89,7 @@ shards in the same shard group.
 
 ## Replacing meta nodes in an InfluxDB Enterprise cluster
 
-[Meta nodes](/enterprise_influxdb/v1.6/concepts/clustering/#meta-nodes) together form a [Raft](https://raft.github.io/) cluster in which nodes elect a leader through consensus vote.
+[Meta nodes](/enterprise_influxdb/v1.7/concepts/clustering/#meta-nodes) together form a [Raft](https://raft.github.io/) cluster in which nodes elect a leader through consensus vote.
 The leader oversees the management of the meta cluster, so it is important to replace non-leader nodes before the leader node.
 The process for replacing meta nodes is as follows:
 
@@ -135,7 +135,7 @@ Identify the `leader` of the cluster. When replacing nodes in a cluster, non-lea
 ### 2. Replace all non-leader nodes
 
 #### 2.1. Provision a new meta node
-[Provision and start a new meta node](/enterprise_influxdb/v1.6/production_installation/meta_node_installation/), but **do not** add it to the cluster yet.
+[Provision and start a new meta node](/enterprise_influxdb/v1.7/production_installation/meta_node_installation/), but **do not** add it to the cluster yet.
 For this guide, the new meta node's hostname will be `enterprise-meta-04`.
 
 #### 2.2. Remove the non-leader meta node
@@ -247,7 +247,7 @@ The minimum number of meta nodes you should have in your cluster is 3.
 
 ## Replacing data nodes in an InfluxDB Enterprise cluster
 
-[Data nodes](/enterprise_influxdb/v1.6/concepts/clustering/#data-nodes) house all raw time series data and metadata.
+[Data nodes](/enterprise_influxdb/v1.7/concepts/clustering/#data-nodes) house all raw time series data and metadata.
 The process of replacing data nodes is as follows:
 
 1. [Provision a new data node](#1-provision-a-new-data-node)
@@ -257,7 +257,7 @@ The process of replacing data nodes is as follows:
 
 ### 1. Provision a new data node
 
-[Provision and start a new data node](/enterprise_influxdb/v1.6/production_installation/data_node_installation/), but **do not** add it to your cluster yet.
+[Provision and start a new data node](/enterprise_influxdb/v1.7/production_installation/data_node_installation/), but **do not** add it to your cluster yet.
 
 ### 2. Replace the old data node with the new data node
 Log into any of your cluster's meta nodes and use `influxd-ctl update-data` to replace the old data node with the new data node:
@@ -312,7 +312,7 @@ ID  Database   Retention Policy  Desired Replicas  Shard Group  Start           
 6   foo        autogen           2                 4            2018-03-19T00:00:00Z  2018-03-26T00:00:00Z                        [{5 enterprise-data-02:8088} {4 enterprise-data-03:8088}]
 ```
 
-Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/config-data-nodes#check-interval-10m),
+Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influxdb/v1.7/administration/config-data-nodes#check-interval-10m),
 the AE service will begin copying shards from other shard owners to the new node.
 The time it takes for copying to complete is determined by the number of shards copied and how much data is stored in each.
 
@@ -331,7 +331,7 @@ enterprise-data-02:8088  enterprise-data-03:8088  telegraf  autogen  3        11
 ```
 
 > **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same shard group before replacing the other nodes.
-View the [Anti-entropy](/enterprise_influxdb/v1.6/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
+View the [Anti-entropy](/enterprise_influxdb/v1.7/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
 
 
 ## Troubleshooting

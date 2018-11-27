@@ -1,9 +1,9 @@
 ---
 title: Setup of SMTP server for InfluxDB Enterprise
 aliases:
-    - /enterprise/v1.6/guides/smtp-server/
+    - /enterprise/v1.7/guides/smtp-server/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: SMTP server setup
     weight: 20
     parent: Guides

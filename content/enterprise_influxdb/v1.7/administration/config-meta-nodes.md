@@ -37,7 +37,7 @@ menu:
 
     #### `hostname = ""`
 
-    The hostname of the [meta node](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node).
+    The hostname of the [meta node](/enterprise_influxdb/v1.7/concepts/glossary/#meta-node).
     This must be resolvable and reachable by all other members of the cluster.
 
     Environment variable: `INFLUXDB_HOSTNAME`
@@ -93,7 +93,7 @@ menu:
 
     ####  `dir = "/var/lib/influxdb/meta"`
 
-    The location of the meta directory which stores the [metastore](/influxdb/v1.6/concepts/glossary/#metastore).
+    The location of the meta directory which stores the [metastore](/influxdb/v1.7/concepts/glossary/#metastore).
 
     Environment variable: `INFLUXDB_META_DIR`
 
@@ -111,13 +111,13 @@ menu:
     Meta nodes support JWT authentication and Basic authentication.
     For JWT authentication, also see the [`shared-secret`](#shared-secret) and [`internal-shared-secret`](#internal-shared-secret) configuration options.
 
-    If set to `true`, also set the [`meta-auth-enabled` option](/enterprise_influxdb/v1.6/administration/config-data-nodes#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
+    If set to `true`, also set the [`meta-auth-enabled` option](/enterprise_influxdb/v1.7/administration/config-data-nodes#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
 
     Environment variable: `INFLUXDB_META_AUTH_ENABLED`
 
     ####  `http-bind-address = ":8091"`
 
-    The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.6/administration/cluster-commands/) and by data nodes to access the meta APIs.
+    The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) and by data nodes to access the meta APIs.
     For simplicity we recommend using the same port on all meta nodes, but this
     is not necessary.
 
@@ -167,7 +167,7 @@ menu:
 
     #### `retention-autocreate = true`
 
-    Automatically creates a default [retention policy](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+    Automatically creates a default [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
     The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
     The system targets the `autogen` RP when a write or query does not specify an RP.
     Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
@@ -240,7 +240,7 @@ menu:
     Leases automatically expire after the `lease-duration` is met.
 
     Leases ensure that only one data node is running something at a given time.
-    For example, [Continuous Queries](/influxdb/v1.6/concepts/glossary/#continuous-query-cq)
+    For example, [Continuous Queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq)
     (CQ) use a lease so that all data nodes aren't running the same CQs at once.
 
     Environment variable: `INFLUXDB_META_LEASE_DURATION`
@@ -252,7 +252,7 @@ menu:
     Environment variable: `INFLUXDB_META_SHARED_SECRET`
 
     #### `internal-shared-secret = ""`
-    The shared secret used by the internal API for JWT authentication. Set this to a long pass phrase. This value must be the same as the value of the [`[meta] meta-internal-shared-secret`](/enterprise_influxdb/v1.6/administration/config-data-nodes#meta-internal-shared-secret) in the data node configuration file.
+    The shared secret used by the internal API for JWT authentication. Set this to a long pass phrase. This value must be the same as the value of the [`[meta] meta-internal-shared-secret`](/enterprise_influxdb/v1.7/administration/config-data-nodes#meta-internal-shared-secret) in the data node configuration file.
     Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
 
     Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`

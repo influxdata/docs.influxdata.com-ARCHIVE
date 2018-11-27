@@ -1,9 +1,9 @@
 ---
 title: Anti-entropy service in InfluxDB Enterprise
 aliases:
-  - /enterprise_influxdb/v1.6/guides/anti-entropy/
+  - /enterprise_influxdb/v1.7/guides/anti-entropy/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     menu: Anti-entropy service
     weight: 40
     parent: Administration
@@ -32,7 +32,7 @@ out-of-sync shards for repair.
 In the repair process, AE will sync the necessary updates from other shards
 in the same shard group.
 
-By default, the service checks every 5 minutes, as configured in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/config-data-nodes/#check-interval-5m) setting.
+By default, the service checks every 5 minutes, as configured in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.7/administration/config-data-nodes/#check-interval-5m) setting.
 
 The anti-entropy service can only address missing or inconsistent shards when
 there is at least one copy of the shard available.
@@ -149,7 +149,7 @@ at which point the repair is finished.
 The AE service does its best to avoid hot shards (shards that are currently receiving writes)
 because they change quickly.
 While write replication between shard owner nodes (with a
-[replication factor](/influxdb/v1.6/concepts/glossary/#replication-factor)
+[replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor)
 greater than 1) typically happens in milliseconds, this slight difference is
 still enough to cause the appearance of entropy where there is none.
 AE is designed and intended to repair cold shards.
@@ -168,7 +168,7 @@ until it either shows as being in the queue, being repaired, or no longer in the
 
 ## Configuration
 
-Anti-entropy configuration options are available in [`[anti-entropy]`](/enterprise_influxdb/v1.6/administration/config-data-nodes#anti-entropy) section of your `influxdb.conf`.
+Anti-entropy configuration options are available in [`[anti-entropy]`](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy) section of your `influxdb.conf`.
 
 ## Command line tools for managing entropy
 The `influxd-ctl entropy` command enables you to manage entropy among shards in a cluster.
@@ -210,7 +210,7 @@ Once a repair has started, requests to cancel it are ignored.
 
 > Stopping a entropy repair for a **missing** shard operation is not currently supported.
 > It may be possible to stop repairs for missing shards with the
-> [`influxd-ctl kill-copy-shard`](/enterprise_influxdb/v1.6/administration/cluster-commands/#kill-copy-shard) command.
+> [`influxd-ctl kill-copy-shard`](/enterprise_influxdb/v1.7/administration/cluster-commands/#kill-copy-shard) command.
 
 
 ## Scenarios
@@ -263,7 +263,7 @@ Queued Shards: [21179 25165]
 
 If a data node suddenly disappears due to a catastrophic hardware failure or for any other reason, as soon as a new data node is online, the anti-entropy service will copy the correct shards to the new replacement node. The time it takes for the copying to complete is determined by the number of shards to be copied and how much data is stored in each.
 
-_View the [Replacing Data Nodes](/enterprise_influxdb/v1.6/guides/replacing-nodes/#replacing-data-nodes-in-an-influxdb-enterprise-cluster) documentation for instructions on replacing data nodes in your InfluxDB Enterprise cluster._
+_View the [Replacing Data Nodes](/enterprise_influxdb/v1.7/guides/replacing-nodes/#replacing-data-nodes-in-an-influxdb-enterprise-cluster) documentation for instructions on replacing data nodes in your InfluxDB Enterprise cluster._
 
 ### Replacing a machine that is running a data node
 
@@ -279,7 +279,7 @@ remaining replicas in the cluster.
 In rare cases, the currently active shard, or the shard to which new data is
 currently being written, may find itself with inconsistent data.
 Because the AE process can't write to hot shards, you must stop writes to the new
-shard using the [`influxd-ctl truncate-shards` command](/enterprise_influxdb/v1.6/administration/cluster-commands/#truncate-shards),
+shard using the [`influxd-ctl truncate-shards` command](/enterprise_influxdb/v1.7/administration/cluster-commands/#truncate-shards),
 then add the inconsistent shard to the entropy repair queue:
 
 ```bash

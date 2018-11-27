@@ -1,7 +1,7 @@
 ---
 title: Enabling HTTPS for InfluxDB Enterprise
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Enabling HTTPS
     weight: 100
     parent: Guides
@@ -14,7 +14,7 @@ and, in some cases, HTTPS verifies the authenticity of the InfluxDB Enterprise s
 clients.
 
 If you plan on sending requests to InfluxDB Enterprise over a network, we
-[strongly recommend](/enterprise_influxdb/v1.6/administration/security/)
+[strongly recommend](/enterprise_influxdb/v1.7/administration/security/)
 that you set up HTTPS.
 
 ## Requirements
@@ -169,7 +169,7 @@ enterprise-meta-03:8091   1.x.y-c1.x.z
 ```
 
 
-Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.6/tools/shell/):
+Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.7/tools/shell/):
 ```
 influx -ssl -host <domain_name>.com
 ```

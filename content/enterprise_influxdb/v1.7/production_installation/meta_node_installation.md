@@ -1,9 +1,9 @@
 ---
 title: Step 1 - Installing InfluxDB Enterprise meta nodes
 aliases:
-    - /enterprise/v1.6/production_installation/meta_node_installation/
+    - /enterprise/v1.7/production_installation/meta_node_installation/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     weight: 10
     parent: Production installation
 ---
@@ -17,7 +17,7 @@ your InfluxDB Enterprise cluster: the meta nodes.
 
 > If you wish to evaluate InfluxDB Enterprise in a non-production
 environment, feel free to follow the instructions outlined in the
-[QuickStart installation](/enterprise_influxdb/v1.6/quickstart_installation) section.
+[QuickStart installation](/enterprise_influxdb/v1.7/quickstart_installation) section.
 Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
 will need to reinstall InfluxDB Enterprise with the Production Installation
 process before using the product in a production environment.
@@ -25,7 +25,7 @@ process before using the product in a production environment.
 <br>
 # Meta node setup description and requirements
 
-The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.6/concepts/glossary/#meta-node), with each meta node running on its own server.
+The Production Installation process sets up three [meta nodes](/enterprise_influxdb/v1.7/concepts/glossary/#meta-node), with each meta node running on its own server.
 <br>
 You **must** have a minimum of three meta nodes in a cluster.
 InfluxDB Enterprise clusters require at least three meta nodes and an __**odd number**__
@@ -37,7 +37,7 @@ Note: Deploying multiple meta nodes on the same server is strongly discouraged s
 InfluxData recommends deploying meta nodes on relatively small footprint servers.
 
 See the
-[Clustering Guide](/enterprise_influxdb/v1.6/concepts/clustering#optimal-server-counts)
+[Clustering Guide](/enterprise_influxdb/v1.7/concepts/clustering#optimal-server-counts)
 for more on cluster architecture.
 
 ### Other requirements
@@ -98,15 +98,15 @@ Perform the following steps on each meta server.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.4-c1.6.4_amd64.deb
-sudo dpkg -i influxdb-meta_1.6.4-c1.6.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.2-c1.7.2_amd64.deb
+sudo dpkg -i influxdb-meta_1.7.2-c1.7.2_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.2_c1.7.2.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.7.2_c1.7.2.x86_64.rpm
 ```
 
 ### II. Edit the configuration file
@@ -200,9 +200,9 @@ The expected output is:
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.6.4-c1.6.4
-    enterprise-meta-02:8091   1.6.4-c1.6.4
-    enterprise-meta-03:8091   1.6.4-c1.6.4
+    enterprise-meta-01:8091   1.7.2-c1.7.2
+    enterprise-meta-02:8091   1.7.2-c1.7.2
+    enterprise-meta-03:8091   1.7.2-c1.7.2
 
 
 Note that your cluster must have at least three meta nodes.
@@ -210,6 +210,6 @@ If you do not see your meta nodes in the output, please retry adding them to
 the cluster.
 
 Once your meta nodes are part of your cluster move on to [the next steps to
-set up your data nodes](/enterprise_influxdb/v1.6/production_installation/data_node_installation/).
+set up your data nodes](/enterprise_influxdb/v1.7/production_installation/data_node_installation/).
 Please do not continue to the next steps if your meta nodes are not part of the
 cluster.

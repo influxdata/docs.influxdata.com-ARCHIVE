@@ -1,9 +1,9 @@
 ---
 title: Step 2 - Installing Chronograf
 aliases:
-    - /enterprise/v1.6/production_installation/chrono_install/
+    - /enterprise/v1.7/production_installation/chrono_install/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     weight: 20
     parent: QuickStart installation
 ---
