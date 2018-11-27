@@ -31,14 +31,14 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For de
 
 If `[meta] auth-enabled` is set to `true`, the `[meta] internal-shared-secret` value must be set in the configuration.
 If it is not set, an error will be logged and `influxd-meta` will not start.
-* Previously, authentication could be enabled without setting an `internal-shared-secret`. The security risk was that an unset (empty) value could be used for the `internal-shared-secret`, seriously weakening the JWT authentication used for intra-node communication.
+* Previously, authentication could be enabled without setting an `internal-shared-secret`. The security risk was that an unset (empty) value could be used for the `internal-shared-secret`, seriously weakening the JWT authentication used for inter-node communication.
 
 #### Review production installation configurations
 
 The [Production Installation](/enterprise_influxdb/v1.7/production_installation/)
-documentation has been updated to fix errors in configuration settings, including changing `shared-secret` to `internal-shared-secret` and adding missing steps for configuration settings of data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that the configuration settings properly enable JWT authentication for intra-node communication.
+documentation has been updated to fix errors in configuration settings, including changing `shared-secret` to `internal-shared-secret` and adding missing steps for configuration settings of data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that the configuration settings properly enable JWT authentication for inter-node communication.
 
-The following summarizes the expected settings for proper configuration of JWT authentication for intra-node communication:
+The following summarizes the expected settings for proper configuration of JWT authentication for inter-node communication:
 
 ##### Data node configuration files (`influxdb.conf`)
 
@@ -69,7 +69,7 @@ The following summarizes the expected settings for proper configuration of JWT a
 `""`.
   * A long pass phrase is recommended for better security.
 
->**Note:** To provide encrypted intra-node communication, you must enable HTTPS. Although the JWT signature is encrypted, the the payload of a JWT token is encoded, but is not encrypted.
+>**Note:** To provide encrypted inter-node communication, you must enable HTTPS. Although the JWT signature is encrypted, the the payload of a JWT token is encoded, but is not encrypted.
 
 ### Bug fixes
 

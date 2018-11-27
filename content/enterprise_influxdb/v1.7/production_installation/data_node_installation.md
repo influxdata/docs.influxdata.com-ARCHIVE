@@ -114,7 +114,7 @@ First, in `/etc/influxdb/influxdb.conf`:
 * Uncomment `hostname` at the top of the file and set it to the full hostname of the data node.
 * Uncomment `auth-enabled` in the `[http]` section and set it to `true`.
 * Uncomment `meta-auth-enabled` in the `[meta]` section and set it to `true`.
-* Uncomment `meta-internal-shared-secret` in the `[meta]` section and set it to a long pass phrase. The internal shared secret is used in JWT authentication for intra-node communication. This value must be same for all of your data nodes and match the `[meta] internal-shared-secret` value in the configuration files of your meta nodes.
+* Uncomment `meta-internal-shared-secret` in the `[meta]` section and set it to a long pass phrase. The internal shared secret is used in JWT authentication for inter-node communication. This value must be same for all of your data nodes and match the `[meta] internal-shared-secret` value in the configuration files of your meta nodes.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
