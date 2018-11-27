@@ -12,10 +12,14 @@ menu:
 ---
 
 The `batch` node handles the creation of several child QueryNodes.
-Each call to `query` creates a child batch node that
-can further be configured. See [QueryNode](/kapacitor/v1.5/nodes/query_node/)
+Each call to [`query`](/kapacitor/v1.5/nodes/query_node) creates a child batch node that
+can further be configured. *See [QueryNode](/kapacitor/v1.5/nodes/query\node/)*.
 The `batch` variable in batch tasks is an instance of
 a [BatchNode.](/kapacitor/v1.5/nodes/batch_node/)
+
+> A **QueryNode** is required when using **BatchNode**.
+> It defines the source and schedule for batch data and should be used before
+> any other [chaining methods](#chaining-methods-1).
 
 Example:
 
@@ -93,7 +97,7 @@ Example:
 
 ```js
     var data = batch
-        |from()...
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
@@ -106,7 +110,7 @@ The above is equivalent to this example:
 
 ```js
     var data = batch
-        |from()...
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |stats(10s)
@@ -130,7 +134,7 @@ Example:
 
 ```js
     var data = batch
-        |from()...
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
@@ -146,7 +150,7 @@ Example:
 
 ```js
     var data = batch
-        |from()...
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     // Only trigger the alert if the time of day is between 8am-5pm.
     data

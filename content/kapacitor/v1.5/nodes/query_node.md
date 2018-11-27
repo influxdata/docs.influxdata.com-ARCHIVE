@@ -461,8 +461,8 @@ Example:
 
 
 ```js
-    var data = stream
-        |from()...
+    var data = batch
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
@@ -474,8 +474,8 @@ The above is equivalent to this example:
 
 
 ```js
-    var data = stream
-        |from()...
+    var data = batch
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |stats(10s)
@@ -498,8 +498,8 @@ Example:
 
 
 ```js
-    var data = stream
-        |from()...
+    var data = batch
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
@@ -514,8 +514,8 @@ Example:
 
 
 ```js
-    var data = stream
-        |from()...
+    var data = batch
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     // Only trigger the alert if the time of day is between 8am-5pm.
     data
