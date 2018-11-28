@@ -100,7 +100,7 @@ menu:
     ####  `bind-address = ":8089"`
 
     The bind address(port) for meta node communication.
-    For simplicity, we recommend using the same port on all meta nodes, but this
+    For simplicity, InfluxData recommends using the same port on all meta nodes, but this
     is not necessary.
 
     Environment variable: `INFLUXDB_META_BIND_ADDRESS`
@@ -117,8 +117,8 @@ menu:
 
     ####  `http-bind-address = ":8091"`
 
-    The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) and by data nodes to access the meta APIs.
-    For simplicity we recommend using the same port on all meta nodes, but this
+    The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) and by data nodes to access the Meta API.
+    For simplicity, InfluxData recommends using the same port on all meta nodes, but this
     is not necessary.
 
     Environment variable: `INFLUXDB_META_HTTP_BIND_ADDRESS`

@@ -513,7 +513,7 @@ Switches to journald logging for on systemd systems. Logs are no longer sent to 
 - Respect the [`pprof-enabled` configuration setting](/enterprise_influxdb/v1.3/administration/configuration/#pprof-enabled-true-1) on data nodes
 - Use the data reference instead of `Clone()` during read-only operations for performance purposes
 - Prevent the system from double-collecting cluster statistics
-- Ensure that the meta API redirects to the cluster leader when it gets the `ErrNotLeader` error
+- Ensure that the Meta API redirects to the cluster leader when it gets the `ErrNotLeader` error
 - Don't overwrite cluster users with existing OSS InfluxDB users when migrating an OSS instance into a cluster
 - Fix a data race in the raft store
 - Allow large segment files (> 10MB) in the Hinted Handoff

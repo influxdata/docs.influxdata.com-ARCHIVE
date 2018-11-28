@@ -37,15 +37,16 @@ The communicatio between the meta nodes and the data nodes are also secured via 
 Resources:
 [Enabling HTTPS](/enterprise_influxdb/v1.7/guides/https_setup/)
 
-## Secure your Host
+## Secure your host
 
 ### Ports
-For InfluxDB Enterprise Data Nodes, close all ports on each host except for port `8086`.
+
+For InfluxDB Enterprise data nodes, close all ports on each host except for port `8086`.
 You can also use a proxy to port `8086`.  By default, data nodes and meta nodes communicate with each other over '8088','8089',and'8091'
 
-For InfluxDB Enterprise, [backuping and restoring](/enterprise_influxdb/v1.7/administration/backup-and-restore/) is performed from the meta nodes.
+For InfluxDB Enterprise, [backing up and restoring](/enterprise_influxdb/v1.7/administration/backup-and-restore/) is performed from the meta nodes.
 
 
 ### AWS Recommendations
 
-We recommend implementing on-disk encryption; InfluxDB does not offer built-in support to encrypt the data.
+InfluxData recommends implementing on-disk encryption; InfluxDB does not offer built-in support to encrypt the data.
