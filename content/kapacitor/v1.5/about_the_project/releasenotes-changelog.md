@@ -12,6 +12,8 @@ menu:
 - Add ability to expire groups using the BarrierNode.
 - Add alert/persist-topics to config.
 - Add multiple field support to the ChangeDetectNode.
+- Add links to PagerDuty v2 alerts.
+- Add additional metadata to Sensu alerts.
 
 ### Bugfixes
 - Fix join not catching up fast enough after a pause in the data stream.
