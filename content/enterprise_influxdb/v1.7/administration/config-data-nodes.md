@@ -605,6 +605,12 @@ Enables HTTP endpoints.
 
 Environment variable: `INFLUXDB_HTTP_ENABLED`
 
+#### `flux-enabled = false`
+
+Determines whether the Flux query endpoint is enabled. To enable the use of Flux queries, set the value to `true`.
+
+Environment variable: `INFLUXDB_HTTP_FLUX_ENABLED`
+
 #### `bind-address = ":8086"`
 
 The bind address used by the HTTP service.
