@@ -7,6 +7,12 @@ menu:
     parent: About the project
 ---
 
+## v1.7.2 [2018-11-??]
+
+### Bug fixes
+
+*  Fix `ApplyEnvOverrides` when a type that implements `Unmarshaler` is in a slice.
+
 ## v1.7.1 [2018-11-14]
 
 ### Bug fixes
