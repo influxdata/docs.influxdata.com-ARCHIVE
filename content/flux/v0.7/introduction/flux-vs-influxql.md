@@ -181,8 +181,8 @@ cov(x: table1, y: table2, on: ["_time", "_field"])
 ```
 
 ## Not yet supported in Flux
-Flux is working towards complete parity InfluxQL and new functions are being added to that end.
-The table below shows InfluxQL statements, clauses, and functions along with their equivalent Flux function.
+Flux is working towards complete parity with InfluxQL and new functions are being added to that end.
+The table below shows InfluxQL statements, clauses, and functions along with their equivalent Flux functions.
 
 > The current version of Flux included with InfluxDB is a technical preview and is still in active development.
 > New functions are added often and the following table may not represent the current state of Flux.
