@@ -133,8 +133,7 @@ data to generate a cumulative histogram with support for other histogram types c
 
 ---
 
-_See [Create histograms](/flux/v0.7/guides/histograms) for an example of using
-Flux to create a cumulative histogram._
+_For an example of using Flux to create a cumulative histogram, see [Create histograms](/flux/v0.7/guides/histograms)._
 
 ---
 

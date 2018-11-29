@@ -4188,8 +4188,8 @@ InfluxDB then rounds those averages down to the nearest integer.
 
 ## HISTOGRAM()
 _InfluxQL does not currently support histogram generation.
-See [Flux's `histogram()` function](/flux/v0.7/functions/transformations/histogram)
-for information about creating histograms with data stored in InfluxDB._
+For information about creating histograms with data stored in InfluxDB, see
+[Flux's `histogram()` function](/flux/v0.7/functions/transformations/histogram)._
 
 ## LN()
 Returns the natural logarithm of the field value.
