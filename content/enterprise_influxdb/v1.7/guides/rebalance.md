@@ -35,7 +35,7 @@ throughput, follow the steps in
 
 The following sections assume that you already added a new data node to the
 cluster, and they use the
-[`influx-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) available on
+[`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) available on
 all meta nodes.
 
 Before you begin, stop writing historical data to InfluxDB.

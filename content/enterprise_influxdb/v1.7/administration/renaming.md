@@ -27,7 +27,7 @@ First, spend write and query activity to the cluster.
 - Repeat the process for the last meta node (former leader).
 
 Intermediate verification:
-- Verify the state of the cluster with `influx-ctl show`. The version must be reported on all nodes for them to be healthy.
+- Verify the state of the cluster with `influxd-ctl show`. The version must be reported on all nodes for them to be healthy.
 - Verify there is a meta leader with `curl localhost:8091/status` and that all meta nodes list the rest in the output.
 - Restart all data nodes one by one. Verify that `/var/lib/influxdb/meta/client.json` on all data nodes references the new meta names.
 - Verify the `show shards` output lists all shards and node ownership as expected.
@@ -43,7 +43,7 @@ Intermediate verification:
 - Repeat on the remaining data nodes. Remember to only execute the `update-data` command from the meta leader.
 
 Final verification:
-- Verify the state of the cluster with `influx-ctl show`. The version must be reported on all nodes for them to be healthy.
+- Verify the state of the cluster with `influxd-ctl show`. The version must be reported on all nodes for them to be healthy.
 - Verify the `show shards` output lists all shards and node ownership as expected.
 - Verify meta queries work (show measurements under a database).
 - Verify data are being queried successfully.
