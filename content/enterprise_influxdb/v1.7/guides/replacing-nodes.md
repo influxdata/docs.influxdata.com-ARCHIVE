@@ -167,7 +167,7 @@ influxd-ctl remove-meta -force -tcpAddr enterprise-meta-02:8089 enterprise-meta-
 ```
 
 #### 2.3. Add the new meta node
-Once the non-leader meta node has been removed, use `influx-ctl add-meta` to replace it with the new meta node:
+Once the non-leader meta node has been removed, use `influxd-ctl add-meta` to replace it with the new meta node:
 
 ```bash
 # Pattern
@@ -320,7 +320,7 @@ The time it takes for copying to complete is determined by the number of shards 
 Check on the status of the copy-shard process with:
 
 ```bash
-influx-ctl copy-shard-status
+influxd-ctl copy-shard-status
 ```
 
 The output will show all currently running copy-shard processes.
