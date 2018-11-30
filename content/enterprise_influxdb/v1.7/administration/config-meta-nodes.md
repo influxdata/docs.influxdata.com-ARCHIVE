@@ -43,6 +43,8 @@ This must be resolvable and reachable by all other members of the cluster.
 
 Environment variable: `INFLUXDB_HOSTNAME`
 
+-----
+
 ### Enterprise license settings
 
 #### `[enterprise]`
@@ -94,6 +96,8 @@ The cluster should remain unaffected as long as only one node is restarting at a
 time as long as there are two or more data nodes.
 
 Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
+
+-----
 
 ### Meta node settings
 
