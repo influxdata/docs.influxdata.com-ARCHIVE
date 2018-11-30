@@ -1,9 +1,9 @@
 ---
-title: InfluxDB Enterprise mode configurations
+title: InfluxDB Enterprise meta mode configuration
 description: Covers the InfluxDB Enterprise meta node configuration settings and environmental variables
 menu:
   enterprise_influxdb_1_6:
-    name: Meta node configurations
+    name: Meta node configuration
     weight: 16
     parent: Administration
 ---
@@ -13,246 +13,319 @@ menu:
     * [[enterprise]](#enterprise)
     * [[meta]](#meta)
 
-    ## Meta node configurations
+## Meta node configurations
 
-    ### Global options
+### Global options
 
-    #### `reporting-disabled = false`
+#### `reporting-disabled = false`
 
-    InfluxData, the company, relies on reported data from running nodes primarily to
-    track the adoption rates of different InfluxDB versions.
-    These data help InfluxData support the continuing development of InfluxDB.
+InfluxData, the company, relies on reported data from running nodes primarily to
+track the adoption rates of different InfluxDB versions.
+These data help InfluxData support the continuing development of InfluxDB.
 
-    The `reporting-disabled` option toggles the reporting of data every 24 hours to
-    `usage.influxdata.com`.
-    Each report includes a randomly-generated identifier, OS, architecture,
-    InfluxDB version, and the number of databases, measurements, and unique series.
-    Setting this option to `true` will disable reporting.
+The `reporting-disabled` option toggles the reporting of data every 24 hours to
+`usage.influxdata.com`.
+Each report includes a randomly-generated identifier, OS, architecture,
+InfluxDB version, and the number of databases, measurements, and unique series.
+Setting this option to `true` will disable reporting.
 
-    > **Note:** No data from user databases are ever transmitted.
+> **Note:** No data from user databases are ever transmitted.
 
-    #### `bind-address = ""`
-    This setting is not intended for use.
-    It will be removed in future versions.
+#### `bind-address = ""`
 
-    #### `hostname = ""`
+This setting is not intended for use.
+It will be removed in future versions.
 
-    The hostname of the [meta node](/enterprise_influxdb/v1.7/concepts/glossary/#meta-node).
-    This must be resolvable and reachable by all other members of the cluster.
+#### `hostname = ""`
 
-    Environment variable: `INFLUXDB_HOSTNAME`
+The hostname of the [meta node](/enterprise_influxdb/v1.7/concepts/glossary/#meta-node).
+This must be resolvable and reachable by all other members of the cluster.
 
-    ### `[enterprise]`
+Environment variable: `INFLUXDB_HOSTNAME`
 
-    The `[enterprise]` section contains the parameters for the meta node's
-    registration with the [InfluxDB Enterprise License Portal](https://portal.influxdata.com/).
+### Enterprise license settings
 
-    #### `license-key = ""`
+#### `[enterprise]`
 
-    The license key created for you on [InfluxPortal](https://portal.influxdata.com).
-    The meta node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
-    The server caches the license file locally.
-    You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
+The `[enterprise]` section contains the parameters for the meta node's
+registration with the [InfluxDB Enterprise License Portal](https://portal.influxdata.com/).
 
-    Use the same key for all nodes in the same cluster.
-    <dt>The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-    </dt>
+#### `license-key = ""`
 
-    We recommended performing rolling restarts on the nodes after the
-    license key update. Restart one Meta, Data, or Enterprise service at a time and
-    wait for it to come back up successfully. The cluster should remain unaffected
-    as long as only one node is restarting at a time as long as there are two or more
-    data nodes.
+The license key created for you on [InfluxPortal](https://portal.influxdata.com).
+The meta node transmits the license key to
+[portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443
+and receives a temporary JSON license file in return.
+The server caches the license file locally.
+You must use the [`license-path` setting](#license-path) if your server cannot
+communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
-    Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
+Use the same key for all nodes in the same cluster.
+<dt>The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+</dt>
 
-    #### `license-path = ""`
+InfluxData recommends performing rolling restarts on the nodes after the license key update.
+Restart one meta node or data node service at a time and wait for it to come back up successfully.
+The cluster should remain unaffected as long as only one node is restarting at a
+time as long as there are two or more data nodes.
 
-    The local path to the permanent JSON license file that you received from InfluxData
-    for instances that do not have access to the internet.
-    Contact [sales@influxdb.com](mailto:sales@influxdb.com) if a licence file is required.
+Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
 
-    The license file should be saved on every server in the cluster, including Meta,
-    Data, and Enterprise nodes. The file contains the JSON-formatted license, and must
-    be readable by the influxdb user. Each server in the cluster independently verifies
-    its license.
+#### `license-path = ""`
 
-    <dt>
-    The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-    </dt>
+The local path to the permanent JSON license file that you received from InfluxData
+for instances that do not have access to the Internet.
+If you need a license file, contact [sales@influxdb.com](mailto:sales@influxdb.com).
 
-    We recommended performing rolling restarts on the nodes after the
-    license file update. Restart one Meta, Data, or Enterprise service at a time and
-    wait for it to come back up successfully. The cluster should remain unaffected
-    as long as only one node is restarting at a time as long as there are two or more
-    data nodes.
+The license file must be saved on every server in the cluster, including meta nodes
+and data nodes.
+The file contains the JSON-formatted license, and must be readable by the `influxdb` user.
+Each server in the cluster independently verifies its license.
 
-    Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
+<dt>
+The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
+</dt>
 
-    ### `[meta]`
+InfluxData recommends performing rolling restarts on the nodes after the
+license file update.
+Restart one meta node or data node service at a time and wait for it to come back
+up successfully.
+The cluster should remain unaffected as long as only one node is restarting at a
+time as long as there are two or more data nodes.
 
-    ####  `dir = "/var/lib/influxdb/meta"`
+Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
-    The location of the meta directory which stores the [metastore](/influxdb/v1.7/concepts/glossary/#metastore).
+### Meta node settings
 
-    Environment variable: `INFLUXDB_META_DIR`
+#### `[meta]`
 
-    ####  `bind-address = ":8089"`
 
-    The bind address(port) for meta node communication.
-    For simplicity, InfluxData recommends using the same port on all meta nodes, but this
-    is not necessary.
+#### `dir = "/var/lib/influxdb/meta"`
 
-    Environment variable: `INFLUXDB_META_BIND_ADDRESS`
+The directory where cluster meta data is stored.
 
-    #### `auth-enabled = false`
+Environment variable: `INFLUXDB_META_DIR`
 
-    Set to `true` to enable authentication.
-    Meta nodes support JWT authentication and Basic authentication.
-    For JWT authentication, also see the [`shared-secret`](#shared-secret) and [`internal-shared-secret`](#internal-shared-secret) configuration options.
+#### `bind-address = ":8089"`
 
-    If set to `true`, also set the [`meta-auth-enabled` option](/enterprise_influxdb/v1.7/administration/config-data-nodes#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
+The bind address(port) for meta node communication.
+For simplicity, InfluxData recommends using the same port on all meta nodes,
+but this is not necessary.
 
-    Environment variable: `INFLUXDB_META_AUTH_ENABLED`
+Environment variable: `INFLUXDB_META_BIND_ADDRESS`
 
-    ####  `http-bind-address = ":8091"`
+#### `http-bind-address = ":8091"`
 
-    The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) and by data nodes to access the Meta API.
-    For simplicity, InfluxData recommends using the same port on all meta nodes, but this
-    is not necessary.
+The default address to bind the API to.
 
-    Environment variable: `INFLUXDB_META_HTTP_BIND_ADDRESS`
+Environment variable: `INFLUXDB_META_HTTP_BIND_ADDRESS`
 
-    ####  `https-enabled = false`
+#### `https-enabled = false`
 
-    Set to `true` to if using HTTPS over the `8091` API port.
-    Currently, the `8089` and `8088` ports do not support TLS.
+Determines whether meta nodes use HTTPS to communicate with each other.
 
-    Environment variable: `INFLUXDB_META_HTTPS_ENABLED`
+Environment variable: `INFLUXDB_META_HTTPS_ENABLED`
 
-    ####  `https-certificate = ""`
+#### `https-certificate = ""`
 
-    The path of the certificate file.
-    This is required if [`https-enabled`](#https-enabled-false) is set to `true`.
+The SSL certificate to use when HTTPS is enabled.  
+The certificate should be a PEM-encoded bundle of the certificate and key.  
+If it is just the certificate, a key must be specified in https-private-key.
 
-    Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
+Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
 
-    #### `https-private-key = ""`
+#### `https-private-key = ""`
 
-    The path of the private key file.
+Use a separate private key location.
 
-    Environment variable: `INFLUXDB_META_HTTPS_PRIVATE_KEY`
+Environment variable: `INFLUXDB_META_HTTPS_PRIVATE_KEY`
 
-    #### `https-insecure-tls = false`
+#### `https-insecure-tls = false`
 
-    Set to `true` to allow insecure HTTPS connections to meta nodes.
-    Use this setting when testing with self-signed certificates.
+Whether meta nodes will skip certificate validation communicating with each other over HTTPS.
+This is useful when testing with self-signed certificates.
 
-    Environment variable: `INFLUXDB_META_HTTPS_INSECURE_TLS`
+Environment variable: `INFLUXDB_META_HTTPS_INSECURE_TLS`
 
-    #### `gossip-frequency = "5s"`
+#### `auth-enabled = false`
 
-    The frequency at which meta nodes communicate the cluster membership state.
+Set to `true` to enable authentication.
+Meta nodes support JWT authentication and Basic authentication.
+For JWT authentication, see also the [`shared-secret`](#shared-secret) and
+[`internal-shared-secret`](#internal-shared-secret) configuration settings.
 
-    Environment variable: `INFLUXDB_META_GOSSIP_FREQUENCY`
+If set to `true`, also set the [`meta-auth-enabled` option](/enterprise_influxdb/v1.7/administration/config-data-nodes#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
 
-    #### `announcement-expiration = "30s"`
+Environment variable: `INFLUXDB_META_AUTH_ENABLED`
 
-    The rate at which the results of `influxd-ctl show` are updated when a meta
-    node leaves the cluster.
-    Note that in version 1.0, configuring this setting provides no change from the
-    user's perspective.
+####  `http-bind-address = ":8091"`
 
-    Environment variable: `INFLUXDB_META_ANNOUNCEMENT_EXPIRATION`
+The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) and by data nodes to access the Meta API.
+For simplicity, InfluxData recommends using the same port on all meta nodes, but this
+is not necessary.
 
-    #### `retention-autocreate = true`
+Environment variable: `INFLUXDB_META_HTTP_BIND_ADDRESS`
 
-    Automatically creates a default [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
-    The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
-    The system targets the `autogen` RP when a write or query does not specify an RP.
-    Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
+#### `https-enabled = false`
 
-    Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
+Determines whether meta nodes use HTTPS to communicate with each other.
 
-    #### `election-timeout = "1s"`
+#### `https-certificate = ""`
 
-    The duration a Raft candidate spends in the candidate state without a leader
-    before it starts an election.
-    The election timeout is slightly randomized on each Raft node each time it is called.
-    An additional jitter is added to the `election-timeout` duration of between zero and the `election-timeout`.
-    The default setting should work for most systems.
+The SSL certificate to use when HTTPS is enabled.  
+The certificate should be a PEM-encoded bundle of the certificate and key.  
+If it is just the certificate, a key must be specified in https-private-key.
 
-    Environment variable: `INFLUXDB_META_ELECTION_TIMEOUT`
+#### `https-private-key = ""`
 
-    #### `heartbeat-timeout = "1s"`
+Use a separate private key location.
 
-    The heartbeat timeout is the amount of time a Raft follower remains in the
-    follower state without a leader before it starts an election.
-    Clusters with high latency between nodes may want to increase this parameter to
-    avoid unnecessary Raft elections.
+#### `https-insecure-tls = false`
 
-    Environment variable: `INFLUXDB_META_HEARTBEAT_TIMEOUT`
+Whether meta nodes will skip certificate validation communicating with each other over HTTPS.
+This is useful when testing with self-signed certificates.
 
-    #### `leader-lease-timeout = "500ms"`
 
-    The leader lease timeout is the amount of time a Raft leader will remain leader
-    if it does not hear from a majority of nodes.
-    After the timeout the leader steps down to the follower state.
-    Clusters with high latency between nodes may want to increase this parameter to
-    avoid unnecessary Raft elections.
+#### `https-enabled = false`
 
-    Environment variable: `INFLUXDB_META_LEADER_LEASE_TIMEOUT`
+Set to `true` to if using HTTPS over the `8091` API port.
+Currently, the `8089` and `8088` ports do not support TLS.
 
-    #### `consensus-timeout = "30s`"
+Environment variable: `INFLUXDB_META_HTTPS_ENABLED`
 
-    Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
+#### `https-certificate = ""`
 
-    #### `commit-timeout = "50ms"`
+The path of the certificate file.
+This is required if [`https-enabled`](#https-enabled-false) is set to `true`.
 
-    The commit timeout is the amount of time a Raft node will tolerate between
-    commands before issuing a heartbeat to tell the leader it is alive.
-    The default setting should work for most systems.
+Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
 
-    Environment variable: `INFLUXDB_META_COMMIT_TIMEOUT`
+#### `https-private-key = ""`
 
-    #### `cluster-tracing = false`
+The path of the private key file.
 
-    Cluster tracing toggles the logging of Raft logs on Raft nodes.
-    Enable this setting when debugging Raft consensus issues.
+Environment variable: `INFLUXDB_META_HTTPS_PRIVATE_KEY`
 
-    Environment variable: `INFLUXDB_META_CLUSTER_TRACING`
+#### `https-insecure-tls = false`
 
-    #### `logging-enabled = true`
+Set to `true` to allow insecure HTTPS connections to meta nodes.
+Use this setting when testing with self-signed certificates.
 
-    Meta logging toggles the logging of messages from the meta service.
+Environment variable: `INFLUXDB_META_HTTPS_INSECURE_TLS`
 
-    Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
+#### `gossip-frequency = "5s"`
 
-    #### `pprof-enabled = true`
+The frequency at which meta nodes communicate the cluster membership state.
 
-    Set to `false` to disable the `/debug/pprof` endpoint for troubleshooting.
+Environment variable: `INFLUXDB_META_GOSSIP_FREQUENCY`
 
-    Environment variable: `INFLUXDB_META_PPROF_ENABLED`
+#### `announcement-expiration = "30s"`
 
-    #### `lease-duration = "1m0s"`
+The rate at which the results of `influxd-ctl show` are updated when a meta
+node leaves the cluster.
+Note that in version 1.0, configuring this setting provides no change from
+the user's perspective.
 
-    The default duration of the leases that data nodes acquire from the meta nodes.
-    Leases automatically expire after the `lease-duration` is met.
+Environment variable: `INFLUXDB_META_ANNOUNCEMENT_EXPIRATION`
 
-    Leases ensure that only one data node is running something at a given time.
-    For example, [Continuous Queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq)
-    (CQ) use a lease so that all data nodes aren't running the same CQs at once.
+#### `retention-autocreate = true`
 
-    Environment variable: `INFLUXDB_META_LEASE_DURATION`
+Automatically creates a default [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
+The system targets the `autogen` RP when a write or query does not specify an RP.
+Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
 
-    #### `shared-secret = ""`
-    The shared secret to be used by the public API for creating custom JWT authentication.
-    Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
+Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
-    Environment variable: `INFLUXDB_META_SHARED_SECRET`
+#### `election-timeout = "1s"`
 
-    #### `internal-shared-secret = ""`
-    The shared secret used by the internal API for JWT authentication. Set this to a long pass phrase. This value must be the same as the value of the [`[meta] meta-internal-shared-secret`](/enterprise_influxdb/v1.7/administration/config-data-nodes#meta-internal-shared-secret) in the data node configuration file.
-    Set [`auth-enabled`](#auth-enabled-false) to `true` if using this option.
+The duration a Raft candidate spends in the candidate state without a leader
+before it starts an election.
+The election timeout is slightly randomized on each Raft node each time it is called.
+An additional jitter is added to the `election-timeout` duration of between zero and the `election-timeout`.
+The default setting should work for most systems.
 
-    Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
+Environment variable: `INFLUXDB_META_ELECTION_TIMEOUT`
+
+#### `heartbeat-timeout = "1s"`
+
+The heartbeat timeout is the amount of time a Raft follower remains in the follower
+state without a leader before it starts an election.
+Clusters with high latency between nodes may want to increase this parameter to
+avoid unnecessary Raft elections.
+
+Environment variable: `INFLUXDB_META_HEARTBEAT_TIMEOUT`
+
+#### `leader-lease-timeout = "500ms"`
+
+The leader lease timeout is the amount of time a Raft leader will remain leader
+ if it does not hear from a majority of nodes.
+After the timeout the leader steps down to the follower state.
+Clusters with high latency between nodes may want to increase this parameter to
+ avoid unnecessary Raft elections.
+
+Environment variable: `INFLUXDB_META_LEADER_LEASE_TIMEOUT`
+
+#### `consensus-timeout = "30s`"
+
+Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
+
+#### `commit-timeout = "50ms"`
+
+The commit timeout is the amount of time a Raft node will tolerate between
+commands before issuing a heartbeat to tell the leader it is alive.
+The default setting should work for most systems.
+
+Environment variable: `INFLUXDB_META_COMMIT_TIMEOUT`
+
+#### `cluster-tracing = false`
+
+Cluster tracing toggles the logging of Raft logs on Raft nodes.
+Enable this setting when debugging Raft consensus issues.
+
+Environment variable: `INFLUXDB_META_CLUSTER_TRACING`
+
+#### `logging-enabled = true`
+
+Meta logging toggles the logging of messages from the meta service.
+
+Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
+
+#### `pprof-enabled = true`
+
+Enables the `/debug/pprof` endpoint for troubleshooting.
+To disable, set the value to `false`.
+
+Environment variable: `INFLUXDB_META_PPROF_ENABLED`
+
+#### `lease-duration = "1m0s"`
+
+The default duration of the leases that data nodes acquire from the meta nodes.
+Leases automatically expire after the `lease-duration` is met.
+
+Leases ensure that only one data node is running something at a given time.
+For example, [Continuous Queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq)
+(CQs) use a lease so that all data nodes aren't running the same CQs at once.
+
+For more details about `lease-duration` and its impact on continuous queries, see
+[Configuration and operational considerations on a cluster](enterprise_influxdb/latest/features/clustering-features/#configuration-and-operational-considerations-on-a-cluster).
+
+Environment variable: `INFLUXDB_META_LEASE_DURATION`
+
+#### `shared-secret = ""`
+
+The shared secret to be used by the public API for creating custom JWT authentication.
+If you use this setting, set [`auth-enabled`](#auth-enabled-false) to `true`.
+
+Environment variable: `INFLUXDB_META_SHARED_SECRET`
+
+#### `internal-shared-secret = ""`
+
+The shared secret used by the internal API for JWT authentication for
+inter-node communication within the cluster.
+Set this to a long pass phrase.
+This value must be the same value as the
+[`[meta] meta-internal-shared-secret`](/enterprise_influxdb/v1.7/administration/config-data-nodes#meta-internal-shared-secret) in the data node configuration file.
+If you are using this option, set [`auth-enabled`](#auth-enabled-false) to `true`.
+
+Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`

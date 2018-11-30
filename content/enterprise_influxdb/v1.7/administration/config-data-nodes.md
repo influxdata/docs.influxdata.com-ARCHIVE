@@ -1,9 +1,9 @@
 ---
-title: InfluxDB Enterprise data node configurations
+title: InfluxDB Enterprise data node configuration
 description: Covers the InfluxDB Enterprise data node configuration settings and environmental variables
 menu:
   enterprise_influxdb_1_7:
-    name: Data node configurations
+    name: Data node configuration
     weight: 12
     parent: Administration
 ---
@@ -31,20 +31,20 @@ menu:
     * [TLS [tls]](#tls-settings)
 
 
-    ## Data node configurations
+## Data node configurations
 
-    The InfluxDB Enterprise data node configuration settings overlap significantly
-    with the settings in InfluxDB OSS.
+The InfluxDB Enterprise data node configuration settings overlap significantly
+with the settings in InfluxDB OSS.
 
-    > **Note:**
-    The system has internal defaults for every configuration file setting.
-    View the default settings with the `influxd config` command.
-    The local configuration file (`/etc/influxdb/influxdb.conf`) overrides any
-    internal defaults but the configuration file does not need to include
-    every configuration setting.
-    Starting with version 1.0.1, most of the settings in the local configuration
-    file are commented out.
-    All commented-out settings will be determined by the internal defaults.
+> **Note:**
+The system has internal defaults for every configuration file setting.
+View the default settings with the `influxd config` command.
+The local configuration file (`/etc/influxdb/influxdb.conf`) overrides any
+internal defaults but the configuration file does not need to include
+every configuration setting.
+Starting with version 1.0.1, most of the settings in the local configuration
+file are commented out.
+All commented-out settings will be determined by the internal defaults.
 
 -----
 
@@ -329,6 +329,25 @@ The default timeout set on shard readers.
 The time in which a query connection must return its response after which the system returns an error.
 
 Environment variable: `INFLUXDB_CLUSTER_SHARD_READER_TIMEOUT`
+
+#### `https-enabled = false`
+
+Determines whether data nodes use HTTPS to communicate with each other.
+
+#### `https-certificate = ""`
+
+The SSL certificate to use when HTTPS is enabled.  
+The certificate should be a PEM-encoded bundle of the certificate and key.  
+If it is just the certificate, a key must be specified in `https-private-key`.
+
+#### `https-private-key = ""`
+
+Use a separate private key location.
+
+#### `https-insecure-tls = false`
+
+Whether data nodes will skip certificate validation communicating with each other over HTTPS.
+This is useful when testing with self-signed certificates.
 
 ####  `cluster-tracing = false`
 
