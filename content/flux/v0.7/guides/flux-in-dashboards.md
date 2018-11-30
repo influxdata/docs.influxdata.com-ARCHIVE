@@ -8,8 +8,8 @@ menu:
     weight: 7
 ---
 
-[Chronograf](/chronograf/latest/) is InfluxData’s open source web interface for building
-and customizing dashboards that visualize your data.
+[Chronograf](/chronograf/latest/) is the web user interface for managing for the
+InfluxData platform that lest you create and customize dashboards that visualize your data.
 Visualized data is retrieved using either an InfluxQL or Flux query.
 This guide walks through using Flux queries in Chronograf dashboard cells.
 
@@ -17,20 +17,59 @@ This guide walks through using Flux queries in Chronograf dashboard cells.
 
 ---
 
-_**Chronograf v1.7+** is required to use Flux in dashboards._
+_**Chronograf v1.7+** and **InfluxDB v1.7 with [Flux enabled](/flux/v0.7/introduction/installation)**
+are required to use Flux in dashboards._
 
 ---
 
 To use Flux in a dashboard cell, either create a new cell or edit an existing cell
 by clicking the **pencil** icon in the top right corner of the cell.
-To the right of the dropdown above the graph preview, select **Flux** as the source type.
+To the right of the **Source dropdown** above the graph preview, select **Flux** as the source type.
 
 ![Flux in Chronograf dashboard cells](/img/flux/flux-dashboard-cell.png)
 
+> The Flux source type is only available if your data source has
+> [Flux enabled](/flux/v0.7/introduction/installation).
+
 This will provide **Schema**, **Script**, and **Functions** panes.
-The Schema pane allows you to explore your data.
+
+### Schema pane
+The Schema pane allows you to explore your data and add filters for specific
+measurements, fields, and tags to your Flux script.
+
+<img src="/img/flux/flux-dashboard-add-filter.png" style="max-width:316px" title="Add a filter from the Schema panel">
+
+### Script pane
 The Script pane is where you write your Flux script.
+In its default state, the **Script** pane includes an optional [Script Wizard](/chronograf/v1.7/guides/querying-data/#explore-data-with-flux)
+that uses selected options to build a Flux query for you.
+The generated query includes all the relevant functions and [template variables](#template-variables-in-flux)
+required to return your desired data.
+
+### Functions pane
 The Functions pane provides a list of functions available in your Flux queries.
+Clicking on a function will add it to the end of the script in the Script pane.
+Hovering over a function provides documentation for the function as well as links
+to deep documentation.
+
+### Dynamic sources
+Chronograf can be configured with multiple data sources.
+The **Sources dropdown** allows you to select a specific data source to connect to,
+but a **Dynamic Source** options is also available.
+With a dynamic source, the cell will query data from whatever data source to which
+Chronograf is currently connected.
+Connections are managed under Chronograf's **Configuration** tab.
+
+### View raw data
+As you're building your Flux scripts, each function processes or transforms your
+data is ways specific to the function.
+It can be helpful to view the actual data in order to see how it is being shaped.
+The **View Raw Data** toggle above the data visualization switches between graphed
+data and raw data shown in table form.
+
+![View raw data](/img/flux/flux-dashboard-view-raw.png)
+
+_The **View Raw Data** toggle is only available when using Flux._
 
 ## Template variables in Flux
 Chronograf [template variables](/chronograf/latest/guides/dashboard-template-variables/)
@@ -99,8 +138,11 @@ dataSet
   )
 ```
 
-
 ### Custom template variables
 <dt>
 Chronograf does not yet support the use of custom template variables in Flux queries.
 </dt>
+
+## Using Flux and InfluxQL
+Within individual dashboard cells, the use of Flux and InfluxQL is mutually exclusive.
+However, a dashboard may consist of different cells, each using Flux or InfluxQL.
