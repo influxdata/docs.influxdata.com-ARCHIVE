@@ -92,8 +92,8 @@ Create a file for each of these hosts and host groups in their respective direct
 > You only need to create files for hosts or hostgroups that will be offline.
 
 The contents of the file should contain one or more key-value pairs.
-The key being the field or tag key that will be set on each matching record,
-and the value being the field or tag value that will be set on matching records.
+The key being the field or tag key that will be set on each matching point,
+and the value being the field or tag value that will be set on matching points.
 
 For this example, set the `maintenance` field to `true`.
 Each of the source files will look like the following:
@@ -137,12 +137,12 @@ Those listed first, from left to right, are checked first.
 ### Define the sideload field
 The `field` property requires two arguments:
 
-1.  The key that Kapacitor looks for in the source files and the field key that
-    for which it defines a value on each data point.
+1.  The key that Kapacitor looks for in the source files and the field for which
+    it defines a value on each data point.
 2.  The default value used if no matching file and key are found in the source files.
 
 In this example, use the `maintenance` field and set the default value to `FALSE`.
-This assumes hosts are not be undergoing maintenance by default.
+This assumes hosts are not undergoing maintenance by default.
 
 ```js
 |sideload()
@@ -151,8 +151,8 @@ This assumes hosts are not be undergoing maintenance by default.
   .field('maintenance', FALSE)
 ```
 
-> The `tag` property could instead of `field` if you'd rather set a tag rather
-> than a field on each data point.
+> The `tag` property could be used instead of `field` if you prefer to set a tag
+> on each data point rather than a field.
 
 ### Update alert logic
 The `sideload` node will now set the `maintenance` field on every data point processed by the TICKscript.
