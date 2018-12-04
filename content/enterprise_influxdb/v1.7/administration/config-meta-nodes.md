@@ -10,8 +10,8 @@ menu:
 
 * [Meta node configurations](#meta-node-configurations)
     * [Global options](#global-options)
-    * [[enterprise]](#enterprise)
-    * [[meta]](#meta)
+    * [Enterprise license `[enterprise]`](#enterprise)
+    * [Meta node `[meta]`](#meta)
 
 ## Meta node configurations
 
