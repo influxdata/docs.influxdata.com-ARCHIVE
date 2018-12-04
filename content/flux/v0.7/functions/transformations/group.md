@@ -67,7 +67,7 @@ from(bucket: "telegraf/autogen")
   |> group(columns: ["_time"], mode: "except")
 ```
 
-###### Group by nothing
+###### Remove all grouping
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -30m)

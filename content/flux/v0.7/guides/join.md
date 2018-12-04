@@ -295,7 +295,7 @@ batchSize = (cluster_id, start=-1m, interval=10s) => {
         _time: r._time,
         _value: r._value_httpd / r._value_write,
     }))
-    |> group(by: cluster_id)
+    |> group(columns: cluster_id)
 }
 
 batchSize(cluster_id: "enter cluster id here")
