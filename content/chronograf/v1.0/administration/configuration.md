@@ -50,5 +50,5 @@ chronograf -config chronograf.generated.conf
 By default, Chronograf will look for configuration files in these locations:
 
 * Debian or RPM package: `/opt/chronograf/config.toml`
-* OS X via Homebrew: `/usr/local/etc/chronograf.toml`
-* Standalone OS X binary: `chronograf-0.x.x/chronograf.toml`
+* macOS via Homebrew: `/usr/local/etc/chronograf.toml`
+* Standalone macOS binary: `chronograf-0.x.x/chronograf.toml`

@@ -87,7 +87,7 @@ Chronograf lets you create custom template variables powered by meta queries or 
 
 To create a template variable:
 
-1. Click on **Template Variables** at the top of your dashboard, then **+ Add Variable**.
+1. Click **Variables** at the top of your dashboard, then **+ Add Template Variable**.
 2. Provide a name for the variable.
 3. Select the [variable type](#template-variable-types).
    The type defines the method for retrieving the array of possible values.

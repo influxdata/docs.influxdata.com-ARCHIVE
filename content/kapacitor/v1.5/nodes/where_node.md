@@ -34,7 +34,7 @@ sums
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[where](#description)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a new node that filters the data stream by a given expression.  |
+| **where&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a new node that filters the data stream by a given expression.  |
 
 ### Property Methods
 

@@ -21,16 +21,16 @@ of three or more meta nodes and zero or more data nodes. If you need instruction
 Please note that this migration process:
 
 * Deletes all data from any data nodes that are already part of the InfluxDB Enterprise cluster
-* Will transfer all users from the OSS instance to the InfluxEnterprise Cluster*
+* Will transfer all users from the OSS instance to the InfluxDB Enterprise Cluster*
 * Requires downtime for writes and reads for the OSS instance
 
 <dt>
 If you're using an InfluxDB Enterprise cluster version prior to 0.7.4, the
 following steps will **not** transfer users from the OSS instance to the
-InfluxEnterprise Cluster.
+InfluxDB Enterprise Cluster.
 </dt>
 
-In addition, please refrain from creating a Global Admin user in the InfluxEnterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
+In addition, please refrain from creating a Global Admin user in the InfluxDB Enterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
 
 ## Modify the `/etc/hosts` file
 
@@ -173,7 +173,7 @@ Note: it may take a few minutes before the existing data become available in the
 
 ### 1. Add any data nodes that you removed from cluster back into the cluster
 
-From a **meta** node in the InfluxEnterprise Cluster, run:
+From a **meta** node in the InfluxDB Enterprise Cluster, run:
 ```
 influxd-ctl add-data <the-hostname>:8088
 ```

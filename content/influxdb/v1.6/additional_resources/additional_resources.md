@@ -14,18 +14,18 @@ Check out the following InfluxData resources to learn more about InfluxDB OSS an
 Check out the [InfluxData blog](https://www.influxdata.com/blog/) for announcements, updates, and
 weekly [tech tips](https://www.influxdata.com/category/tech-tips/).
 
-## [Technical papers](https://www.influxdata.com/technical-papers/)
+## [Technical papers](https://www.influxdata.com/_resources/techpapers-new/)
 
-[InfluxData technical papers](https://www.influxdata.com/technical-papers/) series offer in-depth analysis on performance, time series,
+[InfluxData technical papers](https://www.influxdata.com/_resources/techpapers-new/) series offer in-depth analysis on performance, time series,
 and benchmarking of InfluxDB compared to other popular databases.
 
-## [Meetup videos](https://www.influxdata.com/videos/)
+## [Meetup videos](https://www.influxdata.com/_resources/videosnew//)
 
-Check out our growing collection of [meetup videos](https://www.influxdata.com/videos/) for introductory content, how-tos, and more.
+Check out our growing collection of [meetup videos](https://www.influxdata.com/_resources/videosnew//) for introductory content, how-tos, and more.
 
-## [Virtual training videos](https://www.influxdata.com/videos-training/)
+## [Virtual training videos](https://www.influxdata.com/_resources/videosnew/)
 
-Watch [virtual training videos](https://www.influxdata.com/videos-training/) from our weekly training webinar.
+Watch [virtual training videos](https://www.influxdata.com/_resources/videosnew/) from our weekly training webinar.
 
 ## [Virtual training schedule](https://www.influxdata.com/virtual-training-courses/)
 

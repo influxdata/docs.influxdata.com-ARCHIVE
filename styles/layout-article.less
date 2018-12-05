@@ -31,9 +31,7 @@ a {
 
 .article {
 	background-color: @article-bg;
-	position: fixed;
 	overflow: auto;
-	height: ~"calc(100% - "@sidebar--toggle-height~" - "@nav-height~")";
 	width: 100%;
 
 	&::-webkit-scrollbar { background-color: @article-bg; width: @scrollbar-width; }
@@ -52,7 +50,6 @@ a {
 		background-position: center center;
 		background-size: cover !important;
 		background-repeat: no-repeat;
-		position: relative;
 
 		h1 {
 			margin-bottom: 0;
@@ -64,10 +61,9 @@ a {
 	}
 }
 .article-content {
-	display: inline-block;
 	text-align: left;
-	margin: 0 auto;
 	width: 100%;
+	max-width: 760px;
 	color: @article-text;
 
 	a:link,
@@ -102,23 +98,45 @@ a {
 		transition: color 0.2s ease;
 		color: @default-text-color;
 	}
-	a code {
-		&:after {
-			content: "";
-			position: absolute;
-			top: -1px;
-			right: -1px;
-			width: 0;
-			height: 0;
-			border-style: solid;
-			border-width: 0 .5em .5em 0;
-			border-color: transparent @article-code-color transparent transparent;
-			opacity: .5;
-			transition: all .2s;
-		}
-		&:hover:after {
-			opacity: 1;
-			border-color: transparent @default-link-hover transparent transparent;
+	p,li {
+		a {
+			code {
+				position: relative;
+				&:after {
+					content: "";
+					position: absolute;
+					top: -1px;
+					right: -1px;
+					width: 0;
+					height: 0;
+					border-style: solid;
+					border-width: 0 .5em .5em 0;
+					border-color: transparent @article-code-color transparent transparent;
+					opacity: .5;
+					transition: all .2s;
+				}
+				&:hover:after {
+					opacity: 1;
+					border-color: transparent @default-link-hover transparent transparent;
+				}
+			}
+			&.btn {
+				display: inline-block;
+				color: @g20-white;
+				font-size: .95rem;
+				padding: .5em 1em;
+				margin: 1em 0 1.5em;
+
+				&.download:before {
+					content: '\e964';
+					font-family: 'icomoon';
+					font-size: 1.15em;
+					font-weight: normal;
+					vertical-align: bottom;
+					display: inline;
+					margin-right: .5em;
+				}
+			}
 		}
 	}
 
@@ -141,13 +159,13 @@ a {
 		line-height: 1.45em;
 	}
 	table {
-		display: block;
-		margin-bottom: @margin-bottom-base;
+		margin: 1em 0 @margin-bottom-base;
 		overflow-x: auto;
+		background-color: @article-bg;
 	}
 
 	/* Headings */
-	h1,h2,h3,h4 {
+	h1,h2,h3,h4,h5,h6 {
 		width: 100%;
 		color: @article-text-heading;
 
@@ -180,17 +198,26 @@ a {
 	h2 {
 		font-size: @heading2Size;
 		font-weight: 600;
-		padding-bottom: 0.25em;
-		margin-top: 1.5em;
-		border-bottom: 2px solid @article-line-color;
+		margin: 1.5em 0 .5em;
 	}
 	h3 {
 		font-size: @heading3Size;
-		font-weight: 400;
+		font-weight: 700;
+		margin: 1em 0 .5em;
 	}
 	h4 {
 		font-size: @heading4Size;
 		font-weight: 400;
+		font-style: italic;
+		margin: 1.25em 0 .5em;
+	}
+	h5 {
+		line-height: 1.6em;
+	}
+	h6 {
+		font-size: @paragraphSize*.95;
+		font-style: italic;
+		line-height: 1.6em;
 	}
 
 	&.section-landing{
@@ -211,6 +238,7 @@ a {
 			display: list-item;;
 			list-style-position: outside;
 			padding-left: 0.5em;
+			margin-bottom: .25em;
 		}
 		p {
 			margin-left: 0;
@@ -242,7 +270,7 @@ a {
 		width: 100%;
 		margin-left: 0;
 		margin-bottom: 0;
-		margin-top: 1.25em;
+		margin-top: .25em;
 	}
 	hr {
 		width: 100%;
@@ -257,9 +285,6 @@ a {
 		max-width: 100%;
 		height: auto;
 		border-radius: @radius;
-	}
-	table {
-		background-color: @article-bg;
 	}
 	td,
 	th {
@@ -348,8 +373,6 @@ a {
 		border-color: @article-code-border;
 		border-style: solid;
 		padding: 0.1em 0.5em;
-		position: relative;
-		top: -0.1em;
 		-webkit-font-smoothing: subpixel-antialiased !important;
 		-moz-osx-font-smoothing: auto !important;
 		font-weight: 400 !important;
@@ -365,7 +388,6 @@ a {
 		border-width: @border-small-screen @border-small-screen @border-small-screen @thick-left-border;
 		background-color: @article-code-bg;
 		border-color: @article-code-border;
-    position: relative;
     z-index: 99;
 		line-height: 1.1em !important;
 
@@ -385,6 +407,105 @@ a {
 			border: 4px solid @article-code-bg;
 			background-color: @article-code-scrollbar;
 			border-radius: calc(@scrollbar-width / 2);
+		}
+	}
+}
+
+.page-nav-btns {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	margin: 3em 0 2em;
+
+	a {
+		display: flex;
+		align-items: center;
+		color: @g20-white !important;
+		font-size: .95rem;
+		padding: .75rem 1rem;
+		margin: 0 .15rem;
+
+		&.prev {
+			position: absolute;
+			left: 0;
+			&:before {
+				content: '\e804';
+				font-family: 'icomoon';
+				font-size: .85rem;
+				font-weight: normal;
+				vertical-align: middle;
+				display: inline;
+				margin-right: .85rem;
+			}
+		}
+
+		&.next {
+			position: absolute;
+			right: 0;
+			&:after {
+				content: '\e805';
+				font-family: 'icomoon';
+				font-size: .85rem;
+				font-weight: normal;
+				vertical-align: middle;
+				display: inline;
+				margin-left: .85rem;
+			}
+		}
+	}
+}
+
+//
+// Content truncater
+// --------------------------------------------------
+
+.truncate {
+	position: relative;
+	margin-bottom: 3.5rem;
+
+	.truncate-bottom {
+		position: absolute;
+		bottom: -30px;
+		width: 100%;
+		z-index: 100%;
+		height: auto;
+	}
+
+	a.truncate-toggle {
+		display: block;
+		width: 100px;
+		margin: 0 auto;
+		color: @article-text;
+		background: @article-bg;
+		padding: .45rem;
+		text-align: center;
+		font-size: .75rem;
+		text-transform: uppercase;
+		border-radius: @radius;
+		transition: color .2s;
+		&:before{
+			content: "Show Less"
+		}
+		&:hover {
+			color: @default-link-color;
+		}
+	}
+	&.closed {
+		min-height: 200px;
+		max-height: 25vh;
+		overflow: hidden;
+
+		.truncate-bottom {
+			bottom: 0;
+			background-image: linear-gradient(to bottom, @article-bg-rgba-0, @article-bg-rgba-1);
+			height: 100px;
+		}
+
+		a.truncate-toggle {
+			margin-top: 75px;
+			&:before {
+				content: "Show More"
+			}
 		}
 	}
 }
@@ -649,26 +770,11 @@ a {
 @media (min-width: @breakpoint-small) {
 	.article {
 		padding-left: @sidebar-small-width;
-		height: ~"calc(100% - "@nav-height~")";
 	}
 	.article-section {
 		padding: 3rem;
 	}
 	.article-content {
-		dt,
-		blockquote,
-		pre,
-		p,
-		ol,
-		ul,
-		.view-in-chronograf,
-		.vertical-tabs-container {
-			width: ~"calc(100% - "@indented-element-size~")";
-			margin-left: @indented-element-size;
-		}
-		table {
-			margin-left: @indented-element-size;
-		}
 		code,
 		pre,
 		td,
@@ -685,7 +791,7 @@ a {
 		padding-left: @sidebar-large-width;
 	}
 	.article-section {
-		padding: 5rem;
+		padding: 4.5rem;
 	}
 	.old-version {
 		width: 60%;

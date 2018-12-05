@@ -43,7 +43,7 @@ dropped.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[derivative](#description)&nbsp;(&nbsp;`field`&nbsp;`string`)** | Create a new node that computes the derivative of adjacent points.  |
+| **derivative&nbsp;(&nbsp;`field`&nbsp;`string`)** | Create a new node that computes the derivative of adjacent points.  |
 
 ### Property Methods
 

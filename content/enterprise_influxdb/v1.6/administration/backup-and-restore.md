@@ -20,8 +20,9 @@ The primary use cases for backup and restore are:
 InfluxDB Enterprise supports backing up and restoring data in a cluster, a single database, a single database and retention policy, and
 single [shard](/influxdb/v1.6/concepts/glossary/#shard).
 
-> **Note:** Backups are not interchangeable between [InfluxDB OSS](/influxdb/v1.6/) and InfluxDB Enterprise. You cannot restore an InfluxDB OSS backup to an InfluxDB Enterprise data node, nor can you restore an InfluxDB Enterprise backup to an InfluxDB OSS instance.
-> If you are working with InfluxDB OSS, see [Backing up and restoring in InfluxDB OSS](/influxdb/v1.6/administration/backup_and_restore/) in the InfluxDB OSS documentation.
+> **Note:** You can use the [new `backup` and `restore` utilities in InfluxDB OSS 1.5](/influxdb/v1.5/administration/backup_and_restore/) to:
+> * Restore InfluxDB Enterprise 1.5 backup files to InfluxDB OSS 1.5.
+> * Back up InfluxDB OSS 1.5 data that can be restored in InfluxDB Enterprise 1.5.
 
 ## Backup
 
@@ -48,7 +49,7 @@ influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/features/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Backup options:
@@ -179,7 +180,7 @@ The system automatically drops the `_internal` database when it performs a compl
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/features/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Restore options:
@@ -209,7 +210,7 @@ complete restore.
 
 #### Global options:
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/features/cluster-commands/#global-options)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.6/administration/cluster-commands/#global-options)
 for a complete list of the global `influxd-ctl` options.
 
 #### Restore options:
@@ -333,6 +334,6 @@ The unintended data, however, include only the metastore information, not the sh
 
 #### Issue 2: Restore a backup created prior to version 1.2.0
 
-InfluxEnterprise introduced incremental backups in version 1.2.0.
+InfluxDB Enterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, be sure to follow the syntax
 for [restoring from a full backup](#syntax-for-a-restore-from-a-full-backup).

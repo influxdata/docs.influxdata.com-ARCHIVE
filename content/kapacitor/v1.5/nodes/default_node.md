@@ -35,7 +35,7 @@ Available Statistics:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[default](#description)&nbsp;(&nbsp;)** | Create a node that can set defaults for missing tags or fields.  |
+| **default&nbsp;(&nbsp;)** | Create a node that can set defaults for missing tags or fields.  |
 
 ### Property Methods
 

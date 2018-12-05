@@ -54,6 +54,7 @@ influxd backup
     [ -host <host:port> ]
     [ -retention <rp_name> ] | [ -shard <shard_ID> -retention <rp_name> ]
     [ -start <timestamp> [ -end <timestamp> ] | -since <timestamp> ]
+    [ -skip-errors ]
     <path-to-backup>
 ```
 
@@ -88,6 +89,7 @@ Optional arguments are enclosed in brackets.
 
 - `[ -since <timestamp> ]`: Perform an incremental backup after the specified timestamp [RFC3339 format](https://www.ietf.org/rfc/rfc3339.txt). Use `-start` instead, unless needed for legacy backup support.
 
+- `[ -skip-errors ]`: Optional flag to continue backing up the remaining shards when the current shard fails to back up.
 
 #### Backup examples
 
@@ -129,6 +131,17 @@ influxd restore [ -db <db_name> ]
     [ -shard <shard_ID> ]
     <path-to-backup-files>
 ```
+<dt>
+Restoring backups that specified time periods (using `-start` and `-end`)
+
+Backups that specified time intervals using the `-start` or `-end` arguments are performed on blocks of data and not on a point-by-point basis. Since most blocks are highly compacted, extracting each block to inspect each point creates both a computational and disk-space burden on the running system.
+Each data block is annotated with starting and ending timestamps for the time interval included in the block. When you specify `-start` or `-end` timestamps, all of the specified data is backed up, but other data points that are in the same blocks will also be backed up.
+
+**Expected behavior**
+
+- When restoring data, you are likely to see data that is outside of the specified time periods.
+- If  duplicate data points are included in the backup files, the points will be written again, overwriting any existing data.
+</dt>
 
 #### Arguments
 

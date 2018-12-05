@@ -32,8 +32,8 @@ Reference documentation for the InfluxDB HTTP API.
 
 Go straight to the reference documentation on:
 
-* [Writing data with the HTTP API](/influxdb/v1.6/tools/api/#write)
-* [Querying data with the HTTP API](/influxdb/v1.6/tools/api/#query)
+* [Writing data with the HTTP API](/influxdb/v1.6/tools/api/#write-http-endpoint)
+* [Querying data with the HTTP API](/influxdb/v1.6/tools/api/#query-http-endpoint)
 
 For friendlier documentation, see the guides on
 [writing data](/influxdb/v1.6/guides/writing_data/) and

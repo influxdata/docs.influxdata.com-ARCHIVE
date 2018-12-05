@@ -37,7 +37,7 @@ This section covers some of the common use cases for the anti-entropy service.
 
 If a data node suddenly disappears, e.g. due to a catastrophic hardware failure, as soon as a new data node is online, the anti-entropy service will copy the correct shards to the new replacement node. The time it takes for the copying to complete is determined by the number of shards to be copied and how much data is stored in each.
 
-*View the [Replacing Data Nodes](/enterprise_influxdb/v1.5/guides/replacing-nodes/#replacing-data-nodes) documentation for instructions on replacing data nodes in your InfluxDB Enterprise cluster.*
+*View the [Replacing Data Nodes](/enterprise_influxdb/v1.5/guides/replacing-nodes/#replacing-data-nodes-in-an-influxdb-enterprise-cluster) documentation for instructions on replacing data nodes in your InfluxDB Enterprise cluster.*
 
 ### Scenario 2: Replacing a machine that is running a data node
 

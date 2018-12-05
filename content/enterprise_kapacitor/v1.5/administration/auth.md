@@ -1021,4 +1021,4 @@ $ curl --negotiate -u "admin:changeit" -s https://cluster_node_1:8091/role?name=
 ```
 ### Kapacitor user and privilege management using Chronograf
 
-See [Kapacitor user and privilege management](/chronograf/v1.4/administration/kapacitor-user-privilege-management/) in the Chronograf documentation.
+See [Kapacitor user and privilege management](/chronograf/latest/administration/managing-influxdb-users/) in the Chronograf documentation.

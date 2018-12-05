@@ -30,6 +30,12 @@ body.docs-theme--enterprise_kapacitor {
     a.top:hover {
       background: @kapacitor-link-hover;
     }
+    a.btn {
+      background: @kapacitor-btn;
+      &:hover {
+        background: @kapacitor-btn-hover;
+      }
+    }
     &.section-landing{
   		h2 a.off-page:link:hover {
   			color: @kapacitor-link !important;
@@ -73,5 +79,10 @@ body.docs-theme--enterprise_kapacitor {
   }
   .navbar--product-menu {
     .gradient-v(@kapacitor-dropdown-gradient-a,@kapacitor-dropdown-gradient-b);
+  }
+
+  // Tab Labels
+  .tabs a.is-active {
+    background: @kapacitor-link;
   }
 }

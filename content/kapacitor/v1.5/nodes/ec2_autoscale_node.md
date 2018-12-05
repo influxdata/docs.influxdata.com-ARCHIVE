@@ -76,7 +76,7 @@ Available Statistics:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[ec2Autoscale](#description)&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for an EC2 Autoscale group.  |
+| **ec2Autoscale&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for an EC2 Autoscale group.  |
 
 ### Property Methods
 

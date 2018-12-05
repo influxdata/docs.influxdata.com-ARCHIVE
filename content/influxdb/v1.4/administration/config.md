@@ -87,7 +87,7 @@ The InfluxDB system has internal defaults for all of the settings in the configu
 The local InfluxDB configuration file is located here:
 
 - Linux: `/etc/influxdb/influxdb.conf`
-- MacOS: `/usr/local/etc/influxdb.conf`
+- macOS: `/usr/local/etc/influxdb.conf`
 
 Settings that are commented out are set to the internal system defaults. Uncommented settings override the internal defaults.
 Note that the local configuration file does not need to include every configuration setting.
@@ -183,7 +183,7 @@ which stores information on users, databases, retention policies, shards, and co
 The `meta` directory.
 Files in the `meta` directory include `meta.db`, the InfluxDB metastore file.
 
->**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/meta`
+>**Note:** The default directory for macOS installations is `/Users/<username>/.influxdb/meta`
 
 Environment variable: `INFLUXDB_META_DIR`
 
@@ -212,7 +212,7 @@ The `[data]` settings control where the actual shard data for InfluxDB lives and
 The directory where InfluxDB stores the data.
 This directory may be changed.
 
->**Note:** The default directory for OS X installations is `/Users/<username>/.influxdb/data`.
+>**Note:** The default directory for macOS installations is `/Users/<username>/.influxdb/data`.
 
 Environment variable: `INFLUXDB_DATA_DIR`
 
@@ -228,7 +228,7 @@ Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 The WAL directory is the location of the [write ahead log](/influxdb/v1.4/concepts/glossary/#wal-write-ahead-log).
 
->**Note:** The default WAL directory for Mac OS X installations is `/Users/<username>/.influxdb/wal`.
+>**Note:** The default WAL directory for macOS installations is `/Users/<username>/.influxdb/wal`.
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
 

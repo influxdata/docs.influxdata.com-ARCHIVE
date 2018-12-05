@@ -57,7 +57,7 @@ In the following example, all combinations triples are created:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[combine](#description)&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Combine this node with itself. The data are combined on timestamp.  |
+| **combine&nbsp;(&nbsp;`expressions`&nbsp;`...ast.LambdaNode`)** | Combine this node with itself. The data are combined on timestamp.  |
 
 ### Property Methods
 

@@ -20,16 +20,15 @@
 // --------------------------------------------------
 
 html {
-	overflow: hidden;
+	overflow: auto;
 }
 html,body {
 	width: 100%;
 	height: 100%;
 	background-color: @body-bg-color;
+  -webkit-overflow-scrolling: touch;
 }
 body {
-	padding-top: @nav-height;
-	padding-bottom: @sidebar--toggle-height;
 	color: @default-text-color;
 	line-height: 1;
 	overflow: auto;
@@ -165,7 +164,7 @@ table {
 @import "layout-article.less";
 @import "layout-home.less";
 @import "layout-error-pages.less";
-@import "vertical-tabs.less";
+@import "tabs.less";
 
 //
 // Media Queries

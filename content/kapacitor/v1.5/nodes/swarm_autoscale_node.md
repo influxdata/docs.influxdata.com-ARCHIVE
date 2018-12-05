@@ -77,7 +77,7 @@ Available Statistics:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[swarmAutoscale](#description)&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for a Docker swarm cluster.  |
+| **swarmAutoscale&nbsp;(&nbsp;)** | Create a node that can trigger autoscale events for a Docker swarm cluster.  |
 
 ### Property Methods
 

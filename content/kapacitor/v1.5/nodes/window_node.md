@@ -43,7 +43,7 @@ new data and `5 minutes` of the previous period's data.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[window](#description)&nbsp;(&nbsp;)** | Create a new node that windows the stream by time.  |
+| **window&nbsp;(&nbsp;)** | Create a new node that windows the stream by time.  |
 
 ### Property Methods
 

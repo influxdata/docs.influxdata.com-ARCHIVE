@@ -15,7 +15,7 @@ menu:
 * [Enterprise licensing](#enterprise-licensing)
 * [Authentication](#authentication)
 * [Cluster communications](#cluster-communications)
-* [Remote procedure calls (RPCs)](#remote-procedure-calls--rpcs-)
+* [Remote procedure calls (RPCs)](#remote-procedure-calls-rpcs)
 
 <br/>
 Kapacitor Enterprise configuration shares the same principles as those presented

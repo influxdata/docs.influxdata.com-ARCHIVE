@@ -101,7 +101,7 @@ errors
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[join](#description)&nbsp;(&nbsp;`others`&nbsp;`...Node`)** | Join this node with other nodes. The data are joined on timestamp.  |
+| **join&nbsp;(&nbsp;`others`&nbsp;`...Node`)** | Join this node with other nodes. The data are joined on timestamp.  |
 
 ### Property Methods
 

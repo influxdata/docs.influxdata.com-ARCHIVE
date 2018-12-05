@@ -30,6 +30,12 @@ body.docs-theme--chronograf {
     a.top:hover {
       background: @chronograf-link-hover;
     }
+    a.btn {
+      background: @chronograf-btn;
+      &:hover {
+        background: @chronograf-btn-hover;
+      }
+    }
     &.section-landing{
   		h2 a.off-page:link:hover {
   			color: @chronograf-link !important;
@@ -73,5 +79,10 @@ body.docs-theme--chronograf {
   }
   .navbar--product-menu {
     .gradient-v(@chronograf-dropdown-gradient-a,@chronograf-dropdown-gradient-b);
+  }
+
+  // Tab Labels
+  .tabs a.is-active {
+    background: @chronograf-link;
   }
 }

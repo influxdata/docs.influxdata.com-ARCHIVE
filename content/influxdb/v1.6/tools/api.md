@@ -170,16 +170,20 @@ HEAD http://localhost:8086/ping
 
 ### Example
 
-Extract the version of your InfluxDB instance in the `X-Influxdb-Version` field
-of the header:
+You can use the `/ping` endpoint to find the build and version of an InfluxDB instance.
+The `X-Influxdb-Build` header field displays the InfluxDB build type, either `OSS` (open source) or `ENT` (Enterprise).
+The `X-Influxdb-Version` header field displays the InfluxDB version.
+
 ```bash
-$ curl -sl -I localhost:8086/ping
+~ curl -sl -I http://localhost:8086/ping
 
 HTTP/1.1 204 No Content
 Content-Type: application/json
-Request-Id: [...]
-X-Influxdb-Version: 1.4.x
-Date: Wed, 08 Nov 2017 00:09:52 GMT
+Request-Id: 9c353b0e-aadc-11e8-8023-000000000000
+X-Influxdb-Build: OSS
+X-Influxdb-Version: v1.6.2
+X-Request-Id: 9c353b0e-aadc-11e8-8023-000000000000
+Date: Tue, 28 Aug 2018 16:08:32 GMT
 ```
 
 ### Status Codes and Responses
@@ -279,7 +283,7 @@ That behavior is configurable; see the [`max-row-limit`](/influxdb/v1.6/administ
 \** The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.6/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
-See below for an [example](#example-4-create-a-database-using-basic-authentication) of basic authentication.
+See below for an [example](#create-a-database-using-basic-authentication) of basic authentication.
 
 #### Examples
 
@@ -595,7 +599,7 @@ POST http://localhost:8086/write
 \* The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.6/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
-See below for an [example](#example-4-write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
+See below for an [example](#write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
 
 \*\* We recommend using the least precise precision possible as this can result
 in significant improvements in compression.

@@ -29,13 +29,13 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 
 ## Installation
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
   [Ubuntu & Debian](#)
   [RedHat & CentOS](#)
   [SLES & openSUSE](#)
   [FreeBSD/PC-BSD](#)
-  [MAC OS X](#)
+  [macOS](#)
   [Windows](#)
 {{% /tabs %}}
 {{< tab-content-container >}}
@@ -132,7 +132,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   The configuration file is located at `/usr/local/etc/telegraf.conf` with examples in `/usr/local/etc/telegraf.conf.sample`.
 {{% /tab-content %}}
 {{% tab-content %}}
-  Users of OS X 10.8 and higher can install Telegraf using the [Homebrew](http://brew.sh/) package manager.
+  Users of macOS 10.8 and higher can install Telegraf using the [Homebrew](http://brew.sh/) package manager.
   Once `brew` is installed, you can install Telegraf by running:
 
   ```bash
@@ -161,7 +161,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   ```
 {{% /tab-content %}}
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 ## Configuration
 

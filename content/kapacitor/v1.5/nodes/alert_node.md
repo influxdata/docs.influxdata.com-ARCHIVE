@@ -23,7 +23,7 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 
 | Chaining method | Description |
 |:---------|:---------|
-| **[alert](#description)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
+| **alert&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
 
 ### Property methods
 

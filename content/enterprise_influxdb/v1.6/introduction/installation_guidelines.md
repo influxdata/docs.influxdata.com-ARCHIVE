@@ -25,10 +25,12 @@ The [Production installation](/enterprise_influxdb/v1.6/production_installation/
 
 > **Note:** If you install InfluxDB Enterprise with the QuickStart installation process you will need to reinstall InfluxDB Enterprise with the Production installation process before using the product in a production environment.
 
+There are [other installation options](/enterprise_influxdb/v1.6/other_installation/) available to easily install an InfluxDB Enterprise cluster in select environments.
+
 ## Requirements for InfluxDB Enterprise clusters
 
 Review [Clustering Guide](/enterprise_influxdb/v1.6/concepts/clustering/)
-for an overview of the architecture and concepts in an InfluxEnterprise Cluster
+for an overview of the architecture and concepts in an InfluxDB Enterprise Cluster
 and the [Hardware sizing guide](http://docs.influxdata.com/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster) for information on provisioning the correct servers.
 
 For clusters using a license key and not a license file, all nodes must be able to contact `portal.influxdata.com`
@@ -48,13 +50,13 @@ If you alter the default ports in the configuration file(s), ensure the configur
 
 #### Synchronize time between hosts
 
-InfluxEnterprise uses hosts' local time in UTC to assign timestamps to data and for coordination purposes.
+InfluxDB Enterprise uses hosts' local time in UTC to assign timestamps to data and for coordination purposes.
 Use the Network Time Protocol (NTP) to synchronize time between hosts.
 
 #### Use SSDs
 
 Clusters require sustained availability of 1000-2000 IOPS from the attached storage.
-SANs must guarantee at least 1000 IOPS is always available to InfluxEnterprise
+SANs must guarantee at least 1000 IOPS is always available to InfluxDB Enterprise
 nodes or they may not be sufficient.
 SSDs are strongly recommended, and we have had no reports of IOPS contention from any customers running on SSDs.
 

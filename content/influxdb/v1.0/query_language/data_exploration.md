@@ -1336,7 +1336,7 @@ Reports the value from the previous time interval for time intervals with no dat
 
 #### Examples
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [Example 1: fill(100)](#)
 [Example 2: fill(none)](#)
@@ -1475,7 +1475,7 @@ the value from the previous time interval.
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 #### Common issues with `fill()`
 
@@ -2748,7 +2748,7 @@ Separate multiple [`SELECT` statements](#the-basic-select-statement) in a query 
 
 ### Examples:
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [Example 1: CLI](#)
 [Example 2: HTTP API](#)
@@ -2830,4 +2830,4 @@ With InfluxDB's [HTTP API](/influxdb/v1.0/tools/api/):
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
