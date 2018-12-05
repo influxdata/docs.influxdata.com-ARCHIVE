@@ -22,7 +22,7 @@ a [StreamNode.](/kapacitor/v1.5/nodes/stream_node/)
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stream](#description)** | Has no constructor signature. |
+| **stream** | Has no constructor signature. |
 
 ### Property Methods
 

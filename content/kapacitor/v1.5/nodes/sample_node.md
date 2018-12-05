@@ -40,7 +40,7 @@ for ensuring data is aligned with a boundary.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[sample](#description)&nbsp;(&nbsp;`rate`&nbsp;`interface{}`)** | Create a new node that samples the incoming points or batches.  |
+| **sample&nbsp;(&nbsp;`rate`&nbsp;`interface{}`)** | Create a new node that samples the incoming points or batches.  |
 
 ### Property Methods
 

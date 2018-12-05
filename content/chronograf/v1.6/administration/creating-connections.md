@@ -132,7 +132,7 @@ To use Kapacitor in Chronograf, create Kapacitor connections and configure alert
 To create a Kapacitor connection using the Chronograf UI:
 
 1. Open Chronograf and click **Configuration** (wrench icon) in the navigation menu.
-2. Next to an existing [InfluxDB connection](#managing-influx-db-connections), click **Add Kapacitor Connection** if there are no existing Kapacitor connections or select **Add Kapacitor Connection** in the **Kapacitor Connection** dropdown list.
+2. Next to an existing [InfluxDB connection](#managing-influxdb-connections-using-the-chronograf-ui), click **Add Kapacitor Connection** if there are no existing Kapacitor connections or select **Add Kapacitor Connection** in the **Kapacitor Connection** dropdown list.
 
 ![Add a new Kapacitor connection in Chronograf](/img/chronograf/v1.6/connection-kapacitor.png)
 

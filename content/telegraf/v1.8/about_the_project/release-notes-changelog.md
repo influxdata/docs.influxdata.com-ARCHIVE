@@ -8,43 +8,96 @@ menu:
     parent: About the project
 ---
 
+## v1.8.3 [2018-10-30]
+
+### Bug fixes
+
+- Add DN attributes as tags in X.509 Certificate (`x509_cert`) input to avoid series overwrite.
+- Prevent connection leak by closing unused connections in AMQP (`amqp`) output.
+- Use default partition key when tag does not exist in Amazon Kinesis (`kinesis`) output.
+- Log the correct error in JTI OpenConfig (`jti_openconfig`).
+- Handle panic when IMPI input (`ipmi_sensor`) gets bad input.
+- Don't add unserializable fields to Jolokia2 (`jolokia2`) input.
+- Fix version check in PostgreSQL plugin (`postgresql_extensible`).
+
+## v1.8.2 [2018-10-17]
+
+### Bug fixes
+
+* Aerospike (`aerospike`) input plugin
+  * Support uint fields.
+* Docker (`docker`) input plugin
+  * Use container name from list if no name in container stats.
+* Filecount (`filecount`) input plugin
+  * Prevent panic on error in file stat.
+* InfluxDB v2 (`influxdb_v2`) input plugin
+  * Update write path to match updated v2 API.
+* Logparser (`logparser`) input plugin
+  * Fix panic.
+* MongoDB (`mongodb`) input plugin
+  * Lower authorization errors to debug level.
+* MQTT Consumer (`mqtt_consumer`) input plugin
+  * Fix connect and reconnect.
+* Ping (`ping`) input plugin
+  * Return correct response code.
+* VMware vSphere (`vsphere`) input plugin
+  * Fix missing timeouts.
+* X.509 Certificate (`x509_cert`) input plugin
+  * Fix segfault.
+
+## v1.8.1 [2018-10-03]
+
+### Bug fixes
+
+- Fix `hardware_type` may be truncated in Microsoft SQL Server (`sqlserver`) input plugin.
+- Improve performance in Basicstats (`basicstats`) aggregator plugin.
+- Add `hostname` to TLS config for SNI support in X.509 Certicate (`x509_cert`) input plugin.
+- Don't add tags with empty values to OpenTSDB (`opentsdb`) output plugin.
+- Fix panic during network error in VMware vSphere (`vsphere`) input plugin.
+- Unify error response in HTTP Listener (`http_listener`) input plugin with InfluxDB (`influxdb`) output plugin.
+- Add `UUID` to VMs in VMware vSphere (`vsphere`) input plugin.
+- Skip tags with empty values in Amazon Cloudwatch (`cloudwatch`) output plugin.
+- Fix missing non-realtime samples in VMware vSphere (`vsphere`) input plugin.
+- Fix case of `timezone`/`grok_timezone` options in grok parser and logparser input plugin.
+
 ## v1.8 [2018-09-21]
 
 ### New input plugins
 
-- [ActiveMQ (`activemq`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/activemq/) - Contributed by @mlabouardy
-- [Beanstalkd (`beanstalkd`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/beanstalkd/) - Contributed by @44px
-- [Filecount (`filecount`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/filecount/) - Contributed by @sometimesfood
-- [File (`file`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/file/) - Contributed by @maxunt
-- [Icinga2 (`icinga2`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/icinga2/) - Contributed by @mlabouardy
-- [Kibana (`kibana`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/icinga2/) - Contributed by @lpic10
-- [PgBouncer (`pgbouncer`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/pgbouncer/) - Contributed by @nerzhul
-- [Temp (`temp`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/temp/) - Contributed by @pytimer
-- [Tengine (`tengine`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/tengine/) - Contributed by @ertaoxu
-- [VMware vSphere (`vsphere`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/vsphere/) - Contributed by @prydin
-- [X509 Cert (`x509_cert`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/x509_cert/) - Contributed by @jtyr
+- [ActiveMQ (`activemq`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/activemq/README.md) - Contributed by @mlabouardy
+- [Beanstalkd (`beanstalkd`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/beanstalkd/README.md) - Contributed by @44px
+- [File (`file`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/file/README.md) - Contributed by @maxunt
+- [Filecount (`filecount`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/filecount/README.md) - Contributed by @sometimesfood
+- [Icinga2 (`icinga2`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/icinga2/README.md) - Contributed by @mlabouardy
+- [Kibana (`kibana`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/kibana/README.md) - Contributed by @lpic10
+- [PgBouncer (`pgbouncer`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/pgbouncer/README.md) - Contributed by @nerzhul
+- [Temp (`temp`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/temp/README.md) - Contributed by @pytimer
+- [Tengine (`tengine`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/tengine/README.md) - Contributed by @ertaoxu
+- [VMware vSphere (`vsphere`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/vsphere/README.md) - Contributed by @prydin
+- [X.509 Certificate (`x509_cert`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/inputs/x509_cert/README.md) - Contributed by @jtyr
 
 ### New processor plugins
 
-- [Enum (`enum`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/enum/) - Contributed by @KarstenSchnitter
-- [Parser (`parser`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/parser/) - Contributed by @Ayrdrie & @maxunt
-- [Rename (`rename`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/rename/) - Contributed by @goldibex
-- [Strings (`strings`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/processors/strings/) - Contributed by @bsmaldon
+- [Enum (`enum`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/enum/README.md) - Contributed by @KarstenSchnitter
+- [Parser (`parser`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/parser/README.md) - Contributed by @Ayrdrie & @maxunt
+- [Rename (`rename`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/rename/README.md) - Contributed by @goldibex
+- [Strings (`strings`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/processors/strings/README.md) - Contributed by @bsmaldon
 
 ### New aggregator plugins
 
-- [ValueCounter (`valuecounter`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/aggregators/valuecounter/) - Contributed by @piotr1212
+- [ValueCounter (`valuecounter`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/aggregators/valuecounter/README.md) - Contributed by @piotr1212
 
 ### New output plugins
 
-- [Azure Monitor (`azure_monitor`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/azure_monitor/) - Contributed by @influxdata
-- [InfluxDB v2 (`influxdb_v2`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb_v2/) - Contributed by @influxdata
+- [Azure Monitor (`azure_monitor`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) - Contributed by @influxdata
+- [InfluxDB v2 (`influxdb_v2`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/influxdb_v2/README.md) - Contributed by @influxdata
 
 ### New input data formats (parsers)
 
 - [csv](/telegraf/v1.8/data_formats/input/csv) - Contributed by @maxunt
 - [grok](/telegraf/v1.8/data_formats/input/grok/) - Contributed by @maxunt
 - [logfmt](/telegraf/v1.8/data_formats/input/logfmt/) - Contributed by @Ayrdrie & @maxunt
+- [wavefront](/telegraf/v1.8/data_formats/input/wavefront) - Contributed by @puckpuck
 
 ### New output data formats (serializers)
 
@@ -1152,7 +1205,7 @@ consistent with the behavior of `collection_jitter`.
 - Make DNS lookups for chrony configurable.
 - Allow wildcard filtering of varnish stats.
 - Support for glob patterns in exec plugin commands configuration.
-- RabbitMQ input: made url parameter optional by using DefaultURL (http://localhost:15672) if not specified.
+- RabbitMQ input: made url parameter optional by using DefaultURL (`http://localhost:15672`) if not specified.
 - Limit AWS GetMetricStatistics requests to 10 per second.
 - RabbitMQ/Apache/InfluxDB inputs: made url(s) parameter optional by using reasonable input defaults if not specified.
 - Refactor of flush_jitter argument.

@@ -1,144 +1,198 @@
 ---
 title: Telegraf output plugins
-descriptions: Telegraf output plugins are used with the InfluxData time series platform to transform, decorate, and filter metrics. Supported output plugins include Datadog, Elasticsearch, Graphite, InfluxDB, Kafka, MQTT, Prometheus Client, Riemann, and Wavefront.
+descriptions: Use Telegraf output plugins to transform, decorate, and filter metrics. Supported output plugins include Datadog, Elasticsearch, Graphite, InfluxDB, Kafka, MQTT, Prometheus Client, Riemann, and Wavefront.
 menu:
   telegraf_1_8:
     name: Output
     weight: 20
     parent: Plugins
 ---
-
 Telegraf allows users to specify multiple output sinks in the configuration file.
-
-> ***Note:*** Telegraf plugins added in the current release are noted with ` -- NEW in v1.8`.
->The [Release notes and changelog](/telegraf/v1.8/about_the_project/release-notes-changelog) has a list of new plugins and updates for other plugins. See the plugin README files for more details.
 
 ## Supported Telegraf output plugins
 
-### [Amon (`amon`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/amon)
+### Amazon CloudWatch
 
-The [Amon (`amon`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/amon) writes to [Amon](https://www.amon.cx) and requires a serverkey and amoninstance URL which can be obtained [here](https://www.amon.cx/docs/monitoring/) for the account.
+Plugin ID: `outputs.cloudwatch`
 
-If the point value being sent cannot be converted to a float64, the metric is skipped.
+The [Amazon CloudWatch output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/cloudwatch/README.md) send metrics to Amazon CloudWatch.
+
+### Amazon Kinesis
+
+Plugin ID: `outputs.kinesis`
+
+The [Amazon Kinesis output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/kinesis/README.md) is an experimental plugin that is still in the early stages of development. It will batch up all of the Points in one Put request to Kinesis. This should save the number of API requests by a considerable level.
+
+### Amon
+
+Plugin ID: `outputs.amon`
+
+The [Amon output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/amon/README.md) writes metrics to an  [Amon server](https://github.com/amonapp/amon). For details on the Amon Agent, see [Monitoring Agent](https://docs.amon.cx/agent/) and requires a `apikey` and `amoninstance` URL.
+
+If the point value being sent cannot be converted to a float64 value, the metric is skipped.
 
 Metrics are grouped by converting any `_` characters to `.` in the Point Name.
 
-### [AMQP (`amqp`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/amqp)
+### AMQP  
 
-The [AMQP (`amqp`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/amqp) writes to a AMQP 0-9-1 Exchange, a prominent implementation of this protocol being [RabbitMQ](https://www.rabbitmq.com/).
+Plugin ID: `outputs.amqp`
+
+The [AMQP output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/amqp/README.md) writes to a AMQP 0-9-1 Exchange, a prominent implementation of this protocol being [RabbitMQ](https://www.rabbitmq.com/).
 
 Metrics are written to a topic exchange using `tag`, defined in configuration file as `RoutingTag`, as a routing key.
 
-### [Application Insights (`application_insights`)](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights)
+### Apache Kafka
 
-The [Application Insights (`application_insights`) output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights) writes Telegraf metrics to [Application Insights (Microsoft Azure)](https://azure.microsoft.com/en-us/services/application-insights/).
+Plugin ID: `outputs.kafka`
 
-### [Azure Monitor (`azure_monitor`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/azure_monitor) -- NEW in v.1.8
+The [Apache Kafka output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/kafka/README.md) writes to a [Kafka Broker](http://kafka.apache.org/07/quickstart.html) acting a Kafka Producer.
 
->**Note:** The Azure Monitor custom metrics service is currently in preview and not available in a subset of Azure regions.
+### CrateDB
 
-The [Azure Monitor (`azure_monitor`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/azure_monitor) sends custom metrics to Azure Monitor. Azure Monitor has a metric resolution of one minute. To handle this in Telegraf, the Azure Monitor output plugin automatically aggregates metrics into one minute buckets, which are then sent to Azure Monitor on every flush interval.
+Plugin ID: `cratedb`
 
-The metrics from each input plugin will be written to a separate Azure Monitor namespace, prefixed with `Telegraf/` by default. The field name for each metric is written as the Azure Monitor metric name. All field values are written as a summarized set that includes `min`, `max`, `sum`, and `count`. Tags are written as a dimension on each Azure Monitor metric.
+The [CrateDB output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/cratedb/README.md) writes to [CrateDB](https://crate.io/) using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
 
-### [CloudWatch (`cloudwatch`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/cloudwatch)
+### Datadog
 
-The [CloudWatch (`cloudwatch`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/cloudwatch) send metrics to Amazon CloudWatch.
+Plugin ID: `outputs.datadog`
 
-### [CrateDB (`cratedb`)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb)
+The [Datadog output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/datadog/README.md) writes to the [Datadog Metrics API](http://docs.datadoghq.com/api/#metrics) and requires an `apikey` which can be obtained [here](https://app.datadoghq.com/account/settings#api) for the account.
 
-The [CrateDB (`cratedb`) output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/cratedb) writes to [CrateDB](https://crate.io/) using its [PostgreSQL protocol](https://crate.io/docs/crate/reference/protocols/postgres.html).
+### Discard
 
-### [Datadog (`datadog`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/datadog)
+Plugin ID: `outputs.discard`
 
-The [Datadog (`datadog`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/datadog) writes to the [Datadog Metrics API](http://docs.datadoghq.com/api/#metrics) and requires an `apikey` which can be obtained [here](https://app.datadoghq.com/account/settings#api) for the account.
+The [Discard output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/discard/README.md) simply drops all metrics that are sent to it. It is only meant to be used for testing purposes.
 
-### [Discard (`discard`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/discard)
+### Elasticsearch
 
-The [Discard (`discard`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/discard) simply drops all metrics that are sent to it. It is only meant to be used for testing purposes.
+Plugin ID: `outputs.elasticsearch`
 
-### [Elasticsearch (`elasticsearch`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/elasticsearch)
+The [Elasticsearch output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/elasticsearch/README.md) writes to Elasticsearch via HTTP using [Elastic](http://olivere.github.io/elastic/). Currently it only supports Elasticsearch 5.x series.
 
-The [Elasticsearch (`elasticsearch`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/elasticsearch) writes to Elasticsearch via HTTP using [Elastic](http://olivere.github.io/elastic/). Currently it only supports Elasticsearch 5.x series.
+### File
 
-### [File (`file`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/file)
+Plugin ID: `outputs.file`
 
-The [File (`file`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/file) writes Telegraf metrics to files.
+The [File output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/file/README.md) writes Telegraf metrics to files.
 
-### [Graphite (`graphite`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/graphite)
+### Graphite
 
-The [Graphite (`graphite`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/graphite) writes to [Graphite](http://graphite.readthedocs.org/en/latest/index.html) via raw TCP.
+Plugin ID: `outputs.graphite`
 
-### [Graylog (`graylog`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/graylog)
+The [Graphite output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/graphite/README.md) writes to [Graphite](http://graphite.readthedocs.org/en/latest/index.html) via raw TCP.
 
-The  [Graylog (`graylog`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/graylog) writes to a Graylog instance using the `gelf` format.
+### Graylog
 
-### [HTTP (`http`)](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http)
+Plugin ID: `outputs.graylog`
 
-The [HTTP (`http`) output plugin](https://github.com/influxdata/telegraf/tree/master/plugins/outputs/http) sends metrics in a HTTP message encoded using one of the output data formats. For `data_formats` that support batching, metrics are sent in batch format.
+The  [Graylog output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/graylog/README.md) writes to a Graylog instance using the `gelf` format.
 
-### [InfluxDB v1.x (`influxdb`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb)
+### HTTP
 
-The [InfluxDB v1.x (`influxdb`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb) writes to InfluxDB using HTTP or UDP.
+Plugin ID: `outputs.http`
 
-### [InfluxDB v2 (`influxdb_v2`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb)-- NEW in v.1.8
+The [HTTP output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/http/README.md) sends metrics in a HTTP message encoded using one of the output data formats. For `data_formats` that support batching, metrics are sent in batch format.
 
-The [InfluxDB v2 (`influxdb_v2`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/influxdb) writes metrics to the [InfluxDB 2.0](https://github.com/influxdata/platform) HTTP service.
+### InfluxDB v1.x
 
-### [Instrumental (`instrumental`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/instrumental)
+Plugin ID: `outputs.influxdb`
 
-The [Instrumental (`instrumental`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/instrumental) writes to the [Instrumental Collector API](https://instrumentalapp.com/docs/tcp-collector) and requires a Project-specific API token.
+The [InfluxDB v1.x output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/influxdb/README.md) writes to InfluxDB using HTTP or UDP.
+
+### InfluxDB v2
+
+Plugin ID: `outputs.influxdb_v2`
+
+The [InfluxDB v2 output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/influxdb_v2/README.md) writes metrics to the [InfluxDB 2.0](https://github.com/influxdata/platform) HTTP service.
+
+### Instrumental
+
+Plugin ID: `outputs.instrumental`
+
+The [Instrumental output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/instrumental/README.md) writes to the [Instrumental Collector API](https://instrumentalapp.com/docs/tcp-collector) and requires a Project-specific API token.
 
 Instrumental accepts stats in a format very close to Graphite, with the only difference being that the type of stat (gauge, increment) is the first token, separated from the metric itself by whitespace. The increment type is only used if the metric comes in as a counter through [[input.statsd]].
 
-### [Kafka (`kafka`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/kafka)
+### Librato
 
-The [Kafka (`kafka`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/kafka) writes to a [Kafka Broker](http://kafka.apache.org/07/quickstart.html) acting a Kafka Producer.
+Plugin ID: `outputs.librato`
 
-### [Kinesis (`kinesis`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/kinesis)
+The [Librato output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/librato/README.md) writes to the [Librato Metrics API](http://dev.librato.com/v1/metrics#metrics) and requires an `api_user` and `api_token` which can be obtained [here](https://metrics.librato.com/account/api_tokens) for the account.
 
-The [Kinesis (`kinesis`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/kinesis) is an experimental plugin that is still in the early stages of development. It will batch up all of the Points in one Put request to Kinesis. This should save the number of API requests by a considerable level.
+### Microsoft Azure Application Insights
 
-### [Librato (`librato`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/librato)
+Plugin ID: `outputs.application_insights`
 
-The [Librato (`librato`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/librato) writes to the [Librato Metrics API](http://dev.librato.com/v1/metrics#metrics) and requires an `api_user` and `api_token` which can be obtained [here](https://metrics.librato.com/account/api_tokens) for the account.
+The [Microsoft Azure Application Insights output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/application_insights/README.md) writes Telegraf metrics to [Application Insights (Microsoft Azure)](https://azure.microsoft.com/en-us/services/application-insights/).
 
-### [MQTT (`mqtt`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/mqtt)
+### Microsoft Azure Monitor
 
-The [MQTT (`mqtt`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/mqtt) writes to the MQTT server using [supported output data formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md).
+Plugin ID: `outputs.azure_monitor`
 
-### [NATS Output (`nats`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/nats)
+>**Note:** The Azure Monitor custom metrics service is currently in preview and not available in a subset of Azure regions.
 
-The [NATS Output (`nats`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/nats) writes to a (list of) specified NATS instance(s).
+The [Microsoft Azure Monitor output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/azure_monitor/README.md) sends custom metrics to [Microsoft Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/). Azure Monitor has a metric resolution of one minute. To handle this in Telegraf, the Azure Monitor output plugin automatically aggregates metrics into one minute buckets, which are then sent to Azure Monitor on every flush interval.
 
-### [NSQ (`nsq`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/nsq)
+For a Microsoft blog posting on using Telegraf with Microsoft Azure Monitor, see [Collect custom metrics for a Linux VM with the InfluxData Telegraf Agent](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/metrics-store-custom-linux-telegraf).
 
-  The [NSQ (`nsq`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/nsq) writes to a specified NSQD instance, usually local to the producer. It requires a server name and a topic name.
+The metrics from each input plugin will be written to a separate Azure Monitor namespace, prefixed with `Telegraf/` by default. The field name for each metric is written as the Azure Monitor metric name. All field values are written as a summarized set that includes `min`, `max`, `sum`, and `count`. Tags are written as a dimension on each Azure Monitor metric.
 
-  ### [OpenTSDB (`opentsdb`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/opentsdb)
+### MQTT Producer  
 
-  The [OpenTSDB (`opentsdb`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/opentsdb) writes to an OpenTSDB instance using either the telnet or HTTP mode.
+Plugin ID: `outputs.mqtt`
+
+The [MQTT Producer output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/mqtt/README.md) writes to the MQTT server using [supported output data formats](/telegraf/v1.8/data_formats/output/).
+
+### NATS Output
+
+Plugin ID: `outputs.nats`
+
+The [NATS Output output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/nats/README.md) writes to a (list of) specified NATS instance(s).
+
+### NSQ
+
+Plugin ID: `outputs.nsq`
+
+The [NSQ output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/nsq/README.md) writes to a specified NSQD instance, usually local to the producer. It requires a server name and a topic name.
+
+### OpenTSDB
+
+Plugin ID: `outputs.opentsdb`
+
+The [OpenTSDB output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/opentsdb/README.md) writes to an OpenTSDB instance using either the telnet or HTTP mode.
 
 Using the HTTP API is the recommended way of writing metrics since OpenTSDB 2.0 To use HTTP mode, set `useHttp` to true in config. You can also control how many metrics are sent in each HTTP request by setting `batchSize` in config. See http://opentsdb.net/docs/build/html/api_http/put.html for details.
 
-### [Prometheus Client (`prometheus_client`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/prometheus_client)
+### Prometheus Client
 
-The [Prometheus Client (`prometheus_client`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/prometheus_client) starts a [Prometheus](https://prometheus.io/) Client, it exposes all metrics on `/metrics` (default) to be polled by a Prometheus server.
+Plugin ID: `outputs.prometheus_client`
 
-### [Riemann (`riemann`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann)
+The [Prometheus Client output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/prometheus_client/README.md) starts a [Prometheus](https://prometheus.io/) Client, it exposes all metrics on `/metrics` (default) to be polled by a Prometheus server.
 
-The [Riemann (`riemann`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann) writes to [Riemann](http://riemann.io/) using TCP or UDP.
+### Riemann
 
-### [Socket Writer (`socket_writer`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/socket_writer)
+Plugin ID: `outputs.riemann`
 
-The [Socket Writer (`socket_writer`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/socket_writer) writes to a UDP, TCP, or UNIX socket. It can output data in any of the [supported output formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md).
+The [Riemann output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/riemann/README.md) writes to [Riemann](http://riemann.io/) using TCP or UDP.
 
-### [Wavefront (`wavefront`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/wavefront/README.md)
+### Socket Writer
 
-The [Wavefront (`wavefront`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/wavefront/README.md) writes to a Wavefront proxy, in Wavefront data format over TCP.
+Plugin ID: `outputs.socket_writer`
+
+The [Socket Writer output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/socket_writer/README.md) writes to a UDP, TCP, or UNIX socket. It can output data in any of the [supported output formats](https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md).
+
+### Wavefront
+
+Plugin ID: `outputs.wavefront`
+
+The [Wavefront output plugin](https://github.com/influxdata/telegraf/blob/release-1.8/plugins/outputs/wavefront/README.md) writes to a Wavefront proxy, in Wavefront data format over TCP.
 
 ## Deprecated Telegraf output plugins
 
-### [Riemann Legacy (`riemann_legacy`)](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann_legacy)
+### Riemann Legacy
 
-The [Riemann Legacy (`riemann_legacy`) output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann_legacy) will be deprecated in a future release, see https://github.com/influxdata/telegraf/issues/1878 for more details & discussion.
+Plugin ID: `outputs.riemann_legacy`
+
+The [Riemann Legacy output plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/outputs/riemann_legacy) will be deprecated in a future release, see https://github.com/influxdata/telegraf/issues/1878 for more details & discussion.

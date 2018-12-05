@@ -53,15 +53,19 @@ $(function(){
 });
 
 /**
- * Behavior for the vertical tab widget.
+ * Behavior for the tabs widget.
  */
 $(function() {
-	const tab = '.vertical-tabs a';
-	const content = '.vertical-tab-content';
+	const container = '.tabs-container'
+	const tab = '.tabs p a';
+	const content = '.tab-content';
 
-	// Add the active class to the first tab, in case it wasn't already set in the markup.
-	$(tab).removeClass('is-active');
-	$(tab + ':first').addClass('is-active');
+	// Add the active class to the first tab in each tab group,
+	// in case it wasn't already set in the markup.
+	$(container).each(function () {
+		$(tab, this).removeClass('is-active');
+		$(tab + ':first', this).addClass('is-active');
+	});
 
 	$(tab).on('click', function(e) {
 		e.preventDefault();
@@ -74,11 +78,12 @@ $(function() {
 		$(content).each(function(i) {
 			if (i === activeIndex) {
 				$(this).show();
-			} else {
-				$(this).hide();
+				$(this).siblings(content).hide();
 			}
 		});
+		console.log(activeIndex);
 	});
+
 });
 
 
@@ -135,7 +140,7 @@ $(document).ready( function(){
 
 	// Remove heading border if not followed by a paragraph
 	$('h2').each(function() {
-		var hasParagraph = $(this).next('p, ol, ul, table, code, pre').length
+		var hasParagraph = $(this).next(':not(h1,h2)').length
 		if(hasParagraph == 0) {
 			$(this).addClass('no-paragraph');
 		};
@@ -204,5 +209,28 @@ $(document).ready( function() {
 		} else if ( pos <= 64 ){
 			$(element).css("top", pos + "px");
 		}
+	})
+})
+
+/*
+ * Nested left nav toggle behavior
+ */
+
+$(document).ready( function() {
+	$(".sidebar--children-toggle").click(function(e) {
+		e.preventDefault()
+		$(this).toggleClass('open');
+		$(this).siblings('.sidebar--children').toggleClass('open');
+	})
+})
+
+/*
+ * Content Truncate toggle
+ */
+
+$(document).ready( function() {
+	$(".article-content .truncate-toggle").click(function(e) {
+		e.preventDefault()
+		$(this).closest('.truncate').toggleClass('closed');
 	})
 })

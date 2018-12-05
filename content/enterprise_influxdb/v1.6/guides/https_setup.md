@@ -312,7 +312,7 @@ enterprise-meta-03:8091   1.x.y-c1.x.z
 ```
 
 
-Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.6/tools/shell/):
+Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/latest/tools/shell/):
 ```
 influx -ssl -unsafeSsl -host <domain_name>.com
 ```
@@ -329,7 +329,7 @@ That's it! You've successfully set up HTTPS with InfluxDB Enterprise.
 
 ## Connect Telegraf to a secured InfluxDB Enterprise instance
 
-Connecting [Telegraf](/telegraf/v1.7/) to an InfluxDB Enterprise instance that's using
+Connecting [Telegraf](/telegraf/latest/) to an InfluxDB Enterprise instance that's using
 HTTPS requires some additional steps.
 
 In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), under the OUTPUT PLUGINS section, edit the `urls`

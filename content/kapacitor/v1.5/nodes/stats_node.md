@@ -54,7 +54,7 @@ This is a limitation of the current implementation and may be removed in the fut
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stats](#description)&nbsp;(&nbsp;`interval`&nbsp;`time.Duration`)** | Create a new stream of data that contains the internal statistics of the node. The interval represents how often to emit the statistics based on real time. This means the interval time is independent of the times of the data points the source node is receiving.  |
+| **stats&nbsp;(&nbsp;`interval`&nbsp;`time.Duration`)** | Create a new stream of data that contains the internal statistics of the node. The interval represents how often to emit the statistics based on real time. This means the interval time is independent of the times of the data points the source node is receiving.  |
 
 ### Property Methods
 
@@ -128,7 +128,7 @@ Property methods are marked using the `.` operator.
 
 ### Align
 
-Round times to the [StatsNode.Interval](/kapacitor/v1.5/nodes/stats_node/#interval) value.
+Round times to the StatsNode.Interval value.
 
 
 ```js

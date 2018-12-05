@@ -43,7 +43,7 @@ stream
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[stateCount](#description)&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a node that tracks number of consecutive points in a given state.  |
+| **stateCount&nbsp;(&nbsp;`expression`&nbsp;`ast.LambdaNode`)** | Create a node that tracks number of consecutive points in a given state.  |
 
 ### Property Methods
 

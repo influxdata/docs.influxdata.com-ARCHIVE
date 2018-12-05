@@ -38,7 +38,7 @@ spans 1 minute and is grouped into 10 second buckets.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[query](#description)&nbsp;(&nbsp;`q`&nbsp;`string`)** | The query to execute. Must not contain a time condition in the `WHERE` clause or contain a `GROUP BY` clause. The time conditions are added dynamically according to the period, offset and schedule. The `GROUP BY` clause is added dynamically according to the dimensions passed to the `groupBy` method.  |
+| **query&nbsp;(&nbsp;`q`&nbsp;`string`)** | The query to execute. Must not contain a time condition in the `WHERE` clause or contain a `GROUP BY` clause. The time conditions are added dynamically according to the period, offset and schedule. The `GROUP BY` clause is added dynamically according to the dimensions passed to the `groupBy` method.  |
 
 ### Property Methods
 

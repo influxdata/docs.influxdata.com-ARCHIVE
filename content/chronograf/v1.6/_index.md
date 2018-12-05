@@ -7,7 +7,7 @@ menu:
   chronograf:
     name: v1.6
     identifier: chronograf_1_6
-    weight: 1
+    weight: 8
 ---
 
 Chronograf is InfluxData's open source web application.

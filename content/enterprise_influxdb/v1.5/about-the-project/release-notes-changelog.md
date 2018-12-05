@@ -8,16 +8,6 @@ menu:
     parent: About the project
 ---
 
-<table style="width:100%">
-  <tr>
-    <td><a href="#clustering">Clustering release notes</a></td>
-    <td><a href="#web-console">DEPRECATED: Web Console release notes</a></td>
-  </tr>
-</table>
-
-<br>
-<br>
-
 ## v1.5.4 [2018-06-21]
 
 This release builds off of the InfluxDB OSS 1.5.4 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
@@ -389,7 +379,7 @@ Please see the OSS [release notes](https://github.com/influxdata/influxdb/blob/1
 
 This release is built with Go (golang) 1.7.4.
 It resolves a security vulnerability reported in Go (golang) version 1.7.3 which impacts all
-users currently running on the Mac OS X platform, powered by the Darwin operating system.
+users currently running on the macOS platform, powered by the Darwin operating system.
 
 #### Cluster-specific bug fixes
 

@@ -39,13 +39,13 @@ For users who don't want to install any software and are ready to use InfluxDB,
 you may want to check out our
 [managed hosted InfluxDB offering](https://cloud.influxdata.com).
 
-{{< vertical-tabs >}}
+{{< tab-labels >}}
 {{% tabs %}}
 [Ubuntu & Debian](#)
 [Red Hat & CentOS](#)
 [SLES & openSUSE](#)
 [FreeBSD/PC-BSD](#)
-[MAC OS X](#)
+[macOS](#)
 {{% /tabs %}}
 {{< tab-content-container >}}
 
@@ -161,7 +161,7 @@ To have InfluxDB start at system boot, add `influxd_enable="YES"` to `/etc/rc.co
 
 {{% tab-content %}}
 
-Users of OS X 10.8 and higher can install InfluxDB using the [Homebrew](http://brew.sh/) package manager.
+Users of macOS 10.8 and higher can install InfluxDB using the [Homebrew](http://brew.sh/) package manager.
 Once `brew` is installed, you can install InfluxDB by running:
 
 ```bash
@@ -190,7 +190,7 @@ influxd -config /usr/local/etc/influxdb.conf
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /vertical-tabs >}}
+{{< /tab-labels >}}
 
 ## Configuration
 

@@ -71,7 +71,7 @@ Often in this scenario, rather than replacing the entire host, you just need to 
 Host information remains the same, but once started again, the `influxd` process doesn't know
 to communicate with the meta nodes so the AE process can't start the shard-sync process.
 
-To resolve this, log in to a meta node and use the `update-data` command
+To resolve this, log in to a meta node and use the [`influxd-ctl update-data`](/enterprise_influxdb/v1.6/administration/cluster-commands/#update-data) command
 to [update the failed data node to itself](#2-replace-the-old-data-node-with-the-new-data-node).
 
 ```bash
@@ -312,7 +312,7 @@ ID  Database   Retention Policy  Desired Replicas  Shard Group  Start           
 6   foo        autogen           2                 4            2018-03-19T00:00:00Z  2018-03-26T00:00:00Z                        [{5 enterprise-data-02:8088} {4 enterprise-data-03:8088}]
 ```
 
-Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/configuration/#check-interval-30s),
+Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/config-data-nodes#check-interval-10m),
 the AE service will begin copying shards from other shard owners to the new node.
 The time it takes for copying to complete is determined by the number of shards copied and how much data is stored in each.
 

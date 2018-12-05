@@ -170,8 +170,8 @@ HEAD http://localhost:8086/ping
 
 ### Example
 
-You can use the `/ping` endpoint to find the build and version of an InfluxDB instance. 
-The `X-Influxdb-Build` header field displays the InfluxDB build type, either `OSS` (open source) or `ENT` (Enterprise). 
+You can use the `/ping` endpoint to find the build and version of an InfluxDB instance.
+The `X-Influxdb-Build` header field displays the InfluxDB build type, either `OSS` (open source) or `ENT` (Enterprise).
 The `X-Influxdb-Version` header field displays the InfluxDB version.
 
 ```bash
@@ -283,7 +283,7 @@ That behavior is configurable; see the [`max-row-limit`](/influxdb/v1.6/administ
 \** The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.6/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
-See below for an [example](#example-4-create-a-database-using-basic-authentication) of basic authentication.
+See below for an [example](#create-a-database-using-basic-authentication) of basic authentication.
 
 #### Examples
 
@@ -599,7 +599,7 @@ POST http://localhost:8086/write
 \* The HTTP API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.6/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
-See below for an [example](#example-4-write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
+See below for an [example](#write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
 
 \*\* We recommend using the least precise precision possible as this can result
 in significant improvements in compression.

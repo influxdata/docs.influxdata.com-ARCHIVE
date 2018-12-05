@@ -522,7 +522,7 @@ The [Zipkin (`zipkin`) input plugin](https://github.com/influxdata/telegraf/tree
 
 ### [Zookeeper (`zookeeper`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/zookeeper)
 
-The [Zookeeper (`zookeeper`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/zookeeper) collects variables outputted from the `mntr` command [Zookeeper Admin](https://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html).
+The [Zookeeper (`zookeeper`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/zookeeper) collects variables outputted from the `mntr` command [Zookeeper Admin](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html).
 
 ## Deprecated Telegraf input plugins
 

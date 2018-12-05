@@ -18,7 +18,7 @@ The following applications will be required:
 * [InfluxDB](/influxdb/latest/)  - While Kapacitor does not require InfluxDB, it is the easiest integration to setup and so it will be used in this guide.
 InfluxDB >= 1.3.x will be needed.
 * [Telegraf](/telegraf/latest/) - Telegraf >= 1.4.x will be required.
-* [Kapacitor](/kapacitor/latest/) - The latest Kapacitor binary and installation packages can be found at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
+* [Kapacitor](/kapacitor/latest/) - The latest Kapacitor binary and installation packages can be found at the [downloads](https://portal.influxdata.com/downloads) page.
 * Terminal - The Kapacitor client application works using the CLI and so a basic terminal will be needed to issue commands.
 
 ## The use case
@@ -100,7 +100,7 @@ Once Telegraf is installed and started, it will, as configured by default, send 
 
 The Telegraf configuration file can be found at its default location: `/etc/telegraf/telegraf.conf`.  For this introduction it is worth noting some values that will be relevant to the Kapacitor tasks that will be shown below. Namely:
 
-   * `[agent]\interval` - declares the frequency at which system metrics will be sent to InfluxDB
+   * `[agent].interval` - declares the frequency at which system metrics will be sent to InfluxDB
    * `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database.
    * `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.
 
@@ -329,7 +329,7 @@ This command will be covered in more detail below.
 Kapacitor now knows how to trigger the alert.
 
 However, nothing is going to happen until the task has been enabled.
-Before being enabled, the task should first be tested to ensure it does not spam the log files or communication channels with alerts. 
+Before being enabled, the task should first be tested to ensure it does not spam the log files or communication channels with alerts.
 Record the current data stream for a bit and use it to test the new task:
 
 ```bash

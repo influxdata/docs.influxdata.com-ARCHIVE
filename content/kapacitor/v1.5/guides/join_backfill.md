@@ -191,7 +191,7 @@ With that the `error_percent` for every minute will be backfilled for the histor
 With the streaming case something similar can be done.  Note that the command
 `kapacitor record stream` does not include the same a historical option `-past`,
 so backfilling using a _stream_ task directly in Kapacitor is not possible.  If
-backfilling is required, the command [`kapacitor record query`](#record-query),
+backfilling is required, the command [`kapacitor record query`](#record-query-and-backfill-with-stream),
 presented below, can also be used.
 
 Never the less the same TICKscript semantics can be used with a _stream_ task
@@ -233,7 +233,7 @@ errors
     |influxDBOut()
         .database('pages')
         .measurement('error_percent')
-``` 
+```
 
 ### Record Query and backfill with stream
 

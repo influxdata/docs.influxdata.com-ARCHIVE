@@ -32,7 +32,7 @@ out-of-sync shards for repair.
 In the repair process, AE will sync the necessary updates from other shards
 in the same shard group.
 
-By default, the service checks every 5 minutes, as configured in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/configuration/#check-interval-5m) setting.
+By default, the service checks every 5 minutes, as configured in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.6/administration/config-data-nodes/#check-interval-5m) setting.
 
 The anti-entropy service can only address missing or inconsistent shards when
 there is at least one copy of the shard available.
@@ -112,7 +112,7 @@ Repair request are pulled from the queue by the background process and repaired 
 
 > Currently, shards that are present on both nodes but contain different data are not automatically queued for repair.
 > A user must make the request via `influxd-ctl entropy repair <shard ID>`.
-> More info [below](#Detecting-and-repairing-entropy)
+> More info [below](#detecting-and-repairing-entropy)
 
 Using `node1` and `node2` from the example [above](#detecting-entropy) – `node1` asks `node2` for a digest of `shard1`.
 `node1` diffs its own local `shard1` digest and `node2`'s `shard1` digest,
@@ -168,7 +168,7 @@ until it either shows as being in the queue, being repaired, or no longer in the
 
 ## Configuration
 
-Anti-entropy configuration options are available in [`[anti-entropy]`](/enterprise_influxdb/v1.6/administration/configuration/#anti-entropy) section of your `influxdb.conf`.
+Anti-entropy configuration options are available in [`[anti-entropy]`](/enterprise_influxdb/v1.6/administration/config-data-nodes#anti-entropy) section of your `influxdb.conf`.
 
 ## Command line tools for managing entropy
 The `influxd-ctl entropy` command enables you to manage entropy among shards in a cluster.
@@ -210,7 +210,7 @@ Once a repair has started, requests to cancel it are ignored.
 
 > Stopping a entropy repair for a **missing** shard operation is not currently supported.
 > It may be possible to stop repairs for missing shards with the
-> [`influxd-ctl kill-copy-shard`](/enterprise_influxdb/v1.6/features/cluster-commands/#kill-copy-shard) command.
+> [`influxd-ctl kill-copy-shard`](/enterprise_influxdb/v1.6/administration/cluster-commands/#kill-copy-shard) command.
 
 
 ## Scenarios
@@ -263,7 +263,7 @@ Queued Shards: [21179 25165]
 
 If a data node suddenly disappears due to a catastrophic hardware failure or for any other reason, as soon as a new data node is online, the anti-entropy service will copy the correct shards to the new replacement node. The time it takes for the copying to complete is determined by the number of shards to be copied and how much data is stored in each.
 
-_View the [Replacing Data Nodes](/enterprise_influxdb/v1.6/guides/replacing-nodes/#replacing-data-nodes) documentation for instructions on replacing data nodes in your InfluxDB Enterprise cluster._
+_View the [Replacing Data Nodes](/enterprise_influxdb/v1.6/guides/replacing-nodes/#replacing-data-nodes-in-an-influxdb-enterprise-cluster) documentation for instructions on replacing data nodes in your InfluxDB Enterprise cluster._
 
 ### Replacing a machine that is running a data node
 
