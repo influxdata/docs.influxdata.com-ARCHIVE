@@ -374,7 +374,7 @@ If the query does not specify the `unit`, the unit defaults to one second (`1s`)
 Returns the area under the curve for subsequent field values associated with the [field key](/influxdb/v1.7/concepts/glossary/#field-key).
 
 `INTEGRAL(/regular_expression/)`  
-Returns the are under the curve for subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.7/query_language/data_exploration/#regular-expressions).
+Returns the area under the curve for subsequent field values associated with each field key that matches the [regular expression](/influxdb/v1.7/query_language/data_exploration/#regular-expressions).
 
 `INTEGRAL(*)`  
 Returns the average field value associated with each field key in the [measurement](/influxdb/v1.7/concepts/glossary/#measurement).
@@ -4187,10 +4187,9 @@ time                   mean
 InfluxDB then rounds those averages down to the nearest integer.
 
 ## HISTOGRAM()
-`HISTOGRAM()` is not yet functional.
-
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+_InfluxQL does not currently support histogram generation.
+For information about creating histograms with data stored in InfluxDB, see
+[Flux's `histogram()` function](/flux/v0.7/functions/transformations/histogram)._
 
 ## LN()
 Returns the natural logarithm of the field value.
