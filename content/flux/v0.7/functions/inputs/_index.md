@@ -13,4 +13,3 @@ The following input functions are available:
 
 - [buckets](/flux/v0.7/functions/inputs/buckets)
 - [from](/flux/v0.7/functions/inputs/from)
-- [fromRows](/flux/v0.7/functions/inputs/fromrows)

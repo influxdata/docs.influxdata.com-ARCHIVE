@@ -29,6 +29,7 @@ Type conversion functions convert the `_value` column of the input table into a 
 - [filter](/flux/v0.7/functions/transformations/filter)
 - [group](/flux/v0.7/functions/transformations/group)
 - [histogram](/flux/v0.7/functions/transformations/histogram)
+- [influxFieldsAsCols](/flux/v0.7/functions/transformations/influxfieldsascols)
 - [join](/flux/v0.7/functions/transformations/join)
 - [keep](/flux/v0.7/functions/transformations/keep)
 - [keys](/flux/v0.7/functions/transformations/keys)
