@@ -1,11 +1,11 @@
 ---
-title: Getting started on Google Cloud Platform Marketplace
+title: Deploy to Google Cloud Platform
 
 menu:
   enterprise_influxdb_1_6:
-    name: Google Cloud Platform Marketplace
+    name: Google Cloud Platform
     weight: 10
-    parent: Other installation options
+    parent: Deploy options
 ---
 
 For users looking to deploy InfluxDB Enterprise on Google Cloud Platform (GCP) infrastructure, InfluxData provides an [InfluxDB Enterprise bring-your-own-license (BYOL) solution](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) that makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.

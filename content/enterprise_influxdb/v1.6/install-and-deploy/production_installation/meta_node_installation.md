@@ -1,5 +1,5 @@
 ---
-title: Step 1 - Installing InfluxDB Enterprise meta nodes
+title: Step 1 - Install InfluxDB Enterprise meta nodes
 aliases:
     - /enterprise/v1.6/production_installation/meta_node_installation/
 menu:
