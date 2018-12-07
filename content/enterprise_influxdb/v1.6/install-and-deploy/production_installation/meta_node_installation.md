@@ -1,7 +1,7 @@
 ---
 title: Step 1 - Install InfluxDB Enterprise meta nodes
 aliases:
-    - /enterprise/v1.6/production_installation/meta_node_installation/
+    - /enterprise_influxdb/v1.6/install-and-deploy/production_installation/meta_node_installation/
 menu:
   enterprise_influxdb_1_6:
     weight: 10
@@ -17,7 +17,7 @@ your InfluxDB Enterprise cluster: the meta nodes.
 
 > If you wish to evaluate InfluxDB Enterprise in a non-production
 environment, feel free to follow the instructions outlined in the
-[QuickStart installation](/enterprise_influxdb/v1.6/quickstart_installation) section.
+[QuickStart installation](/enterprise_influxdb/v1.6/install-and-deploy/quickstart_installation) section.
 Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
 will need to reinstall InfluxDB Enterprise with the Production Installation
 process before using the product in a production environment.

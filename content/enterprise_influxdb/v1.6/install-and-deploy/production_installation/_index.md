@@ -6,6 +6,7 @@ aliases:
 menu:
   enterprise_influxdb_1_6:
     weight: 40
+    parent: Deploy to cloud providers
 ---
 
 The Production Installation process is designed for users looking to deploy
@@ -21,7 +22,7 @@ process before using the product in a production environment.
 
 ## Production installation
 
-Follow the links below to get up and running with InfluxDB Enterprise.
+Follow the links below to get an InfluxDB Enterprise cluster up and running in a production environment.
 
 ### [Step 1 - Install InfluxDB Enterprise meta nodes](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/meta_node_installation/)
 ### [Step 2 - Install InfluxDB data nodes](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/data_node_installation/)
