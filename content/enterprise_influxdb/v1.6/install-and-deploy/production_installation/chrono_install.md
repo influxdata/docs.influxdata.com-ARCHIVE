@@ -4,8 +4,9 @@ aliases:
     - /enterprise_influxdb/v1.6/install-and-deploy/production_installation/chrono_install/
 menu:
   enterprise_influxdb_1_6:
+    name: Step 3 - Install Chronograf
     weight: 20
-    parent: Production installation
+    parent: Install for production
     identifier: chrono_install
 ---
 

@@ -1,12 +1,12 @@
 ---
-title: Production installation
+title: Install InfluxDB Enterprise to a production environment
 aliases:
-    - /enterprise/v1.6/production_installation/
     - /enterprise_influxdb/v1.6/production_installation/
 menu:
   enterprise_influxdb_1_6:
-    weight: 40
-    parent: Deploy to cloud providers
+    name: Install for production
+    weight: 20
+    parent: Install and deploy
 ---
 
 The Production Installation process is designed for users looking to deploy

@@ -5,8 +5,9 @@ aliases:
 
 menu:
   enterprise_influxdb_1_6:
+    name: Step 1 - Install InfluxDB Enterprise cluster
     weight: 10
-    parent: QuickStart installation
+    parent: Install for evaluation
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure

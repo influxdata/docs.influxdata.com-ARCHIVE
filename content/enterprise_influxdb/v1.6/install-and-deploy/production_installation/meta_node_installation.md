@@ -4,8 +4,9 @@ aliases:
     - /enterprise_influxdb/v1.6/install-and-deploy/production_installation/meta_node_installation/
 menu:
   enterprise_influxdb_1_6:
+    name: Step 1 - Install meta nodes
     weight: 10
-    parent: Production installation
+    parent: Install for production
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure

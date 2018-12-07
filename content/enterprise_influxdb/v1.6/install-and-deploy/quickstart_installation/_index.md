@@ -1,11 +1,13 @@
 ---
-title: Install QuickStart environment
+title: Install for evaluation
 aliases:
     - /enterprise/v1.6/quickstart_installation/
     - /enterprise_influxdb/v1.6/quickstart_installation/
 menu:
   enterprise_influxdb_1_6:
-    weight: 30
+    name: Install for evaluation
+    weight: 10
+    parent: Install and deploy
 ---
 
 The QuickStart installation process is designed for users looking to quickly get up and running with InfluxDB Enterprise and for users who are looking to evaluate the product.

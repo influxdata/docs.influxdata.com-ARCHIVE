@@ -4,5 +4,5 @@ description: Install InfluxDB Enterprise to on-premise or cloud providers, inclu
 menu:
   enterprise_influxdb_1_6:
     name: Install and deploy
-    weight: 70
+    weight: 30
 ---

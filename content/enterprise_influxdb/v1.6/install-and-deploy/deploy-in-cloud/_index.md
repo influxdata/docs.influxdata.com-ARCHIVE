@@ -1,11 +1,12 @@
 ---
-title: Deploy to cloud providers
+title: Deploy InfluxDB Enterprise in cloud platforms
 aliases:
     - /enterprise_influxdb/v1.6/other-options/
 menu:
   enterprise_influxdb_1_6:
-    name: Deploy to cloud providers
-    weight: 45
+    name: Deploy in cloud
+    weight: 30
+    parent: Install and deploy
 ---
 
 Other installation options are available for certain users looking to deploy
