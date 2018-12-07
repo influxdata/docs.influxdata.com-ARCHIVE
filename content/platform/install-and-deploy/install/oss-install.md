@@ -1,10 +1,10 @@
 ---
-title: Install and configure the OSS TICK stack
-description: How to install and configure all components of the open source TICK stack – Telegraf, InfluxDB, Chronograf, and Kapacitor.
+title: Install the InfluxData TICK stack (OSS)
+description: Install and configure the open source InfluxData TICK stack – Telegraf, InfluxDB, Chronograf, and Kapacitor.
 menu:
   platform:
-    name: Open Source Installation
-    parent: Installation and configuration
+    name: Install InfluxData TICK stack (OSS)
+    parent: install-platform
     weight: 2
 ---
 

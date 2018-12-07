@@ -1,10 +1,12 @@
 ---
-title: Install and configure the TICK stack
-description: placeholder
+title: Install the InfluxData Platform
+description: Quickly install and configure the InfluxData Platform (TICK stack) to begin exploring time series data
 menu:
   platform:
-    name: Installation and configuration
+    name: Install InfluxData Platform
     weight: 20
+    identifier: install-platform
+    parent: Install the InfluxData Platform
 ---
 
 There are multiple ways to install and configure the InfluxData Platform (also known
