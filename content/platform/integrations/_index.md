@@ -4,7 +4,7 @@ description: Discover all ways the TICK stack integrates into your favorite proj
 menu:
   platform:
     name: Integrations
-    weight: 50
+    weight: 40
 ---
 
 The InfluxData Platform and its TICK stack components integrate with a number of

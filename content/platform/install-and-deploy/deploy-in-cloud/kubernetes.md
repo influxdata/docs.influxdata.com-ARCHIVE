@@ -5,6 +5,7 @@ menu:
   platform:
     name: Deploy with Kubernetes
     parent: deploy-in-cloud-platform
+    weight: 3
 ---
 
 Coming soon!

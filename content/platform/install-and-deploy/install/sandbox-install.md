@@ -5,7 +5,7 @@ menu:
   platform:
     name: Install the InfluxData Sandbox
     parent: install-platform
-    weight: 1
+    weight: 3
 ---
 
 The [InfluxData Sandbox](https://github.com/influxdata/sandbox) is the quickest

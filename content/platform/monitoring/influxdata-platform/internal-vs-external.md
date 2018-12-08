@@ -4,7 +4,7 @@ description: An explanation of internal and external monitoring strategies for y
 menu:
   platform:
     name: Configurations for monitoring
-    parent: Monitor the InfluxData Platform
+    parent: monitor-platform
     weight: 2
 ---
 

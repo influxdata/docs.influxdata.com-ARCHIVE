@@ -5,7 +5,7 @@ menu:
   platform:
     name: Install for production
     parent: install-platform
-    weight: 3
+    weight: 4
 ---
 
 _This is the production installation guide_

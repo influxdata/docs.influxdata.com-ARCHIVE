@@ -4,8 +4,8 @@ description: Set up dashboards to help you visualize and monitor the health and 
 menu:
   platform:
     name: Dashboards for monitoring InfluxDB
-    weight: 1
-    parent: Monitor the InfluxData Platform
+    weight: 
+    parent: monitor-platform
 ---
 ## Overview
 

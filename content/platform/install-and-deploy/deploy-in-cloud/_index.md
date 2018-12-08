@@ -1,12 +1,11 @@
 ---
 title: Deploy the TICK stack in the cloud
 description: Easy ways to deploy the TICK stack on the platform you use.
-draft: true
 menu:
   platform:
     name: Deploy the InfluxData Platform in clouds
     identifier: deploy-in-cloud-platform
-    weight: 2
+    weight: 20
     parent: install-and-deploy-platform
 ---
 

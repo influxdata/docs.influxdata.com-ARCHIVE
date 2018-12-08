@@ -4,7 +4,7 @@ description: Quickly install and configure the InfluxData Platform (TICK stack) 
 menu:
   platform:
     name: Install the InfluxData Platform
-    weight: 1
+    weight: 10
     identifier: install-platform
     parent: install-and-deploy-platform
 ---
