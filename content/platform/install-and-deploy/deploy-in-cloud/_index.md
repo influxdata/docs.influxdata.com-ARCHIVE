@@ -1,10 +1,11 @@
 ---
-title: Deploy the TICK stack
+title: Deploy the TICK stack in the cloud
 description: Easy ways to deploy the TICK stack on the platform you use.
 draft: true
 menu:
   platform:
-    name: Deployment
+    name: Deploy in cloud
+    identifier: deploy-in-cloud
     weight: 30
 ---
 

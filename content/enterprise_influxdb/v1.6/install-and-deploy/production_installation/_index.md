@@ -1,5 +1,5 @@
 ---
-title: Install InfluxDB Enterprise to a production environment
+title: Install an InfluxDB Enterprise cluster to a production environment
 aliases:
     - /enterprise_influxdb/v1.6/production_installation/
 menu:

@@ -4,7 +4,7 @@ description: How to set up an external InfluxData TICK stack that monitors anoth
 menu:
   platform:
     name: Set up an external monitor
-    parent: Monitoring
+    parent: Monitoring InfluxData Platform
     weight: 2
 ---
 

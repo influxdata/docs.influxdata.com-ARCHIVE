@@ -1,9 +1,9 @@
 ---
-title: Getting started with the InfluxData Platform
+title: Get started with the InfluxData Platform
 description: placeholder
 menu:
   platform:
-    name: Getting started
+    name: Get started
     parent: Introduction
 ---
 ## Overview
@@ -35,8 +35,8 @@ As reviewed above, Telegraf is sending system data, including CPU usage, to Infl
 **Query example:**
 ```sql
 SELECT "usage_system",
-       "usage_user" 
-FROM "telegraf"."autogen"."cpu" 
+       "usage_user"
+FROM "telegraf"."autogen"."cpu"
 WHERE time > now() - 30m
 ```
 

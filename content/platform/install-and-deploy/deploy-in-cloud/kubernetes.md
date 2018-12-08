@@ -5,7 +5,7 @@ draft: true
 menu:
   platform:
     name: Deploy to Kubernetes
-    parent: Deployment
+    parent: deploy-in-cloud
     draft: false
 ---
 

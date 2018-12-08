@@ -4,7 +4,7 @@ description: Install and configure the enterprise version of InfluxData Platform
 draft: true
 menu:
   platform:
-    name: Install for production
+    name: Install InfluxData for production
     parent: install-platform
     weight: 3
 ---

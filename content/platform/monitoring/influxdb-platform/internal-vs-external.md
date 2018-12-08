@@ -1,10 +1,10 @@
 ---
-title: Internal versus external monitoring
+title: Monitor InfluxData Platform using internal and external configurations
 description: An explanation of internal and external monitoring strategies for your Enterprise or OSS TICK stack with the pros and cons of each.
 menu:
   platform:
     name: Internal vs external monitoring
-    parent: Monitoring
+    parent: Monitor InfluxData Platform
     weight: 1
 ---
 
