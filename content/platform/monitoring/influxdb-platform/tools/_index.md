@@ -1,16 +1,16 @@
 ---
-title: Tools for monitoring the TICK stack
-description:
+title: Tools for monitoring the InfluxData Platform (TICK stack)
+description: Use the "_internal" measurements, SHOW DIAGNOSTICS, and SHOW STATS to monitor your InfluxData Platform.
 menu:
   platform:
-    name: Monitoring tools
-    parent: Monitoring
+    name: Tools for monitoring
+    parent: Monitor
     weight: 40
 ---
 
-The following tools are avaialble to help monitor and troubleshoot the InfluxData platform.
+The following tools are available to help monitor and troubleshoot the InfluxData platform.
 
-## [_internal Measurements ](/platform/monitoring/tools/measurements-internal)
+## [Measurements for monitoring (`_internal`)](/platform/monitoring/tools/measurements-internal)
 Use and understand InfluxDB `_internal` measurements statistics and field keys that can be used to monitor InfluxDB OSS servers and InfluxDB Enterprise clusters.
 
 ## [The SHOW DIAGNOSTICS statement ](/platform/monitoring/tools/show-diagnostics)

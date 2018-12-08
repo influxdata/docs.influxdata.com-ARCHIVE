@@ -5,5 +5,5 @@ menu:
   platform:
     name: Monitor containers
     weight: 1
-    parent: Monitoring
+    parent: Monitor
 ---

@@ -3,9 +3,9 @@ title: Monitoring the InfluxData Platform
 description: How to use InfluxData's TICK stack to monitor itself and other TICK stacks in order to identify and alert on anomalies.
 menu:
   platform:
-    name: Monitoring InfluxData
+    name: Monitor InfluxData Platform
     weight: 40
-    parent: Monitoring
+    parent: Monitor
 ---
 
 One of the primary use cases for the InfluxData Platform is as server and infrastructure
