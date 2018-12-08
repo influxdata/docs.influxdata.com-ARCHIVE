@@ -4,9 +4,10 @@ description: Easy ways to deploy the TICK stack on the platform you use.
 draft: true
 menu:
   platform:
-    name: Deploy in cloud
-    identifier: deploy-in-cloud
-    weight: 30
+    name: Deploy the InfluxData Platform in clouds
+    identifier: deploy-in-cloud-platform
+    weight: 2
+    parent: install-and-deploy-platform
 ---
 
 There are multiple ways to deploy the InfluxData Platform (also known

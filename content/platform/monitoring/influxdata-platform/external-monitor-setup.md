@@ -1,11 +1,11 @@
 ---
-title: Set up an external monitor
+title: Configure an external monitor of the InfluxData Platform
 description: How to set up an external InfluxData TICK stack that monitors another Enterprise or OSS TICK stack.
 menu:
   platform:
-    name: Set up an external monitor
-    parent: Monitor InfluxData Platform
-    weight: 2
+    name: External monitoring of InfluxData Platform
+    parent: Monitor the InfluxData Platform
+    weight: 3
 ---
 
 The flexibility and portability of InfluxData's TICK stack make it easy to use in different

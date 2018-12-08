@@ -1,12 +1,10 @@
 ---
-title: Deploy InfluxDB OSS on Kubernetes
+title: Deploy InfluxDB OSS with Kubernetes
 description: Deploy the InfluxDB OSS with Kubernetes orchestration for testing.
-draft: true
 menu:
   platform:
-    name: Deploy to Kubernetes
-    parent: deploy-in-cloud
-    draft: false
+    name: Deploy with Kubernetes
+    parent: deploy-in-cloud-platform
 ---
 
 Coming soon!

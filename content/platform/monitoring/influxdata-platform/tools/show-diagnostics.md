@@ -4,7 +4,7 @@ description: Use the SHOW DIAGNOSTICS statement to monitor InfluxDB instances.
 menu:
   platform:
     name: SHOW DIAGNOSTICS
-    parent: Monitoring tools
+    parent: Tools for monitoring InfluxDB
     weight: 90
 ---
 

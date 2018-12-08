@@ -3,9 +3,9 @@ title: Monitor InfluxData Platform using internal and external configurations
 description: An explanation of internal and external monitoring strategies for your Enterprise or OSS TICK stack with the pros and cons of each.
 menu:
   platform:
-    name: Internal vs external monitoring
-    parent: Monitor InfluxData Platform
-    weight: 1
+    name: Configurations for monitoring
+    parent: Monitor the InfluxData Platform
+    weight: 2
 ---
 
 One of the primary use cases for InfluxData's TICK stack is infrastructure monitoring,

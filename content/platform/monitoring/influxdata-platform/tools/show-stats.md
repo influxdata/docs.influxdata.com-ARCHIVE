@@ -4,7 +4,7 @@ description: Use the SHOW STATS statement to monitor InfluxDB instances.
 menu:
   platform:
     name: SHOW STATS
-    parent: Monitoring tools
+    parent: Tools for monitoring InfluxDB
     weight: 100
 ---
 

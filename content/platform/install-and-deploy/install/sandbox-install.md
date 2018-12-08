@@ -3,7 +3,7 @@ title: Install the InfluxData Sandbox for exploration and testing
 description: Install the InfluxData Sandbox, the quickest way to get a TICK stack up and running and ready for exploration and testing.
 menu:
   platform:
-    name: Install InfluxData Sandbox
+    name: Install the InfluxData Sandbox
     parent: install-platform
     weight: 1
 ---

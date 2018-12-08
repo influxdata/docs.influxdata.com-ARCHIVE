@@ -3,8 +3,8 @@ title: Tools for monitoring the InfluxData Platform (TICK stack)
 description: Use the "_internal" measurements, SHOW DIAGNOSTICS, and SHOW STATS to monitor your InfluxData Platform.
 menu:
   platform:
-    name: Tools for monitoring
-    parent: Monitor
+    name: Tools for monitoring InfluxDB
+    parent: Monitoring the InfluxData Platform
     weight: 40
 ---
 

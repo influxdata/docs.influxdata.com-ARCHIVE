@@ -6,5 +6,5 @@ aliases:
 menu:
   platform:
     name: Monitor
-    weight: 10
+    weight: 30
 ---

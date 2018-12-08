@@ -3,9 +3,9 @@ title: Set up monitoring dashboards
 description: Set up dashboards to help you visualize and monitor the health and performance of your InfluxData TICK stack.
 menu:
   platform:
-    name: Dashboards for monitoring
-    parent: Monitor
-    weight: 3
+    name: Dashboards for monitoring InfluxDB
+    weight: 1
+    parent: Monitor the InfluxData Platform
 ---
 ## Overview
 
