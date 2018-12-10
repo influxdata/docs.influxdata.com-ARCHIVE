@@ -749,7 +749,7 @@ Date: Wed, 08 Nov 2017 18:03:44 GMT
 ##### Write several points to the database `mydb` by separating points with a new line
 
 ```
-$ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=3 myfield=89
+$ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=3 myfield=89 1463689152000000000
 mymeas,mytag=2 myfield=34 1463689152000000000'
 
 HTTP/1.1 204 No Content
