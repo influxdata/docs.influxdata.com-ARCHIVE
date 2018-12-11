@@ -5,7 +5,7 @@ draft: true
 menu:
   platform:
     name: Operations guide
-    weight: 10
+    weight: 100
 ---
 
 This is the ops guide
