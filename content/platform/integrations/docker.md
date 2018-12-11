@@ -1,9 +1,9 @@
 ---
-title: Deploy the InfluxData Platform in Docker containers
+title: Docker
 description: InfluxData projects are well suited to be deployed in Docker containers. Containers for each project are published to DockerHub.
 menu:
   platform:
-    name: Deploy InfluxData Platform in Docker
+    name: Docker
     parent: Integrate
 ---
 

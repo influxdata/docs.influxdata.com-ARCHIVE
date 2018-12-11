@@ -1,9 +1,9 @@
 ---
-title: Integrate the InfluxData Platform with Kubernetes
+title: Kubernetes
 description: Deploy InfluxDB OSS in Kubernetes and monitor Kubernetes
 menu:
   platform:
-    name: Integrate InfluxData Platform with Kubernetes
+    name: Kubernetes
     parent: Integrate
 ---
 
@@ -13,7 +13,7 @@ has become a popular way to deploy and manage containers across multiple servers
 ![InfluxDB Kubernetes Logos](/img/platform/flux-kube.png)
 
 There are several ways use the InfluxData Platform (also known as the TICK
-stack) can be used with Kubernetes:
+stack) with Kubernetes:
 
 - [Monitor Kubernetes](#monitor-kubernetes-https-www-influxdata-com-blog-monitoring-kubernetes-architecture)
 - [Deploy the TICK stack on Kubernetes](#deploy-the-tick-stack-on-kubernetes-https-github-com-influxdata-tick-charts)
