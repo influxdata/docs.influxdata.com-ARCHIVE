@@ -3,7 +3,7 @@ title: Integrate the InfluxData Platform with Kubernetes
 description: Deploy InfluxDB OSS in Kubernetes and monitor Kubernetes
 menu:
   platform:
-    name: Deploy InfluxData Platform in Kubernetes
+    name: Integrate InfluxData Platform with Kubernetes
     parent: Integrate
 ---
 
