@@ -25,7 +25,7 @@ The [Production installation](/enterprise_influxdb/v1.6/install-and-deploy/produ
 
 > **Note:** If you install InfluxDB Enterprise with the QuickStart installation process you will need to reinstall InfluxDB Enterprise with the Production installation process before using the product in a production environment.
 
-There are [other installation options](/enterprise_influxdb/v1.6/other_installation/) available to easily install an InfluxDB Enterprise cluster in select environments.
+There are [deployment options](/enterprise_influxdb/v1.6/install-and-deploy/deploy/) available to easily install an InfluxDB Enterprise cluster in select environments.
 
 ## Requirements for InfluxDB Enterprise clusters
 
