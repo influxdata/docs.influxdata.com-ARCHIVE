@@ -1,5 +1,5 @@
 ---
-title: Deploy InfluxDB Enterprise clusters in cloud platforms
+title: Deploy InfluxDB Enterprise clusters in cloud
 aliases:
     - /enterprise_influxdb/v1.6/other-options/
 menu:
@@ -19,10 +19,10 @@ follow the [QuickStart installation](/enterprise_influxdb/v1.6/install-and-deplo
 > If you install InfluxDB Enterprise with the QuickStart Installation process, you
 > will need to reinstall InfluxDB Enterprise with the Production Installation process before using the product in a production environment.
 
-## [Deploy to Google Cloud Platform](/enterprise_influxdb/v1.6/install-and-deploy/deploy-options/google-cloud-platform/)
+## [Deploy in Google Cloud Platform](/enterprise_influxdb/v1.6/install-and-deploy/deploy-options/google-cloud-platform/)
 
 InfluxDB Enterprise is currently available on the Google Cloud Platform (GCP) as a bring-your-own-license (BYOL) offering.
 
-## [Deploy to Amazon Web Services](/enterprise_influxdb/v1.6/install-and-deploy/deploy-options/amazon-web-services/)
+## [Deploy in Amazon Web Services](/enterprise_influxdb/v1.6/install-and-deploy/deploy-options/amazon-web-services/)
 
 InfluxDB Enterprise is currently available on the Google Cloud Platform (GCP) as a bring-your-own-license (BYOL) offering.
