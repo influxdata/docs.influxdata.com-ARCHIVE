@@ -5,7 +5,7 @@ draft: true
 menu:
   platform:
     name: Kubernetes Application Monitoring
-    parent: Use Cases
+    parent: Use cases
 ---
 
 Coming soon!

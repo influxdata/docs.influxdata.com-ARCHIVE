@@ -135,7 +135,7 @@ Identify the `leader` of the cluster. When replacing nodes in a cluster, non-lea
 ### 2. Replace all non-leader nodes
 
 #### 2.1. Provision a new meta node
-[Provision and start a new meta node](/enterprise_influxdb/v1.6/production_installation/meta_node_installation/), but **do not** add it to the cluster yet.
+[Provision and start a new meta node](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/meta_node_installation/), but **do not** add it to the cluster yet.
 For this guide, the new meta node's hostname will be `enterprise-meta-04`.
 
 #### 2.2. Remove the non-leader meta node
@@ -167,7 +167,7 @@ influxd-ctl remove-meta -force -tcpAddr enterprise-meta-02:8089 enterprise-meta-
 ```
 
 #### 2.3. Add the new meta node
-Once the non-leader meta node has been removed, use `influx-ctl add-meta` to replace it with the new meta node:
+Once the non-leader meta node has been removed, use `influxd-ctl add-meta` to replace it with the new meta node:
 
 ```bash
 # Pattern
@@ -257,7 +257,7 @@ The process of replacing data nodes is as follows:
 
 ### 1. Provision a new data node
 
-[Provision and start a new data node](/enterprise_influxdb/v1.6/production_installation/data_node_installation/), but **do not** add it to your cluster yet.
+[Provision and start a new data node](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/data_node_installation/), but **do not** add it to your cluster yet.
 
 ### 2. Replace the old data node with the new data node
 Log into any of your cluster's meta nodes and use `influxd-ctl update-data` to replace the old data node with the new data node:
@@ -320,7 +320,7 @@ The time it takes for copying to complete is determined by the number of shards 
 Check on the status of the copy-shard process with:
 
 ```bash
-influx-ctl copy-shard-status
+influxd-ctl copy-shard-status
 ```
 
 The output will show all currently running copy-shard processes.

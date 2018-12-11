@@ -225,7 +225,7 @@ they appear as single, unconnected points.
 Because records in each table are aggregated together, their timestamps no longer
 apply and the column is removed from the group key and table.
 
-Also notice that the `_start` and `stop` columns are still exist.
+Also notice the `_start` and `_stop` columns still exist.
 These represent the lower and upper bounds of the time window.
 
 Many Flux functions rely on the `_time` column.
