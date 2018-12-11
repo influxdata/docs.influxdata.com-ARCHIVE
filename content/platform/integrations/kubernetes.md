@@ -20,6 +20,7 @@ stack) with Kubernetes:
 - [Frequently asked questions](#frequently-asked-questions)
 
 ## Monitor Kubernetes
+
 The TICK stack is an easy and performant way to monitor the services that make up a Kubernetes cluster, whether or not you're running InfluxDB in a Kubernetes cluster or somewhere else.
 
 ### kube-influxdb Kubernetes monitoring project
