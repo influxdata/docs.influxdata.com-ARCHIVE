@@ -20,7 +20,7 @@ If it is not set, an error will be logged and `influxd-meta` will not start.
 
 #### Review production installation configurations
 
-The [Production Installation](/enterprise_influxdb/v1.6/production_installation/)
+The [Production Installation](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/)
 documentation has been updated to fix errors in configuration settings, including changing `shared-secret` to `internal-shared-secret` and adding missing steps for configuration settings of data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that the configuration settings properly enable JWT authentication for intra-node communication.
 
 The following summarizes the expected settings for proper configuration of JWT authentication for intra-node communication:

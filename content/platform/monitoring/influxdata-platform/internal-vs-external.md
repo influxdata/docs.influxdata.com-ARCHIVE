@@ -17,7 +17,7 @@ These are the two main approaches to Monitoring your TICK stack:
 
 ## Internal monitoring
 
-<dt>Not recommended for production use cases.</dt>
+<dt>Not recommended for production environments.</dt>
 
 By default, the InfluxData platform is configured to monitor itself.
 Telegraf collects metrics from the host on which it's running for things such as
@@ -45,11 +45,14 @@ When using internal monitoring, if your TICK stack goes offline, your monitor do
 Any configured alerts will not be sent and you will not be notified of any issues.
 Because of this, **internal monitoring is not recommended for production use cases.**
 
-## External monitoring
+## The "watcher of watchers" approach for monitoring InfluxDB
 
-> Recommended for production use cases.
+> Recommended for production environments.
 
-External monitoring consists of a TICK stack monitored by another TICK stack.
+A "watcher of watchers" approach for monitoring InfluxDB OSS and InfluxDB cluster
+nodes offers monitoring of your InfluxDB resources while ensuring that the monitoring
+statistics are available remotely in case of data loss.
+
 This usually takes the form of an Enterprise cluster being monitored by an OSS TICK stack.
 It consists of Telegraf agents installed on each node in your primary cluster
 reporting metrics for their respective hosts to a monitoring TICK stack installed

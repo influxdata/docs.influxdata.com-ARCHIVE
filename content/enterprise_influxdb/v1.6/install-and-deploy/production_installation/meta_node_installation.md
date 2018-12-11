@@ -211,6 +211,6 @@ If you do not see your meta nodes in the output, please retry adding them to
 the cluster.
 
 Once your meta nodes are part of your cluster move on to [the next steps to
-set up your data nodes](/enterprise_influxdb/v1.6/production_installation/data_node_installation/).
+set up your data nodes](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/data_node_installation/).
 Please do not continue to the next steps if your meta nodes are not part of the
 cluster.

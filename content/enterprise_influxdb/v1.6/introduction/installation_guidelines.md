@@ -17,11 +17,11 @@ Please review the sections below before you begin working with InfluxDB Enterpri
 
 Two options are described for installing InfluxDB Enterprise.
 
-The [QuickStart installation](/enterprise_influxdb/v1.6/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
+The [QuickStart installation](/enterprise_influxdb/v1.6/install-and-deploy/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
 The QuickStart installation process **is not** intended for use
 in a production environment.
 
-The [Production installation](/enterprise_influxdb/v1.6/production_installation/) process is recommended for users intending to deploy the InfluxDB Enterprise installation in a production environment.
+The [Production installation](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/) process is recommended for users intending to deploy the InfluxDB Enterprise installation in a production environment.
 
 > **Note:** If you install InfluxDB Enterprise with the QuickStart installation process you will need to reinstall InfluxDB Enterprise with the Production installation process before using the product in a production environment.
 

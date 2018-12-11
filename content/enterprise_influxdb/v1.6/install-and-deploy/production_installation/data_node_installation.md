@@ -248,4 +248,4 @@ If you do not see your data nodes in the output, please retry adding them
 to the cluster.
 
 Once your data nodes are part of your cluster move on to [the final step
-to set up Chronograf](/enterprise_influxdb/v1.6/production_installation/chrono_install).
+to set up Chronograf](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/chrono_install).
