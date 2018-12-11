@@ -4,7 +4,7 @@ description: Deploy InfluxDB OSS in Kubernetes and monitor Kubernetes
 menu:
   platform:
     name: Kubernetes
-    parent: Integrate
+    parent: integrate-platform
 ---
 
 [Kubernetes](https://kubernetes.io/) is a container orchestration project that
@@ -21,8 +21,6 @@ stack) with Kubernetes:
 
 ## Monitor Kubernetes
 The TICK stack is an easy and performant way to monitor the services that make up a Kubernetes cluster, whether or not you're running InfluxDB in a Kubernetes cluster or somewhere else.
-
-Why use the InfluxData
 
 ### kube-influxdb Kubernetes monitoring project
 

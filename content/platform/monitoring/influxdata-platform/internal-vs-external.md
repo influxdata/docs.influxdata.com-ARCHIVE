@@ -5,7 +5,7 @@ menu:
   platform:
     name: Configurations for monitoring
     parent: monitor-platform
-    weight: 4
+    weight: 3
 ---
 
 One of the primary use cases for InfluxData's TICK stack is infrastructure monitoring,

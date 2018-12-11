@@ -4,7 +4,7 @@ description: InfluxData projects are well suited to be deployed in Docker contai
 menu:
   platform:
     name: Docker
-    parent: Integrate
+    parent: integrate-platform
 ---
 
 InfluxData projects are well suited to be deployed in Docker containers. Containers for each project are published to DockerHub.

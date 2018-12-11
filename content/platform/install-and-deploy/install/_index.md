@@ -4,7 +4,7 @@ description: Quickly install and configure the InfluxData Platform (TICK stack) 
 menu:
   platform:
     name: Install the InfluxData Platform
-    weight: 10
+    weight: 11
     identifier: install-platform
     parent: install-and-deploy-platform
 ---
@@ -20,12 +20,12 @@ and testing. The InfluxData Sandbox is not intended for production environments,
 but it is a quick way to start using the InfluxData Platform and work with Docker
 containers.
 
-## [Install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install)
+## [Install the InfluxData Platform OSS (TICK stack)](/platform/install-and-deploy/install/oss-install)
 
 Instructions for installing and configuring all components of the open source
 TICK stack – Telegraf, InfluxDB, Chronograf, and Kapacitor.
 
-## [Install InfluxData Enterprise clusters for production environments](/platform/install-and-deploy/fproduction-install)
+## [Install InfluxData Enterprise clusters for production](/enterprise_influxdb/v1.6/install-and-deploy/production-installation)
 
 An end-to-end walkthrough for installing and production-ready Enterprise TICK stack
 is coming soon. In the mean time, information about installing each component of

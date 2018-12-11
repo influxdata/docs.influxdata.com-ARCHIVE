@@ -4,7 +4,7 @@ description: Use the InfluxData TICK stack to monitor containers, including Kube
 menu:
   platform:
     name: Monitor containers
-    weight: 1
+    weight: 2
     parent: Monitor
 ---
 
@@ -13,4 +13,4 @@ as support for the InfluxData Platform and containers rapidly evolves.
 
 ## [Monitor Kubernetes using the InfluxData Platform](/platform/monitoring/containers/kubernetes/)
 
-You can use the InfluxData Platform to monitor your Kubernetes installations. 
+You can use the InfluxData Platform to monitor your Kubernetes installations.

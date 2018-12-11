@@ -4,7 +4,7 @@ description: Use the InfluxData TICK stack to monitor Kubernetes.
 menu:
   platform:
     name: Monitor Kubernetes
-    weight: 30
+    weight: 3
     parent: Monitor containers
     draft: false
 ---

@@ -5,7 +5,7 @@ menu:
   platform:
     name: Measurements for monitoring
     parent: Tools for monitoring InfluxDB
-    weight: 2
+    weight: 3
 ---
 
 **On this page**

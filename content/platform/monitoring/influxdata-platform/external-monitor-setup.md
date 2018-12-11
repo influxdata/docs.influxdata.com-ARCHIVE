@@ -5,7 +5,7 @@ menu:
   platform:
     name: Configure a watcher of watchers
     parent: monitor-platform
-    weight: 3
+    weight: 4
 ---
 
 The flexibility and portability of InfluxData's TICK stack make it easy to use in different

@@ -5,7 +5,7 @@ menu:
   platform:
     name: Enterprise Stats dashboard
     parent: Dashboards for monitoring InfluxDB
-    weight: 3
+    weight: 6
 ---
 
 The InfluxDB Enterprise Cluster Stats dashboard is useful for monitoring the health of your InfluxDB Enterprise clusters.

@@ -1,5 +1,5 @@
 ---
-title: Using the SHOW DIAGNOSTICS statement to monitoring InfluxDB
+title: Use the SHOW DIAGNOSTICS statement to monitoring InfluxDB diagnostic information
 description: Use the SHOW DIAGNOSTICS statement to monitor InfluxDB instances.
 menu:
   platform:
