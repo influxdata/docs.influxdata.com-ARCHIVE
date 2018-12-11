@@ -25,7 +25,7 @@ containers.
 Instructions for installing and configuring all components of the open source
 TICK stack – Telegraf, InfluxDB, Chronograf, and Kapacitor.
 
-## [Install InfluxData Enterprise clusters for production environments](/platform/install-and-deploy/production-install)
+## [Install InfluxData Enterprise clusters for production environments](/platform/install-and-deploy/fproduction-install)
 
 An end-to-end walkthrough for installing and production-ready Enterprise TICK stack
 is coming soon. In the mean time, information about installing each component of
