@@ -219,7 +219,7 @@ The measurement statistics related to the Anti-Entropy (AE) engine in InfluxDB E
 * Data type: integer
 * Used in "Anti-Entropy Errors"
 * Examples
-  * "Anti-Entropy Errors" metric in the [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#anti-entropy-errors) dashboard.
+  * "Anti-Entropy Errors" metric in the [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#anti-entropy-errors) dashboard.
 
 #### jobs
 
@@ -231,7 +231,7 @@ The measurement statistics related to the Anti-Entropy (AE) engine in InfluxDB E
 * The number of active (currently executing) jobs.
 * Data type: integer
 * Examples
-  * "Anti-Entropy Jobs" metric in the [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#anti-entropy-jobs) dashboard.
+  * "Anti-Entropy Jobs" metric in the [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#anti-entropy-jobs) dashboard.
 
 _____
 
@@ -304,7 +304,7 @@ The measurement statistics related to continuous queries (CQs).
 * The total number of continuous queries that executed but failed.
 * Data type: integer
 * Examples
-  * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#continuous-queries-executed-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#continuous-queries-executed-minute) dashboards.
+  * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#continuous-queries-executed-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#continuous-queries-executed-minute) dashboards.
 
 #### queryOk
 
@@ -312,7 +312,7 @@ The measurement statistics related to continuous queries (CQs).
 * Note that this value may be incremented in some cases where a CQ is initiated but does not actually run, for example, due to misconfigured resample intervals.
 * Data type: integer
 * Examples
-  * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#continuous-queries-executed-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#continuous-queries-executed-minute) dashboards.
+  * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#continuous-queries-executed-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#continuous-queries-executed-minute) dashboards.
 
 --------  ---------
 
@@ -324,7 +324,7 @@ The measurement statistics related to continuous queries (CQs).
 * Data type: integer
 * The series cardinality values are estimates, based on [HyperLogLog++ (HLL++)](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go). The numbers returned by the estimates when there are thousands or millions of measurements or series should be accurate within a relatively small margin of error.
 * Examples:
-  * "Measurements By Database" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#number-of-measurements-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#number-of-measurements-by-database) dashboards.
+  * "Measurements By Database" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#number-of-measurements-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#number-of-measurements-by-database) dashboards.
 
 #### numSeries
 
@@ -332,7 +332,7 @@ The measurement statistics related to continuous queries (CQs).
 * Data type: integer
 * The series cardinality values are estimates, based on [HyperLogLog++ (HLL++)](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go). The numbers returned by the estimates when there are thousands or millions of measurements or series should be accurate within a relatively small margin of error.
 * Examples
-  * "Series Cardinality By Database" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#series-cardinality-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#series-cardinality-by-database) dashboards.
+  * "Series Cardinality By Database" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#series-cardinality-by-database) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#series-cardinality-by-database) dashboards.
 
 _____
 
@@ -393,7 +393,7 @@ Upon restart or a crash, this statistic resets to zero, even if the Hinted Hando
 * This statistic should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (See https://github.com/influxdata/docs.influxdata.com/issues/780)
   * See PR on `max-values-per-tag` limit and effects on `queueBytes` (https://github.com/influxdata/docs.influxdata.com/issues/780).
   * Examples:
-    * "Hinted Handoff Queue Size" in the [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#hinted-handoff-hh-queue-size) dashboard.
+    * "Hinted Handoff Queue Size" in the [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#hinted-handoff-hh-queue-size) dashboard.
 
 #### queueDepth
 
@@ -454,7 +454,7 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 * Data type: integer
 * Used in "HTTP Requests"
 * Examples:
-  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
+  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
 
 
 #### fluxQueryReq
@@ -504,15 +504,15 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 * Data type: integer
 * Used in "HTTP Request Duration (99th %)" and "HTTP Requests Per Minute"
 * Examples:
-  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
-  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
+  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
+  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
 
 ####  queryReqDurationNs
 
 * The total query request duration, in nanosecond (ns).
 * Data type: integer
 * Examples:
-  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
+  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
 
 ####  queryRespBytes
 
@@ -544,7 +544,7 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 * The number of HTTP responses due to server errors.
 * Data type: integer
 * Examples
-  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
+  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
 
 ####  statusReq
 
@@ -556,8 +556,8 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 * The number of write requests served using the HTTP `/write` endpoint.
 * Data type: integer
 * Examples
-  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
-  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
+  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
+  * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
 
 ####  writeReqActive
 
@@ -574,7 +574,7 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 * The duration (wall time), in nanoseconds, of write requests served using the `/write` HTTP endpoint.
 * Data type: integer
 * Examples
-  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
+  * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
 
 -----
 
@@ -592,7 +592,7 @@ The `queryExecutor` statistics related to usage of the Query Executor of the Inf
 * The number of queries executed (started).
 * Data type: integer
 * Examples
-  * "Queries Executed Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#queries-executed-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#queries-executed-per-minute) dashboards.
+  * "Queries Executed Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#queries-executed-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#queries-executed-per-minute) dashboards.
 
 ####  queriesFinished
 
@@ -711,7 +711,7 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 * The number of bytes in in-use spans.
 * Data type: integer
 * Examples
-  * "Heap Size" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring#heap-size) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#heap-size) dashboards.
+  * "Heap Size" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#heap-size) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#heap-size) dashboards.
 
 ####  HeapObjects
 
@@ -1127,7 +1127,7 @@ The `write` measurement statistics are about writes to the data node, regardless
 * Incoming writes have to make it through a couple of checks before reaching this point (points parse correctly, correct authentication provided, etc.). After these checks, this statistic should be incremented regardless of source (HTTP, UDP, `_internal` stats, OpenTSDB plugin, etc.).
 * Data type: integer
 * Examples
-  * "Points Throughput / Minute by Hostname" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring/) and [InfluxDB Enterprise Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring/) dashboards
+  * "Points Throughput / Minute by Hostname" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring/) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring/) dashboards
 
 #### pointReqHH (Enterprise only)
 
@@ -1172,7 +1172,7 @@ The `pointReqRemote` statistic is incremented immediately before the remote writ
 * The total number of batches of points that were not successfully written, due to a failure to write to a local or remote shard.
 * Data type: integer
 * Examples
-  * "Shard Write Errors" metric in [InfluxDB OSS Stats](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#shard-write-errors/#shard-write-errors) and [InfluxDB Enterprise Statistics](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring#shard-write-errors) dashboards
+  * "Shard Write Errors" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#shard-write-errors/#shard-write-errors) and [InfluxDB Enterprise Statistics](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#shard-write-errors) dashboards
 
 #### writeOk
 

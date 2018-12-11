@@ -14,7 +14,7 @@ The InfluxQL [`SHOW STATS`](https://docs.influxdata.com/influxdb/v1.6/query_lang
 statement returns detailed measurement statistics on InfluxDB servers and available (enabled) components.
 Each component exporting statistics exports a measurement named after the module and various series that are associated with the measurement.
 To monitor InfluxDB system measurements over time, you can use the `_internal` database.
-For details on measurements available in the `_internal` database, see [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (`_internal`)](/platform/monitoring/tools/measurements-internal/).
+For details on measurements available in the `_internal` database, see [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (`_internal`)](/platform/monitoring/influxdata-platform/tools/measurements-internal/).
 
 > **Note:** These statistics are all reset to zero when the InfluxDB service starts.
 
@@ -38,4 +38,4 @@ The  `SHOW STATS` statement does not list index memory usage unless you use the 
 
 The `SHOW STATS` statement returns the same statistics captured in the `internal` database, but only for the instant you run the statement.
 
-For details on the measurement statistics returned, see [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (`_internal`)](/platform/monitoring/tools/measurements-internal/).
+For details on the measurement statistics returned, see [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (`_internal`)](/platform/monitoring/influxdata-platform/tools/measurements-internal/).

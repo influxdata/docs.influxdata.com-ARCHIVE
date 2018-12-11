@@ -36,7 +36,7 @@ The dashboard contains the following cells:
 * InfluxDB - Query Performance
 * InfluxDB - Cardinality
 
-_For details about the metrics in each cell, see the [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring)._
+_For details about the metrics in each cell, see the [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/influxdata-platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring)._
 
 ![Built-in Telegraf dashboard](/img/platform/platform-dashboard-oss-telegraf.png)
 
@@ -52,7 +52,7 @@ If you're not using Telegraf, you can import the following dashboard built off t
 * Heap Size
 * Shard Write Errors
 
-_For details about the metrics in each cell, see the [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/monitoring-dashboards/dashboard-oss-monitoring)._
+_For details about the metrics in each cell, see the [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring)._
 
 <a class="btn download" href="/downloads/dashboard-influxdb-oss-stats_internal.json" target="\_blank">Download this dashboard</a>
 
@@ -72,7 +72,7 @@ For a single InfluxDB Enterprise instance, you can import the following dashboar
 * Hinted HandOff Queue Size
 * Count of AE Errors & Jobs
 
-_For details about the metrics in each cell, see the [Enterprise Stats monitoring dashboard](/platform/monitoring/monitoring-dashboards/dashboard-enterprise-monitoring)._
+_For details about the metrics in each cell, see the [Enterprise Stats monitoring dashboard](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring)._
 
 <a class="btn download" href="/downloads/dashboard-influxdb-enterprise-cluster-stats_internal.json" target="\_blank">Download this dashboard</a>
 

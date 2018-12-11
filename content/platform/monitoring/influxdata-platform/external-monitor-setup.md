@@ -23,7 +23,7 @@ _This guide assumes a primary node or cluster is already running._
 ## Install a monitor
 Install a separate TICK stack to act as your monitor.
 Your monitor should be on hardware separate from your primary cluster.
-Installation instructions for the TICK stack are provided in the [installation guides](/platform/installation).
+Installation instructions for the TICK stack are provided in the [installation guides](/platform/install-and-deploy/).
 
 > In order for your monitor to receive data from your primary cluster, the primary
 > must be able to connect to InfluxDB's API endpoint in your monitor via HTTP or UDP.

@@ -1,5 +1,5 @@
 ---
-title: Monitor InfluxData Platform using internal and external configurations
+title: Considerations for monitoring the InfluxData Platform
 description: An explanation of internal and external monitoring strategies for your Enterprise or OSS TICK stack with the pros and cons of each.
 menu:
   platform:
@@ -13,7 +13,7 @@ including using the TICK stack to monitor itself or another TICK stack.
 These are the two main approaches to Monitoring your TICK stack:
 
 - **[Internal monitoring](#internal-monitoring)** - A TICK stack that monitors itself.
-- **[External monitoring](#external-monitoring)** - A TICK stack monitored by another TICK stack.
+- **["Watcher of watcher" approach](#The "watcher of watchers" approach)** - A TICK stack monitored by another TICK stack.
 
 ## Internal monitoring
 
@@ -41,11 +41,12 @@ The TICK stack monitors itself out of the box.
 ### Cons of internal monitoring
 
 #### No hardware separation
+
 When using internal monitoring, if your TICK stack goes offline, your monitor does as well.
 Any configured alerts will not be sent and you will not be notified of any issues.
 Because of this, **internal monitoring is not recommended for production use cases.**
 
-## The "watcher of watchers" approach for monitoring InfluxDB
+## The "watcher of watchers" approach
 
 > Recommended for production environments.
 
@@ -64,7 +65,7 @@ _For information about setting up an external monitoring TICK stack, see [Setup 
 
 ---
 
-[Monitoring dashboards](/platform/monitoring/monitoring-dashboards) are available
+[Monitoring dashboards](/platform/monitoring/influxdata-platform/monitoring-dashboards) are available
 that visualize the default metrics provided by the Telegraf agents.
 You can also [configure Kapacitor alerts](/kapacitor/latest/working/alerts/)
 to monitor and alert on each of these metrics.
@@ -72,12 +73,14 @@ to monitor and alert on each of these metrics.
 ### Pros of external monitoring
 
 #### Hardware separation
-With an monitor running separate from your primary TICK stack, issues that occur in the primary stack will not affect the monitor.
+
+With a monitor running separate from your primary TICK stack, issues that occur in the primary stack will not affect the monitor.
 If your primary TICK stack goes down or has issues, your monitor will be able detect them and alert you.
 
 ### Cons of external monitoring
 
 #### Slightly more setup
+
 There is more setup involved with external monitoring, but the benefits far
 outweigh the extra time required, especially for production use cases.
 
