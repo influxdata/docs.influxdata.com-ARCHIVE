@@ -4,10 +4,10 @@ description: InfluxData projects are well suited to be deployed in Docker contai
 menu:
   platform:
     name: Docker
-    parent: Integrations
+    parent: Integrate
 ---
 
-InfluxData projects are well suited to be deployed in containers. Containers for each project are published to DockerHub.
+InfluxData projects are well suited to be deployed in Docker containers. Containers for each project are published to DockerHub.
 
 - [Telegraf](https://hub.docker.com/_/telegraf/)
 - [InfluxDB](https://hub.docker.com/_/influxdb/)

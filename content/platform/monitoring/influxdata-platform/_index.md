@@ -1,6 +1,6 @@
 ---
 title: Monitoring the InfluxData Platform
-description: How to use InfluxData's TICK stack to monitor itself and other TICK stacks in order to identify and alert on anomalies.
+description: How to use the InfluxData TICK stack to monitor itself and other TICK stacks in order to identify and alert on anomalies.
 menu:
   platform:
     name: Monitor the InfluxData Platform

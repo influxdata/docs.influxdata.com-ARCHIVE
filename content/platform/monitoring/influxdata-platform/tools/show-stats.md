@@ -5,7 +5,7 @@ menu:
   platform:
     name: SHOW STATS
     parent: Tools for monitoring InfluxDB
-    weight: 100
+    weight: 4
 ---
 
 ## Using the `SHOW STATS` statement

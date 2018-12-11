@@ -1,9 +1,9 @@
 ---
-title: Configure an external monitor of the InfluxData Platform
+title: Configure an external monitor of InfluxDB
 description: How to set up an external InfluxData TICK stack that monitors another Enterprise or OSS TICK stack.
 menu:
   platform:
-    name: External monitoring of InfluxData Platform
+    name: External monitoring of InfluxDB
     parent: monitor-platform
     weight: 3
 ---

@@ -1,9 +1,9 @@
 ---
-title: TICK stack integrations
+title: Integrate the InfluxData TICK stack
 description: Discover all ways the TICK stack integrates into your favorite projects.
 menu:
   platform:
-    name: Integrations
+    name: Integrate
     weight: 40
 ---
 

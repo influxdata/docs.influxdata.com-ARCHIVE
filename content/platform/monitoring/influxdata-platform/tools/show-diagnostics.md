@@ -5,7 +5,7 @@ menu:
   platform:
     name: SHOW DIAGNOSTICS
     parent: Tools for monitoring InfluxDB
-    weight: 90
+    weight: 3
 ---
 
 Diagnostic information includes mostly information about your InfluxDB server that is not necessarily numerical in format. This diagnostic information is not stored in the [`_internal`](/platform/monitoring/tools/measurements-internal/) database.

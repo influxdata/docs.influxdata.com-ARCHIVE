@@ -1,10 +1,10 @@
 ---
-title: The InfluxData Platform and Kubernetes
+title: Integrate the InfluxData Platform with Kubernetes
 description: Deploy the TICK stack on Kubernetes and monitor Kubernetes.
 menu:
   platform:
     name: Kubernetes
-    parent: Integrations
+    parent: Integrate
 ---
 
 [Kubernetes](https://kubernetes.io/) is a container orchestration project that
