@@ -7,7 +7,23 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v1.9 [2018-11-20]
+
+## v1.9.1 [2018-12-11]
+
+### Bug fixes
+
+- Fix boolean handling in splunkmetric serializer.
+- Set default config values in Jenkins input.
+- Fix server connection and document stats in MongoDB input.
+- Add X-Requested-By header to Graylog input.
+- Fix metric memory not freed from the metric buffer on write.
+- Add support for client TLS certificates in PostgreSQL inputs.
+- Prevent panic when marking the offset in `kafka_consumer`.
+- Add early metrics to aggregator and honor `drop_original` setting.
+- Use `-W` flag on BSD variants in ping input.
+- Allow delta metrics in Wavefront parser.
+
+## v1.9.0 [2018-11-20]
 
 #### Release Notes
 
@@ -26,7 +42,7 @@ menu:
   To avoid overconsumption when reading from queue consumers, the following
   input plugins use the new option `max_undelivered_messages` to limit the number
   of outstanding unwritten metrics:
-  
+
   * Apache Kafka Consumer (`kafka_consumer`)
   * AMQP Consumer (`amqp_consumer`)
   * MQTT Consumer (`mqtt_consumer`)
