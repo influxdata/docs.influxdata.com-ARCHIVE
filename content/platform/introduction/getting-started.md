@@ -10,7 +10,7 @@ menu:
 
 ![Getting started setup](/img/chronograf/v1.6/intro-gs-diagram.png)
 
-Before following the steps below, [download and install](/platform/installation/) each component of the TICK stack.
+Before following the steps below, [download and install](/platform/install-and-deploy/install/) each component of the TICK stack.
 
 ## Understand how Telegraf writes data to InfluxDB
 
@@ -22,7 +22,7 @@ The configuration file for Telegraf specifies where metrics come from and where 
 * `[[outputs.influxdb]]` - declares how to connect to InfluxDB and the destination database, which is the default ‘telegraf’ database.
 * `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB. Enabled by default.
 
-For details about the configuration file, see [Getting started with Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/getting-started/).
+For details about the configuration file, see [Get started with Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/getting-started/).
 
 ## Query data in InfluxDB
 

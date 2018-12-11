@@ -8,3 +8,11 @@ menu:
     name: Monitor
     weight: 30
 ---
+
+
+## [Monitor the InfluxData Platform](/platform/monitoring/influxdata-platform)
+
+
+
+
+##

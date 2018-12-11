@@ -18,15 +18,15 @@ another OSS or Enterprise TICK stack. They cover different potential monitoring 
 and visualizing the monitoring data in a way that makes it easy to recognize, alert on,
 and address anomalies as they happen.
 
-## [Internal versus external monitoring](/platform/monitoring/internal-vs-external)
+## [Internal versus external monitoring](/platform/monitoring/influxdata-platform/internal-vs-external)
 An explanation of internal and external monitoring strategies for your Enterprise
 or OSS TICK stack with the pros and cons of each.
 
-## [Set up an external monitor](/platform/monitoring/external-monitor-setup)
+## [Set up an external monitor](/platform/monitoring/influxdata-platform/external-monitor-setup)
 How to set up an external InfluxData TICK stack that monitors another Enterprise or OSS TICK stack.
 
-## [Dashboards for monitoring](/platform/monitoring/monitoring-dashboards)
+## [Dashboards for monitoring](/platform/monitoring/influxdata-platform/monitoring-dashboards)
 Set up dashboards to help visualize and monitor the health and performance of your InfluxData TICK stack.
 
-## [Monitoring tools](/platform/monitoring/tools)
+## [Monitoring tools](/platform/monitoring/influxdata-platform/tools)
 The InfluxData platform provides tools to help you monitor and troubleshoot issues if they arise.
