@@ -14,11 +14,11 @@ This guide walks through using Flux's `histogram()` function to transform your d
 
 ## histgram() function
 The [`histogram()` function](/flux/v0.7/functions/transformations/histogram) approximates the
-cumulative distribution of a dataset by counting data frequencies for a list of "buckets".
-In the context of histograms, a bucket is simply a range in a data point falls.
-All data points that are less than or equal to the bound are counted in the bucket.
-In the histogram output, a column is added (le) that represents the upper bounds of of each bucket.
-Bucket counts are cumulative.
+cumulative distribution of a dataset by counting data frequencies for a list of "bins."
+A **bin** is simply a range in which a data point falls.
+All data points that are less than or equal to the bound are counted in the bin.
+In the histogram output, a column is added (le) that represents the upper bounds of of each bin.
+Bin counts are cumulative.
 
 ```js
 from(bucket:"telegraf/autogen")
@@ -27,37 +27,37 @@ from(bucket:"telegraf/autogen")
     r._measurement == "mem" AND
     r._field == "used_percent"
   )
-  |> histogram(buckets: [0.0, 10.0, 20.0, 30.0])
+  |> histogram(bins: [0.0, 10.0, 20.0, 30.0])
 ```
 
 > Values output by the `histogram` function represent points of data aggregated over time.
 > Since values do not represent single points in time, there is no `_time` column in the output table.
 
-## Bucket helper functions
-Flux provides two helper functions for generating histogram buckets.
-Each generates and outputs an array of floats designed to be used in the `histogram()` function's `buckets` parameter.
+## Bin helper functions
+Flux provides two helper functions for generating histogram bins.
+Each generates and outputs an array of floats designed to be used in the `histogram()` function's `bins` parameter.
 
-### linearBuckets()
-The [`linearBuckets()` function](/flux/v0.7/functions/misc/linearbuckets) generates a list of linearly separated floats.
+### linearBins()
+The [`linearBins()` function](/flux/v0.7/functions/misc/linearbins) generates a list of linearly separated floats.
 
 ```js
-linearBuckets(start: 0.0, width: 10.0, count: 10)
+linearBins(start: 0.0, width: 10.0, count: 10)
 
 // Generated list: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, +Inf]
 ```
 
-### logarithmicBuckets()
-The [`logarithmicBuckets()` function](/flux/v0.7/functions/misc/logarithmicbuckets) generates a list of exponentially separated floats.
+### logarithmicBins()
+The [`logarithmicBins()` function](/flux/v0.7/functions/misc/logarithmicbins) generates a list of exponentially separated floats.
 
 ```js
-logarithmicBuckets(start: 1.0, factor: 2.0, count: 10, infinty: true)
+logarithmicBins(start: 1.0, factor: 2.0, count: 10, infinty: true)
 
 // Generated list: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, +Inf]
 ```
 
 ## Examples
 
-### Generating a histogram with linear buckets
+### Generating a histogram with linear bins
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -5m)
@@ -66,7 +66,7 @@ from(bucket:"telegraf/autogen")
     r._field == "used_percent"
   )
   |> histogram(
-    buckets: linearBuckets(
+    bins: linearBins(
       start:65.5,
       width: 0.5,
       count: 20,
@@ -102,7 +102,7 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 2018-11-07T22:19:58.423358000Z  2018-11-07T22:24:58.423358000Z            used_percent                     mem  Scotts-MacBook-Pro.local                            75                            30
 ```
 
-### Generating a histogram with linear buckets
+### Generating a histogram with linear bins
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -5m)
@@ -111,7 +111,7 @@ from(bucket:"telegraf/autogen")
     r._field == "used_percent"
   )
   |> histogram(
-    buckets: logarithmicBuckets(
+    bins: logarithmicBins(
       start:0.5,
       factor: 2.0,
       count: 10,
