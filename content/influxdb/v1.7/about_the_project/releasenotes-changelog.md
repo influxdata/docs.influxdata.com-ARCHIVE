@@ -7,6 +7,21 @@ menu:
     parent: About the project
 ---
 
+## v1.7.2 [2018-12-11]
+
+### Bug fixes
+
+* Update to Flux 0.7.1
+* tsdb: conflict based concurrency resolution.
+* Skip and warn series files in retention policy directory.
+* Always cleaning up the fields index.
+* Don't allow deletes to a database in mixed index.
+* Update platform dependency.
+* Verify seriesfile in presence of tombstones.
+* Fix ApplyEnvOverrides when a type that implements Unmarshaler is in a slice.
+* Drop NaN values when writing back points.
+* Pass the query authorizer to subqueries.
+
 ## v1.7.1 [2018-11-14]
 
 ### Bug fixes
