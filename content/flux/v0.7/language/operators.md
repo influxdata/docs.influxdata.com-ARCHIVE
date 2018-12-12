@@ -62,12 +62,12 @@ An assignment operator assigns a value to its left operand based on the value of
 ## Function operators
 Function operators are used to create functions and control the flow of data through function operations.
 
-| Operator             | Description        | Examples                             | Meaning                                                                                          |
-|:--------:            | -----------        | --------                             | -------                                                                                          |
-| <code>&#124;></code> | Pipe&#8209;forward | <code>data &#124;> function()</code> | Tables contained in the "data" variable are piped into the function.                             |
-| `<-`                 | Pipe&#8209;receive | `tables=<-`                          | The "tables" variable or parameter is assigned to data piped into the operation.                 |
-| `=>`                 | Arrow              | `(r) => r.tag1 == "tagvalue"`        | The arrow passes an object or parameters into function operations.                               |
-| `()`                 | Function call      | `top(n:10)`                          | Call the `top` function setting the `n` parameter to `10` and perform the associated operations. |
+| Operator             | Description        | Examples                             | Meaning                                                                                                                                                                 |
+|:--------:            | -----------        | --------                             | -------                                                                                                                                                                 |
+| <code>&#124;></code> | Pipe&#8209;forward | <code>data &#124;> function()</code> | Tables contained in the "data" variable are piped into the function.                                                                                                    |
+| `<-`                 | Pipe&#8209;receive | `tables=<-`                          | The "tables" variable or parameter is assigned to data piped into the operation. _This operator is used for any data type passed into a function; not just table data._ |
+| `=>`                 | Arrow              | `(r) => r.tag1 == "tagvalue"`        | The arrow passes an object or parameters into function operations.                                                                                                      |
+| `()`                 | Function call      | `top(n:10)`                          | Call the `top` function setting the `n` parameter to `10` and perform the associated operations.                                                                        |
 
 ---
 
