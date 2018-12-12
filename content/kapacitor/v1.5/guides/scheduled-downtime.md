@@ -15,11 +15,11 @@ This guide walks through creating TICKscripts that gracefully handle scheduled d
 without triggering alerts.
 
 ## Sideload
-Avoiding unnecessary alerts during scheduled downtime is accomplished by using
-the `sideload` node to load information from files in the filesystem
-and set fields and tags on data points which can then be used in alert logic.
-The [`sideload`](/kapacitor/v1.5/nodes/sideload_node) node adds fields and tags to
-points based on hierarchical data from various file-based sources.
+Avoid unnecessary alerts during scheduled downtime by using the
+[`sideload`](/kapacitor/v1.5/nodes/sideload_node) node to load information from
+files in the filesystem and set fields and tags on data points which can then be used in alert logic.
+The `sideload` node adds fields and tags to points based on hierarchical data
+from various file-based sources.
 
 Kapacitor searches the specified files for a given field or tag key.
 If it finds the field or tag key in the loaded files, it uses the value in the files to
@@ -92,8 +92,8 @@ Create a file for each of these hosts and host groups in their respective direct
 > You only need to create files for hosts or hostgroups that will be offline.
 
 The contents of the file should contain one or more key-value pairs.
-The key being the field or tag key that will be set on each matching point,
-and the value being the field or tag value that will be set on matching points.
+The key is the field or tag key that will be set on each matching point.
+The value is the field or tag value that will be set on matching points.
 
 For this example, set the `maintenance` field to `true`.
 Each of the source files will look like the following:
@@ -130,16 +130,25 @@ matching files in the source directory.
   .order('hosts/{{.host}}.yml' , 'hostgroups/{{.hostgroup}}.yml')
 ```
 
-The order in which file path templates are listed in the `order` property define
+The order of file path templates in the `order` property define
 the precedence in which file paths are checked.
 Those listed first, from left to right, are checked first.
 
 ### Define the sideload field
 The `field` property requires two arguments:
 
-1.  The key that Kapacitor looks for in the source files and the field for which
-    it defines a value on each data point.
-2.  The default value used if no matching file and key are found in the source files.
+```js
+|sideload()
+  // ...
+  .field('<key>', <default-value>)
+```
+
+###### key
+The key that Kapacitor looks for in the source files and the field for which it
+defines a value on each data point.
+
+###### default-value
+The default value used if no matching file and key are found in the source files.
 
 In this example, use the `maintenance` field and set the default value to `FALSE`.
 This assumes hosts are not undergoing maintenance by default.
@@ -151,13 +160,13 @@ This assumes hosts are not undergoing maintenance by default.
   .field('maintenance', FALSE)
 ```
 
-> The `tag` property could be used instead of `field` if you prefer to set a tag
+> You can use the `tag` property instead of `field` if you prefer to set a tag
 > on each data point rather than a field.
 
 ### Update alert logic
 The `sideload` node will now set the `maintenance` field on every data point processed by the TICKscript.
 For those that have `host` or `hostgroup` tags matching the filenames of the source files,
-the `maintenance` field will be set to the value define in the source file.
+the `maintenance` field will be set to the value defined in the source file.
 
 Update the alert logic in your TICKscript to ensure `maintenance` is **not** `true`
 before sending an alert:
