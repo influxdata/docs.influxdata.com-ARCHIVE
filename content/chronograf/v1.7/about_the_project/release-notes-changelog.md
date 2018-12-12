@@ -7,6 +7,30 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.4 [2018-12-12]
+
+### UI Improvements
+
+* Add loading spinners while fetching protoboards.
+* Add ability to skip Kapacitor step while adding a connection.
+* Remove extra save options for retention policy during database creation.
+
+### Bug Fixes
+
+* Fix logs page getting stuck on scroll to top.
+* Fix Flux pivot function using incorrectly named parameters.
+* Fix momentary display of fallback notes while dashboard is loading.
+* Fix issue displaying UUID in table cells.
+* Update functions list for Flux 0.7.1.
+* Fix single stat graphs decimal places when using Flux.
+* Fix missing data and type in refreshing graph.
+* Fix logs in loading state.
+* Improve display of Flux Wizard on small screens.
+* Update logs histogram data on click and new search.
+* Prevent cell renaming widget from pushing other header elements offscreen.
+* Fix Flux editor scrollbars.
+* Use valid characters for Sensu IDs.
+
 ## v1.7.3 [2018-11-13]
 
 ### UI Improvements
