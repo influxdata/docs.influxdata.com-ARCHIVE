@@ -10,7 +10,7 @@ menu:
 There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v1.7/tools/shell/), [client libraries](/influxdb/v1.7/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v1.7/write_protocols/graphite/).
 Here we'll show you how to create a database and write data to it using the built-in HTTP API.
 
-> **Note**: The following examples use `curl`, a command line tool that can be used to make HTTP requests. If you haven't used `curl` before, you can learn more with their [HTTP Scripting Guide](https://curl.haxx.se/docs/httpscripting.html).
+> **Note**: The following examples use `curl`, a command line tool that transfers data using URLs. Learn the basics of `curl` with the [HTTP Scripting Guide](https://curl.haxx.se/docs/httpscripting.html).
 
 ## Creating a database using the HTTP API
 To create a database send a `POST` request to the `/query` endpoint and set the URL parameter `q` to `CREATE DATABASE <new_database_name>`.
