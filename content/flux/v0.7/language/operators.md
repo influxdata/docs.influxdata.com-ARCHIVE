@@ -30,6 +30,10 @@ perform a calculation that returns a single numerical value.
 | `/`      | Division       | `9 / 3`  | `3`    |
 | `%`      | Modulus        | `10 % 5` | `0`    |
 
+> In the current version of Flux, values used in arithmetic operations must
+> be of the same numeric type (integer or float).
+> Operations with values of different numeric types will result in a type error.
+
 ## Comparison operators
 Comparison operators compare expressions and return true or false based on the comparison.
 
