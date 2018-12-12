@@ -28,7 +28,7 @@ If it doesn't find the field or tag key, it sets them to the default value defin
 in the [`field` or `tag` properties](#field).
 
 ### Relevant sideload properties
-Of `sideload`'s properties, the following are relevant to gracefully handling scheduled downtime:
+The following properties of `sideload` are relevant to gracefully handling scheduled downtime:
 
 #### source
 `source` specifies a directory in which source files live.
