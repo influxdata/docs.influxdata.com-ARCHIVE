@@ -21,7 +21,7 @@ This release builds off of the InfluxDB OSS 1.7.0 through 1.7.2 releases. For de
 * AE: memoize DistinctCount, min, & max time.
 * Update influxdb dep for subquery auth update.
 
-Bugfixes
+### Bug fixes
 
 * Update sample configuration.
 
