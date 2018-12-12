@@ -12,7 +12,7 @@ menu:
 ---
 
 The `barrier` node emits a barrier with the current time according to the system clock.
-Since the [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/) emits based on system time,
+Because the [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/) emits based on system time,
 it allows pipelines to be forced in the absence of data traffic.
 The emitted barrier is based on either idle time since the last received
 message or on a periodic timer based on the system clock.

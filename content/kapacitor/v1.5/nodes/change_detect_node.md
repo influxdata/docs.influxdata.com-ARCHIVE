@@ -10,7 +10,7 @@ menu:
     parent: nodes
 ---
 
-The `changeDetect` node creates a new node that only emits new points if different from the previous point.
+The `changeDetect` node creates a new node that emits new points only if different from the previous point.
 The `changeDetect` node can monitor multiple fields.
 
 ##### Example changeDetect node
@@ -22,15 +22,15 @@ stream
 
 ### Constructor
 
-| Chaining Method | Description |
-|:---------|:---------|
-| **changeDetect&nbsp;(&nbsp;`fields`&nbsp;`...string`)** | Create a new node that only emits new points if different from the previous point  |
+| Chaining Method                                         | Description                                                                       |
+|:---------------                                         |:-----------                                                                       |
+| **changeDetect&nbsp;(&nbsp;`fields`&nbsp;`...string`)** | Create a new node that emits new points only if different from the previous point |
 
 ### Property methods
 
-| Setters | Description |
-|:---|:---|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppresses all error logging events from this node.  |
+| Setters                           | Description                                         |
+|:-------                           |:-----------                                         |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppresses all error logging events from this node. |
 
 
 
