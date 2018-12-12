@@ -5,6 +5,19 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.2 [2018-11-28]
+
+### Features
+- Add barrier node support to JoinNode.
+- Add ability to expire groups using the BarrierNode.
+- Add alert/persist-topics to config.
+- Add multiple field support to the ChangeDetectNode.
+- Add links to PagerDuty v2 alerts.
+- Add additional metadata to Sensu alerts.
+
+### Bugfixes
+- Fix join not catching up fast enough after a pause in the data stream.
+
 ## v1.5.1 [2018-08-06]
 
 ### Bugfixes
