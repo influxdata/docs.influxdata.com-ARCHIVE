@@ -13,7 +13,7 @@ menu:
 
 The `batch` node handles the creation of several child QueryNodes.
 Each call to [`query`](/kapacitor/v1.5/nodes/query_node) creates a child batch node that
-can further be configured. *See [QueryNode](/kapacitor/v1.5/nodes/query\node/)*.
+can further be configured. *See [QueryNode](/kapacitor/v1.5/nodes/query_node/)*.
 The `batch` variable in batch tasks is an instance of
 a [BatchNode.](/kapacitor/v1.5/nodes/batch_node/)
 
