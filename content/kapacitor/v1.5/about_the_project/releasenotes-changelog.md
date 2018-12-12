@@ -5,7 +5,7 @@ menu:
     parent: about_the_project
 ---
 
-## v1.5.2 [2018-11-28]
+## v1.5.2 [2018-12-12]
 
 ### Features
 - Add barrier node support to JoinNode.

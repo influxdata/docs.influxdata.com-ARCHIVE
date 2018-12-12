@@ -8,9 +8,9 @@ menu:
 
 # Changelog
 
-## v1.5.2 [2018-11-28]
+## v1.5.2 [2018-12-12]
 
-Includes features and bug fixes from [Kapacitor 1.5.2](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-2-2018-11-28).
+Includes features and bug fixes from [Kapacitor 1.5.2](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-2-2018-12-12).
 
 
 ## v1.5.1 [2018-08-06]
