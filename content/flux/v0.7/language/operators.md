@@ -49,7 +49,7 @@ Comparison operators compare expressions and return true or false based on the c
 | `!~`     | Not equal to regular expression | `"abc" !~ /[0-9]*/` | `true`  |
 
 
-> The `>` and `<` operators can be used to [compare the lexicographic order of strings](#string-operators).
+> The `>` and `<` operators also [compare the lexicographic order of strings](#string-operators).
 
 ## Assignment operators
 An assignment operator assigns a value to its left operand based on the value of its right operand.
@@ -60,7 +60,7 @@ An assignment operator assigns a value to its left operand based on the value of
 
 
 ## Function operators
-Function operators are used to create functions and control the flow of data through function operations.
+Function operators facilitate the creation of functions and control the flow of data through operations.
 
 | Operator             | Description        | Examples                             | Meaning                                                                                                                                                                 |
 |:--------:            | -----------        | --------                             | -------                                                                                                                                                                 |
@@ -85,7 +85,7 @@ String operators concatenate or compare string values.
 | `>`      | Greater than in lexicographic order | `"ant" > "bee"` | `false` |
 
 ## Literal constructors
-Literal constructors are used to define fixed values.
+Literal constructors define fixed values.
 
 | Operator | Description  |
 |:--------:| -----------  |
