@@ -129,7 +129,7 @@ By default, pps is zero and influx will not throttle importing.
 Use with `-import`.
 
 ### `-precision 'rfc3339|h|m|s|ms|u|ns'`
-Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
+Specifies the format/precision of the timestamp for both queries and writes: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
 Precision defaults to nanoseconds.
 
 > **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) works with the `-execute` option, but it does not work with the `-import option`. All other precision formats (e.g., `h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options.
@@ -374,7 +374,7 @@ Write data using line protocol.
 See [insert](/influxdb/v1.7/tools/shell/#write-data-to-influxdb-with-insert).
 
 `precision <format>`
-Specifies the format/precision of the timestamp: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
+Specifies the format/precision of the timestamp for both queries and writes: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
 Precision defaults to nanoseconds.
 
 `pretty`
