@@ -67,7 +67,8 @@ CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ALL 'http://subscrib
 ```
 
 <dt>
-Note: The credentials of the subscriber URL will be shown in cleartext in the output of `show subscriptions`. Any user with the privileges to run `show subscriptions` is able to see these credentials. 
+`SHOW SUBSCRIPTIONS` outputs all subscriber URL in plain text, including those with authentication credentials.
+Any user with the privileges to run `SHOW SUBSCRIPTIONS` is able to see these credentials.
 </dt>
 
 ### Sending subscription data to multiple hosts

@@ -102,7 +102,7 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 2018-11-07T22:19:58.423358000Z  2018-11-07T22:24:58.423358000Z            used_percent                     mem  Scotts-MacBook-Pro.local                            75                            30
 ```
 
-### Generating a histogram with linear bins
+### Generating a histogram with logarithmic bins
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start: -5m)
