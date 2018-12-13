@@ -65,7 +65,7 @@ cp backup/chronograf-v1.db.1.4.3.3 chronograf-v1.db
 ### 4. Install the desired Chronograf version
 Install the desired Chronograf version.
 Chronograf releases can be viewed and downloaded either from the
-[InfluxData downloads](https://portal.influxdata.com/downloads#chronograf)
+[InfluxData downloads](https://portal.influxdata.com/downloads)
 page or from the [Chronograf releases](https://github.com/influxdata/chronograf/releases)
 page on Github.
 

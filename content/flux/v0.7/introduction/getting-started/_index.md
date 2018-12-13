@@ -43,7 +43,7 @@ _For information about downloading and installing Chronograf v1.7, see [Chronogr
 
 ---
 
-_If your are using Docker, the [InfluxData Sandbox](/platform/installation/sandbox-install)
+_If your are using Docker, the [InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install)
 will install the latest version of each component of the TICK stack._
 
 ---

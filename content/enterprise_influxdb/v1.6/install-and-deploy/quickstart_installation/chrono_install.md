@@ -1,7 +1,7 @@
 ---
 title: Step 2 - Install Chronograf
 aliases:
-    - /enterprise_influxdb/v1.6/install-and-deploy/quickstart_installation/chrono_install/
+    - /enterprise_influxdb/v1.6/quickstart_installation/chrono_install/
 menu:
   enterprise_influxdb_1_6:
     weight: 20

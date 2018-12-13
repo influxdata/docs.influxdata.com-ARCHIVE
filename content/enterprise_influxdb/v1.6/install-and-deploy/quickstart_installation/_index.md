@@ -1,8 +1,7 @@
 ---
 title: Install an InfluxDB Enterprise cluster for evaluation
 aliases:
-    - /enterprise/v1.6/quickstart_installation/
-    - /enterprise_influxdb/v1.6/install-and-deploy/quickstart_installation/
+    - /enterprise_influxdb/v1.6/quickstart_installation/
 menu:
   enterprise_influxdb_1_6:
     name: Install cluster for evaluation

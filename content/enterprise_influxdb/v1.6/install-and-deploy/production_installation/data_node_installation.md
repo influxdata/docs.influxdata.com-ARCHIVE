@@ -1,7 +1,7 @@
 ---
 title: Step 2 - Install InfluxDB Enterprise data nodes
 aliases:
-    - /enterprise_influxdb/v1.6/installation/production_installation/data_node_installation/
+    - /enterprise_influxdb/v1.6/production_installation/data_node_installation/
 menu:
   enterprise_influxdb_1_6:
     name: Step 2 - Install data nodes

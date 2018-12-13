@@ -1,6 +1,8 @@
 ---
 title: Use the SHOW STATS statement to monitor InfluxDB statistics
 description: Use the SHOW STATS statement to monitor InfluxDB instances.
+aliases:
+  - /platform/monitoring/tools/show-stats/
 menu:
   platform:
     name: SHOW STATS

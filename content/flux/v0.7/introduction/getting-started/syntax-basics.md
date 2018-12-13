@@ -21,7 +21,7 @@ When started with `-type=flux`, the `influx` CLI is an interactive read-eval-pri
 influx -type=flux
 ```
 
-> If using the [InfluxData Sandbox](/platform/installation/sandbox-install), use the `./sandbox enter`
+> If using the [InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install), use the `./sandbox enter`
 > command to enter the `influxdb` container, where you can start the `influx` CLI in Flux mode.
 > You will also need to specify the `host` as `influxdb` to connect to InfluxDB over the Docker network.
 >
