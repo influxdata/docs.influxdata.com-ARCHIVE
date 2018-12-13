@@ -47,7 +47,6 @@ Use the following InfluxQL statements to manage subscriptions:
 Create subscriptions using the `CREATE SUBSCRIPTION` InfluxQL statement.
 Specify the subscription name, the database name and retention policy to subscribe to,
 and the URL of the host to which data written to InfluxDB should be copied.
-In case authentication is enabled on the subscriber host, adapt the URL to contain the credentials.
 
 ```sql
 -- Pattern:
@@ -57,12 +56,19 @@ CREATE SUBSCRIPTION "<subscription_name>" ON "<db_name>"."<retention_policy>" DE
 -- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that sends data to 'example.com:9090' via HTTP.
 CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ALL 'http://example.com:9090'
 
--- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that sends data to another InfluxDB on 'example.com:8086' via HTTP. Authentication is enabled on the subscription host (user: flux, pass: secret).
-CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ALL 'http://flux:secret@example.com:8086'
-
 -- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that round-robins the data to 'h1.example.com:9090' and 'h2.example.com:9090' via UDP.
 CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ANY 'udp://h1.example.com:9090', 'udp://h2.example.com:9090'
 ```
+In case authentication is enabled on the subscriber host, adapt the URL to contain the credentials.
+
+```
+-- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that sends data to another InfluxDB on 'example.com:8086' via HTTP. Authentication is enabled on the subscription host (user: subscriber, pass: secret).
+CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ALL 'http://subscriber:secret@example.com:8086'
+```
+
+<dt>
+Note: The credentials of the subscriber URL will be shown in cleartext in the output of `show subscriptions`. Any user with the privileges to run `show subscriptions` is able to see these credentials. 
+</dt>
 
 ### Sending subscription data to multiple hosts
 The `CREATE SUBSCRIPTION` statement allows you to specify multiple hosts as endpoints for the subscription.
