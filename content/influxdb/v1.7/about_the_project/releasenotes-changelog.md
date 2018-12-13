@@ -11,16 +11,24 @@ menu:
 
 ### Bug fixes
 
-* Update to Flux 0.7.1
-* tsdb: conflict based concurrency resolution.
-* Skip and warn series files in retention policy directory.
-* Always cleaning up the fields index.
-* Don't allow deletes to a database in mixed index.
-* Update platform dependency.
-* Verify seriesfile in presence of tombstones.
-* Fix ApplyEnvOverrides when a type that implements Unmarshaler is in a slice.
-* Drop NaN values when writing back points.
-* Pass the query authorizer to subqueries.
+* Update to Flux 0.7.1.
+* Conflict-based concurrency resolution adds guards and an epoch-based system to
+   coordinate modifications when deletes happen against writes to the same points
+   at the same time.
+* Skip and warn that series file should not be in a retention policy directory.
+* Checks if measurement was removed from index, and if it was, then cleans up out
+  of fields index. Also fix cleanup issue where only prefix was checked when
+  matching measurements like "m1" and "m10".
+* Error message to user that databases must be run in non-mixed index mode
+ to allow deletes.
+* Update platform dependency to simplify Flux support in Enterprise.
+* Verify series file in presence of tombstones.
+* Fix `ApplyEnvOverrides` when a type that implements Unmarshaler is in a slice to
+  not call `UnMarshaltext` when the environment variable is set to empty.
+* Drop NaN values when writing back points and fix the point writer to report the
+  number of points actually written and omits the ones that were dropped.
+* Query authorizer was not properly passed to subqueries so rejections did not
+  happen when a subquery was the one reading the value. Max series limit was not propagated downward.
 
 ## v1.7.1 [2018-11-14]
 
