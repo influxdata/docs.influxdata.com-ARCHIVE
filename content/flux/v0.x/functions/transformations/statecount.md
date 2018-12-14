@@ -18,7 +18,7 @@ _**Function type:** Transformation_
 _**Output data type:** Integer_
 
 ```js
-stateCount(fn: (r) => r._field == "state", label: "stateCount")
+stateCount(fn: (r) => r._field == "state", column: "stateCount")
 ```
 
 _If the expression generates an error during evaluation, the point is discarded
@@ -34,7 +34,7 @@ Those that evaluate to `false` reset the state count.
 
 _**Data type:** Function_
 
-### label
+### column
 The name of the column added to each record that contains the incremented state count.
 
 _**Data type:** String_
