@@ -22,7 +22,7 @@ _**Output data type:** Duration_
 > state duration will be 0.
 
 ```js
-stateDuration(fn: (r) => r._measurement == "state", lable: "stateDuration", unit: 1s)
+stateDuration(fn: (r) => r._measurement == "state", column: "stateDuration", unit: 1s)
 ```
 
 _If the expression generates an error during evaluation, the point is discarded,
@@ -38,7 +38,7 @@ Those that evaluate to `false` reset the state duration.
 
 _**Data type:** Function_
 
-### label
+### column
 The name of the column added to each record that contains the state duration.
 
 _**Data type:** String_
