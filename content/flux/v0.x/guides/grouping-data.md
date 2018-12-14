@@ -25,13 +25,13 @@ Understanding how modifying group keys shapes output data is key to successfully
 grouping and transforming data into your desired output.
 
 ## group() Function
-Flux's [`group()` function](/flux/v0.x/functions/transformations/group) defines the
+Flux's [`group()` function](/flux/v0.7/functions/transformations/group) defines the
 group key for output tables, i.e. grouping records based on values for specific columns.
 
 ###### group() example
 ```js
 dataStream
-  |> group(by: ["cpu", "host"])
+  |> group(columns: ["cpu", "host"])
 ```
 
 ###### Resulting group key
@@ -54,7 +54,7 @@ A boolean that removes all grouping and outputs everything as a single table.
 
 ---
 
-_For more information, see the [`group()` function](/flux/v0.x/functions/transformations/group)._
+_For more information, see the [`group()` function](/flux/v0.7/functions/transformations/group)._
 
 ---
 
@@ -162,7 +162,7 @@ Group the `dataSet` stream by the `cpu` column.
 
 ```js
 dataSet
-  |> group(by: ["cpu"])
+  |> group(columns: ["cpu"])
 ```
 
 This won't actually change the structure of the data since it already has `cpu` in the group key and is therefore grouped by `cpu`.
@@ -250,7 +250,7 @@ Grouping data by the `_time` column is a good illustration of how grouping chang
 
 ```js
 dataSet
-  |> group(by: ["_time"])
+  |> group(columns: ["_time"])
 ```
 
 When grouping by `_time`, all records that share a common `_time` value are grouped into individual tables.
@@ -376,9 +376,9 @@ Even though there are multiple records per timestamp, it will only visualize the
 >
 ```js
 dataSet
-  |> group(by: ["_time"])
+  |> group(columns: ["_time"])
   |> mean()
-  |> group(except: ["_value", "_time"])
+  |> group(columns: ["_value", "_time"], mode: "except")
 ```
 
 ## Group by CPU and time
@@ -386,7 +386,7 @@ Group by the `cpu` and `_time` columns.
 
 ```js
 dataSet
-  |> group(by: ["cpu", "_time"])
+  |> group(columns: ["cpu", "_time"])
 ```
 
 This outputs a table for every unique `cpu` and `_time` combination:

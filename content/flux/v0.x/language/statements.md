@@ -85,7 +85,7 @@ option task = {
 
 from(bucket:"metrics/autogen")
     |> range(start:-task.every)
-    |> group(by:["level"])
+    |> group(columns:["level"])
     |> mean()
     |> yield(name:"mean")
 ```

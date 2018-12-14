@@ -11,40 +11,45 @@ menu:
 The `group()` function groups records based on their values for specific columns.
 It produces tables with new group keys based on provided properties.
 
-_**Function type:** Transformation_  
-_**Output data type:** Object_
+_**Function type:** Transformation_
 
 ```js
-group(by: ["host", "_measurement"])
+group(columns: ["host", "_measurement"], mode:"by")
 
 // OR
 
-group(except: ["_time"])
+group(columns: ["_time"], mode:"except")
 
 // OR
 
-group(none: true)
+group()
 ```
 
 ## Parameters
 
-### by
-List of columns by which to group.
-_Cannot be used with `except`._
+### columns
+List of columns to use in the grouping operation.
+Defaults to `[]`.
 
 _**Data type:** Array of strings_
 
-## except
-List of columns by which to **not** group.
-All other columns are used to group records.
-_Cannot be used with `by`._
+### mode
+The mode used to group columns.
 
-_**Data type:** Array of strings_
+_**Data type:** String_
 
-## none
-Remove existing groups as well as partitions created by the [`window()` function](/flux/v0.x/functions/transformations/window).
+The following options are available:
 
-_**Data type:** Boolean_
+- by
+- except
+
+Defaults to `"by"`.
+
+#### by
+Groups records by columns defined in the [`columns`](#columns) parameter.
+
+#### except
+Groups records by all columns **except** those defined in the [`columns`](#columns) parameter.
 
 ## Examples
 
@@ -52,14 +57,21 @@ _**Data type:** Boolean_
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -30m)
-  |> group(by: ["host", "_measurement"])
+  |> group(columns: ["host", "_measurement"])
 ```
 
 ###### Group by everything except time
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -30m)
-  |> group(except: ["_time"])
+  |> group(columns: ["_time"], mode: "except")
+```
+
+###### Remove all grouping
+```js
+from(bucket: "telegraf/autogen")
+  |> range(start: -30m)
+  |> group()
 ```
 
 <hr style="margin-top:4rem"/>

@@ -8,7 +8,7 @@ menu:
     weight: 5
 ---
 
-The [`join()` function](/flux/v0.x/functions/transformations/join) merges two or more
+The [`join()` function](/flux/v0.7/functions/transformations/join) merges two or more
 input streams whose values are equal on a set of common columns into a single output stream.
 Flux allows you to join on any columns common between two data streams and opens the door
 for operations such as cross-measurement joins and math across measurements.
@@ -16,7 +16,7 @@ for operations such as cross-measurement joins and math across measurements.
 To illustrate a join operation, use data captured by Telegraf and and stored in
 InfluxDB with a default TICK stack installation - memory usage and processes.
 
-> If using the [InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install) or other
+> If using the [InfluxData Sandbox](/platform/installation/sandbox-install) or other
 > "Dockerized" instances of the TICK stack, these measurements may not be available.
 
 In this guide, we'll join two data streams, one representing memory usage and the other representing the
@@ -205,7 +205,7 @@ Notice the output table includes the following columns:
 These represent the columns with values unique to the two input tables.
 
 ## Calculate and create a new table
-With the two streams of data joined into a single table, use the [`map()` function](/flux/v0.x/functions/transformations/map)
+With the two streams of data joined into a single table, use the [`map()` function](/flux/v0.7/functions/transformations/map)
 to build a new table by mapping the existing `_time` column to a new `_time` column and dividing `_value_mem` by `_value_proc`
 and mapping it to a new `_value` column.
 
@@ -295,7 +295,7 @@ batchSize = (cluster_id, start=-1m, interval=10s) => {
         _time: r._time,
         _value: r._value_httpd / r._value_write,
     }))
-    |> group(by: cluster_id)
+    |> group(columns: cluster_id)
 }
 
 batchSize(cluster_id: "enter cluster id here")
