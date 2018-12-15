@@ -11,4 +11,4 @@ menu:
 Flux input functions define sources of data or display information about data sources.
 The following input functions are available:
 
-{{< function-list category="Inputs" >}}
+{{< function-list category="Inputs" menu="flux_0_7" >}}

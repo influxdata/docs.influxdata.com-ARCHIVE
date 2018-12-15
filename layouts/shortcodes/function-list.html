@@ -1,6 +1,7 @@
 {{ $category := (.Get "category") }}
+{{ $menu := (.Get "menu")}}
 <ul>
-{{ range .Site.Menus.flux_0_7 }}
+{{ range (index .Site.Menus $menu) }}
   {{ if .HasChildren}}
     {{ range .Children }}
       {{ if eq .Parent $category }}
