@@ -11,4 +11,4 @@ menu:
 Flux testing functions test certain aspects of data piped forward into them.
 The following testing functions are available:
 
-{{< function-list category="Tests" >}}
+{{< function-list category="Tests" menu="flux_0_x" >}}
