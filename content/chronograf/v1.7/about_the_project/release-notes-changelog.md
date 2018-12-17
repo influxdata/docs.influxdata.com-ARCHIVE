@@ -7,6 +7,12 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.5 [2018-12-17]
+
+### Bug Fixes
+
+* Update Go, Node, and Alpine versions
+
 ## v1.7.4 [2018-12-12]
 
 ### UI Improvements
