@@ -1,6 +1,6 @@
 ---
 title: Flux testing functions
-description: Flux testing functions certain aspects of data piped forward into them.
+description: Flux testing functions test piped forward data in specific ways and return errors if the tests fail.
 menu:
   flux_0_x:
     name: Tests
@@ -8,7 +8,7 @@ menu:
     weight: 5
 ---
 
-Flux testing functions test certain aspects of data piped forward into them.
+Flux testing functions test piped-forward data in specific ways and return errors if the tests fail.
 The following testing functions are available:
 
 {{< function-list category="Tests" menu="flux_0_x" >}}
