@@ -6,20 +6,24 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v.1.7.2 [2018-11-??]
+## v.1.7.2 [2018-12-11]
 
 This release builds off of the InfluxDB OSS 1.7.0 through 1.7.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Features
 
+* Add support for LDAP StartTLS.
+* Disable Anti-Entropy service by default.
 * Flux 0.7 support.
+* Implement TLS between data nodes.
+* Update to Flux 0.7.1.
+* Add optional TLS support to meta node Raft port.
+* AE: memoize DistinctCount, min, & max time.
+* Update influxdb dep for subquery auth update.
 
 ### Bug fixes
 
-* Meta node Raft port TLS
-* Implement meta node to meta node TLS on Raft port
-* All `_series` files are read if they exist: `inmem` and `tsi1`
-
+* Update sample configuration.
 
 ## v1.6.4 [2018-10-23]
 
