@@ -14,9 +14,8 @@ This release builds off of the InfluxDB OSS 1.7.0 through 1.7.2 releases. For de
 
 * Add support for LDAP StartTLS.
 * Disable Anti-Entropy service by default.
-* Flux 0.7 support.
+* Flux 0.7.1 support.
 * Implement TLS between data nodes.
-* Update to Flux 0.7.1.
 * Add optional TLS support to meta node Raft port.
 * AE: memoize DistinctCount, min, & max time.
 * Update influxdb dep for subquery auth update.
