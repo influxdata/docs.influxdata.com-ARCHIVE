@@ -33,7 +33,7 @@ _**Data type:** String_
 
 ## got
 The stream containing data to test.
-Defaults to data piped forward from another function (`<-`).
+Defaults to data piped-forward from another function (`<-`).
 
 _**Data type:** Object_
 
