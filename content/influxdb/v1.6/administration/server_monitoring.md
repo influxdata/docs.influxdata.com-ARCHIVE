@@ -14,7 +14,7 @@ menu:
 
 * [SHOW STATS](#show-stats)
 * [SHOW DIAGNOSTICS](#show-diagnostics)
-* I[nternal monitoring](#internal-monitoring)
+* [Internal monitoring](#internal-monitoring)
 * [Useful performance metrics commands](#useful-performance-metrics-commands)
 * [InfluxDB `/metrics` HTTP endpoint](#influxdb-metrics-http-endpoint)
 
