@@ -27,7 +27,7 @@ _**Data type:** Boolean_
 
 ### columns
 A list of columns on which to compute the difference.
-Defaults to `["_value"]`
+Defaults to `["_value"]`.
 
 _**Data type:** Array of strings_
 

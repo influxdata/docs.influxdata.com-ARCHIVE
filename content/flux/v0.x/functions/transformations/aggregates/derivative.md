@@ -15,13 +15,14 @@ _**Function type:** Aggregate_
 _**Output data type:** Float_
 
 ```js
-derivative(unit: 100ms, nonNegative: false, columns: ["_value"], timeSrc: "_time")
+derivative(unit: 1s, nonNegative: false, columns: ["_value"], timeSrc: "_time")
 ```
 
 ## Parameters
 
 ### unit
 The time duration used when creating the derivative.
+Defaults to `1s`.
 
 _**Data type:** Duration_
 
@@ -33,7 +34,7 @@ _**Data type:** Boolean_
 
 ### columns
 A list of columns on which to compute the derivative.
-Defaults to `["_value"]`
+Defaults to `["_value"]`.
 
 _**Data type:** Array of strings_
 
@@ -47,7 +48,7 @@ _**Data type:** String_
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -5m)
-  |> derivative(unit: 100ms, nonNegative: true)
+  |> derivative(unit: 1s, nonNegative: true)
 ```
 
 <hr style="margin-top:4rem"/>

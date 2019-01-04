@@ -29,6 +29,7 @@ keyValues(fn: (schema) => schema.columns |> filter(fn: (r) =>  r.label =~ /usage
 ### keyColumns
 A list of columns from which values are extracted.
 All columns indicated must be of the same type.
+Each input table must have all of the columns listed by the `keyColumns` parameter.
 
 _**Data type:** Array of strings_
 
