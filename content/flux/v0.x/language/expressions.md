@@ -8,36 +8,65 @@ menu:
     weight: 40
 ---
 
-> **Note:** This document is a living document and may not represent the current implementation of Flux.
-Any section that is not currently implemented is commented with a `[IMPL#XXX]` where `XXX` is an issue number tracking discussion and progress towards implementation.
-
 An _expression_ specifies the computation of a value by applying the operators and functions to operands.
 
-## Operands
+## Operands and primary expressions
 
 Operands denote the elementary values in an expression.
-An operand may be a literal, identifier denoting a variable, or a parenthesized expression.
 
-> To be added: Expression details.
+Primary expressions are the operands for unary and binary expressions.
+A primary expressions may be a literal, an identifier denoting a variable, or a parenthesized expression.
 
-PEG parsers don't understand operators precedence, so it difficult to express operators in expressions with the grammar.
-We should simplify it and use the EBNF grammar.
-This requires redoing the parser in something besides PEG.
+```js
+PrimaryExpression = identifier | Literal | "(" Expression ")" .
+```
 
-> To be implemented: [IMPL#246](https://github.com/influxdata/platform/issues/246) Update parser to use formal EBNF grammar.
+## Literals
+Literals construct a value.
 
-## Function literals
+```js
+Literal = int_lit
+        | float_lit
+        | string_lit
+        | regex_lit
+        | duration_lit
+        | pipe_receive_lit
+        | ObjectLiteral
+        | ArrayLiteral
+        | FunctionLiteral .
+```
+
+### Object literals
+Object literals construct a value with the object type.
+
+```js
+ObjectLiteral = "{" PropertyList "}" .
+PropertyList  = [ Property { "," Property } ] .
+Property      = identifier [ ":" Expression ]
+              | string_lit ":" Expression .
+```
+
+### Array literals
+
+Array literals construct a value with the array type.
+
+```js
+ArrayLiteral   = "[" ExpressionList "]" .
+ExpressionList = [ Expression { "," Expression } ] .
+```
+
+### Function literals
 
 A _function literal_ defines a new function with a body and parameters.
 The function body may be a block or a single expression.
 The function body must have a return statement if it is an explicit block, otherwise the expression is the return value.
 
-```
-    FunctionLit        = FunctionParameters "=>" FunctionBody .
-    FunctionParameters = "(" [ ParameterList [ "," ] ] ")" .
-    ParameterList      = ParameterDecl { "," ParameterDecl } .
-    ParameterDecl      = identifier [ "=" Expression ] .
-    FunctionBody       = Expression | Block .
+```js
+FunctionLiteral    = FunctionParameters "=>" FunctionBody .
+FunctionParameters = "(" [ ParameterList [ "," ] ] ")" .
+ParameterList      = Parameter { "," Parameter } .
+Parameter          = identifier [ "=" Expression ] .
+FunctionBody       = Expression | Block .
 ```
 
 ##### Examples of function literals
@@ -71,6 +100,10 @@ Positional arguments are not supported.
 Argument order does not matter.
 When an argument has a default value, it is not required to be specified.
 
+```js
+CallExpression = "(" PropertyList ")" .
+```
+
 ##### Examples of call expressions
 
 ```js
@@ -88,7 +121,7 @@ Function literals specify which if any argument is the pipe argument using the _
 It is an error to use a pipe expression if the function does not declare a pipe argument.
 
 ```js
-pipe_lit = "<-" .
+pipe_receive_lit = "<-" .
 ```
 
 ##### Examples of pipe expressions
@@ -99,3 +132,58 @@ bar = (x=<-) => // function body elided
 baz = (y=<-) => // function body elided
 foo() |> bar() |> baz() // equivalent to baz(x:bar(y:foo()))
 ```
+
+## Index expressions
+Index expressions access a value from an array based on a numeric index.
+
+```js
+IndexExpression = "[" Expression "]" .
+```
+
+## Member expressions
+Member expressions access a property of an object.
+The property being accessed must be either an identifier or a string literal.
+In either case the literal value is the name of the property being accessed, the identifier is not evaluated.
+It is not possible to access an object's property using an arbitrary expression.
+
+```js
+MemberExpression        = DotExpression  | MemberBracketExpression
+DotExpression           = "." identifer
+MemberBracketExpression = "[" string_lit "]" .
+```
+
+### Operators
+Operators combine operands into expressions.
+Operator precedence is encoded directly into the grammar.
+
+```js
+Expression               = LogicalExpression .
+LogicalExpression        = UnaryLogicalExpression
+                         | LogicalExpression LogicalOperator UnaryLogicalExpression .
+LogicalOperator          = "and" | "or" .
+UnaryLogicalExpression   = ComparisonExpression
+                         | UnaryLogicalOperator UnaryLogicalExpression .
+UnaryLogicalOperator     = "not" .
+ComparisonExpression     = MultiplicativeExpression
+                         | ComparisonExpression ComparisonOperator MultiplicativeExpression .
+ComparisonOperator       = "==" | "!=" | "<" | "<=" | ">" | ">=" | "=~" | "!~" .
+MultiplicativeExpression = AdditiveExpression
+                         | MultiplicativeExpression MultiplicativeOperator AdditiveExpression .
+MultiplicativeOperator   = "*" | "/" .
+AdditiveExpression       = PipeExpression
+                         | AdditiveExpression AdditiveOperator PipeExpression .
+AdditiveOperator         = "+" | "-" .
+PipeExpression           = PostfixExpression
+                         | PipeExpression PipeOperator UnaryExpression .
+PipeOperator             = "|>" .
+UnaryExpression          = PostfixExpression
+                         | PrefixOperator UnaryExpression .
+PrefixOperator           = "+" | "-" .
+PostfixExpression        = PrimaryExpression
+                         | PostfixExpression PostfixOperator .
+PostfixOperator          = MemberExpression
+                         | CallExpression
+                         | IndexExpression .
+```
+
+_Also see [Flux Operators](/flux/v0.x/language/operators)._

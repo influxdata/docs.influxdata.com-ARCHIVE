@@ -1,6 +1,6 @@
 ---
 title: Programs
-description: A Flux program is a sequence of statements defined by the following syntax.
+description: A Flux program is a sequence of statements and optionally a package clause and import declarations.
 menu:
   flux_0_x:
     parent: Language reference
@@ -10,10 +10,9 @@ menu:
 
 > **Note:** This document is a living document and may not represent the current implementation of Flux.
 
-
-A Flux program is a sequence of statements defined by the following syntax.
+A Flux program is a sequence of statements and optionally a package clause and import declarations.
 
 ```
-Program = [PackageStatement] [ImportList] StatementList .
-ImportList = { ImportStatement } .
+Program = [PackageClause] [ImportList] StatementList .
+ImportList = { ImportDeclaration } .
 ```

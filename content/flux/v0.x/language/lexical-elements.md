@@ -117,8 +117,8 @@ The integer and fractional part comprise decimal digits.
 One of the integer part or the fractional part may be elided.
 
 ```js
-float_lit = decimals "." [ decimals ] |
-    "." decimals .
+float_lit = decimals "." [ decimals ]
+    | "." decimals .
 decimals  = decimal_digit { decimal_digit } .
 ```
 

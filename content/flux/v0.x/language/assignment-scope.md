@@ -46,7 +46,7 @@ When the identifier was previously assigned within the same block the identifier
 An identifier cannot change type within the same block.
 
 ```
-VarAssignment = identifier "=" Expression
+VariableAssignment = identifier "=" Expression
 ```
 
 ##### Examples of variable assignment

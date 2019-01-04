@@ -14,24 +14,25 @@ Any section that is not currently implemented is commented with a `[IMPL#XXX]` w
 A _statement_ controls execution.
 
 ```
-Statement = OptionStatement | VarAssignment |
-            ReturnStatement | ExpressionStatement | BlockStatment .
+Statement = OptionStatement
+          | VarAssignment
+          | ReturnStatement
+          | ExpressionStatement .
 ```
 
-## Package statement
-
-```
-PackageStatement = "package" identifier .
-```
-
-A _package statement_ defines a package block.
+## Package clause
+A _package clause_ defines the name for the current package.
 Package names must be valid Flux identifiers.
 The package statement must be the first statement of every Flux source file.
 If a file does not declare a package statement, all identifiers in that file will belong to the special `main` package.
 
+```
+PackageClause = "package" identifier .
+```
+
 > To be implemented: [IMPL#247](https://github.com/influxdata/platform/issues/247) Add package/namespace support.
 
-### package main
+### Package main
 
 The `main` package is special for a few reasons:
 
@@ -39,15 +40,16 @@ The `main` package is special for a few reasons:
 2. It cannot be imported.
 3. All query specifications produced after evaluating the _main_ package are coerced into producing side effects.
 
-## Import statement
+## Import declaration
 
 ```
-ImportStatement = "import" [identifier] `"` unicode_char { unicode_char } `"`.
+ImportDeclaration = "import" [identifier] string_lit
 ```
 
 A package name and an import path is associated with every package.
-The import statement takes a package's import path and brings all of the identifiers defined in that package into the current scope.
-The import statement defines a namespace through which to access the imported identifiers.
+The import statement takes a package's import path and brings all of the identifiers
+defined in that package into the current scope under a namespace.
+The import statement defines the namespace through which to access the imported identifiers.
 By default the identifier of this namespace is the package name unless otherwise specified.
 For example, given a variable `x` declared in package `foo`, importing `foo` and referencing `x` would look like this:
 
@@ -94,7 +96,7 @@ All options are designed to be completely optional and have default values to be
 Grammatically, an _option statement_ is just a variable assignment preceded by the `option` keyword.
 
 ```
-OptionStatement = "option" VarAssignment
+OptionStatement = "option" VariableAssignment
 ```
 
 Below is a list of all options that are currently implemented in the Flux language:
