@@ -168,6 +168,8 @@ To support multiple organizations, use a comma-delimited list.
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 
+When logging in for the first time, make sure to grant access to the organization you configured. The OAuth application can only see membership in organizations it has been granted access to.
+
 ### Configuring Google authentication
 
 Chronograf supports using the [Google OAuth 2.0 authentication provider](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication. To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
