@@ -30,12 +30,10 @@ The other input table used to calculate the covariance.
 
 _**Data type:** Object_
 
-
 ### on
 The list of columns on which to join.
 
 _**Data type:** Array of strings_
-
 
 ### pearsonr
 Indicates whether the result should be normalized to be the Pearson R coefficient.
