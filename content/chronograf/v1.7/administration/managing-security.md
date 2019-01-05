@@ -168,7 +168,8 @@ To support multiple organizations, use a comma-delimited list.
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 
-When logging in for the first time, make sure to grant access to the organization you configured. The OAuth application can only see membership in organizations it has been granted access to.
+> When logging in for the first time, make sure to grant access to the organization you configured. The OAuth application can only see membership in organizations it has been granted access to.
+
 
 ### Configuring Google authentication
 
