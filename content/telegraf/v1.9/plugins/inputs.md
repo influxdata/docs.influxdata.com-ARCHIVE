@@ -395,7 +395,7 @@ The [Jolokia2 Agent input plugin](https://github.com/influxdata/telegraf/blob/re
 
 Plugin ID: `jolokia2_proxy`
 
-The [Jolokia2 Proxy input plugin](https://github.com/influxdata/plugins/inputs/jolokia2/README.md) eads JMX metrics from one or more targets by interacting with a [Jolokia](https://jolokia.org/) proxy REST endpoint using the [Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
+The [Jolokia2 Proxy input plugin](https://github.com/influxdata/plugins/inputs/jolokia2/README.md) reads JMX metrics from one or more targets by interacting with a [Jolokia](https://jolokia.org/) proxy REST endpoint using the [Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
 
 ### JTI OpenConfig Telemetry
 
