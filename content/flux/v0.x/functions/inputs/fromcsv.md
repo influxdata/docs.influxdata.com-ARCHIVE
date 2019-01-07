@@ -36,6 +36,11 @@ _**Data type:** String_
 ### csv
 Raw CSV-formatted text.
 
+> CSV data must be in the CSV format produced by the Flux HTTP response standard.
+> See the [Flux technical specification](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#csv).
+> for information about this format.
+
+
 _**Data type:** String_
 
 ## Examples
@@ -48,10 +53,10 @@ from(file: "/path/to/data-file.csv")
 ### Query raw CSV-formatted text
 ```js
 csvData = "
-_time,_measurement,_field,_value
-2018-05-22T19:53:24.421470485Z,mem,percent_used,56.4
-2018-05-22T19:53:25.421470485Z,mem,percent_used,52.3
-2018-05-22T19:53:26.421470485Z,mem,percent_used,55.8
+result,table,_start,_stop,_time,region,host,_value
+mean,0,2018-05-08T20:50:00Z,2018-05-08T20:51:00Z,2018-05-08T20:50:00Z,east,A,15.43
+mean,0,2018-05-08T20:50:00Z,2018-05-08T20:51:00Z,2018-05-08T20:50:20Z,east,B,59.25
+mean,0,2018-05-08T20:50:00Z,2018-05-08T20:51:00Z,2018-05-08T20:50:40Z,east,C,52.62
 "
 
 from(csv: csvData)
