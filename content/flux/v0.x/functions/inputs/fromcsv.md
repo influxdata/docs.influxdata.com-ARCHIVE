@@ -37,7 +37,7 @@ _**Data type:** String_
 Raw CSV-formatted text.
 
 > CSV data must be in the CSV format produced by the Flux HTTP response standard.
-> See the [Flux technical specification](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#csv).
+> See the [Flux technical specification](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#csv)
 > for information about this format.
 
 
