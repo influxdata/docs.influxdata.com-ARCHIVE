@@ -43,6 +43,9 @@ _**Data type:** String_
 ```js
 from("monitor/autogen")
   |> range(start: -1h)
-  |> filter(fn: (r) => r._measurement == "server_state")
-  |> stateCount()
+  |> filter(fn: (r) => r._measurement == "http")
+  |> stateCount(
+    fn: (r) => r.http_response_code == "500",
+    column: "server_error_count"
+  )
 ```
