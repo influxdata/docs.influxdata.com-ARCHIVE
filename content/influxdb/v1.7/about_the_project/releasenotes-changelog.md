@@ -82,6 +82,23 @@ Support for the Flux language and queries has been added in this release. To beg
 -	Fix subquery functionality when a function references a tag from the subquery.
 -	Strip tags from a subquery when the outer query does not group by that tag.
 
+## v1.6.5 [2019-01-10]
+
+### Features
+
+-	Reduce allocations in TSI TagSets implementation.
+
+### Bugfixes
+
+-	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
+-	Ensure orphaned series cleaned up with shard drop.
+-	Fix the derivative and others time ranges for aggregate data.
+-	Fix the stream iterator to not ignore errors.
+-	Do not panic when a series ID iterator is `nil`.
+-	Fix panic in IndexSet.
+-	Pass the query authorizer to subqueries.
+-	Fix TSM1 panic on reader error.
+
 ## v1.6.4 [2018-10-16]
 
 ### Features
@@ -204,6 +221,23 @@ using the Prometheus measurement name as the `__name__` label.
 * TSM: `TSMReader.Close` blocks until reads complete.
 * Return the correct auxiliary values for `top` and `bottom`.
 * Close TSMReaders from `FileStore.Close` after releasing FileStore mutex.
+
+## v1.5.5 [2018-12-19]
+
+### Features
+
+-	Reduce allocations in TSI TagSets implementation.
+
+### Bugfixes
+
+-	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
+-	Ensure orphaned series cleaned up with shard drop.
+-	Fix the derivative and others time ranges for aggregate data.
+-	Fix the stream iterator to not ignore errors.
+-	Do not panic when a series ID iterator is `nil`.
+-	Fix panic in IndexSet.
+-	Pass the query authorizer to subqueries.
+-	Fix TSM1 panic on reader error.
 
 ## v1.5.4 [2018-06-21]
 
