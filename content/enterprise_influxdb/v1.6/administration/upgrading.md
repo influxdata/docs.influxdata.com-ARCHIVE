@@ -158,16 +158,17 @@ sudo yum localinstall influxdb-data-1.6.5_c1.6.5.x86_64.rpm
   max-fetch = 10
 ```
 <dt>
-The [anti-entropy service](/enterprise_influxdb/v1.6/administration/anti-entropy/) can initially be CPU intensive 
+The [anti-entropy service](/enterprise_influxdb/v1.6/administration/anti-entropy/) can initially be CPU intensive
 if you have very large shards (>50GB) and/or a large number of shards (>500) associated
 with your database. This can result in the cluster appearing to be unresponsive upon startup while shard digests are
-calculated. Once the shard digests are calculated, the overall CPU utilization should return to a lower level. 
+calculated. Once the shard digests are calculated, the overall CPU utilization should return to a lower level.
 
-To check the number of shards within your cluster, you can use the 
+To check the number of shards within your cluster, use the
 [SHOW SHARDS](/enterprise_influxdb/v1.6/administration/cluster-commands/#show-shards) command.  
-Use your operatings system tools to check the shard sizes.
-    
-You may wish to test this configuration setting in a non-production environment to observe the system resource requirements prior to activating this service in production.     
+Use your operating system tools to check the shard sizes.
+
+You may wish to test this configuration setting in a non-production environment to observe
+the system resource requirements prior to activating this service in production.     
 </dt>
 
 **Remove:**
