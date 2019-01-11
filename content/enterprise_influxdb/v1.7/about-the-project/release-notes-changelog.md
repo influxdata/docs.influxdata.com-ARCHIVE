@@ -3,6 +3,7 @@ title: InfluxDB Enterprise 1.7 release notes
 
 menu:
   enterprise_influxdb_1_7:
+    menu: Release notes
     weight: 10
     parent: About the project
 ---
@@ -23,6 +24,10 @@ This release builds off of the InfluxDB OSS 1.7.0 through 1.7.2 releases. For de
 ### Bug fixes
 
 * Update sample configuration.
+
+## V1.6.5 [2019-01-10]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.5 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ## v1.6.4 [2018-10-23]
 

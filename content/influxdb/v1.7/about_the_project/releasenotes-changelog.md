@@ -16,21 +16,26 @@ menu:
 
 ## v1.7.2 [2018-12-11]
 
-### Features
-
-- Add support for LDAP StartTLS.
-- Disable Anti-Entropy service by default.
-- Flux 0.7 support.
-- Implement TLS between data nodes.
-- Update to Flux 0.7.1.
-- Add optional TLS support to meta node Raft port.
-- AE: memoize DistinctCount, min, & max time.
-- Update influxdb dep for subquery auth update.
-- Add user authentication and authorization support for Flux HTTP requests.
-
 ### Bug fixes
 
-- Update sample configuration.
+* Update to Flux 0.7.1.
+* Conflict-based concurrency resolution adds guards and an epoch-based system to
+   coordinate modifications when deletes happen against writes to the same points
+   at the same time.
+* Skip and warn that series file should not be in a retention policy directory.
+* Checks if measurement was removed from index, and if it was, then cleans up out
+  of fields index. Also fix cleanup issue where only prefix was checked when
+  matching measurements like "m1" and "m10".
+* Error message to user that databases must be run in non-mixed index mode
+ to allow deletes.
+* Update platform dependency to simplify Flux support in Enterprise.
+* Verify series file in presence of tombstones.
+* Fix `ApplyEnvOverrides` when a type that implements Unmarshaler is in a slice to
+  not call `UnMarshaltext` when the environment variable is set to empty.
+* Drop NaN values when writing back points and fix the point writer to report the
+  number of points actually written and omits the ones that were dropped.
+* Query authorizer was not properly passed to subqueries so rejections did not
+  happen when a subquery was the one reading the value. Max series limit was not propagated downward.
 
 ## v1.7.1 [2018-11-14]
 
@@ -82,6 +87,23 @@ Support for the Flux language and queries has been added in this release. To beg
 -	Fix the inherited interval for derivative and others.
 -	Fix subquery functionality when a function references a tag from the subquery.
 -	Strip tags from a subquery when the outer query does not group by that tag.
+
+## v1.6.5 [2019-01-10]
+
+### Features
+
+-	Reduce allocations in TSI TagSets implementation.
+
+### Bugfixes
+
+-	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
+-	Ensure orphaned series cleaned up with shard drop.
+-	Fix the derivative and others time ranges for aggregate data.
+-	Fix the stream iterator to not ignore errors.
+-	Do not panic when a series ID iterator is `nil`.
+-	Fix panic in IndexSet.
+-	Pass the query authorizer to subqueries.
+-	Fix TSM1 panic on reader error.
 
 ## v1.6.4 [2018-10-16]
 
@@ -205,6 +227,23 @@ using the Prometheus measurement name as the `__name__` label.
 * TSM: `TSMReader.Close` blocks until reads complete.
 * Return the correct auxiliary values for `top` and `bottom`.
 * Close TSMReaders from `FileStore.Close` after releasing FileStore mutex.
+
+## v1.5.5 [2018-12-19]
+
+### Features
+
+-	Reduce allocations in TSI TagSets implementation.
+
+### Bug fixes
+
+-	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
+-	Ensure orphaned series cleaned up with shard drop.
+-	Fix the derivative and others time ranges for aggregate data.
+-	Fix the stream iterator to not ignore errors.
+-	Do not panic when a series ID iterator is `nil`.
+-	Fix panic in IndexSet.
+-	Pass the query authorizer to subqueries.
+-	Fix TSM1 panic on reader error.
 
 ## v1.5.4 [2018-06-21]
 

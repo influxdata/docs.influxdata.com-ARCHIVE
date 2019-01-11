@@ -3,6 +3,7 @@ title: InfluxDB Enterprise 1.6 release notes
 
 menu:
   enterprise_influxdb_1_6:
+    name: Release notes
     weight: 10
     parent: About the project
 ---
