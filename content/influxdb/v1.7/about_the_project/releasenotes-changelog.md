@@ -91,13 +91,17 @@ Support for the Flux language and queries has been added in this release. To beg
 ### Bugfixes
 
 -	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
+-   tsdb: Copy measurement names when expression is provided.
 -	Ensure orphaned series cleaned up with shard drop.
 -	Fix the derivative and others time ranges for aggregate data.
+-   Drop NaN (Not a Number) values when writing back points.
 -	Fix the stream iterator to not ignore errors.
 -	Do not panic when a series ID iterator is `nil`.
 -	Fix panic in IndexSet.
 -	Pass the query authorizer to subqueries.
 -	Fix TSM1 panic on reader error.
+-   Limit database and retention policy names to 255 characters.
+-   Update Go runtime to 1.10.6
 
 ## v1.6.4 [2018-10-16]
 
