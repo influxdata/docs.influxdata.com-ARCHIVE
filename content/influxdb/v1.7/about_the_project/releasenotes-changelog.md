@@ -9,10 +9,28 @@ menu:
 
 ## v1.7.3 [2019-01-11]
 
+### Features
+
+- Add user authentication and authorization support for Flux HTTP requests.
+- Add support for optionally logging Flux queries.
+
+v1.7.2 [2018-12-11]
+
+### Features
+
+- Add support for LDAP StartTLS.
+- Disable Anti-Entropy service by default.
+- Flux 0.7 support.
+- Implement TLS between data nodes.
+- Update to Flux 0.7.1.
+- Add optional TLS support to meta node Raft port.
+- AE: memoize DistinctCount, min, & max time.
+- Update influxdb dep for subquery auth update.
+- Add user authentication and authorization support for Flux HTTP requests.
+
 ### Bug fixes
 
-*  Fix `ApplyEnvOverrides` when a type that implements `Unmarshaler` is in a slice.
-
+-	[#2861](https://github.com/influxdata/plutonium/pull/2861): Update sample configuration.
 ## v1.7.1 [2018-11-14]
 
 ### Bug fixes
@@ -21,7 +39,6 @@ menu:
 
 
 ## v1.7.0 [2018-11-06]
--------------------
 
 ### Breaking changes
 
