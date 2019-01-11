@@ -7,23 +7,44 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v.1.7.2 [2018-12-11]
 
-This release builds off of the InfluxDB OSS 1.7.0 through 1.7.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+v1.7.3 [unreleased]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.3 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Features
 
-* Add support for LDAP StartTLS.
-* Disable Anti-Entropy service by default.
-* Flux 0.7.1 support.
-* Implement TLS between data nodes.
-* Add optional TLS support to meta node Raft port.
-* AE: memoize DistinctCount, min, & max time.
-* Update influxdb dep for subquery auth update.
+-	Add user authentication and authorization support for Flux HTTP requests.
+-	Add support for optionally logging Flux queries.
+
+v1.7.2 [2018-12-11]
+-------------------
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+
+-	Add support for LDAP StartTLS.
+-	Disable Anti-Entropy service by default.
+-	Flux 0.7 support.
+-	Implement TLS between data nodes.
+-	Update to Flux 0.7.1.
+-	Add optional TLS support to meta node Raft port.
+-	Anti-Entropy: memoize `DistinctCount`, `min`, & `max` time.
+-	Update influxdb dep for subquery auth update.
 
 ### Bug fixes
 
-* Update sample configuration.
+-	Update sample configuration.
+
+v1.7.1 [2018-11-14]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.1 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+v1.7.0 [2018-11-06]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.0 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ## V1.6.5 [2019-01-10]
 
