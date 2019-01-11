@@ -151,12 +151,14 @@ sudo yum localinstall influxdb-data-1.6.5_c1.6.5.x86_64.rpm
 * [pool-max-idle-streams = 100](/enterprise_influxdb/v1.6/administration/config-data-nodes#pool-max-idle-streams-100) to the `[cluster]` section
 * [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.6/administration/config-data-nodes#pool-max-idle-time-60s) to the `[cluster]` section
 * the [[anti-entropy]](/enterprise_influxdb/v1.6/administration/config-data-nodes#anti-entropy) section:
+
 ```
 [anti-entropy]
   enabled = true
   check-interval = "30s"
   max-fetch = 10
 ```
+
 <dt>
 The [anti-entropy service](/enterprise_influxdb/v1.6/administration/anti-entropy/) can initially be CPU intensive
 if you have very large shards (>50GB) and/or a large number of shards (>500) associated
