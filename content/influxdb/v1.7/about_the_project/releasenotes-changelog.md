@@ -14,7 +14,7 @@ menu:
 - Add user authentication and authorization support for Flux HTTP requests.
 - Add support for optionally logging Flux queries.
 
-v1.7.2 [2018-12-11]
+## v1.7.2 [2018-12-11]
 
 ### Features
 
@@ -30,7 +30,8 @@ v1.7.2 [2018-12-11]
 
 ### Bug fixes
 
--	[#2861](https://github.com/influxdata/plutonium/pull/2861): Update sample configuration.
+- Update sample configuration.
+
 ## v1.7.1 [2018-11-14]
 
 ### Bug fixes
