@@ -2,7 +2,7 @@
 title: stateDuration() function
 description: The stateDuration() function computes the duration of a given state.
 menu:
-  flux_0_7:
+  flux_0_12:
     name: stateDuration
     parent: Transformations
     weight: 1
@@ -22,7 +22,7 @@ _**Output data type:** Duration_
 > state duration will be 0.
 
 ```js
-stateDuration(fn: (r) => r._measurement == "state", label: "stateDuration", unit: 1s)
+stateDuration(fn: (r) => r._measurement == "state", column: "stateDuration", unit: 1s)
 ```
 
 _If the expression generates an error during evaluation, the point is discarded,
@@ -38,7 +38,7 @@ Those that evaluate to `false` reset the state duration.
 
 _**Data type:** Function_
 
-### label
+### column
 The name of the column added to each record that contains the state duration.
 
 _**Data type:** String_
@@ -53,9 +53,9 @@ _**Data type:** Duration_
 ```js
 from("monitor/autogen")
   |> range(start: -1h)
-  |> filter(fn: (r) => r._measurement == "server_state")
+  |> filter(fn: (r) => r._measurement == "http")
   |> stateDuration(
     fn: (r) => r.http_response_code == "500",
-    label: "server_error_duration"
+    column: "server_error_duration"
   )
 ```

@@ -2,7 +2,7 @@
 title: stateCount() function
 description: The stateCount() function computes the number of consecutive records in a given state.
 menu:
-  flux_0_7:
+  flux_0_12:
     name: stateCount
     parent: Transformations
     weight: 1
@@ -18,7 +18,7 @@ _**Function type:** Transformation_
 _**Output data type:** Integer_
 
 ```js
-stateCount(fn: (r) => r._field == "state", label: "stateCount")
+stateCount(fn: (r) => r._field == "state", column: "stateCount")
 ```
 
 _If the expression generates an error during evaluation, the point is discarded
@@ -34,7 +34,7 @@ Those that evaluate to `false` reset the state count.
 
 _**Data type:** Function_
 
-### label
+### column
 The name of the column added to each record that contains the incremented state count.
 
 _**Data type:** String_
@@ -43,9 +43,9 @@ _**Data type:** String_
 ```js
 from("monitor/autogen")
   |> range(start: -1h)
-  |> filter(fn: (r) => r._measurement == "server_state")
+  |> filter(fn: (r) => r._measurement == "http")
   |> stateCount(
     fn: (r) => r.http_response_code == "500",
-    label: "server_error_count"
+    column: "server_error_count"
   )
 ```
