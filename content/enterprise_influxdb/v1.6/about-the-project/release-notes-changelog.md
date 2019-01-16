@@ -6,6 +6,11 @@ menu:
     weight: 10
     parent: About the project
 ---
+
+## v1.6.5 [2019-01-10]
+
+This release builds off of the InfluxDB OSS 1.5.5 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
 ## v1.6.4 [2018-10-23]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
@@ -82,6 +87,10 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For de
 * Ensure shards are not queued to copy if a remote node is unavailable.
 * Ensure the hinted handoff (hh) queue makes forward progress when segment errors occur.
 * Add hinted handoff (hh) queue back pressure.
+
+## v1.5.5 [2018-12-19]
+
+This release builds off of the InfluxDB OSS 1.5.5 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ## v1.5.4 [2018-06-21]
 

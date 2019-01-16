@@ -22,7 +22,7 @@ _**Output data type:** Duration_
 > state duration will be 0.
 
 ```js
-stateDuration(fn: (r) => r._measurement == "state", lable: "stateDuration", unit: 1s)
+stateDuration(fn: (r) => r._measurement == "state", label: "stateDuration", unit: 1s)
 ```
 
 _If the expression generates an error during evaluation, the point is discarded,
@@ -54,5 +54,8 @@ _**Data type:** Duration_
 from("monitor/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) => r._measurement == "server_state")
-  |> stateDuration()
+  |> stateDuration(
+    fn: (r) => r.http_response_code == "500",
+    label: "server_error_duration"
+  )
 ```

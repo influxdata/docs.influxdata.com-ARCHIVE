@@ -834,8 +834,7 @@ Use the `::` syntax to specify if the key is a field key or tag key.
 
 #### Examples
 
-##### Sample data:
-<br>
+##### Sample data:  
 ```
 > INSERT candied,almonds=true almonds=50,half_almonds=51 1465317610000000000
 > INSERT candied,almonds=true almonds=55,half_almonds=56 1465317620000000000

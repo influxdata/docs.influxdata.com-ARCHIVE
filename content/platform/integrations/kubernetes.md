@@ -15,8 +15,8 @@ has become a popular way to deploy and manage containers across multiple servers
 There are several ways use the InfluxData Platform (also known as the TICK
 stack) with Kubernetes:
 
-- [Monitor Kubernetes](#monitor-kubernetes-https-www-influxdata-com-blog-monitoring-kubernetes-architecture)
-- [Deploy the TICK stack on Kubernetes](#deploy-the-tick-stack-on-kubernetes-https-github-com-influxdata-tick-charts)
+- [Monitor Kubernetes](#monitor-kubernetes)
+- [Deploy the TICK stack in Kubernetes](#deploy-the-tick-stack-in-kubernetes)
 - [Frequently asked questions](#frequently-asked-questions)
 
 ## Monitor Kubernetes
@@ -30,18 +30,18 @@ set of Helm charts to make collection and visualization of Kubernetes metrics
 easy. It uses Telegraf, the metrics collection agent, to collect metrics and
 events and includes a set of pre-configured Chronograf dashboards.
 
-[Read the kube-influxdb Getting Started guide.](https://github.com/influxdata/kube-influxdb/blob/master/docs/v1.0/getting_started.md)
+See the [kube-influxdb Getting Started guide](https://github.com/influxdata/kube-influxdb/blob/master/docs/v1.0/getting_started.md).
 
 ### Collect Kubernetes metrics with Telegraf
 
-The [Telegraf metrics collection agent](https://docs.influxdata.com/telegraf/v1.9/introduction/getting-started/)
-can collect many types of metrics in a Kubernetes cluster, like [Docker container metrics](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/docker/README.md)
-and [stats from kubelets](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/kubernetes).
-It can even scrape [Prometheus metrics API endpoints](https://github.com/influxdata/telegraf/tree/release-1.9/plugins/inputs/prometheus).
+The [Telegraf metrics collection agent](/telegraf/latest/introduction/getting-started/)
+can collect many types of metrics in a Kubernetes cluster, like [Docker container metrics](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/docker/README.md)
+and [stats from kubelets](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kubernetes).
+It can even scrape [Prometheus metrics API endpoints](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus).
 Telegraf is used in the [kube-influxdb project](#kube-influxdb-kubernetes-monitoring-project)
 to collect metrics.
 
-[Read about setting up a Kubernetes monitoring architecture using Telegraf](https://www.influxdata.com/blog/monitoring-kubernetes-architecture/)
+See [Set up a Kubernetes monitoring architecture using Telegraf](https://www.influxdata.com/blog/monitoring-kubernetes-architecture/).
 
 ### Prometheus remote read and write support
 
@@ -50,7 +50,7 @@ using Prometheus for metrics collection. See the
 [FAQ](#frequently-asked-questions) for more information on why a more flexible
 time series data store is useful.
 
-[Read about the Prometheus remote read and write API support in InfluxDB](https://docs.influxdata.com/influxdb/v1.7/supported_protocols/prometheus/)
+Read about [Prometheus remote read and write API support in InfluxDB](/influxdb/latest/supported_protocols/prometheus/).
 
 ## Deploy the TICK stack in Kubernetes
 Instructions for installing and configuring all components of the open source
@@ -65,7 +65,7 @@ The [TICK Charts](https://github.com/influxdata/tick-charts) repository provides
 a set of [Helm charts](https://docs.helm.sh/) to deploy every component of the
 InfluxData Platform in Kubernetes.
 
-[Learn how to deploy the InfluxData Platform using Helm Charts](https://github.com/influxdata/tick-charts/blob/master/README.md)
+Learn how to [deploy the InfluxData Platform using Helm Charts](https://github.com/influxdata/tick-charts/blob/master/README.md)
 
 ### K8s Operator
 
@@ -111,7 +111,7 @@ databases in Kubernetes successfully, many InfluxDB users have also experienced
 issues including significant downtime and even loss of data due to Kubernetes
 rescheduling pods or problems with mounted volumes.
 
-InfluxData provides several [ways to deploy InfluxDB in Kubernetes](deploy-the-tick-stack-in-Kubernetes),
+InfluxData provides several [ways to deploy InfluxDB in Kubernetes](/platform/install-and-deploy/deploying/kubernetes/),
 which should be considered experimental and not for use in production. We
 suggest exploring the [Terraform InfluxDB module](https://registry.terraform.io/modules/influxdata/influxdb/aws/1.0.4)
 for a declarative way to deploy InfluxDB for production use.

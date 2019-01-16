@@ -9,7 +9,7 @@ menu:
 ---
 
 [Chronograf](/chronograf/latest/) is the web user interface for managing for the
-InfluxData platform that lest you create and customize dashboards that visualize your data.
+InfluxData platform that lets you create and customize dashboards that visualize your data.
 Visualized data is retrieved using either an InfluxQL or Flux query.
 This guide walks through using Flux queries in Chronograf dashboard cells.
 
@@ -62,7 +62,7 @@ Connections are managed under Chronograf's **Configuration** tab.
 
 ### View raw data
 As you're building your Flux scripts, each function processes or transforms your
-data is ways specific to the function.
+data in ways specific to the function.
 It can be helpful to view the actual data in order to see how it is being shaped.
 The **View Raw Data** toggle above the data visualization switches between graphed
 data and raw data shown in table form.

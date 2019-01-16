@@ -150,14 +150,10 @@ The Enterprise Web server is primarily an HTTP server with similar load requirem
 * IOPS: 50
 
 # When do I need more RAM?
-In general, having more RAM helps queries return faster. There is no known downside to adding more RAM.
+In general, having more RAM helps queries return faster. There is no known downside to adding more RAM. 
 
 The major component that affects your RAM needs is [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality).
 A series cardinality around or above 10 million can cause OOM failures even with large amounts of RAM. If this is the case, you can usually address the problem by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
-
-The increase in RAM needs relative to series cardinality is exponential where the exponent is between one and two:
-
-![Series Cardinality](/img/influxdb/series-cardinality.png)
 
 # What kind of storage do I need?
 InfluxDB is designed to run on SSDs. InfluxData does not test on HDDs or networked storage devices, and we do not recommend them for production.  Performance is an order of magnitude lower on spinning disk drives and the system may break down under even moderate load. For best results InfluxDB servers must have at least 1000 IOPS on the storage system.

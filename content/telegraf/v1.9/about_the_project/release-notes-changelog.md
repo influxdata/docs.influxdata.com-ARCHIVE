@@ -8,6 +8,25 @@ menu:
     parent: About the project
 ---
 
+## v1.9.2 [2019-01-08]
+
+### Bugfixes
+
+- Increase `varnishstat` timeout.
+- Remove storage calculation for non-Azure-managed instances and add server version.
+- Fix error sending empty tag value in `azure_monitor` output.
+- Fix panic with Prometheus input plugin on shutdown.
+- Support non-transparent framing of syslog messages.
+- Apply global- and plugin-level metric modifications before filtering.
+- Fix `num_remapped_pgs` field in `ceph` plugin.
+- Add `PDH_NO_DATA` to known counter error codes in `win_perf_counters`.
+- Fix `amqp_consumer` stops consuming on empty message.
+- Fix multiple replace tables not working in strings processor.
+- Allow non-local UDP connections in `net_response`.
+- Fix TOML option names in parser processor.
+- Fix panic in Docker input with bad endpoint.
+- Fix original metric modified by aggregator filters.
+
 ## v1.9.1 [2018-12-11]
 
 ### Bug fixes

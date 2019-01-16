@@ -24,4 +24,4 @@ Type conversion functions convert the `_value` column of the input table into a 
 
 ## Generic transformations
 
-{{< function-list category="Transformations" >}}
+{{< function-list category="Transformations" menu="flux_0_7" >}}

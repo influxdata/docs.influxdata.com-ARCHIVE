@@ -93,13 +93,13 @@ $(function() {
 $advertContent = [
   {
     ctaText: "Try InfluxCloud",
-    ctaLink: "https://cloud.influxdata.com/",
+    ctaLink: "https://cloud.influxdata.com/trial/user",
     advertText: "Collect, store, and retrieve time-series data in one minute.",
     style: "support-ad--cloud",
   },
   {
     ctaText: "Try InfluxEnterprise",
-    ctaLink: "https://portal.influxdata.com/",
+    ctaLink: "https://portal.influxdata.com/users/new",
     advertText: "Unlock powerful insights that help you delight your customers.",
     style: "support-ad--enterprise",
   },

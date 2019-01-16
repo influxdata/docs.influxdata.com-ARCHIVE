@@ -530,7 +530,7 @@ DROP RETENTION POLICY "1h.cpu" ON "mydb"
 drop_series_stmt = "DROP SERIES" ( from_clause | where_clause | from_clause where_clause ) .
 ```
 
-> ***Note:*** Filtering by time is not supported in the  WHERE clause.
+> ***Note:*** Filtering by time is not supported in the `WHERE` clause.
 
 #### Example:
 
@@ -958,7 +958,7 @@ Estimates or counts exactly the cardinality of the series for the current databa
 
 > **Note:** `ON <database>`, `FROM <sources>`, `WITH KEY = <key>`, `WHERE <condition>`, `GROUP BY <dimensions>`, and `LIMIT/OFFSET` clauses are optional.
 > When using these query clauses, the query falls back to an exact count.
-> Filtering by `time` is only supported when TSI (Time Series Index) is enabled and `time` is not supported in the `WHERE` clause.
+> Filtering by `time` is not supported in the `WHERE` clause.
 
 ```
 show_series_cardinality_stmt = "SHOW SERIES CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]

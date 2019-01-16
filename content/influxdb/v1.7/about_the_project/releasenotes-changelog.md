@@ -7,6 +7,26 @@ menu:
     parent: About the project
 ---
 
+## v1.7.3 [2019-01-14]
+
+### Features
+
+- Update Flux to 0.12.0
+
+### Bug fixes
+
+-	Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
+-	Limit force-full and cold compaction size.
+-	Add user authentication and authorization support for Flux HTTP requests.
+-	Call `storage.Group` API to correctly map group mode.
+-	Following functions, when used on non-float types in subqueries, returned incorrect
+  results: `derivitive`, `non_negative_derivitive`, `moving_average`, `exponential_moving_average`,
+  `double_exponential_moving_average`, `triple_exponential_moving_average`, `relative_strength_index`,
+  `triple_exponential_deriviative`, `kaufmans_efficiency_ratio`, `kaufmans_adaptive_moving_average`,
+  `chande_momentum_oscillator`, `holt_winters`, and `holt_winters_with_fit`.
+-	Add support for optionally logging Flux queries.
+-	Fix cardinality estimation error.
+
 ## v1.7.2 [2018-12-11]
 
 ### Bug fixes
@@ -81,6 +101,27 @@ Support for the Flux language and queries has been added in this release. To beg
 -	Fix the inherited interval for derivative and others.
 -	Fix subquery functionality when a function references a tag from the subquery.
 -	Strip tags from a subquery when the outer query does not group by that tag.
+
+## v1.6.5 [2019-01-10]
+
+### Features
+
+-	Reduce allocations in TSI TagSets implementation.
+
+### Bugfixes
+
+-	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr.
+-   tsdb: Copy measurement names when expression is provided.
+-	Ensure orphaned series cleaned up with shard drop.
+-	Fix the derivative and others time ranges for aggregate data.
+-   Drop NaN (Not a Number) values when writing back points.
+-	Fix the stream iterator to not ignore errors.
+-	Do not panic when a series ID iterator is `nil`.
+-	Fix panic in IndexSet.
+-	Pass the query authorizer to subqueries.
+-	Fix TSM1 panic on reader error.
+-   Limit database and retention policy names to 255 characters.
+-   Update Go runtime to 1.10.6.
 
 ## v1.6.4 [2018-10-16]
 
@@ -204,6 +245,23 @@ using the Prometheus measurement name as the `__name__` label.
 * TSM: `TSMReader.Close` blocks until reads complete.
 * Return the correct auxiliary values for `top` and `bottom`.
 * Close TSMReaders from `FileStore.Close` after releasing FileStore mutex.
+
+## v1.5.5 [2018-12-19]
+
+### Features
+
+-	Reduce allocations in TSI TagSets implementation.
+
+### Bugfixes
+
+-	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
+-	Ensure orphaned series cleaned up with shard drop.
+-	Fix the derivative and others time ranges for aggregate data.
+-	Fix the stream iterator to not ignore errors.
+-	Do not panic when a series ID iterator is `nil`.
+-	Fix panic in IndexSet.
+-	Pass the query authorizer to subqueries.
+-	Fix TSM1 panic on reader error.
 
 ## v1.5.4 [2018-06-21]
 

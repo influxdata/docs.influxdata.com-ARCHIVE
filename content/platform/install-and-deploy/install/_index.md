@@ -31,7 +31,7 @@ An end-to-end walkthrough for installing and production-ready Enterprise TICK st
 is coming soon. In the mean time, information about installing each component of
 an Enterprise TICK stack can be found using the following links:
 
-[Installing Telegraf](/chronograf/latest/introduction/installation)  
+[Installing Telegraf](/telegraf/latest/introduction/installation)  
 [Installing InfluxDB Enterprise](/enterprise_influxdb/latest/introduction/installation_guidelines/)  
 [Installing Chronograf](/chronograf/latest/introduction/installation)  
 [Installing Kapacitor Enterprise](/enterprise_kapacitor/v1.5/introduction/installation_guide/)

@@ -112,9 +112,9 @@ Separate multiple field-value pairs with a comma and no spaces:
 ```
 
 In the example, the field set consists of one field: `temperature=82`.
-Adding another field (`bug_concentration=98`) to the example looks like this:
+Adding another field (`humidity=71`) to the example looks like this:
 ```
-weather,location=us-midwest temperature=82,bug_concentration=98 1465839830100400200
+weather,location=us-midwest temperature=82,humidity=71 1465839830100400200
 ```
 
 ### Whitespace II

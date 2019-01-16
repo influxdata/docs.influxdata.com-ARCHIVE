@@ -7,6 +7,22 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.6 [2019-1-14]
+
+### Bug Fixes
+
+* Properly set scroll to row for table graph
+* Prevent Kapacitor URLs from being overwritten in Connection Wizard.
+* Fix logs intermittently appearing empty on first load.
+* Prevent meta node URLs from being overwritten in Connection Wizard.
+* Update functions list for Flux 0.12.
+
+## v1.7.5 [2018-12-17]
+
+### Bug Fixes
+
+* Update Go, Node, and Alpine versions.
+
 ## v1.7.4 [2018-12-12]
 
 ### UI Improvements
