@@ -1,5 +1,5 @@
 ---
-title: Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (_internal)
+title: Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (`_internal`)
 description: Use and understand the InfluxDB measurements statistics and field keys that can be used to monitor InfluxDB OSS servers and InfluxDB Enterprise clusters.
 menu:
   platform:
