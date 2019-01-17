@@ -7,6 +7,12 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.7 [2019-1-16]
+
+### Bug Fixes
+
+* Use JWT in Enterprise for authentication in Flux.
+
 ## v1.7.6 [2019-1-14]
 
 ### Bug Fixes
