@@ -118,7 +118,7 @@ The following post event handler options can be set in a
 | url              | string                  | The URL to which the alert data will be posted.                                                                     |
 | endpoint         | string                  | Name of a HTTP POST endpoint (configured in the `kapacitor.conf`) to use. _Cannot be specified in place of the URL._ |
 | headers          | map of string to string | Set of extra header values to set on the POST request.                                                              |
-| capture‑response | bool                    | If the HTTP status code is not an `2xx` code, read and log the the HTTP response.                                   |
+| capture‑response | bool                    | If the HTTP status code is not an `2xx` code, read and log the HTTP response.                                   |
 | timeout          | duration                | Timeout for the HTTP POST.                                                                                          |
 
 ### Example: Handler file - Using a pre-configured endpoint
