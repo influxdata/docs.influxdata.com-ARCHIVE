@@ -40,14 +40,14 @@ _**Data type:** Array of strings_
 stream1 = from(bucket:"telegraf/autogen")
   |> range(start:-15m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used"
   )
 
 stream2 = from(bucket:"telegraf/autogen")
   |> range(start:-15m)
   |> filter(fn: (r) => r
-    ._measurement == "mem" AND
+    ._measurement == "mem" and
     r._field == "available"
   )
 

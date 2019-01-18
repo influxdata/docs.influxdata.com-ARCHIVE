@@ -84,7 +84,7 @@ Use the `AND` relational operator to chain multiple filters.
 (r) => (r._measurement == "cpu")
 
 // Example with multiple filters
-(r) => (r._measurement == "cpu") AND (r._field != "usage_system" )
+(r) => (r._measurement == "cpu") and (r._field != "usage_system" )
 ```
 
 #### Use the following:
@@ -94,8 +94,8 @@ For this example, filter by the `cpu` measurement, the `usage_system` field, and
 from(bucket:"telegraf/autogen")
   |> range(start: -15m)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
 ```
@@ -107,8 +107,8 @@ Use Flux's `yield()` function to output the filtered tables as the result of the
 from(bucket:"telegraf/autogen")
   |> range(start: -15m)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
   |> yield()

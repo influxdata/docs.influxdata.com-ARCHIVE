@@ -35,14 +35,14 @@ see [How to join data with Flux](/flux/v0.12/guides/join)._
 dataStream1 = from(bucket: "bucket1")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "network" AND
+    r._measurement == "network" and
     r._field == "bytes-transferred"
   )
 
 dataStream2 = from(bucket: "bucket1")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "httpd" AND
+    r._measurement == "httpd" and
     r._field == "requests-per-sec"
     )
 
@@ -64,7 +64,7 @@ joins them, then calculates the average amount of memory used per running proces
 memUsed = from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used"
   )
 
@@ -72,7 +72,7 @@ memUsed = from(bucket: "telegraf/autogen")
 procTotal = from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "processes" AND
+    r._measurement == "processes" and
     r._field == "total"
     )
 
@@ -100,7 +100,7 @@ Depending on the column type, records are sorted alphabetically, numerically, or
 from(bucket:"telegraf/autogen")
   |> range(start:-12h)
   |> filter(fn: (r) =>
-    r._measurement == "system" AND
+    r._measurement == "system" and
     r._field == "uptime"
   )
   |> sort(columns:["region", "host", "_value"])
@@ -116,7 +116,7 @@ to pivot data tables by specifying `rowKey`, `columnKey`, and `valueColumn` para
 from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
+    r._measurement == "cpu" and
     r.cpu == "cpu-total"
   )
   |> pivot(
@@ -142,7 +142,7 @@ _For an example of using Flux to create a cumulative histogram, see [Create hist
 from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> histogram(

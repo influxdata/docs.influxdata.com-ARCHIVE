@@ -81,7 +81,7 @@ multByX = (tables=<-, x) =>
 from(bucket: "telegraf/autogen")
   |> range(start: -1m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> multByX(x:2.0)
@@ -117,7 +117,7 @@ getWinner = (tables=<-, noSarcasm:true) =>
 from(bucket: "telegraf/autogen")
   |> range(start: -1m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> getWinner()
@@ -126,7 +126,7 @@ from(bucket: "telegraf/autogen")
 from(bucket: "telegraf/autogen")
   |> range(start: -1m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> getWinner(noSarcasm: false)

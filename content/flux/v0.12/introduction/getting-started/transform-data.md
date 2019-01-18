@@ -26,8 +26,8 @@ guide, but update the range to pull data from the last hour:
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
 ```
@@ -58,8 +58,8 @@ For this example, window data in five minute intervals (`5m`).
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
   |> window(every: 5m)
@@ -78,8 +78,8 @@ Use the [`mean()` function](/flux/v0.12/functions/transformations/aggregates/mea
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
   |> window(every: 5m)
@@ -105,8 +105,8 @@ to duplicate the `_stop` column as the `_time` column for each windowed table.
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
   |> window(every: 5m)
@@ -123,8 +123,8 @@ into a single, infinite window.
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
   |> window(every: 5m)
@@ -149,8 +149,8 @@ The same operation performed in this guide can be accomplished using the
 from(bucket:"telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
   |> aggregateWindow(every: 5m, fn: mean)

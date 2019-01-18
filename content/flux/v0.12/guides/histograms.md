@@ -24,7 +24,7 @@ Bin counts are cumulative.
 from(bucket:"telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> histogram(bins: [0.0, 10.0, 20.0, 30.0])
@@ -62,7 +62,7 @@ logarithmicBins(start: 1.0, factor: 2.0, count: 10, infinty: true)
 from(bucket:"telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> histogram(
@@ -107,7 +107,7 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 from(bucket:"telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> histogram(

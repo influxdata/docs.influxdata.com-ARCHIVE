@@ -29,7 +29,7 @@ _**Data type:** Array of strings_
 ```js
 from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent")
   |> range(start:-12h)
   |> window(every:10m)

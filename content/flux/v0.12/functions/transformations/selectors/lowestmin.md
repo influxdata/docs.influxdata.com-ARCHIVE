@@ -45,7 +45,7 @@ _**Data type:** Array of strings_
 from(bucket:"telegraf/autogen")
   |> range(start:-1h)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> lowestMin(n:10, groupColumns: ["host"])

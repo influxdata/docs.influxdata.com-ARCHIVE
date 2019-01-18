@@ -37,7 +37,7 @@ _**Data type:** Integer_
 from(bucket:"telegraf/autogen")
   |> range(start:-1d)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
+    r._measurement == "cpu" and
     r._field == "usage_system"
   )
   |> sample(n: 5, pos: 1)

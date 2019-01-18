@@ -31,7 +31,7 @@ _**Data type:** Array of strings_
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -24h)
-  |> filter(fn: (r) => r._measurement == "system" AND r._field == "n_users")
+  |> filter(fn: (r) => r._measurement == "system" and r._field == "n_users")
   |> increase()
 ```
 

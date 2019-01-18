@@ -36,7 +36,7 @@ _**Data type:** Array of strings_
 from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
+    r._measurement == "cpu" and
     r._field == "usage_system"
   )
   |> integral(unit:10s)

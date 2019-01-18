@@ -25,7 +25,7 @@ The following example queries the memory usage of the host machine.
 dataSet = from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> drop(columns: ["host"])

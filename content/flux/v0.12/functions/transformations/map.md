@@ -46,8 +46,8 @@ _**Data type:** Boolean_
 ```js
 from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_system" AND
+    r._measurement == "cpu" and
+    r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
   |> range(start:-12h)
@@ -58,7 +58,7 @@ from(bucket:"telegraf/autogen")
 ```js
 from(bucket:"telegraf/autogen")
     |> filter(fn: (r) =>
-      r._measurement == "cpu" AND
+      r._measurement == "cpu" and
       r._field == "usage_system"
     )
     |> range(start:-12h)

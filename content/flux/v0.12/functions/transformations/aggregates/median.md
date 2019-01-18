@@ -63,7 +63,7 @@ _**Data type:** Float_
 ```js
 from(bucket: "telegraf/autogen")
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> range(start:-12h)
@@ -75,7 +75,7 @@ from(bucket: "telegraf/autogen")
 ```js
 from(bucket: "telegraf/autogen")
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
   |> range(start:-12h)

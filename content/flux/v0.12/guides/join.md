@@ -35,7 +35,7 @@ This returns the amount of memory (in bytes) used.
 memUsed = from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used"
   )
 ```
@@ -89,7 +89,7 @@ This returns the number of running processes.
 procTotal = from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) =>
-    r._measurement == "processes" AND
+    r._measurement == "processes" and
     r._field == "total"
   )
 ```
@@ -270,8 +270,8 @@ batchSize = (cluster_id, start=-1m, interval=10s) => {
   httpd = from(bucket:"telegraf")
     |> range(start:start)
     |> filter(fn:(r) =>
-      r._measurement == "influxdb_httpd" AND
-      r._field == "writeReq" AND
+      r._measurement == "influxdb_httpd" and
+      r._field == "writeReq" and
       r.cluster_id == cluster_id
     )
     |> aggregateWindow(every: interval, fn: mean)
@@ -280,8 +280,8 @@ batchSize = (cluster_id, start=-1m, interval=10s) => {
   write = from(bucket:"telegraf")
     |> range(start:start)
     |> filter(fn:(r) =>
-      r._measurement == "influxdb_write" AND
-      r._field == "pointReq" AND
+      r._measurement == "influxdb_write" and
+      r._field == "pointReq" and
       r.cluster_id == cluster_id
     )
     |> aggregateWindow(every: interval, fn: max)
