@@ -21,7 +21,7 @@ toFloat()
 ```js
 from(bucket: "telegraf")
   |> filter(fn:(r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used"
   )
   |> toFloat()

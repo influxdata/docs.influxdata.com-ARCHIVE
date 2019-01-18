@@ -39,7 +39,7 @@ _**Data type:** Boolean_
 from(bucket:"telegraf/autogen")
   |> range(start:-12h)
   |> filter(fn: (r) =>
-    r._measurement == "system" AND
+    r._measurement == "system" and
     r._field == "uptime"
   )
   |> sort(columns:["region", "host", "_value"])

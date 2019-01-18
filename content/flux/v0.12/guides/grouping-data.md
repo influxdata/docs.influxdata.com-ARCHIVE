@@ -71,7 +71,7 @@ It uses a regular expression to filter only numbered cores.
 dataSet = from(bucket: "telegraf/autogen")
   |> range(start: -2m)
   |> filter(fn: (r) =>
-    r._field == "usage_system" AND
+    r._field == "usage_system" and
     r.cpu =~ /cpu[0-9*]/
   )
   |> drop(columns: ["host"])

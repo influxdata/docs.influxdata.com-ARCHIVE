@@ -14,7 +14,7 @@ The [`sort()`function](/flux/v0.12/functions/transformations/sort) orders the re
 from(bucket:"telegraf/autogen")
   |> range(start:-12h)
   |> filter(fn: (r) =>
-    r._measurement == "system" AND
+    r._measurement == "system" and
     r._field == "uptime"
   )
   |> sort(columns:["region", "host", "_value"])
@@ -34,7 +34,7 @@ You can use `sort()` and `limit()` together to show the top N records. The examp
 from(bucket:"telegraf/autogen")
   |> range(start:-12h)
   |> filter(fn: (r) =>
-    r._measurement == "system" AND
+    r._measurement == "system" and
     r._field == "uptime"
   )
   |> sort(columns:["region", "host", "_value"])

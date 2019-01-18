@@ -45,8 +45,8 @@ It only keeps records for which the `cpu` is either `cpu0`, `cpu1`, or `cpu2`.
 from(bucket: "telegraf/autogen")
   |> range(start: -15m)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
-    r._field == "usage_user" AND
+    r._measurement == "cpu" and
+    r._field == "usage_user" and
     r.cpu =~ /cpu[0-2]/
   )
 ```
@@ -58,7 +58,7 @@ The following example excludes records that do not have `_percent` in a field ke
 from(bucket: "telegraf/autogen")
   |> range(start: -15m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field =~ /_percent/
   )
 ```

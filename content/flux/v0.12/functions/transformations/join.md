@@ -112,14 +112,14 @@ The output will be:
 data_1 = from(bucket:"telegraf/autogen")
   |> range(start:-15m)
   |> filter(fn: (r) =>
-    r._measurement == "cpu" AND
+    r._measurement == "cpu" and
     r._field == "usage_system"
   )
 
 data_2 = from(bucket:"telegraf/autogen")
   |> range(start:-15m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent"
   )
 

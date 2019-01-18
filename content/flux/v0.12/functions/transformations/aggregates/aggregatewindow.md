@@ -63,7 +63,7 @@ _**Data type:** String_
 from(bucket: "telegraf/autogen")
   |> range(start: 1h)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent")
   |> aggregateWindow(
     every: 5m,
@@ -79,7 +79,7 @@ that pipe-forwards tables into the aggregate function with all required paramete
 from(bucket: "telegraf/autogen")
   |> range(start: 1h)
   |> filter(fn: (r) =>
-    r._measurement == "mem" AND
+    r._measurement == "mem" and
     r._field == "used_percent")
   |> aggregateWindow(
     every: 5m,

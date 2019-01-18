@@ -69,7 +69,7 @@ _**Data type:** Float_
 from(bucket: "telegraf/autogen")
 	|> range(start: -5m)
 	|> filter(fn: (r) =>
-    r._measurement == "cpu" AND
+    r._measurement == "cpu" and
     r._field == "usage_system")
 	|> percentile(
     percentile: 0.99,
@@ -83,7 +83,7 @@ from(bucket: "telegraf/autogen")
 from(bucket: "telegraf/autogen")
 	|> range(start: -5m)
 	|> filter(fn: (r) =>
-    r._measurement == "cpu" AND
+    r._measurement == "cpu" and
     r._field == "usage_system")
 	|> percentile(
     percentile: 0.99,

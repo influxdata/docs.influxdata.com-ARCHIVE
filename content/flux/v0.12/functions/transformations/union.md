@@ -35,7 +35,7 @@ _**Data type:** Array of strings_
 left = from(bucket: "test")
   |> range(start: 2018-05-22T19:53:00Z, stop: 2018-05-22T19:53:50Z)
   |> filter(fn: (r) =>
-    r._field == "usage_guest" OR
+    r._field == "usage_guest" or
     r._field == "usage_guest_nice"
   )
   |> drop(columns: ["_start", "_stop"])
@@ -43,7 +43,7 @@ left = from(bucket: "test")
 right = from(bucket: "test")
   |> range(start: 2018-05-22T19:53:50Z, stop: 2018-05-22T19:54:20Z)
   |> filter(fn: (r) =>
-    r._field == "usage_guest" OR
+    r._field == "usage_guest" or
     r._field == "usage_idle"
   )
   |> drop(columns: ["_start", "_stop"])
