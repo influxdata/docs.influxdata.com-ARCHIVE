@@ -8,9 +8,26 @@ menu:
     parent: About the project
 ---
 
+## v1.9.3 [2019-01-22]
+
+#### Bug fixes
+
+* General
+  * Fix latest metrics not sent first when output fails.
+  * Fix `internal_write buffer_size` not reset on timed writes.
+* AMQP Consumer (`amqp_consumer`) input plugin
+  - Fix `amqp_consumer` input stops consuming when it receives
+    unparsable messages.
+* Couchbase (`couchbase`) input plugin
+  * Remove `userinfo` from cluster tag in `couchbase` input.
+* Microsoft SQL Server (`sqlserver`) input plugin
+  * Fix arithmetic overflow in `sqlserver`) input.
+* Prometheus (`prometheus`) input plugin
+  * Fix `prometheus` input not detecting added and removed pods.
+
 ## v1.9.2 [2019-01-08]
 
-### Bugfixes
+### Bug fixes
 
 - Increase `varnishstat` timeout.
 - Remove storage calculation for non-Azure-managed instances and add server version.
