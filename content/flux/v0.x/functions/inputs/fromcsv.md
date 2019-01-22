@@ -2,7 +2,7 @@
 title: fromCSV() function
 description: The fromCSV() function retrieves data from a CSV data source.
 menu:
-  flux_0_12:
+  flux_0_x:
     name: fromCSV
     parent: Inputs
     weight: 1
