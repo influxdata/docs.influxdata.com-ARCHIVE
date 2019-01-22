@@ -39,7 +39,7 @@ When `true`, assigns the value set in the previous non-null row.
 
 > Cannot be used with `value`.
 
-_**Data type:** Boolean | Integer | UInteger | Float | String | Time | Duration_
+_**Data type:** Boolean_
 
 
 ## Examples
