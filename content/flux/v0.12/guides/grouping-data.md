@@ -41,16 +41,12 @@ dataStream
 
 The `group()` function has the following parameters:
 
-### by
-An explicit method for defining the group key with an array of strings.
-Only columns specified are included in the output group key.
+### columns
+The list of columns to include or exclude (depending on the [mode](#mode)) in the grouping operation.
 
-### except
-An implicit method for defining the group key with an array of strings.
-All columns **except** those specified are included in the output group key.
-
-### none
-A boolean that removes all grouping and outputs everything as a single table.
+### mode
+The method used to define the group and resulting group key.
+Possible values include `by` and `except`.
 
 ---
 
