@@ -852,7 +852,7 @@ The [Teamspeak 3 input plugin](https://github.com/influxdata/telegraf/blob/relea
 
 Plugin ID: `internal`
 
-The [Telegraf v1.x input plugin](https://github.com/influxdata/plugins/inputs/internal) collects metrics about the Telegraf v1.x agent itself.
+The [Telegraf v1.x input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/internal/README.md) collects metrics about the Telegraf v1.x agent itself.
 Note that some metrics are aggregates across all instances of one type of plugin.
 
 ### Temp
