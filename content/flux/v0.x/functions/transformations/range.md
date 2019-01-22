@@ -10,6 +10,7 @@ menu:
 
 The `range()` function filters records based on time bounds.
 Each input table's records are filtered to contain only records that exist within the time bounds.
+Records with a `null` value for their time are filtered.
 Each input table's group key value is modified to fit within the time bounds.
 Tables where all records exists outside the time bounds are filtered entirely.
 

@@ -9,6 +9,7 @@ menu:
 ---
 
 The `distinct()` function returns the unique values for a given column.
+`null` is considered its own distinct value if it is present.
 
 _**Function type:** Selector_  
 _**Output data type:** Object_

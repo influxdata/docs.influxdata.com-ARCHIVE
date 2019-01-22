@@ -19,10 +19,9 @@ StatementList = { Statement } .
 
 In addition to _explicit blocks_ in the source code, there are _implicit blocks_:
 
-1. The _options block_ is the top-level block for all Flux programs. All option assignments are contained in this block.
-2. The _universe block_ encompasses all Flux source text aside from option statements. It is nested directly inside of the _options block_.
-3. Each package has a _package block_ containing all Flux source text for that package.
-4. Each file has a _file block_ containing all Flux source text in that file.
-5. Each function literal has its own _function block_ even if not explicitly declared.
+1. The _universe block_ encompasses all Flux source text.
+2. Each package has a _package block_ containing all Flux source text for that package.
+3. Each file has a _file block_ containing all Flux source text in that file.
+4. Each function literal has its own _function block_ even if not explicitly declared.
 
 Blocks nest and influence scoping.

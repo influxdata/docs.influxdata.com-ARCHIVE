@@ -10,6 +10,7 @@ menu:
 
 The `join()` function merges two or more input streams whose values are equal on
 a set of common columns into a single output stream.
+Null values are not considered equal when comparing column values.
 The resulting schema is the union of the input schemas.
 The resulting group key is the union of the input group keys.
 

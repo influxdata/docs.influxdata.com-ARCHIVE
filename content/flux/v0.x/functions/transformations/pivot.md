@@ -25,19 +25,24 @@ Every input row should have a 1:1 mapping to a particular row + column in the ou
 In cases where more than one value is identified for the same row + column pair, the last value
 encountered in the set of table rows is used as the result.
 
-The output table will have columns based on the row key plus the group key, excluding any group key columns in the column key,
-plus new columns for each unique tuple of values identified by the column key.
-Any columns in the original table not referenced in the `rowKey` or the original table's group key are dropped.  
+Every input row should have a 1:1 mapping to a particular row/column pair in the output table,
+determined by its values for the `rowKey` and `columnKey`.
+In cases where more than one value is identified for the same row/column pair in the output,
+the last value encountered in the set of table rows is used as the result.
 
 The output is constructed as follows:
 
-1.  A new row is created for each unique value identified in the input by the `rowKey` parameter.
-2.  The initial set of columns for the new row is the row key unioned with the group key,
-    but excluding columns indicated by the `columnKey` and `valueColumn` parameters.
-3.  A set of value columns are added to the row for each unique value identified in the input by the `columnKey` parameter.
-    The label is a concatenation of the `valueColumn` string and the `columnKey` values using `_` as a separator.
-4.  For each row key + column key pair, the appropriate value is determined from the input table by the `valueColumn`.
-    If no value is found, the value is set to `null`.
+- The set of columns for the new table is the `rowKey` unioned with the group key,
+  but excluding the columns indicated by the `columnKey` and the `valueColumn`.
+- A new column is added to the set of columns for each unique value identified
+  in the input by the `columnKey` parameter.
+- The label of a new column is the concatenation of the values of `columnKey` using `_` as a separator.
+  If the value is `null`, `"null"` is used.
+- A new row is created for each unique value identified in the input by the `rowKey` parameter.
+- For each new row, values for group key columns stay the same, while values for new columns are
+  determined from the input tables by the value in `valueColumn` at the row identified by the
+  `rowKey` values and the new column's label.
+  If no value is found, the value is set to `null`.
 
 
 ## Parameters
@@ -58,16 +63,83 @@ The single column that contains the value to be moved around the pivot.
 _**Data type:** String_
 
 ## Examples
+
+### Align fields within each measurement that have the same timestamp
+
 ```js
-from(bucket: "telegraf/autogen")
-  |> range(start: -1h)
-  |> filter(fn: (r) =>
-    r._measurement == "cpu" and
-    r.cpu == "cpu-total"
-  )
+from(bucket:"test")
+  |> range(start: 1970-01-01T00:00:00.000000000Z)
   |> pivot(
     rowKey:["_time"],
     columnKey: ["_field"],
     valueColumn: "_value"
   )
 ```
+
+###### Input
+|              _time             | _value | _measurement | _field |
+|:------------------------------:|:------:|:------------:|:------:|
+| 1970-01-01T00:00:00.000000001Z |   1.0  |     "m1"     |  "f1"  |
+| 1970-01-01T00:00:00.000000001Z |   2.0  |     "m1"     |  "f2"  |
+| 1970-01-01T00:00:00.000000001Z |  null  |     "m1"     |  "f3"  |
+| 1970-01-01T00:00:00.000000001Z |   3.0  |     "m1"     |  null  |
+| 1970-01-01T00:00:00.000000002Z |   4.0  |     "m1"     |  "f1"  |
+| 1970-01-01T00:00:00.000000002Z |   5.0  |     "m1"     |  "f2"  |
+|              null              |   6.0  |     "m1"     |  "f2"  |
+| 1970-01-01T00:00:00.000000002Z |  null  |     "m1"     |  "f3"  |
+| 1970-01-01T00:00:00.000000003Z |  null  |     "m1"     |  "f1"  |
+| 1970-01-01T00:00:00.000000003Z |   7.0  |     "m1"     |  null  |
+| 1970-01-01T00:00:00.000000004Z |   8.0  |     "m1"     |  "f3"  |
+
+###### Output
+|              _time             | _measurement |  f1  |  f2  |  f3  | null |
+|:------------------------------:|:------------:|:----:|:----:|:----:|:----:|
+| 1970-01-01T00:00:00.000000001Z |     "m1"     |  1.0 |  2.0 | null |  3.0 |
+| 1970-01-01T00:00:00.000000002Z |     "m1"     |  4.0 |  5.0 | null | null |
+|               null             |     "m1"     | null |  6.0 | null | null |
+| 1970-01-01T00:00:00.000000003Z |     "m1"     | null | null | null |  7.0 |
+| 1970-01-01T00:00:00.000000004Z |     "m1"     | null | null |  8.0 | null |
+
+### Align fields and measurements that have the same timestamp  
+> Note the effects of:
+>
+> - Having null values in some `columnKey` value;
+> - Having more values for the same `rowKey` and `columnKey` value
+    (the 11th row overrides the 10th, and so does the 15th with the 14th).
+
+```js
+from(bucket:"test")
+  |> range(start: 1970-01-01T00:00:00.000000000Z)
+  |> pivot(
+    rowKey:["_time"],
+    columnKey: ["_measurement", "_field"],
+    valueColumn: "_value"
+  )
+```
+
+###### Input
+|              _time             | _value | _measurement | _field |
+|:------------------------------:|:------:|:------------:|:------:|
+| 1970-01-01T00:00:00.000000001Z |   1.0  |     "m1"     |  "f1"  |
+| 1970-01-01T00:00:00.000000001Z |   2.0  |     "m1"     |  "f2"  |
+| 1970-01-01T00:00:00.000000001Z |   3.0  |     null     |  "f3"  |
+| 1970-01-01T00:00:00.000000001Z |   4.0  |     null     |  null  |
+| 1970-01-01T00:00:00.000000002Z |   5.0  |     "m1"     |  "f1"  |
+| 1970-01-01T00:00:00.000000002Z |   6.0  |     "m1"     |  "f2"  |
+| 1970-01-01T00:00:00.000000002Z |   7.0  |     "m1"     |  "f3"  |
+| 1970-01-01T00:00:00.000000002Z |   8.0  |     null     |  null  |
+|              null              |   9.0  |     "m1"     |  "f3"  |
+| 1970-01-01T00:00:00.000000003Z |  10.0  |     "m1"     |  null  |
+| 1970-01-01T00:00:00.000000003Z |  11.0  |     "m1"     |  null  |
+| 1970-01-01T00:00:00.000000003Z |  12.0  |     "m1"     |  "f3"  |
+| 1970-01-01T00:00:00.000000003Z |  13.0  |     null     |  null  |
+|              null              |  14.0  |     "m1"     |  null  |
+|              null              |  15.0  |     "m1"     |  null  |
+
+###### Output
+|              _time             | m1_f1 | m1_f2 |  null_f3  | null_null | m1_f3 | m1_null |
+|:------------------------------:|:-----:|:-----:|:---------:|:---------:|:-----:|:-------:|
+| 1970-01-01T00:00:00.000000001Z |  1.0  |  2.0  |    3.0    |    4.0    |  null |  null   |
+| 1970-01-01T00:00:00.000000002Z |  5.0  |  6.0  |   null    |    8.0    |  7.0  |  null   |
+|              null              |  null |  null |   null    |    null   |  9.0  |  15.0   |
+| 1970-01-01T00:00:00.000000003Z |  null |  null |   null    |   13.0    |  12.0 |  11.0   |

@@ -1,6 +1,9 @@
 ---
 title: keys() function
-description: The keys() function returns a table with the input table's group key columns, plus a _value column containing the names of the input table's columns.
+description: >
+  The keys() function outputs the group key of input tables.
+  For each input table, it outputs a table with the same group key columns, plus a
+  _value column containing the labels of the input table's group key.
 menu:
   flux_0_x:
     name: keys
@@ -8,29 +11,41 @@ menu:
     weight: 1
 ---
 
-The `keys()` function returns a table with the input table's group key columns,
-plus a `_value` column containing the names of the input table's columns.
+The `keys()` function outputs the group key of input tables.
+For each input table, it outputs a table with the same group key columns, plus a
+`_value` column containing the labels of the input table's group key.
+Each row in an output table contains the group key value and the label of one column in the group key of the input table.
+Each output table has the same number of rows as the size of the group key of the input table.
 
-_**Function type:** Transformation_  
-_**Output data type:** Object_
+_**Function type:** Transformation_
 
 ```js
-keys(except: ["_time", "_value"])
+keys(column: "_value")
 ```
 
 ## Parameters
 
-### except
-Exclude the specified column names in the output.
-Defaults to `["_time", "_value"]`.
+### column
+The name of the output column in which to store the group key labels.
+Defaults to `"_value"`.
 
-_**Data type:** Array of strings_
+_**Data type:** String_
 
 ## Examples
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -30m)
-  |> keys(except: ["_time", "_start", "_stop", "_field", "_measurement", "_value"])
+  |> keys(column: "keys")
+```
+
+##### Return every possible key in a single table
+```js
+from(bucket: "telegraf/autogen")
+    |> range(start: -30m)
+    |> keys()
+    |> keep(columns: ["_value"])
+    |> group()
+    |> distinct()
 ```
 
 <hr style="margin-top:4rem"/>

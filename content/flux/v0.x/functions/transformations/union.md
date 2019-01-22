@@ -28,7 +28,7 @@ union(tables: ["table1", "table2"])
 Specifies the streams to union together.
 There must be at least two streams.
 
-_**Data type:** Array of strings_
+_**Data type:** Array of streams_
 
 ## Examples
 ```js

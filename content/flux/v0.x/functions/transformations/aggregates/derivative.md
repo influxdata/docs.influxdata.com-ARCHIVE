@@ -9,13 +9,19 @@ menu:
 ---
 
 The `derivative()` function computes the rate of change per [`unit`](#unit) of time between subsequent non-null records.
+It assumes rows are ordered by the `_time` column.
 The output table schema will be the same as the input table.
 
 _**Function type:** Aggregate_  
 _**Output data type:** Float_
 
 ```js
-derivative(unit: 1s, nonNegative: false, columns: ["_value"], timeSrc: "_time")
+derivative(
+  unit: 1s,
+  nonNegative: false,
+  columns: ["_value"],
+  timeSrc: "_time"
+)
 ```
 
 ## Parameters
