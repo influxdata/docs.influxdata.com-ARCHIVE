@@ -1,6 +1,6 @@
 ---
 title: fill() function
-description: The `fill()` function replaces all null values in an input stream and replace them with a non-null value.
+description: The fill() function replaces all null values in an input stream with a non-null value.
 menu:
   flux_0_x:
     name: fill
@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-The `fill()` function replaces all null values in an input stream and replace them with a non-null value.
+The `fill()` function replaces all null values in an input stream with a non-null value.
 The output stream is the same as the input stream with all null values replaced in the specified column.
 
 _**Function type:** Transformation_  
