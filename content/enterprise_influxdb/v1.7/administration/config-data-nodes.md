@@ -497,14 +497,16 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_PURGE_INTERVAL`
 
 ## Anti-Entropy (AE) settings
 
+For information about the Anti-Entropy service, see [Anti-entropy service in InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/anti-entropy).
+
 ### `[anti-entropy]`
 
 Controls the copying and repairing of shards to ensure that data nodes contain the shard data they are supposed to.
 
-#### `enabled = true`
+#### `enabled = false`
 
 Enables the anti-entropy service.
-Default value is `true`.
+Default value is `false`.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_ENABLED`
 
