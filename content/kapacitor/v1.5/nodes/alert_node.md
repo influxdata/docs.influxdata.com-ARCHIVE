@@ -1107,7 +1107,7 @@ are considered different states.
 _**Example**_
 ```js
 stream
-  from()
+  |from()
     .measurement('cpu')
   |window()
     .period(10s)

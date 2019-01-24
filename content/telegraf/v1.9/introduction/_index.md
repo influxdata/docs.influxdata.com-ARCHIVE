@@ -11,7 +11,7 @@ The introductory documentation includes all the information you need to get up a
 
 ## [Downloading Telegraf](/telegraf/v1.9/introduction/downloading/)
 
-Go to the [InfluxData downloads page](https://portal.influxdata.com/downloads#telegraf) to get the latest release of Telegraf.
+Go to the [InfluxData downloads page](https://portal.influxdata.com/downloads) to get the latest release of Telegraf.
 
 ## [Installing Telegraf](/telegraf/v1.9/introduction/installation/)
 

@@ -7,6 +7,23 @@ menu:
     parent: About the project
 ---
 
+## v1.5.5 [2018-12-19]
+
+### Features
+
+-	Reduce allocations in TSI TagSets implementation.
+
+### Bugfixes
+
+-	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
+-	Ensure orphaned series cleaned up with shard drop.
+-	Fix the derivative and others time ranges for aggregate data.
+-	Fix the stream iterator to not ignore errors.
+-	Do not panic when a series ID iterator is `nil`.
+-	Fix panic in IndexSet.
+-	Pass the query authorizer to subqueries.
+-	Fix TSM1 panic on reader error.
+
 ## v1.5.4 [2018-06-21]
 
 ### Features

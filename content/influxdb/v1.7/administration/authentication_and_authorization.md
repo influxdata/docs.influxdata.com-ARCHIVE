@@ -390,8 +390,9 @@ CLI example:
 > SHOW GRANTS FOR "todd"
 database		            privilege
 NOAA_water_database	        WRITE
-another_database_name	    READ
+another_database_name	      READ
 yet_another_database_name   ALL PRIVILEGES
+one_more_database_name      NO PRIVILEGES
 ```
 
 #### General admin and non-admin user management

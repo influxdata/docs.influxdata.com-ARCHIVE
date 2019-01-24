@@ -482,10 +482,10 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_PURGE_INTERVAL`
 
 Controls the copying and repairing of shards to ensure that data nodes contain the shard data they are supposed to.
 
-#### `enabled = true`
+#### `enabled = false`
 
 Enables the anti-entropy service.
-Default value is `true`.
+Default value is `false`.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_ENABLED`
 
@@ -497,10 +497,23 @@ Environment variable: `INFLUXDB_ANTI_ENTROPY_CHECK_INTERVAL`
 
 #### `max-fetch = 10`
 
-The maximum number of shards that a single data node will copy or repair in parallel.
+The maximum number of shards that a single data node will copy or repair concurrently.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
 
+
+#### `max-sync = 1`
+
+The maximum number of concurrent sync operations that should be performed.
+
+Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_SYNC`
+
+
+#### `auto-repair-missing = true`
+
+When set to `true`, missing shards will automatically be repaired.
+
+Environment variable: `INFLUXDB_ANTI_ENTROPY_AUTO_REPAIR_MISSING`
 -----
 
 ## Retention policy settings

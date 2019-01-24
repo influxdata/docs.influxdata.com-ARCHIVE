@@ -208,7 +208,7 @@ The [Jolokia2 Agent (`jolokia2_agent`) input plugin](https://github.com/influxda
 
 ### [Jolokia2 Proxy (`jolokia2_proxy`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md)
 
-The [Jolokia2 Proxy (`jolokia2_proxy`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md) eads JMX metrics from one or more targets by interacting with a [Jolokia](https://jolokia.org/) proxy REST endpoint using the [Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
+The [Jolokia2 Proxy (`jolokia2_proxy`) input plugin](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/jolokia2/README.md) reads JMX metrics from one or more targets by interacting with a [Jolokia](https://jolokia.org/) proxy REST endpoint using the [Jolokia](https://jolokia.org/) [JSON-over-HTTP protocol](https://jolokia.org/reference/html/protocol.html).
 
 ### [Kafka Consumer (`kafka_consumer`)](https://github.com/influxdata/telegraf/tree/release-1.6/plugins/inputs/kafka_consumer)
 

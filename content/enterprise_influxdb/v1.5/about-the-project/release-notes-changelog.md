@@ -8,6 +8,10 @@ menu:
     parent: About the project
 ---
 
+## v1.5.5 [2018-12-19]
+
+This release builds off of the InfluxDB OSS 1.5.5 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+
 ## v1.5.4 [2018-06-21]
 
 This release builds off of the InfluxDB OSS 1.5.4 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.

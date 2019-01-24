@@ -7,7 +7,59 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v1.9 [2018-11-20]
+
+## v1.9.3 [2019-01-22]
+
+#### Bug fixes
+
+* General
+  * Fix latest metrics not sent first when output fails.
+  * Fix `internal_write buffer_size` not reset on timed writes.
+* AMQP Consumer (`amqp_consumer`) input plugin
+  - Fix `amqp_consumer` input stops consuming when it receives
+    unparsable messages.
+* Couchbase (`couchbase`) input plugin
+  * Remove `userinfo` from cluster tag in `couchbase` input.
+* Microsoft SQL Server (`sqlserver`) input plugin
+  * Fix arithmetic overflow in `sqlserver`) input.
+* Prometheus (`prometheus`) input plugin
+  * Fix `prometheus` input not detecting added and removed pods.
+
+## v1.9.2 [2019-01-08]
+
+### Bug fixes
+
+- Increase `varnishstat` timeout.
+- Remove storage calculation for non-Azure-managed instances and add server version.
+- Fix error sending empty tag value in `azure_monitor` output.
+- Fix panic with Prometheus input plugin on shutdown.
+- Support non-transparent framing of syslog messages.
+- Apply global- and plugin-level metric modifications before filtering.
+- Fix `num_remapped_pgs` field in `ceph` plugin.
+- Add `PDH_NO_DATA` to known counter error codes in `win_perf_counters`.
+- Fix `amqp_consumer` stops consuming on empty message.
+- Fix multiple replace tables not working in strings processor.
+- Allow non-local UDP connections in `net_response`.
+- Fix TOML option names in parser processor.
+- Fix panic in Docker input with bad endpoint.
+- Fix original metric modified by aggregator filters.
+
+## v1.9.1 [2018-12-11]
+
+### Bug fixes
+
+- Fix boolean handling in splunkmetric serializer.
+- Set default config values in Jenkins input.
+- Fix server connection and document stats in MongoDB input.
+- Add X-Requested-By header to Graylog input.
+- Fix metric memory not freed from the metric buffer on write.
+- Add support for client TLS certificates in PostgreSQL inputs.
+- Prevent panic when marking the offset in `kafka_consumer`.
+- Add early metrics to aggregator and honor `drop_original` setting.
+- Use `-W` flag on BSD variants in ping input.
+- Allow delta metrics in Wavefront parser.
+
+## v1.9.0 [2018-11-20]
 
 #### Release Notes
 
@@ -26,7 +78,7 @@ menu:
   To avoid overconsumption when reading from queue consumers, the following
   input plugins use the new option `max_undelivered_messages` to limit the number
   of outstanding unwritten metrics:
-  
+
   * Apache Kafka Consumer (`kafka_consumer`)
   * AMQP Consumer (`amqp_consumer`)
   * MQTT Consumer (`mqtt_consumer`)

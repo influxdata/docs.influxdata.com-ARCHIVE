@@ -1,0 +1,33 @@
+{{ $category := (.Get "category") }}
+{{ $menu := (.Get "menu")}}
+<ul>
+{{ range (index .Site.Menus $menu) }}
+  {{ if .HasChildren}}
+    {{ range .Children }}
+      {{ if eq .Parent $category }}
+        {{ if not .HasChildren }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      {{ end }}
+      {{ if .HasChildren}}
+        {{ range .Children }}
+          {{ if eq .Parent $category }}
+            {{ if not .HasChildren }}
+              <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+            {{ end }}
+          {{ end }}
+          {{ if .HasChildren}}
+            {{ range .Children }}
+              {{ if eq .Parent $category }}
+                {{ if not .HasChildren }}
+                  <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                {{ end }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+</ul>
