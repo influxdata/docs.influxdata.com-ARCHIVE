@@ -12,6 +12,8 @@ v1.7.3 [2019-01-11]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.7.3 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
+> **Note:** A small percentage of customers have experienced customers have experienced data node crashes with segmentation violation errors. Contact support if you encounter this issue -- fix planned for 1.7.4.
+
 ### Features
 
 -	Add user authentication and authorization support for Flux HTTP requests.
