@@ -96,15 +96,15 @@ Perform the following steps on each data node.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.2-c1.7.2_amd64.deb
-sudo dpkg -i influxdb-data_1.7.2-c1.7.2_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.3-c1.7.3_amd64.deb
+sudo dpkg -i influxdb-data_1.7.3-c1.7.3_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.2_c1.7.2.x86_64.rpm
-sudo yum localinstall influxdb-data-1.7.2_c1.7.2.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.3_c1.7.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.3_c1.7.3.x86_64.rpm
 ```
 
 ### II. Edit the data node configuration files
@@ -225,16 +225,16 @@ The expected output is:
     Data Nodes
     ==========
     ID   TCP Address               Version
-    4    enterprise-data-01:8088   1.7.2-c1.7.2
-    5    enterprise-data-02:8088   1.7.2-c1.7.2
+    4    enterprise-data-01:8088   1.7.3-c1.7.3
+    5    enterprise-data-02:8088   1.7.3-c1.7.3
 
 >
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.7.2-c1.7.2
-    enterprise-meta-02:8091   1.7.2-c1.7.2
-    enterprise-meta-03:8091   1.7.2-c1.7.2
+    enterprise-meta-01:8091   1.7.3-c1.7.3
+    enterprise-meta-02:8091   1.7.3-c1.7.3
+    enterprise-meta-03:8091   1.7.3-c1.7.3
 
 
 The output should include every data node that was added to the cluster.
