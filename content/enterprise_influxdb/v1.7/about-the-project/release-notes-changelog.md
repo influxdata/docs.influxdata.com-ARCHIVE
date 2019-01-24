@@ -19,6 +19,10 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.3 releases. For de
 -	Add user authentication and authorization support for Flux HTTP requests.
 -	Add support for optionally logging Flux queries.
 
+#### Anti-Entropy service disabled by default
+
+Prior to v.1.7.2, the Anti-Entropy (AE) service was enabled by default. When shards create large digests with lots of time ranges (10s of thousands), some customers experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, then you can enable AE and watch to see if performance is significantly impacted.
+
 v1.7.2 [2018-12-11]
 -------------------
 
