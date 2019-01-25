@@ -64,6 +64,7 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For de
 
 If `[meta] auth-enabled` is set to `true`, the `[meta] internal-shared-secret` value must be set in the configuration.
 If it is not set, an error will be logged and `influxd-meta` will not start.
+
 * Previously, authentication could be enabled without setting an `internal-shared-secret`. The security risk was that an unset (empty) value could be used for the `internal-shared-secret`, seriously weakening the JWT authentication used for internode communication.
 
 #### Review production installation configurations
