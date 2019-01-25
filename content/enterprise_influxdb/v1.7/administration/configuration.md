@@ -4,7 +4,7 @@ description: Covers the InfluxDB Enterprise configuration settings, including gl
 aliases:
     - /enterprise/v1.7/administration/configuration/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Configuring
     weight: 10
     parent: Administration

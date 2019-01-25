@@ -2,7 +2,7 @@
 title: InfluxDB Enterprise meta mode configuration
 description: Covers the InfluxDB Enterprise meta node configuration settings and environmental variables
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Meta node configuration
     weight: 16
     parent: Administration

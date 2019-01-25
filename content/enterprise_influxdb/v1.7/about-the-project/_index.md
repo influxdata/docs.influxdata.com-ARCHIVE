@@ -1,7 +1,7 @@
 ---
 title: About the project
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     weight: 10
 ---
 

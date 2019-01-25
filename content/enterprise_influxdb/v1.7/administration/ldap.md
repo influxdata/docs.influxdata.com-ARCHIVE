@@ -2,7 +2,7 @@
 title: Configure LDAP authentication in InfluxDB Enterprise
 description: Configure LDAP authentication in InfluxDB Enterprise and test LDAP connectivity.
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Configure LDAP authentication for InfluxDB Enterprise
     weight: 40
     parent: Administration
