@@ -18,7 +18,11 @@ menu:
 -	Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
 -	Limit force-full and cold compaction size.
 -	Add user authentication and authorization support for Flux HTTP requests.
+<<<<<<< HEAD
+-	Call storage.Group API to correctly map group mode.
+=======
 -	Call `storage.Group` API to correctly map group mode.
+>>>>>>> master
 -	Following functions, when used on non-float types in subqueries, returned incorrect
   results: `derivitive`, `non_negative_derivitive`, `moving_average`, `exponential_moving_average`,
   `double_exponential_moving_average`, `triple_exponential_moving_average`, `relative_strength_index`,
@@ -27,6 +31,11 @@ menu:
 -	Add support for optionally logging Flux queries.
 -	Fix cardinality estimation error.
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> master
 ## v1.7.2 [2018-12-11]
 
 ### Bug fixes
@@ -58,7 +67,6 @@ menu:
 
 
 ## v1.7.0 [2018-11-06]
--------------------
 
 ### Breaking changes
 
@@ -110,18 +118,27 @@ Support for the Flux language and queries has been added in this release. To beg
 
 ### Bugfixes
 
+<<<<<<< HEAD
+-	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
+-	Ensure orphaned series cleaned up with shard drop.
+-	Fix the derivative and others time ranges for aggregate data.
+=======
 -	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr.
 -   tsdb: Copy measurement names when expression is provided.
 -	Ensure orphaned series cleaned up with shard drop.
 -	Fix the derivative and others time ranges for aggregate data.
 -   Drop NaN (Not a Number) values when writing back points.
+>>>>>>> master
 -	Fix the stream iterator to not ignore errors.
 -	Do not panic when a series ID iterator is `nil`.
 -	Fix panic in IndexSet.
 -	Pass the query authorizer to subqueries.
 -	Fix TSM1 panic on reader error.
+<<<<<<< HEAD
+=======
 -   Limit database and retention policy names to 255 characters.
 -   Update Go runtime to 1.10.6.
+>>>>>>> master
 
 ## v1.6.4 [2018-10-16]
 
@@ -252,7 +269,11 @@ using the Prometheus measurement name as the `__name__` label.
 
 -	Reduce allocations in TSI TagSets implementation.
 
+<<<<<<< HEAD
+### Bug fixes
+=======
 ### Bugfixes
+>>>>>>> master
 
 -	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
 -	Ensure orphaned series cleaned up with shard drop.

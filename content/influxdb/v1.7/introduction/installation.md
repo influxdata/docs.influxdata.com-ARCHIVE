@@ -17,8 +17,8 @@ Installation of the InfluxDB package may require `root` or administrator privile
 
 By default, InfluxDB uses the following network ports:
 
-- TCP port `8086` is used for client-server communication over InfluxDB's HTTP API
-- TCP port `8088` is used for the RPC service for backup and restore
+- TCP port `8086` is available for client-server communication using the InfluxDB HTTP API.
+- TCP port `8088` is available for the RPC service to perform back up and restore operations.
 
 In addition to the ports above, InfluxDB also offers multiple plugins that may
 require [custom ports](/influxdb/v1.7/administration/ports/).
@@ -54,8 +54,7 @@ For instructions on how to install the Debian package from a file,
 please see the
 [downloads page](https://influxdata.com/downloads/).
 
-Debian and Ubuntu
-users can install the latest stable version of InfluxDB using the
+Debian and Ubuntu users can install the latest stable version of InfluxDB using the
 `apt-get` package manager.
 
 For Ubuntu users, add the InfluxData repository with the following commands:
@@ -246,7 +245,7 @@ We recommend using two SSD volumes, using one for the `influxdb/wal` and the oth
 Depending on your load, each volume should have around 1k-3k provisioned IOPS.
 The `influxdb/data` volume should have more disk space with lower IOPS and the `influxdb/wal` volume should have less disk space with higher IOPS.
 
-Each machine should have a minimum of 8G RAM.
+Each machine should have a minimum of 8GB RAM.
 
 We’ve seen the best performance with the R4 class of machines, as they provide more memory than either of the C3/C4 class and the M4 class.
 
@@ -256,8 +255,8 @@ This example assumes that you are using two SSD volumes and that you have mounte
 This example also assumes that each of those volumes is mounted at `/mnt/influx` and `/mnt/db`.
 For more information on how to do that see the Amazon documentation on how to [Add a Volume to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html).
 
-### Config file
-You'll have to update the config file appropriately for each InfluxDB instance you have.
+### Configuration file
+You'll have to update the configuration file appropriately for each InfluxDB instance you have.
 
 ```
 ...

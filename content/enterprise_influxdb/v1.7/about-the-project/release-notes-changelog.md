@@ -1,20 +1,63 @@
 ---
-title: InfluxDB Enterprise 1.6 release notes
+title: InfluxDB Enterprise 1.7 release notes
 
 menu:
-  enterprise_influxdb_1_6:
-    name: Release notes
+  enterprise_influxdb_1_7:
+    menu: Release notes
     weight: 10
     parent: About the project
 ---
 
-## v1.6.5 [2019-01-10]
+v1.7.3 [2019-01-11]
 
-This release builds off of the InfluxDB OSS 1.6.5 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.3 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+> **Important:** A small percentage of customers have experienced data node crashes with segmentation violation errors. Contact support if you encounter this issue -- a fix is planned for 1.7.4.
+
+### Features
+
+-	Add user authentication and authorization support for Flux HTTP requests.
+-	Add support for optionally logging Flux queries.
+
+#### Anti-Entropy service disabled by default
+
+Prior to v.1.7.2, the Anti-Entropy (AE) service was enabled by default. When shards create large digests with lots of time ranges (10s of thousands), some customers experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, then you can enable AE and watch to see if performance is significantly impacted.
+
+v1.7.2 [2018-12-11]
+-------------------
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+
+-	Add support for LDAP StartTLS.
+-	Disable Anti-Entropy service by default.
+-	Flux 0.7 support.
+-	Implement TLS between data nodes.
+-	Update to Flux 0.7.1.
+-	Add optional TLS support to meta node Raft port.
+-	Anti-Entropy: memoize `DistinctCount`, `min`, & `max` time.
+-	Update influxdb dep for subquery auth update.
+
+### Bug fixes
+
+-	Update sample configuration.
+
+v1.7.1 [2018-11-14]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.1 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+v1.7.0 [2018-11-06]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.0 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+## V1.6.5 [2019-01-10]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.5 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ## v1.6.4 [2018-10-23]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Breaking changes
 
@@ -22,14 +65,14 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For de
 
 If `[meta] auth-enabled` is set to `true`, the `[meta] internal-shared-secret` value must be set in the configuration.
 If it is not set, an error will be logged and `influxd-meta` will not start.
-* Previously, authentication could be enabled without setting an `internal-shared-secret`. The security risk was that an unset (empty) value could be used for the `internal-shared-secret`, seriously weakening the JWT authentication used for intra-node communication.
+* Previously, authentication could be enabled without setting an `internal-shared-secret`. The security risk was that an unset (empty) value could be used for the `internal-shared-secret`, seriously weakening the JWT authentication used for internode communication.
 
 #### Review production installation configurations
 
-The [Production Installation](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/)
-documentation has been updated to fix errors in configuration settings, including changing `shared-secret` to `internal-shared-secret` and adding missing steps for configuration settings of data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that the configuration settings properly enable JWT authentication for intra-node communication.
+The [Production Installation](/enterprise_influxdb/v1.7/production_installation/)
+documentation has been updated to fix errors in configuration settings, including changing `shared-secret` to `internal-shared-secret` and adding missing steps for configuration settings of data nodes and meta nodes. All Enterprise users should review their current configurations to ensure that the configuration settings properly enable JWT authentication for internode communication.
 
-The following summarizes the expected settings for proper configuration of JWT authentication for intra-node communication:
+The following summarizes the expected settings for proper configuration of JWT authentication for internode communication:
 
 ##### Data node configuration files (`influxdb.conf`)
 
@@ -60,7 +103,7 @@ The following summarizes the expected settings for proper configuration of JWT a
 `""`.
   * A long pass phrase is recommended for better security.
 
->**Note:** To provide encrypted intra-node communication, you must enable HTTPS. Although the JWT signature is encrypted, the the payload of a JWT token is encoded, but is not encrypted.
+>**Note:** To provide encrypted internode communication, you must enable HTTPS. Although the JWT signature is encrypted, the the payload of a JWT token is encoded, but is not encrypted.
 
 ### Bug fixes
 
@@ -71,7 +114,7 @@ The following summarizes the expected settings for proper configuration of JWT a
 
 ## v1.6.2 [08-27-2018]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/).
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Features
 
@@ -88,10 +131,6 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For de
 * Ensure shards are not queued to copy if a remote node is unavailable.
 * Ensure the hinted handoff (hh) queue makes forward progress when segment errors occur.
 * Add hinted handoff (hh) queue back pressure.
-
-## v1.5.5 [2018-12-19]
-
-This release builds off of the InfluxDB OSS 1.5.5 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ## v1.5.4 [2018-06-21]
 
@@ -124,12 +163,12 @@ This release builds off of the InfluxDB OSS 1.5.2 release. Please see the [Influ
 ## v1.5.1 [2018-03-20]
 
 This release builds off of the InfluxDB OSS 1.5.1 release. There are no Enterprise-specific changes.
-Please see the [InfluxDB OSS release notes](/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+Please see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ## v1.5.0 [2018-03-06]
 
 > ***Note:*** This release builds off of the 1.5 release of InfluxDB OSS. Please see the [InfluxDB OSS release
-> notes](https://docs.influxdata.com/influxdb/v1.6/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
+> notes](https://docs.influxdata.com/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 For highlights of the InfluxDB 1.5 release, see [What's new in InfluxDB 1.5](/influxdb/v1.5/about_the_project/whats_new/).
 
@@ -508,7 +547,7 @@ Switches to journald logging for on systemd systems. Logs are no longer sent to 
 - Respect the [`pprof-enabled` configuration setting](/enterprise_influxdb/v1.3/administration/configuration/#pprof-enabled-true-1) on data nodes
 - Use the data reference instead of `Clone()` during read-only operations for performance purposes
 - Prevent the system from double-collecting cluster statistics
-- Ensure that the meta API redirects to the cluster leader when it gets the `ErrNotLeader` error
+- Ensure that the Meta API redirects to the cluster leader when it gets the `ErrNotLeader` error
 - Don't overwrite cluster users with existing OSS InfluxDB users when migrating an OSS instance into a cluster
 - Fix a data race in the raft store
 - Allow large segment files (> 10MB) in the Hinted Handoff

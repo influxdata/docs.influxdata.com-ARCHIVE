@@ -14,56 +14,56 @@ menu:
 * [Enterprise cluster measurements](#enterprise-cluster-measurements)
 * [InfluxDB measurement statistics](#influxdb-measurement-statistics)
   * [ae](#ae-enterprise-only) (Enterprise only)
-      - [bytesRx](#bytesrx)
-      - [errors](#errors)
-      - [jobs](#jobs)
-      - [jobsActive](#jobsactive)
+      * [bytesRx](#bytesrx)
+      * [errors](#errors)
+      * [jobs](#jobs)
+      * [jobsActive](#jobsactive)
   * [cluster](#cluster-enterprise-only) (Enterprise only)
-      - [copyShardReq](#copyshardreq)
-      - [createIteratorReq](#createiteratorreq)
-      - [expandSourcesReq](#expandsourcesreq)
-      - [fieldDimensionsReq](#fielddimensionsreq)
-      - [iteratorCostReq](#iteratorcostreq)
-      - [removeShardReq](#removeshardreq)
-      - [writeShardFail](#writeshardfail)
-      - [writeShardPointsReq](#writeshardpointsreq)
-      - [writeShardReq](#writeshardreq)
+      * [copyShardReq](#copyshardreq)
+      * [createIteratorReq](#createiteratorreq)
+      * [expandSourcesReq](#expandsourcesreq)
+      * [fieldDimensionsReq](#fielddimensionsreq)
+      * [iteratorCostReq](#iteratorcostreq)
+      * [removeShardReq](#removeshardreq)
+      * [writeShardFail](#writeshardfail)
+      * [writeShardPointsReq](#writeshardpointsreq)
+      * [writeShardReq](#writeshardreq)
   * [cq](#cq)
-      - [queryFail](#queryfail)
-      - [queryOk](#queryok)
+      * [queryFail](#queryfail)
+      * [queryOk](#queryok)
   * [database](#database)
-      - [numMeasurements](#nummeasurements)
-      - [numSeries](#numseries)
-  * [hh](#hh-enterprise-only) (Enterprise only))
-      - [writeShardReq](#writeshardreq)
-      - [writeShardReqPoints](#writeshardreqpoints)
-  * [hh_processor](#hh-processor-enterprise-only) (Enterprise only))
-      - [bytesRead](#bytesread)
-      - [bytesWritten](#byteswritten)
-      - [queueBytes](#queuebytes)
-      - [queueDepth](#queuedepth)
-      - [writeBlocked](#writeblocked)
-      - [writeDropped](#writedropped)
-      - [writeNodeReq](#writenodereq)
-      - [writeNodeReqFail](#writenodereqfail)
-      - [writeNodeReqPoints](#writenodereqpoints)
-      - [writeShardReq](#writeshardreq)
-      - [writeShardReqPoints](#writeshardreqpoints)
+      * [numMeasurements](#nummeasurements)
+      * [numSeries](#numseries)
+  * [hh](#hh-enterprise-only) (Enterprise only)
+      * [writeShardReq](#writeshardreq)
+      * [writeShardReqPoints](#writeshardreqpoints)
+  * [hh_processor](#hh-processor-enterprise-only) (Enterprise only)
+      * [bytesRead](#bytesread)
+      * [bytesWritten](#byteswritten)
+      * [queueBytes](#queuebytes)
+      * [queueDepth](#queuedepth)
+      * [writeBlocked](#writeblocked)
+      * [writeDropped](#writedropped)
+      * [writeNodeReq](#writenodereq)
+      * [writeNodeReqFail](#writenodereqfail)
+      * [writeNodeReqPoints](#writenodereqpoints)
+      * [writeShardReq](#writeshardreq)
+      * [writeShardReqPoints](#writeshardreqpoints)
   * [httpd](#httpd)
-      - [authFail](#authfail)
-      - [clientError](#clienterror)
-      - [pingReq](#pingreq)
-      - [pointsWrittenDropped](#pointswrittendropped)
-      - [pointsWrittenFail](#pointswrittenfail)
-      - [pointsWrittenOK](#pointswrittenok)
-      - [promReadReq](#promreadreq)
-      - [promWriteReq](#promwritereq)
-      - [fluxQueryReq](#fluxqueryreq)
-      - [fluxQueryDurationNs](#fluxquerydurationns)
-      - [queryReq](#queryreq)
-      - [queryReqDurationNs](#queryreqdurationns)
-      - [queryRespBytes](#queryrespbytes)
-      - [recoveredPanics](#recoveredpanics)
+      * [authFail](#authfail)
+      * [clientError](#clienterror)
+      * [pingReq](#pingreq)
+      * [pointsWrittenDropped](#pointswrittendropped)
+      * [pointsWrittenFail](#pointswrittenfail)
+      * [pointsWrittenOK](#pointswrittenok)
+      * [promReadReq](#promreadreq)
+      * [promWriteReq](#promwritereq)
+      * [fluxQueryReq](#fluxqueryreq)
+      * [fluxQueryDurationNs](#fluxquerydurationns)
+      * [queryReq](#queryreq)
+      * [queryReqDurationNs](#queryreqdurationns)
+      * [queryRespBytes](#queryrespbytes)
+      * [recoveredPanics](#recoveredpanics)
       * [req](#req)
       * [reqActive](#reqactive)
       * [reqDurationNs](#reqdurationns)
@@ -198,9 +198,9 @@ By default, InfluxDB generates measurement statistics that are saved to the `_in
 In a cluster, each measurement in the `_internal` database has three tags:
 * `clusterID` - the UUID of the cluster recording the `_internal` metrics
 * `hostname` - the hostname of the node reporting the metrics.
-  - The `hostname` is added to all statistics and should indicate the hostname as reported by the operating system.
+  * The `hostname` is added to all statistics and should indicate the hostname as reported by the operating system.
 * `nodeID` - the hostname and port of the node reporting the metrics.
-  - The `nodeID` is set in closed source, and  should be set to the hostname or bind address as set in the config file.
+  * The `nodeID` is set in closed source, and  should be set to the hostname or bind address as set in the config file.
 
 ## InfluxDB measurement statistics
 
@@ -240,34 +240,34 @@ _____
 The `cluster` measurement tracks statistics related to the clustering features of the data nodes in InfluxDB Enterprise.
 The tags on the series indicate the source host of the stat.
 
-####  copyShardReq
+#### copyShardReq
 
 * The number of internal requests made to copy a shard from _this_ data node to another data node.
 * Data type: integer
 
-####  createIteratorReq
+#### createIteratorReq
 
 * The number of remote node requests made to remotely read data from this data node.
 * Data type: integer
 
-####  expandSourcesReq
+#### expandSourcesReq
 
 * The number of remote node requests made to find measurements on this node that match a particular regular expression.
 Indicates a SELECT from a regex initiated on a different data node, which then sent an internal request to this node.
 * There is not currently a statistic tracking how many queries with a regex, instead of a fixed measurement, were initiated on a particular node.
 * Data type: integer
 
-####  fieldDimensionsReq
+#### fieldDimensionsReq
 
 * The number of remote node requests for information about the fields and associated types, and tag keys of measurements on this data node.
 * Data type: integer
 
-####  iteratorCostReq
+#### iteratorCostReq
 
 * The number of internal requests for iterator cost.
 * Data type: integer
 
-####  removeShardReq
+#### removeShardReq
 
 * The number of internal requests to delete a shard from this data node.
 * Exclusively incremented by use of the `influxd-ctl remove shard` command.
@@ -336,7 +336,7 @@ The measurement statistics related to continuous queries (CQs).
 
 _____
 
-### hh \[Enterprise only\]
+### hh (Enterprise only)
 
 The `hh` measurement statistics track events resulting in new Hinted Handoff (HH) processors in InfluxDB Enterprise.
 
@@ -358,7 +358,7 @@ The `hh` measurement has one additional tag:
 
 _____
 
-### hh_processor \[Enterprise only\]
+### hh_processor (Enterprise only)
 
 The `hh_processor` measurement statistics are related to the Hinted Handoff (HH) processors in InfluxDB Enterprise, one for each data node.
 
@@ -402,37 +402,37 @@ Upon restart or a crash, this statistic resets to zero, even if the Hinted Hando
 * The `queueDepth` values can give you a sense of when a queue is growing or shrinking.
 * Data type: integer
 
-####  writeBlocked
+#### writeBlocked
 
 * The number of writes blocked because the number of concurrent HH requests exceeds the limit.
 * Data type: integer
 
-####  writeDropped
+#### writeDropped
 
 * The number of writes dropped from the HH queue because the write appeared to be corrupted.
 * Data type: integer
 
-####  writeNodeReq
+#### writeNodeReq
 
 * The total number of write requests that succeeded in writing a batch to the destination node.
 * Data type: integer
 
-####  writeNodeReqFail
+#### writeNodeReqFail
 
 * The total number of write requests that failed in writing a batch of data from the Hinted Handoff queue to the destination node.
 * Data type: integer
 
-####  writeNodeReqPoints
+#### writeNodeReqPoints
 
 * The total number of points successfully written from the HH queue to the destination node fr
 * Data type: integer
 
-####  writeShardReq
+#### writeShardReq
 
 * The total number of every write batch request enqueued into the Hinted Handoff queue.
 * Data type: integer
 
-####  writeShardReqPoints
+#### writeShardReqPoints
 
 * The total number of points enqueued into the Hinted Handoff queue.
 * Data type: integer
@@ -443,12 +443,12 @@ _____
 
 The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
-####  authFail
+#### authFail
 
 * The number of HTTP requests that were aborted due to authentication being required, but not supplied or incorrect.
 * Data type: integer
 
-####  clientError
+#### clientError
 
 * The number of HTTP responses due to client errors, with a `4XX` HTTP status code.
 * Data type: integer
@@ -468,37 +468,37 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 * Data type: integer
 
 
-####  pingReq
+#### pingReq
 
 * The number of times InfluxDB HTTP server served the `/ping` HTTP endpoint.
 * Data type: integer
 
-####  pointsWrittenDropped
+#### pointsWrittenDropped
 
 * The number of points dropped by the storage engine.
 * Data type: integer
 
-####  pointsWrittenFail
+#### pointsWrittenFail
 
 * The number of points accepted by the HTTP `/write` endpoint, but unable to be persisted.
 * Data type: integer
 
-####  pointsWrittenOK
+#### pointsWrittenOK
 
 * The number of points accepted by the HTTP `/write` endpoint and persisted successfully.
 * Data type: integer
 
-####  promReadReq
+#### promReadReq
 
 * The number of read requests to the Prometheus `/read` endpoint.
 * Data type: integer
 
-####  promWriteReq
+#### promWriteReq
 
 * The number of write requests to the Prometheus `/write` endpoint.
 * Data type: integer
 
-####  queryReq
+#### queryReq
 
 * The number of query requests.
 * Data type: integer
@@ -507,51 +507,51 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
   * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
   * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
 
-####  queryReqDurationNs
+#### queryReqDurationNs
 
 * The total query request duration, in nanosecond (ns).
 * Data type: integer
 * Examples:
   * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
 
-####  queryRespBytes
+#### queryRespBytes
 
 * The total number of bytes returned in query responses.
 * Data type: integer
 
-####  recoveredPanics
+#### recoveredPanics
 
 * The total number of panics recovered by the HTTP handler.
 * Data type: integer
 
-####  req
+#### req
 
 * The total number of HTTP requests served.
 * Data Type: integer
 
-####  reqActive  
+#### reqActive  
 
 * The number of currently active requests.
 * Data type: integer
 
-####  reqDurationNs
+#### reqDurationNs
 
 * The duration (wall time), in nanoseconds, spent inside HTTP requests.
 * Data type: integer
 
-####  serverError
+#### serverError
 
 * The number of HTTP responses due to server errors.
 * Data type: integer
 * Examples
   * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
 
-####  statusReq
+#### statusReq
 
 * The number of status requests served using the HTTP `/status` endpoint.
 * Data type: integer
 
-####  writeReq
+#### writeReq
 
 * The number of write requests served using the HTTP `/write` endpoint.
 * Data type: integer
@@ -559,17 +559,17 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
   * "HTTP Request Duration (99th %)" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-request-duration-99th) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-request-duration-99th) dashboards.
   * "HTTP Requests Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#http-requests-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#http-requests-minute) dashboards.
 
-####  writeReqActive
+#### writeReqActive
 
 * The number of currently active write requests.
 * Data type: integer
 
-####  writeReqBytes
+#### writeReqBytes
 
 * The total number of bytes of line protocol data received by write requests, using the HTTP `/write` endpoint.
 * Data type: integer
 
-####  writeReqDurationNs
+#### writeReqDurationNs
 
 * The duration (wall time), in nanoseconds, of write requests served using the `/write` HTTP endpoint.
 * Data type: integer
@@ -582,30 +582,30 @@ The `httpd` measurement statistics are related to the InfluxDB HTTP server.
 
 The `queryExecutor` statistics related to usage of the Query Executor of the InfluxDB engine.
 
-####  queriesActive
+#### queriesActive
 
 * The number of active queries currently being handled.
 * Data type: integer
 
-#####  queriesExecuted
+##### queriesExecuted
 
 * The number of queries executed (started).
 * Data type: integer
 * Examples
   * "Queries Executed Per Minute" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#queries-executed-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#queries-executed-per-minute) dashboards.
 
-####  queriesFinished
+#### queriesFinished
 
 * The number of queries that have finished executing.
 * Data type: integer
 
-####  queryDurationNs
+#### queryDurationNs
 
 * The duration (wall time), in nanoseconds, of every query executed.
 * If one query took 1000 ns from start to finish, and another query took 500 ns from start to finish and ran before the first query finished, the statistic would increase by 1500.
 * Data type: integer
 
-####  recoveredPanics
+#### recoveredPanics
 
 * The number of panics recovered by the Query Executor.
 * Data type: integer
@@ -618,67 +618,67 @@ _____
 
 The `rpc` measurement statistics are related to the use of RPC calls within InfluxDB Enterprise clusters.
 
-####  idleStreams
+#### idleStreams
 
 * The number of idle multiplexed streams across all live TCP connections.
 * Data type: integer
 
-####  liveConnections
+#### liveConnections
 
 * The current number of live TCP connections to other nodes.
 * Data type: integer
 
-####  liveStreams
+#### liveStreams
 
 *  The current number of live multiplexed streams across all live TCP connections.
 * Data type: integer
 
-####  rpcCalls
+#### rpcCalls
 
 * The total number of RPC calls made to remote nodes.
 * Data type: integer
 
-####  rpcFailures
+#### rpcFailures
 
 * The total number of RPC failures, which are RPCs that did not recover.
 * Data type: integer
 
-####  rpcReadBytes
+#### rpcReadBytes
 
 * The total number of RPC bytes read.
 * Data type: integer
 
-####  rpcRetries
+#### rpcRetries
 
 * The total number of RPC calls that retried at least once.
 * Data type: integer
 
-####  rpcWriteBytes
+#### rpcWriteBytes
 
 * The total number of RPC bytes written.
 * Data type: integer
 
-####  singleUse
+#### singleUse
 
 * The total number of single-use connections opened using Dial.
 * Data type: integer
 
-####  singleUseOpen
+#### singleUseOpen
 
 * The number of single-use connections currently open.
 * Data type: integer
 
-####  totalConnections
+#### totalConnections
 
 * The total number of TCP connections that have been established.
 * Data type: integer
 
-####  totalStreams
+#### totalStreams
 
 * The total number of streams established.
 * Data type: integer
 
------
+
 
 ### runtime
 
@@ -686,34 +686,34 @@ The `runtime` measurement statistics include a subset of MemStats records statis
 
 The [Go runtime package](https://golang.org/pkg/runtime/) contains operations that interact with Go's runtime system, including functions used to control goroutines. It also includes the low-level type information used by the [Go reflect package](https://golang.org/pkg/reflect/).
 
-####  Alloc
+#### Alloc
 
 * The currently allocated number of bytes of heap objects.
 * Data type: integer
 
-####  Frees
+#### Frees
 
 * The cumulative number of freed (live) heap objects.
 * Data type: integer
 
-####  HeapAlloc
+#### HeapAlloc
 
 * The size, in bytes, of all heap objects.
 * Data type: integer
 
-####  HeapIdle
+#### HeapIdle
 
 * The number of bytes of idle heap objects.
 * Data type: integer
 
-####  HeapInUse
+#### HeapInUse
 
 * The number of bytes in in-use spans.
 * Data type: integer
 * Examples
   * "Heap Size" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#heap-size) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#heap-size) dashboards.
 
-####  HeapObjects
+#### HeapObjects
 
 * The number of allocated heap objects.
 * Data type: integer
@@ -768,7 +768,7 @@ The [Go runtime package](https://golang.org/pkg/runtime/) contains operations th
 * This statistic does not decrease when objects are freed.
 * Data type: integer
 
-____
+_____
 
 ### shard
 
@@ -825,7 +825,7 @@ The `shard` measurement statistics are related to working with shards in InfluxD
 * The total number of successful write requests.
 * Data type: integer
 
-____
+_____
 
 ### subscriber
 
@@ -846,7 +846,7 @@ The `subscriber` measurement statistics are related to the usage of InfluxDB sub
 * The total number of batches that failed to be written to subscribers.
 * Data type: integer
 
-______
+_______
 
 ### tsm1_cache
 
@@ -919,13 +919,13 @@ GROUP BY time(5m), path
 * The total number of successful writes.
 * Data type: integer
 
-____
+_____
 
 ### tsm1_engine
 
 The `tsm1_engine` measurement statistics are related to the usage of a TSM storage engine with compressed blocks.
 
-#### cacheCompactionDuration       
+#### cacheCompactionDuration  
 
 * The duration (wall time), in nanoseconds, spent in cache compactions.
 
@@ -936,7 +936,7 @@ The `tsm1_engine` measurement statistics are related to the usage of a TSM stora
 * The number of cache compactions that have failed due to errors.
 * Data type: integer
 
-#### cacheCompactions              
+#### cacheCompactions  
 
 * The total number of cache compactions that have ever run.
 * Data type: integer
@@ -996,7 +996,7 @@ The `tsm1_engine` measurement statistics are related to the usage of a TSM stora
 * The number of TSM level 1 compactions that are currently running.
 * Data type: integer
 
-####  tsmLevel2CompactionDuration
+#### tsmLevel2CompactionDuration
 
 * The duration (wall time), in nanoseconds, spent in TSM level 2 compactions.
 * Data type: integer
@@ -1016,12 +1016,12 @@ The `tsm1_engine` measurement statistics are related to the usage of a TSM stora
 * The total number of TSM level 2 compactions that have ever run.
 * Data type: integer
 
-#### tsmLevel2CompactionsActive    
+#### tsmLevel2CompactionsActive  
 
 * The number of TSM level 2 compactions that are currently running.
 * Data type: integer
 
-#### tsmLevel3CompactionDuration   
+#### tsmLevel3CompactionDuration  
 
 * The duration (wall time), in nanoseconds, spent in TSM level 3 compactions.
 * Data type: integer
@@ -1031,7 +1031,7 @@ The `tsm1_engine` measurement statistics are related to the usage of a TSM stora
 * The number of TSM level 3 compactions that have failed due to errors.
 * Data type: integer
 
-#### tsmLevel3CompactionQueue      
+#### tsmLevel3CompactionQueue  
 
 * The current number of pending TSM level 3 compactions.
 * Data type: integer
@@ -1071,7 +1071,7 @@ The `tsm1_engine` measurement statistics are related to the usage of a TSM stora
 * The number of TSM optimize compactions that are currently running.
 * Data type: integer
 
-____
+______
 
 ### tsm1_filestore
 
@@ -1087,7 +1087,7 @@ The `tsm1_filestore` measurement statistics are related to the usage of the TSM 
 * The total number of files in the TSM file store.
 * Data type: integer
 
-____
+_____
 
 ### tsm1_wal
 
@@ -1112,8 +1112,6 @@ The `tsm1_wal` measurement statistics are related to the usage of the TSM Write 
 
 * The number of writes that succeeded.
 * Data type: integer
-
-
 
 _____
 
@@ -1142,9 +1140,8 @@ The `write` measurement statistics are about writes to the data node, regardless
 
 #### pointReqRemote (Enterprise only)
 
-* The total number of points received for write by this node but needed to be forwarded into a shard on a remote node.
-The `pointReqRemote` statistic is incremented immediately before the remote write attempt, which only happens if HH doesn't exist for that node. Then if the write attempt fails, we check again if HH exists, and if so, add the point to HH instead.
-* This statistic does not distinguish between requests that are directly written to the destination node versus enqueued into the Hinted Handoff queue for the destination node.
+* The total number of points received for write by this node but needed to be forwarded into a shard on a remote node. The `pointReqRemote` statistic is incremented immediately before the remote write attempt, which only happens if HH doesn't exist for that node. Then if the write attempt fails, we check again if HH exists, and if so, add the point to HH instead.  
+* This statistic does not distinguish between requests that are directly written to the destination node versus enqueued into the Hinted Handoff queue for the destination node.  
 * Data type: integer
 
 #### req
