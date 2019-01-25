@@ -23,8 +23,7 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.3 releases. For de
 
 Prior to v.1.7.2, the Anti-Entropy (AE) service was enabled by default. When shards create large digests with lots of time ranges (10s of thousands), some customers experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, then you can enable AE and watch to see if performance is significantly impacted.
 
-v1.7.2 [2018-12-11]
--------------------
+## v1.7.2 [2018-12-11]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.7.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
@@ -43,11 +42,11 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.2 releases. For de
 
 -	Update sample configuration.
 
-v1.7.1 [2018-11-14]
+## v1.7.1 [2018-11-14]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.7.1 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
-v1.7.0 [2018-11-06]
+## v1.7.0 [2018-11-06]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.7.0 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
