@@ -26,18 +26,18 @@ _The `assertEquals()` function can be used to perform in-line tests in a query._
 
 ## Parameters
 
-## name
+### name
 Unique name given to the assertion.
 
 _**Data type:** String_
 
-## got
+### got
 The stream containing data to test.
-Defaults to data piped-forward from another function (`<-`).
+_Defaults to piped-forward data (`<-`)._
 
 _**Data type:** Object_
 
-## want
+### want
 The stream that contains the expected data to test against.
 
 _**Data type:** Object_
