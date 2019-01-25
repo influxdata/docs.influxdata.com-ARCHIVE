@@ -20,7 +20,11 @@ derivative(
   unit: 1s,
   nonNegative: false,
   columns: ["_value"],
+<<<<<<< HEAD
+  timeSrc: "_time"
+=======
   timeColumn: "_time"
+>>>>>>> flux-0.x
 )
 ```
 

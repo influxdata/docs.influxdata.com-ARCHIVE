@@ -15,13 +15,19 @@ The return value of intervals is another function that accepts start and stop ti
 The generator is then used to produce the set of intervals.
 The set of intervals includes all intervals that intersect with the initial range of time.
 
-> The `intervals()` function is designed to be used with the intervals parameter of the [`window()` function](/flux/v0.x/functions/transformations/window).
+> The `intervals()` function is designed to be used with the `intervals` parameter of the [`window()` function](/flux/v0.x/functions/transformations/window).
 
 _**Function type:** Miscellaneous_  
 _**Output data type:** Object_
 
 ```js
-intervals()
+intervals(
+  every: 1h,
+  period: 2h,
+  offset:30m,
+  filter:(interval) =>
+    !(weekday(time: interval.start) in [Sunday, Saturday])
+)
 ```
 
 ## Parameters

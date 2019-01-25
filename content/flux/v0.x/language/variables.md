@@ -10,5 +10,6 @@ menu:
 
 > **Note:** This document is a living document and may not represent the current implementation of Flux.
 
-A _variable_ holds a value.
-A variable can only hold values defined by its type.
+A **variable** represents a storage location for a single value.
+Variables are immutable.
+Once a variable is given a value, it holds that value for the remainder of its lifetime.

@@ -10,6 +10,7 @@ menu:
 
 The `shift()` function adds a fixed duration to time columns.
 The output table schema is the same as the input table.
+If the time is `null`, the time will continue to be `null`.
 
 _**Function type:** Transformation_  
 _**Output data type:** Object_

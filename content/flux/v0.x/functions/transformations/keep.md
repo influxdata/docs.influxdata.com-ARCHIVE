@@ -32,8 +32,8 @@ Cannot be used with `fn`.
 _**Data type:** Array of strings_
 
 ### fn
-A function which takes a column name as a parameter (`column`) and returns a boolean indicating
-whether or not the column should be included in the resulting table.
+A predicate function which takes a column name as a parameter (`column`) and returns
+a boolean indicating whether or not the column should be included in the resulting table.
 Cannot be used with `columns`.
 
 _**Data type:** Function_

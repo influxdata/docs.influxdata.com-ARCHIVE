@@ -19,6 +19,9 @@ _**Output data type:** Object_
 yield(name: "custom-name")
 ```
 
+> `yield()` is implicit for queries that do only one thing and are only needed when using multiple sources in a query.
+> With multiple sources, `yield()` is required to specify what is returned, and what name to give it.
+
 ## Parameters
 
 ### name
