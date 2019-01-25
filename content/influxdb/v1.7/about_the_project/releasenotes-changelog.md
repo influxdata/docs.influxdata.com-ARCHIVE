@@ -18,11 +18,7 @@ menu:
 -	Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
 -	Limit force-full and cold compaction size.
 -	Add user authentication and authorization support for Flux HTTP requests.
-<<<<<<< HEAD
--	Call storage.Group API to correctly map group mode.
-=======
 -	Call `storage.Group` API to correctly map group mode.
->>>>>>> master
 -	Following functions, when used on non-float types in subqueries, returned incorrect
   results: `derivitive`, `non_negative_derivitive`, `moving_average`, `exponential_moving_average`,
   `double_exponential_moving_average`, `triple_exponential_moving_average`, `relative_strength_index`,
@@ -31,11 +27,6 @@ menu:
 -	Add support for optionally logging Flux queries.
 -	Fix cardinality estimation error.
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> master
 ## v1.7.2 [2018-12-11]
 
 ### Bug fixes
