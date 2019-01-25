@@ -20,7 +20,11 @@ derivative(
   unit: 1s,
   nonNegative: false,
   columns: ["_value"],
+<<<<<<< HEAD
   timeSrc: "_time"
+=======
+  timeColumn: "_time"
+>>>>>>> flux-0.x
 )
 ```
 
@@ -44,7 +48,7 @@ Defaults to `["_value"]`.
 
 _**Data type:** Array of strings_
 
-### timeSrc
+### timeColumn
 The column containing time values.
 Defaults to `"_time"`.
 
