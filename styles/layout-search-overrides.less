@@ -9,6 +9,19 @@
 	}
 }
 
+.algolia-autocomplete .algolia-docsearch-suggestion .algolia-docsearch-suggestion {
+  &--wrapper { padding: .2rem 0; }
+  &--subcategory-column { display: none; }
+  &--content {
+    padding: .75rem;
+    width: 100%;
+    float: none;
+    &:before {
+      display: none;
+    }
+  }
+}
+
 @media (min-width: 1330px) {
 	.algolia-autocomplete.algolia-autocomplete-right .ds-dropdown-menu {
 		right: auto !important;
