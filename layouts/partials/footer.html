@@ -17,17 +17,22 @@ algoliaOptions: {
   hitsPerPage: 15,
   facets: [ "project", "version", "latest"],
   {{$current := . }}
-    {{ if not .IsHome }}
-      {{ range $product := .Site.Menus.products }}
-      {{ range $version := (index $.Site.Data.versions $product.Identifier) }}
-      {{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
-        facetFilters: [ "project:{{$product.Identifier}}", "version:{{$version}}" ]
+  {{ if not .IsHome }}
+    {{ range $product := .Site.Menus.products }}
+      {{ range $version := index $.Site.Data.versions $product.Identifier }}
+        {{ $latestVersion := index $.Site.Data.default_versions (print $product.Identifier "_semver") }}
+        {{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
+          {{ if eq $version $latestVersion }}
+            facetFilters: [ "latest:true" ]
+          {{ else }}
+            facetFilters: [ "project:{{$product.Identifier}}", "version:{{$version}}" ]
+          {{end}}
+        {{end}}
       {{end}}
     {{end}}
-    {{end}}
-    {{ else }}
-      facetFilters: [ "latest:true" ]
-  {{end}}
+  {{ else }}
+    facetFilters: [ "latest:true" ]
+{{end}}
 }
 });
 </script>

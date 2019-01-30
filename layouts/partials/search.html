@@ -1,9 +1,16 @@
 <div class="navbar--search" id="navbar--search">
-	{{ $productIdentifier := (index (findRE "[^/]+.*?" .RelPermalink) 0) }}
-	{{ if or (eq $productIdentifier "telegraf") (eq $productIdentifier "influxdb") (eq $productIdentifier "enterprise_influxdb") (eq $productIdentifier "chronograf") (eq $productIdentifier "kapacitor") (eq $productIdentifier "enterprise_kapacitor") }}
-		{{ $product := index (where .Site.Menus.products "Identifier" $productIdentifier ) 0 }}
-		<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the {{ $product.Name }} docs...">
-	{{ else }}
-		<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the docs...">
-	{{ end }}
+	{{ $current := . }}
+	{{ range $product := .Site.Menus.products }}
+		{{ range $version := index $.Site.Data.versions $product.Identifier }}
+			{{ $latestVersion := index $.Site.Data.default_versions (print $product.Identifier "_semver") }}
+			{{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
+				{{ if eq $version $latestVersion }}
+					<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the docs...">
+				{{ else }}
+					<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the {{$product.Name}} {{$version}} docs...">
+				{{end}}
+			{{end}}
+		{{end}}
+	{{end}}
+
 </div>
