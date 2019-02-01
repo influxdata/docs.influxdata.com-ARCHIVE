@@ -50,7 +50,20 @@ settings and to use the client against any Kapacitor server.
 ### `-url`
 The `-url` option supplies an HTTP url string (`http(s)://host:port`) to the Kapacitor server.
 When not set on the command line the value of the environment variable `KAPACITOR_URL` is used.
-This can be used to run `kapacitor` commands on a remote Kapacitor server
+This can be used to run `kapacitor` commands on a remote Kapacitor server.
+
+> #### Include authentication credentials in the Kapacitor URL
+> If authentication is enabled on InfluxDB and Kapacitor, include your InfluxDB
+> username and password as query parameters, `u` and `p` respectively, in the Kapacitor URL.
+> For both convenience and security, InfluxData recommends storing these credentials as
+> part of the Kapacitor URL in the `KAPACITOR_URL` environment variable.
+>
+>```sh
+export KAPACITOR_URL=https://192.168.67.88:9093?u=username&p=password
+
+# When KAPACITOR_URL is defined, the -url flag isn't necessary.
+kapacitor list tasks
+```
 
 ### `-skipVerify`
 The `-skipVerify` option disables SSL verification.
