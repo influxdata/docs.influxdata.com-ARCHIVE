@@ -15,7 +15,7 @@ Functionality will vary, and there are, as yet, no standard features that all li
 - [InfluxDB Erlang UDP](https://github.com/palkan/influx_udp) by [palkan](https://github.com/palkan)
 
 ## Go
-- [InfluxDB Go](https://github.com/influxdb/influxdb/blob/master/client/README.md) by [InfluxData](https://github.com/influxdata)
+- [InfluxDB Go](https://github.com/influxdata/influxdb1-client) by [InfluxData](https://github.com/influxdata)
 
 ## Haskell
 - [InfluxDB Haskell](https://github.com/maoe/influxdb-haskell) by [maoe](https://github.com/maoe)
