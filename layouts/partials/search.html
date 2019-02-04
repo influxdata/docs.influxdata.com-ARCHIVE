@@ -1,14 +1,17 @@
 <div class="navbar--search" id="navbar--search">
 	{{ $current := . }}
+	{{ if $.IsHome }}
+		<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the docs...">
+	{{ end }}
 	{{ range $product := .Site.Menus.products }}
 		{{ range $version := index $.Site.Data.versions $product.Identifier }}
 			{{ $latestVersion := index $.Site.Data.default_versions (print $product.Identifier "_semver") }}
 			{{ if in $current.RelPermalink (print "/" $product.Identifier "/" $version) }}
-				{{ if not (eq $version $latestVersion) }}
+				{{ if eq $version $latestVersion }}
+					<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the docs...">
+				{{ else }}
 					<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the {{$product.Name}} {{$version}} docs...">
-				{{ end }}
-			{{else}}
-				<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the docs...">
+				{{end}}
 			{{end}}
 		{{end}}
 	{{end}}
