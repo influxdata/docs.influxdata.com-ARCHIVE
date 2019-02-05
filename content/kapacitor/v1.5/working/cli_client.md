@@ -59,7 +59,7 @@ This can be used to run `kapacitor` commands on a remote Kapacitor server.
 > part of the Kapacitor URL in the `KAPACITOR_URL` environment variable.
 >
 >```sh
-export KAPACITOR_URL=https://192.168.67.88:9093?u=username&p=password
+export KAPACITOR_URL=https://192.168.67.88:9092?u=username&p=password
 
 # When KAPACITOR_URL is defined, the -url flag isn't necessary.
 kapacitor list tasks
