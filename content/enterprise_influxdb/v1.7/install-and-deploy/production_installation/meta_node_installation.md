@@ -1,11 +1,12 @@
 ---
-title: Step 1 - Installing InfluxDB Enterprise meta nodes
+title: Step 1 - Install InfluxDB Enterprise meta nodes
 aliases:
-    - /enterprise/v1.7/production_installation/meta_node_installation/
+    - /enterprise_influxdb/v1.7/production_installation/meta_node_installation/
 menu:
   enterprise_influxdb_1_7:
+    name: Step 1 - Install meta nodes
     weight: 10
-    parent: Production installation
+    parent: Install for production
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
@@ -17,7 +18,7 @@ your InfluxDB Enterprise cluster: the meta nodes.
 
 > If you wish to evaluate InfluxDB Enterprise in a non-production
 environment, feel free to follow the instructions outlined in the
-[QuickStart installation](/enterprise_influxdb/v1.7/quickstart_installation) section.
+[QuickStart installation](/enterprise_influxdb/v1.7/install-and-deploy/quickstart_installation) section.
 Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
 will need to reinstall InfluxDB Enterprise with the Production Installation
 process before using the product in a production environment.
@@ -114,7 +115,7 @@ sudo yum localinstall influxdb-meta-1.7.3_c1.7.3.x86_64.rpm
 In `/etc/influxdb/influxdb-meta.conf`:
 
 * Uncomment `hostname` and set to the full hostname of the meta node.
-* Uncomment `internal-shared-secret` in the `[meta]` section and set it to a long pass phrase to be used in JWT authentication for internode communication. This value must the same for all of your meta nodes and match the `[meta] meta-internal-shared-secret` settings in the configuration files of your data nodes.
+* Uncomment `internal-shared-secret` in the `[meta]` section and set it to a long pass phrase to be used in JWT authentication for intra-node communication. This value must the same for all of your meta nodes and match the `[meta] meta-internal-shared-secret` settings in the configuration files of your data nodes.
 * Set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
 <dt>
@@ -210,6 +211,6 @@ If you do not see your meta nodes in the output, please retry adding them to
 the cluster.
 
 Once your meta nodes are part of your cluster move on to [the next steps to
-set up your data nodes](/enterprise_influxdb/v1.7/production_installation/data_node_installation/).
+set up your data nodes](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/data_node_installation/).
 Please do not continue to the next steps if your meta nodes are not part of the
 cluster.

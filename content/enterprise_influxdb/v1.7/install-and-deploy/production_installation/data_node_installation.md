@@ -1,11 +1,12 @@
 ---
-title: Step 2 - Installing InfluxDB Enterprise data nodes
+title: Step 2 - Install InfluxDB Enterprise data nodes
 aliases:
-    - /enterprise/v1.7/production_installation/data_node_installation/
+    - /enterprise_influxdb/v1.7/production_installation/data_node_installation/
 menu:
   enterprise_influxdb_1_7:
+    name: Step 2 - Install data nodes
     weight: 20
-    parent: Production installation
+    parent: Install for production
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
@@ -14,7 +15,7 @@ The next steps will get you up and running with the second essential component o
 your InfluxDB Enterprise cluster: the data nodes.
 
 If you have not set up your meta nodes, please visit
-[Installing meta nodes](/enterprise_influxdb/v1.7/production_installation/meta_node_installation/).
+[Installing meta nodes](/enterprise_influxdb//v1.7/install-and-deploy/production_installation/meta_node_installation/).
 Bad things can happen if you complete the following steps without meta nodes.
 
 <br>
@@ -114,7 +115,7 @@ First, in `/etc/influxdb/influxdb.conf`:
 * Uncomment `hostname` at the top of the file and set it to the full hostname of the data node.
 * Uncomment `auth-enabled` in the `[http]` section and set it to `true`.
 * Uncomment `meta-auth-enabled` in the `[meta]` section and set it to `true`.
-* Uncomment `meta-internal-shared-secret` in the `[meta]` section and set it to a long pass phrase. The internal shared secret is used in JWT authentication for internode communication. This value must be same for all of your data nodes and match the `[meta] internal-shared-secret` value in the configuration files of your meta nodes.
+* Uncomment `meta-internal-shared-secret` in the `[meta]` section and set it to a long pass phrase. The internal shared secret is used in JWT authentication for intra-node communication. This value must be same for all of your data nodes and match the `[meta] internal-shared-secret` value in the configuration files of your meta nodes.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 
@@ -247,4 +248,4 @@ If you do not see your data nodes in the output, please retry adding them
 to the cluster.
 
 Once your data nodes are part of your cluster move on to [the final step
-to set up Chronograf](/enterprise_influxdb/v1.7/production_installation/chrono_install).
+to set up Chronograf](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/chrono_install).

@@ -497,7 +497,7 @@ Environment variable: `INFLUXDB_ANTI_ENTROPY_CHECK_INTERVAL`
 
 #### `max-fetch = 10`
 
-The maximum number of shards that a single data node will copy or repair concurrently.
+The maximum number of shards that a single data node will copy or repair in parallel.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
 
