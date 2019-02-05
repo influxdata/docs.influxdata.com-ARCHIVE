@@ -522,15 +522,17 @@ The maximum number of shards that a single data node will copy or repair in para
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
 
-### `max-sync = 1`
+#### `max-sync = 1`
 
 The maximum number of concurrent sync operations that should be performed.
 Modify this setting only when requested by InfluxData support.
 
-### `auto-repair-missing = true`
+Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_SYNC`
+#### `auto-repair-missing = true`
 
 Enables missing shards to automatically be repaired.
 
+Environment variable: `INFLUXDB_ANTI_ENTROPY_AUTO_REPAIR_MISSING`
 -----
 
 ## Retention policy settings
