@@ -1,9 +1,9 @@
 ---
 title: Deploy an InfluxDB Enterprise cluster on Google Cloud Platform
 aliases:
-    - /enterprise_influxdb/v1.6/other-options/google-cloud/
+    - /enterprise_influxdb/v1.7/other-options/google-cloud/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Deploy on Google Cloud Platform
     weight: 20
     parent: deploy-in-cloud-enterprise
@@ -21,7 +21,7 @@ This guide requires the following:
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
 - Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
 
-To deploy InfluxDB Enterprise on platforms other than GCP, please see [InfluxDB Enterprise installation options](/enterprise_influxdb/v1.6/introduction/installation_guidelines).
+To deploy InfluxDB Enterprise on platforms other than GCP, please see [InfluxDB Enterprise installation options](/enterprise_influxdb/v1.7/introduction/installation_guidelines).
 
 ## Deploy a cluster
 
@@ -68,8 +68,8 @@ gcloud compute ssh influxdb-access
 On the instance, install the `influx` command line tool via the InfluxDB open source package.
 
 ```
-wget https://dl.influxdata.com/influxdb/releases/influxdb_1.6.3_amd64.deb
-sudo dpkg -i influxdb_1.6.3_amd64.deb
+wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.3_amd64.deb
+sudo dpkg -i influxdb_1.7.3_amd64.deb
 ```
 
 Now the InfluxDB Enterprise cluster can be accessed using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.

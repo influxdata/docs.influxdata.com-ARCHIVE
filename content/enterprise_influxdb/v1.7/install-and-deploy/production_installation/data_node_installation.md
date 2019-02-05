@@ -1,9 +1,9 @@
 ---
 title: Step 2 - Install InfluxDB Enterprise data nodes
 aliases:
-    - /enterprise_influxdb/v1.6/production_installation/data_node_installation/
+    - /enterprise_influxdb/v1.7/production_installation/data_node_installation/
 menu:
-  enterprise_influxdb_1_6:
+  enterprise_influxdb_1_7:
     name: Step 2 - Install data nodes
     weight: 20
     parent: Install for production
@@ -15,13 +15,13 @@ The next steps will get you up and running with the second essential component o
 your InfluxDB Enterprise cluster: the data nodes.
 
 If you have not set up your meta nodes, please visit
-[Installing meta nodes](/enterprise_influxdb//v1.6/install-and-deploy/production_installation/meta_node_installation/).
+[Installing meta nodes](/enterprise_influxdb//v1.7/install-and-deploy/production_installation/meta_node_installation/).
 Bad things can happen if you complete the following steps without meta nodes.
 
 <br>
 # Data node setup description and requirements
 
-The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.6/concepts/glossary#data-node)
+The Production Installation process sets up two [data nodes](/enterprise_influxdb/v1.7/concepts/glossary#data-node)
 and each data node runs on its own server.
 You **must** have a minimum of two data nodes in a cluster.
 InfluxDB Enterprise clusters require at least two data nodes for high availability and redundancy.
@@ -30,7 +30,7 @@ Note: that there is no requirement for each data node to run on its own
 server.  However, best practices are to deploy each data node on a dedicated server.
 
 See the
-[Clustering guide](/enterprise_influxdb/v1.6/concepts/clustering/#optimal-server-counts)
+[Clustering guide](/enterprise_influxdb/v1.7/concepts/clustering/#optimal-server-counts)
 for more on cluster architecture.
 
 ### Other requirements
@@ -57,7 +57,7 @@ setting in the data node configuration file.
 
 InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
-data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.6/tools/api/)).
+data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.7/tools/api/)).
 
 <br>
 # Data node setup
@@ -97,15 +97,15 @@ Perform the following steps on each data node.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.4-c1.6.4_amd64.deb
-sudo dpkg -i influxdb-data_1.6.4-c1.6.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.4-c1.7.4_amd64.deb
+sudo dpkg -i influxdb-data_1.7.4-c1.7.4_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.4_c1.6.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.6.4_c1.6.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.4_c1.7.4.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.4_c1.7.4.x86_64.rpm
 ```
 
 ### II. Edit the data node configuration files
@@ -187,7 +187,7 @@ You should see output similar to:
     influxdb  2706  0.2  7.0 571008 35376 ?        Sl   15:37   0:16 /usr/bin/influxd -config /etc/influxdb/influxdb.conf
 
 
-If you do not see the expected output, the process is either not launching or is exiting prematurely. Check the [logs](/enterprise_influxdb/v1.6/administration/logs/) for error messages and verify the previous setup steps are complete.
+If you do not see the expected output, the process is either not launching or is exiting prematurely. Check the [logs](/enterprise_influxdb/v1.7/administration/logs/) for error messages and verify the previous setup steps are complete.
 
 If you see the expected output, repeat for the remaining data nodes.
 Once all data nodes have been installed, configured, and launched, move on to the next section to join the data nodes to the cluster.
@@ -200,7 +200,7 @@ If you are replacing an existing data node with `influxd-ctl update-data`, skip 
 </dt>
 
 On one and only one of the meta nodes that you set up in the
-[previous document](/enterprise_influxdb/v1.6/introduction/meta_node_installation/), run:
+[previous document](/enterprise_influxdb/v1.7/introduction/meta_node_installation/), run:
 ```
 influxd-ctl add-data enterprise-data-01:8088
 
@@ -226,16 +226,16 @@ The expected output is:
     Data Nodes
     ==========
     ID   TCP Address               Version
-    4    enterprise-data-01:8088   1.6.4-c1.6.4
-    5    enterprise-data-02:8088   1.6.4-c1.6.4
+    4    enterprise-data-01:8088   1.7.4-c1.7.4
+    5    enterprise-data-02:8088   1.7.4-c1.7.4
 
 >
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.6.4-c1.6.4
-    enterprise-meta-02:8091   1.6.4-c1.6.4
-    enterprise-meta-03:8091   1.6.4-c1.6.4
+    enterprise-meta-01:8091   1.7.4-c1.7.4
+    enterprise-meta-02:8091   1.7.4-c1.7.4
+    enterprise-meta-03:8091   1.7.4-c1.7.4
 
 
 The output should include every data node that was added to the cluster.
@@ -248,4 +248,4 @@ If you do not see your data nodes in the output, please retry adding them
 to the cluster.
 
 Once your data nodes are part of your cluster move on to [the final step
-to set up Chronograf](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/chrono_install).
+to set up Chronograf](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/chrono_install).
