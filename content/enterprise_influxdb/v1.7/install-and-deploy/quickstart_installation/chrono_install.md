@@ -1,11 +1,11 @@
 ---
-title: Step 2 - Installing Chronograf
+title: Step 2 - Install Chronograf
 aliases:
-    - /enterprise/v1.7/production_installation/chrono_install/
+    - /enterprise_influxdb/v1.7/quickstart_installation/chrono_install/
 menu:
   enterprise_influxdb_1_7:
     weight: 20
-    parent: QuickStart installation
+    parent: Install for evaluation
 ---
 
 Now that you've installed the meta nodes and data nodes, you are ready to install Chronograf

@@ -46,7 +46,7 @@ kapacitorctl member list -url http://example.com:9092
 > part of the Kapacitor URL in the `KAPACITOR_URL` environment variable.
 >
 >```sh
-export KAPACITOR_URL=https://192.168.67.88:9093?u=username&p=password
+export KAPACITOR_URL=https://192.168.67.88:9092?u=username&p=password
 
 # When KAPACITOR_URL is defined, the -url flag isn't necessary.
 kapacitorctl member list

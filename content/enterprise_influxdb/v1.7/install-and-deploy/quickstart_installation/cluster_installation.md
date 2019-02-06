@@ -1,12 +1,13 @@
 ---
 title: Step 1 - Installing an InfluxDB Enterprise cluster
 aliases:
-    - /enterprise/v1.7/quickstart_installation/cluster_installation/
+    - /enterprise_influxdb/v1.7/quickstart_installation/cluster_installation/
 
 menu:
   enterprise_influxdb_1_7:
+    name: Step 1 - Install InfluxDB Enterprise cluster
     weight: 10
-    parent: QuickStart installation
+    parent: Install for evaluation
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
@@ -16,7 +17,7 @@ InfluxDB Enterprise cluster.
 
 > The QuickStart installation process **is not** designed for use
 in a production environment.
-Follow the instructions outlined in the [Production installation](/enterprise_influxdb/v1.7/production_installation/) section
+Follow the instructions outlined in the [Production installation](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/) section
 if you wish to use InfluxDB Enterprise in a production environment.
 Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
 will need to reinstall InfluxDB Enterprise with the Production Installation
@@ -360,5 +361,5 @@ Your InfluxDB Enterprise cluster should have three data nodes and three meta nod
 If you do not see your meta or data nodes in the output, please retry
 adding them to the cluster.
 
-Once all of your nodes are joined to the cluster, move on to the [next step](/enterprise_influxdb/v1.7/quickstart_installation/chrono_install)
+Once all of your nodes are joined to the cluster, move on to the [next step](/enterprise_influxdb/v1.7/install-and-deploy/quickstart_installation/chrono_install)
 in the QuickStart installation to set up Chronograf.

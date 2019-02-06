@@ -1,14 +1,15 @@
 ---
-title: Getting started on Google Cloud Platform Marketplace
-
+title: Deploy an InfluxDB Enterprise cluster on Google Cloud Platform
+aliases:
+    - /enterprise_influxdb/v1.7/other-options/google-cloud/
 menu:
   enterprise_influxdb_1_7:
-    name: Google Cloud Platform Marketplace
-    weight: 10
-    parent: Other installation options
+    name: Deploy on Google Cloud Platform
+    weight: 20
+    parent: deploy-in-cloud-enterprise
 ---
 
-For users looking to deploy InfluxDB Enterprise on Google Cloud Platform (GCP) infrastructure, InfluxData provides an [InfluxDB Enterprise bring-your-own-license (BYOL) solution](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) that makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
+For deploying InfluxDB Enterprise clusters on Google Cloud Platform (GCP) infrastructure, InfluxData provides an [InfluxDB Enterprise bring-your-own-license (BYOL) solution](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) that makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
 
 > **Note:** The [Deployment Manager templates](https://cloud.google.com/deployment-manager/) used for the InfluxDB Enterprise BYOL solution are [open source](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise). Issues and feature requests for the Marketplace deployment should be [submitted through the related GitHub repository](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise/issues/new) (requires a GitHub account) or by contacting [InfluxData support](mailto:Support@InfluxData.com).
 
@@ -20,9 +21,9 @@ This guide requires the following:
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
 - Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
 
-To deploy InfluxDB Enterprise on platforms other than GCP, see [InfluxDB Enterprise installation options](/enterprise_influxdb/v1.7/introduction/installation_guidelines).
+To deploy InfluxDB Enterprise on platforms other than GCP, please see [InfluxDB Enterprise installation options](/enterprise_influxdb/v1.7/introduction/installation_guidelines).
 
-## Deploying a cluster
+## Deploy a cluster
 
 To deploy an InfluxDB Enterprise cluster, log in to your Google Cloud Platform account and navigate to [InfluxData's InfluxDB Enterprise (BYOL)](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) solution in the GCP Marketplace.
 
@@ -48,7 +49,7 @@ Your cluster is now deployed!
 
 > **Note:** Make sure you save the "Admin username", "Admin password", and "Connection internal IP" values displayed on the screen. They will be required when attempting to access the cluster.
 
-## Accessing the cluster
+## Access the cluster
 
 The cluster's IP address is only reachable from within the GCP network (or subnetwork) specified in the solution configuration. A cluster can only be reached from instances or services within the same GCP network or subnetwork in which it was provisioned.
 
@@ -67,8 +68,8 @@ gcloud compute ssh influxdb-access
 On the instance, install the `influx` command line tool via the InfluxDB open source package.
 
 ```
-wget https://dl.influxdata.com/influxdb/releases/influxdb_1.6.3_amd64.deb
-sudo dpkg -i influxdb_1.6.3_amd64.deb
+wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.3_amd64.deb
+sudo dpkg -i influxdb_1.7.3_amd64.deb
 ```
 
 Now the InfluxDB Enterprise cluster can be accessed using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.
