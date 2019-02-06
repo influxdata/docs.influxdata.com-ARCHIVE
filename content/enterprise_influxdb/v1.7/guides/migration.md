@@ -1,10 +1,10 @@
 ---
-title: Migrating InfluxDB OSS instances to InfluxDB Enterprise clusters
+title: Migrate InfluxDB OSS instances to InfluxDB Enterprise clusters
 aliases:
     - /enterprise/v1.7/guides/migration/
 menu:
   enterprise_influxdb_1_7:
-    name: Migrating InfluxDB OSS to clusters
+    name: Migrate InfluxDB OSS to Enterprise clusters
     weight: 10
     parent: Guides
 ---
@@ -45,7 +45,7 @@ environment, then this step can be skipped.
 
 ## For all existing InfluxDB Enterprise data nodes:
 
-### 1. Remove the node from the InfluxDB Enterprise cluster
+### 1. Remove the data node from the InfluxDB Enterprise cluster
 
 From a **meta** node in your InfluxDB Enterprise cluster, enter:
 ```
@@ -69,7 +69,7 @@ To ensure the file permissions are correct please run:
 sudo chown -R influxdb:influxdb /var/lib/influxdb
 ```
 
-## For the InfluxDB OSS Instance:
+## For the InfluxDB OSS instance:
 
 ### 1. Stop all writes to the InfluxDB OSS instance
 
@@ -109,14 +109,14 @@ If you have settings that you’d like to keep, please make a copy of your confi
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.8-c1.3.8_amd64.deb
-sudo dpkg -i influxdb-data_1.3.8-c1.3.8_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.3-c1.7.3_amd64.deb
+sudo dpkg -i influxdb-data_1.7.3-c1.7.3_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.8_c1.3.8.x86_64.rpm
-sudo yum localinstall influxdb-data-1.3.8_c1.3.8.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.3_c1.7.3.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.3_c1.7.3.x86_64.rpm
 ```
 
 ### 5. Update the configuration file
