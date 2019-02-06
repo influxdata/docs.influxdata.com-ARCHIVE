@@ -37,5 +37,12 @@ In addition to [third party software incorporated in InfluxDB](http://docs.influ
 | [Pretty printing for Go values](https://github.com/kr/pretty) (kr/pretty) | [MIT](https://github.com/kr/pretty/blob/master/License) |
 | [Miscellaneous functions for formatting text](https://github.com/kr/text) (kr/text) | [MIT](https://github.com/kr/text/blob/main/License) |
 | [Some helpful packages for writing Go apps](https://github.com/markbates/going) (markbates/going) | [MIT](https://github.com/markbates/going/blob/master/LICENSE.txt) |
+| [Basic LDAP v3 functionality for the Go programming language](https://github.com/mark-rushakoff/ldapserver) (mark-rushakoff/ldapserver) | [BSD-3-Clause](https://github.com/markbates/going/blob/master/LICENSE) |
+| [Basic LDAP v3 functionality for the Go programming language](https://github.com/go-ldap/ldap) (go-ldap/ldap) | [MIT](https://github.com/go-ldap/ldap/blob/master/LICENSE) |
+| [ASN1 BER Encoding / Decoding Library for the GO programming language](https://github.com/go-asn1-ber/asn1-ber) (go-asn1-ber/ans1-ber) | [MIT](https://github.com/go-asn1-ber/asn1-ber/blob/master/LICENSE) |
+| [A golang registry for global request variables](https://github.com/gorilla/context) (gorilla/context) | [BSD-3-Clause](https://github.com/gorilla/context/blob/master/LICENSE) |
+| [An immutable radix tree implementation in Golang](https://github.com/hashicorp/go-immutable-radix) (hashicorp/go-immutable-radix) | [MPL-2.0](https://github.com/hashicorp/go-immutable-radix/blob/master/LICENSE) |
+| [Golang LRU cache](https://github.com/hashicorp/golang-lru) (hashicorp/golang-lru) | [MPL-2.0](https://github.com/hashicorp/golang-lru/blob/master/LICENSE) |
+
 
 ***Thanks to the open source community for your contributions!***
