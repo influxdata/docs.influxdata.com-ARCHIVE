@@ -53,12 +53,10 @@ $(function(){
 });
 
 /**
- * Behavior for the tabs widget.
+ * Behavior for the tabs widgets.
  */
-$(function() {
-	const container = '.tabs-container'
-	const tab = '.tabs p a';
-	const content = '.tab-content';
+
+ function tabbedContent(container, tab, content) {
 
 	// Add the active class to the first tab in each tab group,
 	// in case it wasn't already set in the markup.
@@ -81,10 +79,11 @@ $(function() {
 				$(this).siblings(content).hide();
 			}
 		});
-		console.log(activeIndex);
 	});
+}
 
-});
+tabbedContent('.code-tabs-wrapper', '.code-tabs p a', '.code-tab-content');
+tabbedContent('.tabs-container', '.tabs p a', '.tab-content');
 
 
 // Randomize advertisement content on page load
