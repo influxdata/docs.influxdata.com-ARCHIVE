@@ -76,14 +76,14 @@
       margin: 0;
       border-radius: @radius @radius 0 0;
       display: inline-block;
-      background: fadeout(@article-code-border, 40%);
-      color: fadeout(@tabs-link, 50%);
+      background: fadeout(@article-code-border, 40%) ;
+      color: fadeout(@tabs-link, 50%) !important;
       &:hover {
-       color: @tabs-link-hover;
+       color: @tabs-link-hover !important;
       }
       &.is-active {
-       background-color: @article-code-border;
-       color: @tabs-link-active;
+       background-color: @article-code-border ;
+       color: @tabs-link-active !important;
       }
     }
   }
