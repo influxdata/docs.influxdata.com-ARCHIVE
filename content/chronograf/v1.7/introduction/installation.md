@@ -27,12 +27,12 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 1. Choose the download link for your operating system.
   * Note that if your download includes a TAR package, we recommend specifying a location for the underlying datastore, `chronograf-v1.db`, outside of the directory from which you start Chronograf. This allows you to preserve and reference your existing datastore, including configurations and dashboards, when you download future versions.
 2. Install Chronograf:
-  * MacOS: `tar zxvf chronograf-1.6.2_darwin_amd64.tar.gz`
-  * Ubuntu & Debian: `sudo dpkg -i chronograf_1.6.2_amd64.deb`
+  * MacOS: `tar zxvf chronograf-1.7.7_darwin_amd64.tar.gz`
+  * Ubuntu & Debian: `sudo dpkg -i chronograf_1.7.7_amd64.deb`
   * RedHat and CentOS: `sudo yum localinstall chronograf-1.6.2.x86_64.rpm`
 3. Start Chronograf:
-  * MacOS: `tar zxvf chronograf-1.6.2_darwin_amd64.tar.gz`
-  * Ubuntu & Debian: `sudo dpkg -i chronograf_1.6.2_amd64.deb`
+  * MacOS: `tar zxvf chronograf-1.7.7_darwin_amd64.tar.gz`
+  * Ubuntu & Debian: `sudo dpkg -i chronograf_1.7.7_amd64.deb`
 
 
 ## Connect Chronograf to your InfluxDB instance or InfluxDB Enterprise cluster
