@@ -588,7 +588,7 @@ When HTTP request logging is enabled, this option specifies the path where log e
 If unspecified, the default is to write to stderr, which intermingles HTTP logs with internal InfluxDB logging.
 If `influxd` is unable to access the specified path, it will log an error and fall back to writing the request log to `stderr`.
 
-Environment variable: `INFLUXDB_ACCESS_LOG_PATH`
+Environment variable: `INFLUXDB_HTTP_ACCESS_LOG_PATH`
 
 #### `access-log-status-filters = []`
 
