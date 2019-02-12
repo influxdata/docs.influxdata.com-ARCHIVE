@@ -667,6 +667,53 @@ Enables HTTP request logging.
 
 Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
 
+### `suppress-write-log = false`
+
+Determines whether the HTTP write request logs should be suppressed when the log is enabled.
+
+#### `access-log-path = ""`
+
+The path to the access log, which determines whether detailed write logging is enabled using `log-enabled = true`.
+Specifies whether HTTP request logging is written to the specified path when enabled.
+If `influxd` is unable to access the specified path, it will log an error and fall back to `stderr`.
+When HTTP request logging is enabled, this option specifies the path where log entries should be written.
+If unspecified, the default is to write to stderr, which intermingles HTTP logs with internal InfluxDB logging.
+If `influxd` is unable to access the specified path, it will log an error and fall back to writing the request log to `stderr`.
+
+Environment variable: `INFLUXDB_HTTP_ACCESS_LOG_PATH`
+
+#### `access-log-status-filters = []`
+
+Filters which requests should be logged. Each filter is of the pattern `nnn`, `nnx`, or `nxx` where `n` is
+a number and `x` is the wildcard for any number.
+To filter all `5xx` responses, use the string `5xx`.
+If multiple filters are used, then only one has to match.
+The default value is no filters, with every request being printed.
+
+Environment variable: `INFLUXDB_HTTP_ACCESS_LOG_STATUS_FILTERS_x`
+
+##### Examples
+
+###### Setting access log status filters using configuration settings
+
+`access-log-status-filter = ["4xx", "5xx"]`
+
+`"4xx"` is in array position `0`
+`"5xx"` is in array position `1`
+
+###### Setting access log status filters using environment variables
+
+The input values for the `access-log-status-filters` is an array.
+When using environment variables, the values can be supplied as follows.
+
+`INFLUXDB_HTTP_ACCESS_LOG_STATUS_FILTERS_0=4xx`
+
+`INFLUXDB_HTTP_ACCESS_LOG_STATUS_FILTERS_1=5xx`
+
+The `_n` at the end of the environment variable represents the array position of the entry.
+
+
+
 #### `write-tracing = false`
 
 Enables detailed write logging.
