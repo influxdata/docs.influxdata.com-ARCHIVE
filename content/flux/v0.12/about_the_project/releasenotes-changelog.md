@@ -10,8 +10,9 @@ menu:
 > The items below represent only end user-facing changes.
 > For a complete changelog, see the
 > [Flux Github repository](https://github.com/influxdata/flux/releases).
+> This changelog also only includes versions of Flux released with InfluxDB.
 
-## v0.12.0 [unreleased]
+## v0.12.0 [2019-01-02]
 _A technical preview of Flux packaged with InfluxDB v1.7.3._
 
 ### Features
