@@ -7,26 +7,6 @@ menu:
     parent: About the project
 ---
 
-## v1.7.3 [2019-01-14]
-
-### Features
-
-* Update Flux to 0.12.0
-
-### Bug fixes
-
-*	Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
-*	Limit force-full and cold compaction size.
-*	Add user authentication and authorization support for Flux HTTP requests.
-*	Call `storage.Group` API to correctly map group mode.
-*	Following functions, when used on non-float types in subqueries, returned incorrect
-  results: `derivitive`, `non_negative_derivitive`, `moving_average`, `exponential_moving_average`,
-  `double_exponential_moving_average`, `triple_exponential_moving_average`, `relative_strength_index`,
-  `triple_exponential_deriviative`, `kaufmans_efficiency_ratio`, `kaufmans_adaptive_moving_average`,
-  `chande_momentum_oscillator`, `holt_winters`, and `holt_winters_with_fit`.
-*	Add support for optionally logging Flux queries.
-*	Fix cardinality estimation error.
-
 ## v1.7.2 [2018-12-11]
 
 ### Bug fixes
