@@ -7,6 +7,26 @@ menu:
     parent: About the project
 ---
 
+## 1.7.4 [2018-02-13]
+
+Features
+
+* Allow TSI bitset cache to be configured.
+
+Bug fixes
+
+* Remove copy-on-write when caching bitmaps in TSI.
+* Use `systemd` for Amazon Linux 2.
+* Revert "Limit force-full and cold compaction size."
+* Convert `TagValueSeriesIDCache` to use string fields.
+* Ensure that cached series id sets are Go heap backed.
+* Allow TSI bitset cache to be configured.
+
+## 1.7.3 [2018-01-??]
+
+
+
+
 ## v1.7.2 [2018-12-11]
 
 ### Bug fixes

@@ -324,15 +324,16 @@ The rate limit, in bytes per second, that we allow TSM compactions to write to d
 
 Environment variable: `INFLUXDB_DATA_COMPACT_THROUGHPUT_BURST`  
 
-#### `max-index-log-file-size = "1m"`
+#### `tsm-use-madv-willneed = false`
 
-The threshold, in bytes, when an index write-ahead log file will compact into an index file.
-Lower sizes will cause log files to be compacted more quickly and result in lower heap usage at the expense of write throughput.
-Higher sizes will be compacted less frequently, store more series in-memory, and provide higher write throughput.
-Valid size suffixes are `k`, `m`, or `g` (case insensitive, `1024` = `1k`).
-Values without a size suffix are in bytes.
+If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped 
+memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files.
+Because this setting has been problematic on some kernels (including CentOS and RHEL ), the default is `false`.
+Changing the value to `true` might help users who have slow disks in some cases.
 
-Environment variable: `INFLUXDB_DATA_MAX_INDEX_LOG_FILE_SIZE`
+Environment variable: `INFLUXDB_TSM_USE_MADV_WILLNEED`
+
+### In-memory (`inmem`) index settings
 
 #### `max-series-per-database = 1000000`
 
@@ -371,13 +372,29 @@ will fail.
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
-#### `tsm-use-madv-willneed = false`
+### TSI (`tsi1`) index settings
 
-If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files.
-Because this setting has been problematic on some kernels (including CentOS and RHEL ), the default is `false`.
-Changing the value to `true` might help users who have slow disks in some cases.
+#### `max-index-log-file-size = "1m"`
 
-Environment variable: `INFLUXDB_TSM_USE_MADV_WILLNEED`
+The threshold, in bytes, when an index write-ahead log (WAL) file will compact
+into an index file. Lower sizes will cause log files to be compacted more
+quickly and result in lower heap usage at the expense of write throughput.
+Higher sizes will be compacted less frequently, store more series in-memory,
+and provide higher write throughput.
+Valid size suffixes are `k`, `m`, or `g` (case-insensitive, 1024 = 1k).
+Values without a size suffix are in bytes.
+
+#### `series-id-set-cache-size = 100`
+
+The size of the internal cache used in the TSI index to store previously 
+calculated series results. Cached results will be returned quickly from the cache rather 
+than needing to be recalculated when a subsequent query with a matching tag key-value 
+predicate is executed. 
+Setting this value to `0` will disable the cache, which may lead to query performance issues.
+This value should only be increased if it is known that the set of regularly used 
+tag key-value predicates across all measurements for a database is larger than 100. An 
+increase in cache size may lead to an increase in heap usage.
+
 
 ## Query management settings
 
