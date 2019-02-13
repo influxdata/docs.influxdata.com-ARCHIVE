@@ -18,7 +18,7 @@ This article outlines many of the tasks possible with Flux but not InfluxQL and 
 ### Joins
 InfluxQL has never supported joins. They can be accomplished using [TICKscript](/kapacitor/latest/tick/introduction/),
 but even TICKscript's join capabilities are limited.
-Flux's [`join()` function](/flux/v0.x/functions/transformations/join/) allows you
+Flux's [`join()` function](/flux/v0.x/functions/built-in/transformations/join/) allows you
 to join data **from any bucket, any measurement, and on any columns** as long as
 each data set includes the columns on which they are to be joined.
 This opens the door for really powerful and useful operations.
@@ -92,7 +92,7 @@ join(
 ### Sort on any column
 InfluxQL's sorting capabilities are very limited, allowing you only to control the
 sort order of `time` using the `ORDER BY time` clause.
-Flux's [`sort()` function](/flux/v0.x/functions/transformations/sort) sorts records based on list of columns.
+Flux's [`sort()` function](/flux/v0.x/functions/built-in/transformations/sort) sorts records based on list of columns.
 Depending on the column type, records are sorted alphabetically, numerically, or chronologically.
 
 ###### Example sort operation
@@ -108,7 +108,7 @@ from(bucket:"telegraf/autogen")
 
 ### Pivot
 Pivoting data tables has never been supported in InfluxQL.
-Flux's [`pivot()` function](/flux/v0.x/functions/transformations/pivot) provides the ability
+Flux's [`pivot()` function](/flux/v0.x/functions/built-in/transformations/pivot) provides the ability
 to pivot data tables by specifying `rowKey`, `columnKey`, and `valueColumn` parameters.
 
 ###### Example pivot operation
@@ -128,7 +128,7 @@ from(bucket: "telegraf/autogen")
 
 ### Histograms
 The ability to generate histograms has been a highly requested feature for InfluxQL, but has never been supported.
-Flux's [`histogram()` function](/flux/v0.x/functions/transformations/histogram) uses input
+Flux's [`histogram()` function](/flux/v0.x/functions/built-in/transformations/histogram) uses input
 data to generate a cumulative histogram with support for other histogram types coming in the future.
 
 ---
@@ -152,8 +152,8 @@ from(bucket: "telegraf/autogen")
 
 ### Covariance
 Flux provides functions for simple covariance calculation.
-The [`covariance()` function](/flux/v0.x/functions/transformations/aggregates/covariance)
-calculates the covariance between two columns and the [`cov()` function](/flux/v0.x/functions/transformations/aggregates/cov)
+The [`covariance()` function](/flux/v0.x/functions/built-in/transformations/aggregates/covariance)
+calculates the covariance between two columns and the [`cov()` function](/flux/v0.x/functions/built-in/transformations/aggregates/cov)
 calculates the covariance between two data streams.
 
 ###### Example covariance between two columns
@@ -191,19 +191,19 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 
 | InfluxQL                          | Flux Functions                                                                                                   |
 | --------                          | --------------                                                                                                   |
-| SELECT                            | [filter()](/flux/v0.x/functions/transformations/filter/)                                                         |
-| WHERE                             | [filter()](/flux/v0.x/functions/transformations/filter/), [range()](/flux/v0.x/functions/transformations/range/) |
-| GROUP BY                          | [group()](/flux/v0.x/functions/transformations/group/)                                                           |
+| SELECT                            | [filter()](/flux/v0.x/functions/built-in/transformations/filter/)                                                         |
+| WHERE                             | [filter()](/flux/v0.x/functions/built-in/transformations/filter/), [range()](/flux/v0.x/functions/built-in/transformations/range/) |
+| GROUP BY                          | [group()](/flux/v0.x/functions/built-in/transformations/group/)                                                           |
 | INTO                              | --                                                                                                               |
-| ORDER BY                          | [sort()](/flux/v0.x/functions/transformations/sort/)                                                             |
-| LIMIT                             | [limit()](/flux/v0.x/functions/transformations/limit/)                                                           |
+| ORDER BY                          | [sort()](/flux/v0.x/functions/built-in/transformations/sort/)                                                             |
+| LIMIT                             | [limit()](/flux/v0.x/functions/built-in/transformations/limit/)                                                           |
 | SLIMIT                            | --                                                                                                               |
 | OFFSET                            | --                                                                                                               |
 | SOFFSET                           | --                                                                                                               |
-| SHOW DATABASES                    | [buckets()](/flux/v0.x/functions/inputs/buckets/)                                                                |
+| SHOW DATABASES                    | [buckets()](/flux/v0.x/functions/built-in/inputs/buckets/)                                                                |
 | SHOW MEASUREMENTS                 | --                                                                                                               |
-| SHOW FIELD KEYS                   | [keys()](/flux/v0.x/functions/transformations/keys/)                                                             |
-| SHOW RETENTION POLICIES           | [buckets()](/flux/v0.x/functions/inputs/buckets/)                                                                |
+| SHOW FIELD KEYS                   | [keys()](/flux/v0.x/functions/built-in/transformations/keys/)                                                             |
+| SHOW RETENTION POLICIES           | [buckets()](/flux/v0.x/functions/built-in/inputs/buckets/)                                                                |
 | SHOW TAG KEYS                     | --                                                                                                               |
 | SHOW TAG VALUES                   | --                                                                                                               |
 | SHOW SERIES                       | --                                                                                                               |
@@ -216,23 +216,23 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 | CREATE RETENTION POLICY           | --                                                                                                               |
 | ALTER RETENTION POLICY            | --                                                                                                               |
 | DROP RETENTION POLICY             | --                                                                                                               |
-| COUNT                             | [count()](/flux/v0.x/functions/transformations/aggregates/count/)                                                |
-| DISTINCT                          | [distinct()](/flux/v0.x/functions/transformations/selectors/distinct/)                                           |
-| INTEGRAL                          | [integral()](/flux/v0.x/functions/transformations/aggregates/integral/)                                          |
-| MEAN                              | [mean()](/flux/v0.x/functions/transformations/aggregates/mean/)                                                  |
-| MEDIAN                            | [median()](/flux/v0.x/functions/transformations/aggregates/median/)                                              |
+| COUNT                             | [count()](/flux/v0.x/functions/built-in/transformations/aggregates/count/)                                                |
+| DISTINCT                          | [distinct()](/flux/v0.x/functions/built-in/transformations/selectors/distinct/)                                           |
+| INTEGRAL                          | [integral()](/flux/v0.x/functions/built-in/transformations/aggregates/integral/)                                          |
+| MEAN                              | [mean()](/flux/v0.x/functions/built-in/transformations/aggregates/mean/)                                                  |
+| MEDIAN                            | [median()](/flux/v0.x/functions/built-in/transformations/aggregates/median/)                                              |
 | MODE                              | --                                                                                                               |
-| SPREAD                            | [spread()](/flux/v0.x/functions/transformations/aggregates/spread/)                                              |
-| STDDEV                            | [stddev()](/flux/v0.x/functions/transformations/aggregates/stddev/)                                              |
-| SUM                               | [sum()](/flux/v0.x/functions/transformations/aggregates/sum/)                                                    |
-| BOTTOM                            | [bottom()](/flux/v0.x/functions/transformations/selectors/bottom/)                                               |
-| FIRST                             | [first()](/flux/v0.x/functions/transformations/selectors/first/)                                                 |
-| LAST                              | [last()](/flux/v0.x/functions/transformations/selectors/last/)                                                   |
-| MAX                               | [max()](/flux/v0.x/functions/transformations/selectors/max/)                                                     |
-| MIN                               | [min()](/flux/v0.x/functions/transformations/selectors/min/)                                                     |
-| PERCENTILE                        | [percentile()](/flux/v0.x/functions/transformations/aggregates/percentile/)                                      |
-| SAMPLE                            | [sample()](/flux/v0.x/functions/transformations/selectors/sample/)                                               |
-| TOP                               | [top()](/flux/v0.x/functions/transformations/selectors/top/)                                                     |
+| SPREAD                            | [spread()](/flux/v0.x/functions/built-in/transformations/aggregates/spread/)                                              |
+| STDDEV                            | [stddev()](/flux/v0.x/functions/built-in/transformations/aggregates/stddev/)                                              |
+| SUM                               | [sum()](/flux/v0.x/functions/built-in/transformations/aggregates/sum/)                                                    |
+| BOTTOM                            | [bottom()](/flux/v0.x/functions/built-in/transformations/selectors/bottom/)                                               |
+| FIRST                             | [first()](/flux/v0.x/functions/built-in/transformations/selectors/first/)                                                 |
+| LAST                              | [last()](/flux/v0.x/functions/built-in/transformations/selectors/last/)                                                   |
+| MAX                               | [max()](/flux/v0.x/functions/built-in/transformations/selectors/max/)                                                     |
+| MIN                               | [min()](/flux/v0.x/functions/built-in/transformations/selectors/min/)                                                     |
+| PERCENTILE                        | [percentile()](/flux/v0.x/functions/built-in/transformations/aggregates/percentile/)                                      |
+| SAMPLE                            | [sample()](/flux/v0.x/functions/built-in/transformations/selectors/sample/)                                               |
+| TOP                               | [top()](/flux/v0.x/functions/built-in/transformations/selectors/top/)                                                     |
 | ABS                               | --                                                                                                               |
 | ACOS                              | --                                                                                                               |
 | ASIN                              | --                                                                                                               |
@@ -240,20 +240,20 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 | ATAN2                             | --                                                                                                               |
 | CEIL                              | --                                                                                                               |
 | COS                               | --                                                                                                               |
-| CUMULATIVE_SUM                    | [cumulativeSum()](/flux/v0.x/functions/transformations/cumulativesum/)                                           |
-| DERIVATIVE                        | [derivative()](/flux/v0.x/functions/transformations/aggregates/derivative/)                                      |
-| DIFFERENCE                        | [difference()](/flux/v0.x/functions/transformations/aggregates/difference/)                                      |
+| CUMULATIVE_SUM                    | [cumulativeSum()](/flux/v0.x/functions/built-in/transformations/cumulativesum/)                                           |
+| DERIVATIVE                        | [derivative()](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                                      |
+| DIFFERENCE                        | [difference()](/flux/v0.x/functions/built-in/transformations/aggregates/difference/)                                      |
 | ELAPSED                           | --                                                                                                               |
 | EXP                               | --                                                                                                               |
 | FLOOR                             | --                                                                                                               |
-| HISTOGRAM                         | [histogram()](/flux/v0.x/functions/transformations/histogram/)                                                   |
+| HISTOGRAM                         | [histogram()](/flux/v0.x/functions/built-in/transformations/histogram/)                                                   |
 | LN                                | --                                                                                                               |
 | LOG                               | --                                                                                                               |
 | LOG2                              | --                                                                                                               |
 | LOG10                             | --                                                                                                               |
 | MOVING_AVERAGE                    | --                                                                                                               |
-| NON_NEGATIVE_DERIVATIVE           | [derivative(nonNegative:true)](/flux/v0.x/functions/transformations/aggregates/derivative/)                      |
-| NON_NEGATIVE_DIFFERENCE           | [difference(nonNegative:true)](/flux/v0.x/functions/transformations/aggregates/derivative/)                      |
+| NON_NEGATIVE_DERIVATIVE           | [derivative(nonNegative:true)](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                      |
+| NON_NEGATIVE_DIFFERENCE           | [difference(nonNegative:true)](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                      |
 | POW                               | --                                                                                                               |
 | ROUND                             | --                                                                                                               |
 | SIN                               | --                                                                                                               |

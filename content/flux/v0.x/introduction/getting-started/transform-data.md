@@ -41,7 +41,7 @@ A common type of function used when transforming data queried from InfluxDB is a
 Aggregate functions take a set of `_value`s in a table, aggregate them, and transform
 them into a new value.
 
-This example uses the [`mean()` function](/flux/v0.x/functions/transformations/aggregates/mean)
+This example uses the [`mean()` function](/flux/v0.x/functions/built-in/transformations/aggregates/mean)
 to average values within time windows.
 
 > The following example walks through the steps required to window and aggregate data,
@@ -49,7 +49,7 @@ to average values within time windows.
 > It's just good to understand the steps in the process.
 
 ## Window your data
-Flux's [`window()` function](/flux/v0.x/functions/transformations/window) partitions records based on a time value.
+Flux's [`window()` function](/flux/v0.x/functions/built-in/transformations/window) partitions records based on a time value.
 Use the `every` parameter to define a duration of time for each window.
 
 For this example, window data in five minute intervals (`5m`).
@@ -72,7 +72,7 @@ When visualized, each table is assigned a unique color.
 
 ## Aggregate windowed data
 Flux aggregate functions take the `_value`s in each table and aggregate them in some way.
-Use the [`mean()` function](/flux/v0.x/functions/transformations/aggregates/mean) to average the `_value`s of each table.
+Use the [`mean()` function](/flux/v0.x/functions/built-in/transformations/aggregates/mean) to average the `_value`s of each table.
 
 ```js
 from(bucket:"telegraf/autogen")
@@ -98,7 +98,7 @@ Aggregate functions don't infer what time should be used for the aggregate value
 Therefore the `_time` column is dropped.
 
 A `_time` column is required in the [next operation](#unwindow-aggregate-tables).
-To add one, use the [`duplicate()` function](/flux/v0.x/functions/transformations/duplicate)
+To add one, use the [`duplicate()` function](/flux/v0.x/functions/built-in/transformations/duplicate)
 to duplicate the `_stop` column as the `_time` column for each windowed table.
 
 ```js
@@ -143,7 +143,7 @@ process helps to understand how data changes "shape" as it is passed through eac
 
 Flux provides (and allows you to create) "helper" functions that abstract many of these steps.
 The same operation performed in this guide can be accomplished using the
-[`aggregateWindow()` function](/flux/v0.x/functions/transformations/aggregates/aggregatewindow).
+[`aggregateWindow()` function](/flux/v0.x/functions/built-in/transformations/aggregates/aggregatewindow).
 
 ```js
 from(bucket:"telegraf/autogen")
