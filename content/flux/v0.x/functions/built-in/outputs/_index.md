@@ -1,6 +1,6 @@
 ---
-title: Flux output functions
-description: Flux output functions yield results or send data to a specified output destination.
+title: Flux built-in output functions
+description: Flux's built-in output functions yield results or send data to a specified output destination.
 aliases:
   - /flux/v0.x/functions/outputs
 menu:
@@ -10,7 +10,7 @@ menu:
 weight: 2
 ---
 
-Flux output functions yield results or send data to a specified output destination.
+Flux's built-in output functions yield results or send data to a specified output destination.
 The following output functions are are available:
 
 {{< function-list >}}

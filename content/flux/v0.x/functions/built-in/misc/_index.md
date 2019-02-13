@@ -1,6 +1,6 @@
 ---
-title: Flux miscellaneous functions
-description: Flux provides miscellaneous functions that serve purposes other than retrieving, transforming, or outputting data.
+title: Flux built-in miscellaneous functions
+description: Flux provides built-in miscellaneous functions that serve purposes other than retrieving, transforming, or outputting data.
 aliases:
   - /flux/v0.x/functions/misc
 menu:
