@@ -1,10 +1,11 @@
 ---
-title: Flux functions
-description: Flux functions allows you to retrieve, transform, process, and output data easily.
+title: Flux built-in functions
+description: Flux's built-in functions allows you to retrieve, transform, process, and output data easily.
 menu:
   flux_0_x:
-    name: Functions
-    weight: 4
+    name: Built-in
+    parent: Functions
+weight: 1
 ---
 
 Flux's functional syntax allows you to retrieve, transform, process, and output data easily.

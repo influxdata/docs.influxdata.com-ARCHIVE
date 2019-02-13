@@ -15,12 +15,12 @@ The output table is different than the input table, but individual row values ar
 
 The following selector functions are available:
 
-{{< function-list category="Selectors" menu="flux_0_x" >}}
+{{< function-list >}}
 
 
 ### Selectors and aggregates
 The following functions can be used as both selectors or aggregates, but they are
 categorized as aggregate functions in this documentation:
 
-- [median](/flux/v0.x/functions/transformations/aggregates/median)
-- [percentile](/flux/v0.x/functions/transformations/aggregates/percentile)
+- [median()](/flux/v0.x/functions/transformations/aggregates/median)
+- [percentile()](/flux/v0.x/functions/transformations/aggregates/percentile)
