@@ -7,6 +7,15 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.8 [2019-2-13]
+
+* Escape injected meta query values.
+* Fix out-of-range decimal places.
+* Stop raw y-axis format from getting updated to 10.
+* Correct autoInterval calculations.
+* Fix multiple organizations not showing configured Kapacitor connections.
+* Fix the inability to edit Kapacitor info in the onboarding wizard.
+
 ## v1.7.7 [2019-1-16]
 
 ### Bug Fixes
@@ -17,7 +26,7 @@ menu:
 
 ### Bug Fixes
 
-* Properly set scroll to row for table graph
+* Properly set scroll to row for table graph.
 * Prevent Kapacitor URLs from being overwritten in Connection Wizard.
 * Fix logs intermittently appearing empty on first load.
 * Prevent meta node URLs from being overwritten in Connection Wizard.
