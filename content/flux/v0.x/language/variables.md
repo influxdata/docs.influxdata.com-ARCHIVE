@@ -1,6 +1,6 @@
 ---
 title: Variables
-description: Flux variables hold values. A variable can only hold values defined by its type.
+description: Flux variables are immutable storage locations for single values.
 menu:
   flux_0_x:
     parent: Language reference

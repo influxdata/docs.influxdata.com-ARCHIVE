@@ -52,7 +52,7 @@ The `main` package is special for a few reasons:
 Packages are initialized in the following order:
 
 1. All imported packages are initialized and assigned to their package identifier.
-2. All option declarations are evaluated and assigned regardless of order. An option cannot have dependencies on any other options assigned in the same package block.
+2. All option declarations are evaluated and assigned regardless of order. An option cannot have a dependency on another option assigned in the same package block.
 3. All variable declarations are evaluated and assigned regardless of order. A variable cannot have a direct or indirect dependency on itself.
 4. Any package side effects are evaluated.
 

@@ -62,7 +62,8 @@ OptionAssignment = "option" [ identifier "." ] identifier "=" Expression
 
 An option assignment creates an option bound to an identifier and gives it a type and a value.
 Options may only be assigned in a package block.
-An identifier assigned to an option may be reassigned a new value but not a new type.
+Once declared, an option may not be redeclared in the same package block.
+An option declared in one package may be reassigned a new value in another.
 An option keeps the same type for the remainder of its lifetime.
 
 ###### Examples
