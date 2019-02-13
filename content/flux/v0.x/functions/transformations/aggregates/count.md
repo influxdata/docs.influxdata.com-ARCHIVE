@@ -8,7 +8,8 @@ menu:
     weight: 1
 ---
 
-The `count()` function outputs the number of non-null records in each aggregated column.
+The `count()` function outputs the number of records in each aggregated column.
+It counts both null and non-null records.
 
 _**Function type:** Aggregate_  
 _**Output data type:** Integer_

@@ -18,7 +18,8 @@ aggregateWindow(
   fn: mean,
   columns: ["_value"],
   timeColumn: "_stop",
-  timeDst: "_time"
+  timeDst: "_time",
+  createEmpty: true
 )
 ```
 
@@ -55,6 +56,13 @@ The "time destination" column to which time is copied for the aggregate record.
 Defaults to `"_time"`.
 
 _**Data type:** String_
+
+### createEmpty
+For windows without data, this will create an empty window and fill
+it with a `null` aggregate value.
+Defaults to `true`.
+
+_**Data type:** Boolean_
 
 ## Examples
 

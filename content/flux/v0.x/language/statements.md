@@ -13,36 +13,17 @@ Any section that is not currently implemented is commented with a `[IMPL#XXX]` w
 
 A _statement_ controls execution.
 
-```
-Statement = OptionStatement
-          | VarAssignment
+```js
+Statement = OptionAssignment
+          | BuiltinStatement
+          | VariableAssignment
           | ReturnStatement
           | ExpressionStatement .
 ```
 
-## Package clause
-A _package clause_ defines the name for the current package.
-Package names must be valid Flux identifiers.
-The package statement must be the first statement of every Flux source file.
-If a file does not declare a package statement, all identifiers in that file will belong to the special `main` package.
-
-```
-PackageClause = "package" identifier .
-```
-
-> To be implemented: [IMPL#247](https://github.com/influxdata/platform/issues/247) Add package/namespace support.
-
-### Package main
-
-The `main` package is special for a few reasons:
-
-1. It defines the entry point of a Flux program.
-2. It cannot be imported.
-3. All query specifications produced after evaluating the _main_ package are coerced into producing side effects.
-
 ## Import declaration
 
-```
+```js
 ImportDeclaration = "import" [identifier] string_lit
 ```
 
@@ -68,78 +49,9 @@ bar.x
 ```
 
 A package's import path is always absolute.
-Flux does not support relative imports.
-Assignment into the namespace of an imported package is not allowed.
+A package may reassign a new value to an option identifier declared in one of its imported packages.
 A package cannot access nor modify the identifiers belonging to the imported packages of its imported packages.
 Every statement contained in an imported package is evaluated.
-
-## Option statement
-
-Options specify a context in which a Flux query is to be run.
-They define variables that describe how to execute a Flux query.
-For example, the following Flux script sets the `task` option to schedule a query to run periodically every hour:
-
-```js
-option task = {
-    name: "mean",
-    every: 1h,
-}
-
-from(bucket:"metrics/autogen")
-    |> range(start:-task.every)
-    |> group(columns:["level"])
-    |> mean()
-    |> yield(name:"mean")
-```
-
-All options are designed to be completely optional and have default values to be used when not specified.
-Grammatically, an _option statement_ is just a variable assignment preceded by the `option` keyword.
-
-```
-OptionStatement = "option" VariableAssignment
-```
-
-Below is a list of all options that are currently implemented in the Flux language:
-
-* now
-* task
-* location
-
-### now
-
-The `now` option is a function that returns a time value to be used as a proxy for the current system time.
-
-```js
-// Query should execute as if the below time is the current system time
-option now = () => 2006-01-02T15:04:05-07:00
-```
-
-### task
-
-The `task` option is used by a scheduler to schedule the execution of a Flux query.
-
-```js
-option task = {
-    name: "foo",        // name is required
-    every: 1h,          // task should be run at this interval
-    delay: 10m,         // delay scheduling this task by this duration
-    cron: "0 2 * * *",  // cron is a more sophisticated way to schedule. every and cron are mutually exclusive
-    retry: 5,           // number of times to retry a failed query
-    }
-```
-
-### location
-
-The `location` option is used to set the default time zone of all times in the script.
-The location maps the UTC offset in use at that location for a given time.
-The default value is set using the time zone of the running process.
-
-```js
-option location = fixedZone(offset:-5h) // set timezone to be 5 hours west of UTC
-option location = loadLocation(name:"America/Denver") // set location to be America/Denver
-```
-
-> To be implemented: [IMPL#660](https://github.com/influxdata/platform/issues/660) Implement Location option.
 
 ## Return statements
 
@@ -163,4 +75,84 @@ ExpressionStatement = Expression .
 1 + 1
 f()
 a
+```
+
+## Named types
+
+A named type can be created using a type assignment statement.
+A named type is equivalent to the type it describes and may be used interchangeably.
+
+```js
+TypeAssignement   = "type" identifier "=" TypeExpression
+TypeExpression    = identifier
+                  | TypeParameter
+                  | ObjectType
+                  | ArrayType
+                  | GeneratorType
+                  | FunctionType .
+TypeParameter     = "'" identifier .
+ObjectType        = "{" PropertyTypeList [";" ObjectUpperBound ] "}" .
+ObjectUpperBound  = "any" | PropertyTypeList .
+PropertyTypeList  = PropertyType [ "," PropertyType ] .
+PropertyType      = identifier ":" TypeExpression
+                  | string_lit ":" TypeExpression .
+ArrayType         = "[]" TypeExpression .
+GeneratorType     = "[...]" TypeExpression .
+FunctionType      = ParameterTypeList "->" TypeExpression
+ParameterTypeList = "(" [ ParameterType { "," ParameterType } ] ")" .
+ParameterType     = identifier ":" [ pipe_receive_lit ] TypeExpression .
+```
+
+Named types are a separate namespace from values.
+It is possible for a value and a type to have the same identifier.
+The following named types are built-in.
+
+```js
+bool     // boolean
+int      // integer
+uint     // unsigned integer
+float    // floating point number
+duration // duration of time
+time     // time
+string   // utf-8 encoded string
+regexp   // regular expression
+type     // a type that itself describes a type
+```
+
+When an object's upper bound is not specified, it is assumed to be equal to its lower bound.
+
+Parameters to function types define whether the parameter is a pipe forward
+parameter and whether the parameter has a default value.
+The `<-` indicates the parameter is the pipe forward parameter.
+
+###### Examples
+```js
+    // alias the bool type
+    type boolean = bool
+
+    // define a person as an object type
+    type person = {
+        name: string,
+        age: int,
+    }
+
+    // Define addition on ints
+    type intAdd = (a: int, b: int) -> int
+
+    // Define polymorphic addition
+    type add = (a: 'a, b: 'a) -> 'a
+
+    // Define funcion with pipe parameter
+    type bar = (foo: <-string) -> string
+
+    // Define object type with an empty lower bound and an explicit upper bound
+    type address = {
+        ;
+        street: string,
+        city: string,
+        state: string,
+        country: string,
+        province: string,
+        zip: int,
+    }
 ```

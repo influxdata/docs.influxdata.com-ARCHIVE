@@ -39,6 +39,12 @@ All columns indicated must be of the same type.
 
 _**Data type:** Function_
 
+## Additional requirements
+
+- Only one of `keyColumns` or `fn` may be used in a single call.
+- All columns indicated must be of the same type.
+- Each input table must have all of the columns listed by the `keyColumns` parameter.
+
 ## Examples
 
 ##### Get key values from explicitly defined columns

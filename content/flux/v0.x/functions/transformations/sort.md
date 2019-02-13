@@ -15,6 +15,11 @@ The output tables will have the same schema as their corresponding input tables.
 _**Function type:** Transformation_  
 _**Output data type:** Object_
 
+#### Sorting with null values
+When sorting, `null` values will always be first.
+When `desc: false`, nulls are less than every other value.
+When `desc: true`, nulls are greater than every value.
+
 ```js
 sort(columns: ["_value"], desc: false)
 ```

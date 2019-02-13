@@ -28,7 +28,7 @@ _**Data type:** Integer_
 The position offset from the start of results where sampling begins.
 `pos` must be less than `n`.
 If `pos` is less than 0, a random offset is used.
-Defaults to -1 (random offset).
+Defaults to `-1` (random offset).
 
 _**Data type:** Integer_
 

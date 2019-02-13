@@ -57,8 +57,8 @@ longIdentifierName
 The following keywords are reserved and may not be used as identifiers:
 
 ```
-and    import  not  return
-empty  in      or   package
+and    import  not  return   option
+empty  in      or   package  builtin
 ```
 
 > To be implemented: [IMPL#256](https://github.com/influxdata/platform/issues/256) Add in and empty operator support.
