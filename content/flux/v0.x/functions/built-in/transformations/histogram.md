@@ -56,8 +56,8 @@ _**Data type:** Array of floats_
 #### Bin helper functions
 The following helper functions can be used to generated bins.
 
-[linearBins()](/flux/v0.x/functions/misc/linearbins)  
-[logarithmicBins()](/flux/v0.x/functions/misc/logarithmicbins)
+[linearBins()](/flux/v0.x/functions/built-in/misc/linearbins)  
+[logarithmicBins()](/flux/v0.x/functions/built-in/misc/logarithmicbins)
 
 ### normalize
 When `true`, will convert the counts into frequency values between 0 and 1.

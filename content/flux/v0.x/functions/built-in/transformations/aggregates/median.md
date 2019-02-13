@@ -10,7 +10,7 @@ menu:
     weight: 1
 ---
 
-The `median()` function is a special application of the [`percentile()` function](/flux/v0.x/functions/transformations/aggregates/percentile)
+The `median()` function is a special application of the [`percentile()` function](/flux/v0.x/functions/built-in/transformations/aggregates/percentile)
 that returns the median `_value` of an input table or all non-null records in the input table
 with values that fall within the 50th percentile depending on the [method](#method) used.
 
@@ -29,9 +29,9 @@ When using the `exact_selector` method, it outputs the non-null record with the
 value that represents the 50th percentile.
 
 > The `median()` function can only be used with float value types.
-> It is a special application of the [`percentile()` function](/flux/v0.x/functions/transformations/aggregates/percentile) which
+> It is a special application of the [`percentile()` function](/flux/v0.x/functions/built-in/transformations/aggregates/percentile) which
 > uses an approximation implementation that requires floats.
-> You can convert your value column to a float column using the [`toFloat()` function](/flux/v0.x/functions/transformations/type-conversions/tofloat).
+> You can convert your value column to a float column using the [`toFloat()` function](/flux/v0.x/functions/built-in/transformations/type-conversions/tofloat).
 
 ## Parameters
 

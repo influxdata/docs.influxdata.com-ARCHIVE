@@ -78,7 +78,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 {{% /truncate %}}
 
 ## Windowing data
-Use the [`window()` function](/flux/v0.x/functions/transformations/window) to group your data based on time bounds.
+Use the [`window()` function](/flux/v0.x/functions/built-in/transformations/window) to group your data based on time bounds.
 The most common parameter passed with the `window()` is `every` which defines the duration of time between windows.
 Other parameters are available, but for this example, window the base data set into one minute windows.
 
@@ -159,14 +159,14 @@ When visualized in [Chronograf](/chronograf/latest/), each window table is displ
 ![Windowed data](/img/flux/simple-windowed-data.png)
 
 ## Aggregate data
-[Aggregate functions](/flux/v0.x/functions/transformations/aggregates) take the values
+[Aggregate functions](/flux/v0.x/functions/built-in/transformations/aggregates) take the values
 of all rows in a table and use them to perform an aggregate operation.
 The result is output as a new value in a single-row table.
 
 Since windowed data is split into separate tables, aggregate operations run against
 each table separately and output new tables containing only the aggregated value.
 
-For this example, use the [`mean()` function](/flux/v0.x/functions/transformations/aggregates/mean)
+For this example, use the [`mean()` function](/flux/v0.x/functions/built-in/transformations/aggregates/mean)
 to output the average of each window:
 
 ```js
@@ -230,7 +230,7 @@ These represent the lower and upper bounds of the time window.
 
 Many Flux functions rely on the `_time` column.
 To further process your data after an aggregate function, you need to add `_time` back in.
-Use the [`duplicate()` function](/flux/v0.x/functions/transformations/duplicate) to
+Use the [`duplicate()` function](/flux/v0.x/functions/built-in/transformations/duplicate) to
 duplicate either the `_start` or `_stop` column as a new `_time` column.
 
 ```js
@@ -316,7 +316,7 @@ With the aggregate values in a single table, data points in the visualization ar
 You have now created a Flux query that windows and aggregates data.
 The data transformation process outlined in this guide should be used for all aggregation operations.
 
-Flux also provides the [`aggregateWindow()` function](/flux/v0.x/functions/transformations/aggregates/aggregatewindow)
+Flux also provides the [`aggregateWindow()` function](/flux/v0.x/functions/built-in/transformations/aggregates/aggregatewindow)
 which performs all these separate functions for you.
 
 The following Flux query will return the same results:

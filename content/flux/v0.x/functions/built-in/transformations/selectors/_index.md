@@ -22,5 +22,5 @@ The following selector functions are available:
 The following functions can be used as both selectors or aggregates, but they are
 categorized as aggregate functions in this documentation:
 
-- [median()](/flux/v0.x/functions/transformations/aggregates/median)
-- [percentile()](/flux/v0.x/functions/transformations/aggregates/percentile)
+- [median()](/flux/v0.x/functions/built-in/transformations/aggregates/median)
+- [percentile()](/flux/v0.x/functions/built-in/transformations/aggregates/percentile)
