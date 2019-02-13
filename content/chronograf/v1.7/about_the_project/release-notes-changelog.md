@@ -7,7 +7,7 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v1.7.8 [2019-2-??]
+## v1.7.8 [2019-2-13]
 
 * Escape injected meta query values.
 * Fix out-of-range decimal places.
