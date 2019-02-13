@@ -12,7 +12,7 @@ menu:
 Histograms provide valuable insight into the distribution of your data.
 This guide walks through using Flux's `histogram()` function to transform your data into a **cumulative histogram**.
 
-## histgram() function
+## histogram() function
 The [`histogram()` function](/flux/v0.x/functions/built-in/transformations/histogram) approximates the
 cumulative distribution of a dataset by counting data frequencies for a list of "bins."
 A **bin** is simply a range in which a data point falls.
