@@ -331,14 +331,13 @@ memory region in terms of input/output paging and to expect access to the mapped
 Because this setting has been problematic on some kernels (including CentOS and RHEL ), the default is `false`.
 Changing the value to `true` might help users who have slow disks in some cases.
 
-Environment variable: `INFLUXDB_TSM_USE_MADV_WILLNEED`
+Environment variable: `INFLUXDB_DATA_TSM_USE_MADV_WILLNEED`
 
 ### In-memory (`inmem`) index settings
 
 #### `max-series-per-database = 1000000`
 
-The maximum number of [series](/influxdb/v1.7/concepts/glossary/#series) allowed
-per database before writes are dropped.
+The maximum number of [series](/influxdb/v1.7/concepts/glossary/#series) allowed per database before writes are dropped.
 The default setting is `1000000` (one million).
 Change the setting to `0` to allow an unlimited number of series per database.
 
@@ -357,8 +356,7 @@ Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
 #### `max-values-per-tag = 100000`
 
-The maximum number of [tag values](/influxdb/v1.7/concepts/glossary/#tag-value)
-allowed per [tag key](/influxdb/v1.7/concepts/glossary/#tag-key).
+The maximum number of [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) allowed per [tag key](/influxdb/v1.7/concepts/glossary/#tag-key).
 The default value is `100000` (one hundred thousand).
 Change the setting to `0` to allow an unlimited number of tag values per tag
 key.
@@ -384,6 +382,8 @@ and provide higher write throughput.
 Valid size suffixes are `k`, `m`, or `g` (case-insensitive, 1024 = 1k).
 Values without a size suffix are in bytes.
 
+Environment variable: `INFLUXDB_DATA_MAX_INDEX_LOG_FILE_SIZE`
+
 #### `series-id-set-cache-size = 100`
 
 The size of the internal cache used in the TSI index to store previously 
@@ -395,6 +395,7 @@ This value should only be increased if it is known that the set of regularly use
 tag key-value predicates across all measurements for a database is larger than 100. An 
 increase in cache size may lead to an increase in heap usage.
 
+Environment variable: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
 
 ## Query management settings
 
