@@ -9,6 +9,8 @@ menu:
 ---
 ## v1.7.8 [2019-2-13]
 
+### Bug Fixes
+
 * Escape injected meta query values.
 * Fix out-of-range decimal places.
 * Stop raw y-axis format from getting updated to 10.
