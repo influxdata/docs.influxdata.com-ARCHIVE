@@ -16,6 +16,9 @@ Those columns are added to the group key of the output tables.
 
 A single input record will be placed into zero or more output tables, depending on the specific windowing function.
 
+By default the start boundary of a window will align with the Unix epoch (zero time)
+modified by the offset of the `location` option.
+
 _**Function type:** Transformation_  
 _**Output data type:** Object_
 
@@ -23,10 +26,11 @@ _**Output data type:** Object_
 window(
   every: 5m,
   period: 5m,
-  start: 12h,
+  offset: 12h,
   timeColumn: "_time",
   startColumn: "_start",
-  stopColumn: "_stop"
+  stopColumn: "_stop",
+  createEmpty: false
 )
 
 // OR
@@ -35,7 +39,8 @@ window(
   intervals: intervals(every: 5m, period: 5m, offset: 12h),
   timeColumn: "_time",
   startColumn: "_start",
-  stopColumn: "_stop"
+  stopColumn: "_stop",
+  createEmpty: false
 )
 ```
 
@@ -57,10 +62,10 @@ Defaults to `every` value.
 
 _**Data type:** Duration_
 
-### start
-The start window time relative to the [`location`](/flux/v0.x/language/statements#location) offset.
-It can be negative, indicating that the start goes backwards in time.
-The default aligns the window boundaries with `now`.
+### offset
+Offset is the duration by which to shift the window boundaries.
+It can be negative, indicating that the offset goes backwards in time.
+Defaults to 0, which will align window end boundaries with the `every` duration.
 
 _**Data type:** Duration_
 
@@ -93,6 +98,12 @@ The column containing the window stop time.
 Defaults to `"_stop"`.
 
 _**Data type:** String_
+
+### createEmpty
+Specifies whether empty tables should be created.
+Defaults to `false`.
+
+_**Data type:** Boolean_
 
 ## Examples
 

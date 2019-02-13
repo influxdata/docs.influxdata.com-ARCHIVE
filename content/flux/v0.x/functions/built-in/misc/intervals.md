@@ -19,6 +19,9 @@ The set of intervals includes all intervals that intersect with the initial rang
 
 > The `intervals()` function is designed to be used with the `intervals` parameter of the [`window()` function](/flux/v0.x/functions/built-in/transformations/window).
 
+By default the end boundary of an interval will align with the Unix epoch (zero time)
+modified by the offset of the `location` option.
+
 _**Function type:** Miscellaneous_  
 _**Output data type:** Object_
 
@@ -50,9 +53,9 @@ Defaults to the value of the `every` duration.
 _**Data type:** Duration_
 
 ### offset
-The offset duration relative to the location offset.
+The duration by which to shift the window boundaries.
 It can be negative, indicating that the offset goes backwards in time.
-Defaults to `0h`.
+Defaults to `0`, which aligns window end boundaries with the `every` duration.
 
 _**Data type:** Duration_
 
