@@ -1,6 +1,8 @@
 ---
 title: assertEquals() function
 description: The assertEquals() function tests whether two streams have identical data.
+aliases:
+  - /flux/v0.x/functions/tests/assertequals
 menu:
   flux_0_x:
     name: assertEquals

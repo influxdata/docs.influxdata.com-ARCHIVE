@@ -4,6 +4,8 @@ description: >
   The keys() function outputs the group key of input tables.
   For each input table, it outputs a table with the same group key columns, plus a
   _value column containing the labels of the input table's group key.
+aliases:
+  - /flux/v0.x/functions/transformations/keys
 menu:
   flux_0_x:
     name: keys

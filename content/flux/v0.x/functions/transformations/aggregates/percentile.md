@@ -1,6 +1,8 @@
 ---
 title: percentile() function
 description: The percentile() function outputs non-null records with values that fall within the specified percentile or the non-null record with the value that represents the specified percentile.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/percentile
 menu:
   flux_0_x:
     name: percentile

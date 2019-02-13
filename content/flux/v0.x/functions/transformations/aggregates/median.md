@@ -1,6 +1,8 @@
 ---
 title: median() function
 description: The `median()` function returns the median `_value` of an input table or all non-null records in the input table with values that fall within the 50th percentile.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/median
 menu:
   flux_0_x:
     name: median

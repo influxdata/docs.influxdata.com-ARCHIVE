@@ -1,6 +1,8 @@
 ---
 title: join() function
 description: The join() function merges two or more input streams whose values are equal on a set of common columns into a single output stream.
+aliases:
+  - /flux/v0.x/functions/transformations/join
 menu:
   flux_0_x:
     name: join

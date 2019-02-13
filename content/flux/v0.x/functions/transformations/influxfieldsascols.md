@@ -3,6 +3,7 @@ title: influxFieldsAsCols() function
 description: The influxFieldsAsCols() function is pivots a table and automatically aligns fields within each input table that have the same timestamp.
 aliases:
   - /flux/v0.x/functions/inputs/fromrows
+  - /flux/v0.x/functions/transformations/influxfieldsascols
 menu:
   flux_0_x:
     name: influxFieldsAsCols

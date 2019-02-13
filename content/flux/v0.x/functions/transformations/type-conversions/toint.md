@@ -1,6 +1,8 @@
 ---
 title: toInt() function
 description: The toInt() function converts a value to an integer.
+aliases:
+  - /flux/v0.x/functions/transformations/type-conversions/toint
 menu:
   flux_0_x:
     name: toInt

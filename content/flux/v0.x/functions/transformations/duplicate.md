@@ -1,6 +1,8 @@
 ---
 title: duplicate() function
 description: The duplicate() function duplicates a specified column in a table.
+aliases:
+  - /flux/v0.x/functions/transformations/duplicate
 menu:
   flux_0_x:
     name: duplicate

@@ -1,6 +1,8 @@
 ---
 title: toUInt() function
 description: The toUInt() function converts a value to an uinteger.
+aliases:
+  - /flux/v0.x/functions/transformations/type-conversions/touint
 menu:
   flux_0_x:
     name: toUInt

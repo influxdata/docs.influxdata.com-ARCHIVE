@@ -1,6 +1,8 @@
 ---
 title: intervals() function
 description: The intervals() function generates a set of time intervals over a range of time.
+aliases:
+  - /flux/v0.x/functions/misc/intervals
 menu:
   flux_0_x:
     name: intervals

@@ -1,6 +1,8 @@
 ---
 title: increase() function
 description: The increase() function calculates the total non-negative difference between values in a table.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/increase
 menu:
   flux_0_x:
     name: increase

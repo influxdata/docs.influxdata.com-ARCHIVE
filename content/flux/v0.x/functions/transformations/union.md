@@ -1,6 +1,8 @@
 ---
 title: union() function
 description: The union() function concatenates two or more input streams into a single output stream.
+aliases:
+  - /flux/v0.x/functions/transformations/union
 menu:
   flux_0_x:
     name: union

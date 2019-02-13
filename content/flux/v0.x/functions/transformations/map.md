@@ -1,6 +1,8 @@
 ---
 title: map() function
 description: The map() function applies a function to each record in the input tables.
+aliases:
+  - /flux/v0.x/functions/transformations/map
 menu:
   flux_0_x:
     name: map

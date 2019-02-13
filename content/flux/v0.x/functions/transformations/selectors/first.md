@@ -1,6 +1,8 @@
 ---
 title: first() function
 description: The first() function selects the first non-null record from an input table.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors/first
 menu:
   flux_0_x:
     name: first

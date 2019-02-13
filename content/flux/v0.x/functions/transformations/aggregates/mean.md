@@ -1,6 +1,8 @@
 ---
 title: mean() function
 description: The mean() function computes the mean or average of non-null records in the input table.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/mean
 menu:
   flux_0_x:
     name: mean

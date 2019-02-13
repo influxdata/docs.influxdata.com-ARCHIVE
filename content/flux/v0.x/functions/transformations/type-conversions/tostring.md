@@ -1,6 +1,8 @@
 ---
 title: toString() function
 description: The toString() function converts a value to a string.
+aliases:
+  - /flux/v0.x/functions/transformations/type-conversions/tostring
 menu:
   flux_0_x:
     name: toString

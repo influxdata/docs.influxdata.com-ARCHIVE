@@ -1,6 +1,8 @@
 ---
 title: filter() function
 description: The filter() function filters data based on conditions defined in a predicate function (fn).
+aliases:
+  - /flux/v0.x/functions/transformations/filter
 menu:
   flux_0_x:
     name: filter

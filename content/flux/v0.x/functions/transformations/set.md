@@ -1,6 +1,8 @@
 ---
 title: set() function
 description: The set() function assigns a static value to each record in the input table.
+aliases:
+  - /flux/v0.x/functions/transformations/set
 menu:
   flux_0_x:
     name: set

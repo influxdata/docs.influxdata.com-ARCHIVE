@@ -1,6 +1,8 @@
 ---
 title: shift() function
 description: The shift() function adds a fixed duration to time columns.
+aliases:
+  - /flux/v0.x/functions/transformations/shift
 menu:
   flux_0_x:
     name: shift

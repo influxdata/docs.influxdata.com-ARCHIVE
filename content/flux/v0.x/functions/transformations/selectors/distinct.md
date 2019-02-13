@@ -1,6 +1,8 @@
 ---
 title: distinct() function
 description: The distinct() function returns the unique values for a given column.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors/distinct
 menu:
   flux_0_x:
     name: distinct

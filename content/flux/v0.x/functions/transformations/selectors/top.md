@@ -1,6 +1,8 @@
 ---
 title: top() function
 description: The top() function sorts a table by columns and keeps only the top n records.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors/top
 menu:
   flux_0_x:
     name: top

@@ -1,6 +1,8 @@
 ---
 title: stateDuration() function
 description: The stateDuration() function computes the duration of a given state.
+aliases:
+  - /flux/v0.x/functions/transformations/stateduration
 menu:
   flux_0_x:
     name: stateDuration

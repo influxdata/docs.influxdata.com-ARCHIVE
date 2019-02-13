@@ -1,6 +1,8 @@
 ---
 title: spread() function
 description: The spread() function outputs the difference between the minimum and maximum values in each specified column.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/spread
 menu:
   flux_0_x:
     name: spread

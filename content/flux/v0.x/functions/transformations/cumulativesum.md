@@ -1,6 +1,8 @@
 ---
 title: cumulativeSum() function
 description: The cumulativeSum() function computes a running sum for non-null records in the table.
+aliases:
+  - /flux/v0.x/functions/transformations/cumulativesum
 menu:
   flux_0_x:
     name: cumulativeSum

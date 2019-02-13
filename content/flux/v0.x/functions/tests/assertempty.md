@@ -1,6 +1,8 @@
 ---
 title: assertEmpty() function
-description: placeholder
+description: The assertEmpty() function tests if an input stream is empty.
+aliases:
+  - /flux/v0.x/functions/tests/assertempty
 menu:
   flux_0_x:
     name: assertEmpty

@@ -1,6 +1,8 @@
 ---
 title: to() function
 description: The to() function writes data to an InfluxDB v2.0 bucket.
+aliases:
+  - /flux/v0.x/functions/outputs/to
 menu:
   flux_0_x:
     name: to
@@ -20,7 +22,7 @@ to(
   org: "my-org",
   host: "http://example.com:8086",
   token: "xxxxxx",
-  timeColumn: "_time", 
+  timeColumn: "_time",
   tagColumns: ["tag1", "tag2", "tag3"],
   fieldFn: (r) => ({ [r._field]: r._value })
 )

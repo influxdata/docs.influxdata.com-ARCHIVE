@@ -1,6 +1,8 @@
 ---
 title: cov() function
 description: The cov() function computes the covariance between two streams by first joining the streams, then performing the covariance operation.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/cov
 menu:
   flux_0_x:
     name: cov

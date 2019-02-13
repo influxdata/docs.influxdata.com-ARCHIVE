@@ -1,10 +1,8 @@
 ---
 title: fill() function
-<<<<<<< HEAD
 description: The fill() function filters data based on conditions defined in a predicate function (fn).
-=======
-description: The fill() function replaces all null values in an input stream with a non-null value.
->>>>>>> flux-0.x
+aliases:
+  - /flux/v0.x/functions/transformations/fill
 menu:
   flux_0_x:
     name: fill

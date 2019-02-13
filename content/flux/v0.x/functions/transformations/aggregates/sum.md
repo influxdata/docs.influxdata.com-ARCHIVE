@@ -1,6 +1,8 @@
 ---
 title: sum() function
 description: The sum() function computes the sum of non-null records in specified columns.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/sum
 menu:
   flux_0_x:
     name: sum

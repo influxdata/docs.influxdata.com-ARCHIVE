@@ -1,6 +1,8 @@
 ---
 title: pearsonr() function
 description: The pearsonr() function computes the Pearson R correlation coefficient between two streams by first joining the streams, then performing the covariance operation normalized to compute R.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/pearsonr
 menu:
   flux_0_x:
     name: pearsonr

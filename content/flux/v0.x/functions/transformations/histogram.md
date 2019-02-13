@@ -1,6 +1,8 @@
 ---
 title: histogram() function
 description: The histogram() function approximates the cumulative distribution of a dataset by counting data frequencies for a list of bins.
+aliases:
+  - /flux/v0.x/functions/transformations/histogram
 menu:
   flux_0_x:
     name: histogram

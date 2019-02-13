@@ -1,6 +1,8 @@
 ---
 title: systemTime() function
 description: The systemTime() function returns the current system time.
+aliases:
+  - /flux/v0.x/functions/misc/systemtime
 menu:
   flux_0_x:
     name: systemTime

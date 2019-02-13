@@ -1,6 +1,8 @@
 ---
 title: toDuration() function
 description: The toDuration() function converts a value to a duration.
+aliases:
+  - /flux/v0.x/functions/transformations/type-conversions/toduration
 menu:
   flux_0_x:
     name: toDuration

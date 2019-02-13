@@ -1,6 +1,8 @@
 ---
 title: logarithmicBins() function
 description: The logarithmicBins() function generates a list of exponentially separated floats.
+aliases:
+  - /flux/v0.x/functions/misc/logarithmicbins
 menu:
   flux_0_x:
     name: logarithmicBins

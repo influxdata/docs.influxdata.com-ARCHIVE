@@ -1,6 +1,8 @@
 ---
 title: yield() function
 description: The yield() function indicates the input tables received should be delivered as a result of the query.
+aliases:
+  - /flux/v0.x/functions/outputs/yield
 menu:
   flux_0_x:
     name: yield

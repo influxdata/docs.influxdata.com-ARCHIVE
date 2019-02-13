@@ -1,6 +1,8 @@
 ---
 title: buckets() function
 description: The buckets() function returns a list of buckets in the organization.
+aliases:
+  - /flux/v0.x/functions/inputs/buckets
 menu:
   flux_0_x:
     name: buckets

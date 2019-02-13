@@ -1,6 +1,8 @@
 ---
 title: limit() function
 description: The limit() function limits the number of records in output tables to a fixed number (n).
+aliases:
+  - /flux/v0.x/functions/transformations/limit
 menu:
   flux_0_x:
     name: limit

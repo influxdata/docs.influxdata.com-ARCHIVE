@@ -1,6 +1,8 @@
 ---
 title: min() function
 description: The min() function selects record with the lowest _value from the input table.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors/min
 menu:
   flux_0_x:
     name: min

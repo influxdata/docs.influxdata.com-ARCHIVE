@@ -1,6 +1,8 @@
 ---
 title: toBool() function
 description: The toBool() function converts a value to a boolean.
+aliases:
+  - /flux/v0.x/functions/transformations/type-conversions/tobool
 menu:
   flux_0_x:
     name: toBool

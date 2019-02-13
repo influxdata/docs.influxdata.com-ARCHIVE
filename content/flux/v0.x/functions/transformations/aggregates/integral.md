@@ -1,6 +1,8 @@
 ---
 title: integral() function
 description: The integral() function computes the area under the curve per unit of time of subsequent non-null records.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/integral
 menu:
   flux_0_x:
     name: integral

@@ -1,6 +1,8 @@
 ---
 title: bottom() function
 description: The bottom() function sorts a table by columns and keeps only the bottom n records.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors/bottom
 menu:
   flux_0_x:
     name: bottom

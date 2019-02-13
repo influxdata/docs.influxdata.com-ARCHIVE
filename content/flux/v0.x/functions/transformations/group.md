@@ -1,6 +1,8 @@
 ---
 title: group() function
 description: The group() function groups records based on their values for specific columns.
+aliases:
+  - /flux/v0.x/functions/transformations/group
 menu:
   flux_0_x:
     name: group

@@ -1,6 +1,8 @@
 ---
 title: toFloat() function
 description: The toFloat() function converts a value to a float.
+aliases:
+  - /flux/v0.x/functions/transformations/type-conversions/tofloat
 menu:
   flux_0_x:
     name: toFloat

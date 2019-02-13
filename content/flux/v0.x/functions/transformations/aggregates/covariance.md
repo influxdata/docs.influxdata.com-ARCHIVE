@@ -1,6 +1,8 @@
 ---
 title: covariance() function
 description: The covariance() function computes the covariance between two columns.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/covariance
 menu:
   flux_0_x:
     name: covariance

@@ -1,6 +1,8 @@
 ---
 title: sample() function
 description: The sample() function selects a subset of the records from the input table.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors/sample
 menu:
   flux_0_x:
     name: sample

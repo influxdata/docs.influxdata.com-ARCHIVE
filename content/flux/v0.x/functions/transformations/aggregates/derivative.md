@@ -1,6 +1,8 @@
 ---
 title: derivative() function
 description: The derivative() function computes the rate of change per unit of time between subsequent non-null records.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/derivative
 menu:
   flux_0_x:
     name: derivative

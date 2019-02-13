@@ -1,6 +1,8 @@
 ---
 title: toTime() function
 description: The toTime() function converts a value to a time.
+aliases:
+  - /flux/v0.x/functions/transformations/type-conversions/totime
 menu:
   flux_0_x:
     name: toTime

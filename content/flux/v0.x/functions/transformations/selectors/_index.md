@@ -1,6 +1,8 @@
 ---
 title: Flux selector functions
 description: Flux selector functions return one or more records based on function logic.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors
 menu:
   flux_0_x:
     parent: Transformations

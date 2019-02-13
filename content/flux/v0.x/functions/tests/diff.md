@@ -1,6 +1,8 @@
 ---
 title: diff() function
 description: The diff() function produces a diff between two streams.
+aliases:
+  - /flux/v0.x/functions/tests/diff
 menu:
   flux_0_x:
     name: diff

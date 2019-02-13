@@ -1,6 +1,8 @@
 ---
 title: highestCurrent() function
 description: The highestCurrent() function returns the top 'n' records from all groups using the last value of each group.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors/highestcurrent
 menu:
   flux_0_x:
     name: highestCurrent

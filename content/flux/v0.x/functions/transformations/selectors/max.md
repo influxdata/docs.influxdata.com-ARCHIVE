@@ -1,6 +1,8 @@
 ---
 title: max() function
 description: The max() function selects record with the highest _value from the input table.
+aliases:
+  - /flux/v0.x/functions/transformations/selectors/max
 menu:
   flux_0_x:
     name: max

@@ -1,6 +1,8 @@
 ---
 title: difference() function
 description: The difference() function computes the difference between subsequent non-null records.
+aliases:
+  - /flux/v0.x/functions/transformations/aggregates/difference
 menu:
   flux_0_x:
     name: difference
