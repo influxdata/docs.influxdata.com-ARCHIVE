@@ -30,7 +30,7 @@ If you have not installed this release, then install the 1.7.4 release.
   * **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
   * **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
-* A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed the issue in 1.7.4.
+* A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed this issue in 1.7.4.
 
 ### Features
 

@@ -8,9 +8,9 @@ menu:
     parent: Administration
 ---
 
-## Upgrading InfluxDB Enterprise 1.3.x-1.6.x clusters to 1.7.3 (rolling upgrade)
+## Upgrading InfluxDB Enterprise 1.3.x-1.6.x clusters to 1.7.4 (rolling upgrade)
 
-### Step 0: Back up your cluster before upgrading to version 1.7.3.
+### Step 0: Back up your cluster before upgrading to version 1.7.4.
 
 Create a full backup of your InfluxDB Enterprise cluster before performing an upgrade.
 If you have incremental backups created as part of your standard operating procedures, make sure to
@@ -23,57 +23,61 @@ trigger a final incremental backup before proceeding with the upgrade.
 
 Follow these steps to upgrade all meta nodes in your InfluxDB Enterprise cluster. Ensure that the meta cluster is healthy before proceeding to the data nodes.
 
-### Step 1: Download the 1.7.3 meta node package.
+### Step 1: Download the 1.7.4 meta node package
 
 #### Meta node package download
-**Ubuntu & Debian (64-bit)**
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.3-c1.7.3_amd64.deb
+
+##### Ubuntu and Debian (64-bit)
+
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.4-c1.7.4_amd64.deb
 ```
 
-**RedHat & CentOS (64-bit)**
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.3_c1.7.3.x86_64.rpm
+##### RedHat and CentOS (64-bit)
+
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.4_c1.7.4.x86_64.rpm
 ```
 
-### Step 2: Install the 1.7.3 meta nodes package.
+### Step 2: Install the 1.7.4 meta nodes package
 
 #### Meta node package install
 
-##### Ubuntu & Debian (64-bit)
+##### Ubuntu and Debian (64-bit)
 
-```
-sudo dpkg -i influxdb-meta_1.7.3-c1.7.3_amd64.deb
-```
-
-##### RedHat & CentOS (64-bit)
-
-```
-sudo yum localinstall influxdb-meta-1.7.3_c1.7.3.x86_64.rpm
+```bash
+sudo dpkg -i influxdb-meta_1.7.4-c1.7.4_amd64.deb
 ```
 
-### Step 3: Restart the `influxdb-meta` service.
+##### RedHat and CentOS (64-bit)
+
+```bash
+sudo yum localinstall influxdb-meta-1.7.4_c1.7.4.x86_64.rpm
+```
+
+### Step 3: Restart the `influxdb-meta` service
 
 #### Meta node restart
 
 ##### sysvinit systems
 
-```
+```bash
 service influxdb-meta restart
 ```
+
 ##### systemd systems
 
-```
+```bash
 sudo systemctl restart influxdb-meta
 ```
 
-### Step 4: Confirm the upgrade.
+### Step 4: Confirm the upgrade
 
 After performing the upgrade on ALL meta nodes, check your node version numbers using the
 `influxd-ctl show` command.
 The [`influxd-ctl` utility](/enterprise_influxdb/v1.7/administration/cluster-commands/) is available on all meta nodes.
 
-```
+```bash
 ~# influxd-ctl show
 
 Data Nodes
@@ -86,57 +90,59 @@ ID	TCP Address		Version
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.7.3_c1.7.3   # 1.7.3_c1.7.3 = 👍
-rk-upgrading-02:8091	1.7.3_c1.7.3
-rk-upgrading-03:8091	1.7.3_c1.7.3
+rk-upgrading-01:8091	1.7.4_c1.7.4   # 1.7.4_c1.7.4 = 👍
+rk-upgrading-02:8091	1.7.4_c1.7.4
+rk-upgrading-03:8091	1.7.4_c1.7.4
 ```
 
 ## Upgrading data nodes
 
 Repeat the following steps for each data node in your InfluxDB Enterprise cluster.
 
-### Step 1: Download the 1.7.3 data node package.
+### Step 1: Download the 1.7.4 data node package
 
 #### Data node package download
 
-##### Ubuntu & Debian (64-bit)
+##### Ubuntu and Debian (64-bit)
 
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.3-c1.7.3_amd64.deb
-```
-
-##### RedHat & CentOS (64-bit)
-
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.3_c1.7.3.x86_64.rpm
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.4-c1.7.4_amd64.deb
 ```
 
-### Step 2: Remove the data node from the load balancer.
+##### RedHat and CentOS (64-bit)
+
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.4_c1.7.4.x86_64.rpm
+```
+
+### Step 2: Remove the data node from the load balancer
 
 To avoid downtime and allow for a smooth transition, remove the data node you are upgrading from your
 load balancer **before** performing the remaining steps.
 
-### Step 3: Install the 1.7.3 data node packages.
+### Step 3: Install the 1.7.4 data node packages
 
 #### Data node package install
 
 When you run the install command, your terminal asks if you want to keep your
-current configuration file or overwrite your current configuration file with the file for version 1.7.3.
+current configuration file or overwrite your current configuration file with the file for version 1.7.4.
 
 Keep your current configuration file by entering `N` or `O`.
-The configuration file will be updated with the necessary changes for version 1.7.3 in the next step.
+The configuration file will be updated with the necessary changes for version 1.7.4 in the next step.
 
-**Ubuntu & Debian (64-bit)**
-```
-sudo dpkg -i influxdb-data_1.7.3-c1.7.3_amd64.deb
-```
+##### Ubuntu and Debian (64-bit)
 
-**RedHat & CentOS (64-bit)**
-```
-sudo yum localinstall influxdb-data-1.7.3_c1.7.3.x86_64.rpm
+```bash
+sudo dpkg -i influxdb-data_1.7.4-c1.7.4_amd64.deb
 ```
 
-### Step 4: Update the data node configuration file.
+##### RedHat & CentOS (64-bit)
+
+```bash
+sudo yum localinstall influxdb-data-1.7.4_c1.7.4.x86_64.rpm
+```
+
+### Step 4: Update the data node configuration file
 
 > The first official Time Series Index (TSI) was released with InfluxDB v1.5.
 > Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
@@ -151,12 +157,14 @@ sudo yum localinstall influxdb-data-1.7.3_c1.7.3.x86_64.rpm
 * [pool-max-idle-streams = 100](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-streams-100) to the `[cluster]` section
 * [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-time-60s) to the `[cluster]` section
 * the [[anti-entropy]](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy) section:
+
 ```
 [anti-entropy]
   enabled = true
   check-interval = "30s"
   max-fetch = 10
 ```
+
 **Remove:**
 
 * `max-remote-write-connections` from the `[cluster]` section
@@ -189,12 +197,13 @@ The new configuration options are set to the default settings.
 
 ##### sysvinit systems
 
-```
+```bash
 service influxdb restart
 ```
+
 ##### systemd systems
 
-```
+```bash
 sudo systemctl restart influxdb
 ```
 
@@ -205,29 +214,28 @@ Add the data node back into the load balancer to allow it to serve reads and wri
 If this is the last data node to be upgraded, proceed to step 7.
 Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and repeat the process for the remaining data nodes.
 
-### Step 8: Confirm the upgrade.
+### Step 8: Confirm the upgrade
 
-Your cluster is now upgraded to InfluxDB Enterprise 1.7.3.
+Your cluster is now upgraded to InfluxDB Enterprise 1.7.4.
 Check your node version numbers using the `influxd-ctl show` command.
 The [`influxd-ctl`](/enterprise_influxdb/v1.7/administration/cluster-commands/) utility is available on all meta nodes.
 
-```
+```bash
 ~# influxd-ctl show
 
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.7.3_c1.7.3   # 1.7.3_c1.7.3 = 👍
-5	rk-upgrading-02:8088	1.7.3_c1.7.3
-6	rk-upgrading-03:8088	1.7.3_c1.7.3
+4	rk-upgrading-01:8088	1.7.4_c1.7.4   # 1.7.4_c1.7.4 = 👍
+5	rk-upgrading-02:8088	1.7.4_c1.7.4
+6	rk-upgrading-03:8088	1.7.4_c1.7.4
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.7.3_c1.7.3
-rk-upgrading-02:8091	1.7.3_c1.7.3
-rk-upgrading-03:8091	1.7.3_c1.7.3
+rk-upgrading-01:8091	1.7.4_c1.7.4
+rk-upgrading-02:8091	1.7.4_c1.7.4
+rk-upgrading-03:8091	1.7.4_c1.7.4
 ```
 
-If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
-provided to you when you received your InfluxDB Enterprise license.
+If you have any issues upgrading your cluster, contact InfluxData support.
