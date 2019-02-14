@@ -9,11 +9,11 @@ menu:
 
 ## v1.7.4 [2018-02-13]
 
-Features
+### Features
 
 * Allow TSI bitset cache to be configured.
 
-Bug fixes
+### Bug fixes
 
 * Remove copy-on-write when caching bitmaps in TSI.
 * Use `systemd` for Amazon Linux 2.
@@ -32,11 +32,11 @@ If you are currently running the 1.7.3 release, it is imperative that you read a
 
 * The issue specifically affects shards larger than 16GB, which have a high potential for data loss once the shard goes through a full compaction. This typically occurs as shards go cold,  meaning once no new data is being written into the database for the time range specified by the shard. Our engineering team is performing a post-mortem to determine how this defect was introduced and a subsequent blog post will highlight what we discover.
 
-Features
+### Features
 
 * Update Flux to 0.12.0
 
-Bug fixes
+### Bug fixes
 
 * Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
 * Limit force-full and cold compaction size.
