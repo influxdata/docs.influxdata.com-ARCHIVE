@@ -107,16 +107,19 @@ sudo yum remove influxdb
 > **Note:** This step will overwrite your current configuration file.
 If you have settings that you’d like to keep, please make a copy of your config file before running the following command.
 
-#### Ubuntu & Debian (64-bit)
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.3-c1.7.3_amd64.deb
-sudo dpkg -i influxdb-data_1.7.3-c1.7.3_amd64.deb
+#### Ubuntu and Debian (64-bit)
+
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.4-c1.7.4_amd64.deb
+sudo dpkg -i influxdb-data_1.7.4-c1.7.4_amd64.deb
 ```
 
-#### RedHat & CentOS (64-bit)
+#### RedHat and CentOS (64-bit)
+
+
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.3_c1.7.3.x86_64.rpm
-sudo yum localinstall influxdb-data-1.7.3_c1.7.3.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.4_c1.7.4.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.4_c1.7.4.x86_64.rpm
 ```
 
 ### 5. Update the configuration file
