@@ -278,9 +278,7 @@ Value should be enclosed in double quotes.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
-Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
-
-####  `max-values-per-tag = 100000`
+#### `max-values-per-tag = 100000`
 
 The maximum number of tag values per tag that are allowed before writes are dropped.
 This limit can prevent high cardinality tag values from being written to a measurement.
