@@ -7,6 +7,45 @@ menu:
     parent: About the project
 ---
 
+## v1.7.4 [2018-02-13]
+
+Features
+
+* Allow TSI bitset cache to be configured.
+
+Bug fixes
+
+* Remove copy-on-write when caching bitmaps in TSI.
+* Use `systemd` for Amazon Linux 2.
+* Revert "Limit force-full and cold compaction size."
+* Convert `TagValueSeriesIDCache` to use string fields.
+* Ensure that cached series id sets are Go heap backed.
+* Allow TSI bitset cache to be configured.
+
+## v1.7.3 [2019-01-11]
+
+If you have not installed this release, skip this release and install v1.7.4.
+
+If you are currently running the 1.7.3 release, it is imperative that you read and review the following:
+
+* We were recently made aware of a critical defect in the InfluxDB 1.7.3 release. We took swift action to make the necessary corrections and out of an abundance of caution for your data and projects, we encourage you to upgrade to the 1.7.4 release as quickly as possible.  
+
+* The issue specifically affects shards larger than 16GB, which have a high potential for data loss once the shard goes through a full compaction. This typically occurs as shards go cold,  meaning once no new data is being written into the database for the time range specified by the shard. Our engineering team is performing a post-mortem to determine how this defect was introduced and a subsequent blog post will highlight what we discover.
+
+Features
+
+* Update Flux to 0.12.0
+
+Bug fixes
+
+* Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
+* Limit force-full and cold compaction size.
+* Add user authentication and authorization support for Flux HTTP requests.
+* Call `storage.Group` API to correctly map group mode.
+* Marked functions that always return floats as always returning floats.
+* Add support for optionally logging Flux queries.
+* Fix cardinality estimation error.
+
 ## v1.7.2 [2018-12-11]
 
 ### Bug fixes

@@ -263,17 +263,20 @@ This setting does not apply to cache snapshotting.
 
 Environmental variable: `INFLUXDB_DATA_CACHE_MAX_CONCURRENT_COMPACTIONS`
 
-####  `compact-full-write-cold-duration = "4h"`
+#### `compact-full-write-cold-duration = "4h"`
 
 The duration at which the TSM engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
 Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
-####  `max-series-per-database = 1000000`
+#### `index-version = "inmem"`
 
-The maximum series allowed per database before writes are dropped.  
-This limit can prevent high cardinality issues at the database level.  
-This limit can be disabled by setting it to `0`.
+The type of shard index to use for new shards.
+The default (`inmem`) is to use an in-memory index that is recreated at startup.
+A value of `tsi1` will use a disk-based index that supports higher cardinality datasets.
+Value should be enclosed in double quotes.
+
+Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
@@ -284,15 +287,6 @@ This limit can prevent high cardinality tag values from being written to a measu
 This limit can be disabled by setting it to `0`.
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
-
-#### `index-version = "inmem"`
-
-The type of shard index to use for new shards.
-The default (`inmem`) is to use an in-memory index that is recreated at startup.
-A value of `tsi1` will use a disk-based index that supports higher cardinality datasets.
-Value should be enclosed in double quotes.
-
-Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 -----
 
