@@ -20,17 +20,17 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.4 releases. For de
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.7.3 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
-If you have not installed this release, skip this release and install v1.7.4.
+### Important update [2019-02-13]
 
-### Important
+If you have not installed this release, then install the 1.7.4 release.
 
-If you are currently running the 1.7.3 release, it is imperative that you read and review the following:
+**If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
 
-* We were recently made aware of a critical defect in the InfluxDB 1.7.3 release. We took swift action to make the necessary corrections and out of an abundance of caution for your data and projects, we encourage you to upgrade to the 1.7.4 release as quickly as possible.  
+* A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
+  * **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  * **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
-* The issue specifically affects shards larger than 16GB, which have a high potential for data loss once the shard goes through a full compaction. This typically occurs as shards go cold,  meaning once no new data is being written into the database for the time range specified by the shard. Our engineering team is performing a post-mortem to determine how this defect was introduced and a subsequent blog post will highlight what we discover.
-
-* A small percentage of customers have experienced data node crashes with segmentation violation errors. Contact support if you encounter this issue -- a fix is planned for 1.7.4.
+* A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed the issue in 1.7.4.
 
 ### Features
 
