@@ -74,12 +74,7 @@ Defines the subscription mode of Kapacitor.
 Available options:
 
 - `"server"`
-- `"cluster"` _(Coming)_
-
-<dt>
-The `cluster` subscription-mode is planned for future versions of Kapacitor and [Kapacitor Enterprise](/enterprise_kapacitor/).
-If used currently, subscription data will not be received.
-</dt>
+- `"cluster"`
 
 ### `subscription-protocol`
 Defines which protocol to use for subscriptions.
