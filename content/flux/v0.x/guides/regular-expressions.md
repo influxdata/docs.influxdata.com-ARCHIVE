@@ -70,7 +70,7 @@ The following example drops columns whose names do not being with `_`.
 from(bucket: "telegraf/autogen")
   |> range(start: -15m)
   |> filter(fn: (r) => r._measurement == "mem")
-  |> drop(fn: (col) => col !~ /_.*/)
+  |> drop(fn: (column) => column !~ /_.*/)
 ```
 
 ## Helpful links
