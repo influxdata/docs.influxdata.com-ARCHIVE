@@ -2,7 +2,7 @@
 title: Graphite output data format
 description: Use the "Graphite" output data format to serialize data from Telegraf metrics.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Graphite output
     weight: 10
     parent: Output data formats
@@ -55,4 +55,4 @@ cpu.usage_idle;cpu=cpu-total;dc=us-east-1;host=tars 98.09 1455320690
 
 ### templates
 
-For more information on templates and template patterns, see [Template patterns](/telegraf/v1.9/data_formats/template-patterns/).
+For more information on templates and template patterns, see [Template patterns](/telegraf/v1.10/data_formats/template-patterns/).

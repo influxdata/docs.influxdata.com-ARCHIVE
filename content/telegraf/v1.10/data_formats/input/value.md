@@ -2,7 +2,7 @@
 title: Value input data format
 description: Use the "value" input data format to parse single values into Telegraf metrics.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Value
     weight: 100
     parent: Input data formats

@@ -2,7 +2,7 @@
 title: Telegraf 1.10 release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Release notes
     weight: 10
     parent: About the project

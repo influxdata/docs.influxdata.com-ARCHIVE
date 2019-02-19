@@ -2,7 +2,7 @@
 title: Dropwizard input data format
 description: Use the "dropwizard" input data format to parse Dropwizard JSON representations into Telegraf metrics.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Dropwizard
     weight: 30
     parent: Input data formats
@@ -10,7 +10,7 @@ menu:
 
 The `dropwizard` data format can parse a [Dropwizard JSON representation][dropwizard] representation of a single metrics registry. By default, tags are parsed from metric names as if they were actual InfluxDB Line Protocol keys (`measurement<,tag_set>`) which can be overridden using custom [template patterns][templates]. All field value types are supported, including `string`, `number` and `boolean`.
 
-[templates]: /telegraf/v1.9/data_formats/template-patterns/
+[templates]: /telegraf/v1.10/data_formats/template-patterns/
 [dropwizard]: http://metrics.dropwizard.io/3.1.0/manual/json/
 
 ## Configuration

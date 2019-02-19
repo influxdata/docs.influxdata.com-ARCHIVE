@@ -2,9 +2,9 @@
 title: Getting started with Telegraf
 description: Downloading, installing, configuring and getting started with Telegraf, the plug-in driven server agent of the InfluxData time series platform.
 aliases:
-  - /telegraf/v1.9/introduction/getting_started/
+  - /telegraf/v1.10/introduction/getting_started/
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Getting started
     weight: 30
     parent: Introduction
@@ -30,7 +30,7 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 
 ### Creating and editing the configuration file
 
-Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v1.9/plugins/inputs/) (where the metrics come from) and [outputs](/telegraf/v1.9/plugins/outputs/) (where the metrics go). There are [several ways](/telegraf/v1.9/administration/configuration/) to create and edit the configuration file.
+Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v1.10/plugins/inputs/) (where the metrics come from) and [outputs](/telegraf/v1.10/plugins/outputs/) (where the metrics go). There are [several ways](/telegraf/v1.10/administration/configuration/) to create and edit the configuration file.
 Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
 
 In the example below, we create a configuration file called `telegraf.conf` with two inputs:

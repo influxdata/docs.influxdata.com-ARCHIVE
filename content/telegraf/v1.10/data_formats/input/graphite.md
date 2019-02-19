@@ -2,7 +2,7 @@
 title: Graphite input data format
 description: Us the Graphite data format to translate Graphite dot buckets directly into Telegraf measurement names, with a single value field, and without any tags.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Graphite
     weight: 40
     parent: Input data formats
@@ -52,4 +52,4 @@ By default, the separator is left as `.`, but this can be changed using the
 
 ### templates
 
-For information on creating templates, see [Template patterns](/telegraf/v1.9/data_formats/template-patterns/).
+For information on creating templates, see [Template patterns](/telegraf/v1.10/data_formats/template-patterns/).

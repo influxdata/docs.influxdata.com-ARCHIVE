@@ -2,7 +2,7 @@
 title: Telegraf aggregator and processor plugins
 description: Use Telegraf aggregator and processor plugins to aggregate and process data between the input plugins and output plugins.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Aggregator and processor plugins
     weight: 20
     parent: Concepts

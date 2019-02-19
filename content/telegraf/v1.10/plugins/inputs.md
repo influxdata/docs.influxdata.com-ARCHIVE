@@ -2,13 +2,13 @@
 title: Telegraf input plugins
 description: Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Input
     weight: 10
     parent: Plugins
 ---
 
-Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.9/administration/configuration/).
+Telegraf input plugins are used with the InfluxData time series platform to collect metrics from the system, services, or third party APIs. All metrics are gathered from the inputs you [enable and configure in the configuration file](/telegraf/v1.10/administration/configuration/).
 
 
 
@@ -218,7 +218,7 @@ or [cluster-stats](https://www.elastic.co/guide/en/elasticsearch/reference/curre
 
 Plugin ID: `exec`
 
-The [Exec input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/exec/README.md) parses supported [Telegraf input data formats](/telegraf/v1.9/data_formats/input/) (InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard into metrics. Each Telegraf metric includes the measurement name, tags, fields, and timesamp.
+The [Exec input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/exec/README.md) parses supported [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) (InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard into metrics. Each Telegraf metric includes the measurement name, tags, fields, and timesamp.
 
 ### Fail2ban
 
@@ -286,14 +286,14 @@ The [Hddtemp input plugin](https://github.com/influxdata/telegraf/blob/release-1
 
 Plugin ID: `http`
 
-The [HTTP input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http/README.md) collects metrics from one or more HTTP (or HTTPS) endpoints. The endpoint should have metrics formatted in one of the [supported input data formats](/telegraf/v1.9/data_formats/input/). Each data format has its own unique set of configuration options which can be added to the input configuration.
+The [HTTP input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http/README.md) collects metrics from one or more HTTP (or HTTPS) endpoints. The endpoint should have metrics formatted in one of the [supported input data formats](/telegraf/v1.10/data_formats/input/). Each data format has its own unique set of configuration options which can be added to the input configuration.
 
 ### HTTP Listener
 
 Plugin ID: `http_listener`
 
 The [HTTP Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http_listener/README.md) listens for messages sent via HTTP POST. Messages are expected in the [InfluxDB
-Line Protocol input data format](/telegraf/v1.9/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.9/data_formats/input/) are not supported).
+Line Protocol input data format](/telegraf/v1.10/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) are not supported).
 This plugin allows Telegraf to serve as a proxy or router for the `/write` endpoint of the InfluxDB HTTP API.
 
 ### HTTP Listener v2
@@ -301,7 +301,7 @@ This plugin allows Telegraf to serve as a proxy or router for the `/write` endpo
 Plugin ID: `http_listener_v2`
 
 The [HTTP Listener v2 input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http_listener_v2/README.md) listens for messages sent via HTTP POST. Messages are expected in the [InfluxDB
-Line Protocol input data format](/telegraf/v1.9/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.9/data_formats/input/) are not supported).
+Line Protocol input data format](/telegraf/v1.10/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) are not supported).
 This plugin allows Telegraf to serve as a proxy or router for the `/write` endpoint of the InfluxDB v2110 HTTP API.
 
 ### HTTP Response
@@ -528,7 +528,7 @@ measurement containing values.
 Plugin ID: `mqtt_consumer`
 
 The [MQTT Consumer input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/mqtt_consumer/README.md) reads from specified MQTT topics and adds messages to InfluxDB. Messages are in the
-[Telegraf input data formats](/telegraf/v1.9/data_formats/input/).
+[Telegraf input data formats](/telegraf/v1.10/data_formats/input/).
 
 ### MySQL
 
@@ -540,7 +540,7 @@ The [MySQL input plugin](https://github.com/influxdata/telegraf/blob/release-1.9
 
 Plugin ID: `nats_consumer`
 
-The [NATS Consumer input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nats_consumer/README.md) reads from specified NATS subjects and adds messages to InfluxDB. Messages are expected in the [Telegraf input data formats](/telegraf/v1.9/data_formats/input/). A Queue Group is used when subscribing to subjects so multiple instances of Telegraf can read from a NATS cluster in parallel.
+The [NATS Consumer input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nats_consumer/README.md) reads from specified NATS subjects and adds messages to InfluxDB. Messages are expected in the [Telegraf input data formats](/telegraf/v1.10/data_formats/input/). A Queue Group is used when subscribing to subjects so multiple instances of Telegraf can read from a NATS cluster in parallel.
 
 ### NATS Server Monitoring
 
@@ -799,7 +799,7 @@ The [SNMP input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/
 Plugin ID: `socket_listener`
 
 The [Socket Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/socket_listener/README.md) listens for messages from streaming (TCP, UNIX) or datagram (UDP, unixgram) protocols. Messages are expected in the
-[Telegraf Input Data Formats](/telegraf/v1.9/data_formats/input/).
+[Telegraf Input Data Formats](/telegraf/v1.10/data_formats/input/).
 
 ### StatsD
 
@@ -997,7 +997,7 @@ It flattens the JSON and finds all numeric values, treating them as floats.
 Plugin ID: `http_listener`
 
 The [HTTP Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/http_listener/README.md) listens for messages sent via HTTP POST. Messages are expected in the [InfluxDB
-Line Protocol input data format](/telegraf/v1.9/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.9/data_formats/input/) are not supported).
+Line Protocol input data format](/telegraf/v1.10/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) are not supported).
 This plugin allows Telegraf to serve as a proxy or router for the `/write` endpoint of the InfluxDB HTTP API.
 
 > DEPRECATED as of version 1.9. Use either [HTTP Listener v2](#http-listener-v2) or the [InfluxDB Listener](#influxdb-v1-x)

@@ -2,7 +2,7 @@
 title: InfluxDB Line Protocol input data format
 description: Use the InfluxDB Line Protocol input data format to parse InfluxDB metrics directly into Telegraf metrics.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: InfluxDB Line Protocol input
     weight: 60
     parent: Input data formats

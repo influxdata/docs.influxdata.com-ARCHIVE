@@ -2,7 +2,7 @@
 title: Telegraf output data formats
 description: Telegraf serializes metrics into output data formats for InfluxDB Line Protocol, JSON, Graphite, and Splunk metrics.
 menu:
-  telegraf_1_9:
+  telegraf_1_10:
     name: Output data formats
     weight: 1
     parent: Data formats
@@ -12,10 +12,10 @@ In addition to output-specific data formats, Telegraf supports the following set
 of common data formats that may be selected when configuring many of the Telegraf
 output plugins.
 
-* [InfluxDB Line Protocol](/telegraf/v1.9/data_formats/output/influx)
-* [JSON](/telegraf/v1.9/data_formats/output/json)
-* [Graphite](/telegraf/v1.9/data_formats/output/graphite)
-* [SplunkMetric](/telegraf/v1.9/data_formats/output/splunkmetric)
+* [InfluxDB Line Protocol](/telegraf/v1.10/data_formats/output/influx)
+* [JSON](/telegraf/v1.10/data_formats/output/json)
+* [Graphite](/telegraf/v1.10/data_formats/output/graphite)
+* [SplunkMetric](/telegraf/v1.10/data_formats/output/splunkmetric)
 
 You will be able to identify the plugins with support by the presence of a
 `data_format` configuration option, for example, in the File (`file`) output plugin:
