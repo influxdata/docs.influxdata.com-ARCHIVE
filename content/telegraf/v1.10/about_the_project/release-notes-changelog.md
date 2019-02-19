@@ -12,7 +12,7 @@ menu:
 
 ## v1.10 [unreleased]
 
-#### New Inputs
+#### New input plugins
 
 - [cloud_pubsub](/plugins/inputs/cloud_pubsub/README.md) - Contributed by @emilymye
 - [kube_inventory](/plugins/inputs/kube_inventory/README.md) - Contributed by @influxdata
@@ -20,7 +20,7 @@ menu:
 - [nginx_upstream_check](/plugins/inputs/nginx_upstream_check/README.md) - Contributed by @dmitryilyin
 - [multifile](/plugins/inputs/multifile/README.md) - Contributed by @martin2250
 
-#### New Outputs
+#### New output plugins
 
 - [cloud_pubsub](/plugins/outputs/cloud_pubsub/README.md) - Contributed by @emilymye
 
@@ -56,18 +56,18 @@ menu:
 - Add resource path -based filtering to `vsphere` input.
 - Add `rcode` tag and field to `dns_query` input.
 
-#### Bugfixes
+#### Bug fixes
 
 - Fix initscript removes pidfile of restarted Telegraf process.
-- Use datacenter option spelling in consul input.
-- Remove auth from /ping route in influxdb_listener.
+- Use datacenter option spelling in `consul` input.
+- Remove auth from `/ping` route in `influxdb_listener`.
 - Fix `x509_cert` input stops checking certs after first error.
-- Skip string fields when writing to stackdriver output.
-- Send metrics in ascending time order in stackdriver output.
-- Use systemd in Amazon Linux 2 rpm.
-- Set deadlock priority in sqlserver input.
-- Remove error log when snmp6 directory does not exists with nstat input.
-- Host not added when using custom arguments in ping plugin.
+- Skip string fields when writing to `stackdriver` output.
+- Send metrics in ascending time order in `stackdriver` output.
+- Use `systemd` in Amazon Linux 2 rpm.
+- Set deadlock priority in `sqlserver` input.
+- Remove error log when snmp6 directory does not exists with `nstat` input.
+- Host not added when using custom arguments in `ping` plugin.
 
 
 
