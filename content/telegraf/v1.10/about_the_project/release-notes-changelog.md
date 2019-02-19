@@ -13,7 +13,7 @@ menu:
 
 
 
-## v1.9.4 [2019-02-05]
+## 1.9.4 [2019-02-05]
 
 ### Bug fixes
 
@@ -25,7 +25,7 @@ menu:
 * Syslog (`syslog`) input plugin
     * Fix definition of multiple syslog plugins.
 
-## v1.9.3 [2019-01-22]
+## 1.9.3 [2019-01-22]
 
 #### Bug fixes
 
@@ -42,7 +42,7 @@ menu:
 * Prometheus (`prometheus`) input plugin
   * Fix `prometheus` input not detecting added and removed pods.
 
-## v1.9.2 [2019-01-08]
+## 1.9.2 [2019-01-08]
 
 ### Bug fixes
 
@@ -61,7 +61,7 @@ menu:
 - Fix panic in Docker input with bad endpoint.
 - Fix original metric modified by aggregator filters.
 
-## v1.9.1 [2018-12-11]
+## 1.9.1 [2018-12-11]
 
 ### Bug fixes
 
@@ -76,7 +76,7 @@ menu:
 - Use `-W` flag on BSD variants in ping input.
 - Allow delta metrics in Wavefront parser.
 
-## v1.9.0 [2018-11-20]
+## 1.9.0 [2018-11-20]
 
 #### Release Notes
 
@@ -158,7 +158,7 @@ menu:
 - Fix outputs block inputs when batch size is reached.
 - Fix potential missing datastore metrics in VMware vSphere (`vsphere`) input plugin.
 
-## v1.8.3 [2018-10-30]
+## 1.8.3 [2018-10-30]
 
 ### Bug fixes
 
@@ -170,7 +170,7 @@ menu:
 - Don't add unserializable fields to Jolokia2 (`jolokia2`) input plugin.
 - Fix version check in PostgreSQL Exstensible (`postgresql_extensible`) plugin.
 
-## v1.8.2 [2018-10-17]
+## 1.8.2 [2018-10-17]
 
 ### Bug fixes
 
@@ -195,7 +195,7 @@ menu:
 * X.509 Certificate (`x509_cert`) input plugin
   * Fix segfault.
 
-## v1.8.1 [2018-10-03]
+## 1.8.1 [2018-10-03]
 
 ### Bug fixes
 
@@ -210,7 +210,7 @@ menu:
 - Fix missing non-realtime samples in VMware vSphere (`vsphere`) input plugin.
 - Fix case of `timezone`/`grok_timezone` options in grok parser and logparser input plugin.
 
-## v1.8 [2018-09-21]
+## 1.8 [2018-09-21]
 
 ### New input plugins
 
@@ -337,7 +337,7 @@ menu:
 - Fix CSV format configuration loading.
 
 
-## v1.7.4 [2018-08-29]
+## 1.7.4 [2018-08-29]
 
 ### Bug fixes
 
@@ -350,7 +350,7 @@ menu:
 * Fix sending of basic authentication credentials in HTTP `(output)` output plugin.
 * Use the correct `GOARM` value in the Linux armel package.
 
-## v1.7.3 [2018-08-07]
+## 1.7.3 [2018-08-07]
 
 ### Bug fixes
 
@@ -362,7 +362,7 @@ menu:
 * Use explicit `zpool` properties to fix parse error on FreeBSD 11.2.
 * Lock buffer when adding metrics.
 
-## v1.7.2 [2018-07-18]
+## 1.7.2 [2018-07-18]
 
 ### Bug fixes
 
@@ -374,7 +374,7 @@ menu:
 * Reset read deadline for Syslog (`syslog`) input plugin.
 * Exclude cached memory on Docker (`docker`) input plugin.
 
-## v1.7.1 [2018-07-03]
+## 1.7.1 [2018-07-03]
 
 ### Bug fixes
 
@@ -387,7 +387,7 @@ menu:
 * Document Swap (`swap`) input plugin.
 * Fix incorrect precision being applied to metric in HTTP Listener (`http_listener`) input plugin.
 
-## v1.7 [2018-06-12]
+## 1.7 [2018-06-12]
 
 ### Release notes
 
@@ -465,7 +465,7 @@ menu:
 - Use same flags for all BSD family ping variants.
 
 
-## v1.6.4 [2018-06-05]
+## 1.6.4 [2018-06-05]
 
 ### Bugfixes
 
@@ -474,7 +474,7 @@ menu:
 * Fix documentation of `instance_name` option in Varnish input.
 * Revert to previous Aerospike library version due to memory leak.
 
-## v1.6.3 [2018-05-21]
+## 1.6.3 [2018-05-21]
 
 ### Bug fixes
 
@@ -485,7 +485,7 @@ menu:
 * Fix Librato (`librato`) output plugin support for unsigned integer (`uint`) and Boolean (`bool`).
 * Fix WaitGroup deadlock, if URL is incorrect, in Apache input plugin.
 
-## v1.6.2 [2018-05-08]
+## 1.6.2 [2018-05-08]
 
 ### Bug fixes
 
@@ -496,7 +496,7 @@ menu:
 * Fix uint support in CrateDB (`cratedb`) output.
 
 
-## v1.6.1 [2018-04-23]
+## 1.6.1 [2018-04-23]
 
 ### Bug fixes
 
@@ -512,7 +512,7 @@ menu:
 * Return errors in SSL/TLS configuration of MongoDB (`mongodb`) input plugin.
 
 
-## v1.6 [2018-04-16]
+## 1.6 [2018-04-16]
 
 ### Release notes
 
@@ -620,7 +620,7 @@ menu:
 * Fix SNMPv3 connection with Cisco ASA 5515 in SNMP (`snmp`) input plugin.
 
 
-## v1.5.3 [2018-03-14]
+## 1.5.3 [2018-03-14]
 
 ### Bug fixes
 
@@ -632,7 +632,7 @@ menu:
 * Fix uptime metric in Passenger (`passenger`) input plugin.
 * Add output of stderr in case of error to exec log message.
 
-## v1.5.2 [2018-01-30]
+## 1.5.2 [2018-01-30]
 
 ### Bug fixes
 
@@ -646,7 +646,7 @@ menu:
 - Add `timeout` to Wavefront output write.
 - Exclude `master_replid` fields from Redis input.
 
-## v1.5.1 [2017-01-10]
+## 1.5.1 [2017-01-10]
 
 ### Bug fixes
 
@@ -657,7 +657,7 @@ menu:
 - Fix `deliver_get` field in RabbitMQ (`rabbitmq`) input plugin.
 - Escape environment variables during config TOML parsing.
 
-## v1.5 [2017-12-14]
+## 1.5 [2017-12-14]
 
 ### New plugins
 
@@ -748,7 +748,7 @@ menu:
 - Fix separation of multiple prometheus_client outputs.
 - Don't add system input uptime_format as a counter.
 
-## v1.4.5 [2017-12-01]
+## 1.4.5 [2017-12-01]
 
 ### Bug fixes
 
@@ -756,7 +756,7 @@ menu:
 - Fix error getting net connections info in netstat input.
 - Fix HOST_MOUNT_PREFIX in Docker with disk input.
 
-## v1.4.4 [2017-11-08]
+## 1.4.4 [2017-11-08]
 
 ### Bug fixes
 - Use schema specified in mqtt_consumer input.
@@ -765,7 +765,7 @@ menu:
 - Support HOST_VAR envvar to locate /var in system input.
 - Use current time if Docker container read time is zero value.
 
-## v1.4.3 [2017-10-25]
+## 1.4.3 [2017-10-25]
 
 ### Bug fixes
 
@@ -781,7 +781,7 @@ menu:
 - Fix unquoting error with Tomcat 6.
 - Fix syscall panic in diskio on some Linux systems.
 
-## v1.4.2 [2017-10-10]
+## 1.4.2 [2017-10-10]
 
 ### Bug fixes
 
@@ -795,7 +795,7 @@ menu:
 - Fix panic in CPU input if number of CPUs changes.
 - Use chunked transfer encoding in InfluxDB output.
 
-## v1.4.1 [2017-09-26]
+## 1.4.1 [2017-09-26]
 
 ### Bug fixes
 
@@ -808,7 +808,7 @@ menu:
 - Fix panic in statsd p100 calculation.
 - Fix arm64 packages contain 32-bit executable.
 
-## v1.4.0 [2017-09-05]
+## 1.4.0 [2017-09-05]
 
 ### Release Notes
 
@@ -913,7 +913,7 @@ menu:
 - Skip non-numerical values in graphite format.
 - Fix panic when handling string fields with escapes.
 
-## v1.3.5 [2017-07-26]
+## 1.3.5 [2017-07-26]
 
 ### Bug fixes
 
@@ -922,7 +922,7 @@ menu:
 - Fix ntpq parse issue when using dns_lookup.
 - Fix panic when agent.interval = "0s".
 
-## v1.3.4 [2017-07-12]
+## 1.3.4 [2017-07-12]
 
 ### Bug fixes
 
@@ -931,7 +931,7 @@ menu:
 - Do not allow metrics with trailing slashes.
 - Prevent Write from being called concurrently.
 
-## v1.3.3 [2017-06-28]
+## 1.3.3 [2017-06-28]
 
 ### Bug fixes
 
@@ -940,7 +940,7 @@ menu:
 - Fix bug parsing default timestamps with modified precision.
 - Fix panic in elasticsearch input if cannot determine master.
 
-## v1.3.2 [2017-06-14]
+## 1.3.2 [2017-06-14]
 
 ### Bug fixes
 
@@ -948,7 +948,7 @@ menu:
 - Fix mongodb/leofs urls without scheme.
 - Fix inconsistent label dimensions in prometheus output.
 
-## v1.3.1 [2017-05-31]
+## 1.3.1 [2017-05-31]
 
 ### Bug fixes
 
@@ -960,7 +960,7 @@ menu:
 - Fix panic in mongo input.
 - Fix length calculation of split metric buffer.
 
-## v1.3.0 [2017-05-09]
+## 1.3.0 [2017-05-09]
 
 #### Changes to the Windows ping plugin
 
@@ -1085,7 +1085,7 @@ These plugins will replace [udp_listener](https://github.com/influxdata/telegraf
 - AMQP output disconnect blocks all outputs.
 - Improve documentation for redis input plugin.
 
-## v1.2.1 [2017-02-01]
+## 1.2.1 [2017-02-01]
 
 ### Bugfixes
 
@@ -1096,7 +1096,7 @@ These plugins will replace [udp_listener](https://github.com/influxdata/telegraf
 
 - Go (golang) version update 1.7.4 -> 1.7.5
 
-## v1.2 [2017-01-24]
+## 1.2 [2017-01-24]
 
 ### Release Notes
 
@@ -1169,20 +1169,20 @@ plugins, not just statsd.
 - Influx parser: parse line-protocol without newlines.
 - InfluxDB output: fix field type conflict blocking output buffer.
 
-## v1.1.2 [2016-12-12]
+## 1.1.2 [2016-12-12]
 
 ### Bugfixes
 
 - Make snmptranslate not required when using numeric OID.
 - Add a global snmp translation cache.
 
-## v1.1.1 [2016-11-14]
+## 1.1.1 [2016-11-14]
 
 ### Bugfixes
 
 - Fix issue parsing toml durations with single quotes.
 
-## v1.1.0 [2016-11-07]
+## 1.1.0 [2016-11-07]
 
 ### Release Notes
 
@@ -1259,7 +1259,7 @@ continue sending logs to /var/log/telegraf/telegraf.log.
 - Ping input odd timeout behavior.
 - Switch to github.com/kballard/go-shellquote.
 
-## v1.0.1 [2016-09-26]
+## 1.0.1 [2016-09-26]
 
 ### Bugfixes
 
@@ -1268,7 +1268,7 @@ continue sending logs to /var/log/telegraf/telegraf.log.
 - Add configurable timeout to influxdb input plugin.
 - Fix statsd no default value panic.
 
-## v1.0 [2016-09-08]
+## 1.0 [2016-09-08]
 
 ### Release Notes
 
