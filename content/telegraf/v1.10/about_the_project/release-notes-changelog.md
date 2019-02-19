@@ -10,6 +10,64 @@ menu:
 
 ## 1.10 [2019-02-??]
 
+## v1.10 [unreleased]
+
+#### New Inputs
+
+- [cloud_pubsub](/plugins/inputs/cloud_pubsub/README.md) - Contributed by @emilymye
+- [kube_inventory](/plugins/inputs/kube_inventory/README.md) - Contributed by @influxdata
+- [neptune_apex](/plugins/inputs/neptune_apex/README.md) - Contributed by @MaxRenaud
+- [nginx_upstream_check](/plugins/inputs/nginx_upstream_check/README.md) - Contributed by @dmitryilyin
+- [multifile](/plugins/inputs/multifile/README.md) - Contributed by @martin2250
+
+#### New Outputs
+
+- [cloud_pubsub](/plugins/outputs/cloud_pubsub/README.md) - Contributed by @emilymye
+
+#### New Serializers
+
+- [nowmetric](/plugins/serializers/nowmetric/README.md) - Contributed by @JefMuller
+- [carbon2](/plugins/serializers/carbon2/README.md) - Contributed by @frankreno
+
+- Allow for force gathering ES cluster stats.
+- Add support for `unix` and `unix_ms` timestamps to `csv` parser.
+- Add ability to tag metrics with topic in `kafka_consumer`.
+- Add option to store `cpu` as a tag in `interrupts` input.
+- Add support for sending a request body to `http` input.
+- Add running field to `procstat_lookup`.
+- Include `DEVLINKS` in available `diskio` `udev` properties.
+- Add micro and nanosecond unix timestamp support to JSON parser.
+- Add support for basic auth to `couchdb` input.
+- Add support in `wavefront` output for the Wavefront Direct Ingestion API.
+- Allow counting float values in `valuecounter` aggregator.
+- Add log send and redo queue fields to `sqlserver` input.
+- Improve scalability of `vsphere` input.
+- Add read and write op per second fields to `ceph` input.
+- Add configurable timeout to `varnish` input.
+- Add `flush_total_time_ns` and additional wired tiger fields to `mongodb` input.
+- Support passing bearer token directly in `k8s` input.
+- Support passing bearer token directly in `prometheus` input.
+- Add option to report input timestamp in `prometheus` output.
+- Add Linux `mipsle` packages.
+- Support `unix_us` and `unix_ns` timestamp format in `csv` parser.
+- Add resource type and resource label support to `stackdriver` output.
+- Add internal metric for line too long in `influxdb_listener`.
+- Add option to set retain flag on messages to `mqtt` output.
+- Add resource path -based filtering to `vsphere` input.
+- Add `rcode` tag and field to `dns_query` input.
+
+#### Bugfixes
+
+- Fix initscript removes pidfile of restarted Telegraf process.
+- Use datacenter option spelling in consul input.
+- Remove auth from /ping route in influxdb_listener.
+- Fix `x509_cert` input stops checking certs after first error.
+- Skip string fields when writing to stackdriver output.
+- Send metrics in ascending time order in stackdriver output.
+- Use systemd in Amazon Linux 2 rpm.
+- Set deadlock priority in sqlserver input.
+- Remove error log when snmp6 directory does not exists with nstat input.
+- Host not added when using custom arguments in ping plugin.
 
 
 
