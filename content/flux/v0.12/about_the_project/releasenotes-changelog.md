@@ -44,6 +44,7 @@ _A technical preview of Flux packaged with InfluxDB v1.7.3._
 - Remove `fromRows()` function.
 - Update to `group()` function parameters. Removed `except`, `by`, `none`,
   and `all` parameters. Added `columns` and `mode` parameters.
+- Update to `drop()` and `keep()` functions. `fn` parameters expect a `column` object.
 - New parser makes chaining operators case-sensitive.
   They should be lowercase: `AND` -> `and`, `OR` -> `or`.
 
