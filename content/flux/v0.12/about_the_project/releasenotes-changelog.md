@@ -10,8 +10,9 @@ menu:
 > The items below represent only end user-facing changes.
 > For a complete changelog, see the
 > [Flux Github repository](https://github.com/influxdata/flux/releases).
+> This changelog also only includes versions of Flux released with InfluxDB.
 
-## v0.12.0 [unreleased]
+## v0.12.0 [2019-01-02]
 _A technical preview of Flux packaged with InfluxDB v1.7.3._
 
 ### Features
@@ -43,6 +44,7 @@ _A technical preview of Flux packaged with InfluxDB v1.7.3._
 - Remove `fromRows()` function.
 - Update to `group()` function parameters. Removed `except`, `by`, `none`,
   and `all` parameters. Added `columns` and `mode` parameters.
+- Update to `drop()` and `keep()` functions. `fn` parameters expect a `column` object.
 - New parser makes chaining operators case-sensitive.
   They should be lowercase: `AND` -> `and`, `OR` -> `or`.
 

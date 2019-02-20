@@ -83,7 +83,7 @@ cards:
     title: InfluxDB Enterprise
     description: InfluxDB Enterprise offers proprietary extensions to the open source version of InfluxDB, and is designed to handle high write and query loads.
     links:
-      - text: Download Kapacitor Enterprise
+      - text: Download InfluxDB Enterprise
         type: relative
         href: /introduction/download/
       - text: Get Started
@@ -99,7 +99,7 @@ cards:
     title: Kapacitor Enterprise
     description: Kapacitor Enterprise offers proprietary extensions to the open source version of Kapacitor.
     links:
-      - text: Download InfluxDB Enterprise
+      - text: Download Kapacitor Enterprise
         type: relative
         href: /introduction/download/
       - text: Get Started

@@ -15,7 +15,7 @@ Chronograf allows you to quickly see data you have stored in InfluxDB so you can
 
 ### Data visualization
 * Investigate your data by building queries using the [Data Explorer](/chronograf/latest/guides/querying-data/).
-* Use pre-created [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards/) to monitor your application data or [create your own dashboards](/chronograf/latest/guides/create-a-dashboard/).
+* Use [pre-created dashboards](/chronograf/latest/guides/using-precreated-dashboards/) to monitor your application data or [create your own dashboards](/chronograf/latest/guides/create-a-dashboard/).
 * Customize dashboards using [template variables](/chronograf/latest/guides/dashboard-template-variables/).
 
 ### Alerting

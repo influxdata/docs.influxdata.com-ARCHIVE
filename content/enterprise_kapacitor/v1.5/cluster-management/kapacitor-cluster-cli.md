@@ -39,6 +39,19 @@ kapacitorctl [command] [subcommand] -url http://example.com:9092
 kapacitorctl member list -url http://example.com:9092
 ```
 
+> #### Include authentication credentials in the Kapacitor URL
+> If authentication is enabled on InfluxDB and Kapacitor, include your InfluxDB
+> username and password as query parameters, `u` and `p` respectively, in the Kapacitor URL.
+> For both convenience and security, InfluxData recommends storing these credentials as
+> part of the Kapacitor URL in the `KAPACITOR_URL` environment variable.
+>
+>```sh
+export KAPACITOR_URL=https://192.168.67.88:9092?u=username&p=password
+
+# When KAPACITOR_URL is defined, the -url flag isn't necessary.
+kapacitorctl member list
+```
+
 ## Commands
 The `kapacitorctl` utility includes the following commands:
 

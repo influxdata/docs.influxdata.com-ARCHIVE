@@ -3064,7 +3064,7 @@ time                   water_level
 
 {{% tab-content %}}
 
-With InfluxDB's [HTTP API](/influxdb/v1.7/tools/api/):
+With the InfluxDB [HTTP API](/influxdb/v1.7/tools/api/):
 
 ```
 {

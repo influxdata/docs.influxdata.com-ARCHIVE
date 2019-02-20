@@ -40,46 +40,89 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 {{% /tabs %}}
 {{< tab-content-container >}}
 {{% tab-content %}}
-  For instructions on how to install the Debian package from a file, please see the [downloads page](https://influxdata.com/downloads/).
+For instructions on how to install the Debian package from a file, please see the [downloads page](https://influxdata.com/downloads/).
 
-  Debian and Ubuntu users can install the latest stable version of Telegraf using the `apt-get` package manager.
+Debian and Ubuntu users can install the latest stable version of Telegraf using the `apt-get` package manager.
 
-  **Ubuntu:** Add the InfluxData repository with the following commands:
+**Ubuntu:** Add the InfluxData repository with the following commands:
 
-  ```bash
-  curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
-  source /etc/lsb-release
-  echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-  ```
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[wget](#)
+[curl](#)
+{{% /code-tabs %}}
 
-  **Debian:** Add the InfluxData repository with the following commands:
+{{% code-tab-content %}}
+```bash
+wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+source /etc/lsb-release
+echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+```
+{{% /code-tab-content %}}
 
-  ```bash
-  # Before adding Influx repository, run this so that apt will be able to read the repository.
+{{% code-tab-content %}}
+```bash
+curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+source /etc/lsb-release
+echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}  
 
-  sudo apt-get update && sudo apt-get install apt-transport-https
+**Debian:** Add the InfluxData repository with the following commands:
 
-  # Add the InfluxData key
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[wget](#)
+[curl](#)
+{{% /code-tabs %}}
 
-  curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
-  source /etc/os-release
-  test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-  test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-  test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-  ```
+{{% code-tab-content %}}
+```bash
+# Before adding Influx repository, run this so that apt will be able to read the repository.
 
-  Then, install and start the Telegraf service:
+sudo apt-get update && sudo apt-get install apt-transport-https
 
-  ```bash
-  sudo apt-get update && sudo apt-get install telegraf
-  sudo service telegraf start
-  ```
+# Add the InfluxData key
 
-  Or if your operating system is using systemd (Ubuntu 15.04+, Debian 8+):
-  ```
-  sudo apt-get update && sudo apt-get install telegraf
-  sudo systemctl start telegraf
-  ```
+wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+source /etc/os-release
+test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+```
+{{% /code-tab-content %}}
+
+{{% code-tab-content %}}
+```bash
+# Before adding Influx repository, run this so that apt will be able to read the repository.
+
+sudo apt-get update && sudo apt-get install apt-transport-https
+
+# Add the InfluxData key
+
+curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+source /etc/os-release
+test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
+
+Then, install and start the Telegraf service:
+
+```bash
+sudo apt-get update && sudo apt-get install telegraf
+sudo service telegraf start
+```
+
+Or if your operating system is using systemd (Ubuntu 15.04+, Debian 8+):
+```
+sudo apt-get update && sudo apt-get install telegraf
+sudo systemctl start telegraf
+```
+
 {{% /tab-content %}}
 {{% tab-content %}}
   For instructions on how to install the RPM package from a file, please see the [downloads page](https://influxdata.com/downloads/).

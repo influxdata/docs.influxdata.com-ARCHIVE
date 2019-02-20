@@ -7,25 +7,45 @@ menu:
     parent: About the project
 ---
 
-## v1.7.3 [2019-01-14]
+## v1.7.4 [2018-02-13]
 
 ### Features
 
-- Update Flux to 0.12.0
+* Allow TSI bitset cache to be configured. New `[data]` index settings for in-memory (`inmem`) and (`tsi1`)
 
 ### Bug fixes
 
--	Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
--	Limit force-full and cold compaction size.
--	Add user authentication and authorization support for Flux HTTP requests.
--	Call `storage.Group` API to correctly map group mode.
--	Following functions, when used on non-float types in subqueries, returned incorrect
-  results: `derivitive`, `non_negative_derivitive`, `moving_average`, `exponential_moving_average`,
-  `double_exponential_moving_average`, `triple_exponential_moving_average`, `relative_strength_index`,
-  `triple_exponential_deriviative`, `kaufmans_efficiency_ratio`, `kaufmans_adaptive_moving_average`,
-  `chande_momentum_oscillator`, `holt_winters`, and `holt_winters_with_fit`.
--	Add support for optionally logging Flux queries.
--	Fix cardinality estimation error.
+* Remove copy-on-write when caching bitmaps in TSI.
+* Use `systemd` for Amazon Linux 2.
+* Revert "Limit force-full and cold compaction size."
+* Convert `TagValueSeriesIDCache` to use string fields.
+* Ensure that cached series id sets are Go heap backed.
+
+## v1.7.3 [2019-01-11]
+
+### Important update [2019-02-13]
+
+If you have not installed this release, then install the 1.7.4 release.
+
+**If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
+
+* A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
+  * **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  * **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
+
+### Features
+
+* Update Flux to 0.12.0
+
+### Bug fixes
+
+* Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
+* Limit force-full and cold compaction size.
+* Add user authentication and authorization support for Flux HTTP requests.
+* Call `storage.Group` API to correctly map group mode.
+* Marked functions that always return floats as always returning floats.
+* Add support for optionally logging Flux queries.
+* Fix cardinality estimation error.
 
 ## v1.7.2 [2018-12-11]
 
@@ -58,7 +78,6 @@ menu:
 
 
 ## v1.7.0 [2018-11-06]
--------------------
 
 ### Breaking changes
 
@@ -97,65 +116,58 @@ Support for the Flux language and queries has been added in this release. To beg
 
 ### Bug fixes
 
--	Missing `hardwareAddr` in `uuid` v1 generation.
--	Fix the inherited interval for derivative and others.
--	Fix subquery functionality when a function references a tag from the subquery.
--	Strip tags from a subquery when the outer query does not group by that tag.
+*	Missing `hardwareAddr` in `uuid` v1 generation.
+*	Fix the inherited interval for derivative and others.
+*	Fix subquery functionality when a function references a tag from the subquery.
+*	Strip tags from a subquery when the outer query does not group by that tag.
 
 ## v1.6.5 [2019-01-10]
 
 ### Features
 
--	Reduce allocations in TSI TagSets implementation.
+*	Reduce allocations in TSI `TagSets` implementation.
 
-### Bugfixes
+### Bug fixes
 
--	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr.
--   tsdb: Copy measurement names when expression is provided.
--	Ensure orphaned series cleaned up with shard drop.
--	Fix the derivative and others time ranges for aggregate data.
--   Drop NaN (Not a Number) values when writing back points.
--	Fix the stream iterator to not ignore errors.
--	Do not panic when a series ID iterator is `nil`.
--	Fix panic in IndexSet.
--	Pass the query authorizer to subqueries.
--	Fix TSM1 panic on reader error.
--   Limit database and retention policy names to 255 characters.
--   Update Go runtime to 1.10.6.
+*	Fix panic in `IndexSet`.
+*	Pass the query authorizer to subqueries.
+*	Fix TSM1 panic on reader error.
+* Limit database and retention policy names to 255 characters.
+* Update Go runtime to 1.10.6.
 
 ## v1.6.4 [2018-10-16]
 
 ### Features
 
--	Set maximum cache size using `-max-cache-size` in `buildtsi` when building TSI index.
+*	Set maximum cache size using `-max-cache-size` in `buildtsi` when building TSI index.
 
 ### Bug fixes
 
--	Fix `tsi1` sketch locking.
--	Fix subquery functionality when a function references a tag from the subquery.
--	Strip tags from a subquery when the outer query does not group by that tag.
--	Add `-series-file` flag to `dumptsi` command help.
--	Cleanup failed TSM snapshots.
--	Fix TSM1 panic on reader error.
--	Fix series file tombstoning.
--	Fixing the stream iterator to not ignore the error.
--	Do not panic when a series ID iterator is nil.
--	Fix append of possible nil iterator.
+*	Fix `tsi1` sketch locking.
+*	Fix subquery functionality when a function references a tag from the subquery.
+*	Strip tags from a subquery when the outer query does not group by that tag.
+*	Add `-series-file` flag to `dumptsi` command help.
+*	Cleanup failed TSM snapshots.
+*	Fix TSM1 panic on reader error.
+*	Fix series file tombstoning.
+*	Fixing the stream iterator to not ignore the error.
+*	Do not panic when a series ID iterator is nil.
+*	Fix append of possible nil iterator.
 
 
 ## v1.6.3 [2018-09-14]
 
 ### Features
 
--	Remove TSI1 HLL sketches from heap.
+*	Remove TSI1 HLL sketches from heap.
 
 ### Bug fixes
 
--	Fix the inherited interval for derivative and others.  The inherited interval from an outer query should not have caused
+*	Fix the inherited interval for derivative and others.  The inherited interval from an outer query should not have caused
 an inner query to fail because inherited intervals are only implicitly passed to inner queries that support group
 by time functionality. Since an inner query with a derivative doesn't support grouping by time and the inner query itself
 doesn't specify a time, the outer query shouldn't have invalidated the inner query.
--	Fix the derivative and others time ranges for aggregate data. The derivative function and others similar to it would
+*	Fix the derivative and others time ranges for aggregate data. The derivative function and others similar to it would
 preload themselves with data so that the first interval would be the start of the time range. That meant reading data outside
 of the time range. One change to the shard mapper made in v1.4.0 caused the shard mapper to constrict queries to the
 intervals given to the shard mapper. This was correct because the shard mapper can only deal with times it has mapped,
@@ -250,18 +262,18 @@ using the Prometheus measurement name as the `__name__` label.
 
 ### Features
 
--	Reduce allocations in TSI TagSets implementation.
+*	Reduce allocations in TSI `TagSets` implementation.
 
-### Bugfixes
+### Bug fixes
 
--	tsdb: Copy return value of IndexSet.MeasurementNamesByExpr
--	Ensure orphaned series cleaned up with shard drop.
--	Fix the derivative and others time ranges for aggregate data.
--	Fix the stream iterator to not ignore errors.
--	Do not panic when a series ID iterator is `nil`.
--	Fix panic in IndexSet.
--	Pass the query authorizer to subqueries.
--	Fix TSM1 panic on reader error.
+*	Copy return value of `IndexSet.MeasurementNamesByExpr`.
+*	Ensure orphaned series cleaned up with shard drop.
+*	Fix the derivative and others time ranges for aggregate data.
+*	Fix the stream iterator to not ignore errors.
+*	Do not panic when a series ID iterator is `nil`.
+*	Fix panic in `IndexSet`.
+*	Pass the query authorizer to subqueries.
+*	Fix TSM1 panic on reader error.
 
 ## v1.5.4 [2018-06-21]
 
