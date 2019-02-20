@@ -20,7 +20,7 @@ Its syntax is largely inspired by [2018's most popular scripting language](https
 Javascript, and takes a functional approach to data exploration and processing.
 
 The following example illustrates pulling data from a bucket (similar to an InfluxQL database) for the last five minutes,
-filtering that data by the `cpu` measurement and the `cpu=cpu-usage` tag, windowing the data in 1 minute intervals,
+filtering that data by the `cpu` measurement and the `cpu=cpu-total` tag, windowing the data in 1 minute intervals,
 and calculating the average of each window:
 
 ```js
