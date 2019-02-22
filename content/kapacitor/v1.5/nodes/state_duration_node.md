@@ -17,10 +17,9 @@ which the expression evaluates as `true`, the state duration will be
 incremented by the duration between points. When a point evaluates as `false`,
 the state duration is reset.
 
-The state duration will be added as an additional field to each point. If the
-expression evaluates as false, the value will be `-1`. If the expression
-generates an error during evaluation, the point is discarded, and does not
-affect the state duration.
+The state duration will be added as an additional `float64` field to each point.
+If the expression evaluates as false, the value will be `-1`.
+If the expression generates an error during evaluation, the point is discarded, and does not affect the state duration.
 
 Example:
 
