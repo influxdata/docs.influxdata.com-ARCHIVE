@@ -39,7 +39,7 @@ Check out the [Glossary](/influxdb/v0.11/concepts/glossary/) if you prefer the c
 The next section references the data printed out below.
 The data are fictional, but represent a believable setup in InfluxDB.
 They show the number of butterflies and honeybees counted by two scientists (`langstroth` and `perpetua`) in two locations (location `1` and location `2`) over the time period from August 18, 2015 at midnight through August 18, 2015 at 6:12 AM.
-Assume that the data live in a database called `my_database` and are subject to the `default` retention policy (more on databases and retention policies to come).
+Assume that the data lives in a database called `my_database` and are subject to the `default` retention policy (more on databases and retention policies to come).
 
 *Hint:* Hover over the links for tooltips to get acquainted with InfluxDB terminology and the layout.
 
