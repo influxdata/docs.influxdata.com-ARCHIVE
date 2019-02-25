@@ -51,14 +51,14 @@ Separating each sentence with a new line makes it easy to parse diffs with the h
 
 Diff without semantic linefeeds:
 ``` diff
--Data is taking off. Those data are time series. You need a database that specializes in time series. You should check out InfluxDB.
-+Data is taking off. Those data are time series. You need a database that specializes in time series. You need InfluxDB.
+-Data is taking off. This data is time series. You need a database that specializes in time series. You should check out InfluxDB.
++Data is taking off. This data is time series. You need a database that specializes in time series. You need InfluxDB.
 ```
 
 Diff with semantic linefeeds:
 ``` diff
 Data is taking off.
-Those data are time series.
+This data is time series.
 You need a database that specializes in time series.
 -You should check out InfluxDB.
 +You need InfluxDB.
