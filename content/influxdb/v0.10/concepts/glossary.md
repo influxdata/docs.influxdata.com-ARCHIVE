@@ -174,7 +174,7 @@ InfluxDB replicates data across `N` data nodes, where `N` is the replication fac
 
 To maintain data availability for queries, the replication factor should be less than or equal to the number of data nodes in the cluster:
 
-* Data are fully available when the replication factor is greater than the number of *unavailable* data nodes.
+* Data is fully available when the replication factor is greater than the number of *unavailable* data nodes.
 * Data may be unavailable when the replication factor is less than the number of *unavailable* data nodes.
 
 Note that there are no query performance benefits from replication.
