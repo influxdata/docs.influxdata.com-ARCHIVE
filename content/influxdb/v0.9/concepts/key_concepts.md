@@ -149,7 +149,7 @@ The only measurement in the sample data is `census`.
 The name `census` tells us that the field values record the number of `butterflies` and `honeybees` - not their size, direction, or some sort of happiness index.
 
 A single measurement can belong to different retention policies.
-A <a name="retention-policy"></a>**retention policy** describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
+A <a name="retention-policy"></a>**retention policy** describes how long InfluxDB keeps data (`DURATION`) and how many copies of this data is stored in the cluster (`REPLICATION`).
 If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v0.9/query_language/database_management/#retention-policy-management).
 
 In the sample data, everything in the `census` measurement belongs to the `default` retention policy.

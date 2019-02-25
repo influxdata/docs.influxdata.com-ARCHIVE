@@ -21,7 +21,7 @@ This guide offers insights into how Kapacitor interacts with Chronograf and intr
 
 Chronograf stores the information on the Alert History page as time series data in InfluxDB.
 It stores it in the `chronograf` database and in the `alerts` [measurement](/influxdb/latest/concepts/glossary/#measurement).
-By default, those data are subject to an infinite [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp) (RP), that is, InfluxDB stores them forever.
+By default, this data is subject to an infinite [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp) (RP), that is, InfluxDB stores them forever.
 Users who expect to have a large number of alerts and users who do not want to store their alert history forever may want to shorten the [duration](/influxdb/latest/concepts/glossary/#duration) of that retention policy.
 
 ### Modifying the retention policy in Chronograf
