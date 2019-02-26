@@ -7,7 +7,7 @@ menu:
     parent: About the project
 ---
 
-## v1.7.4 [2018-02-13]
+## v1.7.4 [2019-02-13]
 
 ### Features
 
