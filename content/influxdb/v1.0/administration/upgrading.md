@@ -134,7 +134,7 @@ Compare your old configuration file against the newly generated [InfluxDB 1.0 fi
 sudo service influxdb start
 ```
 
-**7.** Confirm that your metastore data are present.
+**7.** Confirm that your metastore data is present.
 
 The 1.0 output from the queries `SHOW DATABASES`,`SHOW USERS` and
 `SHOW RETENTION POLICIES ON <database_name>` should match the 0.10 or 0.11

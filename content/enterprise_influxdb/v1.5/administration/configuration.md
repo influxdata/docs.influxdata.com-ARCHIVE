@@ -646,7 +646,7 @@ Environment variable: `INFLUXDB_DATA_TRACE_LOGGING_ENABLED`
 
 ## [cluster]
 
-Controls how data are shared across shards and the options for [query
+Controls how data is shared across shards and the options for [query
 management](/influxdb/v1.5/troubleshooting/query_management/).
 
 ###  dial-timeout = "1s"

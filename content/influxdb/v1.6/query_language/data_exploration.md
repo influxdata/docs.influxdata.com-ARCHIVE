@@ -86,7 +86,7 @@ The measurement has one [tag key](/influxdb/v1.6/concepts/glossary/#tag-key)
 The measurement also has two [fields](/influxdb/v1.6/concepts/glossary/#field):
 `level description` stores string [field values](/influxdb/v1.6/concepts/glossary/#field-value)
 and `water_level` stores float field values.
-All of these data are in the `NOAA_water_database` [database](/influxdb/v1.6/concepts/glossary/#database).
+All of these data is in the `NOAA_water_database` [database](/influxdb/v1.6/concepts/glossary/#database).
 
 > **Disclaimer:** The `level description` field isn't part of the original NOAA data - we snuck it in there for the sake of having a field key with a special character and string field values.
 

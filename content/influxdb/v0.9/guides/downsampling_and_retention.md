@@ -24,7 +24,7 @@ However, InfluxDB recognizes the necessity of purging data that have outlived th
 
 ### Working with RPs
 When you create a database, InfluxDB automatically creates an RP called `default` with an infinite duration and a replication factor set to the number of nodes in the cluster.
-`default` also serves as the `DEFAULT` RP; if you do not supply an explicit RP when you write a point to the database, the data are subject to the `DEFAULT` RP.
+`default` also serves as the `DEFAULT` RP; if you do not supply an explicit RP when you write a point to the database, the data is subject to the `DEFAULT` RP.
 
 InfluxDB automatically queries from and writes to the `DEFAULT` RP on a database.
 To query from or write to a different RP, you must fully qualify the measurement, that is, specify the database and retention policy with the measurement name: `<database_name>."<retention_policy>".<measurement_name>`.
