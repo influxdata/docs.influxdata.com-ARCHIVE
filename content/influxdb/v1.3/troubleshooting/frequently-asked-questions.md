@@ -33,7 +33,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How does InfluxDB handle field type discrepancies across shards?](#how-does-influxdb-handle-field-type-discrepancies-across-shards)  
 * [What are the minimum and maximum integers that InfluxDB can store?](#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store)  
 * [What are the minimum and maximum timestamps that InfluxDB can store?](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store)
-* [How can I tell what type of data is stored in a field?](#how-can-i-tell-what-type-of-data-are-stored-in-a-field)
+* [How can I tell what type of data is stored in a field?](#how-can-i-tell-what-type-of-data-is-stored-in-a-field)
 * [Can I change a field's data type?](#can-i-change-a-field-s-data-type)
 
 **InfluxQL Functions**
