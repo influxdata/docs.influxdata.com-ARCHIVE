@@ -11,8 +11,7 @@
 
     <!-- Set the docsearch tag "latest" for the latest versions of projects and for the platform section -->
     {{ if (or .IsPage (eq .Kind "section")) }}
-    {{ $projectDefaultVersion := index .Site.Data.default_versions (printf "%s_semver" (index (findRE "[^/]+.*?"
-    .RelPermalink) 0)) }}
+    {{ $projectDefaultVersion := index .Site.Data.default_versions (printf "%s_semver" (index (findRE "[^/]+.*?" .RelPermalink) 0)) }}
     {{ if not (or (in .RelPermalink $projectDefaultVersion) (in .RelPermalink "/platform/")) }}
     <meta name="docsearch:latest" content="false">
     {{ else }}
