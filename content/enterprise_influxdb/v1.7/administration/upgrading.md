@@ -117,9 +117,9 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.4_c1.7.4.x8
 
 ### Step 2: Stop traffic to the data node
 
-Your cluster's load balancer distributes read and write requests among data nodes in the cluster. If you have access to the load balancer configuration, stop routing read/write requests to the data node server (port 8086) via your load balancer **before** performing the remaining steps.
+Your cluster's load balancer distributes read and write requests among data nodes in the cluster. If you have access to the load balancer configuration, stop routing read and write requests to the data node server (port 8086) via your load balancer **before** performing the remaining steps.
 
-If you cannot access the load balancer configuration, we recommend working with your networking team to prevent traffic to the data node server before continuing to upgrade.
+If you cannot access the load balancer configuration, work with your networking team to prevent traffic to the data node server before continuing to upgrade.
 
 ### Step 3: Install the 1.7.4 data node packages
 
@@ -210,7 +210,7 @@ sudo systemctl restart influxdb
 
 ### Step 7: Restart traffic to data node 
 
-Restart routing read/write requests to the data node server (port 8086) via your load balancer.
+Restart routing read and write requests to the data node server (port 8086) through your load balancer.
 
 If this is the last data node to be upgraded, continue to the next step.
 Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and repeat the process for the remaining data nodes.
