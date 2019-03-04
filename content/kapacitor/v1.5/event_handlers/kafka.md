@@ -177,7 +177,7 @@ kapacitor enable cpu_alert
 ```
 
 Create a handler file that subscribes to the `cpu` topic and uses the Kafka
-event handler to send alerts to the `alerts` channel in Kafka.
+event handler to send alerts to the `cpu-alerts` topic in Kafka.
 
 _**kafka\_cpu\_handler.yaml**_
 ```yaml
