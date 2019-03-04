@@ -34,8 +34,7 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 
 1. Choose the download link for your operating system.
 
-    > If your download includes a TAR package, save the underlying datastore 
-    `chronograf-v1.db` in directory outside of where you start Chronograf. This preserves and references your existing datastore, including configurations and dashboards, when you download future versions.
+    > If your download includes a TAR package, save the underlying datastore `chronograf-v1.db` in directory outside of where you start Chronograf. This preserves and references your existing datastore, including configurations and dashboards, when you download future versions.
 
 2. Install Chronograf:
 
