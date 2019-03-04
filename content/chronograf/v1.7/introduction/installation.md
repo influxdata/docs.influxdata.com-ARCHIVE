@@ -22,17 +22,55 @@ Chronograf is the user interface for InfluxData's [TICK stack](https://www.influ
 
 ## Download and install
 
+{{< tab-labels >}}
+{{% tabs %}}
+[macOS](#)
+[Ubuntu & Debian](#)
+[RedHat & CentOS](#)
+{{% /tabs %}}
+{{< /tab-labels >}}
+
 The latest Chronograf builds are available on InfluxData's [Downloads page](https://portal.influxdata.com/downloads).
 
 1. Choose the download link for your operating system.
-  * Note that if your download includes a TAR package, we recommend specifying a location for the underlying datastore, `chronograf-v1.db`, outside of the directory from which you start Chronograf. This allows you to preserve and reference your existing datastore, including configurations and dashboards, when you download future versions.
+
+    > If your download includes a TAR package, save the underlying datastore 
+    `chronograf-v1.db` in directory outside of where you start Chronograf. This preserves and references your existing datastore, including configurations and dashboards, when you download future versions.
+
 2. Install Chronograf:
-  * MacOS: `tar zxvf chronograf-1.7.7_darwin_amd64.tar.gz`
-  * Ubuntu & Debian: `sudo dpkg -i chronograf_1.7.7_amd64.deb`
-  * RedHat and CentOS: `sudo yum localinstall chronograf-1.6.2.x86_64.rpm`
-3. Start Chronograf:
-  * MacOS: `tar zxvf chronograf-1.7.7_darwin_amd64.tar.gz`
-  * Ubuntu & Debian: `sudo dpkg -i chronograf_1.7.7_amd64.deb`
+
+    {{< tab-content-container >}}
+    {{% tab-content %}}
+    
+    tar zxvf chronograf-1.7.7_darwin_amd64.tar.gz
+  
+    {{% /tab-content %}}
+
+    {{% tab-content %}}
+    sudo dpkg -i chronograf_1.7.7_amd64.deb
+    {{% /tab-content %}}
+
+    {{% tab-content %}}
+    sudo yum localinstall chronograf-1.6.2.x86_64.rpm
+    {{% /tab-content %}}
+
+    {{< /tab-content-container >}}
+
+3. Start Chronograf: {{< tab-content-container >}} {{% tab-content %}}
+
+    chronograf
+  
+    {{% /tab-content %}}
+
+    {{% tab-content %}}
+    chronograf
+    {{% /tab-content %}}
+
+    {{% tab-content %}}
+    chronograf
+    {{% /tab-content %}}
+
+    {{< /tab-content-container >}}
 
 
 ## Connect Chronograf to your InfluxDB instance or InfluxDB Enterprise cluster
