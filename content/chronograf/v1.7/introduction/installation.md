@@ -55,21 +55,11 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 
     {{< /tab-content-container >}}
 
-3. Start Chronograf: {{< tab-content-container >}} {{% tab-content %}}
+3. Start Chronograf: 
 
+    ```
     chronograf
-  
-    {{% /tab-content %}}
-
-    {{% tab-content %}}
-    chronograf
-    {{% /tab-content %}}
-
-    {{% tab-content %}}
-    chronograf
-    {{% /tab-content %}}
-
-    {{< /tab-content-container >}}
+    ```
 
 
 ## Connect Chronograf to your InfluxDB instance or InfluxDB Enterprise cluster
