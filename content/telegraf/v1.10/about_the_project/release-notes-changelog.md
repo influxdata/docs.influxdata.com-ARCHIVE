@@ -31,7 +31,6 @@ menu:
 
 - **General**
   - Allow for force gathering ES cluster stats.
-  - Add support for `unix` and `unix_ms` timestamps to `csv` parser.
   - Add Linux `mipsle` packages.
 - **Input plugins**
   - Ceph (`ceph`)
@@ -80,6 +79,7 @@ menu:
   - **Input data formats**
   - CSV
     - Support `unix_us` and `unix_ns` timestamp format.
+    - Add support for `unix` and `unix_ms` timestamps.
   - Grok (`grok`)
     - Allow parser to produce metrics with no fields.
   - JSON
