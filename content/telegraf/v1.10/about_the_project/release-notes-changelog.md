@@ -12,9 +12,9 @@ menu:
 
 #### New input plugins
 
-- [Google Cloud PubSub (`cloud_pubsub`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub/README.md)) - Contributed by @emilymye
+- [Google Cloud PubSub (`cloud_pubsub`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub/README.md) - Contributed by @emilymye
 - [Kubernetes Inventory (`kube_inventory`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub_push/README.md) - Contributed by @influxdata
-- [Neptune Apex (`neptune_apex`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/neptune_apex/README.md)) - Contributed by @MaxRenaud
+- [Neptune Apex (`neptune_apex`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/neptune_apex/README.md) - Contributed by @MaxRenaud
 - [NGINX Upstream Check (`nginx_upstream_check`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/nginx_upstream_check/README.md) - Contributed by @dmitryilyin
 - [Multifile (`multifile`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/multifile/README.md) - Contributed by @martin2250
 
