@@ -150,7 +150,8 @@ Before you restore, stop anti-entropy (AE) services if they are enabled (disable
 1. For each data node in the cluster, do the following:
    a. Stop the influxdb service.
    b. Disable anti-entropy in influx.config.
-   c. Restart the influxdb service, and wait for the data node to return to a healthy state (node is up, receiving read and write requests, and the hinted handoff queue is drained). 
+   c. Restart the influxdb service, and wait for the data node to return to a healthy state (node is up, receiving read
+ and write requests, and the hinted handoff queue is drained). 
 2. Now you're ready to restore. See examples below for details on how to restore.
 3. Restart AE services on each data node.
 
