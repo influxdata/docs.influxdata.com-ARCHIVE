@@ -80,6 +80,8 @@ menu:
   - **Input data formats**
   - CSV
     - Support `unix_us` and `unix_ns` timestamp format.
+  - Grok (`grok`)
+    - Allow parser to produce metrics with no fields.
   - JSON
     - Add micro and nanosecond unix timestamp support.
   - **Output data formats**
@@ -104,6 +106,8 @@ menu:
   - X.509 Certificate
     - Fix input stops checking certificates after first error.
 - **Output plugins**
+  - Prometheus (`prometheus`)
+    - Sort metrics by timestamp.
   - Stackdriver (`stackdriver`)
     - Skip string fields when writing.
     - Send metrics in ascending time order.
