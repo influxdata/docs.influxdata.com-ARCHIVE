@@ -238,7 +238,10 @@ Plugin ID: `file`
 
 The [File input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/file/README.md) updates a list of files every interval and parses the contents using the selected input data format.
 
-Files will always be read in their entirety, if you wish to tail/follow a file use the [tail input plugin](#tail) instead.
+Files will always be read in their entirety. If you wish to tail or follow a file, then use the [Tail input plugin](#tail).
+
+> **Note:** To parse metrics from multiple files that are formatted in one of the supported
+> [input data formats](/telegraf/v1.10/data_formats/input), use the [Multifile input plugin](#multifile).
 
 ### Filecount
 
@@ -258,6 +261,18 @@ Plugin ID: `fluentd`
 
 The [Fluentd input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/fluentd/README.md) gathers metrics from plugin endpoint provided by in_monitor plugin. This plugin understands
 data provided by `/api/plugin.json` resource (`/api/config.json` is not covered).
+
+### Google Cloud PubSub
+
+Plugin ID: `cloud_pubsub`
+
+The [Google Cloud PubSub input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub/README.md) ingests metrics from [Google Cloud PubSub](https://cloud.google.com/pubsub) and creates metrics using one of the supported [input data formats](https://github.com/influxdata/telegraf/blob/release-1.10/docs/DATA_FORMATS_INPUT.md).
+
+### Google Cloud PubSub Push
+
+Plugin ID: `cloud_pubsub_push`
+
+The [Google Cloud PubSub Push (`cloud_pubsub_push`) input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub_push/README.md) listens for messages sent using HTTP POST requests from Google Cloud PubSub. The plugin expects messages in Google's Pub/Sub JSON Format ONLY. The intent of the plugin is to allow Telegraf to serve as an endpoint of the Google Pub/Sub 'Push' service. Google's PubSub service will only send over HTTPS/TLS so this plugin must be behind a valid proxy or must be configured to use TLS.
 
 ### Graylog
 
@@ -428,6 +443,12 @@ Plugin ID: `kibana`
 
 The [Kibana input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/kibana/README.md) queries the Kibana status API to obtain the health status of Kibana and some useful metrics.
 
+### Kinesis Consumer
+
+Plugin ID: `kinesis_consumer`
+
+The [Kinesis Consumer input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/kinesis_consumer/README.md) reads from a Kinesis data stream and creates metrics using one of the supported [input data formats](/telegraf/v1.10/data_formats/input).
+
 ### Kubernetes
 
 Plugin ID: `kubernetes`
@@ -439,6 +460,20 @@ The [Kubernetes input plugin](https://github.com/influxdata/telegraf/blob/releas
 and containers for a single host. It is assumed that this plugin is running as part of a daemonset within a
 Kubernetes installation. This means that Telegraf is running on every node within the cluster. Therefore, you
 should configure this plugin to talk to its locally running kubelet.
+
+### Kubernetes Inventory
+
+Plugin ID: `kube_inventory`
+
+The [Kubernetes Inventory input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/kube_inventory/README.md) generates metrics derived from the state of the following Kubernetes resources:
+
+* daemonsets
+* deployments
+* nodes
+* persistentvolumes
+* persistentvolumeclaims
+* pods (containers)
+* statefulsets
 
 ### LeoFS
 
@@ -530,6 +565,17 @@ Plugin ID: `mqtt_consumer`
 The [MQTT Consumer input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/mqtt_consumer/README.md) reads from specified MQTT topics and adds messages to InfluxDB. Messages are in the
 [Telegraf input data formats](/telegraf/v1.10/data_formats/input/).
 
+### Multifile
+
+Plugin ID: `multifile`
+
+The [Multifile input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/multifile/README.md) allows Telegraf to combine data from multiple files
+into a single metric, creating one field or tag per file.  
+This is often useful creating custom metrics from the `/sys` or `/proc` filesystems.
+
+> **Note:** To parse metrics from a single file formatted in one of the supported
+> [input data formats](/telegraf/v1.10/data_formats/input), use the [file input plugin](#file).
+
 ### MySQL
 
 Plugin ID: `mysql`
@@ -547,6 +593,13 @@ The [NATS Consumer input plugin](https://github.com/influxdata/telegraf/blob/rel
 Plugin ID: `nats`
 
 The [NATS Server Monitoring input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nats/README.md) gathers metrics when using the [NATS Server monitoring server](https://www.nats.io/documentation/server/gnatsd-monitoring/).
+
+### Neptune Apex
+
+Plugin ID: `neptune_apex`
+
+The [Neptune Apex input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/neptune_apex/README.md) collects real-time data from the Apex `status.xml` page.
+The Neptune Apex controller family allows an aquarium hobbyist to monitor and control their tanks based on various probes. The data is taken directly from the `/cgi-bin/status.xml` at the interval specified in the `telegraf.conf` configuration file.
 
 ### Net
 
@@ -593,6 +646,16 @@ Structures for NGINX Plus have been built based on history of [status module doc
 Plugin ID: `nginx_plus_api`
 
 The [NGINX Plus API input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nginx_plus_api/README.md) gathers advanced status information for NGINX Plus servers.
+
+### NGINX Upstream Check
+
+Plugin ID: `nginx_upstream_check`
+
+The [NGINX Upstream Check input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/nginx_plus_api/README.md) reads the status output of the nginx_upstream_check (https://github.com/yaoweibin/nginx_upstream_check_module). 
+This module can periodically check the NGINX upstream servers using the configured request and interval to determine if the server is still available. 
+If checks are failed, then the server is marked as `down` and will not receive any requests until the check passes and the server will be marked as `up` again.
+
+The status page displays the current status of all upstreams and servers as well as number of the failed and successful checks. This information can be exported in JSON format and parsed by this input.
 
 ### NSQ
 
@@ -800,6 +863,14 @@ Plugin ID: `socket_listener`
 
 The [Socket Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/socket_listener/README.md) listens for messages from streaming (TCP, UNIX) or datagram (UDP, unixgram) protocols. Messages are expected in the
 [Telegraf Input Data Formats](/telegraf/v1.10/data_formats/input/).
+
+### Stackdriver
+
+Plugin ID: `stackdriver`
+
+The [Stackdriver input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/stackdriver/README.md) gathers metrics from the [Stackdriver Monitoring API](https://cloud.google.com/monitoring/api/v3/).
+
+> **Note:** This plugin accesses APIs that are [chargeable](https://cloud.google.com/stackdriver/pricing#stackdriver_monitoring_services) -- you might incur costs.
 
 ### StatsD
 

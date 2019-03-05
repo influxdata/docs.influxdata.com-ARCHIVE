@@ -77,6 +77,13 @@ Plugin ID: `file`
 
 The [File output plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/outputs/file/README.md) writes Telegraf metrics to files.
 
+### Google Cloud PubSub
+
+Plugin ID: `cloud_pubsub`
+
+The [Google PubSub output plugin]() publishes metrics to a [Google Cloud PubSub](https://cloud.google.com/pubsub) topic
+as one of the supported [output data formats](/telegraf/data_formats/output).
+
 ### Graphite
 
 Plugin ID: `graphite`
