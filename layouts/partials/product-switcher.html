@@ -11,7 +11,7 @@
       {{ if (or .IsPage (eq .Kind "section")) }}
         {{ range $product := .Site.Menus.products }}
         {{ range $version := (index $.Site.Data.versions $product.Identifier) }}
-        {{ if in $current.Permalink (print "/" $product.Identifier "/" $version) }}
+        {{ if in $current.Permalink (print "/" $product.Identifier "/" $version "/") }}
           {{$product.Name}} {{$version}}
         {{end}}
       {{end}}
