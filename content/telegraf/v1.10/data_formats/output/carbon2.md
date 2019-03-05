@@ -4,7 +4,7 @@ description: Use the Carbon2 output data format (serializer) converts Telegraf m
 menu:
   telegraf_1_10:
     name: Carbon2
-    weight: 30
+    weight: 10
     parent: Output data formats
 ---
 

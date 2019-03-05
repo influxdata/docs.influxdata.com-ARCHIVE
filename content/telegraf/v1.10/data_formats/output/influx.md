@@ -4,7 +4,7 @@ description: The "influx" data format outputs metrics into the InfluxDB Line Pro
 menu:
   telegraf_1_10:
     name: InfluxDB Line Protocol
-    weight: 20
+    weight: 30
     parent: Output data formats
 ---
 

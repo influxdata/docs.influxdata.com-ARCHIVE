@@ -4,7 +4,7 @@ description: The SplunkMetric serializer formats and outputs data in a format th
 menu:
   telegraf_1_10:
     name: SplunkMetric
-    weight: 40
+    weight: 60
     parent: Output data formats
 ---
 

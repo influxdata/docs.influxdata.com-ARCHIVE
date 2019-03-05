@@ -4,7 +4,7 @@ description: Telegraf's "json" output data format converts metrics into JSON doc
 menu:
   telegraf_1_10:
     name: JSON
-    weight: 30
+    weight: 40
     parent: Output data formats
 ---
 

@@ -3,7 +3,7 @@ title: ServiceNow Metrics output data format
 description: Use the ServiceNow Metrics output data format (serializer) to output metrics in the ServiceNow Operational Intelligence format.
 menu:
   telegraf_1_10:
-    name: ServiceNow Metrics output
+    name: ServiceNow Metrics
     weight: 50
     parent: Output data formats
 ---
@@ -60,7 +60,7 @@ To send this data to a ServiceNow MID Server with Web Server extension activated
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
   data_format = "nowmetric"
-  
+
   ## Additional HTTP headers
   [outputs.http.headers]
   #   # Should be set manually to "application/json" for json data_format

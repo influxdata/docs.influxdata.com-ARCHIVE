@@ -13,9 +13,9 @@ of common data formats that may be selected when configuring many of the Telegra
 output plugins.
 
 * [Carbon2](/telegraf/v1.10/data_formats/output/carbon2)
+* [Graphite](/telegraf/v1.10/data_formats/output/graphite)
 * [InfluxDB Line Protocol](/telegraf/v1.10/data_formats/output/influx)
 * [JSON](/telegraf/v1.10/data_formats/output/json)
-* [Graphite](/telegraf/v1.10/data_formats/output/graphite)
 * [ServiceNow Metrics](/telegraf/v1.10/data_formats/output/nowmetric)
 * [SplunkMetric](/telegraf/v1.10/data_formats/output/splunkmetric)
 
