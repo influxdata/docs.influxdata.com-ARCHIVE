@@ -24,8 +24,8 @@ menu:
 
 #### New output data formats (serializers)
 
-- [ServiceNow Metrics](/telegraf/v1.10/data_formats/nowmetric) - Contributed by @JefMuller
-- [Carbon2](/telegraf/v1.10/data_formats/carbon2) - Contributed by @frankreno
+- [ServiceNow Metrics](/telegraf/v1.10/data_formats/output/nowmetric) - Contributed by @JefMuller
+- [Carbon2](/telegraf/v1.10/data_formats/output/carbon2) - Contributed by @frankreno
 
 #### Features
 
