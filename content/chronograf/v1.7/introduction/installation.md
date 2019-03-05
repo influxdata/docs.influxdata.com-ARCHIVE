@@ -40,9 +40,9 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 
     {{< tab-content-container >}}
     {{% tab-content %}}
-    
+
     tar zxvf chronograf-1.7.7_darwin_amd64.tar.gz
-  
+
     {{% /tab-content %}}
 
     {{% tab-content %}}
@@ -55,7 +55,7 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 
     {{< /tab-content-container >}}
 
-3. Start Chronograf: 
+3. Start Chronograf:
 
     ```
     chronograf
