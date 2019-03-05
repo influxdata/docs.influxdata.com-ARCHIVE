@@ -14,62 +14,102 @@ menu:
 
 #### New input plugins
 
-- [cloud_pubsub](/plugins/inputs/cloud_pubsub/README.md) - Contributed by @emilymye
-- [kube_inventory](/plugins/inputs/kube_inventory/README.md) - Contributed by @influxdata
-- [neptune_apex](/plugins/inputs/neptune_apex/README.md) - Contributed by @MaxRenaud
-- [nginx_upstream_check](/plugins/inputs/nginx_upstream_check/README.md) - Contributed by @dmitryilyin
-- [multifile](/plugins/inputs/multifile/README.md) - Contributed by @martin2250
+
+- [Google Cloud PubSub (`cloud_pubsub`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub/README.md)) - Contributed by @emilymye
+- [Kubernetes Inventory (`kube_inventory`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub_push/README.md) - Contributed by @influxdata
+- [Neptune Apex (`neptune_apex`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/neptune_apex/README.md)) - Contributed by @MaxRenaud
+- [NGINX Upstream Check (`nginx_upstream_check`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/nginx_upstream_check/README.md) - Contributed by @dmitryilyin
+- [Multifile (`multifile`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/multifile/README.md) - Contributed by @martin2250
 
 #### New output plugins
 
-- [cloud_pubsub](/plugins/outputs/cloud_pubsub/README.md) - Contributed by @emilymye
+- [Google Cloud PubSub (`cloud_pubsub`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/outputs/cloud_pubsub/README.md) - Contributed by @emilymye
 
 #### New Serializers
 
-- [nowmetric](/plugins/serializers/nowmetric/README.md) - Contributed by @JefMuller
-- [carbon2](/plugins/serializers/carbon2/README.md) - Contributed by @frankreno
+- [ServiceNow Metrics (`nowmetric`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/serializers/nowmetric/README.md) - Contributed by @JefMuller
+- [Carbon2 (`carbon2`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/serializers/carbon2/README.md) - Contributed by @frankreno
 
-- Allow for force gathering ES cluster stats.
-- Add support for `unix` and `unix_ms` timestamps to `csv` parser.
-- Add ability to tag metrics with topic in `kafka_consumer`.
-- Add option to store `cpu` as a tag in `interrupts` input.
-- Add support for sending a request body to `http` input.
-- Add running field to `procstat_lookup`.
-- Include `DEVLINKS` in available `diskio` `udev` properties.
-- Add micro and nanosecond unix timestamp support to JSON parser.
-- Add support for basic auth to `couchdb` input.
-- Add support in `wavefront` output for the Wavefront Direct Ingestion API.
-- Allow counting float values in `valuecounter` aggregator.
-- Add log send and redo queue fields to `sqlserver` input.
-- Improve scalability of `vsphere` input.
-- Add read and write op per second fields to `ceph` input.
-- Add configurable timeout to `varnish` input.
-- Add `flush_total_time_ns` and additional wired tiger fields to `mongodb` input.
-- Support passing bearer token directly in `k8s` input.
-- Support passing bearer token directly in `prometheus` input.
-- Add option to report input timestamp in `prometheus` output.
-- Add Linux `mipsle` packages.
-- Support `unix_us` and `unix_ns` timestamp format in `csv` parser.
-- Add resource type and resource label support to `stackdriver` output.
-- Add internal metric for line too long in `influxdb_listener`.
-- Add option to set retain flag on messages to `mqtt` output.
-- Add resource path -based filtering to `vsphere` input.
-- Add `rcode` tag and field to `dns_query` input.
+#### Features
+
+- **General**
+  - Allow for force gathering ES cluster stats.
+  - Add support for `unix` and `unix_ms` timestamps to `csv` parser.
+  - Add Linux `mipsle` packages.
+- **Input plugins**
+  - Ceph (`ceph`)
+    - Add read and write op per second fields.
+  - CouchDB (`couchdb`)
+    - Add support for basic auth.
+  - DNS Query (`dns_query`)
+    - Add `rcode` tag and field.
+  - DiskIO (`diskio`)
+    - Include `DEVLINKS` in available `udev` properties.
+  - HTTP (`http`)
+    - Add support for sending a request body to `http` input.
+  - InfluxDB Listener (`influxdb_listener`)
+    - Add internal metric for line too long.
+  - Interrupts (`interrupts`)
+    - Add option to store `cpu` as a tag.
+  - Kafka Consumer (`kafka_consumer)
+    - Add ability to tag metrics with topic.
+  - Kubernetes (`k8s`)
+  - `Support passing bearer token directly.
+  - Microsoft SQL Server
+    - Add log send and redo queue fields.
+  - MongoDB (`mongodb`)
+    - Add `flush_total_time_ns` and additional wired tiger fields.
+  - Procstat (`procstat_lookup`)
+    - Add running field to `procstat_lookup`.
+  - Prometheus (`prometheus`)
+    - Support passing bearer token directly.
+    - Add option to report input timestamp.
+  - VMware vSphere (`vsphere`)
+    - Improve scalability.
+    - Add resource path -based filtering.
+  - Varnish (`varnish`)
+    - Add configurable timeout.
+- **Output plugins**
+  - MQTT (`mqtt`)
+    - Add option to set retain flag on messages.
+  - Stackdriver (`stackdriver`)
+    - Add resource type and resource label support
+  - VMware Wavefront (`wavefront`)
+    - Add support for the Wavefront Direct Ingestion API.
+- **Aggregator plugins**
+  - Value Counter (`valuecounter`)
+    - Allow counting float values.
+- **Data formats**
+  - **Input data formats**
+  - CSV
+    - Support `unix_us` and `unix_ns` timestamp format.
+  - JSON
+    - Add micro and nanosecond unix timestamp support.
+  - **Output data formats**
+    - ServiceNow Metrics
 
 #### Bug fixes
 
-- Fix initscript removes pidfile of restarted Telegraf process.
-- Use datacenter option spelling in `consul` input.
-- Remove auth from `/ping` route in `influxdb_listener`.
-- Fix `x509_cert` input stops checking certs after first error.
-- Skip string fields when writing to `stackdriver` output.
-- Send metrics in ascending time order in `stackdriver` output.
-- Use `systemd` in Amazon Linux 2 rpm.
-- Set deadlock priority in `sqlserver` input.
-- Remove error log when snmp6 directory does not exists with `nstat` input.
-- Host not added when using custom arguments in `ping` plugin.
-
-
+- General
+  - Use `systemd` in Amazon Linux 2 rpm.
+  - Fix `initscript` removes `pidfile` of restarted Telegraf process.
+- **Input plugins**
+  - Consul (`consul`)
+    - Use datacenter option spelling.
+  - InfluxDB Listener (`influxdb_listener`)
+    - Remove auth from `/ping` route.
+  - Microsoft SQL Server (`sqlserver`)
+    - Set deadlock priority.
+  - Nstat (`nstat`)
+    - Remove error log when `snmp6` directory does not exist.
+  - Ping (`ping`)
+    - Host not added when using custom arguments.
+  - X.509 Certificate
+    - Fix input stops checking certificates after first error.
+- **Output plugins**
+  - Stackdriver (`stackdriver`)
+    - Skip string fields when writing.
+    - Send metrics in ascending time order.
 
 ## 1.9.4 [2019-02-05]
 
