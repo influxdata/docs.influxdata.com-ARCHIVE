@@ -146,6 +146,12 @@ $ ls ./telegrafbackup
 
 ## Restore
 
+Before you restore, stop anti-entropy (AE) services if they are enabled (disabled by default). For each data node in the cluster, do the following:
+
+1. Stop the influxdb service.
+2. Disable anti-entropy in influx.config.
+3. Restart the influxdb service, and wait for the data node to return to a healthy state (node is up, receiving read and write requests, and the hinted handoff queue is drained). 
+
 Restore a backup to an existing cluster or a new cluster.
 By default, a restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
 An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
