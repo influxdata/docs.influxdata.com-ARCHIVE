@@ -8,12 +8,9 @@ menu:
     parent: About the project
 ---
 
-## 1.10 [2019-02-??]
-
-## v1.10 [unreleased]
+## 1.10 [2019-03-05]
 
 #### New input plugins
-
 
 - [Google Cloud PubSub (`cloud_pubsub`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub/README.md)) - Contributed by @emilymye
 - [Kubernetes Inventory (`kube_inventory`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/cloud_pubsub_push/README.md) - Contributed by @influxdata
@@ -25,10 +22,10 @@ menu:
 
 - [Google Cloud PubSub (`cloud_pubsub`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/outputs/cloud_pubsub/README.md) - Contributed by @emilymye
 
-#### New Serializers
+#### New output data formats (serializers)
 
-- [ServiceNow Metrics (`nowmetric`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/serializers/nowmetric/README.md) - Contributed by @JefMuller
-- [Carbon2 (`carbon2`)](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/serializers/carbon2/README.md) - Contributed by @frankreno
+- [ServiceNow Metrics](/telegraf/v1.10/data_formats/nowmetric) - Contributed by @JefMuller
+- [Carbon2](/telegraf/v1.10/data_formats/carbon2) - Contributed by @frankreno
 
 #### Features
 
@@ -51,22 +48,22 @@ menu:
     - Add internal metric for line too long.
   - Interrupts (`interrupts`)
     - Add option to store `cpu` as a tag.
-  - Kafka Consumer (`kafka_consumer)
+  - Kafka Consumer (`kafka_consumer`)
     - Add ability to tag metrics with topic.
   - Kubernetes (`k8s`)
   - `Support passing bearer token directly.
-  - Microsoft SQL Server
+  - Microsoft SQL Server (`sqlserver`)
     - Add log send and redo queue fields.
   - MongoDB (`mongodb`)
     - Add `flush_total_time_ns` and additional wired tiger fields.
   - Procstat (`procstat_lookup`)
-    - Add running field to `procstat_lookup`.
+    - Add running field.
   - Prometheus (`prometheus`)
     - Support passing bearer token directly.
     - Add option to report input timestamp.
   - VMware vSphere (`vsphere`)
     - Improve scalability.
-    - Add resource path -based filtering.
+    - Add resource path-based filtering.
   - Varnish (`varnish`)
     - Add configurable timeout.
 - **Output plugins**
@@ -90,7 +87,7 @@ menu:
 
 #### Bug fixes
 
-- General
+- **General**
   - Use `systemd` in Amazon Linux 2 rpm.
   - Fix `initscript` removes `pidfile` of restarted Telegraf process.
 - **Input plugins**

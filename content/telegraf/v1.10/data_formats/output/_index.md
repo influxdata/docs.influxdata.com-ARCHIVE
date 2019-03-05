@@ -12,9 +12,11 @@ In addition to output-specific data formats, Telegraf supports the following set
 of common data formats that may be selected when configuring many of the Telegraf
 output plugins.
 
+* [Carbon2](/telegraf/v1.10/data_formats/output/carbon2)
 * [InfluxDB Line Protocol](/telegraf/v1.10/data_formats/output/influx)
 * [JSON](/telegraf/v1.10/data_formats/output/json)
 * [Graphite](/telegraf/v1.10/data_formats/output/graphite)
+* [ServiceNow Metrics](/telegraf/v1.10/data_formats/output/nowmetric)
 * [SplunkMetric](/telegraf/v1.10/data_formats/output/splunkmetric)
 
 You will be able to identify the plugins with support by the presence of a
