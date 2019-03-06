@@ -31,7 +31,6 @@ menu:
 
 - **General**
   - Allow for force gathering ES cluster stats.
-  - Add support for `unix` and `unix_ms` timestamps to `csv` parser.
   - Add Linux `mipsle` packages.
 - **Input plugins**
   - Ceph (`ceph`)
@@ -80,6 +79,7 @@ menu:
   - **Input data formats**
   - CSV
     - Support `unix_us` and `unix_ns` timestamp format.
+    - Add support for `unix` and `unix_ms` timestamps.
   - Grok (`grok`)
     - Allow parser to produce metrics with no fields.
   - JSON
@@ -111,6 +111,27 @@ menu:
   - Stackdriver (`stackdriver`)
     - Skip string fields when writing.
     - Send metrics in ascending time order.
+
+## v1.9.5 [2019-02-26]
+
+### Bug fixes
+
+* General
+  * Use `systemd` in Amazon Linux 2 rpm.
+* Ceph Storage (`ceph`) input plugin
+  * Add backwards compatibility fields in usage and pool statistics.
+* InfluxDB (`influxdb`) output plugin
+  * Fix UDP line splitting.  
+* Microsoft SQL Server (`sqlserver`) input plugin
+  * Set deadlock priority to low.
+  * Disable results by row in AzureDB query.
+* Nstat (`nstat`) input plugin
+  * Remove error log when `snmp6` directory does not exist.
+* Ping (`ping`) input plugin
+  * Host not added when using custom arguments.
+* Stackdriver (`stackdriver`) output plugin
+  * Skip string fields when writing to stackdriver output.
+  * Send metrics in ascending time order.
 
 ## 1.9.4 [2019-02-05]
 
