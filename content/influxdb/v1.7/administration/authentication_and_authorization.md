@@ -1,4 +1,4 @@
-v1.7---
+---
 title: Authentication and authorization in InfluxDB
 aliases:
     - influxdb/v1.7/administration/authentication_and_authorization/
