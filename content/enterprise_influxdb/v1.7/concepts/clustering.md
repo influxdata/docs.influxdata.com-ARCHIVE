@@ -80,7 +80,7 @@ On disk, the data is always organized by `<database>/<retention_policy>/<shard_i
 
 ## Optimal Server Counts
 
-When creating a cluster you'll need to choose how meta and data nodes to configure and connect. You can think of InfluxDB Enterprise as two separate clusters that communicate with each other: a cluster of meta nodes and one of data nodes. The number of meta nodes is driven by the number of meta node failures they need to be able to handle, while the number of data nodes scales based on your storage and query needs.
+When creating a cluster, you'll need to choose how many meta and data nodes to configure and connect. You can think of InfluxDB Enterprise as two separate clusters that communicate with each other: a cluster of meta nodes and one of data nodes. The number of meta nodes is driven by the number of meta node failures they need to be able to handle, while the number of data nodes scales based on your storage and query needs.
 
 The consensus protocol requires a quorum to perform any operation, so there should always be an odd number of meta nodes. For almost all use cases, 3 meta nodes is the correct number, and such a cluster operates normally even with the permanant loss of 1 meta node.
 
