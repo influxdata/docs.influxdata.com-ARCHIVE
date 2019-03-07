@@ -6,7 +6,7 @@ aliases:
 menu:
   flux_0_x:
     name: toBool
-    parent: Type conversions
+    parent: built-in-type-conversions
     weight: 1
 ---
 
