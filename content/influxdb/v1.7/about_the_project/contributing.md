@@ -8,5 +8,5 @@ menu:
 ---
 
 To learn how you can contribute to the InfluxDB OSS project, see
-[Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/master/CONTRIBUTING.md)
+[Contributing to InfluxDB](https://github.com/influxdata/influxdb/blob/1.7/CONTRIBUTING.md)
 in the GitHub repository.

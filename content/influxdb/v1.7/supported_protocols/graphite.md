@@ -210,4 +210,4 @@ If you need to add the same set of tags to all metrics, you can define them glob
 
 
 
-Content from  [README](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md) on GitHub.
+Content from  [README](https://github.com/influxdata/influxdb/blob/1.7/services/graphite/README.md) on GitHub.

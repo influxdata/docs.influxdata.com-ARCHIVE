@@ -138,4 +138,4 @@ Since UDP is a connectionless protocol, there is no way to signal to the data so
 ...
 ```
 
-Content from [README](https://github.com/influxdata/influxdb/blob/master/services/udp/README.md)
+Content from [README](https://github.com/influxdata/influxdb/blob/1.7/services/udp/README.md)

@@ -50,7 +50,7 @@ Configuration settings that specify a duration support the following duration un
 - `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
 - `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
->**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) might be slightly newer.
+>**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/1.7/etc/config.sample.toml) might be slightly newer.
 
 ## Environment variables
 
@@ -515,7 +515,7 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ### `[monitor]`
 
-The `[monitor]` section settings control InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/master/monitor/README.md).
+The `[monitor]` section settings control InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/1.7/monitor/README.md).
 
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
@@ -830,7 +830,7 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 ### `[[graphite]]`
 
 This section controls one or many listeners for Graphite data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/graphite/README.md) on GitHub for more information.
+See the [README](https://github.com/influxdb/influxdb/blob/1.7/services/graphite/README.md) on GitHub for more information.
 
 #### `enabled = false`
 
@@ -1001,7 +1001,7 @@ When set to `split`, multi-value plugin data (e.g. df free:5000,used:1000) will 
 ### `[[opentsdb]]`
 
 Controls the listener for OpenTSDB data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) on GitHub for more information.
+See the [README](https://github.com/influxdb/influxdb/blob/1.7/services/opentsdb/README.md) on GitHub for more information.
 
 #### `enabled = false`
 
