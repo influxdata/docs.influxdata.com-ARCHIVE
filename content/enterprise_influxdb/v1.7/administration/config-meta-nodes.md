@@ -9,9 +9,9 @@ menu:
 ---
 
 * [Meta node configurations](#meta-node-configurations)
-    * [Global options](#global-options)
-    * [Enterprise license `[enterprise]`](#enterprise)
-    * [Meta node `[meta]`](#meta)
+  * [Global options](#global-options)
+  * [Enterprise license `[enterprise]`](#enterprise)
+  * [Meta node `[meta]`](#meta)
 
 ## Meta node configurations
 
@@ -27,7 +27,7 @@ The `reporting-disabled` option toggles the reporting of data every 24 hours to
 `usage.influxdata.com`.
 Each report includes a randomly-generated identifier, OS, architecture,
 InfluxDB version, and the number of databases, measurements, and unique series.
-Setting this option to `true` will disable reporting.
+To disable reporting, set this option to `true`.
 
 > **Note:** No data from user databases are ever transmitted.
 
@@ -77,7 +77,7 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
 
 The local path to the permanent JSON license file that you received from InfluxData
 for instances that do not have access to the Internet.
-If you need a license file, contact [sales@influxdb.com](mailto:sales@influxdb.com).
+To obtain a license file, contact [sales@influxdb.com](mailto:sales@influxdb.com).
 
 The license file must be saved on every server in the cluster, including meta nodes
 and data nodes.
@@ -102,7 +102,6 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 ### Meta node settings
 
 #### `[meta]`
-
 
 #### `dir = "/var/lib/influxdb/meta"`
 
@@ -188,7 +187,6 @@ Use a separate private key location.
 
 Whether meta nodes will skip certificate validation communicating with each other over HTTPS.
 This is useful when testing with self-signed certificates.
-
 
 #### `https-enabled = false`
 
@@ -330,6 +328,6 @@ inter-node communication within the cluster.
 Set this to a long pass phrase.
 This value must be the same value as the
 [`[meta] meta-internal-shared-secret`](/enterprise_influxdb/v1.7/administration/config-data-nodes#meta-internal-shared-secret) in the data node configuration file.
-If you are using this option, set [`auth-enabled`](#auth-enabled-false) to `true`.
+To use this option, set [`auth-enabled`](#auth-enabled-false) to `true`.
 
 Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
