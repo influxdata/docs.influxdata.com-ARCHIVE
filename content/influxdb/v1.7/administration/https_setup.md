@@ -56,13 +56,15 @@ Specific steps may be different for other operating systems.
 Place the private key file (`.key`) and the signed certificate file (`.crt`)
 or the single bundled file (`.pem`) in the `/etc/ssl` directory.
 
-#### Step 2: Ensure file permissions
-Certificate files require read and write access by the `root` user.
-Ensure that you have the correct file permissions by running the following
-commands:
+#### Step 2: Set SSL file permissions
+Users running influxdb must have read permissions for the SSL certificate. 
+
+>***Note***: You may opt to set up multiple users, groups, and permissions. Ultimately, make sure all users running influxdb have read permissions for the SSL certificate.
+
+Run the following command to give influxdb read and write permissions on the SSL certificate.
 
 ```bash
-sudo chown root:root /etc/ssl/<CA-certificate-file>
+sudo chown influxdb:influxdb /etc/ssl/<CA-certificate-file>
 sudo chmod 644 /etc/ssl/<CA-certificate-file>
 sudo chmod 600 /etc/ssl/<private-key-file>
 ```
