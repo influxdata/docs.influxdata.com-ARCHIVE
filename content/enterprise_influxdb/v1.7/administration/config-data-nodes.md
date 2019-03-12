@@ -8,28 +8,26 @@ menu:
     parent: Administration
 ---
 
-
 * [Data node configurations](#data-node-configurations)
-    * [Global](#global-settings)
-    * [Enterprise license [enterprise]](#enterprise-license-settings)
-    * [Meta node `[meta]`](#meta-node-settings)
-    * [Data `[data]`](#data-settings)
-    * [Cluster `[cluster]`](#cluster-settings)
-    * [Retention `[retention]`](#retention-policy-settings)
-    * [Hinted Handoff `[hinted-handoff]`](#hinted-handoff-settings)
-    * [Anti-Entropy `[anti-entropy]`](#anti-entropy-ae-settings)
-    * [Shard precreation `[shard-precreation]`](#shard-precreation-settings)
-    * [Monitor `[monitor]`](#monitor-settings)
-    * [HTTP endpoints [http]](#http-endpoint-settings)
-    * [Logging [logging]](#logging-settings)
-    * [Subscriber [subscriber]](#subscriber-settings)
-    * [Graphite [graphite]](#graphite-settings)
-    * [Collectd [collectd]](#collectd-settings)
-    * [OpenTSDB [opentsdb]](#opentsdb-settings)
-    * [UDP [udp]](#udp-settings)
-    * [Continuous queries [continuous-queries]](#continuous-queries-settings)
-    * [TLS [tls]](#tls-settings)
-
+  * [Global](#global-settings)
+  * [Enterprise license [enterprise]](#enterprise-license-settings)
+  * [Meta node `[meta]`](#meta-node-settings)
+  * [Data `[data]`](#data-settings)
+  * [Cluster `[cluster]`](#cluster-settings)
+  * [Retention `[retention]`](#retention-policy-settings)
+  * [Hinted Handoff `[hinted-handoff]`](#hinted-handoff-settings)
+  * [Anti-Entropy `[anti-entropy]`](#anti-entropy-ae-settings)
+  * [Shard precreation `[shard-precreation]`](#shard-precreation-settings)
+  * [Monitor `[monitor]`](#monitor-settings)
+  * [HTTP endpoints [http]](#http-endpoint-settings)
+  * [Logging [logging]](#logging-settings)
+  * [Subscriber [subscriber]](#subscriber-settings)
+  * [Graphite [graphite]](#graphite-settings)
+  * [Collectd [collectd]](#collectd-settings)
+  * [OpenTSDB [opentsdb]](#opentsdb-settings)
+  * [UDP [udp]](#udp-settings)
+  * [Continuous queries [continuous-queries]](#continuous-queries-settings)
+  * [TLS [tls]](#tls-settings)
 
 ## Data node configurations
 
@@ -343,7 +341,6 @@ increase in cache size may lead to an increase in heap usage.
 
 Environment variable: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
 
-
 -----
 
 ## Cluster settings
@@ -373,7 +370,7 @@ The number of active streams can exceed the maximum, but they will not return to
 
 Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_STREAMS`
 
-####  `shard-reader-timeout = "0"`
+#### `shard-reader-timeout = "0"`
 
 The default timeout set on shard readers.
 The time in which a query connection must return its response after which the system returns an error.
@@ -399,7 +396,7 @@ Use a separate private key location.
 Whether data nodes will skip certificate validation communicating with each other over HTTPS.
 This is useful when testing with self-signed certificates.
 
-####  `cluster-tracing = false`
+#### `cluster-tracing = false`
 
 Enables cluster trace logging.
 Set to `true` to enable logging of cluster communications.
@@ -407,7 +404,7 @@ Enable this setting to verify connectivity issues between data nodes.
 
 Environment variable: `INFLUXDB_CLUSTER_CLUSTER_TRACING`
 
-####  `write-timeout = "10s"`
+#### `write-timeout = "10s"`
 
 The default time a write request will wait until a timeout error is returned to the caller.
 
@@ -443,14 +440,14 @@ A value of `0` will make the maximum point count unlimited.
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_SELECT_POINT`
 
-####  `max-select-series = 0`
+#### `max-select-series = 0`
 
 The maximum number of series a SELECT can run.
 A value of `0` will make the maximum series count unlimited.
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_SELECT_SERIES`
 
-####  `max-select-buckets = 0`
+#### `max-select-buckets = 0`
 
 The maximum number of group by time buckets a SELECT can create.  
 A value of `0` will make the maximum number of buckets unlimited.
@@ -471,20 +468,20 @@ The maximum number of bytes to write to a shard in a single request.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_BATCH_SIZE`
 
-####  `dir = "/var/lib/influxdb/hh"`
+#### `dir = "/var/lib/influxdb/hh"`
 
 The hinted handoff directory where the durable queue will be stored on disk.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_DIR`
 
-####  `enabled = true`
+#### `enabled = true`
 
 Set to `false` to disable hinted handoff.
 Disabling hinted handoff is not recommended and can lead to data loss if another data node is unreachable for any length of time.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
 
-####  `max-size = 10737418240`
+#### `max-size = 10737418240`
 
 The maximum size of the hinted handoff queue.
 Each queue is for one and only one other data node in the cluster.
@@ -492,7 +489,7 @@ If there are N data nodes in the cluster, each data node may have up to N-1 hint
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
 
-####  `max-age = "168h0m0s"`
+#### `max-age = "168h0m0s"`
 
 The time writes sit in the queue before they are purged.
 The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
@@ -500,7 +497,7 @@ If another data node is unreachable for more than the `max-age` it can lead to d
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_AGE`
 
-####  `retry-concurrency = 20`
+#### `retry-concurrency = 20`
 
 The maximum number of hinted handoff blocks that the source data node attempts to write to each destination data node.
 Hinted handoff blocks are sets of data that belong to the same shard and have the same destination data node.
@@ -578,11 +575,13 @@ The maximum number of concurrent sync operations that should be performed.
 Modify this setting only when requested by InfluxData support.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_SYNC`
+
 #### `auto-repair-missing = true`
 
 Enables missing shards to automatically be repaired.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_AUTO_REPAIR_MISSING`
+
 -----
 
 ## Retention policy settings
@@ -762,8 +761,6 @@ When using environment variables, the values can be supplied as follows.
 
 The `_n` at the end of the environment variable represents the array position of the entry.
 
-
-
 #### `write-tracing = false`
 
 Enables detailed write logging.
@@ -857,7 +854,6 @@ Setting this to `0` or setting `max-concurrent-write-limit` to `0` disables the 
 
 ### `[logging]`
 
-
 #### `format = "logfmt"`
 
 Determines which log encoder to use for logs.
@@ -933,7 +929,7 @@ These next lines control how batching works.
 You should have this enabled otherwise you could get dropped metrics or poor performance.
 Batching will buffer points in memory if you have many coming in.
 
-```
+```toml
 # database = "graphite"
 # retention-policy = ""
 # bind-address = ":2003"
@@ -966,22 +962,21 @@ This string joins multiple matching 'measurement' values providing more control 
 Default tags that will be added to all metrics.  
 These can be overridden at the template level or by tags extracted from metric.
 
-
 #### Templates pattern
 
-```
+```toml
 # templates = [
 #   "*.app env.service.resource.measurement",
 #   # Default template
 #   "server.*",
 # ]
 ```
+
 Each template line requires a template pattern.  
 It can have an optional filter before the template and separated by spaces.  
 It can also have optional extra tags following the template.  
 Multiple tags should be separated by commas and no spaces similar to the line protocol format.  
 There can be only one default template.
-
 
 -----
 
@@ -989,13 +984,14 @@ There can be only one default template.
 
 ### `[[collectd]]`
 
-```
+```toml
 # enabled = false
 # bind-address = ":25826"
 # database = "collectd"
 # retention-policy = ""
 # typesdb = "/usr/share/collectd/types.db"
 ```
+
 #### `security-level = ""`
 
 The collectd security level can be "" (or "none"), "sign", or "encrypt".
@@ -1026,15 +1022,13 @@ Flush at least this often even if we haven't hit buffer limit.
 
 UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
 
-
 -----
 
 ## OpenTSDB settings
 
-
 ### `[[opentsdb]]`
 
-```
+```toml
 # enabled = false
 # bind-address = ":4242"
 # database = "opentsdb"
@@ -1066,14 +1060,13 @@ The number of batches that may be pending in memory.
 
 Flush at least this often even if we haven't hit buffer limit.
 
-
 -----
 
 ## UDP settings
 
 ### `[[udp]]`
 
-```
+```toml
 # enabled = false
 # bind-address = ":8089"
 # database = "udp"
@@ -1083,7 +1076,6 @@ Flush at least this often even if we haven't hit buffer limit.
 #### `precision = ""`
 
 InfluxDB precision for timestamps on received points ("" or "n", "u", "ms", "s", "m", "h")
-
 
 These next lines control how batching works. You should have this enabled otherwise you could get dropped metrics or poor performance.
 Batching will buffer points in memory if you have many coming in.
@@ -1105,6 +1097,7 @@ Will flush at least this often even if we haven't hit buffer limit.
 UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
 
 -----
+
 ## Continuous queries settings
 
 ### `[continuous_queries]`
@@ -1148,9 +1141,9 @@ Our recommended TLS configuration settings for `ciphers`, `min-version`, and `ma
 
 InfluxData's recommended TLS settings for "modern compatibility" are specified in the following configuration settings example.
 
-####
+#### Recommended "modern compatibility" cipher settings
 
-```
+```toml
 ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
             "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
             "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
@@ -1176,8 +1169,6 @@ Environment variable: `INFLUXDB_TLS_MIN_VERSION`
 The maximum version of the TLS protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, and `tls1.2`. If not specified, `max-version` is the maximum TLS version specified in the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants). In this example, `tls1.2` specifies the maximum version as TLS 1.2, which is consistent with the behavior of previous InfluxDB releases.
 
 Environment variable: `INFLUXDB_TLS_MAX_VERSION`
-
-
 
     <!-- #### max-fetch = 10
 
