@@ -20,24 +20,21 @@ that you enable HTTPS.
 To enable HTTPS with InfluxDB, you'll need an existing or new InfluxDB instance
 and a Transport Layer Security (TLS) certificate (also known as a
 Secured Sockets Layer (SSL) certificate).
-InfluxDB supports three types of TLS/SSL certificates:
+InfluxDB supports three types of TLS certificates:
 
-* **Single domain certificates signed by a [Certificate Authority](https://en.wikipedia.org/wiki/Certificate_authority)**
+* **Single domain certificates signed by a Certificate Authority**
 
-    These certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
-    With this certificate option, every InfluxDB instance requires a unique single domain certificate.
+    Single domain certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server. With this certificate option, every InfluxDB instance requires a unique single domain certificate.
 
 * **Wildcard certificates signed by a Certificate Authority**
 
-    These certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
-    Wildcard certificates can be used across multiple InfluxDB instances on different servers.
+    Wildcard certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server. Wildcard certificates can be used across multiple InfluxDB instances on different servers.
 
 * **Self-signed certificates**
 
     Self-signed certificates are not signed by a CA and you can [generate](#step-1-generate-a-self-signed-certificate) them on your own machine.
     Unlike CA-signed certificates, self-signed certificates only provide cryptographic security to HTTPS requests.
     They do not allow clients to verify the identity of the InfluxDB server.
-    We recommend using a self-signed certificate if you are unable to obtain a CA-signed certificate.
     With this certificate option, every InfluxDB instance requires a unique self-signed certificate.
 
 Regardless of your certificate's type, InfluxDB supports certificates composed of
@@ -47,21 +44,21 @@ that combine the private key file and the signed certificate file into a single 
 The following two sections outline how to set up HTTPS with InfluxDB [using a CA-signed
 certificate](#setup-https-with-a-ca-signed-certificate) and [using a self-signed certificate](#setup-https-with-a-self-signed-certificate)
 on Ubuntu 16.04.
-Specific steps may be different for other operating systems.
+Steps may vary for other operating systems.
 
-## Setup HTTPS with a CA-Signed certificate
+## Set up HTTPS with a CA certificate
 
-#### Step 1: Install the SSL/TLS certificate
+#### Step 1: Install the certificate
 
 Place the private key file (`.key`) and the signed certificate file (`.crt`)
 or the single bundled file (`.pem`) in the `/etc/ssl` directory.
 
-#### Step 2: Set SSL file permissions
-Users running influxdb must have read permissions for the SSL certificate. 
+#### Step 2: Set certificate file permissions
+Users running influxdb must have read permissions on the TLS certificate. 
 
->***Note***: You may opt to set up multiple users, groups, and permissions. Ultimately, make sure all users running influxdb have read permissions for the SSL certificate.
+>***Note***: You may opt to set up multiple users, groups, and permissions. Ultimately, make sure all users running influxdb have read permissions for the TLS certificate.
 
-Run the following command to give influxdb read and write permissions on the SSL certificate.
+Run the following command to give influxdb read and write permissions on the certificate files.
 
 ```bash
 sudo chown influxdb:influxdb /etc/ssl/<CA-certificate-file>
@@ -124,7 +121,7 @@ InfluxDB shell version: 1.x.x
 
 That's it! You've successfully set up HTTPS with InfluxDB.
 
-## Setup HTTPS with a Self-Signed Certificate
+## Set up HTTPS with a Self-Signed Certificate
 
 #### Step 1: Generate a self-signed certificate
 
@@ -165,7 +162,7 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 
   [...]
 
-  # The SSL certificate to use when HTTPS is enabled.
+  # The TLS or SSL certificate to use when HTTPS is enabled.
   https-certificate = "/etc/ssl/influxdb-selfsigned.crt"
 
   # Use a separate private key location.
