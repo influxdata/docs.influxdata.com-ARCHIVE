@@ -35,45 +35,47 @@ To enable LDAP support on your data nodes, make the following changes to the Inf
 
 ### Configure the InfluxDB Enterprise meta nodes
 
-To enable LDAP support in InfluxDB Enterprise, make the following configuration settings on your meta nodes:
+To enable LDAP support in InfluxDB Enterprise, make the following changes on your meta nodes.
 
 * Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
 * Provide a username and password as HTTP query parameters
-  - `u`: username
-  - `p`: password
-* Configure the meta node META shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payloads with the secret and username.
-      - Set the `[meta]` configuration setting `meta-shared-secret`, or the corresponding environment variable `INFLUXDB_META_SHARED_SECRET` to `"<shared-secret>"`.
+  * `u`: username
+  * `p`: password
+* Configure the meta node META shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the username and shared secret.
+* Set the `[meta]` configuration setting `meta-shared-secret`, or the corresponding environment variable `INFLUXDB_META_SHARED_SECRET`, to `"<shared-secret>"`.
 * Set the `[meta]` configuration setting `meta.ldap-allowed`, or the corresponding environment variable `INFLUXDB_META_LDAP_ALLOWED`, to `true` on all meta nodes in your cluster.
-    - If using  to `true` on all meta nodes.
-* If authentication is enabled on meta nodes, then the data nodes must be configured for:
-    - `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.auth-enabled` configuration.
-      - `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.internal-shared-secret`.
+* If using  to `true` on all meta nodes.
 
+### Configure the InfluxDB Enterprise data nodes
+
+If authentication is enabled on meta nodes, then the data nodes must be configured with the following options:
+
+* `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.auth-enabled` configuration.
+* `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.internal-shared-secret`.
 
 ### Configure the LDAP configuration file
 
 To create your LDAP configuration file, generate a sample configuration using the following command.
 
-```
+```bash
 influxd-ctl ldap sample-config
 ```
 
 Save this file and edit it as needed for your LDAP server.
 
-
 ### Verify the LDAP authentication
 
 To verify your LDAP configuration and see what happens as you authenticate through LDAP, run:
 
-```
+```bash
 influxd-ctl ldap verify -ldap-config /path/to/ldap.toml
 ```
 
 ### Load the LDAP configuration file
 
-To load your LDAP configuration file, run the `influxd-ctl ldap set-config` command
+To load your LDAP configuration file, run the `influxd-ctl ldap set-config` command.
 
-```
+```bash
 influxd-ctl ldap set-config /path/to/ldap.toml
 ```
 
@@ -108,7 +110,7 @@ enabled = true
   # The default used to be unencrypted. We made this change because as far as we know, nobody is using LDAP in production yet.
   # The fix is to update the config to set `security = "none"`:
   # https://github.com/influxdata/plutonium/pull/2853/commits/87a747e40034fcf05f0da1ed74f7c2c598b8d210#diff-fe8a3f0bbdb3fe46a99666a25eb20725
-  # The test server isn'\''t set up with TLS. Trying to use starttls against it will not work.
+  # The test server is not set up with TLS. Trying to use starttls against it will not work.
   # security = "starttls"
   security = "none"
 
