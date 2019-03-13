@@ -32,7 +32,7 @@ InfluxDB supports three types of TLS certificates:
 
 * **Self-signed certificates**
 
-    Self-signed certificates are not signed by a CA and you can [generate](#step-1-generate-a-self-signed-certificate) them on your own machine.
+    Self-signed certificates are not signed by a Certificate Authority (CA) and you can [generate](#step-1-generate-a-self-signed-certificate) them on your own machine.
     Unlike CA-signed certificates, self-signed certificates only provide cryptographic security to HTTPS requests.
     They do not allow clients to verify the identity of the InfluxDB server.
     With this certificate option, every InfluxDB instance requires a unique self-signed certificate.
