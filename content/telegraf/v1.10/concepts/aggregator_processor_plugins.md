@@ -25,7 +25,7 @@ Besides the input plugins and output plugins, Telegraf includes aggregator and p
                 │    │             │     │Aggregate    │   │
 ┌───────────┐   │    │Process      │     │ - mean      │   │   ┌───────────┐
 │           │   │    │ - transform │     │ - quantiles │   │   │           │
-│   MySQL   │───┼──▶│ - decorate  │────▶│ - min/max   │───┼──▶│   File    │
+│   MySQL   │───┼───▶│ - decorate  │────▶│ - min/max   │───┼──▶│   File    │
 │           │   │    │ - filter    │     │ - count     │   │   │           │
 └───────────┘   │    │             │     │             │   │   └───────────┘
                 │    └─────────────┘     └─────────────┘   │
