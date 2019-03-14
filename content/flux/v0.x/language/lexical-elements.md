@@ -61,7 +61,7 @@ and    import  not  return   option   test
 empty  in      or   package  builtin
 ```
 
-> To be implemented: [IMPL#256](https://github.com/influxdata/platform/issues/256) Add in and empty operator support.
+> [IMPL#256](https://github.com/influxdata/platform/issues/256) Add in and empty operator support.
 
 ## Operators
 
@@ -87,7 +87,7 @@ The following coercion rules apply to numeric literals:
 * An error will occur if the coerced type cannot represent the literal value.
 
 
-> To be implemented: [IMPL#255](https://github.com/influxdata/platform/issues/255) Allow numeric literal coercion.
+> [IMPL#255](https://github.com/influxdata/platform/issues/255) Allow numeric literal coercion.
 
 ### Integer literals
 
@@ -130,7 +130,7 @@ decimals  = decimal_digit { decimal_digit } .
 .26
 ```
 
-> To be implemented: [IMPL#254](https://github.com/influxdata/platform/issues/254) Parse float literals.
+> [IMPL#254](https://github.com/influxdata/platform/issues/254) Parse float literals.
 
 ### Duration literals
 
@@ -242,7 +242,7 @@ time_offset       = "Z" | ("+" | "-" ) hour ":" minute .
 2018-01-01                // midnight on January 1st 2018 in the default location
 ```
 
-> To be implemented: [IMPL#152](https://github.com/influxdata/flux/issues/152) Implement shorthand time literals.
+> [IMPL#152](https://github.com/influxdata/flux/issues/152) Implement shorthand time literals.
 
 ### String literals
 
@@ -273,7 +273,7 @@ StringExpression = "{" Expression "}" .
 
 > To be added: TODO: With string interpolation `string_lit` is not longer a lexical token as part of a literal, but an entire expression in and of itself.
 
-> To be implemented: [IMPL#252](https://github.com/influxdata/platform/issues/252) Parse string literals.
+> [IMPL#252](https://github.com/influxdata/platform/issues/252) Parse string literals.
 
 
 ##### Examples of string literals
@@ -295,7 +295,7 @@ A function `printf` exists to allow more precise control over formatting of vari
 To include the literal curly brackets within a string they must be escaped.
 
 
-> To be implemented: [IMPL#248](https://github.com/influxdata/platform/issues/248) Add printf function.
+> [IMPL#248](https://github.com/influxdata/platform/issues/248) Add printf function.
 
 ##### Example: Interpolation
 

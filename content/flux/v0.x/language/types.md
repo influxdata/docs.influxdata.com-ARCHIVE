@@ -15,7 +15,7 @@ A _type_ defines the set of values and operations on those values.
 Types are never explicitly declared as part of the syntax.
 Types are always inferred from the usage of the value.
 
-> To be implemented: [IMPL#249](https://github.com/influxdata/platform/issues/249) Specify type inference rules.
+> [IMPL#249](https://github.com/influxdata/platform/issues/249) Specify type inference rules.
 
 ## Boolean types
 
@@ -84,11 +84,11 @@ The value may be any other type, and need not be the same as other values within
 A _function type_ represents a set of all functions with the same argument and result types.
 
 
-> To be implemented: [IMPL#249](https://github.com/influxdata/platform/issues/249) Specify type inference rules.
+> [IMPL#249](https://github.com/influxdata/platform/issues/249) Specify type inference rules.
 
 ## Generator types
 
 A _generator type_ represents a value that produces an unknown number of other values.
 The generated values may be of any other type, but must all be the same type.
 
-To be implemented: [IMPL#658](https://github.com/influxdata/platform/query/issues/658) Implement Generators types.
+[IMPL#658](https://github.com/influxdata/platform/query/issues/658) Implement Generators types.
