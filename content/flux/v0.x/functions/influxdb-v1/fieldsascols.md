@@ -8,7 +8,7 @@ menu:
   flux_0_x:
     name: v1.fieldsAsCols
     parent: InfluxDB v1
-weight: 301
+weight: 1
 ---
 
 The `v1.fieldsAsCols()` function is a special application of the `pivot()` function that

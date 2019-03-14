@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: v1.measurements
     parent: InfluxDB v1
-weight: 301
+weight: 1
 ---
 
 The `v1.measurements()` function returns a list of measurements in a specific bucket.

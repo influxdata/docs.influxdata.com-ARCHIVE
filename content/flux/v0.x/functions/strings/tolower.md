@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: strings.toLower
     parent: Strings
-weight: 301
+weight: 1
 ---
 
 The `strings.toLower()` function converts a string to lower case.

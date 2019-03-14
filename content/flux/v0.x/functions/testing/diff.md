@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: testing.diff
     parent: Testing
-    weight: 301
+    weight: 1
 ---
 
 The `testing.diff()` function produces a diff between two streams.

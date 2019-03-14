@@ -1,20 +1,21 @@
 ---
-title: Flux string functions
+title: Flux strings package
 description: >
-  String functions provide tools for manipulating strings in Flux.
-  To use them, import the "strings" package.
+  The Flux string package provides functions for manipulating strings in Flux.
+  Import the `strings` package.
 menu:
   flux_0_x:
     name: Strings
-    parent: Functions
+    parent: Packages and functions
 weight: 4
 ---
 
-String functions provide tools for manipulating strings in Flux.
-To use them, import the `strings` package:
+The Flux string package provides functions for manipulating strings in Flux.
+Import the `strings` package.
 
 ```js
 import "strings"
 ```
 
+## String functions
 {{< function-list >}}

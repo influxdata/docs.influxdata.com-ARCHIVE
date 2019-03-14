@@ -1,5 +1,5 @@
 ---
-title: Fluxbuilt-in transformation functions
+title: Flux built-in transformation functions
 description: Flux's built-in transformation functions transform and shape your data in specific ways.
 aliases:
   - /flux/v0.x/functions/transformations
