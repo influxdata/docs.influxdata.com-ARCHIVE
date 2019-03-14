@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     parent: Language reference
     name: Assignment and scope
-    weight: 20
+    weight: 
 ---
 
 > **Note:** This document is a living document and may not represent the current implementation of Flux.

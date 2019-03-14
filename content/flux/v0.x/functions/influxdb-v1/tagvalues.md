@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: v1.tagValues
     parent: InfluxDB v1
-weight: 301
+weight: 1
 ---
 
 The `v1.tagValues()` function returns a list unique values for a given tag.

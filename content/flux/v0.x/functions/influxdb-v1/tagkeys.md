@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: v1.tagKeys
     parent: InfluxDB v1
-weight: 301
+weight: 1
 ---
 
 The `v1.tagKeys()` function returns a list of tag keys for all series that match the [`predicate`](#predicate).

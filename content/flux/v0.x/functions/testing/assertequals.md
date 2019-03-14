@@ -7,7 +7,7 @@ menu:
   flux_0_x:
     name: testing.assertEquals
     parent: Testing
-weight: 301
+weight: 1
 ---
 
 The `testing.assertEquals()` function tests whether two streams have identical data.

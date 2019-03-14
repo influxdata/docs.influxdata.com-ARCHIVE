@@ -4,7 +4,7 @@ description: Create your own custom Flux functions to transform and manipulate d
 menu:
   flux_0_x:
     name: Custom functions
-    parent: Functions
+    parent: Packages and functions
 weight: 6
 ---
 

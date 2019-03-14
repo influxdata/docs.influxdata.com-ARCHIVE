@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: strings.trimSpace
     parent: Strings
-weight: 301
+weight: 1
 ---
 
 The `strings.trimSpace()` function removes leading and trailing spaces from a string.

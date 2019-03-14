@@ -13,8 +13,8 @@
 {{ range $pages.ByWeight }}
 	<h2><a href="{{ .RelPermalink }}" >{{ .Title }}</a></h2>
 	<p>
-		{{- if .Description }}{{- .Description -}}
-		{{ else }}{{- .Summary -}}
+		{{- if .Description }}{{- .Description | markdownify -}}
+		{{ else }}{{- .Summary | markdownify -}}
 		{{ end -}}
 	</p>
 {{ end }}

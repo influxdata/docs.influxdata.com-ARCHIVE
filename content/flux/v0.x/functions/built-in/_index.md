@@ -1,15 +1,18 @@
 ---
 title: Flux built-in functions
-description: Flux's built-in functions allows you to retrieve, transform, process, and output data easily.
+description: >
+  Built-in functions provide a foundation for working with data using Flux.
+  Because these functions are "built-in," they do not require an `import` statement and are usable without any extra setup.
 menu:
   flux_0_x:
     name: Built-in
-    parent: Functions
+    parent: Packages and functions
 weight: 1
 ---
 
-Flux's functional syntax allows you to retrieve, transform, process, and output data easily.
-There is a large library of built-in functions, but you can also create your own
-custom functions to perform operations that suit your needs.
+Built-in functions provide a foundation for working with data using Flux.
+Because these functions are "built-in," they do not require an `import` statement and are usable without any extra setup.
+
+Built-in functions are grouped into the following categories:
 
 {{< children >}}

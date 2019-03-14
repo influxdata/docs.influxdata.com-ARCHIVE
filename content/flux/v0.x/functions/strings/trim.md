@@ -7,7 +7,7 @@ menu:
   flux_0_x:
     name: strings.trim
     parent: Strings
-weight: 301
+weight: 1
 ---
 
 The `strings.trim()` function removes leading and trailing characters specified

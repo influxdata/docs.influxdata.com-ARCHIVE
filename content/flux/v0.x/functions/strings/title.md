@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: strings.title
     parent: Strings
-weight: 301
+weight: 1
 ---
 
 The `strings.title()` function converts a string to title case.

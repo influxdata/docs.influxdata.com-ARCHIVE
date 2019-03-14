@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: v1.measurementTagKeys
     parent: InfluxDB v1
-weight: 301
+weight: 1
 ---
 
 The `v1.measurementTagKeys()` function returns a list of tag keys for a specific measurement.

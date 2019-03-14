@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: strings.toUpper
     parent: Strings
-weight: 301
+weight: 1
 ---
 
 The `strings.toUpper()` function converts a string to upper case.
