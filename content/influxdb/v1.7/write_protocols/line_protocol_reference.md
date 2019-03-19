@@ -22,7 +22,7 @@ The Line Protocol is a text based format for writing points to InfluxDB.
 Lines separated by the newline character `\n` represent a single point
 in InfluxDB. Line Protocol is whitespace sensitive.
 
->**Note** Line protocol does not support the newline character `/n` within tag values or field values.
+>**Note** Line protocol does not support the newline character `\n` within tag values or field values.
 
 
 ### Description of Syntax
