@@ -7,6 +7,14 @@ menu:
     parent: About the project
 ---
 
+## v1.6.6 [2019-02-28]
+
+### Bug fixes
+
+* Marked functions that always return floats as always returning floats.
+* Fix cardinality estimation error.
+* Update `tagKeyValue` mutex to write lock.
+
 ## v1.6.5 [2019-01-10]
 
 ### Features

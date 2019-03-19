@@ -174,7 +174,7 @@ InfluxDB replicates data across `N` data nodes, where `N` is the replication fac
 
 To maintain data availability for queries, the replication factor should be less than or equal to the number of data nodes in the cluster:
 
-* Data are fully available when the replication factor is greater than the number of *unavailable* data nodes.
+* Data is fully available when the replication factor is greater than the number of *unavailable* data nodes.
 * Data may be unavailable when the replication factor is less than the number of *unavailable* data nodes.
 
 Note that there are no query performance benefits from replication.
@@ -184,7 +184,7 @@ See [Database Management](/influxdb/v0.11/query_language/database_management/#cr
 Related entries: [cluster](/influxdb/v0.11/concepts/glossary/#cluster), [duration](/influxdb/v0.11/concepts/glossary/#duration), [node](/influxdb/v0.11/concepts/glossary/#node), [retention policy](/influxdb/v0.11/concepts/glossary/#retention-policy-rp)
 
 ## retention policy (RP)
-The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration) and how many copies of those data are stored in the cluster (replication factor).
+The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration) and how many copies of this data is stored in the cluster (replication factor).
 RPs are unique per database and along with the measurement and tag set define a series.
 
 When you create a database, InfluxDB automatically creates a retention policy called `default` with an infinite duration and a replication factor set to the number of nodes in the cluster.

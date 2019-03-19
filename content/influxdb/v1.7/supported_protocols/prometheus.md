@@ -111,5 +111,5 @@ fields
 > In InfluxDB v1.6 or later, every Prometheus measurement gets its own InfluxDB measurement.
 
 <dt>
-This format is different than the format used by the [Telegraf Prometheus input plugin]](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus).
+This format is different than the format used by the [Telegraf Prometheus input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus).
 </dt>

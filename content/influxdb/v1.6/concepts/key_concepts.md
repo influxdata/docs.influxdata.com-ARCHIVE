@@ -39,9 +39,9 @@ Check out the [glossary of terms](/influxdb/v1.6/concepts/glossary/) if you pref
 
 ### Sample data
 The next section references the data printed out below.
-The data are fictional, but represent a believable setup in InfluxDB.
+The data is fictional, but represents a believable setup in InfluxDB.
 They show the number of butterflies and honeybees counted by two scientists (`langstroth` and `perpetua`) in two locations (location `1` and location `2`) over the time period from August 18, 2015 at midnight through August 18, 2015 at 6:12 AM.
-Assume that the data live in a database called `my_database` and are subject to the `autogen` retention policy (more on databases and retention policies to come).
+Assume that the data lives in a database called `my_database` and are subject to the `autogen` retention policy (more on databases and retention policies to come).
 
 *Hint:* Hover over the links for tooltips to get acquainted with InfluxDB terminology and the layout.
 
@@ -153,7 +153,7 @@ The only measurement in the sample data is `census`.
 The name `census` tells us that the field values record the number of `butterflies` and `honeybees` - not their size, direction, or some sort of happiness index.
 
 A single measurement can belong to different retention policies.
-A <a name="retention-policy"></a>_**retention policy**_ describes how long InfluxDB keeps data (`DURATION`) and how many copies of those data are stored in the cluster (`REPLICATION`).
+A <a name="retention-policy"></a>_**retention policy**_ describes how long InfluxDB keeps data (`DURATION`) and how many copies of this data is stored in the cluster (`REPLICATION`).
 If you're interested in reading more about retention policies, check out [Database Management](/influxdb/v1.6/query_language/database_management/#retention-policy-management).
 
 <dt> Replication factors do not serve a purpose with single node instances.

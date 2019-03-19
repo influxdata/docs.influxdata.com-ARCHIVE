@@ -28,9 +28,7 @@ The [Production installation](/enterprise_influxdb/v1.5/production_installation/
 
 ## Requirements for InfluxDB Enterprise clusters
 
-Review [Clustering Guide](/enterprise_influxdb/v1.5/concepts/clustering/)
-for an overview of the architecture and concepts in an InfluxEnterprise Cluster
-and the [Hardware sizing guide](http://docs.influxdata.com/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster) for information on provisioning the correct servers.
+For an overview of the architecture and concepts in an InfluxDB Enterprise Cluster, review [Clustering Guide](/enterprise_influxdb/v1.5/concepts/clustering/).
 
 For clusters using a license key and not a license file, all nodes must be able to contact `portal.influxdata.com`
 via port `80` or port `443`. Nodes that go more than four hours without connectivity to the Portal may experience license issues.

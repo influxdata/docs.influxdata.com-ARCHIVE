@@ -67,7 +67,8 @@ Optional arguments are in brackets.
 
 The size of the batches written to the index. Default value is `10000`.
 
->**Warning:** Setting this value can have adverse effects on performance and heap size.
+<dt>**Warning:** Setting this value can have adverse effects on performance and heap size.</dt>
+
 
 ##### `[ -concurrency ]`
 
@@ -340,8 +341,23 @@ Default value is `"$HOME/.influxdb/data"`.
 
 ##### [ `-end <timestamp>` ]
 
-The timestamp for the end of the time range.
-The timestamp string must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#absolute-time).
+The timestamp for the end of the time range. Must be in [RFC3339 format](https://tools.ietf.org/html/rfc3339).
+
+RFC3339 requires very specific formatting. For example, to indicate no time zone offset (UTC+0), you must include Z or +00:00 after seconds. Examples of valid RFC3339 formats include:
+
+**No offset**
+```
+YYYY-MM-DDTHH:MM:SS+00:00 
+YYYY-MM-DDTHH:MM:SSZ 
+YYYY-MM-DDTHH:MM:SS.nnnnnnZ (fractional seconds (.nnnnnn) are optional)
+```
+**With offset**
+```
+YYYY-MM-DDTHH:MM:SS-08:00
+YYYY-MM-DDTHH:MM:SS+07:00
+```
+
+> **Note:** With offsets, avoid replacing the + or - sign with a Z. It may cause an error or print Z (ISO 8601 behavior) instead of the time zone offset.
 
 ##### [ `-out <export_dir>` ]
 
@@ -355,7 +371,7 @@ The name of the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-p
 ##### [ `-start <timestamp>` ]
 
 The timestamp for the start of the time range.
-The timestamp string must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#absolute-time).
+The timestamp string must be in [RFC3339 format](https://tools.ietf.org/html/rfc3339).
 
 ##### [ `-waldir <wal_dir>` ]
 

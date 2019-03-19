@@ -293,7 +293,7 @@ Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 ### `[cluster]`
 
 Settings related to how the data nodes interact with other data nodes.
-Controls how data are shared across shards and the options for query management.
+Controls how data is shared across shards and the options for query management.
 
 #### `dial-timeout = "1s"`
 

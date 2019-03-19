@@ -181,11 +181,12 @@ string(value) string
 
 ##### Duration
 
-Converts an int64 or a float64 into an duration assuming nanoseconds units.
+Converts an int64 or a float64 into an duration assuming the unit as specified as the 2nd argument
 Strings are converted to duration of the form as duration literals in TICKscript.
 
 ```js
-duration(value) duration
+duration(value int64|float64, unit duration) duration
+duration(value string) duration
 ```
 
 #### Existence

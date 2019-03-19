@@ -728,7 +728,7 @@ Environment variable: `INFLUXDB_HTTP_MAX_BODY_SIZE`
 The maximum number of writes that can be processed concurrently.
 To disable the limit, set the value to `0`.
 
-Environment variable: `INFLUXDB_HTTP_MAX_CONCURRRENT_WRITE_LIMIT`
+Environment variable: `INFLUXDB_HTTP_MAX_CONCURRENT_WRITE_LIMIT`
 
 #### `max-enqueued-write-limit = 0`
 

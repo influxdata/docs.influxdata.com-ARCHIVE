@@ -44,7 +44,7 @@ CPU idle usage is less than 10% (or CPU usage is greater than 90%).
 stream
     |from()
       .measurement('cpu')
-      .groupby(*)
+      .groupBy(*)
     |alert()
       .crit(lambda: "usage_idle" < 10)
       .topic('cpu')
