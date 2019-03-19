@@ -4,7 +4,7 @@ description: This guide describes how to use Flux to transform data with mathema
 menu:
   flux_0_x:
     name: Transform data with math
-    parent: How-to guides
+    parent: Guides
 weight: 9
 ---
 
@@ -25,7 +25,7 @@ to "map" over data and transform values using mathematic operations.
 3
 ```
 
-<p style="font-size:.85rem;font-style:italic;margin-top:-2rem;">See <a href="/flux/v0.x/executing-queries/#influx-cli-in-flux-mode">Influx CLI in "Flux mode"</a>.</p>
+<p style="font-size:.85rem;font-style:italic;margin-top:-.8rem;">See <a href="/flux/v0.x/guides/executing-queries/#influx-cli-in-flux-mode">Influx CLI in "Flux mode"</a></p>
 
 {{% note %}}
 #### Operands must be the same type
@@ -56,7 +56,7 @@ For example:
 {{% /note %}}
 
 ## Custom mathematic functions
-Flux lets you [create custom functions](/flux/v0.x/guides/custom-functions) that use mathematic operations.
+Flux lets you [create custom functions](/flux/v0.x/functions/custom-functions) that use mathematic operations.
 View the examples below.
 
 ###### Custom multiplication function
@@ -78,7 +78,7 @@ percent(sample: 20.0, total: 80.0)
 ### Transform values in a data stream
 To transform multiple values in an input stream, your function needs to:
 
-- [Handle piped-forward data](/flux/v0.x/guides/custom-functions/#functions-that-manipulate-piped-forward-data).
+- [Handle piped-forward data](/flux/v0.x/functions/custom-functions/#functions-that-manipulate-pipe-forwarded-data).
 - Use the [`map()` function](/flux/v0.x/functions/built-in/transformations/map) to iterate over each row.
 
 The example `multiplyByX()` function below includes:
