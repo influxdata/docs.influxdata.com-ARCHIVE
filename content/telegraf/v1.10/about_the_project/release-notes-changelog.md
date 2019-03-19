@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## v1.10.1 [2019-03-19]
+## 1.10.1 [2019-03-19]
 
 #### Bug fixes
 
