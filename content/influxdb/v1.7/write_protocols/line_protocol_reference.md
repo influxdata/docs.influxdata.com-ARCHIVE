@@ -19,9 +19,11 @@ The Line Protocol is a text based format for writing points to InfluxDB.
 <measurement>[,<tag_key>=<tag_value>[,<tag_key>=<tag_value>]] <field_key>=<field_value>[,<field_key>=<field_value>] [<timestamp>]
 ```
 
-Each line, separated by the newline character `\n`, represents a single point
-in InfluxDB.
-Line Protocol is whitespace sensitive.
+Lines separated by the newline character `\n` represent a single point
+in InfluxDB. Line Protocol is whitespace sensitive.
+
+>**Note** Line protocol does not support the newline character `/n` within tag values or field values.
+
 
 ### Description of Syntax
 
@@ -190,24 +192,37 @@ measurement require both double quotes and escaped (`\`) double quotes in the
 
 ### Special Characters
 
-For tag keys, tag values, and field keys always use a backslash character `\`
-to escape:
+You must use a backslash character `\` to escape the following special characters:
 
-* commas `,`
-* equal signs `=`
-* spaces ` `
+* In string field values, you must escape:
+  * double quotes  
+  * backslash character 
 
-For measurements always use a backslash character `\` to escape:
+        For example, `\"` escapes double quote.
+   
+>#### Note on backslashes:
+>
+* If you use multiple backslashes, they must be escaped. Influx interprets backslashes as follows:
+  *	`\` or `\\` interpreted as `\` 
+  *	`\\\` or `\\\\` interpreted as `\\` 
+  * `\\\\\` or `\\\\\\` interpreted as `\\\\`, and so on
 
-* commas `,`
-* spaces ` `
+* In tag keys, tag values, and field keys, you must escape: 
+  * commas 
+  * equal signs 
+  * spaces 
 
-For string field values use a backslash character `\` to escape:
+        For example, `\,` escapes a comma.
+    
+* In measurements, you must escape:
+  * commas  
+  * spaces 
 
-* double quotes `"`
 
-Line Protocol does not require users to escape the backslash character `\`.
-Users do not need to escape all other special characters.
+
+
+
+You do not need to escape other special characters.
 
 #### Examples
 
