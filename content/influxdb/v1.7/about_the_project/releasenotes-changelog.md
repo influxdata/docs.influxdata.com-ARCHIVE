@@ -7,7 +7,7 @@ menu:
     parent: About the project
 ---
 
-## v1.7.4 [2018-02-13]
+## v1.7.4 [2019-02-13]
 
 ### Features
 
@@ -120,6 +120,14 @@ Support for the Flux language and queries has been added in this release. To beg
 *	Fix the inherited interval for derivative and others.
 *	Fix subquery functionality when a function references a tag from the subquery.
 *	Strip tags from a subquery when the outer query does not group by that tag.
+
+## v1.6.6 [2019-02-28]
+
+### Bug fixes
+
+* Marked functions that always return floats as always returning floats.
+* Fix cardinality estimation error.
+* Update `tagKeyValue` mutex to write lock.
 
 ## v1.6.5 [2019-01-10]
 

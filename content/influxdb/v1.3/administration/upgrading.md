@@ -142,7 +142,7 @@ and manually update any defaults with your localized settings.
 sudo service influxdb start
 ```
 
-**8.** Confirm that your metastore data are present:
+**8.** Confirm that your metastore data is present:
 
 The 1.3 output from the queries `SHOW DATABASES`,`SHOW USERS` and
 `SHOW RETENTION POLICIES ON <database_name>` should match the 0.10 or 0.11

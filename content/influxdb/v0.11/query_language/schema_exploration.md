@@ -23,7 +23,7 @@ See the [Querying Data](/influxdb/v0.11/guides/querying_data/) guide for how to 
 **Sample data**
 
 This document uses the same sample data as the [Data Exploration](/influxdb/v0.11/query_language/data_exploration/) page.
-The data are described and are available for download on the [Sample Data](/influxdb/v0.11/sample_data/data_download/) page.
+The data is described and available for download on the [Sample Data](/influxdb/v0.11/sample_data/data_download/) page.
 
 ## See all databases with `SHOW DATABASES`
 Get a list of all the databases in your system by entering:

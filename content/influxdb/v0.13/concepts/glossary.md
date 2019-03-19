@@ -132,7 +132,7 @@ InfluxDB replicates data across `N` data nodes, where `N` is the replication fac
 Related entries: [duration](/influxdb/v0.13/concepts/glossary/#duration), [node](/influxdb/v0.13/concepts/glossary/#node), [retention policy](/influxdb/v0.13/concepts/glossary/#retention-policy-rp)
 
 ## retention policy (RP)
-The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration), how many copies of those data are stored in the cluster (replication factor), and the time range covered by shard groups (shard group duration).
+The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration), how many copies of this data is stored in the cluster (replication factor), and the time range covered by shard groups (shard group duration).
 RPs are unique per database and along with the measurement and tag set define a series.
 
 When you create a database, InfluxDB automatically creates a retention policy called `default` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.

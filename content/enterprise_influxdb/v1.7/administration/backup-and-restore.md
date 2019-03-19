@@ -146,6 +146,21 @@ $ ls ./telegrafbackup
 
 ## Restore
 
+### Disable anti-entropy (AE) before restoring a backup
+
+> Before restoring a backup, stop the anti-entropy (AE) service (if enabled) on **each data node in the cluster, one at a time**. 
+
+>
+> 1. Stop the `influxd` service.
+> 2. Set `[anti-entropy].enabled` to `false` in the influx configuration file (by default, influx.conf).
+> 3. Restart the `influxd` service and wait for the data node to receive read and write requests and for the [hinted handoff queue](/enterprise_influxdb/v1.7/concepts/clustering/#hinted-handoff) to drain. 
+>
+> 4. Once AE is disabled on all data nodes and each node returns to a healthy state, you're ready to restore the backup. For details on how to restore your backup, see examples below.
+
+> 5. After restoring the backup, restart AE services on each data node.
+
+
+### Restore a backup
 Restore a backup to an existing cluster or a new cluster.
 By default, a restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
 An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.

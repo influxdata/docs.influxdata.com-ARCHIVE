@@ -239,7 +239,7 @@ Larger numbers may yield better compression but could incur a performance peanal
 
 ## [cluster]
 
-This section controls non-Raft cluster behavior, which generally includes how data are shared across shards.
+This section controls non-Raft cluster behavior, which generally includes how data is shared across shards.
 
 ### force-remote-mapping = true
 

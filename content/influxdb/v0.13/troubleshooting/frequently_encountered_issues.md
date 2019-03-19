@@ -422,7 +422,7 @@ We do this by [altering](/influxdb/v0.13/query_language/database_management/#mod
 > ALTER RETENTION POLICY default ON example_db DURATION 3d
 ```
 
-At the next [retention policy enforcement check](/influxdb/v0.13/administration/config/#retention), InfluxDB immediately drops `Shard Group 1` because all of its data are older than 3 days.
+At the next [retention policy enforcement check](/influxdb/v0.13/administration/config/#retention), InfluxDB immediately drops `Shard Group 1` because all of its data is older than 3 days.
 InfluxDB does not drop `Shard Group 2`.
 This is because InfluxDB cannot divide existing shard groups and some data in `Shard Group 2` still fall within the new three day retention policy.
 

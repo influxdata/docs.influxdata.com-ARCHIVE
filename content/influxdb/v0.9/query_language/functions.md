@@ -31,7 +31,7 @@ See the [Querying Data](/influxdb/v0.9/guides/querying_data/) guide for how to q
 **Sample data**
 
 The examples in this document use the same sample data as the [Data Exploration](/influxdb/v0.9/query_language/data_exploration/) page.
-The data are described and are available for download on the [Sample Data](/influxdb/v0.9/sample_data/data_download/) page.
+The data is described and available for download on the [Sample Data](/influxdb/v0.9/sample_data/data_download/) page.
 
 # Aggregations
 

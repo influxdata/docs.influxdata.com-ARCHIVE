@@ -14,7 +14,7 @@ This guide shows how to combine two InfluxDB features -- retention policies and 
 
 ## Retention Policies
 ### Definition  
-A retention policy (RP) is the part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration) and how many copies of those data are stored in the cluster (replication factor).
+A retention policy (RP) is the part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration) and how many copies of this data is stored in the cluster (replication factor).
 A database can have several RPs and RPs are unique per database.
 
 <dt> Replication factors do not serve a purpose with single node instances.
@@ -27,7 +27,7 @@ However, InfluxDB recognizes the necessity of purging data that have outlived th
 
 ### Working with RPs
 When you create a database, InfluxDB automatically creates an RP called `default` with an infinite duration and a replication factor set to one.
-`default` also serves as the `DEFAULT` RP; if you do not supply an explicit RP when you write a point to the database, the data are subject to the `DEFAULT` RP.
+`default` also serves as the `DEFAULT` RP; if you do not supply an explicit RP when you write a point to the database, the data is subject to the `DEFAULT` RP.
 
 InfluxDB automatically queries from and writes to the `DEFAULT` RP on a database.
 To query from or write to a different RP, you must fully qualify the measurement, that is, specify the database and retention policy with the measurement name: `<database_name>."<retention_policy>".<measurement_name>`.

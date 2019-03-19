@@ -1,4 +1,4 @@
-v1.7---
+---
 title: Authentication and authorization in InfluxDB
 aliases:
     - influxdb/v1.7/administration/authentication_and_authorization/
@@ -62,7 +62,7 @@ Enable authentication by setting the `auth-enabled` option to `true` in the `[ht
   log-enabled = true
   write-tracing = false
   pprof-enabled = false
-  https-enabled = false
+  https-enabled = true
   https-certificate = "/etc/ssl/influxdb.pem"
 ```
 

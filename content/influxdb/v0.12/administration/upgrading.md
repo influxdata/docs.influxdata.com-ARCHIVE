@@ -128,7 +128,7 @@ change the following directories in your newly-generated configuration file:
 sudo service influxdb start
 ```
 
-**7.** Confirm that your metastore data are present.
+**7.** Confirm that your metastore data is present.
 
 The 0.12 output from the queries `SHOW DATABASES`,`SHOW USERS` and
 `SHOW RETENTION POLICIES ON <database_name>` should match the 0.11 output.
