@@ -152,7 +152,9 @@ a {
 	ol,
 	li,
 	blockquote,
+	.note,
 	dt,
+	.warn,
 	pre {
 		display: block;
 		margin-bottom: @margin-bottom-base;
@@ -306,7 +308,9 @@ a {
 	}
 	/* Notes <blockquote> and Gotchas <dt> */
 	dt,
-	blockquote {
+	.warn,
+	blockquote,
+	.note {
 		font-size: @smallTextSize;
 		padding: 1em 1.5em;
 		border-radius: @radius;
@@ -325,7 +329,8 @@ a {
 			color: @article-tooltip-nested;
 		}
 	}
-	blockquote {
+	blockquote,
+	.note {
 		font-style: italic;
 		color: @article-note-text;
 		border-color: @article-note-border;
@@ -340,7 +345,8 @@ a {
 			border-color: @article-note-code-border;
 		}
 	}
-	dt {
+	dt,
+	.warn {
 		color: @article-gotcha-text;
 		border-color: @article-gotcha-border;
 		background-color: @article-gotcha-bg;
