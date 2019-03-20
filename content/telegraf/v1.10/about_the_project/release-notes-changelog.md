@@ -8,6 +8,17 @@ menu:
     parent: About the project
 ---
 
+## 1.10.1 [2019-03-19]
+
+#### Bug fixes
+
+- Show error when TLS configuration cannot be loaded.
+- Add base64-encoding/decoding for Google Cloud PubSub (`pubsub`) plugins.
+- Fix type compatibility in VMware vSphere (`vsphere`) input plugin with `use_int_samples` option.
+- Fix VMware vSphere (`vsphere`) input plugin shows failed task in vCenter.
+- Fix invalid measurement name and skip column in the CSV input data format parser.
+- Fix System (`system`) input plugin causing high CPU usage on Raspbian.
+
 ## 1.10 [2019-03-05]
 
 #### New input plugins

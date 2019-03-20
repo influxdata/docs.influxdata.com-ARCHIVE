@@ -84,7 +84,7 @@ Locate the `[http]` section of your InfluxDB configuration file and set the `acc
 
 * If `influxd` is unable to access the specified path, it will log an error and fall back to writing the request log to `stderr`.
 * The `[httpd]` prefix is stripped when HTTP request logging is redirected to a separate file, allowing access log parsing tools (like [lnav](https://lnav.org)) to render the files without additional modification.
-* To rotate the HTTP request log file, use the `copyrotate` method of `logrotate` or similar to leave the original file in place.
+* To rotate the HTTP request log file, use the `copytruncate` method of `logrotate` or similar to leave the original file in place.
 
 
 ## Structured logging
