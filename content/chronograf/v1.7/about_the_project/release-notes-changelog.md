@@ -7,6 +7,16 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.9 [2019-3-20]
+
+### Bug Fixes
+
+* Fix the input for line controls in visualization options.
+* Stop scrollbars from covering text in Flux Editor.
+* Insert Flux function near cursor in Flux editor.
+* Fix double-quoting of map template values.
+* Fix disappearing data when scrolling a table.
+
 ## v1.7.8 [2019-2-13]
 
 ### Bug Fixes
