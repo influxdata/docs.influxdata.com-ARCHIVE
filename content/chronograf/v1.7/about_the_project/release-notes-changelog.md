@@ -13,7 +13,7 @@ menu:
 
 * Fix the input for line controls in visualization options.
 * Stop scrollbars from covering text in Flux Editor.
-* Insert Flux function near cursor in Flux editor.
+* Insert Flux function near cursor in Flux Editor.
 * Fix double-quoting of map template values.
 * Fix disappearing data when scrolling a table.
 
