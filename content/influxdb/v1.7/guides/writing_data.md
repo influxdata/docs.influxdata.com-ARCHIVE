@@ -45,7 +45,7 @@ Anything that has to do with time in InfluxDB is always UTC.
 
 ### Configure gzip compression
 
-InfluxData supports gzip compression. To increase data transfer speed, consider the following options: 
+InfluxDB supports gzip compression. To reduce network traffic, consider the following options: 
 
   * To accept compressed data from InfluxDB, add the `Accept-Encoding: gzip` header to HTTP API requests.
 
@@ -53,18 +53,13 @@ InfluxData supports gzip compression. To increase data transfer speed, consider 
 
   For details about enabling gzip for client libraries, see your client library documentation. 
   
-  To enable gzip for Telegraf, add the `Content_encoding = “gzip”` header to your Telegraf configuration file (telegraf.conf).  
+  **To enable gzip for Telegraf influxdb outputs**
+  
+  * In the Telegraf configuration file (telegraf.conf), under [[outputs.influxdb]], change 
+  `content_encoding = "identity"` (default) to `content_encoding = "gzip"`
 
-  **gzip compression considerations**
-
-  * Determine the appropriate compression level: 1 (fastest) - 9 (most compressed).
-
-  * Identify the types of files to compress.
-
-  * Proxy servers may interfere with gzip. Use the Vary HTTP response header to specify how proxies and caches should handle compressed content.
-
-  * Configure dynamic and static compression.
-
+>**Note**
+Write requests to InfluxDB 2.x [[outputs.influxdb_v2]] are configured to compress content in gzip format by default.
 
 ### Writing multiple points
 ---
