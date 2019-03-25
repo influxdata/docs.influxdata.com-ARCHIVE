@@ -33,7 +33,13 @@ _**Function type:** Aggregate_
 _**Output data type:** Float_
 
 ```js
-histogramQuantile(quantile: 0.5, countColumn: "_value", upperBoundColumn: "le", valueColumn: "_value", minValue: 0)
+histogramQuantile(
+  quantile: 0.5,
+  countColumn: "_value",
+  upperBoundColumn: "le",
+  valueColumn: "_value",
+  minValue: 0.0
+)
 ```
 
 ## Parameters

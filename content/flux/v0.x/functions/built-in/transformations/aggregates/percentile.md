@@ -18,7 +18,12 @@ _**Function type:** Aggregate or Selector_
 _**Output data type:** Float or Object_
 
 ```js
-percentile(columns: ["_value"], percentile: 0.99, method: "estimate_tdigest", compression: 1000)
+percentile(
+  columns: ["_value"],
+  percentile: 0.99,
+  method: "estimate_tdigest",
+  compression: 1000.0
+)
 ```
 
 When using the `estimate_tdigest` or `exact_mean` methods, it outputs non-null
@@ -76,7 +81,7 @@ from(bucket: "telegraf/autogen")
 	|> percentile(
     percentile: 0.99,
     method: "estimate_tdigest",
-    compression: 1000
+    compression: 1000.0
   )
 ```
 
