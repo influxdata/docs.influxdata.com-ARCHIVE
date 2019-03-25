@@ -7,22 +7,21 @@ menu:
     parent: Guides
 ---
 
-There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v1.7/tools/shell/), [client libraries](/influxdb/v1.7/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v1.7/write_protocols/graphite/).
-Here we'll show you how to create a database and write data to it using the built-in HTTP API.
+Write data into InfluxDB using the [command line interface](/influxdb/v1.7/tools/shell/), [client libraries](/influxdb/v1.7/clients/api/), and plugins for common data formats such as [Graphite](/influxdb/v1.7/write_protocols/graphite/). (can all of these methods use the HTTP API?)
 
 > **Note**: The following examples use `curl`, a command line tool that transfers data using URLs. Learn the basics of `curl` with the [HTTP Scripting Guide](https://curl.haxx.se/docs/httpscripting.html).
 
-## Creating a database using the HTTP API
+### Create a database using the HTTP API
 To create a database send a `POST` request to the `/query` endpoint and set the URL parameter `q` to `CREATE DATABASE <new_database_name>`.
-The example below sends a request to InfluxDB running on `localhost` and creates the database `mydb`:
-<br>
+The example below sends a request to InfluxDB running on `localhost` and creates the `mydb` database:
 
 ```bash
 curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mydb"
 ```
 
-## Writing data using the HTTP API
+### Write data using the HTTP API
 The HTTP API is the primary means of writing data into InfluxDB, by sending `POST` requests to the `/write` endpoint.
+
 The example below writes a single point to the `mydb` database.
 The data consist of the [measurement](/influxdb/v1.7/concepts/glossary/#measurement) `cpu_load_short`, the [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key) `host` and `region` with the [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) `server01` and `us-west`, the [field key](/influxdb/v1.7/concepts/glossary/#field-key) `value` with a [field value](/influxdb/v1.7/concepts/glossary/#field-value) of `0.64`, and the [timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) `1434055562000000000`.
 <br>
@@ -43,6 +42,29 @@ Field keys are required and are always strings, and, [by default](/influxdb/v1.7
 The timestamp - supplied at the end of the line in Unix time in nanoseconds since January 1, 1970 UTC - is optional.
 If you do not specify a timestamp InfluxDB uses the server's local nanosecond timestamp in Unix epoch.
 Anything that has to do with time in InfluxDB is always UTC.
+
+### Configure gzip compression
+
+InfluxData supports gzip compression. To increase data transfer speed, consider the following options: 
+
+  * To accept compressed data from InfluxDB, add the `Accept-Encoding: gzip` header to HTTP API requests.
+
+  * To compress data before sending it to InfluxDB, add the `Content-Encoding: gzip` header to HTTP API requests.
+
+  For details about enabling gzip for client libraries, see your client library documentation. 
+  
+  To enable gzip for Telegraf, add the `Content_encoding = “gzip”` header to your Telegraf configuration file (telegraf.conf).  
+
+  **gzip compression considerations**
+
+  * Determine the appropriate compression level: 1 (fastest) - 9 (most compressed).
+
+  * Identify the types of files to compress.
+
+  * Proxy servers may interfere with gzip. Use the Vary HTTP response header to specify how proxies and caches should handle compressed content.
+
+  * Configure dynamic and static compression.
+
 
 ### Writing multiple points
 ---
