@@ -7,6 +7,18 @@ menu:
     parent: About the project
 ---
 
+v1.7.5 [2019-03-26]
+-------------------
+
+### Bug fixes
+
+- Update tagKeyValue mutex to write lock.
+- Fix some more shard epoch races.
+
+### Features
+
+- Add gen-init and gen-exec commands. Add support for describing data-generation schema using a TOML file.
+
 ## v1.7.4 [2019-02-13]
 
 ### Features
