@@ -365,13 +365,13 @@ submits data to InfluxDB determines the destination database.
 
 Plugin ID: `interrupts`
 
-The [Interrupts input plugin](https://github.com/influxdata/plugins/inputs/interrupts) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
+The [Interrupts input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/interrupts/README.md) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
 
 ### IPMI Sensor
 
 Plugin ID: `ipmi_sensor`
 
-The [IPMI Sensor input plugin](https://github.com/influxdata/plugins/inputs/ipmi_sensor) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
+The [IPMI Sensor input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/ipmi_sensor/README.md) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
 
 ### Ipset
 
