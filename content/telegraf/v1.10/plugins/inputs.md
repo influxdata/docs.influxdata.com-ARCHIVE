@@ -993,7 +993,7 @@ Plugin ID: `win_perf_counters`
 
 Supports: Windows
 
-The way the [Windows Performance Counters input plugin](https://github.com/influxdata/plugins/inputs/win_perf_counters) works is that on load of Telegraf, the plugin will be handed configuration
+The way the [Windows Performance Counters input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/win_perf_counters/README.md) works is that on load of Telegraf, the plugin will be handed configuration
 from Telegraf.
 This configuration is parsed and then tested for validity such as if the Object, Instance and Counter existing.
 If it does not match at startup, it will not be fetched.
