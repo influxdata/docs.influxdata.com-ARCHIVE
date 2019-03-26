@@ -335,7 +335,7 @@ The [Icinga2 input plugin](https://github.com/influxdata/plugins/inputs/icinga2)
 
 Plugin ID: `influxdb`
 
-The [InfluxDB v1.x input plugin](https://github.com/influxdata/plugins/inputs/influxdb) gathers metrics from the exposed InfluxDB v1.x `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
+The [InfluxDB v1.x input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/influxdb/README.md) gathers metrics from the exposed InfluxDB v1.x `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
 capturing and storing these metrics locally within the `_internal` database for production deployments.
 [Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
 
@@ -377,19 +377,19 @@ The [IPMI Sensor input plugin](https://github.com/influxdata/telegraf/blob/relea
 
 Plugin ID: `ipset`
 
-The [Ipset input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipset) gathers packets and bytes counters from Linux `ipset`. It uses the output of the command `ipset save`. Ipsets created without the `counters` option are ignored.
+The [Ipset input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/ipset/README.md) gathers packets and bytes counters from Linux `ipset`. It uses the output of the command `ipset save`. Ipsets created without the `counters` option are ignored.
 
 ### IPtables
 
 Plugin ID: `iptables`
 
-The [IPtables input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/iptables/README.md) gathers packets and bytes counters for rules within a set of table and chain from the Linux iptables firewall.
+The [IPtables input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/iptables/README.md) gathers packets and bytes counters for rules within a set of table and chain from the Linux iptables firewall.
 
 ### IPVS
 
 Plugin ID: `ipvs`
 
-The [IPVS input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/ipvs/README.md) uses the Linux kernel netlink socket interface to gather metrics about IPVS virtual and real servers.
+The [IPVS input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/ipvs/README.md) uses the Linux kernel netlink socket interface to gather metrics about IPVS virtual and real servers.
 
 ### Jenkins
 
