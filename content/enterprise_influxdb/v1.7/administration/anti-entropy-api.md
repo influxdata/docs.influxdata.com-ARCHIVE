@@ -20,39 +20,97 @@ Base URL: `localhost:8086/shard-repair`
 
 ### `/status`
 
-##### Description
+#### GET
 
-List shards that are in an inconsistent state and in need of repair
+#### Description
 
-##### Description
+List shards that are in an inconsistent state and in need of repair.
 
-##### Parameters
+#### Parameters
 
 | Name | Located in | Description | Required | Type |
 | ---- | ---------- | ----------- | -------- | ---- |
 | local | query | Limit status check to local shards on the data node handling this request | No | boolean |
 
-##### Responses
+#### Responses
+
+Response content type: `application/json`
+
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
 | 200 | successful operation | object |
 
+### Example
+
+#### cURL
+
+```bash
+curl -X GET "http://localhost:8086/shard-repair/status?local=true" -H "accept: application/json"
+```
+
+#### Request URL
+
+```text
+http://localhost:8086/shard-repair/status?local=true
+
+```
+
+#### Server response
+
+Example value
+
+```json
+{
+  "shards": [
+    {
+      "id": "1",
+      "database": "ae",
+      "retention_policy": "autogen",
+      "start_time": "-259200000000000",
+      "end_time": "345600000000000",
+      "expires": "0",
+      "status": "diff"
+    },
+    {
+      "id": "3",
+      "database": "ae",
+      "retention_policy": "autogen",
+      "start_time": "62640000000000000",
+      "end_time": "63244800000000000",
+      "expires": "0",
+      "status": "diff"
+    }
+  ],
+  "queued_shards": [
+    "3",
+    "5",
+    "9"
+  ],
+  "processing_shards": [
+    "3",
+    "9"
+  ]
+}
+```
+
 ### `/repair`
 
-#### POST  
+### POST  
 
-##### Description
+#### Description
 
-Queue shard for repair of inconsistent state
+Queue shard for repair of inconsistent state.
 
-##### Parameters
+#### Parameters
 
 | Name | Located in | Description | Required | Type |
 | ---- | ---------- | ----------- | -------- | ---- |
 | id | query | ID of shard to queue for repair | Yes | integer |
 
-##### Responses
+#### Responses
+
+Response content type: `application/json`
 
 | Code | Description |
 | ---- | ----------- |
@@ -60,28 +118,58 @@ Queue shard for repair of inconsistent state
 | 400 | Bad request |
 | 500 | Internal server error |
 
+### Example
+
+#### cURL
+
+```bash
+curl -X POST "http://localhost:8086/shard-repair/repair?id=1" -H "accept: application/json"
+```
+
+#### Request URL
+
+```text
+http://localhost:8086/shard-repair/repair?id=1
+```
+
 ### `/cancel-repair`
 
 #### POST
 
-##### Description
+#### Description
 
-Remove shard from repair queue on node(s)
+Remove shard from repair queue on nodes.
 
-##### Parameters
+#### Parameters
 
 | Name | Located in | Description | Required | Type |
 | ---- | ---------- | ----------- | -------- | ---- |
 | id | query | ID of shard to remove from repair queue | Yes | integer |
 | local | query | Only remove shard from repair queue on node receiving the request | No | boolean |
 
-##### Responses
+#### Responses
+
+Response content type: `application/json`
 
 | Code | Description |
 | ---- | ----------- |
 | 204 | successful operation |
 | 400 | bad request |
 | 500 | internal server error |
+
+#### Example
+
+##### cURL
+
+```bash
+curl -X POST "http://localhost:8086/shard-repair/cancel-repair?id=1&local=false" -H "accept: application/json"
+```
+
+##### Request URL
+
+```text
+http://localhost:8086/shard-repair/cancel-repair?id=1&local=false
+```
 
 ### Models
 
@@ -97,3 +185,40 @@ Remove shard from repair queue on node(s)
 | expires | string |  | No |
 | status | string |  | No |
 
+##### Server response
+
+Example value
+
+```json
+{
+  "shards": [
+    {
+      "id": "1",
+      "database": "ae",
+      "retention_policy": "autogen",
+      "start_time": "-259200000000000",
+      "end_time": "345600000000000",
+      "expires": "0",
+      "status": "diff"
+    },
+    {
+      "id": "3",
+      "database": "ae",
+      "retention_policy": "autogen",
+      "start_time": "62640000000000000",
+      "end_time": "63244800000000000",
+      "expires": "0",
+      "status": "diff"
+    }
+  ],
+  "queued_shards": [
+    "3",
+    "5",
+    "9"
+  ],
+  "processing_shards": [
+    "3",
+    "9"
+  ]
+}
+```
