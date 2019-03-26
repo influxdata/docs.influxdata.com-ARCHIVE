@@ -4,7 +4,7 @@ aliases:
     - /enterprise_influxdb/v1.7/quickstart_installation/
 menu:
   enterprise_influxdb_1_7:
-    name: Install cluster for evaluation
+    name: Install for evaluation
     weight: 10
     parent: Install and deploy
 ---
