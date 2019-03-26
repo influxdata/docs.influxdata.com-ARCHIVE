@@ -1,19 +1,19 @@
 ---
-title: InfluxDB Enterprise meta mode configuration
+title: Configure InfluxDB Enterprise meta modes
 description: Covers the InfluxDB Enterprise meta node configuration settings and environmental variables
 menu:
   enterprise_influxdb_1_7:
-    name: Meta node configuration
-    weight: 16
+    name: Configure meta nodes
+    weight: 30
     parent: Administration
 ---
 
-* [Meta node configurations](#meta-node-configurations)
+* [Meta node configuration settings](#meta-node-configurations)
   * [Global options](#global-options)
   * [Enterprise license `[enterprise]`](#enterprise)
   * [Meta node `[meta]`](#meta)
 
-## Meta node configurations
+## Meta node configuration settings
 
 ### Global options
 

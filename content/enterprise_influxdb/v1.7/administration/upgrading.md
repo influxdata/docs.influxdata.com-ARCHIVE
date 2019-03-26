@@ -1,10 +1,11 @@
 ---
-title: Upgrading InfluxDB Enterprise clusters
+title: Upgrade InfluxDB Enterprise clusters
 aliases:
     - /enterprise/v1.7/administration/upgrading/
 menu:
   enterprise_influxdb_1_7:
-    weight: 20
+    name: Upgrade
+    weight: 50
     parent: Administration
 ---
 

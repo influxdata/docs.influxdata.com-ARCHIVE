@@ -1,11 +1,11 @@
 ---
-title: Anti-Entropy service in InfluxDB Enterprise
+title: Use Anti-Entropy service in InfluxDB Enterprise
 aliases:
   - /enterprise_influxdb/v1.7/guides/Anti-Entropy/
 menu:
   enterprise_influxdb_1_7:
-    menu: Anti-Entropy service
-    weight: 40
+    name: Use Anti-Entropy service
+    weight: 60
     parent: Administration
 ---
 
@@ -180,7 +180,7 @@ until it either shows as being in the queue, being repaired, or no longer in the
 
 ## Configuration
 
-The configuration settings for the Anti-Entropy service are described in [Anti-Entropy settings]](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy) section of the data node configuration.
+The configuration settings for the Anti-Entropy service are described in [Anti-Entropy settings](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy) section of the data node configuration.
 
 To enable the Anti-Entropy service, change the default value of the `[anti-entropy].enabled = false` setting to `true` in the `influxdb.conf` file of each of your data nodes.
 
@@ -232,7 +232,7 @@ Once a repair has started, requests to cancel it are ignored.
 > It may be possible to stop repairs for missing shards with the
 > [`influxd-ctl kill-copy-shard`](/enterprise_influxdb/v1.7/administration/cluster-commands/#kill-copy-shard) command.
 
-## The InfluxDB Anti-Entropy API
+## InfluxDB Anti-Entropy API
 
 The Anti-Entropy service uses an API for managing and monitoring entropy.
 Details on the available API endpoints can be found in [The InfluxDB Anti-Entropy API](/enterprise_influxdb/v1.7/administration/anti-entropy-api).
