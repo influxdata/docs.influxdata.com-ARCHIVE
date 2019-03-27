@@ -3,7 +3,7 @@ title: InfluxDB Enterprise 1.7 release notes
 
 menu:
   enterprise_influxdb_1_7:
-    menu: Release notes
+    name: Release notes
     weight: 10
     parent: About the project
 ---
