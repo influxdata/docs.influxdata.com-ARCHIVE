@@ -42,6 +42,7 @@ influxd-ctl -bind-tls remove-meta enterprise-meta-02:8091
 ```
 
 #### `curl -k`
+
 `curl` natively supports TLS/SSL connections, but if using a self-signed certificate, pass the `-k`/`--insecure` flag to allow for "insecure" SSL connections.
 
 > Self-signed certificates are considered "insecure" due to their lack of a valid chain of authority. However, data is still encrypted when using self-signed certificates.
@@ -55,15 +56,19 @@ curl -k https://localhost:8091/status
 ```
 
 ### Replacing meta nodes in a functional cluster
+
 If all meta nodes in the cluster are fully functional, simply follow the steps for [replacing meta nodes](#replacing-meta-nodes-in-an-influxdb-enterprise-cluster).
 
 ### Replacing an unresponsive meta node
+
 If replacing a meta node that is either unreachable or unrecoverable, you need to forcefully remove it from the meta cluster. Instructions for forcefully removing meta nodes are provided in the [step 2.2](#2-2-remove-the-non-leader-meta-node) of the [replacing meta nodes](#replacing-meta-nodes-in-an-influxdb-enterprise-cluster) process.
 
 ### Replacing responsive and unresponsive data nodes in a cluster
+
 The process of replacing both responsive and unresponsive data nodes is the same. Simply follow the instructions for [replacing data nodes](#replacing-data-nodes-in-an-influxdb-enterprise-cluster).
 
 ### Reconnecting a data node with a failed disk
+
 A disk drive failing is never a good thing, but it does happen, and when it does,
 all shards on that node are lost.
 
@@ -135,10 +140,12 @@ Identify the `leader` of the cluster. When replacing nodes in a cluster, non-lea
 ### 2. Replace all non-leader nodes
 
 #### 2.1. Provision a new meta node
+
 [Provision and start a new meta node](/enterprise_influxdb/v1.7/production_installation/meta_node_installation/), but **do not** add it to the cluster yet.
 For this guide, the new meta node's hostname will be `enterprise-meta-04`.
 
 #### 2.2. Remove the non-leader meta node
+
 Now remove the non-leader node you are replacing by using the `influxd-ctl remove-meta` command and the TCP address of the meta node (ex. `enterprise-meta-02:8091`):
 
 ```bash
@@ -158,7 +165,7 @@ influxd-ctl remove-meta enterprise-meta-02:8091
 >If the meta process is not running on the node you are trying to remove or the node is neither reachable nor recoverable, use the `-force` flag.
 When forcefully removing a meta node, you must also pass the `-tcpAddr` flag with the TCP and HTTP bind addresses of the node you are removing.
 
->```bash
+```bash
 # Pattern
 influxd-ctl remove-meta -force -tcpAddr <meta-node-tcp-bind-address> <meta-node-http-bind-address>
 
@@ -167,6 +174,7 @@ influxd-ctl remove-meta -force -tcpAddr enterprise-meta-02:8089 enterprise-meta-
 ```
 
 #### 2.3. Add the new meta node
+
 Once the non-leader meta node has been removed, use `influxd-ctl add-meta` to replace it with the new meta node:
 
 ```bash
@@ -191,6 +199,7 @@ influxd-ctl -bind enterprise-meta-node-01:8091 add-meta enterprise-meta-node-04:
 The added meta node has the hostname `cluster-meta-node-04` and runs on port `8091`.
 
 #### 2.4. Confirm the meta node was added
+
 Confirm the new meta-node has been added by running:
 
 ```bash
@@ -215,14 +224,17 @@ enterprise-meta-04:8091	1.5.x-c1.5.x # <-- The newly added meta node
 ```
 
 #### 2.5. Remove and replace all other non-leader meta nodes
+
 **If replacing only one meta node, no further action is required.**
 If replacing others, repeat steps [2.1-2.4](#2-1-provision-a-new-meta-node) for all non-leader meta nodes one at a time.
 
 ### 3. Replace the leader node
+
 As non-leader meta nodes are removed and replaced, the leader node oversees the replication of data to each of the new meta nodes.
 Leave the leader up and running until at least two of the new meta nodes are up, running and healthy.
 
 #### 3.1 - Kill the meta process on the leader node
+
 Log into the leader meta node and kill the meta process.
 
 ```bash
@@ -242,6 +254,7 @@ curl localhost:8091/status | jq
 ```
 
 #### 3.2 - Remove and replace the old leader node
+
 Remove the old leader node and replace it by following steps [2.1-2.4](#2-1-provision-a-new-meta-node).
 The minimum number of meta nodes you should have in your cluster is 3.
 
@@ -260,6 +273,7 @@ The process of replacing data nodes is as follows:
 [Provision and start a new data node](/enterprise_influxdb/v1.7/production_installation/data_node_installation/), but **do not** add it to your cluster yet.
 
 ### 2. Replace the old data node with the new data node
+
 Log into any of your cluster's meta nodes and use `influxd-ctl update-data` to replace the old data node with the new data node:
 
 ```bash
@@ -317,6 +331,7 @@ the AE service will begin copying shards from other shard owners to the new node
 The time it takes for copying to complete is determined by the number of shards copied and how much data is stored in each.
 
 ### 4. Check the `copy-shard-status`
+
 Check on the status of the copy-shard process with:
 
 ```bash
@@ -325,7 +340,7 @@ influxd-ctl copy-shard-status
 
 The output will show all currently running copy-shard processes.
 
-```
+```bash
 Source                   Dest                     Database  Policy   ShardID  TotalSize  CurrentSize  StartedAt
 enterprise-data-02:8088  enterprise-data-03:8088  telegraf  autogen  3        119624324  119624324    2018-04-17 23:45:09.470696179 +0000 UTC
 ```
@@ -333,18 +348,19 @@ enterprise-data-02:8088  enterprise-data-03:8088  telegraf  autogen  3        11
 > **Important:** If replacing other data nodes in the cluster, make sure shards are completely copied from nodes in the same shard group before replacing the other nodes.
 View the [Anti-entropy](/enterprise_influxdb/v1.7/administration/anti-entropy/#concepts) documentation for important information regarding anti-entropy and your database's replication factor.
 
-
 ## Troubleshooting
 
 ### Cluster commands result in timeout without error
+
 In some cases, commands used to add or remove nodes from your cluster
 timeout, but don't return an error.
 
-```
+```bash
 add-data: operation timed out with error:
 ```
 
 #### Check your InfluxDB user permissions
+
 In order to add or remove nodes to or from a cluster, your user must have `AddRemoveNode` permissions.
 Attempting to manage cluster nodes without the appropriate permissions results
 in a timeout with no accompanying error.
@@ -397,6 +413,7 @@ _In the output above, `bob` does not have the required `AddRemoveNode` permissio
 and would not be able to add or remove nodes from the cluster._
 
 #### Check the network connection between nodes
+
 Something may be interrupting the network connection between nodes.
 To check, `ping` the server or node you're trying to add or remove.
 If the ping is unsuccessful, something in the network is preventing communication.
