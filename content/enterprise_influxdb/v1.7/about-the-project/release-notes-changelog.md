@@ -8,6 +8,19 @@ menu:
     parent: About the project
 ---
 
+## v1.7.5 [2019-03-26]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.5 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+
+- Add `influx_tools` utility (for internal support use) to be part of the packaging.
+
+### Bug fixes
+
+- Anti-Entropy: fix `contains no .tsm files` error.
+- `fix(cluster)`: account for nil result set when writing read response.
+
 ## v1.7.4 [2019-02-13]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.7.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
