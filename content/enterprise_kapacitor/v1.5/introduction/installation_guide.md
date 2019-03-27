@@ -81,7 +81,7 @@ Save your customized `kapacitor.conf` in the filesystem of the server on which i
 The location of your `kapacitor.conf` is important when [starting Kapacitor](#specify-the-location-of-your-kapacitor-conf).
 
 
-## Step 3: Start the Kapacitor deamon
+## Step 3: Start the Kapacitor daemon
 With Kapacitor Enterprise configured, start the Kapacitor daemon using the `kapacitord` binary.
 
 ```bash
