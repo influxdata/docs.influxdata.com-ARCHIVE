@@ -375,7 +375,7 @@ the `SELECT` clause:
 To return any data associated with the `location` tag key, the query's `SELECT`
 clause must include at least one field key (`water_level`):
 ```
-> SELECT "water_level","location" FROM "h2o_feet" LIMIT 3
+> SELECT "water_level","location" FROM "h2o_feet"
 name: h2o_feet
 time                   water_level  location
 ----                   -----------  --------
