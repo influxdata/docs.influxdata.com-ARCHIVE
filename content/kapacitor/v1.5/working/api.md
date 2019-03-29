@@ -1,5 +1,5 @@
 ---
-title: Kapacitor HTTP API reference
+title: Kapacitor HTTP API reference documentation
 description: Use the Kapacitor HTTP API endpoints to control task execution, query statues, and collect troubleshooting data.
 aliases:
   - /kapacitor/v1.5/api
@@ -10,8 +10,6 @@ menu:
     weight: 10
     parent: work-w-kapacitor
 ---
-
-# Kapacitor HTTP API reference documentation
 
 * [General Information](#general-information)
 * [Writing Data](#writing-data)
