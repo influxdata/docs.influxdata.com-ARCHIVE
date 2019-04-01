@@ -410,9 +410,12 @@ CLI example:
 >
 ```
 
-    > **Note:** The password [string](/influxdb/v1.7/query_language/spec/#strings) must be wrapped in single quotes.
-Do not include the single quotes when authenticating requests.
-> For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
+  {{% note %}}
+
+  **Note:** The password [string](/influxdb/v1.7/query_language/spec/#strings) must be wrapped in single quotes. Do not include the single quotes when authenticating requests. For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
+
+  {{% /note %}}
+
 
 ##### `DROP` a user
 
