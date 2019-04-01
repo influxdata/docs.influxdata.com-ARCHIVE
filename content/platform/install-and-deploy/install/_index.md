@@ -13,9 +13,9 @@ There are multiple ways to install and configure the InfluxData Platform (also k
 as the TICK stack). Included below are several installation options and relevant
 links for exploring the InfluxData Platform and its TICK stack components.
 
-## [Deploy the InfluxData Platform (TICK stack) in Docker containers](/platform/install-and-deploy/deploy/sandbox-install)
+## [Deploy the InfluxData Platform (TICK stack) in Docker containers](/platform/install-and-deploy/deploying/sandbox-install)
 
-The quickest way to install the InfluxData Platform is to [deploy the InfluxData Platform OSS (TICK stack) in Docker containers using the InfluxData Sandbox](/platform/install-and-deploy/deploy/sandbox-install) to quickly get up and running and ready for exploration
+The quickest way to install the InfluxData Platform is to [deploy the InfluxData Platform OSS (TICK stack) in Docker containers using the InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install) to quickly get up and running and ready for exploration
 and testing. The InfluxData Sandbox is not intended for production environments,
 but it is a quick way to start using the InfluxData Platform and work with Docker
 containers.
