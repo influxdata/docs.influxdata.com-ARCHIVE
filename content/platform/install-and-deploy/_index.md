@@ -18,7 +18,7 @@ You can manually install and configure all of the InfluxData Platform OSS compon
 for use or install InfluxDB Enterprise clusters for production use.
 
 
-## [Deploy the InfluxData TICK stack in containers](/platform/install-and-deploy/deploy/)
+## [Deploy the InfluxData TICK stack in containers](/platform/install-and-deploy/deploying/)
 
 Use containers and container providers to simplify and ease the deployment of
 the InfluxData Platform.

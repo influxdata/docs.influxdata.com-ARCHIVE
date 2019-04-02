@@ -41,4 +41,4 @@ walk through installing and configuring the open source version of Kapacitor.
 The [InfluxData Sandbox](https://github.com/influxdata/sandbox) is an alternative
 method for installing the OSS TICK stack that uses Docker and Docker Compose to build
 and network each component. For information about installing the Sandbox, view the
-[InfluxData Sandbox installation instructions](/platform/install-and-deploy/deploy/sandbox-install).
+[InfluxData Sandbox installation instructions](/platform/install-and-deploy/deploying/sandbox-install).
