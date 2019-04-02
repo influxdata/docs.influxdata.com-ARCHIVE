@@ -10,6 +10,10 @@ menu:
 ## v1.7.5 [2019-03-26]
 -------------------
 
+<dt>
+**Update (2019-04-01):** If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`), then do not upgrade to this release. Customers have reported that InfluxDB 1.7.5 stops responding without warning. For details, see [GitHub issue #13010](https://github.com/influxdata/influxdb/issues/13010). The [planned fix](https://github.com/influxdata/influxdb/issues/13053) will be available soon.
+</dt> 
+
 ### Bug fixes
 
 - Update `tagKeyValue` mutex to write lock.
