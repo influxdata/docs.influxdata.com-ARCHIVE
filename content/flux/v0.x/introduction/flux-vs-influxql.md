@@ -230,7 +230,7 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 | LAST                              | [last()](/flux/v0.x/functions/built-in/transformations/selectors/last/)                                                   |
 | MAX                               | [max()](/flux/v0.x/functions/built-in/transformations/selectors/max/)                                                     |
 | MIN                               | [min()](/flux/v0.x/functions/built-in/transformations/selectors/min/)                                                     |
-| PERCENTILE                        | [percentile()](/flux/v0.x/functions/built-in/transformations/aggregates/percentile/)                                      |
+| PERCENTILE                        | [quantile()](/flux/v0.x/functions/built-in/transformations/aggregates/quantile/)                                      |
 | SAMPLE                            | [sample()](/flux/v0.x/functions/built-in/transformations/selectors/sample/)                                               |
 | TOP                               | [top()](/flux/v0.x/functions/built-in/transformations/selectors/top/)                                                     |
 | ABS                               | --                                                                                                               |

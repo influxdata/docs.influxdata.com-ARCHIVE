@@ -1,6 +1,8 @@
 ---
 title: median() function
-description: The `median()` function returns the median `_value` of an input table or all non-null records in the input table with values that fall within the 50th percentile.
+description: >
+  The `median()` function returns the median `_value` of an input table or all non-null
+  records in the input table with values that fall within the `0.5` quantile (50th percentile).
 aliases:
   - /flux/v0.x/functions/transformations/aggregates/median
 menu:
@@ -10,9 +12,9 @@ menu:
     weight: 1
 ---
 
-The `median()` function is a special application of the [`percentile()` function](/flux/v0.x/functions/built-in/transformations/aggregates/percentile)
+The `median()` function is a special application of the [`quantile()` function](/flux/v0.x/functions/built-in/transformations/aggregates/quantile)
 that returns the median `_value` of an input table or all non-null records in the input table
-with values that fall within the 50th percentile depending on the [method](#method) used.
+with values that fall within the `0.5` quantile (50th percentile) depending on the [method](#method) used.
 
 _**Function type:** Selector or Aggregate_  
 _**Output data type:** Object_
@@ -23,13 +25,13 @@ median(method: "estimate_tdigest", compression: 0.0)
 ```
 
 When using the `estimate_tdigest` or `exact_mean` methods, it outputs non-null
-records with values that fall within the 50th percentile.
+records with values that fall within the `0.5` quantile.
 
 When using the `exact_selector` method, it outputs the non-null record with the
-value that represents the 50th percentile.
+value that represents the `0.5` quantile.
 
 > The `median()` function can only be used with float value types.
-> It is a special application of the [`percentile()` function](/flux/v0.x/functions/built-in/transformations/aggregates/percentile) which
+> It is a special application of the [`quantile()` function](/flux/v0.x/functions/built-in/transformations/aggregates/quantile) which
 > uses an approximation implementation that requires floats.
 > You can convert your value column to a float column using the [`toFloat()` function](/flux/v0.x/functions/built-in/transformations/type-conversions/tofloat).
 
@@ -44,18 +46,18 @@ The available options are:
 
 ##### estimate_tdigest
 An aggregate method that uses a [t-digest data structure](https://github.com/tdunning/t-digest)
-to compute an accurate percentile estimate on large data sources.
+to compute an accurate quantile estimate on large data sources.
 
 ##### exact_mean
-An aggregate method that takes the average of the two points closest to the percentile value.
+An aggregate method that takes the average of the two points closest to the quantile value.
 
 ##### exact_selector
-A selector method that returns the data point for which at least percentile points are less than.
+A selector method that returns the data point for which at least quantile points are less than.
 
 ### compression
 Indicates how many centroids to use when compressing the dataset.
 A larger number produces a more accurate result at the cost of increased memory requirements.
-Defaults to 1000.
+Defaults to `1000.0`.
 
 _**Data type:** Float_
 
@@ -88,8 +90,8 @@ from(bucket: "telegraf/autogen")
 ## Function definition
 ```js
 median = (method="estimate_tdigest", compression=0.0, tables=<-) =>
-  percentile(
-    percentile:0.5,
+  quantile(
+    q:0.5,
     method:method,
     compression:compression
   )

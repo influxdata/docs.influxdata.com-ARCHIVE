@@ -93,7 +93,7 @@ from(bucket: "telegraf/autogen")
     r._field == "used_percent")
   |> aggregateWindow(
     every: 5m,
-    fn: (columns, tables=<-) => tables |> percentile(percentile: 0.99, columns:columns)
+    fn: (columns, tables=<-) => tables |> quantile(q: 0.99, columns:columns)
   )
 ```
 
