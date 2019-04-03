@@ -120,7 +120,7 @@ The following post event handler options can be set in a
 | headers             | map of string to string | Set of extra header values to set on the POST request.                                                               |
 | capture‑response    | bool                    | If the HTTP status code is not an `2xx` code, read and log the HTTP response.                                        |
 | timeout             | duration                | Timeout for the HTTP POST.                                                                                           |
-| skipSSLVerification | bool                    | Disables ssl verification for the POST request.                                                                      |
+| skipSSLVerification | bool                    | Disables SSL verification for the POST request.                                                                      |
 
 ### Example: Handler file - Using a pre-configured endpoint
 ```yaml
