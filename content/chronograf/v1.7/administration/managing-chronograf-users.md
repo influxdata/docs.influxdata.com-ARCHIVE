@@ -31,7 +31,7 @@ menu:
 
 ## Managing Chronograf users and roles
 
-> ***Note:*** Support for organizations and user roles is available in Chronograf 1.4 or later. First, OAuth 2.0 authentication must be configured (if it is, you'll see the Chronograf Admin tab). For more information, see [managing security] (https://docs.influxdata.com/chronograf/latest/administration/managing-security/).
+> ***Note:*** Support for organizations and user roles is available in Chronograf 1.4 or later. First, OAuth 2.0 authentication must be configured (if it is, you'll see the Chronograf Admin tab on the Admin menu). For more information, see [Managing security] (https://docs.influxdata.com/chronograf/1.7/administration/managing-security/).
 
 Chronograf includes four organization-bound user roles and one cross-organization SuperAdmin status. In an organization, admins (with the `admin` role) or users with SuperAdmin status can create, update, and assign roles to a user or remove a role assignment.
 
