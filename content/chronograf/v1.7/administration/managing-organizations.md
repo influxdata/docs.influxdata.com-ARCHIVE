@@ -20,9 +20,11 @@ menu:
 
 ## About Chronograf organizations
 
-> ***Note:*** Support for organizations and user roles is available in Chronograf 1.4 or later. First, OAuth 2.0 authentication must be configured (if it is, you'll see the Chronograf Admin tab). For more information, see [managing security] (https://docs.influxdata.com/chronograf/latest/administration/managing-security/).
+> ***Note:*** Support for organizations and user roles is available in Chronograf 1.4 or later. 
+First, OAuth 2.0 authentication must be configured (if it is, you'll see the Chronograf Admin tab). For more information, 
+see [managing security] (https://docs.influxdata.com/chronograf/1.7/administration/managing-security/).
 
-For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](https://docs.influxdata.com//chronograf/latest/administration/managing-chronograf-users/).
+For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](https://docs.influxdata.com/chronograf/v1.7/administration/managing-chronograf-users/).
 
 A Chronograf organization is a collection of Chronograf users who share common Chronograf-owned resources, including dashboards, InfluxDB connections, and Kapacitor connections. Organizations can be used to represent companies, functional units, projects, or teams. Chronograf users can be members of multiple organizations.
 
@@ -67,8 +69,8 @@ You can configure existing and new organizations in the **Organizations** tab of
 
 See the following pages for more information about managing Chronograf users and security:
 
-* [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
-* [Managing security](/chronograf/latest/administration/managing-security/)
+* [Managing Chronograf users](/chronograf/v1.7/administration/managing-chronograf-users/)
+* [Managing security](/chronograf/v1.7/administration/managing-security/)
 
 ## Mapping organizations
 
