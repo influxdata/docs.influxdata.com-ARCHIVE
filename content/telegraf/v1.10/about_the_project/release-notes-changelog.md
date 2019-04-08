@@ -8,6 +8,56 @@ menu:
     parent: About the project
 ---
 
+## v1.10.2 [2019-04-02]
+
+### Breaking changes
+
+ Grok input data format (parser): string fields no longer have leading and trailing quotation marks removed.  
+ If you are capturing quoted strings, the patterns might need to be updated.
+
+### Bug fixes
+
+#### Agent
+
+- Fix deadlock when Telegraf is aligning aggregators.
+- Add owned directories to RPM package specification.
+- Fix drop tracking of metrics removed with aggregator `drop_original`.
+- Fix aggregator window alignment.
+- Fix panic during shutdown of multiple aggregators.
+- Fix tags applied to wrong metric on parse error.
+
+#### Plugins
+
+- Ceph (`ceph`) input
+  - Fix missing cluster stats.
+- DiskIO (`diskio`) input
+  - Fix reading major and minor block devices identifiers.
+- File (`file`) output
+  - Fix open file error handling.
+- Filecount (`filecount`) input
+  - Fix basedir check and parent dir extraction.
+- Grok (`grok`) parser
+  - Fix last character removed from string field.
+- InfluxDB v2 (`influxdb_v2`) output
+  - Fix plugin name in output logging.
+- Prometheus (`prometheus`) input
+  - Fix parsing of kube config `certificate-authority-data`.
+- Prometheus (`prometheus`) output
+  - Remove tags that would create invalid label names.
+- StatsD (`statsd`) input
+  - Listen before leaving start.
+
+## 1.10.1 [2019-03-19]
+
+#### Bug fixes
+
+- Show error when TLS configuration cannot be loaded.
+- Add base64-encoding/decoding for Google Cloud PubSub (`pubsub`) plugins.
+- Fix type compatibility in VMware vSphere (`vsphere`) input plugin with `use_int_samples` option.
+- Fix VMware vSphere (`vsphere`) input plugin shows failed task in vCenter.
+- Fix invalid measurement name and skip column in the CSV input data format parser.
+- Fix System (`system`) input plugin causing high CPU usage on Raspbian.
+
 ## 1.10 [2019-03-05]
 
 #### New input plugins

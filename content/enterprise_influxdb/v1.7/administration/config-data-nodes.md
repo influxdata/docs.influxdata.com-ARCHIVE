@@ -1,14 +1,14 @@
 ---
-title: InfluxDB Enterprise data node configuration
+title: Configure InfluxDB Enterprise data nodes
 description: Covers the InfluxDB Enterprise data node configuration settings and environmental variables
 menu:
   enterprise_influxdb_1_7:
-    name: Data node configuration
-    weight: 12
+    name: Configure data nodes
+    weight: 20
     parent: Administration
 ---
 
-* [Data node configurations](#data-node-configurations)
+* [Data node configuration settings](#data-node-configurations)
   * [Global](#global-settings)
   * [Enterprise license [enterprise]](#enterprise-license-settings)
   * [Meta node `[meta]`](#meta-node-settings)
@@ -29,7 +29,7 @@ menu:
   * [Continuous queries [continuous-queries]](#continuous-queries-settings)
   * [TLS [tls]](#tls-settings)
 
-## Data node configurations
+## Data node configuration settings
 
 The InfluxDB Enterprise data node configuration settings overlap significantly
 with the settings in InfluxDB OSS.
@@ -122,11 +122,9 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
 ## Meta node settings
 
-
 ### `[meta]`
 
 Settings related to how the data nodes interact with the meta nodes.
-
 
 #### `dir = "/var/lib/influxdb/meta"`
 
@@ -231,7 +229,6 @@ InfluxData recommends values ranging from `0ms` to `100ms` for non-SSD disks.
 
 Environment variable: `INFLUXDB_DATA_WAL_FSYNC_DELAY`
 
-
 ### Data settings for the TSM engine
 
 #### `cache-max-memory-size = "1g"`
@@ -261,7 +258,7 @@ This setting does not apply to cache snapshotting.
 
 Environmental variable: `INFLUXDB_DATA_CACHE_MAX_CONCURRENT_COMPACTIONS`
 
-####  `compact-full-write-cold-duration = "4h"`
+#### `compact-full-write-cold-duration = "4h"`
 
 The duration at which the TSM engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
@@ -288,7 +285,7 @@ If a point causes the number of series in a database to exceed
 `max-series-per-database`, InfluxDB will not write the point, and it returns a
 `500` with the following error:
 
-```
+```bash
 {"error":"max series per database exceeded: <series>"}
 ```
 
@@ -481,7 +478,7 @@ Disabling hinted handoff is not recommended and can lead to data loss if another
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
 
-#### `max-size = 10737418240`
+#### `max-size = "10g"`
 
 The maximum size of the hinted handoff queue.
 Each queue is for one and only one other data node in the cluster.
@@ -491,7 +488,7 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
 
 #### `max-age = "168h0m0s"`
 
-The time writes sit in the queue before they are purged.
+The time interval that writes sit in the queue before they are purged.
 The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
 If another data node is unreachable for more than the `max-age` it can lead to data loss.
 

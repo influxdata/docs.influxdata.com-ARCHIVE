@@ -3,10 +3,23 @@ title: InfluxDB Enterprise 1.7 release notes
 
 menu:
   enterprise_influxdb_1_7:
-    menu: Release notes
+    name: Release notes
     weight: 10
     parent: About the project
 ---
+
+## v1.7.5 [2019-03-26]
+
+This release builds off of the InfluxDB OSS 1.6.0 through 1.7.5 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+
+- Add `influx_tools` utility (for internal support use) to be part of the packaging.
+
+### Bug fixes
+
+- Anti-Entropy: fix `contains no .tsm files` error.
+- `fix(cluster)`: account for nil result set when writing read response.
 
 ## v1.7.4 [2019-02-13]
 
@@ -14,7 +27,7 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.4 releases. For de
 
 ### Bug fixes
 
-* Use `systemd` for Amazon Linux 2.
+- Use `systemd` for Amazon Linux 2.
 
 ## v1.7.3 [2019-01-11]
 
@@ -26,16 +39,16 @@ If you have not installed this release, then install the 1.7.4 release.
 
 **If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
 
-* A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
-  * **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
-  * **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
+- A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
+  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
-* A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed this issue in 1.7.4.
+- A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed this issue in 1.7.4.
 
 ### Features
 
-* Add user authentication and authorization support for Flux HTTP requests.
-* Add support for optionally logging Flux queries.
+- Add user authentication and authorization support for Flux HTTP requests.
+- Add support for optionally logging Flux queries.
 
 #### Anti-Entropy service disabled by default
 

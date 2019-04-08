@@ -445,7 +445,7 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ## Monitoring settings `[monitor]`
 
-This section controls InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/master/monitor/README.md).
+This section controls InfluxDB's [system self-monitoring](https://github.com/influxdata/influxdb/blob/1.6/monitor/README.md).
 
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.

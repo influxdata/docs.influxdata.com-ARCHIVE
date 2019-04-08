@@ -7,19 +7,35 @@ menu:
     parent: About the project
 ---
 
+## v1.7.5 [2019-03-26]
+-------------------
+
+<dt>
+**Update (2019-04-01):** If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`), then do not upgrade to this release. Customers have reported that InfluxDB 1.7.5 stops responding without warning. For details, see [GitHub issue #13010](https://github.com/influxdata/influxdb/issues/13010). The [planned fix](https://github.com/influxdata/influxdb/issues/13053) will be available soon.
+</dt> 
+
+### Bug fixes
+
+- Update `tagKeyValue` mutex to write lock.
+- Fix some more shard epoch races.
+
+### Features
+
+- Add `gen-init` and `gen-exec` commands to `influx_tools` utility (internal use only). Add support for describing data-generation schema using a TOML file.
+
 ## v1.7.4 [2019-02-13]
 
 ### Features
 
-* Allow TSI bitset cache to be configured. New `[data]` index settings for in-memory (`inmem`) and (`tsi1`)
+- Allow TSI bitset cache to be configured. New `[data]` index settings for in-memory (`inmem`) and (`tsi1`)
 
 ### Bug fixes
 
-* Remove copy-on-write when caching bitmaps in TSI.
-* Use `systemd` for Amazon Linux 2.
-* Revert "Limit force-full and cold compaction size."
-* Convert `TagValueSeriesIDCache` to use string fields.
-* Ensure that cached series id sets are Go heap backed.
+- Remove copy-on-write when caching bitmaps in TSI.
+- Use `systemd` for Amazon Linux 2.
+- Revert "Limit force-full and cold compaction size."
+- Convert `TagValueSeriesIDCache` to use string fields.
+- Ensure that cached series id sets are Go heap backed.
 
 ## v1.7.3 [2019-01-11]
 
@@ -29,13 +45,13 @@ If you have not installed this release, then install the 1.7.4 release.
 
 **If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
 
-* A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
-  * **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
-  * **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
+- A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
+  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
 ### Features
 
-* Update Flux to 0.12.0
+- Update Flux to `0.12.0`
 
 ### Bug fixes
 

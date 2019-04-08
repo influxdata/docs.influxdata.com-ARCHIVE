@@ -24,7 +24,7 @@ for exploring your data.
     <td><a href="#time-syntax">Time Syntax</a></td>
   </tr>
   <tr>
-    <td><a href="#the-where-clause">The WHERE Clause</a></td>
+    <td><a href="#the-where-clause">The WHERE clause</a></td>
     <td><a href="#the-limit-and-slimit-clauses">The LIMIT and SLIMIT clauses</a></td>
     <td><a href="#regular-expressions">Regular Expressions</a></td>
   </tr>
@@ -375,7 +375,7 @@ the `SELECT` clause:
 To return any data associated with the `location` tag key, the query's `SELECT`
 clause must include at least one field key (`water_level`):
 ```
-> SELECT "water_level","location" FROM "h2o_feet" LIMIT 3
+> SELECT "water_level","location" FROM "h2o_feet"
 name: h2o_feet
 time                   water_level  location
 ----                   -----------  --------
@@ -408,6 +408,10 @@ SELECT_clause FROM_clause WHERE <conditional_expression> [(AND|OR) <conditional_
 
 The `WHERE` clause supports `conditional_expression`s on fields, tags, and
 timestamps.
+
+>**Note** InfluxDB does not support using OR in the WHERE clause to specify multiple time ranges. For example, InfluxDB will return an empty response for the following query:
+<br>
+`> SELECT * FROM "absolutismus" WHERE time = '2016-07-31T20:07:00Z' OR time = '2016-07-31T23:07:17Z'`
 
 #### Fields
 

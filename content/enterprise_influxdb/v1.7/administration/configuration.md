@@ -1,37 +1,37 @@
 ---
-title: Configuring InfluxDB Enterprise
+title: Configure InfluxDB Enterprise clusters
 description: Covers the InfluxDB Enterprise configuration settings, including global options, meta node options, and data node options
 aliases:
     - /enterprise/v1.7/administration/configuration/
 menu:
   enterprise_influxdb_1_7:
-    name: Configuring
+    name: Configure clusters
     weight: 10
     parent: Administration
 ---
 
-This page contains general information about configuring InfluxDB Enterprise.
+This page contains general information about configuring InfluxDB Enterprise clusters.
 For complete listings and descriptions of the configuration settings, see:
 
-* [Data node configurations](/enterprise_influxdb/v1.7/administration/config-data-nodes)
-* [Meta node configurations](/enterprise_influxdb/v1.7/administration/config-meta-nodes)
+* [Configure data nodes](/enterprise_influxdb/v1.7/administration/config-data-nodes)
+* [Configure meta nodes](/enterprise_influxdb/v1.7/administration/config-meta-nodes)
 
-## Using configuration files
+## Use configuration files
 
-#### Print a default configuration file
+### Display the default configurations
 
 The following commands print out a TOML-formatted configuration with all
 available options set to their default values.
 
-Meta node configuration:
+#### Meta node configuration
 
-```
+```bash
 influxd-meta config
 ```
 
-Data node configuration:
+#### Data node configuration
 
-```
+```bash
 influxd config
 ```
 

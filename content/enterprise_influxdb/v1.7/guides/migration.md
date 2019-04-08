@@ -48,24 +48,30 @@ environment, then this step can be skipped.
 ### 1. Remove the data node from the InfluxDB Enterprise cluster
 
 From a **meta** node in your InfluxDB Enterprise cluster, enter:
-```
+
+```bash
 influxd-ctl remove-data <data_node_hostname>:8088
 ```
+
 ### 2. Delete any existing data
 
 On each **data** node that you dropped from the cluster, enter:
-```
+
+```bash
 sudo rm -rf /var/lib/influxdb/{meta,data,hh}
 ```
 
 ### 3. Create new directories
 
 On each data node that you dropped from the cluster, enter:
-```
+
+```bash
 sudo mkdir /var/lib/influxdb/{data,hh,meta}
 ```
+
 To ensure the file permissions are correct please run:
-```
+
+```bash
 sudo chown -R influxdb:influxdb /var/lib/influxdb
 ```
 
@@ -76,29 +82,34 @@ sudo chown -R influxdb:influxdb /var/lib/influxdb
 ### 2. Stop the influxdb service on the InfluxDB OSS instance
 
 On sysvinit systems, use the `service` command:
-```
+
+```bash
 sudo service influxdb stop
 ```
 
 On systemd systems, use the `systemctl` command:
-```
+
+```bash
 sudo systemctl stop influxdb
 ```
 
 Double check that the service is stopped (the following should return nothing):
-```
+
+```bash
 ps ax | grep influxd
 ```
 
 ### 3. Remove the InfluxDB OSS package
 
-On Debian/Ubuntu systems:
-```
+On Debian and Ubuntu systems:
+
+```bash
 sudo apt-get remove influxdb
 ```
 
-On RHEL/CentOS systems:
-```
+On RHEL and CentOS systems:
+
+```bash
 sudo yum remove influxdb
 ```
 
@@ -110,16 +121,15 @@ If you have settings that you’d like to keep, please make a copy of your confi
 #### Ubuntu and Debian (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.4-c1.7.4_amd64.deb
-sudo dpkg -i influxdb-data_1.7.4-c1.7.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.5-c1.7.5_amd64.deb
+sudo dpkg -i influxdb-data_1.7.5-c1.7.5_amd64.deb
 ```
 
 #### RedHat and CentOS (64-bit)
 
-
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.4_c1.7.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.7.4_c1.7.4.x86_64.rpm
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.5_c1.7.5.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.5_c1.7.5.x86_64.rpm
 ```
 
 ### 5. Update the configuration file
@@ -134,7 +144,7 @@ in the `[enterprise]` section to the local path to the JSON license file you rec
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 </dt>
 
-```
+```toml
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
 hostname="<data-node-hostname>" #✨
@@ -150,23 +160,28 @@ hostname="<data-node-hostname>" #✨
 ### 6. Start the data node
 
 On sysvinit systems, use the `service` command:
-```
+
+```bash
 sudo service influxdb start
 ```
 
 On systemd systems, use the `systemctl` command:
-```
+
+```bash
 sudo systemctl start influxdb
 ```
 
 ### 7. Add the node to the cluster
 
 From a **meta** node in the cluster, run:
-```
+
+```bash
 influxd-ctl add-data <data-node-hostname>:8088
 ```
+
 You should see:
-```
+
+```bash
 Added data node y at data-node-hostname:8088
 ```
 
@@ -177,17 +192,20 @@ Note: it may take a few minutes before the existing data become available in the
 ### 1. Add any data nodes that you removed from cluster back into the cluster
 
 From a **meta** node in the InfluxDB Enterprise Cluster, run:
-```
+
+```bash
 influxd-ctl add-data <the-hostname>:8088
 ```
+
 Output:
-```
+
+```bash
 Added data node y at the-hostname:8088
 ```
 
 Finally verify that all nodes are now members of the cluster as expected:
 
-```
+```bash
 influxd-ctl show
 ```
 
