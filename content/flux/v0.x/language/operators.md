@@ -19,6 +19,10 @@ Flux includes the following types of operators:
 - [Literal constructors](#literal-constructors)
 - [Miscellaneous operators](#miscellaneous-operators)
 
+_Also see:_
+
+- [Operator precedence](#operator-precedence)
+
 ## Arithmetic operators
 Arithmetic operators take two numerical values (either literals or variables) and
 perform a calculation that returns a single numerical value.
@@ -31,9 +35,11 @@ perform a calculation that returns a single numerical value.
 | `/`      | Division       | `9 / 3`  | `3`    |
 | `%`      | Modulus        | `10 % 5` | `0`    |
 
-> In the current version of Flux, values used in arithmetic operations must
-> be of the same numeric type (integer or float).
-> Operations with values of different numeric types will result in a type error.
+{{% note %}}
+In the current version of Flux, values used in arithmetic operations must
+be of the same numeric type (integer or float).
+Operations with values of different numeric types will result in a type error.
+{{% /note %}}
 
 ## Comparison operators
 Comparison operators compare expressions and return true or false based on the comparison.
@@ -49,8 +55,9 @@ Comparison operators compare expressions and return true or false based on the c
 | `=~`     | Equal to regular expression     | `"abc" =~ /[a-z]*/` | `true`  |
 | `!~`     | Not equal to regular expression | `"abc" !~ /[0-9]*/` | `true`  |
 
-
-> The `>` and `<` operators also [compare the lexicographic order of strings](#string-operators).
+{{% note %}}
+The `>` and `<` operators also [compare the lexicographic order of strings](#string-operators).
+{{% /note %}}
 
 ## Logical operators
 | Operator | Description                                                           |
@@ -87,7 +94,7 @@ Function operators facilitate the creation of functions and control the flow of 
 
 ---
 
-_See [Custom functions](/flux/v0.x/functions/custom-functions/) for examples of function operators is use._
+_See [Custom functions](/v2.0/query-data/guides/custom-functions) for examples of function operators is use._
 
 ---
 
@@ -110,9 +117,28 @@ Literal constructors define fixed values.
 | `""`     | String       |
 
 ## Miscellaneous operators
-| Operator | Description         | Example                     |
-|:--------:|:-----------         | -------                     |
-| `( )`    | Logical grouping    | `r._value / (r._value * 2)` |
-| `,`      | Sequence delimiter  | `item1, item2, item3`       |
-| `:`      | Key-value separator | `{name: "Bob"}`             |
-| `.`      | Dot reference       | `r._measurement`            |
+| Operator | Description                   | Example                     |
+|:--------:|:-----------                   | -------                     |
+| `( )`    | Logical grouping              | `r._value / (r._value * 2)` |
+| `,`      | Sequence delimiter            | `item1, item2, item3`       |
+| `:`      | Key-value separator           | `{name: "Bob"}`             |
+| `.`      | Member access / dot reference | `r._measurement`            |
+
+## Operator precedence
+The table below outlines operator precedence.
+Operators with a lower number have higher precedence.
+
+|Precedence | Operator  | Description                |
+|:--------- |:--------: |:-----------                |
+| 1         | `a()`     | Function call              |
+|           | `a[]`     | Member or index access     |
+|           | `.`       | Member access              |
+| 2         | `*` `/`   | Multiplication and division|
+| 3         | `+` `-`   | Addition and subtraction   |
+| 4         | `==` `!=` | Comparison operators       |
+|           | `<` `<=`  |                            |
+|           | `>` `>=`  |                            |
+|           | `=~` `!~` |                            |
+| 5         | `not`     | Unary logical expression   |
+| 6         | `and`     | Logical AND                |
+| 7         | `or`      | Logical OR                 |
