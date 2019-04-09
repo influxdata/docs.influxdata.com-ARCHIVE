@@ -13,7 +13,7 @@ However, it is also possible to set custom default configuration options in the 
 
 ## Starting the Chronograf service
 
-Chronograf can be started using the default configuration options, but environment variables and command line options let you configure OAuth 2.0 authentication and other options based on your requirements.
+Start Chronograf using the default configuration options, or [customize your configuration](https://docs.influxdata.com/chronograf/v1.7/administration/configuration/) with environment variables and command line options (for example, to configure OAuth 2.0 authentication) based on your requirements.
 
 **Linux:**
 
@@ -27,12 +27,12 @@ sudo systemctl start chronograf [OPTIONS]
 chronograf [OPTIONS]
 ```
 
-`[OPTIONS]` are any of the available Chronograf command line options, separated by spaces. See the [Chronograf configuration options](/chronograf/v1.7/administration/config-options) documentation for details about configuration options, including command line options and corresponding environment variables.
+`[OPTIONS]` are available Chronograf command line options, separated by spaces. See the [Chronograf configuration options](https://docs.influxdata.com/chronograf/v1.7/administration/config-options) documentation for details about configuration options, including command line options and corresponding environment variables.
 
 ## Setting custom default Chronograf config options
 
 Custom default Chronograf configuration settings can be defined in `/etc/default/chronograf`.
-This file consists of key-value pairs – the key being the environment variable for each configuration option outlined in the [Chronograf configuration options](/chronograf/v1.7/administration/config-options) documentation and the value being the desired setting for that option.
+This file consists of key-value pairs. See keys (environment variables) for [Chronograf configuration options](https://docs.influxdata.com/chronograf/v1.7/administration/config-options), and set values for the keys you want to configure.
 
 ```conf
 HOST=0.0.0.0
@@ -45,14 +45,17 @@ LOG_LEVEL=info
 > **Note:** `/etc/default/chronograf` is only created in Linux-based operating systems.
 It is neither created nor used in macOS.
 
-## Enabling security, multi-organization, and multi-user support
+## Setting up security, organizations, and users
 
-See [Managing security](/chronograf/latest/administration/managing-security) for details on configuring authentication options for Chronograf using the JWT and OAuth 2.0 authentication protocols.
+To set up security for Chronograf, configure:
 
-After you configure OAuth 2.0 authentication in Chronograf, you can use the multi-organization and multi-user support described in detail here:
+* [OAuth 2.0 authentication](https://docs.influxdata.com/chronograf/v1.7/administration/managing-security/#oauth-2-0-providers-with-jwt-tokens)
+* [TLS (Transport Layer Security) for HTTPS](https://docs.influxdata.com/chronograf/v1.7/administration/managing-security/#configuring-tls-transport-layer-security-and-https)
 
-* [Managing organizations](/chronograf/latest/administration/managing-organizations)
-* [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users)
+After you configure OAuth 2.0 authentication, you can set up multiple organizations, roles, and users. For details, check out the following topics:
+
+* [Managing organizations](https://docs.influxdata.com/chronograf/v1.7/administration/managing-organizations/)
+* [Managing Chronograf users](https://docs.influxdata.com/chronograf/v1.7/administration/managing-chronograf-users/)
 
 
 <!-- TODO ## Configuring Chronograf for InfluxDB Enterprise clusters) -->
