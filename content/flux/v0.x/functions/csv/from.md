@@ -1,30 +1,36 @@
 ---
-title: fromCSV() function
-description: The fromCSV() function retrieves data from a CSV data source.
+title: csv.from() function
+description: The csv.from() function retrieves data from a CSV data source.
 aliases:
   - /flux/v0.x/functions/inputs/fromcsv
+  - /flux/v0.x/functions/built-in/inputs/fromcsv
 menu:
   flux_0_x:
-    name: fromCSV
-    parent: Inputs
+    name: csv.from
+    parent: CSV
     weight: 1
 ---
 
-The `fromCSV()` function retrieves data from a comma-separated value (CSV) data source.
+The `csv.from()` function retrieves data from a comma-separated value (CSV) data source.
 It returns a stream of tables.
 Each unique series is contained within its own table.
 Each record in the table represents a single point in the series.
 
-_**Function type:** Input_  
-_**Output data type:** Object_
+_**Function type:** Input_
 
 ```js
-from(file: "/path/to/data-file.csv")
+import "csv"
+
+csv.from(file: "/path/to/data-file.csv")
 
 // OR
 
-from(csv: csvData)
+csv.from(csv: csvData)
 ```
+
+{{% warn %}}
+`csv.from()` is not avaialable in InfluxCloud.
+{{% /warn %}}
 
 ## Parameters
 
@@ -32,16 +38,18 @@ from(csv: csvData)
 The file path of the CSV file to query.
 The path can be absolute or relative.
 If relative, it is relative to the working directory of the `influxd` process.
+_The CSV file must exist in the same file system running the `influxd` process._
 
 _**Data type:** String_
 
 ### csv
 Raw CSV-formatted text.
 
-> CSV data must be in the CSV format produced by the Flux HTTP response standard.
-> See the [Flux technical specification](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#csv)
-> for information about this format.
-
+{{% note %}}
+CSV data must be in the CSV format produced by the Flux HTTP response standard.
+See the [Flux technical specification](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#csv)
+for information about this format.
+{{% /note %}}
 
 _**Data type:** String_
 
@@ -49,11 +57,15 @@ _**Data type:** String_
 
 ### Query CSV data from a file
 ```js
-from(file: "/path/to/data-file.csv")
+import "csv"
+
+csv.from(file: "/path/to/data-file.csv")
 ```
 
 ### Query raw CSV-formatted text
 ```js
+import "csv"
+
 csvData = "
 result,table,_start,_stop,_time,region,host,_value
 mean,0,2018-05-08T20:50:00Z,2018-05-08T20:51:00Z,2018-05-08T20:50:00Z,east,A,15.43
@@ -61,5 +73,5 @@ mean,0,2018-05-08T20:50:00Z,2018-05-08T20:51:00Z,2018-05-08T20:50:20Z,east,B,59.
 mean,0,2018-05-08T20:50:00Z,2018-05-08T20:51:00Z,2018-05-08T20:50:40Z,east,C,52.62
 "
 
-from(csv: csvData)
+csv.from(csv: csvData)
 ```
