@@ -11,13 +11,13 @@ menu:
 ---
 
 The `difference()` function computes the difference between subsequent records.  
-Every user-specified column of numeric type is subtracted while others are kept intact.
+The user-specified column of numeric type is subtracted while others are kept intact.
 
 _**Function type:** Aggregate_  
 _**Output data type:** Float_
 
 ```js
-difference(nonNegative: false, columns: ["_value"])
+difference(nonNegative: false, column: "_value")
 ```
 
 ## Parameters
@@ -28,11 +28,11 @@ When set to `true`, if a value is less than the previous value, it is assumed th
 
 _**Data type:** Boolean_
 
-### columns
-A list of columns on which to compute the difference.
-Defaults to `["_value"]`.
+### column
+The column to use to compute the difference.
+Defaults to `"_value"`.
 
-_**Data type:** Array of strings_
+_**Data type:** String_
 
 ## Subtraction rules for numeric types
 - The difference between two non-null values is their algebraic difference;
@@ -58,37 +58,37 @@ from(bucket: "telegraf/autogen")
 ### Example data transformation
 
 ###### Input table
-| _time |   A  |   B  |   C  | tag |
-|:-----:|:----:|:----:|:----:|:---:|
-|  0001 | null |   1  |   2  |  tv |
-|  0002 |   6  |   2  | null |  tv |
-|  0003 |   4  |   2  |   4  |  tv |
-|  0004 |  10  |  10  |   2  |  tv |
-|  0005 | null | null |   1  |  tv |
+| _time | _value | tag |
+|:-----:|:------:|:---:|
+| 0001  | null   | tv  |
+| 0002  | 6      | tv  |
+| 0003  | 4      | tv  |
+| 0004  | 10     | tv  |
+| 0005  | null   | tv  |
 
 #### With nonNegative set to false
 ```js
 |> difference(nonNegative: false)
 ```
 ###### Output table
-| _time |   A  |   B  |   C  | tag |
-|:-----:|:----:|:----:|:----:|:---:|
-|  0002 | null |   1  | null |  tv |
-|  0003 |  -2  |   0  |   2  |  tv |
-|  0004 |   6  |   8  |  -2  |  tv |
-|  0005 | null | null |  -1  |  tv |
+| _time | _value | tag |
+|:-----:|:------:|:---:|
+| 0002  | null   | tv  |
+| 0003  | -2     | tv  |
+| 0004  | 6      | tv  |
+| 0005  | null   | tv  |
 
 #### With nonNegative set to true
 ```js
 |> difference(nonNegative: true):
 ```
 ###### Output table
-| _time |   A  |   B  |   C  | tag |
-|:-----:|:----:|:----:|:----:|:---:|
-|  0002 | null |   1  | null |  tv |
-|  0003 | null |   0  |   2  |  tv |
-|  0004 |   6  |   8  | null |  tv |
-|  0005 | null | null | null |  tv |
+| _time | _value | tag |
+|:-----:|:------:|:---:|
+| 0002  | null   | tv  |
+| 0003  | null   | tv  |
+| 0004  | 6      | tv  |
+| 0005  | null   | tv  |
 
 <hr style="margin-top:4rem"/>
 

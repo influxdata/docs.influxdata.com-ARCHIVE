@@ -17,7 +17,7 @@ _**Function type:** Selector, Aggregate_
 ```js
 lowestMin(
   n:10,
-  columns: ["_value"],
+  column: "_value",
   groupColumns: []
 )
 ```
@@ -29,12 +29,11 @@ Number of records to return.
 
 _**Data type:** Integer_
 
-### columns
-List of columns by which to sort.
-Sort precedence is determined by list order (left to right).
-Default is `["_value"]`.
+### column
+Column by which to sort.
+Default is `"_value"`.
 
-_**Data type:** Array of strings_
+_**Data type:** String_
 
 ### groupColumns
 The columns on which to group before performing the aggregation.
@@ -63,23 +62,22 @@ _sortLimit = (n, desc, columns=["_value"], tables=<-) =>
 
 // _highestOrLowest is a helper function which reduces all groups into a single
 // group by specific tags and a reducer function. It then selects the highest or
-// lowest records based on the columns and the _sortLimit function.
+// lowest records based on the column and the _sortLimit function.
 // The default reducer assumes no reducing needs to be performed.
-_highestOrLowest = (n, _sortLimit, reducer, columns=["_value"], groupColumns=[], tables=<-) =>
+_highestOrLowest = (n, _sortLimit, reducer, column="_value", groupColumns=[], tables=<-) =>
   tables
     |> group(columns:groupColumns)
     |> reducer()
     |> group(columns:[])
-    |> _sortLimit(n:n, columns:columns)
+    |> _sortLimit(n:n, columns:[column])
 
-lowestMin = (n, columns=["_value"], groupColumns=[], tables=<-) =>
+lowestMin = (n, column="_value", groupColumns=[], tables=<-) =>
   tables
     |> _highestOrLowest(
         n:n,
-        columns:columns,
+        column:column,
         groupColumns:groupColumns,
-        // TODO(nathanielc): Once max/min support selecting based on multiple columns change this to pass all columns.
-        reducer: (tables=<-) => tables |> min(column:columns[0]),
+        reducer: (tables=<-) => tables |> min(column:column),
         _sortLimit: bottom,
       )
 ```
