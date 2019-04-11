@@ -478,9 +478,9 @@ Disabling hinted handoff is not recommended and can lead to data loss if another
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
 
-#### `max-size = "10g"`
+#### `max-size = "10737418240"`
 
-The maximum size of the hinted handoff queue.
+The maximum size of the hinted handoff queue in bytes.
 Each queue is for one and only one other data node in the cluster.
 If there are N data nodes in the cluster, each data node may have up to N-1 hinted handoff queues.
 
