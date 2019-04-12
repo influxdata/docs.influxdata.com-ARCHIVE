@@ -830,7 +830,7 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 ### `[[graphite]]`
 
 This section controls one or many listeners for Graphite data.
-For more information, see [Graphite protocol support in InfluxDB]](/influxdb/v1.7/supported_protocols/graphite/).
+For more information, see [Graphite protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/graphite/).
 
 #### `enabled = false`
 
