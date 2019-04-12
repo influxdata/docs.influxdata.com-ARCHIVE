@@ -90,7 +90,7 @@ All of these data is in the `NOAA_water_database` [database](/influxdb/v1.7/conc
 
 > **Disclaimer:** The `level description` field isn't part of the original NOAA data - we snuck it in there for the sake of having a field key with a special character and string field values.
 
-# The basic SELECT statement
+## The basic SELECT statement
 
 The `SELECT` statement queries data from a particular [measurement](/influxdb/v1.7/concepts/glossary/#measurement) or measurements.
 
@@ -172,7 +172,8 @@ Please review the [rules for single and double-quoting](/influxdb/v1.7/troublesh
 ### Examples
 
 #### Select all fields and tags from a single measurement
-```
+
+```sql
 > SELECT * FROM "h2o_feet"
 
 name: h2o_feet
@@ -201,7 +202,7 @@ queries the database's `DEFAULT` retention policy.
 
 #### Select specific tags and fields from a single measurement
 
-```
+```sql
 > SELECT "level description","location","water_level" FROM "h2o_feet"
 
 name: h2o_feet
@@ -221,7 +222,7 @@ a tag.
 
 #### Select specific tags and fields from a single measurement, and provide their identifier type
 
-```
+```sql
 > SELECT "level description"::field,"location"::tag,"water_level"::field FROM "h2o_feet"
 
 name: h2o_feet
@@ -243,7 +244,7 @@ That syntax is not required for most use cases.
 
 #### Select all fields from a single measurement
 
-```
+```sql
 > SELECT *::field FROM "h2o_feet"
 
 name: h2o_feet
@@ -260,7 +261,8 @@ The query selects all fields from the `h2o_feet` measurement.
 The `SELECT` clause supports combining the `*` syntax with the `::` syntax.
 
 #### Select a specific field from a measurement and perform basic arithmetic
-```
+
+```sql
 > SELECT ("water_level" * 2) + 4 from "h2o_feet"
 
 name: h2o_feet
@@ -280,7 +282,8 @@ See [Mathematical Operators](/influxdb/v1.7/query_language/math_operators/)
 for more on supported operators.
 
 #### Select all data from more than one measurement
-```
+
+```sql
 > SELECT * FROM "h2o_feet","h2o_pH"
 
 name: h2o_feet
@@ -307,7 +310,8 @@ The query selects all fields and tags from two measurements: `h2o_feet` and
 Separate multiple measurements with a comma (`,`).
 
 #### Select all data from a fully qualified measurement
-```
+
+```sql
 > SELECT * FROM "NOAA_water_database"."autogen"."h2o_feet"
 
 name: h2o_feet
@@ -330,7 +334,8 @@ In the HTTP API, fully qualify a measurement in place of using the `db`
 and `rp` query string parameters if desired.
 
 #### Select all data from a measurement in a particular database
-```
+
+```sql
 > SELECT * FROM "NOAA_water_database".."h2o_feet"
 
 name: h2o_feet
@@ -366,13 +371,16 @@ This behavior is a result of how the system stores data.
 
 The following query returns no data because it specifies a single tag key (`location`) in
 the `SELECT` clause:
-```
+
+```sql
 > SELECT "location" FROM "h2o_feet"
 >
 ```
+
 To return any data associated with the `location` tag key, the query's `SELECT`
 clause must include at least one field key (`water_level`):
-```
+
+```sql
 > SELECT "water_level","location" FROM "h2o_feet"
 name: h2o_feet
 time                   water_level  location
@@ -468,7 +476,8 @@ details how to specify alternative time ranges in the `WHERE` clause.
 ### Examples
 
 #### Select data that have specific field key-values
-```
+
+```sql
 > SELECT * FROM "h2o_feet" WHERE "water_level" > 8
 
 name: h2o_feet
@@ -487,7 +496,8 @@ The query returns data from the `h2o_feet`
 that are greater than eight.
 
 #### Select data that have a specific string field key-value
-```
+
+```sql
 > SELECT * FROM "h2o_feet" WHERE "level description" = 'below 3 feet'
 
 name: h2o_feet
@@ -506,7 +516,8 @@ InfluxQL requires single quotes around string field values in the `WHERE`
 clause.
 
 #### Select data that have a specific field key-value and perform basic arithmetic
-```
+
+```sql
 > SELECT * FROM "h2o_feet" WHERE "water_level" + 2 > 11.9
 
 name: h2o_feet
@@ -531,7 +542,7 @@ for more on supported operators.
 
 #### Select data that have a specific tag key-value
 
-```
+```sql
 > SELECT "water_level" FROM "h2o_feet" WHERE "location" = 'santa_monica'
 
 name: h2o_feet
@@ -549,7 +560,8 @@ The query returns data from the `h2o_feet` measurement where the
 InfluxQL requires single quotes around tag values in the `WHERE` clause.
 
 #### Select data that have specific field key-values and tag key-values
-```
+
+```sql
 > SELECT "water_level" FROM "h2o_feet" WHERE "location" <> 'santa_monica' AND (water_level < -0.59 OR water_level > 9.95)
 
 name: h2o_feet
@@ -570,7 +582,8 @@ The `WHERE` clause supports the operators `AND` and `OR`, and supports
 separating logic with parentheses.
 
 #### Select data that have specific timestamps
-```
+
+```sql
 > SELECT * FROM "h2o_feet" WHERE time > now() - 7d
 ```
 
@@ -594,7 +607,8 @@ The first two queries in the code block below attempt to specify the tag value
 Those queries return no results.
 The third query single quotes `santa_monica` (this is the supported syntax)
 and returns the expected results.
-```
+
+```sql
 > SELECT "water_level" FROM "h2o_feet" WHERE "location" = santa_monica
 
 > SELECT "water_level" FROM "h2o_feet" WHERE "location" = "santa_monica"
@@ -618,7 +632,7 @@ The second query returns no results.
 The third query single quotes `at or greater than 9 feet` (this is the
 supported syntax) and returns the expected results.
 
-```
+```sql
 > SELECT "level description" FROM "h2o_feet" WHERE "level description" = at or greater than 9 feet
 
 ERR: error parsing query: found than, expected ; at line 1, char 86
@@ -691,7 +705,7 @@ Other supported features: [Regular Expressions](#regular-expressions)
 
 ##### Group query results by a single tag
 
-```
+```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" GROUP BY "location"
 
 name: h2o_feet
@@ -719,7 +733,7 @@ If you request a query that has no timestamp to return, such as an [aggregation 
 
 ##### Group query results by more than one tag
 
-```
+```sql
 > SELECT MEAN("index") FROM "h2o_quality" GROUP BY location,randtag
 
 name: h2o_quality
@@ -766,7 +780,7 @@ Separate multiple tags with a comma in the `GROUP BY` clause.
 
 ##### Group query results by all tags
 
-```
+```sql
 > SELECT MEAN("index") FROM "h2o_quality" GROUP BY *
 
 name: h2o_quality
@@ -832,8 +846,6 @@ This is because the `h2o_quality` measurement only has two tag keys.
 SELECT <function>(<field_key>) FROM_clause WHERE <time_range> GROUP BY time(<time_interval>),[tag_key] [fill(<fill_option>)]
 ```
 
-#### Description of basic syntax
-
 Basic `GROUP BY time()` queries require an InfluxQL [function](/influxdb/v1.7/query_language/functions/)
 in the [`SELECT` clause](#the-basic-select-statement) and a time range in the
 [`WHERE` clause](#the-where-clause).
@@ -863,7 +875,8 @@ and the timestamps returned by the query.
 #### Examples of basic syntax
 
 The examples below use the following subsample of the sample data:
-```
+
+```sql
 > SELECT "water_level","location" FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z'
 
 name: h2o_feet
@@ -885,7 +898,7 @@ time                   water_level   location
 
 ##### Group query results into 12 minute intervals
 
-```
+```sql
 > SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m)
 
 name: h2o_feet
@@ -909,7 +922,7 @@ and up to, but not including, `2015-08-18T00:24:00Z.`
 
 ##### Group query results into 12 minutes intervals and by a tag key
 
-```
+```sq;
 > SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m),"location"
 
 name: h2o_feet
@@ -956,7 +969,7 @@ In some cases, this can lead to unexpected results.
 
 Raw data:
 
-```
+```sql
 > SELECT "water_level" FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:18:00Z'
 name: h2o_feet
 --------------
@@ -971,7 +984,7 @@ Query and results:
 
 The following query covers a 12-minute time range and groups results into 12-minute time intervals, but it returns **two** results:
 
-```
+```sql
 > SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time < '2015-08-18T00:18:00Z' GROUP BY time(12m)
 
 name: h2o_feet
@@ -1017,7 +1030,7 @@ in the Advanced Syntax section continues with the query shown here;
 it shifts forward the preset time boundaries by six minutes such that
 InfluxDB returns:
 
-```
+```sql
 name: h2o_feet
 time                   count
 ----                   -----
@@ -1031,8 +1044,6 @@ time                   count
 ```
 SELECT <function>(<field_key>) FROM_clause WHERE <time_range> GROUP BY time(<time_interval>,<offset_interval>),[tag_key] [fill(<fill_option>)]
 ```
-
-#### Description of advanced syntax
 
 Advanced `GROUP BY time()` queries require an InfluxQL [function](/influxdb/v1.7/query_language/functions/)
 in the [`SELECT` clause](#the-basic-select-statement) and a time range in the
@@ -1066,7 +1077,7 @@ and the timestamps returned by the query.
 
 The examples below use the following subsample of the sample data:
 
-```
+```sql
 > SELECT "water_level" FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:54:00Z'
 
 name: h2o_feet
@@ -1086,7 +1097,7 @@ time                   water_level
 
 ##### Group query results into 18 minute intervals and shift the preset time boundaries forward
 
-```
+```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(18m,6m)
 
 name: h2o_feet
@@ -1103,7 +1114,7 @@ time intervals, and offsetting the preset time boundaries by six minutes.
 
 The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB's preset time boundaries. Let's first examine the results without the offset:
 
-```
+```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(18m)
 
 name: h2o_feet
@@ -1164,7 +1175,7 @@ the query's time range so the query returns no results for that last interval.
 
 ##### Group query results into 12 minute intervals and shift the preset time boundaries back
 
-```
+```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(18m,-12m)
 
 name: h2o_feet
@@ -1186,7 +1197,8 @@ the query in Example 2 uses a negative `offset_interval` instead of a positive
 intuitive option when deciding between a positive and negative `offset_interval`.
 
 The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB's preset time boundaries. Let's first examine the results without the offset:
-```
+
+```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(18m)
 
 name: h2o_feet
@@ -1249,7 +1261,7 @@ the query's time range so the query returns no results for that first interval.
 
 This example is a continuation of the scenario outlined in [Common Issues with Basic Syntax](#common-issues-with-basic-syntax).
 
-```
+```sql
 > SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time < '2015-08-18T00:18:00Z' GROUP BY time(12m,6m)
 
 name: h2o_feet
@@ -1264,7 +1276,7 @@ time intervals, and offsetting the preset time boundaries by six minutes.
 
 The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB's preset time boundaries. Let's first examine the results without the offset:
 
-```
+```sql
 > SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time < '2015-08-18T00:18:00Z' GROUP BY time(12m)
 
 name: h2o_feet
@@ -1371,7 +1383,8 @@ Reports the value from the previous time interval for time intervals with no dat
 {{% tab-content %}}
 
 Without `fill(100)`:
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-09-18T16:00:00Z' AND time <= '2015-09-18T16:42:00Z' GROUP BY time(12m)
 
 name: h2o_feet
@@ -1384,7 +1397,8 @@ time                   max
 ```
 
 With `fill(100)`:
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-09-18T16:00:00Z' AND time <= '2015-09-18T16:42:00Z' GROUP BY time(12m) fill(100)
 
 name: h2o_feet
@@ -1404,7 +1418,7 @@ time                   max
 
 Without `fill(linear)`:
 
-```
+```sql
 > SELECT MEAN("tadpoles") FROM "pond" WHERE time >= '2016-11-11T21:00:00Z' AND time <= '2016-11-11T22:06:00Z' GROUP BY time(12m)
 
 name: pond
@@ -1419,7 +1433,8 @@ time                   mean
 ```
 
 With `fill(linear)`:
-```
+
+```sql
 > SELECT MEAN("tadpoles") FROM "pond" WHERE time >= '2016-11-11T21:00:00Z' AND time <= '2016-11-11T22:06:00Z' GROUP BY time(12m) fill(linear)
 
 name: pond
@@ -1444,7 +1459,8 @@ We had to create a dataset with less regular data to work with `fill(linear)`.
 {{% tab-content %}}
 
 Without `fill(none)`:
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-09-18T16:00:00Z' AND time <= '2015-09-18T16:42:00Z' GROUP BY time(12m)
 
 name: h2o_feet
@@ -1457,7 +1473,8 @@ time                   max
 ```
 
 With `fill(none)`:
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-09-18T16:00:00Z' AND time <= '2015-09-18T16:42:00Z' GROUP BY time(12m) fill(none)
 
 name: h2o_feet
@@ -1475,7 +1492,8 @@ time                   max
 {{% tab-content %}}
 
 Without `fill(null)`:
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-09-18T16:00:00Z' AND time <= '2015-09-18T16:42:00Z' GROUP BY time(12m)
 
 name: h2o_feet
@@ -1488,7 +1506,8 @@ time                   max
 ```
 
 With `fill(null)`:
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-09-18T16:00:00Z' AND time <= '2015-09-18T16:42:00Z' GROUP BY time(12m) fill(null)
 
 name: h2o_feet
@@ -1508,7 +1527,8 @@ That result matches the result of the query without `fill(null)`.
 {{% tab-content %}}
 
 Without `fill(previous)`:
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-09-18T16:00:00Z' AND time <= '2015-09-18T16:42:00Z' GROUP BY time(12m)
 
 name: h2o_feet
@@ -1521,7 +1541,8 @@ time                   max
 ```
 
 With `fill(previous)`:
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-09-18T16:00:00Z' AND time <= '2015-09-18T16:42:00Z' GROUP BY time(12m) fill(previous)
 
 name: h2o_feet
@@ -1556,7 +1577,8 @@ range covers no data.
 The following query returns no data because `water_level` has no points within
 the query's time range.
 Note that `fill(800)` has no effect on the query results.
-```
+
+```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location" = 'coyote_creek' AND time >= '2015-09-18T22:00:00Z' AND time <= '2015-09-18T22:18:00Z' GROUP BY time(12m) fill(800)
 >
 ```
@@ -1571,7 +1593,8 @@ value is outside the query’s time range.
 The following query covers the time range between `2015-09-18T16:24:00Z` and `2015-09-18T16:54:00Z`.
 Note that `fill(previous)` fills the result for `2015-09-18T16:36:00Z` with the
 result from `2015-09-18T16:24:00Z`.
-```
+
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE location = 'coyote_creek' AND time >= '2015-09-18T16:24:00Z' AND time <= '2015-09-18T16:54:00Z' GROUP BY time(12m) fill(previous)
 
 name: h2o_feet
@@ -1588,7 +1611,7 @@ Note that `fill(previous)` doesn't fill the result for `2015-09-18T16:36:00Z` wi
 result from `2015-09-18T16:24:00Z`; the result for `2015-09-18T16:24:00Z` is outside the query's
 shorter time range.
 
-```
+```sql
 > SELECT MAX("water_level") FROM "h2o_feet" WHERE location = 'coyote_creek' AND time >= '2015-09-18T16:36:00Z' AND time <= '2015-09-18T16:54:00Z' GROUP BY time(12m) fill(previous)
 
 name: h2o_feet
@@ -1611,7 +1634,7 @@ The following query covers the time range between `2016-11-11T21:24:00Z` and
 using the values from the `2016-11-11T21:24:00Z` time interval and the
 `2016-11-11T22:00:00Z` time interval.
 
-```
+```sql
 > SELECT MEAN("tadpoles") FROM "pond" WHERE time > '2016-11-11T21:24:00Z' AND time <= '2016-11-11T22:06:00Z' GROUP BY time(12m) fill(linear)
 
 name: pond
@@ -1630,7 +1653,7 @@ time interval and the `2016-11-11T21:48:00Z` time interval; the result for
 `2016-11-11T21:24:00Z` is outside the query's shorter time range and InfluxDB
 cannot perform the linear interpolation.
 
-```
+```sql
 > SELECT MEAN("tadpoles") FROM "pond" WHERE time >= '2016-11-11T21:36:00Z' AND time <= '2016-11-11T22:06:00Z' GROUP BY time(12m) fill(linear)
 name: pond
 time                   mean
@@ -1648,6 +1671,7 @@ time                   mean
 The `INTO` clause writes query results to a user-specified [measurement](/influxdb/v1.7/concepts/glossary/#measurement).
 
 ### Syntax
+
 ```
 SELECT_clause INTO <measurement_name> FROM_clause [WHERE_clause] [GROUP_BY_clause]
 ```
@@ -1913,7 +1937,7 @@ documentation for how to automate `INTO` clause queries on realtime data.
 Among [other uses](/influxdb/v1.7/query_language/continuous_queries/#continuous-query-use-cases),
 Continuous Queries automate the downsampling process.
 
-# ORDER BY time DESC
+## ORDER BY time DESC
 
 By default, InfluxDB returns results in ascending time order; the first [point](/influxdb/v1.7/concepts/glossary/#point)
 returned has the oldest [timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) and
@@ -1989,6 +2013,7 @@ Without `ORDER BY time DESC`, the query would return
 `LIMIT <N>` returns the first `N` [points](/influxdb/v1.7/concepts/glossary/#point) from the specified [measurement](/influxdb/v1.7/concepts/glossary/#measurement).
 
 ### Syntax
+
 ```
 SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] LIMIT <N>
 ```
@@ -2173,7 +2198,7 @@ associated with the `h2o_feet` measurement.
 Note that without `LIMIT 2 SLIMIT 1`, the query would return four points
 for each of the two series associated with the `h2o_feet` measurement.
 
-# The OFFSET and SOFFSET clauses
+## The OFFSET and SOFFSET clauses
 
 `OFFSET` and `SOFFSET` paginates [points](/influxdb/v1.7/concepts/glossary/#point) and [series](/influxdb/v1.7/concepts/glossary/#series) returned.
 
@@ -2335,7 +2360,7 @@ time                   mean
 2015-08-18T00:00:00Z   8.0625
 ```
 
-# The Time Zone clause
+## The Time Zone clause
 
 The `tz()` clause returns the UTC offset for the specified timezone.
 
@@ -2368,7 +2393,7 @@ time                       water_level
 
 The query results include the UTC offset (`-05:00`) for the `America/Chicago` time zone in the timestamps.
 
-# Time syntax
+## Time syntax
 
 For most `SELECT` statements, the default time range is between [`1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store).
 For `SELECT` statements with a [`GROUP BY time()` clause](#group-by-time-intervals),
@@ -2696,7 +2721,7 @@ in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) format by default.
 Specify alternative formats with the
 [`epoch` query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters).
 
-# Regular expressions
+## Regular expressions
 
 InfluxQL supports using regular expressions when specifying:
 
@@ -2855,7 +2880,7 @@ The query uses an InfluxQL [function](/influxdb/v1.7/query_language/functions/)
 to select the first value of `index` for every tag that includes the letter `l`
 in its tag key.
 
-# Data types and cast operations
+## Data types and cast operations
 
 The [`SELECT` clause](#the-basic-select-statement) supports specifying a [field's](/influxdb/v1.7/concepts/glossary/#field) type and basic cast
 operations with the `::` syntax.
@@ -2955,7 +2980,7 @@ The query returns the integer form of `water_level`'s float [field values](/infl
 The query returns no data as casting a float field value to a string is not
 yet supported.
 
-# Merge behavior
+## Merge behavior
 
 In InfluxDB, queries merge [series](/influxdb/v1.7/concepts/glossary/#series)
 automatically.
@@ -3006,7 +3031,7 @@ time                   mean
 1970-01-01T00:00:00Z   3.530863470081006
 ```
 
-# Multiple statements
+## Multiple statements
 
 Separate multiple [`SELECT` statements](#the-basic-select-statement) in a query with a semicolon (`;`).
 
@@ -3096,7 +3121,7 @@ With the InfluxDB [HTTP API](/influxdb/v1.7/tools/api/):
 {{< /tab-content-container >}}
 {{< /tab-labels >}}
 
-# Subqueries
+## Subqueries
 
 A subquery is a query that is nested in the `FROM` clause of another query.
 Use a subquery to apply a query as a condition in the enclosing query.
