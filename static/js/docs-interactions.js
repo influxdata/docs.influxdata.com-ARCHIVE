@@ -124,6 +124,22 @@ $(document).on('ready', function(){
   	.append($advertText,$ctaButton);
 });
 
+// $ads = [
+// 	{ class: "cloud",	file: "/ads/ad-cloud.html" },
+// 	{ class: "cloud",	file: "/ads/ad-cloud.html" }
+// ]
+//
+// $(document).on('ready', function(){
+//
+//   $numAds = $ads.length;
+//   $randomizer = Math.floor(Math.random() * $numAds);
+//   $adContent = $ads[$randomizer];
+//
+// 	$('#sidebar--ad').addClass('ad-' + $adContent.class)
+// 	$('#sidebar--ad').load($adContent.file)
+// });
+
+
 /*
  * Add class to outbound title links on section landing pages
  * Force external links to open in a new tab/window
