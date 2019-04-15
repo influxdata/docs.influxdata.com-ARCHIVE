@@ -10,12 +10,8 @@ menu:
     weight: 1
 ---
 
-<<<<<<< HEAD
-The `filter()` function replaces all null values in an input stream and replace them with a non-null value.
-=======
+
 The `fill()` function replaces all null values in an input stream with a non-null value.
->>>>>>> flux-0.x
-The output stream is the same as the input stream with all null values replaced in the specified column.
 
 _**Function type:** Transformation_  
 
@@ -45,11 +41,7 @@ When `true`, assigns the value set in the previous non-null row.
 
 > Cannot be used with `value`.
 
-<<<<<<< HEAD
 _**Data type:** Boolean | Integer | UInteger | Float | String | Time | Duration_
-=======
-_**Data type:** Boolean_
->>>>>>> flux-0.x
 
 
 ## Examples

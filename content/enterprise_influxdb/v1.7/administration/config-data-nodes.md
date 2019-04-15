@@ -918,6 +918,9 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 
 ### `[[graphite]]`
 
+This section controls one or many listeners for Graphite data.
+For more information, see [Graphite protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/graphite/).
+
 #### `enabled = false`
 
 Determines whether the graphite endpoint is enabled.
@@ -979,6 +982,9 @@ There can be only one default template.
 
 ## CollectD settings
 
+The `[[collectd]]` settings control the listener for `collectd` data.
+For more information, see [CollectD protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/collectd/).
+
 ### `[[collectd]]`
 
 ```toml
@@ -1023,6 +1029,9 @@ UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS
 
 ## OpenTSDB settings
 
+Controls the listener for OpenTSDB data.
+For more information, see [OpenTSDB protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/opentsdb/).
+
 ### `[[opentsdb]]`
 
 ```toml
@@ -1060,6 +1069,9 @@ Flush at least this often even if we haven't hit buffer limit.
 -----
 
 ## UDP settings
+
+The `[[udp]]` settings control the listeners for InfluxDB line protocol data using UDP.
+For more information, see [UDP protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/udp/).
 
 ### `[[udp]]`
 
