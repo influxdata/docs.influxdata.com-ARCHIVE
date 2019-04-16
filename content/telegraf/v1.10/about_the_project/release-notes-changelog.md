@@ -8,6 +8,19 @@ menu:
     parent: About the project
 ---
 
+## v1.10.3 [2019-04-16]
+
+### Bug fixes
+
+#### Agent
+
+- Set log directory attributes in RPM specification.
+
+#### Plugins
+
+- Prometheus Client (`prometheus_client`) output plugin.
+  - Allow colons in metric names
+  
 ## v1.10.2 [2019-04-02]
 
 ### Breaking changes
