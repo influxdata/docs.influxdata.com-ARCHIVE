@@ -39,6 +39,13 @@ float   the set of all IEEE-754 64-bit floating-point numbers
 A _time type_ represents a single point in time with nanosecond precision.
 The time type name is `time`.
 
+### Timestamp format
+Flux supports [RFC3339](https://tools.ietf.org/html/rfc3339#section-5.6) timestamps:
+
+- `YYYY-MM-DD`
+- `YYYY-MM-DDT00:00:00Z`
+- `YYYY-MM-DDT00:00:00.000Z`
+
 ## Duration types
 
 A _duration type_ represents a length of time with nanosecond precision.
