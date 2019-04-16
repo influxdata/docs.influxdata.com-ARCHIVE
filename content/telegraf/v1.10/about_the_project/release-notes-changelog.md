@@ -19,7 +19,7 @@ menu:
 #### Plugins
 
 - Prometheus Client (`prometheus_client`) output plugin.
-  - Allow colons in metric names
+  - Allow colons in metric names.
   
 ## v1.10.2 [2019-04-02]
 
