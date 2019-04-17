@@ -16,16 +16,16 @@ _**Function type:** Aggregate_
 _**Output data type:** Float_
 
 ```js
-mean(columns: ["_value"])
+mean(column: "_value")
 ```
 
 ## Parameters
 
-### columns
-A list of columns on which to compute the mean.
-Defaults to `["_value"]`.
+### column
+The column to use to compute the mean.
+Defaults to `"_value"`.
 
-_**Data type:** Array of strings_
+_**Data type:** String_
 
 ## Examples
 ```js

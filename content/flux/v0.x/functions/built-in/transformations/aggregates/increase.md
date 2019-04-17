@@ -20,16 +20,16 @@ _**Function type:** Aggregate_
 _**Output data type:** Float_
 
 ```js
-increase(columns: ["_values"])
+increase(column: "_values")
 ```
 
 ## Parameters
 
-### columns
-The list of columns for which the increase is calculated.
-Defaults to `["_value"]`.
+### column
+The column for which the increase is calculated.
+Defaults to `"_value"`.
 
-_**Data type:** Array of strings_
+_**Data type:** Strings_
 
 ## Examples
 ```js
@@ -61,8 +61,8 @@ Given the following input table:
 
 ## Function definition
 ```js
-increase = (tables=<-, columns=["_value"]) =>
+increase = (tables=<-, column="_value") =>
 	tables
-		|> difference(nonNegative: true, columns:columns)
+		|> difference(nonNegative: true, column:column)
 		|> cumulativeSum()
 ```

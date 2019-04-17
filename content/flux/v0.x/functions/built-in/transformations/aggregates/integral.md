@@ -17,7 +17,7 @@ _**Function type:** Aggregate_
 _**Output data type:** Float_
 
 ```js
-integral(unit: 10s, columns: ["_value"])
+integral(unit: 10s, column: "_value")
 ```
 
 ## Parameters
@@ -27,11 +27,11 @@ The time duration used when computing the integral.
 
 _**Data type:** Duration_
 
-### columns
-A list of columns on which to operate.
-Defaults to `["_value"]`.
+### column
+The column on which to operate.
+Defaults to `"_value"`.
 
-_**Data type:** Array of strings_
+_**Data type:** String_
 
 ## Examples
 ```js

@@ -14,13 +14,12 @@ Flux aggregate functions take values from an input table and aggregate them in s
 The output table contains is a single row with the aggregated value.
 
 Aggregate operations output a table for every input table they receive.
-A list of columns to aggregate must be provided to the operation.
-The aggregate function is applied to each column in isolation.
+A column to aggregate must be provided to the operation.
 Any output table will have the following properties:
 
 - It always contains a single record.
 - It will have the same group key as the input table.
-- It will contain a column for each provided aggregate column.
+- It will contain a column for the provided aggregate column.
   The column label will be the same as the input table.
   The type of the column depends on the specific aggregate operation.
   The value of the column will be `null` if the input table is empty or the input column has only `null` values.

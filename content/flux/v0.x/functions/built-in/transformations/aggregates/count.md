@@ -17,16 +17,16 @@ _**Function type:** Aggregate_
 _**Output data type:** Integer_
 
 ```js
-count(columns: ["_value"])
+count(column: "_value")
 ```
 
 ## Parameters
 
 ### columns
-A list of columns on which to operate
-Defaults to `["_value"]`.
+Column on which to operate.
+Defaults to `"_value"`.
 
-_**Data type: Array of strings**_
+_**Data type: String**_
 
 ## Examples
 ```js
@@ -38,7 +38,7 @@ from(bucket: "telegraf/autogen")
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -5m)
-  |> count(columns: ["_value"])
+  |> count(column: "_value")
 ```
 
 <hr style="margin-top:4rem"/>
