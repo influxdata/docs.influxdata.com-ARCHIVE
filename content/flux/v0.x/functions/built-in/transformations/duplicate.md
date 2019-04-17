@@ -33,6 +33,10 @@ The name assigned to the duplicate column.
 
 _**Data type:** String_
 
+{{% note %}}
+If the `as` column already exists, this function will overwrite the existing values.
+{{% /note %}}
+
 ## Examples
 ```js
 from(bucket: "telegraf/autogen")
