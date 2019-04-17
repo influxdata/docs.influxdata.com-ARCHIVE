@@ -17,7 +17,7 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 ### Features
 
 - Upgrade Flux to `0.24.0` and remove the platform dependency.
-  - If Flux is enabled, use Chronograf 1.7.9 or later.
+  - If Flux is enabled, use Chronograf 1.7.10 or later.
 - Track remote read requests to Prometheus remote read handler.
 
 ### Bug fixes
