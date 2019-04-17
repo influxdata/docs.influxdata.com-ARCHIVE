@@ -12,7 +12,7 @@ menu:
 
 The `derivative()` function computes the rate of change per [`unit`](#unit) of time between subsequent non-null records.
 It assumes rows are ordered by the `_time` column.
-The output table schema is the same as the input table.
+The output table schema will be the same as the input table.
 
 _**Function type:** Aggregate_  
 _**Output data type:** Float_
@@ -21,8 +21,12 @@ _**Output data type:** Float_
 derivative(
   unit: 1s,
   nonNegative: false,
-  column: "_value",
+  columns: ["_value"],
+<<<<<<< HEAD
   timeSrc: "_time"
+=======
+  timeColumn: "_time"
+>>>>>>> flux-0.x
 )
 ```
 
@@ -40,13 +44,13 @@ When set to `true`, if a value is less than the previous value, it is assumed th
 
 _**Data type:** Boolean_
 
-### column
-The column to use to compute the derivative.
-Defaults to `"_value"`.
+### columns
+A list of columns on which to compute the derivative.
+Defaults to `["_value"]`.
 
-_**Data type:** String_
+_**Data type:** Array of strings_
 
-### timeSrc
+### timeColumn
 The column containing time values.
 Defaults to `"_time"`.
 

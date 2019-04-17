@@ -1,6 +1,6 @@
 ---
 title: stddev() function
-description: The stddev() function computes the standard deviation of non-null records in a specified column.
+description: The stddev() function computes the standard deviation of non-null records in specified columns.
 aliases:
   - /flux/v0.x/functions/transformations/aggregates/stddev
 menu:
@@ -10,22 +10,22 @@ menu:
     weight: 1
 ---
 
-The `stddev()` function computes the standard deviation of non-null records in a specified column.
+The `stddev()` function computes the standard deviation of non-null records in specified columns.
 
 _**Function type:** Aggregate_  
 _**Output data type:** Float_
 
 ```js
-stddev(column: "_value")
+stddev(columns: ["_value"])
 ```
 
 ## Parameters
 
-### column
-The column on which to operate.
-Defaults to `"_value"`.
+### columns
+Specifies a list of columns on which to operate.
+Defaults to `["_value"]`.
 
-_**Data type:** String_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

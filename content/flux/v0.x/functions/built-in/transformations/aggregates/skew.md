@@ -16,16 +16,15 @@ _**Function type:** Aggregate_
 _**Output data type:** Float_
 
 ```js
-skew(column: "_value")
+skew(columns: ["_value"])
 ```
 
 ## Parameters
 
-### column
-The column on which to operate.
-Defaults to `"_value"`.
+### columns
+Specifies a list of columns on which to operate. Defaults to `["_value"]`.
 
-_**Data type:** String_
+_**Data type:** Array of strings_
 
 ## Examples
 ```js

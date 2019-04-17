@@ -16,16 +16,8 @@ _**Function type:** Selector_
 _**Output data type:** Object_
 
 ```js
-max(column: "_value")
+max()
 ```
-
-## Parameters
-
-### column
-The column to use to calculate the maximum value.
-Default is `"_value"`.
-
-_**Data type:** String_
 
 ## Examples
 ```js

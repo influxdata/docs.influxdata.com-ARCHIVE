@@ -16,16 +16,8 @@ _**Function type:** Selector_
 _**Output data type:** Object_
 
 ```js
-min(column: "_value")
+min()
 ```
-
-## Parameters
-
-### column
-The column to use to calculate the minimum value.
-Default is `"_value"`.
-
-_**Data type:** String_
 
 ## Examples
 ```js

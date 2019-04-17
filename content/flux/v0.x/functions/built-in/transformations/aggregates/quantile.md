@@ -22,7 +22,7 @@ _**Output data type:** Float or Object_
 
 ```js
 quantile(
-  column: "_value",
+  columns: ["_value"],
   q: 0.99,
   method: "estimate_tdigest",
   compression: 1000.0
@@ -37,11 +37,11 @@ value that represents the specified quantile.
 
 ## Parameters
 
-### column
-The column to use to compute the quantile.
-Defaults to `"_value"`.
+### columns
+A list of columns on which to compute the quantile.
+Defaults to `["_value"]`.
 
-_**Data type:** String_
+_**Data type:** Array of strings_
 
 ### q
 A value between 0 and 1 indicating the desired quantile.
@@ -63,12 +63,12 @@ to compute an accurate quantile estimate on large data sources.
 An aggregate method that takes the average of the two points closest to the quantile value.
 
 ##### exact_selector
-A selector method that returns the data point for which at least `q` points are less than.
+A selector method that returns the data point for which at least quantile points are less than.
 
 ### compression
 Indicates how many centroids to use when compressing the dataset.
 A larger number produces a more accurate result at the cost of increased memory requirements.
-Defaults to 1000.
+Defaults to `1000.0`.
 
 _**Data type:** Float_
 
