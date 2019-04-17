@@ -37,11 +37,7 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 
 <dt>
 **Update (2019-04-01):** If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`), then do not upgrade to this release. Customers have reported that InfluxDB 1.7.5 stops responding without warning. For details, see [GitHub issue #13010](https://github.com/influxdata/influxdb/issues/13010). The [planned fix](https://github.com/influxdata/influxdb/issues/13053) will be available soon.
-</dt> 
-
-### Features
-
-- Add `gen-init` and `gen-exec` commands to `influx_tools` utility (internal use only). Add support for describing data-generation schema using a TOML file.
+</dt>
 
 ### Bug fixes
 
