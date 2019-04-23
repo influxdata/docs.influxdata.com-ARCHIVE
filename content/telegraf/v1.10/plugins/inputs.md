@@ -218,7 +218,7 @@ or [cluster-stats](https://www.elastic.co/guide/en/elasticsearch/reference/curre
 
 Plugin ID: `exec`
 
-The [Exec input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/exec/README.md) parses supported [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) (InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard into metrics. Each Telegraf metric includes the measurement name, tags, fields, and timesamp.
+The [Exec input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/exec/README.md) parses supported [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) (InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard into metrics. Each Telegraf metric includes the measurement name, tags, fields, and timestamp.
 
 ### Fail2ban
 
