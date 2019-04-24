@@ -36,7 +36,7 @@ To download it, use `git` to clone the source repository:
 
 ```bash
 # Clone the InfluxData Sandbox from Github
-git clone git@github.com:influxdata/sandbox.git
+git clone https://github.com/influxdata/sandbox.git
 ```
 
 The Sandbox repo includes a `sandbox` binary used to provision and manage the
