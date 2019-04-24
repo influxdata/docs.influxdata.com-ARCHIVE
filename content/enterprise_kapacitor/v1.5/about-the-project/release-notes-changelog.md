@@ -8,6 +8,11 @@ menu:
 
 # Changelog
 
+## v1.5.2 [2018-12-12]
+
+Includes features and bug fixes from [Kapacitor 1.5.2](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-2-2018-12-12).
+
+
 ## v1.5.1 [2018-08-06]
 
 Includes features and bug fixes from [Kapacitor 1.5.1](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-1-2018-08-06).
@@ -99,7 +104,7 @@ See the complete list of bug fixes and features below.
 - Update Go version to 1.9.1
 - Add support for exposing logs via the API. API is released as a technical preview.
 - Add support for {{ .Duration }} on Alert Message property.
-- Add support for [JSON lines](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) for steaming HTTP logs.
+- Add support for [JSON lines](https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON) for steaming HTTP logs.
 - Add new node Sideload, that allows loading data from files into the stream of data. Data can be loaded using a hierarchy.
 - Promote Alert API to stable v1 path.
 - Change WARN level logs to INFO level.

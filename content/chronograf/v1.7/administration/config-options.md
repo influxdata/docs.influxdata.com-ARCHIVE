@@ -90,7 +90,7 @@ Path to directory of canned dashboards, sources, Kapacitor connections, and orga
 
 Default value: `/usr/share/chronograf/resources`
 
-Default value: `$RESOURCES_PATH`
+Environment variable: `$RESOURCES_PATH`
 
 #### `--basepath=` | `-p`
 
@@ -329,18 +329,18 @@ See [Configuring Heroku authentication](/chronograf/v1.7/administration/managing
 ### `--heroku-client-id=`                         
 The Heroku Client ID for OAuth 2.0 support.
 
-**Environment Variable:** `$HEROKU_CLIENT_ID`
+**Environment variable:** `$HEROKU_CLIENT_ID`
 
 ### `--heroku-secret=`                            
 The Heroku Secret for OAuth 2.0 support.
 
-**Environment Variable:** `$HEROKU_SECRET`
+**Environment variable:** `$HEROKU_SECRET`
 
 ### `--heroku-organization=`                      
 The Heroku organization memberships required for access to Chronograf.
 Lists are comma-separated.
 
-**Environment Variable:** `$HEROKU_ORGS`
+**Environment variable:** `$HEROKU_ORGS`
 
 
 ### Generic OAuth 2.0 authentication options

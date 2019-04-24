@@ -38,7 +38,7 @@ spans 1 minute and is grouped into 10 second buckets.
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[query](#description)&nbsp;(&nbsp;`q`&nbsp;`string`)** | The query to execute. Must not contain a time condition in the `WHERE` clause or contain a `GROUP BY` clause. The time conditions are added dynamically according to the period, offset and schedule. The `GROUP BY` clause is added dynamically according to the dimensions passed to the `groupBy` method.  |
+| **query&nbsp;(&nbsp;`q`&nbsp;`string`)** | The query to execute. Must not contain a time condition in the `WHERE` clause or contain a `GROUP BY` clause. The time conditions are added dynamically according to the period, offset and schedule. The `GROUP BY` clause is added dynamically according to the dimensions passed to the `groupBy` method.  |
 
 ### Property Methods
 
@@ -411,7 +411,7 @@ Returns: [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node/)
 
 ### Combine
 
-Combine this node with itself. The data are combined on timestamp.
+Combine this node with itself. The data is combined on timestamp.
 
 
 ```js
@@ -461,8 +461,8 @@ Example:
 
 
 ```js
-    var data = stream
-        |from()...
+    var data = batch
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
@@ -474,8 +474,8 @@ The above is equivalent to this example:
 
 
 ```js
-    var data = stream
-        |from()...
+    var data = batch
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |stats(10s)
@@ -498,8 +498,8 @@ Example:
 
 
 ```js
-    var data = stream
-        |from()...
+    var data = batch
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
@@ -514,8 +514,8 @@ Example:
 
 
 ```js
-    var data = stream
-        |from()...
+    var data = batch
+        |query()...
     // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
     // Only trigger the alert if the time of day is between 8am-5pm.
     data
@@ -696,7 +696,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 ### HttpOut
 
 Create an HTTP output node that caches the most recent data it has received.
-The cached data are available at the given endpoint.
+The cached data is available at the given endpoint.
 The endpoint is the relative path from the API endpoint of the running task.
 For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is
 `top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`.
@@ -740,7 +740,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data are joined on timestamp.
+Join this node with other nodes. The data is joined on timestamp.
 
 
 ```js

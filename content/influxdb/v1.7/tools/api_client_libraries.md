@@ -15,14 +15,23 @@ InfluxDB client libraries are developed by the open source community. These clie
 
 Thanks to the open source community for your contributions, commitment, and effort!
 
+## C++
+* [influxdb-cxx](https://github.com/awegrzyn/influxdb-cxx.git)
+  * Maintained by [Adam Wegrzynek (awegrzyn)](https://github.com/awegrzyn)
+
 ## Elixir
 
 * [Instream (instream)](https://github.com/mneudert/instream)
   * Maintained by [Marc Neudert (mneudert)](https://github.com/mneudert)
 
+## Erlang
+
+* [Erlang InfluxDB UDP Writer](https://github.com/palkan/influx_udp)
+  * Maintained by [Vladimir Dementyev (palkan)](https://github.com/palkan)
+
 ## Go
 
-* [InfluxDB Client](https://github.com/influxdb/influxdb/blob/master/client/README.md)
+* [InfluxDB Client](https://github.com/influxdata/influxdb1-client)
   * Maintained by [InfluxData](https://github.com/influxdata)
 
 ## Haskell

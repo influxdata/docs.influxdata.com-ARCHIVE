@@ -284,7 +284,7 @@ The interval at which InfluxDB checks to purge data that are above `max-age`.
 
 ## [cluster]
 
-This section controls non-Raft cluster behavior, which generally includes how data are shared across shards.
+This section controls non-Raft cluster behavior, which generally includes how data is shared across shards.
 
 ### shard-writer-timeout = "5s"
 

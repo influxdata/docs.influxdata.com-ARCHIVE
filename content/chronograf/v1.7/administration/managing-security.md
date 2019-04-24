@@ -27,14 +27,17 @@ menu:
 
 ## Chronograf security
 
-Role-based access control in Chronograf and enhanced security are provided using two configurable options:
+To enhance security, configure both of the following options for Chronograf:
 
 * OAuth 2.0 providers with JWT tokens
+
+>**Note** After configuring OAuth 2.0, the Chronograf Admin tab becomes visible, and you can set up [multiple organizations] (https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/) and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
+
 * TLS (Transport Layer Security) for HTTPS
 
 Both of these options are discussed in the following sections.
 
-> ***Note:*** All measures of Chronograf security are enforced by the server. Any direct requests to the Chronograf server will be subjected to, and thus must comply with, any configured security options.
+> ***Note:*** All measures of Chronograf security are enforced by the server. Any direct requests to the Chronograf server must comply with configured security options.
 
 ## OAuth 2.0 providers with JWT tokens
 
@@ -167,6 +170,9 @@ To support multiple organizations, use a comma-delimited list.
 ```sh
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
+
+> When logging in for the first time, make sure to grant access to the organization you configured. The OAuth application can only see membership in organizations it has been granted access to.
+
 
 ### Configuring Google authentication
 

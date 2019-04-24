@@ -29,7 +29,7 @@ Kapacitor has two binaries:
 * kapacitord -- the Kapacitor server daemon.
 
 You can download the binaries directly from the
-[downloads](https://influxdata.com/downloads/#kapacitor) page.
+[downloads](https://portal.influxdata.com/downloads) page.
 
 ### Starting the Kapacitor service
 

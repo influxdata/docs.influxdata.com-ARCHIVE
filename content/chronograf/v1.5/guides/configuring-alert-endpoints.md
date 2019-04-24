@@ -172,7 +172,7 @@ See [AlertNode (Kapacitor TICKscript node) - PagerDuty v2](/kapacitor/latest/nod
 ### Slack
 
 [Slack](https://slack.com/) is a popular messaging app for teams.
-Configure Chronograf to send alerts to an existing Slack channels or as a [direct messages (DMs)](https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages).
+Configure Chronograf to send alerts to an existing Slack channels or as a [direct messages (DMs)](https://get.slack.help/hc/en-us/articles/212281468-Direct-messages-and-group-DMs).
 The sections below describe each configuration option.
 
 #### Nickname this Configuration

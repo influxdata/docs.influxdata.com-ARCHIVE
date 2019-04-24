@@ -9,9 +9,9 @@ menu:
 
 The introductory documentation includes all the information you need to get up and running with Telegraf.
 
-## [Downloading Telegraf](https://influxdata.com/downloads/#telegraf)
+## [Downloading Telegraf](https://portal.influxdata.com/downloads)
 
-Go to the [InfluxData downloads page](https://influxdata.com/downloads/#telegraf) to get the latest release of Telegraf.
+Go to the [InfluxData downloads page](https://portal.influxdata.com/downloads) to get the latest release of Telegraf.
 
 ## [Installing Telegraf](/telegraf/v1.8/introduction/installation/)
 

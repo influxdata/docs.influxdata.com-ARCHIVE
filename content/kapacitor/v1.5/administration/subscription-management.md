@@ -74,11 +74,13 @@ Defines the subscription mode of Kapacitor.
 Available options:
 
 - `"server"`
-- `"cluster"` _(Coming)_
+- `"cluster"` _(See warning below)_
 
 <dt>
-The `cluster` subscription-mode is planned for future versions of Kapacitor and [Kapacitor Enterprise](/enterprise_kapacitor/).
-If used currently, subscription data will not be received.
+The default setting for `subscription-mode` is `cluster`, however this should
+not be used with [Kapacitor Enterprise](/enterprise_kapacitor/).
+Multi-node Kapacitor Enterprise clusters should only use the `server` subscription-mode,
+otherwise subscription data will not be received.
 </dt>
 
 ### `subscription-protocol`

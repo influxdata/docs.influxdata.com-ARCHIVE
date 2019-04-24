@@ -3,8 +3,9 @@ title: Open source license for InfluxDB
 menu:
   influxdb_1_7:
     name: InfluxDB license
-    weight: 50
+    weight: 40
     parent: About the project
 ---
 
-The [InfluxDB license](https://github.com/influxdata/influxdb/blob/master/DEPENDENCIES) is available on GitHub.
+The [open source license for InfluxDB](https://github.com/influxdata/influxdb/blob/master/LICENSE)
+is available in the GitHub repository.

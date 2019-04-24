@@ -46,14 +46,54 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 
   **Ubuntu:** Add the InfluxData repository with the following commands:
 
+  {{< code-tabs-wrapper >}}
+  {{% code-tabs %}}
+  [wget](#)
+  [curl](#)
+  {{% /code-tabs %}}
+
+  {{% code-tab-content %}}
+  ```bash
+  wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+  source /etc/lsb-release
+  echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+  ```
+  {{% /code-tab-content %}}
+
+  {{% code-tab-content %}}
   ```bash
   curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
   source /etc/lsb-release
   echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
   ```
+  {{% /code-tab-content %}}
+  {{< /code-tabs-wrapper >}}  
 
   **Debian:** Add the InfluxData repository with the following commands:
 
+  {{< code-tabs-wrapper >}}
+  {{% code-tabs %}}
+  [wget](#)
+  [curl](#)
+  {{% /code-tabs %}}
+
+  {{% code-tab-content %}}
+  ```bash
+  # Before adding Influx repository, run this so that apt will be able to read the repository.
+
+  sudo apt-get update && sudo apt-get install apt-transport-https
+
+  # Add the InfluxData key
+
+  wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+  source /etc/os-release
+  test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+  test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+  test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+  ```
+  {{% /code-tab-content %}}
+
+  {{% code-tab-content %}}
   ```bash
   # Before adding Influx repository, run this so that apt will be able to read the repository.
 
@@ -67,6 +107,8 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
   test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
   ```
+  {{% /code-tab-content %}}
+  {{< /code-tabs-wrapper >}}
 
   Then, install and start the Telegraf service:
 

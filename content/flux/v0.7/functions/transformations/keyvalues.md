@@ -19,7 +19,7 @@ keyValues(keyColumns: ["usage_idle", "usage_user"])
 
 // OR
 
-keyValues(fn: (schema) => schema.columns |> filter(fn:(v) =>  v.label =~ /usage_.*/))
+keyValues(fn: (schema) => schema.columns |> filter(fn: (r) =>  r.label =~ /usage_.*/))
 ```
 
 ## Parameters
@@ -53,7 +53,7 @@ from(bucket: "telegraf/autogen")
 from(bucket: "telegraf/autogen")
   |> range(start: -30m)
   |> filter(fn: (r) => r._measurement == "cpu")
-  |> keyValues(fn: (schema) => schema.columns |> filter(fn:(v) =>  v.label =~ /usage_.*/))
+  |> keyValues(fn: (schema) => schema.columns |> filter(fn: (r) =>  r.label =~ /usage_.*/))
 ```
 
 <hr style="margin-top:4rem"/>

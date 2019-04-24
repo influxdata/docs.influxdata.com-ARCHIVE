@@ -1,6 +1,8 @@
 ---
 title: Telegraf input data formats
 description: Telegraf supports parsing input data formats into Telegraf metrics for InfluxDB Line Protocol, CollectD, CSV, Dropwizard, Graphite, Grok, JSON, Logfmt, Nagios, Value, and Wavefront.
+aliases:
+  - /telegraf/v1.8/concepts/data_formats_input/
 menu:
   telegraf_1_8:
     name: Input data formats

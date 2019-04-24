@@ -222,7 +222,7 @@ The system automatically drops the `_internal` database when it performs a compl
 
 #### Global options
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/features/cluster-commands/#global-arguments)
+Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.5/administration/cluster-commands/#global-options)
 for a complete list of the `influxd-ctl` global options.
 
 #### Arguments
@@ -358,7 +358,7 @@ time                  written
 
 #### Restoring writes information not part of the original backup
 
-If a [restore from an incremental backup](#syntax-for-restoring-from-incremental-backups) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
+If a [restore from an incremental backup](#restoring-from-incremental-backups) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
 Backups consist of a shard data backup and a metastore backup.
 The **shard data backup** contains the actual time series data: the measurements, tags, fields, and so on.
 The **metastore backup** contains user information, database names, retention policy names, shard metadata, continuous queries, and subscriptions.
@@ -375,4 +375,4 @@ The unintended data, however, include only the metastore information, not the sh
 
 InfluxDB Enterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, use the syntax
-for [restoring from a full backup](#syntax-for-restoring-from-full-backups).
+for [restoring from a full backup](#restoring-from-full-backups).

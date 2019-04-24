@@ -13,6 +13,9 @@ or "windowing" data, then aggregating windowed values into a new value.
 This guide walks through windowing and aggregating data with Flux and demonstrates
 how data is shaped in the process.
 
+> The following example is an in-depth walk through of the steps required to window and aggregate data.
+> The [`aggregateWindow()` function](#summing-up) performs these operations for you, but understanding
+> how data is shaped in the process helps to successfully create your desired output.
 
 ## Data set
 For the purposes of this guide, define a variable that represents your base data set.
@@ -21,7 +24,10 @@ The following example queries the memory usage of the host machine.
 ```js
 dataSet = from(bucket: "telegraf/autogen")
   |> range(start: -5m)
-  |> filter(fn: (r) => r._measurement == "mem" AND r._field == "used_percent")
+  |> filter(fn: (r) =>
+    r._measurement == "mem" AND
+    r._field == "used_percent"
+  )
   |> drop(columns: ["host"])
 ```
 
@@ -219,7 +225,7 @@ they appear as single, unconnected points.
 Because records in each table are aggregated together, their timestamps no longer
 apply and the column is removed from the group key and table.
 
-Also notice that the `_start` and `stop` columns are still exist.
+Also notice the `_start` and `_stop` columns still exist.
 These represent the lower and upper bounds of the time window.
 
 Many Flux functions rely on the `_time` column.
@@ -320,6 +326,3 @@ The following Flux query will return the same results:
 dataSet
   |> aggregateWindow(every: 1m, fn: mean)
 ```
-
-> `aggregateWindow()` does not support all aggregate functions as some require parameters not handled by this function.
-> For aggregate operations that can't be accomplished using `aggregateWindow()`, use the steps outlined in this guide.

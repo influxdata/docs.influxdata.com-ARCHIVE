@@ -266,7 +266,7 @@ Environment variable: `INFLUXDB_META_AUTH_ENABLED`
 
 ###  http-bind-address = ":8091"
 
-The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.5/features/cluster-commands/) and by data nodes to access the
+The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.5/administration/cluster-commands/) and by data nodes to access the
 meta APIs.
 For simplicity we recommend using the same port on all meta nodes, but this
 is not necessary.
@@ -646,7 +646,7 @@ Environment variable: `INFLUXDB_DATA_TRACE_LOGGING_ENABLED`
 
 ## [cluster]
 
-Controls how data are shared across shards and the options for [query
+Controls how data is shared across shards and the options for [query
 management](/influxdb/v1.5/troubleshooting/query_management/).
 
 ###  dial-timeout = "1s"

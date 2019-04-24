@@ -8,15 +8,9 @@ menu:
     parent: About the project
 ---
 
-<table style="width:100%">
-  <tr>
-    <td><a href="#clustering">Clustering release notes</a></td>
-    <td><a href="#web-console">DEPRECATED: Web Console release notes</a></td>
-  </tr>
-</table>
+## v1.5.5 [2018-12-19]
 
-<br>
-<br>
+This release builds off of the InfluxDB OSS 1.5.5 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
 ## v1.5.4 [2018-06-21]
 

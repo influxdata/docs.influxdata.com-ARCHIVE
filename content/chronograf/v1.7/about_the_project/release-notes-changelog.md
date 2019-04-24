@@ -7,6 +7,17 @@ menu:
     weight: 10
     parent: About the project
 ---
+
+## v1.7.10 [2019-04-16]
+
+### Bug Fixes
+- Fix the input for line controls in visualization options.
+- Fix Cell editor visualization not using ceo time range.
+- Fixed an issue where imports were not working in Flux scripts.
+
+### Features
+- Updated the UI to work with the latest Flux version.
+
 ## v1.7.9 [2019-3-20]
 
 ### Bug Fixes

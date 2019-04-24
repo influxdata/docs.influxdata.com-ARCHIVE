@@ -1,5 +1,5 @@
 .tabs-container {
-  margin: 2em 0 .5em;
+  margin: 2em 0 2em;
 }
 .tabs {
   flex-grow: 1;
@@ -31,7 +31,6 @@
 }
 
 .tab-content {
-  padding: 1.5em 0;
   width: 100%;
 
   & > * {
@@ -47,6 +46,57 @@
 .tab-content-container {
   position: relative;
   border-radius: 0 @radius @radius @radius;
+}
+
+////////////////////////////////// Code Tabs //////////////////////////////////
+
+.code-tabs-content {
+  margin: .75rem 0 3rem;
+  width: 100%;
+
+  & > * {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+.code-tabs-wrapper {
+  margin: 1.5rem 0 .5rem;
+
+  .code-tabs {
+    p {
+      margin: 0;
+      text-align: right;
+      display: block;
+      font-size: .9rem;
+    }
+    a {
+      padding: .25rem .75rem;
+      margin: 0;
+      border-radius: @radius @radius 0 0;
+      display: inline-block;
+      background: fadeout(@article-code-border, 40%) ;
+      color: fadeout(@tabs-link, 50%) !important;
+      &:hover {
+       color: @tabs-link-hover !important;
+      }
+      &.is-active {
+       background-color: @article-code-border ;
+       color: @tabs-link-active !important;
+      }
+    }
+  }
+
+  .code-tab-content {
+    padding: 0;
+    pre {
+      margin: 0 0 3rem;
+      border-radius: @radius 0 @radius @radius;
+    }
+    &:not(:first-of-type) {
+      display: none;
+    }
+  }
 }
 
 //

@@ -63,8 +63,8 @@ Deletes sent to the Cache will clear out the given key or the specific time rang
 
 The Cache exposes a few controls for snapshotting behavior.
 The two most important controls are the memory limits.
-There is a lower bound, [`cache-snapshot-memory-size`](/influxdb/v1.7/administration/config#cache-snapshot-memory-size-26214400), which when exceeded will trigger a snapshot to TSM files and remove the corresponding WAL segments.
-There is also an upper bound, [`cache-max-memory-size`](/influxdb/v1.7/administration/config#cache-max-memory-size-1073741824), which when exceeded will cause the Cache to reject new writes.
+There is a lower bound, [`cache-snapshot-memory-size`](/influxdb/v1.7/administration/config#cache-snapshot-memory-size-25m), which when exceeded will trigger a snapshot to TSM files and remove the corresponding WAL segments.
+There is also an upper bound, [`cache-max-memory-size`](/influxdb/v1.7/administration/config#cache-max-memory-size-1g), which when exceeded will cause the Cache to reject new writes.
 These configurations are useful to prevent out of memory situations and to apply back pressure to clients writing data faster than the instance can persist it.
 The checks for memory thresholds occur on every write.
 
@@ -195,11 +195,11 @@ Our implementation removes the timestamp encoding described in paper and only en
 #### Integers
 
 Integer encoding uses two different strategies depending on the range of values in the uncompressed data.
-Encoded values are first encoded using [ZigZag encoding](https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers).
+Encoded values are first encoded using [ZigZag encoding](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers).
 This interleaves positive and negative integers across a range of positive integers.
 
 For example, [-2,-1,0,1] becomes [3,1,0,2].
-See Google's [Protocol Buffers documentation](https://developers.google.com/protocol-buffers/docs/encoding?hl=en#signed-integers) for more information.
+See Google's [Protocol Buffers documentation](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers) for more information.
 
 If all ZigZag encoded values are less than (1 << 60) - 1, they are compressed using simple8b encoding.
 If any values are larger than the maximum then all values are stored uncompressed in the block.

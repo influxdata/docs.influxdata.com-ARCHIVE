@@ -11,7 +11,7 @@ menu:
 * [How do I connect Chronograf to an InfluxEnterprise cluster?](#how-do-i-connect-chronograf-to-an-influxenterprise-cluster)
 * [What visualization types does Chronograf support?](#what-visualization-types-does-chronograf-support)
 * [What does the status column indicate on the Host List page?](#what-does-the-status-column-indicate-on-the-host-list-page)
-* [Why is my host's status red when data are still arriving?](#why-is-my-host-s-status-red-when-data-are-still-arriving)
+* [Why is my host's status red when data is still arriving?](#why-is-my-host-s-status-red-when-data-is-still-arriving)
 
 ### Known Issues
 
@@ -145,7 +145,7 @@ The status icon is a high-level measure of your host's health.
 If Chronograf has not received data from a host for the past minute, the status icon is red.
 If Chronograf has received data from a host within the past minute, the status icon is green.
 
-## Why is my host's status red when data are still arriving?
+## Why is my host's status red when data is still arriving?
 
 There are several possible explanations for an inaccurate red status icon:
 

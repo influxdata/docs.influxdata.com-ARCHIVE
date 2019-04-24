@@ -9,4 +9,4 @@ menu:
 
 
 
-Download the latest Kapacitor OSS release at the [InfluxData download page](https://influxdata.com/downloads/#kapacitor).
+Download the latest Kapacitor OSS release at the [InfluxData download page](https://portal.influxdata.com/downloads).

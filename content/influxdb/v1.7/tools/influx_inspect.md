@@ -63,49 +63,50 @@ influx_inspect buildtsi -datadir <data_dir> -waldir <wal_dir> [ options ]
 
 Optional arguments are in brackets.
 
-#### `[ -batch-size ]`
+##### `[ -batch-size ]`
 
 The size of the batches written to the index. Default value is `10000`.
 
->**Warning:** Setting this value can have adverse effects on performance and heap size.
+<dt>**Warning:** Setting this value can have adverse effects on performance and heap size.</dt>
 
-#### `[ -concurrency ]`
+
+##### `[ -concurrency ]`
 
 The number of workers to dedicate to shard index building.
 Defaults to [`GOMAXPROCS`](/influxdb/v1.7/administration/config#gomaxprocs-environment-variable) value.
 
-#### `[ -database <db_name> ]`
+##### `[ -database <db_name> ]`
 
 The name of the database.
 
-#### `-datadir <data_dir>`
+##### `-datadir <data_dir>`
 
 The path to the `data` directory.
 
-#### `[ -max-cache-size ]`
+##### `[ -max-cache-size ]`
 
 The maximum size of the cache before it starts rejecting writes.
 This value overrides the configuration setting for
 `[data] cache-max-memory-size`.
 Default value is `1073741824`.
 
-#### `[ -max-log-file-size ]`
+##### `[ -max-log-file-size ]`
 
 The maximum size of the log file. Default value is `1048576`.
 
-#### `[ -retention <rp_name> ]`
+##### `[ -retention <rp_name> ]`
 
 The name of the retention policy.
 
-#### `[ -shard <shard_ID> ]`
+##### `[ -shard <shard_ID> ]`
 
 The identifier of the shard.
 
-#### `[ -v ]`
+##### `[ -v ]`
 
 Flag to enable output in verbose mode.
 
-#### `-waldir <wal_dir>`
+##### `-waldir <wal_dir>`
 
 The directory for the WAL (Write Ahead Log) files.
 
@@ -149,14 +150,14 @@ Path to the `.tsm` file, located by default in the `data` directory.
 
 When specifying the path, wildcards (`*`) can replace one or more characters.
 
-###### Examples
+#### Examples
 
-Single shard:
+##### Delete a measurement from a single shard
 
 ```
 ./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
 ```
-All shards in the database:
+##### Delete a measurement from all shards in the database
 
 ```
 ./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
@@ -237,12 +238,12 @@ Filter data by tag value regular expression.
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index
 ```
-##### Specifying paths to the `_series` directory and an `index` file**
+##### Specifying paths to the `_series` directory and an `index` file
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0
 ```
-**Specifying paths to the `_series` directory and multiple `index` files**
+##### Specifying paths to the `_series` directory and multiple `index` files
 
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /path/to/index/file1 ...
@@ -333,33 +334,46 @@ Default value is `false`.
 The name of the database to export.
 Default value is `""`.
 
-
 ##### `-datadir <data_dir>`
 
 The path to the `data` directory.
 Default value is `"$HOME/.influxdb/data"`.
 
-#### [ `-end <timestamp>` ]
+##### [ `-end <timestamp>` ]
 
-The timestamp for the end of the time range.
-The timestamp string must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#absolute-time).
+The timestamp for the end of the time range. Must be in [RFC3339 format](https://tools.ietf.org/html/rfc3339).
 
-#### [ `-out <export_dir>` ]
+RFC3339 requires very specific formatting. For example, to indicate no time zone offset (UTC+0), you must include Z or +00:00 after seconds. Examples of valid RFC3339 formats include:
+
+**No offset**
+```
+YYYY-MM-DDTHH:MM:SS+00:00 
+YYYY-MM-DDTHH:MM:SSZ 
+YYYY-MM-DDTHH:MM:SS.nnnnnnZ (fractional seconds (.nnnnnn) are optional)
+```
+**With offset**
+```
+YYYY-MM-DDTHH:MM:SS-08:00
+YYYY-MM-DDTHH:MM:SS+07:00
+```
+
+> **Note:** With offsets, avoid replacing the + or - sign with a Z. It may cause an error or print Z (ISO 8601 behavior) instead of the time zone offset.
+
+##### [ `-out <export_dir>` ]
 
 The location for the export file.
 Default value is `"$HOME/.influxdb/export"`.
 
-#### [ `-retention <rp_name> ` ]
+##### [ `-retention <rp_name> ` ]
 
 The name of the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) to export. Default value is `""`.
 
-#### [ `-start <timestamp>` ]
+##### [ `-start <timestamp>` ]
 
 The timestamp for the start of the time range.
-The timestamp string must be in [RFC3339 format](/influxdb/v1.7/query_language/data_exploration/#absolute-time).
+The timestamp string must be in [RFC3339 format](https://tools.ietf.org/html/rfc3339).
 
-
-#### [ `-waldir <wal_dir>` ]
+##### [ `-waldir <wal_dir>` ]
 
 Path to the [WAL](/influxdb/v1.7/concepts/glossary/#wal-write-ahead-log) directory.
 Default value is `"$HOME/.influxdb/wal"`.
@@ -378,7 +392,7 @@ influx_inspect export -compress
 influx_inspect export -database mydb -retention autogen
 ```
 
-##### Example of output
+##### Output file
 
 ```
 # DDL
@@ -402,6 +416,7 @@ The default location is `$HOME/.influxdb`.
 ```
 influx_inspect report [ options ]
 ```
+
 #### Options
 
 Optional arguments are in brackets.
@@ -411,12 +426,12 @@ Optional arguments are in brackets.
 The regular expression or wildcard pattern to match included files.
 Default value is `""`.
 
-#### [ `-detailed` ]
+##### [ `-detailed` ]
 
 The flag to report detailed cardinality estimates.
 Default value is `false`.
 
-#### [ `-exact` ]
+##### [ `-exact` ]
 
 The flag to report exact cardinality counts instead of estimates.
 Default value is `false`.
@@ -448,11 +463,11 @@ influx_inspect reporttsi -db-path <path-to-db> [ options ]
 
 Optional arguments are in brackets.
 
-#### `-db-path <path-to-db>`
+##### `-db-path <path-to-db>`
 
 The path to the database.
 
-#### [ `-top <n>` ]
+##### [ `-top <n>` ]
 
 Limits the results to the top specified number within each shard.
 
@@ -514,7 +529,7 @@ Path to a specific series file; overrides `-db` and `-dir`.
 
 Enables verbose logging.
 
-# Caveats
+## Caveats
 
 The system does not have access to the metastore when exporting TSM shards.
 As such, it always creates the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) with infinite duration and replication factor of 1.  End users may want to change this prior to reimporting if they are importing to a cluster or want a different duration

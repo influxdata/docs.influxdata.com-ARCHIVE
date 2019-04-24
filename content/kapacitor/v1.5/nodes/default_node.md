@@ -35,7 +35,7 @@ Available Statistics:
 
 | Chaining Method | Description |
 |:---------|:---------|
-| **[default](#description)&nbsp;(&nbsp;)** | Create a node that can set defaults for missing tags or fields.  |
+| **default&nbsp;(&nbsp;)** | Create a node that can set defaults for missing tags or fields.  |
 
 ### Property Methods
 
@@ -205,7 +205,7 @@ Returns: [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node/)
 
 ### Combine
 
-Combine this node with itself. The data are combined on timestamp.
+Combine this node with itself. The data is combined on timestamp.
 
 
 ```js
@@ -512,7 +512,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 ### HttpOut
 
 Create an HTTP output node that caches the most recent data it has received.
-The cached data are available at the given endpoint.
+The cached data is available at the given endpoint.
 The endpoint is the relative path from the API endpoint of the running task.
 For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is
 `top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`.
@@ -556,7 +556,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data are joined on timestamp.
+Join this node with other nodes. The data is joined on timestamp.
 
 
 ```js

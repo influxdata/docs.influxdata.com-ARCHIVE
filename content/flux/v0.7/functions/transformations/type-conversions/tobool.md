@@ -20,7 +20,10 @@ toBool()
 ## Examples
 ```js
 from(bucket: "telegraf")
-  |> filter(fn:(r) => r._measurement == "mem" AND r._field == "used")
+  |> filter(fn:(r) =>
+    r._measurement == "mem" AND
+    r._field == "used"
+  )
   |> toBool()
 ```
 

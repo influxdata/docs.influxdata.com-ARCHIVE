@@ -72,7 +72,7 @@ time			                level description	      location	       water_level
 
 The [series](/influxdb/v0.12/concepts/glossary/#series) are made up of the [measurement](/influxdb/v0.12/concepts/glossary/#measurement) `h2o_feet` and the [tag key](/influxdb/v0.12/concepts/glossary/#tag-key) `location` with the [tag values](/influxdb/v0.12/concepts/glossary/#tag-value) `santa_monica` and `coyote_creek`.
 There are two [fields](/influxdb/v0.12/concepts/glossary/#field): `water_level` which stores floats and `level description` which stores strings.
-All of the data are in the `NOAA_water_database` database.
+All of the data is in the `NOAA_water_database` database.
 
 > **Disclaimer:** The `level description` field isn't part of the original NOAA data - we snuck it in there for the sake of having a field key with a special character and string [field values](/influxdb/v0.12/concepts/glossary/#field-value).
 

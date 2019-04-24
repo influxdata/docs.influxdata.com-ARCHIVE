@@ -9,4 +9,4 @@ menu:
 
 
 
-Download the latest Chronograf release at the [InfluxData download page](https://influxdata.com/downloads/#influxdb).
+Download the latest Chronograf release at the [InfluxData download page](https://portal.influxdata.com/downloads).

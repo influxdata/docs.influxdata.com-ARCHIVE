@@ -36,7 +36,8 @@ from(bucket:"telegraf/autogen")
   |> filter(fn: (r) =>
     r._measurement == "cpu" AND
     r._field == "usage_system" AND
-    r.cpu == "cpu-total")
+    r.cpu == "cpu-total"
+  )
 ```
 
 <hr style="margin-top:4rem"/>

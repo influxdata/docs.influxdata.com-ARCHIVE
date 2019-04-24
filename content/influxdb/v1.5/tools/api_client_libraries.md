@@ -22,7 +22,7 @@ Thanks to the open source community for your contributions, commitment, and effo
 
 ## Go
 
-* [InfluxDB Client](https://github.com/influxdb/influxdb/blob/master/client/README.md)
+* [InfluxDB Client](https://github.com/influxdata/influxdb1-client)
   * Maintained by [InfluxData](https://github.com/influxdata)
 
 ## Haskell

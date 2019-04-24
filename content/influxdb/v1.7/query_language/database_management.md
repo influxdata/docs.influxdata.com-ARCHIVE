@@ -233,7 +233,7 @@ exist.
 
 The following sections cover how to create, alter, and delete retention policies.
 Note that when you create a database, InfluxDB automatically creates a retention policy named `autogen` which has infinite retention.
-You may rename that retention policy or disable its auto-creation in the [configuration file](/influxdb/v1.7/administration/config/#metastore-settings).
+You may disable its auto-creation in the [configuration file](/influxdb/v1.7/administration/config/#metastore-settings).
 
 ### Create retention policies with CREATE RETENTION POLICY
 
@@ -332,9 +332,9 @@ First, create the retention policy `what_is_time` with a `DURATION` of two days:
 >
 ```
 
-Modify `what_is_time` to have a three week `DURATION`, a 30 minute shard group duration, and  make it the `DEFAULT` retention policy for `NOAA_water_database`.
+Modify `what_is_time` to have a three week `DURATION`, a two hour shard group duration, and make it the `DEFAULT` retention policy for `NOAA_water_database`.
 ```sql
-> ALTER RETENTION POLICY "what_is_time" ON "NOAA_water_database" DURATION 3w SHARD DURATION 30m DEFAULT
+> ALTER RETENTION POLICY "what_is_time" ON "NOAA_water_database" DURATION 3w SHARD DURATION 2h DEFAULT
 >
 ```
 In the last example, `what_is_time` retains its original replication factor of 1.

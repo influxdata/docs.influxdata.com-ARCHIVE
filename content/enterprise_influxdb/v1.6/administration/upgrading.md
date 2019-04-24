@@ -8,9 +8,9 @@ menu:
     parent: Administration
 ---
 
-## Upgrading InfluxDB Enterprise 1.3.x-1.5.x clusters to 1.6.4 (rolling upgrade)
+## Upgrading InfluxDB Enterprise 1.3.x-1.5.x clusters to 1.6.5 (rolling upgrade)
 
-### Step 0: Back up your cluster before upgrading to version 1.6.4.
+### Step 0: Back up your cluster before upgrading to version 1.6.5.
 
 Create a full backup of your InfluxDB Enterprise cluster before performing an upgrade.
 If you have incremental backups created as part of your standard operating procedures, make sure to
@@ -23,33 +23,33 @@ trigger a final incremental backup before proceeding with the upgrade.
 
 Follow these steps to upgrade all meta nodes in your InfluxDB Enterprise cluster. Ensure that the meta cluster is healthy before proceeding to the data nodes.
 
-### Step 1: Download the 1.6.4 meta node package.
+### Step 1: Download the 1.6.5 meta node package.
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.4-c1.6.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.5-c1.6.5_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.5_c1.6.5.x86_64.rpm
 ```
 
-### Step 2: Install the 1.6.4 meta nodes package.
+### Step 2: Install the 1.6.5 meta nodes package.
 
 #### Meta node package install
 
 ##### Ubuntu & Debian (64-bit)
 
 ```
-sudo dpkg -i influxdb-meta_1.6.4-c1.6.4_amd64.deb
+sudo dpkg -i influxdb-meta_1.6.5-c1.6.5_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```
-sudo yum localinstall influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.6.5_c1.6.5.x86_64.rpm
 ```
 
 ### Step 3: Restart the `influxdb-meta` service.
@@ -71,7 +71,7 @@ sudo systemctl restart influxdb-meta
 
 After performing the upgrade on ALL meta nodes, check your node version numbers using the
 `influxd-ctl show` command.
-The [`influxd-ctl` utility](/enterprise_influxdb/v1.6/features/cluster-commands/) is available on all meta nodes.
+The [`influxd-ctl` utility](/enterprise_influxdb/v1.6/administration/cluster-commands/) is available on all meta nodes.
 
 ```
 ~# influxd-ctl show
@@ -79,61 +79,62 @@ The [`influxd-ctl` utility](/enterprise_influxdb/v1.6/features/cluster-commands/
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.3.x_c1.3.y
-5	rk-upgrading-02:8088	1.3.x_c1.3.y
-6	rk-upgrading-03:8088	1.3.x_c1.3.y
+4	rk-upgrading-01:8088	1.5.x_c1.5.y
+5	rk-upgrading-02:8088	1.5.x_c1.5.y
+6	rk-upgrading-03:8088	1.5.x_c1.5.y
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.6.4_c1.6.4   # 1.6.4_c1.6.4 = 👍
-rk-upgrading-02:8091	1.6.4_c1.6.4
-rk-upgrading-03:8091	1.6.4_c1.6.4
+rk-upgrading-01:8091	1.6.5_c1.6.5   # 1.6.5_c1.6.5 = 👍
+rk-upgrading-02:8091	1.6.5_c1.6.5
+rk-upgrading-03:8091	1.6.5_c1.6.5
 ```
 
 ## Upgrading data nodes
 
 Repeat the following steps for each data node in your InfluxDB Enterprise cluster.
 
-### Step 1: Download the 1.6.4 data node package.
+### Step 1: Download the 1.6.5 data node package.
 
 #### Data node package download
 
 ##### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.4-c1.6.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.5-c1.6.5_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.4_c1.6.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.5_c1.6.5.x86_64.rpm
 ```
 
-### Step 2: Remove the data node from the load balancer.
+### Step 2: Stop traffic to the data node
 
-To avoid downtime and allow for a smooth transition, remove the data node you are upgrading from your
-load balancer **before** performing the remaining steps.
+Your cluster's load balancer distributes read and write requests among data nodes in the cluster. If you have access to the load balancer configuration, stop routing read/write requests to the data node server (port 8086) via your load balancer **before** performing the remaining steps.
 
-### Step 3: Install the 1.6.4 data node packages.
+If you cannot access the load balancer configuration, we recommend working with your networking team to prevent traffic to the data node server before continuing to upgrade.
+
+### Step 3: Install the 1.6.5 data node packages.
 
 #### Data node package install
 
 When you run the install command, your terminal asks if you want to keep your
-current configuration file or overwrite your current configuration file with the file for version 1.6.4.
+current configuration file or overwrite your current configuration file with the file for version 1.6.5.
 
 Keep your current configuration file by entering `N` or `O`.
-The configuration file will be updated with the necessary changes for version 1.6.4 in the next step.
+The configuration file will be updated with the necessary changes for version 1.6.5 in the next step.
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-data_1.6.4-c1.6.4_amd64.deb
+sudo dpkg -i influxdb-data_1.6.5-c1.6.5_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-data-1.6.4_c1.6.4.x86_64.rpm
+sudo yum localinstall influxdb-data-1.6.5_c1.6.5.x86_64.rpm
 ```
 
 ### Step 4: Update the data node configuration file.
@@ -151,12 +152,28 @@ sudo yum localinstall influxdb-data-1.6.4_c1.6.4.x86_64.rpm
 * [pool-max-idle-streams = 100](/enterprise_influxdb/v1.6/administration/config-data-nodes#pool-max-idle-streams-100) to the `[cluster]` section
 * [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.6/administration/config-data-nodes#pool-max-idle-time-60s) to the `[cluster]` section
 * the [[anti-entropy]](/enterprise_influxdb/v1.6/administration/config-data-nodes#anti-entropy) section:
+
 ```
 [anti-entropy]
   enabled = true
   check-interval = "30s"
   max-fetch = 10
 ```
+
+<dt>
+The [anti-entropy service](/enterprise_influxdb/v1.6/administration/anti-entropy/) can initially be CPU intensive
+if you have very large shards (>50GB) and/or a large number of shards (>500) associated
+with your database. This can result in the cluster appearing to be unresponsive upon startup while shard digests are
+calculated. Once the shard digests are calculated, the overall CPU utilization should return to a lower level.
+
+To check the number of shards within your cluster, use the
+[SHOW SHARDS](/enterprise_influxdb/v1.6/administration/cluster-commands/#show-shards) command.  
+Use your operating system tools to check the shard sizes.
+
+You may wish to test this configuration setting in a non-production environment to observe
+the system resource requirements prior to activating this service in production.     
+</dt>
+
 **Remove:**
 
 * `max-remote-write-connections` from the `[cluster]` section
@@ -178,7 +195,7 @@ The new configuration options are set to the default settings.
 2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
   - When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
-  - Run the [`influx_inspect buildtsi`](/influxdb/v1.6/tools/influx_inspect#influx-inspect-buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
+  - Run the [`influx_inspect buildtsi`](/influxdb/v1.6/tools/influx_inspect#buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
 > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
 > or ensure that the permissions match afterward.
@@ -198,9 +215,9 @@ service influxdb restart
 sudo systemctl restart influxdb
 ```
 
-### Step 7: Add the data node back into the load balancer.
+### Step 7: Restart traffic to data node
 
-Add the data node back into the load balancer to allow it to serve reads and writes.
+Restart routing read/write requests to the data node server (port 8086) via your load balancer.
 
 If this is the last data node to be upgraded, proceed to step 7.
 Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and repeat the process for the remaining data nodes.
@@ -209,7 +226,7 @@ Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and
 
 Your cluster is now upgraded to InfluxDB Enterprise 1.6.
 Check your node version numbers using the `influxd-ctl show` command.
-The [`influxd-ctl`](/enterprise_influxdb/v1.6/features/cluster-commands/) utility is available on all meta nodes.
+The [`influxd-ctl`](/enterprise_influxdb/v1.6/administration/cluster-commands/) utility is available on all meta nodes.
 
 ```
 ~# influxd-ctl show
@@ -217,16 +234,16 @@ The [`influxd-ctl`](/enterprise_influxdb/v1.6/features/cluster-commands/) utilit
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.6.4_c1.6.4   # 1.6.4_c1.6.4 = 👍
-5	rk-upgrading-02:8088	1.6.4_c1.6.4
-6	rk-upgrading-03:8088	1.6.4_c1.6.4
+4	rk-upgrading-01:8088	1.6.5_c1.6.5   # 1.6.5_c1.6.5 = 👍
+5	rk-upgrading-02:8088	1.6.5_c1.6.5
+6	rk-upgrading-03:8088	1.6.5_c1.6.5
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.6.4_c1.6.4
-rk-upgrading-02:8091	1.6.4_c1.6.4
-rk-upgrading-03:8091	1.6.4_c1.6.4
+rk-upgrading-01:8091	1.6.5_c1.6.5
+rk-upgrading-02:8091	1.6.5_c1.6.5
+rk-upgrading-03:8091	1.6.5_c1.6.5
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address

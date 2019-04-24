@@ -5,7 +5,7 @@ menu:
   telegraf:
     name: v1.8
     identifier: telegraf_1_8
-    weight: 1
+    weight: 12
 ---
 
 Telegraf is a plugin-driven server agent for collecting & reporting metrics,

@@ -17,21 +17,19 @@ Please review the sections below before you begin working with InfluxDB Enterpri
 
 Two options are described for installing InfluxDB Enterprise.
 
-The [QuickStart installation](/enterprise_influxdb/v1.6/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
+The [QuickStart installation](/enterprise_influxdb/v1.6/install-and-deploy/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
 The QuickStart installation process **is not** intended for use
 in a production environment.
 
-The [Production installation](/enterprise_influxdb/v1.6/production_installation/) process is recommended for users intending to deploy the InfluxDB Enterprise installation in a production environment.
+The [Production installation](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/) process is recommended for users intending to deploy the InfluxDB Enterprise installation in a production environment.
 
 > **Note:** If you install InfluxDB Enterprise with the QuickStart installation process you will need to reinstall InfluxDB Enterprise with the Production installation process before using the product in a production environment.
 
-There are [other installation options](/enterprise_influxdb/v1.6/other_installation/) available to easily install an InfluxDB Enterprise cluster in select environments.
+There are [deployment options](/enterprise_influxdb/v1.6/install-and-deploy/deploying/) available to easily install an InfluxDB Enterprise cluster in select environments.
 
 ## Requirements for InfluxDB Enterprise clusters
 
-Review [Clustering Guide](/enterprise_influxdb/v1.6/concepts/clustering/)
-for an overview of the architecture and concepts in an InfluxDB Enterprise Cluster
-and the [Hardware sizing guide](http://docs.influxdata.com/influxdb/v1.0/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster) for information on provisioning the correct servers.
+For an overview of the architecture and concepts in an InfluxDB Enterprise Cluster, review [Clustering Guide](/enterprise_influxdb/v1.6/concepts/clustering/).
 
 For clusters using a license key and not a license file, all nodes must be able to contact `portal.influxdata.com`
 via port `80` or port `443`. Nodes that go more than four hours without connectivity to the Portal may experience license issues.

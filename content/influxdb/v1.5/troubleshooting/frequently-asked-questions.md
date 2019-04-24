@@ -35,7 +35,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [How does InfluxDB handle field type discrepancies across shards?](#how-does-influxdb-handle-field-type-discrepancies-across-shards)
 * [What are the minimum and maximum integers that InfluxDB can store?](#what-are-the-minimum-and-maximum-integers-that-influxdb-can-store)
 * [What are the minimum and maximum timestamps that InfluxDB can store?](#what-are-the-minimum-and-maximum-timestamps-that-influxdb-can-store)
-* [How can I tell what type of data are stored in a field?](#how-can-i-tell-what-type-of-data-are-stored-in-a-field)
+* [How can I tell what type of data is stored in a field?](#how-can-i-tell-what-type-of-data-is-stored-in-a-field)
 * [Can I change a field's data type?](#can-i-change-a-field-s-data-type)
 
 **InfluxQL Functions**
@@ -173,7 +173,7 @@ currently writing data to one of the old, longer shard groups, the system is
 forced to keep all of the data in that shard group.
 This occurs even if some of the data in that shard group are outside of the new
 `DURATION`.
-InfluxDB will drop that shard group once all of its data are outside the new
+InfluxDB will drop that shard group once all of its data is outside the new
 `DURATION`.
 The system will then begin writing data to shard groups that have the new,
 shorter `SHARD DURATION` preventing any further unexpected data retention.
@@ -361,7 +361,7 @@ The maximum timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806
 
 Timestamps outside that range return a [parsing error](/influxdb/v1.5/troubleshooting/errors/#unable-to-parse-time-outside-range).
 
-## How can I tell what type of data are stored in a field?
+## How can I tell what type of data is stored in a field?
 
 The [`SHOW FIELD KEYS`](/influxdb/v1.5/query_language/schema_exploration/#show-field-keys) query also returns the field's type.
 
@@ -570,7 +570,7 @@ We list some of the most frequent cases below:
 ### Retention Policies
 The first and most common explanation involves [retention policies](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) (RP).
 InfluxDB automatically queries data in a database’s `DEFAULT` RP.
-If your data are stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.5/query_language/data_exploration/#example-7-select-all-data-from-a-fully-qualified-measurement) the alternative RP.
+If your data is stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.5/query_language/data_exploration/#example-7-select-all-data-from-a-fully-qualified-measurement) the alternative RP.
 
 ### Tag Keys in the SELECT clause
 A query requires at least one [field key](/influxdb/v1.5/concepts/glossary/#field-key)
@@ -834,8 +834,7 @@ Use the `::` syntax to specify if the key is a field key or tag key.
 
 #### Examples
 
-##### Sample data:
-<br>
+##### Sample data:  
 ```
 > INSERT candied,almonds=true almonds=50,half_almonds=51 1465317610000000000
 > INSERT candied,almonds=true almonds=55,half_almonds=56 1465317620000000000

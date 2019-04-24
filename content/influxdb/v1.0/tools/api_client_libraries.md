@@ -15,7 +15,7 @@ Most should be fully compatible with InfluxDB version 1.0.
 Functionality will vary, and there are, as yet, no standard features that all libraries must implement in order to be listed here.
 
 ## Go
-- [InfluxDB Go](https://github.com/influxdb/influxdb/blob/master/client/README.md) by [InfluxData](https://github.com/influxdata)
+- [InfluxDB Go](https://github.com/influxdata/influxdb1-client) by [InfluxData](https://github.com/influxdata)
 
 ## Haskell
 - [InfluxDB Haskell](https://github.com/maoe/influxdb-haskell) by [maoe](https://github.com/maoe)

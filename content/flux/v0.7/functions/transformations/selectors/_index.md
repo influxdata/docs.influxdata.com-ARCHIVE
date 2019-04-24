@@ -13,20 +13,12 @@ The output table is different than the input table, but individual row values ar
 
 The following selector functions are available:
 
-- [bottom](./bottom)
-- [distinct](./distinct)
-- [first](./first)
-- [last](./last)
-- [max](./max)
-- [min](./min)
-- [sample](./sample)
-- [top](./top)
-- [unique](./unique)
+{{< function-list category="Selectors" menu="flux_0_7" >}}
 
 
 ### Selectors and aggregates
 The following functions can be used as both selectors or aggregates, but they are
 categorized as aggregate functions in this documentation:
 
-- [median](../aggregates/median)
-- [percentile](../aggregates/percentile)
+- [median](/flux/v0.7/functions/transformations/aggregates/median)
+- [percentile](/flux/v0.7/functions/transformations/aggregates/percentile)

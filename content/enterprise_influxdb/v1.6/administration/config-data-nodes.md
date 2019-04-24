@@ -13,20 +13,22 @@ menu:
     * [Global](#global-settings)
     * [Enterprise license [enterprise]](#enterprise-license-settings)
     * [Meta node [meta]](#meta-node-settings)
-    * [Data [data]](#data)
-    * [Cluster [cluster]](#cluster)
-    * [Retention [retention]](#retention)
-    * [Shard precreation [shard-precreation]](#shard-precreation)
-    * [Monitor [monitor]](#monitor)
-    * [Subscriber [subscriber]](#subscriber)
-    * [HTTP endpoints [http]](#http)
-    * [Graphite [graphite]](#graphite)
-    * [Collectd [collectd]](#collectd)
-    * [OpenTSDB [opentsdb]](#opentsdb)
-    * [UDP [udp]](#udp)
-    * [Continuous queries [continuous-queries]](#continuous-queries)
-    * [Hinted Handoff [hinted-handoff]](#hinted-handoff)
-    * [Anti-Entropy [anti-entropy]](#anti-entropy)
+    * [Data [data]](#data-settings)
+    * [Cluster [cluster]](#cluster-settings)
+    * [Retention [retention]](#retention-policy-settings)
+    * [Hinted Handoff [hinted-handoff]](#hinted-handoff-settings)
+    * [Anti-Entropy [anti-entropy]](#anti-entropy-ae-settings)
+    * [Shard precreation [shard-precreation]](#shard-precreation-settings)
+    * [Monitor [monitor]](#monitor-settings)
+    * [HTTP endpoints [http]](#http-endpoint-settings)
+    * [Logging [logging]](#logging-settings)
+    * [Subscriber [subscriber]](#subscriber-settings)
+    * [Graphite [graphite]](#graphite-settings)
+    * [Collectd [collectd]](#collectd-settings)
+    * [OpenTSDB [opentsdb]](#opentsdb-settings)
+    * [UDP [udp]](#udp-settings)
+    * [Continuous queries [continuous-queries]](#continuous-queries-settings)
+    * [TLS [tls]](#tls-settings)
 
 
     ## Data node configurations
@@ -85,7 +87,7 @@ The `[enterprise]` section contains the parameters for the meta node's registrat
 The license key created for you on [InfluxPortal](https://portal.influxdata.com). The meta node transmits the license key to [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443 and receives a temporary JSON license file in return.
 The server caches the license file locally.
 The data process will only function for a limited time without a valid license file.
-You must use the [`license-path` setting](#license-path-1) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
+You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
 <dt>
 Use the same key for all nodes in the same cluster.  
@@ -164,7 +166,7 @@ Environment variable: `INFLUXDB_META_META_AUTH_ENABLED`
 #### `meta-internal-shared-secret = ""`
 
 The shared secret used by the internal API for JWT authentication between InfluxDB nodes.
-This value must be the same as the [`internal-shared-secret`](#internal-shared-secret) specified in the meta node configuration file.
+This value must be the same as the [`internal-shared-secret`](/enterprise_influxdb/v1.6/administration/config-meta-nodes/#internal-shared-secret) specified in the meta node configuration file.
 
 Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
 
@@ -261,27 +263,11 @@ This setting does not apply to cache snapshotting.
 
 Environmental variable: `INFLUXDB_DATA_CACHE_MAX_CONCURRENT_COMPACTIONS`
 
-####  `compact-full-write-cold-duration = "4h"`
+#### `compact-full-write-cold-duration = "4h"`
 
 The duration at which the TSM engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
 Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
-
-####  `max-series-per-database = 1000000`
-
-The maximum series allowed per database before writes are dropped.  
-This limit can prevent high cardinality issues at the database level.  
-This limit can be disabled by setting it to `0`.
-
-Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
-
-####  `max-values-per-tag = 100000`
-
-The maximum number of tag values per tag that are allowed before writes are dropped.
-This limit can prevent high cardinality tag values from being written to a measurement.
-This limit can be disabled by setting it to `0`.
-
-Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
 #### `index-version = "inmem"`
 
@@ -292,6 +278,14 @@ Value should be enclosed in double quotes.
 
 Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
+#### `max-values-per-tag = 100000`
+
+The maximum number of tag values per tag that are allowed before writes are dropped.
+This limit can prevent high cardinality tag values from being written to a measurement.
+This limit can be disabled by setting it to `0`.
+
+Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
+
 -----
 
 ## Cluster settings
@@ -299,7 +293,7 @@ Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 ### `[cluster]`
 
 Settings related to how the data nodes interact with other data nodes.
-Controls how data are shared across shards and the options for query management.
+Controls how data is shared across shards and the options for query management.
 
 #### `dial-timeout = "1s"`
 
@@ -413,7 +407,7 @@ Disabling hinted handoff is not recommended and can lead to data loss if another
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
 
-####  `max-size = 10737418240`
+####  `max-size = "10g`
 
 The maximum size of the hinted handoff queue.
 Each queue is for one and only one other data node in the cluster.
@@ -423,7 +417,7 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
 
 ####  `max-age = "168h0m0s"`
 
-The time writes sit in the queue before they are purged.
+The time interval that writes sit in the queue before they are purged.
 The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
 If another data node is unreachable for more than the `max-age` it can lead to data loss.
 
@@ -480,10 +474,10 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_PURGE_INTERVAL`
 
 Controls the copying and repairing of shards to ensure that data nodes contain the shard data they are supposed to.
 
-#### `enabled = true`
+#### `enabled = false`
 
 Enables the anti-entropy service.
-Default value is `true`.
+Default value is `false`.
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_ENABLED`
 
@@ -499,7 +493,24 @@ The maximum number of shards that a single data node will copy or repair in para
 
 Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_FETCH`
 
-### `[retention]` Retention policy settings
+
+#### `max-sync = 1`
+
+The maximum number of concurrent sync operations that should be performed.
+
+Environment variable: `INFLUXDB_ANTI_ENTROPY_MAX_SYNC`
+
+
+#### `auto-repair-missing = true`
+
+When set to `true`, missing shards will automatically be repaired.
+
+Environment variable: `INFLUXDB_ANTI_ENTROPY_AUTO_REPAIR_MISSING`
+-----
+
+## Retention policy settings
+
+### `[retention]`
 
 Controls the enforcement of retention policies for evicting old data.
 

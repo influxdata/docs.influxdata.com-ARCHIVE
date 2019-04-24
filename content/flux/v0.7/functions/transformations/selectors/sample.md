@@ -36,7 +36,10 @@ _**Data type:** Integer_
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start:-1d)
-  |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "usage_system")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r._field == "usage_system"
+  )
   |> sample(n: 5, pos: 1)
 ```
 

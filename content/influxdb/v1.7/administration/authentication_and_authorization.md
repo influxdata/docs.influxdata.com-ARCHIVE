@@ -1,4 +1,4 @@
-v1.7---
+---
 title: Authentication and authorization in InfluxDB
 aliases:
     - influxdb/v1.7/administration/authentication_and_authorization/
@@ -36,13 +36,13 @@ If additional security or compliance features are desired, InfluxDB should be ru
 ## Authentication
 
 InfluxDB's HTTP API and the [command line interface](/influxdb/v1.7/tools/shell/) (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
-When you enable authentication InfluxDB only executes HTTP requests that are sent with valid credentials.
+When you enable authentication, InfluxDB only executes HTTP requests that are sent with valid credentials.
 
 
 > **Note:** Authentication only occurs at the HTTP request scope.
 Plugins do not currently have the ability to authenticate requests and service endpoints (for example, Graphite, collectd, etc.) are not authenticated.
 
-### Set up Authentication
+### Set up authentication
 
 #### 1. Create at least one [admin user](#admin-users).
 See the [authorization section](#authorization) for how to create an admin user.
@@ -62,15 +62,15 @@ Enable authentication by setting the `auth-enabled` option to `true` in the `[ht
   log-enabled = true
   write-tracing = false
   pprof-enabled = false
-  https-enabled = false
+  https-enabled = true
   https-certificate = "/etc/ssl/influxdb.pem"
 ```
 
-#### 3. Restart the process.
+#### 3. Restart the process
 
 Now InfluxDB will check user credentials on every request and will only process requests that have valid credentials for an existing user.
 
-### Authenticate Requests
+### Authenticate requests
 
 #### Authenticate with the HTTP API
 There are two options for authenticating with the [HTTP API](/influxdb/v1.7/tools/api/).
@@ -92,16 +92,16 @@ curl -G http://localhost:8086/query -u todd:influxdb4ever --data-urlencode "q=SH
 ```
 
 ##### Authenticate by providing query parameters in the URL or request body
-<br>
+
 Set `u` as the username and `p` as the password.
 
-Example using query parameters:
+###### Example using query parameters
 
 ```bash
 curl -G "http://localhost:8086/query?u=todd&p=influxdb4ever" --data-urlencode "q=SHOW DATABASES"
 ```
 
-Example using request body:
+###### Example using request body
 
 ```bash
 curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "p=influxdb4ever" --data-urlencode "q=SHOW DATABASES"
@@ -111,10 +111,10 @@ curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "
 There are three options for authenticating with the [CLI](/influxdb/v1.7/tools/shell/).
 
 ##### Authenticate with the `INFLUX_USERNAME` and `INFLUX_PASSWORD` environment variables
-<br>
+
 Example:
 
-```
+```bash
 export INFLUX_USERNAME todd
 export INFLUX_PASSWORD influxdb4ever
 echo $INFLUX_USERNAME $INFLUX_PASSWORD
@@ -126,7 +126,7 @@ InfluxDB shell 1.4.x
 ```
 
 ##### Authenticate by setting the `username` and `password` flags when you start the CLI
-<br>
+
 Example:
 
 ```bash
@@ -136,7 +136,7 @@ InfluxDB shell 1.4.x
 ```
 
 ##### Authenticate with `auth <username> <password>` after starting the CLI
-<br>
+
 Example:
 
 ```bash
@@ -149,14 +149,14 @@ password:
 >
 ```
 
-
->
 ## Authenticate Telegraf requests to InfluxDB
->
+
 Authenticating [Telegraf](/telegraf/latest/) requests to an InfluxDB instance with
 authentication enabled requires some additional steps.
-In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), uncomment
-and edit the `username` and `password` settings:
+In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), uncomment
+and edit the `username` and `password` settings.
+
+```
 >
     ###############################################################################
     #                            OUTPUT PLUGINS                                   #
@@ -171,7 +171,9 @@ and edit the `username` and `password` settings:
     password = "metricsmetricsmetricsmetrics" #💥
 >
     [...]
->
+
+```
+
 Next, restart Telegraf and you're all set!
 
 ## Authorization
@@ -179,7 +181,7 @@ Next, restart Telegraf and you're all set!
 Authorization is only enforced once you've [enabled authentication](#set-up-authentication).
 By default, authentication is disabled, all credentials are silently ignored, and all users have all privileges.
 
-### User Types and Privileges
+### User types and privileges
 
 #### Admin users
 Admin users have `READ` and `WRITE` access to all databases and full access to the following administrative queries:
@@ -211,7 +213,7 @@ Non-admin users can have one of the following three privileges per database:
 `READ`, `WRITE`, and `ALL` privileges are controlled per user per database. A new non-admin user has no access to any database until they are specifically [granted privileges to a database](#grant-read-write-or-all-database-privileges-to-an-existing-user) by an admin user.
 Non-admin users can [`SHOW`](/influxdb/v1.7/query_language/schema_exploration/#show-databases) the databases on which they have `READ` and/or `WRITE` permissions.
 
-### User Management Commands
+### User management commands
 
 #### Admin user management
 
@@ -219,8 +221,8 @@ When you enable HTTP authentication, InfluxDB requires you to create at least on
 
 `CREATE USER admin WITH PASSWORD '<password>' WITH ALL PRIVILEGES`
 
-##### `CREATE` another admin user:
-<br>
+##### `CREATE` another admin user
+
 ```
 CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
 ```
@@ -245,8 +247,8 @@ CLI example:
     > CREATE USER todd WITH PASSWORD '123456' WITH ALL PRIVILEGES
     >
 
-##### `GRANT` administrative privileges to an existing user:
-<br>
+##### `GRANT` administrative privileges to an existing user
+
 ```
 GRANT ALL PRIVILEGES TO <username>
 ```
@@ -258,8 +260,8 @@ CLI example:
 >
 ```
 
-##### `REVOKE` administrative privileges from an admin user:
-<br>
+##### `REVOKE` administrative privileges from an admin user
+
 ```
 REVOKE ALL PRIVILEGES FROM <username>
 ```
@@ -271,8 +273,8 @@ CLI example:
 >
 ```
 
-##### `SHOW` all existing users and their admin status:
-<br>
+##### `SHOW` all existing users and their admin status
+
 ```
 SHOW USERS
 ```
@@ -289,8 +291,9 @@ dobby    false
 ```
 
 #### Non-admin user management
-##### `CREATE` a new non-admin user:
-<br>
+
+##### `CREATE` a new non-admin user
+
 ```
 CREATE USER <username> WITH PASSWORD '<password>'
 ```
@@ -308,7 +311,7 @@ CLI example:
 
 > **Notes:**
 >
-* The user value must be wrapped in double quotes if starts with a digit, is an InfluxQL keyword, contains a hyphen and or includes any special characters, for example: `!@#$%^&*()-`
+* The user value must be wrapped in double quotes if it starts with a digit, is an InfluxQL keyword, contains a hyphen and or includes any special characters, for example: `!@#$%^&*()-`
 * The password [string](/influxdb/v1.7/query_language/spec/#strings) must be wrapped in single quotes.
 * Do not include the single quotes when authenticating requests.
 
@@ -329,8 +332,8 @@ CLI example:
     >
 
 
-##### `GRANT` `READ`, `WRITE` or `ALL` database privileges to an existing user:
-<br>
+##### `GRANT` `READ`, `WRITE` or `ALL` database privileges to an existing user
+
 ```
 GRANT [READ,WRITE,ALL] ON <database_name> TO <username>
 ```
@@ -351,8 +354,8 @@ CLI examples:
 >
 ```
 
-##### `REVOKE` `READ`, `WRITE`, or `ALL` database privileges from an existing user:
-<br>
+##### `REVOKE` `READ`, `WRITE`, or `ALL` database privileges from an existing user
+
 ```
 REVOKE [READ,WRITE,ALL] ON <database_name> FROM <username>
 ```
@@ -375,8 +378,8 @@ CLI examples:
 
 >**Note:** If a user with `ALL` privileges has `WRITE` privileges revoked, they are left with `READ` privileges, and vice versa.
 
-##### `SHOW` a user's database privileges:
-<br>
+##### `SHOW` a user's database privileges
+
 ```
 SHOW GRANTS FOR <user_name>
 ```
@@ -387,14 +390,15 @@ CLI example:
 > SHOW GRANTS FOR "todd"
 database		            privilege
 NOAA_water_database	        WRITE
-another_database_name	    READ
+another_database_name	      READ
 yet_another_database_name   ALL PRIVILEGES
+one_more_database_name      NO PRIVILEGES
 ```
 
 #### General admin and non-admin user management
 
-##### Re`SET` a user's password:
-<br>
+##### Re`SET` a user's password
+
 ```
 SET PASSWORD FOR <username> = '<password>'
 ```
@@ -410,8 +414,8 @@ CLI example:
 Do not include the single quotes when authenticating requests.
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 
-##### `DROP` a user:
-<br>
+##### `DROP` a user
+
 ```
 DROP USER <username>
 ```
@@ -423,7 +427,7 @@ CLI example:
 >
 ```
 
-## Authentication and Authorization HTTP Errors
+## Authentication and authorization HTTP errors
 
 Requests with no authentication credentials or incorrect credentials yield the `HTTP 401 Unauthorized` response.
 

@@ -23,7 +23,7 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 
 | Chaining method | Description |
 |:---------|:---------|
-| **[alert](#description)&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
+| **alert&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
 
 ### Property methods
 
@@ -1107,7 +1107,7 @@ are considered different states.
 _**Example**_
 ```js
 stream
-  from()
+  |from()
     .measurement('cpu')
   |window()
     .period(10s)
@@ -1345,7 +1345,7 @@ Returns: [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node/)
 
 ### Combine
 
-Combine this node with itself. The data are combined on timestamp.
+Combine this node with itself. The data is combined on timestamp.
 
 ```js
 alert|combine(expressions ...ast.LambdaNode)
@@ -1630,7 +1630,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 ### HttpOut
 
 Create an HTTP output node that caches the most recent data it has received.
-The cached data are available at the given endpoint.
+The cached data is available at the given endpoint.
 The endpoint is the relative path from the API endpoint of the running task.
 For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is
 `top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`.
@@ -1671,7 +1671,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data are joined on timestamp.
+Join this node with other nodes. The data is joined on timestamp.
 
 ```js
 alert|join(others ...Node)

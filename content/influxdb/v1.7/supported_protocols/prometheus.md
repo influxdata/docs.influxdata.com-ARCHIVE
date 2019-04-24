@@ -39,14 +39,14 @@ CREATE DATABASE "prometheus"
 To enable the use of the Prometheus remote read and write APIs with InfluxDB, add URL
 values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
 
-- [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_write%3E)
-- [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_read%3E)
+* [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_write%3E)
+* [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_read%3E)
 
 The URLs must be resolvable from your running Prometheus server and use the port
 on which InfluxDB is running (`8086` by default).
 Also include the database name using the `db=` query parameter.
 
-**Example: Endpoints in Prometheus configuration file**  
+#### Example: Endpoints in Prometheus configuration file
 
 ```yaml
 remote_write:
@@ -62,7 +62,8 @@ If [authentication is enabled on InfluxDB](/influxdb/v1.7/administration/authent
 pass the `username` and `password` of an InfluxDB user with read and write privileges
 using the `u=` and `p=` query parameters respectively.
 
-_**Example endpoints with authentication enabled**_  
+##### Examples of endpoints with authentication enabled**_  
+
 ```yaml
 remote_write:
   - url: "http://localhost:8086/api/v1/prom/write?db=prometheus&u=username&p=password"
@@ -82,14 +83,17 @@ remote_read:
 As Prometheus data is brought into InfluxDB, the following transformations are
 made to match the InfluxDB data structure:
 
-- The Prometheus metric name becomes the InfluxDB [measurement](/influxdb/v1.7/concepts/key_concepts/#measurement) name.
-- The Prometheus sample (value) becomes an InfluxDB field using the `value` field key. It is always a float.
-- Prometheus labels become InfluxDB tags.
-- All `# HELP` and `# TYPE` lines are ignored.
+* The Prometheus metric name becomes the InfluxDB [measurement](/influxdb/v1.7/concepts/key_concepts/#measurement) name.
+* The Prometheus sample (value) becomes an InfluxDB field using the `value` field key. It is always a float.
+* Prometheus labels become InfluxDB tags.
+* All `# HELP` and `# TYPE` lines are ignored.
+* [v1.7.6 and later] Prometheus remote write endpoint drops unsupported Prometheus values (`NaN`,`-Inf`, and `+Inf`) rather than reject the entire batch.
+  * If [write trace logging is enabled (`[http] write-tracing = true`)](/influxdb/v1.7/administration/config/#write-tracing-false), then summaries of dropped values are logged.
+  * If a batch of values contains values that are subsequently dropped, HTTP status code `204` is returned.
 
-**Example: Prometheus to InfluxDB parsing**
+### Example: Parse Prometheus to InfluxDB
 
-```bash
+```shell
 # Prometheus metric
 example_metric{queue="0:http://example:8086/api/v1/prom/write?db=prometheus",le="0.005"} 308
 
@@ -111,5 +115,5 @@ fields
 > In InfluxDB v1.6 or later, every Prometheus measurement gets its own InfluxDB measurement.
 
 <dt>
-This format is different than the format used by the [Telegraf Prometheus input plugin]](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus).
+This format is different than the format used by the [Telegraf Prometheus input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus).
 </dt>

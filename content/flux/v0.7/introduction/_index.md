@@ -8,7 +8,7 @@ menu:
 ---
 
 Flux is InfluxData's new functional data scripting language designed for querying, analyzing, and acting on time series data.
-Its takes the power of [InfluxQL](/influxdb/latest/query_language/spec/) and the functionality of [TICKscript](https://docs.influxdata.com/kapacitor/v1.5/tick/introduction/) and combines them into a single, unified syntax.
+It takes the power of [InfluxQL](/influxdb/latest/query_language/spec/) and the functionality of [TICKscript](https://docs.influxdata.com/kapacitor/v1.5/tick/introduction/) and combines them into a single, unified syntax.
 
 > Flux v0.7 is a technical preview included with [InfluxDB v1.7](/influxdb/v1.7).
 > It is still in active development and many functions provided by InfluxQL and TICKscript
@@ -26,7 +26,10 @@ and calculating the average of each window:
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start:-1h)
-  |> filter(fn:(r) => r._measurement == "cpu" AND r.cpu == "cpu-total")
+  |> filter(fn:(r) =>
+    r._measurement == "cpu" AND
+    r.cpu == "cpu-total"
+  )
   |> aggregateWindow(every: 1m, fn: mean)
 ```
 

@@ -16,7 +16,7 @@ for operations such as cross-measurement joins and math across measurements.
 To illustrate a join operation, use data captured by Telegraf and and stored in
 InfluxDB with a default TICK stack installation - memory usage and processes.
 
-> If using the [InfluxData Sandbox](/platform/installation/platform-install) or other
+> If using the [InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install) or other
 > "Dockerized" instances of the TICK stack, these measurements may not be available.
 
 In this guide, we'll join two data streams, one representing memory usage and the other representing the

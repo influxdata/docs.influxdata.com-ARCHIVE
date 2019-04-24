@@ -7,8 +7,114 @@ menu:
     parent: About the project
 ---
 
+## v1.7.6 [2019-04-16]
+
+<dt>
+If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`),
+this release includes the fix for InfluxDB 1.7.5 servers that stopped responding without warning. 
+</dt>
+
+### Features
+
+- Upgrade Flux to `0.24.0` and remove the platform dependency.
+  - If Flux is enabled, use Chronograf 1.7.10 or later.
+- Track remote read requests to Prometheus remote read handler.
+
+### Bug fixes
+
+- Ensure credentials are correctly passed when executing Flux HTTP requests in the `influx` CLI with the `-type=flux` option.
+- Back port of data generation improvements: renamed files for consistency between versions, added `time-interval` schema option, and updated schema example documentation.
+- Fix security vulnerability when `[http]shared-secret` configuration setting is blank.
+- Add nil check for `tagKeyValueEntry.setIDs()`.
+- Extend the Prometheus remote write endpoint to drop unsupported Prometheus values (`NaN`,`-Inf`, and `+Inf`) rather than reject the entire batch.
+  - If write trace logging enabled (`[http] write-tracing = true`), then summaries of dropped values are logged.
+  - If a batch of values contains values that are subsequently dropped, HTTP status code `204` is returned.
+- Update predicate key mapping to match InfluxDB `2.x` behavior.
+- Fix panic in Prometheus read API.
+- Add a version constraint for influxql.
+
+## v1.7.5 [2019-03-26]
+
+<dt>
+**Update (2019-04-01):** If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`), then do not upgrade to this release. Customers have reported that InfluxDB 1.7.5 stops responding without warning. For details, see [GitHub issue #13010](https://github.com/influxdata/influxdb/issues/13010). The [planned fix](https://github.com/influxdata/influxdb/issues/13053) will be available soon.
+</dt>
+
+### Bug fixes
+
+- Update `tagKeyValue` mutex to write lock.
+- Fix some more shard epoch races.
+
+## v1.7.4 [2019-02-13]
+
+### Features
+
+- Allow TSI bitset cache to be configured. New `[data]` configuration settings for `inmem` (`tsm-use-madv-willneed`) and `tsi1` (`max-index-log-file-size` and `series-id-set-cache-size`).
+
+### Bug fixes
+
+- Remove copy-on-write when caching bitmaps in TSI.
+- Use `systemd` for Amazon Linux 2.
+- Revert "Limit force-full and cold compaction size."
+- Convert `TagValueSeriesIDCache` to use string fields.
+- Ensure that cached series id sets are Go heap backed.
+
+## v1.7.3 [2019-01-11]
+
+### Important update [2019-02-13]
+
+If you have not installed this release, then install the 1.7.4 release.
+
+**If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
+
+- A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
+  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
+
+### Features
+
+- Update Flux to `0.12.0`
+
+### Bug fixes
+
+* Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
+* Limit force-full and cold compaction size.
+* Add user authentication and authorization support for Flux HTTP requests.
+* Call `storage.Group` API to correctly map group mode.
+* Marked functions that always return floats as always returning floats.
+* Add support for optionally logging Flux queries.
+* Fix cardinality estimation error.
+
+## v1.7.2 [2018-12-11]
+
+### Bug fixes
+
+* Update to Flux 0.7.1.
+* Conflict-based concurrency resolution adds guards and an epoch-based system to
+   coordinate modifications when deletes happen against writes to the same points
+   at the same time.
+* Skip and warn that series file should not be in a retention policy directory.
+* Checks if measurement was removed from index, and if it was, then cleans up out
+  of fields index. Also fix cleanup issue where only prefix was checked when
+  matching measurements like "m1" and "m10".
+* Error message to user that databases must be run in non-mixed index mode
+ to allow deletes.
+* Update platform dependency to simplify Flux support in Enterprise.
+* Verify series file in presence of tombstones.
+* Fix `ApplyEnvOverrides` when a type that implements Unmarshaler is in a slice to
+  not call `UnMarshaltext` when the environment variable is set to empty.
+* Drop NaN values when writing back points and fix the point writer to report the
+  number of points actually written and omits the ones that were dropped.
+* Query authorizer was not properly passed to subqueries so rejections did not
+  happen when a subquery was the one reading the value. Max series limit was not propagated downward.
+
+## v1.7.1 [2018-11-14]
+
+### Bug fixes
+
+* Simple8B `EncodeAll` incorrectly encodes entries: For a run of `1s`, if the 120th or 240th entry is not a `1`, the run will be incorrectly encoded as selector `0` (`240 1s`) or selector `1` (`120 1s`), resulting in a loss of data for the 120th or 240th value. Manifests itself as consuming significant CPU resources and as compactions running indefinitely.
+
+
 ## v1.7.0 [2018-11-06]
--------------------
 
 ### Breaking changes
 
@@ -21,7 +127,7 @@ Chunked query was added into the Go client v2 interface. If you compiled against
 Support for the Flux language and queries has been added in this release. To begin exploring Flux 0.7 (technical preview):
 
 * Enable Flux using the new configuration setting [`[http] flux-enabled = true`](/influxdb/v1.7/administration/config/#flux-enabled-false).
-* Use the new [`influx -type=flux`](/influxdb/v1.7/tools/shell#type) option to enable the Flux REPL shell for creating Flux queries.
+* Use the new [`influx -type=flux`](/influxdb/v1.7/tools/shell/#type) option to enable the Flux REPL shell for creating Flux queries.
 * Read about Flux and the Flux language, enabling Flux, or jump into the getting started and other guides in the [Flux v0.7 (technical preview) documentation](/flux/v0.7/).
 
 #### Time Series Index (TSI) query performance and throughputs improvements
@@ -47,44 +153,66 @@ Support for the Flux language and queries has been added in this release. To beg
 
 ### Bug fixes
 
--	Missing `hardwareAddr` in `uuid` v1 generation.
--	Fix the inherited interval for derivative and others.
--	Fix subquery functionality when a function references a tag from the subquery.
--	Strip tags from a subquery when the outer query does not group by that tag.
+*	Missing `hardwareAddr` in `uuid` v1 generation.
+*	Fix the inherited interval for derivative and others.
+*	Fix subquery functionality when a function references a tag from the subquery.
+*	Strip tags from a subquery when the outer query does not group by that tag.
+
+## v1.6.6 [2019-02-28]
+
+### Bug fixes
+
+* Marked functions that always return floats as always returning floats.
+* Fix cardinality estimation error.
+* Update `tagKeyValue` mutex to write lock.
+
+## v1.6.5 [2019-01-10]
+
+### Features
+
+*	Reduce allocations in TSI `TagSets` implementation.
+
+### Bug fixes
+
+*	Fix panic in `IndexSet`.
+*	Pass the query authorizer to subqueries.
+*	Fix TSM1 panic on reader error.
+* Limit database and retention policy names to 255 characters.
+* Update Go runtime to 1.10.6.
 
 ## v1.6.4 [2018-10-16]
 
 ### Features
 
--	Set maximum cache size using `-max-cache-size` in `buildtsi` when building TSI index.
+*	Set maximum cache size using `-max-cache-size` in `buildtsi` when building TSI index.
 
 ### Bug fixes
 
--	Fix `tsi1` sketch locking.
--	Fix subquery functionality when a function references a tag from the subquery.
--	Strip tags from a subquery when the outer query does not group by that tag.
--	Add `-series-file` flag to `dumptsi` command help.
--	Cleanup failed TSM snapshots.
--	Fix TSM1 panic on reader error.
--	Fix series file tombstoning.
--	Fixing the stream iterator to not ignore the error.
--	Do not panic when a series ID iterator is nil.
--	Fix append of possible nil iterator.
+*	Fix `tsi1` sketch locking.
+*	Fix subquery functionality when a function references a tag from the subquery.
+*	Strip tags from a subquery when the outer query does not group by that tag.
+*	Add `-series-file` flag to `dumptsi` command help.
+*	Cleanup failed TSM snapshots.
+*	Fix TSM1 panic on reader error.
+*	Fix series file tombstoning.
+*	Fixing the stream iterator to not ignore the error.
+*	Do not panic when a series ID iterator is nil.
+*	Fix append of possible nil iterator.
 
 
 ## v1.6.3 [2018-09-14]
 
 ### Features
 
--	Remove TSI1 HLL sketches from heap.
+*	Remove TSI1 HLL sketches from heap.
 
 ### Bug fixes
 
--	Fix the inherited interval for derivative and others.  The inherited interval from an outer query should not have caused
+*	Fix the inherited interval for derivative and others.  The inherited interval from an outer query should not have caused
 an inner query to fail because inherited intervals are only implicitly passed to inner queries that support group
 by time functionality. Since an inner query with a derivative doesn't support grouping by time and the inner query itself
 doesn't specify a time, the outer query shouldn't have invalidated the inner query.
--	Fix the derivative and others time ranges for aggregate data. The derivative function and others similar to it would
+*	Fix the derivative and others time ranges for aggregate data. The derivative function and others similar to it would
 preload themselves with data so that the first interval would be the start of the time range. That meant reading data outside
 of the time range. One change to the shard mapper made in v1.4.0 caused the shard mapper to constrict queries to the
 intervals given to the shard mapper. This was correct because the shard mapper can only deal with times it has mapped,
@@ -174,6 +302,23 @@ using the Prometheus measurement name as the `__name__` label.
 * TSM: `TSMReader.Close` blocks until reads complete.
 * Return the correct auxiliary values for `top` and `bottom`.
 * Close TSMReaders from `FileStore.Close` after releasing FileStore mutex.
+
+## v1.5.5 [2018-12-19]
+
+### Features
+
+*	Reduce allocations in TSI `TagSets` implementation.
+
+### Bug fixes
+
+*	Copy return value of `IndexSet.MeasurementNamesByExpr`.
+*	Ensure orphaned series cleaned up with shard drop.
+*	Fix the derivative and others time ranges for aggregate data.
+*	Fix the stream iterator to not ignore errors.
+*	Do not panic when a series ID iterator is `nil`.
+*	Fix panic in `IndexSet`.
+*	Pass the query authorizer to subqueries.
+*	Fix TSM1 panic on reader error.
 
 ## v1.5.4 [2018-06-21]
 

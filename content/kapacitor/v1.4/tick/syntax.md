@@ -115,7 +115,7 @@ Chaining operators are used within expressions to define pipelines or pipeline s
 
 ## Variables and literals
 
-Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding what a variable represents. They are typically declared along with the assignment of a literal value.  In a TICKscript intended to be used as a [template task](/kapacitor/v1.4/guides/template_tasks/) they can also be declared with simply a type identifier.
+Variables in TICKscript are useful for storing and reusing values and for providing a friendly mnemonic for quickly understanding what a variable represents. They are typically declared along with the assignment of a literal value.  In a TICKscript intended to be used as a [template task](/kapacitor/v1.4/working/template_tasks/) they can also be declared with simply a type identifier.
 
 ### Variables
 
@@ -123,7 +123,7 @@ Variables are declared using the keyword `var` at the start of a declaration.
 Variables are immutable and cannot be reassigned new values later on in the script, though they can be used in other declarations and can be passed into methods.
 Variables are also used in template tasks as placeholders to be filled when the template is used to create a new task.
 
-For a detailed presentation on working with **template tasks** see the guide [Template tasks](/kapacitor/v1.4/guides/template_tasks/).
+For a detailed presentation on working with **template tasks** see the guide [Template tasks](/kapacitor/v1.4/working/template_tasks/).
 If a TICKscript proves useful, it may be desirable to reuse it as a template task in order to quickly create other similar tasks.  For this reason it is recommended to use variables as much as possible.
 
 #### Naming variables

@@ -21,7 +21,7 @@ cards:
     links:
       - text: Download Telegraf
         type: absolute
-        href: https://influxdata.com/downloads/#telegraf
+        href: https://portal.influxdata.com/downloads
       - text: Get Started
         type: relative
         href: /introduction/getting-started
@@ -37,7 +37,7 @@ cards:
     links:
       - text: Download InfluxDB
         type: absolute
-        href: https://influxdata.com/downloads/#influxdb
+        href: https://portal.influxdata.com/downloads
       - text: Get Started
         type: relative
         href: /introduction/getting-started
@@ -53,7 +53,7 @@ cards:
     links:
       - text: Download Chronograf
         type: absolute
-        href: https://influxdata.com/downloads/#chronograf
+        href: https://portal.influxdata.com/downloads
       - text: Get Started
         type: relative
         href: /introduction/getting-started
@@ -69,7 +69,7 @@ cards:
     links:
       - text: Download Kapacitor
         type: absolute
-        href: https://influxdata.com/downloads/#kapacitor
+        href: https://portal.influxdata.com/downloads
       - text: Get Started
         type: relative
         href: /introduction/getting-started
@@ -81,9 +81,9 @@ cards:
   - id: enterprise_influxdb
     category: enterprise
     title: InfluxDB Enterprise
-    description: Kapacitor Enterprise offers proprietary extensions to the open source version of Kapacitor.
+    description: InfluxDB Enterprise offers proprietary extensions to the open source version of InfluxDB, and is designed to handle high write and query loads.
     links:
-      - text: Download Kapacitor Enterprise
+      - text: Download InfluxDB Enterprise
         type: relative
         href: /introduction/download/
       - text: Get Started
@@ -97,9 +97,9 @@ cards:
   - id: enterprise_kapacitor
     category: enterprise
     title: Kapacitor Enterprise
-    description: InfluxDB Enterprise offers proprietary extensions to the open source version of InfluxDB, and is designed to handle high write and query loads.
+    description: Kapacitor Enterprise offers proprietary extensions to the open source version of Kapacitor.
     links:
-      - text: Download InfluxDB Enterprise
+      - text: Download Kapacitor Enterprise
         type: relative
         href: /introduction/download/
       - text: Get Started

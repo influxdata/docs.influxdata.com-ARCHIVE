@@ -35,12 +35,11 @@ throughput, follow the steps in
 
 The following sections assume that you already added a new data node to the
 cluster, and they use the
-[`influx-ctl` tool](/enterprise_influxdb/v1.5/features/cluster-commands/) available on
+[`influx-ctl` tool](/enterprise_influxdb/v1.5/administration/cluster-commands/) available on
 all meta nodes.
 
 Before you begin, stop writing historical data to InfluxDB.
-Historical data are data with timestamps that occur in the past, that is, they're
-data that aren't real-time data.
+Historical data has a timestamp that occurs in the past (not real-time data).
 Performing a rebalance while writing historical data can lead to data loss.
 
 ## Rebalance Procedure 1: Rebalance a cluster to create space

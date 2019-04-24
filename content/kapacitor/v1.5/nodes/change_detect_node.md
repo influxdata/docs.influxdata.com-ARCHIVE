@@ -4,26 +4,33 @@ description: ChangeDetectNode creates a new node that only emits new points if d
 
 menu:
   kapacitor_1_5:
-    name: ChangeDetect
+    name: ChangeDetectNode
     identifier: change_detect_node
     weight: 40
     parent: nodes
 ---
 
-The `changeDetect` node creates a new node that only emits new points if different
-from the previous point.
+The `changeDetect` node creates a new node that emits new points only if different from the previous point.
+The `changeDetect` node can monitor multiple fields.
+
+##### Example changeDetect node
+```js
+stream
+	|from().measurement('packets')
+	|changeDetect('field_a','field_b')
+```
 
 ### Constructor
 
-| Chaining Method | Description |
-|:---------|:---------|
-| **[changeDetect](#descr)&nbsp;(&nbsp;`field`&nbsp;`string`)** | Create a new node that only emits new points if different from the previous point  |
+| Chaining Method                                         | Description                                                                       |
+|:---------------                                         |:-----------                                                                       |
+| **changeDetect&nbsp;(&nbsp;`fields`&nbsp;`...string`)** | Create a new node that emits new points only if different from the previous point |
 
 ### Property methods
 
-| Setters | Description |
-|:---|:---|
-| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppresses all error logging events from this node.  |
+| Setters                           | Description                                         |
+|:-------                           |:-----------                                         |
+| **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppresses all error logging events from this node. |
 
 
 
@@ -163,7 +170,7 @@ Returns: [ChangeDetectNode](/kapacitor/v1.5/nodes/change_detect_node/)
 
 ### Combine
 
-Combine this node with itself. The data are combined on timestamp.
+Combine this node with itself. The data is combined on timestamp.
 
 
 ```js
@@ -470,7 +477,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.5/nodes/influx_q_l_node/)
 ### HttpOut
 
 Create an HTTP output node that caches the most recent data it has received.
-The cached data are available at the given endpoint.
+The cached data is available at the given endpoint.
 The endpoint is the relative path from the API endpoint of the running task.
 For example, if the task endpoint is at `/kapacitor/v1/tasks/<task_id>` and endpoint is
 `top10`, then the data can be requested from `/kapacitor/v1/tasks/<task_id>/top10`.
@@ -514,7 +521,7 @@ Returns: [InfluxDBOutNode](/kapacitor/v1.5/nodes/influx_d_b_out_node/)
 
 ### Join
 
-Join this node with other nodes. The data are joined on timestamp.
+Join this node with other nodes. The data is joined on timestamp.
 
 
 ```js

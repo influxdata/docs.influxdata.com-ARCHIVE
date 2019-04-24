@@ -15,7 +15,7 @@ instance into an InfluxDB Enterprise cluster.
 <dt>
 The process assumes that you already have a fully configured InfluxDB Enterprise cluster
 of three or more meta nodes and zero or more data nodes. If you need instructions for meta node installation:
-- [Production installation of meta nodes](/enterprise_influxdb/v1.6/production_installation/meta_node_installation/)
+- [Production installation of meta nodes](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/meta_node_installation/)
 </dt>
 
 Please note that this migration process:
@@ -109,14 +109,14 @@ If you have settings that you’d like to keep, please make a copy of your confi
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.3.8-c1.3.8_amd64.deb
-sudo dpkg -i influxdb-data_1.3.8-c1.3.8_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.5-c1.6.5_amd64.deb
+sudo dpkg -i influxdb-data_1.6.5-c1.6.5_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.3.8_c1.3.8.x86_64.rpm
-sudo yum localinstall influxdb-data-1.3.8_c1.3.8.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.5_c1.6.5.x86_64.rpm
+sudo yum localinstall influxdb-data-1.6.5_c1.6.5.x86_64.rpm
 ```
 
 ### 5. Update the configuration file

@@ -14,7 +14,7 @@ menu:
 
 * [SHOW STATS](#show-stats)
 * [SHOW DIAGNOSTICS](#show-diagnostics)
-* I[nternal monitoring](#internal-monitoring)
+* [Internal monitoring](#internal-monitoring)
 * [Useful performance metrics commands](#useful-performance-metrics-commands)
 * [InfluxDB `/metrics` HTTP endpoint](#influxdb-metrics-http-endpoint)
 
@@ -38,7 +38,7 @@ For details on this command, see [`SHOW DIAGNOSTICS`](/influxdb/v1.7/query_langu
 ## Internal monitoring
 InfluxDB also writes statistical and diagnostic information to database named `_internal`, which records metrics on the internal runtime and service performance.
 The `_internal` database can be queried and manipulated like any other InfluxDB database.
-Check out the [monitor service README](https://github.com/influxdb/influxdb/blob/master/monitor/README.md) and the [internal monitoring blog post](https://influxdb.com/blog/2015/09/22/monitoring_internal_show_stats.html) for more detail.
+Check out the [monitor service README](https://github.com/influxdata/influxdb/blob/1.7/monitor/README.md) and the [internal monitoring blog post](https://influxdb.com/blog/2015/09/22/monitoring_internal_show_stats.html) for more detail.
 
 ## Useful performance metrics commands
 

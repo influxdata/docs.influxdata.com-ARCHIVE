@@ -198,7 +198,7 @@ restore: DB metadata not changed. database may already exist
     ```
     > USE telegraf_bak
     > SELECT * INTO telegraf..:MEASUREMENT FROM /.*/ GROUP BY *
-    > DROP telegraf_bak
+    > DROP DATABASE telegraf_bak
     ```
 
 **To restore to a retention policy that already exists:**

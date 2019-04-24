@@ -13,7 +13,7 @@ With Flux, data can be grouped by any column in your queried data set.
 This guide walks through grouping data in Flux with examples of how data is shaped in the process.
 
 ## Group keys
-Every table has a **group key** – a list of columns which for which every row in the table has the same value.
+Every table has a **group key** – a list of columns for which every row in the table has the same value.
 
 ###### Example group key
 ```js
@@ -72,7 +72,8 @@ dataSet = from(bucket: "telegraf/autogen")
   |> range(start: -2m)
   |> filter(fn: (r) =>
     r._field == "usage_system" AND
-    r.cpu =~ /cpu[0-9*]/ )
+    r.cpu =~ /cpu[0-9*]/
+  )
   |> drop(columns: ["host"])
 ```
 

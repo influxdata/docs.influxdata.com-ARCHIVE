@@ -48,11 +48,15 @@ _**Data type:** Boolean_
 ```js
 table1 = from(bucket: "telegraf/autogen")
   |> range(start: -15m)
-  |> filter(fn: (r) => r._measurement == "measurement_1")
+  |> filter(fn: (r) =>
+    r._measurement == "measurement_1"
+  )
 
 table2 = from(bucket: "telegraf/autogen")
   |> range(start: -15m)
-  |> filter(fn: (r) => r._measurement == "measurement_2")
+  |> filter(fn: (r) =>
+    r._measurement == "measurement_2"
+  )
 
 cov(x: table1, y: table2, on: ["_time", "_field"])
 ```

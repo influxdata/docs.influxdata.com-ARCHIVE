@@ -21,12 +21,12 @@ pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 The group key of the resulting table is the same as the input tables, excluding columns found in the [`columnKey`](#columnkey) and [`valueColumn`](#valuecolumn) parameters.
 This is because these columns are not part of the resulting output table.  
 
-Every input row should have a 1:1 mapping to a particular row + column in the output table, determined by its values for the [`rowKey`](#rowkey) and [`columnKey`](#columnkey) parameters.   
+Every input row should have a 1:1 mapping to a particular row + column in the output table, determined by its values for the [`rowKey`](#rowkey) and [`columnKey`](#columnkey) parameters.
 In cases where more than one value is identified for the same row + column pair, the last value
 encountered in the set of table rows is used as the result.
 
 The output table will have columns based on the row key plus the group key, excluding any group key columns in the column key,
-plus new columns for each unique tuple of values identified by the column key.  
+plus new columns for each unique tuple of values identified by the column key.
 Any columns in the original table not referenced in the `rowKey` or the original table's group key are dropped.  
 
 The output is constructed as follows:
@@ -61,6 +61,13 @@ _**Data type:** String_
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -1h)
-  |> filter(fn: (r) => r._measurement == "cpu" AND r._field == "cpu-total")
-  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" AND
+    r.cpu == "cpu-total"
+  )
+  |> pivot(
+    rowKey:["_time"],
+    columnKey: ["_field"],
+    valueColumn: "_value"
+  )
 ```
