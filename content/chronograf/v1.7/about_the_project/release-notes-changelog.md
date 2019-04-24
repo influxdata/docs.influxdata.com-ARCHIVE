@@ -7,12 +7,16 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.11 [2019-04-24]
+
+## Bug Fixes
+- Fix fetching tag keys in Flux Builder.
 
 ## v1.7.10 [2019-04-16]
 
 ### Bug Fixes
 - Fix the input for line controls in visualization options.
-- Fix Cell editor visualization not using ceo time range.
+- Fix Cell editor visualization not using CEO time range.
 - Fixed an issue where imports were not working in Flux scripts.
 
 ### Features
