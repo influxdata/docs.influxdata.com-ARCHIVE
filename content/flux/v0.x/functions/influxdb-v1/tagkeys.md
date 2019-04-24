@@ -60,6 +60,7 @@ tagKeys = (bucket, predicate=(r) => true, start=-30d) =>
     |> filter(fn: predicate)
     |> keys()
     |> keep(columns: ["_value"])
+    |> distinct()
 ```
 
 _**Used functions:**
@@ -67,4 +68,5 @@ _**Used functions:**
 [range](/flux/v0.x/functions/built-in/transformations/range/),
 [filter](/flux/v0.x/functions/built-in/transformations/filter/),
 [keys](/flux/v0.x/functions/built-in/transformations/keys/),
-[keep](/flux/v0.x/functions/built-in/transformations/keep/)_
+[keep](/flux/v0.x/functions/built-in/transformations/keep/),
+[distinct](/flux/v0.x/functions/built-in/transformations/selectors/distcint)_

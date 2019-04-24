@@ -25,8 +25,8 @@ reduce(
 ```
 
 If the reducer record contains a column with the same name as a group key column,
-the group key column's value is overwritten and the resulting record is regrouped
-into the appropriate table.
+the group key column's value is overwritten, and the outgoing group key is changed.
+However, if two reduced tables write to the same destination group key, the function will error.
 
 ## Parameters
 
