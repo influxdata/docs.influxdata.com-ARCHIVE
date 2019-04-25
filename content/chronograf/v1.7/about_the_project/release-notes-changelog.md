@@ -17,7 +17,7 @@ menu:
 ### Bug Fixes
 - Fix the input for line controls in visualization options.
 - Fix Cell editor visualization not using CEO time range.
-- Fixed an issue where imports were not working in Flux scripts.
+- Fix an issue where imports were not working in Flux scripts.
 
 ### Features
 - Updated the UI to work with the latest Flux version.
