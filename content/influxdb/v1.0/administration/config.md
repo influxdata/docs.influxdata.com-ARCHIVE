@@ -268,7 +268,7 @@ Every configuration option is optional.
 If a configuration option is not provided, its default value will be used.
 All configuration options listed below are set to their default value.
 
->**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
+>**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/1.0/etc/config.sample.toml) will always be slightly ahead of what is documented here.
 
 ## Global Options
 
@@ -493,7 +493,7 @@ The path of the certificate file.
 
 ## [monitor]
 
-This section controls InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/master/monitor/README.md).
+This section controls InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/1.0/monitor/README.md).
 
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
@@ -589,7 +589,7 @@ Realm is the JWT realm used by the http endpoint.
 ## [[graphite]]
 
 This section controls one or many listeners for Graphite data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/graphite/README.md) on GitHub for more information.
+See the [README](https://github.com/influxdb/influxdb/blob/1.0/services/graphite/README.md) on GitHub for more information.
 
 ### enabled = false
 
@@ -697,7 +697,7 @@ can be found
 ## [[opentsdb]]
 
 Controls the listener for OpenTSDB data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) on GitHub for more information.
+See the [README](https://github.com/influxdb/influxdb/blob/1.0/services/opentsdb/README.md) on GitHub for more information.
 
 ### enabled = false
 
