@@ -16,4 +16,4 @@ The point's Measurement is `sys.cpu.user`, the timestamp is `1356998400`, and th
 The point is also tagged with `host=webserver01` and `cpu=0`.
 Tags allow fast and efficient queries to be performed on your data.
 
-To learn more about enabling OpenTSDB support, check the example [configuration file](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml).
+To learn more about enabling OpenTSDB support, check the example [configuration file](https://github.com/influxdb/influxdb/blob/1.5/etc/config.sample.toml).
