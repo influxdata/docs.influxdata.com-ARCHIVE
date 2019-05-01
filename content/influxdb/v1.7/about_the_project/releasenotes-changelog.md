@@ -48,7 +48,7 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 
 ### Features
 
-- Allow TSI bitset cache to be configured. New `[data]` configuration settings for `inmem` (`tsm-use-madv-willneed`) and `tsi1` (`max-index-log-file-size` and `series-id-set-cache-size`).
+- Allow TSI bitset cache to be configured. New `[data]` configuration setting `tsi-cache-size = 100`.
 
 ### Bug fixes
 
