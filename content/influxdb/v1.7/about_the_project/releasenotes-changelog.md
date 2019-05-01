@@ -48,7 +48,7 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 
 ### Features
 
-- Allow TSI bitset cache to be configured. New `[data]` configuration setting `tsi-cache-size = 100`.
+- Allow TSI bitset cache to be configured. See: [InfluxDB Configuration `[data]`](/influxdb/v1.7/administration/config/#tsi-tsi1-index-settings)
 
 ### Bug fixes
 
