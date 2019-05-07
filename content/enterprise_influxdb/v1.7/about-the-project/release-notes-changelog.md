@@ -14,7 +14,7 @@ This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.6 release. For d
 
 ### Bug fixes
 
-- Revert the InfluxQL downgrade that happened between 1.7.4 and 1.7.5.
+- Reverts v1.7.5 InfluxQL regressions that removed parentheses and resulted in operator precedence causing changing results in complex queries and regular expressions.
 
 ## v1.7.5 [2019-03-26]
 
