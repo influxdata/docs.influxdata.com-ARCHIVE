@@ -7,27 +7,49 @@ menu:
     parent: About the project
 ---
 
+## v1.7.6 [2019-04-16]
+
+<dt>
+If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`),
+this release includes the fix for InfluxDB 1.7.5 servers that stopped responding without warning. 
+</dt>
+
+### Features
+
+- Upgrade Flux to `0.24.0` and remove the platform dependency.
+  - If Flux is enabled, use Chronograf 1.7.11 or later.
+  - When using Flux, there is a known issue that using `now` will cause a panic.  The proper syntax is `now()`.
+- Track remote read requests to Prometheus remote read handler.
+
+### Bug fixes
+
+- Ensure credentials are correctly passed when executing Flux HTTP requests in the `influx` CLI with the `-type=flux` option.
+- Back port of data generation improvements: renamed files for consistency between versions, added `time-interval` schema option, and updated schema example documentation.
+- Fix security vulnerability when `[http]shared-secret` configuration setting is blank.
+- Add nil check for `tagKeyValueEntry.setIDs()`.
+- Extend the Prometheus remote write endpoint to drop unsupported Prometheus values (`NaN`,`-Inf`, and `+Inf`) rather than reject the entire batch.
+  - If write trace logging enabled (`[http] write-tracing = true`), then summaries of dropped values are logged.
+  - If a batch of values contains values that are subsequently dropped, HTTP status code `204` is returned.
+- Update predicate key mapping to match InfluxDB `2.x` behavior.
+- Fix panic in Prometheus read API.
+- Add a version constraint for influxql.
+
 ## v1.7.5 [2019-03-26]
--------------------
 
 <dt>
 **Update (2019-04-01):** If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`), then do not upgrade to this release. Customers have reported that InfluxDB 1.7.5 stops responding without warning. For details, see [GitHub issue #13010](https://github.com/influxdata/influxdb/issues/13010). The [planned fix](https://github.com/influxdata/influxdb/issues/13053) will be available soon.
-</dt> 
+</dt>
 
 ### Bug fixes
 
 - Update `tagKeyValue` mutex to write lock.
 - Fix some more shard epoch races.
 
-### Features
-
-- Add `gen-init` and `gen-exec` commands to `influx_tools` utility (internal use only). Add support for describing data-generation schema using a TOML file.
-
 ## v1.7.4 [2019-02-13]
 
 ### Features
 
-- Allow TSI bitset cache to be configured. New `[data]` index settings for in-memory (`inmem`) and (`tsi1`)
+- Allow TSI bitset cache to be configured. See: [InfluxDB Configuration `[data]`](/influxdb/v1.7/administration/config/#tsi-tsi1-index-settings)
 
 ### Bug fixes
 

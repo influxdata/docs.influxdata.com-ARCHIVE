@@ -59,8 +59,8 @@ Telegraf has a few options you can configure under the `[agent]` section of the
 config.
 
 * **interval**: Default data collection interval for all inputs
-* **round_interval**: Rounds collection interval to 'interval'
-For example, if interval="10s" then always collect on :00, :10, :20, etc.
+* **round_interval**: Rounds collection interval to `interval`.
+For example, if `interval` is set to 10s then always collect on :00, :10, :20, etc.
 * **metric_batch_size**: Telegraf will send metrics to output in batch of at
 most `metric_batch_size` metrics.
 * **metric_buffer_limit**: Telegraf will cache `metric_buffer_limit` metrics
@@ -73,8 +73,8 @@ Each plugin will sleep for a random time within jitter before collecting.
 This can be used to avoid many plugins querying things like sysfs at the
 same time, which can have a measurable effect on the system.
 * **flush_interval**: Default data flushing interval for all outputs.
-You should not set this below
-interval. Maximum `flush_interval` will be `flush_interval` + `flush_jitter`
+You should not set this below `interval`. 
+Maximum `flush_interval` will be `flush_interval` + `flush_jitter`
 * **flush_jitter**: Jitter the flush interval by a random amount.
 This is primarily to avoid
 large write spikes for users running a large number of Telegraf instances.

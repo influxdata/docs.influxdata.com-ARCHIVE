@@ -13,7 +13,7 @@ including using the TICK stack to monitor itself or another TICK stack.
 These are the two main approaches to Monitoring your TICK stack:
 
 - **[Internal monitoring](#internal-monitoring)** - A TICK stack that monitors itself.
-- **["Watcher of watcher" approach](#The "watcher of watchers" approach)** - A TICK stack monitored by another TICK stack.
+- **["Watcher of watchers" approach](#the-watcher-of-watchers-approach)** - A TICK stack monitored by another TICK stack.
 
 ## Internal monitoring
 

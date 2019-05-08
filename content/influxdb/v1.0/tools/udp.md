@@ -130,4 +130,4 @@ $ echo "cpu value=1"> /dev/udp/localhost/8089
 
 ## More Information
 
-For more information about the UDP plugin, please see the UDP plugin [README](https://github.com/influxdb/influxdb/blob/master/services/udp/README.md).
+For more information about the UDP plugin, please see the UDP plugin [README](https://github.com/influxdb/influxdb/blob/1.0/services/udp/README.md).

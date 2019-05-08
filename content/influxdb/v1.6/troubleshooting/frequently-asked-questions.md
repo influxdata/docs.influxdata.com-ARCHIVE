@@ -570,11 +570,7 @@ We list some of the most frequent cases below:
 
 The first and most common explanation involves [retention policies](/influxdb/v1.6/concepts/glossary/#retention-policy-rp) (RP).
 InfluxDB automatically queries data in a database’s `DEFAULT` RP.
-<<<<<<< HEAD
 If your data is stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you specify the alternative RP.
-=======
-If your data is stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you [specify](/influxdb/v1.6/query_language/data_exploration/#select-all-data-from-a-fully-qualified-measurement) the alternative RP.
->>>>>>> master
 
 ### Tag keys in the SELECT clause
 

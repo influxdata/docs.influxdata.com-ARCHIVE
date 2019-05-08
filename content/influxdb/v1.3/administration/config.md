@@ -188,7 +188,7 @@ Configuration options that specify a duration support the following duration uni
 `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
 `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
->**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) will always be slightly ahead of what is documented here.
+>**Note:** This page documents configuration options for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/1.3/etc/config.sample.toml) will always be slightly ahead of what is documented here.
 
 ### Environment Variables
 
@@ -531,7 +531,7 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ## [monitor]
 
-This section controls InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/master/monitor/README.md).
+This section controls InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/1.3/monitor/README.md).
 
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
@@ -723,7 +723,7 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 ## [[graphite]]
 
 This section controls one or many listeners for Graphite data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/graphite/README.md) on GitHub for more information.
+See the [README](https://github.com/influxdb/influxdb/blob/1.3/services/graphite/README.md) on GitHub for more information.
 
 ### enabled = false
 
@@ -882,7 +882,7 @@ Environment variable: `INFLUXDB_COLLECTD_READ_BUFFER`
 ## [[opentsdb]]
 
 Controls the listener for OpenTSDB data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) on GitHub for more information.
+See the [README](https://github.com/influxdb/influxdb/blob/1.3/services/opentsdb/README.md) on GitHub for more information.
 
 ### enabled = false
 

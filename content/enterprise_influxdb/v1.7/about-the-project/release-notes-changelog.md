@@ -8,6 +8,14 @@ menu:
     parent: About the project
 ---
 
+## v1.7.6 [2019-05-07]
+
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.6 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Bug fixes
+
+- Reverts v1.7.5 InfluxQL regressions that removed parentheses and resulted in operator precedence causing changing results in complex queries and regular expressions.
+
 ## v1.7.5 [2019-03-26]
 
 <dt>

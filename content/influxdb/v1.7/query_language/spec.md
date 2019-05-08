@@ -945,7 +945,7 @@ show_series_stmt = "SHOW SERIES" [on_clause] [ from_clause ] [ where_clause ] [ 
 SHOW SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 ```
 
-#### SHOW SERIES CARDINALITY
+### SHOW SERIES CARDINALITY
 
 Estimates or counts exactly the cardinality of the series for the current database unless a database is specified using the `ON <database>` option.
 

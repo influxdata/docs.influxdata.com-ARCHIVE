@@ -105,11 +105,11 @@ See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/
 * "Docker - Images"
 * "Docker - Container State"
 
-`docker_net.json`
+`docker_blkio.json`
 
 * "Docker - Container Block IO"
 
-`docker_blkio.json`
+`docker_net.json`
 
 * "Docker - Container Network"
 
