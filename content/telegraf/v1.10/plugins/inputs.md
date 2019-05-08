@@ -303,14 +303,6 @@ Plugin ID: `http`
 
 The [HTTP input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/http/README.md) collects metrics from one or more HTTP (or HTTPS) endpoints. The endpoint should have metrics formatted in one of the [supported input data formats](/telegraf/v1.10/data_formats/input/). Each data format has its own unique set of configuration options which can be added to the input configuration.
 
-### HTTP Listener
-
-Plugin ID: `http_listener`
-
-The [HTTP Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/http_listener/README.md) listens for messages sent via HTTP POST. Messages are expected in the [InfluxDB
-Line Protocol input data format](/telegraf/v1.10/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) are not supported).
-This plugin allows Telegraf to serve as a proxy or router for the `/write` endpoint of the InfluxDB HTTP API.
-
 ### HTTP Listener v2
 
 Plugin ID: `http_listener_v2`
@@ -790,7 +782,7 @@ The [Prometheus Format input plugin](https://github.com/influxdata/telegraf/blob
 
 Plugin ID: `puppetagent`
 
-The [Puppet Agent input plugin](https://github.com/influxdata/plugins/inputs/puppetagent) collects variables outputted from the `last_run_summary.yaml` file usually
+The [Puppet Agent input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/puppetagent/README.md) collects variables outputted from the `last_run_summary.yaml` file usually
 located in `/var/lib/puppet/state/` Puppet Agent Runs. For more information, see [Puppet Monitoring: How  to Monitor the Success or Failure of Puppet Runs](https://puppet.com/blog/puppet-monitoring-how-to-monitor-success-or-failure-of-puppet-runs)
 
 ### RabbitMQ
