@@ -18,6 +18,7 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 
 - Upgrade Flux to `0.24.0` and remove the platform dependency.
   - If Flux is enabled, use Chronograf 1.7.11 or later.
+  - When using Flux, there is a known issue that using `now` will cause a panic.  The proper syntax is `now()`.
 - Track remote read requests to Prometheus remote read handler.
 
 ### Bug fixes
