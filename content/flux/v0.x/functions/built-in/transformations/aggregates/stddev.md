@@ -16,7 +16,10 @@ _**Function type:** Aggregate_
 _**Output data type:** Float_
 
 ```js
-stddev(column: "_value")
+stddev(
+  column: "_value",
+  mode: "sample"
+)
 ```
 
 ## Parameters
@@ -26,6 +29,20 @@ The column on which to operate.
 Defaults to `"_value"`.
 
 _**Data type:** String_
+
+### mode
+The standard deviation mode or type of standard deviation to calculate.
+Defaults to `"sample"`.
+
+_**Data type:** String_
+
+The available options are:
+
+##### sample
+Calculates the sample standard deviation where the data is considered to be part of a larger population.
+
+##### population
+Calculates the population standard deviation where the data is considered a population of its own.
 
 ## Examples
 ```js
