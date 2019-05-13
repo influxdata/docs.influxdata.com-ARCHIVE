@@ -152,30 +152,48 @@ DotExpression           = "." identifer
 MemberBracketExpression = "[" string_lit "]" .
 ```
 
-### Operators
+## Conditional expressions
+Conditional expressions evaluate a boolean-valued condition.
+If the result is _true_, the expression that follows the `then` keyword is evaluated and returned.
+If the result is _false_, the expression that follows the `else` keyword is evaluated and returned.
+In either case, only the branch taken is evaluated and only side effects associated this branch will occur.
+
+```js
+ConditionalExpression = "if" Expression "then" Expression "else" Expression .
+```
+
+##### Conditional expression example
+```js
+color = if code == 0 then "green" else if code == 1 then "yellow" else "red"
+```
+
+## Operators
 Operators combine operands into expressions.
 The precedence of the operators is given in the table below.
 Operators with a lower number have higher precedence.
 
-|Precedence| Operator |        Description        |
-|----------|----------|---------------------------|
-|     1    |  `a()`   |       Function call       |
-|          |  `a[]`   |  Member or index access   |
-|          |   `.`    |       Member access       |
-|     2    | `*` `/`  |Multiplication and division|
-|     3    | `+` `-`  | Addition and subtraction  |
-|     4    |`==` `!=` |   Comparison operators    |
-|          | `<` `<=` |                           |
-|          | `>` `>=` |                           |
-|          |`=~` `!~` |                           |
-|     5    |  `not`   | Unary logical expression  |
-|     6    |  `and`   |        Logical AND        |
-|     7    |  `or`    |        Logical OR         |
+| Precedence | Operator           | Description               |
+|:----------:|:--------:          |:--------------------------|
+| 1          | `a()`              | Function call             |
+|            | `a[]`              | Member or index access    |
+|            | `.`                | Member access             |
+| 2          | `*` `/`            |Multiplication and division|
+| 3          | `+` `-`            | Addition and subtraction  |
+| 4          |`==` `!=`           | Comparison operators      |
+|            | `<` `<=`           |                           |
+|            | `>` `>=`           |                           |
+|            |`=~` `!~`           |                           |
+| 5          | `not`              | Unary logical expression  |
+| 6          | `and`              | Logical AND               |
+| 7          | `or`               | Logical OR                |
+| 8          | `if` `then` `else` | Conditional               |
 
 The operator precedence is encoded directly into the grammar as the following.
 
 ```js
-Expression               = LogicalExpression .
+Expression               = ConditionalExpression .
+ConditionalExpression    = LogicalExpression
+                         | "if" Expression "then" Expression "else" Expression .
 LogicalExpression        = UnaryLogicalExpression
                          | LogicalExpression LogicalOperator UnaryLogicalExpression .
 LogicalOperator          = "and" | "or" .
@@ -204,4 +222,4 @@ PostfixOperator          = MemberExpression
                          | IndexExpression .
 ```
 
-_Also see [Flux Operators](/flux/v0.x/language/operators)._
+_Also see [Flux Operators](/v2.0/reference/flux/language/operators)._
