@@ -20,9 +20,9 @@ menu:
 
 #### Plugins
 
-- HTTP output plugin (`http_output)
+- HTTP output plugin (`http`)
   - Fix http output cannot set Host header.
-- InfluxDB v2 output (`influxdb_v2 output`)
+- InfluxDB v2 output (`influxdb_v2`)
   - Don't discard metrics on forbidden error.
 - IPMI Sensor input (`ipmi_sensor`)
   - Add support for hex values.
