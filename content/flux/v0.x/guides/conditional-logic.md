@@ -56,7 +56,7 @@ The following example uses an example `metric` variable to change how the query 
 ```js
 metric = "Memory"
 
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) =>
       if v.metric == "Memory"
@@ -82,7 +82,7 @@ It sets the `level` column to a specific string based on `_value` column.
 {{% /code-tabs %}}
 {{% code-tab-content %}}
 ```js
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) => r._measurement == "mem" and r._field == "used_percent" )
   |> map(fn: (r) => ({
@@ -99,7 +99,7 @@ from(bucket: "example-bucket")
 {{% /code-tab-content %}}
 {{% code-tab-content %}}
 ```js
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) => r._measurement == "mem" and r._field == "used_percent" )
   |> map(fn: (r) => ({
@@ -134,7 +134,7 @@ functions to count the number of records in every five minute window that exceed
 ```js
 threshold = 65.0
 
-data = from(bucket: "example-bucket")
+data = from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) => r._measurement == "mem" and r._field == "used_percent" )
   |> aggregateWindow(
@@ -154,7 +154,7 @@ data = from(bucket: "example-bucket")
 ```js
 threshold = 65.0
 
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) => r._measurement == "mem" and r._field == "used_percent" )
   // Aggregate data into 5 minute windows using a custom reduce() function

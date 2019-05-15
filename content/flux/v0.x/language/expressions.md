@@ -222,4 +222,4 @@ PostfixOperator          = MemberExpression
                          | IndexExpression .
 ```
 
-_Also see [Flux Operators](/v2.0/reference/flux/language/operators)._
+_Also see [Flux Operators](/flux/v0.x/language/operators)._

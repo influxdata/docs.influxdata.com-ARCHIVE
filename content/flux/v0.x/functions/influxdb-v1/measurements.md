@@ -14,7 +14,7 @@ The return value is always a single table with a single column, `_value`.
 ```js
 import "influxdata/influxdb/v1"
 
-v1.measurements(bucket: "example-bucket")
+v1.measurements(bucket: "telegraf/autogen")
 ```
 
 ## Parameters

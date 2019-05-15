@@ -16,7 +16,7 @@ The return value is always a single table with a single column, `_value`.
 import "influxdata/influxdb/v1"
 
 v1.tagValues(
-  bucket: "example-bucket",
+  bucket: "telegraf/autogen",
   tag: "host",
   predicate: (r) => true,
   start: -30d

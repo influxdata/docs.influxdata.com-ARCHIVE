@@ -15,7 +15,7 @@ The return value is always a single table with a single column, `_value`.
 import "influxdata/influxdb/v1"
 
 v1.measurementTagKeys(
-  bucket: "example-bucket",
+  bucket: "telegraf/autogen",
   measurement: "cpu"
 )
 ```
