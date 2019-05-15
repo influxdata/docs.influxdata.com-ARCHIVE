@@ -21,7 +21,11 @@ _**Output data type:** Object_
 
 
 ```js
-median(method: "estimate_tdigest", compression: 0.0)
+median(
+  column: "_value",
+  method: "estimate_tdigest",
+  compression: 0.0
+)
 ```
 
 When using the `estimate_tdigest` or `exact_mean` methods, it outputs non-null
@@ -36,6 +40,12 @@ value that represents the `0.5` quantile.
 > You can convert your value column to a float column using the [`toFloat()` function](/flux/v0.x/functions/built-in/transformations/type-conversions/tofloat).
 
 ## Parameters
+
+### column
+The column used to calculate the median.
+Defaults to `"_value"`.
+
+_**Data type:** String_
 
 ### method
 Defines the method of computation. Defaults to `"estimate_tdigest"`.
