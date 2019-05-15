@@ -6,6 +6,45 @@ menu:
     weight: 1
 ---
 
+## v0.29.0 [2019-05-15]
+
+### Breaking changes
+- Make `on` a required parameter to `join()`.
+
+### Features
+- Add stream table index functions (
+  [`tableFind()`](/flux/v0.x/functions/built-in/transformations/stream-table/tablefind/),
+  [`getRecord()`](/flux/v0.x/functions/built-in/transformations/stream-table/getrecord/),
+  [`getColumn()`](/flux/v0.x/functions/built-in/transformations/stream-table/getcolumn/)
+  ).
+- Construct invalid binary expressions when given multiple expressions.
+
+### Bug fixes
+- Properly use RefCount to reference count tables.
+- Remove the race condition within the `(*Query).Done` method.
+- Fix table functions test.
+- Add `column` parameter to `median()`.
+- Modify `median` to work with `aggregateWindow()`.
+- `pivot()` now uses the correct column type when filling nulls.
+- Add error handling for property list.
+- Return the error from the context in the executor.
+
+## v0.28.3 [2019-05-01]
+
+### Bug fixes
+- Fix request results labels to count runtime errors.
+- An error when joining could result in two calls to finish.
+
+## v0.28.2 [2019-04-26]
+
+### Bug fixes
+- Preallocate data when constructing a new string array.
+
+## v0.28.1 [2019-04-25]
+
+### Bug fixes
+- Make executor respect memory limit from caller.
+
 ## v0.28.0 [2019-04-24]
 
 ### Features
