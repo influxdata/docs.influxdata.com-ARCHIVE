@@ -404,7 +404,7 @@ influx_inspect export -database myDB -compress
 
 After exporting the data in line protocol format, you can import the data using the [`influx -import` CLI command](https://docs.influxdata.com/influxdb/latest/tools/shell/#import).
 
-In the following example, the compressed data file is impported into the specified database.
+In the following example, the compressed data file is imported into the specified database.
 
 ```bash
 influx -import -database myDB -compress
