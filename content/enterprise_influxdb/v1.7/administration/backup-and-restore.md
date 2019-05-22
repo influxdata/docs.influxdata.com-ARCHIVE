@@ -397,7 +397,7 @@ For details on optional settings and usage, see [`influx_inspect export` command
 In the following example, the database is exported filtered to include only one day and compressed for optimal speed and file size.
 
 ```bash
-influx_inspect export -database myDB -compress
+influx_inspect export -database myDB -compress -start 2019-05-19T00:00:00.000Z -end 2019-05-19T23:59:59.999Z
 ```
 
 ### Importing data
@@ -418,6 +418,6 @@ For an example of using the exporting and importing data approach for disaster r
 
 * Data is exported every 15 minutes from an active cluster to an AWS S3 bucket.
 * The export file in the S3 bucket is replicated using the AWS S3 copy command.
-* Data is imported every 15 minutes to a cluster available for disaster recovery.
-* Advantages of the export-import approach over the standard backup and restore utilities.
-* The use of a custom admin tool to manage users and the scheduled exports and imports.
+* Data is imported every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
+* Advantages of the export-import approach over the standard backup and restore utilities for large volumes of data.
+* Use of a custom administration tool to manage users and scheduled exports and imports.
