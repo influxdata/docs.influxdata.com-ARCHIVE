@@ -25,15 +25,15 @@ Depending on the volume of data to be protected and your application requirement
 * [Backup and restore utilities](#backup-and-restore-utilities) — For most applications
 * [Exporting and importing data](#exporting-and-importing-data) — For large datasets
 
-> **Note:** You can use the [new `backup` and `restore` utilities in InfluxDB OSS 1.5](/influxdb/v1.5/administration/backup_and_restore/) to:
-> * Restore InfluxDB Enterprise 1.5 backup files to InfluxDB OSS 1.5.
-> * Back up InfluxDB OSS 1.5 data that can be restored in InfluxDB Enterprise 1.5.
+> **Note:** You can use the [new `backup` and `restore` utilities (InfluxDB OSS 1.5 and later](/influxdb/latest/administration/backup_and_restore/) to:
+> * Restore InfluxDB Enterprise backup files to InfluxDB OSS instances.
+> * Back up InfluxDB OSS data that can be restored in InfluxDB Enterprise clusters.
 
 ## Backup and restore utilities
 
 InfluxDB Enterprise supports backing up and restoring data in a cluster, a single database, a single database and retention policy, and single shards. Most InfluxDB Enterprise applications can use the backup and restore utilities.
 
->**Note:** For large datasets (100s of gigabytes of data), you might need to use the [export and import method](#exporting-and-importing-data) method.
+>**Note:** For large datasets (100s of gigabytes of data or more), you might need to use the [export and import method](#exporting-and-importing-data) method.
 
 ### Backup utility
 
