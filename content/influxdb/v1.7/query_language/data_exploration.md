@@ -431,14 +431,16 @@ Queries with unquoted string field values or double quoted string field values
 will not return any data and, in most cases,
 [will not return an error](#common-issues-with-the-where-clause).
 
-Supported operators:
-`=`&emsp;&nbsp;&thinsp;equal to
-`<>`&emsp;not equal to
-`!=`&emsp;not equal to
-`>`&emsp;&nbsp;&thinsp;greater than
-`>=`&emsp;greater than or equal to
-`<`&emsp;&nbsp;&thinsp;less than
-`<=`&emsp;less than or equal to
+##### Supported operators:
+| Operator | Meaning                  |
+|:--------:|:--------                 |
+| `=`      | equal to                 |
+| `<>`     | not equal to             |
+| `!=`     | not equal to             |
+| `>`      | greater than             |
+| `>=`     | greater than or equal to |
+| `<`      | less than                |
+| `<=`     | less than or equal to    |
 
 Other supported features:
 [Arithmetic Operations](/influxdb/v1.7/query_language/math_operators/),
@@ -456,10 +458,12 @@ Queries with unquoted tag values or double quoted tag values will not return
 any data and, in most cases,
 [will not return an error](#common-issues-with-the-where-clause).
 
-Supported operators:
-`=`&emsp;&nbsp;&thinsp;equal to
-`<>`&emsp;not equal to
-`!=`&emsp;not equal to
+##### Supported operators
+| Operator | Meaning      |
+|:--------:|:-------      |
+| `=`      | equal to     |
+| `<>`     | not equal to |
+| `!=`     | not equal to |
 
 Other supported features:
 [Regular Expressions](#regular-expressions)
@@ -2425,14 +2429,15 @@ SELECT_clause FROM_clause WHERE time <operator> ['<rfc3339_date_time_string>' | 
 ```
 
 #### Supported operators
-
-`=`&emsp;&nbsp;&thinsp;equal to
-`<>`&emsp;not equal to
-`!=`&emsp;not equal to
-`>`&emsp;&nbsp;&thinsp;greater than
-`>=`&emsp;greater than or equal to
-`<`&emsp;&nbsp;&thinsp;less than
-`<=`&emsp;less than or equal to
+| Operator | Meaning                  |
+|:--------:|:-------                  |
+| `=`      | equal to                 |
+| `<>`     | not equal to             |
+| `!=`     | not equal to             |
+| `>`      | greater than             |
+| `>=`     | greater than or equal to |
+| `<`      | less than                |
+| `<=`     | less than or equal to    |
 
 Currently, InfluxDB does not support using `OR` with absolute time in the `WHERE`
 clause. See the [Frequently Asked Questions](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
@@ -2599,14 +2604,15 @@ SELECT_clause FROM_clause WHERE time <operator> now() [[ - | + ] <duration_liter
 The whitespace between `-` or `+` and the [duration literal](/influxdb/v1.7/query_language/spec/#durations) is required.
 
 #### Supported operators
-
-`=`&emsp;&nbsp;&thinsp;equal to
-`<>`&emsp;not equal to
-`!=`&emsp;not equal to
-`>`&emsp;&nbsp;&thinsp;greater than
-`>=`&emsp;greater than or equal to
-`<`&emsp;&nbsp;&thinsp;less than
-`<=`&emsp;less than or equal to
+| Operator | Meaning                  |
+|:--------:|:-------                  |
+| `=`      | equal to                 |
+| `<>`     | not equal to             |
+| `!=`     | not equal to             |
+| `>`      | greater than             |
+| `>=`     | greater than or equal to |
+| `<`      | less than                |
+| `<=`     | less than or equal to    |
 
 #### `duration_literal`
 
