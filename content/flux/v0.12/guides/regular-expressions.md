@@ -52,14 +52,14 @@ from(bucket: "telegraf/autogen")
 ```
 
 ### Use a regex to filter by field key
-The following example excludes records that do not have `_percent` in a field key.
+The following example filters out records that have `_percent` in a field key.
 
 ```js
 from(bucket: "telegraf/autogen")
   |> range(start: -15m)
   |> filter(fn: (r) =>
-    r._measurement == "mem" and
-    r._field =~ /_percent/
+    r._measurement == "mem" AND
+    r._field !~ /_percent/
   )
 ```
 
