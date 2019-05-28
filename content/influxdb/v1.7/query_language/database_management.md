@@ -343,7 +343,12 @@ A successful `ALTER RETENTION POLICY` query returns an empty result.
 
 ### Delete retention policies with DROP RETENTION POLICY
 
-Delete all measurements and data in a specific retention policy with:
+Delete all measurements and data in a specific retention policy:
+
+{{% warn %}}
+Dropping a retention policy will permanently delete all measurements and data stored in the retention policy.
+{{% /warn %}}
+
 ```sql
 DROP RETENTION POLICY <retention_policy_name> ON <database_name>
 ```
