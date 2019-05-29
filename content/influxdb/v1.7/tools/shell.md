@@ -308,6 +308,7 @@ For example:
 Things to note about `-import`:
 
 * Allow the database to ingest points by using `-pps` to set the number of points per second allowed by the import. By default, pps is zero and `influx` does not throttle importing.
+* If you are using this command on an InfluxDB Enterprise cluster that remains active during an import, InfluxData recommends limiting the points per second to 5,000 to 10,000.
 * Imports work with `.gz` files, just include `-compressed` in the command.
 * Include timestamps in the data file. InfluxDB will assign the same timestamp to points without a timestamp. This can lead to unintended [overwrite behavior](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
 * If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB.
