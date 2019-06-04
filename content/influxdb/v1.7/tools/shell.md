@@ -147,7 +147,7 @@ Default value is `influxql`.
 To use the Flux REPL shell, set the value to `flux`.
 For details on using Flux and the Flux language shell, see the [Flux documentation](/flux/v0.7/).
 
-###`-username 'username'`
+### `-username 'username'`
 
 The username that `influx` uses to connect to the server.
 Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment variable.
