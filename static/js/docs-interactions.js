@@ -91,8 +91,8 @@ tabbedContent('.tabs-container', '.tabs p a', '.tab-content');
 
 $ads = [
 	{ class: "cloud",	file: "/promos/cloud.html" },
-	{ class: "influx-days",	file: "/promos/influx-days.html" },
-	// { class: "enterprise", file: "/promos/enterprise.html" }
+	// { class: "influx-days",	file: "/promos/influx-days.html" },
+	{ class: "enterprise", file: "/promos/enterprise.html" }
 ]
 
 $(document).on('ready', function(){
