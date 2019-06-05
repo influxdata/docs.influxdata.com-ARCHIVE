@@ -7,7 +7,7 @@ menu:
     weight: 50
     parent: Administration
 ---
-When you configure a connection in Chronograf, you can import a variety of prebuilt dashboards based on the [Telegraf input plugins](telegraf/latest/plugins/inputs) you use. The following dashboards are available based on the associated plugins.
+Chronograf lets you import a variety of prebuilt dashboards that visualize metrics collect by specific [Telegraf input plugins](/telegraf/latest/plugins/inputs). The following Telegraf-related dashboards templates are available.
 
 For details on how to import dashboards while adding a connection in Chronograf, see [Creating connections](chronograf/latest/administration/creating-connections//#managing-influxdb-connections-using-the-chronograf-ui).
 
