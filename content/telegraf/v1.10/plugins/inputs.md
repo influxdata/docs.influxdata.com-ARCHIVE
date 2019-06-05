@@ -210,7 +210,7 @@ see the [Dovecot documentation](http://wiki2.dovecot.org/Statistics).
 
 Plugin ID: `elasticsearch`
 
-The [Elasticsearch sinput plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/elasticsearch/README.md) queries endpoints to obtain [node](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
+The [Elasticsearch input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/elasticsearch/README.md) queries endpoints to obtain [node](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
 and optionally [cluster-health](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)
 or [cluster-stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-stats.html) metrics.
 
