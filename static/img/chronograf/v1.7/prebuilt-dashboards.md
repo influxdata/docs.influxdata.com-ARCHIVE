@@ -25,7 +25,53 @@ The Docker dashboard displays the following information:
 - [`system` plugin](/telegraf/latest/plugins/inputs/#system)
 - [`cpu` plugin](/telegraf/latest/plugins/inputs/#cpu)
 
-- Kubernetes Node. [](/telegraf/latest/plugins/inputs/#kubernetes)
+## Kubernetes Node
+The Kubernetes Node dashboard displays the following information:
+- Total Nodes
+- Total Pod Count
+- Total Containers
+- K8s - Node Millicores
+- K8s - Node Memory Bytes
+- K8s - Pod Millicores
+- K8s - Pod Memory Bytes
+- K8s - Pod TX Bytes/Second
+- K8s - Pod RX Bytes/Second
+- K8s - Kubelet Millicores
+- K8s - Kubelet Memory Bytes
+
+### Plugins
+- [kubernetes](/telegraf/latest/plugins/inputs/#kubernetes)
+
+## Kubernetes Overview
+The Kubernetes Node dashboard displays the following information:
+- Total Nodes
+- Total Pod Count
+- Total Containers
+- K8s - Node Millicores
+- K8s - Node Memory Bytes
+- K8s - Pod Millicores
+- K8s - Pod Memory Bytes
+- K8s - Pod TX Bytes/Second
+- K8s - Pod RX Bytes/Second
+- K8s - Kubelet Millicores
+- K8s - Kubelet Memory Bytes
+
+### Plugins
+- [kubernetes](/telegraf/latest/plugins/inputs/#kubernetes)
+
+# Kubernetes Pod
+The Kubernetes Pod dashboard displays the following information:
+- Total Nodes
+- Total Pod Count
+- Total Containers
+- K8s - Pod Millicores
+- K8s - Pod Memory Bytes
+- K8s - Pod Millicores
+- K8s - Pod Memory Bytes
+- K8s - Pod TX Bytes/Second
+
+### Plugins
+- [kubernetes](/telegraf/latest/plugins/inputs/#kubernetes)
 
 - Riak. [](/telegraf/latest/plugins/inputs/#riak)
 
@@ -54,7 +100,18 @@ The Consul Telemetry dashboard displays the following information:
 
 - Kubernetes Overview. [](/telegraf/latest/plugins/inputs/#kubernetes-inventory)
 
-- Mesos. [](/telegraf/latest/plugins/inputs/#mesos)
+## Mesos
+The Mesos dashboard displays the following information:
+- Mesos Active Slaves
+- Mesos Tasks Active
+- Mesos Tasks
+- Mesos Outstanding Offers
+- Mesos Available/Used CPUs
+- Mesos Available/Used Memory
+- Mesos Master Uptime
+
+### Plugins
+- [`mesos` plugin](/telegraf/latest/plugins/inputs/#mesos)
 
 ## IIS
 IIS - Service
@@ -64,14 +121,16 @@ IIS - Service
 
 - RabbitMQ. [](/telegraf/latest/plugins/inputs/#rabbitmq)
 
-- System.:
-    - [`system` plugin](/telegraf/latest/plugins/inputs/#system)
-    - [`mem` plugin](/telegraf/latest/plugins/inputs/#mem)
-    - [`cpu` plugin](/telegraf/latest/plugins/inputs/#cpu)
-    - [`diskio` plugin](/telegraf/latest/plugins/inputs/#diskio)
-    - [`net` plugin](/telegraf/latest/plugins/inputs/#net)
-    - [`processes` plugin](/telegraf/latest/plugins/inputs/#processes)
-    - [`swap` plugin](/telegraf/latest/plugins/inputs/#swap)
+## System
+
+### Plugins
+- [`influxdb` plugin](/telegraf/latest/plugins/inputs/#influxdb)
+- [`system` plugin](/telegraf/latest/plugins/inputs/#system)
+- [`mem` plugin](/telegraf/latest/plugins/inputs/#mem)
+- [`cpu` plugin](/telegraf/latest/plugins/inputs/#cpu)
+- [`disk` plugin](/telegraf/latest/plugins/inputs/#disk)
+- [`net` plugin](/telegraf/latest/plugins/inputs/#net)
+
 
 
 - VMware vSphere Overview. [](/telegraf/latest/plugins/inputs/#vmware-vsphere)
@@ -122,12 +181,91 @@ The ElasticSearch dashboard displays the following information:
 
 ## InfluxDB
 The InfluxDB dashboard displays the following information:
-- 
+- System Uptime
+- System Load
+- Network
+- Memory Usage
+- CPU Utilization %
+- Filesystems Usage
+- # Measurements
+- nCPU
+- # Series
+- # Measurements per DB
+- # Series per DB
+- InfluxDB Memory Heap
+- InfluxDB Active Requests
+- InfluxDB - HTTP Requests/Min
+- InfluxDB GC Activity
+- InfluxDB - Written Points/Min
+- InfluxDB - Query Executor Duration
+- InfluxDB - Write Errors
+- InfluxDB - Client Errors
+- # CQ/Minute
+
+### Plugins
+-
 
 
 ## Memcached
-- NSQ
-- PostgreSQL
+The Memcached dashboard displays the following information:
+- Memcached - Current Connections
+- Memcached - Get Hits/Second
+- Memcached - Get Misses/Second
+- Memcached - Delete Hits/Second
+- Memcached - Delete Misses/Second
+- Memcached - Incr Hits/Second
+- Memcached - Incr Misses/Second
+- Memcached - Current Items
+- Memcached - Total Items
+- Memcached - Bytes Stored
+- Memcached - Bytes Read/Sec
+- Memcached - Bytes Written/Sec
+- Memcached - Evictions/10 Seconds
+
+### Plugins
+- [`memcached` plugin](/telegraf/latest/plugins/inputs/#memcached)
+
+
+## NSQ
+The NSQ dashboard displays the following information:
+- NSQ - Channel Client Count
+- NSQ - Channel Messages Count
+- NSQ - Topic Count
+- NSQ - Server Count
+- NSQ - Topic Messages
+- NSQ - Topic Messages on Disk
+- NSQ - Topic Ingress
+- NSQ - Topic Egress
+
+### Plugins
+- [`nsq` plugin](/telegraf/latest/plugins/inputs/#nsq)
+
+## PostgreSQL
+The PostgreSQL dashboard displays the following information:
+- System Uptime
+- nCPU
+- System Load
+- Total Memory
+- Memory Usage
+- Filesystems Usage
+- CPU Usage
+- System Load
+- I/O
+- Network
+- Processes
+- Swap
+- PostgreSQL rows out/sec
+- PostgreSQL rows in/sec
+- PostgreSQL - Buffers
+- PostgreSQL commit/rollback per sec
+- Postgres deadlocks/conflicts
+
+### Plugins
+- [`system` plugin](/telegraf/latest/plugins/inputs/#system)
+- [`mem` plugin](/telegraf/latest/plugins/inputs/#mem)
+- [`cpu` plugin](/telegraf/latest/plugins/inputs/#cpu)
+- [`diskio` plugin](/telegraf/latest/plugins/inputs/#diskio)
+
 
 ## HAProxy
 The HAProxy dashboard displays the following information:
@@ -148,14 +286,85 @@ The HAProxy dashboard displays the following information:
 - HAProxy - Backend Error Responses/Second
 
 ### Plugins
- [`haproxy` plugin](/telegraf/latest/plugins/inputs/#haproxy)
+- [`haproxy` plugin](/telegraf/latest/plugins/inputs/#haproxy)
 
-- Kubernetes Pod
-- NGINX
-- Redis
-- VMware vSphere VMs
-- VMware vSphere Hosts
-- PHPfpm
-- Win System
-- MySQL
-- Ping
+## Kubernetes Pod
+
+### Plugins
+
+
+## NGINX
+The NGINX dashboard displays the following information:
+- NGINX - Client Connection
+- NGINX - Client Errors
+- NGINX - Client Requests
+- NGINX - Active Client State
+
+### Plugins
+- [`nginx` plugin](/telegraf/latest/plugins/inputs/#nginx)
+
+## Redis
+
+### Plugins
+
+
+## VMware vSphere VMs
+
+### Plugins
+
+
+## VMware vSphere Hosts
+
+### Plugins
+
+
+## PHPfpm
+The PHPfpm dashboard displays the following information:
+- PHPfpm - Accepted Connections
+- PHPfpm - Processes
+- PHPfpm - Slow Requests
+- PHPfpm - Max Children Reached
+
+### Plugins
+- [`phpfpm` plugin](/telegraf/latest/plugins/inputs/#nginx)
+
+## Win System
+
+### Plugins
+
+
+
+## MySQL
+The MySQL dashboard displays the following information:
+- System Uptime
+- nCPU
+- MySQL uptime
+- Total Memory
+- System Load
+- Memory Usage
+- InnoDB Buffer Pool Size
+- InnoDB Buffer Usage
+- Max Connections
+- Open Connections
+- I/O
+- Network
+- MySQL Connections/User
+- MySQL Received Bytes/Sec
+- MySQL Sent Bytes/Sec
+- MySQL Connections
+- MySQL Queries/Sec
+- MySQL Slow Queries
+- InnoDB Data
+
+### Plugins
+- [`mySQL` plugin](/telegraf/latest/plugins/inputs/#mysql)
+- [`system` plugin](/telegraf/latest/plugins/inputs/#system)
+- [`mem` plugin](/telegraf/latest/plugins/inputs/#mem)
+
+## Ping
+The Ping dashboard displays the following information:
+- Ping - Packet Loss Percent
+- Ping - Response Times (ms)
+
+### Plugins
+- [`ping` plugin](/telegraf/latest/plugins/inputs/#ping)
