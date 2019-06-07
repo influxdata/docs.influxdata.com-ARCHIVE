@@ -6,6 +6,27 @@ menu:
     weight: 1
 ---
 
+## v0.31.1 [2019-05-29]
+
+### Bug fixes
+- Do not call done after calling the function.
+
+## v0.31.0 [2019-05-28]
+
+### Breaking changes
+- Copy the table when a table is used multiple times.
+
+### Features
+- Support for dynamic queries.
+
+### Bug fixes
+- Copy the table when a table is used multiple times.
+
+## v0.30.0 [2019-05-16]
+
+### Features
+- Support for dynamic queries.
+
 ## v0.29.0 [2019-05-15]
 
 ### Breaking changes
@@ -106,7 +127,7 @@ menu:
 {{% note %}}
 ### Breaking changes since last Flux update
 Flux v0.24 is packaged with the InfluxDB v1.7.6.
-InfluxDB v1.7.3-1.7.5 included Flux v0.12.
+-B v1.7.3-1.7.5 included Flux v0.12.
 The list below is a summary of breaking changes in Flux between those versions.
 
 - Rename `percentile()` function to `quantile()`.

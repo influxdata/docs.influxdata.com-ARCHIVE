@@ -22,7 +22,7 @@ count(column: "_value")
 
 ## Parameters
 
-### columns
+### column
 Column on which to operate.
 Defaults to `"_value"`.
 

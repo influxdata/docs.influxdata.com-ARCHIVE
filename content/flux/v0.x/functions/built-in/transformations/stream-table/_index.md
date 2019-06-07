@@ -13,6 +13,8 @@ menu:
 Use stream and table functions to extract a table from a stream of tables and access its
 columns and records.
 
+{{< function-list >}}
+
 ##### Example stream and table functions
 ```js
 data = from(bucket:"telegraf/autogen")
@@ -28,5 +30,3 @@ values = t |> getColumn(column: "_value")
 // Extract the first record from the table
 r0 = t |> getRecord(idx: 0)
 ```
-
-{{< children type="functions" >}}
