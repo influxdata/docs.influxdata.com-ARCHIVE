@@ -97,7 +97,7 @@ the following:
      - Example: `threshold = 0.0`.
    * **Boolean**
      - Examples: `enabled = true`, `global = false`, `no-verify = false`.
-   * **Array** &ndash;
+   * **Array** –
      - Examples: `my_database = [ "default", "longterm" ]`, ` urls = ["http://localhost:8086"]`
    * **Inline Table**
        - Example: `basic-auth = { username = "my-user", password = "my-pass" }`
@@ -130,7 +130,7 @@ HTTP properties,
 such as a bind address and the path to an HTTPS certificate,
 are defined in the `[http]` table.
 
-**Example 1 &ndash; The HTTP grouping**
+**Example 1 – The HTTP grouping**
 
 ```toml
 ...
@@ -156,7 +156,7 @@ are defined in the `[http]` table.
 The `[config-override]` table contains only one key which enables or disables the ability to
 override certain values through the HTTP API. It is enabled by default.
 
-**Example 2 &ndash; The Config Override grouping**
+**Example 2 – The Config Override grouping**
 
 ```toml
 ...
@@ -170,7 +170,7 @@ override certain values through the HTTP API. It is enabled by default.
 The Kapacitor service uses logging to monitor and inspect its behavior.
 The path to the log and the log threshold is defined in `[logging]` table.
 
-**Example 3 &ndash; The Logging grouping**
+**Example 3 – The Logging grouping**
 
 ```toml
 ...
@@ -189,7 +189,7 @@ Starting with Kapacitor 1.4, the Kapacitor service includes a feature
 that enables the loading of TICKscript tasks when the service loads.
 The path to these scripts is defined in this table.
 
-**Example 4 &ndash; The Load grouping**
+**Example 4 – The Load grouping**
 
 ```toml
 ...
@@ -207,7 +207,7 @@ The Kapacitor client application can record data streams and batches for testing
 tasks before they are enabled.
 This table contains one key which declares the path to the directory where the replay files are to be stored.
 
-**Example 5 &ndash; The Replay grouping**
+**Example 5 – The Replay grouping**
 
 ```toml
 ...
@@ -229,7 +229,7 @@ The Kapacitor service stores its configuration and other information in the key-
 The location of this database on the file system is defined in the storage table
 grouping.
 
-**Example 6 &ndash; The Storage grouping**
+**Example 6 – The Storage grouping**
 
 ```toml
 ...
@@ -249,7 +249,7 @@ For a Deadman's switch to work it needs a threshold below which the switch will
 be triggered.  It also needs a polling interval as well as an id and message
 which will be passed to the alert handler.
 
-**Example 7 &ndash; The Deadman grouping**
+**Example 7 – The Deadman grouping**
 
 ```toml
 ...
@@ -276,7 +276,12 @@ You must define at least one `[[influxdb]]` table array configuration for an Inf
 Multiple InfluxDB table array configurations can be specified,
 but one InfluxDB table array configuration must be flagged as the `default`.
 
-**Example 8 &ndash; An InfluxDB Connection grouping**
+{{% note %}}
+To use Kapacitor with an InfluxDB instance that requires authentication,
+it must authenticate using an InfluxDB user with **read and write** permissions. 
+{{% /note %}}
+
+**Example 8 – An InfluxDB Connection grouping**
 
 ```toml
 ...
@@ -384,7 +389,7 @@ POSTing alerts to an HTTP endpoint.
 Kapacitor will send usage statistics back to InfluxData.
 This feature can be disabled or enabled in the `[reporting]` table grouping.
 
-**Example 9 &ndash; Reporting configuration**
+**Example 9 – Reporting configuration**
 ```toml
 ...
 [reporting]
@@ -401,7 +406,7 @@ Internal statistics about Kapacitor can also be emitted to an InfluxDB database.
 The collection frequency and the database to which the statistics are emitted
 can be configured in the `[stats]` table grouping.
 
-**Example 10 &ndash; Stats configuration**
+**Example 10 – Stats configuration**
 
 ```toml
 ...
@@ -441,7 +446,7 @@ A feature defined by an optional table should be enabled whenever a relevant nod
 For example, if alerts are to be sent via email, then the SMTP service should
 be enabled and configured in the `[smtp]` properties table.
 
-**Example 11 &ndash; Enabling SMTP**
+**Example 11 – Enabling SMTP**
 
 ```toml
 ...
@@ -522,7 +527,7 @@ be found in the configuration file:
 
    * [Swarm](/kapacitor/v1.5/nodes/swarm_autoscale_node/)
 
-   **Example 12 &ndash; The Docker Swarm configuration**
+   **Example 12 – The Docker Swarm configuration**
 
    ```toml
    ...
@@ -545,7 +550,7 @@ be found in the configuration file:
    ```
    * [Kubernetes](/kapacitor/v1.5/nodes/k8s_autoscale_node/)
 
-   **Example 13 &ndash; The Kubernetes configuration**
+   **Example 13 – The Kubernetes configuration**
 
    ```toml
    ...
@@ -593,7 +598,7 @@ A UDF configuration requires a path to an executable, identified by the followin
 The UDF can also include a group of environment variables declared in a table
 identified by the string `udf.functions.<UDF_NAME>.env`.
 
-   **Example 14 &ndash; Configuring a User Defined Function**
+   **Example 14 – Configuring a User Defined Function**
 
    ```toml
    ...
@@ -642,7 +647,7 @@ Each input source has additional properties specific to its configuration.  They
 follow the same configurations for these services used in
 [Influxdb](https://github.com/influxdata/influxdb/blob/master/etc/config.sample.toml).
 
-**Example 15 &ndash; Collectd configuration**
+**Example 15 – Collectd configuration**
 
 ```toml
 ...
@@ -658,7 +663,7 @@ follow the same configurations for these services used in
 ...
 ```
 
-**Example 16 &ndash; Opentsdb configuration**
+**Example 16 – Opentsdb configuration**
 
 ```toml
 ...
@@ -684,7 +689,7 @@ example, Kapacitor can be configured to accept raw data from a UDP connection.
 
 This is configured much like other input services.
 
-**Example 17 &ndash; UDP configuration**
+**Example 17 – UDP configuration**
 
 ```toml
 ...
@@ -708,7 +713,7 @@ For more information, see [Scraping and Discovery](/kapacitor/v1.5/pull_metrics/
 For scraping and discovery to work one or more scrapers must be configured. One
 scraper can be bound to one discovery service.
 
-**Example 18 &ndash; Scraper configuration**
+**Example 18 – Scraper configuration**
 
 ```toml
 ...
@@ -759,7 +764,7 @@ services:
 * Triton
 * UDP
 
-**Example 19 &ndash; EC2 Discovery Service configuration**
+**Example 19 – EC2 Discovery Service configuration**
 
 ```toml
 ...
@@ -843,7 +848,7 @@ Properties can be altered by POSTing a JSON document to the endpoint.
 The JSON document must contain a `set` field with a map of the properties to override and
 their new values.
 
-**Example 19 &ndash; JSON file for enabling the SMTP configuration**
+**Example 19 – JSON file for enabling the SMTP configuration**
 ```json
 {
     "set":{
@@ -857,7 +862,7 @@ service can be enabled.
 
 Property overrides can be removed with the `delete` field in the JSON document.
 
-**Example 20 &ndash; JSON file for removing an SMTP override**
+**Example 20 – JSON file for removing an SMTP override**
 ```json
 {
     "delete":[
