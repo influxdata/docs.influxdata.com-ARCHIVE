@@ -7,7 +7,7 @@ menu:
     parent: Guides
 ---
 
-Write data into InfluxDB using the [command line interface](/influxdb/v1.7/tools/shell/), [client libraries](/influxdb/v1.7/clients/api/), and plugins for common data formats such as [Graphite](/influxdb/v1.7/write_protocols/graphite/). (can all of these methods use the HTTP API?)
+Write data into InfluxDB using the [command line interface](/influxdb/v1.7/tools/shell/), [client libraries](/influxdb/v1.7/clients/api/), and plugins for common data formats such as [Graphite](/influxdb/v1.7/write_protocols/graphite/).
 
 > **Note**: The following examples use `curl`, a command line tool that transfers data using URLs. Learn the basics of `curl` with the [HTTP Scripting Guide](https://curl.haxx.se/docs/httpscripting.html).
 
