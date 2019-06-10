@@ -380,13 +380,13 @@ Your users should now be able to sign into Chronograf using the new Okta provide
     > These should be replaced by the actual URLs used to access each service.
 
     ```bash
-    GENERIC_NAME=gitlab
+    GENERIC_NAME=generic
     GENERIC_CLIENT_ID=<gitlab_application_id>
     GENERIC_CLIENT_ID=<gitlab_secret>
     GENERIC_AUTH_URL=http://<gitlab-server-example.com>/oauth/authorize?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&response_type=code
     GENERIC_TOKEN_URL=http://gitlab-server-example.com/oauth/token?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&grant_type=authorization_code
     GENERIC_SCOPES=api
-    TOKEN_SECRET=mysupersecret
+    GENERIC_CLIENT_SECRET=mysupersecret
     GENERIC_API_URL=http://gitlab-server-example.com/api/v3/user
     ```
 
