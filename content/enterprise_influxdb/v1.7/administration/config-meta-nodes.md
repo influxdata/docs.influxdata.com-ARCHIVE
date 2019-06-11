@@ -310,7 +310,7 @@ For example, [Continuous Queries](/influxdb/v1.7/concepts/glossary/#continuous-q
 (CQs) use a lease so that all data nodes aren't running the same CQs at once.
 
 For more details about `lease-duration` and its impact on continuous queries, see
-[Configuration and operational considerations on a cluster](enterprise_influxdb/latest/features/clustering-features/#configuration-and-operational-considerations-on-a-cluster).
+[Configuration and operational considerations on a cluster](/enterprise_influxdb/v1.7/features/clustering-features/#configuration-and-operational-considerations-on-a-cluster).
 
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
 
