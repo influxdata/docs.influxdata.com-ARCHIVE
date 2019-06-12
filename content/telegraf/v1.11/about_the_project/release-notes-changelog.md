@@ -116,7 +116,7 @@ menu:
 #### Agent
 
 - Create Windows service only when specified or in service manager.
-- Don't start telegraf when stale pidfile found.
+- Don't start Telegraf when stale pid file found.
 - Fix inline table support in configuration file.
 - Fix multi-line basic strings support in configuration file.
 - Fix multiple SIGHUP causes Telegraf to shutdown.
