@@ -5,6 +5,16 @@
 ##############   %%%%%%  %%  %%  %%       %%%%     %%     %%%%    ##############
 
 input:
+  - name: AMQP Consumer
+    id: amqp_consumer
+    description: |
+      The AMQP Consumer input plugin provides a consumer for use with AMQP 0-9-1,
+      a prominent implementation of this protocol
+      being RabbitMQ.
+    link: https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/amqp_consumer/README.md
+    introduced: 1.3.0
+    tags: [linux, macos, windows, messaging]
+
   - name: ActiveMQ
     id: activemq
     description: |
@@ -39,16 +49,6 @@ input:
     link: https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/kinesis_consumer/README.md
     introduced: 1.10.0
     tags: [linux, macos, windows, cloud, messaging]
-
-  - name: AMQP Consumer
-    id: amqp_consumer
-    description: |
-      The AMQP Consumer input plugin provides a consumer for use with AMQP 0-9-1,
-      a prominent implementation of this protocol
-      being RabbitMQ.
-    link: https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/amqp_consumer/README.md
-    introduced: 1.3.0
-    tags: [linux, macos, windows, messaging]
 
   - name: Apache Aurora
     id: aurora
