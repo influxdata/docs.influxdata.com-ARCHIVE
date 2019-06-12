@@ -1,0 +1,17 @@
+{{ $type := .Get "type" }}
+{{ $telegrafVersion := replaceRE `^v` "" .Site.Data.default_versions.telegraf_semver }}
+{{ range (index .Site.Data.telegraf_plugins $type ) }}
+  {{ $pluginTags := delimit .tags " " }}
+  {{ $minorVer := replaceRE `\.[^.]*$` "" .introduced }}
+  <div class="plugin-card visible{{ if eq $minorVer $telegrafVersion }} new{{ end }}" id="{{ .id }}" data-tags="{{ $type }} {{ lower $pluginTags }} {{ if eq $minorVer $telegrafVersion }}new{{ end }} {{ if .deprecated }}deprecated{{ end }} ">
+    <div class="info">
+      <h3 id="{{ .id }}">{{ .name }}</h3>
+      <p class="meta">
+        Plugin ID: <code>{{ $type }}s.{{ .id }}</code><br/>
+        Telegraf {{ if not .deprecated }}{{ .introduced }}+{{ else }}{{ .introduced }} - {{ .deprecated }} <span class="deprecated">Depricated</span>{{ end }}
+      </p>
+      <p>{{ .description | markdownify | safeHTML }}</p>
+    </div>
+    <a class="btn github-link" href="{{ .link }}" target="_blank"><span class="icon github"></span> <span class="hide">View</span></a>
+  </div>
+{{ end }}
