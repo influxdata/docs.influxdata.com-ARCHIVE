@@ -49,6 +49,11 @@ menu:
 - Allow env vars `${}` expansion syntax in configuration file.
 - Allow devices option to match against devlinks.
 
+### Input data formats
+
+- Nagios
+  - Add support for multiple line text and perfdata.
+
 #### Input plugins
 
 - AMQP Consumer (`amqp_consumer`)
@@ -59,7 +64,7 @@ menu:
   - Allow selection of collected statistic types in cloudwatch input.
 - Apache Solr (`solr`)
   - Add support for HTTP basic auth.
-- Hddtemp (`hddtemp`) input
+- Hddtemp (`hddtemp`) 
   - Add source tag.
 - InfluxDB Listener (`influxdb_listener`)
   - Support verbose query parameter in ping endpoint.
@@ -101,13 +106,10 @@ menu:
 
 #### Processor plugins
 
-- Converter
+- Converter (`converter`)
   - Add hexadecimal string to integer conversion.
 - Enum (`enum`)
   - Support tags.
-
-- Nagios parser
-  - Add support for multiple line text and perfdata.
 
 ### Bug fixes
 
