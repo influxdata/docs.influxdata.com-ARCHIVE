@@ -8,6 +8,150 @@ menu:
     parent: About the project
 ---
 
+## v1.11 [2019-06-11]
+
+- The `uptime_format` field in the system input has been deprecated, use the
+  `uptime` field instead.
+- The `cloudwatch` input has been updated to use a more efficient API, it now
+  requires `GetMetricData` permissions instead of `GetMetricStatistics`.  The
+  `units` tag is not available from this API and is no longer collected.
+
+### New Inputs
+
+- [bind](/plugins/inputs/bind/README.md) - Contributed by @dswarbrick & @danielllek
+- [cisco_telemetry_gnmi](/plugins/inputs/cisco_telemetry_gnmi/README.md) - Contributed by @sbyx
+- [cisco_telemetry_mdt](/plugins/inputs/cisco_telemetry_mdt/README.md) - Contributed by @sbyx
+- [ecs](/plugins/inputs/ecs/README.md) - Contributed by @rbtr
+- [github](/plugins/inputs/github/README.md) - Contributed by @influxdata
+- [openweathermap](/plugins/inputs/openweathermap/README.md) - Contributed by @regel
+- [powerdns_recursor](/plugins/inputs/powerdns_recursor/README.md) - Contributed by @dupondje
+
+### New Aggregators
+
+- [final](/plugins/aggregators/final/README.md) - Contributed by @oplehto
+
+### New Outputs
+
+- [syslog](/plugins/outputs/syslog/README.md) - Contributed by @javicrespo
+- [health](/plugins/outputs/health/README.md) - Contributed by @influxdata
+
+### New Serializers
+
+- [wavefront](/plugins/serializers/wavefront/README.md) - Contributed by @puckpuck
+
+### Features
+
+#### Agent
+
+- Add CLI support for outputting sections of the configuration.
+- Add `service-display-name` option for use with Windows service.
+- Add support for log rotation.
+- Allow env vars `${}` expansion syntax in configuration file.
+- Allow devices option to match against devlinks.
+
+#### Input plugins
+
+- AMQP Consumer (`amqp_consumer`)
+  - Support passive queue declaration.
+  - Add support for gzip compression.
+- Amazon Cloudwatch statistics
+  - Use more efficient GetMetricData API to collect Cloudwatch metrics.
+  - Allow selection of collected statistic types in cloudwatch input.
+- Apache Solr (`solr`)
+  - Add support for HTTP basic auth.
+- Hddtemp (`hddtemp`) input
+  - Add source tag.
+- InfluxDB Listener (`influxdb_listener`)
+  - Support verbose query parameter in ping endpoint.
+- NVIDIA SMI (`nvidia-smi`)
+  - Extend metrics collected from Nvidia GPUs.
+- Net (`net`)
+  - Speed up interface stat collection.
+- PHP FM (`phpfm`) 
+  - Enhance HTTP connection options.
+- Ping (`ping`)
+  - Add TTL field.
+- Procstat (`procstat`)
+  - Add `cmdline` tag.
+  - Add pagefault data.
+- Prometheus (`prometheus`)
+  - Add namespace restriction.
+- SMART (`smart`)
+  - Support more drive types.
+- Socket Listener (`socket_listener`)
+  - Add option to set permissions for UNIX domain sockets.
+- StatsD (`statsd`)
+  - Add support for Datadog events.
+
+### Output plugins
+
+- AMQP (`amqp`)
+  - Add support for gzip compression.
+- File (`file`)
+  - Add file rotation support.
+- Stackdriver (`stackdriver`)
+  - Set user agent.
+-- VMware Wavefront (`wavefront`)
+  - Add option to use strict sanitization rules.
+
+### Aggregator plugins
+
+- Histogram aggregator
+  - Add option to reset buckets on flush.
+
+#### Processor plugins
+
+- Converter
+  - Add hexadecimal string to integer conversion.
+- Enum (`enum`)
+  - Support tags.
+
+- Nagios parser
+  - Add support for multiple line text and perfdata.
+
+### Bug fixes
+
+#### Agent
+
+- Create Windows service only when specified or in service manager.
+- Don't start telegraf when stale pidfile found.
+- Fix inline table support in configuration file.
+- Fix multi-line basic strings support in configuration file.
+- Fix multiple SIGHUP causes Telegraf to shutdown.
+- Fix batch fails when single metric is unserializable.
+- Log a warning on write if the metric buffer has overflowed.
+
+#### Plugins
+
+- AMQP (`amqp`) output
+  - Fix direct exchange routing key.
+- Apex Neptune (`apex_neptune`) inpur
+  - Skip invalid power times.
+- Docker (`docker`) input
+  - Fix docker input does not parse image name correctly.
+- Fibaro (`fibaro`) input
+  - Set default timeout of `5s`.
+- InfluxDB v1.x (`influxdb`) output
+  - Fix connection leak on reload.
+- InfluxDB v2 output
+  - Fix connection leak on reload.
+- Lustre 2 (`lustre2`) input
+  - Fix only one job per storage target reported.
+- Microsoft Azure Monitor (`azure_monitor`) output
+  - Fix scale set resource id.
+- Microsoft SQL Server (`sqlserver`) input
+   Fix connection closing on error.  
+- Minecraft (`minecraft`) input
+  - Support Minecraft server 1.13 and newer.
+- NGINX Upstream Check (`nginx_upstream_check`) input
+  - Fix TOML option name.
+- PgBounder (`pgbouncer`) input
+  - Fix unsupported pkt type error.
+- Procstat (`procstat`) input
+  - Verify a process passed by `pid_file` exists.
+- VMware vSphere (`vsphere`) input
+  - Fixed datastore name mapping.
+
 ## 1.10.4 [2019-05-14]
 
 ### Bug fixes
