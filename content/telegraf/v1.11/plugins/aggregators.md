@@ -18,13 +18,13 @@ Aggregators emit new aggregate metrics based on the metrics collected by the inp
 
 Plugin ID: `basicstats`
 
-The [BasicStats aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/aggregators/basicstats/README.md) gives `count`, `max`, `min`, `mean`, `s2`(variance), and `stdev` for a set of values, emitting the aggregate every period seconds.
+The [BasicStats aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/aggregators/basicstats/README.md) gives `count`, `max`, `min`, `mean`, `s2`(variance), and `stdev` for a set of values, emitting the aggregate every period seconds.
 
 ### Histogram
 
 Plugin ID: `histogram`
 
-The [Histogram aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/aggregators/histogram/README.md) creates histograms containing the counts of field values within a range.
+The [Histogram aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/aggregators/histogram/README.md) creates histograms containing the counts of field values within a range.
 
 Values added to a bucket are also added to the larger buckets in the distribution. This creates a [cumulative histogram](https://upload.wikimedia.org/wikipedia/commons/5/53/Cumulative_vs_normal_histogram.svg).
 
@@ -34,13 +34,13 @@ Like other Telegraf aggregator plugins, the metric is emitted every period secon
 
 Plugin ID: `minmax`
 
-The [MinMax aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/aggregators/minmax/README.md) aggregates `min` and `max` values of each field it sees, emitting the aggregrate every period seconds.
+The [MinMax aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/aggregators/minmax/README.md) aggregates `min` and `max` values of each field it sees, emitting the aggregrate every period seconds.
 
 ### ValueCounter
 
 Plugin ID: `valuecounter`
 
-The [ValueCounter aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/aggregators/valuecounter/README.md) counts the occurrence of values in fields and emits the counter once every 'period' seconds.
+The [ValueCounter aggregator plugin](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/aggregators/valuecounter/README.md) counts the occurrence of values in fields and emits the counter once every 'period' seconds.
 
 A use case for the ValueCounter aggregator plugin is when you are processing an HTTP access log with the [Logparser input plugin](/telegraf/v1.8/plugins/inputs/#logparser) and want to count the HTTP status codes.
 

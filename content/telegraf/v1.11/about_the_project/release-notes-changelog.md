@@ -17,28 +17,28 @@ menu:
    instead of `GetMetricStatistics`.  The `units` tag is not
    available from this API and is no longer collected.
 
-### New Inputs
+### New input plugins
 
-- [bind](/plugins/inputs/bind/README.md) - Contributed by @dswarbrick & @danielllek
-- [cisco_telemetry_gnmi](/plugins/inputs/cisco_telemetry_gnmi/README.md) - Contributed by @sbyx
-- [cisco_telemetry_mdt](/plugins/inputs/cisco_telemetry_mdt/README.md) - Contributed by @sbyx
-- [ecs](/plugins/inputs/ecs/README.md) - Contributed by @rbtr
-- [github](/plugins/inputs/github/README.md) - Contributed by @influxdata
-- [openweathermap](/plugins/inputs/openweathermap/README.md) - Contributed by @regel
-- [powerdns_recursor](/plugins/inputs/powerdns_recursor/README.md) - Contributed by @dupondje
+- [BIND 9 Nameserver Statistics (`bind`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/bind/README.md) - Contributed by @dswarbrick & @danielllek
+- [Cisco GNMI Telemetry (`cisco_telemetry_gnmi`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/cisco_telemetry_gnmi/README.md) - Contributed by @sbyx
+- [Cisco Model-driven Telemetry (`cisco_telemetry_mdt`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/cisco_telemetry_mdt/README.md) - Contributed by @sbyx
+- [ECS (`ecs`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/ecs/README.md) - Contributed by @rbtr
+- [GitHub (`github`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/github/README.md) - Contributed by @influxdata
+- [OpenWeatherMap (`openweathermap`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/openweathermap/README.md) - Contributed by @regel
+- [PowerDNS Recursor (`powerdns_recursor`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/powerdns_recursor/README.md) - Contributed by @dupondje
 
-### New Aggregators
+### New aggregator plugins
 
-- [final](/plugins/aggregators/final/README.md) - Contributed by @oplehto
+- [Final (`final`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/aggregators/final/README.md) - Contributed by @oplehto
 
-### New Outputs
+### New output plugins
 
-- [syslog](/plugins/outputs/syslog/README.md) - Contributed by @javicrespo
-- [health](/plugins/outputs/health/README.md) - Contributed by @influxdata
+- [Syslog (`syslog`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/outputs/syslog/README.md) - Contributed by @javicrespo
+- [Health (`health`)](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/outputs/health/README.md) - Contributed by @influxdata
 
-### New Serializers
+### New output data formats (serializers)
 
-- [wavefront](/plugins/serializers/wavefront/README.md) - Contributed by @puckpuck
+- [wavefront](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/serializers/wavefront/README.md) - Contributed by @puckpuck
 
 ### Features
 
