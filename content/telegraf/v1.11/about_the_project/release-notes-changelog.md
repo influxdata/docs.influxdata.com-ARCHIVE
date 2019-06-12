@@ -1,5 +1,5 @@
 ---
-title: Telegraf 1.10 release notes
+title: Telegraf 1.11 release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
   telegraf_1_11:
@@ -8,13 +8,14 @@ menu:
     parent: About the project
 ---
 
-## v1.11 [2019-06-11]
+## v1.11.0 [2019-06-11]
 
-- The `uptime_format` field in the system input has been deprecated, use the
-  `uptime` field instead.
-- The `cloudwatch` input has been updated to use a more efficient API, it now
-  requires `GetMetricData` permissions instead of `GetMetricStatistics`.  The
-  `units` tag is not available from this API and is no longer collected.
+- System (`system`) input plugin
+  - The `uptime_format` field has been deprecated — use the `uptime` field instead.
+- Amazon Cloudwatch Statistics (`cloudwatch`) input plugin
+  - Updated to use a more efficient API and now requires `GetMetricData` permissions
+   instead of `GetMetricStatistics`.  The `units` tag is not
+   available from this API and is no longer collected.
 
 ### New Inputs
 
@@ -59,7 +60,7 @@ menu:
 - AMQP Consumer (`amqp_consumer`)
   - Support passive queue declaration.
   - Add support for gzip compression.
-- Amazon Cloudwatch statistics
+- Amazon Cloudwatch Statistics (`cloudwatch`)
   - Use more efficient GetMetricData API to collect Cloudwatch metrics.
   - Allow selection of collected statistic types in cloudwatch input.
 - Apache Solr (`solr`)
