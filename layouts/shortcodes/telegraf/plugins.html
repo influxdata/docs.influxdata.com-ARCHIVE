@@ -8,7 +8,7 @@
       <h3 id="{{ .id }}">{{ .name }}</h3>
       <p class="meta">
         Plugin ID: <code>{{ $type }}s.{{ .id }}</code><br/>
-        Telegraf {{ if not .deprecated }}{{ .introduced }}+{{ else }}{{ .introduced }} - {{ .deprecated }} <span class="deprecated">Depricated</span>{{ end }}
+        Telegraf {{ if not .deprecated }}{{ .introduced }}+{{ else }}{{ .introduced }} - {{ .deprecated }} <span class="deprecated">Deprecated</span>{{ end }}
       </p>
       <p>{{ .description | markdownify | safeHTML }}</p>
     </div>
