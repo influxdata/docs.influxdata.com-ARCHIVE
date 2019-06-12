@@ -155,6 +155,14 @@ input:
     introduced: 1.8.0
     tags: [linux, macos, windows, messaging]
 
+  - name: BIND 9 Nameserver Statistics
+    id: bind
+    description: |
+      plugin decodes the JSON or XML statistics provided by BIND 9 nameservers.
+    links: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/bind/README.md
+    introduced: 1.11.0
+    tags: [linux, macos, windows, netoworking]
+
   - name: Bond
     id: bond
     description: |
@@ -212,6 +220,26 @@ input:
     link: https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/chrony/README.md
     introduced: 0.13.1
     tags: [linux, macos, windows, networking, systems]
+
+  - name: Cisco GNMI Telemetry
+    id: cisco_telemetry_gnmi
+    description: |
+      Cisco GNMI Telemetry is an input plugin that consumes telemetry data similar to the GNMI specification. 
+      This GRPC-based protocol can utilize TLS for authentication and encryption. 
+      This plugin has been developed to support GNMI telemetry as produced by Cisco IOS XR (64-bit) version 6.5.1 and later.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/cisco_telemetry_gnmi/README.md
+    introduced: 1.11.0
+    tags: [linux, macos, windows, applications]
+
+  - name: Cisco Model-driven Telemetry (MDT)
+    id: cisco_telemetry_mdt
+    description: |
+      Cisco model-driven telemetry (MDT) is an input plugin that consumes telemetry data from Cisco IOS XR, IOS XE and NX-OS platforms. 
+      It supports TCP & GRPC dialout transports. GRPC-based transport can utilize TLS for authentication and encryption. 
+      Telemetry data is expected to be GPB-KV (self-describing-gpb) encoded.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/cisco_telemetry_mdt/README.md
+    introduced: 1.11.0
+    tags: [linux, macos, windows, applications]
 
   - name: Conntrack
     id: conntrack
@@ -323,6 +351,14 @@ input:
     introduced: 0.10.3
     tags: [linux, macos, windows, applications, web]
 
+  - name: ECS
+    id: ecs
+    description: |
+      ECS, Fargate compatible, input plugin which uses the ECS v2 metadata and stats API endpoints to gather stats on running containers in a Task.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/ecs/README.md
+    introduced: 1.11.0
+    tags: [linux, macos, windows, cloud, containers]
+
   - name: Elasticsearch
     id: elasticsearch
     description: |
@@ -401,6 +437,14 @@ input:
     link: https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/fluentd/README.md
     introduced: 1.4.0
     tags: [linux, macos, windows, servers]
+
+  - name: GitHub
+    id: github
+    description: |
+      Gathers repository information from GitHub-hosted repositories.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/github/README.md
+    introduced: 1.11.0
+    tags: [linux, macos, windows, applications]
 
   - name: Google Cloud PubSub
     id: cloud_pubsub
@@ -1039,6 +1083,14 @@ input:
     introduced: 1.5.0
     tags: [linux, macos, windows, applications]
 
+  - name: OpenWeatherMap
+    id: openweathermap
+    description: |
+      Collect current weather and forecast data from OpenWeatherMap.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/openweathermap/README.md
+    introduced: 1.11.0
+    tags: [linux, macos, windows, applications]
+
   - name: PF
     id: pf
     description: |
@@ -1123,6 +1175,14 @@ input:
       The PowerDNS input plugin gathers metrics about PowerDNS using UNIX sockets.
     link: https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/powerdns/README.md
     introduced: 0.10.2
+    tags: [linux, macos, windows, networking, web]
+
+  - name: PowerDNS Recursor
+    id: powerdns_recursor
+    description: |
+      The PowerDNS Recursor input plugin gathers metrics about PowerDNS Recursor using UNIX sockets.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/powerdns_recursor/README.md
+    introduced: 1.11.0
     tags: [linux, macos, windows, networking, web]
 
   - name: Processes
@@ -1667,6 +1727,15 @@ output:
     introduced: 1.7.0
     tags: [linux, macos, windows, applications]
 
+  - name: Health
+    id: health
+    description: |
+      The health plugin provides a HTTP health check resource that can be configured to return a failure status code based on the value of a metric.
+      When the plugin is healthy it will return a 200 response; when unhealthy it will return a 503 response. The default state is healthy, one or more checks must fail in order for the resource to enter the failed state.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/outputs/health/README.md
+    introduced: 1.11.0
+    tags: [linux, macos, windows, applications]
+
   - name: InfluxDB v1.x
     id: influxdb
     description: |
@@ -1831,6 +1900,15 @@ output:
     introduced: 1.9.0
     tags: [linux, macos, windows, cloud]
 
+  - name: Syslog
+    id: syslog
+    description: |
+      The syslog output plugin sends syslog messages transmitted over UDP or TCP or TLS, with or without the octet counting framing.
+      Syslog messages are formatted according to RFC 5424.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/outputs/syslog/README.md
+    introduced: 1.11.0
+    tags: [linux, macos, windows, logging]
+
   - name: Wavefront
     id: wavefront
     description: |
@@ -1854,6 +1932,17 @@ aggregator:
       and `stdev` for a set of values, emitting the aggregate every period seconds.
     link: https://github.com/influxdata/telegraf/blob/release-1.10/plugins/aggregators/basicstats/README.md
     introduced: 1.5.0
+    tags: [linux, macos, windows]
+
+  - name: Final
+    id: final
+    description: |
+      The final aggregator emits the last metric of a contiguous series. 
+      A contiguous series is defined as a series which receives updates within the time period in series_timeout. 
+      The contiguous series may be longer than the time interval defined by period.
+      This is useful for getting the final value for data sources that produce discrete time series, such as procstat, cgroup, kubernetes, etc.
+    link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/aggregators/final/README.md
+    introduced: 1.11.0
     tags: [linux, macos, windows]
 
   - name: Histogram
