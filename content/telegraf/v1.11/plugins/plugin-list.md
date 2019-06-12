@@ -13,7 +13,7 @@ weight: 6
 Telegraf is a plugin-driven agent that collects, processes, aggregates, and writes metrics.
 It supports four categories of plugins including input, output, aggregator, and processor.
 
-{{< telegraf/filters >}}
+{{< telegraf-plugin-filters >}}
 
 
 **Jump to:**
@@ -27,19 +27,19 @@ It supports four categories of plugins including input, output, aggregator, and 
 Telegraf input plugins are used with the InfluxData time series platform to collect
 metrics from the system, services, or third party APIs.
 
-{{< telegraf/plugins type="input" >}}
+{{< telegraf-plugins-cards type="input" >}}
 
 ## Output plugins
 Telegraf processor plugins write metrics to various destinations.
 
-{{< telegraf/plugins type="output" >}}
+{{< telegraf-plugins-cards type="output" >}}
 
 ## Aggregator plugins
 Telegraf aggregator plugins create aggregate metrics (for example, mean, min, max, quantiles, etc.)
 
-{{< telegraf/plugins type="aggregator" >}}
+{{< telegraf-plugins-cards type="aggregator" >}}
 
 ## Processor plugins
 Telegraf output plugins transform, decorate, and filter metrics.
 
-{{< telegraf/plugins type="processor" >}}
+{{< telegraf-plugins-cards type="processor" >}}
