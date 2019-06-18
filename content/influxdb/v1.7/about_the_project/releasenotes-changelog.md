@@ -7,6 +7,17 @@ menu:
     parent: About the project
 ---
 
+## 1.7.7 [2019-06-12]
+
+### Bug fixes
+
+- Fix the sort order for aggregates so that they are sorted by tag and then time.
+- Use the timezone when evaluating time literals in subqueries.
+- Fix CSV decoder bug where empty tag values cause an array index panic.
+- Fix open/close race in SeriesFile.
+- Sync series segment after truncate.
+- Fix the ordering for selectors within a subquery with different outer tags.
+
 ## v1.7.6 [2019-04-16]
 
 <dt>
