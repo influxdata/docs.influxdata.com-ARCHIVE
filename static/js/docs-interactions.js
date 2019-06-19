@@ -89,40 +89,22 @@ tabbedContent('.tabs-container', '.tabs p a', '.tab-content');
 // Randomize advertisement content on page load
 // Ad content stored in object
 
-$advertContent = [
-  {
-    ctaText: "Try InfluxCloud",
-    ctaLink: "https://cloud.influxdata.com/trial/user",
-    advertText: "Collect, store, and retrieve time-series data in one minute.",
-    style: "support-ad--cloud",
-  },
-  {
-    ctaText: "Try InfluxEnterprise",
-    ctaLink: "https://portal.influxdata.com/users/new",
-    advertText: "Unlock powerful insights that help you delight your customers.",
-    style: "support-ad--enterprise",
-  },
+$ads = [
+	{ class: "cloud",	file: "/promos/cloud.html" },
+	// { class: "influx-days",	file: "/promos/influx-days.html" },
+	{ class: "enterprise", file: "/promos/enterprise.html" }
 ]
+
 $(document).on('ready', function(){
-  $numAdverts = $advertContent.length;
-  $randomizer = Math.floor(Math.random() * $numAdverts);
-  $contentToInject = $advertContent[$randomizer];
 
-  $ctaButton = $('<a />')
-  	.addClass('sidebar--support-ad--cta')
-  	.attr({
-  		'href': $contentToInject.ctaLink,
-  		'target': '_blank'
-  	})
-  	.text($contentToInject.ctaText);
-  $advertText = $('<p />')
-  	.addClass('sidebar--support-ad--desc')
-  	.text($contentToInject.advertText);
+  $numAds = $ads.length;
+  $randomizer = Math.floor(Math.random() * $numAds);
+  $adContent = $ads[$randomizer];
 
-  $('#support-ad')
-  	.addClass($contentToInject.style)
-  	.append($advertText,$ctaButton);
+	$('#sidebar--ad').addClass($adContent.class)
+	$('#sidebar--ad').load($adContent.file)
 });
+
 
 /*
  * Add class to outbound title links on section landing pages

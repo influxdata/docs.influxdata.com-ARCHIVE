@@ -201,5 +201,7 @@ stream
 
 ## Prepare for scheduled downtime
 [Define a new Kapacitor task](/kapacitor/v1.5/working/cli_client/#tasks-and-task-templates) using your updated TICKscript.
+
 As your scheduled downtime begins, update the `maintenance` value in the appropriate
-host and host group source files to avoid alerts being triggered for those specific hosts and host groups.
+host and host group source files and reload sideload to avoid alerts being triggered
+for those specific hosts and host groups.

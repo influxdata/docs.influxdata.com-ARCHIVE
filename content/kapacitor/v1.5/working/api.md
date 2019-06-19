@@ -40,7 +40,7 @@ All requests can return these response codes:
 | HTTP Response Code | Meaning                                                                                                                                                             |
 | ------------------ | -------                                                                                                                                                             |
 | 2xx                | The request was a success, content is dependent on the request.                                                                                                     |
-| 4xx                | Invalid request, refer to error for what it wrong with the request. Repeating the request will continue to return the same error.                                   |
+| 4xx                | Invalid request, refer to error for what is wrong with the request. Repeating the request will continue to return the same error.                                   |
 | 5xx                | The server was unable to process the request, refer to the error for a reason. Repeating the request may result in a success if the server issue has been resolved. |
 
 ### Errors

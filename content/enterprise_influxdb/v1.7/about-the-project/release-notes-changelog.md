@@ -8,9 +8,32 @@ menu:
     parent: About the project
 ---
 
+## v1.7.6 [2019-05-07]
+
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.6 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Bug fixes
+
+- Reverts v1.7.5 InfluxQL regressions that removed parentheses and resulted in operator precedence causing changing results in complex queries and regular expressions.
+
 ## v1.7.5 [2019-03-26]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.5 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+<dt>
+
+**If you are currently on this release, roll back to v1.7.4 until a fix is available.**
+
+After upgrading to this release, some customers have experienced regressions,
+including parentheses being removed resulting in operator precedence causing changing results
+in complex queries and regular expressions.
+
+Examples:
+
+- Complex WHERE clauses with parentheses. For example, `WHERE d > 100 AND (c = 'foo' OR v = 'bar'`).
+- Conditions not including parentheses caysubg operator precedence to return `(a AND b) OR c` instead of `a AND (b OR c)`
+
+</dt>
+
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.5 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Features
 
@@ -23,7 +46,7 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.5 releases. For de
 
 ## v1.7.4 [2019-02-13]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.4 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Bug fixes
 
@@ -31,7 +54,7 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.4 releases. For de
 
 ## v1.7.3 [2019-01-11]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.3 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.3 release. For details on changes incorporated from the InfluxDB OSS release, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Important update [2019-02-13]
 
@@ -56,7 +79,7 @@ Prior to v.1.7.2, the Anti-Entropy (AE) service was enabled by default. When sha
 
 ## v1.7.2 [2018-12-11]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.2 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Features
 
@@ -75,11 +98,11 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.2 releases. For de
 
 ## v1.7.1 [2018-11-14]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.1 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.1 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ## v1.7.0 [2018-11-06]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.0 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.0 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ## v1.6.6 [2019-02-28]
 -------------------
@@ -88,7 +111,7 @@ This release only includes the InfluxDB OSS 1.6.6 changes (no Enterprise-specifi
 
 ## V1.6.5 [2019-01-10]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.6.5 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.5 releases. For details about changes incorporated from InfluxDB OSS releases, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ## v1.6.4 [2018-10-23]
 

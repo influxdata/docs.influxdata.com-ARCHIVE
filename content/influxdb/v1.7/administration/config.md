@@ -50,7 +50,7 @@ Configuration settings that specify a duration support the following duration un
 - `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
 - `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
->**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) might be slightly newer.
+>**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/1.7/etc/config.sample.toml) might be slightly newer.
 
 ## Environment variables
 
@@ -830,7 +830,7 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 ### `[[graphite]]`
 
 This section controls one or many listeners for Graphite data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/graphite/README.md) on GitHub for more information.
+For more information, see [Graphite protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/graphite/).
 
 #### `enabled = false`
 
@@ -913,9 +913,8 @@ Environment variable: `INFLUXDB_GRAPHITE_SEPARATOR`
 
 ### `[[collectd]]`
 
-The `[[collectd]]` settings control the listener for `collectd` data. For more information, see the
-[README](https://github.com/influxdata/influxdb/tree/master/services/collectd)
-on GitHub.
+The `[[collectd]]` settings control the listener for `collectd` data.
+For more information, see [CollectD protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/collectd/).
 
 #### `enabled = false`
 
@@ -1001,7 +1000,7 @@ When set to `split`, multi-value plugin data (e.g. df free:5000,used:1000) will 
 ### `[[opentsdb]]`
 
 Controls the listener for OpenTSDB data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) on GitHub for more information.
+For more information, see [OpenTSDB protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/opentsdb/).
 
 #### `enabled = false`
 
@@ -1079,7 +1078,7 @@ Environment variable: `INFLUXDB_OPENTSDB_BATCH_TIMEOUT`
 ### `[[udp]]`
 
 The `[[udp]]` settings control the listeners for InfluxDB line protocol data using UDP.
-See the [UDP page](/influxdb/v1.7/write_protocols/udp/) for more information.
+For more information, see [UDP protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/udp/).
 
 #### `enabled = false`
 

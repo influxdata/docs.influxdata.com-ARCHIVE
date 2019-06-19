@@ -8,7 +8,45 @@ menu:
     parent: About the project
 ---
 
-## v1.10.2 [2019-04-02]
+## 1.10.4 [2019-05-14]
+
+### Bug fixes
+
+#### Agent
+
+- Create telegraf user in pre-install RPM scriptlet.
+- Fix parse of unix timestamp with more than ns precision.
+- Fix race condition in the Wavefront parser.
+
+#### Plugins
+
+- HTTP output plugin (`http`)
+  - Fix http output cannot set Host header.
+- IPMI Sensor input (`ipmi_sensor`)
+  - Add support for hex values.
+- InfluxDB v2 output (`influxdb_v2`)
+  - Don't discard metrics on forbidden error.
+- Interrupts input (`interrupts`)
+  - Restore field name case.
+- NTPQ input (`ntpq`)
+  - Skip lines with missing `refid`.
+- VMware vSphere input (`vsphere`)
+  - Fix interval estimation.
+
+## 1.10.3 [2019-04-16]
+
+### Bug fixes
+
+#### Agent
+
+- Set log directory attributes in RPM specification.
+
+#### Plugins
+
+- Prometheus Client (`prometheus_client`) output plugin.
+  - Allow colons in metric names.
+  
+## 1.10.2 [2019-04-02]
 
 ### Breaking changes
 

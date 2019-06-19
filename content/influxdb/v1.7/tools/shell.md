@@ -102,7 +102,7 @@ By default, InfluxDB runs on localhost.
 
 ### `-import`
 
-Import new data from a file or import a previously [exported](https://github.com/influxdb/influxdb/blob/master/importer/README.md) database from a file.
+Import new data from a file or import a previously [exported](https://github.com/influxdb/influxdb/blob/1.7/importer/README.md) database from a file.
 See [-import](/influxdb/v1.7/tools/shell/#import-data-from-a-file-with-import).
 
 ### `-password '<password>'`
@@ -147,7 +147,7 @@ Default value is `influxql`.
 To use the Flux REPL shell, set the value to `flux`.
 For details on using Flux and the Flux language shell, see the [Flux documentation](/flux/v0.7/).
 
-###`-username 'username'`
+### `-username 'username'`
 
 The username that `influx` uses to connect to the server.
 Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment variable.
@@ -308,6 +308,7 @@ For example:
 Things to note about `-import`:
 
 * Allow the database to ingest points by using `-pps` to set the number of points per second allowed by the import. By default, pps is zero and `influx` does not throttle importing.
+* If you are using this command on an InfluxDB Enterprise cluster that remains active during an import, InfluxData recommends limiting the points per second to 5,000 to 10,000.
 * Imports work with `.gz` files, just include `-compressed` in the command.
 * Include timestamps in the data file. InfluxDB will assign the same timestamp to points without a timestamp. This can lead to unintended [overwrite behavior](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
 * If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB.
@@ -316,7 +317,7 @@ Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 By default, the HTTP request times out after five seconds.
 InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
 
-> **Note:** For how to export data from InfluxDB version 0.8.9, see [Exporting from 0.8.9](https://github.com/influxdb/influxdb/blob/master/importer/README.md).
+> **Note:** For how to export data from InfluxDB version 0.8.9, see [Exporting from 0.8.9](https://github.com/influxdb/influxdb/blob/1.7/importer/README.md).
 
 ## `influx` commands
 

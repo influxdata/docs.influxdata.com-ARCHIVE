@@ -77,7 +77,7 @@ that the resultant data is passed to a UDF or similar for custom processing.
 
 
 ### Chaining Methods
-Alert](/kapacitor/v1.5/nodes/flatten_node/#alert),
+[Alert](#alert),
 [Barrier](#barrier),
 [Bottom](#bottom),
 [ChangeDetect](#changedetect),

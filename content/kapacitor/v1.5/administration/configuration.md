@@ -99,7 +99,7 @@ the following:
      - Example: `threshold = 0.0`.
    * **Boolean**
      - Examples: `enabled = true`, `global = false`, `no-verify = false`.
-   * **Array** &ndash;
+   * **Array** –
      - Examples: `my_database = [ "default", "longterm" ]`, ` urls = ["http://localhost:8086"]`
    * **Inline Table**
        - Example: `basic-auth = { username = "my-user", password = "my-pass" }`
@@ -324,6 +324,11 @@ Multiple InfluxDB table array configurations can be specified,
 but one InfluxDB table array configuration must be flagged as the `default`.
 
 **Example: An InfluxDB connection grouping**
+=======
+{{% note %}}
+To use Kapacitor with an InfluxDB instance that requires authentication,
+it must authenticate using an InfluxDB user with **read and write** permissions. 
+{{% /note %}}
 
 ```toml
 ...
@@ -431,7 +436,7 @@ POSTing alerts to an HTTP endpoint.
 Kapacitor will send usage statistics back to InfluxData.
 This feature can be disabled or enabled in the `[reporting]` table grouping.
 
-**Example 9 &ndash; Reporting configuration**
+**Example 9 – Reporting configuration**
 ```toml
 ...
 [reporting]
@@ -488,7 +493,7 @@ A feature defined by an optional table should be enabled whenever a relevant nod
 For example, if alerts are to be sent via email, then the SMTP service should
 be enabled and configured in the `[smtp]` properties table.
 
-**Example 11 &ndash; Enabling SMTP**
+**Example 11 – Enabling SMTP**
 
 ```toml
 ...
@@ -568,7 +573,7 @@ be found in the configuration file:
 
    * [Swarm](/kapacitor/v1.5/nodes/swarm_autoscale_node/)
 
-   **Example 12 &ndash; The Docker Swarm configuration**
+   **Example 12 – The Docker Swarm configuration**
 
    ```toml
    ...
@@ -704,7 +709,7 @@ follow the same configurations for these services used in
 ...
 ```
 
-**Example 16 &ndash; Opentsdb configuration**
+**Example 16 – Opentsdb configuration**
 
 ```toml
 ...
@@ -755,6 +760,7 @@ For scraping and discovery to work one or more scrapers must be configured. One
 scraper can be bound to one discovery service.
 
 **Example: Scraper configuration**
+
 
 ```toml
 ...
@@ -890,6 +896,7 @@ The JSON document must contain a `set` field with a map of the properties to ove
 their new values.
 
 **Example: JSON file for enabling the SMTP configuration**
+
 ```json
 {
     "set":{
@@ -904,6 +911,7 @@ service can be enabled.
 Property overrides can be removed with the `delete` field in the JSON document.
 
 **Example: JSON file for removing an SMTP override**
+
 ```json
 {
     "delete":[

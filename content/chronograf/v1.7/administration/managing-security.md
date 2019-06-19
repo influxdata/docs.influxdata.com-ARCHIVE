@@ -27,14 +27,17 @@ menu:
 
 ## Chronograf security
 
-Role-based access control in Chronograf and enhanced security are provided using two configurable options:
+To enhance security, configure both of the following options for Chronograf:
 
 * OAuth 2.0 providers with JWT tokens
+
+>**Note** After configuring OAuth 2.0, the Chronograf Admin tab becomes visible, and you can set up [multiple organizations] (https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/) and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
+
 * TLS (Transport Layer Security) for HTTPS
 
 Both of these options are discussed in the following sections.
 
-> ***Note:*** All measures of Chronograf security are enforced by the server. Any direct requests to the Chronograf server will be subjected to, and thus must comply with, any configured security options.
+> ***Note:*** All measures of Chronograf security are enforced by the server. Any direct requests to the Chronograf server must comply with configured security options.
 
 ## OAuth 2.0 providers with JWT tokens
 
@@ -377,13 +380,13 @@ Your users should now be able to sign into Chronograf using the new Okta provide
     > These should be replaced by the actual URLs used to access each service.
 
     ```bash
-    GENERIC_NAME=gitlab
+    GENERIC_NAME=generic
     GENERIC_CLIENT_ID=<gitlab_application_id>
     GENERIC_CLIENT_ID=<gitlab_secret>
     GENERIC_AUTH_URL=http://<gitlab-server-example.com>/oauth/authorize?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&response_type=code
     GENERIC_TOKEN_URL=http://gitlab-server-example.com/oauth/token?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&grant_type=authorization_code
     GENERIC_SCOPES=api
-    TOKEN_SECRET=mysupersecret
+    GENERIC_CLIENT_SECRET=mysupersecret
     GENERIC_API_URL=http://gitlab-server-example.com/api/v3/user
     ```
 

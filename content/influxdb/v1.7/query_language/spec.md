@@ -100,7 +100,7 @@ unquoted_identifier = ( letter ) { letter | digit } .
 quoted_identifier   = `"` unicode_char { unicode_char } `"` .
 ```
 
-#### Examples:
+#### Examples
 
 ```
 cpu
@@ -307,7 +307,7 @@ alter_retention_policy_stmt  = "ALTER RETENTION POLICY" policy_name on_clause
                                [ retention_policy_option ] .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- Set default retention policy for mydb to 1h.cpu.
@@ -332,7 +332,7 @@ every_stmt                   = "EVERY" duration_lit
 for_stmt                     = "FOR" duration_lit
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- selects from DEFAULT retention policy and writes into 6_months retention policy
@@ -383,7 +383,7 @@ create_database_stmt = "CREATE DATABASE" db_name
 <dt> Replication factors do not serve a purpose with single node instances.
 </dt>
 
-#### Examples:
+#### Examples
 
 ```sql
 -- Create a database called foo
@@ -430,7 +430,7 @@ Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](/kap
 create_subscription_stmt = "CREATE SUBSCRIPTION" subscription_name "ON" db_name "." retention_policy "DESTINATIONS" ("ANY"|"ALL") host { "," host} .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- Create a SUBSCRIPTION on database 'mydb' and retention policy 'autogen' that send data to 'example.com:9090' via UDP.
@@ -447,7 +447,7 @@ create_user_stmt = "CREATE USER" user_name "WITH PASSWORD" password
                    [ "WITH ALL PRIVILEGES" ] .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- Create a normal database user.
@@ -466,7 +466,7 @@ CREATE USER "jdoe" WITH PASSWORD '1337password' WITH ALL PRIVILEGES
 delete_stmt = "DELETE" ( from_clause | where_clause | from_clause where_clause ) .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 DELETE FROM "cpu"
@@ -480,7 +480,7 @@ DELETE WHERE time < '2000-01-01T00:00:00Z'
 drop_continuous_query_stmt = "DROP CONTINUOUS QUERY" query_name on_clause .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 DROP CONTINUOUS QUERY "myquery" ON "mydb"
@@ -492,7 +492,7 @@ DROP CONTINUOUS QUERY "myquery" ON "mydb"
 drop_database_stmt = "DROP DATABASE" db_name .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 DROP DATABASE "mydb"
@@ -504,7 +504,7 @@ DROP DATABASE "mydb"
 drop_measurement_stmt = "DROP MEASUREMENT" measurement .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- drop the cpu measurement
@@ -517,7 +517,7 @@ DROP MEASUREMENT "cpu"
 drop_retention_policy_stmt = "DROP RETENTION POLICY" policy_name on_clause .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 -- drop the retention policy named 1h.cpu from mydb
@@ -532,7 +532,7 @@ drop_series_stmt = "DROP SERIES" ( from_clause | where_clause | from_clause wher
 
 > ***Note:*** Filtering by time is not supported in the `WHERE` clause.
 
-#### Example:
+#### Example
 
 ```sql
 DROP SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
@@ -545,9 +545,9 @@ DROP SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 drop_shard_stmt = "DROP SHARD" ( shard_id ) .
 ```
 
-#### Example:
+#### Example
 
-```
+```sql
 DROP SHARD 1
 ```
 
@@ -557,7 +557,7 @@ DROP SHARD 1
 drop_subscription_stmt = "DROP SUBSCRIPTION" subscription_name "ON" db_name "." retention_policy .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 DROP SUBSCRIPTION "sub0" ON "mydb"."autogen"
@@ -569,7 +569,7 @@ DROP SUBSCRIPTION "sub0" ON "mydb"."autogen"
 drop_user_stmt = "DROP USER" user_name .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 DROP USER "jdoe"
@@ -597,9 +597,9 @@ The elements of `EXPLAIN` query plan include:
 explain_stmt = "EXPLAIN" select_stmt .
 ```
 
-#### Example:
+#### Example
 
-```
+```sql
 > explain select sum(pointReq) from "_internal"."monitor"."write" group by hostname;
 > QUERY PLAN
 ------
@@ -612,7 +612,6 @@ NUMBER OF BLOCKS: 1
 SIZE OF BLOCKS: 931
 ```
 
-
 ### EXPLAIN ANALYZE
 
 Executes the query and counts the actual costs during runtime.
@@ -621,9 +620,9 @@ Executes the query and counts the actual costs during runtime.
 explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
 ```
 
-#### Example:
+#### Example
 
-```
+```sql
 > explain analyze select sum(pointReq) from "_internal"."monitor"."write" group by hostname;
 > EXPLAIN ANALYZE
 -----------
@@ -676,7 +675,6 @@ explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
 └── planning_time: 76.192µs
 ```
 
-
 ### GRANT
 
 > **NOTE:** Users can be granted privileges on databases that do not exist.
@@ -685,7 +683,7 @@ explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
 grant_stmt = "GRANT" privilege [ on_clause ] to_clause .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- grant admin privileges
@@ -699,7 +697,7 @@ GRANT READ ON "mydb" TO "jdoe"
 
 Stop currently-running query.
 
-```sql
+```
 kill_query_statement = "KILL QUERY" query_id .
 ```
 
@@ -712,7 +710,7 @@ Where `query_id` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1
 KILL QUERY <qid> ON "<host>"
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- kill query with qid of 36 on the local host
@@ -730,7 +728,7 @@ KILL QUERY 53 ON "myhost:8088"
 revoke_stmt = "REVOKE" privilege [ on_clause ] "FROM" user_name .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- revoke admin privileges from jdoe
@@ -784,7 +782,7 @@ See the specific SHOW CARDINALITY commands for details:
 show_continuous_queries_stmt = "SHOW CONTINUOUS QUERIES" .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 -- show all continuous queries
@@ -797,7 +795,7 @@ SHOW CONTINUOUS QUERIES
 show_databases_stmt = "SHOW DATABASES" .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 -- show all databases
@@ -813,7 +811,6 @@ For more information on using the `SHOW DIAGNOSTICS` command, see [Using the SHO
 ```sql
 show_diagnostics_stmt = "SHOW DIAGNOSTICS"
 ```
-
 
 ### SHOW FIELD KEY CARDINALITY
 
@@ -860,12 +857,13 @@ SHOW FIELD KEYS FROM "cpu"
 show_grants_stmt = "SHOW GRANTS FOR" user_name .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 -- show grants for jdoe
 SHOW GRANTS FOR "jdoe"
 ```
+
 #### SHOW MEASUREMENT CARDINALITY
 
 Estimates or counts exactly the cardinality of the measurement set for the current database unless a database is specified using the `ON <database>` option.
@@ -880,7 +878,7 @@ show_measurement_cardinality_stmt = "SHOW MEASUREMENT CARDINALITY" [ on_clause ]
 show_measurement_exact_cardinality_stmt = "SHOW MEASUREMENT EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
 ```
 
-#### Example:
+#### Example
 
 ```sql
 -- show estimated cardinality of measurement set on current database
@@ -895,7 +893,7 @@ SHOW MEASUREMENT EXACT CARDINALITY ON mydb
 show_measurements_stmt = "SHOW MEASUREMENTS" [on_clause] [ with_measurement_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- show all measurements
@@ -914,7 +912,7 @@ SHOW MEASUREMENTS WITH MEASUREMENT =~ /h2o.*/
 show_queries_stmt = "SHOW QUERIES" .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 -- show all currently-running queries
@@ -928,7 +926,7 @@ SHOW QUERIES
 show_retention_policies_stmt = "SHOW RETENTION POLICIES" [on_clause] .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 -- show all retention policies on a database
@@ -941,13 +939,13 @@ SHOW RETENTION POLICIES ON "mydb"
 show_series_stmt = "SHOW SERIES" [on_clause] [ from_clause ] [ where_clause ] [ limit_clause ] [ offset_clause ] .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 SHOW SERIES FROM "telegraf"."autogen"."cpu" WHERE cpu = 'cpu8'
 ```
 
-#### SHOW SERIES CARDINALITY
+### SHOW SERIES CARDINALITY
 
 Estimates or counts exactly the cardinality of the series for the current database unless a database is specified using the `ON <database>` option.
 
@@ -966,7 +964,7 @@ show_series_cardinality_stmt = "SHOW SERIES CARDINALITY" [ on_clause ] [ from_cl
 show_series_exact_cardinality_stmt = "SHOW SERIES EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- show estimated cardinality of the series on current database
@@ -985,7 +983,7 @@ SHOW SERIES EXACT CARDINALITY ON mydb
 show_shard_groups_stmt = "SHOW SHARD GROUPS" .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 SHOW SHARD GROUPS
@@ -997,7 +995,7 @@ SHOW SHARD GROUPS
 show_shards_stmt = "SHOW SHARDS" .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 SHOW SHARDS
@@ -1027,10 +1025,9 @@ show_stats_stmt = "SHOW STATS [ FOR '<component>' | 'indexes' ]"
 
 * Returns an estimate of memory use of all indexes. Index memory use is not reported with `SHOW STATS` because it is a potentially expensive operation.
 
-
 #### Example
 
-```
+```sql
 > show stats
 name: runtime
 -------------
@@ -1045,14 +1042,13 @@ batches_tx      bytes_rx        connections_active      connections_handled     
 159             3999750         0                       1                       158110          158110
 ```
 
-
 ### SHOW SUBSCRIPTIONS
 
 ```
 show_subscriptions_stmt = "SHOW SUBSCRIPTIONS" .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 SHOW SUBSCRIPTIONS
@@ -1072,7 +1068,7 @@ show_tag_key_cardinality_stmt = "SHOW TAG KEY CARDINALITY" [ on_clause ] [ from_
 show_tag_key_exact_cardinality_stmt = "SHOW TAG KEY EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ]
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- show estimated tag key cardinality
@@ -1088,7 +1084,7 @@ show_tag_keys_stmt = "SHOW TAG KEYS" [on_clause] [ from_clause ] [ where_clause 
                      [ limit_clause ] [ offset_clause ] .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- show all tag keys
@@ -1111,7 +1107,7 @@ show_tag_values_stmt = "SHOW TAG VALUES" [on_clause] [ from_clause ] with_tag_cl
                        [ limit_clause ] [ offset_clause ] .
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- show all tag values across all measurements for the region tag
@@ -1126,6 +1122,7 @@ SHOW TAG VALUES WITH KEY !~ /.*c.*/
 -- show tag values from the cpu measurement for region & host tag keys where service = 'redis'
 SHOW TAG VALUES FROM "cpu" WITH KEY IN ("region", "host") WHERE "service" = 'redis'
 ```
+
 #### SHOW TAG VALUES CARDINALITY
 
 Estimates or counts exactly the cardinality of tag key values for the specified tag key on the current database unless a database is specified using the `ON <database>` option.
@@ -1140,7 +1137,7 @@ show_tag_values_cardinality_stmt = "SHOW TAG VALUES CARDINALITY" [ on_clause ] [
 show_tag_values_exact_cardinality_stmt = "SHOW TAG VALUES EXACT CARDINALITY" [ on_clause ] [ from_clause ] [ where_clause ] [ group_by_clause ] [ limit_clause ] [ offset_clause ] with_key_clause
 ```
 
-#### Examples:
+#### Examples
 
 ```sql
 -- show estimated tag key values cardinality for a specified tag key
@@ -1159,7 +1156,7 @@ SHOW TAG VALUES EXACT CARDINALITY WITH KEY = "myTagKey"
 show_users_stmt = "SHOW USERS" .
 ```
 
-#### Example:
+#### Example
 
 ```sql
 -- show all users
@@ -1320,7 +1317,6 @@ The life cycle of a query looks like this:
    points. The emitter's job is to convert simple time/value points into the
    more complex result objects that are returned to the client.
 
-
 ### Understanding iterators
 
 Iterators are at the heart of the query engine. They provide a simple interface
@@ -1356,7 +1352,7 @@ additional points that are missing from an input iterator.
 This composition also lends itself well to aggregation. For example, a statement
 such as this:
 
-```
+```sql
 SELECT MEAN(value) FROM cpu GROUP BY time(10m)
 ```
 
@@ -1368,8 +1364,7 @@ the derivative of the mean:
 SELECT DERIVATIVE(MEAN(value), 20m) FROM cpu GROUP BY time(10m)
 ```
 
-
-### Understanding Auxiliary Fields
+### Understanding auxiliary fields
 
 Because InfluxQL allows users to use selector functions such as `FIRST()`,
 `LAST()`, `MIN()`, and `MAX()`, the engine must provide a way to return related
@@ -1377,7 +1372,7 @@ data at the same time with the selected point.
 
 For example, in this query:
 
-```
+```sql
 SELECT FIRST(value), host FROM cpu GROUP BY time(1h)
 ```
 
@@ -1388,8 +1383,7 @@ auxiliary fields of the point. These auxiliary fields are attached to the point
 until it is passed to the emitter where the fields get split off to their own
 iterator.
 
-
-### Built-in Iterators
+### Built-in iterators
 
 There are many helper iterators that let us build queries:
 
@@ -1431,8 +1425,7 @@ There are many helper iterators that let us build queries:
 * Dedupe Iterator - This iterator only outputs unique points. It is resource
   intensive so it is only used for small queries such as meta query statements.
 
-
-### Call Iterators
+### Call iterators
 
 Function calls in InfluxQL are implemented at two levels. Some calls can be
 wrapped at multiple layers to improve efficiency. For example, a `COUNT()` can

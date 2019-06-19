@@ -17,11 +17,11 @@ _**Function type:** Input_
 _**Output data type:** Object_
 
 ```js
-from(file: "/path/to/data-file.csv")
+fromCSV(file: "/path/to/data-file.csv")
 
 // OR
 
-from(csv: csvData)
+fromCSV(csv: csvData)
 ```
 
 ## Parameters
@@ -47,7 +47,7 @@ _**Data type:** String_
 
 ### Query CSV data from a file
 ```js
-from(file: "/path/to/data-file.csv")
+fromCSV(file: "/path/to/data-file.csv")
 ```
 
 ### Query raw CSV-formatted text
@@ -59,5 +59,5 @@ mean,0,2018-05-08T20:50:00Z,2018-05-08T20:51:00Z,2018-05-08T20:50:20Z,east,B,59.
 mean,0,2018-05-08T20:50:00Z,2018-05-08T20:51:00Z,2018-05-08T20:50:40Z,east,C,52.62
 "
 
-from(csv: csvData)
+fromCSV(csv: csvData)
 ```
