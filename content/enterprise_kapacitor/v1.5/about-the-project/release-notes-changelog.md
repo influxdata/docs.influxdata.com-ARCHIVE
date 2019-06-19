@@ -6,6 +6,33 @@ menu:
     parent: About the Project
 ---
 
+## v1.5.3 [2019-06-18]
+
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.7.7 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.7/about_the_project/releasenotes-changelog/).
+
+### Breaking changes
+
+**New topic handler behavior**
+
+All topic owners must be available when a user attempts to create, update, or delete a topic handler. A liveness probe is performed on only the nodes that own the topic. If an owner node is unresponsive, then an error message like the following is generated:
+
+```bash
+$ kapacitor -skipVerify -url https://kapacitor:kapacitor@localhost:10092 define-topic-handler ../log.yaml
+
+failed to create handler: could not verify liveness of topic owners: status of 4ab28f5e-b38e-4660-9073-b4a46b4f59f3 is left
+```
+
+## Features
+
+- Ensure all owner nodes are alive before creating, updating, or deleting topic handlers. See note above.
+
+- Support insecure TLS and auth when connecting to InfluxDB Enterprise meta node.
+
+### Bug fixes
+
+- Fix config start error from extra 'load' section
+- Update build script to correctly change file ownership in order to make `rpm` verification pass on RH-based systems.
+
 ## v1.5.2 [2018-12-12]
 *Includes features and bug fixes from [Kapacitor 1.5.3](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-3-2019-06-18).*
 
