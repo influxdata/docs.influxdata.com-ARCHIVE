@@ -6,18 +6,24 @@ menu:
     parent: About the Project
 ---
 
-# Changelog
+## v1.5.2 [2018-12-12]
+*Includes features and bug fixes from [Kapacitor 1.5.3](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-3-2019-06-18).*
+
+### Features
+- Ensure all owner nodes are alive before creating/updating/deleting topic handlers.
+- Support insecure TLS and auth when connecting to Plutonium meta node.
+
+### Bug fixes
+- Fix config start error from extra 'load' section.
+- Update build script to correctly change file ownership in order to make rpm verification pass on RH-based systems.
 
 ## v1.5.2 [2018-12-12]
-
-Includes features and bug fixes from [Kapacitor 1.5.2](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-2-2018-12-12).
-
+*Includes features and bug fixes from [Kapacitor 1.5.2](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-2-2018-12-12).*
 
 ## v1.5.1 [2018-08-06]
+*Includes features and bug fixes from [Kapacitor 1.5.1](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-1-2018-08-06).*
 
-Includes features and bug fixes from [Kapacitor 1.5.1](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-1-2018-08-06).
-
-### Bugfixes
+### Bug fixes
 
 - Fix an issue to ensure alert deduplication is by topic.
   Previously, alert events were being erroneously deduplicated across the set of topics assigned to a node.
@@ -25,23 +31,18 @@ Includes features and bug fixes from [Kapacitor 1.5.1](/kapacitor/v1.5/about_the
   This change fixes the unintended behavior.
 
 ## v1.5.0 [2018-05-22]
+*Includes features and bug fixes from [Kapacitor 1.5.0](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-0-2018-05-17).*
 
-Includes features and bug fixes from [Kapacitor 1.5.0](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-0-2018-05-17).
-
-### Bugfixes
-
+### Bug fixes
 - Fix match condition being lost through rpc layer.
 
 ## v1.4.1 [2018-03-14]
-
-Includes bugfixes from Kapacitor 1.4.1
+*Includes bug fixes from Kapacitor 1.4.1.*
 
 ### Bug fixes
-
-* Fix `load` service not working when authentication is enabled.
+- Fix `load` service not working when authentication is enabled.
 
 ## v1.4.0 [2017-12-08]
-
 The v1.4.0 release has many new features, here is a list of some of the highlights:
 
 - Load TICKscripts and alert handlers from a directory.
@@ -52,33 +53,28 @@ The v1.4.0 release has many new features, here is a list of some of the highligh
 
 See the complete list of bug fixes and features below.
 
-### Bugfixes
-
+### Bug fixes
 - Idle Barrier is dropping all messages when source has clock offset
 - Fix oddly generated TOML for mqtt & httppost
 
 ## v1.4.0-rc3 [2017-12-04]
 
-### Bugfixes
-
+### Bug fixes
 - Fix issues where log API checked the wrong header for the desired content type.
 
 ## v1.4.0-rc2 [2017-11-28]
 
 ### Features
-
 - Add support for AWS EC2 autoscaling services.
 - Add BarrierNode to emit BarrierMessage periodically
 
-### Bugfixes
-
+### Bug fixes
 - Fix VictorOps "data" field being a string instead of actual JSON.
 - Fix panic with MQTT toml configuration generation.
 
 ## v1.4.0-rc1 [2017-11-09]
 
 ### Features
-
 - Add Previous state.
 - Add support to persist replay status after it finishes.
 - alert.post and https_post timeouts needed.
@@ -109,8 +105,7 @@ See the complete list of bug fixes and features below.
 - Promote Alert API to stable v1 path.
 - Change WARN level logs to INFO level.
 
-### Bugfixes
-
+### Bug fixes
 - Crash of Kapacitor on Windows x64 when starting a recording
 - Allow for `.yml` file extensions in `define-topic-handler`
 - Fix http server error logging.
@@ -131,177 +126,137 @@ See the complete list of bug fixes and features below.
 
 ## v1.3.3 [2017-08-11]
 
-### Bugfixes
-
+### Bug fixes
 - Bypass auth when `pprof` is enabled.
 
 ## v1.3.2 [2017-08-08]
 
-### Bugfixes
-
+### Bug fixes
 - Use details field from alert node in PagerDuty.
 
 ## v1.3.1 [2017-06-20]
 
-### Bugfixes
-
+### Bug fixes
 - Fix inconsistent naming of node vs member.
 
 ## v1.3.0 [2017-06-19]
 
 ### Release Notes
-
 With this release, Kapacitor Enterprise can be clustered and will deduplicate alerts generated within the cluster.
 
-### Bugfixes
-
+### Bug fixes
 - Expose HTTP API advertise address.
 - Fix panic if alerts are triggering during startup.
 - Fix `ENV` overrides not working for text Unmarshaler types.
 
 ## v1.3.0-rc3 [2017-06-13]
 
-### Bugfixes
-
+### Bug fixes
 - Fix `build.sh` to copy build artifacts back out of docker data volume.
 
 ## v1.3.0-rc2 [2017-06-13]
 
-### Bugfixes
-
+### Bug fixes
 - Expose Advertise Address properly.
 
 ## v1.3.0-rc1 [2017-06-09]
 
 ### Features
-
 - Add Alert deduplication for a cluster of Kapacitor Enterprise nodes.
 - Add support for subscription modes.
 
-### Bugfixes
-
+### Bug fixes
 - Fix data race in rendezvous hash type.
 
 ## v1.2.2 [2017-04-14]
 
-### Bugfixes
-
+### Bug fixes
 - Fix InfluxDB token client not opening.
 
 ## v1.2.1 [2017-04-13]
 
 ### Release Notes
-
 No Kapacitor Enterprise-specific changes, only upgrading to Kapacitor 1.2.1.
 Contains the fix for stale credentials when querying InfluxDB.
 
 ## v1.2.0 [2017-01-24]
 
 ### Release Notes
-
 No Kapacitor Enterprise-specific changes, only upgrading to Kapacitor 1.2.0.
 
 ## v1.1.1 [2016-12-06]
 
 ### Release Notes
-
 No Kapacitor Enterprise-specific changes, only upgrading to Kapacitor 1.1.1.
 
 ## v1.1.0 [2016-11-08]
 
-### Release Notes
-
-### Bugfixes
-
+### Bug fixes
 - Update to add Kapacitor dynamic config support.
 
 ## v1.0.2 [2016-10-06]
 
 ### Release Notes
-
 Update to Kapacitor 1.0.2
 
-### Bugfixes
-
+### Bug fixes
 - Fail on startup if saving cluster/server IDs fails.
 - Update to Kapacitor fixes for #954
 
 ## v1.0.1 [2016-09-26]
 
 ### Release Notes
-
 Update to Kapacitor 1.0.1
 No Kapacitor Enterprise-specific changes.
 
 ## v1.0.0 [2016-09-02]
 
 ### Release Notes
-
 Update to Kapacitor 1.0.0
 
 ### Features
-
 - Upgrade to Kapacitor 1.0.0-rc3
     NOTE: rc3 and the final 1.0.0 release are identical.
 
 ## v0.1.0 [2016-08-29]
 
 ### Release Notes
-
 Update to Kapacitor 1.0.0-rc2
 
 ### Features
-
 - Upgrade to Kapacitor 1.0.0-rc2
 
 ## v0.0.5 [2016-08-12]
 
 ### Release Notes
-
 Update to lastest Kapacitor for Subscription improvements.
 
-### Bugfixes
-
+### Bug fixes
 - Remove default user, only add it for tests.
 
 ## v0.0.4 [2016-08-10]
 
-### Release Notes
-
-### Features
-
-### Bugfixes
-
+### Bug fixes
 - Fix PM permission conversion error for generic read/write privileges to dbs.
 
 ## v0.0.3 [2016-08-03]
 
-### Release Notes
-
 ### Features
-
 - Add token-based authentication for InfluxDB communication.
-
-### Bugfixes
 
 ## v0.0.2 [2016-07-27]
 
-### Release Notes
-
 ### Features
-
 - Add mechanism for subscription token-based auth.
 
-### Bugfixes
+### Bug fixes
 
 ## v0.0.1 [2016-07-25]
 
 ### Release Notes
-
 First release of Kapacitor Enterprise with basic authentication/authorization support.
 
 ### Features
-
 - Auth Service Implementation. Simple boltdb/bcrypt backed users/auth.
 - Entitlements and Enterprise registration.
 - BREAKING: Search for valid configuration on startup in `~/.kapacitor` and `/etc/kapacitor/`.
