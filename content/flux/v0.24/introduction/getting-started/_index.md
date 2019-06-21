@@ -12,8 +12,7 @@ menu:
 Flux is InfluxData's new functional data scripting language designed for querying,
 analyzing, and acting on data.
 
-This multi-part getting started guide walks through important concepts related to Flux,
-how to query time series data from InfluxDB using Flux, and introduces Flux syntax and functions.
+This guide walks through important concepts related to Flux, how to query time series data from InfluxDB using Flux, and introduces Flux syntax and functions.
 
 ## What you will need
 
@@ -43,7 +42,7 @@ _For information about downloading and installing Chronograf v1.7, see [Chronogr
 
 ---
 
-_If your are using Docker, the [InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install)
+_If you use Docker, the [InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install)
 will install the latest version of each component of the TICK stack._
 
 ---
