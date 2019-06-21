@@ -17,6 +17,9 @@ menu:
 - Properly update query time bounds when zooming in on a dashboard.
 - Fix an issue where Flux responses weren't parsed correctly.
 
+### Features
+- Allow negative numbers for configured y-axis minimums
+
 ## v1.7.11 [2019-04-24]
 
 ## Bug Fixes
