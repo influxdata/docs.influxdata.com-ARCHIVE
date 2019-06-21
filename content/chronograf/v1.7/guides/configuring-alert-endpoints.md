@@ -30,6 +30,7 @@ Chronograf supports the following event handlers:
 * [OpsGenie2](#opsgenie2)
 * [PagerDuty](#pagerduty)
 * [PagerDuty2](#pagerduty2)
+* Pushover
 * Sensu
 * [Slack](#slack)
 * SMTP/Email
