@@ -7,6 +7,16 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.12 [2019-06-20]
+
+## Bug Fixes
+- Clarify wording of PagerDuty v1 deprecation message
+- Requesting info from an unavailable source no longer causes the page to hang.
+- Create Chronograf user before CentOS installation.
+- Add support for web workers in IE11.
+- Properly update query time bounds when zooming in on a dashboard.
+- Fix an issue where Flux responses weren't parsed correctly.
+
 ## v1.7.11 [2019-04-24]
 
 ## Bug Fixes
