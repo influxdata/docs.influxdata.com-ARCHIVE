@@ -8,6 +8,31 @@ menu:
     parent: About the project
 ---
 
+## 1.11.1 [2019-06-25]
+
+### Bug fixes
+
+#### Agent
+
+- Fix panic if `pool_mode` column does not exist.
+- Add missing `container_id` field to `docker_container_status` metrics.
+- Add `device`, `serial_no`, and `wwn` tags to synthetic attributes.
+
+#### Plugins
+
+- Cisco GNMI Telemetry input (`cisco_telemetry_gnmi`)
+  - Omit keys when creating measurement names for GNMI telemetry.
+- Disk input (`disk`)
+  - Cannot set `mount_points` option.
+- NGINX Plus API input (`nginx_plus_api`)
+  - Skip 404 error reporting.
+- Procstat input (`procstat`)
+  - Don't consider `pid` of `0` when using systemd lookup.
+- StatsD input (`statsd`)
+  - Fix parsing of remote TCP address.
+- System input (`system`)
+  - Ignore error when `utmp` is missing.
+
 ## v1.11.0 [2019-06-11]
 
 - System (`system`) input plugin
