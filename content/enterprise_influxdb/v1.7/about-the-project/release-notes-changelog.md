@@ -70,21 +70,13 @@ If you have not installed this release, then install the 1.7.4 release.
 
 ### Features
 
+#### Anti-entropy service disabled by default
+
+Prior to v.1.7.3, the anti-entropy (AE) service was enabled by default. When shards create large digests with lots of time ranges (10s of thousands), some customers experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, then you can enable AE and watch to see if performance is significantly impacted.
+
 - Add user authentication and authorization support for Flux HTTP requests.
 - Add support for optionally logging Flux queries.
-
-#### Anti-Entropy service disabled by default
-
-Prior to v.1.7.2, the Anti-Entropy (AE) service was enabled by default. When shards create large digests with lots of time ranges (10s of thousands), some customers experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, then you can enable AE and watch to see if performance is significantly impacted.
-
-## v1.7.2 [2018-12-11]
-
-This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.2 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
-
-### Features
-
 -	Add support for LDAP StartTLS.
--	Disable Anti-Entropy service by default.
 -	Flux 0.7 support.
 -	Implement TLS between data nodes.
 -	Update to Flux 0.7.1.
@@ -95,14 +87,6 @@ This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.2 release. For d
 ### Bug fixes
 
 -	Update sample configuration.
-
-## v1.7.1 [2018-11-14]
-
-This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.1 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
-
-## v1.7.0 [2018-11-06]
-
-This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.0 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ## v1.6.6 [2019-02-28]
 -------------------
