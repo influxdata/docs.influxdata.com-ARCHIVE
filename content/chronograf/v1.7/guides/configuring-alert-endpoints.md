@@ -169,6 +169,34 @@ See the [PagerDuty Events API V2 Overview](https://v2.developer.pagerduty.com/do
 
 See [AlertNode (Kapacitor TICKscript node) - PagerDuty v2](/kapacitor/latest/nodes/alert_node/#pagerduty-v2) in the Kapacitor documentation for details about enabling a new "Generic API" service using TICKscripts.
 
+### Pushover
+
+Configure Chronograf to send Pushover event handler alerts.
+
+#### User Key
+
+Enter your Pushover USER_TOKEN.
+
+#### Token
+
+Enter your Pushover API token.
+
+#### Pushover URL
+
+The URL for the Pushover API. The default value is `https://api.pushover.net/1/messages.json`.
+
+#### Configuration Enabled
+
+Check the **Configuration Enabled** checkbox to enable this configuration.
+
+#### Save Changes
+
+Click **Save Changes** to save the Pushover configuration.
+
+#### Send Test Alert
+
+Click **Send Test Alert** to test your alert endpoint configuration.
+
 
 ### Slack
 
