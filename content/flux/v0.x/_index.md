@@ -5,7 +5,7 @@ menu:
   flux:
     name: v0.x
     identifier: flux_0_x
-    weight: 97
+    weight: 96
 ---
 
 ## [Introduction to Flux](/flux/v0.x/introduction)
