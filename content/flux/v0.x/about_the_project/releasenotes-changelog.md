@@ -6,6 +6,23 @@ menu:
     weight: 1
 ---
 
+## v0.34.2 [2019-06-27]
+
+### Bug fixes
+- Parse float types with PostgreSQL.
+
+## v0.34.1 [2019-06-26]
+
+### Features
+- Add custom PostgreSQL type support.
+- Added MySQL type support.
+- Nulls work in table and row functions.
+
+### Bug fixes
+- Fixed boolean literal type conversion problem and added tests.
+- Diff should track memory allocations when it copies the table.
+- Copy table will report if it is empty correctly.
+
 ## v0.x.2 [2019-06-25]
 
 _A technical preview of Flux packaged with InfluxDB v1.7.8._
