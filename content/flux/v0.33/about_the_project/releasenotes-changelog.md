@@ -8,6 +8,8 @@ menu:
 
 ## v0.33.2 [2019-06-25]
 
+_A technical preview of Flux packaged with InfluxDB v1.7.8._
+
 ### Bug fixes
 - Use `strings.Replace` instead of `strings.ReplaceAll` for compatibility.
 
@@ -189,7 +191,7 @@ The list below is a summary of breaking changes in Flux between those versions.
 
 ## v0.24.0 [2019-04-01]
 
-_A technical preview of Flux packaged with InfluxDB v1.7.6._
+_A technical preview of Flux packaged with InfluxDB v1.7.6 and 1.7.7._
 
 ### Breaking changes
 - Rename `percentile()` function to `quantile()`.
