@@ -155,7 +155,7 @@ With this release, Kapacitor Enterprise can be clustered and will deduplicate al
 
 ### Bugfixes
 
-- Expose HTTP API advertise address.
+- Expose InfluxDB API advertise address.
 - Fix panic if alerts are triggering during startup.
 - Fix `ENV` overrides not working for text Unmarshaler types.
 
