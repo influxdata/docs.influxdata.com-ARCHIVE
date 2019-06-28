@@ -35,7 +35,7 @@ We've provided a list below of all the terms we'll cover, but we recommend readi
   </tr>
 </table>
 
-Check out the [glossary of terms](/influxdb/v1.7/concepts/glossary/) if you prefer the cold, hard facts.
+Check out the [glossary](/influxdb/v1.7/concepts/glossary/) if you prefer the cold, hard facts.
 
 ### Sample data
 The next section references the data printed out below.
@@ -95,12 +95,11 @@ Here are all eight field sets in the sample data:
 * `butterflies = 8    honeybees = 23`
 * `butterflies = 7    honeybees = 22`
 
-Fields are a required piece of InfluxDB's data structure - you cannot have data in InfluxDB without fields.
+Fields are a required piece of the InfluxDB data structure - you cannot have data in InfluxDB without fields.
 It's also important to note that fields are not indexed.
 [Queries](/influxdb/v1.7/concepts/glossary/#query) that use field values as filters must scan all values that match the other conditions in the query.
 As a result, those queries are not performant relative to queries on tags (more on tags below).
 In general, fields should not contain commonly-queried metadata.
-
 
 The last two columns in the sample data, called `location` and `scientist`, are tags.
 Tags are made up of tag keys and tag values.

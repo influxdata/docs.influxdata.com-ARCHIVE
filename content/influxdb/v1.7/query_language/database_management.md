@@ -43,14 +43,14 @@ InfluxQL offers a full suite of administrative commands.
 
 If you're looking for `SHOW` queries (for example, `SHOW DATABASES` or `SHOW RETENTION POLICIES`), see [Schema Exploration](/influxdb/v1.7/query_language/schema_exploration).
 
-The examples in the sections below use InfluxDB's [Command Line Interface (CLI)](/influxdb/v1.7/introduction/getting-started/).
-You can also execute the commands using the HTTP API; simply  send a `GET` request to the `/query` endpoint and include the command in the URL parameter `q`.
-See the [Querying Data](/influxdb/v1.7/guides/querying_data/) guide for more on using the HTTP API.
+The examples in the sections below use the InfluxDB [Command Line Interface (CLI)](/influxdb/v1.7/introduction/getting-started/).
+You can also execute the commands using the InfluxDB API; simply  send a `GET` request to the `/query` endpoint and include the command in the URL parameter `q`.
+For more on using the InfluxDB API, see [Querying data](/influxdb/v1.7/guides/querying_data/).
 
 > **Note:** When authentication is enabled, only admin users can execute most of the commands listed on this page.
 > See the documentation on [authentication and authorization](/influxdb/v1.7/administration/authentication_and_authorization/) for more information.
 
-## Data Management
+## Data management
 
 ### CREATE DATABASE
 

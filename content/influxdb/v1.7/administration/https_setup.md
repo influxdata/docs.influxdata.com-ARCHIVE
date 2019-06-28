@@ -20,6 +20,7 @@ that you enable HTTPS.
 To enable HTTPS with InfluxDB, you'll need an existing or new InfluxDB instance
 and a Transport Layer Security (TLS) certificate (also known as a
 Secured Sockets Layer (SSL) certificate).
+
 InfluxDB supports three types of TLS certificates:
 
 * **Single domain certificates signed by a Certificate Authority**
@@ -54,6 +55,7 @@ Place the private key file (`.key`) and the signed certificate file (`.crt`)
 or the single bundled file (`.pem`) in the `/etc/ssl` directory.
 
 #### Step 2: Set certificate file permissions
+
 Users running influxdb must have read permissions on the TLS certificate. 
 
 >***Note***: You may opt to set up multiple users, groups, and permissions. Ultimately, make sure all users running influxdb have read permissions for the TLS certificate.
@@ -71,17 +73,16 @@ sudo chmod 600 /etc/ssl/<private-key-file>
 By default, InfluxDB supports the values for TLS `ciphers`, `min-version`, and `max-version` listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depends on the version of Go used to build InfluxDB. You can configure InfluxDB to support a restricted list of TLS cipher suite IDs and versions.
 For more information, see [Transport Layer Security (TLS) configuration settings](/influxdb/v1.7/administration/config#transport-layer-security-tls-settings).
 
-
 #### Step 4: Enable HTTPS in the InfluxDB configuration file
 
 HTTPS is disabled by default.
-Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
+Enable HTTPS in the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `https-enabled` to `true`
 * `https-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 * `https-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
-```
+```toml
 [http]
 
   [...]
@@ -101,19 +102,22 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 #### Step 5: Restart the InfluxDB service
 
 Restart the InfluxDB process for the configuration changes to take effect:
-```
+
+```bash
 sudo systemctl restart influxdb
 ```
 
 #### Step 6: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.7/tools/shell/):
-```
+
+```bash
 influx -ssl -host <domain_name>.com
 ```
 
 A successful connection returns the following:
-```
+
+```bash
 Connected to https://<domain_name>.com:8086 version 1.x.x
 InfluxDB shell version: 1.x.x
 >
@@ -121,16 +125,16 @@ InfluxDB shell version: 1.x.x
 
 That's it! You've successfully set up HTTPS with InfluxDB.
 
-## Set up HTTPS with a Self-Signed Certificate
+## Set up HTTPS with a self-signed certificate
 
 #### Step 1: Generate a self-signed certificate
 
 The following command generates a private key file (`.key`) and a self-signed
 certificate file (`.crt`) which remain valid for the specified `NUMBER_OF_DAYS`.
-It outputs those files to InfluxDB's default certificate file paths and gives them
+It outputs those files to the InfluxDB database's default certificate file paths and gives them
 the required permissions.
 
-```
+```bash
 sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/ssl/influxdb-selfsigned.key -out /etc/ssl/influxdb-selfsigned.crt -days <NUMBER_OF_DAYS>
 ```
 
@@ -140,7 +144,7 @@ both actions generate valid certificate files.
 
 Run the following command to give influxdb read and write permissions on the certificate.
 
-```
+```bash
 chown influxdb:influxdb /etc/ssl/influxdb-selfsigned.*
 ```
 
@@ -148,11 +152,10 @@ chown influxdb:influxdb /etc/ssl/influxdb-selfsigned.*
 
 By default, InfluxDB supports the values for TLS `ciphers`, `min-version`, and `max-version` listed in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants) and depends on the version of Go used to build InfluxDB. You can configure InfluxDB to support a restricted list of TLS cipher suite IDs and versions. For more information, see [Transport Layer Security (TLS) settings `[tls]`](/influxdb/v1.7/administration/config#transport-layer-security-tls-settings).
 
-
-#### Step 3: Enable HTTPS in InfluxDB's configuration file
+#### Step 3: Enable HTTPS in the configuration file
 
 HTTPS is disabled by default.
-Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
+Enable HTTPS in the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `https-enabled` to `true`
 * `https-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
@@ -181,19 +184,22 @@ Enable HTTPS in InfluxDB's the `[http]` section of the configuration file (`/etc
 #### Step 4: Restart InfluxDB
 
 Restart the InfluxDB process for the configuration changes to take effect:
-```
+
+```bash
 sudo systemctl restart influxdb
 ```
 
 #### Step 5: Verify the HTTPS setup
 
 Verify that HTTPS is working by connecting to InfluxDB with the [CLI tool](/influxdb/v1.7/tools/shell/):
-```
+
+```bash
 influx -ssl -unsafeSsl -host <domain_name>.com
 ```
 
 A successful connection returns the following:
-```
+
+```bash
 Connected to https://<domain_name>.com:8086 version 1.x.x
 InfluxDB shell version: 1.x.x
 >
@@ -201,23 +207,23 @@ InfluxDB shell version: 1.x.x
 
 That's it! You've successfully set up HTTPS with InfluxDB.
 
->
 ## Connect Telegraf to a secured InfluxDB instance
->
+
 Connecting [Telegraf](/telegraf/latest/) to an InfluxDB instance that's using
 HTTPS requires some additional steps.
->
-In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), edit the `urls`
+
+In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), edit the `urls`
 setting to indicate `https` instead of `http` and change `localhost` to the
 relevant domain name.
 If you're using a self-signed certificate, uncomment the `insecure_skip_verify`
 setting and set it to `true`.
->
+
+```toml
     ###############################################################################
     #                            OUTPUT PLUGINS                                   #
     ###############################################################################
 >
-    # Configuration for influxdb server to send metrics to
+    # Configuration for InfluxDB server to send metrics to
     [[outputs.influxdb]]
       ## The full HTTP or UDP endpoint URL for your InfluxDB instance.
       ## Multiple urls can be specified as part of the same cluster,
@@ -230,6 +236,6 @@ setting and set it to `true`.
       ## Optional SSL Config
       [...]
       insecure_skip_verify = true # <-- Update only if you're using a self-signed certificate
->
+```
 
 Next, restart Telegraf and you're all set!

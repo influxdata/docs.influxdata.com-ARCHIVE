@@ -8,7 +8,7 @@ menu:
     parent: Tools
 ---
 
-InfluxDB's command line interface (`influx`) is an interactive shell for the HTTP API.
+The InfluxDB command line interface (`influx`) is an interactive shell for the InfluxDB API.
 Use `influx` to write data (manually or from a file), query data interactively, and view query output in different formats.
 
 * [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx)
@@ -16,12 +16,12 @@ Use `influx` to write data (manually or from a file), query data interactively, 
 * [`influx` commands](/influxdb/v1.7/tools/shell/#influx-commands)
 
 ## Launch `influx`
+
 If you [install](https://influxdata.com/downloads/) InfluxDB via a package manager, the CLI is installed at `/usr/bin/influx` (`/usr/local/bin/influx` on macOS).
 
 To access the CLI, first launch the `influxd` database process and then launch `influx` in your terminal.
 Once you've entered the shell and successfully connected to an InfluxDB node, you'll see the following output:
-<br>
-<br>
+
 ```bash
 $ influx
 Connected to http://localhost:8086 version 1.7.x
@@ -38,6 +38,7 @@ You can use `help` at any time to get a list of available commands. Use `Ctrl+C`
 The following environment variables can be used to configure settings used by the `influx` client. They can be specified in lower or upper case, however the upper case version takes precedence.
 
 #### `HTTP_PROXY`
+
 Defines the proxy server to use for HTTP.
 
 **Value format:**`[protocol://]<host>[:port]`
@@ -47,6 +48,7 @@ HTTP_PROXY=http://localhost:1234
 ```
 
 #### `HTTPS_PROXY`
+
 Defines the proxy server to use for HTTPS. Takes precedence over HTTP_PROXY for HTTPS.
 
 **Value format:**`[protocol://]<host>[:port]`
@@ -56,6 +58,7 @@ HTTPS_PROXY=https://localhost:1443
 ```
 
 #### `NO_PROXY`
+
 List of host names that should **not** go through any proxy. If set to an asterisk '\*' only, it matches all hosts.
 
 **Value format:** comma-separated list of hosts
@@ -129,15 +132,18 @@ By default, pps is zero and influx will not throttle importing.
 Use with `-import`.
 
 ### `-precision 'rfc3339|h|m|s|ms|u|ns'`
+
 Specifies the format/precision of the timestamp for both queries and writes: `rfc3339` (`YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ`), `h` (hours), `m` (minutes), `s` (seconds), `ms` (milliseconds), `u` (microseconds), `ns` (nanoseconds).
 Precision defaults to nanoseconds.
 
 > **Note:** Setting the precision to `rfc3339` (`-precision rfc3339`) works with the `-execute` option, but it does not work with the `-import option`. All other precision formats (e.g., `h`,`m`,`s`,`ms`,`u`, and `ns`) work with the `-execute` and `-import` options.
 
 ### `-pretty`
+
 Turns on pretty print for the `json` format.
 
 ### `-ssl`
+
 Use HTTPS for requests.
 
 ### `-type`
@@ -269,6 +275,7 @@ If your database and retention policy already exist, your file can skip this sec
 Example:
 
 File (`datarrr.txt`):
+
 ```
 # DDL
 CREATE DATABASE pirates
@@ -286,12 +293,14 @@ treasures,captain_id=crunch value=109 1439858880
 ```
 
 Command:
-```
-$influx -import -path=datarrr.txt -precision=s
+
+```bash
+$ influx -import -path=datarrr.txt -precision=s
 ```
 
 Results:
-```
+
+```bash
 2015/12/22 12:25:06 Processed 2 commands
 2015/12/22 12:25:06 Processed 5 inserts
 2015/12/22 12:25:06 Failed 0 inserts
@@ -396,13 +405,15 @@ Use `insert into <retention policy> <line protocol>` to write data to a specific
 
 Write data to a single field in the measurement `treasures` with the tag `captain_id = pirate_king`.
 `influx` automatically writes the point to the database's `DEFAULT` retention policy.
-```
+
+```sql
 > INSERT treasures,captain_id=pirate_king value=2
 >
 ```
 
 Write the same point to the already-existing retention policy `oneday`:
-```
+
+```sql
 > INSERT INTO oneday treasures,captain_id=pirate_king value=2
 Using retention policy oneday
 >

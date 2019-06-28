@@ -10,9 +10,9 @@ menu:
 
 One of the more important aspects of the 1.0 release is that this marks the stabilization of our API and storage format. Over the course of the last three years we’ve iterated aggressively, often breaking the API in the process. With the release of 1.0 and for the entire 1.x line of releases we’re committing to the following:
 
-### No breaking HTTP API changes
+### No breaking InfluxDB API changes
 
-When it comes to the HTTP API, if a command works in 1.0 it will work unchanged in all 1.x releases...with one caveat. We will be adding [keywords](/influxdb/v1.7/query_language/spec/#keywords) to the query language. New keywords won't break your queries if you wrap all [identifiers](/influxdb/v1.7/concepts/glossary/#identifier) in double quotes and all string literals in single quotes. This is generally considered best practice so it should be followed anyway. For users following that guideline, the query and ingestion APIs will have no breaking changes for all 1.x releases. Note that this does not include the Go code in the project. The underlying Go API in InfluxDB can and will change over the course of 1.x development. Users should be accessing InfluxDB through the [HTTP API](/influxdb/v1.7/tools/api/).
+When it comes to the InfluxDB API, if a command works in 1.0 it will work unchanged in all 1.x releases...with one caveat. We will be adding [keywords](/influxdb/v1.7/query_language/spec/#keywords) to the query language. New keywords won't break your queries if you wrap all [identifiers](/influxdb/v1.7/concepts/glossary/#identifier) in double quotes and all string literals in single quotes. This is generally considered best practice so it should be followed anyway. For users following that guideline, the query and ingestion APIs will have no breaking changes for all 1.x releases. Note that this does not include the Go code in the project. The underlying Go API in InfluxDB can and will change over the course of 1.x development. Users should be accessing InfluxDB through the [InfluxDB API](/influxdb/v1.7/tools/api/).
 
 ### Storage engine stability
 

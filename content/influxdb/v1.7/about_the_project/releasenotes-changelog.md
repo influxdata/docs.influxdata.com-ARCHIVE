@@ -7,6 +7,17 @@ menu:
     parent: About the project
 ---
 
+## 1.7.7 [2019-06-12]
+
+### Bug fixes
+
+- Fix the sort order for aggregates so that they are sorted by tag and then time.
+- Use the timezone when evaluating time literals in subqueries.
+- Fix CSV decoder bug where empty tag values cause an array index panic.
+- Fix open/close race in SeriesFile.
+- Sync series segment after truncate.
+- Fix the ordering for selectors within a subquery with different outer tags.
+
 ## v1.7.6 [2019-04-16]
 
 <dt>
@@ -657,7 +668,7 @@ Minor bug fixes were identified via Community and InfluxCloud.
 
 #### TSI
 
-Version 1.3.0 marks the first official release of InfluxDB's new time series index (TSI) engine.
+Version 1.3.0 marks the first official release of the new InfluxDB time series index (TSI) engine.
 
 The TSI engine is a significant technical advancement in InfluxDB.
 It offers a solution to the [time-structured merge tree](https://docs.influxdata.com/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).
