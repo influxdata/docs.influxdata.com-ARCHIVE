@@ -6,10 +6,11 @@ menu:
     identifier: InfluxQL
 ---
 
-This section introduces InfluxQL, InfluxDB's SQL-like query language for
-interacting with data in InfluxDB.
+This section introduces InfluxQL, the InfluxDB SQL-like query language for
+working with data in InfluxDB databases.
 
 ## InfluxQL tutorial
+
 The first seven documents in this section provide a tutorial-style introduction
 to InfluxQL.
 Feel free to download the dataset provided in
@@ -47,7 +48,7 @@ policies as well as deleting and dropping data.
 
 Covers all [InfluxQL functions](/influxdb/v1.7/query_language/functions/).
 
-#### [InfluxQL Continuous Queries](/influxdb/v1.7/query_language/continuous_queries/)
+#### [InfluxQL continuous queries](/influxdb/v1.7/query_language/continuous_queries/)
 
 Covers the
 [basic syntax](/influxdb/v1.7/query_language/continuous_queries/#basic-syntax)
@@ -57,16 +58,15 @@ Covers the
 and
 [common use cases](/influxdb/v1.7/query_language/continuous_queries/#continuous-query-use-cases)
 for
-[Continuous Queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq).
+[continuous queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq).
 This page also describes how to
 [`SHOW`](/influxdb/v1.7/query_language/continuous_queries/#listing-continuous-queries) and
 [`DROP`](/influxdb/v1.7/query_language/continuous_queries/#deleting-continuous-queries)
-Continuous Queries.
+continuous queries.
 
 #### [InfluxQL mathematical operators](/influxdb/v1.7/query_language/math_operators/)
 
 Covers the use of mathematical operators in InfluxQL.
-
 
 ## [InfluxQL reference](/influxdb/v1.7/query_language/spec/)
 

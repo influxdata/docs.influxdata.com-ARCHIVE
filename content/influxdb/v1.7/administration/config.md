@@ -178,7 +178,7 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 ### `[meta]`
 
-This section controls parameters for InfluxDB's metastore,
+This section controls parameters for the InfluxDB metastore,
 which stores information on users, databases, retention policies, shards, and continuous queries.
 
 ### `dir = "/var/lib/influxdb/meta"`
@@ -515,7 +515,7 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ### `[monitor]`
 
-The `[monitor]` section settings control InfluxDB's [system self-monitoring](https://github.com/influxdata/influxdb/blob/1.7/monitor/README.md).
+The `[monitor]` section settings control the InfluxDB [system self-monitoring](https://github.com/influxdata/influxdb/blob/1.7/monitor/README.md).
 
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
@@ -867,7 +867,7 @@ Environment variable: `INFLUXDB_GRAPHITE_PROTOCOL`
 
 The number of nodes that must confirm the write.
 If the requirement is not met the return value will be either `partial write` if some points in the batch fail or `write failure` if all points in the batch fail.
-For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v1.7/write_protocols/write_syntax/).
+For more information, see the Query String Parameters for Writes section in the [InfluxDB line protocol syntax reference](/influxdb/v1.7/write_protocols/write_syntax/).
 
 Environment variable: `INFLUXDB_GRAPHITE_CONSISTENCY_LEVEL`
 

@@ -241,9 +241,9 @@ The `mymeas` [measurement](/influxdb/v1.7/concepts/glossary/#measurement) has tw
 The first point has the [timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) `2017-03-01T00:16:18Z`, a `myfield` value of `33.1`, and no tag values for the `mytag1` and `mytag2` [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key).
 The second point has the timestamp `2017-03-01T00:17:18Z`, a `myfield` value of `12.4`, a `mytag1` value of `12`, and a `mytag2` value of `14`.
 
-The same query in InfluxDB's [Command Line Interface](/influxdb/v1.7/tools/shell/) (CLI) returns the following table:
+The same query in the InfluxDB [Command Line Interface](/influxdb/v1.7/tools/shell/) (CLI) returns the following table:
 
-```
+```sql
 name: mymeas
 time                  myfield  mytag1  mytag2
 ----                  -------  ------  ------
@@ -710,12 +710,12 @@ Content-Length: 33
 
 ### Request body
 
-```
---data-binary '<Data in Line Protocol format>'
+```bash
+--data-binary '<Data in InfluxDB line protocol format>'
 ```
 
 All data must be binary encoded and in the
-[Line Protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) format.
+[InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) format.
 Our example shows the `--data-binary` parameter from curl, which we will use in
 all examples on this page.
 Using any encoding method other than `--data-binary` will likely lead to issues;
@@ -727,7 +727,7 @@ Options:
 * Write several points to the database with one request by separating each point
 by a new line.
 * Write points from a file with the `@` flag.
-The file should contain a batch of points in the Line Protocol format.
+The file should contain a batch of points in the InfluxDB line protocol format.
 Individual points must be on their own line and separated by newline characters
 (`\n`).
 Files containing carriage returns will cause parser errors.
@@ -806,7 +806,7 @@ Errors are returned in JSON.
 | HTTP status code | Description    |
 | :--------------- | :------------- |
 | 204 No Content   | Success!      |
-| 400 Bad Request  | Unacceptable request. Can occur with a Line Protocol syntax error or if a user attempts to write values to a field that previously accepted a different value type. The returned JSON offers further information. |
+| 400 Bad Request  | Unacceptable request. Can occur with an InfluxDB line protocol syntax error or if a user attempts to write values to a field that previously accepted a different value type. The returned JSON offers further information. |
 | 401 Unauthorized | Unacceptable request. Can occur with invalid authentication credentials.  |
 | 404 Not Found    | Unacceptable request. Can occur if a user attempts to write to a database that does not exist. The returned JSON offers further information. |
 | 500 Internal Server Error  | The system is overloaded or significantly impaired. Can occur if a user attempts to write to a retention policy that does not exist. The returned JSON offers further information. |

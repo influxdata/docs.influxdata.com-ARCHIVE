@@ -113,7 +113,7 @@ where the primary index is always time.
 The difference is that, with InfluxDB, you can have millions of measurements,
 you don't have to define schemas up-front, and null values aren't stored.
 
-Points are written to InfluxDB using the Line Protocol, which follows the following format:
+Points are written to InfluxDB using the InfluxDB line protocol, which follows the following format:
 
 ```
 <measurement>[,<tag-key>=<tag-value>...] <field-key>=<field-value>[,<field2-key>=<field2-value>...] [unix-nano-timestamp]
@@ -128,9 +128,9 @@ stock,symbol=AAPL bid=127.46,ask=127.48
 temperature,machine=unit42,type=assembly external=25,internal=37 1434067467000000000
 ```
 
-> **Note:** More information on the line protocol can be found on the [Syntax](/influxdb/v1.7/write_protocols/line_protocol_reference/#syntax) page.
+> **Note:** For details on the InfluxDB line protocol, see [InfluxDB line protocol syntax](/influxdb/v1.7/write_protocols/line_protocol_reference/#syntax) page.
 
-To insert a single time-series datapoint into InfluxDB using the CLI, enter `INSERT` followed by a point:
+To insert a single time series data point into InfluxDB using the CLI, enter `INSERT` followed by a point:
 
 ```sql
 > INSERT cpu,host=serverA,region=us_west value=0.64

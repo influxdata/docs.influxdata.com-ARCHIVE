@@ -35,9 +35,8 @@ If additional security or compliance features are desired, InfluxDB should be ru
 
 ## Authentication
 
-InfluxDB's HTTP API and the [command line interface](/influxdb/v1.7/tools/shell/) (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
+The InfluxDB HTTP API and the [command line interface](/influxdb/v1.7/tools/shell/) (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
 When you enable authentication, InfluxDB only executes HTTP requests that are sent with valid credentials.
-
 
 > **Note:** Authentication only occurs at the HTTP request scope.
 Plugins do not currently have the ability to authenticate requests and service endpoints (for example, Graphite, collectd, etc.) are not authenticated.
@@ -54,7 +53,7 @@ InfluxDB will enforce authentication once there is an admin user.
 #### 2. By default, authentication is disabled in the configuration file.
 Enable authentication by setting the `auth-enabled` option to `true` in the `[http]` section of the configuration file:
 
-```
+```toml
 [http]
   enabled = true
   bind-address = ":8086"
@@ -156,7 +155,7 @@ authentication enabled requires some additional steps.
 In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), uncomment
 and edit the `username` and `password` settings.
 
-```
+```toml
 >
     ###############################################################################
     #                            OUTPUT PLUGINS                                   #

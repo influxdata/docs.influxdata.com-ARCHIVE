@@ -668,7 +668,7 @@ Minor bug fixes were identified via Community and InfluxCloud.
 
 #### TSI
 
-Version 1.3.0 marks the first official release of InfluxDB's new time series index (TSI) engine.
+Version 1.3.0 marks the first official release of the new InfluxDB time series index (TSI) engine.
 
 The TSI engine is a significant technical advancement in InfluxDB.
 It offers a solution to the [time-structured merge tree](https://docs.influxdata.com/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).
