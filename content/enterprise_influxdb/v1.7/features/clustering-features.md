@@ -29,7 +29,7 @@ Subscriptions used by Kapacitor work in a cluster. Writes to any node will be fo
 
 ### Configuration and operational considerations on a cluster
 
-It is important to understand how to configure InfluxDB Enterprise and how this impacts the Continuous Queries (CQ) engine’s behavior:
+It is important to understand how to configure InfluxDB Enterprise and how this impacts the continuous queries (CQ) engine’s behavior:
 
 - **Data node configuration** `[continuous queries]`
 [run-interval](/enterprise_influxdb/v1.7/administration/config-data-nodes#run-interval-1s)

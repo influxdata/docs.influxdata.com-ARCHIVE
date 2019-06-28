@@ -35,7 +35,7 @@ and timestamp.
 | [Measurement](/influxdb/v1.7/concepts/glossary/#measurement) | Required | The measurement name. InfluxDB accepts one measurement per point. | String
 | [Tag set](/influxdb/v1.7/concepts/glossary/#tag-set) | Optional | All tag key-value pairs for the point.  | [Tag keys](/influxdb/v1.7/concepts/glossary/#tag-key) and [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are both strings.
 | [Field set](/influxdb/v1.7/concepts/glossary/#field-set) | Required. Points must have at least one field. | All field key-value pairs for the point. | [Field keys](/influxdb/v1.7/concepts/glossary/#field-key) are strings. [Field values](/influxdb/v1.7/concepts/glossary/#field-value) can be floats, integers, strings, or Booleans.
-| [Timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) | Optional. InfluxDB uses the server's local nanosecond timestamp in UTC if the timestamp is not included with the point. | The timestamp for the data point. InfluxDB accepts one timestamp per point. | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.7/tools/api/#write-http-endpoint).
+| [Timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) | Optional. InfluxDB uses the server's local nanosecond timestamp in UTC if the timestamp is not included with the point. | The timestamp for the data point. InfluxDB accepts one timestamp per point. | Unix nanosecond timestamp. Specify alternative precisions with the [InfluxDB API](/influxdb/v1.7/tools/api/#write-http-endpoint).
 
 > #### Performance and Setup Tips:
 >
@@ -58,7 +58,7 @@ to InfluxDB can be inaccurate.
 | Integer | Field values | Signed 64-bit integers (-9223372036854775808 to 9223372036854775807). Specify an integer with a trailing `i` on the number. Example: `1i`. |
 | String | Measurements, tag keys, tag values, field keys, field values | Length limit 64KB. |
 | Boolean | Field values | Stores TRUE or FALSE values.<br><br>TRUE write syntax:`[t, T, true, True, TRUE]`.<br><br>FALSE write syntax:`[f, F, false, False, FALSE]` |
-| Timestamp | Timestamps | Unix nanosecond timestamp. Specify alternative precisions with the [HTTP API](/influxdb/v1.7/tools/api/#write-http-endpoint). The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`. The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`. |
+| Timestamp | Timestamps | Unix nanosecond timestamp. Specify alternative precisions with the [InfluxDB API](/influxdb/v1.7/tools/api/#write-http-endpoint). The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`. The maximum valid timestamp is `9223372036854775806` or `2262-04-11T23:47:16.854775806Z`. |
 
 #### Boolean syntax for writes and queries
 

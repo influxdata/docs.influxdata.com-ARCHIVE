@@ -614,7 +614,7 @@ POST http://localhost:8086/write
 | rp=\<retention_policy_name> | Optional | Sets the target [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) for the write. InfluxDB writes to the `DEFAULT` retention policy if you do not specify a retention policy. |
 | u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have write access to the database. Use with the query string parameter `p`. |
 
-\* The HTTP API also supports basic authentication.
+\* The InfluxDB API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
 See below for an [example](#write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.

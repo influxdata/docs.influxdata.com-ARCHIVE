@@ -21,7 +21,7 @@ The `database name required` error occurs when certain `SHOW` queries do
 not specify a [database](/influxdb/v1.7/concepts/glossary/#database).
 Specify a database with an `ON` clause in the `SHOW` query, with `USE <database_name>` in the
 [CLI](/influxdb/v1.7/tools/shell/), or with the `db` query string parameter in
-the [HTTP API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
+the [InfluxDB API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
 
 The relevant `SHOW` queries include `SHOW RETENTION POLICIES`, `SHOW SERIES`,
 `SHOW MEASUREMENTS`, `SHOW TAG KEYS`, `SHOW TAG VALUES`, and `SHOW FIELD KEYS`.

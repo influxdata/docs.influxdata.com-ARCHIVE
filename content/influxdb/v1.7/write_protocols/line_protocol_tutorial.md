@@ -147,7 +147,7 @@ local timestamp instead of `2016-06-13T17:43:50.1004002Z`.
 weather,location=us-midwest temperature=82
 ```
 
-Use the HTTP API to specify timestamps with a precision other than nanoseconds,
+Use the InfluxDB API to specify timestamps with a precision other than nanoseconds,
 such as microseconds, milliseconds, or seconds.
 We recommend using the coarsest precision possible as this can result in
 significant improvements in compression.
@@ -482,7 +482,7 @@ Protocol from a file.
 
 There are several ways to write data to InfluxDB.
 See the [Tools](/influxdb/v1.7/tools/) section for more
-on the [HTTP API](/influxdb/v1.7/tools/api/#write-http-endpoint), the
+on the [InfluxDB API](/influxdb/v1.7/tools/api/#write-http-endpoint), the
 [CLI](/influxdb/v1.7/tools/shell/), and the available Service Plugins (
 [UDP](/influxdb/v1.7/tools/udp/),
 [Graphite](/influxdb/v1.7/tools/graphite/),

@@ -70,7 +70,7 @@ Where applicable, it links to outstanding issues on GitHub.
 
 * [How do I write integer field values?](#how-do-i-write-integer-field-values)
 * [How does InfluxDB handle duplicate points?](#how-does-influxdb-handle-duplicate-points)
-* [What newline character does the HTTP API require?](#what-newline-character-does-the-http-api-require)
+* [What newline character does the InfluxDB API require?](#what-newline-character-does-the-http-api-require)
 * [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)
 * [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)
 * [Does the precision of the timestamp matter?](#does-the-precision-of-the-timestamp-matter)
@@ -186,7 +186,7 @@ shorter `SHARD DURATION` preventing any further unexpected data retention.
 The syntax for specifying microsecond duration units differs for [configuration](/influxdb/v1.7/administration/config/) settings, writes, queries, and setting the precision in the InfluxDB [Command Line Interface](/influxdb/v1.7/tools/shell/) (CLI).
 The table below shows the supported syntax for each category:
 
-| |  Configuration File | HTTP API Writes | All Queries  | CLI Precision Command |
+| |  Configuration File | InfluxDB API Writes | All Queries  | CLI Precision Command |
 |---|---|---|---|---|
 | u  | ❌ | 👍  |  👍 |  👍  |
 | us |  👍  | ❌ | ❌ |  ❌ |
@@ -1013,7 +1013,7 @@ time                             az        hostname   val_1   val_2
 1970-01-15T06:56:07.890000001Z   us_west   server02   5.24
 ```
 
-## What newline character does the HTTP API require?
+## What newline character does the InfluxDB API require?
 
 The InfluxDB line protocol relies on line feed (`\n`, which is ASCII `0x0A`) to indicate the end of a line and the beginning of a new line. Files or data that use a newline character other than `\n` will result in the following errors: `bad timestamp`, `unable to parse`.
 
