@@ -246,7 +246,7 @@ CREATE RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <dur
 
 ##### `DURATION`
 
-The `DURATION` clause determines how long InfluxDB keeps the data.
+- The `DURATION` clause determines how long InfluxDB keeps the data.
 The `<duration>` is a [duration literal](/influxdb/v1.7/query_language/spec/#durations)
 or `INF` (infinite).
 The minimum duration for a retention policy is one hour and the maximum
@@ -254,19 +254,23 @@ duration is `INF`.
 
 ##### `REPLICATION`
 
-The `REPLICATION` clause determines how many independent copies of each point
-are stored in the [cluster](/influxdb/v1.7/high_availability/clusters/), where `n` is the number of data nodes.
+- The `REPLICATION` clause determines how many independent copies of each point
+are stored in the [cluster](/influxdb/v1.7/high_availability/clusters/).
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+- By default, the replication factor `n` usually equals the number of data nodes. However, if you have four or more data nodes, the default replication factor `n` is 3.
+
+- To ensure data is immediately available for queries, set the replication factor `n` to less than or equal to the number of data nodes in the cluster.
+
+> **Important:** If you have four or more data nodes, verify that the database replication factor is correct.
+
+- Replication factors do not serve a purpose with single node instances.
 
 ##### `SHARD DURATION`
 
-The `SHARD DURATION` clause determines the time range covered by a [shard group](/influxdb/v1.7/concepts/glossary/#shard-group).
-The `<duration>` is a [duration literal](/influxdb/v1.7/query_language/spec/#durations)
+- Optional. The `SHARD DURATION` clause determines the time range covered by a [shard group](/influxdb/v1.7/concepts/glossary/#shard-group).
+- The `<duration>` is a [duration literal](/influxdb/v1.7/query_language/spec/#durations)
 and does not support an `INF` (infinite) duration.
-This setting is optional.
-By default, the shard group duration is determined by the retention policy's
+- By default, the shard group duration is determined by the retention policy's
 `DURATION`:
 
 | Retention Policy's DURATION  | Shard Group Duration  |

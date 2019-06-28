@@ -153,30 +153,38 @@ Related entries: [point](/influxdb/v1.7/concepts/glossary/#point), [schema](/inf
 ## query
 
 An operation that retrieves data from InfluxDB.
-See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.7/query_language/schema_exploration/), [Database Management](/influxdb/v1.7/query_language/database_management/).
+See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.7/query_language/schema_exploration/), 
+[Database Management](/influxdb/v1.7/query_language/database_management/).
 
-## replication factor
 
-The attribute of the retention policy that determines how many copies of the data are stored in the cluster.
-InfluxDB replicates data across `N` data nodes, where `N` is the replication factor.
+## replication factor  
 
-<dt> Replication factors are not relevant for single node instances.
-</dt>
+An attribute of the retention policy that determines how many copies of data to store in the cluster. Replicating copies ensures that data is available
+ when a data node (or more) is unavailable.
 
-Related entries: [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node), [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)
+By default, the replication factor `n` usually equals the number of data nodes. However, if you have four or more data nodes, the replication factor `n` is 3.
+
+> **Important:** If you have four or more data nodes, verify that the database replication factor is correct.
+
+To set the replication factor, see [Retention policy management](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node), 
+[retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)
 
 ## retention policy (RP)
 
-The part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration), how many copies of this data is stored in the cluster (replication factor), and the time range covered by shard groups (shard group duration).
+Describes how long InfluxDB keeps data (duration), how many copies of the data to store in the cluster (replication factor), and the time range covered by
+ shard groups (shard group duration).
 RPs are unique per database and along with the measurement and tag set define a series.
 
-When you create a database, InfluxDB automatically creates a retention policy called `autogen` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
-See [Database Management](/influxdb/v1.7/query_language/database_management/#retention-policy-management) for retention policy management.
+When you create a database, InfluxDB creates a retention policy called `autogen` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
+For more information, see [Retention policy management](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
 
 <dt> Replication factors do not serve a purpose with single node instances.
 </dt>
 
-Related entries: [duration](/influxdb/v1.7/concepts/glossary/#duration), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor), [series](/influxdb/v1.7/concepts/glossary/#series), [shard duration](/influxdb/v1.7/concepts/glossary/#shard-duration), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
+Related entries: [duration](/influxdb/v1.7/concepts/glossary/#duration), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor),
+ [series](/influxdb/v1.7/concepts/glossary/#series), [shard duration](/influxdb/v1.7/concepts/glossary/#shard-duration), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
 
 ## schema
 
@@ -184,7 +192,8 @@ How the data are organized in InfluxDB.
 The fundamentals of the InfluxDB schema are databases, retention policies, series, measurements, tag keys, tag values, and field keys.
 See [Schema Design](/influxdb/v1.7/concepts/schema_and_data_layout/) for more information.
 
-Related entries: [database](/influxdb/v1.7/concepts/glossary/#database), [field key](/influxdb/v1.7/concepts/glossary/#field-key), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp), [series](/influxdb/v1.7/concepts/glossary/#series), [tag key](/influxdb/v1.7/concepts/glossary/#tag-key), [tag value](/influxdb/v1.7/concepts/glossary/#tag-value)
+Related entries: [database](/influxdb/v1.7/concepts/glossary/#database), [field key](/influxdb/v1.7/concepts/glossary/#field-key), [measurement](/influxdb/v1.7/concepts/glossary/#measurement),
+ [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp), [series](/influxdb/v1.7/concepts/glossary/#series), [tag key](/influxdb/v1.7/concepts/glossary/#tag-key), [tag value](/influxdb/v1.7/concepts/glossary/#tag-value)
 
 ## selector
 
