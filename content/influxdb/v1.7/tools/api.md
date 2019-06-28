@@ -1,16 +1,16 @@
 ---
-title: InfluxDB HTTP API reference
-description: Use the InfluxDB HTTP API endpoints to run queries, write data, check server status, and troubleshoot by tracking HTTP client requests, collecting server statistics, and using Go "pprof" profiles.
+title: InfluxDB API reference
+description: Use the InfluxDB API endpoints to run queries, write data, check server status, and troubleshoot by tracking HTTP client requests, collecting server statistics, and using Go "pprof" profiles.
 aliases:
     - /influxdb/v1.7/concepts/api/
 menu:
   influxdb_1_7:
-    name: InfluxDB HTTP API reference
+    name: InfluxDB API reference
     weight: 20
     parent: Tools
 ---
 
-The InfluxDB HTTP API provides a simple way to interact with the database.
+The InfluxDB API provides a simple way to interact with the database.
 It uses HTTP response codes, HTTP authentication, JWT Tokens, and basic authentication, and responses are returned in JSON.
 
 The following sections assume your InfluxDB instance is running on `localhost`
@@ -289,7 +289,7 @@ A successful [`CREATE DATABASE` query](/influxdb/v1.7/query_language/database_ma
 \* InfluxDB does not truncate the number of rows returned for requests without the `chunked` parameter.
 That behavior is configurable; see the [`max-row-limit`](/influxdb/v1.7/administration/config/#max-row-limit-0) configuration option for more information.
 
-\** The HTTP API also supports basic authentication.
+\** The InfluxDB API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
 See below for an [example](#create-a-database-using-basic-authentication) of basic authentication.

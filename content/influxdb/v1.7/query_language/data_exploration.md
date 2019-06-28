@@ -141,7 +141,7 @@ Returns data from a single measurement.
 If you're using the [CLI](/influxdb/v1.7/tools/shell/) InfluxDB queries the measurement in the
 [`USE`d](/influxdb/v1.7/tools/shell/#commands)
 [database](/influxdb/v1.7/concepts/glossary/#database) and the `DEFAULT` [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.7/tools/api/) InfluxDB queries the
+If you're using the [InfluxDB API](/influxdb/v1.7/tools/api/) InfluxDB queries the
 measurement in the database specified in the [`db` query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters)
 and the `DEFAULT` retention policy.
 
@@ -196,10 +196,10 @@ If you're using the [CLI](/influxdb/v1.7/tools/shell/) be sure to enter
 `USE NOAA_water_database` before you run the query.
 The CLI queries the data in the `USE`d database and the
 `DEFAULT` [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.7/tools/api/) be sure to set the
+If you're using the [InfluxDB API](/influxdb/v1.7/tools/api/) be sure to set the
 `db` [query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters)
 to `NOAA_water_database`.
-If you do not set the `rp` query string parameter, the HTTP API automatically
+If you do not set the `rp` query string parameter, the InfluxDB API automatically
 queries the database's `DEFAULT` retention policy.
 
 #### Select specific tags and fields from a single measurement
@@ -332,7 +332,7 @@ policy, and the measurement `h2o_feet`.
 In the CLI, fully qualify a measurement to query data in a database other
 than the `USE`d database and in a retention policy other than the
 `DEFAULT` retention policy.
-In the HTTP API, fully qualify a measurement in place of using the `db`
+In the InfluxDB API, fully qualify a measurement in place of using the `db`
 and `rp` query string parameters if desired.
 
 #### Select all data from a measurement in a particular database
@@ -356,7 +356,7 @@ The `..` indicates the `DEFAULT` retention policy for the specified database.
 
 In the CLI, specify the database to query data in a database other than the
 `USE`d database.
-In the HTTP API, specify the database in place of using the `db` query
+In the InfluxDB API, specify the database in place of using the `db` query
 string parameter if desired.
 
 ### Common issues with the SELECT statement
@@ -1692,7 +1692,7 @@ Writes data to the specified measurement.
 If you're using the [CLI](/influxdb/v1.7/tools/shell/) InfluxDB writes the data to the measurement in the
 [`USE`d](/influxdb/v1.7/tools/shell/#commands)
 [database](/influxdb/v1.7/concepts/glossary/#database) and the `DEFAULT` [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.7/tools/api/) InfluxDB writes the data to the
+If you're using the [InfluxDB API](/influxdb/v1.7/tools/api/) InfluxDB writes the data to the
 measurement in the database specified in the [`db` query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters)
 and the `DEFAULT` retention policy.
 
@@ -1784,10 +1784,10 @@ time                   water_level
 The query writes its results a new [measurement](/influxdb/v1.7/concepts/glossary/#measurement): `h2o_feet_copy_1`.
 If you're using the [CLI](/influxdb/v1.7/tools/shell/), InfluxDB writes the data to
 the `USE`d [database](/influxdb/v1.7/concepts/glossary/#database) and the `DEFAULT` [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.7/tools/api/), InfluxDB writes the
+If you're using the [InfluxDB API](/influxdb/v1.7/tools/api/), InfluxDB writes the
 data to the database and retention policy specified in the `db` and `rp`
 [query string parameters](/influxdb/v1.7/tools/api/#query-string-parameters).
-If you do not set the `rp` query string parameter, the HTTP API automatically
+If you do not set the `rp` query string parameter, the InfluxDB API automatically
 writes the data to the database's `DEFAULT` retention policy.
 
 The response shows the number of points (`7605`) that InfluxDB writes to `h2o_feet_copy_1`.
@@ -2727,7 +2727,7 @@ The [CLI](/influxdb/v1.7/tools/shell/) returns timestamps in
 nanosecond epoch format by default.
 Specify alternative formats with the
 [`precision <format>` command](/influxdb/v1.7/tools/shell/#influx-commands).
-The [HTTP API](/influxdb/v1.7/tools/api/) returns timestamps
+The [InfluxDB API](/influxdb/v1.7/tools/api/) returns timestamps
 in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) format by default.
 Specify alternative formats with the
 [`epoch` query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters).
@@ -3051,7 +3051,7 @@ Separate multiple [`SELECT` statements](#the-basic-select-statement) in a query 
 {{< tab-labels >}}
 {{% tabs %}}
 [Example 1: CLI](#)
-[Example 2: HTTP API](#)
+[Example 2: InfluxDB API](#)
 {{% /tabs %}}
 {{< tab-content-container >}}
 

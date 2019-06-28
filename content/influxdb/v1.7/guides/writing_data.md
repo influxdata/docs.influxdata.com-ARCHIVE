@@ -49,9 +49,9 @@ Anything that has to do with time in InfluxDB is always UTC.
 
 InfluxDB supports gzip compression. To reduce network traffic, consider the following options: 
 
-* To accept compressed data from InfluxDB, add the `Accept-Encoding: gzip` header to HTTP API requests.
+* To accept compressed data from InfluxDB, add the `Accept-Encoding: gzip` header to InfluxDB API requests.
 
-* To compress data before sending it to InfluxDB, add the `Content-Encoding: gzip` header to HTTP API requests.
+* To compress data before sending it to InfluxDB, add the `Content-Encoding: gzip` header to InfluxDB API requests.
 
 For details about enabling gzip for client libraries, see your client library documentation. 
   
@@ -173,4 +173,4 @@ Content-Length: 45
 ### Next steps
 
 Now that you know how to write data with the InfluxDB API, discover how to query them with the [Querying data](/influxdb/v1.7/guides/querying_data/) guide!
-For more information about writing data with the HTTP API, please see the [InfluxDB API reference](/influxdb/v1.7/tools/api/#write-http-endpoint).
+For more information about writing data with the InfluxDB API, please see the [InfluxDB API reference](/influxdb/v1.7/tools/api/#write-http-endpoint).

@@ -10,7 +10,7 @@ menu:
 ## aggregation
 
 An InfluxQL function that returns an aggregated value across a set of points.
-See [InfluxQL Functions](/influxdb/v1.7/query_language/functions/#aggregations) for a complete list of the available and upcoming aggregations.
+For a complete list of the available and upcoming aggregations, see [InfluxQL functions](/influxdb/v1.7/query_language/functions/#aggregations).
 
 Related entries: [function](/influxdb/v1.7/concepts/glossary/#function), [selector](/influxdb/v1.7/concepts/glossary/#selector), [transformation](/influxdb/v1.7/concepts/glossary/#transformation)
 
@@ -18,7 +18,7 @@ Related entries: [function](/influxdb/v1.7/concepts/glossary/#function), [select
 
 A collection of points in InfluxDB line protocol format, separated by newlines (`0x0A`).
 A batch of points may be submitted to the database using a single HTTP request to the write endpoint.
-This makes writes via the HTTP API much more performant by drastically reducing the HTTP overhead.
+This makes writes using the InfluxDB API much more performant by drastically reducing the HTTP overhead.
 InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
 
 Related entries: [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol), [point](/influxdb/v1.7/concepts/glossary/#point)

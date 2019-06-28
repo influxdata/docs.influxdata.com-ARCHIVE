@@ -556,7 +556,7 @@ For details on enabling HTTPS and authentication, see [Authentication and Author
 
 Determines whether the HTTP endpoints are enabled.
 To disable access to the HTTP endpoints, set the value to `false`.
-Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.7/tools/shell/) connects to the database using the HTTP API.
+Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.7/tools/shell/) connects to the database using the InfluxDB API.
 
 Environment variable: `INFLUXDB_HTTP_ENABLED`
 

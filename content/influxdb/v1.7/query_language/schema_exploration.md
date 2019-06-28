@@ -46,14 +46,15 @@ Returns a list of all [databases](/influxdb/v1.7/concepts/glossary/#database) on
 
 ### Syntax
 
-```
+```sql
 SHOW DATABASES
 ```
 
 ### Examples
 
-#### Example 1: Run a `SHOW DATABASES` query
-```
+#### Run a `SHOW DATABASES` query
+
+```sql
 > SHOW DATABASES
 
 name: databases
@@ -67,10 +68,12 @@ The query returns database names in a tabular format.
 This InfluxDB instance has two databases: `NOAA_water_database` and `_internal`.
 
 ## `SHOW RETENTION POLICIES`
+
 Returns a list of [retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) for the specified [database](/influxdb/v1.7/concepts/glossary/#database).
 
 ### Syntax
-```
+
+```sql
 SHOW RETENTION POLICIES [ON <database_name>]
 ```
 
@@ -79,13 +82,13 @@ SHOW RETENTION POLICIES [ON <database_name>]
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
 database with `USE <database_name>` in the [CLI](/influxdb/v1.7/tools/shell/) or with the `db` query
-string parameter in the [HTTP API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
+string parameter in the [InfluxDB API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
 
 ### Examples
 
-#### Example 1: Run a `SHOW RETENTION POLICIES` query with the `ON` clause
+#### Run a `SHOW RETENTION POLICIES` query with the `ON` clause
 
-```
+```sql
 > SHOW RETENTION POLICIES ON NOAA_water_database
 
 name      duration   shardGroupDuration   replicaN   default
@@ -101,12 +104,12 @@ a seven-day [shard group duration](/influxdb/v1.7/concepts/glossary/#shard-group
 a [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor)
 of one, and it is the `DEFAULT` retention policy for the database.
 
-#### Example 2: Run a `SHOW RETENTION POLICIES` query without the `ON` clause
+#### Run a `SHOW RETENTION POLICIES` query without the `ON` clause
 
 {{< tab-labels >}}
   {{% tabs %}}
   [CLI](#)
-  [HTTP API](#)
+  [InfluxDB API](#)
   {{% /tabs %}}
 {{< /tab-labels >}}
 {{< tab-content-container >}}
@@ -114,7 +117,8 @@ of one, and it is the `DEFAULT` retention policy for the database.
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
-```
+
+```sql
 > USE NOAA_water_database
 Using database NOAA_water_database
 
@@ -130,7 +134,8 @@ autogen   0s         168h0m0s             1          true
 {{% tab-content %}}
 
 Specify the database with the `db` query string parameter:
-```
+
+```bash
 ~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW RETENTION POLICIES"
 
 {
@@ -166,11 +171,13 @@ Specify the database with the `db` query string parameter:
 {{< /tab-content-container >}}
 
 ## `SHOW SERIES`
+
 Returns a list of [series](/influxdb/v1.7/concepts/glossary/#series) for
 the specified [database](/influxdb/v1.7/concepts/glossary/#database).
 
 ### Syntax
-```
+
+```sql
 SHOW SERIES [ON <database_name>] [FROM_clause] [WHERE <tag_key> <operator> [ '<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
 
@@ -179,7 +186,7 @@ SHOW SERIES [ON <database_name>] [FROM_clause] [WHERE <tag_key> <operator> [ '<t
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
 database with `USE <database_name>` in the [CLI](/influxdb/v1.7/tools/shell/) or with the `db` query
-string parameter in the [HTTP API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
+string parameter in the [InfluxDB API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
 
 The `FROM`, `WHERE`, `LIMIT`, and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
@@ -200,9 +207,9 @@ and on [Regular Expressions in Queries](/influxdb/v1.7/query_language/data_explo
 
 ### Examples
 
-#### Example 1: Run a `SHOW SERIES` query with the `ON` clause
+#### Run a `SHOW SERIES` query with the `ON` clause
 
-```
+```sql
 > SHOW SERIES ON NOAA_water_database
 
 key
@@ -228,12 +235,12 @@ Everything before the first comma is the [measurement](/influxdb/v1.7/concepts/g
 Everything after the first comma is either a [tag key](/influxdb/v1.7/concepts/glossary/#tag-key) or a [tag value](/influxdb/v1.7/concepts/glossary/#tag-value).
 The `NOAA_water_database` has five different measurements and 14 different series.
 
-#### Example 2: Run a `SHOW SERIES` query without the `ON` clause
+#### Run a `SHOW SERIES` query without the `ON` clause
 
 {{< tab-labels >}}
   {{% tabs %}}
   [CLI](#)
-  [HTTP API](#)
+  [InfluxDB API](#)
   {{% /tabs %}}
 {{< /tab-labels >}}
 {{< tab-content-container >}}
@@ -241,7 +248,8 @@ The `NOAA_water_database` has five different measurements and 14 different serie
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
-```
+
+```sql
 > USE NOAA_water_database
 Using database NOAA_water_database
 
@@ -270,7 +278,8 @@ h2o_temperature,location=santa_monica
 {{% tab-content %}}
 
 Specify the database with the `db` query string parameter:
-```
+
+```bash
 ~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW SERIES"
 
 {
@@ -336,9 +345,9 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 {{< /tab-content-container >}}
 
-#### Example 3: Run a `SHOW SERIES` query with several clauses
+#### Run a `SHOW SERIES` query with several clauses
 
-```
+```sql
 > SHOW SERIES ON NOAA_water_database FROM "h2o_quality" WHERE "location" = 'coyote_creek' LIMIT 2
 
 key
@@ -352,20 +361,22 @@ associated with the `h2o_quality` measurement and the tag `location = coyote_cre
 The `LIMIT` clause limits the number of series returned to two.
 
 ## `SHOW MEASUREMENTS`
+
 Returns a list of [measurements](/influxdb/v1.7/concepts/glossary/#measurement)
 for the specified [database](/influxdb/v1.7/concepts/glossary/#database).
 
 ### Syntax
 
-```
+```sql
 SHOW MEASUREMENTS [ON <database_name>] [WITH MEASUREMENT <regular_expression>] [WHERE <tag_key> <operator> ['<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
 
 ### Description of Syntax
+
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
 database with `USE <database_name>` in the [CLI](/influxdb/v1.7/tools/shell/) or with the `db` query
-string parameter in the [HTTP API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
+string parameter in the [InfluxDB API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
 
 The `WITH`, `WHERE`, `LIMIT` and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
@@ -385,8 +396,9 @@ and on [Regular expressions in queries](/influxdb/v1.7/query_language/data_explo
 
 ### Examples
 
-#### Example 1: Run a `SHOW MEASUREMENTS` query with the `ON` clause
-```
+#### Run a `SHOW MEASUREMENTS` query with the `ON` clause
+
+```sql
 > SHOW MEASUREMENTS ON NOAA_water_database
 
 name: measurements
@@ -404,12 +416,12 @@ database.
 The database has five measurements: `average_temperature`, `h2o_feet`,
 `h2o_pH`, `h2o_quality`, and `h2o_temperature`.
 
-#### Example 2: Run a `SHOW MEASUREMENTS` query without the `ON` clause
+#### Run a `SHOW MEASUREMENTS` query without the `ON` clause
 
 {{< tab-labels >}}
   {{% tabs %}}
   [CLI](#)
-  [HTTP API](#)
+  [InfluxDB API](#)
   {{% /tabs %}}
 {{< /tab-labels >}}
 {{< tab-content-container >}}
@@ -417,7 +429,8 @@ The database has five measurements: `average_temperature`, `h2o_feet`,
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
-```
+
+```sql
 > USE NOAA_water_database
 Using database NOAA_water_database
 
@@ -478,8 +491,9 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 {{< /tab-content-container >}}
 
-#### Example 3: Run a `SHOW MEASUREMENTS` query with several clauses (i)
-```
+#### Run a `SHOW MEASUREMENTS` query with several clauses (i)
+
+```sql
 > SHOW MEASUREMENTS ON NOAA_water_database WITH MEASUREMENT =~ /h2o.*/ LIMIT 2 OFFSET 1
 
 name: measurements
@@ -494,9 +508,9 @@ start with `h2o`.
 The `LIMIT` and `OFFSET` clauses limit the number of measurement names returned to
 two and offset the results by one, skipping the `h2o_feet` measurement.
 
-#### Example 4: Run a `SHOW MEASUREMENTS` query with several clauses (ii)
+#### Run a `SHOW MEASUREMENTS` query with several clauses (ii)
 
-```
+```sql
 > SHOW MEASUREMENTS ON NOAA_water_database WITH MEASUREMENT =~ /h2o.*/ WHERE "randtag"  =~ /\d/
 
 name: measurements
@@ -509,11 +523,13 @@ The query returns all measurements in the `NOAA_water_database` that start
 with `h2o` and have values for the tag key `randtag` that include an integer.
 
 ## `SHOW TAG KEYS`
+
 Returns a list of [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key)
 associated with the specified [database](/influxdb/v1.7/concepts/glossary/#database).
 
 ### Syntax
-```
+
+```sql
 SHOW TAG KEYS [ON <database_name>] [FROM_clause] [WHERE <tag_key> <operator> ['<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
 
@@ -522,7 +538,7 @@ SHOW TAG KEYS [ON <database_name>] [FROM_clause] [WHERE <tag_key> <operator> ['<
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
 database with `USE <database_name>` in the [CLI](/influxdb/v1.7/tools/shell/) or with the `db` query
-string parameter in the [HTTP API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
+string parameter in the [InfluxDB API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
 
 The `FROM` clause and the `WHERE` clause are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
@@ -543,8 +559,9 @@ and on [Regular Expressions in Queries](/influxdb/v1.7/query_language/data_explo
 
 ### Examples
 
-#### Example 1: Run a `SHOW TAG KEYS` query with the `ON` clause
-```
+#### Run a `SHOW TAG KEYS` query with the `ON` clause
+
+```sql
 > SHOW TAG KEYS ON "NOAA_water_database"
 
 name: average_temperature
@@ -579,19 +596,20 @@ The output groups tag keys by measurement name;
 it shows that every measurement has the `location` tag key and that the
 `h2o_quality` measurement has an additional `randtag` tag key.
 
-#### Example 2: Run a `SHOW TAG KEYS` query without the `ON` clause
+#### Run a `SHOW TAG KEYS` query without the `ON` clause
 
 {{< tab-labels >}}
 {{% tabs %}}
 [CLI](#)
-[HTTP API](#)
+[InfluxDB API](#)
 {{% /tabs %}}
 {{< tab-content-container >}}
 
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
-```
+
+```sql
 > USE NOAA_water_database
 Using database NOAA_water_database
 
@@ -629,7 +647,8 @@ location
 {{% tab-content %}}
 
 Specify the database with the `db` query string parameter:
-```
+
+```sql
 ~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode "q=SHOW TAG KEYS"
 
 {
@@ -706,9 +725,9 @@ Specify the database with the `db` query string parameter:
 {{< /tab-content-container >}}
 {{< /tab-labels >}}
 
+#### Run a `SHOW TAG KEYS` query with several clauses
 
-#### Example 3: Run a `SHOW TAG KEYS` query with several clauses
-```
+```sql
 > SHOW TAG KEYS ON "NOAA_water_database" FROM "h2o_quality" LIMIT 1 OFFSET 1
 
 name: h2o_quality
@@ -723,12 +742,13 @@ The `LIMIT` and `OFFSET` clauses limit the number of tag keys returned to one
 and offsets the results by one.
 
 ## `SHOW TAG VALUES`
+
 Returns the list of [tag values](/influxdb/v1.7/concepts/glossary/#tag-value)
 for the specified [tag key(s)](/influxdb/v1.7/concepts/glossary/#tag-key) in the database.
 
 ### Syntax
 
-```
+```sql
 SHOW TAG VALUES [ON <database_name>][FROM_clause] WITH KEY [ [<operator> "<tag_key>" | <regular_expression>] | [IN ("<tag_key1>","<tag_key2")]] [WHERE <tag_key> <operator> ['<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
 
@@ -736,7 +756,7 @@ SHOW TAG VALUES [ON <database_name>][FROM_clause] WITH KEY [ [<operator> "<tag_k
 
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
-database with `USE <database_name>` in the [CLI](/influxdb/v1.7/tools/shell/) or with the `db` query string parameter in the [HTTP API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
+database with `USE <database_name>` in the [CLI](/influxdb/v1.7/tools/shell/) or with the `db` query string parameter in the [InfluxDB API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
 
 The `WITH` clause is required.
 It supports specifying a single tag key, a regular expression, and multiple tag keys.
@@ -760,8 +780,9 @@ and on [Regular Expressions in Queries](/influxdb/v1.7/query_language/data_explo
 
 ### Examples
 
-#### Example 1: Run a `SHOW TAG VALUES` query with the `ON` clause
-```
+#### Run a `SHOW TAG VALUES` query with the `ON` clause
+
+```sql
 > SHOW TAG VALUES ON "NOAA_water_database" WITH KEY = "randtag"
 
 name: h2o_quality
@@ -776,12 +797,12 @@ The query returns all tag values of the `randtag` tag key in the `NOAA_water_dat
 database.
 `SHOW TAG VALUES` groups query results by measurement name.
 
-#### Example 2: Run a `SHOW TAG VALUES` query without the `ON` clause
+#### Run a `SHOW TAG VALUES` query without the `ON` clause
 
 {{< tab-labels >}}
   {{% tabs %}}
   [CLI](#)
-  [HTTP API](#)
+  [InfluxDB API](#)
   {{% /tabs %}}
 {{< /tab-labels >}}
 {{< tab-content-container >}}
@@ -789,7 +810,8 @@ database.
 {{% tab-content %}}
 
 Specify the database with `USE <database_name>`
-```
+
+```sql
 > USE NOAA_water_database
 Using database NOAA_water_database
 
@@ -808,7 +830,8 @@ randtag   3
 {{% tab-content %}}
 
 Specify the database with the `db` query string parameter:
-```
+
+```bash
 ~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode 'q=SHOW TAG VALUES WITH KEY = "randtag"'
 
 {
@@ -846,8 +869,9 @@ Specify the database with the `db` query string parameter:
 {{% /tab-content %}}
 {{< /tab-content-container >}}
 
-#### Example 3: Run a `SHOW TAG VALUES` query with several clauses
-```
+#### Run a `SHOW TAG VALUES` query with several clauses
+
+```sql
 > SHOW TAG VALUES ON "NOAA_water_database" WITH KEY IN ("location","randtag") WHERE "randtag" =~ /./ LIMIT 3
 
 name: h2o_quality
@@ -863,20 +887,23 @@ all measurements in the `NOAA_water_database` database where `randtag` has tag v
 The `LIMIT` clause limits the number of tag values returned to three.
 
 ## `SHOW FIELD KEYS`
+
 Returns the [field keys](/influxdb/v1.7/concepts/glossary/#field-key) and the
 [data type](/influxdb/v1.7/write_protocols/line_protocol_reference/#data-types) of their
 [field values](/influxdb/v1.7/concepts/glossary/#field-value).
 
 ### Syntax
-```
+
+```sql
 SHOW FIELD KEYS [ON <database_name>] [FROM <measurement_name>]
 ```
 
 ### Description of syntax
+
 `ON <database_name>` is optional.
 If the query does not include `ON <database_name>`, you must specify the
 database with `USE <database_name>` in the [CLI](/influxdb/v1.7/tools/shell/) or with the `db` query
-string parameter in the [HTTP API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
+string parameter in the [InfluxDB API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
 
 The `FROM` clause is also optional.
 See the Data Exploration page for documentation on the
@@ -889,9 +916,9 @@ occurs first in the following list: float, integer, string, boolean.
 
 ### Examples
 
-#### Example 1: Run a `SHOW FIELD KEYS` query with the `ON` clause
+#### Run a `SHOW FIELD KEYS` query with the `ON` clause
 
-```
+```sql
 > SHOW FIELD KEYS ON "NOAA_water_database"
 
 name: average_temperature
@@ -924,13 +951,12 @@ degrees             float
 The query returns the field keys and field value data types for each
 measurement in the `NOAA_water_database` database.
 
-#### Example 2: Run a `SHOW FIELD KEYS` query without the `ON` clause
-
+#### Run a `SHOW FIELD KEYS` query without the `ON` clause
 
 {{< tab-labels >}}
   {{% tabs %}}
   [CLI](#)
-  [HTTP API](#)
+  [InfluxDB API](#)
   {{% /tabs %}}
 {{< /tab-labels >}}
 {{< tab-content-container >}}
@@ -939,7 +965,7 @@ measurement in the `NOAA_water_database` database.
 
 Specify the database with `USE <database_name>`
 
-```
+```sql
 > USE NOAA_water_database
 Using database NOAA_water_database
 
@@ -977,7 +1003,8 @@ degrees             float
 {{% tab-content %}}
 
 Specify the database with the `db` query string parameter:
-```
+
+```bash
 ~# curl -G "http://localhost:8086/query?db=NOAA_water_database&pretty=true" --data-urlencode 'q=SHOW FIELD KEYS'
 
 {
@@ -1064,8 +1091,9 @@ Specify the database with the `db` query string parameter:
 {{< /tab-content-container >}}
 
 
-#### Example 3: Run a `SHOW FIELD KEYS` query with the `FROM` clause
-```
+#### Run a `SHOW FIELD KEYS` query with the `FROM` clause
+
+```sql
 > SHOW FIELD KEYS ON "NOAA_water_database" FROM "h2o_feet"
 
 name: h2o_feet
@@ -1080,7 +1108,8 @@ measurement in the `NOAA_water_database` database.
 
 ### Common Issues with `SHOW FIELD KEYS`
 
-#### Issue 1: SHOW FIELD KEYS and field type discrepancies
+#### SHOW FIELD KEYS and field type discrepancies
+
 Field value
 [data types](/influxdb/v1.7/write_protocols/line_protocol_reference/#data-types)
 cannot differ within a [shard](/influxdb/v1.7/concepts/glossary/#shard) but they
@@ -1089,10 +1118,10 @@ can differ across shards.
 the field key.
 
 ##### Example
-<br>
+
 The `all_the_types` field stores four different data types:
 
-```
+```sql
 > SHOW FIELD KEYS
 
 name: mymeas
@@ -1106,6 +1135,5 @@ all_the_types   boolean
 
 Note that `SHOW FIELD KEYS` handles field type discrepancies differently from
 `SELECT` statements.
-See the
-[FAQ](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards)
-page for more information.
+For more information, see the
+[How does InfluxDB handle field type discrepancies across shards?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards).

@@ -12,7 +12,7 @@ menu:
 With InfluxDB [installed](/influxdb/v1.7/introduction/installation), you're ready to start doing some awesome things.
 In this section we'll use the `influx` [command line interface](/influxdb/v1.7/tools/shell/) (CLI), which is included in all
 InfluxDB packages and is a lightweight and simple way to interact with the database.
-The CLI communicates with InfluxDB directly by making requests to the InfluxDB HTTP API over port `8086` by default.
+The CLI communicates with InfluxDB directly by making requests to the InfluxDB API over port `8086` by default.
 
 > **Note:** The database can also be used by making raw HTTP requests.
 See [Writing Data](/influxdb/v1.7/guides/writing_data/) and [Querying Data](/influxdb/v1.7/guides/querying_data/)
@@ -34,7 +34,7 @@ InfluxDB shell 1.7.x
 
 > **Notes:**
 >
-* The InfluxDB HTTP API runs on port `8086` by default.
+* The InfluxDB API runs on port `8086` by default.
 Therefore, `influx` will connect to port `8086` and `localhost` by default.
 If you need to alter these defaults, run `influx --help`.
 * The [`-precision` argument](/influxdb/v1.7/tools/shell/#influx-options) specifies the format/precision of any returned timestamps.
