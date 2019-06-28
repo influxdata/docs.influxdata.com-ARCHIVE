@@ -8,8 +8,6 @@ menu:
     parent: Concepts
 ---
 
-## Time Series Index (TSI) description
-
 When InfluxDB ingests data, we store not only the value but we also index the measurement and tag information so that it can be queried quickly.
 In earlier versions, index data could only be stored in-memory, however, that requires a lot of RAM and places an upper bound on the number of series a machine can hold.
 This upper bound is usually somewhere between 1 - 4 million series depending on the machine used.
@@ -20,6 +18,20 @@ TSI uses the operating system's page cache to pull hot data into memory and let 
 
 There are currently limits in TSM and the query engine which restrict the number of series you should practically store on a node.
 This practical upper bound is usually around 30 million series.
+
+## Enable TSI
+
+To enable TSI, you must set `index-version = tsi1` in the InfluxDB configuration file (influxdb.conf).
+
+### InfluxDB Enterprise
+
+- To convert your data nodes to support TSI, see [Upgrade InfluxDB Enterprise clusters](https://docs.influxdata.com/enterprise_influxdb/v1.7/administration/upgrading/).
+
+- For detail on configuration, see [Configure InfluxDB Enterprise clusters](https://docs.influxdata.com/enterprise_influxdb/v1.7/administration/configuration/#sidebar).
+
+### InfluxDB OSS
+
+- For detail on configuration, see [Configuring InfluxDB OSS](https://docs.influxdata.com/influxdb/v1.7/administration/config/#sidebar).
 
 ## Tooling
 
