@@ -116,8 +116,8 @@ There are three options for authenticating with the [CLI](/influxdb/v1.7/tools/s
 Example:
 
 ```bash
-export INFLUX_USERNAME todd
-export INFLUX_PASSWORD influxdb4ever
+export INFLUX_USERNAME=todd
+export INFLUX_PASSWORD=influxdb4ever
 echo $INFLUX_USERNAME $INFLUX_PASSWORD
 todd influxdb4ever
 

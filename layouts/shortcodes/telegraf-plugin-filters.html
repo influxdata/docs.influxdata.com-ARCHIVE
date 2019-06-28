@@ -1,0 +1,21 @@
+<div id="plugin-filters">
+
+  {{ range .Site.Data.telegraf_plugin_filters.filters }}
+  {{ $numValues := len .values }}
+  <div class="filter-category{{ if gt $numValues 6 }} two-columns{{ else if gt $numValues 12 }} three-columns{{ end }}">
+    <h5>{{ .category }}</h5>
+    <ul class="filter-list">
+      {{ range .values }}
+        <li>
+          <label for="{{ lower . }}" data-count="(0)">
+            <input type="checkbox" id="{{ lower . }}" name="{{ lower . }}">
+            <span class="checkbox"></span>
+            {{ . }}
+          </label>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+</div>
