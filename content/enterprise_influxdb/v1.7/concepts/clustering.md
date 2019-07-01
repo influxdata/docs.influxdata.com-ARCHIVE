@@ -66,6 +66,8 @@ Meta nodes hold all of the following meta data:
 
 The meta nodes keep this data in the Raft database on disk, backed by BoltDB. By default the Raft database is  `/var/lib/influxdb/meta/raft.db`.
 
+> **Note:** Meta nodes require the `/meta` directory.
+
 ### Data nodes
 
 Data nodes hold all of the raw time series data and metadata, including:
@@ -76,7 +78,7 @@ Data nodes hold all of the raw time series data and metadata, including:
 
 On disk, the data is always organized by `<database>/<retention_policy>/<shard_id>`. By default the parent directory is `/var/lib/influxdb/data`.
 
-> **Note:** Meta nodes only require the `/meta` directory, but Data nodes require all four subdirectories of `/var/lib/influxdb/`: `/meta`, `/data`, `/wal`, and `/hh`.
+> **Note:** Data nodes require all four subdirectories of `/var/lib/influxdb/`, including `/meta` (specifically, the clients.json file), `/data`, `/wal`, and `/hh`.
 
 ## Optimal server counts
 
