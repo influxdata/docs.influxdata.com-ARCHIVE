@@ -173,7 +173,7 @@ HEAD http://localhost:8086/ping
 
 By default, the `/ping` HTTP endpoint returns a simple HTTP 204 status response to let the client know that the server is running. Default value is `false`.
 When `verbose` option is set to `true` (`/ping?verbose=true`), an HTTP 200 status  is returned.
-The `verbose=true` option is required for health checks in the Google Kubernetes Cloud.
+The `verbose=true` option is required for [Google Cloud Load Balancing](https://cloud.google.com/load-balancing/docs/health-check-concepts) health checks.
 
 ### Example
 
