@@ -163,8 +163,6 @@ By default, the replication factor `n` usually equals the number of data nodes. 
 
 > **Important:** If you have four or more data nodes, verify that the database replication factor is correct.
 
-To set the replication factor, see [Retention policy management](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
-
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node), 
 [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)
 
