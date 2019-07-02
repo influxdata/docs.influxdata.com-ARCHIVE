@@ -159,9 +159,8 @@ See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema
 
 An attribute of the retention policy that determines how many copies of data to store in the cluster. Replicating copies ensures that data is available when a data node (or more) is unavailable.
 
-By default, the replication factor `n` usually equals the number of data nodes. However, if you have four or more data nodes, the replication factor `n` is 3.
-
-> **Important:** If you have four or more data nodes, verify that the database replication factor is correct.
+For three nodes or less, the default replication factor equals the number of data nodes. 
+For more than three nodes, the default replication factor is 3. To change the default replication factor, specify the replication factor `n` in the retention policy.
 
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node), 
 [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)
