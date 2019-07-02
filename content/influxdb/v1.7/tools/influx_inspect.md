@@ -10,7 +10,7 @@ menu:
 Influx Inspect is an InfluxDB disk utility that can be used to:
 
 * View detailed information about disk shards.
-* Exporting data from a shard to [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) that can be inserted back into the database.
+* Exporting data from a shard to [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) that can be inserted back into the database.
 * Converting TSM in-memory index shards to TSI disk-based index shards.
 
 ## `influx_inspect` utility
@@ -32,7 +32,7 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 * [`dumptsi`](#dumptsi): Dumps low-level details about TSI files.
 * [`dumptsm`](#dumptsm): Dumps low-level details about TSM files.
 * [`dumptsmwal`](#dumptsmwal): Dump all data from a WAL file.  
-* [`export`](#export): Exports raw data from a shard in Line Protocol format.
+* [`export`](#export): Exports raw data from a shard in InfluxDB line protocol format.
 * [`report`](#report): Displays a shard level report.
 * [`reporttsi`](#reporttsi): Reports on cardinality for measurements and shards.
 * [`verify`](#verify): Verifies the integrity of TSM files.
@@ -309,7 +309,7 @@ If a user writes points with timestamps set by the client, then multiple points 
 
 ### `export`
 
-Exports all TSM files in Line Protocol data format.
+Exports all TSM files in InfluxDB line protocol data format.
 Writes all WAL file data for `_internal/monitor`.
 This output file can be imported using the
 [influx](/influxdb/v1.7/tools/shell/#import-data-from-a-file-with-import) command.

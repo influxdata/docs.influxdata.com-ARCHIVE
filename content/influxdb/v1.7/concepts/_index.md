@@ -11,7 +11,7 @@ Understanding the following concepts will help you get the most out of InfluxDB.
 
 ## [Key concepts](/influxdb/v1.7/concepts/key_concepts/)
 
-A brief explanation of InfluxDB's core architecture useful for new beginners.
+A brief explanation of the InfluxDB core architecture.
 
 ## [Glossary of terms](/influxdb/v1.7/concepts/glossary/)
 

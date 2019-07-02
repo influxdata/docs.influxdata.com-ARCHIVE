@@ -105,7 +105,7 @@ Referencing the example above, in general:
 * InfluxDB points (for example, `2015-04-16T12:00:00Z	5`) are similar to SQL rows.
 
 Building on this comparison of database terminology,
-InfluxDB's [continuous queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq)
+InfluxDB [continuous queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq)
 and [retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) are
 similar to stored procedures in an SQL database.
 They're specified once and then performed regularly and automatically.
@@ -129,7 +129,9 @@ InfluxQL's `SELECT` statement follows the form of an SQL `SELECT` statement:
 ```sql
 SELECT <stuff> FROM <measurement_name> WHERE <some_conditions>
 ```
+
 where `WHERE` is optional.
+
 To get the InfluxDB output in the section above, you'd enter:
 
 ```sql
@@ -151,7 +153,7 @@ SELECT * FROM "foodships" WHERE "planet" = 'Saturn' AND time > '2015-04-16 12:00
 As shown in the example above, InfluxQL allows you to specify the time range of your query in the `WHERE` clause.
 You can use date-time strings wrapped in single quotes that have the
 format `YYYY-MM-DD HH:MM:SS.mmm`
-( `mmm` is milliseconds and is optional, and you can also specify microseconds or nanoseconds).
+(`mmm` is milliseconds and is optional, and you can also specify microseconds or nanoseconds).
 You can also use relative time with `now()` which refers to the server's current timestamp:
 
 ```sql
@@ -172,8 +174,6 @@ The options for specifying time durations with `now()` are:
 | d        | days   		|
 | w        | weeks   		|
 
-<br/>
-
 InfluxQL also supports regular expressions, arithmetic in expressions, `SHOW` statements, and `GROUP BY` statements.
 See our [data exploration](/influxdb/v1.7/query_language/data_exploration/) page for an in-depth discussion of those topics.
 InfluxQL functions include `COUNT`, `MIN`, `MAX`, `MEDIAN`, `DERIVATIVE` and more.
@@ -181,7 +181,7 @@ For a full list check out the [functions](/influxdb/v1.7/query_language/function
 
 Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v1.7/introduction/getting-started/).
 
-## A note on why InfluxDB isn't CRUD...
+## A note on why InfluxDB isn't CRUD
 
 InfluxDB is a database that has been optimized for time series data.
 This data commonly comes from sources like distributed sensor groups, click data from large websites, or lists of financial transactions.

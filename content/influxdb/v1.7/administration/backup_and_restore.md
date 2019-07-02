@@ -228,7 +228,7 @@ The metrics are backed up on a per-database basis in an operation separate from 
 
 #### Backing up the metastore
 
-InfluxDB's metastore contains internal information about the status of
+The InfluxDB metastore contains internal information about the status of
 the system, including user information, database and shard metadata, continuous queries, retention policies, and subscriptions.
 While a node is running, you can create a backup of your instance's metastore by running the command:
 

@@ -1,8 +1,8 @@
 ---
-title: InfluxDB glossary of terms
+title: InfluxDB glossary
 menu:
   influxdb_1_7:
-    name: Glossary of terms
+    name: Glossary
     weight: 20
     parent: Concepts
 ---
@@ -10,18 +10,18 @@ menu:
 ## aggregation
 
 An InfluxQL function that returns an aggregated value across a set of points.
-See [InfluxQL Functions](/influxdb/v1.7/query_language/functions/#aggregations) for a complete list of the available and upcoming aggregations.
+For a complete list of the available and upcoming aggregations, see [InfluxQL functions](/influxdb/v1.7/query_language/functions/#aggregations).
 
 Related entries: [function](/influxdb/v1.7/concepts/glossary/#function), [selector](/influxdb/v1.7/concepts/glossary/#selector), [transformation](/influxdb/v1.7/concepts/glossary/#transformation)
 
 ## batch
 
-A collection of points in line protocol format, separated by newlines (`0x0A`).
+A collection of points in InfluxDB line protocol format, separated by newlines (`0x0A`).
 A batch of points may be submitted to the database using a single HTTP request to the write endpoint.
-This makes writes via the HTTP API much more performant by drastically reducing the HTTP overhead.
+This makes writes using the InfluxDB API much more performant by drastically reducing the HTTP overhead.
 InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
 
-Related entries: [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol), [point](/influxdb/v1.7/concepts/glossary/#point)
+Related entries: [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol), [point](/influxdb/v1.7/concepts/glossary/#point)
 
 ## continuous query (CQ)
 
@@ -48,8 +48,8 @@ Related entries: [retention policy](/influxdb/v1.7/concepts/glossary/#retention-
 
 ## field
 
-The key-value pair in InfluxDB's data structure that records metadata and the actual data value.
-Fields are required in InfluxDB's data structure and they are not indexed - queries on field values scan all points that match the specified time range and, as a result, are not performant relative to tags.
+The key-value pair in an InfluxDB data structure that records metadata and the actual data value.
+Fields are required in InfluxDB data structures and they are not indexed - queries on field values scan all points that match the specified time range and, as a result, are not performant relative to tags.
 
 *Query tip:* Compare fields to tags; tags are indexed.
 
@@ -102,13 +102,13 @@ Related entries:
 [tag key](/influxdb/v1.7/concepts/glossary/#tag-key),
 [user](/influxdb/v1.7/concepts/glossary/#user)
 
-## line protocol
+## InfluxDB line protocol
 
-The text based format for writing points to InfluxDB. See [Line Protocol](/influxdb/v1.7/write_protocols/).
+The text based format for writing points to InfluxDB. See [InfluxDB line protocol](/influxdb/v1.7/write_protocols/).
 
 ## measurement
 
-The part of InfluxDB's structure that describes the data stored in the associated fields.
+The part of the InfluxDB data structure that describes the data stored in the associated fields.
 Measurements are strings.
 
 Related entries: [field](/influxdb/v1.7/concepts/glossary/#field), [series](/influxdb/v1.7/concepts/glossary/#series)
@@ -132,7 +132,7 @@ The local server's nanosecond timestamp.
 
 ## point
 
-The part of InfluxDB's data structure that consists of a single collection of fields in a series.
+The part of the InfluxDB data structure that consists of a single collection of fields in a series.
 Each point is uniquely identified by its series and timestamp.
 
 You cannot store more than one point with the same timestamp in the same series.
@@ -172,9 +172,6 @@ Describes how long InfluxDB keeps data (duration), how many copies of the data t
 When you create a database, InfluxDB creates a retention policy called `autogen` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
 For more information, see [Retention policy management](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
-
 Related entries: [duration](/influxdb/v1.7/concepts/glossary/#duration), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor), [series](/influxdb/v1.7/concepts/glossary/#series), [shard duration](/influxdb/v1.7/concepts/glossary/#shard-duration), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
 
 ## schema
@@ -194,8 +191,7 @@ Related entries: [aggregation](/influxdb/v1.7/concepts/glossary/#aggregation), [
 
 ## series
 
-The collection of data in InfluxDB's data structure that share a measurement, tag set, and retention policy.
-
+The collection of data in the InfluxDB data structure that share a measurement, tag set, and retention policy.
 
 > **Note:** The field set is not part of the series identification!
 
@@ -285,13 +281,14 @@ Subscriptions can use TCP or UDP for transmitting the writes.
 
 ## tag
 
-The key-value pair in InfluxDB's data structure that records metadata.
-Tags are an optional part of InfluxDB's data structure but they are useful for storing commonly-queried metadata; tags are indexed so queries on tags are performant.
+The key-value pair in the InfluxDB data structure that records metadata.
+Tags are an optional part of the data structure, but they are useful for storing commonly-queried metadata; tags are indexed so queries on tags are performant.
 *Query tip:* Compare tags to fields; fields are not indexed.
 
 Related entries: [field](/influxdb/v1.7/concepts/glossary/#field), [tag key](/influxdb/v1.7/concepts/glossary/#tag-key), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set), [tag value](/influxdb/v1.7/concepts/glossary/#tag-value)
 
 ## tag key
+
 The key part of the key-value pair that makes up a tag.
 Tag keys are strings and they store metadata.
 Tag keys are indexed so queries on tag keys are performant.
@@ -301,6 +298,7 @@ Tag keys are indexed so queries on tag keys are performant.
 Related entries: [field key](/influxdb/v1.7/concepts/glossary/#field-key), [tag](/influxdb/v1.7/concepts/glossary/#tag), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set), [tag value](/influxdb/v1.7/concepts/glossary/#tag-value)
 
 ## tag set
+
 The collection of tag keys and tag values on a point.
 
 Related entries: [point](/influxdb/v1.7/concepts/glossary/#point), [series](/influxdb/v1.7/concepts/glossary/#series), [tag](/influxdb/v1.7/concepts/glossary/#tag), [tag key](/influxdb/v1.7/concepts/glossary/#tag-key), [tag value](/influxdb/v1.7/concepts/glossary/#tag-value)

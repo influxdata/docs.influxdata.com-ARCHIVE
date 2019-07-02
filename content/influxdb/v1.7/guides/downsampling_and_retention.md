@@ -13,19 +13,19 @@ A natural solution is to downsample the data; keep the high precision raw data
 for only a limited time, and store the lower precision, summarized data for much
 longer or forever.
 
-InfluxDB offers two features - Continuous Queries (CQ) and Retention Policies
+InfluxDB offers two features - continuous queries (CQ) and retention policies
 (RP) - that automate the process of downsampling data and expiring old data.
 This guide describes a practical use case for CQs and RPs and covers how to
-set up those features in InfluxDB.
+set up those features in InfluxDB databases.
 
 ### Definitions
 
-A **Continuous Query** (CQ) is an InfluxQL query that runs automatically and
+A **continuous query** (CQ) is an InfluxQL query that runs automatically and
 periodically within a database.
 CQs require a function in the `SELECT` clause and must include a
 `GROUP BY time()` clause.
 
-A **Retention Policy** (RP) is the part of InfluxDB's data structure
+A **retention policy** (RP) is the part of InfluxDB data structure
 that describes for how long InfluxDB keeps data.
 InfluxDB compares your local server's timestamp to the timestamps on your data
 and deletes data that are older than the RP's `DURATION`.
@@ -78,7 +78,7 @@ the CQ has no `FOR` clause.
 
 #### 1. Create the database
 
-```
+```sql
 > CREATE DATABASE "food_data"
 ```
 
@@ -177,7 +177,7 @@ With the new CQ and two new RPs, `food_data` is ready to start receiving data.
 After writing data to our database and letting things run for a bit, we see
 two measurements: `orders` and `downsampled_orders`.
 
-```bash
+```sql
 > SELECT * FROM "orders" LIMIT 5
 name: orders
 ---------
@@ -228,5 +228,5 @@ Using a combination of RPs and CQs, we've successfully set up our database to
 automatically keep the high precision raw data for a limited time, create lower
 precision data, and store that lower precision data for a longer period of time.
 Now that you have a general understanding of how these features can work
-together, we recommend looking at the detailed documentation on [CQs](/influxdb/v1.7/query_language/continuous_queries/) and [RPs](/influxdb/v1.7/query_language/database_management/#retention-policy-management)
+together, check out the detailed documentation on [CQs](/influxdb/v1.7/query_language/continuous_queries/) and [RPs](/influxdb/v1.7/query_language/database_management/#retention-policy-management)
 to see all that they can do for you.
