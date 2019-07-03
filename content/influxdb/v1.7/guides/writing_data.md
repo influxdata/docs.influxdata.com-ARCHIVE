@@ -61,7 +61,7 @@ For details about enabling gzip for client libraries, see your client library do
   `content_encoding = "identity"` (default) to `content_encoding = "gzip"`
 
 >**Note**
-Write requests to InfluxDB 2.x [[outputs.influxdb_v2]] are configured to compress content in gzip format by default.
+Writes to InfluxDB 2.x [[outputs.influxdb_v2]] are configured to compress content in gzip format by default.
 
 ### Writing multiple points
 
