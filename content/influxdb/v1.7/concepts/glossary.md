@@ -16,7 +16,7 @@ Related entries: [function](/influxdb/v1.7/concepts/glossary/#function), [select
 
 ## batch
 
-A collection of points in InfluxDB line protocol format, separated by newlines (`0x0A`).
+A collection of data points in InfluxDB line protocol format, separated by newlines (`0x0A`).
 A batch of points may be submitted to the database using a single HTTP request to the write endpoint.
 This makes writes using the InfluxDB API much more performant by drastically reducing the HTTP overhead.
 InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
@@ -155,26 +155,22 @@ Related entries: [point](/influxdb/v1.7/concepts/glossary/#point), [schema](/inf
 An operation that retrieves data from InfluxDB.
 See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema Exploration](/influxdb/v1.7/query_language/schema_exploration/), [Database Management](/influxdb/v1.7/query_language/database_management/).
 
-## replication factor
+## replication factor  
 
-The attribute of the retention policy that determines how many copies of the data are stored in the cluster.
-InfluxDB replicates data across `N` data nodes, where `N` is the replication factor.
+The attribute of the retention policy that determines how many copies of data to concurrently store (or retain) in the cluster. Replicating copies ensures that data is available when a data node (or more) is unavailable.
 
-<dt> Replication factors are not relevant for single node instances.
-</dt>
+For three nodes or less, the default replication factor equals the number of data nodes. 
+For more than three nodes, the default replication factor is 3. To change the default replication factor, specify the replication factor `n` in the retention policy.
 
-Related entries: [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node), [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node), 
+[retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)
 
 ## retention policy (RP)
 
-The part of the InfluxDB data structure that describes for how long InfluxDB keeps data (duration), how many copies of this data is stored in the cluster (replication factor), and the time range covered by shard groups (shard group duration).
-RPs are unique per database and along with the measurement and tag set define a series.
+Describes how long InfluxDB keeps data (duration), how many copies of the data to store in the cluster (replication factor), and the time range covered by shard groups (shard group duration). RPs are unique per database and along with the measurement and tag set define a series.
 
-When you create a database, InfluxDB automatically creates a retention policy called `autogen` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
-See [Database Management](/influxdb/v1.7/query_language/database_management/#retention-policy-management) for retention policy management.
-
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+When you create a database, InfluxDB creates a retention policy called `autogen` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
+For more information, see [Retention policy management](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
 
 Related entries: [duration](/influxdb/v1.7/concepts/glossary/#duration), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor), [series](/influxdb/v1.7/concepts/glossary/#series), [shard duration](/influxdb/v1.7/concepts/glossary/#shard-duration), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
 
