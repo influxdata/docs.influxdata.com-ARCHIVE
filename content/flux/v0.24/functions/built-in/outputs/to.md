@@ -8,7 +8,6 @@ menu:
     name: to
     parent: Outputs
     weight: 1
-draft: true
 ---
 
 The `to()` function writes data to an **InfluxDB v2.0** bucket.
