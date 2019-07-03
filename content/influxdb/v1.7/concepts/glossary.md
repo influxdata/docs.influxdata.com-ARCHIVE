@@ -16,7 +16,7 @@ Related entries: [function](/influxdb/v1.7/concepts/glossary/#function), [select
 
 ## batch
 
-A collection of points in InfluxDB line protocol format, separated by newlines (`0x0A`).
+A collection of data points in InfluxDB line protocol format, separated by newlines (`0x0A`).
 A batch of points may be submitted to the database using a single HTTP request to the write endpoint.
 This makes writes using the InfluxDB API much more performant by drastically reducing the HTTP overhead.
 InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
@@ -157,7 +157,7 @@ See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema
 
 ## replication factor  
 
-An attribute of the retention policy that determines how many copies of data to store in the cluster. Replicating copies ensures that data is available when a data node (or more) is unavailable.
+The attribute of the retention policy that determines how many copies of data to concurrently store (or retain) in the cluster. Replicating copies ensures that data is available when a data node (or more) is unavailable.
 
 For three nodes or less, the default replication factor equals the number of data nodes. 
 For more than three nodes, the default replication factor is 3. To change the default replication factor, specify the replication factor `n` in the retention policy.
