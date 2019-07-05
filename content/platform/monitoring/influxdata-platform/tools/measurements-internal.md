@@ -14,177 +14,176 @@ menu:
 * [Enterprise cluster measurements](#enterprise-cluster-measurements)
 * [InfluxDB measurement statistics](#influxdb-measurement-statistics)
   * [ae](#ae-enterprise-only) (Enterprise only)
-      * [bytesRx](#bytesrx)
-      * [errors](#errors)
-      * [jobs](#jobs)
-      * [jobsActive](#jobsactive)
+    * [bytesRx](#bytesrx)
+    * [errors](#errors)
+    * [jobs](#jobs)
+    * [jobsActive](#jobsactive)
   * [cluster](#cluster-enterprise-only) (Enterprise only)
-      * [copyShardReq](#copyshardreq)
-      * [createIteratorReq](#createiteratorreq)
-      * [expandSourcesReq](#expandsourcesreq)
-      * [fieldDimensionsReq](#fielddimensionsreq)
-      * [iteratorCostReq](#iteratorcostreq)
-      * [removeShardReq](#removeshardreq)
-      * [writeShardFail](#writeshardfail)
-      * [writeShardPointsReq](#writeshardpointsreq)
-      * [writeShardReq](#writeshardreq)
+    * [copyShardReq](#copyshardreq)
+    * [createIteratorReq](#createiteratorreq)
+    * [expandSourcesReq](#expandsourcesreq)
+    * [fieldDimensionsReq](#fielddimensionsreq)
+    * [iteratorCostReq](#iteratorcostreq)
+    * [removeShardReq](#removeshardreq)
+    * [writeShardFail](#writeshardfail)
+    * [writeShardPointsReq](#writeshardpointsreq)
+    * [writeShardReq](#writeshardreq)
   * [cq](#cq)
-      * [queryFail](#queryfail)
-      * [queryOk](#queryok)
+    * [queryFail](#queryfail)
+    * [queryOk](#queryok)
   * [database](#database)
-      * [numMeasurements](#nummeasurements)
-      * [numSeries](#numseries)
+    * [numMeasurements](#nummeasurements)
+    * [numSeries](#numseries)
   * [hh](#hh-enterprise-only) (Enterprise only)
-      * [writeShardReq](#writeshardreq)
-      * [writeShardReqPoints](#writeshardreqpoints)
+    * [writeShardReq](#writeshardreq)
+    * [writeShardReqPoints](#writeshardreqpoints)
   * [hh_processor](#hh-processor-enterprise-only) (Enterprise only)
-      * [bytesRead](#bytesread)
-      * [bytesWritten](#byteswritten)
-      * [queueBytes](#queuebytes)
-      * [queueDepth](#queuedepth)
-      * [writeBlocked](#writeblocked)
-      * [writeDropped](#writedropped)
-      * [writeNodeReq](#writenodereq)
-      * [writeNodeReqFail](#writenodereqfail)
-      * [writeNodeReqPoints](#writenodereqpoints)
-      * [writeShardReq](#writeshardreq)
-      * [writeShardReqPoints](#writeshardreqpoints)
+    * [bytesRead](#bytesread)
+    * [bytesWritten](#byteswritten)
+    * [queueBytes](#queuebytes)
+    * [queueDepth](#queuedepth)
+    * [writeBlocked](#writeblocked)
+    * [writeDropped](#writedropped)
+    * [writeNodeReq](#writenodereq)
+    * [writeNodeReqFail](#writenodereqfail)
+    * [writeNodeReqPoints](#writenodereqpoints)
+    * [writeShardReq](#writeshardreq)
+    * [writeShardReqPoints](#writeshardreqpoints)
   * [httpd](#httpd)
-      * [authFail](#authfail)
-      * [clientError](#clienterror)
-      * [pingReq](#pingreq)
-      * [pointsWrittenDropped](#pointswrittendropped)
-      * [pointsWrittenFail](#pointswrittenfail)
-      * [pointsWrittenOK](#pointswrittenok)
-      * [promReadReq](#promreadreq)
-      * [promWriteReq](#promwritereq)
-      * [fluxQueryReq](#fluxqueryreq)
-      * [fluxQueryDurationNs](#fluxquerydurationns)
-      * [queryReq](#queryreq)
-      * [queryReqDurationNs](#queryreqdurationns)
-      * [queryRespBytes](#queryrespbytes)
-      * [recoveredPanics](#recoveredpanics)
-      * [req](#req)
-      * [reqActive](#reqactive)
-      * [reqDurationNs](#reqdurationns)
-      * [serverError](#servererror)
-      * [statusReq](#statusreq)
-      * [writeReq](#writereq)
-      * [writeReqActive](#writereqactive)
-      * [writeReqBytes](#writereqbytes)
-      * [writeReqDurationNs](#writereqdurationns)
+    * [authFail](#authfail)
+    * [clientError](#clienterror)
+    * [pingReq](#pingreq)
+    * [pointsWrittenDropped](#pointswrittendropped)
+    * [pointsWrittenFail](#pointswrittenfail)
+    * [pointsWrittenOK](#pointswrittenok)
+    * [promReadReq](#promreadreq)
+    * [promWriteReq](#promwritereq)
+    * [fluxQueryReq](#fluxqueryreq)
+    * [fluxQueryDurationNs](#fluxquerydurationns)
+    * [queryReq](#queryreq)
+    * [queryReqDurationNs](#queryreqdurationns)
+    * [queryRespBytes](#queryrespbytes)
+    * [recoveredPanics](#recoveredpanics)
+    * [req](#req)
+    * [reqActive](#reqactive)
+    * [reqDurationNs](#reqdurationns)
+    * [serverError](#servererror)
+    * [statusReq](#statusreq)
+    * [writeReq](#writereq)
+    * [writeReqActive](#writereqactive)
+    * [writeReqBytes](#writereqbytes)
+    * [writeReqDurationNs](#writereqdurationns)
   * [queryExecutor](#queryexecutor)
-      * [queriesActive](#queriesactive)
-      * [queriesExecuted](#queriesexecuted)
-      * [queriesFinished](#queriesfinished)
-      * [queryDurationNs](#querydurationns)
-      * [recoveredPanics](#recoveredpanics)
+    * [queriesActive](#queriesactive)
+    * [queriesExecuted](#queriesexecuted)
+    * [queriesFinished](#queriesfinished)
+    * [queryDurationNs](#querydurationns)
+    * [recoveredPanics](#recoveredpanics)
   * [rpc](#rpc-enterprise-only) (Enterprise only)
-      * [idleStreams](#idlestreams)
-      * [liveConnections](#liveconnections)
-      * [liveStreams](#livestreams)
-      * [rpcCalls](#rpccalls)
-      * [rpcFailures](#rpcfailures)
-      * [rpcReadBytes](#rpcreadbytes)
-      * [rpcRetries](#rpcretries)
-      * [rpcWriteBytes](#rpcwritebytes)
-      * [singleUse](#singleuse)
-      * [singleUseOpen](#singleuseopen)
-      * [totalConnections](#totalconnections)
-      * [totalStreams](#totalstreams)
+    * [idleStreams](#idlestreams)
+    * [liveConnections](#liveconnections)
+    * [liveStreams](#livestreams)
+    * [rpcCalls](#rpccalls)
+    * [rpcFailures](#rpcfailures)
+    * [rpcReadBytes](#rpcreadbytes)
+    * [rpcRetries](#rpcretries)
+    * [rpcWriteBytes](#rpcwritebytes)
+    * [singleUse](#singleuse)
+    * [singleUseOpen](#singleuseopen)
+    * [totalConnections](#totalconnections)
+    * [totalStreams](#totalstreams)
   * [runtime](#runtime)
-      * [Alloc](#alloc)
-      * [Frees](#frees)
-      * [HeapAlloc](#heapalloc)
-      * [HeapIdle](#heapidle)
-      * [HeapInUse](#heapinuse)
-      * [HeapObjects](#heapobjects)
-      * [HeapReleased](#heapreleased)
-      * [HeapSys](#heapsys)
-      * [Lookups](#lookups)
-      * [Mallocs](#mallocs)
-      * [NumGC](#numgc)
-      * [NumGoroutine](#numgoroutine)
-      * [PauseTotalNs](#)
-      * [Sys](#sys)
-      * [TotalAlloc](#totalalloc)
+    * [Alloc](#alloc)
+    * [Frees](#frees)
+    * [HeapAlloc](#heapalloc)
+    * [HeapIdle](#heapidle)
+    * [HeapInUse](#heapinuse)
+    * [HeapObjects](#heapobjects)
+    * [HeapReleased](#heapreleased)
+    * [HeapSys](#heapsys)
+    * [Lookups](#lookups)
+    * [Mallocs](#mallocs)
+    * [NumGC](#numgc)
+    * [NumGoroutine](#numgoroutine)
+    * [PauseTotalNs](#pausetotalns)
+    * [Sys](#sys)
+    * [TotalAlloc](#totalalloc)
   * [shard](#shard)
-      * [diskBytes](#diskbytes)
-      * [fieldsCreate](#fieldscreate)
-      * [seriesCreate](#seriescreate)
-      * [writeBytes](#writebytes)
-      * [writePointsDropped](#writepointsdropped)
-      * [writePointsErr](#writepointserr)
-      * [writePointsOk](#writepointsok)
-      * [writeReq](#writereq)
-      * [writeReqErr](#writereqerr)
-      * [writeReqOk](#writereqok)
+    * [diskBytes](#diskbytes)
+    * [fieldsCreate](#fieldscreate)
+    * [seriesCreate](#seriescreate)
+    * [writeBytes](#writebytes)
+    * [writePointsDropped](#writepointsdropped)
+    * [writePointsErr](#writepointserr)
+    * [writePointsOk](#writepointsok)
+    * [writeReq](#writereq)
+    * [writeReqErr](#writereqerr)
+    * [writeReqOk](#writereqok)
   * [subscriber](#subscriber)
-      * [createFailures](#createfailures)
-      * [pointsWritten](#pointswritten)
-      * [writeFailures](#writefailures)
+    * [createFailures](#createfailures)
+    * [pointsWritten](#pointswritten)
+    * [writeFailures](#writefailures)
   * [tsm1_cache](#tsm1-cache)
-      * [WALCompactionTimeMs](#walcompactiontimems)
-      * [cacheAgeMs](#cacheagems)
-      * [cachedBytes](#cachedbytes)
-      * [diskBytes](#diskbytes)
-      * [memBytes](#membytes)
-      * [snapshotCount](#snapshotcount)
-      * [writeDropped](#writedropped)
-      * [writeErr](#writeerr)
-      * [writeOk](#writeok)
+    * [WALCompactionTimeMs](#walcompactiontimems)
+    * [cacheAgeMs](#cacheagems)
+    * [cachedBytes](#cachedbytes)
+    * [diskBytes](#diskbytes)
+    * [memBytes](#membytes)
+    * [snapshotCount](#snapshotcount)
+    * [writeDropped](#writedropped)
+    * [writeErr](#writeerr)
+    * [writeOk](#writeok)
   * [tsm1_engine](#tsm1-engine)
-      * [cacheCompactionDuration](#cachecompactionduration)
-      * [cacheCompactionErr](#cachecompactionerr)
-      * [cacheCompactions](#cachecompactions)
-      * [cacheCompactionsActive](#cachecompactionsactive)
-      * [tsmFullCompactionDuration](#tsmfullcompactionduration)
-      * [tsmFullCompactionErr](#tsmfullcompactionerr)
-      * [tsmFullCompactionQueue](#tsmfullcompactionqueue)
-      * [tsmFullCompactions](#tsmfullcompactions)
-      * [tsmFullCompactionsActive](#tsmfullcompactionsactive)
-      * [tsmLevel1CompactionDuration](#tsmlevel1compactionduration)
-      * [tsmLevel1CompactionErr](#tsmlevel1compactionerr)
-      * [tsmLevel1CompactionQueue](#tsmlevel1compactionqueue)
-      * [tsmLevel1Compactions](#tsmlevel1compactions)
-      * [tsmLevel1CompactionsActive](#tsmlevel1compactionsactive)
-      * [tsmLevel2CompactionDuration](#tsmlevel2compactionduration)
-      * [tsmLevel2CompactionErr](#tsmlevel2compactionerr)
-      * [tsmLevel2CompactionQueue](#tsmlevel2compactionqueue)
-      * [tsmLevel2Compactions](#tsmlevel2compactions)
-      * [tsmLevel2CompactionsActive](#tsmlevel2compactionsactive)
-      * [tsmLevel3CompactionDuration](#tsmlevel3compactionduration)
-      * [tsmLevel3CompactionErr](#tsmlevel3compactionerr)
-      * [tsmLevel3CompactionQueue](#tsmlevel3compactionqueue)
-      * [tsmLevel3Compactions](#tsmlevel3compactions)
-      * [tsmLevel3CompactionsActive](#tsmlevel3compactionsactive)
-      * [tsmOptimizeCompactionDuration](#tsmoptimizecompactionduration)
-      * [tsmOptimizeCompactionErr](#tsmoptimizecompactionerr)
-      * [tsmOptimizeCompactionQueue](#tsmoptimizecompactionqueue)
-      * [tsmOptimizeCompactions](#tsmoptimizecompactions)
-      * [tsmOptimizeCompactionsActive](#tsmoptimizecompactionsactive)
+    * [cacheCompactionDuration](#cachecompactionduration)
+    * [cacheCompactionErr](#cachecompactionerr)
+    * [cacheCompactions](#cachecompactions)
+    * [cacheCompactionsActive](#cachecompactionsactive)
+    * [tsmFullCompactionDuration](#tsmfullcompactionduration)
+    * [tsmFullCompactionErr](#tsmfullcompactionerr)
+    * [tsmFullCompactionQueue](#tsmfullcompactionqueue)
+    * [tsmFullCompactions](#tsmfullcompactions)
+    * [tsmFullCompactionsActive](#tsmfullcompactionsactive)
+    * [tsmLevel1CompactionDuration](#tsmlevel1compactionduration)
+    * [tsmLevel1CompactionErr](#tsmlevel1compactionerr)
+    * [tsmLevel1CompactionQueue](#tsmlevel1compactionqueue)
+    * [tsmLevel1Compactions](#tsmlevel1compactions)
+    * [tsmLevel1CompactionsActive](#tsmlevel1compactionsactive)
+    * [tsmLevel2CompactionDuration](#tsmlevel2compactionduration)
+    * [tsmLevel2CompactionErr](#tsmlevel2compactionerr)
+    * [tsmLevel2CompactionQueue](#tsmlevel2compactionqueue)
+    * [tsmLevel2Compactions](#tsmlevel2compactions)
+    * [tsmLevel2CompactionsActive](#tsmlevel2compactionsactive)
+    * [tsmLevel3CompactionDuration](#tsmlevel3compactionduration)
+    * [tsmLevel3CompactionErr](#tsmlevel3compactionerr)
+    * [tsmLevel3CompactionQueue](#tsmlevel3compactionqueue)
+    * [tsmLevel3Compactions](#tsmlevel3compactions)
+    * [tsmLevel3CompactionsActive](#tsmlevel3compactionsactive)
+    * [tsmOptimizeCompactionDuration](#tsmoptimizecompactionduration)
+    * [tsmOptimizeCompactionErr](#tsmoptimizecompactionerr)
+    * [tsmOptimizeCompactionQueue](#tsmoptimizecompactionqueue)
+    * [tsmOptimizeCompactions](#tsmoptimizecompactions)
+    * [tsmOptimizeCompactionsActive](#tsmoptimizecompactionsactive)
   * [tsm1_filestore](#tsm1-filestore)
-      * [diskBytes](#diskbytes)
-      * [numFiles](#numfiles)
+    * [diskBytes](#diskbytes)
+    * [numFiles](#numfiles)
   * [tsm1_wal](#tsm1-wal)
-      * [currentSegmentDiskBytes](#currentsegmentdiskbytes)
-      * [oldSegmentsDiskBytes](#oldsegmentdiskbytes)
-      * [writeErr](#writeerr)
-      * [writeOk](#writeok)
+    * [currentSegmentDiskBytes](#currentsegmentdiskbytes)
+    * [oldSegmentsDiskBytes](#oldsegmentdiskbytes)
+    * [writeErr](#writeerr)
+    * [writeOk](#writeok)
   * [write](#write)
-      * [pointReq](#pointreq)
-      * [pointReqHH](#pointreqhh-enterprise-only) (Enterprise only)
-      * [pointReqLocal](#pointreqlocal-enterprise-only) (Enterprise only)
-      * [pointReqRemote](#pointreqremote-enterprise-only) (Enterprise only)
-      * [req](#req)
-      * [subWriteDrop](#subwritedrop)
-      * [subWriteOk](#subwriteok)
-      * [writeDrop](#writedrop)
-      * [writeError](#writeerror)
-      * [writeOk](#writeok)
-      * [writePartial](#writepartial-enterprise-only) (Enterprise only)
-      * [writeTimeout](#writetimeout)
-
+    * [pointReq](#pointreq)
+    * [pointReqHH](#pointreqhh-enterprise-only) (Enterprise only)
+    * [pointReqLocal](#pointreqlocal-enterprise-only) (Enterprise only)
+    * [pointReqRemote](#pointreqremote-enterprise-only) (Enterprise only)
+    * [req](#req)
+    * [subWriteDrop](#subwritedrop)
+    * [subWriteOk](#subwriteok)
+    * [writeDrop](#writedrop)
+    * [writeError](#writeerror)
+    * [writeOk](#writeok)
+    * [writePartial](#writepartial-enterprise-only) (Enterprise only)
+    * [writeTimeout](#writetimeout)
 
 ## Using the `_internal` database
 
@@ -192,10 +191,10 @@ By default, InfluxDB generates measurement statistics that are saved to the `_in
 
 > **Note:** When using the "watcher of watcher (WoW)" configuration, InfluxDB measurement statistics are written to the `telegraf` database using the InfluxDB plugins. When the data is collected in the `telegraf` database using InfluxDB plugins, most of the field keys below are prepended with `infuxdb_`, but they are otherwise identical to the ones listed here.
 
-
 ## Enterprise cluster measurements
 
 In a cluster, each measurement in the `_internal` database has three tags:
+
 * `clusterID` - the UUID of the cluster recording the `_internal` metrics
 * `hostname` - the hostname of the node reporting the metrics.
   * The `hostname` is added to all statistics and should indicate the hostname as reported by the operating system.
@@ -291,8 +290,6 @@ Indicates a SELECT from a regex initiated on a different data node, which then s
 * The number of internal write requests from a remote data node, regardless of success.
 * Data type: integer
 
-
-
 _____
 
 ### cq
@@ -314,7 +311,7 @@ The measurement statistics related to continuous queries (CQs).
 * Examples
   * "Continuous Queries Executed" metric in [InfluxDB OSS Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring#continuous-queries-executed-minute) and [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#continuous-queries-executed-minute) dashboards.
 
---------  ---------
+_____
 
 ### database
 
@@ -338,14 +335,17 @@ _____
 
 ### hh (Enterprise only)
 
-The `hh` measurement statistics track events resulting in new Hinted Handoff (HH) processors in InfluxDB Enterprise.
+The `hh` measurements represent metrics for the entire hinted handoff service. All of the `hh_processor` statistics are aggregated under this metric to simplify reporting the status of the hinted handoff service.
+
+The `hh` measurement statistics track events resulting in new hinted handoff (HH) processors in InfluxDB Enterprise.
 
 The `hh` measurement has one additional tag:
+
 * `path` - The path to the durable hinted handoff queue on disk.
 
 #### writeShardReq
 
-* The number of initial write requests handled by the Hinted Handoff engine for a remote node.
+* The number of initial write requests handled by the hinted handoff engine for a remote node.
 * Subsequent write requests to this node, destined for the same remote node, do not increment this statistics.
 * This statistic resets to `0` upon restart of `influxd`, regardless of the state the last time the process was alive. It is incremented when the HH "supersystem" is instructed to enqueue a write for the node, and the "subsystem" for the destination node doesn't exist and has to be created, and the "subsystem" created successfully.
 * If HH files are on disk for a remote node at process startup, the branch that increments this stat will not be reached.
@@ -353,41 +353,38 @@ The `hh` measurement has one additional tag:
 
 #### writeShardReqPoints
 
-* The number of write requests for each point in the initial request to the Hinted Handoff engine for a remote node.
+* The number of write requests for each point in the initial request to the hinted handoff engine for a remote node.
 * Data type: integer
 
 _____
 
-### hh_processor (Enterprise only)
+### hh_database (Enterprise only)
 
-The `hh_processor` measurement statistics are related to the Hinted Handoff (HH) processors in InfluxDB Enterprise, one for each data node.
+The ``hh_database` measurement aggregates all hinted handoff queues for a single database and node. This allows accurate reporting of total queue size for a single database to a target node.
 
-The `hh_processor` measurement has two additional tags:
-* `node` - The destination node for the recorded metrics.
-* `path` - The path to the durable hinted handoff queue on disk.
-
-> **Note:** The `hh_processor` statistics against a host are only accurate for the lifecycle of the current process. If the process crashes or restarts, `bytesRead` and `bytesWritten` are reset to zero, even if the HH queue was non-empty.
+* `db` — named of database
+* `node` — node identifier
 
 #### bytesRead
 
 >**Note:** Resets to zero after crash or restart, even if the HH queue was non-empty.
 
-* The size, in bytes, of points read from the Hinted Handoff queue and sent to its destination data node.
+* The size, in bytes, of points read from the hinted handoff queue and sent to its destination data node.
 * Note that if the data node process is restarted while there is data in the HH queue, `bytesRead` may settle to a number larger than `bytesWritten`.
-* Hinted Handoff writes occur in concurrent batches as determined by the [`retry-concurrency`](/enterprise_influxdb/latest/administration/configuration/#retry-concurrency-20) setting. If an individual write succeeds, the metric is incremented. If any write out of the whole batch fails, the entire batch is considered unsuccessful, and every part of the batch will be retried later. This was not the intended behavior of this stat.
+* Hinted handoff writes occur in concurrent batches as determined by the [`retry-concurrency`](/enterprise_influxdb/latest/administration/configuration/#retry-concurrency-20) setting. If an individual write succeeds, the metric is incremented. If any write out of the whole batch fails, the entire batch is considered unsuccessful, and every part of the batch will be retried later. This was not the intended behavior of this stat.
 * The other situation where `bytesRead` could be larger would be after a restart of the process. Say at startup there were 1000 bytes still enqueued in HH from the previous run of the process. Immediately after a restart, both `bytesRead` and `bytesWritten` are set to zero. Assuming HH is properly depleted, and no future writes require HH, then the stats will read 1000 bytes read and 0 bytes written.
 * Data type: integer
 
 #### bytesWritten
 
-* The total number of bytes written to the Hinted Handoff queue.
+* The total number of bytes written to the hinted handoff queue.
 * Note that this statistic only tracks bytes written during the lifecycle of the current process.
-Upon restart or a crash, this statistic resets to zero, even if the Hinted Handoff queue was not empty.
+Upon restart or a crash, this statistic resets to zero, even if the hinted handoff queue was not empty.
 * Data type: integer
 
 #### queueBytes
 
-* The total number of bytes remaining in the Hinted Handoff queue.
+* The total number of bytes remaining in the hinted handoff queue.
 * This statistic should accurately and absolutely track the number of bytes of encoded data waiting to be sent to the remote node.
 * Data type: integer
 * This statistic should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (See https://github.com/influxdata/docs.influxdata.com/issues/780)
@@ -397,7 +394,7 @@ Upon restart or a crash, this statistic resets to zero, even if the Hinted Hando
 
 #### queueDepth
 
-* The total number of segments in the Hinted Handoff queue. The HH queue is a sequence of 10MB "segment" files.
+* The total number of segments in the hinted handoff queue. The HH queue is a sequence of 10MB "segment" files.
 * This is a coarse-grained statistic that roughly represents the amount of data queued for a remote node.
 * The `queueDepth` values can give you a sense of when a queue is growing or shrinking.
 * Data type: integer
@@ -419,7 +416,7 @@ Upon restart or a crash, this statistic resets to zero, even if the Hinted Hando
 
 #### writeNodeReqFail
 
-* The total number of write requests that failed in writing a batch of data from the Hinted Handoff queue to the destination node.
+* The total number of write requests that failed in writing a batch of data from the hinted handoff queue to the destination node.
 * Data type: integer
 
 #### writeNodeReqPoints
@@ -429,12 +426,94 @@ Upon restart or a crash, this statistic resets to zero, even if the Hinted Hando
 
 #### writeShardReq
 
-* The total number of every write batch request enqueued into the Hinted Handoff queue.
+* The total number of every write batch request enqueued into the hinted handoff queue.
 * Data type: integer
 
 #### writeShardReqPoints
 
-* The total number of points enqueued into the Hinted Handoff queue.
+* The total number of points enqueued into the hinted handoff queue.
+* Data type: integer
+
+_____
+
+### hh_processor (Enterprise only)
+
+The `hh_processor` represents measurement statistics for a single queue (shard). In InfluxDB Enterprise, there is a hinted handoff processor on each data node.
+
+The `hh_processor` measurement has two additional tags:
+
+* `node` - The destination node for the recorded metrics.
+* `path` - The path to the durable hinted handoff queue on disk.
+
+> **Note:** The `hh_processor` statistics against a host are only accurate for the lifecycle of the current process. If the process crashes or restarts, `bytesRead` and `bytesWritten` are reset to zero, even if the HH queue was non-empty.
+
+#### bytesRead
+
+>**Note:** Resets to zero after crash or restart, even if the HH queue was non-empty.
+
+* The size, in bytes, of points read from the hinted handoff queue and sent to its destination data node.
+* Note that if the data node process is restarted while there is data in the HH queue, `bytesRead` may settle to a number larger than `bytesWritten`.
+* Hinted handoff writes occur in concurrent batches as determined by the [`retry-concurrency`](/enterprise_influxdb/latest/administration/configuration/#retry-concurrency-20) setting. If an individual write succeeds, the metric is incremented. If any write out of the whole batch fails, the entire batch is considered unsuccessful, and every part of the batch will be retried later. This was not the intended behavior of this stat.
+* The other situation where `bytesRead` could be larger would be after a restart of the process. Say at startup there were 1000 bytes still enqueued in HH from the previous run of the process. Immediately after a restart, both `bytesRead` and `bytesWritten` are set to zero. Assuming HH is properly depleted, and no future writes require HH, then the stats will read 1000 bytes read and 0 bytes written.
+* Data type: integer
+
+#### bytesWritten
+
+* The total number of bytes written to the hinted handoff queue.
+* Note that this statistic only tracks bytes written during the lifecycle of the current process.
+Upon restart or a crash, this statistic resets to zero, even if the hinted handoff queue was not empty.
+* Data type: integer
+
+#### queueBytes
+
+* The total number of bytes remaining in the hinted handoff queue.
+* This statistic should accurately and absolutely track the number of bytes of encoded data waiting to be sent to the remote node.
+* Data type: integer
+* This statistic should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (See https://github.com/influxdata/docs.influxdata.com/issues/780)
+  * See PR on `max-values-per-tag` limit and effects on `queueBytes` (https://github.com/influxdata/docs.influxdata.com/issues/780).
+  * Examples:
+    * "Hinted Handoff Queue Size" in the [InfluxDB Enterprise Stats](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-enterprise-monitoring#hinted-handoff-hh-queue-size) dashboard.
+
+#### queueDepth
+
+* The total number of segments in the hinted handoff queue. The HH queue is a sequence of 10MB "segment" files.
+* This is a coarse-grained statistic that roughly represents the amount of data queued for a remote node.
+* The `queueDepth` values can give you a sense of when a queue is growing or shrinking.
+* Data type: integer
+
+#### writeBlocked
+
+* The number of writes blocked because the number of concurrent HH requests exceeds the limit.
+* Data type: integer
+
+#### writeDropped
+
+* The number of writes dropped from the HH queue because the write appeared to be corrupted.
+* Data type: integer
+
+#### writeNodeReq
+
+* The total number of write requests that succeeded in writing a batch to the destination node.
+* Data type: integer
+
+#### writeNodeReqFail
+
+* The total number of write requests that failed in writing a batch of data from the hinted handoff queue to the destination node.
+* Data type: integer
+
+#### writeNodeReqPoints
+
+* The total number of points successfully written from the HH queue to the destination node fr
+* Data type: integer
+
+#### writeShardReq
+
+* The total number of every write batch request enqueued into the hinted handoff queue.
+* Data type: integer
+
+#### writeShardReqPoints
+
+* The total number of points enqueued into the hinted handoff queue.
 * Data type: integer
 
 _____
@@ -609,8 +688,6 @@ The `queryExecutor` statistics related to usage of the Query Executor of the Inf
 
 * The number of panics recovered by the Query Executor.
 * Data type: integer
-
-
 
 _____
 
@@ -1129,7 +1206,7 @@ The `write` measurement statistics are about writes to the data node, regardless
 
 #### pointReqHH (Enterprise only)
 
-* The total number of points received for write by this node and then enqueued into Hinted Handoff for the destination node.
+* The total number of points received for write by this node and then enqueued into hinted handoff for the destination node.
 
 * Data type: integer
 
@@ -1141,7 +1218,7 @@ The `write` measurement statistics are about writes to the data node, regardless
 #### pointReqRemote (Enterprise only)
 
 * The total number of points received for write by this node but needed to be forwarded into a shard on a remote node. The `pointReqRemote` statistic is incremented immediately before the remote write attempt, which only happens if HH doesn't exist for that node. Then if the write attempt fails, we check again if HH exists, and if so, add the point to HH instead.  
-* This statistic does not distinguish between requests that are directly written to the destination node versus enqueued into the Hinted Handoff queue for the destination node.  
+* This statistic does not distinguish between requests that are directly written to the destination node versus enqueued into the hinted handoff queue for the destination node.  
 * Data type: integer
 
 #### req
