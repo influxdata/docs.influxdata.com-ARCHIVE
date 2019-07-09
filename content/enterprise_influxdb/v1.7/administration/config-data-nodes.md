@@ -347,6 +347,17 @@ Environment variable: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
 Settings related to how the data nodes interact with other data nodes.
 Controls how data is shared across shards and the options for query management.
 
+An InfluxDB Enterprise cluster uses remote procedure calls (RPCs) for inter-node communication.
+An RPC connection pool manages the stream connections and efficiently uses system resources.
+InfluxDB data nodes multiplex RPC streams over a single TCP connection to avoid the overhead of
+frequently establishing and destroying TCP connections and exhausting ephemeral ports.
+Typically, a data node establishes a single, persistent TCP connection to each of the other data nodes
+to perform most RPC requests. In special circumstances, for example, when copying shards,
+a single-use TCP connection may be used.
+
+For information on InfluxDB `_internal` measurement statistics related to clusters, RPCs, and shards,
+see [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (`_inernal`)](/platform/monitoring/influxdata-platform/tools/measurements-internal/#cluster-enterprise-only).
+
 #### `dial-timeout = "1s"`
 
 The duration for which the meta node waits for a connection to a remote data node before the meta node attempts to connect to a different remote data node.
@@ -356,14 +367,22 @@ Environment variable: `INFLUXDB_CLUSTER_DIAL_TIMEOUT`
 
 #### `pool-max-idle-time = "60s"`
 
-The time a stream remains idle in the connection pool after which it's reaped.
+The maximum time that a TCP connection to another data node remains idle in the connection pool.
+When the connection is idle longer than the specified duration, the inactive connection is reaped —
+retired or recycled — so that the connection pool is not filled with inactive connections. Reaping
+idle connections minimizes inactive connections, decreases system load, and prevents system failure.
 
 Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_TIME`
 
 #### `pool-max-idle-streams = 100`
 
-The maximum number of streams that can be idle in a pool, per node.
-The number of active streams can exceed the maximum, but they will not return to the pool when released.
+The maximum number of idle RPC stream connections to retain in an idle pool between two nodes.
+When a new RPC request is issued, a connection is temporarily pulled from the idle pool, used, and then returned.
+If an idle pool is full and a stream connection is no longer required, the system closes the stream connection and resources become available.
+The number of active streams can exceed the maximum number of idle pool connections,
+but are not returned to the idle pool when released.
+Creating streams are relatively inexpensive operations to perform,
+so it is unlikely that changing this value will measurably improve performance between two nodes.
 
 Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_STREAMS`
 
