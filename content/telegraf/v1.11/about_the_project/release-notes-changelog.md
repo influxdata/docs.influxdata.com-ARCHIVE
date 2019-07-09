@@ -8,6 +8,27 @@ menu:
     parent: About the project
 ---
 
+## 1.11.2 [2019-07-09]
+
+### Bug fixes
+
+#### Plugins
+
+- Bind input (`bind`)
+  - Fix value out of range error on 32-bit systems.
+- Burrow input (`burrow`)
+  - Apply topic filter to partition metrics.
+- Filecount input (`filecount`)
+  - Fix path separator handling in Windows.
+- Logparser input (`logparser`)
+  - Fix stop working after reload.
+- Ping input (`ping`)
+  - Fix source address ping flag on BSD.
+- StatsD input (`statsd`)
+  - Fix panic with empty Datadog tag string.
+- Tail input (`tail`)
+  - Fix stop working after reload.
+
 ## 1.11.1 [2019-06-25]
 
 ### Bug fixes
@@ -33,7 +54,7 @@ menu:
 - System input (`system`)
   - Ignore error when `utmp` is missing.
 
-## v1.11.0 [2019-06-11]
+## 1.11.0 [2019-06-11]
 
 - System (`system`) input plugin
   - The `uptime_format` field has been deprecated — use the `uptime` field instead.
@@ -372,7 +393,7 @@ menu:
     - Skip string fields when writing.
     - Send metrics in ascending time order.
 
-## v1.9.5 [2019-02-26]
+## 1.9.5 [2019-02-26]
 
 ### Bug fixes
 
