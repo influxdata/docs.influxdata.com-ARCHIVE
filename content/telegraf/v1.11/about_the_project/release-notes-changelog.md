@@ -15,7 +15,7 @@ menu:
 #### Plugins
 
 - Bind input (`bind`)
-  - Fix value out of range error on 32-bit systems.
+  - Fix `value out of range` error on 32-bit systems.
 - Burrow input (`burrow`)
   - Apply topic filter to partition metrics.
 - Filecount input (`filecount`)
