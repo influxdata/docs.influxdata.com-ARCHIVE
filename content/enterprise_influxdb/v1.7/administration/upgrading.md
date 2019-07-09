@@ -9,24 +9,35 @@ menu:
     parent: Administration
 ---
 
-## Upgrading InfluxDB Enterprise 1.3.x-1.7.x clusters to 1.7.6 (rolling upgrade)
+To successfully upgrade from InfluxDB Enterprise 1.3.x-1.7.x clusters to 1.7.6 (rolling upgrade), complete the following steps:
 
-### Step 0: Back up your cluster before upgrading to version 1.7.6.
+1. [Back up your cluster](#back-up-your-cluster).
 
-Create a full backup of your InfluxDB Enterprise cluster before performing an upgrade.
-If you have incremental backups created as part of your standard operating procedures, make sure to
-trigger a final incremental backup before proceeding with the upgrade.
+2. [Upgrade meta nodes](#upgrade-meta-nodes).
+
+3. [Upgrade data nodes](#upgrade-data-nodes).
+   
+   > ***Note:*** To enable HTTPS, you must update the configuration files on each meta node (`influxdb-meta.conf`) and each data node (`influxdb.conf`). Details included in procedures below.
+
+## Back up your cluster
+
+Before performing an upgrade, create a full backup of your InfluxDB Enterprise cluster. Also, if you create incremental backups, trigger a final incremental backup.
 
 > ***Note:*** For information on performing a final incremental backup or a full backup,
 > see [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
 
-## Upgrading meta nodes
+## Upgrade meta nodes
 
-Follow these steps to upgrade all meta nodes in your InfluxDB Enterprise cluster. Ensure that the meta cluster is healthy before proceeding to the data nodes.
+Complete the following steps to upgrade meta nodes in your InfluxDB Enterprise cluster:
 
-### Step 1: Download the 1.7.6 meta node package
+1. [Download the meta node package](#download-the-meta-node-package).
+2. [Install the meta node package](#install-the-meta-node-package).
+3. [Update `influxdb-meta.conf`](#update-influxdb-meta-conf).
+4. [Restart the `influxdb-meta` service](#restart-the-influxdb-meta-service).
+5. Repeat steps 1-4 for each meta node in your cluster.
+6. [Confirm the meta nodes upgrade](#confirm-the-meta-nodes-upgrade).
 
-#### Meta node package download
+### Download the meta node package
 
 ##### Ubuntu and Debian (64-bit)
 
@@ -40,9 +51,7 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.6-c1.7.6_am
 wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.6_c1.7.6.x86_64.rpm
 ```
 
-### Step 2: Install the 1.7.6 meta nodes package
-
-#### Meta node package install
+### Install the meta node package
 
 ##### Ubuntu and Debian (64-bit)
 
@@ -56,9 +65,11 @@ sudo dpkg -i influxdb-meta_1.7.6-c1.7.6_amd64.deb
 sudo yum localinstall influxdb-meta-1.7.6_c1.7.6.x86_64.rpm
 ```
 
-### Step 3: Restart the `influxdb-meta` service
+### Update `influxdb-meta.conf`
 
-#### Meta node restart
+To enable HTTPS, you must update the meta node configuration file (`influxdb-meta.conf`). For information, see [Enable HTTPS within the configuration file for each Meta Node](/enterprise_influxdb/v1.7/guides/https_setup/#step-3-enable-https-within-the-configuration-file-for-each-meta-node).
+
+### Restart the `influxdb-meta` service
 
 ##### sysvinit systems
 
@@ -72,9 +83,9 @@ service influxdb-meta restart
 sudo systemctl restart influxdb-meta
 ```
 
-### Step 4: Confirm the upgrade
+### Confirm the meta nodes upgrade
 
-After performing the upgrade on ALL meta nodes, check your node version numbers using the
+After upgrading _**all**_ meta nodes, check your node version numbers using the
 `influxd-ctl show` command.
 The [`influxd-ctl` utility](/enterprise_influxdb/v1.7/administration/cluster-commands/) is available on all meta nodes.
 
@@ -96,13 +107,23 @@ rk-upgrading-02:8091	1.7.6_c1.7.6
 rk-upgrading-03:8091	1.7.6_c1.7.6
 ```
 
-## Upgrading data nodes
+Ensure that the meta cluster is healthy before upgrading the data nodes.
 
-Repeat the following steps for each data node in your InfluxDB Enterprise cluster.
+## Upgrade data nodes
 
-### Step 1: Download the 1.7.6 data node package
+Complete the following steps to upgrade data nodes in your InfluxDB Enterprise cluster:
 
-#### Data node package download
+1. [Download the data node package](#download-the-data-node-package).
+2. [Stop traffic to data nodes](#stop-traffic-to-data-nodes).
+3. [Install the data node package](#install-the-data-node-package).
+4. [Update `influxdb.conf`](#update-influxdb-conf).
+5. For Time Series Index (TSI) only. [Prepare your data node to support TSI](#prepare-your-data-node-to-support-tsi).
+6. [Restart the `influxdb` service](#restart-the-influxdb-service).
+7. [Restart traffic to data nodes](#restart-traffic-to-data-nodes).
+8. Repeat steps 1-7 for each data node in your cluster.
+9. [Confirm the data nodes upgrade](#confirm-the-data-nodes-upgrade).
+
+### Download the data node package
 
 ##### Ubuntu and Debian (64-bit)
 
@@ -116,21 +137,15 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.6-c1.7.6_am
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.6_c1.7.6.x86_64.rpm
 ```
 
-### Step 2: Stop traffic to the data node
+### Stop traffic to data nodes
 
-Your cluster's load balancer distributes read and write requests among data nodes in the cluster. If you have access to the load balancer configuration, stop routing read and write requests to the data node server (port 8086) via your load balancer **before** performing the remaining steps.
+- If you have access to the load balancer configuration, use your load balancer to stop routing read and write requests to the data node server (port 8086).
 
-If you cannot access the load balancer configuration, work with your networking team to prevent traffic to the data node server before continuing to upgrade.
+- If you cannot access the load balancer configuration, work with your networking team to prevent traffic to the data node server before continuing to upgrade.
 
-### Step 3: Install the 1.7.6 data node packages
+### Install the data node package
 
-#### Data node package install
-
-When you run the install command, your terminal asks if you want to keep your
-current configuration file or overwrite your current configuration file with the file for version 1.7.6.
-
-Keep your current configuration file by entering `N` or `O`.
-The configuration file will be updated with the necessary changes for version 1.7.6 in the next step.
+When you run the install command, you're prompted to keep or overwrite your current configuration file with the file for version 1.7.6. Enter `N` or `O` to keep your current configuration file. You'll make the configuration changes for version 1.7.6. in the next procedure, [Update`infludb.conf`](#update-influxdb-conf).
 
 ##### Ubuntu and Debian (64-bit)
 
@@ -144,83 +159,59 @@ sudo dpkg -i influxdb-data_1.7.6-c1.7.6_amd64.deb
 sudo yum localinstall influxdb-data-1.7.6_c1.7.6.x86_64.rpm
 ```
 
-### Step 4: Update the data node configuration file
+### Update `influxdb.conf`
 
-> The first official Time Series Index (TSI) was released with InfluxDB v1.5.
-> Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
+To enable either HTTPS or Time Series Index (TSI), you must update the data node configuration file (`influxdb.conf`).
 
-**Add:**
+- To enable HTTPS, see [Enable HTTPS within the configuration file for each Data Node](https://docs.influxdata.com/enterprise_influxdb/v1.7/guides/https_setup/#step-4-enable-https-within-the-configuration-file-for-each-data-node).
 
-* If enabling TSI: [index-version = "tsi1"](/enterprise_influxdb/v1.7/administration/config-data-nodes#index-version-inmem) to the `[data]` section.
-* If not enabling TSI: [index-version = "inmem"](/enterprise_influxdb/v1.7/administration/config-data-nodes#index-version-inmem) to the `[data]` section.
-  * Use 'tsi1' for the Time Series Index (TSI); set the value to `inmem` to use the TSM in-memory index.
-* [wal-fsync-delay = "0s"](/enterprise_influxdb/v1.7/administration/config-data-nodes#wal-fsync-delay-0s) to the `[data]` section
-* [max-concurrent-compactions = 0](/enterprise_influxdb/v1.7/administration/config-data-nodes#max-concurrent-compactions-0) to the `[data]` section
-* [pool-max-idle-streams = 100](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-streams-100) to the `[cluster]` section
-* [pool-max-idle-time = "1m0s"](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-time-60s) to the `[cluster]` section
-* the [[anti-entropy]](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy) section:
+- To enable TSI, open `/etc/influxdb/influxdb.conf`, and then adjust and save the settings shown in the following table.
 
-```toml
-[anti-entropy]
-  enabled = true
-  check-interval = "30s"
-  max-fetch = 10
-```
+    | Section | Setting                                                   |
+    | --------| ----------------------------------------------------------|
+    | `[data]` |  <ul><li>To use Time Series Index (TSI) disk-based indexing, add [`index-version = "tsi1"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#index-version-inmem) <li>To use TSM in-memory index, add [`index-version = "inmem"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#index-version-inmem) <li>Add [`wal-fsync-delay = "0s"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#wal-fsync-delay-0s) <li>Add [`max-concurrent-compactions = 0`](/enterprise_influxdb/v1.7/administration/config-data-nodes#max-concurrent-compactions-0)<li>Set[`cache-max-memory-size`](/enterprise_influxdb/v1.7/administration/config-data-nodes#cache-max-memory-size-1g) to `1073741824` |
+    | `[cluster]`| <ul><li>Add [`pool-max-idle-streams = 100`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-streams-100) <li>Add[`pool-max-idle-time = "1m0s"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-time-60s) <li>Remove `max-remote-write-connections` 
+    |[`[anti-entropy]`](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy)| <ul><li>Add `enabled = true` <li>Add `check-interval = "30s"` <li>Add `max-fetch = 10`|
+    |`[admin]`| Remove entire section.|
 
-**Remove:**
+For more information about TSI, see [TSI overview](/influxdb/v1.7/concepts/time-series-index/) and [TSI details](/influxdb/v1.7/concepts/tsi-details/).
 
-* `max-remote-write-connections` from the `[cluster]` section
-* `[admin]` section
+### Prepare your data node to support TSI
 
-**Update:**
+Complete the following steps for Time Series Index (TSI) only.
 
-* [cache-max-memory-size](/enterprise_influxdb/v1.7/administration/config-data-nodes#cache-max-memory-size-1g) to `1073741824` in the `[data]` section
+1. Delete all existing TSM-based shard `index` directories to ensure there are no incompatible index files. By default, the `index` directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
 
-The new configuration options are set to the default settings.
-
-### Step 5: [For TSI Preview instances only] Prepare your node to support Time Series Index (TSI).
-
-1. Delete all existing TSM-based shard `index` directories.
-
-* Remove the existing `index` directories to ensure there are no incompatible index files.
-* By default, the `index` directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
-
-2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
-
-* When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
-* Run the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
+2. If TSI is enabled, TSM-based shards must be converted to support TSI. Run the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi)command to covert TSM-based shards to TSI shards or rebuild existing TSI shards.
 
 > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
 > or ensure that the permissions match afterward.
 
-### Step 6: Restart the `influxdb` service.
+### Restart the `influxdb` service
 
-#### Restart data node
+Restart the `influxdb` service to restart the data nodes.
 
-##### sysvinit systems
+**sysvinit systems**
 
 ```bash
 service influxdb restart
 ```
 
-##### systemd systems
+**systemd systems**
 
 ```bash
 sudo systemctl restart influxdb
 ```
 
-### Step 7: Restart traffic to data node 
+### Restart traffic to data nodes
 
 Restart routing read and write requests to the data node server (port 8086) through your load balancer.
 
-If this is the last data node to be upgraded, continue to the next step.
-Otherwise, return to Step 1 of [Upgrading data nodes](#upgrading-data-nodes) and repeat the process for the remaining data nodes.
+### Confirm the data nodes upgrade
 
-### Step 8: Confirm the upgrade
-
-Your cluster is now upgraded to InfluxDB Enterprise 1.7.6.
-Check your node version numbers using the `influxd-ctl show` command.
-The [`influxd-ctl`](/enterprise_influxdb/v1.7/administration/cluster-commands/) utility is available on all meta nodes.
+After upgrading _**all**_ data nodes, check your node version numbers using the
+`influxd-ctl show` command.
+The [`influxd-ctl` utility](/enterprise_influxdb/v1.7/administration/cluster-commands/) is available on all meta nodes.
 
 ```bash
 ~# influxd-ctl show
@@ -240,4 +231,4 @@ rk-upgrading-02:8091	1.7.6_c1.7.6
 rk-upgrading-03:8091	1.7.6_c1.7.6
 ```
 
-If you have any issues upgrading your cluster, contact InfluxData support.
+If you have issues upgrading your cluster, contact InfluxData support.
