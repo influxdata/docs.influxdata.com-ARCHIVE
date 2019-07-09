@@ -348,7 +348,7 @@ Settings related to how the data nodes interact with other data nodes.
 Controls how data is shared across shards and the options for query management.
 
 An InfluxDB Enterprise cluster uses remote procedure calls (RPCs) for inter-node communication.
-An RPC connection pool manages the stream connections and provides efficient use of system resources.
+An RPC connection pool manages the stream connections and efficiently uses system resources.
 InfluxDB data nodes multiplex RPC streams over a single TCP connection to avoid the overhead of
 frequently establishing and destroying TCP connections and exhausting ephemeral ports. 
 Typically, a data node establishes a single, persistent TCP connection to each of the other data nodes
