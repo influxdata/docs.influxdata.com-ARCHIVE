@@ -191,13 +191,13 @@ Complete the following steps for Time Series Index (TSI) only.
 
 Restart the `influxdb` service to restart the data nodes.
 
-**sysvinit systems**
+##### sysvinit systems
 
 ```bash
 service influxdb restart
 ```
 
-**systemd systems**
+##### systemd systems
 
 ```bash
 sudo systemctl restart influxdb
