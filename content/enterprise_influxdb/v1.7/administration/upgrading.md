@@ -9,7 +9,7 @@ menu:
     parent: Administration
 ---
 
-To successfully upgrade from InfluxDB Enterprise 1.3.x-1.7.x clusters to 1.7.6 (rolling upgrade), complete the following steps:
+To successfully upgrade InfluxDB Enterprise 1.3.x-1.7.x clusters to 1.7.6 (rolling upgrade), complete the following steps:
 
 1. [Back up your cluster](#back-up-your-cluster).
 
