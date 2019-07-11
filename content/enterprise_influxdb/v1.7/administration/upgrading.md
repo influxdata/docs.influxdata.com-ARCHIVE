@@ -56,7 +56,13 @@ sudo dpkg -i influxdb-meta_1.7.6-c1.7.6_amd64.deb
 sudo yum localinstall influxdb-meta-1.7.6_c1.7.6.x86_64.rpm
 ```
 
-### Step 3: Restart the `influxdb-meta` service
+### Step 3: Update the meta node configuration file
+
+Migrate any custom settings from your previous meta node configuration file.
+
+To enable HTTPS, see [Enable HTTPS within the configuration file for each Meta Node](/enterprise_influxdb/v1.7/guides/https_setup/#step-3-enable-https-within-the-configuration-file-for-each-meta-node).
+
+### Step 4: Restart the `influxdb-meta` service
 
 #### Meta node restart
 
@@ -72,7 +78,7 @@ service influxdb-meta restart
 sudo systemctl restart influxdb-meta
 ```
 
-### Step 4: Confirm the upgrade
+### Step 5: Confirm the upgrade
 
 After performing the upgrade on ALL meta nodes, check your node version numbers using the
 `influxd-ctl show` command.
@@ -145,6 +151,16 @@ sudo yum localinstall influxdb-data-1.7.6_c1.7.6.x86_64.rpm
 ```
 
 ### Step 4: Update the data node configuration file
+
+Migrate any custom settings from your previous data node configuration file.
+
+To enable either HTTPS or Time Series Index (TSI), update the data node configuration file (`influxdb.conf`).
+
+#### To enable HTTPS
+
+- To enable HTTPS, see [Enable HTTPS within the configuration file for each Data Node](https://docs.influxdata.com/enterprise_influxdb/v1.7/guides/https_setup/#step-4-enable-https-within-the-configuration-file-for-each-data-node).
+
+#### To enable Time Series Index (TSI)
 
 > The first official Time Series Index (TSI) was released with InfluxDB v1.5.
 > Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
