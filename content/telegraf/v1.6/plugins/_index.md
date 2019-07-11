@@ -16,7 +16,7 @@ The [Telegraf input plugins](/telegraf/v1.6/plugins/inputs/) collect metrics fro
 
 ## [Telegraf output plugins](/telegraf/v1.6/plugins/outputs/)
 
-The [Telegraf output plugins](/telegraf/v1.6/plugins/outputs/) transform, decorate, and filter metrics.
+The [Telegraf output plugins](/telegraf/v1.6/plugins/outputs/) write metrics to various destinations.
 
 ## [Telegraf aggregator plugins](/telegraf/v1.6/plugins/aggregators/)
 
@@ -24,4 +24,4 @@ The [Telegraf aggregator plugins](/telegraf/v1.6/plugins/aggregators/) create ag
 
 ## [Telegraf processor plugins](/telegraf/v1.6/plugins/processors/)
 
-The [Telegraf processor plugins](/telegraf/v1.6/plugins/processors/) write metrics to various destinations.
+The [Telegraf processor plugins](/telegraf/v1.6/plugins/processors/) transform, decorate, and filter metrics.
