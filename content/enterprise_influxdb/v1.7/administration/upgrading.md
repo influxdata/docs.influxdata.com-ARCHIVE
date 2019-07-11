@@ -58,7 +58,9 @@ sudo yum localinstall influxdb-meta-1.7.6_c1.7.6.x86_64.rpm
 
 ### Step 3: Update the meta node configuration file
 
-To enable HTTPS, you must update the meta node configuration file (`influxdb-meta.conf`). For information, see [Enable HTTPS within the configuration file for each Meta Node](/enterprise_influxdb/v1.7/guides/https_setup/#step-3-enable-https-within-the-configuration-file-for-each-meta-node).
+Migrate any custom settings from your previous meta node configuration file.
+
+To enable HTTPS, see [Enable HTTPS within the configuration file for each Meta Node](/enterprise_influxdb/v1.7/guides/https_setup/#step-3-enable-https-within-the-configuration-file-for-each-meta-node).
 
 ### Step 4: Restart the `influxdb-meta` service
 
@@ -150,7 +152,9 @@ sudo yum localinstall influxdb-data-1.7.6_c1.7.6.x86_64.rpm
 
 ### Step 4: Update the data node configuration file
 
-To enable either HTTPS or Time Series Index (TSI), you must update the data node configuration file (`influxdb.conf`).
+Migrate any custom settings from your previous data node configuration file.
+
+To enable either HTTPS or Time Series Index (TSI), update the data node configuration file (`influxdb.conf`).
 
 #### To enable HTTPS
 
