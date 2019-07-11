@@ -16,10 +16,10 @@ View the full list of available Telegraf plugins.
 The [Telegraf input plugins](/telegraf/v1.11/plugins/inputs/) collect metrics from the system, services, or third party APIs.
 
 ### Telegraf output plugins
-The [Telegraf output plugins](/telegraf/v1.11/plugins/outputs/) transform, decorate, and filter metrics.
+The [Telegraf output plugins](/telegraf/v1.11/plugins/outputs/) write metrics to various destinations.
 
 ### Telegraf aggregator plugins
 The [Telegraf aggregator plugins](/telegraf/v1.11/plugins/aggregators/) create aggregate metrics (for example, mean, min, max, quantiles, etc.)
 
 ### Telegraf processor plugins
-The [Telegraf processor plugins](/telegraf/v1.11/plugins/processors/) write metrics to various destinations.
+The [Telegraf processor plugins](/telegraf/v1.11/plugins/processors/) transform, decorate, and filter metrics.
