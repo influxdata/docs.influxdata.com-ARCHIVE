@@ -56,7 +56,7 @@ Change this option to true to disable reporting.
 
 #### `bind-address = ":8088"`
 
-The TCP bind address to use for cluster-internal services, including the RPC service for [backup and restore](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
+The TCP bind address used by the RPC service for inter-node communication and [backup and restore](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
 

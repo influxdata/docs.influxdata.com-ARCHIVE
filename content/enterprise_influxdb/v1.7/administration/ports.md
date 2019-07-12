@@ -1,10 +1,10 @@
 ---
-title: InfluxDB ports
+title: TCP and UDP ports used in InfluxDB Enterprise
 
 menu:
   influxdb_1_7:
-    name: Ports
-    weight: 50
+    name: TCP and UDP Ports
+    weight: 120
     parent: Administration
 ---
 
@@ -12,13 +12,13 @@ menu:
 
 ### `8086`
 The default port that runs the InfluxDB HTTP service.
-[Configure this port](/influxdb/v1.7/administration/config#bind-address-8086)
-in the configuration file.
+[Configure this port](enterprise_influxdb/v1.7/administration/config-data-nodes/#bind-address-8088)
+in the data node configuration file.
 
 **Resources** [API Reference](/influxdb/v1.7/tools/api/)
 
 ### 8088
-The default port used by the RPC service for RPC calls made by the CLI for backup and restore operations (`influxdb backup` and `influxd restore`).
+The default port used for RPC calls used for inter-node communication and by the CLI for backup and restore operations (`influxdb backup` and `influxd restore`).
 [Configure this port](/influxdb/v1.7/administration/config#bind-address-127-0-0-1-8088)
 in the configuration file.
 
