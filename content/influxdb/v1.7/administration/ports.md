@@ -18,7 +18,7 @@ in the configuration file.
 **Resources** [API Reference](/influxdb/v1.7/tools/api/)
 
 ### 8088
-The default port used for RPC calls made by the CLI for backup and restore operations (`influxdb backup` and `influxd restore`).
+The default port used by the RPC service for RPC calls made by the CLI for backup and restore operations (`influxdb backup` and `influxd restore`).
 [Configure this port](/influxdb/v1.7/administration/config#bind-address-127-0-0-1-8088)
 in the configuration file.
 
