@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## 1.7.7 [2019-07-11]
+## 1.7.7 [2019-07-12las]
 
 The InfluxDB Enterprise 1.7.7 release builds on the InfluxDB OSS 1.7.7 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
