@@ -18,6 +18,10 @@ menu:
 - Delete group stats when a group is deleted.
 - Avoid extra allocation when building GroupID.
 
+#### Important update [2019-07-11]
+
+- Fix a high number of CLOSE_WAIT connections.
+
 ## v1.5.2 [2018-12-12]
 
 ### Features
