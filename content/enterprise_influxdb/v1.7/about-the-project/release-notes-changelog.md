@@ -8,6 +8,21 @@ menu:
     parent: About the project
 ---
 
+## 1.7.7 [2019-07-11]
+
+The InfluxDB Enterprise 1.7.7 release builds on the InfluxDB OSS 1.7.7 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+
+- Adds TLS to RPC calls. If verifying certificates, uses the TLS setting in the configuration passed in with -config.
+- Add marketplace entitlements for AWS.
+
+### Bug fixes
+
+- Ensure retry-rate-limit configuration value is used for hinted handoff.
+- Always forward AE repair to next node.
+- Improve hinted handoff metrics.
+
 ## v1.7.6 [2019-05-07]
 
 This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.6 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
