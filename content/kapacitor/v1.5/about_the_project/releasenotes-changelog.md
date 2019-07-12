@@ -7,6 +7,10 @@ menu:
 
 ## v1.5.3 [2019-06-18]
 
+#### Important update [2019-07-11]
+
+- Some customers have reported a high number of CLOSE_WAIT connections. Upgrade to this release to resolve this issue.
+
 ### Features
 - Add ability to skip ssl verification with an alert post node.
 - Add TLS configuration options.
@@ -17,10 +21,6 @@ menu:
 - Make RPM create files with correct ownership on install.
 - Delete group stats when a group is deleted.
 - Avoid extra allocation when building GroupID.
-
-#### Important update [2019-07-11]
-
-- Fix a high number of CLOSE_WAIT connections.
 
 ## v1.5.2 [2018-12-12]
 
