@@ -12,6 +12,11 @@ menu:
 
 The InfluxDB Enterprise 1.7.7 release builds on the InfluxDB OSS 1.7.7 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
+### Known issues
+
+- The Flux Technical Preview was not advanced and reamains at version 0.24.0. Next month's maintenance release will update the preview.
+- After upgrading to Debian 8, customers have experienced an excessively large output additional lines due to a `Println` statement introduced in this release. For a possible workaround, see https://github.com/influxdata/influxdb/issues/14265#issuecomment-508875853. 
+
 ### Features
 
 - Adds TLS to RPC calls. If verifying certificates, uses the TLS setting in the configuration passed in with -config.
