@@ -9,6 +9,11 @@ menu:
 
 ## 1.7.7 [2019-06-26]
 
+### Known issues
+
+- The Flux Technical Preview was not advanced and remains at version 0.24.0. Next month's maintenance release will update the preview.
+- After upgrading to Debian 8, customers have experienced an excessively large output additional lines due to a `Println` statement introduced in this release. For a possible workaround, see https://github.com/influxdata/influxdb/issues/14265#issuecomment-508875853.
+
 ### Bug fixes
 
 - Fix the sort order for aggregates so that they are sorted by tag and then time.
