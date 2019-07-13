@@ -15,7 +15,6 @@ The InfluxDB Enterprise 1.7.7 release builds on the InfluxDB OSS 1.7.7 release. 
 ### Features
 
 - Adds TLS to RPC calls. If verifying certificates, uses the TLS setting in the configuration passed in with -config.
-- Add marketplace entitlements for AWS.
 
 ### Bug fixes
 

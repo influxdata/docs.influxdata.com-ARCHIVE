@@ -530,9 +530,7 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_CONCURRENCY`
 
 #### `retry-rate-limit = 0`
 
-The rate (in bytes per second) at which the hinted handoff retries writes.
-The `retry-rate-limit` option is no longer in use and will be removed from the configuration file in a future release.
-Changing the `retry-rate-limit` setting has no effect on your cluster.
+The rate limit (in bytes per second) that hinted handoff retries hints. A value of `0` disables the rate limit.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_RATE_LIMIT`
 
