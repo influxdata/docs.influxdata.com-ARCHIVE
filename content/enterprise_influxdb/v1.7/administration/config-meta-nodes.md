@@ -177,7 +177,7 @@ Automatically create a default retention policy when creating a database.
 
 The amount of time in candidate state without a leader before we attempt an election.
 
-#### heartbeat-timeout = "1s"
+#### `heartbeat-timeout = "1s"`
 
 The amount of time in follower state without a leader before we attempt an election.
 
