@@ -19,7 +19,8 @@ set the `[http].shared-secret` option in your `kapacitor.conf` to the shared sec
   shared-secret = "youramazingsharedsecret"
 ```
 
-If not set or set to an empty string, the integration with InfluxDB will fail and Kapacitor will not start.
+If not set, set to an empty string, or does not match InfluxDB's shared-secret,
+the integration with InfluxDB will fail and Kapacitor will not start.
 Kapacitor will output an error similar to:
 
 ```
