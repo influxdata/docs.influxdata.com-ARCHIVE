@@ -97,7 +97,8 @@ kapacitord config > kapacitor.generated.conf
 
 If using [Kapacitor v1.5.3](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-3-2019-06-18)
 or newer and InfluxDB with [authentication enabled](/influxdb/v1.7/administration/authentication_and_authorization/),
-set the `[http].shared-secret` option in your Kapacitor configuration file to a non-empty string.
+set the `[http].shared-secret` option in your Kapacitor configuration file to the
+shared secret of your InfluxDB instances.
 
 ```toml
 # ...

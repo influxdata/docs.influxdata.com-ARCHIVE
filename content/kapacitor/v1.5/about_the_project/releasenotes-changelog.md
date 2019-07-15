@@ -10,7 +10,7 @@ menu:
 {{% warn %}}
 ### Authentication and shared secret
 If using Kapacitor v1.5.3 or newer and InfluxDB with [authentication enabled](/influxdb/v1.7/administration/authentication_and_authorization/),
-set the `[http].shared-secret` option in your `kapacitor.conf` to a non-empty string.
+set the `[http].shared-secret` option in your `kapacitor.conf` to the shared secret of your InfluxDB instances.
 
 ```toml
 # ...
