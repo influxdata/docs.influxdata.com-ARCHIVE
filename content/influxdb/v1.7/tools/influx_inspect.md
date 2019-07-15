@@ -10,7 +10,7 @@ menu:
 Influx Inspect is an InfluxDB disk utility that can be used to:
 
 * View detailed information about disk shards.
-* Exporting data from a shard to [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) that can be inserted back into the database.
+* Exporting data from a shard to [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) that can be inserted back into the database.
 * Converting TSM in-memory index shards to TSI disk-based index shards.
 
 ## `influx_inspect` utility
@@ -32,7 +32,7 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 * [`dumptsi`](#dumptsi): Dumps low-level details about TSI files.
 * [`dumptsm`](#dumptsm): Dumps low-level details about TSM files.
 * [`dumptsmwal`](#dumptsmwal): Dump all data from a WAL file.  
-* [`export`](#export): Exports raw data from a shard in Line Protocol format.
+* [`export`](#export): Exports raw data from a shard in InfluxDB line protocol format.
 * [`report`](#report): Displays a shard level report.
 * [`reporttsi`](#reporttsi): Reports on cardinality for measurements and shards.
 * [`verify`](#verify): Verifies the integrity of TSM files.
@@ -238,6 +238,7 @@ Filter data by tag value regular expression.
 ```
 $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index
 ```
+
 ##### Specifying paths to the `_series` directory and an `index` file
 
 ```
@@ -306,10 +307,9 @@ Optional arguments are in brackets.
 Flag to show keys which have duplicate or out-of-order timestamps.
 If a user writes points with timestamps set by the client, then multiple points with the same timestamp (or with time-descending timestamps) can be written.
 
-
 ### `export`
 
-Exports all TSM files in Line Protocol data format.
+Exports all TSM files in InfluxDB line protocol data format.
 Writes all WAL file data for `_internal/monitor`.
 This output file can be imported using the
 [influx](/influxdb/v1.7/tools/shell/#import-data-from-a-file-with-import) command.
@@ -326,7 +326,7 @@ Optional arguments are in brackets.
 
 ##### [ `-compress` ]
 
-The flag to compress the output.
+The flag to compress the output using gzip compression.
 Default value is `false`.
 
 ##### [ `-database <db_name>` ]
@@ -346,12 +346,15 @@ The timestamp for the end of the time range. Must be in [RFC3339 format](https:/
 RFC3339 requires very specific formatting. For example, to indicate no time zone offset (UTC+0), you must include Z or +00:00 after seconds. Examples of valid RFC3339 formats include:
 
 **No offset**
+
 ```
 YYYY-MM-DDTHH:MM:SS+00:00 
 YYYY-MM-DDTHH:MM:SSZ 
 YYYY-MM-DDTHH:MM:SS.nnnnnnZ (fractional seconds (.nnnnnn) are optional)
 ```
+
 **With offset**
+
 ```
 YYYY-MM-DDTHH:MM:SS-08:00
 YYYY-MM-DDTHH:MM:SS+07:00
@@ -380,21 +383,21 @@ Default value is `"$HOME/.influxdb/wal"`.
 
 #### Examples
 
-##### Export entire database and compress the output
+##### Export all databases and compress the output
 
-```
+```bash
 influx_inspect export -compress
 ```
 
 ##### Export data from a specific database and retention policy
 
-```
+```bash
 influx_inspect export -database mydb -retention autogen
 ```
 
 ##### Output file
 
-```
+```bash
 # DDL
 CREATE DATABASE MY_DB_NAME
 CREATE RETENTION POLICY autogen ON MY_DB_NAME DURATION inf REPLICATION 1
@@ -436,7 +439,6 @@ Default value is `false`.
 The flag to report exact cardinality counts instead of estimates.
 Default value is `false`.
 Note: This can use a lot of memory.
-
 
 ### `reporttsi`
 

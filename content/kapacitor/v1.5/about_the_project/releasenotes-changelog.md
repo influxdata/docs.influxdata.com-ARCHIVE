@@ -5,6 +5,23 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.3 [2019-06-18]
+
+#### Important update [2019-07-11]
+
+- Some customers have reported a high number of CLOSE_WAIT connections. Upgrade to this release to resolve this issue.
+
+### Features
+- Add ability to skip ssl verification with an alert post node.
+- Add TLS configuration options.
+
+### Bug fixes
+- Use default transport consistently.
+- Fix deadlock in barrier node when delete is used.
+- Make RPM create files with correct ownership on install.
+- Delete group stats when a group is deleted.
+- Avoid extra allocation when building GroupID.
+
 ## v1.5.2 [2018-12-12]
 
 ### Features

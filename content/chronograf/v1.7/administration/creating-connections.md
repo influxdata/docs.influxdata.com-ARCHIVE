@@ -32,7 +32,7 @@ To create an InfluxDB connection in the Chronograf UI:
     * **Make this the default connection**: When this option is selected, this InfluxDB connection will be used when Chronograf is launched.
 
 4. Click **Add Connection**
-   * If the connection is valid, the Dashboards window appears, allowing you to import dashboard templates you can use to display and analyze your data. For details, see [Creating dashboards](/chronograf/latest/create-a-dashboard).
+   * If the connection is valid, the Dashboards window appears, allowing you to import dashboard templates you can use to display and analyze your data. For details, see [Creating dashboards](/chronograf/latest/guides/create-a-dashboard).
    * If the connection cannot be created, the following error message appears:
    "Unable to create source: Error contacting source."
    If this occurs, ensure all connection credentials are correct and that the InfluxDB instance is running and accessible.

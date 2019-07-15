@@ -36,7 +36,7 @@ The dashboard contains the following cells:
 * InfluxDB - Query Performance
 * InfluxDB - Cardinality
 
-_For details about the metrics in each cell, see the [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/influxdata-platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring)._
+_For details about the metrics in each cell, see the [InfluxDB OSS Stats monitoring dashboard](/platform/monitoring/influxdata-platform/monitoring-dashboards/dashboard-oss-monitoring)._
 
 ![Built-in Telegraf dashboard](/img/platform/platform-dashboard-oss-telegraf.png)
 

@@ -41,7 +41,7 @@ To enable LDAP support in InfluxDB Enterprise, make the following changes on you
   * `u`: username
   * `p`: password
 * Configure the meta node META shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the username and shared secret.
-* Set the `[meta]` configuration setting `meta-shared-secret`, or the corresponding environment variable `INFLUXDB_META_SHARED_SECRET`, to `"<shared-secret>"`.
+* Set the `[meta]` configuration setting `internal-shared-secret`, or the corresponding environment variable `INFLUXDB_META_INTERNAL_SHARED_SECRET`, to `"<internal-shared-secret>"`.
 * Set the `[meta]` configuration setting `meta.ldap-allowed`, or the corresponding environment variable `INFLUXDB_META_LDAP_ALLOWED`, to `true` on all meta nodes in your cluster.
 * If using  to `true` on all meta nodes.
 

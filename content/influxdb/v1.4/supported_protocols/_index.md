@@ -11,7 +11,7 @@ Using the collectd input, InfluxDB can accept data transmitted in collectd nativ
 ### [Graphite](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md)
 The Graphite plugin allows measurements to be saved using the Graphite line protocol. By default, enabling the Graphite plugin will allow you to collect metrics and store them using the metric name as the measurement.
 
-### [OpenTSDB](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md)
+### [OpenTSDB](https://github.com/influxdb/influxdb/blob/1.4/services/opentsdb/README.md)
 InfluxDB supports both the telnet and HTTP OpenTSDB protocol.
 This means that InfluxDB can act as a drop-in replacement for your OpenTSDB system.
 

@@ -62,4 +62,4 @@ InfluxDB accepts writes over
 and provides an easy way to set up
 [Graphite](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md),
 [CollectD](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md),
-and [OpenTSDB](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) as input sources.
+and [OpenTSDB](https://github.com/influxdb/influxdb/blob/1.1/services/opentsdb/README.md) as input sources.

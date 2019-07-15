@@ -12,7 +12,7 @@ menu:
 With InfluxDB [installed](/influxdb/v1.7/introduction/installation), you're ready to start doing some awesome things.
 In this section we'll use the `influx` [command line interface](/influxdb/v1.7/tools/shell/) (CLI), which is included in all
 InfluxDB packages and is a lightweight and simple way to interact with the database.
-The CLI communicates with InfluxDB directly by making requests to the InfluxDB HTTP API over port `8086` by default.
+The CLI communicates with InfluxDB directly by making requests to the InfluxDB API over port `8086` by default.
 
 > **Note:** The database can also be used by making raw HTTP requests.
 See [Writing Data](/influxdb/v1.7/guides/writing_data/) and [Querying Data](/influxdb/v1.7/guides/querying_data/)
@@ -34,7 +34,7 @@ InfluxDB shell 1.7.x
 
 > **Notes:**
 >
-* The InfluxDB HTTP API runs on port `8086` by default.
+* The InfluxDB API runs on port `8086` by default.
 Therefore, `influx` will connect to port `8086` and `localhost` by default.
 If you need to alter these defaults, run `influx --help`.
 * The [`-precision` argument](/influxdb/v1.7/tools/shell/#influx-options) specifies the format/precision of any returned timestamps.
@@ -113,7 +113,7 @@ where the primary index is always time.
 The difference is that, with InfluxDB, you can have millions of measurements,
 you don't have to define schemas up-front, and null values aren't stored.
 
-Points are written to InfluxDB using the Line Protocol, which follows the following format:
+Points are written to InfluxDB using the InfluxDB line protocol, which follows the following format:
 
 ```
 <measurement>[,<tag-key>=<tag-value>...] <field-key>=<field-value>[,<field2-key>=<field2-value>...] [unix-nano-timestamp]
@@ -128,9 +128,9 @@ stock,symbol=AAPL bid=127.46,ask=127.48
 temperature,machine=unit42,type=assembly external=25,internal=37 1434067467000000000
 ```
 
-> **Note:** More information on the line protocol can be found on the [Syntax](/influxdb/v1.7/write_protocols/line_protocol_reference/#syntax) page.
+> **Note:** For details on the InfluxDB line protocol, see [InfluxDB line protocol syntax](/influxdb/v1.7/write_protocols/line_protocol_reference/#syntax) page.
 
-To insert a single time-series datapoint into InfluxDB using the CLI, enter `INSERT` followed by a point:
+To insert a single time series data point into InfluxDB using the CLI, enter `INSERT` followed by a point:
 
 ```sql
 > INSERT cpu,host=serverA,region=us_west value=0.64

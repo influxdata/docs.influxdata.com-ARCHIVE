@@ -6251,7 +6251,7 @@ In the `GROUP BY time()` clause, the first argument (`379m`) matches
 the length of time that occurs between each peak and trough in the `water_level` data.
 The second argument (`348m`) is the
 [offset interval](/influxdb/v1.7/query_language/data_exploration/#advanced-group-by-time-syntax).
-The offset interval alters InfluxDB's default `GROUP BY time()` boundaries to
+The offset interval alters the default `GROUP BY time()` boundaries to
 match the time range of the raw data.
 
 The blue line shows the results of the query:
@@ -6897,7 +6897,7 @@ time                  min    max
 
 The query returns the [minimum](#min) and [maximum](#max) field values in the `water_level` field key.
 
-Notice that the query returns `1970-01-01T00:00:00Z`, InfluxDB's null-timestamp equivalent, as the timestamp.
+Notice that the query returns `1970-01-01T00:00:00Z`, the InfluxDB equivalent to a null timestamp, as the timestamp value.
 `MIN()` and `MAX()` are [selector](#selectors) functions; when a selector function is the only function in the `SELECT` clause, it returns a specific timestamp.
 Because `MIN()` and `MAX()` return two different timestamps (see below), the system overrides those timestamps with the null timestamp equivalent.
 
@@ -7045,7 +7045,7 @@ time                   sum
 1970-01-01T00:00:00Z   67777.66900000004
 ```
 
-The query returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
+The query returns the InfluxDB equivalent of a null timestamp (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
 [`SUM()`](#sum) aggregates points across several timestamps and has no single timestamp to return.
 
 ###### Use an aggregate function with a specified time range
@@ -7099,9 +7099,9 @@ InfluxDB does not sort points before it applies the aggregation function; that b
 The timestamps returned by [selector functions](#selectors) depend on the number of functions in the query and on the other clauses in the query:
 
 A query with a single selector function, a single [field key](/influxdb/v1.7/concepts/glossary/#field-key) argument, and no [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) returns the timestamp for the point that appears in the raw data.
-A query with a single selector function, multiple field key arguments, and no [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) returns the timestamp for the point that appears in the raw data or InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`).
+A query with a single selector function, multiple field key arguments, and no [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) returns the timestamp for the point that appears in the raw data or the InfluxDB equivalent of a null timestamp (epoch 0: `1970-01-01T00:00:00Z`).
 
-A query with more than one function and no time range in the [`WHERE` clause](/influxdb/v1.7/query_language/data_exploration/#the-where-clause) returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`).
+A query with more than one function and no time range in the [`WHERE` clause](/influxdb/v1.7/query_language/data_exploration/#the-where-clause) returns the InfluxDB equivalent of a null timestamp (epoch 0: `1970-01-01T00:00:00Z`).
 A query with more than one function and a time range in the `WHERE` clause returns the lower time bound as the timestamp.
 
 A query with a selector function and a `GROUP BY time()` clause returns the lower time bound for each `GROUP BY time()` interval.
@@ -7148,7 +7148,7 @@ time                  max_water_level
 2015-08-29T07:24:00Z  9.964
 ```
 
-The first query returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
+The first query returns the InfluxDB equivalent of a null timestamp  (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
 `FIRST(*)` returns two timestamps (one for each field key in the `h2o_feet` [measurement](/influxdb/v1.7/concepts/glossary/#measurement)) so the system overrides those timestamps with the null timestamp equivalent.
 
 The second query returns the timestamp for the maximum point that appears in the raw data.
@@ -7165,7 +7165,7 @@ time                  max    min
 1970-01-01T00:00:00Z  9.964  -0.61
 ```
 
-The query returns InfluxDB's null timestamp equivalent (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
+The query returns the InfluxDB equivalent of a null timestamp (epoch 0: `1970-01-01T00:00:00Z`) as the timestamp.
 The `MAX()` and [`MIN()`](#min) functions return different timestamps so the system has no single timestamp to return.
 
 ###### Use a selector function with another function and with a specified time range

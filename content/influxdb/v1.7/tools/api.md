@@ -1,16 +1,16 @@
 ---
-title: InfluxDB HTTP API reference
-description: Use the InfluxDB HTTP API endpoints to run queries, write data, check server status, and troubleshoot by tracking HTTP client requests, collecting server statistics, and using Go "pprof" profiles.
+title: InfluxDB API reference
+description: Use the InfluxDB API endpoints to run queries, write data, check server status, and troubleshoot by tracking HTTP client requests, collecting server statistics, and using Go "pprof" profiles.
 aliases:
     - /influxdb/v1.7/concepts/api/
 menu:
   influxdb_1_7:
-    name: InfluxDB HTTP API reference
+    name: InfluxDB API reference
     weight: 20
     parent: Tools
 ---
 
-The InfluxDB HTTP API provides a simple way interact with the database.
+The InfluxDB API provides a simple way to interact with the database.
 It uses HTTP response codes, HTTP authentication, JWT Tokens, and basic authentication, and responses are returned in JSON.
 
 The following sections assume your InfluxDB instance is running on `localhost`
@@ -48,22 +48,22 @@ The `/debug/pprof/` endpoint generates an HTML page with a list of built-in Go p
 | mutex | Stack traces of holders of contended mutexes.  |
 | threadcreate | Stack traces that led to the creation of new OS threads. |
 
-To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile. The resulting profile is output to a file specified in `<path\to\output-file>`.
+To access one of the the `/debug/pprof/` profiles listed above, use the following cURL request, substituting `<profile>` with the name of the profile. The resulting profile is output to a file specified in `<path/to/output-file>`.
 
-```
+```bash
 curl -o <path/to/output-file>  http://localhost:8086/debug/pprof/<profile>
 ```
 
 In the following example, the cURL command outputs the resulting heap profile to a file:
 
-```
+```bash
 curl -o <path/to/output-file> http://localhost:/8086/debug/pprof/heap
 ```
 
 You can also use the [Go `pprof` interactive tool](https://github.com/google/pprof) to access the InfluxDB `/debug/pprof/` profiles.
 For example, to look at the heap profile of a InfluxDB instance using this tool, you would use a command like this:
 
-```
+```bash
 go tool pprof http://localhost:8086/debug/pprof/heap
 ```
 
@@ -80,7 +80,7 @@ The `/debug/pprof/all` endpoint is a custom `/debug/pprof` profile intended prim
 
 To create a `profile.tar.gz` archive, use the following cURL command to generate a `profile.tar.gz` file for sharing with InfluxData support.
 
-```
+```bash
 curl -o profiles.tar.gz "http://localhost:8086/debug/pprof/all?cpu=true"
 ```
 
@@ -89,7 +89,7 @@ curl -o profiles.tar.gz "http://localhost:8086/debug/pprof/all?cpu=true"
 
 As the following example shows, the cURL output includes "Time Spent," the time elapsed (in  seconds). After 30 seconds of data has been collected, the results are output to a file.
 
-```
+```bash
 ➜  ~ curl -o profiles.tar.gz "http://localhost:8086/debug/pprof/all?cpu=true"
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -103,7 +103,7 @@ The `/debug/requests` endpoint returns the number of writes and queries to Influ
 
 ### Definition
 
-```
+```bash
 curl http://localhost:8086/debug/requests
 ```
 
@@ -117,7 +117,7 @@ curl http://localhost:8086/debug/requests
 
 ##### Track requests over a ten-second interval
 
-```
+```bash
 $ curl http://localhost:8086/debug/requests
 
 {
@@ -129,7 +129,7 @@ The response shows that, over the past ten seconds, the `user1` user sent one re
 
 ##### Track requests over a one-minute interval
 
-```
+```bash
 $ curl http://localhost:8086/debug/requests?seconds=60
 
 {
@@ -145,14 +145,13 @@ The response shows that, over the past minute, `user1` sent three requests to th
 
 InfluxDB exposes statistics and information about its runtime through the `/debug/vars` endpoint, which can be accessed using the following cURL command:
 
-```
+```bash
 curl http://localhost:8086/debug/vars
 ```
 
 Server statistics and information are displayed in JSON format.
 
 >**Note:** The [InfluxDB input plugin](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb) is available to collect metrics (using the `/debug/vars` endpoint) from specified Kapacitor instances. For a list of the measurements and fields, see the [InfluxDB input plugin README](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/influxdb).
-
 
 ## `/ping` HTTP endpoint
 
@@ -161,9 +160,11 @@ Use this endpoint to check the status of your InfluxDB instance and your version
 of InfluxDB.
 
 ### Definition
+
 ```
 GET http://localhost:8086/ping
 ```
+
 ```
 HEAD http://localhost:8086/ping
 ```
@@ -172,8 +173,7 @@ HEAD http://localhost:8086/ping
 
 By default, the `/ping` HTTP endpoint returns a simple HTTP 204 status response to let the client know that the server is running. Default value is `false`.
 When `verbose` option is set to `true` (`/ping?verbose=true`), an HTTP 200 status  is returned.
-The `verbose=true` option is required for health checks in the Google Kubernetes Cloud.
-
+The `verbose=true` option is required for [Google Cloud Load Balancing](https://cloud.google.com/load-balancing/docs/health-check-concepts) health checks.
 
 ### Example
 
@@ -212,6 +212,7 @@ and users.
 ```
 GET http://localhost:8086/query
 ```
+
 ```
 POST http://localhost:8086/query
 ```
@@ -230,7 +231,7 @@ Those `SELECT` queries require a `POST` request.
 
 ##### Query data with a `SELECT` statement
 
-```
+```bash
 $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 {"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2017-03-01T00:16:18Z",33.1,null,null],["2017-03-01T00:17:18Z",12.4,"12","14"]]}]}]}
@@ -240,8 +241,9 @@ The `mymeas` [measurement](/influxdb/v1.7/concepts/glossary/#measurement) has tw
 The first point has the [timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) `2017-03-01T00:16:18Z`, a `myfield` value of `33.1`, and no tag values for the `mytag1` and `mytag2` [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key).
 The second point has the timestamp `2017-03-01T00:17:18Z`, a `myfield` value of `12.4`, a `mytag1` value of `12`, and a `mytag2` value of `14`.
 
-The same query in InfluxDB's [Command Line Interface](/influxdb/v1.7/tools/shell/) (CLI) returns the following table:
-```
+The same query in the InfluxDB [Command Line Interface](/influxdb/v1.7/tools/shell/) (CLI) returns the following table:
+
+```sql
 name: mymeas
 time                  myfield  mytag1  mytag2
 ----                  -------  ------  ------
@@ -251,7 +253,7 @@ time                  myfield  mytag1  mytag2
 
 ##### Query data with a `SELECT` statement and an `INTO` clause
 
-```
+```bash
 $ curl -XPOST 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * INTO "newmeas" FROM "mymeas"'
 
 {"results":[{"statement_id":0,"series":[{"name":"result","columns":["time","written"],"values":[["1970-01-01T00:00:00Z",2]]}]}]}
@@ -264,7 +266,7 @@ Note that the system uses epoch 0 (`1970-01-01T00:00:00Z`) as a [null timestamp 
 
 ##### Create a database
 
-```
+```bash
 $ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{"statement_id":0}]}
@@ -287,7 +289,7 @@ A successful [`CREATE DATABASE` query](/influxdb/v1.7/query_language/database_ma
 \* InfluxDB does not truncate the number of rows returned for requests without the `chunked` parameter.
 That behavior is configurable; see the [`max-row-limit`](/influxdb/v1.7/administration/config/#max-row-limit-0) configuration option for more information.
 
-\** The HTTP API also supports basic authentication.
+\** The InfluxDB API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
 See below for an [example](#create-a-database-using-basic-authentication) of basic authentication.
@@ -296,7 +298,7 @@ See below for an [example](#create-a-database-using-basic-authentication) of bas
 
 ##### Query data with a `SELECT` statement and return pretty-printed JSON
 
-```
+```bash
 $ curl -G 'http://localhost:8086/query?db=mydb&pretty=true' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 {
@@ -335,7 +337,7 @@ $ curl -G 'http://localhost:8086/query?db=mydb&pretty=true' --data-urlencode 'q=
 
 ##### Query data with a `SELECT` statement and return second precision epoch timestamps
 
-```
+```bash
 $ curl -G 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 {"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[[1488327378,33.1,null,null],[1488327438,12.4,"12","14"]]}]}]}
@@ -344,7 +346,8 @@ $ curl -G 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELE
 ##### Create a database using HTTP authentication
 
 Valid credentials:
-```
+
+```bash
 $ curl -XPOST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{"statement_id":0}]}
@@ -353,7 +356,8 @@ $ curl -XPOST 'http://localhost:8086/query?u=myusername&p=mypassword' --data-url
 A successful [`CREATE DATABASE` query](/influxdb/v1.7/query_language/database_management/#create-database) returns no additional information.
 
 Invalid credentials:
-```
+
+```bash
 $ curl -XPOST 'http://localhost:8086/query?u=myusername&p=notmypassword' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"error":"authorization failed"}
@@ -362,7 +366,8 @@ $ curl -XPOST 'http://localhost:8086/query?u=myusername&p=notmypassword' --data-
 ##### Create a database using basic authentication
 
 The following example uses valid credentials.
-```
+
+```bash
 $ curl -XPOST -u myusername:mypassword 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"results":[{"statement_id":0}]}
@@ -371,7 +376,8 @@ $ curl -XPOST -u myusername:mypassword 'http://localhost:8086/query' --data-urle
 A successful [`CREATE DATABASE` query](/influxdb/v1.7/query_language/database_management/#create-database) returns no additional information.
 
 The following example uses invalid credentials.
-```
+
+```bash
 $ curl -XPOST -u myusername:notmypassword 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 {"error":"authorization failed"}
@@ -400,6 +406,7 @@ request.
 The queries in the file must be separated a semicolon (`;`).
 
 Syntax:
+
 ```
 curl -F "q=@<path_to_file>" -F "async=true" http://localhost:8086/query
 ```
@@ -407,6 +414,7 @@ curl -F "q=@<path_to_file>" -F "async=true" http://localhost:8086/query
 ##### Request query results in CSV format
 
 Syntax:
+
 ```
 curl -H "Accept: application/csv" -G 'http://localhost:8086/query [...]
 ```
@@ -421,11 +429,13 @@ Use the syntax `$<placeholder_key>` as a placeholder in the query, and URL
 encode the map of placeholder keys to placeholder values in the request body:
 
 Query syntax:
+
 ```
 --data-urlencode 'q= SELECT [...] WHERE [ <field_key> | <tag_key> ] = $<placeholder_key>'
 ```
 
 Map syntax:
+
 ```
 --data-urlencode 'params={"<placeholder_key>":[ <placeholder_float_field_value> | <placeholder_integer_field_value> | "<placeholder_string_field_value>" | <placeholder_boolean_field_value> | "<placeholder_tag_value>" ]}'
 ```
@@ -436,7 +446,7 @@ Delimit multiple placeholder key-value pairs with comma `,`.
 
 ##### Send multiple queries
 
-```
+```bash
 $ curl -G 'http://localhost:8086/query?db=mydb&epoch=s' --data-urlencode 'q=SELECT * FROM "mymeas";SELECT mean("myfield") FROM "mymeas"'
 
 {"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[[1488327378,33.1,null,null],[1488327438,12.4,"12","14"]]}]},{"statement_id":1,"series":[{"name":"mymeas","columns":["time","mean"],"values":[[0,22.75]]}]}]}
@@ -460,11 +470,12 @@ The first point has no [tag values](/influxdb/v1.7/concepts/glossary/#tag-value)
 
 ##### Submit queries from a file
 
-```
-$ curl -F "q=@queries.txt" -F "async=true" 'http://localhost:8086/query'
+```bash
+curl -F "q=@queries.txt" -F "async=true" 'http://localhost:8086/query'
 ```
 
 A sample of the queries in `queries.txt`:
+
 ```
 CREATE DATABASE mydb;
 CREATE RETENTION POLICY four_weeks ON mydb DURATION 4w REPLICATION 1;
@@ -472,7 +483,7 @@ CREATE RETENTION POLICY four_weeks ON mydb DURATION 4w REPLICATION 1;
 
 ##### Bind a parameter in the `WHERE` clause to specific tag value
 
-```
+```bash
 $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytag1" = $tag_value' --data-urlencode 'params={"tag_value":"12"}'
 
 {"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2017-03-01T00:17:18Z",12.4,"12","14"]]}]}]}
@@ -483,7 +494,7 @@ InfluxDB stores [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) as str
 
 ##### Bind a parameter in the `WHERE` clause to a numerical field value
 
-```
+```bash
 $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "myfield" > $field_value' --data-urlencode 'params={"field_value":30}'
 
 {"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2017-03-01T00:16:18Z",33.1,null,null]]}]}]}
@@ -494,7 +505,7 @@ The value `30` does not require double quotes because `myfield` stores numerical
 
 ##### Bind two parameters in the `WHERE` clause to a specific tag value and numerical field value
 
-```
+```bash
 $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas" WHERE "mytag1" = $tag_value AND  "myfield" < $field_value' --data-urlencode 'params={"tag_value":"12","field_value":30}'
 
 {"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2017-03-01T00:17:18Z",12.4,"12","14"]]}]}]}
@@ -520,7 +531,7 @@ to enable pretty-print JSON.
 
 ##### A successful request that returns data
 
-```
+```bash
 $ curl -i -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 HTTP/1.1 200 OK
@@ -536,7 +547,7 @@ Transfer-Encoding: chunked
 
 ##### A successful request that returns an error
 
-```
+```bash
 $ curl -i -G 'http://localhost:8086/query?db=mydb1' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 HTTP/1.1 200 OK
@@ -552,7 +563,7 @@ Transfer-Encoding: chunked
 
 ##### An incorrectly formatted query
 
-```
+```bash
 $ curl -i -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT *'
 
 HTTP/1.1 400 Bad Request
@@ -567,7 +578,7 @@ Content-Length: 76
 
 ##### Query data with invalid authentication credentials
 
-```
+```bash
 $ curl -i  -XPOST 'http://localhost:8086/query?u=myusername&p=notmypassword' --data-urlencode 'q=CREATE DATABASE "mydb"'
 
 HTTP/1.1 401 Unauthorized
@@ -603,7 +614,7 @@ POST http://localhost:8086/write
 | rp=\<retention_policy_name> | Optional | Sets the target [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) for the write. InfluxDB writes to the `DEFAULT` retention policy if you do not specify a retention policy. |
 | u=\<username> | Optional if you haven't [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.* | Sets the username for authentication if you've enabled authentication. The user must have write access to the database. Use with the query string parameter `p`. |
 
-\* The HTTP API also supports basic authentication.
+\* The InfluxDB API also supports basic authentication.
 Use basic authentication if you've [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication)
 and aren't using the query string parameters `u` and `p`.
 See below for an [example](#write-a-point-to-the-database-mydb-using-basic-authentication) of basic authentication.
@@ -615,7 +626,7 @@ in significant improvements in compression.
 
 ##### Write a point to the database `mydb` with a timestamp in seconds
 
-```
+```bash
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb&precision=s" --data-binary 'mymeas,mytag=1 myfield=90 1463683075'
 
 HTTP/1.1 204 No Content
@@ -627,7 +638,7 @@ Date: Wed, 08 Nov 2017 17:33:23 GMT
 
 ##### Write a point to the database `mydb` and the retention policy `myrp`
 
-```
+```bash
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb&rp=myrp" --data-binary 'mymeas,mytag=1 myfield=90'
 
 HTTP/1.1 204 No Content
@@ -640,7 +651,8 @@ Date: Wed, 08 Nov 2017 17:34:31 GMT
 ##### Write a point to the database `mydb` using HTTP authentication
 
 Valid credentials:
-```
+
+```bash
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=mypassword" --data-binary 'mymeas,mytag=1 myfield=91'
 
 HTTP/1.1 204 No Content
@@ -651,7 +663,8 @@ Date: Wed, 08 Nov 2017 17:34:56 GMT
 ```
 
 Invalid credentials:
-```
+
+```bash
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb&u=myusername&p=notmypassword" --data-binary 'mymeas,mytag=1 myfield=91'
 
 HTTP/1.1 401 Unauthorized
@@ -668,7 +681,8 @@ Content-Length: 33
 ##### Write a point to the database `mydb` using basic authentication
 
 Valid credentials:
-```
+
+```bash
 $ curl -i -XPOST -u myusername:mypassword "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=91'
 
 HTTP/1.1 204 No Content
@@ -679,7 +693,8 @@ Date: Wed, 08 Nov 2017 17:36:40 GMT
 ```
 
 Invalid credentials:
-```
+
+```bash
 $ curl -i -XPOST -u myusername:notmypassword "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=91'
 
 HTTP/1.1 401 Unauthorized
@@ -695,12 +710,12 @@ Content-Length: 33
 
 ### Request body
 
-```
---data-binary '<Data in Line Protocol format>'
+```bash
+--data-binary '<Data in InfluxDB line protocol format>'
 ```
 
 All data must be binary encoded and in the
-[Line Protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) format.
+[InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) format.
 Our example shows the `--data-binary` parameter from curl, which we will use in
 all examples on this page.
 Using any encoding method other than `--data-binary` will likely lead to issues;
@@ -712,7 +727,7 @@ Options:
 * Write several points to the database with one request by separating each point
 by a new line.
 * Write points from a file with the `@` flag.
-The file should contain a batch of points in the Line Protocol format.
+The file should contain a batch of points in the InfluxDB line protocol format.
 Individual points must be on their own line and separated by newline characters
 (`\n`).
 Files containing carriage returns will cause parser errors.
@@ -722,9 +737,9 @@ Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 
 #### Examples
 
-##### Example 1: Write a point to the database `mydb` with a nanosecond timestamp
-<br>
-```
+##### Write a point to the database `mydb` with a nanosecond timestamp
+
+```bash
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90 1463683075000000000'
 
 HTTP/1.1 204 No Content
@@ -736,7 +751,7 @@ Date: Wed, 08 Nov 2017 18:02:57 GMT
 
 ##### Write a point to the database `mydb` with the local server's nanosecond timestamp
 
-```
+```bash
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=1 myfield=90'
 
 HTTP/1.1 204 No Content
@@ -748,7 +763,7 @@ Date: Wed, 08 Nov 2017 18:03:44 GMT
 
 ##### Write several points to the database `mydb` by separating points with a new line
 
-```
+```bash
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary 'mymeas,mytag=3 myfield=89 1463689152000000000
 mymeas,mytag=2 myfield=34 1463689152000000000'
 
@@ -761,7 +776,7 @@ Date: Wed, 08 Nov 2017 18:04:02 GMT
 
 ##### Write several points to the database `mydb` from the file `data.txt`
 
-```
+```bash
 $ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary @data.txt
 
 HTTP/1.1 204 No Content
@@ -791,7 +806,7 @@ Errors are returned in JSON.
 | HTTP status code | Description    |
 | :--------------- | :------------- |
 | 204 No Content   | Success!      |
-| 400 Bad Request  | Unacceptable request. Can occur with a Line Protocol syntax error or if a user attempts to write values to a field that previously accepted a different value type. The returned JSON offers further information. |
+| 400 Bad Request  | Unacceptable request. Can occur with an InfluxDB line protocol syntax error or if a user attempts to write values to a field that previously accepted a different value type. The returned JSON offers further information. |
 | 401 Unauthorized | Unacceptable request. Can occur with invalid authentication credentials.  |
 | 404 Not Found    | Unacceptable request. Can occur if a user attempts to write to a database that does not exist. The returned JSON offers further information. |
 | 500 Internal Server Error  | The system is overloaded or significantly impaired. Can occur if a user attempts to write to a retention policy that does not exist. The returned JSON offers further information. |

@@ -8,7 +8,7 @@ menu:
     parent: Troubleshooting
 ---
 
-With InfluxDB's query management features, users are able to
+With the InfluxDB query management features, users are able to
 identify currently-running queries,
 kill queries that are overloading their system,
 and prevent and halt the execution of inefficient queries with several configuration settings.
@@ -22,18 +22,19 @@ and prevent and halt the execution of inefficient queries with several configura
 </table>
 
 ## List currently-running queries with `SHOW QUERIES`
+
 `SHOW QUERIES` lists the query id, query text, relevant database, and duration
 of all currently-running queries on your InfluxDB instance.
 
 #### Syntax
 
-```
+```sql
 SHOW QUERIES
 ```
 
 #### Example
 
-```
+```sql
 > SHOW QUERIES
 qid	  query															               database		  duration
 37	   SHOW QUERIES																                	  100368u
@@ -41,27 +42,30 @@ qid	  query															               database		  duration
 ```
 
 ##### Explanation of the output
-<br>
 
 - `qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL - QUERY`](/influxdb/v1.7/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
 - `query`&emsp;&emsp;&thinsp;&thinsp;The query text.  
 - `database`&emsp;The database targeted by the query.  
 - `duration`&emsp;The length of time that the query has been running.
 See [Query Language Reference](/influxdb/v1.7/query_language/spec/#durations)
-for an explanation of InfluxDB's time units.
+for an explanation of time units in InfluxDB databases.
 
 ## Stop currently-running queries with `KILL QUERY`
+
 `KILL QUERY` tells InfluxDB to stop running the relevant query.
 
 #### Syntax
+
 Where `qid` is the query ID, displayed in the [`SHOW QUERIES`](/influxdb/v1.3/troubleshooting/query_management/#list-currently-running-queries-with-show-queries) output:
-```
+
+```sql
 KILL QUERY <qid>
 ```
+
 ***InfluxDB Enterprise clusters:*** To kill queries on a cluster, you need to specify the query ID (qid) and the TCP host (for example, `myhost:8088`),
 available in the `SHOW QUERIES` output.
 
-```
+```sql
 KILL QUERY <qid> ON "<host>"
 ```
 
@@ -69,12 +73,13 @@ A successful `KILL QUERY` query returns no results.
 
 #### Examples
 
-```
+```sql
 -- kill query with qid of 36 on the local host
 > KILL QUERY 36
 >
 ```
-```
+
+```sql
 -- kill query on InfluxDB Enterprise cluster
 > KILL QUERY 53 ON "myhost:8088"
 >
@@ -129,7 +134,6 @@ Example log output with `log-queries-after` set to `"1s"`:
 Use this value with [`KILL QUERY`](/influxdb/v1.7/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).
 
 The default location for the log output file is `/var/log/influxdb/influxdb.log`. However on systems that use systemd (most modern Linux distributions) those logs are output to `journalctl`. You should be able to view the InfluxDB logs using the following command: `journalctl -u influxdb`
-
 
 ### `max-select-point`
 

@@ -50,7 +50,7 @@ Configuration settings that specify a duration support the following duration un
 - `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
 - `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
->**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) might be slightly newer.
+>**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/1.7/etc/config.sample.toml) might be slightly newer.
 
 ## Environment variables
 
@@ -178,7 +178,7 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 ### `[meta]`
 
-This section controls parameters for InfluxDB's metastore,
+This section controls parameters for the InfluxDB metastore,
 which stores information on users, databases, retention policies, shards, and continuous queries.
 
 ### `dir = "/var/lib/influxdb/meta"`
@@ -515,7 +515,7 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ### `[monitor]`
 
-The `[monitor]` section settings control InfluxDB's [system self-monitoring](https://github.com/influxdata/influxdb/blob/1.7/monitor/README.md).
+The `[monitor]` section settings control the InfluxDB [system self-monitoring](https://github.com/influxdata/influxdb/blob/1.7/monitor/README.md).
 
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
@@ -556,7 +556,7 @@ For details on enabling HTTPS and authentication, see [Authentication and Author
 
 Determines whether the HTTP endpoints are enabled.
 To disable access to the HTTP endpoints, set the value to `false`.
-Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.7/tools/shell/) connects to the database using the HTTP API.
+Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.7/tools/shell/) connects to the database using the InfluxDB API.
 
 Environment variable: `INFLUXDB_HTTP_ENABLED`
 
@@ -867,7 +867,7 @@ Environment variable: `INFLUXDB_GRAPHITE_PROTOCOL`
 
 The number of nodes that must confirm the write.
 If the requirement is not met the return value will be either `partial write` if some points in the batch fail or `write failure` if all points in the batch fail.
-For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v1.7/write_protocols/write_syntax/).
+For more information, see the Query String Parameters for Writes section in the [InfluxDB line protocol syntax reference](/influxdb/v1.7/write_protocols/write_syntax/).
 
 Environment variable: `INFLUXDB_GRAPHITE_CONSISTENCY_LEVEL`
 
