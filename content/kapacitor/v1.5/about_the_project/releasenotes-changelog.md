@@ -7,12 +7,32 @@ menu:
 
 ## v1.5.3 [2019-06-18]
 
-#### Important update [2019-07-11]
+{{% warn %}}
+### Authentication and shared secret
+If using Kapacitor v1.5.3 or newer and InfluxDB with [authentication enabled](/influxdb/v1.7/administration/authentication_and_authorization/),
+set the `[http].shared-secret` option in your `kapacitor.conf` to a non-empty string.
 
-- Some customers have reported a high number of CLOSE_WAIT connections. Upgrade to this release to resolve this issue.
+```toml
+# ...
+[http]
+  # ...
+  shared-secret = "youramazingsharedsecret"
+```
+
+If not set or set to an empty string, the integration with InfluxDB will fail and Kapacitor will not start.
+Kapacitor will output an error similar to:
+
+```
+kapacitord[4313]: run: open server: open service *influxdb.Service: failed to link subscription on startup: signature is invalid
+```
+{{% /warn %}}
+
+#### Important update [2019-07-11]
+- Some customers have reported a high number of CLOSE_WAIT connections.
+  Upgrade to this release to resolve this issue.
 
 ### Features
-- Add ability to skip ssl verification with an alert post node.
+- Add ability to skip SSL verification with an alert post node.
 - Add TLS configuration options.
 
 ### Bug fixes

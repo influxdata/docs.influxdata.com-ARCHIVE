@@ -80,7 +80,7 @@ sudo systemctl start kapacitor
 
 ## Configuration
 
-An example configuration file can be found [here](https://github.com/influxdb/kapacitor/blob/master/etc/kapacitor/kapacitor.conf)
+An example configuration file can be found [here](https://github.com/influxdb/kapacitor/blob/master/etc/kapacitor/kapacitor.conf).
 
 Kapacitor can also provide an example configuration for you using this command:
 
@@ -92,6 +92,21 @@ To generate a new configuration file, run:
 ```
 kapacitord config > kapacitor.generated.conf
 ```
+
+### Shared secret
+
+If using [Kapacitor v1.5.3](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-3-2019-06-18)
+or newer and InfluxDB with [authentication enabled](/influxdb/v1.7/administration/authentication_and_authorization/),
+set the `[http].shared-secret` option in your Kapacitor configuration file to a non-empty string.
+
+```toml
+# ...
+[http]
+  # ...
+  shared-secret = "youramazingsharedsecret"
+```
+
+If not set or set to an empty string, the integration with InfluxDB will fail and Kapacitor will not start.
 
 ### Time zone
 
