@@ -15,7 +15,7 @@ The InfluxDB Enterprise 1.7.7 release builds on the InfluxDB OSS 1.7.7 release. 
 ### Known issues
 
 - The Flux Technical Preview was not advanced and remains at version 0.24.0. Next month's maintenance release will update the preview.
-- After upgrading to Debian 8, customers have experienced an excessively large output additional lines due to a `Println` statement introduced in this release. For a possible workaround, see https://github.com/influxdata/influxdb/issues/14265#issuecomment-508875853.
+- After upgrading, customers have experienced an excessively large output additional lines due to a `Println` statement introduced in this release. For a possible workaround, see https://github.com/influxdata/influxdb/issues/14265#issuecomment-508875853.  Next month's maintenance release will address this issue.
 
 ### Features
 
