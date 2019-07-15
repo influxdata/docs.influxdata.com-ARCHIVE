@@ -35,7 +35,7 @@ Absolute start times are defined using timestamps.
 _**Data type:** Duration or Timestamp_
 
 ### stop
-Specifies the exclusive newest time to be included in the results. Defaults to `now`.
+Specifies the newest time to be included in the results. Defaults to `now`.
 
 Relative stop times are defined using negative durations.
 Negative durations are relative to now.
