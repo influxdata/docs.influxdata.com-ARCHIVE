@@ -38,6 +38,7 @@ We've provided a list below of all the terms we'll cover, but we recommend readi
 Check out the [glossary](/influxdb/v1.7/concepts/glossary/) if you prefer the cold, hard facts.
 
 ### Sample data
+
 The next section references the data printed out below.
 The data is fictional, but represents a believable setup in InfluxDB.
 They show the number of butterflies and honeybees counted by two scientists (`langstroth` and `perpetua`) in two locations (location `1` and location `2`) over the time period from August 18, 2015 at midnight through August 18, 2015 at 6:12 AM.
@@ -59,6 +60,7 @@ Assume that the data lives in a database called `my_database` and are subject to
 | 2015-08-18T06:12:00Z                                                            | 7                                                                        | 22                                                                     | 2                                                                   | perpetua                                                              |
 
 ### Discussion
+
 Now that you've seen some sample data in InfluxDB this section covers what it all means.
 
 InfluxDB is a time series database so it makes sense to start with what is at the root of everything we do: time.
@@ -167,14 +169,15 @@ The data above consist of four series:
 
 | Arbitrary series number  |  Retention policy | Measurement  |  Tag set |
 |---|---|---|---|
-| series 1  | `autogen` | `census`  | `location = 1`,`scientist = langstroth` |
-| series 2 | `autogen` |  `census` |  `location = 2`,`scientist = langstroth` |
-| series 3  | `autogen` | `census`  | `location = 1`,`scientist = perpetua` |
-| series 4 | `autogen` |  `census` |  `location = 2`,`scientist = perpetua` |
+| series 1  | `autogen` | `census` | `location = 1`,`scientist = langstroth` |
+| series 2  | `autogen` | `census` | `location = 2`,`scientist = langstroth` |
+| series 3  | `autogen` | `census` | `location = 1`,`scientist = perpetua` |
+| series 4  | `autogen` | `census` | `location = 2`,`scientist = perpetua` |
 
 Understanding the concept of a series is essential when designing your [schema](/influxdb/v1.7/concepts/glossary/#schema) and when working with your data in InfluxDB.
 
-Finally, a <a name="point"></a>_**point**_ is the field set in the same series with the same timestamp.
+Finally, a <a name="point"></a>_**point**_ is uniquely identified by its series and timestamp, and has four components: a measurement, a tag set, a field set, and a timestamp.
+
 For example, here's a single point:
 ```
 name: census
@@ -183,8 +186,7 @@ time                    butterflies honeybees   location    scientist
 2015-08-18T00:00:00Z    1           30          1           perpetua
 ```
 
-The series in the example is defined by the retention policy (`autogen`), the measurement (`census`), and the tag set (`location = 1`, `scientist = perpetua`).
-The timestamp for the point is `2015-08-18T00:00:00Z`.
+The point in this example is part of series 3 and defined by the measurement (`census`), the tag set (`location = 1`, `scientist = perpetua`), the field set (`butterflies = 1`, `honeybees = 30`), and the timestamp `2015-08-18T00:00:00Z`.
 
 All of the stuff we've just covered is stored in a database - the sample data are in the database `my_database`.
 An InfluxDB <a name=database></a>_**database**_ is similar to traditional relational databases and serves as a logical container for users, retention policies, continuous queries, and, of course, your time series data.
