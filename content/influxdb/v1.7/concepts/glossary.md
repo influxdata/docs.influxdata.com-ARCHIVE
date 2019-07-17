@@ -132,12 +132,12 @@ The local server's nanosecond timestamp.
 
 ## point
 
-The part of the InfluxDB data structure that consists of a single collection of fields in a series.
-Each point is uniquely identified by its series and timestamp.
+In InfluxDB, a point represents a single data record, similar to a row in a SQL database table. Each point:
+- Has four components: a measurement, a tag set, a field set, and a timestamp.
+- Is uniquely identified by its series and timestamp.
+- Is represented by one row in [line protocol](/influxdb/v1.7/write_protocols/line_protocol_reference)
 
-You cannot store more than one point with the same timestamp in the same series.
-Instead, when you write a new point to the same series with the same timestamp as an existing point in that series, the field set becomes the union of the old field set and the new field set, where any ties go to the new field set.
-For an example, see [Frequently Asked Questions](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
+You cannot store more than one point with the same timestamp in a series. If you write a point to a series with a timestamp that matches an existing point, the field set becomes a union of the old and new field set, where any ties go to the new field set. For more information about duplicate points, see [How does InfluxDB handle duplicate points?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points).
 
 Related entries: [field set](/influxdb/v1.7/concepts/glossary/#field-set), [series](/influxdb/v1.7/concepts/glossary/#series), [timestamp](/influxdb/v1.7/concepts/glossary/#timestamp)
 
