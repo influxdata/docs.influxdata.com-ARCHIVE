@@ -132,7 +132,7 @@ The local server's nanosecond timestamp.
 
 ## point
 
-In InfluxDB, a point represents a single data record, similar to a row in a SQL database. Each point:
+In InfluxDB, a point represents a single data record, similar to a row in a SQL database table. Each point:
 - Has four components: a measurement, a tag set, a field set, and a timestamp.
 - Is uniquely identified by its series and timestamp.
 - Is represented by one row in [line protocol](/influxdb/v1.7/write_protocols/line_protocol_reference)
