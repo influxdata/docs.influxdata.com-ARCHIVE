@@ -176,7 +176,7 @@ The data above consist of four series:
 
 Understanding the concept of a series is essential when designing your [schema](/influxdb/v1.7/concepts/glossary/#schema) and when working with your data in InfluxDB.
 
-Finally, a <a name="point"></a>_**point**_ is uniquely identified by its series and timestamp, and has four components: a measurement, a tag set, a field set, and a timestamp.
+Finally, a <a name="point"></a>_**point**_ represents a single data record and has four components: a measurement, a tag set, a field set, and a timestamp. A point is uniquely identified by its series and timestamp.
 
 For example, here's a single point:
 ```
