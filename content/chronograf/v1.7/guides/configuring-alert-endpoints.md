@@ -30,6 +30,7 @@ Chronograf supports the following event handlers:
 * [OpsGenie2](#opsgenie2)
 * [PagerDuty](#pagerduty)
 * [PagerDuty2](#pagerduty2)
+* [Pushover](#pushover)
 * Sensu
 * [Slack](#slack)
 * SMTP/Email
@@ -167,6 +168,34 @@ Send an alerts about recognized events to PagerDuty using the Chronograf PagerDu
 See the [PagerDuty Events API V2 Overview](https://v2.developer.pagerduty.com/docs/events-api-v2) for details on the PagerDuty Events API and recognized event types (`trigger`, `acknowledge`, and `resolve`).
 
 See [AlertNode (Kapacitor TICKscript node) - PagerDuty v2](/kapacitor/latest/nodes/alert_node/#pagerduty-v2) in the Kapacitor documentation for details about enabling a new "Generic API" service using TICKscripts.
+
+### Pushover
+
+Configure Chronograf to send Pushover event handler alerts.
+
+#### User Key
+
+Enter your Pushover USER_TOKEN.
+
+#### Token
+
+Enter your Pushover API token.
+
+#### Pushover URL
+
+The URL for the Pushover API. The default value is `https://api.pushover.net/1/messages.json`.
+
+#### Configuration Enabled
+
+Check the **Configuration Enabled** checkbox to enable this configuration.
+
+#### Save Changes
+
+Click **Save Changes** to save the Pushover configuration.
+
+#### Send Test Alert
+
+Click **Send Test Alert** to test your alert endpoint configuration.
 
 
 ### Slack

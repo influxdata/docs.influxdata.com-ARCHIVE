@@ -12,7 +12,7 @@ menu:
 
 # File-based definitions of tasks, templates, and load handlers
 
-The load directory service enables file-based definitions of Kapacitor tasks, templates, and topic handlers that are loaded on startup or when a NOHUP signal is sent to the process.
+The load directory service enables file-based definitions of Kapacitor tasks, templates, and topic handlers that are loaded on startup or when a SIGHUP signal is sent to the process.
 
 ## Configuration
 The load directory service configuration is specified in the `[load]` section of the Kapacitor configuration file.
@@ -31,7 +31,7 @@ The `tasks` directory should contain task TICKscripts and the associated templat
 
 The `templates` directory should contain templated TICKscripts.
 
-The `handlers` directory will contain topic handler definitions in yaml or json.
+The `handlers` directory will contain topic handler definitions in YAML or JSON.
 
 ## Tasks
 

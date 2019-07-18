@@ -56,7 +56,7 @@ Change this option to true to disable reporting.
 
 #### `bind-address = ":8088"`
 
-The TCP bind address to use for cluster-internal services, including the RPC service for [backup and restore](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
+The TCP bind address used by the RPC service for inter-node communication and [backup and restore](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
 
@@ -530,9 +530,7 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_CONCURRENCY`
 
 #### `retry-rate-limit = 0`
 
-The rate (in bytes per second) at which the hinted handoff retries writes.
-The `retry-rate-limit` option is no longer in use and will be removed from the configuration file in a future release.
-Changing the `retry-rate-limit` setting has no effect on your cluster.
+The rate limit (in bytes per second) that hinted handoff retries hints. A value of `0` disables the rate limit.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_RATE_LIMIT`
 
