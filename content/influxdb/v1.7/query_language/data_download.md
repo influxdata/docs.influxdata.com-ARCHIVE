@@ -20,7 +20,7 @@ Executing `influx` will start the CLI and automatically connect to the local Inf
 (assuming you have already started the server with `service influxdb start` or by running `influxd` directly).
 The output should look like this:
 
-```bash
+```sh
 $ influx -precision rfc3339
 Connected to http://localhost:8086 version 1.4.x
 InfluxDB shell 1.4.x
@@ -46,26 +46,31 @@ Names of databases can contain any unicode character as long as the string is do
 Names can also be left unquoted if they contain _only_ ASCII letters,
 digits, or underscores and do not begin with a digit.
 
-Throughout the query language exploration, we'll use the database name `NOAA_water_database`:
-
-```
-> CREATE DATABASE NOAA_water_database
-> exit
-```
+Throughout the query language exploration, you use the database `NOAA_water_database` that
+you create and load data in the next steps.
 
 ### Download and write the data to InfluxDB
 
 From your terminal, download the text file that contains the data in [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) format:
-```
-curl https://s3.amazonaws.com/noaa.water-database/NOAA_data.txt -o NOAA_data.txt
+
+```bash
+$ curl https://s3.amazonaws.com/noaa.water-database/NOAA_data.txt -o NOAA_data.txt
 ```
 
-Write the data to InfluxDB via the [CLI](../../tools/shell/):
+Write the sample data to InfluxDB using the [`influx` CLI](../../tools/shell/). 
+At your shell prompt, run the following command.
+
+```bash
+$ influx -import -path=NOAA_data.txt -precision=s 
 ```
-influx -import -path=NOAA_data.txt -precision=s -database=NOAA_water_database
-```
+When you run the command, the `CREATE DATABASE` statement in the DDL section at the top of the file creates the database "NOAA_water_database" and then loads the data.
 
 ### Test queries
+
+Now that you created the "NOAA_water_database" and loaded it with data, you can launch the `influx` shell and test out some SHOW statement to see the measurements and run some queries to verify that the data is available.
+
+Run the following command at your shell prompt to launch the `influx` shell and set the database to "NOAA_water_database`. You could leave out the `-database` argument here and specify the database at the `influx` shell prompt by running `USE NOAA_water_database`, but this is quicker.
+
 ```bash
 $ influx -precision rfc3339 -database NOAA_water_database
 Connected to http://localhost:8086 version 1.4.x
@@ -74,6 +79,7 @@ InfluxDB shell 1.4.x
 ```
 
 See all five measurements:
+
 ```bash
 > SHOW measurements
 name: measurements
