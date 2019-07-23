@@ -587,7 +587,7 @@ input:
       ## An array of urls to scrape metrics from.
       urls = ["http://localhost:9999/metrics"]
       ```
-    introduced: 1.11.0
+    introduced: 1.8.0
     tags: [linux, macos, windows, data-stores]
 
   - name: InfluxDB Listener
