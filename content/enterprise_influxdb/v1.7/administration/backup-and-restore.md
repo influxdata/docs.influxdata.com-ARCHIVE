@@ -52,6 +52,8 @@ If there are no existing incremental backups, the system automatically performs 
 Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [restore](#restore), keep `-full` backups and incremental backups in separate directories.
 
+To perform a full restore of metastore, including users and permission, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents.
+
 #### Syntax
 
 ```
