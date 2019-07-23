@@ -111,6 +111,7 @@ menu:
   * [shard](#shard)
       * [diskBytes](#diskbytes)
       * [fieldsCreate](#fieldscreate)
+      * [indexType](#indextype)
       * [seriesCreate](#seriescreate)
       * [writeBytes](#writebytes)
       * [writePointsDropped](#writepointsdropped)
@@ -783,6 +784,12 @@ The `shard` measurement statistics are related to working with shards in InfluxD
 
 * The number of fields created.
 * Data type: integer
+
+#### indexType
+
+* The type of index.
+* Values: `inmem` or `tsi1`
+* Data type: string
 
 #### seriesCreate
 
