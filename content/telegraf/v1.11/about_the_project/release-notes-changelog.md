@@ -8,6 +8,30 @@ menu:
     parent: About the project
 ---
 
+## 1.11.3 [2019-07-23]
+
+### Bug fixes
+
+#### Telegraf agent
+
+- Treat empty array as successful parse in JSON parser.
+- Fix template pattern partial wildcard matching.
+
+#### Telegraf plugins
+
+- Bind input (`bind`)
+  - Add missing `rcode` and `zonestat`.
+- GitHub input
+  - - Fix panic.
+- Lustre2 input (`lustre2`)
+  - Fix config parse regression.
+- NVIDIA-SMI output (`nvidia-smi`)
+  - Handle unknown error.
+- StatD input (`statd`)
+  - Fix panic when processing Datadog events.
+- VMware vSphere input (`vsphere`)
+  - Fix unable to reconnect after vCenter reboot.
+
 ## 1.11.2 [2019-07-09]
 
 ### Bug fixes
