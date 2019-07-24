@@ -15,19 +15,20 @@ When deploying InfluxDB Enterprise in production environments, you should have a
 
 The tools provided by InfluxDB Enterprise can be used to:
 
-* Provide disaster recovery due to unexpected events
-* Migrate data to new environments or servers
-* Restore clusters to a consistent state
-* Debugging
+- Provide disaster recovery due to unexpected events
+- Migrate data to new environments or servers
+- Restore clusters to a consistent state
+- Debugging
 
 Depending on the volume of data to be protected and your application requirements, InfluxDB Enterprise offers two methods, described below, for managing backups and restoring data:
 
-* [Backup and restore utilities](#backup-and-restore-utilities) — For most applications
-* [Exporting and importing data](#exporting-and-importing-data) — For large datasets
+- [Backup and restore utilities](#backup-and-restore-utilities) — For most applications
+- [Exporting and importing data](#exporting-and-importing-data) — For large datasets
 
 > **Note:** You can use the [new `backup` and `restore` utilities (InfluxDB OSS 1.5 and later](/influxdb/latest/administration/backup_and_restore/) to:
-> * Restore InfluxDB Enterprise backup files to InfluxDB OSS instances.
-> * Back up InfluxDB OSS data that can be restored in InfluxDB Enterprise clusters.
+>
+> - Restore InfluxDB Enterprise backup files to InfluxDB OSS instances.
+> - Back up InfluxDB OSS data that can be restored in InfluxDB Enterprise clusters.
 
 ## Backup and restore utilities
 
@@ -41,9 +42,9 @@ A backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#met
 All backups also include a manifest, a JSON file describing what was collected during the backup.
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
-* Metastore backup: `20060102T150405Z.meta`
-* Shard data backup: `20060102T150405Z.<shard_id>.tar.gz`
-* Manifest: `20060102T150405Z.manifest`
+- Metastore backup: `20060102T150405Z.meta`
+- Shard data backup: `20060102T150405Z.<shard_id>.tar.gz`
+- Manifest: `20060102T150405Z.manifest`
 
 Backups can be full (using the `-full` flag) or incremental, and they are incremental by default.
 Incremental backups create a copy of the metastore and shard data that have changed since the last incremental backup.
@@ -52,9 +53,11 @@ If there are no existing incremental backups, the system automatically performs 
 Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [restore](#restore), keep `-full` backups and incremental backups in separate directories.
 
+To perform a full restore of metastore, including users and permission, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents.
+
 #### Syntax
 
-```
+```bash
 influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
 ```
 
@@ -65,18 +68,19 @@ for a complete list of the global `influxd-ctl` options.
 
 ##### Backup options
 
-* `-db <string>`: the name of the single database to back up
-* `-from <TCP-address>`: the data node TCP address to prefer when backing up
-* `-full`: perform a full backup
-* `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
-* `-shard <unit>`: the ID of the single shard to back up
+- `-db <string>`: the name of the single database to back up
+- `-from <TCP-address>`: the data node TCP address to prefer when backing up
+- `-full`: perform a full backup
+- `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
+- `-shard <unit>`: the ID of the single shard to back up
 
 ##### Examples
 
 Store the following incremental backups in different directories.
 The first backup specifies `-db myfirstdb` and the second backup specifies
 different options: `-db myfirstdb` and `-rp autogen`.
-```
+
+```bash
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 
 influxd-ctl backup -db myfirstdb -rp autogen ./myfirstdb-autogen-backup
@@ -165,17 +169,14 @@ $ ls ./telegrafbackup
 
 #### Disable anti-entropy (AE) before restoring a backup
 
-> Before restoring a backup, stop the anti-entropy (AE) service (if enabled) on **each data node in the cluster, one at a time**. 
+> Before restoring a backup, stop the anti-entropy (AE) service (if enabled) on **each data node in the cluster, one at a time**.
 
 >
 > 1. Stop the `influxd` service.
 > 2. Set `[anti-entropy].enabled` to `false` in the influx configuration file (by default, influx.conf).
-> 3. Restart the `influxd` service and wait for the data node to receive read and write requests and for the [hinted handoff queue](/enterprise_influxdb/v1.7/concepts/clustering/#hinted-handoff) to drain. 
->
+> 3. Restart the `influxd` service and wait for the data node to receive read and write requests and for the [hinted handoff queue](/enterprise_influxdb/v1.7/concepts/clustering/#hinted-handoff) to drain.
 > 4. Once AE is disabled on all data nodes and each node returns to a healthy state, you're ready to restore the backup. For details on how to restore your backup, see examples below.
-
 > 5. After restoring the backup, restart AE services on each data node.
-
 
 ##### Restore a backup
 
@@ -205,7 +206,7 @@ Use the syntax below to restore an incremental backup to a new cluster or an exi
 Note that the existing cluster must contain no data in the affected databases.*
 Performing a restore from an incremental backup requires the path to the incremental backup's directory.
 
-```
+```bash
 influxd-ctl [global-options] restore [restore-options] <path-to-backup-directory>
 ```
 
@@ -220,13 +221,13 @@ for a complete list of the global `influxd-ctl` options.
 
 ##### Restore options
 
-* `-db <string>`: the name of the single database to restore
-* `-list`: shows the contents of the backup
-* `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
-* `-newrf <int>`: the new replication factor to restore to (this is capped to the number of data nodes in the cluster)
-* `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
-* `-rp <string>`: the name of the single retention policy to restore
-* `-shard <unit>`: the shard ID to restore
+- `-db <string>`: the name of the single database to restore
+- `-list`: shows the contents of the backup
+- `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
+- `-newrf <int>`: the new replication factor to restore to (this is capped to the number of data nodes in the cluster)
+- `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
+- `-rp <string>`: the name of the single retention policy to restore
+- `-shard <unit>`: the shard ID to restore
 
 #### Syntax to restore from a full backup
 
@@ -235,7 +236,7 @@ Restore the `-full` backup to a new cluster or an existing cluster.
 Note that the existing cluster must contain no data in the affected databases.*
 Performing a restore from a `-full` backup requires the `-full` flag and the path to the full backup's manifest file.
 
-```
+```bash
 influxd-ctl [global-options] restore [options] -full <path-to-manifest-file>
 ```
 
@@ -251,13 +252,13 @@ for a complete list of the global `influxd-ctl` options.
 
 ##### Restore options
 
-* `-db <string>`: the name of the single database to restore
-* `-list`: shows the contents of the backup
-* `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
-* `-newrf <int>`: the new replication factor to restore to (this is capped to the number of data nodes in the cluster)
-* `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
-* `-rp <string>`: the name of the single retention policy to restore
-* `-shard <unit>`: the shard ID to restore
+- `-db <string>`: the name of the single database to restore
+- `-list`: shows the contents of the backup
+- `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
+- `-newrf <int>`: the new replication factor to restore to (this is capped to the number of data nodes in the cluster)
+- `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
+- `-rp <string>`: the name of the single retention policy to restore
+- `-shard <unit>`: the shard ID to restore
 
 #### Examples
 
@@ -354,7 +355,7 @@ time                  written
 1970-01-01T00:00:00Z  471
 ```
 
-#### Common Issues with restore
+#### Common issues with restore
 
 ##### Restore writes information not part of the original backup
 
@@ -387,9 +388,9 @@ As an alternative to the standard backup and restore utilities, you can use the 
 
 You can use the [`influx_inspect export` command](/influxdb/latest/tools/influx_inspect#export) to export data in line protocol format from your InfluxDB Enterprise cluster. Options include:
 
-* Exporting all, or specific, databases
-* Filtering with starting and ending timestamps
-* Using gzip compression for smaller files and faster exports
+- Exporting all, or specific, databases
+- Filtering with starting and ending timestamps
+- Using gzip compression for smaller files and faster exports
 
 For details on optional settings and usage, see [`influx_inspect export` command](/influxdb/latest/tools/influx_inspect#export).
 
@@ -415,8 +416,8 @@ For details on using the `influx -import` command, see [Import data from a file 
 
 For an example of using the exporting and importing data approach for disaster recovery, see the Capital One presentation from Influxdays 2019 on ["Architecting for Disaster Recovery."](https://www.youtube.com/watch?v=LyQDhSdnm4A). In this presentation, Capital One discusses the following:
 
-* Data is exported every 15 minutes from an active cluster to an AWS S3 bucket.
-* The export file in the S3 bucket is replicated using the AWS S3 copy command.
-* Data is imported every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
-* Advantages of the export-import approach over the standard backup and restore utilities for large volumes of data.
-* Use of a custom administration tool to manage users and scheduled exports and imports.
+- Data is exported every 15 minutes from an active cluster to an AWS S3 bucket.
+- The export file in the S3 bucket is replicated using the AWS S3 copy command.
+- Data is imported every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
+- Advantages of the export-import approach over the standard backup and restore utilities for large volumes of data.
+- Use of a custom administration tool to manage users and scheduled exports and imports.

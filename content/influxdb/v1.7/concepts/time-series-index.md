@@ -8,9 +8,11 @@ menu:
     parent: Concepts
 ---
 
-## Time Series Index (TSI)
+Find overview and background information on Time Series Index (TSI) in this topic. For detail, including how to enable and configure TSI, see [Time Series Index (TSI) details](https://docs.influxdata.com/influxdb/v1.7/concepts/tsi-details/).
 
-In order to support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores, InfluxData has added the new Time Series Index (TSI).
+## Overview
+
+To support a large number of time series, that is, a very high cardinality in the number of unique time series that the database stores, InfluxData has added the new Time Series Index (TSI).
 InfluxData supports customers using InfluxDB with tens of millions of time series.
 InfluxData's goal, however, is to expand to hundreds of millions, and eventually billions.
 Using InfluxData's TSI storage engine, users should be able to have millions of unique time series.
