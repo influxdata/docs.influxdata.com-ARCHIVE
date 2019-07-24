@@ -14,188 +14,188 @@ menu:
 - [Enterprise cluster measurements](#enterprise-cluster-measurements)
 - [InfluxDB measurement statistics](#influxdb-measurement-statistics)
   - [ae](#ae-enterprise-only) (Enterprise only)
-    - [bytesRx](#bytesrx)
-    - [errors](#errors)
-    - [jobs](#jobs)
-    - [jobsActive](#jobsactive)
+    - bytesRx
+    - errors
+    - jobs
+    - jobsActive
   - [cluster](#cluster-enterprise-only) (Enterprise only)
-    - [copyShardReq](#copyshardreq)
-    - [createIteratorReq](#createiteratorreq)
-    - [expandSourcesReq](#expandsourcesreq)
-    - [fieldDimensionsReq](#fielddimensionsreq)
-    - [iteratorCostReq](#iteratorcostreq)
-    - [removeShardReq](#removeshardreq)
-    - [writeShardFail](#writeshardfail)
-    - [writeShardPointsReq](#writeshardpointsreq)
-    - [writeShardReq](#writeshardreq)
+    - copyShardReq
+    - createIteratorReq
+    - expandSourcesReq
+    - fieldDimensionsReq
+    - iteratorCostReq
+    - removeShardReq
+    - writeShardFail
+    - writeShardPointsReq
+    - writeShardReq
   - [cq](#cq)
-    - [queryFail](#queryfail)
-    - [queryOk](#queryok)
+    - queryFail
+    - queryOk
   - [database](#database)
-    - [numMeasurements](#nummeasurements)
-    - [numSeries](#numseries)
+    - numMeasurements
+    - numSeries
   - [hh](#hh-enterprise-only) (Enterprise only)
-    - [writeShardReq](#writeshardreq)
-    - [writeShardReqPoints](#writeshardreqpoints)
+    - writeShardReq
+    - writeShardReqPoints
   - [hh_database](#hh-database) (Enterprise only)
-    - [bytesRead]
-    - [bytesWritten]
-    - [queueBytes]
-    - [queueDepth]
-    - [writeBlocked]
-    - [writeDropped]
-    - [writeNodeReq]
-    - [writeNodeReqFail]
-    - [writeNodeReqPoints]
-    - [writeShardReq]
-    - [writeShardReqPoints]  
+    - bytesRead
+    - bytesWritten
+    - queueBytes
+    - queueDepth
+    - writeBlocked
+    - writeDropped
+    - writeNodeReq
+    - writeNodeReqFail
+    - writeNodeReqPoints
+    - writeShardReq
+    - writeShardReqPoints  
   - [hh_processor](#hh-processor-enterprise-only) (Enterprise only)
-    - [bytesRead](#bytesread)
-    - [bytesWritten](#byteswritten)
-    - [queueBytes](#queuebytes)
-    - [queueDepth](#queuedepth)
-    - [writeBlocked](#writeblocked)
-    - [writeDropped](#writedropped)
-    - [writeNodeReq](#writenodereq)
-    - [writeNodeReqFail](#writenodereqfail)
-    - [writeNodeReqPoints](#writenodereqpoints)
-    - [writeShardReq](#writeshardreq)
-    - [writeShardReqPoints](#writeshardreqpoints)
+    - bytesRead
+    - bytesWritten
+    - queueBytes
+    - queueDepth
+    - writeBlocked
+    - writeDropped
+    - writeNodeReq
+    - writeNodeReqFail
+    - writeNodeReqPoints
+    - writeShardReq
+    - writeShardReqPoints
   - [httpd](#httpd)
-    - [authFail](#authfail)
-    - [clientError](#clienterror)
-    - [pingReq](#pingreq)
-    - [pointsWrittenDropped](#pointswrittendropped)
-    - [pointsWrittenFail](#pointswrittenfail)
-    - [pointsWrittenOK](#pointswrittenok)
-    - [promReadReq](#promreadreq)
-    - [promWriteReq](#promwritereq)
-    - [fluxQueryReq](#fluxqueryreq)
-    - [fluxQueryDurationNs](#fluxquerydurationns)
-    - [queryReq](#queryreq)
-    - [queryReqDurationNs](#queryreqdurationns)
-    - [queryRespBytes](#queryrespbytes)
-    - [recoveredPanics](#recoveredpanics)
-    - [req](#req)
-    - [reqActive](#reqactive)
-    - [reqDurationNs](#reqdurationns)
-    - [serverError](#servererror)
-    - [statusReq](#statusreq)
-    - [writeReq](#writereq)
-    - [writeReqActive](#writereqactive)
-    - [writeReqBytes](#writereqbytes)
-    - [writeReqDurationNs](#writereqdurationns)
+    - authFail
+    - clientError
+    - pingReq
+    - pointsWrittenDropped
+    - pointsWrittenFail
+    - pointsWrittenOK
+    - promReadReq
+    - promWriteReq
+    - fluxQueryReq
+    - fluxQueryDurationNs
+    - queryReq
+    - queryReqDurationNs
+    - queryRespBytes
+    - recoveredPanics
+    - req
+    - reqActive
+    - reqDurationNs
+    - serverError
+    - statusReq
+    - writeReq
+    - writeReqActive
+    - writeReqBytes
+    - writeReqDurationNs
   - [queryExecutor](#queryexecutor)
-    - [queriesActive](#queriesactive)
-    - [queriesExecuted](#queriesexecuted)
-    - [queriesFinished](#queriesfinished)
-    - [queryDurationNs](#querydurationns)
-    - [recoveredPanics](#recoveredpanics)
+    - queriesActive
+    - queriesExecuted
+    - queriesFinished
+    - queryDurationNs
+    - recoveredPanics
   - [rpc](#rpc-enterprise-only) (Enterprise only)
-    - [idleStreams](#idlestreams)
-    - [liveConnections](#liveconnections)
-    - [liveStreams](#livestreams)
-    - [rpcCalls](#rpccalls)
-    - [rpcFailures](#rpcfailures)
-    - [rpcReadBytes](#rpcreadbytes)
-    - [rpcRetries](#rpcretries)
-    - [rpcWriteBytes](#rpcwritebytes)
-    - [singleUse](#singleuse)
-    - [singleUseOpen](#singleuseopen)
-    - [totalConnections](#totalconnections)
-    - [totalStreams](#totalstreams)
+    - idleStreams
+    - liveConnections
+    - liveStreams
+    - rpcCalls
+    - rpcFailures
+    - rpcReadBytes
+    - rpcRetries
+    - rpcWriteBytes
+    - singleUse
+    - singleUseOpen
+    - totalConnections
+    - totalStreams
   - [runtime](#runtime)
-    - [Alloc](#alloc)
-    - [Frees](#frees)
-    - [HeapAlloc](#heapalloc)
-    - [HeapIdle](#heapidle)
-    - [HeapInUse](#heapinuse)
-    - [HeapObjects](#heapobjects)
-    - [HeapReleased](#heapreleased)
-    - [HeapSys](#heapsys)
-    - [Lookups](#lookups)
-    - [Mallocs](#mallocs)
-    - [NumGC](#numgc)
-    - [NumGoroutine](#numgoroutine)
-    - [PauseTotalNs](#pausetotalns)
-    - [Sys](#sys)
-    - [TotalAlloc](#totalalloc)
+    - Alloc
+    - Frees
+    - HeapAlloc
+    - HeapIdle
+    - HeapInUse
+    - HeapObjects
+    - HeapReleased
+    - HeapSys
+    - Lookups
+    - Mallocs
+    - NumGC
+    - NumGoroutine
+    - PauseTotalNs
+    - Sys
+    - TotalAlloc
   - [shard](#shard)
-    - [diskBytes](#diskbytes)
-    - [fieldsCreate](#fieldscreate)
-    - [seriesCreate](#seriescreate)
-    - [writeBytes](#writebytes)
-    - [writePointsDropped](#writepointsdropped)
-    - [writePointsErr](#writepointserr)
-    - [writePointsOk](#writepointsok)
-    - [writeReq](#writereq)
-    - [writeReqErr](#writereqerr)
-    - [writeReqOk](#writereqok)
+    - diskBytes
+    - fieldsCreate
+    - seriesCreate
+    - writeBytes
+    - writePointsDropped
+    - writePointsErr
+    - writePointsOk
+    - writeReq
+    - writeReqErr
+    - writeReqOk
   - [subscriber](#subscriber)
-    - [createFailures](#createfailures)
-    - [pointsWritten](#pointswritten)
-    - [writeFailures](#writefailures)
+    - createFailures
+    - pointsWritten
+    - writeFailures
   - [tsm1_cache](#tsm1-cache)
-    - [WALCompactionTimeMs](#walcompactiontimems)
-    - [cacheAgeMs](#cacheagems)
-    - [cachedBytes](#cachedbytes)
-    - [diskBytes](#diskbytes)
-    - [memBytes](#membytes)
-    - [snapshotCount](#snapshotcount)
-    - [writeDropped](#writedropped)
-    - [writeErr](#writeerr)
-    - [writeOk](#writeok)
+    - WALCompactionTimeMs
+    - cacheAgeMs
+    - cachedBytes
+    - diskBytes
+    - memBytes
+    - snapshotCount
+    - writeDropped
+    - writeErr
+    - writeOk
   - [tsm1_engine](#tsm1-engine)
-    - [cacheCompactionDuration](#cachecompactionduration)
-    - [cacheCompactionErr](#cachecompactionerr)
-    - [cacheCompactions](#cachecompactions)
-    - [cacheCompactionsActive](#cachecompactionsactive)
-    - [tsmFullCompactionDuration](#tsmfullcompactionduration)
-    - [tsmFullCompactionErr](#tsmfullcompactionerr)
-    - [tsmFullCompactionQueue](#tsmfullcompactionqueue)
-    - [tsmFullCompactions](#tsmfullcompactions)
-    - [tsmFullCompactionsActive](#tsmfullcompactionsactive)
-    - [tsmLevel1CompactionDuration](#tsmlevel1compactionduration)
-    - [tsmLevel1CompactionErr](#tsmlevel1compactionerr)
-    - [tsmLevel1CompactionQueue](#tsmlevel1compactionqueue)
-    - [tsmLevel1Compactions](#tsmlevel1compactions)
-    - [tsmLevel1CompactionsActive](#tsmlevel1compactionsactive)
-    - [tsmLevel2CompactionDuration](#tsmlevel2compactionduration)
-    - [tsmLevel2CompactionErr](#tsmlevel2compactionerr)
-    - [tsmLevel2CompactionQueue](#tsmlevel2compactionqueue)
-    - [tsmLevel2Compactions](#tsmlevel2compactions)
-    - [tsmLevel2CompactionsActive](#tsmlevel2compactionsactive)
-    - [tsmLevel3CompactionDuration](#tsmlevel3compactionduration)
-    - [tsmLevel3CompactionErr](#tsmlevel3compactionerr)
-    - [tsmLevel3CompactionQueue](#tsmlevel3compactionqueue)
-    - [tsmLevel3Compactions](#tsmlevel3compactions)
-    - [tsmLevel3CompactionsActive](#tsmlevel3compactionsactive)
-    - [tsmOptimizeCompactionDuration](#tsmoptimizecompactionduration)
-    - [tsmOptimizeCompactionErr](#tsmoptimizecompactionerr)
-    - [tsmOptimizeCompactionQueue](#tsmoptimizecompactionqueue)
-    - [tsmOptimizeCompactions](#tsmoptimizecompactions)
-    - [tsmOptimizeCompactionsActive](#tsmoptimizecompactionsactive)
+    - cacheCompactionDuration
+    - cacheCompactionErr
+    - cacheCompactions
+    - cacheCompactionsActive
+    - tsmFullCompactionDuration
+    - tsmFullCompactionErr
+    - tsmFullCompactionQueue
+    - tsmFullCompactions
+    - tsmFullCompactionsActive
+    - tsmLevel1CompactionDuration
+    - tsmLevel1CompactionErr
+    - tsmLevel1CompactionQueue
+    - tsmLevel1Compactions
+    - tsmLevel1CompactionsActive
+    - tsmLevel2CompactionDuration
+    - tsmLevel2CompactionErr
+    - tsmLevel2CompactionQueue
+    - tsmLevel2Compactions
+    - tsmLevel2CompactionsActive
+    - tsmLevel3CompactionDuration
+    - tsmLevel3CompactionErr
+    - tsmLevel3CompactionQueue
+    - tsmLevel3Compactions
+    - tsmLevel3CompactionsActive
+    - tsmOptimizeCompactionDuration
+    - tsmOptimizeCompactionErr
+    - tsmOptimizeCompactionQueue
+    - tsmOptimizeCompactions
+    - tsmOptimizeCompactionsActive
   - [tsm1_filestore](#tsm1-filestore)
-    - [diskBytes](#diskbytes)
-    - [numFiles](#numfiles)
+    - diskBytes
+    - numFiles
   - [tsm1_wal](#tsm1-wal)
-    - [currentSegmentDiskBytes](#currentsegmentdiskbytes)
-    - [oldSegmentsDiskBytes](#oldsegmentdiskbytes)
-    - [writeErr](#writeerr)
-    - [writeOk](#writeok)
+    - currentSegmentDiskBytes
+    - oldSegmentsDiskBytes
+    - writeErr
+    - writeOk
   - [write](#write)
-    - [pointReq](#pointreq)
-    - [pointReqHH](#pointreqhh-enterprise-only) (Enterprise only)
-    - [pointReqLocal](#pointreqlocal-enterprise-only) (Enterprise only)
-    - [pointReqRemote](#pointreqremote-enterprise-only) (Enterprise only)
-    - [req](#req)
-    - [subWriteDrop](#subwritedrop)
-    - [subWriteOk](#subwriteok)
-    - [writeDrop](#writedrop)
-    - [writeError](#writeerror)
-    - [writeOk](#writeok)
-    - [writePartial](#writepartial-enterprise-only) (Enterprise only)
-    - [writeTimeout](#writetimeout)
+    - pointReq
+    - pointReqHH (Enterprise only)
+    - pointReqLocal (Enterprise only)
+    - pointReqRemote (Enterprise only)
+    - req
+    - subWriteDrop
+    - subWriteOk
+    - writeDrop
+    - writeError
+    - writeOk
+    - writePartial (Enterprise only)
+    - writeTimeout
 
 ## Using the `_internal` database
 
@@ -374,8 +374,10 @@ The `hh` measurement has one additional tag:
 
 The ``hh_database` measurement aggregates all hinted handoff queues for a single database and node. This allows accurate reporting of total queue size for a single database to a target node.
 
-- `db` — named of database
-- `node` — node identifier
+The `hh_database` measurement has two additional tags:
+
+- `db` — The name of the database
+- `node` — The node identifier
 
 #### bytesRead
 
