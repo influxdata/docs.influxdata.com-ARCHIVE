@@ -8,194 +8,232 @@ menu:
     weight: 3
 ---
 
-**On this page**
+## On this page
 
-- [Using the `_internal` database](#using-the-internal-database)
-- [Enterprise cluster measurements](#enterprise-cluster-measurements)
-- [InfluxDB measurement statistics](#influxdb-measurement-statistics)
-  - [ae](#ae-enterprise-only) (Enterprise only)
-    - bytesRx
-    - errors
-    - jobs
-    - jobsActive
-  - [cluster](#cluster-enterprise-only) (Enterprise only)
-    - copyShardReq
-    - createIteratorReq
-    - expandSourcesReq
-    - fieldDimensionsReq
-    - iteratorCostReq
-    - removeShardReq
-    - writeShardFail
-    - writeShardPointsReq
-    - writeShardReq
-  - [cq](#cq)
-    - queryFail
-    - queryOk
-  - [database](#database)
-    - numMeasurements
-    - numSeries
-  - [hh](#hh-enterprise-only) (Enterprise only)
-    - writeShardReq
-    - writeShardReqPoints
-  - [hh_database](#hh-database) (Enterprise only)
-    - bytesRead
-    - bytesWritten
-    - queueBytes
-    - queueDepth
-    - writeBlocked
-    - writeDropped
-    - writeNodeReq
-    - writeNodeReqFail
-    - writeNodeReqPoints
-    - writeShardReq
-    - writeShardReqPoints  
-  - [hh_processor](#hh-processor-enterprise-only) (Enterprise only)
-    - bytesRead
-    - bytesWritten
-    - queueBytes
-    - queueDepth
-    - writeBlocked
-    - writeDropped
-    - writeNodeReq
-    - writeNodeReqFail
-    - writeNodeReqPoints
-    - writeShardReq
-    - writeShardReqPoints
-  - [httpd](#httpd)
-    - authFail
-    - clientError
-    - pingReq
-    - pointsWrittenDropped
-    - pointsWrittenFail
-    - pointsWrittenOK
-    - promReadReq
-    - promWriteReq
-    - fluxQueryReq
-    - fluxQueryDurationNs
-    - queryReq
-    - queryReqDurationNs
-    - queryRespBytes
-    - recoveredPanics
-    - req
-    - reqActive
-    - reqDurationNs
-    - serverError
-    - statusReq
-    - writeReq
-    - writeReqActive
-    - writeReqBytes
-    - writeReqDurationNs
-  - [queryExecutor](#queryexecutor)
-    - queriesActive
-    - queriesExecuted
-    - queriesFinished
-    - queryDurationNs
-    - recoveredPanics
-  - [rpc](#rpc-enterprise-only) (Enterprise only)
-    - idleStreams
-    - liveConnections
-    - liveStreams
-    - rpcCalls
-    - rpcFailures
-    - rpcReadBytes
-    - rpcRetries
-    - rpcWriteBytes
-    - singleUse
-    - singleUseOpen
-    - totalConnections
-    - totalStreams
-  - [runtime](#runtime)
-    - Alloc
-    - Frees
-    - HeapAlloc
-    - HeapIdle
-    - HeapInUse
-    - HeapObjects
-    - HeapReleased
-    - HeapSys
-    - Lookups
-    - Mallocs
-    - NumGC
-    - NumGoroutine
-    - PauseTotalNs
-    - Sys
-    - TotalAlloc
-  - [shard](#shard)
-    - diskBytes
-    - fieldsCreate
-    - seriesCreate
-    - writeBytes
-    - writePointsDropped
-    - writePointsErr
-    - writePointsOk
-    - writeReq
-    - writeReqErr
-    - writeReqOk
-  - [subscriber](#subscriber)
-    - createFailures
-    - pointsWritten
-    - writeFailures
-  - [tsm1_cache](#tsm1-cache)
-    - WALCompactionTimeMs
-    - cacheAgeMs
-    - cachedBytes
-    - diskBytes
-    - memBytes
-    - snapshotCount
-    - writeDropped
-    - writeErr
-    - writeOk
-  - [tsm1_engine](#tsm1-engine)
-    - cacheCompactionDuration
-    - cacheCompactionErr
-    - cacheCompactions
-    - cacheCompactionsActive
-    - tsmFullCompactionDuration
-    - tsmFullCompactionErr
-    - tsmFullCompactionQueue
-    - tsmFullCompactions
-    - tsmFullCompactionsActive
-    - tsmLevel1CompactionDuration
-    - tsmLevel1CompactionErr
-    - tsmLevel1CompactionQueue
-    - tsmLevel1Compactions
-    - tsmLevel1CompactionsActive
-    - tsmLevel2CompactionDuration
-    - tsmLevel2CompactionErr
-    - tsmLevel2CompactionQueue
-    - tsmLevel2Compactions
-    - tsmLevel2CompactionsActive
-    - tsmLevel3CompactionDuration
-    - tsmLevel3CompactionErr
-    - tsmLevel3CompactionQueue
-    - tsmLevel3Compactions
-    - tsmLevel3CompactionsActive
-    - tsmOptimizeCompactionDuration
-    - tsmOptimizeCompactionErr
-    - tsmOptimizeCompactionQueue
-    - tsmOptimizeCompactions
-    - tsmOptimizeCompactionsActive
-  - [tsm1_filestore](#tsm1-filestore)
-    - diskBytes
-    - numFiles
-  - [tsm1_wal](#tsm1-wal)
-    - currentSegmentDiskBytes
-    - oldSegmentsDiskBytes
-    - writeErr
-    - writeOk
-  - [write](#write)
-    - pointReq
-    - pointReqHH (Enterprise only)
-    - pointReqLocal (Enterprise only)
-    - pointReqRemote (Enterprise only)
-    - req
-    - subWriteDrop
-    - subWriteOk
-    - writeDrop
-    - writeError
-    - writeOk
-    - writePartial (Enterprise only)
-    - writeTimeout
+[Using the `_internal` database](#using-the-internal-database)
+
+[Enterprise cluster measurements](#enterprise-cluster-measurements)
+
+[InfluxDB measurement statistics](#influxdb-measurement-statistics)
+
+[ae](#ae-enterprise-only) (Enterprise only)
+
+- bytesRx
+- errors
+- jobs
+- jobsActive
+
+[cluster](#cluster-enterprise-only) (Enterprise only)
+
+- copyShardReq
+- createIteratorReq
+- expandSourcesReq
+- fieldDimensionsReq
+- iteratorCostReq
+- removeShardReq
+- writeShardFail
+- writeShardPointsReq
+- writeShardReq
+
+[cq](#cq)
+
+- queryFail
+- queryOk
+
+[database](#database)
+
+- numMeasurements
+- numSeries
+
+[hh](#hh-enterprise-only) (Enterprise only)
+
+- writeShardReq
+- writeShardReqPoints
+
+[hh_database](#hh-database) (Enterprise only)
+
+- bytesRead
+- bytesWritten
+- queueBytes
+- queueDepth
+- writeBlocked
+- writeDropped
+- writeNodeReq
+- writeNodeReqFail
+- writeNodeReqPoints
+- writeShardReq
+- writeShardReqPoints  
+
+[hh_processor](#hh-processor-enterprise-only) (Enterprise only)
+
+- bytesRead
+- bytesWritten
+- queueBytes
+- queueDepth
+- writeBlocked
+- writeDropped
+- writeNodeReq
+- writeNodeReqFail
+- writeNodeReqPoints
+- writeShardReq
+- writeShardReqPoints
+
+[httpd](#httpd)
+
+- authFail
+- clientError
+- pingReq
+- pointsWrittenDropped
+- pointsWrittenFail
+- pointsWrittenOK
+- promReadReq
+- promWriteReq
+- fluxQueryReq
+- fluxQueryDurationNs
+- queryReq
+- queryReqDurationNs
+- queryRespBytes
+- recoveredPanics
+- req
+- reqActive
+- reqDurationNs
+- serverError
+- statusReq
+- writeReq
+- writeReqActive
+- writeReqBytes
+- writeReqDurationNs
+
+[queryExecutor](#queryexecutor)
+
+- queriesActive
+- queriesExecuted
+- queriesFinished
+- queryDurationNs
+- recoveredPanics
+
+[rpc](#rpc-enterprise-only) (Enterprise only)
+
+- idleStreams
+- liveConnections
+- liveStreams
+- rpcCalls
+- rpcFailures
+- rpcReadBytes
+- rpcRetries
+- rpcWriteBytes
+- singleUse
+- singleUseOpen
+- totalConnections
+- totalStreams
+
+[runtime](#runtime)
+
+- Alloc
+- Frees
+- HeapAlloc
+- HeapIdle
+- HeapInUse
+- HeapObjects
+- HeapReleased
+- HeapSys
+- Lookups
+- Mallocs
+- NumGC
+- NumGoroutine
+- PauseTotalNs
+- Sys
+- TotalAlloc
+
+[shard](#shard)
+
+- diskBytes
+- fieldsCreate
+- seriesCreate
+- writeBytes
+- writePointsDropped
+- writePointsErr
+- writePointsOk
+- writeReq
+- writeReqErr
+- writeReqOk
+
+[subscriber](#subscriber)
+
+- createFailures
+- pointsWritten
+- writeFailures
+
+[tsm1_cache](#tsm1-cache)
+
+- WALCompactionTimeMs
+- cacheAgeMs
+- cachedBytes
+- diskBytes
+- memBytes
+- snapshotCount
+- writeDropped
+- writeErr
+- writeOk
+
+[tsm1_engine](#tsm1-engine)
+
+- cacheCompactionDuration
+- cacheCompactionErr
+- cacheCompactions
+- cacheCompactionsActive
+- tsmFullCompactionDuration
+- tsmFullCompactionErr
+- tsmFullCompactionQueue
+- tsmFullCompactions
+- tsmFullCompactionsActive
+- tsmLevel1CompactionDuration
+- tsmLevel1CompactionErr
+- tsmLevel1CompactionQueue
+- tsmLevel1Compactions
+- tsmLevel1CompactionsActive
+- tsmLevel2CompactionDuration
+- tsmLevel2CompactionErr
+- tsmLevel2CompactionQueue
+- tsmLevel2Compactions
+- tsmLevel2CompactionsActive
+- tsmLevel3CompactionDuration
+- tsmLevel3CompactionErr
+- tsmLevel3CompactionQueue
+- tsmLevel3Compactions
+- tsmLevel3CompactionsActive
+- tsmOptimizeCompactionDuration
+- tsmOptimizeCompactionErr
+- tsmOptimizeCompactionQueue
+- tsmOptimizeCompactions
+- tsmOptimizeCompactionsActive
+
+[tsm1_filestore](#tsm1-filestore)
+
+- diskBytes
+- numFiles
+
+[tsm1_wal](#tsm1-wal)
+
+- currentSegmentDiskBytes
+- oldSegmentsDiskBytes
+- writeErr
+- writeOk
+
+[write](#write)
+
+- pointReq
+- pointReqHH (Enterprise only)
+- pointReqLocal (Enterprise only)
+- pointReqRemote (Enterprise only)
+- req
+- subWriteDrop
+- subWriteOk
+- writeDrop
+- writeError
+- writeOk
+- writePartial (Enterprise only)
+- writeTimeout
 
 ## Using the `_internal` database
 
