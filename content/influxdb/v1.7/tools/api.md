@@ -407,7 +407,7 @@ The queries in the file must be separated a semicolon (`;`).
 
 Syntax:
 
-```
+```bash
 curl -F "q=@<path_to_file>" -F "async=true" http://localhost:8086/query
 ```
 
@@ -415,7 +415,7 @@ curl -F "q=@<path_to_file>" -F "async=true" http://localhost:8086/query
 
 Syntax:
 
-```
+```bash
 curl -H "Accept: application/csv" -G 'http://localhost:8086/query [...]
 ```
 
@@ -458,7 +458,7 @@ The first query's result has a `statement_id` of `0` and the second query's resu
 
 ##### Request query results in CSV format
 
-```
+```bash
 $ curl -H "Accept: application/csv" -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
 
 name,tags,time,myfield,mytag1,mytag2
@@ -476,7 +476,7 @@ curl -F "q=@queries.txt" -F "async=true" 'http://localhost:8086/query'
 
 A sample of the queries in `queries.txt`:
 
-```
+```sql
 CREATE DATABASE mydb;
 CREATE RETENTION POLICY four_weeks ON mydb DURATION 4w REPLICATION 1;
 ```
