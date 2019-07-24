@@ -37,6 +37,18 @@ menu:
   - [hh](#hh-enterprise-only) (Enterprise only)
     - [writeShardReq](#writeshardreq)
     - [writeShardReqPoints](#writeshardreqpoints)
+  - [hh_database](#hh-database) (Enterprise only)
+    - [bytesRead]
+    - [bytesWritten]
+    - [queueBytes]
+    - [queueDepth]
+    - [writeBlocked]
+    - [writeDropped]
+    - [writeNodeReq]
+    - [writeNodeReqFail]
+    - [writeNodeReqPoints]
+    - [writeShardReq]
+    - [writeShardReqPoints]  
   - [hh_processor](#hh-processor-enterprise-only) (Enterprise only)
     - [bytesRead](#bytesread)
     - [bytesWritten](#byteswritten)
