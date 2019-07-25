@@ -34,6 +34,8 @@ Depending on the volume of data to be protected and your application requirement
 
 InfluxDB Enterprise supports backing up and restoring data in a cluster, a single database, a single database and retention policy, and single shards. Most InfluxDB Enterprise applications can use the backup and restore utilities.
 
+Use the `backup` and `restore` utilities to back up and restore between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.7.7.
+
 >**Note:** For large datasets (100s of gigabytes of data or more), you might need to use the [export and import method](#exporting-and-importing-data) method.
 
 ### Backup utility
