@@ -57,7 +57,8 @@ To prevent issues with [restore](#restore), keep `-full` backups and incremental
 
 To perform a full restore of metastore, including users and permission, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents.
 
->**Note:** The backup utility copies all data through the meta node that is used to execute the backup. As a result, performance of a backup and restore is typically limited by the network IO of the meta node. Increasing resources available to this meta node (such as resizing the EC2 instance) can significantly improve backup and restore performance.
+>**Note:** The backup utility copies all data through the meta node that is used to
+execute the backup. As a result, performance of a backup and restore is typically limited by the network IO of the meta node. Increasing the resources available to this meta node (such as resizing the EC2 instance) can significantly improve backup and restore performance.
 
 #### Syntax
 
