@@ -165,7 +165,7 @@ type HouseDBOutNode struct {
     // Include the generic node implementation
     node
     // Keep a reference to the pipeline node
-    h    *pipeline.HouseDBOutNode
+    h *pipeline.HouseDBOutNode
 }
 ```
 
@@ -185,10 +185,10 @@ In our case we want to define a function called `newHouseDBOutNode`.
 Add the following method to the `housedb_out.go` file.:
 
 ```go
-func newHouseDBOutNode(et *ExecutingTask, n *pipeline.HouseDBOutNode) (*HouseDBOutNode, error) {
+func newHouseDBOutNode(et *ExecutingTask, n *pipeline.HouseDBOutNode, d NodeDiagnostic) (*HouseDBOutNode, error) {
     h := &HouseDBOutNode{
         // pass in necessary fields to the 'node' struct
-        node: node{Node: n, et: et},
+        node: node{Node: n, et: et, diag: d},
         // Keep a reference to the pipeline.HouseDBOutNode
         h: n,
     }
@@ -221,7 +221,7 @@ Now we need to define the `runOut` method.
 In the file `housedb_out.go` add this method:
 
 ```go
-func (h *HouseDBOutNode) runOut() error {
+func (h *HouseDBOutNode) runOut(snapshot []byte) error {
     return nil
 }
 ```
@@ -230,88 +230,87 @@ With that change the `HouseDBOutNode` is syntactically complete but doesn't do a
 Let's give it something to do!
 
 As we learned earlier nodes communicate via edges.
-There is a Go type `kapacitor.Edge` that handles this communication.
+There is a Go type `edge.Edge` that handles this communication.
 All we want to do is read data from the edge and send it to HouseDB.
-Recall that we said that a `HouseDBOutNode` "wants" whatever edge type we give it.
-Because the node accepts any edge type, we must define how to read stream or batch data.
-Lets update the `runOut` method with an appropriate switch statement.
-
-```go
-func (h *HouseDBOutNode) runOut() error {
-    switch h.Wants() {
-    case pipeline.StreamEdge:
-        // Read stream data and send to HouseDB
-    case pipeline.BatchEdge:
-        // Read batch data and send to HouseDB
-    }
-    return nil
-}
-```
+Data is represented in the form of an `edge.Message` type.
+A node reads messages using an `edge.Consumer`, and a node processes messages by implementing the `edge.Receiver` interface.
+The both the `Consumer` and `Receiver` interfaces can be found [here](https://github.com/influxdb/kapacitor/blob/master/edge/consumer.go)
 
 The `node` type we included via composition in the `HouseDBOutNode` provides a list of edges in the field named `ins`.
 Since `HouseDBOutNode` can have only one parent, the edge we are concerned with is the 0th edge.
-The `Edge` type provides two methods:
-
-* `NextPoint` for reading stream data.
-* `NextBatch` for reading batch data.
-
-Let's update the cases in the switch statements to loop through all data.
+We can consume and process messages from an edge using the `NewConsumerWithReceiver` function.
 
 ```go
-func (h *HouseDBOutNode) runOut() error {
-    switch h.Wants() {
-    case pipeline.StreamEdge:
-        // Read stream data and send to HouseDB
-        for p, ok := h.ins[0].NextPoint(); ok; p, ok = h.ins[0].NextPoint() {
-            // Process a single point
-        }
-    case pipeline.BatchEdge:
-        // Read batch data and send to HouseDB
-        for b, ok := h.ins[0].NextBatch(); ok; b, ok = h.ins[0].NextBatch() {
-            // Process a batch of points
-        }
-    }
-    return nil
+// NewConsumerWithReceiver creates a new consumer for the edge e and receiver r.
+func NewConsumerWithReceiver(e Edge, r Receiver) Consumer {
+	return &consumer{
+		edge: e,
+		r:    r,
+	}
 }
 ```
 
-To make it easy on ourselves we can convert the single point into a batch containing just that point.
-Then all we need to do is write a function that takes a batch of points and writes it to HouseDB.
+Let's update `runOut` to read and process messages using this function.
 
 ```go
-func (h *HouseDBOutNode) runOut() error {
-    switch h.Wants() {
-    case pipeline.StreamEdge:
-        // Read stream data and send to HouseDB
-        for p, ok := h.ins[0].NextPoint(); ok; p, ok = h.ins[0].NextPoint() {
-            // Turn the point into a batch with just one point.
-            batch := models.Batch{
-                Name:   p.Name,
-                Group:  p.Group,
-                Tags:   p.Tags,
-                Points: []models.TimeFields{{Time: p.Time, Fields: p.Fields}},
-            }
-            // Write the batch
-            err := h.write(batch)
-            if err != nil {
-                return err
-            }
-        }
-    case pipeline.BatchEdge:
-        // Read batch data and send to HouseDB
-        for b, ok := h.ins[0].NextBatch(); ok; b, ok = h.ins[0].NextBatch() {
-            // Write the batch
-            err := h.write(b)
-            if err != nil {
-                return err
-            }
-        }
-    }
-    return nil
+func (h *HouseDBOutNode) runOut(snapshot []byte) error {
+	consumer := edge.NewConsumerWithReceiver(
+		n.ins[0],
+		h,
+	)
+	return consumer.Consume()
+}
+```
+
+All that's left is for `HouseDBOutNode` to implement the `Receiver` interface and to write a function that takes a batch of points and writes it to HouseDB.
+To make it easy on ourselves we can use an `edge.BatchBuffer` for receiving batch messages.
+We can also convert single point messages into batch messages containing just one point.
+
+```go
+func (h *HouseDBOutNode) BeginBatch(begin edge.BeginBatchMessage) (edge.Message, error) {
+	return nil, h.batchBuffer.BeginBatch(begin)
 }
 
+func (h *HouseDBOutNode) BatchPoint(bp edge.BatchPointMessage) (edge.Message, error) {
+	return nil, h.batchBuffer.BatchPoint(bp)
+}
+
+func (h *HouseDBOutNode) EndBatch(end edge.EndBatchMessage) (edge.Message, error) {
+    msg := h.batchBuffer.BufferedBatchMessage(end)
+    return msg, h.write(msg)
+}
+
+func (h *HouseDBOutNode) Point(p edge.PointMessage) (edge.Message, error) {
+	batch := edge.NewBufferedBatchMessage(
+		edge.NewBeginBatchMessage(
+			p.Name(),
+			p.Tags(),
+			p.Dimensions().ByName,
+			p.Time(),
+			1,
+		),
+		[]edge.BatchPointMessage{
+			edge.NewBatchPointMessage(
+				p.Fields(),
+				p.Tags(),
+				p.Time(),
+			),
+		},
+		edge.NewEndBatchMessage(),
+	)
+    return p, h.write(batch)
+}
+
+func (h *HouseDBOutNode) Barrier(b edge.BarrierMessage) (edge.Message, error) {
+	return b, nil
+}
+func (h *HouseDBOutNode) DeleteGroup(d edge.DeleteGroupMessage) (edge.Message, error) {
+	return d, nil
+}
+func (h *HouseDBOutNode) Done() {}
+
 // Write a batch of data to HouseDB
-func (h *HouseDBOutNode) write(batch models.Batch) error {
+func (h *HouseDBOutNode) write(batch edge.BufferedBatchMessage) error {
     // Implement writing to HouseDB here...
     return nil
 }
@@ -371,54 +370,77 @@ type HouseDBOutNode struct {
     // Include the generic node implementation
     node
     // Keep a reference to the pipeline node
-    h    *pipeline.HouseDBOutNode
+    h *pipeline.HouseDBOutNode
+    // Buffer for a batch of points
+    batchBuffer *edge.BatchBuffer
 }
 
-func newHouseDBOutNode(et *ExecutingTask, n *pipeline.HouseDBOutNode) (*HouseDBOutNode, error) {
+func newHouseDBOutNode(et *ExecutingTask, n *pipeline.HouseDBOutNode, d NodeDiagnostic) (*HouseDBOutNode, error) {
     h := &HouseDBOutNode{
         // pass in necessary fields to the 'node' struct
-        node: node{Node: n, et: et},
+        node: node{Node: n, et: et, diag: d},
         // Keep a reference to the pipeline.HouseDBOutNode
         h: n,
+        // Buffer for a batch of points
+        batchBuffer: new(edge.BatchBuffer),
     }
     // Set the function to be called when running the node
     h.node.runF = h.runOut
     return h
 }
 
-func (h *HouseDBOutNode) runOut() error {
-    switch h.Wants() {
-    case pipeline.StreamEdge:
-        // Read stream data and send to HouseDB
-        for p, ok := h.ins[0].NextPoint(); ok; p, ok = h.ins[0].NextPoint() {
-            // Turn the point into a batch with just one point.
-        batch := models.Batch{
-                Name:   p.Name,
-                Group:  p.Group,
-                Tags:   p.Tags,
-                Points: []models.TimeFields{{Time: p.Time, Fields: p.Fields}},
-            }
-            // Write the batch
-            err := h.write(batch)
-            if err != nil {
-                return err
-            }
-        }
-    case pipeline.BatchEdge:
-        // Read batch data and send to HouseDB
-        for b, ok := h.ins[0].NextBatch(); ok; b, ok = h.ins[0].NextBatch() {
-            // Write the batch
-            err := h.write(b)
-            if err != nil {
-                return err
-            }
-        }
-    }
-    return nil
+func (h *HouseDBOutNode) runOut(snapshot []byte) error {
+	consumer := edge.NewConsumerWithReceiver(
+		n.ins[0],
+		h,
+	)
+	return consumer.Consume()
 }
 
+func (h *HouseDBOutNode) BeginBatch(begin edge.BeginBatchMessage) (edge.Message, error) {
+	return nil, h.batchBuffer.BeginBatch(begin)
+}
+
+func (h *HouseDBOutNode) BatchPoint(bp edge.BatchPointMessage) (edge.Message, error) {
+	return nil, h.batchBuffer.BatchPoint(bp)
+}
+
+func (h *HouseDBOutNode) EndBatch(end edge.EndBatchMessage) (edge.Message, error) {
+    msg := h.batchBuffer.BufferedBatchMessage(end)
+    return msg, h.write(msg)
+}
+
+func (h *HouseDBOutNode) Point(p edge.PointMessage) (edge.Message, error) {
+	batch := edge.NewBufferedBatchMessage(
+		edge.NewBeginBatchMessage(
+			p.Name(),
+			p.Tags(),
+			p.Dimensions().ByName,
+			p.Time(),
+			1,
+		),
+		[]edge.BatchPointMessage{
+			edge.NewBatchPointMessage(
+				p.Fields(),
+				p.Tags(),
+				p.Time(),
+			),
+		},
+		edge.NewEndBatchMessage(),
+	)
+    return p, h.write(batch)
+}
+
+func (h *HouseDBOutNode) Barrier(b edge.BarrierMessage) (edge.Message, error) {
+	return b, nil
+}
+func (h *HouseDBOutNode) DeleteGroup(d edge.DeleteGroupMessage) (edge.Message, error) {
+	return d, nil
+}
+func (h *HouseDBOutNode) Done() {}
+
 // Write a batch of data to HouseDB
-func (h *HouseDBOutNode) write(batch models.Batch) error {
+func (h *HouseDBOutNode) write(batch edge.BufferedBatchMessage) error {
     // Implement writing to HouseDB here...
     return nil
 }
@@ -442,11 +464,11 @@ task.go (only the new case is shown):
 ```go
 ...
 // Create a node from a given pipeline node.
-func (et *ExecutingTask) createNode(p pipeline.Node, l *log.Logger) (n Node, err error) {
+func (et *ExecutingTask) createNode(p pipeline.Node, d NodeDiagnostic) (n Node, err error) {
     switch t := p.(type) {
     ...
 	case *pipeline.HouseDBOutNode:
-		n, err = newHouseDBOutNode(et, t, l)
+		n, err = newHouseDBOutNode(et, t, d)
     ...
 }
 ...
