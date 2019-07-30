@@ -407,7 +407,7 @@ Disabling hinted handoff is not recommended and can lead to data loss if another
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
 
-####  `max-size = 10737418240`
+####  `max-size = "10g`
 
 The maximum size of the hinted handoff queue.
 Each queue is for one and only one other data node in the cluster.
@@ -417,7 +417,7 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
 
 ####  `max-age = "168h0m0s"`
 
-The time writes sit in the queue before they are purged.
+The time interval that writes sit in the queue before they are purged.
 The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
 If another data node is unreachable for more than the `max-age` it can lead to data loss.
 

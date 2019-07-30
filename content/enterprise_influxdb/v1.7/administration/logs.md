@@ -1,10 +1,10 @@
 ---
-title: Logging and tracing in InfluxDB Enterprise
+title: Log and trace InfluxDB Enterprise operations
 description: Covers logging locations, redirecting HTTP request logging, structured logging, and tracing.
 menu:
   enterprise_influxdb_1_7:
-    name: Logging and tracing
-    weight: 40
+    name: Log and trace
+    weight: 90
     parent: Administration
 ---
 

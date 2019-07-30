@@ -1,0 +1,105 @@
+#sidebar--ad {
+  margin: -0.75rem 1rem;
+  border-radius: @radius;
+
+  &.cloud {
+    background: linear-gradient(45deg, #9394FF, #22ADF6);
+    padding: 1.5rem 1.5rem;
+    text-align: center;
+
+    .text {
+      margin: 0 0 1rem 0;
+      color: @g20-white;
+      line-height: 1.3em;
+      font-size: 1.1em;
+      font-weight: 500;
+    }
+
+    .cta {
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: @radius;
+      color: @g20-white;
+      border: 2px solid fadeout(@g20-white, 60%);
+      background-color: transparent;
+      transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease;
+      padding: 0.75em 1.5em;
+      font-weight: 700;
+      display: inline-block;
+      font-size: 1.125em;
+
+      &:hover {
+        background-color: fadeout(@g20-white, 85%);
+        border-color: fadeout(@g20-white, 40%)
+      }
+    }
+  }
+
+  &.enterprise {
+    background: linear-gradient(to right, @c-rainforest,@c-pool);
+    padding: 1.5rem 1.5rem;
+    text-align: center;
+
+    .text {
+      margin: 0 0 1rem 0;
+      color: @g20-white;
+      line-height: 1.3em;
+      // font-size: 1.2em;
+      font-weight: 500;
+    }
+
+    .cta {
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: @radius;
+      color: @g20-white;
+      border: 2px solid fadeout(@g20-white, 60%);
+      background-color: transparent;
+      transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease;
+      padding: 0.75em 1.5em;
+      font-weight: 700;
+      display: inline-block;
+      font-size: 1.125em;
+
+      &:hover {
+        background-color: fadeout(@g20-white, 85%);
+        border-color: fadeout(@g20-white, 40%)
+      }
+    }
+  }
+
+  &.influx-days {
+    padding: 1rem;
+    background: url("/promos/assets/influx-days-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: @g20-white;
+    font-weight: bold;
+
+    img {
+      margin: .4rem 0 .8rem;
+    }
+
+    .text {
+      font-size: 1.75rem;
+      margin-bottom: .5rem;
+    }
+    .details {
+      font-size: .9rem;
+      line-height: 1.1rem;
+    }
+    .cta {
+      display: inline-block;
+      margin-top: .85rem;
+      color: @g20-white;
+      background: #5CBB47;
+      font-size: 1.15rem;
+      padding: .45rem 1.75rem;
+      border-radius: @radius;
+    }
+  }
+}

@@ -23,7 +23,7 @@ This returns information such as build information, uptime, hostname, server con
 ## Internal Monitoring
 InfluxDB also writes statistical and diagnostic information to database named `_internal`, which records metrics on the internal runtime and service performance.
 The `_internal` database can be queried and manipulated like any other InfluxDB database.
-Check out the [monitor service README](https://github.com/influxdb/influxdb/blob/master/monitor/README.md) and the [internal monitoring blog post](https://influxdb.com/blog/2015/09/22/monitoring_internal_show_stats.html) for more detail.
+Check out the [monitor service README](https://github.com/influxdb/influxdb/blob/1.1/monitor/README.md) and the [internal monitoring blog post](https://influxdb.com/blog/2015/09/22/monitoring_internal_show_stats.html) for more detail.
 
 ## Useful Commands
 

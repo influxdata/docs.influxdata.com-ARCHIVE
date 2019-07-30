@@ -43,14 +43,14 @@ InfluxQL offers a full suite of administrative commands.
 
 If you're looking for `SHOW` queries (for example, `SHOW DATABASES` or `SHOW RETENTION POLICIES`), see [Schema Exploration](/influxdb/v1.7/query_language/schema_exploration).
 
-The examples in the sections below use InfluxDB's [Command Line Interface (CLI)](/influxdb/v1.7/introduction/getting-started/).
-You can also execute the commands using the HTTP API; simply  send a `GET` request to the `/query` endpoint and include the command in the URL parameter `q`.
-See the [Querying Data](/influxdb/v1.7/guides/querying_data/) guide for more on using the HTTP API.
+The examples in the sections below use the InfluxDB [Command Line Interface (CLI)](/influxdb/v1.7/introduction/getting-started/).
+You can also execute the commands using the InfluxDB API; simply  send a `GET` request to the `/query` endpoint and include the command in the URL parameter `q`.
+For more on using the InfluxDB API, see [Querying data](/influxdb/v1.7/guides/querying_data/).
 
 > **Note:** When authentication is enabled, only admin users can execute most of the commands listed on this page.
 > See the documentation on [authentication and authorization](/influxdb/v1.7/administration/authentication_and_authorization/) for more information.
 
-## Data Management
+## Data management
 
 ### CREATE DATABASE
 
@@ -246,7 +246,7 @@ CREATE RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <dur
 
 ##### `DURATION`
 
-The `DURATION` clause determines how long InfluxDB keeps the data.
+- The `DURATION` clause determines how long InfluxDB keeps the data.
 The `<duration>` is a [duration literal](/influxdb/v1.7/query_language/spec/#durations)
 or `INF` (infinite).
 The minimum duration for a retention policy is one hour and the maximum
@@ -254,19 +254,23 @@ duration is `INF`.
 
 ##### `REPLICATION`
 
-The `REPLICATION` clause determines how many independent copies of each point
-are stored in the [cluster](/influxdb/v1.7/high_availability/clusters/), where `n` is the number of data nodes.
+- The `REPLICATION` clause determines how many independent copies of each point
+are stored in the [cluster](/influxdb/v1.7/high_availability/clusters/).
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+- By default, the replication factor `n` usually equals the number of data nodes. However, if you have four or more data nodes, the default replication factor `n` is 3.
+
+- To ensure data is immediately available for queries, set the replication factor `n` to less than or equal to the number of data nodes in the cluster.
+
+> **Important:** If you have four or more data nodes, verify that the database replication factor is correct.
+
+- Replication factors do not serve a purpose with single node instances.
 
 ##### `SHARD DURATION`
 
-The `SHARD DURATION` clause determines the time range covered by a [shard group](/influxdb/v1.7/concepts/glossary/#shard-group).
-The `<duration>` is a [duration literal](/influxdb/v1.7/query_language/spec/#durations)
+- Optional. The `SHARD DURATION` clause determines the time range covered by a [shard group](/influxdb/v1.7/concepts/glossary/#shard-group).
+- The `<duration>` is a [duration literal](/influxdb/v1.7/query_language/spec/#durations)
 and does not support an `INF` (infinite) duration.
-This setting is optional.
-By default, the shard group duration is determined by the retention policy's
+- By default, the shard group duration is determined by the retention policy's
 `DURATION`:
 
 | Retention Policy's DURATION  | Shard Group Duration  |
@@ -343,7 +347,12 @@ A successful `ALTER RETENTION POLICY` query returns an empty result.
 
 ### Delete retention policies with DROP RETENTION POLICY
 
-Delete all measurements and data in a specific retention policy with:
+Delete all measurements and data in a specific retention policy:
+
+{{% warn %}}
+Dropping a retention policy will permanently delete all measurements and data stored in the retention policy.
+{{% /warn %}}
+
 ```sql
 DROP RETENTION POLICY <retention_policy_name> ON <database_name>
 ```

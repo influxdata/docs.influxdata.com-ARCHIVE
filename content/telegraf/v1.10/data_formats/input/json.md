@@ -116,9 +116,9 @@ Config:
 ```toml
 [[inputs.file]]
   files = ["example"]
-  name_key = "name"
+  json_name_key = "name"
   tag_keys = ["my_tag_1"]
-  string_fields = ["my_field"]
+  json_string_fields = ["my_field"]
   data_format = "json"
 ```
 

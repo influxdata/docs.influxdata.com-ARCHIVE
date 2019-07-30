@@ -17,7 +17,7 @@ Installation of the InfluxDB package may require `root` or administrator privile
 
 By default, InfluxDB uses the following network ports:
 
-- TCP port `8086` is available for client-server communication using the InfluxDB HTTP API.
+- TCP port `8086` is available for client-server communication using the InfluxDB API.
 - TCP port `8088` is available for the RPC service to perform back up and restore operations.
 
 In addition to the ports above, InfluxDB also offers multiple plugins that may

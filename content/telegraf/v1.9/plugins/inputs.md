@@ -350,31 +350,31 @@ submits data to InfluxDB determines the destination database.
 
 Plugin ID: `interrupts`
 
-The [Interrupts input plugin](https://github.com/influxdata/plugins/inputs/interrupts) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
+The [Interrupts input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/interrupts/README.md) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
 
 ### IPMI Sensor
 
 Plugin ID: `ipmi_sensor`
 
-The [IPMI Sensor input plugin](https://github.com/influxdata/plugins/inputs/ipmi_sensor) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
+The [IPMI Sensor input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/ipmi_sensor/README.md) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
 
 ### Ipset
 
 Plugin ID: `ipset`
 
-The [Ipset input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipset) gathers packets and bytes counters from Linux `ipset`. It uses the output of the command `ipset save`. Ipsets created without the `counters` option are ignored.
+The [Ipset input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/ipset/README.md) gathers packets and bytes counters from Linux `ipset`. It uses the output of the command `ipset save`. Ipsets created without the `counters` option are ignored.
 
 ### IPtables
 
 Plugin ID: `iptables`
 
-The [IPtables input plugin](https://github.com/influxdata/telegraf/blob/1.9.0/plugins/inputs/iptables/README.md) gathers packets and bytes counters for rules within a set of table and chain from the Linux iptables firewall.
+The [IPtables input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/iptables/README.md) gathers packets and bytes counters for rules within a set of table and chain from the Linux iptables firewall.
 
 ### IPVS
 
 Plugin ID: `ipvs`
 
-The [IPVS input plugin](https://github.com/influxdata/telegraf/blob/1.9.0/plugins/inputs/ipvs/README.md) uses the Linux kernel netlink socket interface to gather metrics about IPVS virtual and real servers.
+The [IPVS input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/ipvs/README.md) uses the Linux kernel netlink socket interface to gather metrics about IPVS virtual and real servers.
 
 ### Jenkins
 

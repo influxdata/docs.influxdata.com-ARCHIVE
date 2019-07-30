@@ -292,7 +292,7 @@ The 0.9 line of InfluxDB used BoltDB as the underlying storage engine.
 This writeup is about the Time Structured Merge Tree storage engine that was released in 0.9.5 and is the only storage engine supported in InfluxDB 0.11+, including the entire 1.x family.
 
 The properties of the time series data use case make it challenging for many existing storage engines.
-Over the course of InfluxDB's development we've tried a few of the more popular options.
+Over the course of InfluxDB development, InfluxData tried a few of the more popular options.
 We started with LevelDB, an engine based on LSM Trees, which are optimized for write throughput.
 After that we tried BoltDB, an engine based on a memory mapped B+Tree, which is optimized for reads.
 Finally, we ended up building our own storage engine that is similar in many ways to LSM Trees.
@@ -300,7 +300,7 @@ Finally, we ended up building our own storage engine that is similar in many way
 With our new storage engine we were able to achieve up to a 45x reduction in disk space usage from our B+Tree setup with even greater write throughput and compression than what we saw with LevelDB and its variants.
 This post will cover the details of that evolution and end with an in-depth look at our new storage engine and its inner workings.
 
-## Properties of Time Series Data
+## Properties of time series data
 
 The workload of time series data is quite different from normal database workloads.
 There are a number of factors that conspire to make it very difficult to scale and remain performant:
@@ -315,8 +315,8 @@ The first and most obvious problem is one of scale.
 In DevOps, IoT, or APM it is easy to collect hundreds of millions or billions of unique data points every day.
 
 For example, let's say we have 200 VMs or servers running, with each server collecting an average of 100 measurements every 10 seconds.
-Given there are 86,400 seconds in a day, a single measurement will generate 8,640 points in a day, per server.
-That gives us a total of 200 * 100 * 8,640 = 172,800,000 individual data points per day.
+Given there are 86,400 seconds in a day, a single measurement will generate 8,640 points in a day per server.
+That gives us a total of 172,800,000 (`200 * 100 * 8,640`) individual data points per day.
 We find similar or larger numbers in sensor data use cases.
 
 The volume of data means that the write throughput can be very high.
@@ -345,13 +345,13 @@ However, that means that once the first points written reach their expiration da
 
 Let's dig into the details of the two types of storage engines we tried and how these properties had a significant impact on our performance.
 
-## LevelDB and Log Structured Merge Trees
+## LevelDB and log structured merge trees
 
 When the InfluxDB project began, we picked LevelDB as the storage engine because we had used it for time series data storage in the product that was the precursor to InfluxDB.
 We knew that it had great properties for write throughput and everything seemed to "just work".
 
-LevelDB is an implementation of a Log Structured Merge Tree (or LSM Tree) that was built as an open source project at Google.
-It exposes an API for a key/value store where the key space is sorted.
+LevelDB is an implementation of a log structured merge tree (LSM tree) that was built as an open source project at Google.
+It exposes an API for a key-value store where the key space is sorted.
 This last part is important for time series data as it allowed us to quickly scan ranges of time as long as the timestamp was in the key.
 
 LSM Trees are based on a log that takes writes and two structures known as Mem Tables and SSTables.

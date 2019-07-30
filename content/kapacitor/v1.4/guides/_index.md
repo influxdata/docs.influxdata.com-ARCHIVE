@@ -10,7 +10,7 @@ menu:
 ---
 
 The following is a list of examples in no particular order that demonstrate some of the features of Kapacitor.
-These guides assume your are familiar with the basics of defining, recording, replaying and enabling tasks within Kapacitor.
+These guides assume you're familiar with the basics of defining, recording, replaying and enabling tasks within Kapacitor.
 See the [getting started](/kapacitor/v1.4/introduction/getting-started/) guide if you need a refresher.
 
 ### [Calculating rates across joined series + backfill](/kapacitor/v1.4/guides/join_backfill/)

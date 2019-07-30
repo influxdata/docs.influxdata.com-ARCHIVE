@@ -50,7 +50,7 @@ Configuration settings that specify a duration support the following duration un
 - `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
 - `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
 
->**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/master/etc/config.sample.toml) might be slightly newer.
+>**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/1.7/etc/config.sample.toml) might be slightly newer.
 
 ## Environment variables
 
@@ -178,7 +178,7 @@ Environment variable: `INFLUXDB_BIND_ADDRESS`
 
 ### `[meta]`
 
-This section controls parameters for InfluxDB's metastore,
+This section controls parameters for the InfluxDB metastore,
 which stores information on users, databases, retention policies, shards, and continuous queries.
 
 ### `dir = "/var/lib/influxdb/meta"`
@@ -515,7 +515,7 @@ Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ### `[monitor]`
 
-The `[monitor]` section settings control InfluxDB's [system self-monitoring](https://github.com/influxdb/influxdb/blob/master/monitor/README.md).
+The `[monitor]` section settings control the InfluxDB [system self-monitoring](https://github.com/influxdata/influxdb/blob/1.7/monitor/README.md).
 
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
@@ -556,7 +556,7 @@ For details on enabling HTTPS and authentication, see [Authentication and Author
 
 Determines whether the HTTP endpoints are enabled.
 To disable access to the HTTP endpoints, set the value to `false`.
-Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.7/tools/shell/) connects to the database using the HTTP API.
+Note that the InfluxDB [command line interface (CLI)](/influxdb/v1.7/tools/shell/) connects to the database using the InfluxDB API.
 
 Environment variable: `INFLUXDB_HTTP_ENABLED`
 
@@ -830,7 +830,7 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 ### `[[graphite]]`
 
 This section controls one or many listeners for Graphite data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/graphite/README.md) on GitHub for more information.
+For more information, see [Graphite protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/graphite/).
 
 #### `enabled = false`
 
@@ -867,7 +867,7 @@ Environment variable: `INFLUXDB_GRAPHITE_PROTOCOL`
 
 The number of nodes that must confirm the write.
 If the requirement is not met the return value will be either `partial write` if some points in the batch fail or `write failure` if all points in the batch fail.
-For more information, see the Query String Parameters for Writes section in the [Line Protocol Syntax Reference ](/influxdb/v1.7/write_protocols/write_syntax/).
+For more information, see the Query String Parameters for Writes section in the [InfluxDB line protocol syntax reference](/influxdb/v1.7/write_protocols/write_syntax/).
 
 Environment variable: `INFLUXDB_GRAPHITE_CONSISTENCY_LEVEL`
 
@@ -913,9 +913,8 @@ Environment variable: `INFLUXDB_GRAPHITE_SEPARATOR`
 
 ### `[[collectd]]`
 
-The `[[collectd]]` settings control the listener for `collectd` data. For more information, see the
-[README](https://github.com/influxdata/influxdb/tree/master/services/collectd)
-on GitHub.
+The `[[collectd]]` settings control the listener for `collectd` data.
+For more information, see [CollectD protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/collectd/).
 
 #### `enabled = false`
 
@@ -1001,7 +1000,7 @@ When set to `split`, multi-value plugin data (e.g. df free:5000,used:1000) will 
 ### `[[opentsdb]]`
 
 Controls the listener for OpenTSDB data.
-See the [README](https://github.com/influxdb/influxdb/blob/master/services/opentsdb/README.md) on GitHub for more information.
+For more information, see [OpenTSDB protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/opentsdb/).
 
 #### `enabled = false`
 
@@ -1079,7 +1078,7 @@ Environment variable: `INFLUXDB_OPENTSDB_BATCH_TIMEOUT`
 ### `[[udp]]`
 
 The `[[udp]]` settings control the listeners for InfluxDB line protocol data using UDP.
-See the [UDP page](/influxdb/v1.7/write_protocols/udp/) for more information.
+For more information, see [UDP protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/udp/).
 
 #### `enabled = false`
 

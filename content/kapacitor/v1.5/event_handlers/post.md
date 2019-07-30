@@ -113,13 +113,14 @@ The following post event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.post()` in a TICKscript.
 
-| Name             | Type                    | Description                                                                                                         |
-| ----             | ----                    | -----------                                                                                                         |
-| url              | string                  | The URL to which the alert data will be posted.                                                                     |
-| endpoint         | string                  | Name of a HTTP POST endpoint (configured in the `kapacitor.conf`) to use. _Cannot be specified in place of the URL._ |
-| headers          | map of string to string | Set of extra header values to set on the POST request.                                                              |
-| capture‑response | bool                    | If the HTTP status code is not an `2xx` code, read and log the HTTP response.                                   |
-| timeout          | duration                | Timeout for the HTTP POST.                                                                                          |
+| Name                | Type                    | Description                                                                                                          |
+| ----                | ----                    | -----------                                                                                                          |
+| url                 | string                  | The URL to which the alert data will be posted.                                                                      |
+| endpoint            | string                  | Name of a HTTP POST endpoint (configured in the `kapacitor.conf`) to use. _Cannot be specified in place of the URL._ |
+| headers             | map of string to string | Set of extra header values to set on the POST request.                                                               |
+| capture‑response    | bool                    | If the HTTP status code is not an `2xx` code, read and log the HTTP response.                                        |
+| timeout             | duration                | Timeout for the HTTP POST.                                                                                           |
+| skipSSLVerification | bool                    | Disables SSL verification for the POST request.                                                                      |
 
 ### Example: Handler file - Using a pre-configured endpoint
 ```yaml
@@ -144,6 +145,7 @@ options:
     'Example2': 'example2'
   capture-response: true
   timeout: 10s
+  skipSSLVerification: true
 ```
 
 ### Example: TICKscript - Using a pre-configured endpoint
@@ -160,11 +162,12 @@ options:
 |alert()
   // ...
   // Defining post options "inline"
-  .post('http://example.com/path')
+  .post('https://example.com/path')
     .header('Example1', 'example1')
     .header('Example2', 'example2')
     .captureResponse()
     .timeout(10s)
+    .skipSSLVerification()
 ```
 
 ## Using the Post event handler
@@ -209,11 +212,12 @@ stream
   |alert()
     .crit(lambda: "usage_idle" < 10)
     .message('Hey, check your CPU')
-    .post('http://example.com/path')
+    .post('https://example.com/path')
       .header('Example1', 'example1')
       .header('Example2', 'example2')
       .captureResponse()
       .timeout(10s)
+      .skipSSLVerification()
 ```
 
 
@@ -281,16 +285,17 @@ using the [`alert-template-file`](#alert-template-file) config.
 Alert templates use [Golang Template](https://golang.org/pkg/text/template/) and
 have access to the following fields:
 
-| Field        | Description                                             |
-| -----        | -----------                                             |
-| .ID          | The unique ID for the alert.                            |
-| .Message     | The message of the alert.                               |
-| .Details     | The details of the alert.                               |
-| .Time        | The time the alert event occurred.                      |
-| .Duration    | The duration of the alert event.                        |
-| .Level       | The level of the alert, i.e INFO, WARN, or CRITICAL.    |
-| .Data        | The data that triggered the alert.                      |
-| .Recoverable | Indicates whether or not the alert is auto-recoverable. |
+| Field          | Description                                                   |
+| -----          | -----------                                                   |
+| .ID            | The unique ID for the alert.                                  |
+| .Message       | The message of the alert.                                     |
+| .Details       | The details of the alert.                                     |
+| .Time          | The time the alert event occurred.                            |
+| .Duration      | The duration of the alert event.                              |
+| .Level         | The level of the alert, i.e INFO, WARN, or CRITICAL.          |
+| .Data          | The data that triggered the alert.                            |
+| .PreviousLevel | The previous level of the alert, i.e INFO, WARN, or CRITICAL. |
+| .Recoverable   | Indicates whether or not the alert is auto-recoverable.       |
 
 #### Inline alert template
 _**kapacitor.conf**_

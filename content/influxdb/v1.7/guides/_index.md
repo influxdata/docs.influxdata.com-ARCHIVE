@@ -7,9 +7,9 @@ menu:
 
 ---
 
-## [Writing data with the HTTP API](/influxdb/v1.7/guides/writing_data/)
+## [Writing data with the InfluxDB API](/influxdb/v1.7/guides/writing_data/)
 
-## [Querying data with the HTTP API](/influxdb/v1.7/guides/querying_data/)
+## [Querying data with the InfluxDB API](/influxdb/v1.7/guides/querying_data/)
 
 ## [Downsampling and data retention](/influxdb/v1.7/guides/downsampling_and_retention/)
 

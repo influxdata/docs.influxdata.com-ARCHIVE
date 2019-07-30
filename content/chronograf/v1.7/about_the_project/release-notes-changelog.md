@@ -7,6 +7,44 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.12 [2019-06-20]
+
+## Bug Fixes
+- Clarify wording of PagerDuty v1 deprecation message
+- Requesting info from an unavailable source no longer causes the page to hang.
+- Create Chronograf user before CentOS installation.
+- Add support for web workers in IE11.
+- Properly update query time bounds when zooming in on a dashboard.
+- Fix an issue where Flux responses weren't parsed correctly.
+
+### Features
+- Allow negative numbers for configured y-axis minimums
+
+## v1.7.11 [2019-04-24]
+
+## Bug Fixes
+- Fix fetching tag keys in Flux Builder.
+
+## v1.7.10 [2019-04-16]
+
+### Bug Fixes
+- Fix the input for line controls in visualization options.
+- Fix Cell editor visualization not using CEO time range.
+- Fix an issue where imports were not working in Flux scripts.
+
+### Features
+- Updated the UI to work with the latest Flux version.
+
+## v1.7.9 [2019-3-20]
+
+### Bug Fixes
+
+* Fix the input for line controls in visualization options.
+* Stop scrollbars from covering text in Flux Editor.
+* Insert Flux function near cursor in Flux Editor.
+* Fix double-quoting of map template values.
+* Fix disappearing data when scrolling a table.
+
 ## v1.7.8 [2019-2-13]
 
 ### Bug Fixes

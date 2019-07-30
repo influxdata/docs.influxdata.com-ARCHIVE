@@ -59,7 +59,6 @@ InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.7/tools/api/)).
 
-<br>
 # Data node setup
 
 ## Step 1: Modify the `/etc/hosts` file
@@ -94,18 +93,18 @@ Perform the following steps on each data node.
 
 ### I. Download and install the data service
 
-#### Ubuntu & Debian (64-bit)
+#### Ubuntu and Debian (64-bit)
 
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.4-c1.7.4_amd64.deb
-sudo dpkg -i influxdb-data_1.7.4-c1.7.4_amd64.deb
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.7-c1.7.7_amd64.deb
+sudo dpkg -i influxdb-data_1.7.7-c1.7.7_amd64.deb
 ```
 
-#### RedHat & CentOS (64-bit)
+#### RedHat and CentOS (64-bit)
 
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.4_c1.7.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.7.4_c1.7.4.x86_64.rpm
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.7_c1.7.7.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.7_c1.7.7.x86_64.rpm
 ```
 
 ### II. Edit the data node configuration files
@@ -125,7 +124,7 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 </dt>
 
-```
+```toml
 # Change this option to true to disable reporting.
 # reporting-disabled = false
 # bind-address = ":8088"
@@ -167,12 +166,14 @@ hostname="<enterprise-data-0x>" #✨
 ### III. Start the data service
 
 On sysvinit systems, enter:
-```
+
+```bash
 service influxdb start
 ```
 
 On systemd systems, enter:
-```
+
+```bash
 sudo systemctl start influxdb
 ```
 
@@ -201,14 +202,16 @@ If you are replacing an existing data node with `influxd-ctl update-data`, skip 
 
 On one and only one of the meta nodes that you set up in the
 [previous document](/enterprise_influxdb/v1.7/introduction/meta_node_installation/), run:
-```
+
+```bash
 influxd-ctl add-data enterprise-data-01:8088
 
 influxd-ctl add-data enterprise-data-02:8088
 ```
 
 The expected output is:
-```
+
+```bash
 Added data node y at enterprise-data-0x:8088
 ```
 
@@ -226,16 +229,16 @@ The expected output is:
     Data Nodes
     ==========
     ID   TCP Address               Version
-    4    enterprise-data-01:8088   1.7.4-c1.7.4
-    5    enterprise-data-02:8088   1.7.4-c1.7.4
+    4    enterprise-data-01:8088   1.7.7-c1.7.7
+    5    enterprise-data-02:8088   1.7.7-c1.7.7
 
 >
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.7.4-c1.7.4
-    enterprise-meta-02:8091   1.7.4-c1.7.4
-    enterprise-meta-03:8091   1.7.4-c1.7.4
+    enterprise-meta-01:8091   1.7.7-c1.7.7
+    enterprise-meta-02:8091   1.7.7-c1.7.7
+    enterprise-meta-03:8091   1.7.7-c1.7.7
 
 
 The output should include every data node that was added to the cluster.

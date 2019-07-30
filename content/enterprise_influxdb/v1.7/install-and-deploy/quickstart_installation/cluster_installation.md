@@ -2,7 +2,6 @@
 title: Step 1 - Installing an InfluxDB Enterprise cluster
 aliases:
     - /enterprise_influxdb/v1.7/quickstart_installation/cluster_installation/
-
 menu:
   enterprise_influxdb_1_7:
     name: Step 1 - Install InfluxDB Enterprise cluster
@@ -105,17 +104,18 @@ Perform the following steps on all three servers.
 ### I. Download and install the meta service
 
 
-#### Ubuntu & Debian (64-bit)
+#### Ubuntu and Debian (64-bit)
 
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.7-c1.7.7_amd64.deb
+sudo dpkg -i influxdb-meta_1.7.7-c1.7.7_amd64.deb
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.4-c1.7.4_amd64.deb
-sudo dpkg -i influxdb-meta_1.7.4-c1.7.4_amd64.deb
-```
-#### RedHat & CentOS (64-bit)]
 
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.4_c1.7.4.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.7.4_c1.7.4.x86_64.rpm
+#### RedHat and CentOS (64-bit)]
+
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.7_c1.7.7.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.7.7_c1.7.7.x86_64.rpm
 ```
 
 ### II. Edit the meta service configuration file
@@ -129,7 +129,7 @@ In `/etc/influxdb/influxdb-meta.conf`:
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 </dt>
 
-```
+```toml
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
 hostname="<quickstart-cluster-0x>" #✨
@@ -147,12 +147,14 @@ hostname="<quickstart-cluster-0x>" #✨
 ### III. Start the meta service
 
 On sysvinit systems, enter:
-```
+
+```bash
 service influxdb-meta start
 ```
 
 On systemd systems, enter:
-```
+
+```bash
 sudo systemctl start influxdb-meta
 ```
 
@@ -172,17 +174,18 @@ Perform the following steps on all three servers.
 
 ### I. Download and install the data service
 
-#### Ubuntu & Debian (64-bit)
+#### Ubuntu and Debian (64-bit)
 
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.7-c1.7.7_amd64.deb
+sudo dpkg -i influxdb-data_1.7.7-c1.7.7_amd64.deb
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.4-c1.7.4_amd64.deb
-sudo dpkg -i influxdb-data_1.7.4-c1.7.4_amd64.deb
-```
-#### RedHat & CentOS (64-bit)
 
-```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.4_c1.7.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.7.4_c1.7.4.x86_64.rpm
+#### RedHat and CentOS (64-bit)
+
+```bash
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.7_c1.7.7.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.7_c1.7.7.x86_64.rpm
 ```
 
 ### II. Edit the data service configuration file
@@ -204,7 +207,7 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 </dt>
 
-```
+```toml
 # Change this option to true to disable reporting.
 # reporting-disabled = false
 # bind-address = ":8088"
@@ -239,17 +242,20 @@ hostname="<quickstart-cluster-0x>" #✨
   # The JWT auth shared secret to validate requests using JSON web tokens.
   shared-secret = "long pass phrase used for signing tokens" #✨
 ```
+
 > **Note:** The `hostname` in the configuration file must match the `hostname` in your server's `/etc/hosts` file.
 
-
 ### III. Start the data service
+
 On sysvinit systems, enter:
-```
+
+```bash
 service influxdb start
 ```
 
 On systemd systems, enter:
-```
+
+```bash
 sudo systemctl start influxdb
 ```
 
@@ -268,14 +274,17 @@ If you do not see the expected output, the process is either not launching or is
 ## Step 4: Join the nodes to the cluster
 
 ### I. Join the first server to the cluster
+
 On the first server (`quickstart-cluster-01`), join its meta node and data node
 to the cluster by entering:
-```
+
+```bash
 influxd-ctl join
 ```
 
 The expected output is:
-```
+
+```bash
 Joining meta node at localhost:8091
 Searching for meta node on quickstart-cluster-01:8091...
 Searching for data node on quickstart-cluster-01:8088...
@@ -297,14 +306,17 @@ The flag must be right after the influxd-ctl join command:
 >To confirm that the node was successfully joined, run `influxd-ctl show` and verify that the node's hostname shows in the output.
 
 ### II. Join the second server to the cluster
+
 On the second server (`quickstart-cluster-02`), join its meta node and data node
 to the cluster by entering:
-```
+
+```bash
 influxd-ctl join quickstart-cluster-01:8091
 ```
 
 The expected output is:
-```
+
+```bash
 Joining meta node at quickstart-cluster-01:8091
 Searching for meta node on quickstart-cluster-02:8091...
 Searching for data node on quickstart-cluster-02:8088...
@@ -316,14 +328,17 @@ Successfully joined cluster
 ```
 
 ### III. Join the third server to the cluster
+
 On the third server (`quickstart-cluster-03`), join its meta node and data node
 to the cluster by entering:
-```
+
+```bash
 influxd-ctl join quickstart-cluster-01:8091
 ```
 
 The expected output is:
-```
+
+```bash
 Joining meta node at quickstart-cluster-01:8091
 Searching for meta node on quickstart-cluster-03:8091...
 Searching for data node on quickstart-cluster-03:8088...
@@ -335,26 +350,29 @@ Successfully joined cluster
 ```
 
 ### IV. Verify your cluster
+
 On any server, enter:
-```
+
+```bash
 influxd-ctl show
 ```
 
 The expected output is:
-```
+
+```bash
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.7.4-c1.7.4
-4    quickstart-cluster-02:8088   1.7.4-c1.7.4
-6    quickstart-cluster-03:8088   1.7.4-c1.7.4
+2    quickstart-cluster-01:8088   1.7.7-c1.7.7
+4    quickstart-cluster-02:8088   1.7.7-c1.7.7
+6    quickstart-cluster-03:8088   1.7.7-c1.7.7
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.7.4-c1.7.4
-quickstart-cluster-02:8091   1.7.4-c1.7.4
-quickstart-cluster-03:8091   1.7.4-c1.7.4
+quickstart-cluster-01:8091   1.7.7-c1.7.7
+quickstart-cluster-02:8091   1.7.7-c1.7.7
+quickstart-cluster-03:8091   1.7.7-c1.7.7
 ```
 
 Your InfluxDB Enterprise cluster should have three data nodes and three meta nodes.

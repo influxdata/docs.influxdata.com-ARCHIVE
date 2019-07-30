@@ -8,6 +8,94 @@ menu:
     parent: About the project
 ---
 
+## 1.10.4 [2019-05-14]
+
+### Bug fixes
+
+#### Agent
+
+- Create telegraf user in pre-install RPM scriptlet.
+- Fix parse of unix timestamp with more than ns precision.
+- Fix race condition in the Wavefront parser.
+
+#### Plugins
+
+- HTTP output plugin (`http`)
+  - Fix http output cannot set Host header.
+- IPMI Sensor input (`ipmi_sensor`)
+  - Add support for hex values.
+- InfluxDB v2 output (`influxdb_v2`)
+  - Don't discard metrics on forbidden error.
+- Interrupts input (`interrupts`)
+  - Restore field name case.
+- NTPQ input (`ntpq`)
+  - Skip lines with missing `refid`.
+- VMware vSphere input (`vsphere`)
+  - Fix interval estimation.
+
+## 1.10.3 [2019-04-16]
+
+### Bug fixes
+
+#### Agent
+
+- Set log directory attributes in RPM specification.
+
+#### Plugins
+
+- Prometheus Client (`prometheus_client`) output plugin.
+  - Allow colons in metric names.
+  
+## 1.10.2 [2019-04-02]
+
+### Breaking changes
+
+ Grok input data format (parser): string fields no longer have leading and trailing quotation marks removed.  
+ If you are capturing quoted strings, the patterns might need to be updated.
+
+### Bug fixes
+
+#### Agent
+
+- Fix deadlock when Telegraf is aligning aggregators.
+- Add owned directories to RPM package specification.
+- Fix drop tracking of metrics removed with aggregator `drop_original`.
+- Fix aggregator window alignment.
+- Fix panic during shutdown of multiple aggregators.
+- Fix tags applied to wrong metric on parse error.
+
+#### Plugins
+
+- Ceph (`ceph`) input
+  - Fix missing cluster stats.
+- DiskIO (`diskio`) input
+  - Fix reading major and minor block devices identifiers.
+- File (`file`) output
+  - Fix open file error handling.
+- Filecount (`filecount`) input
+  - Fix basedir check and parent dir extraction.
+- Grok (`grok`) parser
+  - Fix last character removed from string field.
+- InfluxDB v2 (`influxdb_v2`) output
+  - Fix plugin name in output logging.
+- Prometheus (`prometheus`) input
+  - Fix parsing of kube config `certificate-authority-data`.
+- Prometheus (`prometheus`) output
+  - Remove tags that would create invalid label names.
+- StatsD (`statsd`) input
+  - Listen before leaving start.
+
+## 1.10.1 [2019-03-19]
+
+#### Bug fixes
+
+- Show error when TLS configuration cannot be loaded.
+- Add base64-encoding/decoding for Google Cloud PubSub (`pubsub`) plugins.
+- Fix type compatibility in VMware vSphere (`vsphere`) input plugin with `use_int_samples` option.
+- Fix VMware vSphere (`vsphere`) input plugin shows failed task in vCenter.
+- Fix invalid measurement name and skip column in the CSV input data format parser.
+- Fix System (`system`) input plugin causing high CPU usage on Raspbian.
+
 ## 1.10 [2019-03-05]
 
 #### New input plugins

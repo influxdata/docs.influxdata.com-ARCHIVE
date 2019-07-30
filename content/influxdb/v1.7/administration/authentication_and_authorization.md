@@ -35,9 +35,8 @@ If additional security or compliance features are desired, InfluxDB should be ru
 
 ## Authentication
 
-InfluxDB's HTTP API and the [command line interface](/influxdb/v1.7/tools/shell/) (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
+The InfluxDB API and the [command line interface](/influxdb/v1.7/tools/shell/) (CLI), which connects to the database using the API, include simple, built-in authentication based on user credentials.
 When you enable authentication, InfluxDB only executes HTTP requests that are sent with valid credentials.
-
 
 > **Note:** Authentication only occurs at the HTTP request scope.
 Plugins do not currently have the ability to authenticate requests and service endpoints (for example, Graphite, collectd, etc.) are not authenticated.
@@ -54,7 +53,7 @@ InfluxDB will enforce authentication once there is an admin user.
 #### 2. By default, authentication is disabled in the configuration file.
 Enable authentication by setting the `auth-enabled` option to `true` in the `[http]` section of the configuration file:
 
-```
+```toml
 [http]
   enabled = true
   bind-address = ":8086"
@@ -72,8 +71,9 @@ Now InfluxDB will check user credentials on every request and will only process 
 
 ### Authenticate requests
 
-#### Authenticate with the HTTP API
-There are two options for authenticating with the [HTTP API](/influxdb/v1.7/tools/api/).
+#### Authenticate with the InfluxDB API
+
+There are two options for authenticating with the [InfluxDB API](/influxdb/v1.7/tools/api/).
 
 If you authenticate with both Basic Authentication **and** the URL query parameters, the user credentials specified in the query parameters take precedence.
 The queries in the following examples assume that the user is an [admin user](#admin-users).
@@ -82,7 +82,7 @@ See the section on [authorization](#authorization) for the different user types,
 > **Note:** InfluxDB redacts passwords when you enable authentication.
 
 ##### Authenticate with Basic Authentication as described in [RFC 2617, Section 2](http://tools.ietf.org/html/rfc2617)
-<br>
+
 This is the preferred method for providing user credentials.
 
 Example:
@@ -108,6 +108,7 @@ curl -G http://localhost:8086/query --data-urlencode "u=todd" --data-urlencode "
 ```
 
 #### Authenticate with the CLI
+
 There are three options for authenticating with the [CLI](/influxdb/v1.7/tools/shell/).
 
 ##### Authenticate with the `INFLUX_USERNAME` and `INFLUX_PASSWORD` environment variables
@@ -115,8 +116,8 @@ There are three options for authenticating with the [CLI](/influxdb/v1.7/tools/s
 Example:
 
 ```bash
-export INFLUX_USERNAME todd
-export INFLUX_PASSWORD influxdb4ever
+export INFLUX_USERNAME=todd
+export INFLUX_PASSWORD=influxdb4ever
 echo $INFLUX_USERNAME $INFLUX_PASSWORD
 todd influxdb4ever
 
@@ -156,7 +157,7 @@ authentication enabled requires some additional steps.
 In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), uncomment
 and edit the `username` and `password` settings.
 
-```
+```toml
 >
     ###############################################################################
     #                            OUTPUT PLUGINS                                   #
@@ -184,6 +185,7 @@ By default, authentication is disabled, all credentials are silently ignored, an
 ### User types and privileges
 
 #### Admin users
+
 Admin users have `READ` and `WRITE` access to all databases and full access to the following administrative queries:
 
 Database management:  
@@ -205,6 +207,7 @@ User management:
 See [below](#user-management-commands) for a complete discussion of the user management commands.
 
 #### Non-admin users
+
 Non-admin users can have one of the following three privileges per database:
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;`READ`  
 &nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;`WRITE`  
@@ -223,13 +226,13 @@ When you enable HTTP authentication, InfluxDB requires you to create at least on
 
 ##### `CREATE` another admin user
 
-```
+```sql
 CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
 ```
 
 CLI example:
 
-```bash
+```sql
 > CREATE USER paul WITH PASSWORD 'timeseries4days' WITH ALL PRIVILEGES
 >
 ```
@@ -249,39 +252,39 @@ CLI example:
 
 ##### `GRANT` administrative privileges to an existing user
 
-```
+```sql
 GRANT ALL PRIVILEGES TO <username>
 ```
 
 CLI example:
 
-```bash
+```sql
 > GRANT ALL PRIVILEGES TO "todd"
 >
 ```
 
 ##### `REVOKE` administrative privileges from an admin user
 
-```
+```sql
 REVOKE ALL PRIVILEGES FROM <username>
 ```
 
 CLI example:
 
-```bash
+```sql
 > REVOKE ALL PRIVILEGES FROM "todd"
 >
 ```
 
 ##### `SHOW` all existing users and their admin status
 
-```
+```sql
 SHOW USERS
 ```
 
 CLI example:
 
-```bash
+```sql
 > SHOW USERS
 user 	 admin
 todd     false
@@ -294,13 +297,13 @@ dobby    false
 
 ##### `CREATE` a new non-admin user
 
-```
+```sql
 CREATE USER <username> WITH PASSWORD '<password>'
 ```
 
 CLI example:
 
-```bash
+```sql
 > CREATE USER todd WITH PASSWORD 'influxdb41yf3'
 > CREATE USER alice WITH PASSWORD 'wonder\'land'
 > CREATE USER "rachel_smith" WITH PASSWORD 'asdf1234!'
@@ -334,7 +337,7 @@ CLI example:
 
 ##### `GRANT` `READ`, `WRITE` or `ALL` database privileges to an existing user
 
-```
+```sql
 GRANT [READ,WRITE,ALL] ON <database_name> TO <username>
 ```
 
@@ -342,14 +345,14 @@ CLI examples:
 
 `GRANT` `READ` access to `todd` on the `NOAA_water_database` database:
 
-```bash
+```sql
 > GRANT READ ON "NOAA_water_database" TO "todd"
 >
 ```
 
 `GRANT` `ALL` access to `todd` on the `NOAA_water_database` database:
 
-```bash
+```sql
 > GRANT ALL ON "NOAA_water_database" TO "todd"
 >
 ```
@@ -364,14 +367,14 @@ CLI examples:
 
 `REVOKE` `ALL` privileges from `todd` on the `NOAA_water_database` database:
 
-```bash
+```sql
 > REVOKE ALL ON "NOAA_water_database" FROM "todd"
 >
 ```
 
 `REVOKE` `WRITE` privileges from `todd` on the `NOAA_water_database` database:
 
-```bash
+```sql
 > REVOKE WRITE ON "NOAA_water_database" FROM "todd"
 >
 ```
@@ -380,13 +383,13 @@ CLI examples:
 
 ##### `SHOW` a user's database privileges
 
-```
+```sql
 SHOW GRANTS FOR <user_name>
 ```
 
 CLI example:
 
-```bash
+```sql
 > SHOW GRANTS FOR "todd"
 database		            privilege
 NOAA_water_database	        WRITE
@@ -399,13 +402,13 @@ one_more_database_name      NO PRIVILEGES
 
 ##### Re`SET` a user's password
 
-```
+```sql
 SET PASSWORD FOR <username> = '<password>'
 ```
 
 CLI example:
 
-```bash
+```sql
 > SET PASSWORD FOR "todd" = 'influxdb4ever'
 >
 ```
@@ -416,13 +419,13 @@ Do not include the single quotes when authenticating requests.
 
 ##### `DROP` a user
 
-```
+```sql
 DROP USER <username>
 ```
 
 CLI example:
 
-```bash
+```sql
 > DROP USER "todd"
 >
 ```

@@ -210,7 +210,7 @@ see the [Dovecot documentation](http://wiki2.dovecot.org/Statistics).
 
 Plugin ID: `elasticsearch`
 
-The [Elasticsearch sinput plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/elasticsearch/README.md) queries endpoints to obtain [node](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
+The [Elasticsearch input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/elasticsearch/README.md) queries endpoints to obtain [node](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
 and optionally [cluster-health](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)
 or [cluster-stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-stats.html) metrics.
 
@@ -218,7 +218,7 @@ or [cluster-stats](https://www.elastic.co/guide/en/elasticsearch/reference/curre
 
 Plugin ID: `exec`
 
-The [Exec input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/exec/README.md) parses supported [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) (InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard into metrics. Each Telegraf metric includes the measurement name, tags, fields, and timesamp.
+The [Exec input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/exec/README.md) parses supported [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) (InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard into metrics. Each Telegraf metric includes the measurement name, tags, fields, and timestamp.
 
 ### Fail2ban
 
@@ -303,14 +303,6 @@ Plugin ID: `http`
 
 The [HTTP input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/http/README.md) collects metrics from one or more HTTP (or HTTPS) endpoints. The endpoint should have metrics formatted in one of the [supported input data formats](/telegraf/v1.10/data_formats/input/). Each data format has its own unique set of configuration options which can be added to the input configuration.
 
-### HTTP Listener
-
-Plugin ID: `http_listener`
-
-The [HTTP Listener input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/http_listener/README.md) listens for messages sent via HTTP POST. Messages are expected in the [InfluxDB
-Line Protocol input data format](/telegraf/v1.10/data_formats/input/influx) ONLY (other [Telegraf input data formats](/telegraf/v1.10/data_formats/input/) are not supported).
-This plugin allows Telegraf to serve as a proxy or router for the `/write` endpoint of the InfluxDB HTTP API.
-
 ### HTTP Listener v2
 
 Plugin ID: `http_listener_v2`
@@ -335,7 +327,7 @@ The [Icinga2 input plugin](https://github.com/influxdata/plugins/inputs/icinga2)
 
 Plugin ID: `influxdb`
 
-The [InfluxDB v1.x input plugin](https://github.com/influxdata/plugins/inputs/influxdb) gathers metrics from the exposed InfluxDB v1.x `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
+The [InfluxDB v1.x input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/influxdb/README.md) gathers metrics from the exposed InfluxDB v1.x `/debug/vars` endpoint.  Using Telegraf to extract these metrics to create a "monitor of monitors" is a best practice and allows you to reduce the overhead associated with
 capturing and storing these metrics locally within the `_internal` database for production deployments.
 [Read more about this approach here.](https://www.influxdata.com/blog/influxdb-debugvars-endpoint/)
 
@@ -365,31 +357,31 @@ submits data to InfluxDB determines the destination database.
 
 Plugin ID: `interrupts`
 
-The [Interrupts input plugin](https://github.com/influxdata/plugins/inputs/interrupts) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
+The [Interrupts input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/interrupts/README.md) gathers metrics about IRQs, including `interrupts` (from `/proc/interrupts`) and `soft_interrupts` (from `/proc/softirqs`).
 
 ### IPMI Sensor
 
 Plugin ID: `ipmi_sensor`
 
-The [IPMI Sensor input plugin](https://github.com/influxdata/plugins/inputs/ipmi_sensor) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
+The [IPMI Sensor input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/ipmi_sensor/README.md) queries the local machine or remote host sensor statistics using the `ipmitool` utility.
 
 ### Ipset
 
 Plugin ID: `ipset`
 
-The [Ipset input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/ipset) gathers packets and bytes counters from Linux `ipset`. It uses the output of the command `ipset save`. Ipsets created without the `counters` option are ignored.
+The [Ipset input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/ipset/README.md) gathers packets and bytes counters from Linux `ipset`. It uses the output of the command `ipset save`. Ipsets created without the `counters` option are ignored.
 
 ### IPtables
 
 Plugin ID: `iptables`
 
-The [IPtables input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/iptables/README.md) gathers packets and bytes counters for rules within a set of table and chain from the Linux iptables firewall.
+The [IPtables input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/iptables/README.md) gathers packets and bytes counters for rules within a set of table and chain from the Linux iptables firewall.
 
 ### IPVS
 
 Plugin ID: `ipvs`
 
-The [IPVS input plugin](https://github.com/influxdata/telegraf/blob/release-1.9/plugins/inputs/ipvs/README.md) uses the Linux kernel netlink socket interface to gather metrics about IPVS virtual and real servers.
+The [IPVS input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/ipvs/README.md) uses the Linux kernel netlink socket interface to gather metrics about IPVS virtual and real servers.
 
 ### Jenkins
 
@@ -790,7 +782,7 @@ The [Prometheus Format input plugin](https://github.com/influxdata/telegraf/blob
 
 Plugin ID: `puppetagent`
 
-The [Puppet Agent input plugin](https://github.com/influxdata/plugins/inputs/puppetagent) collects variables outputted from the `last_run_summary.yaml` file usually
+The [Puppet Agent input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/puppetagent/README.md) collects variables outputted from the `last_run_summary.yaml` file usually
 located in `/var/lib/puppet/state/` Puppet Agent Runs. For more information, see [Puppet Monitoring: How  to Monitor the Success or Failure of Puppet Runs](https://puppet.com/blog/puppet-monitoring-how-to-monitor-success-or-failure-of-puppet-runs)
 
 ### RabbitMQ
@@ -993,7 +985,7 @@ Plugin ID: `win_perf_counters`
 
 Supports: Windows
 
-The way the [Windows Performance Counters input plugin](https://github.com/influxdata/plugins/inputs/win_perf_counters) works is that on load of Telegraf, the plugin will be handed configuration
+The way the [Windows Performance Counters input plugin](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/win_perf_counters/README.md) works is that on load of Telegraf, the plugin will be handed configuration
 from Telegraf.
 This configuration is parsed and then tested for validity such as if the Object, Instance and Counter existing.
 If it does not match at startup, it will not be fetched.

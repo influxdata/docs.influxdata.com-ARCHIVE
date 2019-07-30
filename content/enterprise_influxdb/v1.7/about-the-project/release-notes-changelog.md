@@ -3,22 +3,77 @@ title: InfluxDB Enterprise 1.7 release notes
 
 menu:
   enterprise_influxdb_1_7:
-    menu: Release notes
+    name: Release notes
     weight: 10
     parent: About the project
 ---
 
-## v1.7.4 [2019-02-13]
+## 1.7.7 [2019-07-12]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+The InfluxDB Enterprise 1.7.7 release builds on the InfluxDB OSS 1.7.7 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Known issues
+
+- The Flux Technical Preview was not advanced and remains at version 0.24.0. Next month's maintenance release will update the preview.
+- After upgrading, customers have experienced an excessively large output additional lines due to a `Println` statement introduced in this release. For a possible workaround, see https://github.com/influxdata/influxdb/issues/14265#issuecomment-508875853.  Next month's maintenance release will address this issue.
+
+### Features
+
+- Adds TLS to RPC calls. If verifying certificates, uses the TLS setting in the configuration passed in with -config.
 
 ### Bug fixes
 
-* Use `systemd` for Amazon Linux 2.
+- Ensure retry-rate-limit configuration value is used for hinted handoff.
+- Always forward AE repair to next node.
+- Improve hinted handoff metrics.
 
-## v1.7.3 [2019-01-11]
+## 1.7.6 [2019-05-07]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.3 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.6 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Bug fixes
+
+- Reverts v1.7.5 InfluxQL regressions that removed parentheses and resulted in operator precedence causing changing results in complex queries and regular expressions.
+
+## 1.7.5 [2019-03-26]
+
+<dt>
+
+**If you are currently on this release, roll back to v1.7.4 until a fix is available.**
+
+After upgrading to this release, some customers have experienced regressions,
+including parentheses being removed resulting in operator precedence causing changing results
+in complex queries and regular expressions.
+
+Examples:
+
+- Complex WHERE clauses with parentheses. For example, `WHERE d > 100 AND (c = 'foo' OR v = 'bar'`).
+- Conditions not including parentheses caysubg operator precedence to return `(a AND b) OR c` instead of `a AND (b OR c)`
+
+</dt>
+
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.5 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+
+- Add `influx_tools` utility (for internal support use) to be part of the packaging.
+
+### Bug fixes
+
+- Anti-Entropy: fix `contains no .tsm files` error.
+- `fix(cluster)`: account for nil result set when writing read response.
+
+## 1.7.4 [2019-02-13]
+
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.4 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Bug fixes
+
+- Use `systemd` for Amazon Linux 2.
+
+## 1.7.3 [2019-01-11]
+
+This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.3 release. For details on changes incorporated from the InfluxDB OSS release, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Important update [2019-02-13]
 
@@ -26,29 +81,21 @@ If you have not installed this release, then install the 1.7.4 release.
 
 **If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
 
-* A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
-  * **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
-  * **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
+- A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
+  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
-* A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed this issue in 1.7.4.
-
-### Features
-
-* Add user authentication and authorization support for Flux HTTP requests.
-* Add support for optionally logging Flux queries.
-
-#### Anti-Entropy service disabled by default
-
-Prior to v.1.7.2, the Anti-Entropy (AE) service was enabled by default. When shards create large digests with lots of time ranges (10s of thousands), some customers experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, then you can enable AE and watch to see if performance is significantly impacted.
-
-## v1.7.2 [2018-12-11]
-
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+- A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed this issue in 1.7.4.
 
 ### Features
 
+#### Anti-entropy service disabled by default
+
+Prior to v.1.7.3, the anti-entropy (AE) service was enabled by default. When shards create large digests with lots of time ranges (10s of thousands), some customers experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, then you can enable AE and watch to see if performance is significantly impacted.
+
+- Add user authentication and authorization support for Flux HTTP requests.
+- Add support for optionally logging Flux queries.
 -	Add support for LDAP StartTLS.
--	Disable Anti-Entropy service by default.
 -	Flux 0.7 support.
 -	Implement TLS between data nodes.
 -	Update to Flux 0.7.1.
@@ -60,24 +107,16 @@ This release builds off of the InfluxDB OSS 1.6.0 through 1.7.2 releases. For de
 
 -	Update sample configuration.
 
-## v1.7.1 [2018-11-14]
-
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.1 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
-
-## v1.7.0 [2018-11-06]
-
-This release builds off of the InfluxDB OSS 1.6.0 through 1.7.0 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
-
-## v1.6.6 [2019-02-28]
+## 1.6.6 [2019-02-28]
 -------------------
 
 This release only includes the InfluxDB OSS 1.6.6 changes (no Enterprise-specific changes).
 
-## V1.6.5 [2019-01-10]
+## 1.6.5 [2019-01-10]
 
-This release builds off of the InfluxDB OSS 1.6.0 through 1.6.5 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+This release builds off of the InfluxDB OSS 1.6.0 through 1.6.5 releases. For details about changes incorporated from InfluxDB OSS releases, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
-## v1.6.4 [2018-10-23]
+## 1.6.4 [2018-10-23]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.6.4 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
@@ -106,7 +145,7 @@ The following summarizes the expected settings for proper configuration of JWT a
 
 **[meta] section**
 
-* `meta-auth-enabled = true`
+- `meta-auth-enabled = true`
   - Must match for meta nodes' `[meta] auth-enabled` settings.
 - `meta-internal-shared-secret = "<long-pass-phrase>"`
   - Must be the same pass phrase on all meta nodes' `[meta] internal-shared-secret` settings.
@@ -117,49 +156,49 @@ The following summarizes the expected settings for proper configuration of JWT a
 
 **[meta]** section
 
-* `auth-enabled = true`
-  * Enables authentication. Default value is `false` .
-* `internal-shared-secret = "<long-pass-phrase>"`
-  * Must same pass phrase on all data nodes' `[meta] meta-internal-shared-secret`
+- `auth-enabled = true`
+  - Enables authentication. Default value is `false` .
+- `internal-shared-secret = "<long-pass-phrase>"`
+  - Must same pass phrase on all data nodes' `[meta] meta-internal-shared-secret`
   settings.
-  * Used by the internal API for JWT authentication. Default value is
+  - Used by the internal API for JWT authentication. Default value is
 `""`.
-  * A long pass phrase is recommended for better security.
+  - A long pass phrase is recommended for better security.
 
 >**Note:** To provide encrypted internode communication, you must enable HTTPS. Although the JWT signature is encrypted, the the payload of a JWT token is encoded, but is not encrypted.
 
 ### Bug fixes
 
-* Only map shards that are reported ready.
-* Fix data race when shards are deleted and created concurrently.
-* Reject `influxd-ctl update-data` from one existing host to another.
-* Require `internal-shared-secret` if meta auth enabled.
+- Only map shards that are reported ready.
+- Fix data race when shards are deleted and created concurrently.
+- Reject `influxd-ctl update-data` from one existing host to another.
+- Require `internal-shared-secret` if meta auth enabled.
 
-## v1.6.2 [08-27-2018]
+## 1.6.2 [08-27-2018]
 
 This release builds off of the InfluxDB OSS 1.6.0 through 1.6.2 releases. For details about changes incorporated from InfluxDB OSS releases, see the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ### Features
 
-* Update Go runtime to `1.10`.
-* Provide configurable TLS security options.
-* Add LDAP functionality for authorization and authentication.
-* Anti-Entropy (AE): add ability to repair shards.
-* Anti-Entropy (AE): improve swagger doc for `/status` endpoint.
-* Include the query task status in the show queries output.
+- Update Go runtime to `1.10`.
+- Provide configurable TLS security options.
+- Add LDAP functionality for authorization and authentication.
+- Anti-Entropy (AE): add ability to repair shards.
+- Anti-Entropy (AE): improve swagger doc for `/status` endpoint.
+- Include the query task status in the show queries output.
 
 #### Bug fixes
 
-* TSM files not closed when shard is deleted.
-* Ensure shards are not queued to copy if a remote node is unavailable.
-* Ensure the hinted handoff (hh) queue makes forward progress when segment errors occur.
-* Add hinted handoff (hh) queue back pressure.
+- TSM files not closed when shard is deleted.
+- Ensure shards are not queued to copy if a remote node is unavailable.
+- Ensure the hinted handoff (hh) queue makes forward progress when segment errors occur.
+- Add hinted handoff (hh) queue back pressure.
 
-## v1.5.4 [2018-06-21]
+## 1.5.4 [2018-06-21]
 
 This release builds off of the InfluxDB OSS 1.5.4 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 
-## v1.5.3 [2018-05-25]
+## 1.5.3 [2018-05-25]
 
 This release builds off of the InfluxDB OSS 1.5.3 release. Please see the [InfluxDB OSS release notes](/influxdb/v1.5/about_the_project/releasenotes-changelog/) for more information about the InfluxDB OSS release.
 

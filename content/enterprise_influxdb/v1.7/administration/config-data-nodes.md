@@ -1,14 +1,14 @@
 ---
-title: InfluxDB Enterprise data node configuration
+title: Configure InfluxDB Enterprise data nodes
 description: Covers the InfluxDB Enterprise data node configuration settings and environmental variables
 menu:
   enterprise_influxdb_1_7:
-    name: Data node configuration
-    weight: 12
+    name: Configure data nodes
+    weight: 20
     parent: Administration
 ---
 
-* [Data node configurations](#data-node-configurations)
+* [Data node configuration settings](#data-node-configurations)
   * [Global](#global-settings)
   * [Enterprise license [enterprise]](#enterprise-license-settings)
   * [Meta node `[meta]`](#meta-node-settings)
@@ -29,7 +29,7 @@ menu:
   * [Continuous queries [continuous-queries]](#continuous-queries-settings)
   * [TLS [tls]](#tls-settings)
 
-## Data node configurations
+## Data node configuration settings
 
 The InfluxDB Enterprise data node configuration settings overlap significantly
 with the settings in InfluxDB OSS.
@@ -56,7 +56,7 @@ Change this option to true to disable reporting.
 
 #### `bind-address = ":8088"`
 
-The TCP bind address to use for cluster-internal services, including the RPC service for [backup and restore](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
+The TCP bind address used by the RPC service for inter-node communication and [backup and restore](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
 
 Environment variable: `INFLUXDB_BIND_ADDRESS`
 
@@ -122,11 +122,9 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
 ## Meta node settings
 
-
 ### `[meta]`
 
 Settings related to how the data nodes interact with the meta nodes.
-
 
 #### `dir = "/var/lib/influxdb/meta"`
 
@@ -231,7 +229,6 @@ InfluxData recommends values ranging from `0ms` to `100ms` for non-SSD disks.
 
 Environment variable: `INFLUXDB_DATA_WAL_FSYNC_DELAY`
 
-
 ### Data settings for the TSM engine
 
 #### `cache-max-memory-size = "1g"`
@@ -261,7 +258,7 @@ This setting does not apply to cache snapshotting.
 
 Environmental variable: `INFLUXDB_DATA_CACHE_MAX_CONCURRENT_COMPACTIONS`
 
-####  `compact-full-write-cold-duration = "4h"`
+#### `compact-full-write-cold-duration = "4h"`
 
 The duration at which the TSM engine will compact all TSM files in a shard if it hasn't received a write or delete.
 
@@ -288,7 +285,7 @@ If a point causes the number of series in a database to exceed
 `max-series-per-database`, InfluxDB will not write the point, and it returns a
 `500` with the following error:
 
-```
+```bash
 {"error":"max series per database exceeded: <series>"}
 ```
 
@@ -350,6 +347,17 @@ Environment variable: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
 Settings related to how the data nodes interact with other data nodes.
 Controls how data is shared across shards and the options for query management.
 
+An InfluxDB Enterprise cluster uses remote procedure calls (RPCs) for inter-node communication.
+An RPC connection pool manages the stream connections and efficiently uses system resources.
+InfluxDB data nodes multiplex RPC streams over a single TCP connection to avoid the overhead of
+frequently establishing and destroying TCP connections and exhausting ephemeral ports.
+Typically, a data node establishes a single, persistent TCP connection to each of the other data nodes
+to perform most RPC requests. In special circumstances, for example, when copying shards,
+a single-use TCP connection may be used.
+
+For information on InfluxDB `_internal` measurement statistics related to clusters, RPCs, and shards,
+see [Measurements for monitoring InfluxDB OSS and InfluxDB Enterprise (`_inernal`)](/platform/monitoring/influxdata-platform/tools/measurements-internal/#cluster-enterprise-only).
+
 #### `dial-timeout = "1s"`
 
 The duration for which the meta node waits for a connection to a remote data node before the meta node attempts to connect to a different remote data node.
@@ -359,14 +367,22 @@ Environment variable: `INFLUXDB_CLUSTER_DIAL_TIMEOUT`
 
 #### `pool-max-idle-time = "60s"`
 
-The time a stream remains idle in the connection pool after which it's reaped.
+The maximum time that a TCP connection to another data node remains idle in the connection pool.
+When the connection is idle longer than the specified duration, the inactive connection is reaped —
+retired or recycled — so that the connection pool is not filled with inactive connections. Reaping
+idle connections minimizes inactive connections, decreases system load, and prevents system failure.
 
 Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_TIME`
 
 #### `pool-max-idle-streams = 100`
 
-The maximum number of streams that can be idle in a pool, per node.
-The number of active streams can exceed the maximum, but they will not return to the pool when released.
+The maximum number of idle RPC stream connections to retain in an idle pool between two nodes.
+When a new RPC request is issued, a connection is temporarily pulled from the idle pool, used, and then returned.
+If an idle pool is full and a stream connection is no longer required, the system closes the stream connection and resources become available.
+The number of active streams can exceed the maximum number of idle pool connections,
+but are not returned to the idle pool when released.
+Creating streams are relatively inexpensive operations to perform,
+so it is unlikely that changing this value will measurably improve performance between two nodes.
 
 Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_STREAMS`
 
@@ -481,9 +497,9 @@ Disabling hinted handoff is not recommended and can lead to data loss if another
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
 
-#### `max-size = 10737418240`
+#### `max-size = "10737418240"`
 
-The maximum size of the hinted handoff queue.
+The maximum size of the hinted handoff queue in bytes.
 Each queue is for one and only one other data node in the cluster.
 If there are N data nodes in the cluster, each data node may have up to N-1 hinted handoff queues.
 
@@ -491,7 +507,7 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_SIZE`
 
 #### `max-age = "168h0m0s"`
 
-The time writes sit in the queue before they are purged.
+The time interval that writes sit in the queue before they are purged.
 The time is determined by how long the batch has been in the queue, not by the timestamps in the data.
 If another data node is unreachable for more than the `max-age` it can lead to data loss.
 
@@ -514,9 +530,7 @@ Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_CONCURRENCY`
 
 #### `retry-rate-limit = 0`
 
-The rate (in bytes per second) at which the hinted handoff retries writes.
-The `retry-rate-limit` option is no longer in use and will be removed from the configuration file in a future release.
-Changing the `retry-rate-limit` setting has no effect on your cluster.
+The rate limit (in bytes per second) that hinted handoff retries hints. A value of `0` disables the rate limit.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_RETRY_RATE_LIMIT`
 
@@ -921,6 +935,9 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 
 ### `[[graphite]]`
 
+This section controls one or many listeners for Graphite data.
+For more information, see [Graphite protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/graphite/).
+
 #### `enabled = false`
 
 Determines whether the graphite endpoint is enabled.
@@ -982,6 +999,9 @@ There can be only one default template.
 
 ## CollectD settings
 
+The `[[collectd]]` settings control the listener for `collectd` data.
+For more information, see [CollectD protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/collectd/).
+
 ### `[[collectd]]`
 
 ```toml
@@ -1026,6 +1046,9 @@ UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS
 
 ## OpenTSDB settings
 
+Controls the listener for OpenTSDB data.
+For more information, see [OpenTSDB protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/opentsdb/).
+
 ### `[[opentsdb]]`
 
 ```toml
@@ -1063,6 +1086,9 @@ Flush at least this often even if we haven't hit buffer limit.
 -----
 
 ## UDP settings
+
+The `[[udp]]` settings control the listeners for InfluxDB line protocol data using UDP.
+For more information, see [UDP protocol support in InfluxDB](/influxdb/v1.7/supported_protocols/udp/).
 
 ### `[[udp]]`
 

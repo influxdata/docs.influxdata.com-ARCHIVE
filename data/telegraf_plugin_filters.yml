@@ -1,0 +1,30 @@
+filters:
+  - category: Plugin type
+    values:
+      - Input
+      - Output
+      - Aggregator
+      - Processor
+  - category: Plugin category
+    values:
+      - Applications
+      - Build & Deploy
+      - Cloud
+      - Containers
+      - Data Stores
+      - IoT
+      - Logging
+      - Messaging
+      - Networking
+      - Servers
+      - Systems
+      - Web
+  - category: Operating system
+    values:
+      - Linux
+      - macOS
+      - Windows
+  - category: Status
+    values:
+      - New
+      - Deprecated
