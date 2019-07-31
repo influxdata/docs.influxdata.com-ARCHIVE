@@ -316,7 +316,7 @@ For example:
 
 > **Note:** If you get errors running `-import`, see [Common `-import` errors](/influxdb/v1.7/troubleshooting/errors/#common-import-errors).
 
-  **Note:** If you do not see imported data (but received no errors), verify the retention policy (RP) specified in the import file is the same RP that points are being written to. Also, verify that timestamps for data points are within the specified RP or shard duration.
+ > If you do not see imported data (but received no errors), verify the retention policy (RP) specified in the import file is the same RP that points are being written to. Also, verify that timestamps for data points are within the specified RP or shard duration.
 
 Things to note about `-import`:
 
