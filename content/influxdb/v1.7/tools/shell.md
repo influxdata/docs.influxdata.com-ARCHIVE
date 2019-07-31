@@ -272,7 +272,7 @@ The import file has two sections:
 If your database and retention policy already exist, your file can skip this section.
 * **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol).
 
-Example:
+##### Example
 
 File (`datarrr.txt`):
 
@@ -314,6 +314,8 @@ For example:
     Time elapsed: 56.740578415s.
     Points per second (PPS): 54634
 
+> **Note:** If you get errors running `-import`, see [Common `-import` errors](/influxdb/v1.7/troubleshooting/errors/#common-import-errors).
+
 Things to note about `-import`:
 
 * Allow the database to ingest points by using `-pps` to set the number of points per second allowed by the import. By default, pps is zero and `influx` does not throttle importing.
@@ -325,6 +327,11 @@ We recommend writing points in batches of 5,000 to 10,000 points.
 Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 By default, the HTTP request times out after five seconds.
 InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
+* To redirect failed import lines to another file, run the following command:
+
+    ```js
+    influx -import -path=metrics-default.gz -compressed > failures
+    ```
 
 > **Note:** For how to export data from InfluxDB version 0.8.9, see [Exporting from 0.8.9](https://github.com/influxdb/influxdb/blob/1.7/importer/README.md).
 
