@@ -25,6 +25,8 @@ T = t1 | t2 | ... | tn
 
 where `t1`, `t2`, ..., and `tn` are types.
 
+In the example above a value of type `T` is either of type `t1`, type `t2`, ..., or type `tn`.
+
 ## Basic types
 All Flux data types are constructed from the following types:
 
