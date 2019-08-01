@@ -11,11 +11,11 @@ menu:
     parent: nodes
 ---
 
-The `query` node defines a source and a schedule for processing batch data.
-The data is queried from an InfluxDB database and then passed into the data pipeline.
+The `query` node defines a source and a schedule for processing batch data. Data is queried from InfluxDB, validated by the `query` node, and then passed into the data pipeline.
+
+>**Note:** Kapacitor requires that non-negative values for aggregate functions (such as differences, derivatives, and so on) be computed outside of the `query` node.
 
 Example:
-
 
 ```js
 batch
@@ -27,12 +27,13 @@ batch
     .period(1m)
     .every(20s)
     .groupBy(time(10s), 'cpu')
-  ...
+  | difference('max_usage')
+  | where(lambda: "difference" >= 0)
+    ...
 ```
 
-In the above example InfluxDB is queried every 20 seconds; the window of time returned
-spans 1 minute and is grouped into 10 second buckets.
-
+In the example above, InfluxDB is queried every 20 seconds; the window of time returned
+spans 1 minute and is grouped into 10 second buckets. Non-negative values are computed before passing data to the `query` node.
 
 ### Constructor
 
