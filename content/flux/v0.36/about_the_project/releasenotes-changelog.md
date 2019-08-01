@@ -6,19 +6,91 @@ menu:
     weight: 1
 ---
 
-## v0.36.2 [2019-06-25]
+## v0.36.2 [2019-07-12]
 
 _A technical preview of Flux packaged with InfluxDB v1.7.8._
 
 ### Bug fixes
+- Add helper methods for comparing entire result sets.
+- Map will not panic when a record is `null`.
+
+## v0.36.1 [2019-07-10]
+
+### Bug fixes
+- Add `range` call to some end-to-end tests.
+- Fix implementation of `strings.replaceAll`.
+
+## v0.36.0 [2019-07-09]
+
+### Features
+- Updated `movingAverage()` and added `timedMovingAverage`.
+- `elapsed()` function.
+- `mode()` function.
+- `sleep()` function.
+- Modify error usage in places to use the new enriched errors.
+- Enriched error interface.
+- End-to-end tests that show how to mimic pandas functionality.
+- End-to-end tests for string functions.
+
+### Bug fixes
+- Fix `difference()` so that it returns an error instead of panicking when given a `_time` column.
+- Added end-to-end tests for type conversion functions.
+- Make `map()` error if return type is not an object.
+- Fixed miscounted allocations in the `ColListTableBuilder`.
+- Support formatting `with`.
+
+### Breaking changes
+- Updated `movingAverage()` to `timedMovingAverage` and added new
+  `movingAverage()` implementation.
+
+
+## v0.35.1 [2019-07-03]
+
+### Bug fixes
+- Re-add `mergeKey` parameter to `map()` in deprecated state.
+
+## v0.35.0 [2019-07-02]
+
+### Breaking changes
+- Remove `mergeKey` parameter from the `map()` function.
+
+### Features
+- Add `sql.to()` function.
+- Add `movingAverage()` function.
+- Add `strlen()` and `substring()` functions to the `strings` package.
+
+### Bug fixes
+- Remove `mergeKey` parameter from the `map()` function.
+- Parse float types with PostgreSQL.
+
+## v0.34.2 [2019-06-27]
+
+### Bug fixes
+- Parse float types with PostgreSQL.
+
+## v0.34.1 [2019-06-26]
+
+### Features
+- Add custom PostgreSQL type support.
+- Added MySQL type support.
+- Nulls work in table and row functions.
+
+### Bug fixes
+- Fixed boolean literal type conversion problem and added tests.
+- Diff should track memory allocations when it copies the table.
+- Copy table will report if it is empty correctly.
+
+## v0.33.2 [2019-06-25]
+
+### Bug fixes
 - Use `strings.Replace` instead of `strings.ReplaceAll` for compatibility.
 
-## v0.36.1 [2019-06-20]
+## v0.33.1 [2019-06-20]
 
 ### Bug fixes
 - Copy table will report if it is empty correctly.
 
-## v0.36.0 [2019-06-18]
+## v0.33.0 [2019-06-18]
 
 ### Breaking changes
 - Implement nulls in the compiler runtime.
