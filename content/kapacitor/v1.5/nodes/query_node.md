@@ -11,7 +11,7 @@ menu:
     parent: nodes
 ---
 
-The `query` node defines a source and a schedule for processing batch data. Data is queried from InfluxDB, validated by the `query` node, and then passed into the data pipeline.
+The `query` node defines a source and a schedule for processing batch data. Data is queried from InfluxDB, computed by the `query` node, and then passed into the data pipeline.
 
 >**Note:** Kapacitor requires that non-negative values for aggregate functions (such as differences, derivatives, and so on) be computed outside of the `query` node.
 
