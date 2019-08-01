@@ -11,7 +11,7 @@ menu:
 **Content**
 
 * [Logging locations](#logging-locations)
-* [Redirecting HTTP request logging](#redirecting-http-request-logging)
+* [HTTP access logging](#http-access-logging)
 * [Structured logging](#structured-logging)
 * [Tracing](#tracing)
 
@@ -72,9 +72,35 @@ If using the package install on a `sysvinit` system, the config file for logrota
 You can view the file [here](https://github.com/influxdb/influxdb/blob/1.7/scripts/logrotate).
 
 
-## Redirecting HTTP request logging
+## HTTP access logging
 
-Use the HTTP access log to log HTTP request traffic separately from the other InfluxDB log output. When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
+Use the HTTP access log to log HTTP request traffic separately from the other InfluxDB log output.
+
+### HTTP access log format
+
+The HTTP access log has the following format.
+
+```
+return fmt.Sprintf(`%s - %s [%s] "%s %s %s" %s %s "%s" "%s" %s %d`,
+		host,
+		detect(username, "-"),
+		start.Format("02/Jan/2006:15:04:05 -0700"),
+		r.Method,
+		uri,
+		r.Proto,
+		detect(strconv.Itoa(l.Status()), "-"),
+		strconv.Itoa(l.Size()),
+		detect(referer, "-"),
+		detect(userAgent, "-"),
+		r.Header.Get("Request-Id"),
+		// response time, report in microseconds because this is consistent
+		// with apache's %D parameter in mod_log_config
+		int64(time.Since(start)/time.Microsecond))
+```
+
+### Redirecting HTTP access logging
+
+When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
 
 **To redirect HTTP request logging:**
 
