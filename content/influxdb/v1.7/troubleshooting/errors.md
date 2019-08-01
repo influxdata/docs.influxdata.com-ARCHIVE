@@ -355,10 +355,13 @@ query itself has not hit an interrupt point.
 
 Find common errors that occur when importing data in the command line interface (CLI).
 
-1. (Optional) Send import errors to a new file by running the `-import` command with the `failures` option:
+1. (Optional) Customize how to view `-import` errors and output by running any of following commands:
 
-        influx -import -path= {filename}.gz -compressed > failures
-  
+  - Send errors and output to a file: `influx -import -path= {filename}.gz -compressed {my-file} 2>&1`
+  - Send errors and output to separate files: `influx -import -path=metrics-default.gz -compressed > {my-output-file} 2> {my-error-file}`
+  - Send errors to a file: `influx -import -path=metrics-default.gz -compressed 2> {my-file}`
+  - Send output to a file: `influx -import -path= {filename}.gz -compressed {my-file}`
+
 2. Review import errors for possible causes to resolve:
 
   - [Inconsistent data types](#inconsistent-data-types)
@@ -384,7 +387,7 @@ This error occurs when an imported data point is older than the specified retent
 
 **Error:** `reading standard input: /path/to/directory: is a directory`
 
-  This error occurs when the `- import` command doesn't include the name of an import file. Specify the file to import, for example: `$ influx -import -path={filename}.txt -precision=s`
+  This error occurs when the `-import` command doesn't include the name of an import file. Specify the file to import, for example: `$ influx -import -path={filename}.txt -precision=s`
 
 ### Docker container cannot read host files
 
