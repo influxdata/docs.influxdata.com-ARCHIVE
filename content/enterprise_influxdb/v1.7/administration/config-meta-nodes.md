@@ -52,6 +52,8 @@ Environment variable: `INFLUXDB_HOSTNAME`
 The `[enterprise]` section contains the parameters for the meta node's
 registration with the [InfluxDB Enterprise License Portal](https://portal.influxdata.com/).
 
+
+
 #### `license-key = ""`
 
 The license key created for you on [InfluxPortal](https://portal.influxdata.com).
@@ -150,113 +152,34 @@ This is useful when testing with self-signed certificates.
 
 Environment variable: `INFLUXDB_META_HTTPS_INSECURE_TLS`
 
-#### `auth-enabled = false`
+#### `data-use-tls = false`
 
-Set to `true` to enable authentication.
-Meta nodes support JWT authentication and Basic authentication.
-For JWT authentication, see also the [`shared-secret`](#shared-secret) and
-[`internal-shared-secret`](#internal-shared-secret) configuration settings.
+Whether to use TLS to communicate with data nodes.
 
-If set to `true`, also set the [`meta-auth-enabled` option](/enterprise_influxdb/v1.7/administration/config-data-nodes#meta-auth-enabled-false) to `true` in the `[meta]` section of the data node configuration file.
+#### `data-insecure-tls = false`
 
-Environment variable: `INFLUXDB_META_AUTH_ENABLED`
-
-####  `http-bind-address = ":8091"`
-
-The port used by the [`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) and by data nodes to access the Meta API.
-For simplicity, InfluxData recommends using the same port on all meta nodes, but this
-is not necessary.
-
-Environment variable: `INFLUXDB_META_HTTP_BIND_ADDRESS`
-
-#### `https-enabled = false`
-
-Determines whether meta nodes use HTTPS to communicate with each other.
-
-#### `https-certificate = ""`
-
-The SSL certificate to use when HTTPS is enabled.  
-The certificate should be a PEM-encoded bundle of the certificate and key.  
-If it is just the certificate, a key must be specified in https-private-key.
-
-#### `https-private-key = ""`
-
-Use a separate private key location.
-
-#### `https-insecure-tls = false`
-
-Whether meta nodes will skip certificate validation communicating with each other over HTTPS.
+Whether meta nodes will skip certificate validation communicating with data nodes over TLS.
 This is useful when testing with self-signed certificates.
-
-#### `https-enabled = false`
-
-Set to `true` to if using HTTPS over the `8091` API port.
-Currently, the `8089` and `8088` ports do not support TLS.
-
-Environment variable: `INFLUXDB_META_HTTPS_ENABLED`
-
-#### `https-certificate = ""`
-
-The path of the certificate file.
-This is required if [`https-enabled`](#https-enabled-false) is set to `true`.
-
-Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
-
-#### `https-private-key = ""`
-
-The path of the private key file.
-
-Environment variable: `INFLUXDB_META_HTTPS_PRIVATE_KEY`
-
-#### `https-insecure-tls = false`
-
-Set to `true` to allow insecure HTTPS connections to meta nodes.
-Use this setting when testing with self-signed certificates.
-
-Environment variable: `INFLUXDB_META_HTTPS_INSECURE_TLS`
 
 #### `gossip-frequency = "5s"`
 
-The frequency at which meta nodes communicate the cluster membership state.
-
-Environment variable: `INFLUXDB_META_GOSSIP_FREQUENCY`
+The default frequency with which the node will gossip its known announcements.
 
 #### `announcement-expiration = "30s"`
 
-The rate at which the results of `influxd-ctl show` are updated when a meta
-node leaves the cluster.
-Note that in version 1.0, configuring this setting provides no change from
-the user's perspective.
-
-Environment variable: `INFLUXDB_META_ANNOUNCEMENT_EXPIRATION`
+The default length of time an announcement is kept before it is considered too old.
 
 #### `retention-autocreate = true`
 
-Automatically creates a default [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
-The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
-The system targets the `autogen` RP when a write or query does not specify an RP.
-Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
-
-Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
+Automatically create a default retention policy when creating a database.
 
 #### `election-timeout = "1s"`
 
-The duration a Raft candidate spends in the candidate state without a leader
-before it starts an election.
-The election timeout is slightly randomized on each Raft node each time it is called.
-An additional jitter is added to the `election-timeout` duration of between zero and the `election-timeout`.
-The default setting should work for most systems.
-
-Environment variable: `INFLUXDB_META_ELECTION_TIMEOUT`
+The amount of time in candidate state without a leader before we attempt an election.
 
 #### `heartbeat-timeout = "1s"`
 
-The heartbeat timeout is the amount of time a Raft follower remains in the follower
-state without a leader before it starts an election.
-Clusters with high latency between nodes may want to increase this parameter to
-avoid unnecessary Raft elections.
-
-Environment variable: `INFLUXDB_META_HEARTBEAT_TIMEOUT`
+The amount of time in follower state without a leader before we attempt an election.
 
 #### `leader-lease-timeout = "500ms"`
 
@@ -268,10 +191,6 @@ Clusters with high latency between nodes may want to increase this parameter to
 
 Environment variable: `INFLUXDB_META_LEADER_LEASE_TIMEOUT`
 
-#### `consensus-timeout = "30s`"
-
-Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
-
 #### `commit-timeout = "50ms"`
 
 The commit timeout is the amount of time a Raft node will tolerate between
@@ -279,6 +198,12 @@ commands before issuing a heartbeat to tell the leader it is alive.
 The default setting should work for most systems.
 
 Environment variable: `INFLUXDB_META_COMMIT_TIMEOUT`
+
+#### `consensus-timeout = "30s"`
+
+Timeout waiting for consensus before getting the latest Raft snapshot.
+
+Environment variable: `INFLUXDB_META_CONSENSUS_TIMEOUT`
 
 #### `cluster-tracing = false`
 
@@ -313,6 +238,16 @@ For more details about `lease-duration` and its impact on continuous queries, se
 [Configuration and operational considerations on a cluster](/enterprise_influxdb/v1.7/features/clustering-features/#configuration-and-operational-considerations-on-a-cluster).
 
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
+
+#### `auth-enabled = false`
+
+If true, HTTP endpoints require authentication.
+This setting must have the same value as the data nodes' meta.meta-auth-enabled configuration.
+
+#### `ldap-allowed = false`
+
+Whether LDAP is allowed to be set.
+If true, you will need to use `influxd ldap set-config` and set enabled=true to use LDAP authentication.
 
 #### `shared-secret = ""`
 

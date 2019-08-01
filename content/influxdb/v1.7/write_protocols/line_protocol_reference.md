@@ -219,7 +219,7 @@ For example, `\"` escapes double quote.
 * If you use multiple backslashes, they must be escaped. Influx interprets backslashes as follows:
   *	`\` or `\\` interpreted as `\` 
   *	`\\\` or `\\\\` interpreted as `\\` 
-  * `\\\\\` or `\\\\\\` interpreted as `\\\\`, and so on
+  * `\\\\\` or `\\\\\\` interpreted as `\\\`, and so on
 
 * In tag keys, tag values, and field keys, you must escape: 
   * commas

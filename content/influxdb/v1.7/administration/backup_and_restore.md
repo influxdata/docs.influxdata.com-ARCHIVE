@@ -25,6 +25,8 @@ Starting in version 1.5, the InfluxDB OSS `backup` utility provides:
 
 ## Online backup and restore (for InfluxDB OSS)
 
+Use the `backup` and `restore` utilities to back up and restore between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.7.7.
+
 ### Configuring remote connections
 
 The online backup and restore processes execute over a TCP connection to the database.
@@ -56,7 +58,6 @@ influxd backup
     [ -start <timestamp> [ -end <timestamp> ] | -since <timestamp> ]
     <path-to-backup>
 ```
-
 
 To invoke the new InfluxDB Enterprise-compatible format, run the `influxd backup` command with the `-portable` flag, like this:
 

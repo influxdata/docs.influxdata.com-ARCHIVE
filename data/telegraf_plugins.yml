@@ -573,6 +573,23 @@ input:
     introduced: 0.2.5
     tags: [linux, macos, windows, data-stores]
 
+  - name: InfluxDB v2
+    id: influxdb
+    description: |
+      InfluxDB 2.x exposes its metrics using the Prometheus Exposition Format — there is no InfluxDB v2 input
+      plugin.
+      
+      To collect data on an InfluxDB 2.x instance running on localhost, the configuration for the 
+      Prometheus input plugin would be:
+      
+      ```
+      [[inputs.prometheus]]
+      ## An array of urls to scrape metrics from.
+      urls = ["http://localhost:9999/metrics"]
+      ```
+    introduced: 1.8.0
+    tags: [linux, macos, windows, data-stores]
+
   - name: InfluxDB Listener
     id: influxdb_listener
     description: |
@@ -595,7 +612,7 @@ input:
     link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/influxdb_listener/README.md
     introduced: 1.9.0
     tags: [linux, macos, windows, data-stores]
-
+    
   - name: Interrupts
     id: interrupts
     description: |
