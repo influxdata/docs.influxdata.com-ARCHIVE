@@ -7,10 +7,6 @@ menu:
     name: movingAverage
     parent: Aggregates
 weight: 501
-related:
-  - /v2.0/reference/flux/functions/built-in/transformations/aggregates/timedmovingaverage/
-  - /v2.0/reference/flux/functions/built-in/transformations/aggregates/exponentialmovingaverage/
-  - https://docs.influxdata.com/influxdb/latest/query_language/functions/#moving-average, InfluxQL MOVING_AVERAGE()
 ---
 
 The `movingAverage()` function calculates the mean of values grouped into `n` number of points.
