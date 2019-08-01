@@ -90,7 +90,7 @@ creates a new column if it doesn't exist, and includes all existing columns in
 the output table.
 
 ```js
-recduce(fn: (r) => ({ r with newColumn: r._value * 2 }))
+reduce(fn: (r) => ({ r with newColumn: r._value * 2 }))
 ```
 
 ## Examples
