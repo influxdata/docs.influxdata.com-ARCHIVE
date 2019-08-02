@@ -13,7 +13,7 @@ menu:
 
 The `query` node defines a source and a schedule for processing batch data. Data is queried from InfluxDB, computed by the `query` node, and then passed into the data pipeline.
 
->**Note:** Kapacitor requires that non-negative values for aggregate functions (such as differences, derivatives, and so on) be computed outside of the `query` node.
+>**Note:** Kapacitor requires aggregate functions (such as differences, derivatives, and so on) be computed outside of the `query` node.
 
 Example:
 
@@ -27,13 +27,28 @@ batch
     .period(1m)
     .every(20s)
     .groupBy(time(10s), 'cpu')
-  | difference('max_usage')
-  | where(lambda: "difference" >= 0)
     ...
 ```
 
 In the example above, InfluxDB is queried every 20 seconds; the window of time returned
-spans 1 minute and is grouped into 10 second buckets. Non-negative values are computed before passing data to the `query` node.
+spans 1 minute and is grouped into 10 second buckets.
+
+The `query` node cannot contain grouping clauses or conditions on time. To compute an aggregate over groups, specify grouping and the aggregate itself using TICKScript. For example, the following script calculates the non-negative difference:
+
+```js
+batch
+  |query('''
+    SELECT mean("value")
+    FROM "telegraf"."default".cpu_usage_idle
+    WHERE "host" = 'serverA'
+  ''')
+    .period(1m)
+    .every(20s)
+    .groupBy(time(10s), 'cpu')
+  | difference('max_usage')
+  | where(lambda: "difference" >= 0)
+  ...
+```
 
 ### Constructor
 
