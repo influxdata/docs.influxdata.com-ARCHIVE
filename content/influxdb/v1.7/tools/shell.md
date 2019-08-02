@@ -329,10 +329,10 @@ We recommend writing points in batches of 5,000 to 10,000 points.
 Smaller batches, and more HTTP requests, will result in sub-optimal performance.
 By default, the HTTP request times out after five seconds.
 InfluxDB will still attempt to write the points after that time out but there will be no confirmation that they were successfully written.
-* To redirect failed import lines to another file, run the following command:
+* To redirect import errors to a file called failures, run the following command:
 
     ```js
-    influx -import -path=metrics-default.gz -compressed > failures
+    influx -import -path=metrics-default.gz -compressed 2> failures
     ```
 
 > **Note:** For how to export data from InfluxDB version 0.8.9, see [Exporting from 0.8.9](https://github.com/influxdb/influxdb/blob/1.7/importer/README.md).
