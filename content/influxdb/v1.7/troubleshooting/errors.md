@@ -350,3 +350,58 @@ query itself has not hit an interrupt point.
 
 **Resources:**
 [Query management](/influxdb/v1.0/troubleshooting/query_management/)
+
+## Common `-import` errors
+
+Find common errors that occur when importing data in the command line interface (CLI).
+
+1. (Optional) Customize how to view `-import` errors and output by running any of the following commands:
+
+  - Send errors and output to a new file: `influx -import -path={import-file}.gz -compressed {new-file} 2>&1`
+  - Send errors and output to separate files: `influx -import -path={import-file}.gz -compressed > {output-file} 2> {error-file}`
+  - Send errors to a new file: `influx -import -path={import-file}.gz -compressed 2> {new-file}`
+  - Send output to a new file: `influx -import -path={import-file}.gz -compressed {new-file}`
+
+2. Review import errors for possible causes to resolve:
+
+  - [Inconsistent data types](#inconsistent-data-types)
+  - [Data points older than retention policy](#data-points-older-than-retention-policy)
+  - [Unnamed import file](#unnamed-import-file)
+  - [Docker container cannot read host files](#container-cannot-read-host-files)
+
+  >**Note:** To learn how to use the `-import` command, see [Import data from a file with `-import`](/influxdb/v1.7/tools/shell/#import-data-from-a-file-with-import).
+
+### Inconsistent data types
+
+**Error:** `partial write: field type conflict:`
+
+This error occurs when fields in an imported measurement have inconsistent data types. Make sure all fields in a measurement have the same data type, such as float64, int64, and so on.
+
+### Data points older than retention policy
+
+**Error:** `partial write: points beyond retention policy dropped={number-of-points-dropped}`
+
+This error occurs when an imported data point is older than the specified retention policy and dropped. Verify the correct retention policy is specified in the import file.
+
+### Unnamed import file
+
+**Error:** `reading standard input: /path/to/directory: is a directory`
+
+  This error occurs when the `-import` command doesn't include the name of an import file. Specify the file to import, for example: `$ influx -import -path={filename}.txt -precision=s`
+
+### Docker container cannot read host files
+
+**Error:** `open /path/to/file: no such file or directory`
+
+This error occurs when the Docker container cannot read files on the host machine. To make host machine files readable, complete the following procedure.
+
+#### Make host machine files readable to Docker
+
+  1. Create a directory, and then copy files to import into InfluxDB to this directory.
+  2. When you launch the Docker container, mount the new directory on the InfluxDB container by running the following command:
+
+        docker run -v /dir/path/on/host:/dir/path/in/container
+
+  3. Verify the Docker container can read host machine files by running the following command:
+
+        influx -import -path=/path/in/container
