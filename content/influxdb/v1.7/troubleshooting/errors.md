@@ -355,12 +355,12 @@ query itself has not hit an interrupt point.
 
 Find common errors that occur when importing data in the command line interface (CLI).
 
-1. (Optional) Customize how to view `-import` errors and output by running any of following commands:
+1. (Optional) Customize how to view `-import` errors and output by running any of the following commands:
 
-  - Send errors and output to a file: `influx -import -path= {filename}.gz -compressed {my-file} 2>&1`
-  - Send errors and output to separate files: `influx -import -path=metrics-default.gz -compressed > {my-output-file} 2> {my-error-file}`
-  - Send errors to a file: `influx -import -path=metrics-default.gz -compressed 2> {my-file}`
-  - Send output to a file: `influx -import -path= {filename}.gz -compressed {my-file}`
+  - Send errors and output to a new file: `influx -import -path={import-file}.gz -compressed {new-file} 2>&1`
+  - Send errors and output to separate files: `influx -import -path={import-file}.gz -compressed > {output-file} 2> {error-file}`
+  - Send errors to a new file: `influx -import -path={import-file}.gz -compressed 2> {new-file}`
+  - Send output to a new file: `influx -import -path={import-file}.gz -compressed {new-file}`
 
 2. Review import errors for possible causes to resolve:
 
