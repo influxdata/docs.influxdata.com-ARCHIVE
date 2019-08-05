@@ -13,8 +13,6 @@ menu:
 
 The `query` node defines a source and a schedule for processing batch data. Data is queried from InfluxDB, computed by the `query` node, and then passed into the data pipeline.
 
->**Note:** Kapacitor requires aggregate functions (such as differences, derivatives, and so on) be computed outside of the `query` node.
-
 Example:
 
 ```js
@@ -30,10 +28,23 @@ batch
     ...
 ```
 
-In the example above, InfluxDB is queried every 20 seconds; the window of time returned
-spans 1 minute and is grouped into 10 second buckets.
+In the example above, InfluxDB is queried every 20 seconds; the window of time returned spans 1 minute and is grouped into 10 second buckets.
 
-The `query` node cannot contain grouping clauses or conditions on time. To compute an aggregate over groups, specify grouping and the aggregate itself using TICKScript. For example, the following script calculates the non-negative difference:
+>**Note:** Kapacitor requires aggregate functions (such as differences, derivatives, and so on) be computed outside of the `query` node. The `query` node cannot contain a grouping clause or condition on time.
+
+To use InfluxQL advanced syntax for functions in the `query` node, you must express part of the InfluxQL query in the TICKScript. Advanced syntax computes the nested aggregation over time buckets, and then applies the outer aggregate on the results.
+
+For example, the following InfluxQL script, which calculates the non-negative difference of the 10-second mean of cpu usage for every cpu, isn't valid for the `query` node:
+
+```js
+SELECT non_negative_difference(mean("value"))
+  FROM "telegraf"."default"."cpu_usage_idle"
+  WHERE "host" = 'serverA'
+  GROUP BY time(10s), "cpu"
+  ...
+```
+
+To calculate the result above for the `query` node, you must specify grouping and the outer aggregate using TICKScript:
 
 ```js
 batch
@@ -43,7 +54,7 @@ batch
     WHERE "host" = 'serverA'
   ''')
     .period(1m)
-    .every(20s)
+    .every(1m)
     .groupBy(time(10s), 'cpu')
   | difference('max_usage')
   | where(lambda: "difference" >= 0)
