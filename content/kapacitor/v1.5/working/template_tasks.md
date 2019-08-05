@@ -12,12 +12,20 @@ menu:
     parent: work-w-kapacitor
 ---
 
-Kapacitor has a template system that allows a template to be defined and reused for multiple tasks.
-Each task can define its own value for all variables declared within the template.
-Templates can be consumed using the CLI and the [API](/kapacitor/v1.5/working/api).
+Use templates in the CLI and the [API](/kapacitor/v1.5/working/api) to define and reuse tasks.
 
-## Create a task template
-The following is a simple example that defines a template that computes the mean of a field and triggers an alert.
+To create a task template, do the following:
+
+1. Create a task template script
+2. Run the `define-template` command
+
+Then, use the task template to define new tasks.
+
+>Note: Chronograf does **not** display template details, including variable values.
+
+## Create a task template script
+
+The following task template script computes the mean of a field and triggers an alert.
 
 _**Example: generic\_alert\_template.tick**_
 ```js
@@ -54,11 +62,11 @@ stream
          .channel(slack_channel)
 ```
 
-Notice how all of the fields in the method call are defined by variables declared earlier in the script.
-This allows complete customized usage of the template when later leveraging it to define tasks.
+Notice all fields in the script are declared variables, which lets you customize variable values when using the template to define a task.
 
-### Defining variables
-In a task template, variables are defined using the following patterns:
+### Define variables
+
+In a task template, use the following pattern to define variables:
 
 ```js
 // Required variable pattern
@@ -69,12 +77,12 @@ var varName = dataType: defaultValue
 var varName = [*]
 ```
 
-_View the [literal value types](/kapacitor/v1.5/tick/syntax/#types) section of the
-TICKscript syntax article for information about available data types._
+For information about available data types, see [literal value types](/kapacitor/v1.5/tick/syntax/#types).
 
 #### Optional variables
-In some cases, a templated task may be used for tasks that do not require values for all templated variables.
-In order for a variable to be optional, provide a default value. In most cases, the default can simply be `TRUE`:
+
+In some cases, a template task may be used for tasks that do not require values for all template variables.
+To ensure a variable is optional, provide a default value. In most cases, the default can simply be `TRUE`:
 
 ```js
 // Pattern
@@ -86,9 +94,9 @@ var warn = lambda: TRUE
 var groups = [*]
 ```
 
+## Run the `define-template` command
 
-## Define a task template
-To use a template script, first define a new template using the `define-template` command:
+To define a new template, run the `define-template` command:
 
 ```bash
 kapacitor define-template generic_mean_alert -tick path/to/template_script.tick
@@ -100,7 +108,7 @@ Use `show-template` to see more information about the newly created template.
 kapacitor show-template generic_mean_alert
 ```
 
-A list of variables declared for the template should be returned in the group `vars` as part of the console output as shown in this example:
+A list of variables declared for the template is returned in the group `vars` as part of the console output as shown in this example:
 
 _**Example: The Vars section of kapacitor show-template output**_
 ```output
@@ -125,9 +133,11 @@ Variable descriptions are derived from comments above each variable in the templ
 The specific values of variables and of the database/retention policy are unique for each task
 created using the template.
 
-## Define a new task and provide variable values
-Now define a task using the template to trigger an alert on CPU usage.
-Pass variable values into the template using a simple JSON file.
+## Define a new task
+
+Define a new task using the template to trigger an alert on CPU usage.
+
+1. Pass variable values into the template using a simple JSON file.
 
 _**Example: A JSON variable file**_
 ```json
@@ -143,14 +153,18 @@ _**Example: A JSON variable file**_
 }
 ```
 
-Define the new task using the the `-template` and `-vars` arguments to pass in the
-template file and the JSON variable file.
+2. Pass in the template file and the JSON variable file by running a command with both `-template` and `-vars` arguments:
 
-```bash
-kapacitor define cpu_alert -template generic_mean_alert -vars cpu_vars.json -dbrp telegraf.autogen
-```
+    ```bash
+    kapacitor define cpu_alert -template generic_mean_alert -vars cpu_vars.json -dbrp telegraf.autogen
+    ```
 
-Use the `show` command to display the variable values associated with the newly created task.
+3. Use the `show` command to display the variable values associated with the newly created task.
+
+> **Note:** For Kapacitor instances with authentication enabled, use the following form:
+`./kapacitor -url http://username:password@MYSERVER:9092 show TASKNAME`
+
+##### Example
 
 ```
 kapacitor show cpu_alert
@@ -220,7 +234,7 @@ window         duration  10m0s
 
 Any number of tasks can be defined using the same template.
 
-> **NOTE:** Updates to the template will update all associated tasks and reload them if necessary.
+> **Note:** Updates to the template will update all associated tasks and reload them if necessary.
 
 ## Using Variables
 
@@ -309,6 +323,7 @@ kapacitor define mem_alert -file mem_template_task.yaml
 ```
 
 ## Specifying `dbrp` implicitly
+
 The following is a simple example that defines a template that computes the mean of a field and triggers an alert, where the `dbrp` is specified in the template.
 
 _**Example: Defining the database and retention policy in the template**_
