@@ -11,13 +11,12 @@ menu:
     parent: nodes
 ---
 
-The `barrier` node emits a barrier with the current time according to the system clock.
-Because the [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/) emits based on system time,
-it allows pipelines to be forced in the absence of data traffic.
-The emitted barrier is based on either idle time since the last received
-message or on a periodic timer based on the system clock.
-Any messages received after an emitted barrier that are older than the last
-emitted barrier are dropped.
+The `barrier` node emits a barrier based on one of the following:
+
+- Idle time since the last data point was received
+- Periodic timer based on the system time
+
+Barriers let you execute pipelines without data traffic. Data points received after a specified barrier are dropped.
 
 ##### Example barrier node
 
