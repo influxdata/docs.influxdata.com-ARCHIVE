@@ -27,7 +27,7 @@ stream
     .measurement('cpu')
   |barrier()
     .idle(5s)
-    .delete()
+    .delete(TRUE)
   |window()
     .period(10s)
     .every(5s)
@@ -35,6 +35,7 @@ stream
   //Post the top 10 results over the last 10s updated every 5s.
   |httpPost('http://example.com/api/top10')
 ```
+> **Note:** In .delete(TRUE), TRUE must be uppercase.
 
 ### Constructor
 
