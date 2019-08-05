@@ -18,7 +18,7 @@ The `barrier` node emits a barrier based on one of the following:
 
 Barriers let you execute pipelines without data traffic. Data points received after a specified barrier are dropped.
 
-##### Example barrier node
+##### Example barrier based on idle time
 
 ```js
 stream
