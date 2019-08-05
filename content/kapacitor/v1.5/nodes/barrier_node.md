@@ -27,7 +27,7 @@ stream
     .measurement('cpu')
   |barrier()
     .idle(5s)
-    .delete()
+    .delete(TRUE)
   |window()
     .period(10s)
     .every(5s)
@@ -48,7 +48,7 @@ stream
 |:---|:---|
 | **[idle](#idle)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Emit barrier based on idle time since the last received message. Must be greater than zero.  |
 | **[period](#period)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Emit barrier based on periodic timer.  The timer is based on system clock rather than message time. Must be greater than zero.  |
-| **[delete](#delete)&nbsp;(&nbsp;)** | Delete the group after processing each barrier. |
+| **[delete](#delete)&nbsp;(&nbsp;`value`&nbsp;`Boolean`)** | Delete the group after processing each barrier. |
 | **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress all error logging events from this node.  |
 
 
