@@ -30,8 +30,6 @@ batch
 
 In the example above, InfluxDB is queried every 20 seconds; the window of time returned spans 1 minute and is grouped into 10 second buckets.
 
->**Note:** Kapacitor requires aggregate functions (such as differences, derivatives, and so on) be computed outside of the `query` node. The `query` node cannot contain a grouping clause or condition on time.
-
 To use InfluxQL advanced syntax for functions in the `query` node, you must express part of the InfluxQL query in the TICKScript. Advanced syntax computes the nested aggregation over time buckets, and then applies the outer aggregate on the results.
 
 For example, the following InfluxQL script, which calculates the non-negative difference of the 10-second mean of cpu usage for every cpu, isn't valid for the `query` node:
