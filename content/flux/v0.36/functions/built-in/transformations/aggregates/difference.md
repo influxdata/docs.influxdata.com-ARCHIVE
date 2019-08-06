@@ -11,13 +11,13 @@ menu:
 ---
 
 The `difference()` function computes the difference between subsequent records.  
-The user-specified column of numeric type is subtracted while others are kept intact.
+The user-specified columns of numeric type are subtracted while others are kept intact.
 
 _**Function type:** Aggregate_  
 _**Output data type:** Float_
 
 ```js
-difference(nonNegative: false, column: "_value")
+difference(nonNegative: false, columns: ["_value"])
 ```
 
 ## Parameters
@@ -28,11 +28,11 @@ When set to `true`, if a value is less than the previous value, it is assumed th
 
 _**Data type:** Boolean_
 
-### column
-The column to use to compute the difference.
-Defaults to `"_value"`.
+### columns
+The columns to use to compute the difference.
+Defaults to `["_value"]`.
 
-_**Data type:** String_
+_**Data type:** Array of Strings_
 
 ## Subtraction rules for numeric types
 - The difference between two non-null values is their algebraic difference;
