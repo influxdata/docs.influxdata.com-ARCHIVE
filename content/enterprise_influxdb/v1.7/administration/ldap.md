@@ -105,11 +105,6 @@ enabled = true
   # per the LDAPv3 standard.
   # Other options are "starttls+insecure" to behave the same as starttls
   # but skip server certificate verification, or "none" to use an unencrypted connection.
-  # from Mark: Right, there was  '\''breaking'\'' change in the ldap config, that when unspecified, the default is to use TLS.
-  # The default used to be unencrypted. We made this change because as far as we know, nobody is using LDAP in production yet.
-  # The fix is to update the config to set `security = "none"`:
-  # https://github.com/influxdata/plutonium/pull/2853/commits/87a747e40034fcf05f0da1ed74f7c2c598b8d210#diff-fe8a3f0bbdb3fe46a99666a25eb20725
-  # The test server is not set up with TLS. Trying to use starttls against it will not work.
   # security = "starttls"
   security = "none"
 
