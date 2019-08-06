@@ -11,11 +11,9 @@ menu:
     parent: nodes
 ---
 
-The `query` node defines a source and a schedule for processing batch data.
-The data is queried from an InfluxDB database and then passed into the data pipeline.
+The `query` node defines a source and a schedule for processing batch data. Data is queried from InfluxDB, computed by the `query` node, and then passed into the data pipeline.
 
 Example:
-
 
 ```js
 batch
@@ -27,12 +25,39 @@ batch
     .period(1m)
     .every(20s)
     .groupBy(time(10s), 'cpu')
+    ...
+```
+
+In the example above, InfluxDB is queried every 20 seconds; the window of time returned spans 1 minute and is grouped into 10 second buckets.
+
+To use InfluxQL advanced syntax for functions in the `query` node, you must express part of the InfluxQL query in the TICKScript. Advanced syntax computes the nested aggregation over time buckets, and then applies the outer aggregate on the results.
+
+For example, the following InfluxQL script, which calculates the non-negative difference of the 10-second mean of cpu usage for every cpu, isn't valid for the `query` node:
+
+```js
+SELECT non_negative_difference(mean("value"))
+  FROM "telegraf"."default"."cpu_usage_idle"
+  WHERE "host" = 'serverA'
+  GROUP BY time(10s), "cpu"
   ...
 ```
 
-In the above example InfluxDB is queried every 20 seconds; the window of time returned
-spans 1 minute and is grouped into 10 second buckets.
+To calculate the result above for the `query` node, you must specify grouping and the outer aggregate using TICKScript:
 
+```js
+batch
+  |query('''
+    SELECT mean("value")
+    FROM "telegraf"."default".cpu_usage_idle
+    WHERE "host" = 'serverA'
+  ''')
+    .period(1m)
+    .every(1m)
+    .groupBy(time(10s), 'cpu')
+  | difference('max_usage')
+  | where(lambda: "difference" >= 0)
+  ...
+```
 
 ### Constructor
 
