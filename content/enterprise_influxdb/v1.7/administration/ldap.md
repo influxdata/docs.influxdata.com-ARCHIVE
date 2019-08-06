@@ -32,6 +32,8 @@ To enable LDAP support on your data nodes, make the following changes to the Inf
 * Configure the HTTP shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the secret and username.
   * Set the `[http]` configuration setting for `shared-secret`, or the corresponding environment variable `INFLUXDB_HTTP_SHARED_SECRET`. Default value is `""`.
 
+> **Note:** To use fine-grained authorization (FGA) with LDAP, you must map FGA roles to key-value pairs in the LDAP database. For more information, see Fine-grained authorization in InfluxDB Enterprise (https://docs.influxdata.com/enterprise_influxdb/v1.7/guides/fine-grained-authorization/).
+
 ### Configure the InfluxDB Enterprise meta nodes
 
 To enable LDAP support in InfluxDB Enterprise, make the following changes on your meta nodes.
