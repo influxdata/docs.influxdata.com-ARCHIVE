@@ -104,7 +104,7 @@ enabled = true
   # and upgrade to TLS as the first action against the server,
   # per the LDAPv3 standard.
   # Other options are "starttls+insecure" to behave the same as starttls
-  # but skip server certificate verification, or "none" to use an unencrypted connection.
+  # but skip server certificate verification, or "none" to use an unencrypted connection
   # security = "starttls"
   security = "none"
 
@@ -132,64 +132,3 @@ enabled = true
 
   # Attribute to use to determine the "group" in the group-mappings section.
   group-attribute = "cn"
-
-  # Anyone whose last name begins with X gets to be an admin.
-  # If using this config, you'\''ll probably want to remember an X last name to
-  # be able to do things like create a database.
-  admin-groups = ["X_lastnames"]
-
-  group-mappings = [
-    {group = "A_firstnames", role = "a_first"},
-    {group = "A_lastnames",  role = "a_last"},
-    {group = "B_firstnames", role = "b_first"},
-    {group = "B_lastnames",  role = "b_last"},
-    {group = "C_firstnames", role = "c_first"},
-    {group = "C_lastnames",  role = "c_last"},
-    {group = "D_firstnames", role = "d_first"},
-    {group = "D_lastnames",  role = "d_last"},
-    {group = "E_firstnames", role = "e_first"},
-    {group = "E_lastnames",  role = "e_last"},
-    {group = "F_firstnames", role = "f_first"},
-    {group = "F_lastnames",  role = "f_last"},
-    {group = "G_firstnames", role = "g_first"},
-    {group = "G_lastnames",  role = "g_last"},
-    {group = "H_firstnames", role = "h_first"},
-    {group = "H_lastnames",  role = "h_last"},
-    {group = "I_firstnames", role = "i_first"},
-    {group = "I_lastnames",  role = "i_last"},
-    {group = "J_firstnames", role = "j_first"},
-    {group = "J_lastnames",  role = "j_last"},
-    {group = "K_firstnames", role = "k_first"},
-    {group = "K_lastnames",  role = "k_last"},
-    {group = "L_firstnames", role = "l_first"},
-    {group = "L_lastnames",  role = "l_last"},
-    {group = "M_firstnames", role = "m_first"},
-    {group = "M_lastnames",  role = "m_last"},
-    {group = "N_firstnames", role = "n_first"},
-    {group = "N_lastnames",  role = "n_last"},
-    {group = "O_firstnames", role = "o_first"},
-    {group = "O_lastnames",  role = "o_last"},
-    {group = "P_firstnames", role = "p_first"},
-    {group = "P_lastnames",  role = "p_last"},
-    {group = "Q_firstnames", role = "q_first"},
-    {group = "Q_lastnames",  role = "q_last"},
-    {group = "R_firstnames", role = "r_first"},
-    {group = "R_lastnames",  role = "r_last"},
-    {group = "S_firstnames", role = "s_first"},
-    {group = "S_lastnames",  role = "s_last"},
-    {group = "T_firstnames", role = "t_first"},
-    {group = "T_lastnames",  role = "t_last"},
-    {group = "U_firstnames", role = "u_first"},
-    {group = "U_lastnames",  role = "u_last"},
-    {group = "V_firstnames", role = "v_first"},
-    {group = "V_lastnames",  role = "v_last"},
-    {group = "W_firstnames", role = "w_first"},
-    {group = "W_lastnames",  role = "w_last"},
-    {group = "X_firstnames", role = "x_first"},
-    {group = "X_lastnames",  role = "x_last"},
-    {group = "Y_firstnames", role = "y_first"},
-    {group = "Y_lastnames",  role = "y_last"},
-    {group = "Z_firstnames", role = "z_first"},
-    {group = "Z_lastnames",  role = "z_last"},
-  ]'
-```
