@@ -416,7 +416,7 @@ input:
   - name: Filecount
     id: filecount
     description: |
-      The Filecount input plugin counts files in directories that match certain criteria.
+      The Filecount input plugin reports the number and total size of files in directories that match certain criteria.
     link: https://github.com/influxdata/telegraf/blob/release-1.11/plugins/inputs/filecount/README.md
     introduced: 1.8.0
     tags: [linux, macos, windows, systems]
