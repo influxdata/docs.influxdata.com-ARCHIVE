@@ -45,6 +45,8 @@ Thanks to the open source community for your contributions, commitment, and effo
 
 * [influxdb-java](https://github.com/influxdb/influxdb-java)
   * Maintained by [Stefan Majer (majst01)](https://github.com/majst01)
+* [Alpakka InfluxDB](https://doc.akka.io/docs/alpakka/current/influxdb.html)
+  * Maintained by the Alpakka community with help from [Lightbend](https://www.lightbend.com/)
 
 ## JavaScript/Node.js
 
@@ -119,7 +121,8 @@ Thanks to the open source community for your contributions, commitment, and effo
   * Maintained by [Paul Goldbaum (paulgoldbaum)](https://github.com/paulgoldbaum)
 * [chronicler](https://github.com/fsanaulla/chronicler)
   * Maintained by [Faiaz Sanaulla (fsanaulla)](https://github.com/fsanaulla)
-
+* [Alpakka InfluxDB](https://doc.akka.io/docs/alpakka/current/influxdb.html)
+  * Maintained by the Alpakka community with help from [Lightbend](https://www.lightbend.com/)
 
 ## Sensu
 
