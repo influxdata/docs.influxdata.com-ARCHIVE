@@ -8,16 +8,28 @@ menu:
     parent: About the project
 ---
 
+## v1.11.4 [2019-08-06]
+
+### Bugfixes
+
+#### Plugins
+- Kubernetes input (`kubernetes`)
+  - Correct typo in `logsfs_available_bytes` field.
+- Datadog output (`datadog`)
+  - Skip floats that are `NaN` or `Inf`.
+- Socket Listener input (`socket_listener`)
+  - Fix reload panic.
+
 ## 1.11.3 [2019-07-23]
 
 ### Bug fixes
 
-#### Telegraf agent
+#### Agent
 
 - Treat empty array as successful parse in JSON parser.
 - Fix template pattern partial wildcard matching.
 
-#### Telegraf plugins
+#### Plugins
 
 - Bind input (`bind`)
   - Add missing `rcode` and `zonestat`.
@@ -135,7 +147,7 @@ menu:
   - Allow selection of collected statistic types in cloudwatch input.
 - Apache Solr (`solr`)
   - Add support for HTTP basic auth.
-- Hddtemp (`hddtemp`) 
+- Hddtemp (`hddtemp`)
   - Add source tag.
 - InfluxDB Listener (`influxdb_listener`)
   - Support verbose query parameter in ping endpoint.
@@ -143,7 +155,7 @@ menu:
   - Extend metrics collected from Nvidia GPUs.
 - Net (`net`)
   - Speed up interface stat collection.
-- PHP FM (`phpfm`) 
+- PHP FM (`phpfm`)
   - Enhance HTTP connection options.
 - Ping (`ping`)
   - Add TTL field.
@@ -262,7 +274,7 @@ menu:
 
 - Prometheus Client (`prometheus_client`) output plugin.
   - Allow colons in metric names.
-  
+
 ## 1.10.2 [2019-04-02]
 
 ### Breaking changes
