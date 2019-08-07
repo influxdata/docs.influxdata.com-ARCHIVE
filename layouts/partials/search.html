@@ -1,6 +1,6 @@
 <div class="navbar--search" id="navbar--search">
 	{{ $current := . }}
-	{{ if $.IsHome }}
+	{{ if or $.IsHome (in $current.RelPermalink "/platform/") }}
 		<input class="navbar--search-field" id="algolia-search-input" type="text" accesskey="s" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" dir="auto" placeholder="Search the docs...">
 	{{ end }}
 	{{ range $product := .Site.Menus.products }}
