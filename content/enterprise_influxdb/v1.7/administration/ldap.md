@@ -7,10 +7,10 @@ menu:
     weight: 40
     parent: Administration
 ---
-Configure InfluxDB Enterprise to query a Lightweight Directory Access Protocol (LDAP)-compatible directory service to:
+Configure InfluxDB Enterprise to use LDAP (Lightweight Directory Access Protocol) to:
 
 - Determine user permissions
-- Synchronize InfluxDB and the directory service so each request to the remote directory service doesn't need to be queried.
+- Synchronize InfluxDB and LDAP so each LDAP request doesn't need to be queried.
 
 ## Requirements
 
