@@ -210,7 +210,7 @@ InfluxDB works within file system size restrictions for Linux and Windows POSIX.
 - Linux ext3 file system limits size ~16TB 
 - Linux ext4 file system limits size to ~exabyte (with file size limit ~16TB)
 
-If you anticipate growing over 16TB per volume/file system, we recommend finding a provider that supports your storage requirements.
+If you anticipate growing over 16TB per volume/file system, we recommend finding a provider and distribution that supports your storage requirements.
 
 ## How do I use the InfluxDB CLI to return human readable timestamps?
 
