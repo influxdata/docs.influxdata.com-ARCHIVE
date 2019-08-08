@@ -9,32 +9,32 @@ menu:
     parent: Guides
 ---
 
-## Controlling access to data with InfluxDB Enterprise's fine-grained authorization
+Use fine-grained authorization in InfluxDB Enterprise to control access at the database, measurement, or series level.
 
-In InfluxDB OSS, access control operates only at a database level.
-In InfluxDB Enterprise, fine-grained authorization can be used to control access at a measurement or series level.
+> **Note:** InfluxDB OSS supports access control at the database level only.
 
-### Concepts
+## Set up fine-grained authorization (FGA)
 
-To use fine-grained authorization (FGA), you must first [enable authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication) in your configuration file.
-Then the admin user needs to create users through the query API and grant those users explicit read and/or write privileges per database.
-So far, this is the same as how you would configure authorization on an InfluxDB OSS instance.
+> **Note:** To set up FGA, you must have admin permissions.
 
-To continue setting up fine-grained authorization, the admin user must first set _restrictions_ which define a combination of database, measurement, and tags which cannot be accessed without an explicit _grant_.
-A _grant_ enables access to series that were previously restricted.
+1. [Enable authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication) in your configuration file.
+2. Create users through the query API and grant users explicit read and/or write privileges per database.
+3. Obtain access to meta nodes' HTTP ports (which run on port 8091 by default).
 
-Restrictions limit access to the series that match the database, measurement, and tags specified.
-The different access permissions (currently just "read" and "write") can be restricted independently depending on the scenario.
-Grants will allow access, according to the listed permissions, to restricted series for the users and roles specified.
-Users are the same as the users created in InfluxQL, and [roles](/enterprise_influxdb/v1.7/features/users/#cluster-user-information), an InfluxDB Enterprise feature, are created separately through the Meta HTTP API.
+    > **Note:** In a typical cluster configuration, the data nodes' HTTP ports (8086 by default) are exposed to clients but the meta nodes' HTTP ports are not. You may need to work with your network administrator to gain access to the meta nodes' HTTP ports.
+
+4. Set up restrictions to limit access permissions to series that match a specified combination of database, measurement, and tags.
+
+    > **Note:** Access permissions (currently "read" and "write") may be restricted independently depending on the scenario.
+
+5. Set up grants to remove restrictions for specified users and roles.
+6. Update, modify, or delete grants for users or roles as needed.
+
+> **Note:** Users are the same as the users created in InfluxQL and [roles](/enterprise_influxdb/v1.7/features/users/#cluster-user-information), an InfluxDB Enterprise feature, are created separately through the Meta HTTP API.
 
 ### Modifying grants and restrictions
 
-To configure FGA, you will need access to the meta nodes' HTTP ports (which run on port 8091 by default).
-Note that in a typical cluster configuration, the data nodes' HTTP ports (8086 by default) are exposed to clients but the meta nodes' HTTP ports are not.
-You may need to work with your network administrator to gain access to the meta nodes' HTTP ports.
-
-### Scenario: partitioning access within a single measurement via users
+#### Scenario: partitioning access in a single measurement via users
 
 We'll assume a schema of a database named `datacenters`, one measurement named `network` with a tag of `dc=east` or `dc=west`, and two fields, `bytes_in` and `bytes_out`.
 Suppose you want to make sure that the client in the east datacenter can't read or write the west datacenter's metrics, and vice versa.
@@ -54,9 +54,14 @@ GRANT ALL ON datacenters TO west
 At this point, the east and west users have unrestricted read and write access to the `datacenters` database.
 We'll need to decide what restrictions to apply in order to limit their access.
 
-#### Restrictions
+#### Set up restrictions
 
-##### Restriction option 1: the entire database
+Set up restrictions to limit access permissions to:
+- an entire database
+- a measurement in the database
+- a specific series in the database
+
+##### Restrict the entire database
 
 Restricting the entire database is a simple option, and in most cases it is the simplest option to reason about.
 Moreover, because this is a very general restriction, it will have minimal impact on performance.
@@ -74,7 +79,7 @@ curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
 
 After applying this restriction and before applying any grants, the east and west users will not be authorized to read from or write to the database.
 
-##### Restriction option 2: one measurement within the database
+##### Restrict one measurement in the database
 
 Restricting a single measurement will disallow reads and writes within that measurement, but access to other measurements within the database will be decided by standard permissions.
 
@@ -91,7 +96,7 @@ curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
 Compared to the previous approach of restricting the entire database, this only restricts access to the measurement `network`.
 In this state, the east and west users are free to read from and write to any measurement in the database `datacenters` besides `network`.
 
-##### Restriction option 3: specific series in a database
+##### Restrict specific series in a database
 
 The most fine-grained restriction option is to restrict specific tags in a measurement and database.
 
@@ -118,12 +123,15 @@ Remember that you will achieve the best performance by having few, broad restric
 
 We only used the matcher `exact` above, but you can also match with `prefix` if you want to restrict based on a common prefix on your database, measurements, or tags.
 
-#### Grants
 
-Now that you've applied your restrictions that apply to all users, you must apply grants to allow selected users to bypass the restrictions.
+
+
+#### Grant options
+
+Now that you've applied your restrictions that apply to all users, apply, update, or delete grant access to determine whether selected users to bypass the restrictions.
 The structure of a POST body for a grant is identical to the POST body for a restriction, but with the addition of a `users` array.
 
-##### Grant option 1: the entire database
+##### Grant access to the entire database
 
 This offers no guarantee that the users will write to the correct measurement or use the correct tags.
 
@@ -137,7 +145,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
   }'
 ```
 
-##### Grant option 2: one measurement within the database
+##### Grant access to one measurement in a database
 
 This guarantees that the users will only have access to the `network` measurement but it still does not guarantee that they will use the correct tags.
 
@@ -152,7 +160,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
   }'
 ```
 
-##### Grant option 3: specific tags on a database
+##### Grant access to specific tags on a database
 
 This guarantees that the users will only have access to data with the corresponding `dc` tag but it does not guarantee that they will use the `network` measurement.
 
@@ -175,7 +183,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
   }'
 ```
 
-##### Grant option 4: specific series within the database
+##### Grant access to specific series in a database
 
 To guarantee that both users only have access to the `network` measurement and that the east user uses the tag `dc=east` and the west user uses the tag `dc=west`, we need to make two separate grant calls:
 
@@ -202,6 +210,21 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 
 Now, when the east user writes to the `network` measurement, it must include the tag `dc=east`, and when the west user writes to `network`, it must include the tag `dc=west`.
 Note that this is only the requirement of the presence of that tag; `dc=east,foo=bar` will also be accepted.
+
+##### Modify a grant
+
+To modify an existing grant, following the steps to create a new grant, except use PATCH instead of POST. 
+
+>**Note:** Supply all of the data from the existing grant, and specify the field(s) to update. The grant ID cannot be used to update a single field.
+
+##### Delete a grant
+
+Run the following command to delete a grant:
+
+```js
+curl -X "DELETE" "http://localhost:8091/influxdb/v2/acl/grants/<grant_id>
+```
+
 
 ### Scenario: partitioning access via roles
 
