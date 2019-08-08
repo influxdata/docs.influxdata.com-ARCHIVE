@@ -196,10 +196,7 @@ The new configuration options are set to the default settings.
 
 ### Step 5: [For TSI Preview instances only] Prepare your node to support Time Series Index (TSI).
 
-1. Delete all existing TSM-based shard `index` directories.
-
-  - Remove the existing `index` directories to ensure there are no incompatible index files.
-  - By default, the `index` directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
+1. Delete all existing TSM-based shard `index` directories (by default, located at `/<shard_ID>/index` for example, `/2/index`).
 
 2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
