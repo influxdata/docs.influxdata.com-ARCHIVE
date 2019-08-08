@@ -34,9 +34,7 @@ Fine-grained authorization in InfluxDB Enterprise controls access at the databas
 5. Set up grants to remove restrictions for specified users and roles.
 6. Update, modify, or delete grants for users or roles as needed.
 
-### Modifying grants and restrictions
-
-#### Scenario: partitioning access in a single measurement via users
+### Giving users access to a database
 
 We'll assume a schema of a database named `datacenters`, one measurement named `network` with a tag of `dc=east` or `dc=west`, and two fields, `bytes_in` and `bytes_out`.
 Suppose you want to make sure that the client in the east datacenter can't read or write the west datacenter's metrics, and vice versa.
