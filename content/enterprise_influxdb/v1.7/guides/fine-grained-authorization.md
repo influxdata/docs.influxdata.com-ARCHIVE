@@ -9,28 +9,30 @@ menu:
     parent: Guides
 ---
 
-Use fine-grained authorization in InfluxDB Enterprise to control access at the database, measurement, or series level.
+Fine-grained authorization in InfluxDB Enterprise controls access at the database, measurement, or series level.
 
 > **Note:** InfluxDB OSS supports access control at the database level only.
 
 ## Set up fine-grained authorization (FGA)
 
-> **Note:** To set up FGA, you must have admin permissions.
+> **Note:** To set up FGA, you must have [admin permissions](/influxdb/v1.7/administration/authentication_and_authorization/#admin-user-management).
 
 1. [Enable authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication) in your configuration file.
-2. Create users through the query API and grant users explicit read and/or write privileges per database.
-3. Obtain access to meta nodes' HTTP ports (which run on port 8091 by default).
+2. Create users (the same way you do for InfluxDB) through the query API and grant users explicit read and/or write privileges per database. For detail, see [User management commands](/influxdb/v1.7/administration/authentication_and_authorization/#user-management-commands).
+3. Obtain access to the meta nodes' HTTP ports (8091 by default).
 
     > **Note:** In a typical cluster configuration, the data nodes' HTTP ports (8086 by default) are exposed to clients but the meta nodes' HTTP ports are not. You may need to work with your network administrator to gain access to the meta nodes' HTTP ports.
 
-4. Set up restrictions to limit access permissions to series that match a specified combination of database, measurement, and tags.
+4. Create and manage custom [roles](/enterprise_kapacitor/v1.5/administration/auth/#roles).
 
-    > **Note:** Access permissions (currently "read" and "write") may be restricted independently depending on the scenario.
+    > **Note:** For an overview of how users and roles work in InfluxDB Enterprise, see [InfluxDB Enterprise users](/enterprise_influxdb/v1.7/features/users/#create-users-roles).
+
+5. Set up restrictions to limit access to series that match a specified combination of database, measurement, and tags.
+
+    > **Note:** Permissions (currently "read" and "write") may be restricted independently depending on the scenario.
 
 5. Set up grants to remove restrictions for specified users and roles.
 6. Update, modify, or delete grants for users or roles as needed.
-
-> **Note:** Users are the same as the users created in InfluxQL and [roles](/enterprise_influxdb/v1.7/features/users/#cluster-user-information), an InfluxDB Enterprise feature, are created separately through the Meta HTTP API.
 
 ### Modifying grants and restrictions
 
