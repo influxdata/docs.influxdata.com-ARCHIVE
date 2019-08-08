@@ -198,13 +198,13 @@ The new configuration options are set to the default settings.
 
 1. Delete all existing TSM-based shard `index` directories.
 
-* Remove the existing `index` directories to ensure there are no incompatible index files.
-* By default, the `index` directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
+  - Remove the existing `index` directories to ensure there are no incompatible index files.
+  - By default, the `index` directories are located at `/<shard_ID>/index` (e.g., `/2/index`).
 
 2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
-* When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
-* Run the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
+  - When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
+  - Run the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
 > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,
 > or ensure that the permissions match afterward.
