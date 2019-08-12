@@ -11,7 +11,7 @@ menu:
 Configure InfluxDB Enterprise to use LDAP (Lightweight Directory Access Protocol) to:
 
 - Validate user permissions
-- Synchronize InfluxDB and LDAP so each LDAP request doesn't need to be queried.
+- Synchronize InfluxDB and LDAP so each LDAP request doesn't need to be queried
 
 ## Requirements
 
@@ -92,6 +92,8 @@ A `DN` is the distinguished name that uniquely identifies an entry and describes
   # this configuration should work out of the box.
   # Verify with `influxd-ctl ldap verify /path/to/this.toml`.
 
+  # Note, Windows Active Directory may not work with LDAP.
+
 enabled = true
 
 [[servers]]
@@ -109,7 +111,7 @@ enabled = true
   # per the LDAPv3 standard.
   # Other options are "starttls+insecure", which behaves the same as starttls
   # but skips the server certificate verification, and "none", which uses an unencrypted connection.
-  # security = "starttls"
+  security = "starttls"
 
   # Credentials to use when searching for a user or group.
   bind-dn = "cn=readonly admin,ou=users,ou=enterprisead,dc=enterprisead,dc=example,dc=com"
