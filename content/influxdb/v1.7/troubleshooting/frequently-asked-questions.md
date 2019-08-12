@@ -21,6 +21,8 @@ Where applicable, it links to outstanding issues on GitHub.
 * [What is the relationship between shard group durations and retention policies?](#what-is-the-relationship-between-shard-group-durations-and-retention-policies)
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
 * [Why does InfluxDB fail to parse microsecond units in the configuration file?](#why-does-influxdb-fail-to-parse-microsecond-units-in-the-configuration-file)
+* [Does InfluxDB have a file system size limit?](#does-influxdb-have-a-file-system-size-limit)
+
 
 **Command line interface (CLI)**
 
@@ -199,6 +201,16 @@ If a configuration option specifies the `u` or `µ` syntax, InfluxDB fails to st
 ```
 run: parse config: time: unknown unit [µ|u] in duration [<integer>µ|<integer>u]
 ```
+
+## Does InfluxDB have a file system size limit?
+
+InfluxDB works within file system size restrictions for Linux and Windows POSIX. Some storage providers and distributions have size restrictions; for example:
+
+- Amazon EBS volume limits size to ~16TB
+- Linux ext3 file system limits size ~16TB 
+- Linux ext4 file system limits size to ~1EB (with file size limit ~16TB)
+
+If you anticipate growing over 16TB per volume/file system, we recommend finding a provider and distribution that supports your storage requirements.
 
 ## How do I use the InfluxDB CLI to return human readable timestamps?
 
