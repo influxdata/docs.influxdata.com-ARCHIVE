@@ -66,7 +66,7 @@ Update the following settings in each meta node configuration file (/etc/influxd
 
 2. Save the sample file and edit as needed for your LDAP server. For detail, see the [sample LDAP configuration file](#sample-ldap-configuration) below.
 
-    > **Note:** To use fine-grained authorization (FGA) with LDAP, you must map InfluxDB Enterprise roles to key-value pairs in the LDAP database. For more information, see [Fine-grained authorization in InfluxDB Enterprise](/enterprise_influxdb/v1.7/guides/fine-grained-authorization/).
+    > **Note:** To use fine-grained authorization (FGA) with LDAP, you must map InfluxDB Enterprise roles to key-value pairs in the LDAP database. For more information, see [Fine-grained authorization in InfluxDB Enterprise](/enterprise_influxdb/v1.7/guides/fine-grained-authorization/). The InfluxDB admin user doesn't include permissions for InfluxDB Enterprise roles.
 
 3. To verify your LDAP configuration and see what happens as you authenticate through LDAP, run:
 
