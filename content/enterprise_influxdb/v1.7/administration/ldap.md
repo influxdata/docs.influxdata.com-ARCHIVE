@@ -151,14 +151,14 @@ enabled = true
   # For example, if you map the following groups and roles:
 
   [[servers.group-mappings]]
-    group = "admins"
+    group = "admin"
     role = "administrator"
 
   [[servers.group-mappings]]
-    group = "users"
+    group = "user"
     role = "monitor"
 
-  # To do `admins` tasks, you'd log in with the `administrator` role username and password.
+  # To do `admin` tasks, log in with the `administrator` role username and password.
 
-  # To do `users` tasks, you'd log in with the `monitor` role username and password.
+  # To do `user` tasks, log in with the `monitor` role username and password.
 ```
