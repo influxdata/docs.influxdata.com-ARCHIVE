@@ -19,6 +19,7 @@ This article covers the following:
 - [Kapacitor cluster architecture](#kapacitor-cluster-architecture)
 - [Setup a Kapacitor Enterprise cluster](#setup-a-kapacitor-enterprise-cluster)
 - [Remove a member from a Kapacitor cluster](#remove-a-member-from-a-kapacitor-cluster)
+- [Cluster data ingestion](#cluster-data-ingestion)
 - [Cluster awareness and replication](#cluster-awareness-and-replication)
 - [Troubleshooting](#troubleshooting)
 
@@ -300,6 +301,29 @@ Member ID                               Gossip Address RPC Address    API Addres
 > If decommissioning the Kapacitor server, be sure to [remove its subscription from InfluxDB](/influxdb/latest/administration/subscription-management/#remove-subscriptions).
 > InfluxDB does not know if the server will come back or not and will continue to
 > attempt to send data to the removed member unless its subscription is manually removed.
+
+## Cluster data ingestion
+The primary method for sending data to Kapacitor is through using
+[subscriptions](/kapacitor/v1.5/administration/subscription-management/), but you
+can also [send data directly to the Kapacitor HTTP API](/kapacitor/v1.5/working/api/#writing-data).
+
+### Sequentially or in parallel
+When writing directly to the `kapacitor/v1/write` endpoint of nodes in your Kapacitor Enterprise cluster,
+you can send data in parallel (to all nodes at once) or sequentially (to one node after the other).
+Either method is accepted, but if writing sequentially, ensure each point has the same timestamp
+when written to nodes and that requests arrive quickly.
+Even though each node will process data at slightly different times, points have
+the same timestamps, each Kapacitor node will compute the same result.
+
+The [`delay-per-member`](#delay-per-member) configuration options is a time interval
+that allows for nodes to process data at slightly different times.
+As long as the write requests to the first node and the last node are no more than
+the `delay-per-member` interval, you will not have any issues.
+
+{{% note %}}
+The default value of `delay-per-member` is `10s`.
+You can increase the value, but this will delay alert events by that same amount.
+{{% /note %}}
 
 ## Cluster awareness and replication
 The current release of Kapacitor Enterprise is only partially "cluster-aware," meaning
