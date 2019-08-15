@@ -1904,7 +1904,7 @@ the returned timestamps mark the start of the `GROUP BY time()` interval.
 `GROUP BY time()` queries with the `TOP()` function behave differently;
 they maintain the timestamp of the original data point.
 
-#####E Example
+###### Example
 
 The query below returns two points per 18-minute
 `GROUP BY time()` interval.
