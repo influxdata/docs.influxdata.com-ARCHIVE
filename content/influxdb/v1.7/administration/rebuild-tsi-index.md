@@ -39,3 +39,14 @@ influx_inspect buildtsi -datadir /data -waldir /wal
 
 ## 5. Restart InfluxDB
 Restart InfluxDB by starting the `influxd` process.
+
+---
+
+{{% note %}}
+## Rebuilding the TSI index in an InfluxDB Enterprise cluster
+To rebuild the TSI index in an InfluxDB Enterprise cluster, follow the steps
+above for every data node in the cluster.
+After restarting the `influxd` process on a data node, allow the
+[hinted handoff queue (HHQ)](/enterprise_influxdb/latest/concepts/clustering/#hinted-handoff)
+to write all missed data to the updated node moving on to the next node.
+{{% /note %}}
