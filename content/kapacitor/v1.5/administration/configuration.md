@@ -158,13 +158,13 @@ are defined in the `[http]` table.
 If the TLS configuration settings is not specified, Kapacitor supports all of the cipher suite IDs listed and all of the TLS versions implemented in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants), depending on the version of Go used to build InfluxDB.
 Use the `SHOW DIAGNOSTICS` command to see the version of Go used to build Kapacitor.
 
-###### `ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256", ]
-   ]
+###### `ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",]`
+
 Determines the available set of cipher suites. For a list of available ciphers, which depends on the version of Go, see https://golang.org/pkg/crypto/tls/#pkg-constants. 
 You can use the query `SHOW DIAGNOSTICS` to see the version of Go used to build Kapacitor. 
 If not specified, uses the default settings from Go's crypto/tls package.
 
-###### `min-version = tls1.2`
+###### `min-version = "tls1.2"`
 
 Minimum version of the tls protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
 
