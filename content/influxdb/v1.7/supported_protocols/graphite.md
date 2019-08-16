@@ -40,6 +40,7 @@ The special value _measurement_ is used to define the measurement name.  It can 
 ### Basic Matching
 
 `servers.localhost.cpu.loadavg.10`
+
 * Template: `.host.resource.measurement*`
 * Output:  _measurement_ =`loadavg.10` _tags_ =`host=localhost resource=cpu`
 
@@ -49,12 +50,14 @@ The _measurement_ can be specified multiple times in a template to provide more 
 matched multiple times. Multiple values will be joined together using the _Separator_ config variable.  By default, this value is `.`.
 
 `servers.localhost.localdomain.cpu.cpu0.user`
+
 * Template: `.host.host.measurement.cpu.measurement`
 * Output: _measurement_ = `cpu.user` _tags_ = `host=localhost.localdomain cpu=cpu0`
 
 Since `.` requires queries on measurements to be double-quoted, you may want to set this to `_` to simplify querying parsed metrics.
 
 `servers.localhost.cpu.cpu0.user`
+
 * Separator: `_`
 * Template: `.host.measurement.cpu.measurement`
 * Output: _measurement_ = `cpu_user` _tags_ = `host=localhost cpu=cpu0`
@@ -64,6 +67,7 @@ Since `.` requires queries on measurements to be double-quoted, you may want to 
 Additional tags can be added to a metric if they don't exist on the received metric.  You can add additional tags by specifying them after the pattern.  Tags have the same format as the line protocol.  Multiple tags are separated by commas.
 
 `servers.localhost.cpu.loadavg.10`
+
 * Template: `.host.resource.measurement* region=us-west,zone=1a`
 * Output:  _measurement_ = `loadavg.10` _tags_ = `host=localhost resource=cpu region=us-west zone=1a`
 
