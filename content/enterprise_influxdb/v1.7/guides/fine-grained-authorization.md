@@ -48,11 +48,19 @@ and then complete the following steps.
 ---
 
 {{% note %}}
-#### Tools used in examples
+#### Notes about examples
 The examples below use `curl`, a command line tool for transferring data, to send
 HTTP requests to the Meta API, and `jq`, a command line JSON processor,
 to make the JSON output easier to read.
 Alternatives for each are available, but are not covered in this documentation.
+
+All examples  assume authentication is enabled in InfluxDB and require admin
+credentials with each request.
+Use the `curl -u` flag to pass authentication credentials:
+
+```sh
+curl -u `username:password` #...
+```
 {{% /note %}}
 
 ---
@@ -93,6 +101,7 @@ The following examples create two new roles:
 ```sh
 # Create east role
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "create",
@@ -103,6 +112,7 @@ curl -s -L -XPOST "http://localhost:8091/role" \
 
 # Create west role
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "create",
@@ -120,6 +130,7 @@ The following example sets read and write permissions on `db1` for both `east` a
 
 ```sh
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "add-permissions",
@@ -132,6 +143,7 @@ curl -s -L -XPOST "http://localhost:8091/role" \
   }'
 
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "add-permissions",
@@ -152,6 +164,7 @@ The following example removes read and write permissions from `db1` for the `eas
 
 ```sh
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "remove-permissions",
@@ -173,6 +186,7 @@ The following examples add user1, user2 and the ops user to the `east` and `west
 ```sh
 # Add user1 and ops to the east role
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "add-users",
@@ -184,6 +198,7 @@ curl -s -L -XPOST "http://localhost:8091/role" \
 
 # Add user1 and ops to the west role
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "add-users",
@@ -208,6 +223,7 @@ field to `delete` and include the name of the role to delete.
 
 ```sh
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "delete",
@@ -247,6 +263,7 @@ The following example restricts reads and writes on the `my_database` database.
 
 ```sh
 curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -261,6 +278,7 @@ _This restriction does not apply to other measurements in the `my_database` data
 
 ```sh
 curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -277,6 +295,7 @@ _This restriction does not apply to other tags or tag values in the `network` me
 
 ```sh
 curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -292,6 +311,7 @@ writes to `network` with a tag key of `datacenter` and a tag value of anything b
 ##### Apply restrictions to a series defined by multiple tags
 ```sh
 curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -312,6 +332,7 @@ To create multiple restrictions for a list of values, use a bash `for` loop:
 ```sh
 for value in val1 val2 val3 val4; do
   curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+    -u "admin-username:admin-password" \
     -H "Content-Type: application/json" \
     --data-binary '{
       "database": {"match": "exact", "value": "my_database"},
@@ -327,7 +348,7 @@ done
 To view existing restrictions, use the `GET` request method with the `acl/restrictions` endpoint.
 
 ```sh
-curl -L -XGET "http://localhost:8091/influxdb/v2/acl/restrictions" | jq
+curl -L -u "admin-username:admin-password" -XGET "http://localhost:8091/influxdb/v2/acl/restrictions" | jq
 ```
 
 ### Update a restriction
@@ -341,10 +362,12 @@ Use the `DELETE` request method to delete a restriction by ID.
 
 ```sh
 # Obtain the restriction ID from the list of restrictions
-curl -L -XGET "http://localhost:8091/influxdb/v2/acl/restrictions" | jq
+curl -L -u "admin-username:admin-password" \
+  -XGET "http://localhost:8091/influxdb/v2/acl/restrictions" | jq
 
 # Delete the restriction using the restriction ID
-curl -L -XDELETE "http://localhost:8091/influxdb/v2/acl/restrictions/<restriction_id>"
+curl -L -u "admin-username:admin-password" \
+  -XDELETE "http://localhost:8091/influxdb/v2/acl/restrictions/<restriction_id>"
 ```
 
 ## Manage grants
@@ -354,7 +377,8 @@ permissions on InfluxDB assets.
 Manage grants using the InfluxDB Meta API `acl/grants` endpoint.
 
 ```sh
-curl -L -XGET "http://localhost:8091/influxdb/v2/acl/grants"
+curl -L -u "admin-username:admin-password" \
+  -XGET "http://localhost:8091/influxdb/v2/acl/grants"
 ```
 
 - [Grant permissions by database](#grant-permissions-by-database)
@@ -372,7 +396,7 @@ The following examples grant read and write permissions on the `my_database` dat
 ##### Grant database-level permissions to users
 ```sh
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
+  -u "admin-username:admin-password" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
     "permissions": ["read", "write"],
@@ -386,6 +410,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 ##### Grant database-level permissions to roles
 ```sh
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -405,6 +430,7 @@ guarantee that users will use the correct tags.
 ##### Grant measurement-level permissions to users
 ```sh
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -421,6 +447,7 @@ To grant access for roles, run:
 
 ```sh
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -442,6 +469,7 @@ _Neither guarantees the users will use the `network` measurement._
 ```sh
 # Grant user1 read/write permissions on data with the 'datacenter=east' tag set.
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -452,6 +480,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 
 # Grant user2 read/write permissions on data with the 'datacenter=west' tag set.
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -465,6 +494,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 ```sh
 # Grant role1 read/write permissions on data with the 'datacenter=east' tag set.
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -475,6 +505,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 
 # Grant role2 read/write permissions on data with the 'datacenter=west' tag set.
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -494,6 +525,7 @@ _They each specify the measurement in the request body._
 # Grant user1 read/write permissions on data with the 'datacenter=west' tag set
 # inside the 'network' measurement.
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -506,6 +538,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 # Grant user2 read/write permissions on data with the 'datacenter=west' tag set
 # inside the 'network' measurement.
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -521,6 +554,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 # Grant role1 read/write permissions on data with the 'datacenter=west' tag set
 # inside the 'network' measurement.
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -533,6 +567,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 # Grant role2 read/write permissions on data with the 'datacenter=west' tag set
 # inside the 'network' measurement.
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
@@ -555,7 +590,8 @@ Note that this is only the requirement of the presence of that tag;
 To view existing grants, use the `GET` request method with the `acl/grants` endpoint.
 
 ```sh
-curl -L -XGET "http://localhost:8091/influxdb/v2/acl/grants" | jq
+curl -L -u "admin-username:admin-password" \
+  -XGET "http://localhost:8091/influxdb/v2/acl/grants" | jq
 ```
 
 ### Update a grant
@@ -569,8 +605,10 @@ Use the `DELETE` request method to delete a grant by ID.
 
 ```sh
 # Obtain the grant ID from the list of grants
-curl -L -XGET "http://localhost:8091/influxdb/v2/acl/grants" | jq
+curl -L -u "admin-username:admin-password" \
+  -XGET "http://localhost:8091/influxdb/v2/acl/grants" | jq
 
 # Delete the grant using the grant ID
-curl -L -XDELETE "http://localhost:8091/influxdb/v2/acl/grants/<grant_id>"
+curl -L -u "admin-username:admin-password" \
+  -XDELETE "http://localhost:8091/influxdb/v2/acl/grants/<grant_id>"
 ```
