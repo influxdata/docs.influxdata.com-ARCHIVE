@@ -303,20 +303,20 @@ Member ID                               Gossip Address RPC Address    API Addres
 > attempt to send data to the removed member unless its subscription is manually removed.
 
 ## Cluster data ingestion
-The primary method for sending data to Kapacitor is through using
-[subscriptions](/kapacitor/v1.5/administration/subscription-management/), but you
-can also [send data directly to the Kapacitor HTTP API](/kapacitor/v1.5/working/api/#writing-data).
+The primary methods for writing data to Kapacitor are using
+[subscriptions](/kapacitor/v1.5/administration/subscription-management/) or directly
+[using the Kapacitor API `/kapacitor/v1/write` endpoint](/kapacitor/v1.5/working/api/#writing-data).
 
 ### Sequentially or in parallel
-When writing directly to the `kapacitor/v1/write` endpoint of nodes in your Kapacitor Enterprise cluster,
-you can send data in parallel (to all nodes at once) or sequentially (to one node after the other).
-Either method is accepted, but if writing sequentially, ensure each point has the same timestamp
-when written to nodes and that requests arrive quickly.
-Even though each node will process data at slightly different times, points have
-the same timestamps, each Kapacitor node will compute the same result.
+When writing directly to the Kapacitor API, send requests to all nodes in your Kapacitor Enterprise cluster.
+You can send data in parallel (to all nodes at once) or sequentially (to one node after the other).
+Either method is acceptable, but when writing sequentially, ensure each point has
+the same timestamp when writing to each node and that write requests arrive quickly.
+Each node will process data at slightly different times, but if points have
+the same timestamp, each Kapacitor node will compute the same result.
 
-The [`delay-per-member`](#delay-per-member) configuration options is a time interval
-that allows for nodes to process data at slightly different times.
+The [`delay-per-member`](#delay-per-member) configuration option is a time interval
+that lets nodes process data at slightly different times.
 As long as the write requests to the first node and the last node are no more than
 the `delay-per-member` interval, you will not have any issues.
 
