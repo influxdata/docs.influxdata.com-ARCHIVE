@@ -48,11 +48,19 @@ and then complete the following steps.
 ---
 
 {{% note %}}
-#### Tools used in examples
+#### Notes about examples
 The examples below use `curl`, a command line tool for transferring data, to send
 HTTP requests to the Meta API, and `jq`, a command line JSON processor,
 to make the JSON output easier to read.
 Alternatives for each are available, but are not covered in this documentation.
+
+All examples  assume authentication is enabled in InfluxDB and require admin
+credentials with each request.
+Use the `curl -u` flag to pass authentication credentials:
+
+```sh
+curl -u `username:password` #...
+```
 {{% /note %}}
 
 ---
