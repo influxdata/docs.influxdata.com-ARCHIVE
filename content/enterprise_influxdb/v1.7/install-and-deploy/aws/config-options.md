@@ -1,10 +1,10 @@
 ---
-title: Deploy an InfluxDB Enterprise cluster on Amazon Web Services
+title: Configuration options
 menu:
   enterprise_influxdb_1_7:
-    name: Deploy on Amazon Web Services
+    name: AWS configuration options
     weight: 20
-    parent: deploy-in-cloud-enterprise
+    parent: aws
 ---
 
 AvailabilityZones
@@ -20,5 +20,5 @@ Password
 SSHLocation
 Subnets
 TelegrafVersion
-Username	-
+Username
 VpcId
