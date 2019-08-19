@@ -31,4 +31,10 @@ Parameters section:
       - SSH Access CIDR: Enter 0.0.0.0/0 to allow all traffic.
 
     - InfluxDB Configuration.
-      - 
+      - InfluxDB Enterprise License Key: BYOL only?
+      - InfluxDB Administrator Username:
+      - InfluxDB Administrator Password:
+      - InfluxDB Enterprise Version: Defaults to current version
+      - Telegraf Version: Defaults to current version
+      - InfluxDB Data Node Disk Size: Defaults to 250.
+      - InfluxDB Data Node Disk IOPS: Defaults to 1000.
