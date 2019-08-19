@@ -1,10 +1,10 @@
 ---
-title: Deploy InfluxDB Enterprise clusters in containers
+title: Deploy InfluxDB Enterprise clusters in AWS
 aliases:
     - /enterprise_influxdb/v1.7/other-options/
 menu:
   enterprise_influxdb_1_7:
-    name: Deploy in containers
+    name: Deploy in AWS
     identifier: deploy-in-cloud-enterprise
     weight: 30
     parent: Install and deploy
