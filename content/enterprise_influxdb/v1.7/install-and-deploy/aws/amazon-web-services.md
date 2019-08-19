@@ -43,4 +43,18 @@ Parameters section:
       - Availability Zones: You must select these in the same order as the subnets. ??? What does this mean again? And they also automatically alphabetize themselves still.
       - DataNodeInstanceType: Defaults to m5.large
       - MetaNodeInstanceType: t3.small
-      - MonitorInstanceType: t3- 
+      - MonitorInstanceType: t3.large
+
+## Step 3: Configure stack options
+
+- Tags section
+  - Enter key-value pairs to apply to resources in the stack.
+
+- Permissions section
+  - IAM role???
+
+- Advanced options
+
+## Step 4: Review
+
+- 
