@@ -38,3 +38,9 @@ Parameters section:
       - Telegraf Version: Defaults to current version
       - InfluxDB Data Node Disk Size: Defaults to 250.
       - InfluxDB Data Node Disk IOPS: Defaults to 1000.
+
+    - Other parameters
+      - Availability Zones: You must select these in the same order as the subnets. ??? What does this mean again? And they also automatically alphabetize themselves still.
+      - DataNodeInstanceType: Defaults to m5.large
+      - MetaNodeInstanceType: t3.small
+      - MonitorInstanceType: t3- 
