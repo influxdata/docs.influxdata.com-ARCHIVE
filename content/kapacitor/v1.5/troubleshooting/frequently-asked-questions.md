@@ -12,15 +12,21 @@ This page addresses frequent sources of confusion or important things to know re
 Where applicable, it links to outstanding issues on Github.
 
 **Administration**  
-[Is the alert state and alert data lost happen updating a script?](#is-the-alert-state-and-alert-data-lost-happen-when-updating-a-script)  
-[How do I verify that Kapacitor is receiving data from InfluxDB?](#how-do-i-verify-that-kapacitor-is-receiving-data-from-influxdb)
+
+- [Is the alert state and alert data lost happen updating a script?](#is-the-alert-state-and-alert-data-lost-happen-when-updating-a-script)  
+- [How do I verify that Kapacitor is receiving data from InfluxDB?](#how-do-i-verify-that-kapacitor-is-receiving-data-from-influxdb)
 
 **TICKscript**  
-[Batches work but streams do not. Why?](#batches-work-but-streams-do-not-why)  
-[Is there a limit on the number of scripts Kapacitor can handle?](#is-there-a-limit-on-the-number-of-scripts-kapacitor-can-handle)  
+
+- [Batches work but streams do not. Why?](#batches-work-but-streams-do-not-why)  
+- [Is there a limit on the number of scripts Kapacitor can handle?](#is-there-a-limit-on-the-number-of-scripts-kapacitor-can-handle)  
 
 **Performance**  
-[Do you get better performance with running one complex script or having multiple scripts running in parallel?](#do-you-get-better-performance-with-running-one-complex-script-or-having-multiple-scripts-running-in-parallel)  
+
+- [Do you get better performance with running one complex script or having multiple scripts running in parallel?](#do-you-get-better-performance-with-running-one-complex-script-or-having-multiple-scripts-running-in-parallel)  
+- [Do template-based scripts use less resources or are they just an ease-of-use tool?](#do-template-based-scripts-use-less-resources-r-are-they-just-an-ease-of-use-tool)  
+- [How does Kapacitor handle high load?](#how-does-kapacitor-handle-high-load)
+- [How can I optimize Kapacitor tasks?](#how-can-i-optimize-kapacitor-tasks)
 
 ## Administration
 
@@ -77,7 +83,40 @@ There is no software limit, but it will be limited by available server resources
 Taking things to the extreme, best-case is one task that consumes all the data and does all the work since there is added overhead when managing multiple tasks.
 However, significant effort has gone into reducing the overhead of each task.
 Use tasks in a way that makes logical sense for your project and organization.
-If you run into performance issues with multiple tasks, [let us know](https://github.com/influxdata/kapacitor/issues/new). _**As a last resort**_, merge tasks into more complex tasks.
+If you run into performance issues with multiple tasks, [let us know](https://github.com/influxdata/kapacitor/issues/new).
+_**As a last resort**_, merge tasks into more complex tasks.
 
 ### Do template-based scripts use less resources or are they just an ease-of-use tool?
-Templates are just an ease of use tool and make no difference in regards to performance.
+Templates are just an ease-of-use tool and make no difference in regards to performance.
+
+### How does Kapacitor handle high load?
+If Kapacitor is unable to ingest and process incoming data before it receives new data,
+Kapacitor queues incoming data in memory and processes it when able.
+Memory requirements of queued data depend on the ingest rate and shape of the incoming data.
+Once Kapacitor is able to process all queued data, it slowly releases memory
+as the internal garbage collector reclaims memory.
+
+Extended periods of high data ingestion can overwhelm available system resources
+forcing the operating system to stop the `kapacitord` process.
+The primary means for avoiding this issue are:
+
+- Ensure your hardware provides enough system resources to handle additional load.
+- Optimize your Kapacitor tasks. _[See below](#how-can-i-optimize-kapacitor-tasks)_.
+
+{{% note %}}
+As Kapacitor processes data in the queue, it may consume other system resources such as
+CPU, disk and network IO, etc., which will affect the overall performance of your Kapacitor server.
+{{% /note %}}
+
+### How can I optimize Kapacitor tasks?
+As you optimize Kapacitor tasks, consider the following:
+
+#### "Batch" incoming data
+[`batch`](/kapacitor/v1.5/nodes/batch_node/) queries data from InfluxDB in batches.
+As long as Kapacitor is able to process a batch before the next batch is queried,
+it won't need to queue anything.
+
+[`stream`](/kapacitor/v1.5/nodes/stream_node/) mirrors all InfluxDB writes to
+Kapacitor in real time and is more prone to queueing.
+If using `stream`, segment incoming data into time-based batches using
+[`window`](/kapacitor/v1.5/nodes/window_node/).
