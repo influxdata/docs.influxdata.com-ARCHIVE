@@ -8,14 +8,27 @@ menu:
 ---
 
 
-## Deploy an InfluxDB Enterprise cluster on Amazon Web Services
+1. Log into the AWS console.
+2. From Services, selext CloudFormation.
+3. In the lefthand navigation menu, select **Stacks**.
+4. Click **Create Stack**.
 
-InfluxData recommends using the Terraform [InfluxDB AWS Module](https://github.com/gruntwork-io/terraform-aws-influx)to deploy a single InfluxDB Enterprise cluster or a multi-cluster architecture on Amazon Web Services.
+## Step 1: Specify template
 
-### InfluxDB AWS Module (Terraform)
+1. In the Prepare template section, select **Template is ready**.
+2. In the Specify template section, upload the template. ???
+3. Click **Next**.
 
-The [InfluxDB AWS Module] is the official module for deploying InfluxDB Enterprise on AWS using [Terraform](https://www.terraform.io/) and [Packer](https://www.packer.io/).
+## Step 2: Specify stack details
 
-The InfluxDB AWS Module, maintained by [Gruntwork](http://www.gruntwork.io/), was written using a combination of Terraform and scripts (mostly bash) and includes automated tests, documentation, and examples.
+In the Stack name section, enter a name for your stack.
+Parameters section:
 
-For details on using this Terraform module to deploy InfluxDB Enterprise clusters, see the [InfluxDB AWS Module repository](https://github.com/gruntwork-io/terraform-aws-influx).
+  - Network Configuration.
+      - VPC ID: Click the dropdown menu to fill in your VPC. (??? is this a secret? gunnar)
+      - Subnets: Select three subnets.
+      - SSH Key Name: Create a key pair at Services > EC2 > Key Pairs.
+      - SSH Access CIDR: Enter 0.0.0.0/0 to allow all traffic.
+
+    - InfluxDB Configuration.
+      - 
