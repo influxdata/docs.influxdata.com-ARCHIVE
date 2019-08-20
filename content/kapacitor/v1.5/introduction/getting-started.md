@@ -274,7 +274,7 @@ Task files are commonly referred to as "TICKscripts."
 
 ### Task execution
 At the beginning of each TICKscript, you specify the database and retention policy
-that contain data the TICKscript should act using the `dbrp` keyword.
+that contain data the TICKscript should act on using the `dbrp` keyword.
 
 ```js
 dbrp "telegraf"."autogen"
