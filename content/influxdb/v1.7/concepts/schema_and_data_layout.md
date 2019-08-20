@@ -173,6 +173,8 @@ A shard group will only be removed once a shard group's *end time* is older than
 
 For example, if your RP has a duration of one day, InfluxDB will drop an hour's worth of data every hour and will always have 25 shard groups. One for each hour in the day and an extra shard group that is partially expiring, but will not be removed until the whole shard group is older than 24 hours.
 
+Another use case to consider: [finding tag keys in a specified time interval](#find-tag-keys-within-shard-duration-precision). Specify a short shard group duration, for example, 1h, to find tag keys within a one hour interval.
+
 ## Shard group duration recommendations
 
 The default shard group durations works well for most cases.
