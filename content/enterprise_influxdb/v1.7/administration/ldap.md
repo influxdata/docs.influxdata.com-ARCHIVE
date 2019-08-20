@@ -27,12 +27,8 @@ To use LDAP with an InfluxDB Enterprise cluster, do the following:
 
 ### Configure data nodes
 
-Update the following settings in each data node configuration file (/etc/influxdb/influxdb.conf):
+Update the following settings in each data node configuration file (`/etc/influxdb/influxdb.conf`):
 
-- Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
-- Provide a username and password as HTTP query parameters:
-  - `u`: username
-  - `p`: password
 - Enable HTTP authentication:
   - Set the `[http]` `auth-enabled` configuration setting, or corresponding environment variable `INFLUXDB_HTTP_AUTH_ENABLED`, to `true`. Default is `false`.
 - Configure the HTTP shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the secret and username:
@@ -46,14 +42,21 @@ Update the following settings in each data node configuration file (/etc/influxd
 
 Update the following settings in each meta node configuration file (/etc/influxdb/influxdb-meta.conf):
 
-- Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
-- Provide a username and password as HTTP query parameters:
-  - `u`: username
-  - `p`: password
 - Configure the meta node META shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the username and shared secret.
 - Set the `[meta]` configuration setting `internal-shared-secret`, or the corresponding environment variable `INFLUXDB_META_INTERNAL_SHARED_SECRET`, to `"<internal-shared-secret>"`.
 - Set the `[meta]` configuration setting `meta.ldap-allowed`, or the corresponding environment variable `INFLUXDB_META_LDAP_ALLOWED`, to `true` on all meta nodes in your cluster.
 - If using  to `true` on all meta nodes.
+
+### Authenticate your connection to InfluxDB
+
+To authenticate your connection, run the following command, replacing:
+
+`curl -u username:password -XPOST "http://localhost:8086/..."`
+
+Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
+- Provide a username and password as HTTP query parameters:
+  - `u`: username
+  - `p`: password
 
 ### Create, verify, and upload the LDAP configuration file
 
@@ -86,6 +89,7 @@ The following is a sample configuration file that connects to a publicly availab
 
 A `DN` is the distinguished name that uniquely identifies an entry and describes its position in the directory information tree (DIT) hierarchy. The DN of an LDAP entry is similar to a file path on a file system. `DNs` refers to multiple DN entries.
 
+{{% truncate %}}
 ```toml
 
   # As long as you have an SSH tunnel to the LDAP server,
@@ -164,3 +168,4 @@ enabled = true
 
   # To do `user` tasks, log in with the `monitor` role username and password.
 ```
+{{% /truncate %}}
