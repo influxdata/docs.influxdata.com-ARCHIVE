@@ -327,13 +327,13 @@ Environment variable: `INFLUXDB_DATA_MAX_INDEX_LOG_FILE_SIZE`
 
 #### `series-id-set-cache-size = 100`
 
-The size of the internal cache used in the TSI index to store previously 
-calculated series results. Cached results will be returned quickly from the cache rather 
-than needing to be recalculated when a subsequent query with a matching tag key-value 
-predicate is executed. 
+The size of the internal cache used in the TSI index to store previously
+calculated series results. Cached results will be returned quickly from the cache rather
+than needing to be recalculated when a subsequent query with a matching tag key-value
+predicate is executed.
 Setting this value to `0` will disable the cache, which may lead to query performance issues.
-This value should only be increased if it is known that the set of regularly used 
-tag key-value predicates across all measurements for a database is larger than 100. An 
+This value should only be increased if it is known that the set of regularly used
+tag key-value predicates across all measurements for a database is larger than 100. An
 increase in cache size may lead to an increase in heap usage.
 
 Environment variable: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
@@ -497,7 +497,7 @@ Disabling hinted handoff is not recommended and can lead to data loss if another
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_ENABLED`
 
-#### `max-size = "10737418240"`
+#### `max-size = 10737418240`
 
 The maximum size of the hinted handoff queue in bytes.
 Each queue is for one and only one other data node in the cluster.
