@@ -20,7 +20,7 @@ algoliaOptions: {
   {{$current := . }}
   {{ if or .IsHome (in $current.RelPermalink "/platform/") }}
     facetFilters: [ "latest:true" ]
-  {{ else }}    
+  {{ else }}
     {{ $product := index (findRE "[^/]+.*?" $current.RelPermalink) 0 }}
     {{ $version := index (findRE "[^/]+.*?" $current.RelPermalink) 1 }}
     {{ $latestVersion := index $.Site.Data.default_versions (print $product "_semver") }}
