@@ -4,7 +4,7 @@ menu:
   enterprise_influxdb_1_7:
     name: AWS configuration options
     weight: 30
-    parent: aws
+    parent: deploy-in-aws
 ---
 The following configuration options are available:
 

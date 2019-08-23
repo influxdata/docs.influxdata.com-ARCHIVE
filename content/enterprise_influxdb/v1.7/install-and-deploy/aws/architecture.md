@@ -4,7 +4,7 @@ menu:
   enterprise_influxdb_1_7:
     name: AWS architecture
     weight: 30
-    parent: aws
+    parent: deploy-in-aws
 ---
 <!-- Gunnar--can you add text describing this here?-->
 

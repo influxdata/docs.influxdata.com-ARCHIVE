@@ -4,7 +4,7 @@ menu:
   enterprise_influxdb_1_7:
     name: Deploy on Amazon Web Services
     weight: 30
-    parent: aws
+    parent: deploy-in-aws
 ---
 
 <!-- Gunnar--can you add some pverview/intro text here?-->
