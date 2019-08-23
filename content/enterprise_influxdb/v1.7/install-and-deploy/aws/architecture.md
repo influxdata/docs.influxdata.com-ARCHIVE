@@ -6,7 +6,6 @@ menu:
     weight: 30
     parent: aws
 ---
+<!-- Gunnar--can you add text describing this here?-->
 
 [Stacked Graph Controls](/img/influxdb/aws-marketplace-influxdb-enterprise.png)
-
-auto scaling groups: each one only has one instance on purpose that it manages. should never have more than one instance.  ** important to note in the docs for people making changes. each time an instance spins up it automatically ssigns itself an EBS and ENI (see image)

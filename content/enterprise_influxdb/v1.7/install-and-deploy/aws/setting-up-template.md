@@ -7,6 +7,7 @@ menu:
     parent: aws
 ---
 
+<!-- Gunnar--can you add some pverview/intro text here?-->
 
 ## Step 1: Specify template
 
