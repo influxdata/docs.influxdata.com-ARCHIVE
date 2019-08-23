@@ -49,14 +49,13 @@ Update the following settings in each meta node configuration file (/etc/influxd
 
 ### Authenticate your connection to InfluxDB
 
-To authenticate your connection, run the following command, replacing:
+- To authenticate your InfluxDB connection, run the following command, replacing `username:password` with your credentials:
 
-`curl -u username:password -XPOST "http://localhost:8086/..."`
+    ```js
+    curl -u username:password -XPOST "http://localhost:8086/..."
+    ```
 
-Provide an HTTP Basic Authentication header. See [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/) for details on using HTTP Basic Authentication with InfluxDB.
-- Provide a username and password as HTTP query parameters:
-  - `u`: username
-  - `p`: password
+For more detail on authentication, see [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/).
 
 ### Create, verify, and upload the LDAP configuration file
 
@@ -92,54 +91,46 @@ A `DN` is the distinguished name that uniquely identifies an entry and describes
 {{% truncate %}}
 ```toml
 
-  # As long as you have an SSH tunnel to the LDAP server,
-  # this configuration should work out of the box.
-  # Verify with `influxd-ctl ldap verify /path/to/this.toml`.
-
-  # Note, Windows Active Directory may not work with LDAP.
-
 enabled = true
 
 [[servers]]
-  # Assumes you have an SSH tunnel to the LDAP server.
-  # The SSH command looks something like:
-  # ssh -N -L 3389:ad_server:389 jumpbox_ip
-  # To add a tunnel-only user, run:
-  # useradd tunnel -m -d /home/tunnel -s /bin/true && mkdir -p /home/tunnel/.ssh && cat pubkey >> /home/tunnel/.ssh/authorized_keys
-  host = "LDAP-server-name"
-  port = 3389
+  enabled = true
+
+[[servers]]
+  host = "<LDAPserver>"
+  port = 389
 
   # Security mode for LDAP connection to this server.
-  # Defaults to "starttls", which uses an initial unencrypted connection
+  # The recommended security is set "starttls" by default. This uses an initial unencrypted connection
   # and upgrades to TLS as the first action against the server,
   # per the LDAPv3 standard.
-  # Other options are "starttls+insecure", which behaves the same as starttls
-  # but skips the server certificate verification, and "none", which uses an unencrypted connection.
+  # Other options are "starttls+insecure" to behave the same as starttls
+  # but skip server certificate verification, or "none" to use an unencrypted connection.
   security = "starttls"
 
   # Credentials to use when searching for a user or group.
-  bind-dn = "cn=readonly admin,ou=users,ou=enterprisead,dc=enterprisead,dc=example,dc=com"
-  bind-password = "p@ssw0rd"
+  bind-dn = "cn=read-only-admin,dc=example,dc=com"
+  bind-password = "password"
 
   # Base DNs to use when applying the search-filter to discover an LDAP user.
   search-base-dns = [
-    "ou=Users,ou=enterprisead,dc=enterprisead,dc=example,dc=com",
+    "dc=example,dc=com",
   ]
 
-  # LDAP filter to discover a user'\''s DN.
+  # LDAP filter to discover a user's DN.
   # %s will be replaced with the provided username.
-  search-filter = "(sAMAccountName=%s)"
+  search-filter = "(uid=%s)"
+  # On Active Directory you might use "(sAMAccountName=%s)".
 
   # Base DNs to use when searching for groups.
-  group-search-base-dns = [
-    "ou=Users,ou=enterprisead,dc=enterprisead,dc=example,dc=com",
-  ]
+  group-search-base-dns = ["dc=example,dc=com"]
 
   # LDAP filter to identify groups that a user belongs to.
-  # %s will be replaced with the user'\''s DN.
-  group-membership-search-filter = "(&(objectClass=group)(member=%s))"
+  # %s will be replaced with the user's DN.
+  group-membership-search-filter = "(&(objectClass=groupOfUniqueNames)(uniqueMember=%s))"
+  # On Active Directory you might use "(&(objectClass=group)(member=%s))".
 
-   # Attribute to use to determine the "group" in the group-mappings section.
+  # Attribute to use to determine the "group" in the group-mappings section.
   group-attribute = "ou"
   # On Active Directory you might use "cn".
 
@@ -152,20 +143,18 @@ enabled = true
   group-member-attribute = "uniqueMember"
   # On Active Directory you might use "member".
 
-  # Map LDAP groups to InfluxDB Enterprise roles by creating roles for all LDAP groups.
-  
-  # For example, if you map the following groups and roles:
+  # Create an administrator role in InfluxDB and then log in as a member of the admin LDAP group. Only members of a group with the administrator role can complete admin tasks. 
+  # For example, if tesla is the only member of the `italians` group, you must log in as tesla/password.
+  admin-groups = ["italians"]
+
+  # These two roles would have to be created by hand if you want these LDAP group memberships to do anything.
+  [[servers.group-mappings]]
+    group = "mathematicians"
+    role = "arithmetic"
 
   [[servers.group-mappings]]
-    group = "admin"
-    role = "administrator"
+    group = "scientists"
+    role = "laboratory"
 
-  [[servers.group-mappings]]
-    group = "user"
-    role = "monitor"
-
-  # To do `admin` tasks, log in with the `administrator` role username and password.
-
-  # To do `user` tasks, log in with the `monitor` role username and password.
 ```
 {{% /truncate %}}
