@@ -65,7 +65,7 @@ Chronograf supports many different [visualization types](/chronograf/latest/guid
 ### Step 5: Save your cell
 Click **Save** (the green checkmark icon) to save your cell.
 
-> ***Note:*** if you navigate away from this page without clicking Save, your work will not be saved.
+> ***Note:*** If you navigate away from this page without clicking Save, your work will not be saved.
 
 ### Step 6: Configure your dashboard
 
@@ -79,23 +79,26 @@ Click **Save** (the green checkmark icon) to save your cell.
 * **Pan** over your cell data by pressing the shift key and clicking and dragging your mouse over the graph
 * **Reset** your cell by double-clicking your mouse in the cell window
 
-> Note:
-These tips only apply to the line, stacked, step-plot, and line+stat [visualization types](/chronograf/latest/guides/visualization-types/).
+    > **Note:**
+    These tips only apply to the line, stacked, step-plot, and line+stat [visualization types](/chronograf/latest/guides/visualization-types/).
 
 #### Configure dashboard-wide settings:
-* You can change the dashboard's *auto-refresh interval* at the top of the page - the default interval selected is **Every 15 seconds**.
-* You can also modify the dashboard's *time range* at the top of the page - the default range is **Past 15 minutes**.
+* Change the dashboard's *selected time* at the top of the page - the default time is **Local**, which uses your browser's local time. Select **UTC** to use Coordinated Universal Time.
 
-Now, you are free to experiment and complete your dashboard by creating, editing, and repositioning more cells!
+    > **Note:** If your organization spans multiple time zones, we recommend using UTC (Coordinated Universal Time) to ensure that everyone sees metrics and events at the same time.
+* Change the dashboard's *auto-refresh interval* at the top of the page - the default interval selected is **Every 15 seconds**.
+* Modify the dashboard's *time range* at the top of the page - the default range is **Past 15 minutes**.
+
+Now, you're ready to experiment and complete your dashboard by creating, editing, and repositioning more cells!
 
 ## Dashboard templates
 
 Select from a variety of dashboard templates to import and customize based on which Telegraf plugins you have enabled, such as the following examples:
 
-* <img src="/img/chronograf/v1.7/protoboard-kubernetes.png" style="width:100%; max-width:600px;">
-* <img src="/img/chronograf/v1.7/protoboard-mysql.png" style="width:100%; max-width:600px;">
-* <img src="/img/chronograf/v1.7/protoboard-system.png" style="width:100%; max-width:600px;">
-* <img src="/img/chronograf/v1.7/protoboard-vsphere.png" style="width:100%; max-width:600px;">
+<img src="/img/chronograf/v1.7/protoboard-kubernetes.png" style="width:100%; max-width:600px;">
+<img src="/img/chronograf/v1.7/protoboard-mysql.png" style="width:100%; max-width:600px;">
+<img src="/img/chronograf/v1.7/protoboard-system.png" style="width:100%; max-width:600px;">
+<img src="/img/chronograf/v1.7/protoboard-vsphere.png" style="width:100%; max-width:600px;">
 
 **To import dashboard templates:**
 
