@@ -85,7 +85,7 @@ Click **Save** (the green checkmark icon) to save your cell.
 #### Configure dashboard-wide settings:
 * Change the dashboard's *selected time* at the top of the page - the default time is **Local**, which uses your browser's local time. Select **UTC** to use Coordinated Universal Time.
 
-    > **Note:** If your organization spans multiple time zones, we recommend using UTC (Coordinated Universal Time) to ensure that everyone sees metrics and events at the same time.
+    > **Note:** If your organization spans multiple time zones, we recommend using UTC (Coordinated Universal Time) to ensure that everyone sees metrics and events for the same time.
 * Change the dashboard's *auto-refresh interval* at the top of the page - the default interval selected is **Every 15 seconds**.
 * Modify the dashboard's *time range* at the top of the page - the default range is **Past 15 minutes**.
 
