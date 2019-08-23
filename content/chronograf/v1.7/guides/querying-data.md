@@ -13,6 +13,14 @@ To open the **Data Explorer**, click the **Explore** icon in the navigation bar:
 
 <img src="/img/chronograf/v1.7/data-explorer-icon.png" style="width:100%; max-width:400px; margin:2em 0; display: block;">
 
+## Select local time or UTC (Coordinated Universal Time)
+
+- In the upper-right corner of the page, select the time to view metrics and events by clicking one of the following:
+  - **UTC** for Coordinated Universal Time
+  - **Local** for the local time reported by your browser 
+
+> **Note:** If your organization spans multiple time zones, we recommend using UTC (Coordinated Universal Time) to ensure that everyone sees metrics and events at the same time.
+
 ## Explore data with InfluxQL
 
 InfluxQL is a SQL-like query language you can use to interact with data in InfluxDB. For detailed tutorials and reference material, see our [InfluxQL documentation](/influxdb/latest/query_language/).
