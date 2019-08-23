@@ -9,9 +9,8 @@ menu:
     weight: 30
     parent: Install and deploy
 ---
+<!--Gunnar can you help with some intro text here too? Maybe the same general overview text here as for the setting up page?-->
 
-## Set up AWS
-
-## Configuration options
-
-## Architecture
+- Set up AWS
+- Configuration options
+- Architecture
