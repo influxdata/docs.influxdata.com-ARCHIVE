@@ -19,7 +19,7 @@ To open the **Data Explorer**, click the **Explore** icon in the navigation bar:
   - **UTC** for Coordinated Universal Time
   - **Local** for the local time reported by your browser 
 
-> **Note:** If your organization spans multiple time zones, we recommend using UTC (Coordinated Universal Time) to ensure that everyone sees metrics and events at the same time.
+> **Note:** If your organization spans multiple time zones, we recommend using UTC (Coordinated Universal Time) to ensure that everyone sees metrics and events for the same time.
 
 ## Explore data with InfluxQL
 
