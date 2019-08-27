@@ -17,7 +17,6 @@ and use the results with InfluxDB dashboards and other operations.
 
 - [Query a SQL data source](#query-a-sql-data-source)
 - [Join SQL data with data in InfluxDB](#join-sql-data-with-data-in-influxdb)
-- [Use SQL results to populate template variables](#use-sql-results-to-populate-template-variables)
 - [Sample sensor data](#sample-sensor-data)
 
 ## Query a SQL data source
@@ -90,26 +89,6 @@ sensorMetrics = from(bucket: "example-bucket")
 join(tables: {metric: sensorMetrics, info: sensorInfo}, on: ["sensor_id"])
 ```
 
-## Use SQL results to populate dashboard variables
-Use `sql.from()` to [create template variables](/chronograf/latest/guides/dashboard-template-variables/#create-custom-template-variables)
-from SQL query results.
-The following example uses the [air sensor sample data](#sample-data) below to
-create a variable that lets you select the location of a sensor.
-
-```js
-import "sql"
-
-sql.from(
-    driverName: "postgres",
-    dataSourceName: "postgresql://localhost?sslmode=disable",
-    query: "SELECT * FROM sensors"
-  )
-  |> rename(columns: {location: "_value"})
-  |> keep(columns: ["_value"])
-```
-
-Use the variable to manipulate queries in your dashboards.
-
 ---
 
 ## Sample sensor data
@@ -151,11 +130,10 @@ To use `air-sensor-data.rb`:
     chmod +x air-sensor-data.rb
     ```
 
-4. Start the generator. Specify your organization, bucket, and authorization token.
-  _For information about retrieving your token, see [View tokens](/v2.0/security/tokens/view-tokens/)._
+4. Start the generator. Specify your database.
 
     ```
-    ./air-sensor-data.rb -o your-org -b your-bucket -t YOURAUTHTOKEN
+    ./air-sensor-data.rb -d database-name
     ```
 
     The generator begins to write data to InfluxDB and will continue until stopped.
@@ -204,10 +182,3 @@ To use `air-sensor-data.rb`:
     ```
     SELECT * FROM sensors;
     ```
-
-#### Import the sample data dashboard
-Download and import the Air Sensors dashboard to visualize the generated data:
-
-<a class="btn download" style="color:#fff" href="/downloads/air_sensors_dashboard.json" download>Download Air Sensors dashboard</a>
-
-_For information about importing a dashboard, see [Create a dashboard](/v2.0/visualize-data/dashboards/create-dashboard/#create-a-new-dashboard)._
