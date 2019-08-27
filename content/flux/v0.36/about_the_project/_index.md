@@ -6,7 +6,7 @@ menu:
     weight: 1
 ---
 
-## [Release notes](/flux/v0.12/about_the_project/releasenotes-changelog)
+## [Release notes](/flux/v0.36/about_the_project/releasenotes-changelog)
 
 <!-- ## [Contributing to Flux](https://github.com/influxdata/flux/blob/master/CONTRIBUTING.md) -->
 
