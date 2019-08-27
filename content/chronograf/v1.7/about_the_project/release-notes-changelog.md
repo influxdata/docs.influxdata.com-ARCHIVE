@@ -7,10 +7,42 @@ menu:
     weight: 10
     parent: About the project
 ---
+
+## v1.7.14 [2019-08-27]
+
+### Bug Fixes
+- Fix Data Explorer crashing due to empty query.
+- Fix styles in Kapacitor alert config page.
+
+## v1.7.13 [2019-08-20]
+
+### Bug Fixes
+- Fix scroll to row bug on table graphs.
+- Wrap inline commas in quotes to distinguish from CSV delimiters.
+- Fix TICKscript editor syntax coloring.
+- Fix JWK check when using login_id.
+- Fix dashboard typos.
+- Configure Papa Parse to distinguish inline vs delimiter commas.
+- Fix TICKscript editor coloring for boolean literals.
+- Fix JWK signing key check.
+- Fix alert rule message text template parsing.
+- Fix erroneous query manipulation.
+- Fix group by database for numSeries and numMeasurement queries in canned dashboards.
+- Update `axios` and `lodash` dependenies with known vulnerabilities.
+- Fix dashboard typos in protoboard queries.
+- Fix repeating last command in Data Explore window when multiple tabs are open.
+
+### Features
+
+- Add toggle for UTC and local time.
+- Add time zone selector to data explorer.
+- Add time zone toggle.
+- Add Login Hint and redirect to OAuth provider automatically.
+
 ## v1.7.12 [2019-06-20]
 
 ## Bug Fixes
-- Clarify wording of PagerDuty v1 deprecation message
+- Clarify wording of PagerDuty v1 deprecation message.
 - Requesting info from an unavailable source no longer causes the page to hang.
 - Create Chronograf user before CentOS installation.
 - Add support for web workers in IE11.
