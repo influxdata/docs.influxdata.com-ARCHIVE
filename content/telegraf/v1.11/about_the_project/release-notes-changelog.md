@@ -8,6 +8,18 @@ menu:
     parent: About the project
 ---
 
+## v1.11.5 [2019-08-27]
+
+### Bugfixes
+- Update `go-sql-driver/mysql` driver to 1.4.1 to address auth issues.
+- Return error status from `--test` if input plugins produce an error.
+- Fix with multiple instances only last configuration is used in smart input.
+- Build official packages with Go 1.12.9.
+- Split out `-w` argument in `iptables` input plugin.
+- Add support for parked process state on Linux.
+- Remove leading slash from rcon command.
+- Allow jobs with dashes in the name in `lustre2` input plugin.
+
 ## v1.11.4 [2019-08-06]
 
 ### Bugfixes
