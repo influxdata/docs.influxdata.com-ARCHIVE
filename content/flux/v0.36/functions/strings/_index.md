@@ -7,7 +7,7 @@ menu:
   flux_0_36:
     name: Strings
     parent: Packages and functions
-weight: 4
+    weight: 1
 ---
 
 The Flux string package provides functions to manipulate UTF-8 encoded strings.

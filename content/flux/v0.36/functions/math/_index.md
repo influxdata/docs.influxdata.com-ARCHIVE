@@ -7,7 +7,7 @@ menu:
   flux_0_36:
     name: Math
     parent: Packages and functions
-weight: 2
+weight: 1
 v2.0/tags: [math, functions]
 ---
 

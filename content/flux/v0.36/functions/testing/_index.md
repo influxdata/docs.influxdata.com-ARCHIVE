@@ -7,7 +7,7 @@ menu:
   flux_0_36:
     name: Testing
     parent: Packages and functions
-weight: 5
+    weight: 1
 ---
 
 The Flux testing package provides functions that test piped-forward data in specific ways.

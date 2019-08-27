@@ -4,7 +4,7 @@ description: The `sleep()` function delays execution by a specified duration.
 menu:
   flux_0_36:
     name: sleep
-    parent: built-in-misc
+    parent: Miscellaneous
 weight: 401
 ---
 
