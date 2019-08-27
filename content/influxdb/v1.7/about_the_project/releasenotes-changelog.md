@@ -7,6 +7,21 @@ menu:
     parent: About the project
 ---
 
+## v1.7.8 [2019-08-20]
+
+### Bugfixes
+- Fix Prometheus read panic.
+- Remove stray `fmt.Println` in `tsm1.StringArrayEncodeAll`.
+- Fix issue where fields re-appear after `DROP MEASUREMENT`.
+- Remove a dubugging `println` call.
+- Subquery ordering with aggregates in descending mode was wrong.
+- Fix the http handler to not mislabel series as partial.
+- Make `SHOW SERIES EXACT CARDINALITY` count only distinct series.
+- Fix time range exceeding min/max bounds.
+
+### Features
+- Update Flux version to v0.36.2
+
 ## 1.7.7 [2019-06-26]
 
 ### Known issues
@@ -27,7 +42,7 @@ menu:
 
 <dt>
 If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`),
-this release includes the fix for InfluxDB 1.7.5 servers that stopped responding without warning. 
+this release includes the fix for InfluxDB 1.7.5 servers that stopped responding without warning.
 </dt>
 
 ### Features
@@ -84,7 +99,7 @@ If you have not installed this release, then install the 1.7.4 release.
 **If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
 
 - A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
-  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard.
   - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
 ### Features
