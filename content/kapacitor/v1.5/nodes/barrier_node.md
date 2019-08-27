@@ -154,6 +154,12 @@ triggered for a group it is then deleted, freeing any resources managing the gro
 barrier.delete()
 ```
 
+{{% note %}}
+`delete` will free system resources used for managing groups and can help to maintain
+the overall performance of Kapacitor, but these gains are minimal.
+For information about optimizing tasks, see [How can I optimize Kapacitor tasks?](/kapacitor/v1.5/troubleshooting/frequently-asked-questions/#how-can-i-optimize-kapacitor-tasks)
+{{% /note %}}
+
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
 
