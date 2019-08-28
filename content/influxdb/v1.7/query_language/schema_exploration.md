@@ -210,7 +210,7 @@ and on [Regular Expressions in Queries](/influxdb/v1.7/query_language/data_explo
 #### Run a `SHOW SERIES` query with the `ON` clause
 
 ```sql
-// Returns all series for all shards in the database
+// Returns series for all shards in the database
 > SHOW SERIES ON NOAA_water_database
 
 key
