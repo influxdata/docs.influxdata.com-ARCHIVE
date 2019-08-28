@@ -179,9 +179,11 @@ For more information about TSI, see [TSI overview](/influxdb/v1.7/concepts/time-
 
 Complete the following steps for Time Series Index (TSI) only.
 
-1. Delete all existing TSM-based shard `index` directories (by default, the `index` directories are located at `/<shard_ID>/index`).
+1. Delete all `_series` directories in the `/data` directory (by default, stored at `/data/<dbName>/_series`).
 
-2. If TSI is enabled, TSM-based shards must be converted to support TSI. Run the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi)command to covert TSM-based shards to TSI shards or rebuild existing TSI shards.
+2. Delete all TSM-based shard `index` directories (by default, located at `/data/<dbName/<rpName>/<shardID>/index`).
+
+3. Use the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi) utility to rebuild the TSI index. For example, run the following command: `influx_inspect buildtsi -datadir /yourDataDirectory -waldir /wal`, replacing `yourDataDirectory` with the name of your directory. Running this command converts TSM-based shards to TSI shards or rebuilds existing TSI shards.
 
     > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as, or ensure that the permissions match afterward.
 
@@ -204,6 +206,8 @@ sudo systemctl restart influxdb
 ### Restart traffic to data nodes
 
 Restart routing read and write requests to the data node server (port 8086) through your load balancer.
+
+> **Note** Allow the hinted handoff queue (HHQ) to write all missed data to the updated node before upgrading the next data node.
 
 ### Confirm the data nodes upgrade
 
