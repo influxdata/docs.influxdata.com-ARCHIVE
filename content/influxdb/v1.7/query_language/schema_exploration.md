@@ -210,6 +210,7 @@ and on [Regular Expressions in Queries](/influxdb/v1.7/query_language/data_explo
 #### Run a `SHOW SERIES` query with the `ON` clause
 
 ```sql
+// Returns all series for all shards in the database
 > SHOW SERIES ON NOAA_water_database
 
 key
@@ -359,6 +360,51 @@ h2o_quality,location=coyote_creek,randtag=2
 The query returns all series in the `NOAA_water_database` database that are
 associated with the `h2o_quality` measurement and the tag `location = coyote_creek`.
 The `LIMIT` clause limits the number of series returned to two.
+
+#### Run a `SHOW SERIES` query limited by time
+
+Limit series returned within a specified shard group duration. 
+
+```sql
+// Returns all series in the current shard.
+> SHOW SERIES ON NOAA_water_database WHERE time < now() - 1m
+
+key
+---
+average_temperature,location=coyote_creek
+h2o_feet,location=coyote_creek
+h2o_pH,location=coyote_creek
+h2o_quality,location=coyote_creek,randtag=1
+h2o_quality,location=coyote_creek,randtag=2
+h2o_quality,location=coyote_creek,randtag=3
+h2o_temperature,location=coyote_creek
+```
+
+The query above returns all series in the `NOAA_water_database` database in the current shard group. The `WHERE` clause limits results to series in the shard group that contain a timestamp in the last minute. Note, if a shard group duration is 7 days, results returned may be up to 7 days old.
+
+```sql
+// Returns all series in shard groups that contain a timestamp in the last 28 days.
+> SHOW SERIES ON NOAA_water_database WHERE time < now() - 672m
+
+key
+---
+average_temperature,location=coyote_creek
+average_temperature,location=santa_monica
+h2o_feet,location=coyote_creek
+h2o_feet,location=santa_monica
+h2o_pH,location=coyote_creek
+h2o_pH,location=santa_monica
+h2o_quality,location=coyote_creek,randtag=1
+h2o_quality,location=coyote_creek,randtag=2
+h2o_quality,location=coyote_creek,randtag=3
+h2o_quality,location=santa_monica,randtag=1
+h2o_quality,location=santa_monica,randtag=2
+h2o_quality,location=santa_monica,randtag=3
+h2o_temperature,location=coyote_creek
+h2o_temperature,location=santa_monica
+```
+
+Note, if the specified shard group duration is 7 days, the query above returns series for the last 3 or 4 shards.
 
 ## `SHOW MEASUREMENTS`
 
