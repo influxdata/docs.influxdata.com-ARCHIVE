@@ -114,4 +114,4 @@ After installing and upgrading to InfluxDB 1.7.x, you can switch between using t
 
 ## Upgrading InfluxDB Enterprise clusters
 
-See [Upgrading InfluxDB Enterprise clusters](/enterprise_influxdb/v1.6/administration/upgrading/).
+See [Upgrading InfluxDB Enterprise clusters](/enterprise_influxdb/v1.7/administration/upgrading/).
