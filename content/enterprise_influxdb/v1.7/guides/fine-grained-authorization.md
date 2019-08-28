@@ -397,6 +397,7 @@ The following examples grant read and write permissions on the `my_database` dat
 ```sh
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
   -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
   --data-binary '{
     "database": {"match": "exact", "value": "my_database"},
     "permissions": ["read", "write"],
