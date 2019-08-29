@@ -10,7 +10,7 @@ menu:
 
 ## Upgrading to InfluxDB Enterprise 1.5.4
 
-Version 1.5 includes the first official Time Series Index (TSI) release. Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI disk-based indexing offers.
+Version 1.5 includes the first official Time Series Index (TSI) release. Although you can install without enabling TSI, you are encouraged to begin leveraging the advantages the TSI indexing offers.
 
 ## Upgrading InfluxDB Enterprise 1.3.x-1.5.x clusters to 1.5.4 (rolling upgrade)
 
@@ -178,7 +178,7 @@ The new configuration options are set to the default settings.
 
 2. Convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
-  - When TSI is enabled, new shards use the TSI disk-based indexing. Existing shards must be converted to support TSI.
+  - When TSI is enabled, new shards use the TSI index. Existing shards must be converted to support TSI.
   - Run the [`influx_inspect buildtsi`](/influxdb/v1.5/tools/influx_inspect#buildtsi) command to convert existing TSM-based shards (or rebuild TSI Preview shards) to support TSI.
 
 > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as,

@@ -15,14 +15,12 @@ To successfully upgrade InfluxDB Enterprise clusters to 1.7.7, complete the foll
 2. [Upgrade meta nodes](#upgrade-meta-nodes).
 3. [Upgrade data nodes](#upgrade-data-nodes).
 
-   > ***Note:*** To enable HTTPS, you must update the configuration files on each meta node (`influxdb-meta.conf`) and each data node (`influxdb.conf`). Details included in procedures below.
-
 ## Back up your cluster
 
 Before performing an upgrade, create a full backup of your InfluxDB Enterprise cluster. Also, if you create incremental backups, trigger a final incremental backup.
 
 > ***Note:*** For information on performing a final incremental backup or a full backup,
-> see [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
+> see [Back up and restore InfluxDB Enterprise clusters](/enterprise_influxdb/v1.7/administration/backup-and-restore/).
 
 ## Upgrade meta nodes
 
@@ -64,6 +62,8 @@ sudo yum localinstall influxdb-meta-1.7.7_c1.7.7.x86_64.rpm
 ```
 
 ### Update the meta node configuration file
+
+Migrate any custom settings from your previous meta node configuration file.
 
 To enable HTTPS, you must update the meta node configuration file (`influxdb-meta.conf`). For information, see [Enable HTTPS within the configuration file for each Meta Node](/enterprise_influxdb/v1.7/guides/https_setup/#step-3-enable-https-within-the-configuration-file-for-each-meta-node).
 
@@ -173,7 +173,7 @@ Migrate any custom settings from your previous data node configuration file.
     |[`[anti-entropy]`](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy)| <ul><li>Add `enabled = true` <li>Add `check-interval = "30s"` <li>Add `max-fetch = 10`|
     |`[admin]`| Remove entire section.|
 
-For more information about TSI, see [TSI overview](/influxdb/v1.7/concepts/time-series-index/) and [TSI details](/influxdb/v1.7/concepts/tsi-details/).
+    For more information about TSI, see [TSI overview](/influxdb/v1.7/concepts/time-series-index/) and [TSI details](/influxdb/v1.7/concepts/tsi-details/).
 
 ### Prepare your data node to support TSI
 
@@ -183,9 +183,15 @@ Complete the following steps for Time Series Index (TSI) only.
 
 2. Delete all TSM-based shard `index` directories (by default, located at `/data/<dbName/<rpName>/<shardID>/index`).
 
-3. Use the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi) utility to rebuild the TSI index. For example, run the following command: `influx_inspect buildtsi -datadir /yourDataDirectory -waldir /wal`, replacing `yourDataDirectory` with the name of your directory. Running this command converts TSM-based shards to TSI shards or rebuilds existing TSI shards.
+3. Use the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi) utility to rebuild the TSI index. For example, run the following command:
 
-    > **Note:** Run the `buildtsi` command using the user account that you are going to run the database as, or ensure that the permissions match afterward.
+    ```js
+    influx_inspect buildtsi -datadir /yourDataDirectory -waldir /wal`
+    ``` 
+
+    Replacing `yourDataDirectory` with the name of your directory. Running this command converts TSM-based shards to TSI shards or rebuilds existing TSI shards.
+
+    > **Note:** Run the `buildtsi` command using the same system user that runs the `influxd` service, or a user with the same permissions.
 
 ### Restart the `influxdb` service
 
@@ -207,7 +213,7 @@ sudo systemctl restart influxdb
 
 Restart routing read and write requests to the data node server (port 8086) through your load balancer.
 
-> **Note** Allow the hinted handoff queue (HHQ) to write all missed data to the updated node before upgrading the next data node.
+> **Note:** Allow the hinted handoff queue (HHQ) to write all missed data to the updated node before upgrading the next data node. To review in-progress operations in the hinted handoff queue, run [`copy-shard-status`](/enterprise_influxdb/v1.7/administration/cluster-commands/#copy-shard-status).
 
 ### Confirm the data nodes upgrade
 

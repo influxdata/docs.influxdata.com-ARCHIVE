@@ -9,10 +9,10 @@ menu:
 ---
 
 
-We recommend enabling Time Series Index (TSI). To learn more about TSI, see:
+We recommend enabling Time Series Index (TSI) (step 3 of Upgrade to InfluxDB 1.7.x). [Switch between TSM and TSI](#switch-between-tsm-and-tsi-indexes) as needed. To learn more about TSI, see:
 
--   [Time Series Index (TSI) overview](/influxdb/v1.7/concepts/time-series-index/)
--   [Time Series Index (TSI) details](/influxdb/v1.7/concepts/tsi-details/)
+- [Time Series Index (TSI) overview](/influxdb/v1.7/concepts/time-series-index/)
+- [Time Series Index (TSI) details](/influxdb/v1.7/concepts/tsi-details/)
 
 > **_Note:_** The default configuration continues to use TSM-based shards with in-memory indexes (as in earlier versions).
 
@@ -38,13 +38,13 @@ We recommend enabling Time Series Index (TSI). To learn more about TSI, see:
 
 ## Switch between TSM and TSI indexes
 
-After upgrading to InfluxDB 1.7.x, switch between using the TSM in-memory index and the TSI disk-based index as needed.
+After upgrading to InfluxDB 1.7.x, switch between using the TSM index and the TSI index as needed.
 
-### Switch from TSM to TSI
+### To switch from TSM to TSI
 
-Complete step 3 and 4 in the previous procedure.
+Complete step 3 and 4 in [Upgrade to InfluxDB 1.7.x](#upgrade-to-influxdb-1-7-x).
 
-### Switch from TSI to TSM
+### To switch from TSI to TSM
 
 1. In the InfluxDB configuration file, set `index-version = "inmem"`. 
 2. Delete all shard `index` directories (by default, located at `/<shard_ID>/index`).
