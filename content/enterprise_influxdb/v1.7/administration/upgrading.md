@@ -213,7 +213,7 @@ sudo systemctl restart influxdb
 
 Restart routing read and write requests to the data node server (port 8086) through your load balancer.
 
-> **Note:** Allow the hinted handoff queue (HHQ) to write all missed data to the updated node before upgrading the next data node. To review in-progress operations in the hinted handoff queue, run [`copy-shard-status`](/enterprise_influxdb/v1.7/administration/cluster-commands/#copy-shard-status).
+> **Note:** Allow the hinted handoff queue (HHQ) to write all missed data to the updated node before upgrading the next data node. Once all data has been written, the disk space used in the hinted handoff queue should be 0. Check the disk space on your hh directory by running the [`du`] command, for example, `du /var/lib/influxdb/hh`.
 
 ### Confirm the data nodes upgrade
 
