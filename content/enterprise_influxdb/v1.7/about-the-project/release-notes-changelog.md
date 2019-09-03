@@ -8,6 +8,11 @@ menu:
     parent: About the project
 ---
 
+## 1.7.8 [2019-09-03]
+
+The InfluxDB Enterprise 1.7.8 release builds on the InfluxDB OSS 1.7.8 release.
+For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
 ## 1.7.7 [2019-07-12]
 
 The InfluxDB Enterprise 1.7.7 release builds on the InfluxDB OSS 1.7.7 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
@@ -82,7 +87,7 @@ If you have not installed this release, then install the 1.7.4 release.
 **If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
 
 - A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
-  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard.
   - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
 - A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed this issue in 1.7.4.
