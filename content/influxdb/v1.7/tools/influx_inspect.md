@@ -11,7 +11,7 @@ Influx Inspect is an InfluxDB disk utility that can be used to:
 
 * View detailed information about disk shards.
 * Exporting data from a shard to [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) that can be inserted back into the database.
-* Converting TSM in-memory index shards to TSI disk-based index shards.
+* Converting TSM index shards to TSI index shards.
 
 ## `influx_inspect` utility
 
