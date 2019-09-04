@@ -9,6 +9,12 @@ menu:
 
 ## v1.7.8 [2019-08-20]
 
+{{% warn %}}
+InfluxDB now rejects all non-UTF-8 characters.
+To successfully write data to InfluxDB, use only UTF-8 characters in
+database names, measurement names, tag sets, and field sets.
+{{% /warn %}}
+
 ### Bugfixes
 - Fix Prometheus read panic.
 - Remove stray `fmt.Println` in `tsm1.StringArrayEncodeAll`.
@@ -102,13 +108,16 @@ If you have not installed this release, then install the 1.7.4 release.
   - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard.
   - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
+### Breaking changes
+
+- Fix invalid UTF-8 bytes preventing shard opening. Treat fields and measurements as raw bytes.
+
 ### Features
 
 - Update Flux to `0.12.0`
 
 ### Bug fixes
 
-* Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
 * Limit force-full and cold compaction size.
 * Add user authentication and authorization support for Flux HTTP requests.
 * Call `storage.Group` API to correctly map group mode.
