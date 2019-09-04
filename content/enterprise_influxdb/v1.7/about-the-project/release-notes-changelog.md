@@ -10,6 +10,13 @@ menu:
 
 ## 1.7.8 [2019-09-03]
 
+{{% warn %}}
+InfluxDB now rejects all non-UTF-8 characters.
+To successfully write data to InfluxDB, use only UTF-8 characters in
+database names, measurement names, tag sets, and field sets.
+InfluxDB Enterprise customers can contact InfluxData support for more information.
+{{% /warn %}}
+
 The InfluxDB Enterprise 1.7.8 release builds on the InfluxDB OSS 1.7.8 release.
 For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
@@ -91,6 +98,9 @@ If you have not installed this release, then install the 1.7.4 release.
   - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
 
 - A small percentage of customers experienced data node crashes with segmentation violation errors.  We fixed this issue in 1.7.4.
+
+### Breaking changes
+- Fix invalid UTF-8 bytes preventing shard opening. Treat fields and measurements as raw bytes.
 
 ### Features
 
