@@ -48,3 +48,9 @@ Overview of security options and configurations.
 ## [Stability and compatibility](/influxdb/v1.7/administration/stability_and_compatibility/)
 
 Management of breaking changes, upgrades, and ongoing support.
+
+## Downgrading
+
+To revert to a prior version, complete the same steps as when [Upgrading to InfluxDB 1.7.x](https://docs.influxdata.com/influxdb/v1.7/administration/upgrading/), replacing 1.7.x with the version you want to downgrade to. After downloading the release, migrating your configuration settings, enabling TSI or TSM, and make sure to [rebuild your index](/influxdb/v1.7/administration/rebuild-tsi-index/#sidebar).
+
+>**Note:** Some versions of InfluxDB may have breaking changes that impact your ability to downgrade. Please review the applicable version of release notes to ensure backward compatibility. Release notes will include exceptions that prevent a release from being downgraded.
