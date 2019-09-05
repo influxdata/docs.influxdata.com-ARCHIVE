@@ -278,7 +278,7 @@ Confirm the new data node has been added by running:
 influxd-ctl show
 ```
 
-The new meta node should appear in the output:
+The new data node should appear in the output:
 
 ```bash
 Data Nodes
