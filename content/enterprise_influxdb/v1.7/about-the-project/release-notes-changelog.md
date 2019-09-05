@@ -20,6 +20,15 @@ InfluxDB Enterprise customers can contact InfluxData support for more informatio
 The InfluxDB Enterprise 1.7.8 release builds on the InfluxDB OSS 1.7.8 release.
 For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
+### Bug fixes
+- Clarified `influxd-ctl` error message when the Anti-Entropy (AE) service is disabled.
+- Ensure invalid, non-UTF-8 data is removed from hinted handoff.
+- Added error messages for `INFLUXDB_LOGGING_LEVEL` if misconfigured.
+- Added logging when data nodes connect to meta service.
+
+### Features
+- The Flux Technical Preview has advanced to version [0.36.2](/flux/v0.36/).
+
 ## 1.7.7 [2019-07-12]
 
 The InfluxDB Enterprise 1.7.7 release builds on the InfluxDB OSS 1.7.7 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
