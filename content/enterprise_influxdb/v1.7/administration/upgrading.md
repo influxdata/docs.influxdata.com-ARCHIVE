@@ -15,6 +15,8 @@ To successfully upgrade InfluxDB Enterprise clusters to 1.7.8, complete the foll
 2. [Upgrade meta nodes](#upgrade-meta-nodes).
 3. [Upgrade data nodes](#upgrade-data-nodes).
 
+> ***Note:*** To downgrade to an earlier version, complete the following procedures, replacing the version numbers with the version that you want to downgrade to.
+
 ## Back up your cluster
 
 Before performing an upgrade, create a full backup of your InfluxDB Enterprise cluster. Also, if you create incremental backups, trigger a final incremental backup.
