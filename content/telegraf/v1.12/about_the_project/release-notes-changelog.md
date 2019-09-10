@@ -24,7 +24,8 @@ menu:
   - Fix error reading closed response body.
 - Apcupsd input (`apcupsd`)
   - Fix documentation to reflect plugin.
-- Display retry log message only when retry after is received.
+- InfluxDB v2 output (`influxdb_v2`)
+  - Display retry log message only when retry after is received.
 
 
 ## v1.12 [2019-09-03]
