@@ -8,6 +8,26 @@ menu:
     parent: About the project
 ---
 
+## v1.12.1 [2019-09-10]
+
+### Bugfixes
+- Fix dependenciess on GLIBC_2.14 symbol version.
+- Filecount input (`filecount`)
+  - Fix filecount for paths with trailing slash.
+- Icinga2 input (`icinga2`)
+  - Convert check state to an integer.
+- Apache Kafka Consumer input (`kafka_consumer`)
+  - Fix could not mark message delivered error.
+- MongoDB input (`mongodb`)
+  - Skip collection stats when disabled.
+- HTTP Response input (`http_response`)
+  - Fix error reading closed response body.
+- Apcupsd input (`apcupsd`)
+  - Fix documentation to reflect plugin.
+- InfluxDB v2 output (`influxdb_v2`)
+  - Display retry log message only when retry after is received.
+
+
 ## v1.12 [2019-09-03]
 
 ### Release Notes
