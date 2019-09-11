@@ -5,9 +5,49 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.3 [2019-06-18]
+
+{{% warn %}}
+### Authentication and shared secret
+If using Kapacitor v1.5.3 or newer and InfluxDB with [authentication enabled](/influxdb/v1.7/administration/authentication_and_authorization/),
+set the `[http].shared-secret` option in your `kapacitor.conf` to the shared secret of your InfluxDB instances.
+
+```toml
+# ...
+[http]
+  # ...
+  shared-secret = "youramazingsharedsecret"
+```
+
+If not set, set to an empty string, or does not match InfluxDB's shared-secret,
+the integration with InfluxDB will fail and Kapacitor will not start.
+Kapacitor will output an error similar to:
+
+```
+kapacitord[4313]: run: open server: open service *influxdb.Service: failed to link subscription on startup: signature is invalid
+```
+{{% /warn %}}
+
+#### Important update [2019-07-11]
+- Some customers have reported a high number of CLOSE_WAIT connections.
+  Upgrade to this release to resolve this issue.
+
+### Features
+- Add ability to skip SSL verification with an alert post node.
+- Add TLS configuration options.
+
+### Bug fixes
+
+- Use default transport consistently.
+- Fix deadlock in barrier node when delete is used.
+- Make RPM create files with correct ownership on install.
+- Delete group stats when a group is deleted.
+- Avoid extra allocation when building GroupID.
+
 ## v1.5.2 [2018-12-12]
 
 ### Features
+
 - Add barrier node support to JoinNode.
 - Add ability to expire groups using the BarrierNode.
 - Add alert/persist-topics to config.
@@ -15,12 +55,13 @@ menu:
 - Add links to PagerDuty v2 alerts.
 - Add additional metadata to Sensu alerts.
 
-### Bugfixes
+### Bug fixes
+
 - Fix join not catching up fast enough after a pause in the data stream.
 
 ## v1.5.1 [2018-08-06]
 
-### Bugfixes
+### Bug fixes
 
 - `pagerduty2` should use `routingKey` rather than `serviceKey`.
 - Fix KafkaTopic not working from TICKscript.
@@ -42,7 +83,8 @@ menu:
 - Add `.quiet` to all nodes to silence any errors reported by the node.
 - Add Kafka event handler.
 
-### Bugfixes
+### Bug fixes
+
 - Kapacitor ticks generating a hash instead of their actual given name.
 - Fix deadlock in load service when task has an error.
 - Support PagerDuty API v2.
@@ -71,9 +113,11 @@ Kapacitor v1.4.0 adds many new features, highlighted here:
 ### Breaking changes
 
 #### Change over internal API to use message passing semantics.
+
 The `Combine` and `Flatten` nodes previously operated (erroneously) across batch boundaries: this has been fixed.
 
 ### Features
+
 - Added service for loading topic handlers, tasks, and templates from `dir`.
 - Topic handler file format modified to include TopicID and HandlerID.
 - TICKscript now allows task descriptions exclusively through a TICKscript.
@@ -103,7 +147,7 @@ The `Combine` and `Flatten` nodes previously operated (erroneously) across batch
 - Change `WARN` level logs to `INFO` level.
 - Updated Go version to 1.9.2.
 
-### Bugfixes
+### Bug fixes
 
 - Fixed issues where log API checked the wrong header for the desired content type.
 - Fixed VictorOps "data" field being a string instead of actual JSON.
@@ -131,11 +175,13 @@ The `Combine` and `Flatten` nodes previously operated (erroneously) across batch
 ## v1.3.3 [2017-08-11]
 
 ### Bug fixes
+
 - Expose pprof without authentication, if enabled.
 
 ## v1.3.2 [2017-08-08]
 
 ### Bug fixes
+
 - Use details field from alert node in PagerDuty.
 
 ## v1.3.1 [2017-06-02]
@@ -237,7 +283,9 @@ kapacitor define-handler system aggregate_by_1m.yaml
 For more details on the alerting system, see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/alerts).
 
 ### Breaking Change
+
 #### Fixed inconsistency with JSON data from alerts.
+
     The alert handlers Alerta, Log, OpsGenie, PagerDuty, Post and VictorOps allow extra opaque data to beattached to alert notifications.
     That opaque data was inconsistent and this change fixes that.
     Depending on how that data was consumed this could result in a breaking change, since the original behavior
@@ -246,6 +294,7 @@ For more details on the alerting system, see the full documentation [here](https
     always `error` instead of for only some of the outputs.
 
 #### Refactor the Alerting service.
+
     The change is completely breaking for the technical preview alerting service, a.k.a. the new alert topic
     handler features. The change boils down to simplifying how you define and interact with topics.
     Alert handlers now only ever have a single action and belong to a single topic.
@@ -253,13 +302,16 @@ For more details on the alerting system, see the full documentation [here](https
     See the updated API docs.
 
 #### Add generic error counters to every node type.
+
     Renamed `query_errors` to `errors` in batch node.
     Renamed `eval_errors` to `errors` in eval node.
 
 #### The UDF agent Go API has changed.
+
     The changes now make it so that the agent package is self contained.
 
 #### A bug was fixed around missing fields in the derivative node.
+
     The behavior of the node changes slightly in order to provide a consistent fix to the bug.
     The breaking change is that now, the time of the points returned are from the right hand or current point time,
     instead of the left hand or previous point time.
@@ -285,7 +337,7 @@ For more details on the alerting system, see the full documentation [here](https
 - Added discovery and scraping services for metrics collection (pull model).
 - Updated Go version to 1.7.5.
 
-### Bugfixes
+### Bug fixes
 
 - Fixed broken ENV var configuration overrides for the Kubernetes section.
 - Copy batch points slice before modification, fixes potential panics and data corruption.
@@ -388,7 +440,7 @@ See the [API docs on technical preview](https://docs.influxdata.com/kapacitor/v1
 - Enable markdown in slack attachments.
 
 
-### Bugfixes
+### Bug fixes
 
 - Fix issue with the Union node buffering more points than necessary.
 - Fix panic during close of failed startup when connecting to InfluxDB.
@@ -445,7 +497,7 @@ See the [API docs](https://docs.influxdata.com/kapacitor/latest/api/api/) for mo
 - Add support for Slack icon emojis and custom usernames.
 - Bring Kapacitor up to parity with available InfluxQL functions in 1.1.
 
-### Bugfixes
+### Bug fixes
 
 - Fix bug where keeping a list of fields that where not referenced in the eval expressions would cause an error.
 - Fix the number of subscriptions statistic.
@@ -455,7 +507,7 @@ See the [API docs](https://docs.influxdata.com/kapacitor/latest/api/api/) for mo
 
 ## v1.0.2 [2016-10-06]
 
-### Bugfixes
+### Bug fixes
 
 - Fix bug where errors to save cluster/server ID files were ignored.
 - Create data_dir on startup if it does not exist.
@@ -471,7 +523,7 @@ See the [API docs](https://docs.influxdata.com/kapacitor/latest/api/api/) for mo
 - Add support for string manipulation functions.
 - Add ability to set specific HTTP port and hostname per configured InfluxDB cluster.
 
-### Bugfixes
+### Bug fixes
 
 - Fixed typo in the default configuration file
 - Change |log() output to be in JSON format so its self documenting structure.

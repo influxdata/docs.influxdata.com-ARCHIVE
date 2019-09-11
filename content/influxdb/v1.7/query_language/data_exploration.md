@@ -58,6 +58,7 @@ See the [Sample Data](/influxdb/v1.7/query_language/data_download/) page to down
 the data and follow along with the example queries in the sections below.
 
 Start by logging into the Influx CLI:
+
 ```bash
 $ influx -precision rfc3339 -database NOAA_water_database
 Connected to http://localhost:8086 version 1.7.x
@@ -65,7 +66,7 @@ InfluxDB shell 1.7.x
 >
 ```
 
-Next,  get acquainted with this subsample of the data in the `h2o_feet` measurement:
+Next, get acquainted with this subsample of the data in the `h2o_feet` measurement:
 
 name: <span class="tooltip" data-tooltip-text="Measurement">h2o_feet</span>
 
@@ -103,6 +104,7 @@ SELECT <field_key>[,<field_key>,<tag_key>] FROM <measurement_name>[,<measurement
 The `SELECT` statement requires a `SELECT` clause and a `FROM` clause.
 
 #### `SELECT` clause
+
 The `SELECT` clause supports several formats for specifying data:
 
 `SELECT *`
@@ -139,7 +141,7 @@ Returns data from a single measurement.
 If you're using the [CLI](/influxdb/v1.7/tools/shell/) InfluxDB queries the measurement in the
 [`USE`d](/influxdb/v1.7/tools/shell/#commands)
 [database](/influxdb/v1.7/concepts/glossary/#database) and the `DEFAULT` [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.7/tools/api/) InfluxDB queries the
+If you're using the [InfluxDB API](/influxdb/v1.7/tools/api/) InfluxDB queries the
 measurement in the database specified in the [`db` query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters)
 and the `DEFAULT` retention policy.
 
@@ -194,10 +196,10 @@ If you're using the [CLI](/influxdb/v1.7/tools/shell/) be sure to enter
 `USE NOAA_water_database` before you run the query.
 The CLI queries the data in the `USE`d database and the
 `DEFAULT` [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.7/tools/api/) be sure to set the
+If you're using the [InfluxDB API](/influxdb/v1.7/tools/api/) be sure to set the
 `db` [query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters)
 to `NOAA_water_database`.
-If you do not set the `rp` query string parameter, the HTTP API automatically
+If you do not set the `rp` query string parameter, the InfluxDB API automatically
 queries the database's `DEFAULT` retention policy.
 
 #### Select specific tags and fields from a single measurement
@@ -330,7 +332,7 @@ policy, and the measurement `h2o_feet`.
 In the CLI, fully qualify a measurement to query data in a database other
 than the `USE`d database and in a retention policy other than the
 `DEFAULT` retention policy.
-In the HTTP API, fully qualify a measurement in place of using the `db`
+In the InfluxDB API, fully qualify a measurement in place of using the `db`
 and `rp` query string parameters if desired.
 
 #### Select all data from a measurement in a particular database
@@ -354,7 +356,7 @@ The `..` indicates the `DEFAULT` retention policy for the specified database.
 
 In the CLI, specify the database to query data in a database other than the
 `USE`d database.
-In the HTTP API, specify the database in place of using the `db` query
+In the InfluxDB API, specify the database in place of using the `db` query
 string parameter if desired.
 
 ### Common issues with the SELECT statement
@@ -431,14 +433,17 @@ Queries with unquoted string field values or double quoted string field values
 will not return any data and, in most cases,
 [will not return an error](#common-issues-with-the-where-clause).
 
-Supported operators:
-`=`&emsp;&nbsp;&thinsp;equal to
-`<>`&emsp;not equal to
-`!=`&emsp;not equal to
-`>`&emsp;&nbsp;&thinsp;greater than
-`>=`&emsp;greater than or equal to
-`<`&emsp;&nbsp;&thinsp;less than
-`<=`&emsp;less than or equal to
+##### Supported operators
+
+| Operator | Meaning                  |
+|:--------:|:--------                 |
+| `=`      | equal to                 |
+| `<>`     | not equal to             |
+| `!=`     | not equal to             |
+| `>`      | greater than             |
+| `>=`     | greater than or equal to |
+| `<`      | less than                |
+| `<=`     | less than or equal to    |
 
 Other supported features:
 [Arithmetic Operations](/influxdb/v1.7/query_language/math_operators/),
@@ -446,7 +451,7 @@ Other supported features:
 
 #### Tags
 
-```
+```sql
 tag_key <operator> ['tag_value']
 ```
 
@@ -456,10 +461,13 @@ Queries with unquoted tag values or double quoted tag values will not return
 any data and, in most cases,
 [will not return an error](#common-issues-with-the-where-clause).
 
-Supported operators:
-`=`&emsp;&nbsp;&thinsp;equal to
-`<>`&emsp;not equal to
-`!=`&emsp;not equal to
+##### Supported operators
+
+| Operator | Meaning      |
+|:--------:|:-------      |
+| `=`      | equal to     |
+| `<>`     | not equal to |
+| `!=`     | not equal to |
 
 Other supported features:
 [Regular Expressions](#regular-expressions)
@@ -682,7 +690,7 @@ Tired of reading? Check out this InfluxQL Short:
 
 #### Syntax
 
-```
+```sql
 SELECT_clause FROM_clause [WHERE_clause] GROUP BY [* | <tag_key>[,<tag_key]]
 ```
 
@@ -842,7 +850,7 @@ This is because the `h2o_quality` measurement only has two tag keys.
 
 #### Syntax
 
-```
+```sql
 SELECT <function>(<field_key>) FROM_clause WHERE <time_range> GROUP BY time(<time_interval>),[tag_key] [fill(<fill_option>)]
 ```
 
@@ -868,7 +876,7 @@ for more information.
 
 **Coverage:**
 
-Basic `GROUP BY time()` queries rely on the `time_interval` and on InfluxDB's
+Basic `GROUP BY time()` queries rely on the `time_interval` and on the InfluxDB database's
 preset time boundaries to determine the raw data included in each time interval
 and the timestamps returned by the query.
 
@@ -922,7 +930,7 @@ and up to, but not including, `2015-08-18T00:24:00Z.`
 
 ##### Group query results into 12 minutes intervals and by a tag key
 
-```sq;
+```sql
 > SELECT COUNT("water_level") FROM "h2o_feet" WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-08-18T00:30:00Z' GROUP BY time(12m),"location"
 
 name: h2o_feet
@@ -1024,7 +1032,7 @@ Only one raw point (`7.887`) falls both within the query's second `GROUP BY time
 second time boundary.
 
 The [advanced `GROUP BY time()` syntax](#advanced-group-by-time-syntax) allows users to shift
-the start time of InfluxDB's preset time boundaries.
+the start time of the InfluxDB database's preset time boundaries.
 [Example 3](#examples-3)
 in the Advanced Syntax section continues with the query shown here;
 it shifts forward the preset time boundaries by six minutes such that
@@ -1041,7 +1049,7 @@ time                   count
 
 #### Syntax
 
-```
+```sql
 SELECT <function>(<field_key>) FROM_clause WHERE <time_range> GROUP BY time(<time_interval>,<offset_interval>),[tag_key] [fill(<fill_option>)]
 ```
 
@@ -1057,7 +1065,7 @@ for details on the `time_interval`.
 
 The `offset_interval` is a
 [duration literal](/influxdb/v1.7/query_language/spec/#durations).
-It shifts forward or back InfluxDB's preset time boundaries.
+It shifts forward or back tje InfluxDB database's preset time boundaries.
 The `offset_interval` can be positive or negative.
 
 ##### `fill(<fill_option>)`
@@ -1070,7 +1078,7 @@ for more information.
 **Coverage:**
 
 Advanced `GROUP BY time()` queries rely on the `time_interval`, the `offset_interval`
-, and on InfluxDB's preset time boundaries to determine the raw data included in each time interval
+, and on the InfluxDB database's preset time boundaries to determine the raw data included in each time interval
 and the timestamps returned by the query.
 
 #### Examples of advanced syntax
@@ -1112,7 +1120,7 @@ The query uses an InfluxQL [function](/influxdb/v1.7/query_language/functions/)
 to calculate the average `water_level`, grouping results into 18 minute
 time intervals, and offsetting the preset time boundaries by six minutes.
 
-The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB's preset time boundaries. Let's first examine the results without the offset:
+The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to the InfluxDB database's preset time boundaries. Let's first examine the results without the offset:
 
 ```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(18m)
@@ -1127,7 +1135,7 @@ time                   mean
 ```
 
 The time boundaries and returned timestamps for the query **without** the
-`offset_interval` adhere to InfluxDB's preset time boundaries:
+`offset_interval` adhere to the InfluxDB database's preset time boundaries:
 
 | Time Interval Number | Preset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
@@ -1196,7 +1204,7 @@ the query in Example 2 uses a negative `offset_interval` instead of a positive
 > There are no performance differences between the two queries; feel free to choose the most
 intuitive option when deciding between a positive and negative `offset_interval`.
 
-The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB's preset time boundaries. Let's first examine the results without the offset:
+The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB database's preset time boundaries. Let's first examine the results without the offset:
 
 ```sql
 > SELECT MEAN("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time <= '2015-08-18T00:54:00Z' GROUP BY time(18m)
@@ -1211,7 +1219,7 @@ time                    mean
 ```
 
 The time boundaries and returned timestamps for the query **without** the
-`offset_interval` adhere to InfluxDB's preset time boundaries:
+`offset_interval` adhere to the InfluxDB database's preset time boundaries:
 
 | Time Interval Number | Preset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
@@ -1271,10 +1279,10 @@ time                   count
 ```
 
 The query uses an InfluxQL [function](/influxdb/v1.7/query_language/functions/)
-to calculate the average `water_level`, grouping results into 12 minute
+to count the number of `water_level` points, grouping results into 12 minute
 time intervals, and offsetting the preset time boundaries by six minutes.
 
-The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB's preset time boundaries. Let's first examine the results without the offset:
+The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB database's preset time boundaries. Let's first examine the results without the offset:
 
 ```sql
 > SELECT COUNT("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2015-08-18T00:06:00Z' AND time < '2015-08-18T00:18:00Z' GROUP BY time(12m)
@@ -1287,7 +1295,7 @@ time                   count
 ```
 
 The time boundaries and returned timestamps for the query **without** the
-`offset_interval` adhere to InfluxDB's preset time boundaries:
+`offset_interval` adhere to InfluxDB database's preset time boundaries:
 
 | Time Interval Number | Preset Time Boundary |`GROUP BY time()` Interval | Points Included | Returned Timestamp |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
@@ -1330,7 +1338,7 @@ the query's time range so the query returns no results for that second interval.
 
 #### Syntax
 
-```
+```sql
 SELECT <function>(<field_key>) FROM_clause WHERE <time_range> GROUP BY time(time_interval,[<offset_interval])[,tag_key] [fill(<fill_option>)]
 ```
 
@@ -1672,7 +1680,7 @@ The `INTO` clause writes query results to a user-specified [measurement](/influx
 
 ### Syntax
 
-```
+```sql
 SELECT_clause INTO <measurement_name> FROM_clause [WHERE_clause] [GROUP_BY_clause]
 ```
 
@@ -1684,7 +1692,7 @@ Writes data to the specified measurement.
 If you're using the [CLI](/influxdb/v1.7/tools/shell/) InfluxDB writes the data to the measurement in the
 [`USE`d](/influxdb/v1.7/tools/shell/#commands)
 [database](/influxdb/v1.7/concepts/glossary/#database) and the `DEFAULT` [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.7/tools/api/) InfluxDB writes the data to the
+If you're using the [InfluxDB API](/influxdb/v1.7/tools/api/) InfluxDB writes the data to the
 measurement in the database specified in the [`db` query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters)
 and the `DEFAULT` retention policy.
 
@@ -1776,10 +1784,10 @@ time                   water_level
 The query writes its results a new [measurement](/influxdb/v1.7/concepts/glossary/#measurement): `h2o_feet_copy_1`.
 If you're using the [CLI](/influxdb/v1.7/tools/shell/), InfluxDB writes the data to
 the `USE`d [database](/influxdb/v1.7/concepts/glossary/#database) and the `DEFAULT` [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
-If you're using the [HTTP API](/influxdb/v1.7/tools/api/), InfluxDB writes the
+If you're using the [InfluxDB API](/influxdb/v1.7/tools/api/), InfluxDB writes the
 data to the database and retention policy specified in the `db` and `rp`
 [query string parameters](/influxdb/v1.7/tools/api/#query-string-parameters).
-If you do not set the `rp` query string parameter, the HTTP API automatically
+If you do not set the `rp` query string parameter, the InfluxDB API automatically
 writes the data to the database's `DEFAULT` retention policy.
 
 The response shows the number of points (`7605`) that InfluxDB writes to `h2o_feet_copy_1`.
@@ -1947,7 +1955,7 @@ with the most recent timestamps first.
 
 ### Syntax
 
-```
+```sql
 SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] ORDER BY time DESC
 ```
 
@@ -2014,7 +2022,7 @@ Without `ORDER BY time DESC`, the query would return
 
 ### Syntax
 
-```
+```sql
 SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] LIMIT <N>
 ```
 
@@ -2076,7 +2084,7 @@ one for each twelve-minute interval in the query's time range.
 
 ### Syntax
 
-```
+```sql
 SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] GROUP BY *[,time(<time_interval>)] [ORDER_BY_clause] SLIMIT <N>
 ```
 
@@ -2141,7 +2149,7 @@ associated with the `h2o_feet` measurement: `location=coyote_creek` and
 
 ### Syntax
 
-```
+```sql
 SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] GROUP BY *[,time(<time_interval>)] [ORDER_BY_clause] LIMIT <N1> SLIMIT <N2>
 ```
 
@@ -2215,7 +2223,7 @@ for each of the two series associated with the `h2o_feet` measurement.
 
 ### Syntax
 
-```
+```sql
 SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] LIMIT_clause OFFSET <N> [SLIMIT_clause]
 ```
 
@@ -2288,7 +2296,7 @@ time                   mean
 
 ### Syntax
 
-```
+```sql
 SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] GROUP BY *[,time(time_interval)] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] SLIMIT_clause SOFFSET <N>
 ```
 
@@ -2366,7 +2374,7 @@ The `tz()` clause returns the UTC offset for the specified timezone.
 
 ### Syntax
 
-```
+```sql
 SELECT_clause [INTO_clause] FROM_clause [WHERE_clause] [GROUP_BY_clause] [ORDER_BY_clause] [LIMIT_clause] [OFFSET_clause] [SLIMIT_clause] [SOFFSET_clause] tz('<time_zone>')
 ```
 
@@ -2420,19 +2428,21 @@ Specify absolute time with date-time strings and epoch time.
 
 ### Syntax
 
-```
+```sql
 SELECT_clause FROM_clause WHERE time <operator> ['<rfc3339_date_time_string>' | '<rfc3339_like_date_time_string>' | <epoch_time>] [AND ['<rfc3339_date_time_string>' | '<rfc3339_like_date_time_string>' | <epoch_time>] [...]]
 ```
 
 #### Supported operators
 
-`=`&emsp;&nbsp;&thinsp;equal to
-`<>`&emsp;not equal to
-`!=`&emsp;not equal to
-`>`&emsp;&nbsp;&thinsp;greater than
-`>=`&emsp;greater than or equal to
-`<`&emsp;&nbsp;&thinsp;less than
-`<=`&emsp;less than or equal to
+| Operator | Meaning                  |
+|:--------:|:-------                  |
+| `=`      | equal to                 |
+| `<>`     | not equal to             |
+| `!=`     | not equal to             |
+| `>`      | greater than             |
+| `>=`     | greater than or equal to |
+| `<`      | less than                |
+| `<=`     | less than or equal to    |
 
 Currently, InfluxDB does not support using `OR` with absolute time in the `WHERE`
 clause. See the [Frequently Asked Questions](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#why-is-my-query-with-a-where-or-time-clause-returning-empty-results)
@@ -2441,7 +2451,7 @@ for more information.
 
 #### `rfc3339_date_time_string`
 
-```
+```sql
 'YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ'
 ```
 
@@ -2450,7 +2460,7 @@ The [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) date-time string requires si
 
 #### `rfc3339_like_date_time_string`
 
-```
+```sql
 'YYYY-MM-DD HH:MM:SS.nnnnnnnnn'
 ```
 
@@ -2591,7 +2601,7 @@ Use [`now()`](/influxdb/v1.7/concepts/glossary/#now) to query data with [timesta
 
 ### Syntax
 
-```
+```sql
 SELECT_clause FROM_clause WHERE time <operator> now() [[ - | + ] <duration_literal>] [(AND|OR) now() [...]]
 ```
 
@@ -2599,14 +2609,15 @@ SELECT_clause FROM_clause WHERE time <operator> now() [[ - | + ] <duration_liter
 The whitespace between `-` or `+` and the [duration literal](/influxdb/v1.7/query_language/spec/#durations) is required.
 
 #### Supported operators
-
-`=`&emsp;&nbsp;&thinsp;equal to
-`<>`&emsp;not equal to
-`!=`&emsp;not equal to
-`>`&emsp;&nbsp;&thinsp;greater than
-`>=`&emsp;greater than or equal to
-`<`&emsp;&nbsp;&thinsp;less than
-`<=`&emsp;less than or equal to
+| Operator | Meaning                  |
+|:--------:|:-------                  |
+| `=`      | equal to                 |
+| `<>`     | not equal to             |
+| `!=`     | not equal to             |
+| `>`      | greater than             |
+| `>=`     | greater than or equal to |
+| `<`      | less than                |
+| `<=`     | less than or equal to    |
 
 #### `duration_literal`
 
@@ -2716,7 +2727,7 @@ The [CLI](/influxdb/v1.7/tools/shell/) returns timestamps in
 nanosecond epoch format by default.
 Specify alternative formats with the
 [`precision <format>` command](/influxdb/v1.7/tools/shell/#influx-commands).
-The [HTTP API](/influxdb/v1.7/tools/api/) returns timestamps
+The [InfluxDB API](/influxdb/v1.7/tools/api/) returns timestamps
 in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) format by default.
 Specify alternative formats with the
 [`epoch` query string parameter](/influxdb/v1.7/tools/api/#query-string-parameters).
@@ -2742,7 +2753,7 @@ as those without.
 
 ### Syntax
 
-```
+```sql
 SELECT /<regular_expression_field_key>/ FROM /<regular_expression_measurement>/ WHERE [<tag_key> <operator> /<regular_expression_tag_value>/ | <field_key> <operator> /<regular_expression_field_value>/] GROUP BY /<regular_expression_tag_key>/
 ```
 
@@ -2911,7 +2922,7 @@ document for more information on how InfluxDB handles field value type discrepan
 
 ### Syntax
 
-```
+```sql
 SELECT_clause <field_key>::<type> FROM_clause
 ```
 
@@ -2943,7 +2954,7 @@ floats or from floats to integers.
 
 ### Syntax
 
-```
+```sql
 SELECT_clause <field_key>::<type> FROM_clause
 ```
 
@@ -3040,13 +3051,13 @@ Separate multiple [`SELECT` statements](#the-basic-select-statement) in a query 
 {{< tab-labels >}}
 {{% tabs %}}
 [Example 1: CLI](#)
-[Example 2: HTTP API](#)
+[Example 2: InfluxDB API](#)
 {{% /tabs %}}
 {{< tab-content-container >}}
 
 {{% tab-content %}}
 
-In InfluxDB's [CLI](/influxdb/v1.7/tools/shell/):
+In the InfluxDB [CLI](/influxdb/v1.7/tools/shell/):
 
 ```sql
 > SELECT MEAN("water_level") FROM "h2o_feet"; SELECT "water_level" FROM "h2o_feet" LIMIT 2
@@ -3067,7 +3078,7 @@ time                   water_level
 
 {{% tab-content %}}
 
-With the InfluxDB [HTTP API](/influxdb/v1.7/tools/api/):
+With the [InfluxDB API](/influxdb/v1.7/tools/api/):
 
 ```json
 {
@@ -3130,7 +3141,7 @@ Subqueries offer functionality similar to nested functions and SQL
 
 ### Syntax
 
-```
+```sql
 SELECT_clause FROM ( SELECT_statement ) [...]
 ```
 
@@ -3145,7 +3156,7 @@ The subquery supports all clauses listed in this document.
 InfluxQL supports multiple nested subqueries per main query.
 Sample syntax for multiple subqueries:
 
-```
+```sql
 SELECT_clause FROM ( SELECT_clause FROM ( SELECT_statement ) [...] ) [...]
 ```
 
@@ -3299,7 +3310,7 @@ Notice that the main query specifies `water_level_derivative`, not `water_level`
 
 InfluxQL supports multiple nested subqueries per main query:
 
-```
+```sql
 SELECT_clause FROM ( SELECT_clause FROM ( SELECT_statement ) [...] ) [...]
                      ------------------   ----------------
                          Subquery 1          Subquery 2
@@ -3307,7 +3318,8 @@ SELECT_clause FROM ( SELECT_clause FROM ( SELECT_statement ) [...] ) [...]
 
 InfluxQL does not support multiple [`SELECT` statements](#the-basic-select-statement) per subquery:
 
-```
+```sql
 SELECT_clause FROM (SELECT_statement; SELECT_statement) [...]
 ```
+
 The system returns a parsing error if a subquery includes multiple `SELECT` statements.

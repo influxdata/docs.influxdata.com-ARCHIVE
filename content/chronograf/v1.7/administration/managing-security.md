@@ -360,19 +360,21 @@ Your users should now be able to sign into Chronograf using the new Okta provide
 **To enable Chronograf support using a GitLab OAuth 2.0 application:**
 
 1. In your GitLab profile, [create a new OAuth2 authentication service](https://docs.gitlab.com/ee/integration/oauth_provider.html#adding-an-application-through-the-profile).
-   Provide a name for your authentication service, then enter your publicly accessible Chronograf URL with the `/oauth/generic/callback` path as your GitLab **callback URL**:
+   Provide a name for your authentication service, then enter your publicly accessible Chronograf URL with the `/oauth/gitlab/callback` path as your GitLab **callback URL**:
 
     **Callback URL**:
 
     ```sh
     # Pattern
-    http://<your_chronograf_server>:8888/oauth/generic/callback
+    http://<your_chronograf_server>:8888/oauth/gitlab/callback
 
     # Example
-    http://chronograf-example.com:8888/oauth/generic/callback
+    http://chronograf-example.com:8888/oauth/gitlab/callback
     ```
 
     Click **Submit** to save the service details.
+    
+    Make sure your application has **openid** and **read_user** Scopes.
 
 2. Copy the provided **Application Id** and **Secret** and set the following environment variables:
 
@@ -382,12 +384,13 @@ Your users should now be able to sign into Chronograf using the new Okta provide
     ```bash
     GENERIC_NAME=gitlab
     GENERIC_CLIENT_ID=<gitlab_application_id>
-    GENERIC_CLIENT_ID=<gitlab_secret>
-    GENERIC_AUTH_URL=http://<gitlab-server-example.com>/oauth/authorize?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&response_type=code
-    GENERIC_TOKEN_URL=http://gitlab-server-example.com/oauth/token?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&grant_type=authorization_code
-    GENERIC_SCOPES=api
+    GENERIC_CLIENT_SECRET=<gitlab_secret>
+    GENERIC_AUTH_URL=http://<gitlab-server-example.com>/oauth/authorize
+    GENERIC_TOKEN_URL=http://gitlab-server-example.com/oauth/token
+    GENERIC_SCOPES=openid,read_user
     TOKEN_SECRET=mysupersecret
     GENERIC_API_URL=http://gitlab-server-example.com/api/v3/user
+    PUBLIC_URL=http://chronograf-example.com:8888/
     ```
 
     The equivalent command line options are:
@@ -395,12 +398,13 @@ Your users should now be able to sign into Chronograf using the new Okta provide
     ```bash
     --generic-name=gitlab
     --generic-client-id=<gitlab_application_id>
-    --generic-client-id=<gitlab_secret>
-    --generic-auth-url=http://<gitlab-server-example.com>/oauth/authorize?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&response_type=code
-    --generic-token-url=http://gitlab-server-example.com/oauth/token?redirect_uri=http%3A%2F%2Fchronograf-server-example.com%3A8888%2Foauth%2Fgeneric%2Fcallback&grant_type=authorization_code
-    --generic-scopes=api
+    --generic-client-secret=<gitlab_secret>
+    --generic-auth-url=http://<gitlab-server-example.com>/oauth/authorize
+    --generic-token-url=http://gitlab-server-example.com/oauth/token
+    --generic-scopes=openid,read_user
     --token-secret=mysupersecret
     --generic-api-url=http://gitlab-server-example.com/api/v3/user
+    --public-url=http://chronograf-example.com:8888/
     ```
 
 3. Restart the Chronograf service.

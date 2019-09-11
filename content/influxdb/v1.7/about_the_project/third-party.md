@@ -7,7 +7,6 @@ menu:
     parent: About the project
 ---
 
-
 InfluxData products contain third party software, which means the copyrighted,
 patented, or otherwise legally protected software of third parties that is
 incorporated in InfluxData products.

@@ -9,227 +9,99 @@ menu:
     parent: Guides
 ---
 
-## Controlling access to data with InfluxDB Enterprise's fine-grained authorization
+Fine-grained authorization (FGA) in InfluxDB Enterprise controls access at the database, measurement, and series level.
 
-In InfluxDB OSS, access control operates only at a database level.
-In InfluxDB Enterprise, fine-grained authorization can be used to control access at a measurement or series level.
+> **Note:** InfluxDB OSS controls access at the database level only.
 
-### Concepts
+## Set up fine-grained authorization
 
-To use fine-grained authorization (FGA), you must first [enable authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication) in your configuration file.
-Then the admin user needs to create users through the query API and grant those users explicit read and/or write privileges per database.
-So far, this is the same as how you would configure authorization on an InfluxDB OSS instance.
+To set up fine-grained authorization (FGA), you must have
+[admin permissions](/influxdb/v1.7/administration/authentication_and_authorization/#admin-user-management),
+and then complete the following steps.
 
-To continue setting up fine-grained authorization, the admin user must first set _restrictions_ which define a combination of database, measurement, and tags which cannot be accessed without an explicit _grant_.
-A _grant_ enables access to series that were previously restricted.
+1. [Enable authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication) in your InfluxDB configuration file.
 
-Restrictions limit access to the series that match the database, measurement, and tags specified.
-The different access permissions (currently just "read" and "write") can be restricted independently depending on the scenario.
-Grants will allow access, according to the listed permissions, to restricted series for the users and roles specified.
-Users are the same as the users created in InfluxQL, and [roles](/enterprise_influxdb/v1.7/features/users/#cluster-user-information), an InfluxDB Enterprise feature, are created separately through the Meta HTTP API.
+2. Create users through the InfluxDB query API.
 
-### Modifying grants and restrictions
+    ```sql
+    CREATE USER username WITH PASSWORD 'password'
+    ```
 
-To configure FGA, you will need access to the meta nodes' HTTP ports (which run on port 8091 by default).
-Note that in a typical cluster configuration, the data nodes' HTTP ports (8086 by default) are exposed to clients but the meta nodes' HTTP ports are not.
-You may need to work with your network administrator to gain access to the meta nodes' HTTP ports.
+    For detail, see [User management commands](/influxdb/v1.7/administration/authentication_and_authorization/#user-management-commands).
 
-### Scenario: partitioning access within a single measurement via users
+3. Obtain access to the **meta** nodes' HTTP API (port 8091 by default).
 
-We'll assume a schema of a database named `datacenters`, one measurement named `network` with a tag of `dc=east` or `dc=west`, and two fields, `bytes_in` and `bytes_out`.
-Suppose you want to make sure that the client in the east datacenter can't read or write the west datacenter's metrics, and vice versa.
+    > In a typical cluster configuration, the data nodes' HTTP ports
+    > (8086 by default) are exposed to clients but the meta nodes' HTTP ports are not.
+    > You may need to work with your network administrator to gain access to the meta nodes' HTTP ports.
 
-First, as an administrator, you would create the database and users and standard grants with InfluxQL queries:
+4. _(Optional)_ [Create roles](#manage-roles). Roles let you grant permissions to groups of users assigned to each role.
 
+    > For an overview of how users and roles work in InfluxDB Enterprise, see [InfluxDB Enterprise users](/enterprise_influxdb/v1.7/features/users/).
+
+5. [Set up restrictions](#manage-restrictions). Restrictions apply to all non-admin users.
+
+    > Permissions (currently "read" and "write") may be restricted independently depending on the scenario.
+
+7. [Set up grants](#manage-grants) to remove restrictions for specified users and roles.
+
+---
+
+{{% note %}}
+#### Notes about examples
+The examples below use `curl`, a command line tool for transferring data, to send
+HTTP requests to the Meta API, and `jq`, a command line JSON processor,
+to make the JSON output easier to read.
+Alternatives for each are available, but are not covered in this documentation.
+
+All examples  assume authentication is enabled in InfluxDB and require admin
+credentials with each request.
+Use the `curl -u` flag to pass authentication credentials:
+
+```sh
+curl -u `username:password` #...
 ```
-CREATE DATABASE datacenters
+{{% /note %}}
 
-CREATE USER east WITH PASSWORD 'east'
-GRANT ALL ON datacenters TO east
+---
 
-CREATE USER west WITH PASSWORD 'west'
-GRANT ALL ON datacenters TO west
-```
+## Matching methods
+As you manage restrictions and grants to databases, measurements, or seriesusing matching methods.
+The following matching methods are available:
 
-At this point, the east and west users have unrestricted read and write access to the `datacenters` database.
-We'll need to decide what restrictions to apply in order to limit their access.
+- **exact**: Matches only exact string matches.
+- **prefix**: Matches strings the begin with a specified prefix.
 
-#### Restrictions
+```sh
+# Match a database name exactly
+"database": {"match": "exact", "value": "my_database"}
 
-##### Restriction option 1: the entire database
-
-Restricting the entire database is a simple option, and in most cases it is the simplest option to reason about.
-Moreover, because this is a very general restriction, it will have minimal impact on performance.
-
-Assuming the meta node is running its HTTP service on localhost on the default port, you can run
-
-```
-curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "permissions": ["read", "write"]
-  }'
-```
-
-After applying this restriction and before applying any grants, the east and west users will not be authorized to read from or write to the database.
-
-##### Restriction option 2: one measurement within the database
-
-Restricting a single measurement will disallow reads and writes within that measurement, but access to other measurements within the database will be decided by standard permissions.
-
-```
-curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "measurement": {"match": "exact", "value": "network"},
-    "permissions": ["read", "write"]
-  }'
+# Match any databases that begin with "my_"
+"database": {"match": "prefix", "value": "my_"}
 ```
 
-Compared to the previous approach of restricting the entire database, this only restricts access to the measurement `network`.
-In this state, the east and west users are free to read from and write to any measurement in the database `datacenters` besides `network`.
+{{% note %}}
+#### Wildcard matching
+Neither `exact` nor `prefix` matching methods allow for wildcard matching.
+{{% /note %}}
 
-##### Restriction option 3: specific series in a database
+## Manage roles
+Roles allow you to assign permissions to groups of users.
+The following examples assume the `user1`, `user2` and `ops` users already exist in InfluxDB.
 
-The most fine-grained restriction option is to restrict specific tags in a measurement and database.
+### Create a role
+To create a new role, use the InfluxDB Meta API `/role` endpoint with the `action`
+field set to `create` in the request body.
 
-```
-for region in east west; do
-  curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
-    -H "Content-Type: application/json" \
-    --data-binary '{
-      "database": {"match": "exact", "value": "datacenters"},
-      "measurement": {"match": "exact", "value": "network"},
-      "tags": [{"match": "exact", "key": "dc", "value": "'$region'"}],
-      "permissions": ["read", "write"]
-    }'
-done
-```
+The following examples create two new roles:
 
-This configuration would allow reads and writes from any measurement in `datacenters`; and when the measurement is `network`, it would only restrict when there is a tag `dc=east` or `dc=west`.
-This is probably not what you want, as it would allow writes to `network` without tags or writes to `network` with a tag key of `dc` and a tag value of anything but `east` or `west`.
+- east
+- west
 
-##### Restriction summary
-
-These options were simple matchers on exact patterns.
-Remember that you will achieve the best performance by having few, broad restrictions as opposed to many narrow restrictions.
-
-We only used the matcher `exact` above, but you can also match with `prefix` if you want to restrict based on a common prefix on your database, measurements, or tags.
-
-#### Grants
-
-Now that you've applied your restrictions that apply to all users, you must apply grants to allow selected users to bypass the restrictions.
-The structure of a POST body for a grant is identical to the POST body for a restriction, but with the addition of a `users` array.
-
-##### Grant option 1: the entire database
-
-This offers no guarantee that the users will write to the correct measurement or use the correct tags.
-
-```
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "permissions": ["read", "write"],
-    "users": [{"name": "east"}, {"name": "west"}]
-  }'
-```
-
-##### Grant option 2: one measurement within the database
-
-This guarantees that the users will only have access to the `network` measurement but it still does not guarantee that they will use the correct tags.
-
-```
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "measurement": {"match": "exact", "value": "network"},
-    "permissions": ["read", "write"],
-    "users": [{"name": "east"}, {"name": "west"}]
-  }'
-```
-
-##### Grant option 3: specific tags on a database
-
-This guarantees that the users will only have access to data with the corresponding `dc` tag but it does not guarantee that they will use the `network` measurement.
-
-```
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "tags": [{"match": "exact", "key": "dc", "value": "east"}],
-    "permissions": ["read", "write"],
-    "users": [{"name": "east"}]
-  }'
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "tags": [{"match": "exact", "key": "dc", "value": "west"}],
-    "permissions": ["read", "write"],
-    "users": [{"name": "west"}]
-  }'
-```
-
-##### Grant option 4: specific series within the database
-
-To guarantee that both users only have access to the `network` measurement and that the east user uses the tag `dc=east` and the west user uses the tag `dc=west`, we need to make two separate grant calls:
-
-```
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "measurement": {"match": "exact", "value": "network"},
-    "tags": [{"match": "exact", "key": "dc", "value": "east"}],
-    "permissions": ["read", "write"],
-    "users": [{"name": "east"}]
-  }'
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "measurement": {"match": "exact", "value": "network"},
-    "tags": [{"match": "exact", "key": "dc", "value": "west"}],
-    "permissions": ["read", "write"],
-    "users": [{"name": "west"}]
-  }'
-```
-
-Now, when the east user writes to the `network` measurement, it must include the tag `dc=east`, and when the west user writes to `network`, it must include the tag `dc=west`.
-Note that this is only the requirement of the presence of that tag; `dc=east,foo=bar` will also be accepted.
-
-### Scenario: partitioning access via roles
-
-Suppose that we have many individuals who need to write to our `datacenters` database in the previous example.
-We wouldn't want them to all share one set of login credentials.
-We can instead use _roles_, which are associate a set of users with a set of permissions.
-
-We'll assume that we now have many users on the east and west teams, and we'll have an `ops` user who needs full access to data from both the east and west datacenters.
-We will only create one user each for east and west, but the process would be the same for any number of users.
-
-First we will set up the users.
-
-```
-CREATE DATABASE datacenters
-
-CREATE USER e001 WITH PASSWORD 'e001'
-CREATE USER w001 WITH PASSWORD 'w001'
-CREATE USER ops WITH PASSWORD 'ops'
-```
-
-#### Creating the roles
-
-We want one role for full access to any point in `datacenters` with the tag `dc=east` and another role for the tag `dc=west`.
-
-First, we initialize the roles.
-
-```
+```sh
+# Create east role
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "create",
@@ -237,7 +109,10 @@ curl -s -L -XPOST "http://localhost:8091/role" \
       "name": "east"
     }
   }'
+
+# Create west role
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "create",
@@ -247,147 +122,494 @@ curl -s -L -XPOST "http://localhost:8091/role" \
   }'
 ```
 
-Next, let's specify that anyone belonging to those roles has general read and write access to the `datacenters` database.
+### Specify role permissions
+To specify permissions for a role, use the InfluxDB Meta API `/role` endpoint with the `action` field
+set to `add-permissions`. Specify the [permissions](https://docs.influxdata.com/chronograf/v1.7/administration/managing-influxdb-users/#permissions) to add for each database.
 
-```
+The following example sets read and write permissions on `db1` for both `east` and `west` roles.
+
+```sh
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "add-permissions",
     "role": {
       "name": "east",
       "permissions": {
-        "datacenters": ["ReadData", "WriteData"]
+        "db1": ["ReadData", "WriteData"]
       }
     }
   }'
 
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "add-permissions",
     "role": {
       "name": "west",
       "permissions": {
-        "datacenters": ["ReadData", "WriteData"]
+        "db1": ["ReadData", "WriteData"]
       }
     }
   }'
 ```
 
-Next, we need to associate users to the roles.
-The `east` role gets the user from the east team, the `west` role gets the user from the west team, and both roles get the `ops` user.
+### Remove role permissions
+To remove permissions from a role, use the InfluxDB Meta API `/role` endpoint with the `action` field
+set to `remove-permissions`. Specify the [permissions](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/#permissions) to remove from each database.
 
-```
+The following example removes read and write permissions from `db1` for the `east` role.
+
+```sh
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "action": "remove-permissions",
+    "role": {
+      "name": "east",
+      "permissions": {
+        "db1": ["ReadData", "WriteData"]
+      }
+    }
+  }'
+```
+
+### Assign users to a role
+To assign users to role, set the `action` field to `add-users` and include a list
+of users in the `role` field.
+
+The following examples add user1, user2 and the ops user to the `east` and `west` roles.
+
+```sh
+# Add user1 and ops to the east role
+curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "add-users",
     "role": {
       "name": "east",
-      "users": ["e001", "ops"]
+      "users": ["user1", "ops"]
     }
   }'
+
+# Add user1 and ops to the west role
 curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
     "action": "add-users",
     "role": {
       "name": "west",
-      "users": ["w001", "ops"]
+      "users": ["user2", "ops"]
     }
   }'
 ```
 
-#### Restrictions
+### View existing roles
+To view existing roles with their assigned permissions and users, use the `GET`
+request method with the InfluxDB Meta API `/role` endpoint.
 
-Please refer to the previous scenario for directions on how to set up restrictions.
-
-#### Grants and roles
-
-Grants for a role function the same as grants for a user.
-Instead of using the key `users` to refer to users, use the key `roles` to refer to roles.
-
-##### Grant option 1: the entire database
-
-This offers no guarantee that the users in the roles will write to the correct measurement or use the correct tags.
-
+```sh
+curl -L -XGET http://localhost:8091/role | jq
 ```
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+
+### Delete a role
+To delete a role, the InfluxDB Meta API `/role` endpoint and set the `action`
+field to `delete` and include the name of the role to delete.
+
+```sh
+curl -s -L -XPOST "http://localhost:8091/role" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "permissions": ["read", "write"],
-    "roles": [{"name": "east"}, {"name": "west"}]
+    "action": "delete",
+    "role": {
+      "name": "west"
+    }
   }'
 ```
 
-##### Grant option 2: one measurement within the database
+{{% note %}}
+Deleting a role does not delete users assigned to the role.
+{{% /note %}}
 
-This guarantees that the users in the roles will only have access to the `network` measurement but it still does not guarantee that they will use the correct tags.
+## Manage restrictions
+Restrictions restrict either or both read and write permissions on InfluxDB assets.
+Restrictions apply to all non-admin users.
+[Grants](#manage-grants) override restrictions.
 
+Manage restrictions using the InfluxDB Meta API `acl/restrictions` endpoint.
+
+```sh
+curl -L -XGET "http://localhost:8091/influxdb/v2/acl/restrictions"
 ```
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+
+- [Restrict by database](#restrict-by-database)
+- [Restrict by measurement in a database](#restrict-by-measurement-in-a-database)
+- [Restrict by series in a database](#restrict-by-series-in-a-database)
+- [View existing restrictions](#view-existing-restrictions)
+- [Update a restriction](#update-a-restriction)
+- [Remove a restriction](#remove-a-restriction)
+
+> **Note:** For the best performance, set up minimal restrictions.
+
+### Restrict by database
+In most cases, restricting the database is the simplest option, and has minimal impact on performance.
+The following example restricts reads and writes on the `my_database` database.
+
+```sh
+curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
+    "database": {"match": "exact", "value": "my_database"},
+    "permissions": ["read", "write"]
+  }'
+```
+
+### Restrict by measurement in a database
+The following example restricts read and write permissions on the `network`
+measurement in the `my_database` database.
+_This restriction does not apply to other measurements in the `my_database` database._
+
+```sh
+curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "measurement": {"match": "exact", "value": "network"},
+    "permissions": ["read", "write"]
+  }'
+```
+
+### Restrict by series in a database
+The most fine-grained restriction option is to restrict specific tags in a measurement and database.
+The following example restricts read and write permissions on the `datacenter=east` tag in the
+`network` measurement in the `my_database` database.
+_This restriction does not apply to other tags or tag values in the `network` measurement._
+
+```sh
+curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "measurement": {"match": "exact", "value": "network"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "east"}],
+    "permissions": ["read", "write"]
+  }'
+```
+
+_Consider this option carefully, as it allows writes to `network` without tags or
+writes to `network` with a tag key of `datacenter` and a tag value of anything but `east`._
+
+##### Apply restrictions to a series defined by multiple tags
+```sh
+curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "measurement": {"match": "exact", "value": "network"},
+    "tags": [
+      {"match": "exact", "key": "tag1", "value": "value1"},
+      {"match": "exact", "key": "tag2", "value": "value2"}
+    ],
+    "permissions": ["read", "write"]
+  }'
+```
+
+{{% note %}}
+#### Create multiple restrictions at a time
+There may be times where you need to create restrictions using unique values for each.
+To create multiple restrictions for a list of values, use a bash `for` loop:
+
+```sh
+for value in val1 val2 val3 val4; do
+  curl -L -XPOST "http://localhost:8091/influxdb/v2/acl/restrictions" \
+    -u "admin-username:admin-password" \
+    -H "Content-Type: application/json" \
+    --data-binary '{
+      "database": {"match": "exact", "value": "my_database"},
+      "measurement": {"match": "exact", "value": "network"},
+      "tags": [{"match": "exact", "key": "datacenter", "value": "'$value'"}],
+      "permissions": ["read", "write"]
+    }'
+done
+```
+{{% /note %}}
+
+### View existing restrictions
+To view existing restrictions, use the `GET` request method with the `acl/restrictions` endpoint.
+
+```sh
+curl -L -u "admin-username:admin-password" -XGET "http://localhost:8091/influxdb/v2/acl/restrictions" | jq
+```
+
+### Update a restriction
+_You can not directly modify a restriction.
+Delete the existing restriction and create a new one with updated parameters._
+
+### Remove a restriction
+To remove a restriction, obtain the restriction ID using the `GET` request method
+with the `acl/restrictions` endpoint.
+Use the `DELETE` request method to delete a restriction by ID.
+
+```sh
+# Obtain the restriction ID from the list of restrictions
+curl -L -u "admin-username:admin-password" \
+  -XGET "http://localhost:8091/influxdb/v2/acl/restrictions" | jq
+
+# Delete the restriction using the restriction ID
+curl -L -u "admin-username:admin-password" \
+  -XDELETE "http://localhost:8091/influxdb/v2/acl/restrictions/<restriction_id>"
+```
+
+## Manage grants
+Grants remove restrictions and grant users or roles either or both read and write
+permissions on InfluxDB assets.
+
+Manage grants using the InfluxDB Meta API `acl/grants` endpoint.
+
+```sh
+curl -L -u "admin-username:admin-password" \
+  -XGET "http://localhost:8091/influxdb/v2/acl/grants"
+```
+
+- [Grant permissions by database](#grant-permissions-by-database)
+- [Grant permissions by measurement in a database](#grant-permissions-by-measurement-in-a-database)
+- [Grant permissions by series in a database](#grant-permissions-by-series-in-a-database)
+- [View existing grants](#view-existing-grants)
+- [Update a grant](#update-a-grant)
+- [Remove a grant](#remove-a-grant)
+
+### Grant permissions by database
+The following examples grant read and write permissions on the `my_database` database.
+
+> **Note:** This offers no guarantee that the users will write to the correct measurement or use the correct tags.
+
+##### Grant database-level permissions to users
+```sh
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "permissions": ["read", "write"],
+    "users": [
+      {"name": "user1"},
+      {"name": "user2"}
+    ]
+  }'
+```
+
+##### Grant database-level permissions to roles
+```sh
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "permissions": ["read", "write"],
+    "roles": [
+      {"name": "role1"},
+      {"name": "role2"}
+    ]
+  }'
+```
+
+### Grant permissions by measurement in a database
+The following examples grant permissions to the `network` measurement in the `my_database` database.
+These grants do not apply to other measurements in the `my_database` database nor
+guarantee that users will use the correct tags.
+
+##### Grant measurement-level permissions to users
+```sh
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
     "measurement": {"match": "exact", "value": "network"},
     "permissions": ["read", "write"],
-    "roles": [{"name": "east"}, {"name": "west"}]
+    "users": [
+      {"name": "user1"},
+      {"name": "user2"}
+    ]
   }'
 ```
 
-##### Grant option 3: specific tags on a database
+To grant access for roles, run:
 
-This guarantees that the users in the roles will only have access to data with the corresponding `dc` tag.
-They will have access to any measurement in the `datacenters` database.
-
-```
+```sh
 curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
   -H "Content-Type: application/json" \
   --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "tags": [{"match": "exact", "key": "dc", "value": "east"}],
-    "permissions": ["read", "write"],
-    "roles": [{"name": "east"}]
-  }'
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "tags": [{"match": "exact", "key": "dc", "value": "west"}],
-    "permissions": ["read", "write"],
-    "roles": [{"name": "west"}]
-  }'
-```
-
-##### Grant option 4: specific series within the database
-
-To guarantee that both roles only have access to the `network` measurement and that the east user uses the tag `dc=east` and the west user uses the tag `dc=west`, we need to make two separate grant calls:
-
-```
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
+    "database": {"match": "exact", "value": "my_database"},
     "measurement": {"match": "exact", "value": "network"},
-    "tags": [{"match": "exact", "key": "dc", "value": "east"}],
     "permissions": ["read", "write"],
-    "roles": [{"name": "east"}]
-  }'
-curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
-  -H "Content-Type: application/json" \
-  --data-binary '{
-    "database": {"match": "exact", "value": "datacenters"},
-    "measurement": {"match": "exact", "value": "network"},
-    "tags": [{"match": "exact", "key": "dc", "value": "west"}],
-    "permissions": ["read", "write"],
-    "roles": [{"name": "west"}]
+    "roles": [
+      {"name": "role1"},
+      {"name": "role2"}
+    ]
   }'
 ```
 
-Now, when a user in the east role writes to the `network` measurement, it must include the tag `dc=east`, and when the west user writes to `network`, it must include the tag `dc=west`.
-Note that this is only the requirement of the presence of that tag; `dc=east,foo=bar` will also be accepted.
+### Grant permissions by series in a database
 
-If a user is in both the east and west roles, they must write points with either `dc=east` or `dc=west`.
-When they query data, they will be able to read points tagged with `dc=east` or `dc=west`.
+The following examples grant access only to data with the corresponding `datacenter` tag.
+_Neither guarantees the users will use the `network` measurement._
+
+##### Grant series-level permissions to users
+```sh
+# Grant user1 read/write permissions on data with the 'datacenter=east' tag set.
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "east"}],
+    "permissions": ["read", "write"],
+    "users": [{"name": "user1"}]
+  }'
+
+# Grant user2 read/write permissions on data with the 'datacenter=west' tag set.
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "west"}],
+    "permissions": ["read", "write"],
+    "users": [{"name": "user2"}]
+  }'
+```
+
+##### Grant series-level permissions to roles
+```sh
+# Grant role1 read/write permissions on data with the 'datacenter=east' tag set.
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "east"}],
+    "permissions": ["read", "write"],
+    "roles": [{"name": "role1"}]
+  }'
+
+# Grant role2 read/write permissions on data with the 'datacenter=west' tag set.
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "west"}],
+    "permissions": ["read", "write"],
+    "roles": [{"name": "role2"}]
+  }'
+```
+
+### Grant access to specific series in a measurement
+The following examples grant read and write permissions to corresponding `datacenter`
+tags in the `network` measurement.
+_They each specify the measurement in the request body._
+
+##### Grant series-level permissions in a measurement to users
+```sh
+# Grant user1 read/write permissions on data with the 'datacenter=west' tag set
+# inside the 'network' measurement.
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "measurement": {"match": "exact", "value": "network"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "east"}],
+    "permissions": ["read", "write"],
+    "users": [{"name": "user1"}]
+  }'
+
+# Grant user2 read/write permissions on data with the 'datacenter=west' tag set
+# inside the 'network' measurement.
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "measurement": {"match": "exact", "value": "network"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "west"}],
+    "permissions": ["read", "write"],
+    "users": [{"name": "user2"}]
+  }'
+```
+
+##### Grant series-level permissions in a measurement to roles
+```sh
+# Grant role1 read/write permissions on data with the 'datacenter=west' tag set
+# inside the 'network' measurement.
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "measurement": {"match": "exact", "value": "network"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "east"}],
+    "permissions": ["read", "write"],
+    "roles": [{"name": "role1"}]
+  }'
+
+# Grant role2 read/write permissions on data with the 'datacenter=west' tag set
+# inside the 'network' measurement.
+curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
+  -u "admin-username:admin-password" \
+  -H "Content-Type: application/json" \
+  --data-binary '{
+    "database": {"match": "exact", "value": "my_database"},
+    "measurement": {"match": "exact", "value": "network"},
+    "tags": [{"match": "exact", "key": "datacenter", "value": "west"}],
+    "permissions": ["read", "write"],
+    "roles": [{"name": "role2"}]
+  }'
+```
+
+With these grants in place, a user or role can only read or write data from or to
+the `network` measurement if the data includes the apropriate `datacenter` tag set.
+
+{{% note %}}
+Note that this is only the requirement of the presence of that tag;
+`datacenter=east,foo=bar` will also be accepted.
+{{% /note %}}
+
+### View existing grants
+To view existing grants, use the `GET` request method with the `acl/grants` endpoint.
+
+```sh
+curl -L -u "admin-username:admin-password" \
+  -XGET "http://localhost:8091/influxdb/v2/acl/grants" | jq
+```
+
+### Update a grant
+_You can not directly modify a grant.
+Delete the existing grant and create a new one with updated parameters._
+
+### Remove a grant
+To delete a grant, obtain the grant ID using the `GET` request method with the
+`acl/grants` endpoint.
+Use the `DELETE` request method to delete a grant by ID.
+
+```sh
+# Obtain the grant ID from the list of grants
+curl -L -u "admin-username:admin-password" \
+  -XGET "http://localhost:8091/influxdb/v2/acl/grants" | jq
+
+# Delete the grant using the grant ID
+curl -L -u "admin-username:admin-password" \
+  -XDELETE "http://localhost:8091/influxdb/v2/acl/grants/<grant_id>"
+```

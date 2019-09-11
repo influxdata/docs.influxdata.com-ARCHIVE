@@ -29,7 +29,7 @@ InfluxDB shell 1.4.x
 
 > **Notes:**
 >
-* The InfluxDB HTTP API runs on port `8086` by default.
+* The InfluxDB API runs on port `8086` by default.
 Therefore, `influx` will connect to port `8086` and `localhost` by default.
 If you need to alter these defaults, run `influx --help`.
 * The [`-precision` argument](/influxdb/latest/tools/shell/#influx-options) specifies the format/precision of any returned timestamps.

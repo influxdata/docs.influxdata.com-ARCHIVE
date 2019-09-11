@@ -7,17 +7,55 @@ menu:
     parent: About the project
 ---
 
-## v1.7.6 [2019-04-16]
+## v1.7.8 [2019-08-20]
+
+{{% warn %}}
+InfluxDB now rejects all non-UTF-8 characters.
+To successfully write data to InfluxDB, use only UTF-8 characters in
+database names, measurement names, tag sets, and field sets.
+{{% /warn %}}
+
+### Bugfixes
+- Fix Prometheus read panic.
+- Remove stray `fmt.Println` in `tsm1.StringArrayEncodeAll`.
+- Fix issue where fields re-appear after `DROP MEASUREMENT`.
+- Remove a dubugging `println` call.
+- Subquery ordering with aggregates in descending mode was wrong.
+- Fix the http handler to not mislabel series as partial.
+- Make `SHOW SERIES EXACT CARDINALITY` count only distinct series.
+- Fix time range exceeding min/max bounds.
+
+### Features
+- Update Flux version to v0.36.2
+
+## 1.7.7 [2019-06-26]
+
+### Known issues
+
+- The Flux Technical Preview was not advanced and remains at version 0.24.0. Next month's maintenance release will update the preview.
+- After upgrading, customers have experienced an excessively large output additional lines due to a `Println` statement introduced in this release. For a possible workaround, see https://github.com/influxdata/influxdb/issues/14265#issuecomment-508875853. Next month's maintenance release will address this.
+
+### Bug fixes
+
+- Fix the sort order for aggregates so that they are sorted by tag and then time.
+- Use the timezone when evaluating time literals in subqueries.
+- Fix CSV decoder bug where empty tag values cause an array index panic.
+- Fix open/close race in `SeriesFile`.
+- Sync series segment after truncate.
+- Fix the ordering for selectors within a subquery with different outer tags.
+
+## 1.7.6 [2019-04-16]
 
 <dt>
 If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`),
-this release includes the fix for InfluxDB 1.7.5 servers that stopped responding without warning. 
+this release includes the fix for InfluxDB 1.7.5 servers that stopped responding without warning.
 </dt>
 
 ### Features
 
 - Upgrade Flux to `0.24.0` and remove the platform dependency.
-  - If Flux is enabled, use Chronograf 1.7.10 or later.
+  - If Flux is enabled, use Chronograf 1.7.11 or later.
+  - When using Flux, there is a known issue that using `now` will cause a panic.  The proper syntax is `now()`.
 - Track remote read requests to Prometheus remote read handler.
 
 ### Bug fixes
@@ -33,7 +71,7 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 - Fix panic in Prometheus read API.
 - Add a version constraint for influxql.
 
-## v1.7.5 [2019-03-26]
+## 1.7.5 [2019-03-26]
 
 <dt>
 **Update (2019-04-01):** If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`), then do not upgrade to this release. Customers have reported that InfluxDB 1.7.5 stops responding without warning. For details, see [GitHub issue #13010](https://github.com/influxdata/influxdb/issues/13010). The [planned fix](https://github.com/influxdata/influxdb/issues/13053) will be available soon.
@@ -44,11 +82,11 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 - Update `tagKeyValue` mutex to write lock.
 - Fix some more shard epoch races.
 
-## v1.7.4 [2019-02-13]
+## 1.7.4 [2019-02-13]
 
 ### Features
 
-- Allow TSI bitset cache to be configured. New `[data]` configuration settings for `inmem` (`tsm-use-madv-willneed`) and `tsi1` (`max-index-log-file-size` and `series-id-set-cache-size`).
+- Allow TSI bitset cache to be configured. See: [InfluxDB Configuration `[data]`](/influxdb/v1.7/administration/config/#tsi-tsi1-index-settings)
 
 ### Bug fixes
 
@@ -58,7 +96,7 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 - Convert `TagValueSeriesIDCache` to use string fields.
 - Ensure that cached series id sets are Go heap backed.
 
-## v1.7.3 [2019-01-11]
+## 1.7.3 [2019-01-11]
 
 ### Important update [2019-02-13]
 
@@ -67,8 +105,12 @@ If you have not installed this release, then install the 1.7.4 release.
 **If you are currently running this release, then upgrade to the 1.7.4 release as soon as possible.**
 
 - A critical defect in the InfluxDB 1.7.3 release was discovered and our engineering team fixed the issue in the 1.7.4 release. Out of high concern for your data and projects, upgrade to the 1.7.4 release as soon as possible.
-  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard. 
+  - **Critical defect:** Shards larger than 16GB are at high risk for data loss during full compaction. The full compaction process runs when a shard go "cold" – no new data is being written into the database during the time range specified by the shard.
   - **Post-mortem analysis:** InfluxData engineering is performing a post-mortem analysis to determine how this defect was introduced. Their discoveries will be shared in a blog post.
+
+### Breaking changes
+
+- Fix invalid UTF-8 bytes preventing shard opening. Treat fields and measurements as raw bytes.
 
 ### Features
 
@@ -76,7 +118,6 @@ If you have not installed this release, then install the 1.7.4 release.
 
 ### Bug fixes
 
-* Fix invalid UTF-8 bytes preventing shard opening.Treat fields and measurements as raw bytes.
 * Limit force-full and cold compaction size.
 * Add user authentication and authorization support for Flux HTTP requests.
 * Call `storage.Group` API to correctly map group mode.
@@ -84,7 +125,7 @@ If you have not installed this release, then install the 1.7.4 release.
 * Add support for optionally logging Flux queries.
 * Fix cardinality estimation error.
 
-## v1.7.2 [2018-12-11]
+## 1.7.2 [2018-12-11]
 
 ### Bug fixes
 
@@ -107,14 +148,13 @@ If you have not installed this release, then install the 1.7.4 release.
 * Query authorizer was not properly passed to subqueries so rejections did not
   happen when a subquery was the one reading the value. Max series limit was not propagated downward.
 
-## v1.7.1 [2018-11-14]
+## 1.7.1 [2018-11-14]
 
 ### Bug fixes
 
 * Simple8B `EncodeAll` incorrectly encodes entries: For a run of `1s`, if the 120th or 240th entry is not a `1`, the run will be incorrectly encoded as selector `0` (`240 1s`) or selector `1` (`120 1s`), resulting in a loss of data for the 120th or 240th value. Manifests itself as consuming significant CPU resources and as compactions running indefinitely.
 
-
-## v1.7.0 [2018-11-06]
+## 1.7.0 [2018-11-06]
 
 ### Breaking changes
 
@@ -158,7 +198,7 @@ Support for the Flux language and queries has been added in this release. To beg
 *	Fix subquery functionality when a function references a tag from the subquery.
 *	Strip tags from a subquery when the outer query does not group by that tag.
 
-## v1.6.6 [2019-02-28]
+## 1.6.6 [2019-02-28]
 
 ### Bug fixes
 
@@ -166,7 +206,7 @@ Support for the Flux language and queries has been added in this release. To beg
 * Fix cardinality estimation error.
 * Update `tagKeyValue` mutex to write lock.
 
-## v1.6.5 [2019-01-10]
+## 1.6.5 [2019-01-10]
 
 ### Features
 
@@ -180,7 +220,7 @@ Support for the Flux language and queries has been added in this release. To beg
 * Limit database and retention policy names to 255 characters.
 * Update Go runtime to 1.10.6.
 
-## v1.6.4 [2018-10-16]
+## 1.6.4 [2018-10-16]
 
 ### Features
 
@@ -199,8 +239,7 @@ Support for the Flux language and queries has been added in this release. To beg
 *	Do not panic when a series ID iterator is nil.
 *	Fix append of possible nil iterator.
 
-
-## v1.6.3 [2018-09-14]
+## 1.6.3 [2018-09-14]
 
 ### Features
 
@@ -221,7 +260,7 @@ functionality. The query compiler has been updated with an additional attribute 
 will need to be read so that the shard mapper can include extra times that it may not necessarily read from,
 but may be queried because of the above described functionality.
 
-## v1.6.2 [2018-08-27]
+## 1.6.2 [2018-08-27]
 
 ### Features
 
@@ -231,7 +270,7 @@ but may be queried because of the above described functionality.
 
 *	Ensure orphaned series cleaned up with shard drop.
 
-## v1.6.1 [2018-08-03]
+## 1.6.1 [2018-08-03]
 
 ### Features
 
@@ -253,7 +292,7 @@ but may be queried because of the above described functionality.
 *	Allow tag keys to contain underscores.
 *	Fix a panic when matching on a specific type of regular expression.
 
-## v1.6.0 [2018-07-05]
+## 1.6.0 [2018-07-05]
 
 ### Breaking changes
 
@@ -303,7 +342,7 @@ using the Prometheus measurement name as the `__name__` label.
 * Return the correct auxiliary values for `top` and `bottom`.
 * Close TSMReaders from `FileStore.Close` after releasing FileStore mutex.
 
-## v1.5.5 [2018-12-19]
+## 1.5.5 [2018-12-19]
 
 ### Features
 
@@ -320,7 +359,7 @@ using the Prometheus measurement name as the `__name__` label.
 *	Pass the query authorizer to subqueries.
 *	Fix TSM1 panic on reader error.
 
-## v1.5.4 [2018-06-21]
+## 1.5.4 [2018-06-21]
 
 ### Features
 
@@ -331,7 +370,7 @@ using the Prometheus measurement name as the `__name__` label.
 * Fix panic in readTombstoneV4.
 * buildtsi: Do not escape measurement names.
 
-## v1.5.3 [2018-05-25]
+## 1.5.3 [2018-05-25]
 
 ### Features
 
@@ -342,7 +381,7 @@ using the Prometheus measurement name as the `__name__` label.
 * Fix the validation for multiple nested `DISTINCT` calls.
 * Return the correct auxiliary values for `TOP` and `BOTTOM`.
 
-## v1.5.2 [2018-04-12]
+## 1.5.2 [2018-04-12]
 
 ### Features
 
@@ -358,7 +397,7 @@ using the Prometheus measurement name as the `__name__` label.
 * Fix `buildtsi` partition key.
 * Ensure that conditions are encoded correctly even if the AST is not properly formed.
 
-## v1.5.1 [2018-03-20]
+## 1.5.1 [2018-03-20]
 
 ### Bug fixes
 
@@ -368,7 +407,7 @@ using the Prometheus measurement name as the `__name__` label.
 -	Fix panic when checking fieldsets.
 -	Fix data race in WAL.
 
-## v1.5.0 [2018-03-06]
+## 1.5.0 [2018-03-06]
 
 ### Breaking changes
 
@@ -405,7 +444,7 @@ The default logging format has been changed. See [Logging and tracing in InfluxD
 - Fix missing sorting of blocks by time when compacting.
 - WAL: update `lastWriteTime` behavior
 
-## v1.4.3 [unreleased]
+## 1.4.3 [unreleased]
 
 ### Configuration Changes
 
@@ -417,7 +456,7 @@ The default logging format has been changed. See [Logging and tracing in InfluxD
 
 - Fix higher disk I/O utilization
 
-## v1.4.2 [2017-11-15]
+## 1.4.2 [2017-11-15]
 
 Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an `incompatible tsi1 index MANIFEST` error.
 
@@ -425,13 +464,13 @@ Refer to the 1.4.0 breaking changes section if `influxd` fails to start with an 
 
 - Fix `panic: runtime error: slice bounds out of range` when running `dep init`
 
-## v1.4.1 [2017-11-13]
+## 1.4.1 [2017-11-13]
 
 ### Bug fixes
 
 - Fix descending cursors and range queries via IFQL RPC API.
 
-## v1.4.0 [2017-11-13]
+## 1.4.0 [2017-11-13]
 
 ### TSI Index
 This feature remains experimental in this release.
@@ -557,7 +596,7 @@ will find the shards refuse to open and will most likely see the following error
 - Handle utf16 files when reading the configuration file.
 - Fix `panic: runtime error: slice bounds out of range`.
 
-## v1.3.7 [2017-10-26]
+## 1.3.7 [2017-10-26]
 
 ### Release Notes
 Bug fix identified via Community and InfluxCloud. The build artifacts are now consistent with v1.3.5.
@@ -656,7 +695,7 @@ Minor bug fixes were identified via Community and InfluxCloud.
 
 #### TSI
 
-Version 1.3.0 marks the first official release of InfluxDB's new time series index (TSI) engine.
+Version 1.3.0 marks the first official release of the new InfluxDB time series index (TSI) engine.
 
 The TSI engine is a significant technical advancement in InfluxDB.
 It offers a solution to the [time-structured merge tree](https://docs.influxdata.com/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).

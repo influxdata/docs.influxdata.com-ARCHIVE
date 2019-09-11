@@ -9,32 +9,31 @@ menu:
     parent: Administration
 ---
 
-## Contents
+Contents
 
 * [Integration with secure InfluxDB](#integration-with-secure-influxdb)
-   * [Securing InfluxDB meta nodes](#securing-influxdb-meta-nodes)
-   * [Secure InfluxDB data nodes](#securing-influxdb-data-nodes)
+  * [Securing InfluxDB meta nodes](#securing-influxdb-meta-nodes)
+  * [Secure InfluxDB data nodes](#securing-influxdb-data-nodes)
 * [Securing Kapacitor Enterprise](#securing-kapacitor-enterprise)
-   * [Kapacitor Enterprise over TLS](#kapacitor-enterprise-over-tls)
-   * [Kapacitor Enterprise with authentication](#kapacitor-enterprise-with-authentication)  
+  * [Kapacitor Enterprise over TLS](#kapacitor-enterprise-over-tls)
+  * [Kapacitor Enterprise with authentication](#kapacitor-enterprise-with-authentication)  
 
-<br/>
 Kapacitor Enterprise security means configuring a Kapacitor cluster to work with
 an already secured InfluxDB Enterprise cluster as well as enabling security
 features implemented by Kapacitor handlers and services.  These including using
 TLS on public API endpoints and enabling authentication and authorization, which
 is covered in depth in [Authentication and authorization](/enterprise_kapacitor/v1.5/administration/auth/).    
 
-### Integration with secure InfluxDB
+## Integration with secure InfluxDB
 
 A secure Influx Enterprise installation is one which has at a minimum TLS
 enabled on publicly exposed APIs.  These include the user and other APIs of
 the InfluxDB meta nodes.  It may also include enabling authentication to these
 nodes.  
 
-Seting up security in InfluxDB Enterprise is covered in [Managing security in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/security/).
+Setting up security in InfluxDB Enterprise is covered in [Managing security in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/security/).
 
-#### Securing InfluxDB meta nodes
+### Securing InfluxDB meta nodes
 
 Since the InfluxDB meta node is used as the backend user and privilege store of the
 TICK stack, it is particularly important when securing Kapacitor with
@@ -44,7 +43,7 @@ when verifying security credentials.
 Properties relating to the InfluxDB meta node configuration are located in the `[auth]`
 group of the configuration schema.  
 
-**Example 1:Authentication configuration group**
+#### Example: Authentication configuration group
 
 ```toml
 [auth]
@@ -71,11 +70,11 @@ The properties can be understood as follows:
 More detailed information is available in
 [Authentication and authorization](/enterprise_kapacitor/v1.5/administration/auth/).  
 
-#### Securing InfluxDB data nodes
+### Securing InfluxDB data nodes
 
 InfluxDB Enterprise data nodes can be secured with TLS and authentication.
 
-**TLS enabled**
+#### TLS enabled**
 
 Integrating Kapacitor to a TLS-enabled InfluxDB data cluster requires the following
 properties in the `[[influxdb]]` group.
@@ -87,7 +86,7 @@ properties in the `[[influxdb]]` group.
       * `ssl-key`: Path to the public key used by the endpoint.
    * `ssl-ca`: Path to the PEM record of the certificate authority.
 
-**Example 2: InfluxDB group, enabling TLS connection**
+##### Example: InfluxDB group, enabling TLS connection**
 
 ```toml
 [[influxdb]]
@@ -108,14 +107,15 @@ properties in the `[[influxdb]]` group.
 
 ```
 
-**Authentication protected**
+#### Authentication protected
 
 To connect to a cluster protected by authentication, provide the following parameters:
 
 * `username`: Name of InfluxDB user with admin privileges.
 * `password`: Password of the user.
 
-**Example 3: InfluxDB group, enabling authentication**
+##### Example: InfluxDB group, enabling authentication
+
 ```toml
 # Multiple InfluxDB configurations can be defined.
 # Exactly one must be marked as the default.
@@ -132,7 +132,7 @@ To connect to a cluster protected by authentication, provide the following param
   ...
 ```
 
-### Securing Kapacitor Enterprise
+## Securing Kapacitor Enterprise
 
 Kapacitor Enterprise listens for communications on three different ports.
 
@@ -154,7 +154,7 @@ same TLS security measures as
 and also features an authentication and authorization handler. For more information,
 see [Authentication and authorization](/enterprise_kapacitor/v1.5/administration/auth/).
 
-#### Kapacitor Enterprise over TLS
+### Kapacitor Enterprise over TLS
 
 This feature can be enabled in the `[http]` group of the configuration.
 Activation requires simply setting the property `https-enabled` to `true` and
@@ -162,7 +162,8 @@ then providing a path to a certificate with the property `https-certificate`.
 
 The following example shows how this is done in the `kapacitor.conf` file.
 
-**Example 4: Enabling TLS for Kapacitor Enterprise**
+#### Example: Enabling TLS for Kapacitor Enterprise
+
 ```toml
 [http]
   # HTTP API Server for Kapacitor
@@ -183,7 +184,8 @@ The following example shows how this is done in the `kapacitor.conf` file.
 Note that the PEM format certificate defined by the property `https-certificate`
 needs to contain the root key and certificate as shown in Example 5.
 
-**Example 5: Combined key and certificate PEM file**
+#### Example: Combined key and certificate PEM file
+
 ```
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBBAKCAQEA8ysZveuWjlyE8uCLl8RTYUvjkAI69Y/1vAz9l8YGdRGuY4gH
@@ -201,7 +203,8 @@ In addition the `[[influxdb]]` section needs to have its property
 `subscription-protocol` updated to `https`, otherwise subscription data will be
 sent using the wrong prootocol.
 
-**Example 6: Subscription protocol in InfluxDB**
+#### Example: Subscription protocol in InfluxDB
+
 ```toml
 [[influxdb]]
   # Connect to an InfluxDB cluster
@@ -223,8 +226,9 @@ supplied the `-url` argument in order to connect.  If a self-signed or other
 certificate is used, which has not been added to the system certificate store,
 an additional argument `-skipVerify` will also need to be provided.
 
-**Example 5: Connecting the Kapacitor client with TLS enabled**
-```
+##### Example: Connecting the Kapacitor client with TLS enabled
+
+```bash
 $ kapacitor -url https://localhost:9092 -skipVerify list tasks
 ID                                                 Type      Status    Executing Databases and Retention Policies
 chronograf-v1-3586109e-8b7d-437a-80eb-a9c50d00ad53 stream    enabled   true      ["telegraf"."autogen"]
@@ -233,8 +237,9 @@ chronograf-v1-3586109e-8b7d-437a-80eb-a9c50d00ad53 stream    enabled   true     
 To avoid having to enter the URL string every time Kapacitor is invoked, the value
 can be stored as the environment variable `KAPACITOR_URL`.  
 
-**Example 6: Using the environment variable KAPACITOR_URL**
-```
+##### Example: Using the environment variable KAPACITOR_URL
+
+```bash
 $ export KAPACITOR_URL=https://localhost:9092
 $ kapacitor -skipVerify list tasks
 ID                                                 Type      Status    Executing Databases and Retention Policies

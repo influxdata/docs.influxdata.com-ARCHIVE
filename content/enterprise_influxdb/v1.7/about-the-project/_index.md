@@ -43,6 +43,7 @@ In addition to [third party software incorporated in InfluxDB](http://docs.influ
 | [A golang registry for global request variables](https://github.com/gorilla/context) (gorilla/context) | [BSD-3-Clause](https://github.com/gorilla/context/blob/master/LICENSE) |
 | [An immutable radix tree implementation in Golang](https://github.com/hashicorp/go-immutable-radix) (hashicorp/go-immutable-radix) | [MPL-2.0](https://github.com/hashicorp/go-immutable-radix/blob/master/LICENSE) |
 | [Golang LRU cache](https://github.com/hashicorp/golang-lru) (hashicorp/golang-lru) | [MPL-2.0](https://github.com/hashicorp/golang-lru/blob/master/LICENSE) |
+| [Go Zap structured logging implementation](https://go.uber.org/zap/zapcore) | [MIT](https://github.com/uber-go/zap/blob/master/LICENSE.txt) |
 
 
 ***Thanks to the open source community for your contributions!***

@@ -11,15 +11,14 @@ menu:
     parent: nodes
 ---
 
-The `barrier` node emits a barrier with the current time according to the system clock.
-Because the [BarrierNode](/kapacitor/v1.5/nodes/barrier_node/) emits based on system time,
-it allows pipelines to be forced in the absence of data traffic.
-The emitted barrier is based on either idle time since the last received
-message or on a periodic timer based on the system clock.
-Any messages received after an emitted barrier that are older than the last
-emitted barrier are dropped.
+The `barrier` node emits a barrier based on one of the following:
 
-##### Example barrier node
+- Idle time since the last data point was received
+- Periodic timer based on the system time
+
+Barriers let you execute pipelines without data traffic. Data points received after a specified barrier are dropped.
+
+##### Example barrier based on idle time
 
 ```js
 stream
@@ -27,7 +26,7 @@ stream
     .measurement('cpu')
   |barrier()
     .idle(5s)
-    .delete()
+    .delete(TRUE)
   |window()
     .period(10s)
     .every(5s)
@@ -35,6 +34,7 @@ stream
   //Post the top 10 results over the last 10s updated every 5s.
   |httpPost('http://example.com/api/top10')
 ```
+> **Note:** In .delete(TRUE), TRUE must be uppercase.
 
 ### Constructor
 
@@ -48,7 +48,7 @@ stream
 |:---|:---|
 | **[idle](#idle)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Emit barrier based on idle time since the last received message. Must be greater than zero.  |
 | **[period](#period)&nbsp;(&nbsp;`value`&nbsp;`time.Duration`)** | Emit barrier based on periodic timer.  The timer is based on system clock rather than message time. Must be greater than zero.  |
-| **[delete](#delete)&nbsp;(&nbsp;)** | Delete the group after processing each barrier. |
+| **[delete](#delete)&nbsp;(&nbsp;`value`&nbsp;`Boolean`)** | Delete the group after processing each barrier. |
 | **[quiet](#quiet)&nbsp;(&nbsp;)** | Suppress all error logging events from this node.  |
 
 
@@ -153,6 +153,12 @@ triggered for a group it is then deleted, freeing any resources managing the gro
 ```js
 barrier.delete()
 ```
+
+{{% note %}}
+`delete` will free system resources used for managing groups and can help to maintain
+the overall performance of Kapacitor, but these gains are minimal.
+For information about optimizing tasks, see [How can I optimize Kapacitor tasks?](/kapacitor/v1.5/troubleshooting/frequently-asked-questions/#how-can-i-optimize-kapacitor-tasks)
+{{% /note %}}
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 
