@@ -78,24 +78,10 @@ Use the HTTP access log to log HTTP request traffic separately from the other In
 
 ### HTTP access log format
 
-The HTTP access log has the following format.
+The following is an example of the HTTP access log format:
 
 ```
-return fmt.Sprintf(`%s - %s [%s] "%s %s %s" %s %s "%s" "%s" %s %d`,
-		host,
-		detect(username, "-"),
-		start.Format("02/Jan/2006:15:04:05 -0700"),
-		r.Method,
-		uri,
-		r.Proto,
-		detect(strconv.Itoa(l.Status()), "-"),
-		strconv.Itoa(l.Size()),
-		detect(referer, "-"),
-		detect(userAgent, "-"),
-		r.Header.Get("Request-Id"),
-		// response time, report in microseconds because this is consistent
-		// with apache's %D parameter in mod_log_config
-		int64(time.Since(start)/time.Microsecond))
+172.13.8.13,172.39.5.169 - - [21/Jul/2019:03:01:27 +0000] "GET /query?db=metrics&q=SELECT+MEAN%28value%29+as+average_cpu%2C+MAX%28value%29+as+peak_cpu+FROM+%22foo.load%22+WHERE+time+%3E%3D+now%28%29+-+1m+AND+org_id+%21%3D+%27%27+AND+group_id+%21%3D+%27%27+GROUP+BY+org_id%2Cgroup_id HTTP/1.0" 200 11450 "-" "Baz Service" d6ca5a13-at63-11o9-8942-000000000000 9337349
 ```
 
 ### Redirecting HTTP access logging
