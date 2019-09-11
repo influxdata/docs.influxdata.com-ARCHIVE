@@ -1227,7 +1227,7 @@ field            = expr [ alias ] .
 
 fields           = field { "," field } .
 
-fill_option      = "null" | "none" | "previous" | int_lit | float_lit . | "linear"
+fill_option      = "null" | "none" | "previous" | int_lit | float_lit | "linear" .
 
 host             = string_lit .
 

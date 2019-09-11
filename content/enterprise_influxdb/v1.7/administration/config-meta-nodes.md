@@ -127,21 +127,29 @@ Environment variable: `INFLUXDB_META_HTTP_BIND_ADDRESS`
 
 #### `https-enabled = false`
 
-Determines whether meta nodes use HTTPS to communicate with each other.
+Determines whether meta nodes use HTTPS to communicate with each other. By default, HTTPS is disabled. We strongly recommend enabling HTTPS.
+
+To enable HTTPS, set https-enabled to `true`, specify the path to the SSL certificate `https-certificate = " "`, and specify the path to the SSL private key `https-private-key = ""`.
 
 Environment variable: `INFLUXDB_META_HTTPS_ENABLED`
 
 #### `https-certificate = ""`
 
-The SSL certificate to use when HTTPS is enabled.  
-The certificate should be a PEM-encoded bundle of the certificate and key.  
-If it is just the certificate, a key must be specified in https-private-key.
+If HTTPS is enabled, specify the path to the SSL certificate.  
+Use either:
+
+* PEM-encoded bundle with both the certificate and key (`[bundled-crt-and-key].pem`)
+* Certificate only (`[certificate].crt`)
 
 Environment variable: `INFLUXDB_META_HTTPS_CERTIFICATE`
 
 #### `https-private-key = ""`
 
-Use a separate private key location.
+If HTTPS is enabled, specify the path to the SSL private key.
+Use either:
+
+* PEM-encoded bundle with both the certificate and key (`[bundled-crt-and-key].pem`)
+* Private key only (`[private-key].key`)
 
 Environment variable: `INFLUXDB_META_HTTPS_PRIVATE_KEY`
 

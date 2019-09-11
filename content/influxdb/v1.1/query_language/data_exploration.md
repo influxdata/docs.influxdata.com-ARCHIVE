@@ -1251,7 +1251,7 @@ time                   count
 ```
 
 The query uses an InfluxQL [function](/influxdb/v1.1/query_language/functions/)
-to calculate the average `water_level`, grouping results into 12 minute
+to count the number of `water_level` points, grouping results into 12 minute
 time intervals, and offsetting the preset time boundaries by six minutes.
 
 The time boundaries and returned timestamps for the query **without** the `offset_interval` adhere to InfluxDB's preset time boundaries. Let's first examine the results without the offset:

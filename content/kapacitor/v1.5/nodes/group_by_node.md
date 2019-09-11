@@ -13,8 +13,10 @@ menu:
 
 The `groupBy` node will group the incoming data.
 Each group is then processed independently for the rest of the pipeline.
-Only tags that are dimensions in the grouping will be preserved.
-All other tags are dropped.
+
+#### groupBy with aggregated data
+When using `groupBy` with aggregated data, only tags that are dimensions in the grouping are preserved.
+All other tags are dropped. With data that is not being aggregated, all tags are preserved.
 
 Example:
 

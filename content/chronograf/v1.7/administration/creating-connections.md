@@ -157,8 +157,8 @@ All `.kap` files should contain the following:
 
 ```json
 {
-  "id": 10000,
-  "srcID": 10000,
+  "id": "10000",
+  "srcID": "10000",
   "name": "My Kapacitor",
   "url": "http://localhost:9092",
   "active": true,
@@ -191,8 +191,8 @@ Environment variables can be loaded using the `"{{ .VARIABLE_KEY }}"` syntax:
 
 ```JSON
 {
-  "id": 10000,
-  "srcID": 10000,
+  "id": "10000",
+  "srcID": "10000",
   "name": "My Kapacitor",
   "url": "{{ .KAPACITOR_URL }}",
   "active": true,
