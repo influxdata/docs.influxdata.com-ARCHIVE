@@ -1,6 +1,7 @@
 ---
 title: json.encode() function
-description: The `json.encode()` function converts a value into JSON bytes.
+description: >
+  The `json.encode()` function converts a value into JSON bytes.
 menu:
   flux_0_x:
     name: json.encode
@@ -14,6 +15,7 @@ _**Function type:** Type conversion_
 
 ```js
 import "json"
+
 json.encode(v: "some value")
 ```
 

@@ -8,8 +8,7 @@ menu:
   flux_0_x:
     name: doubleEMA
     parent: Aggregates
-weight: 1
-  -
+    weight: 1
 ---
 
 The `doubleEMA()` function calculates the exponential moving average of values in

@@ -4,8 +4,8 @@ description: The `bytes()` function converts a single value to bytes.
 menu:
   flux_0_x:
     name: bytes
-    parent: Type conversions
-    weight: 1
+    parent: built-in-type-conversions
+    weight: 2
 ---
 
 The `bytes()` function converts a single value to bytes.

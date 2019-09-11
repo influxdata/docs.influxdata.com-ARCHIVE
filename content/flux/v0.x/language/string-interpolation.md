@@ -74,7 +74,7 @@ String interpolation is a more concise method for achieving the same result.
 person = {
   name: "John",
   age: 42
-}\
+}
 
 // String interpolation
 "My name is ${person.name} and I'm ${string(v: person.age)} years old."

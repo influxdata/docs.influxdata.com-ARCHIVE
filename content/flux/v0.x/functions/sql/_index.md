@@ -17,4 +17,4 @@ Import the `sql` package:
 import "sql"
 ```
 
-{{< children type="functions" show="pages" >}}
+{{< function-list >}}
