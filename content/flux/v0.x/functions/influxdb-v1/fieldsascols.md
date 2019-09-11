@@ -6,7 +6,7 @@ aliases:
   - /flux/v0.x/functions/transformations/influxfieldsascols
 menu:
   flux_0_x:
-    name: v1.fieldsAsCols
+    name: v1.fieldsAsCols 
     parent: InfluxDB v1
 weight: 1
 ---

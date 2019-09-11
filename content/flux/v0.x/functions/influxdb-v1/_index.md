@@ -8,7 +8,7 @@ menu:
   flux_0_x:
     name: InfluxDB v1
     parent: Packages and functions
-weight: 2
+weight: 1
 ---
 
 The Flux InfluxDB v1 package provides functions for managing data from an InfluxDB v1.x

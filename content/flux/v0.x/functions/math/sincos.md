@@ -17,7 +17,7 @@ import "math"
 
 math.sincos(x: 1.23)
 
-// Returns {sin: 0.9424888019316975, cos: 0.3342377271245026}
+// Returns {sin: 0.9424888019316975, cos: 0.3642377271245026}
 ```
 
 ## Parameters

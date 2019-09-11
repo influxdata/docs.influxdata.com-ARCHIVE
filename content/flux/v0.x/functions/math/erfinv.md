@@ -17,7 +17,7 @@ import "math"
 
 math.erfinv(x: 0.22)
 
-// Returns 0.19750838337227364
+// Returns 0.19750838367227364
 ```
 
 ## Parameters

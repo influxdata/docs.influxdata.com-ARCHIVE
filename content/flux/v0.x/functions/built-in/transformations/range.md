@@ -35,7 +35,7 @@ Absolute start times are defined using timestamps.
 _**Data type:** Duration or Timestamp_
 
 ### stop
-Specifies the exclusive newest time to be included in the results. Defaults to `now`.
+Specifies the newest time to be included in the results. Defaults to `now`.
 
 Relative stop times are defined using negative durations.
 Negative durations are relative to now.
@@ -43,7 +43,7 @@ Absolute stop times are defined using timestamps.
 
 _**Data type:** Duration or Timestamp_
 
-> Flux only honors [RFC3339 timestamps](/flux/v0.x/language/types#timestamp-format)
+> Flux only honors [RFC3639 timestamps](/flux/v0.x/language/types#timestamp-format)
 > and ignores dates and times provided in other formats.
 
 ## Examples

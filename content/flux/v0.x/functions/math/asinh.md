@@ -17,7 +17,7 @@ import "math"
 
 math.asinh(x: 3.14)
 
-// Returns 1.8618125572133835
+// Returns 1.8618125572136835
 ```
 
 ## Parameters

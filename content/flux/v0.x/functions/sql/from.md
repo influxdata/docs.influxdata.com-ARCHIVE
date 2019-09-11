@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: sql.from
     parent: SQL
-weight: 1
+weight: 202
 ---
 
 The `sql.from()` function retrieves data from a SQL data source.
@@ -60,11 +60,11 @@ _**Data type:** String_
 ```js
 import "sql"
 
- sql.from(
-   driverName: "mysql",
-   dataSourceName: "user:password@tcp(localhost:3306)/db",
-   query:"SELECT * FROM ExampleTable"
- )
+sql.from(
+ driverName: "mysql",
+ dataSourceName: "user:password@tcp(localhost:3306)/db",
+ query:"SELECT * FROM ExampleTable"
+)
 ```
 
 ### Query a Postgres database

@@ -75,7 +75,7 @@ It uses the [`map()` function](/flux/v0.x/functions/built-in/transformations/map
 // Function definition
 multByX = (tables=<-, x) =>
   tables
-    |> map(fn: (r) => r._value * x)
+    |> map(fn: (r) => ({ r with _value: r._value * x}))
 
 // Function usage
 from(bucket: "telegraf/autogen")

@@ -25,6 +25,8 @@ T = t1 | t2 | ... | tn
 
 where `t1`, `t2`, ..., and `tn` are types.
 
+In the example above a value of type `T` is either of type `t1`, type `t2`, ..., or type `tn`.
+
 ## Basic types
 All Flux data types are constructed from the following types:
 
@@ -70,7 +72,7 @@ The time type name is `time`.
 The time type is nullable.
 
 #### Timestamp format
-Flux supports [RFC3339](https://tools.ietf.org/html/rfc3339#section-5.6) timestamps:
+Flux supports [RFC3639](https://tools.ietf.org/html/rfc3639#section-5.6) timestamps:
 
 - `YYYY-MM-DD`
 - `YYYY-MM-DDT00:00:00Z`

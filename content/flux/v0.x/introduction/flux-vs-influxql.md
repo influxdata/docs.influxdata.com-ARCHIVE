@@ -221,7 +221,7 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 | INTEGRAL                          | [integral()](/flux/v0.x/functions/built-in/transformations/aggregates/integral/)                                                                  |
 | MEAN                              | [mean()](/flux/v0.x/functions/built-in/transformations/aggregates/mean/)                                                                          |
 | MEDIAN                            | [median()](/flux/v0.x/functions/built-in/transformations/aggregates/median/)                                                                      |
-| MODE                              | --                                                                                                                                                 |
+| MODE                              | [mode()](/flux/v0.x/functions/built-in/transformations/aggregates/mode/)                                                                          |
 | SPREAD                            | [spread()](/flux/v0.x/functions/built-in/transformations/aggregates/spread/)                                                                      |
 | STDDEV                            | [stddev()](/flux/v0.x/functions/built-in/transformations/aggregates/stddev/)                                                                      |
 | SUM                               | [sum()](/flux/v0.x/functions/built-in/transformations/aggregates/sum/)                                                                            |
@@ -243,7 +243,7 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 | CUMULATIVE_SUM                    | [cumulativeSum()](/flux/v0.x/functions/built-in/transformations/cumulativesum/)                                                                   |
 | DERIVATIVE                        | [derivative()](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                                                              |
 | DIFFERENCE                        | [difference()](/flux/v0.x/functions/built-in/transformations/aggregates/difference/)                                                              |
-| ELAPSED                           | --                                                                                                                                                 |
+| ELAPSED                           | [elapsed()](/flux/v0.x/functions/built-in/transformations/aggregates/elapsed/)                                                                    |
 | EXP                               | [math.exp()](/flux/v0.x/functions/math/exp/)                                                                                                      |
 | FLOOR                             | [math.floor()](/flux/v0.x/functions/math/floor/)                                                                                                  |
 | HISTOGRAM                         | [histogram()](/flux/v0.x/functions/built-in/transformations/histogram/)                                                                           |
@@ -251,7 +251,7 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 | LOG                               | [math.logb()](/flux/v0.x/functions/math/logb/)                                                                                                    |
 | LOG2                              | [math.log2()](/flux/v0.x/functions/math/log2/)                                                                                                    |
 | LOG10                             | [math.log10()](/flux/v0.x/functions/math/log10/)                                                                                                  |
-| MOVING_AVERAGE                    | --                                                                                                                                                 |
+| MOVING_AVERAGE                    | [movingAverage()](/flux/v0.x/functions/built-in/transformations/aggregates/movingaverage/)                                                        |
 | NON_NEGATIVE_DERIVATIVE           | [derivative(nonNegative:true)](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                                              |
 | NON_NEGATIVE_DIFFERENCE           | [difference(nonNegative:true)](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                                              |
 | POW                               | [math.pow()](/flux/v0.x/functions/math/pow/)                                                                                                      |

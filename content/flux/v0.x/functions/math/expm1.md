@@ -20,7 +20,7 @@ import "math"
 
 math.expm1(x: 1.22)
 
-// Returns 2.3871877336213343
+// Returns 2.3871877366213643
 ```
 
 ## Parameters

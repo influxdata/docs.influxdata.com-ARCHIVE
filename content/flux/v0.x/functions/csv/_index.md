@@ -7,7 +7,7 @@ menu:
   flux_0_x:
     name: CSV
     parent: Packages and functions
-weight: 2
+weight: 1
 ---
 
 CSV Flux functions provide tools for working with data in [annotated CSV format](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#csv).

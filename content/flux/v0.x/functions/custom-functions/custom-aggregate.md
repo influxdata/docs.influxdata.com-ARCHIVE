@@ -4,8 +4,8 @@ description: Create your own custom aggregate functions in Flux using the `reduc
 menu:
   flux_0_x:
     name: Custom aggregate functions
-    parent: Guides
-weight: 12
+    parent: Custom functions
+weight: 1
 ---
 
 To aggregate your data, use the Flux

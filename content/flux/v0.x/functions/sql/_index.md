@@ -1,5 +1,6 @@
 ---
 title: Flux SQL package
+list_title: SQL package
 description: >
   The Flux SQL package provides tools for working with data in SQL databases such as MySQL and PostgreSQL.
   Import the `sql` package.
@@ -7,7 +8,7 @@ menu:
   flux_0_x:
     name: SQL
     parent: Packages and functions
-weight: 2
+    weight: 1
 ---
 
 SQL Flux functions provide tools for working with data in SQL databases such as MySQL and PostgreSQL.
@@ -17,4 +18,4 @@ Import the `sql` package:
 import "sql"
 ```
 
-{{< function-list >}}
+{{< children type="functions" show="pages" >}}

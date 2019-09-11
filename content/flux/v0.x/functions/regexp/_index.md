@@ -8,7 +8,7 @@ menu:
     name: Regular expressions
     identifier: regexp-package
     parent: Packages and functions
-weight: 5
+weight: 1
 ---
 
 The Flux regular expressions package includes functions that provide enhanced

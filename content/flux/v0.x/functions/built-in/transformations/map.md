@@ -21,7 +21,7 @@ _**Function type:** Transformation_
 _**Output data type:** Object_
 
 ```js
-map(fn: (r) => r._value * r._value), mergeKey: true)
+map(fn: (r) => ({ _value: r._value * r._value }))
 ```
 
 ## Parameters
@@ -33,14 +33,6 @@ The return value must be an object.
 _**Data type:** Function_
 
 > Objects evaluated in `fn` functions are represented by `r`, short for "record" or "row".
-
-### mergeKey
-Indicates if the record returned from `fn` should be merged with the group key.
-When merging, all columns on the group key will be added to the record giving precedence to any columns already present on the record.
-When not merging, only columns defined on the returned record will be present on the output records.
-Defaults to `true`.
-
-_**Data type:** Boolean_
 
 ## Important notes
 
@@ -72,7 +64,7 @@ from(bucket:"telegraf/autogen")
     r.cpu == "cpu-total"
   )
   |> range(start:-12h)
-  |> map(fn: (r) => r._value * r._value)
+  |> map(fn: (r) => ({ r with _value: r._value * r._value }))
 ```
 
 ###### Create a new table with new format
