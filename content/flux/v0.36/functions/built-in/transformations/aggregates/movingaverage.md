@@ -43,7 +43,7 @@ _**Data type:** Array of Strings_
 
 #### Calculate a five point moving average
 ```js
-from(bucket: "example-bucket"):
+from(bucket: "telegraf/autogen"):
   |> range(start: -12h)
   |> movingAverage(n: 5)
 ```

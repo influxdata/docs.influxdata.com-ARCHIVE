@@ -8,6 +8,7 @@ menu:
     name: intervals
     parent: Miscellaneous
     weight: 1
+draft: true
 ---
 
 The `intervals()` function generates a set of time intervals over a range of time.

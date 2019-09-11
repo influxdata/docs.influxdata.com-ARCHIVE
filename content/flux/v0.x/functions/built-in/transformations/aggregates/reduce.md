@@ -35,6 +35,11 @@ Function to apply to each record with a reducer object ([`identity`](#identity))
 
 _**Data type:** Function_
 
+{{% note %}}
+Make sure `fn` parameter names match each specified parameter.
+To learn why, see [Match parameter names](/flux/v0.x/language/data-model/#match-parameter-names).
+{{% /note %}}
+
 ###### fn syntax
 ```js
 // Pattern
@@ -148,7 +153,7 @@ from(bucket:"telegraf/autogen")
 
 ##### Calculate the average and preserve existing columns
 ```js
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
   |> filter(fn: (r) => r._measurement == "mem" and r._field == "used_percent")
   |> window(every: 5m)

@@ -46,7 +46,7 @@ _**Data type:** String_
 
 ###### Calculate a seven day moving average every day
 ```js
-from(bucket: "example-bucket"):
+from(bucket: "telegraf/autogen"):
   |> range(start: -7y)
   |> filter(fn: (r) =>
     r._measurement == "financial" and
@@ -57,7 +57,7 @@ from(bucket: "example-bucket"):
 
 ###### Calculate a five year moving average every year
 ```js
-from(bucket: "example-bucket"):
+from(bucket: "telegraf/autogen"):
   |> range(start: -50d)
   |> filter(fn: (r) =>
     r._measurement == "financial" and

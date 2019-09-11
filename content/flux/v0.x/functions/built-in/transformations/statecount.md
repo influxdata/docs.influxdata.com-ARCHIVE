@@ -36,6 +36,11 @@ Those that evaluate to `false` reset the state count.
 
 _**Data type:** Function_
 
+{{% note %}}
+Make sure `fn` parameter names match each specified parameter.
+To learn why, see [Match parameter names](/flux/v0.x/language/data-model/#match-parameter-names).
+{{% /note %}}
+
 ### column
 The name of the column added to each record that contains the incremented state count.
 

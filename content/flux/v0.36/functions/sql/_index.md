@@ -1,6 +1,5 @@
 ---
 title: Flux SQL package
-list_title: SQL package
 description: >
   The Flux SQL package provides tools for working with data in SQL databases such as MySQL and PostgreSQL.
   Import the `sql` package.

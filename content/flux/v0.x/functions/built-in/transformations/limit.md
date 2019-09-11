@@ -1,6 +1,6 @@
 ---
 title: limit() function
-description: The limit() function limits the number of records in output tables to a fixed number (n).
+description: The `limit()` function limits each output table to the first `n` records.
 aliases:
   - /flux/v0.x/functions/transformations/limit
 menu:
@@ -10,16 +10,18 @@ menu:
     weight: 1
 ---
 
-The `limit()` function limits the number of records in output tables to a fixed number ([`n`](#n)).
-One output table is produced for each input table.
-Each output table contains the first `n` records after the first `offset` records of the input table.
-If the input table has less than `offset + n` records, all records except the first `offset` ones are output.
+The `limit()` function limits each output table to the first [`n`](#n) records.
+The function produces one output table for each input table.
+Each output table contains the first `n` records after the [`offset`](#offset).
+If the input table has less than `offset + n` records, `limit()` outputs all records after the `offset`.
 
 _**Function type:** Filter_  
-_**Output data type:** Object_
 
 ```js
-limit(n:10, offset: 0)
+limit(
+  n:10,
+  offset: 0
+)
 ```
 
 ## Parameters
@@ -36,10 +38,12 @@ Defaults to `0`.
 _**Data type:** Integer_
 
 ## Examples
+
+##### Output the first ten records in each table
 ```js
 from(bucket:"telegraf/autogen")
   |> range(start:-1h)
-  |> limit(n:10, offset: 1)
+  |> limit(n:10)
 ```
 
 <hr style="margin-top:4rem"/>

@@ -48,7 +48,7 @@ _**Data type:** String_
 
 ##### Calculate the time between points in seconds
 ```js
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
 	|> range(start: -5m)
 	|> elapsed(unit: 1s)
 ```

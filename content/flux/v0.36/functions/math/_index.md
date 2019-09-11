@@ -8,7 +8,6 @@ menu:
     name: Math
     parent: Packages and functions
 weight: 1
-v2.0/tags: [math, functions]
 ---
 
 The Flux math package provides basic constants and mathematical functions.

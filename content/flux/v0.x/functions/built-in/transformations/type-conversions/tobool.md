@@ -33,5 +33,5 @@ from(bucket: "telegraf")
 ```js
 toBool = (tables=<-) =>
   tables
-    |> map(fn:(r) => bool(v: r._value))
+    |> map(fn:(r) => ({ r with _value: bool(v: r._value) }))
 ```

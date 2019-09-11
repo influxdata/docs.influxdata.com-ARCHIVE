@@ -256,8 +256,7 @@ String literals support several escape sequences.
 \t   U+0009 horizontal tab
 \"   U+0022 double quote
 \\   U+005C backslash
-\{   U+007B open curly bracket
-\}   U+007D close curly bracket
+\${  U+0024 U+007B dollar sign and opening curly bracket
 ```
 
 Additionally, any byte value may be specified via a hex encoding using `\x` as the prefix.
@@ -268,7 +267,7 @@ byte_value       = `\` "x" hex_digit hex_digit .
 hex_digit        = "0" … "9" | "A" … "F" | "a" … "f" .
 unicode_value    = unicode_char | escaped_char .
 escaped_char     = `\` ( "n" | "r" | "t" | `\` | `"` ) .
-StringExpression = "{" Expression "}" .
+StringExpression = "${" Expression "}" .
 ```
 
 > To be added: TODO: With string interpolation `string_lit` is not longer a lexical token as part of a literal, but an entire expression in and of itself.
@@ -287,9 +286,9 @@ StringExpression = "{" Expression "}" .
 ```
 
 String literals are also interpolated for embedded expressions to be evaluated as strings.
-Embedded expressions are enclosed in curly brackets (`{}`).
+Embedded expressions are enclosed in a dollar sign and curly braces (`${}`).
 The expressions are evaluated in the scope containing the string literal.
-The result of an expression is formatted as a string and replaces the string content between the brackets.
+The result of an expression is formatted as a string and replaces the string content between the braces.
 All types are formatted as strings according to their literal representation.
 A function `printf` exists to allow more precise control over formatting of various types.
 To include the literal curly brackets within a string they must be escaped.
@@ -301,12 +300,10 @@ To include the literal curly brackets within a string they must be escaped.
 
 ```js
 n = 42
-"the answer is {n}" // the answer is 42
-"the answer is not {n+1}" // the answer is not 43
-"openinng curly bracket \{" // openinng curly bracket {
-"closing curly bracket \}" // closing curly bracket }
+"the answer is ${n}" // the answer is 42
+"the answer is not ${n+1}" // the answer is not 43
+"dollar sign opening curly bracket \${" // dollar sign opening curly bracket ${
 ```
-[IMPL#251](https://github.com/influxdata/platform/issues/251) Add string interpolation support
 
 
 ### Regular expression literals

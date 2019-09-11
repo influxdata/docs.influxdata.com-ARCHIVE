@@ -19,6 +19,12 @@ _**Output data type:** Integer_
 toInt()
 ```
 
+{{% note %}}
+To convert values in a column other than `_value`, define a custom function
+patterned after the [function definition](#function-definition),
+but replace `_value` with your desired column.
+{{% /note %}}
+
 ## Examples
 ```js
 from(bucket: "telegraf")
@@ -33,5 +39,5 @@ from(bucket: "telegraf")
 ```js
 toInt = (tables=<-) =>
   tables
-    |> map(fn:(r) => int(v: r._value))
+    |> map(fn:(r) => ({ r with _value: int(v: r._value) }))
 ```

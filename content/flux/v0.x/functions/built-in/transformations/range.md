@@ -26,25 +26,23 @@ range(start: -15m, stop: now)
 ## Parameters
 
 ### start
-Specifies the oldest time to be included in the results.
+The earliest time to include in results.
+Use a relative duration or absolute time.
+For example, `-1h` or `2019-08-28T22:00:00Z`.
+Durations are relative to `now()`.
 
-Relative start times are defined using negative durations.
-Negative durations are relative to now.
-Absolute start times are defined using timestamps.
-
-_**Data type:** Duration or Timestamp_
+_**Data type:** Duration | Time_
 
 ### stop
-Specifies the newest time to be included in the results. Defaults to `now`.
+The latest time to include in results.
+Use a relative duration or absolute time.
+For example, `-1h` or `2019-08-28T22:00:00Z`.
+Durations are relative to `now()`.
+Defaults to `now()`.
 
-Relative stop times are defined using negative durations.
-Negative durations are relative to now.
-Absolute stop times are defined using timestamps.
+_**Data type:** Duration | Time_
 
-_**Data type:** Duration or Timestamp_
-
-> Flux only honors [RFC3639 timestamps](/flux/v0.x/language/types#timestamp-format)
-> and ignores dates and times provided in other formats.
+> Time values in Flux must be in [RFC3339 format](/flux/v0.x/language/types#timestamp-format).
 
 ## Examples
 

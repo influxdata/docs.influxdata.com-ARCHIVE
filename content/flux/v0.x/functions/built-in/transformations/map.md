@@ -34,6 +34,11 @@ _**Data type:** Function_
 
 > Objects evaluated in `fn` functions are represented by `r`, short for "record" or "row".
 
+{{% note %}}
+Make sure `fn` parameter names match each specified parameter.
+To learn why, see [Match parameter names](/flux/v0.x/language/data-model/#match-parameter-names).
+{{% /note %}}
+
 ## Important notes
 
 #### Preserve columns
@@ -84,7 +89,7 @@ from(bucket:"telegraf/autogen")
 
 ###### Add new columns and preserve existing columns
 ```js
-from(bucket:"example-bucket")
+from(bucket:"telegraf/autogen")
     |> filter(fn: (r) =>
       r._measurement == "cpu" and
       r._field == "usage_system"

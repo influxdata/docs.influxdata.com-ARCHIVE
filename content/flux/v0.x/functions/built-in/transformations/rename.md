@@ -42,6 +42,11 @@ Cannot be used with `columns`.
 
 _**Data type:** Function_
 
+{{% note %}}
+Make sure `fn` parameter names match each specified parameter.
+To learn why, see [Match parameter names](/flux/v0.x/language/data-model/#match-parameter-names).
+{{% /note %}}
+
 ## Examples
 
 ##### Rename a single column

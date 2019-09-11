@@ -19,6 +19,12 @@ _**Output data type:** String_
 toString()
 ```
 
+{{% note %}}
+To convert values in a column other than `_value`, define a custom function
+patterned after the [function definition](#function-definition),
+but replace `_value` with your desired column.
+{{% /note %}}
+
 ## Examples
 ```js
 from(bucket: "telegraf")
@@ -33,5 +39,5 @@ from(bucket: "telegraf")
 ```js
 toString = (tables=<-) =>
   tables
-    |> map(fn:(r) => string(v: r._value))
+    |> map(fn:(r) => ({ r with _value: string(v: r._value) }))
 ```

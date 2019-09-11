@@ -25,8 +25,7 @@ The value to convert.
 ## Examples
 ```js
 from(bucket: "sensor-data")
-  |> filter(fn:(r) =>
-    r._measurement == "system" and
-  )
+  |> range(start: -1m)
+  |> filter(fn:(r) => r._measurement == "system" )
   |> map(fn:(r) => ({ r with responsive: bool(v: r.responsive) }))
 ```

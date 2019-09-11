@@ -2,10 +2,10 @@
 title: sql.to() function
 description: The `sql.to()` function writes data to a SQL database.
 menu:
-  v2_0_ref:
+  flux_0_x:
     name: sql.to
     parent: SQL
-weight: 202
+    weight: 1
 ---
 
 The `sql.to()` function writes data to a SQL database.

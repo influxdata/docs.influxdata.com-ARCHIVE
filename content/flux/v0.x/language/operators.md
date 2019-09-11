@@ -33,7 +33,8 @@ perform a calculation that returns a single numerical value.
 | `-`      | Subtraction    | `3 - 2`  | `1`    |
 | `*`      | Multiplication | `2 * 3`  | `6`    |
 | `/`      | Division       | `9 / 3`  | `3`    |
-| `%`      | Modulus        | `10 % 5` | `0`    |
+| `^`      | Exponentiation | `2 ^ 3`  | `8`    |
+| `%`      | Modulo         | `10 % 5` | `0`    |
 
 {{% note %}}
 In the current version of Flux, values used in arithmetic operations must

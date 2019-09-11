@@ -10,7 +10,8 @@ menu:
     weight: 1
 ---
 
-The `aggregateWindow()` function applies an aggregate function to fixed windows of time.
+The `aggregateWindow()` function applies an aggregate or selector function
+(any function with a `column` parameter) to fixed windows of time.
 
 _**Function type:** Aggregate_  
 
@@ -25,11 +26,16 @@ aggregateWindow(
 )
 ```
 
-As data is windowed into separate tables and aggregated, the `_time` column is dropped from each group key.
+As data is windowed into separate tables and processed, the `_time` column is dropped from each group key.
 This function copies the timestamp from a remaining column into the `_time` column.
 View the [function definition](#function-definition).
 
 ## Parameters
+
+{{% note %}}
+Make sure `fn` parameter names match each specified parameter.
+To learn why, see [Match parameter names](/flux/v0.x/language/data-model/#match-parameter-names).
+{{% /note %}}
 
 ### every
 The duration of windows.
@@ -42,7 +48,7 @@ The aggregate function used in the operation.
 _**Data type:** Function_
 
 {{% note %}}
-Only aggregate functions with a `column` parameter (singular) work with `aggregateWindow()`.
+Only aggregate and selector functions with a `column` parameter (singular) work with `aggregateWindow()`.
 {{% /note %}}
 
 ### column
@@ -84,10 +90,10 @@ from(bucket: "telegraf/autogen")
     fn: mean
   )
 ```
-####### Specifying parameters of the aggregate function
-To use `aggregateWindow()` aggregate functions that don't provide defaults for required parameters,
-for the `fn` parameter, define an anonymous function with `columns` and `tables` parameters
-that pipe-forwards tables into the aggregate function with all required parameters defined:
+###### Specify parameters of the aggregate function
+To use functions that don't provide defaults for required parameters with `aggregateWindow()`,
+define an anonymous function with `column` and `tables` parameters that pipe-forward
+tables into the aggregate or selector function with all required parameters defined:
 
 ```js
 from(bucket: "telegraf/autogen")

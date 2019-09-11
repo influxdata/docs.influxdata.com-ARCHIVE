@@ -10,7 +10,7 @@ menu:
     weight: 1
 ---
 
-The `increase()` function calculates the total non-negative difference between values in a table.
+The `increase()` function calculates the total non-negative difference between subsequent values.
 A main use case is tracking changes in counter values which may wrap over time
 when they hit a threshold or are reset.
 In the case of a wrap/reset, we can assume that the absolute delta between two
@@ -20,16 +20,16 @@ _**Function type:** Aggregate_
 _**Output data type:** Float_
 
 ```js
-increase(column: "_values")
+increase(columns: ["_value"])
 ```
 
 ## Parameters
 
-### column
-The column for which the increase is calculated.
-Defaults to `"_value"`.
+### columns
+The columns to use in the operation.
+Defaults to `["_value"]`.
 
-_**Data type:** Strings_
+_**Data type:** Array of Strings_
 
 ## Examples
 ```js

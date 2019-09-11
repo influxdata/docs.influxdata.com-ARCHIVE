@@ -28,6 +28,11 @@ It expects a `key` argument which represents a group key in the input stream.
 
 _**Data type:** Function_
 
+{{% note %}}
+Make sure `fn` parameter names match each specified parameter.
+To learn why, see [Match parameter names](/flux/v0.x/language/data-model/#match-parameter-names).
+{{% /note %}}
+
 ##### Example fn function
 ```js
 (key) => key._field == "fieldName"

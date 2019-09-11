@@ -25,8 +25,7 @@ The value to convert.
 ## Examples
 ```js
 from(bucket: "sensor-data")
-  |> filter(fn:(r) =>
-    r._measurement == "camera" and
-  )
-  |> map(fn:(r) => uint(v: r.exposures))
+  |> range(start: -1m)
+  |> filter(fn:(r) => r._measurement == "camera" )
+  |> map(fn:(r) => ({ r with exposures: uint(v: r.exposures) }))
 ```

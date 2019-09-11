@@ -6,6 +6,180 @@ menu:
     weight: 1
 ---
 
+## v0.45.1 [2019-09-09]
+
+### Bug fixes
+- Ensure `http.post` respects the context.
+
+## v0.45.0 [2019-09-06]
+
+### Features
+- Added Google Bigtable `from()`.
+
+### Bug fixes
+- Add `pagerduty.severityFromLevel()` helper function.
+- Sleep function now gets canceled when the context is canceled.
+- Categorize the undefined identifier as an invalid status code.
+- Panic from `CheckKind` in `memberEvaluator`.
+
+## v0.44.0 [2019-09-05]
+
+### Features
+- Add `http.basicAuth` function.
+- Add measurement filters to `monitor.from` and `monitor.logs`.
+
+### Bug fixes
+- changed the default HTTP client to be more robust.
+
+## v0.43.0 [2019-09-04]
+
+### Features
+- PagerDuty endpoint for alerts and notifications.
+
+## v0.42.0 [2019-08-30]
+
+### Features
+- Add `stateChanges` function.
+
+### Bug fixes
+- Race condition in looking up types in `map`.
+- Support bool equality expressions.
+- Calculating a type variable's free type variables.
+- Do not generate fresh type variables for member expressions.
+- Array instantiation.
+
+## v0.41.0 [2019-08-26]
+
+### Features
+- Add ability to validate URLs before making `http.post` requests.
+- Evaluate string interpolation.
+- Implement the `secrets.get` function.
+- Added secret service interface.
+- Add secrets package that will construct a secret object.
+- Added a SecretService interface and a new dependencies package and a basic test of functionality.
+- Add Slack endpoint.
+
+### Bug fixes
+- Make `reset()` check for non-nil data before calling `Release()`.
+- Add test case for `notify` function.
+- Add missing math import to test case.
+- Make packages aware of options.
+- Resolved `holtWinters` panic.
+- Use non-pointer receiver for `interpreter.function`.
+
+## v0.40.2 [2019-08-22]
+
+### Bug fixes
+- Resolved `holtWinters()` panic.
+
+## v0.40.1 [2019-08-21]
+
+### Bug fixes
+- Use non-pointer receiver for `interpreter.function`.
+
+## v0.40.0 [2019-08-20]
+
+### Breaking changes
+- Update compiler package to use true scope.
+- Add `http` and `json` to prelude.
+
+### Features
+- Add `alerts.check()` function.
+- Add `alerts.notify` function.
+- Add `kaufmansER()` and `kaufmansAMA()` functions.
+- Add `experimental.to()` function.
+- Add `experimental.set()` function to update entire object.
+- Add `experimental.objectKeys()` function.
+- Add `tripleExponentialDerivative()` function.
+- Add `json.encode()` function.
+- Add `mqtt.to()` function.
+- Add Bytes type.
+- Update compiler package to use true scope.
+- Add http endpoint.
+- Add post method implementation.
+- String interpolation.
+
+### Bug fixes
+- Avoid wrapping table errors in the CSV encoder.
+- Remove irrelevant TODOs.
+- `mode()` now properly considers nulls when calculating the mode.
+- Add `http` and `json` to prelude.
+- Rename all Flux test files to use `_test.flux`.
+
+## v0.39.0 [2019-08-13]
+
+{{% warn %}}
+In Flux 0.39.0, `holtWinters()` can cause the query engine to panic.
+**Flux 0.40.2 resolves this panic.**
+{{% /warn %}}
+
+### Breaking changes
+- Implement the scanning components for string expressions.
+
+### Features
+- Add `tail()` function.
+- Add framework for `http.post()` function.
+- Implement `deadman()` function.
+- Time arithmetic functions.
+- Alerts package.
+- Add an experimental `group()` function with mode `extend`.
+- Implement the scanning components for string expressions.
+- Add `chandeMomentumOscillator()` function.
+- Add `hourSelection()` function.
+- Add `date.year()` function
+
+### Bug fixes
+- Update object to use Invalid type instead of nil monotypes.
+- Make it so the alerts package can be defined in pure Flux.
+- Close connection after `sql.to()`.
+
+## v0.38.0 [2019-08-06]
+
+### Features
+- Update selectors to operate on time columns.
+- Add `relativeStrengthIndex()` transformation.
+- Add double and triple exponential average transformations (`doubleEMA()` and `tripleEMA()`).
+- Add `holtWinters()` transformation.
+- Add `keepFirst` parameter to `difference()`.
+- DatePart equivalent functions.
+- Add runtime package.
+- Add and subtract duration literal arithmetic.
+- Allow `keep()` to run regardless of nonexistent columns.
+  If all columns given are nonexistent, `keep()` returns an empty table.
+- Scanner returns positioning.
+
+### Bug fixes
+- Function resolver now keeps track of local assignments that may be evaluated at runtime.
+- Fixed InfluxDB test errors.
+- Add range to tests to pass in InfluxDB.
+- Allow converting a duration to a duration.
+- Catch integer overflow and underflow for literals.
+
+## v0.37.2 [2019-07-24]
+
+-  _General cleanup of internal code._
+
+## v0.37.1 [2019-07-23]
+
+### Bug fixes
+- Fixed InfluxDB test errors.
+- Add range to tests to pass in InfluxDB.
+
+## v0.37.0 [2019-07-22]
+
+### Features
+- Add PromQL to Flux transpiler and Flux helper functions.
+- Add mutable arrow array builders.
+- Created date package.
+- Return query and result errors in the multi result encoder.
+- Add `exponentialMovingAverage()`.
+- Add full draft of Rust parser.
+- Implement more production rules.
+- AST marshalling.
+- Parse statements.
+- Parse integer and float literals.
+- Add initial Rust implementation of parser.
+
 ## v0.36.2 [2019-07-12]
 
 _A technical preview of Flux packaged with InfluxDB v1.7.8._

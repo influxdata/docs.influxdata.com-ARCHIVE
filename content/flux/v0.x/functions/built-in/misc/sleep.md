@@ -39,14 +39,14 @@ _**Data type:** Duration_
 
 ### Delay execution in a chained query
 ```js
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> sleep(duration: 10s)
 ```
 
 ### Delay execution using a stream variable
 ```js
-x = from(bucket: "example-bucket")
+x = from(bucket: "telegraf/autogen")
     |> range(start: -1h)
 
 sleep(v: x, duration: 10s)

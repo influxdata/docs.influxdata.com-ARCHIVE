@@ -97,6 +97,11 @@ Default is `(r) => ({ [r._field]: r._value })`
 _**Data type:** Function_
 _**Output data type:** Object_
 
+{{% note %}}
+Make sure `fieldFn` parameter names match each specified parameter.
+To learn why, see [Match parameter names](/flux/v0.x/language/data-model/#match-parameter-names).
+{{% /note %}}
+
 ## Examples
 
 ### Default to() operation

@@ -73,7 +73,7 @@ _**Data type:** String_
 The assumed minimum value of the dataset.
 When the quantile falls below the lowest upper bound, interpolation is performed between `minValue` and the lowest upper bound.
 When `minValue` is equal to negative infinity, the lowest upper bound is used.
-Defaults to `0`.
+Defaults to `0.0`.
 
 _**Data type:** Float_
 

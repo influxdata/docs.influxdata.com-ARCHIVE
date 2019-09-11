@@ -43,7 +43,7 @@ _**Data type:** String_
 
 ###### Return the mode of windowed data
 ```js
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> filter(fn: (r) =>
     r._measurement == "errors" and
     r._field == "count_per_minute"

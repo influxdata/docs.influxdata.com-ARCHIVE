@@ -68,7 +68,7 @@ A selector method that returns the data point for which at least `q` points are 
 ### compression
 Indicates how many centroids to use when compressing the dataset.
 A larger number produces a more accurate result at the cost of increased memory requirements.
-Defaults to 1000.
+Defaults to `1000.0`.
 
 _**Data type:** Float_
 
