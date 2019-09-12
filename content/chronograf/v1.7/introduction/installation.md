@@ -36,21 +36,21 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 
     > If your download includes a TAR package, save the underlying datastore `chronograf-v1.db` in directory outside of where you start Chronograf. This preserves and references your existing datastore, including configurations and dashboards, when you download future versions.
 
-2. Install Chronograf:
+2. Install Chronograf, replacing `<version#>` with the appropriate version:
 
     {{< tab-content-container >}}
     {{% tab-content %}}
 
-    tar zxvf chronograf-1.7.7_darwin_amd64.tar.gz
+    tar zxvf chronograf-<version#>_darwin_amd64.tar.gz
 
     {{% /tab-content %}}
 
     {{% tab-content %}}
-    sudo dpkg -i chronograf_1.7.7_amd64.deb
+    sudo dpkg -i chronograf_<version#>_amd64.deb
     {{% /tab-content %}}
 
     {{% tab-content %}}
-    sudo yum localinstall chronograf-1.6.2.x86_64.rpm
+    sudo yum localinstall chronograf-<version#>.x86_64.rpm
     {{% /tab-content %}}
 
     {{< /tab-content-container >}}
