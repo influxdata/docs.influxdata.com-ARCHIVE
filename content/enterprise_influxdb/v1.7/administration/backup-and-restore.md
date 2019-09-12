@@ -25,7 +25,7 @@ Depending on the volume of data to be protected and your application requirement
 - [Backup and restore utilities](#backup-and-restore-utilities) — For most applications
 - [Exporting and importing data](#exporting-and-importing-data) — For large datasets
 
-> **Note:** You can use the [new `backup` and `restore` utilities (InfluxDB OSS 1.5 and later](/influxdb/latest/administration/backup_and_restore/) to:
+> **Note:** Use the [`backup` and `restore` utilities (InfluxDB OSS 1.5 and later)](/influxdb/latest/administration/backup_and_restore/) to:
 >
 > - Restore InfluxDB Enterprise backup files to InfluxDB OSS instances.
 > - Back up InfluxDB OSS data that can be restored in InfluxDB Enterprise clusters.
@@ -385,13 +385,13 @@ for [restoring from a full backup](#syntax-for-a-restore-from-a-full-backup).
 
 ## Exporting and importing data
 
-For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. When you are working with large data volumes (100s of gigabytes or more), however, you may find that the standard backup and restore utilities cannot adequately hande the volumes of data in your application.  
+For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. However, when working with data volumes 100s of gigabytes or more, the standard backup and restore utilities may not adequately handle the volumes of data in your application.  
 
-As an alternative to the standard backup and restore utilities, you can use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures to be followed for your disaster recovery and backup strategy. These commands can be executed manually or included in shell scripts that can run the export and import operations at scheduled intervals. An example is provided below.
+As an alternative to the standard backup and restore utilities, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. These commands can be executed manually or included in shell scripts that run the export and import operations at scheduled intervals (example below).
 
 ### Exporting data
 
-You can use the [`influx_inspect export` command](/influxdb/latest/tools/influx_inspect#export) to export data in line protocol format from your InfluxDB Enterprise cluster. Options include:
+Use the [`influx_inspect export` command](/influxdb/latest/tools/influx_inspect#export) to export data in line protocol format from your InfluxDB Enterprise cluster. Options include:
 
 - Exporting all, or specific, databases
 - Filtering with starting and ending timestamps
@@ -421,8 +421,8 @@ For details on using the `influx -import` command, see [Import data from a file 
 
 For an example of using the exporting and importing data approach for disaster recovery, see the Capital One presentation from Influxdays 2019 on ["Architecting for Disaster Recovery."](https://www.youtube.com/watch?v=LyQDhSdnm4A). In this presentation, Capital One discusses the following:
 
-- Data is exported every 15 minutes from an active cluster to an AWS S3 bucket.
-- The export file in the S3 bucket is replicated using the AWS S3 copy command.
-- Data is imported every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
+- Exporting data every 15 minutes from an active cluster to an AWS S3 bucket.
+- Replicating the export file in the S3 bucket using the AWS S3 copy command.
+- Importing data every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
 - Advantages of the export-import approach over the standard backup and restore utilities for large volumes of data.
-- Use of a custom administration tool to manage users and scheduled exports and imports.
+- Managing users and scheduled exports and imports with a custom administration tool.

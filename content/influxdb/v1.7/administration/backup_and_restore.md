@@ -12,7 +12,7 @@ menu:
 
 ## Overview
 
-Starting in version 1.5, the InfluxDB OSS `backup` utility provides:
+The InfluxDB OSS `backup` utility provides:
 
 * Option to run backup and restore functions on online (live) databases.
 * Backup and restore functions for single or multiple databases, along with optional timestamp filtering.
@@ -21,11 +21,11 @@ Starting in version 1.5, the InfluxDB OSS `backup` utility provides:
 
 > **InfluxDB Enterprise users:** See [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/latest/administration/backup-and-restore/).
 
-> ***Note:*** Prior to InfluxDB OSS 1.5, the `backup` utility created backup file formats incompatible with InfluxDB Enterprise.  This legacy format is still supported in the new `backup` utility as input for the new *online* restore function. The *offline* backup and restore utilities in InfluxDB OSS versions 1.4 and earlier are deprecated, but are documented below in [Backward compatible offline backup and restore](#backward-compatible-offline-backup-and-restore-legacy-format).
+> ***Note:*** Prior to InfluxDB OSS 1.5, the `backup` utility created backup file formats incompatible with InfluxDB Enterprise. This legacy format is still supported in the new `backup` utility as input for the new *online* restore function. The *offline* backup and restore utilities in InfluxDB OSS versions 1.4 and earlier are deprecated, but are documented below in [Backward compatible offline backup and restore](#backward-compatible-offline-backup-and-restore-legacy-format).
 
 ## Online backup and restore (for InfluxDB OSS)
 
-Use the `backup` and `restore` utilities to back up and restore between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.7.7.
+Use the `backup` and `restore` utilities to back up and restore between `influxd` instances with the same versions or with only minor version differences. For example, you can back up from 1.7.3 and restore on 1.7.7.
 
 ### Configuring remote connections
 
