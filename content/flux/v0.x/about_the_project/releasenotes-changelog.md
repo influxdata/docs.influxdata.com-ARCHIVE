@@ -327,9 +327,9 @@ _A technical preview of Flux packaged with InfluxDB v1.7.8._
 
 ### Features
 - Add stream table index functions (
-  [`tableFind()`](/flux/v0.x/functions/built-in/transformations/stream-table/tablefind/),
-  [`getRecord()`](/flux/v0.x/functions/built-in/transformations/stream-table/getrecord/),
-  [`getColumn()`](/flux/v0.x/functions/built-in/transformations/stream-table/getcolumn/)
+  [`tableFind()`](/flux/v0.x/stdlib/built-in/transformations/stream-table/tablefind/),
+  [`getRecord()`](/flux/v0.x/stdlib/built-in/transformations/stream-table/getrecord/),
+  [`getColumn()`](/flux/v0.x/stdlib/built-in/transformations/stream-table/getcolumn/)
   ).
 - Construct invalid binary expressions when given multiple expressions.
 

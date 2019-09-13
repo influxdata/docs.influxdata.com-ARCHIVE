@@ -37,7 +37,7 @@ Otherwise, you will get an error similar to:
 Error: type error: float != int
 ```
 
-To convert operands to the same type, use [type-conversion functions](/flux/v0.x/functions/built-in/transformations/type-conversions/)
+To convert operands to the same type, use [type-conversion functions](/flux/v0.x/stdlib/built-in/transformations/type-conversions/)
 or manually format operands.
 The operand data type determines the output data type.
 For example:
@@ -56,7 +56,7 @@ For example:
 {{% /note %}}
 
 ## Custom mathematic functions
-Flux lets you [create custom functions](/flux/v0.x/functions/custom-functions) that use mathematic operations.
+Flux lets you [create custom functions](/flux/v0.x/stdlib/custom-functions) that use mathematic operations.
 View the examples below.
 
 ###### Custom multiplication function
@@ -78,8 +78,8 @@ percent(sample: 20.0, total: 80.0)
 ### Transform values in a data stream
 To transform multiple values in an input stream, your function needs to:
 
-- [Handle piped-forward data](/flux/v0.x/functions/custom-functions/#functions-that-manipulate-pipe-forwarded-data).
-- Use the [`map()` function](/flux/v0.x/functions/built-in/transformations/map) to iterate over each row.
+- [Handle piped-forward data](/flux/v0.x/stdlib/custom-functions/#functions-that-manipulate-pipe-forwarded-data).
+- Use the [`map()` function](/flux/v0.x/stdlib/built-in/transformations/map) to iterate over each row.
 
 The example `multiplyByX()` function below includes:
 
@@ -143,7 +143,7 @@ data
 #### Include partial gigabytes
 Because the original metric (bytes) is an integer, the output of the operation is an integer and does not include partial GBs.
 To calculate partial GBs, convert the `_value` column and its values to floats using the
-[`float()` function](/flux/v0.x/functions/built-in/transformations/type-conversions/float)
+[`float()` function](/flux/v0.x/stdlib/built-in/transformations/type-conversions/float)
 and format the denominator in the division operation as a float.
 
 ```js

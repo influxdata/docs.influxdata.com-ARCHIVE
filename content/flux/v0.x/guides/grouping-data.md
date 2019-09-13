@@ -25,7 +25,7 @@ Understanding how modifying group keys shapes output data is key to successfully
 grouping and transforming data into your desired output.
 
 ## group() Function
-Flux's [`group()` function](/flux/v0.x/functions/built-in/transformations/group) defines the
+Flux's [`group()` function](/flux/v0.x/stdlib/built-in/transformations/group) defines the
 group key for output tables, i.e. grouping records based on values for specific columns.
 
 ###### group() example
@@ -54,7 +54,7 @@ A boolean that removes all grouping and outputs everything as a single table.
 
 ---
 
-_For more information, see the [`group()` function](/flux/v0.x/functions/built-in/transformations/group)._
+_For more information, see the [`group()` function](/flux/v0.x/stdlib/built-in/transformations/group)._
 
 ---
 

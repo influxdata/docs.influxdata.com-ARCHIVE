@@ -20,7 +20,7 @@ Every Flux query needs the following:
 
 
 ## 1. Define your data source
-Flux's [`from()`](/flux/v0.x/functions/built-in/inputs/from) function defines an InfluxDB data source.
+Flux's [`from()`](/flux/v0.x/stdlib/built-in/inputs/from) function defines an InfluxDB data source.
 It requires a [`bucket`](/flux/v0.x/introduction/getting-started/#buckets) parameter.
 For this example, use `telegraf/autogen`, a combination of the default database and retention policy provided by the TICK stack.
 
@@ -33,7 +33,7 @@ Flux requires a time range when querying time series data.
 "Unbounded" queries are very resource-intensive and as a protective measure,
 Flux will not query the database without a specified range.
 
-Use the pipe-forward operator (`|>`) to pipe data from your data source into the [`range()`](/flux/v0.x/functions/built-in/transformations/range)
+Use the pipe-forward operator (`|>`) to pipe data from your data source into the [`range()`](/flux/v0.x/stdlib/built-in/transformations/range)
 function, which specifies a time range for your query.
 It accepts two properties: `start` and `stop`.
 Ranges can be **relative** using negative [durations](/flux/v0.x/language/lexical-elements#duration-literals)

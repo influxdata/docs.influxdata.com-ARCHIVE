@@ -28,7 +28,7 @@ name = "John"
 {{% note %}}
 #### Flux only interpolates string values
 Flux currently interpolates only string values ([IMP#1775](https://github.com/influxdata/flux/issues/1775)).
-Use the [string() function](/flux/v0.x/functions/built-in/transformations/type-conversions/string/)
+Use the [string() function](/flux/v0.x/stdlib/built-in/transformations/type-conversions/string/)
 to convert non-string values to strings.
 
 ```js
