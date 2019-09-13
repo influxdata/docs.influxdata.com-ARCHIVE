@@ -18,7 +18,7 @@ This article outlines many of the tasks possible with Flux but not InfluxQL and 
 ### Joins
 InfluxQL has never supported joins. They can be accomplished using [TICKscript](/kapacitor/latest/tick/introduction/),
 but even TICKscript's join capabilities are limited.
-Flux's [`join()` function](/flux/v0.x/functions/built-in/transformations/join/) allows you
+Flux's [`join()` function](/flux/v0.x/stdlib/built-in/transformations/join/) allows you
 to join data **from any bucket, any measurement, and on any columns** as long as
 each data set includes the columns on which they are to be joined.
 This opens the door for really powerful and useful operations.
@@ -92,7 +92,7 @@ join(
 ### Sort on any column
 InfluxQL's sorting capabilities are very limited, allowing you only to control the
 sort order of `time` using the `ORDER BY time` clause.
-Flux's [`sort()` function](/flux/v0.x/functions/built-in/transformations/sort) sorts records based on list of columns.
+Flux's [`sort()` function](/flux/v0.x/stdlib/built-in/transformations/sort) sorts records based on list of columns.
 Depending on the column type, records are sorted alphabetically, numerically, or chronologically.
 
 ###### Example sort operation
@@ -108,7 +108,7 @@ from(bucket:"telegraf/autogen")
 
 ### Pivot
 Pivoting data tables has never been supported in InfluxQL.
-Flux's [`pivot()` function](/flux/v0.x/functions/built-in/transformations/pivot) provides the ability
+Flux's [`pivot()` function](/flux/v0.x/stdlib/built-in/transformations/pivot) provides the ability
 to pivot data tables by specifying `rowKey`, `columnKey`, and `valueColumn` parameters.
 
 ###### Example pivot operation
@@ -128,7 +128,7 @@ from(bucket: "telegraf/autogen")
 
 ### Histograms
 The ability to generate histograms has been a highly requested feature for InfluxQL, but has never been supported.
-Flux's [`histogram()` function](/flux/v0.x/functions/built-in/transformations/histogram) uses input
+Flux's [`histogram()` function](/flux/v0.x/stdlib/built-in/transformations/histogram) uses input
 data to generate a cumulative histogram with support for other histogram types coming in the future.
 
 ---
@@ -152,8 +152,8 @@ from(bucket: "telegraf/autogen")
 
 ### Covariance
 Flux provides functions for simple covariance calculation.
-The [`covariance()` function](/flux/v0.x/functions/built-in/transformations/aggregates/covariance)
-calculates the covariance between two columns and the [`cov()` function](/flux/v0.x/functions/built-in/transformations/aggregates/cov)
+The [`covariance()` function](/flux/v0.x/stdlib/built-in/transformations/aggregates/covariance)
+calculates the covariance between two columns and the [`cov()` function](/flux/v0.x/stdlib/built-in/transformations/aggregates/cov)
 calculates the covariance between two data streams.
 
 ###### Example covariance between two columns
@@ -191,21 +191,21 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 
 | InfluxQL                          | Flux Functions                                                                                                                                   |
 | --------                          | --------------                                                                                                                                   |
-| SELECT                            | [filter()](/flux/v0.x/functions/built-in/transformations/filter/)                                                                                |
-| WHERE                             | [filter()](/flux/v0.x/functions/built-in/transformations/filter/), [range()](/flux/v0.x/functions/built-in/transformations/range/)               |
-| GROUP BY                          | [group()](/flux/v0.x/functions/built-in/transformations/group/)                                                                                  |
-| INTO                              | [to()](/flux/v0.x/functions/built-in/outputs/to/) <span><a style="color:orange" href="#footnote">*</a></span>                                    |
-| ORDER BY                          | [sort()](/flux/v0.x/functions/built-in/transformations/sort/)                                                                                    |
-| LIMIT                             | [limit()](/flux/v0.x/functions/built-in/transformations/limit/)                                                                                  |
+| SELECT                            | [filter()](/flux/v0.x/stdlib/built-in/transformations/filter/)                                                                                |
+| WHERE                             | [filter()](/flux/v0.x/stdlib/built-in/transformations/filter/), [range()](/flux/v0.x/stdlib/built-in/transformations/range/)               |
+| GROUP BY                          | [group()](/flux/v0.x/stdlib/built-in/transformations/group/)                                                                                  |
+| INTO                              | [to()](/flux/v0.x/stdlib/built-in/outputs/to/) <span><a style="color:orange" href="#footnote">*</a></span>                                    |
+| ORDER BY                          | [sort()](/flux/v0.x/stdlib/built-in/transformations/sort/)                                                                                    |
+| LIMIT                             | [limit()](/flux/v0.x/stdlib/built-in/transformations/limit/)                                                                                  |
 | SLIMIT                            | --                                                                                                                                               |
 | OFFSET                            | --                                                                                                                                               |
 | SOFFSET                           | --                                                                                                                                               |
-| SHOW DATABASES                    | [buckets()](/flux/v0.x/functions/built-in/inputs/buckets/)                                                                                       |
-| SHOW MEASUREMENTS                 | [v1.measurements](/flux/v0.x/functions/influxdb-v1/measurements)                                                                                 |
-| SHOW FIELD KEYS                   | [keys()](/flux/v0.x/functions/built-in/transformations/keys/)                                                                                    |
-| SHOW RETENTION POLICIES           | [buckets()](/flux/v0.x/functions/built-in/inputs/buckets/)                                                                                       |
-| SHOW TAG KEYS                     | [v1.tagKeys()](/flux/v0.x/functions/influxdb-v1/tagkeys), [v1.measurementTagKeys()](/flux/v0.x/functions/influxdb-v1/measurementtagkeys)         |
-| SHOW TAG VALUES                   | [v1.tagValues()](/flux/v0.x/functions/influxdb-v1/tagvalues), [v1.measurementTagValues()](/flux/v0.x/functions/influxdb-v1/measurementtagvalues) |
+| SHOW DATABASES                    | [buckets()](/flux/v0.x/stdlib/built-in/inputs/buckets/)                                                                                       |
+| SHOW MEASUREMENTS                 | [v1.measurements](/flux/v0.x/stdlib/influxdb-v1/measurements)                                                                                 |
+| SHOW FIELD KEYS                   | [keys()](/flux/v0.x/stdlib/built-in/transformations/keys/)                                                                                    |
+| SHOW RETENTION POLICIES           | [buckets()](/flux/v0.x/stdlib/built-in/inputs/buckets/)                                                                                       |
+| SHOW TAG KEYS                     | [v1.tagKeys()](/flux/v0.x/stdlib/influxdb-v1/tagkeys), [v1.measurementTagKeys()](/flux/v0.x/stdlib/influxdb-v1/measurementtagkeys)         |
+| SHOW TAG VALUES                   | [v1.tagValues()](/flux/v0.x/stdlib/influxdb-v1/tagvalues), [v1.measurementTagValues()](/flux/v0.x/stdlib/influxdb-v1/measurementtagvalues) |
 | SHOW SERIES                       | --                                                                                                                                               |
 | CREATE DATABASE                   | --                                                                                                                                               |
 | DROP DATABASE                     | --                                                                                                                                               |
@@ -216,57 +216,57 @@ The table below shows InfluxQL statements, clauses, and functions along with the
 | CREATE RETENTION POLICY           | --                                                                                                                                               |
 | ALTER RETENTION POLICY            | --                                                                                                                                               |
 | DROP RETENTION POLICY             | --                                                                                                                                               |
-| COUNT                             | [count()](/flux/v0.x/functions/built-in/transformations/aggregates/count/)                                                                       |
-| DISTINCT                          | [distinct()](/flux/v0.x/functions/built-in/transformations/selectors/distinct/)                                                                  |
-| INTEGRAL                          | [integral()](/flux/v0.x/functions/built-in/transformations/aggregates/integral/)                                                                 |
-| MEAN                              | [mean()](/flux/v0.x/functions/built-in/transformations/aggregates/mean/)                                                                         |
-| MEDIAN                            | [median()](/flux/v0.x/functions/built-in/transformations/aggregates/median/)                                                                     |
-| MODE                              | [mode()](/flux/v0.x/functions/built-in/transformations/aggregates/mode/)                                                                         |
-| SPREAD                            | [spread()](/flux/v0.x/functions/built-in/transformations/aggregates/spread/)                                                                     |
-| STDDEV                            | [stddev()](/flux/v0.x/functions/built-in/transformations/aggregates/stddev/)                                                                     |
-| SUM                               | [sum()](/flux/v0.x/functions/built-in/transformations/aggregates/sum/)                                                                           |
-| BOTTOM                            | [bottom()](/flux/v0.x/functions/built-in/transformations/selectors/bottom/)                                                                      |
-| FIRST                             | [first()](/flux/v0.x/functions/built-in/transformations/selectors/first/)                                                                        |
-| LAST                              | [last()](/flux/v0.x/functions/built-in/transformations/selectors/last/)                                                                          |
-| MAX                               | [max()](/flux/v0.x/functions/built-in/transformations/selectors/max/)                                                                            |
-| MIN                               | [min()](/flux/v0.x/functions/built-in/transformations/selectors/min/)                                                                            |
-| PERCENTILE                        | [quantile()](/flux/v0.x/functions/built-in/transformations/aggregates/quantile/)                                                                 |
-| SAMPLE                            | [sample()](/flux/v0.x/functions/built-in/transformations/selectors/sample/)                                                                      |
-| TOP                               | [top()](/flux/v0.x/functions/built-in/transformations/selectors/top/)                                                                            |
-| ABS                               | [math.abs()](/flux/v0.x/functions/math/abs/)                                                                                                     |
-| ACOS                              | [math.acos()](/flux/v0.x/functions/math/acos/)                                                                                                   |
-| ASIN                              | [math.asin()](/flux/v0.x/functions/math/asin/)                                                                                                   |
-| ATAN                              | [math.atan()](/flux/v0.x/functions/math/atan/)                                                                                                   |
-| ATAN2                             | [math.atan2()](/flux/v0.x/functions/math/atan2/)                                                                                                 |
-| CEIL                              | [math.ceil()](/flux/v0.x/functions/math/ceil/)                                                                                                   |
-| COS                               | [math.cos()](/flux/v0.x/functions/math/cos/)                                                                                                     |
-| CUMULATIVE_SUM                    | [cumulativeSum()](/flux/v0.x/functions/built-in/transformations/cumulativesum/)                                                                  |
-| DERIVATIVE                        | [derivative()](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                                                             |
-| DIFFERENCE                        | [difference()](/flux/v0.x/functions/built-in/transformations/aggregates/difference/)                                                             |
-| ELAPSED                           | [elapsed()](/flux/v0.x/functions/built-in/transformations/aggregates/elapsed/)                                                                   |
-| EXP                               | [math.exp()](/flux/v0.x/functions/math/exp/)                                                                                                     |
-| FLOOR                             | [math.floor()](/flux/v0.x/functions/math/floor/)                                                                                                 |
-| HISTOGRAM                         | [histogram()](/flux/v0.x/functions/built-in/transformations/histogram/)                                                                          |
-| LN                                | [math.log()](/flux/v0.x/functions/math/log/)                                                                                                     |
-| LOG                               | [math.logb()](/flux/v0.x/functions/math/logb/)                                                                                                   |
-| LOG2                              | [math.log2()](/flux/v0.x/functions/math/log2/)                                                                                                   |
-| LOG10                             | [math.log10()](/flux/v0.x/functions/math/log10/)                                                                                                 |
-| MOVING_AVERAGE                    | [movingAverage()](/flux/v0.x/functions/built-in/transformations/aggregates/movingaverage/)                                                       |
-| NON_NEGATIVE_DERIVATIVE           | [derivative(nonNegative:true)](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                                             |
-| NON_NEGATIVE_DIFFERENCE           | [difference(nonNegative:true)](/flux/v0.x/functions/built-in/transformations/aggregates/derivative/)                                             |
-| POW                               | [math.pow()](/flux/v0.x/functions/math/pow/)                                                                                                     |
-| ROUND                             | [math.round()](/flux/v0.x/functions/math/round/)                                                                                                 |
-| SIN                               | [math.sin()](/flux/v0.x/functions/math/sin/)                                                                                                     |
-| SQRT                              | [math.sqrt()](/flux/v0.x/functions/math/sqrt/)                                                                                                   |
-| TAN                               | [math.tan()](/flux/v0.x/functions/math/tan/)                                                                                                     |
-| HOLT_WINTERS                      | [holtWinters()](/flux/v0.x/functions/transformations/aggregates/holtwinters/)                                                                    |
-| CHANDE_MOMENTUM_OSCILLATOR        | [chandeMomentumOscillator()](/flux/v0.x/functions/built-in/transformations/aggregates/chandemomentumoscillator/)                                 |
-| EXPONENTIAL_MOVING_AVERAGE        | [exponentialMovingAverage()](/flux/v0.x/functions/built-in/transformations/aggregates/exponentialmovingaverage/)                                 |
-| DOUBLE_EXPONENTIAL_MOVING_AVERAGE | [doubleEMA()](/flux/v0.x/functions/built-in/transformations/aggregates/doubleema/)                                                               |
-| KAUFMANS_EFFICIENCY_RATIO         | [kaufmansER()](/flux/v0.x/functions/built-in/transformations/aggregates/kaufmanser/)                                                             |
-| KAUFMANS_ADAPTIVE_MOVING_AVERAGE  | [kaufmansAMA()](/flux/v0.x/functions/built-in/transformations/aggregates/kaufmansama/)                                                           |
-| TRIPLE_EXPONENTIAL_MOVING_AVERAGE | [tripleEMA()](/flux/v0.x/functions/built-in/transformations/aggregates/tripleema/)                                                               |
-| TRIPLE_EXPONENTIAL_DERIVATIVE     | [tripleExponentialDerivative()](/flux/v0.x/functions/built-in/transformations/aggregates/tripleexponentialderivative/)                           |
-| RELATIVE_STRENGTH_INDEX           | [relativeStrengthIndex()](/flux/v0.x/functions/built-in/transformations/aggregates/relativestrengthindex/)                                       |
+| COUNT                             | [count()](/flux/v0.x/stdlib/built-in/transformations/aggregates/count/)                                                                       |
+| DISTINCT                          | [distinct()](/flux/v0.x/stdlib/built-in/transformations/selectors/distinct/)                                                                  |
+| INTEGRAL                          | [integral()](/flux/v0.x/stdlib/built-in/transformations/aggregates/integral/)                                                                 |
+| MEAN                              | [mean()](/flux/v0.x/stdlib/built-in/transformations/aggregates/mean/)                                                                         |
+| MEDIAN                            | [median()](/flux/v0.x/stdlib/built-in/transformations/aggregates/median/)                                                                     |
+| MODE                              | [mode()](/flux/v0.x/stdlib/built-in/transformations/aggregates/mode/)                                                                         |
+| SPREAD                            | [spread()](/flux/v0.x/stdlib/built-in/transformations/aggregates/spread/)                                                                     |
+| STDDEV                            | [stddev()](/flux/v0.x/stdlib/built-in/transformations/aggregates/stddev/)                                                                     |
+| SUM                               | [sum()](/flux/v0.x/stdlib/built-in/transformations/aggregates/sum/)                                                                           |
+| BOTTOM                            | [bottom()](/flux/v0.x/stdlib/built-in/transformations/selectors/bottom/)                                                                      |
+| FIRST                             | [first()](/flux/v0.x/stdlib/built-in/transformations/selectors/first/)                                                                        |
+| LAST                              | [last()](/flux/v0.x/stdlib/built-in/transformations/selectors/last/)                                                                          |
+| MAX                               | [max()](/flux/v0.x/stdlib/built-in/transformations/selectors/max/)                                                                            |
+| MIN                               | [min()](/flux/v0.x/stdlib/built-in/transformations/selectors/min/)                                                                            |
+| PERCENTILE                        | [quantile()](/flux/v0.x/stdlib/built-in/transformations/aggregates/quantile/)                                                                 |
+| SAMPLE                            | [sample()](/flux/v0.x/stdlib/built-in/transformations/selectors/sample/)                                                                      |
+| TOP                               | [top()](/flux/v0.x/stdlib/built-in/transformations/selectors/top/)                                                                            |
+| ABS                               | [math.abs()](/flux/v0.x/stdlib/math/abs/)                                                                                                     |
+| ACOS                              | [math.acos()](/flux/v0.x/stdlib/math/acos/)                                                                                                   |
+| ASIN                              | [math.asin()](/flux/v0.x/stdlib/math/asin/)                                                                                                   |
+| ATAN                              | [math.atan()](/flux/v0.x/stdlib/math/atan/)                                                                                                   |
+| ATAN2                             | [math.atan2()](/flux/v0.x/stdlib/math/atan2/)                                                                                                 |
+| CEIL                              | [math.ceil()](/flux/v0.x/stdlib/math/ceil/)                                                                                                   |
+| COS                               | [math.cos()](/flux/v0.x/stdlib/math/cos/)                                                                                                     |
+| CUMULATIVE_SUM                    | [cumulativeSum()](/flux/v0.x/stdlib/built-in/transformations/cumulativesum/)                                                                  |
+| DERIVATIVE                        | [derivative()](/flux/v0.x/stdlib/built-in/transformations/aggregates/derivative/)                                                             |
+| DIFFERENCE                        | [difference()](/flux/v0.x/stdlib/built-in/transformations/aggregates/difference/)                                                             |
+| ELAPSED                           | [elapsed()](/flux/v0.x/stdlib/built-in/transformations/aggregates/elapsed/)                                                                   |
+| EXP                               | [math.exp()](/flux/v0.x/stdlib/math/exp/)                                                                                                     |
+| FLOOR                             | [math.floor()](/flux/v0.x/stdlib/math/floor/)                                                                                                 |
+| HISTOGRAM                         | [histogram()](/flux/v0.x/stdlib/built-in/transformations/histogram/)                                                                          |
+| LN                                | [math.log()](/flux/v0.x/stdlib/math/log/)                                                                                                     |
+| LOG                               | [math.logb()](/flux/v0.x/stdlib/math/logb/)                                                                                                   |
+| LOG2                              | [math.log2()](/flux/v0.x/stdlib/math/log2/)                                                                                                   |
+| LOG10                             | [math.log10()](/flux/v0.x/stdlib/math/log10/)                                                                                                 |
+| MOVING_AVERAGE                    | [movingAverage()](/flux/v0.x/stdlib/built-in/transformations/aggregates/movingaverage/)                                                       |
+| NON_NEGATIVE_DERIVATIVE           | [derivative(nonNegative:true)](/flux/v0.x/stdlib/built-in/transformations/aggregates/derivative/)                                             |
+| NON_NEGATIVE_DIFFERENCE           | [difference(nonNegative:true)](/flux/v0.x/stdlib/built-in/transformations/aggregates/derivative/)                                             |
+| POW                               | [math.pow()](/flux/v0.x/stdlib/math/pow/)                                                                                                     |
+| ROUND                             | [math.round()](/flux/v0.x/stdlib/math/round/)                                                                                                 |
+| SIN                               | [math.sin()](/flux/v0.x/stdlib/math/sin/)                                                                                                     |
+| SQRT                              | [math.sqrt()](/flux/v0.x/stdlib/math/sqrt/)                                                                                                   |
+| TAN                               | [math.tan()](/flux/v0.x/stdlib/math/tan/)                                                                                                     |
+| HOLT_WINTERS                      | [holtWinters()](/flux/v0.x/stdlib/transformations/aggregates/holtwinters/)                                                                    |
+| CHANDE_MOMENTUM_OSCILLATOR        | [chandeMomentumOscillator()](/flux/v0.x/stdlib/built-in/transformations/aggregates/chandemomentumoscillator/)                                 |
+| EXPONENTIAL_MOVING_AVERAGE        | [exponentialMovingAverage()](/flux/v0.x/stdlib/built-in/transformations/aggregates/exponentialmovingaverage/)                                 |
+| DOUBLE_EXPONENTIAL_MOVING_AVERAGE | [doubleEMA()](/flux/v0.x/stdlib/built-in/transformations/aggregates/doubleema/)                                                               |
+| KAUFMANS_EFFICIENCY_RATIO         | [kaufmansER()](/flux/v0.x/stdlib/built-in/transformations/aggregates/kaufmanser/)                                                             |
+| KAUFMANS_ADAPTIVE_MOVING_AVERAGE  | [kaufmansAMA()](/flux/v0.x/stdlib/built-in/transformations/aggregates/kaufmansama/)                                                           |
+| TRIPLE_EXPONENTIAL_MOVING_AVERAGE | [tripleEMA()](/flux/v0.x/stdlib/built-in/transformations/aggregates/tripleema/)                                                               |
+| TRIPLE_EXPONENTIAL_DERIVATIVE     | [tripleExponentialDerivative()](/flux/v0.x/stdlib/built-in/transformations/aggregates/tripleexponentialderivative/)                           |
+| RELATIVE_STRENGTH_INDEX           | [relativeStrengthIndex()](/flux/v0.x/stdlib/built-in/transformations/aggregates/relativestrengthindex/)                                       |
 
 _<span style="font-size:.9rem" id="footnote"><span style="color:orange">*</span> The <code>to()</code> function only writes to InfluxDB 2.0.</span>_

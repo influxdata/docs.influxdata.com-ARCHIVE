@@ -21,8 +21,8 @@ The best way to learn Flux is to walk through writing a flux script. This guide 
 ## [Flux guides](/flux/v0.x/guides)
 Helpful guides that walk through both common and complex tasks and use cases for Flux.
 
-## [Flux functions](/flux/v0.x/functions)
-Flux functions allows you to retrieve, transform, process, and output data easily.
+## [Flux standard library](/flux/v0.x/stdlib)
+The Flux standard library includes packages and functions that retrieve, transform, process, and output data.
 
 ## [Flux language reference](/flux/v0.x/language)
 The specification for the Flux language and query execution.
