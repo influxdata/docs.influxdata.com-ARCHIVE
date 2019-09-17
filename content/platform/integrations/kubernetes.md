@@ -16,8 +16,16 @@ There are several ways use the InfluxData Platform (also known as the TICK
 stack) with Kubernetes:
 
 - [Monitor Kubernetes](#monitor-kubernetes)
+  - [kube-influxdb Kubernetes monitoring project](#kube-influxdb-kubernetes-monitoring-project)
+  - [Collect Kubernetes metrics with Telegraf](#collect-kubernetes-metrics-with-telegraf)
+  - [Prometheus remote read and write support](#prometheus-remote-read-and-write-support)
 - [Deploy the TICK stack in Kubernetes](#deploy-the-tick-stack-in-kubernetes)
+  - [Helm Charts](#helm-charts)
+  - [K8s Operator](#k8s-operator)
+  - [Solutions for Kubernetes services](#solutions-for-kubernetes-services)
 - [Frequently asked questions](#frequently-asked-questions)
+  - [How is the InfluxData Platform (TICK) different from Prometheus?](#how-is-the-influxdata-platform-tick-different-from-prometheus)
+  - [Should I run InfluxDB in Kubernetes?](#should-i-run-influxdb-in-kubernetes)
 
 ## Monitor Kubernetes
 
@@ -61,11 +69,12 @@ TICK stack – Telegraf, InfluxDB, Chronograf, and Kapacitor in Kubernetes.
 
 ### Helm Charts
 
-The [TICK Charts](https://github.com/influxdata/tick-charts) repository provides
-a set of [Helm charts](https://docs.helm.sh/) to deploy every component of the
-InfluxData Platform in Kubernetes.
+InfluxData recommends using the [Helm Stable](https://github.com/helm/charts/tree/master/stable) repository for installing the TICK stack.
 
-Learn how to [deploy the InfluxData Platform using Helm Charts](https://github.com/influxdata/tick-charts/blob/master/README.md)
+- [Telegraf](https://github.com/helm/charts/tree/master/stable/telegraf)
+- [InfluxDB](https://github.com/helm/charts/tree/master/stable/influxdb)
+- [Chronograf](https://github.com/helm/charts/tree/master/stable/chronograf)
+- [Kapacitor](https://github.com/helm/charts/tree/master/stable/kapacitor)
 
 ### K8s Operator
 
