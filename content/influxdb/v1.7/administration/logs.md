@@ -78,7 +78,7 @@ Use the HTTP access log to log HTTP request traffic separately from the other In
 
 ### HTTP access log format
 
-The following is an example of the HTTP access log format. The table below describes each component of the HTTP access log. 
+The following is an example of the HTTP access log format. The table below describes each component of the HTTP access log.
 
 ```
 172.13.8.13,172.39.5.169 - - [21/Jul/2019:03:01:27 +0000] "GET /query?db=metrics&q=SELECT+MEAN%28value%29+as+average_cpu%2C+MAX%28value%29+as+peak_cpu+FROM+%22foo.load%22+WHERE+time+%3E%3D+now%28%29+-+1m+AND+org_id+%21%3D+%27%27+AND+group_id+%21%3D+%27%27+GROUP+BY+org_id%2Cgroup_id HTTP/1.0" 200 11450 "-" "Baz Service" d6ca5a13-at63-11o9-8942-000000000000 9337349
@@ -92,14 +92,14 @@ The following is an example of the HTTP access log format. The table below descr
 |Time of log event             |`[21/Jul/2019:03:01:27 +0000]`                                                                                                |
 |Request method                |`GET`                                                                                                                         |
 |Username                      |`user`                                                                                                                        |
-|URI                           |`/query?db=metrics%26q=SELECT%20used_percent%20FROM%20%22telegraf.autogen.mem%22%20WHERE%20time%20%3E=%20now()%20-%201m%20	` |
+|HTTP API call being made, which shows the database being accessed and the query being run. For more details, see [InfluxDB API reference](/influxdb/v1.7/tools/api/). Note that this field is URL-encoded.                            |`/query?db=metrics%26q=SELECT%20used_percent%20FROM%20%22telegraf.autogen.mem%22%20WHERE%20time%20%3E=%20now()%20-%201m%20	` |
 |Request protocol              |`HTTP/1.0` 	                                                                                                                  |
 |HTTP response code            |`200`                                                                                                                         |
 |Size of response in bytes     |`11450`                                                                                                                       |
 |Referrer                      |`-`                                                                                                                           |
 |User agent                    |`Baz Service`                                                                                                                 |
 |Request ID                    |`d4ca9a10-ab63-11e9-8942-000000000000`                                                                                        |
-|Response time in microseconds |9357049                                                                                                                       |
+|Response time in microseconds |`9357049`                                                                                                                       |
 
 ### Redirecting HTTP access logging
 
