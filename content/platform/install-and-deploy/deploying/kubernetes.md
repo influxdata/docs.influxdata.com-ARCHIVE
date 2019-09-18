@@ -14,9 +14,12 @@ Instructions for installing and configuring all components of the open source TI
 
 ### Use Helm Charts to deploy InfluxData Platform components
 
-The [TICK Charts](https://github.com/influxdata/tick-charts) repository provides a set of [Helm charts](https://docs.helm.sh/) to deploy every component of the InfluxData Platform in Kubernetes.
+InfluxData recommends using the [Helm Stable](https://github.com/helm/charts/tree/master/stable) repository for installing the TICK stack.
 
-[Learn how to deploy the InfluxData Platform using Helm Charts](https://github.com/influxdata/tick-charts/blob/master/README.md)
+- [Telegraf](https://github.com/helm/charts/tree/master/stable/telegraf)
+- [InfluxDB](https://github.com/helm/charts/tree/master/stable/influxdb)
+- [Chronograf](https://github.com/helm/charts/tree/master/stable/chronograf)
+- [Kapacitor](https://github.com/helm/charts/tree/master/stable/kapacitor)
 
 ### Use the InfluxDB Operator
 
