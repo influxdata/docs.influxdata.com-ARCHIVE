@@ -175,7 +175,7 @@ For example, if your RP has a duration of one day, InfluxDB will drop an hour's 
 
 ## Shard group duration recommendations
 
-The default shard group durations works well for most cases. However, high-throughput or long-running instances will benefit from using longer shard group durations.
+The default shard group durations work well for most cases. However, high-throughput or long-running instances will benefit from using longer shard group durations.
 Here are some recommendations for longer shard group durations:
 
 | RP Duration  | Shard Group Duration  |
