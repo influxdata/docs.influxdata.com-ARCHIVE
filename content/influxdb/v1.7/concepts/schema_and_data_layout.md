@@ -163,9 +163,9 @@ Determining the optimal shard group duration requires finding the balance betwee
 Longer shard group durations allow InfluxDB to store more data in the same logical location.
 This reduces data duplication, improves compression efficiency, and allows faster queries in some cases.
 
-### Short shard duration
+### Short shard group duration
 
-Shorter shard durations allow the system to more efficiently drop data and record incremental backups.
+Shorter shard group durations allow the system to more efficiently drop data and record incremental backups.
 When InfluxDB enforces an RP it drops entire shard groups, not individual data points, even if the points are older than the RP duration.
 A shard group will only be removed once a shard group's duration *end time* is older than the RP duration.
 
@@ -202,4 +202,4 @@ Other factors to consider before setting shard group duration:
 Bulk insertion of historical data covering a large time range in the past will trigger the creation of a large number of shards at once.
 The concurrent access and overhead of writing to hundreds or thousands of shards can quickly lead to slow performance and memory exhaustion.
 
-When writing historical data, we highly recommend temporarily setting a longer shard duration so fewer shards are created. Typically, a shard duration of 52 weeks works well for backfilling.
+When writing historical data, we highly recommend temporarily setting a longer shard group duration so fewer shards are created. Typically, a shard group duration of 52 weeks works well for backfilling.
