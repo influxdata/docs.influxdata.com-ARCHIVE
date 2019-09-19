@@ -1147,24 +1147,26 @@ The example below shows how to filter `SHOW TAG KEYS` within a one hour time per
 #### Example filtering `SHOW TAG KEYS` by time
 
 1. Specify a shard duration on a new database or [alter an existing shard duration](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy). To specify a 1h shard duration when creating a new database, run the following command:
-```js
-> CREATE database mydb with duration 7d REPLICATION 1 SHARD DURATION 1h name myRP;
-```
 
-     > **Note:** The minimum shard duration is 1h.
+    ```sh
+    > CREATE database mydb with duration 7d REPLICATION 1 SHARD DURATION 1h name myRP;
+    ```
 
-2. Verify the shard duration has the correct time interval (precision) by running the `show shards` command. The example below shows a shard duration with an hour precision.
-```js
-> show shards
-name: mydb
-id database retention_policy shard_group start_time end_time expiry_time owners
--- -------- ---------------- ----------- ---------- -------- ----------- ------
-> precision h
-```  
+    > **Note:** The minimum shard duration is 1h.
+
+2. Verify the shard duration has the correct time interval (precision) by running the `SHOW SHARDS` command. The example below shows a shard duration with an hour precision.
+
+    ```sh
+    > SHOW SHARDS
+    name: mydb
+    id database retention_policy shard_group start_time end_time expiry_time owners
+    -- -------- ---------------- ----------- ---------- -------- ----------- ------
+    > precision h
+    ```  
 
 3. (Optional) Insert sample tag keys. This step is for demonstration purposes. If you already have tag keys (or other meta data) to search for, skip this step.
 
-    ```js
+    ```sh
     // Insert a sample tag called "test_key" into the "test" measurement, and then check the timestamp:
     > INSERT test,test_key=hello value=1
 
@@ -1190,7 +1192,7 @@ id database retention_policy shard_group start_time end_time expiry_time owners
     `SELECT * FROM measurement <WHERE time clause>`
   
     The examples below use test data from step 3.
-    ```js
+    ```sh
     //Using data from Step 3, show tag keys between now and an hour ago
     > SHOW TAG KEYS ON mydb where time > now() -1h and time < now()
     name: test
