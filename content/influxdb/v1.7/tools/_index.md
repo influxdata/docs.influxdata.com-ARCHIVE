@@ -52,5 +52,21 @@ Influx Inspect is a tool designed to view detailed information about on disk sha
 Grafana is a convenient dashboard tool for visualizing time series data.
 It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.
 
-<dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats in InfluxDB 0.11, InfluxDB 1.3+ will not work with the Query Editor in Grafana 2.6.
-This issue does not affect existing queries and dashboards or users working with Grafana 3.0. </dt>
+> **Tip:** If you use Grafana template variables, you can limit results (for example, a list of hosts) by a specified period of time.
+
+### Limit results for Grafana template variables
+
+Use the WHERE clause to limit results for a specified time period. The example below shows how to limit hosts retrieving data for a specified period.
+
+##### Example limiting results for Grafana
+
+```
+// Create a retention policy for a specified duration.
+CREATE RETENTION POLICY "lookup" ON "prod" DURATION 2d REPLICATION 1
+
+// Obtain a distinct list of hosts currently retrieving data, and then add information to "group by" into a measurement.
+CREATE CONTINUOUS QUERY "lookupquery" ON "prod" BEGIN SELECT mean(value) as value INTO "your.system"."host_info" FROM "cpuload" WHERE time > now() - 1h GROUP BY time(1h), host, team, status, location END;
+
+// In your Grafana templates, include your tag values.
+SHOW TAG VALUES FROM "your.system"."host_info" WITH KEY = “host” 
+```
