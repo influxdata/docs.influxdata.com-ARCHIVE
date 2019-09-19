@@ -765,9 +765,6 @@ The `FROM`, `WHERE`, `LIMIT`, and `OFFSET` clauses are optional.
 The `WHERE` clause supports tag comparisons; field comparisons are not
 valid for the `SHOW TAG KEYS` query.
 
->** Note:** 
-To [find tag keys within a specified time interval](#find-tag-keys-within-shard-duration), you must specify a shard duration in the same time interval.
-
 Supported operators in the `WITH` and `WHERE` clauses:
 `=`&emsp;&nbsp;&thinsp;equal to
 `<>`&emsp;not equal to
