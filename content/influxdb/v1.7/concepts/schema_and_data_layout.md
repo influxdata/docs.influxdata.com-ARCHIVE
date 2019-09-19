@@ -140,7 +140,7 @@ While both queries are similar, the use of multiple tags in Schema 2 avoids the 
 InfluxDB stores data in shard groups.
 Shard groups are organized by [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP) and store data with timestamps that fall within a specific time interval called the [shard duration](/influxdb/v1.7/concepts/glossary/#shard-duration).
 
-If no shard duration is provided, the shard duration is determined by the RP's [duration](/influxdb/v1.7/concepts/glossary/#duration) at the time the RP is created. The default values are:
+If no shard group duration is provided, the shard group duration is determined by the RP's [duration](/influxdb/v1.7/concepts/glossary/#duration) at the time the RP is created. The default values are:
 
 | RP Duration  | Shard Group Duration  |
 |---|---|
@@ -148,7 +148,7 @@ If no shard duration is provided, the shard duration is determined by the RP's [
 | >= 2 days and <= 6 months  | 1 day  |
 | > 6 months  | 7 days  |
 
-The shard duration is also configurable per RP.
+The shard group duration is also configurable per RP.
 To configure the shard group duration, see [Retention Policy Management](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
 
 ## Shard group duration tradeoffs
@@ -160,7 +160,7 @@ Determining the optimal shard group duration requires finding the balance betwee
 
 ### Long shard group duration
 
-Longer shard durations allow InfluxDB to store more data in the same logical location.
+Longer shard group durations allow InfluxDB to store more data in the same logical location.
 This reduces data duplication, improves compression efficiency, and allows faster queries in some cases.
 
 ### Short shard duration
@@ -171,12 +171,11 @@ A shard group will only be removed once a shard group's duration *end time* is o
 
 For example, if your RP has a duration of one day, InfluxDB will drop an hour's worth of data every hour and will always have 25 shard groups. One for each hour in the day and an extra shard group that is partially expiring, but isn't removed until the whole shard group is older than 24 hours.
 
-Another use case to consider: [finding tag keys within a specified time interval](#find-tag-keys-within-shard-duration). Specify a short shard group duration, for example, 1h, to find tag keys within a one hour interval.
+Another use case to consider, [filtering meta queries to get results for a specified time period](#run-a-show-tag-keys-query-filtering-by-time-period). For example, to find tag keys within a one hour interval, specify a shard group duration of 1h.
 
 ## Shard group duration recommendations
 
-The default shard group durations works well for most cases.
-However, high-throughput or long-running instances will benefit from using longer shard group durations.
+The default shard group durations works well for most cases. However, high-throughput or long-running instances will benefit from using longer shard group durations.
 Here are some recommendations for longer shard group durations:
 
 | RP Duration  | Shard Group Duration  |
@@ -190,108 +189,17 @@ Here are some recommendations for longer shard group durations:
 > **Note:** Note that `INF` (infinite) is not a [valid shard group duration](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
 In extreme cases where data covers decades and will never be deleted, a long shard group duration like `1040w` (20 years) is perfectly valid.
 
-Here are some other factors to take into consideration when determining shard group duration:
+Other factors to consider before setting shard group duration:
 
 * Shard groups should be twice as long as the longest time range of the most frequent queries
 * Shard groups should each contain more than 100,000 [points](/influxdb/v1.7/concepts/glossary/#point) per shard group
 * Shard groups should each contain more than 1,000 points per [series](/influxdb/v1.7/concepts/glossary/#series)
 
-### Shard duration for backfilling
+>**Note:** A special use case to consider: filtering queries on schema data (such as tags, series, measurements) by time. For example, if you want to filter schema data within a one hour interval, you must set the shard group duration to 1h. For more information, see [filter schema data by time](#filter-schema-data-by-time).
+
+### Shard group duration for backfilling
 
 Bulk insertion of historical data covering a large time range in the past will trigger the creation of a large number of shards at once.
 The concurrent access and overhead of writing to hundreds or thousands of shards can quickly lead to slow performance and memory exhaustion.
 
 When writing historical data, we highly recommend temporarily setting a longer shard duration so fewer shards are created. Typically, a shard duration of 52 weeks works well for backfilling.
-
-### Find tag keys within shard duration
-
-To find tag keys within a specified time interval, specify a shard duration in the same time interval.
-
-1. Specify a shard duration on a new database or [alter an existing shard duration](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy). To specify a 1h shard duration on a new database, run the following command:
-```js
-> CREATE database mydb with duration 7d REPLICATION 1 SHARD DURATION 1h name myRP;
-```
-
-     > **Note:** The minimum shard duration is 1h.
-
-2. Verify the shard duration has the correct time interval (precision) by running the `show shards` command. The example below shows a shard duration with an hour precision.
-```js
-> show shards
-name: mydb
-id database retention_policy shard_group start_time end_time expiry_time owners
--- -------- ---------------- ----------- ---------- -------- ----------- ------
-> precision h
-```  
-
-3. (Optional) Insert sample tag keys. This step is for demonstration purposes. If you already have tag keys to search for, skip this step.
-
-    ```js
-    // Insert a sample tag called "test_key" into the "test" measurement, and then check the timestamp:
-    > INSERT test,test_key=hello value=1
-
-    > select * from test
-    name: test
-    time test_key value
-    ---- -------- -----
-    434820 hello 1
-
-    // Add new tag keys with timestamps one, two, and three hours earlier:
-
-    > INSERT test,test_key_1=hello value=1 434819
-    > INSERT test,test_key_2=hello value=1 434819
-    > INSERT test,test_key_3_=hello value=1 434818
-    > INSERT test,test_key_4=hello value=1 434817
-    > INSERT test,test_key_5_=hello value=1 434817
-    ```
-
-4. To find tag keys within a shard duration, run one of the following commands:
-   
-    `SHOW TAG KEYS ON database-name <WHERE time clause>` 
-    OR 
-    `SELECT * FROM measurement <WHERE time clause>`
-  
-    The examples below use test data from step 3.
-    ```js
-    //Using data from Step 3, show tag keys between now and an hour ago
-    > SHOW TAG KEYS ON mydb where time > now() -1h and time < now()
-    name: test
-    tagKey
-    ------
-    test_key
-    test_key_1
-    test_key_2
-
-    // Find tag keys between one and two hours ago
-    > SHOW TAG KEYS ON mydb where > time > now() -2h and time < now()-1h
-    name: test
-    tagKey
-    ------
-    test_key_1
-    test_key_2
-    test_key_3
-
-    // Find tag keys between two and three hours ago
-    > SHOW TAG KEYS ON mydb where > time > now() -3h and time < now()-2h
-    name: test
-    tagKey
-    ------
-    test_key_3
-    test_key_4
-    test_key_5
-
-    // For a specified measurement, find tag keys in a given shard by specifying the time boundaries of the shard
-      > SELECT * FROM test WHERE time >= '2019-08-09T00:00:00Z' and time < '2019-08-09T10:00:00Z'
-      name: test
-      time test_key_4 test_key_5 value
-      ---- ------------ ------------ -----
-      434817 hello 1
-      434817 hello 1
-
-      // For a specified database, find tag keys in a given shard by specifying the time boundaries of the shard
-      > SHOW TAG KEYS ON mydb WHERE time >= '2019-08-09T00:00:00Z' and time < '2019-08-09T10:00:00Z'
-      name: test
-      tagKey
-      ------
-      test_key_4
-      test_key_5
-    ```
