@@ -23,7 +23,7 @@ The following sections cover useful query syntax for exploring your [schema](/in
   </tr>
   <tr>
     <td><a href="#show-field-keys">SHOW FIELD KEYS</a></td>
-    <td></td>
+    <td><a href="#filter-schema-data-by-time">Filter schema data by time</a></td>
     <td></td>
   </tr>
 </table>
@@ -1140,3 +1140,100 @@ Note that `SHOW FIELD KEYS` handles field type discrepancies differently from
 `SELECT` statements.
 For more information, see the
 [How does InfluxDB handle field type discrepancies across shards?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards).
+
+### Filter schema data by time
+
+To filter queries on schema (also known as meta queries) by a specified time period, say one hour, you must have a shard group duration of the same period (1h). This happens because meta queries return all data in a shard (not individual datapoints). If a shard includes a datapoint with a timestamp in a specified time period, the meta query returns results from that shard.
+
+The example below shows how to filter `SHOW TAG KEYS` within a one hour time period. To filter other schema data, replace `SHOW TAG KEYS` with `SHOW TAG VALUES`, `SHOW SERIES`, `SHOW MEASUREMENTS`, `SHOW FIELD KEYS`, and so on.
+
+#### Example filtering `SHOW TAG KEYS` by time
+
+1. Specify a shard duration on a new database or [alter an existing shard duration](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy). To specify a 1h shard duration when creating a new database, run the following command:
+```js
+> CREATE database mydb with duration 7d REPLICATION 1 SHARD DURATION 1h name myRP;
+```
+
+     > **Note:** The minimum shard duration is 1h.
+
+2. Verify the shard duration has the correct time interval (precision) by running the `show shards` command. The example below shows a shard duration with an hour precision.
+```js
+> show shards
+name: mydb
+id database retention_policy shard_group start_time end_time expiry_time owners
+-- -------- ---------------- ----------- ---------- -------- ----------- ------
+> precision h
+```  
+
+3. (Optional) Insert sample tag keys. This step is for demonstration purposes. If you already have tag keys (or other meta data) to search for, skip this step.
+
+    ```js
+    // Insert a sample tag called "test_key" into the "test" measurement, and then check the timestamp:
+    > INSERT test,test_key=hello value=1
+
+    > select * from test
+    name: test
+    time test_key value
+    ---- -------- -----
+    434820 hello 1
+
+    // Add new tag keys with timestamps one, two, and three hours earlier:
+
+    > INSERT test,test_key_1=hello value=1 434819
+    > INSERT test,test_key_2=hello value=1 434819
+    > INSERT test,test_key_3_=hello value=1 434818
+    > INSERT test,test_key_4=hello value=1 434817
+    > INSERT test,test_key_5_=hello value=1 434817
+    ```
+
+4. To find tag keys within a shard duration, run one of the following commands:
+   
+    `SHOW TAG KEYS ON database-name <WHERE time clause>` OR
+     
+    `SELECT * FROM measurement <WHERE time clause>`
+  
+    The examples below use test data from step 3.
+    ```js
+    //Using data from Step 3, show tag keys between now and an hour ago
+    > SHOW TAG KEYS ON mydb where time > now() -1h and time < now()
+    name: test
+    tagKey
+    ------
+    test_key
+    test_key_1
+    test_key_2
+
+    // Find tag keys between one and two hours ago
+    > SHOW TAG KEYS ON mydb where > time > now() -2h and time < now()-1h
+    name: test
+    tagKey
+    ------
+    test_key_1
+    test_key_2
+    test_key_3
+
+    // Find tag keys between two and three hours ago
+    > SHOW TAG KEYS ON mydb where > time > now() -3h and time < now()-2h
+    name: test
+    tagKey
+    ------
+    test_key_3
+    test_key_4
+    test_key_5
+
+    // For a specified measurement, find tag keys in a given shard by specifying the time boundaries of the shard
+    > SELECT * FROM test WHERE time >= '2019-08-09T00:00:00Z' and time < '2019-08-09T10:00:00Z'
+    name: test
+    time test_key_4 test_key_5 value
+    ---- ------------ ------------ -----
+    434817 hello 1
+    434817 hello 1
+
+    // For a specified database, find tag keys in a given shard by specifying the time boundaries of the shard
+    > SHOW TAG KEYS ON mydb WHERE time >= '2019-08-09T00:00:00Z' and time < '2019-08-09T10:00:00Z'
+    name: test
+    tagKey
+    ------
+    test_key_4
+    test_key_5
+    ```
