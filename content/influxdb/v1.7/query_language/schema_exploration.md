@@ -1138,11 +1138,11 @@ Note that `SHOW FIELD KEYS` handles field type discrepancies differently from
 For more information, see the
 [How does InfluxDB handle field type discrepancies across shards?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards).
 
-### Filter schema data by time
+### Filter meta queries by time
 
-To filter queries on schema (also known as meta queries) by a specified time period, say one hour, you must have a shard group duration of the same period (1h). This happens because meta queries return all data in a shard (not individual datapoints). If a shard includes a datapoint with a timestamp in a specified time period, the meta query returns results from that shard.
+When you filter meta queries by time, you may see results outside of your specified time. Meta query results are filtered at the shard level, so results can be approximately as granular as your shard group duration. If your time filter spans multiple shards, you'll get results from all shards with points in the specified time range. To review your shards and timestamps on points in the shard, run `SHOW SHARDS`. To learn more about shards and their duration, see [recommended shard groups durations](/influxdb/v1.7/concepts/schema_and_data_layout/#shard-group-duration-recommendations).
 
-The example below shows how to filter `SHOW TAG KEYS` within a one hour time period. To filter other schema data, replace `SHOW TAG KEYS` with `SHOW TAG VALUES`, `SHOW SERIES`, `SHOW MEASUREMENTS`, `SHOW FIELD KEYS`, and so on.
+The example below shows how to filter `SHOW TAG KEYS` approximately by one hour using a 1h shard group duration. To filter other meta data, replace `SHOW TAG KEYS` with `SHOW TAG VALUES`, `SHOW SERIES`, `SHOW MEASUREMENTS`, `SHOW FIELD KEYS`, and so on.
 
 #### Example filtering `SHOW TAG KEYS` by time
 
