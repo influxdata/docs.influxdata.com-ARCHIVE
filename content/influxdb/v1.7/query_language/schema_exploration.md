@@ -23,7 +23,7 @@ The following sections cover useful query syntax for exploring your [schema](/in
   </tr>
   <tr>
     <td><a href="#show-field-keys">SHOW FIELD KEYS</a></td>
-    <td><a href="#filter-schema-data-by-time">Filter schema data by time</a></td>
+    <td><a href="#filter-meta-queries-by-time">Filter meta queries by time</a></td>
     <td></td>
   </tr>
 </table>

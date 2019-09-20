@@ -171,7 +171,7 @@ A shard group will only be removed once a shard group's duration *end time* is o
 
 For example, if your RP has a duration of one day, InfluxDB will drop an hour's worth of data every hour and will always have 25 shard groups. One for each hour in the day and an extra shard group that is partially expiring, but isn't removed until the whole shard group is older than 24 hours.
 
->**Note:** A special use case to consider: filtering queries on schema data (such as tags, series, measurements) by time. For example, if you want to filter schema data within a one hour interval, you must set the shard group duration to 1h. For more information, see [filter schema data by time](/influxdb/v1.7/query_language/schema_exploration/#filter-schema-data-by-time).
+>**Note:** A special use case to consider: filtering queries on schema data (such as tags, series, measurements) by time. For example, if you want to filter schema data within a one hour interval, you must set the shard group duration to 1h. For more information, see [filter schema data by time](/influxdb/v1.7/query_language/schema_exploration/#filter-meta-queries-by-time).
 
 ## Shard group duration recommendations
 
