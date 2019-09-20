@@ -47,7 +47,7 @@ The list of client libraries for interacting with the InfluxDB API.
 
 Influx Inspect is a tool designed to view detailed information about on disk shards, as well as export data from a shard to line protocol that can be inserted back into the database.
 
-## [Graphs and dashboards]
+## Graphs and dashboards
 
 Use [Chronograf](https://docs.influxdata.com/chronograf/) or [Grafana](http://docs.grafana.org/datasources/influxdb/) dashboards to visualize your time series data.
 
