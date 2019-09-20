@@ -47,26 +47,28 @@ The list of client libraries for interacting with the InfluxDB API.
 
 Influx Inspect is a tool designed to view detailed information about on disk shards, as well as export data from a shard to line protocol that can be inserted back into the database.
 
-## [Grafana graphs and dashboards](http://docs.grafana.org/datasources/influxdb/)
+## [Graphs and dashboards]
 
-Grafana is a convenient dashboard tool for visualizing time series data.
-It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.
+Use [Chronograf](https://docs.influxdata.com/chronograf/) or [Grafana](http://docs.grafana.org/datasources/influxdb/) dashboards to visualize your time series data.
 
-> **Tip:** If you use Grafana template variables, you can limit results (for example, a list of hosts) by a specified period of time.
+> **Tip:** Use template variables in your dashboards to filter meta query results by a specified period of time.
 
-### Limit results for Grafana template variables
+### Filter meta query results using template variables
 
-Use the WHERE clause to limit results for a specified time period. The example below shows how to limit hosts retrieving data for a specified period.
+The example below shows how to filter hosts retrieving data in the past hour.
 
-##### Example limiting results for Grafana
+##### Example
 
+```sh
+# Create a retention policy.
+CREATE RETENTION POLICY "lookup" ON "prod" DURATION 1d REPLICATION 1
+
+# Create a continuous query that groups by the tags you want to use in your template variables.
+CREATE CONTINUOUS QUERY "lookupquery" ON "prod" BEGIN SELECT mean(value) as value INTO "your.system"."host_info" FROM "cpuload"
+WHERE time > now() - 1h GROUP BY time(1h), host, team, status, location END;
+
+# In your Grafana or Chronograf templates, include your tag values.
+SHOW TAG VALUES FROM "your.system"."host_info" WITH KEY = “host”
 ```
-// Create a retention policy for a specified duration.
-CREATE RETENTION POLICY "lookup" ON "prod" DURATION 2d REPLICATION 1
 
-// Obtain a distinct list of hosts currently retrieving data, and then add information to "group by" into a measurement.
-CREATE CONTINUOUS QUERY "lookupquery" ON "prod" BEGIN SELECT mean(value) as value INTO "your.system"."host_info" FROM "cpuload" WHERE time > now() - 1h GROUP BY time(1h), host, team, status, location END;
-
-// In your Grafana templates, include your tag values.
-SHOW TAG VALUES FROM "your.system"."host_info" WITH KEY = “host” 
-```
+> **Note:** In Chronograf, you can also filter meta query results for a specified time range by [creating a `customer meta query` template variable](https://docs.influxdata.com/chronograf/v1.7/guides/dashboard-template-variables/#create-custom-template-variables) and adding a time range filter.
