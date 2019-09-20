@@ -324,3 +324,26 @@ When using non-standard directories for InfluxDB data and configurations, also b
 chown influxdb:influxdb /mnt/influx
 chown influxdb:influxdb /mnt/db
 ```
+
+For InfluxDB 1.7.6 or later, you must give owner permissions to the `init.sh` file. To do this, run the following script in your `influxdb` directory:
+
+```
+--- /usr/lib/influxdb/scripts/init.sh	2019-04-16 17:01:13.000000000 -0700
++++ /etc/init.d/influxdb	2019-06-26 13:09:15.000000000 -0700
+@@ -63,6 +64,7 @@
+ 
+ if [ ! -f "$STDOUT" ]; then
+     mkdir -p $(dirname $STDOUT)
++    chown $USER:$GROUP $(dirname $STDOUT)
+ fi
+ 
+ if [ -z "$STDERR" ]; then
+@@ -71,6 +73,7 @@
+ 
+ if [ ! -f "$STDERR" ]; then
+     mkdir -p $(dirname $STDERR)
++    chown $USER:$GROUP $(dirname $STDERR)
+ fi
+ 
+ # Override init script variables with DEFAULT values
+ ```
