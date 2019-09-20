@@ -1142,7 +1142,7 @@ For more information, see the
 
 When you filter meta queries by time, you may see results outside of your specified time. Meta query results are filtered at the shard level, so results can be approximately as granular as your shard group duration. If your time filter spans multiple shards, you'll get results from all shards with points in the specified time range. To review your shards and timestamps on points in the shard, run `SHOW SHARDS`. To learn more about shards and their duration, see [recommended shard groups durations](/influxdb/v1.7/concepts/schema_and_data_layout/#shard-group-duration-recommendations).
 
-The example below shows how to filter `SHOW TAG KEYS` approximately by one hour using a 1h shard group duration. To filter other meta data, replace `SHOW TAG KEYS` with `SHOW TAG VALUES`, `SHOW SERIES`, `SHOW MEASUREMENTS`, `SHOW FIELD KEYS`, and so on.
+The example below shows how to filter `SHOW TAG KEYS` by approximately one hour using a 1h shard group duration. To filter other meta data, replace `SHOW TAG KEYS` with `SHOW TAG VALUES`, `SHOW SERIES`, `SHOW MEASUREMENTS`, `SHOW FIELD KEYS`, and so on.
 
 #### Example filtering `SHOW TAG KEYS` by time
 
