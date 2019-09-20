@@ -71,4 +71,4 @@ WHERE time > now() - 1h GROUP BY time(1h), host, team, status, location END;
 SHOW TAG VALUES FROM "your.system"."host_info" WITH KEY = “host”
 ```
 
-> **Note:** In Chronograf, you can also filter meta query results for a specified time range by [creating a `customer meta query` template variable](https://docs.influxdata.com/chronograf/v1.7/guides/dashboard-template-variables/#create-custom-template-variables) and adding a time range filter.
+> **Note:** In Chronograf, you can also filter meta query results for a specified time range by [creating a `custom meta query` template variable](https://docs.influxdata.com/chronograf/v1.7/guides/dashboard-template-variables/#create-custom-template-variables) and adding a time range filter.
