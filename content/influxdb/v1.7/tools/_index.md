@@ -47,10 +47,28 @@ The list of client libraries for interacting with the InfluxDB API.
 
 Influx Inspect is a tool designed to view detailed information about on disk shards, as well as export data from a shard to line protocol that can be inserted back into the database.
 
-## [Grafana graphs and dashboards](http://docs.grafana.org/datasources/influxdb/)
+## Graphs and dashboards
 
-Grafana is a convenient dashboard tool for visualizing time series data.
-It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.
+Use [Chronograf](/chronograf/latest/) or [Grafana](http://docs.grafana.org/datasources/influxdb/) dashboards to visualize your time series data.
 
-<dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats in InfluxDB 0.11, InfluxDB 1.3+ will not work with the Query Editor in Grafana 2.6.
-This issue does not affect existing queries and dashboards or users working with Grafana 3.0. </dt>
+> **Tip:** Use template variables in your dashboards to filter meta query results by a specified period of time (see example below).
+
+### Filter meta query results using template variables
+
+The example below shows how to filter hosts retrieving data in the past hour.
+
+##### Example
+
+```sh
+# Create a retention policy.
+CREATE RETENTION POLICY "lookup" ON "prod" DURATION 1d REPLICATION 1
+
+# Create a continuous query that groups by the tags you want to use in your template variables.
+CREATE CONTINUOUS QUERY "lookupquery" ON "prod" BEGIN SELECT mean(value) as value INTO "your.system"."host_info" FROM "cpuload"
+WHERE time > now() - 1h GROUP BY time(1h), host, team, status, location END;
+
+# In your Grafana or Chronograf templates, include your tag values.
+SHOW TAG VALUES FROM "your.system"."host_info" WITH KEY = “host”
+```
+
+> **Note:** In Chronograf, you can also filter meta query results for a specified time range by [creating a `custom meta query` template variable](/chronograf/latest/guides/dashboard-template-variables/#create-custom-template-variables) and adding a time range filter.
