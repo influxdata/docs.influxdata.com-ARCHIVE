@@ -8,6 +8,17 @@ menu:
     parent: About the project
 ---
 
+## v1.12.2 [2019-09-24]
+
+### Bugfixes
+- Fix detection of layout timestamps in `csv` and `json` parsers.
+- Apcupsd input (`apcupsd`)
+  - Fix parsing of `BATTDATE`.
+- Keep boolean values listed in `json_string_fields`.
+- Disable Go plugin support in official builds.
+- Cisco GNMI Telemetry input (`cisco_telemetry_gnmi`)
+  - Fix path handling issues.
+
 ## v1.12.1 [2019-09-10]
 
 ### Bugfixes
