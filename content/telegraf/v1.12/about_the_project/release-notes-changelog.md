@@ -11,7 +11,7 @@ menu:
 ## v1.12.2 [2019-09-24]
 
 ### Bugfixes
-- Fix detection of layout timestamps in `csv` and `json` parsers.
+- Fix timestamp format detection in `csv` and `json` parsers.
 - Apcupsd input (`apcupsd`)
   - Fix parsing of `BATTDATE`.
 - Keep boolean values listed in `json_string_fields`.
