@@ -3,7 +3,7 @@ title: Hardware sizing guidelines
 menu:
   influxdb_1_7:
     weight: 40
-    parent: guides
+    parent: Guides
 ---
 
 This guide offers test general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. These recommendations are only for the [Time Structured Merge](/influxdb/v1.7/concepts/storage_engine/#the-new-influxdb-storage-engine-from-lsm-tree-to-b-tree-and-back-again-to-create-the-time-structured-merge-tree) tree (`TSM`) storage engine. 
