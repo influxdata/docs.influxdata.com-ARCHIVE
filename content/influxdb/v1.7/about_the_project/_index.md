@@ -28,4 +28,4 @@ is available in the GitHub repository.
 
 ## [Third party software](/influxdb/v1.7/about_the_project/third-party/)
 
-The [list of third party software components, including references to associated licenses and other materials](https://github.com/influxdata/influxdb/blob/master/DEPENDENCIES.md), is maintained on a version by version basis.
+The [list of third party software components, including references to associated licenses and other materials](https://github.com/influxdata/influxdb/blob/1.7/DEPENDENCIES.md), is maintained on a version by version basis.
