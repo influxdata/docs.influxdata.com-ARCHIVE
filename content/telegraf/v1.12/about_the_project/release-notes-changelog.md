@@ -8,6 +8,25 @@ menu:
     parent: About the project
 ---
 
+## v1.12.3 [2019-10-07]
+
+### New Inputs
+- [azure_storage_queue](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/azure_storage_queue/README.md) - Contributed by @mjiderhamn
+- [suricata](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/suricata/README.md) - Contributed by @satta
+
+### New Aggregators
+- [merge](https://github.com/influxdata/telegraf/tree/master/plugins/aggregators/merge) - Contributed by @influxdata
+
+### Features
+- Add per node memory stats to rabbitmq input.
+- Add ability to read query from file to postgresql_extensible input.
+- Add replication metrics to the redis input.
+- Support NX-OS telemetry extensions in cisco_telemetry_mdt.
+- Allow graphite parser to create Inf and NaN values.
+- Use prefix base detection for integer in grok parser.
+- Add more performance counter metrics to sqlserver input.
+- Add millisecond Unix time support to grok parser.
+
 ## v1.12.2 [2019-09-24]
 
 ### Bugfixes
