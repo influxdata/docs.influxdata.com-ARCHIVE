@@ -8,6 +8,18 @@ menu:
     parent: About the project
 ---
 
+## v1.12.3 [2019-10-07]
+
+- Build official packages with Go 1.12.10.
+
+### Bugfixes
+- Use batch serialization format in Exec (`exec`) output plugin.
+- Use case-insensitive serial number match in S.M.A.R.T. (`smart`) input plugin.
+- Add authorization header only when environment variable is set.
+- Fix issue when running multiple MySQL and SQL Server plugin instances.
+- Fix database routing on retry with `exclude_database_tag`.
+- Fix logging panic in Exec (`exec`) input plugin with Nagios data format.
+
 ## v1.12.2 [2019-09-24]
 
 ### Bugfixes
