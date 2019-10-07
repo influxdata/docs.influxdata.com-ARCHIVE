@@ -92,7 +92,7 @@ The following is an example of the HTTP access log format. The table below descr
 |Time of log event             |`[21/Jul/2019:03:01:27 +0000]`                                                                                                |
 |Request method                |`GET`                                                                                                                         |
 |Username                      |`user`                                                                                                                        |
-|HTTP API call being made, which shows the database being accessed and the query being run. For more details, see [InfluxDB API reference](/influxdb/v1.7/tools/api/). Note that this field is URL-encoded.                            |`/query?db=metrics%26q=SELECT%20used_percent%20FROM%20%22telegraf.autogen.mem%22%20WHERE%20time%20%3E=%20now()%20-%201m%20	` |
+|HTTP API call being made&ast;                           |`/query?db=metrics%26q=SELECT%20used_percent%20FROM%20%22telegraf.autogen.mem%22%20WHERE%20time%20%3E=%20now()%20-%201m%20	` |
 |Request protocol              |`HTTP/1.0` 	                                                                                                                  |
 |HTTP response code            |`200`                                                                                                                         |
 |Size of response in bytes     |`11450`                                                                                                                       |
@@ -100,6 +100,7 @@ The following is an example of the HTTP access log format. The table below descr
 |User agent                    |`Baz Service`                                                                                                                 |
 |Request ID                    |`d4ca9a10-ab63-11e9-8942-000000000000`                                                                                        |
 |Response time in microseconds |`9357049`                                                                                                                       |
+&ast; This field shows the database being acessed and the query being run. For more details, see [InfluxDB API reference](/influxdb/v1.7/tools/api/). Note that this field is URL-encoded.  
 
 ### Redirecting HTTP access logging
 
