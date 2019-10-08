@@ -14,13 +14,15 @@ and a management UI for working with clusters.
 The QuickStart Installation process will get you up and running with your
 InfluxDB Enterprise cluster.
 
-> The QuickStart installation process **is not** designed for use
-in a production environment.
-Follow the instructions outlined in the [Production installation](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/) section
-if you wish to use InfluxDB Enterprise in a production environment.
-Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
-will need to reinstall InfluxDB Enterprise with the Production Installation
-process before using the product in a production environment.
+
+>The QuickStart installation process **is not** designed for use in a production environment.
+>
+>To use InfluxDB Enterprise in a production environment,
+>follow the [production installation](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/) instructions.
+>
+>Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
+>will need to reinstall InfluxDB Enterprise with the Production Installation
+>process before using the product in a production environment.
 
 ## Setup description and requirements
 
