@@ -3,8 +3,8 @@ cards:
   # InfluxDB v2 card
   - id: influxdb2
     category: oss
-    title: InfluxDB v2.0
-    description: InfluxDB v2.0 provides everything you need from a time series platform in a single binary.
+    title: InfluxDB 2.0
+    description: InfluxDB 2.0 provides everything you need from a time series platform in a single binary.
     links:
       - text: Download InfluxDB v2.0
         type: absolute
