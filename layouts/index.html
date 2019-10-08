@@ -16,7 +16,11 @@
 		{{ if eq .category "oss" }}
 		<div class="homepage--card card-{{ .id }}">
 			<div class="homepage--card-container">
-				<a class="homepage--card-title" href="/{{ .id }}/{{ index $.Site.Data.default_versions (print .id "_semver") }}/">{{ .title }}</a>
+				{{ if eq .id "influxdb2" }}
+					<a class="homepage--card-title" href="https://v2.docs.influxdata.com/" target="_blank">{{ .title }}</a>
+				{{ else }}
+					<a class="homepage--card-title" href="/{{ .id }}/{{ index $.Site.Data.default_versions (print .id "_semver") }}/">{{ .title }}</a>
+				{{ end }}
 				<p class="homepage--card-description">
 					{{ .description }}
 
