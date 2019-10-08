@@ -22,7 +22,8 @@ HTTP endpoints to InfluxDB:
 
 * `/api/v1/prom/read`
 * `/api/v1/prom/write`
-* `/api/v1/prom/metrics`
+
+Additionally, there is a [`/metrics` endpoint](/influxdb/v1.7/administration/server_monitoring/#influxdb-metrics-http-endpoint) configured to produce default Go metrics in Prometheus metrics format.
 
 ### Create a target database
 
@@ -37,7 +38,7 @@ CREATE DATABASE "prometheus"
 ### Configuration
 
 To enable the use of the Prometheus remote read and write APIs with InfluxDB, add URL
-values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
+values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file):
 
 * [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_write%3E)
 * [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_read%3E)
