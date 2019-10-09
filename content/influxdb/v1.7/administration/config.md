@@ -326,7 +326,7 @@ Environment variable: `INFLUXDB_DATA_COMPACT_THROUGHPUT_BURST`
 
 #### `tsm-use-madv-willneed = false`
 
-If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped 
+If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped
 memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files.
 Because this setting has been problematic on some kernels (including CentOS and RHEL ), the default is `false`.
 Changing the value to `true` might help users who have slow disks in some cases.
@@ -386,13 +386,13 @@ Environment variable: `INFLUXDB_DATA_MAX_INDEX_LOG_FILE_SIZE`
 
 #### `series-id-set-cache-size = 100`
 
-The size of the internal cache used in the TSI index to store previously 
-calculated series results. Cached results will be returned quickly from the cache rather 
-than needing to be recalculated when a subsequent query with a matching tag key-value 
-predicate is executed. 
+The size of the internal cache used in the TSI index to store previously
+calculated series results. Cached results will be returned quickly from the cache rather
+than needing to be recalculated when a subsequent query with a matching tag key-value
+predicate is executed.
 Setting this value to `0` will disable the cache, which may lead to query performance issues.
-This value should only be increased if it is known that the set of regularly used 
-tag key-value predicates across all measurements for a database is larger than 100. An 
+This value should only be increased if it is known that the set of regularly used
+tag key-value predicates across all measurements for a database is larger than 100. An
 increase in cache size may lead to an increase in heap usage.
 
 Environment variable: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
@@ -406,7 +406,7 @@ For more on managing queries, see [Query Management](/influxdb/v1.7/troubleshoot
 
 #### `write-timeout = "10s"`
 
-The duration a write request waits until a "timeout" error is returned to the caller.
+The duration a write request waits until a "timeout" error is returned to the caller. The default value is 10 seconds.
 
 Environment variable: `INFLUXDB_COORDINATOR_WRITE_TIMEOUT`
 

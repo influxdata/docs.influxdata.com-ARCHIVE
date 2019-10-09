@@ -422,7 +422,7 @@ Environment variable: `INFLUXDB_CLUSTER_CLUSTER_TRACING`
 
 #### `write-timeout = "10s"`
 
-The default time a write request will wait until a timeout error is returned to the caller.
+The duration a write request waits until a "timeout" error is returned to the caller. The default value is 10 seconds.
 
 Environment variable: `INFLUXDB_CLUSTER_WRITE_TIMEOUT`
 
