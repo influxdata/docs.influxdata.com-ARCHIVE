@@ -363,7 +363,7 @@ The `LIMIT` clause limits the number of series returned to two.
 
 #### Run a `SHOW SERIES` query limited by time
 
-Limit series returned within a specified shard group duration. 
+Limit series returned within a specified shard group duration.
 
 ```sql
 // Returns all series in the current shard.
@@ -384,7 +384,7 @@ The query above returns all series in the `NOAA_water_database` database in the 
 
 ```sql
 // Returns all series in shard groups that contain a timestamp in the last 28 days.
-> SHOW SERIES ON NOAA_water_database WHERE time < now() - 672m
+> SHOW SERIES ON NOAA_water_database WHERE time < now() - 28d
 
 key
 ---
@@ -1232,11 +1232,11 @@ The example below shows how to filter `SHOW TAG KEYS` by approximately one hour 
     ```
 
 4. To find tag keys within a shard duration, run one of the following commands:
-   
+
     `SHOW TAG KEYS ON database-name <WHERE time clause>` OR
-     
+
     `SELECT * FROM measurement <WHERE time clause>`
-  
+
     The examples below use test data from step 3.
     ```sh
     //Using data from Step 3, show tag keys between now and an hour ago
