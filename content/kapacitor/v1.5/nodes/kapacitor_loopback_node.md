@@ -26,9 +26,29 @@ Example:
   .tag('version', '0.2')
 ```
 
-
-> **Note:** It is possible to create infinite loops using this node.
+{{% note %}}
+#### Beware of infinite loops
+It is possible to create infinite loops using the KapacitorLoopback node.
 Take care to ensure you do not chain tasks together creating a loop.
+{{% /note %}}
+
+{{% warn %}}
+#### Avoid name collisions with multiple subscriptions
+When using the KapacitorLoopback node, don't subscribe to identically named
+databases and retention policies in multiple InfluxDB instances or clusters.
+If Kapacitor is subscribed to multiple instances of InfluxDB, make each database
+and retention policy combination unique. For example:
+
+```
+influxdb_1
+  └─ db1/rp1
+
+influxdb_2
+  └─ db2/rp2
+```
+{{% /warn %}}
+
+
 
 Available Statistics:
 
