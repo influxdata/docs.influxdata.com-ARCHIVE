@@ -62,7 +62,7 @@ The following Alerta event handler options can be set in a
 | group        | string          | Alerta group. Can be a template and has access to the same data as the AlertNode.Details property. Default: {{ .Group }}.                       |
 | value        | string          | Alerta value. Can be a template and has access to the same data as the AlertNode.Details property. Default is an empty string.                  |
 | origin       | string          | Alerta origin. If empty uses the origin from the configuration.                                                                                 |
-| service      | list of strings | List of effected Services.                                                                                                                      |
+| services     | list of strings | List of effected Services.                                                                                                                      |
 | timeout      | duration string | Alerta timeout. Default is 24 hours.                                                                                                            |
 
 > **Note:** The `resource` and `event` properties are required.
@@ -82,7 +82,7 @@ options:
   group: '{{ .Group }}'
   value: 'some-value'
   origin: 'kapacitor'
-  service: ['service1', 'service2']
+  services: ['service1', 'service2']
   timeout: 24h
 ```
 
@@ -100,7 +100,7 @@ options:
     .group('{{ .Group }}')
     .value('some-value')
     .origin('kapacitor')
-    .service('service1', 'service2')
+    .services('service1', 'service2')
     .timeout(24h)
 ```
 
