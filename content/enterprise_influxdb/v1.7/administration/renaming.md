@@ -13,7 +13,7 @@ menu:
 
 The following instructions allow you to rename a host within your InfluxDB Enterprise instance.
 
-First, spend write and query activity to the cluster.
+First, suspend write and query activity to the cluster.
 
 ### Rename meta nodes
 
