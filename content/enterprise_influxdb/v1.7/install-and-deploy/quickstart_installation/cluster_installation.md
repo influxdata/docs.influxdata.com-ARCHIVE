@@ -277,7 +277,7 @@ If you do not see the expected output, the process is either not launching or is
 
 ### I. Create the cluster
 
-On the first server (`quickstart-cluster-01`), add its meta nodes to the cluster with the `influxd-ctl` command.
+On the first server (`quickstart-cluster-01`), add its meta node service to the cluster with the `influxd-ctl` command.
 At the terminal, use the following three commands:
 
 ```bash
@@ -289,7 +289,7 @@ $ influxd-ctl add-meta quickstart-cluster-03:8091
 Added meta node 3 at quickstart-cluster-03:8091
 ```
 
-Next, add the data nodes:
+From the same `quickstart-cluster-01` host, add the data nodes:
 
 ```bash
 $ influxd-ctl add-data quickstart-cluster-02:8088
@@ -300,7 +300,7 @@ Added data node 5 at quickstart-cluster-03:8088
 
 ### II. Verify your cluster
 
-On the same server, verify the installation using `influxd-ctl show`.
+On the same server, verify the cluster members using `influxd-ctl show`.
 
 The expected output is:
 
