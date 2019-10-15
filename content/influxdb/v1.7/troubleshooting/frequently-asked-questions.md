@@ -119,7 +119,7 @@ InfluxDB shell version: 1.4.x
 #### Check the HTTP response in your logs:
 
 ```bash
-$ journald-ctl -u influxdb.service
+$ journalctl -u influxdb.service
 
 Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:45 +0000] "POST /query?db=&epoch=ns&q=SHOW+DATABASES HTTP/1.1" 200 151 "-" ✨ "InfluxDBShell/1.4.x" ✨ 9a4371a1-fec0-11e6-84b6-000000000000 1709
 ```
