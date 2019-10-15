@@ -30,8 +30,8 @@ Resources:
 
 ## Enabling HTTPS
 
-Using HTTPS secures the communication between clients and the InfluxDB server, and, in
-some cases, HTTPS verifies the authenticity of the InfluxDB server to clients (bi-directional authentication).
+Enabling HTTPS encrypts the communication between clients and the InfluxDB server.
+HTTPS can also verify the authenticity of the InfluxDB server to connecting clients.
 
 Resources:
 [Enabling HTTPS](/influxdb/v1.7/administration/https_setup/)

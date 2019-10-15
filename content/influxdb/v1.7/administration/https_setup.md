@@ -8,32 +8,32 @@ menu:
     parent: Administration
 ---
 
-Enabling HTTPS secures the communication between clients and the InfluxDB
-server, and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to clients.
+Enabling HTTPS encrypts the communication between clients and the InfluxDB server.
+When configured with a signed certificate, HTTPS can also verify the authenticity of the InfluxDB server to connecting clients.
 
-If you plan on sending requests to InfluxDB over a network, InfluxData
-[strongly recommends](/influxdb/v1.7/administration/security/)
-that you enable HTTPS.
+InfluxData [strongly recommends](/influxdb/v1.7/administration/security/) enabling HTTPS, especially if you plan on sending requests to InfluxDB over a network.
 
 ## Requirements
 
 To enable HTTPS with InfluxDB, you'll need an existing or new InfluxDB instance
-and a Transport Layer Security (TLS) certificate (also known as a
-Secured Sockets Layer (SSL) certificate).
+and a Transport Layer Security (TLS) certificate (also known as a Secured Sockets Layer (SSL) certificate).
 
 InfluxDB supports three types of TLS certificates:
 
 * **Single domain certificates signed by a Certificate Authority**
 
-    Single domain certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server. With this certificate option, every InfluxDB instance requires a unique single domain certificate.
+    Single domain certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
+    With this certificate option, every InfluxDB instance requires a unique single domain certificate.
 
 * **Wildcard certificates signed by a Certificate Authority**
 
-    Wildcard certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server. Wildcard certificates can be used across multiple InfluxDB instances on different servers.
+    Wildcard certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
+    Wildcard certificates can be used across multiple InfluxDB instances on different servers.
 
 * **Self-signed certificates**
 
-    Self-signed certificates are not signed by a Certificate Authority (CA) and you can [generate](#step-1-generate-a-self-signed-certificate) them on your own machine.
+    Self-signed certificates are _not_ signed by a Certificate Authority (CA).
+    [Generate a self-signed certificate]((#step-1-generate-a-self-signed-certificate)) on your own machine.
     Unlike CA-signed certificates, self-signed certificates only provide cryptographic security to HTTPS requests.
     They do not allow clients to verify the identity of the InfluxDB server.
     With this certificate option, every InfluxDB instance requires a unique self-signed certificate.
@@ -56,11 +56,11 @@ or the single bundled file (`.pem`) in the `/etc/ssl` directory.
 
 #### Step 2: Set certificate file permissions
 
-Users running influxdb must have read permissions on the TLS certificate. 
+Users running InfluxDB must have read permissions on the TLS certificate.
 
->***Note***: You may opt to set up multiple users, groups, and permissions. Ultimately, make sure all users running influxdb have read permissions for the TLS certificate.
+>***Note***: You may opt to set up multiple users, groups, and permissions. Ultimately, make sure all users running InfluxDB have read permissions for the TLS certificate.
 
-Run the following command to give influxdb read and write permissions on the certificate files.
+Run the following command to give InfluxDB read and write permissions on the certificate files.
 
 ```bash
 sudo chown influxdb:influxdb /etc/ssl/<CA-certificate-file>
@@ -142,7 +142,7 @@ When you execute the command, it will prompt you for more information.
 You can choose to fill out that information or leave it blank;
 both actions generate valid certificate files.
 
-Run the following command to give influxdb read and write permissions on the certificate.
+Run the following command to give InfluxDB read and write permissions on the certificate.
 
 ```bash
 chown influxdb:influxdb /etc/ssl/influxdb-selfsigned.*

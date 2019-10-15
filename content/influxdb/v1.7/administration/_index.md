@@ -28,8 +28,8 @@ Information about upgrading from previous versions of InfluxDB
 
 ## [Enabling HTTPS](/influxdb/v1.7/administration/https_setup/)
 
-Enabling HTTPS to secure the communication between clients and the InfluxDB
-server, and verifying the authenticity of the InfluxDB server to clients.
+Enabling HTTPS encrypts the communication between clients and the InfluxDB server.
+HTTPS can also verify the authenticity of the InfluxDB server to connecting clients.
 
 ## [Logging in InfluxDB](/influxdb/v1.7/administration/logs/)
 
