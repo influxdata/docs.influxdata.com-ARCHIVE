@@ -281,21 +281,21 @@ On the first server (`quickstart-cluster-01`), add its meta nodes to the cluster
 At the terminal, use the following three commands:
 
 ```bash
-$ influxd-ctl add-meta eval-meta0:8091
-Added meta node 1 at eval-meta0:8091
-$ influxd-ctl add-meta eval-metadata1:8091
-Added meta node 2 at eval-metadata1:8091
-$ influxd-ctl add-meta eval-metadata2:8091
-Added meta node 3 at eval-metadata2:8091
+$ influxd-ctl add-meta quickstart-cluster-01:8091
+Added meta node 1 at quickstart-cluster-01:8091
+$ influxd-ctl add-meta quickstart-cluster-02:8091
+Added meta node 2 at quickstart-cluster-02:8091
+$ influxd-ctl add-meta quickstart-cluster-03:8091
+Added meta node 3 at quickstart-cluster-03:8091
 ```
 
 Next, add the data nodes:
 
 ```bash
-$ influxd-ctl add-data eval-metadata1:8088
-Added data node 4 at eval-metadata1:8088
-$ influxd-ctl add-data eval-metadata2:8088
-Added data node 5 at eval-metadata2:8088
+$ influxd-ctl add-data quickstart-cluster-02:8088
+Added data node 4 at quickstart-cluster-02:8088
+$ influxd-ctl add-data quickstart-cluster-03:8088
+Added data node 5 at quickstart-cluster-03:8088
 ```
 
 ### II. Verify your cluster
@@ -308,15 +308,15 @@ The expected output is:
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	eval-metadata1:8088	1.7.7-c1.7.7
-5	eval-metadata2:8088	1.7.7-c1.7.7
+4	quickstart-cluster-02:8088	1.7.7-c1.7.7
+5	quickstart-cluster-03:8088	1.7.7-c1.7.7
 
 Meta Nodes
 ==========
 TCP Address		Version
-eval-meta0:8091		1.7.7-c1.7.7
-eval-metadata1:8091	1.7.7-c1.7.7
-eval-metadata2:8091	1.7.7-c1.7.7
+quickstart-cluster-01:8091		1.7.7-c1.7.7
+quickstart-cluster-02:8091	    1.7.7-c1.7.7
+quickstart-cluster-03:8091	    1.7.7-c1.7.7
 ```
 
 Your InfluxDB Enterprise cluster should now have three meta nodes and two data nodes.
