@@ -277,8 +277,7 @@ If you do not see the expected output, the process is either not launching or is
 
 ### I. Create the cluster
 
-On the first server (`quickstart-cluster-01`), add its meta node service to the cluster with the `influxd-ctl` command.
-At the terminal, use the following three commands:
+From the command line of the first server (`quickstart-cluster-01`), run the following commands to add the meta node service to all servers in your cluster:
 
 ```bash
 $ influxd-ctl add-meta quickstart-cluster-01:8091
@@ -308,15 +307,15 @@ The expected output is:
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	quickstart-cluster-02:8088	1.7.7-c1.7.7
-5	quickstart-cluster-03:8088	1.7.7-c1.7.7
+4	quickstart-cluster-02:8088	1.7.8-c1.7.8
+5	quickstart-cluster-03:8088	1.7.8-c1.7.8
 
 Meta Nodes
 ==========
 TCP Address		Version
-quickstart-cluster-01:8091		1.7.7-c1.7.7
-quickstart-cluster-02:8091	    1.7.7-c1.7.7
-quickstart-cluster-03:8091	    1.7.7-c1.7.7
+quickstart-cluster-01:8091		1.7.8-c1.7.8
+quickstart-cluster-02:8091	    1.7.8-c1.7.8
+quickstart-cluster-03:8091	    1.7.8-c1.7.8
 ```
 
 Your InfluxDB Enterprise cluster should now have three meta nodes and two data nodes.
