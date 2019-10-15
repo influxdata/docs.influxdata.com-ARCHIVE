@@ -275,111 +275,52 @@ If you do not see the expected output, the process is either not launching or is
 
 ## Step 4: Join the nodes to the cluster
 
-### I. Join the first server to the cluster
+### I. Create the cluster
 
-On the first server (`quickstart-cluster-01`), join its meta node and data node
-to the cluster by entering:
-
-```bash
-influxd-ctl join
-```
-
-The expected output is:
+On the first server (`quickstart-cluster-01`), add its meta nodes to the cluster with the `influxd-ctl` command.
+At the terminal, use the following three commands:
 
 ```bash
-Joining meta node at localhost:8091
-Searching for meta node on quickstart-cluster-01:8091...
-Searching for data node on quickstart-cluster-01:8088...
-
-Successfully created cluster
-
-  * Added meta node 1 at quickstart-cluster-01:8091
-  * Added data node 2 at quickstart-cluster-01:8088
-
-  To join additional nodes to this cluster, run the following command:
-
-  influxd-ctl join quickstart-cluster-01:8091
+$ influxd-ctl add-meta eval-meta0:8091
+Added meta node 1 at eval-meta0:8091
+$ influxd-ctl add-meta eval-metadata1:8091
+Added meta node 2 at eval-metadata1:8091
+$ influxd-ctl add-meta eval-metadata2:8091
+Added meta node 3 at eval-metadata2:8091
 ```
 
->**Note:** `influxd-ctl` takes the flag `-v` as an option to print verbose information about the join.
-The flag must be right after the influxd-ctl join command:
-`influxd-ctl join -v quickstart-cluster-01:8091`
-
->To confirm that the node was successfully joined, run `influxd-ctl show` and verify that the node's hostname shows in the output.
-
-### II. Join the second server to the cluster
-
-On the second server (`quickstart-cluster-02`), join its meta node and data node
-to the cluster by entering:
+Next, add the data nodes:
 
 ```bash
-influxd-ctl join quickstart-cluster-01:8091
+$ influxd-ctl add-data eval-metadata1:8088
+Added data node 4 at eval-metadata1:8088
+$ influxd-ctl add-data eval-metadata2:8088
+Added data node 5 at eval-metadata2:8088
 ```
 
-The expected output is:
+### II. Verify your cluster
 
-```bash
-Joining meta node at quickstart-cluster-01:8091
-Searching for meta node on quickstart-cluster-02:8091...
-Searching for data node on quickstart-cluster-02:8088...
-
-Successfully joined cluster
-
-  * Added meta node 3 at quickstart-cluster-02:8091
-  * Added data node 4 at quickstart-cluster-02:8088
-```
-
-### III. Join the third server to the cluster
-
-On the third server (`quickstart-cluster-03`), join its meta node and data node
-to the cluster by entering:
-
-```bash
-influxd-ctl join quickstart-cluster-01:8091
-```
-
-The expected output is:
-
-```bash
-Joining meta node at quickstart-cluster-01:8091
-Searching for meta node on quickstart-cluster-03:8091...
-Searching for data node on quickstart-cluster-03:8088...
-
-Successfully joined cluster
-
-  * Added meta node 5 at quickstart-cluster-03:8091
-  * Added data node 6 at quickstart-cluster-03:8088
-```
-
-### IV. Verify your cluster
-
-On any server, enter:
-
-```bash
-influxd-ctl show
-```
+On the same server, verify the installation using `influxd-ctl show`.
 
 The expected output is:
 
 ```bash
 Data Nodes
 ==========
-ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.7.8-c1.7.8
-4    quickstart-cluster-02:8088   1.7.8-c1.7.8
-6    quickstart-cluster-03:8088   1.7.8-c1.7.8
+ID	TCP Address		Version
+4	eval-metadata1:8088	1.7.7-c1.7.7
+5	eval-metadata2:8088	1.7.7-c1.7.7
 
 Meta Nodes
 ==========
-TCP Address                  Version
-quickstart-cluster-01:8091   1.7.8-c1.7.8
-quickstart-cluster-02:8091   1.7.8-c1.7.8
-quickstart-cluster-03:8091   1.7.8-c1.7.8
+TCP Address		Version
+eval-meta0:8091		1.7.7-c1.7.7
+eval-metadata1:8091	1.7.7-c1.7.7
+eval-metadata2:8091	1.7.7-c1.7.7
 ```
 
-Your InfluxDB Enterprise cluster should have three data nodes and three meta nodes.
-If you do not see your meta or data nodes in the output, please retry
-adding them to the cluster.
+Your InfluxDB Enterprise cluster should now have three meta nodes and two data nodes.
+If you do not see your meta or data nodes in the output, please retry adding them to the cluster.
 
 Once all of your nodes are joined to the cluster, move on to the [next step](/enterprise_influxdb/v1.7/install-and-deploy/quickstart_installation/chrono_install)
 in the QuickStart installation to set up Chronograf.
