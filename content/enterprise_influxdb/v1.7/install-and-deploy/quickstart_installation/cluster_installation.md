@@ -288,7 +288,7 @@ $ influxd-ctl add-meta quickstart-cluster-03:8091
 Added meta node 3 at quickstart-cluster-03:8091
 ```
 
-From the same `quickstart-cluster-01` host, add the data nodes:
+From the same `quickstart-cluster-01` host, run the following commands to add the data nodes:
 
 ```bash
 $ influxd-ctl add-data quickstart-cluster-02:8088
