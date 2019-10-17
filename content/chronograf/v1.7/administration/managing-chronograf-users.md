@@ -53,7 +53,7 @@ Chronograf uses InfluxDB and Kapacitor connections to manage user access control
 > **Note:** Chronograf users are entirely separate from InfluxDB and Kapacitor users.
 > The Chronograf user and authentication system applies to the Chronograf user interface.
 > InfluxDB and Kapacitor users and their permissions are managed separately.
-> [Chronograf connections](https://docs.influxdata.com/chronograf/v1.7/administration/creating-connections/)
+> [Chronograf connections](/chronograf/v1.7/administration/creating-connections/)
 > determine which InfluxDB or Kapacitor users to use when when connecting to each service.
 
 #### Chronograf-owned resources
