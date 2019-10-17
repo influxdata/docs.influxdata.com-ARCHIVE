@@ -50,7 +50,11 @@ Each of these four roles, described in detail below, have different capabilities
 
 Chronograf uses InfluxDB and Kapacitor connections to manage user access control to InfluxDB and Kapacitor resources within Chronograf. The permissions of the InfluxDB and Kapacitor user specified within such a connection determine the capabilities for any Chronograf user with access (i.e., viewers, editors, and administrators) to that connection. Administrators include either an admin (`admin` role) or a user of any role with SuperAdmin status.
 
-> ***Note:*** Chronograf users are entirely separate from InfluxDB and Kapacitor users. The only association between Chronograf and InfluxDB or Kapacitor users is through an InfluxDB or Kapacitor connection created within Chronograf.
+> **Note:** Chronograf users are entirely separate from InfluxDB and Kapacitor users.
+> The Chronograf user and authentication system applies to the Chronograf user interface.
+> InfluxDB and Kapacitor users and their permissions are managed separately.
+> [Chronograf connections](https://docs.influxdata.com/chronograf/v1.7/administration/creating-connections/)
+> determine which InfluxDB or Kapacitor users to use when when connecting to each service.
 
 #### Chronograf-owned resources
 
