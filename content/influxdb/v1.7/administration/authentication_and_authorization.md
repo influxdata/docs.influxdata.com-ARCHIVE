@@ -150,21 +150,31 @@ password:
 ```
 
 #### Authenticate using JWT tokens
-Passing JWT tokens in each request is a more secure alternative to using passwords. Currently only works through the [HTTP API](/influxdb/v1.7/tools/api/).
+Passing JWT tokens in each request is a more secure alternative to using passwords.
+This is currently only possible through the [InfluxDB HTTP API](/influxdb/v1.7/tools/api/).
 
-#### 1. Add a shared secret in the configuration file
-Your shared secret used to encode the JWT signature is by default an empty string.
-For increased security, change it in the [configuration file](/influxdb/v1.7/administration/config/#shared-secret) to a long sentence:
+#### 1. Add a shared secret in your InfluxDB configuration file
+InfluxDB uses the shared secret to encode the JWT signature.
+By default, ``shared-secret`` is set to an empty string, in which case no JWT authentication takes place.
+Add a custom shared secret in your [InfluxDB configuration file](/influxdb/v1.7/administration/config/#shared-secret).
+The longer the secret string, the more secure it is:
 
 ```
 [http]
   shared-secret = "my super secret pass phrase"
 ```
 
-#### 2. Generate your token
-Normally you need your own authentication service (in possession of your shared secret) to provide tokens for your HTTP requests, but you can easily simulate the behavior with online tools such as [https://jwt.io/](https://jwt.io/).
+Alternatively, to avoid keeping your secret phrase as plain text in your InfluxDB configuration file, you can write the value in the corresponding environment variable:
 
-The payload (or claims) of the token has to follow the following format:
+```
+INFLUXDB_HTTP_SHARED_SECRET
+```
+
+#### 2. Generate your token
+Use an authentication service to generate a secure token using your InfluxDB username, and expiration time, and your shared secret.
+There are online tools, such as [https://jwt.io/](https://jwt.io/), that will do this for you.
+
+The payload (or claims) of the token must be in the following format:
 
 ```
 {
@@ -172,29 +182,38 @@ The payload (or claims) of the token has to follow the following format:
   "exp": 1516239022
 }
 ```
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;`username` - The name of a user you have previously created.  
-&nbsp;&nbsp;&nbsp;◦&nbsp;&nbsp;&nbsp;`exp` - The expiration time of the token in UNIX notation. For testing, you can manually generate UNIX timestamps using [https://www.unixtimestamp.com/index.php](https://www.unixtimestamp.com/index.php). It is recommended to set short durations for the validity of the token for increased security.
+◦ **username** - The name of your InfluxDB user.  
+◦ **exp** - The expiration time of the token in UNIX epoch time.
+For increased security, keep token expiration periods short.
+For testing, you can manually generate UNIX timestamps using [https://www.unixtimestamp.com/index.php](https://www.unixtimestamp.com/index.php).
 
-Encode the request using your shared secret. You can do this either with a JWT library in your own authentication server (or a little script if you are just testing), or by hand at [https://jwt.io/](https://jwt.io/). Your generated token should look something like this:
+Encode the payload using your shared secret.
+You can do this with either a JWT library in your own authentication server or by hand at [https://jwt.io/](https://jwt.io/).
+The generated token should look similar to the following:
 
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.he0ErCNloe4J7Id0Ry2SEDg09lKkZkfsRiGsdX_vgEg
 ```
 
-#### 3. Send an HTTP request
-To request authentication by JWT token (or bearer token), you have to pass the previously generated token in the HTTP header of your request, in the standard field "Authorization":
+#### 3. Include the token in HTTP requests
+Include your generated token as part of the ``Authorization`` header in HTTP requests.
+Use the ``Bearer`` authorization scheme:
 
 ```
 Authorization: Bearer <myToken>
 ```
-Remember, you need to use a token that has not expired yet!
+{{% note %}}
+Only unexpired tokens will successfully authenticate.
+Be sure your token has not expired.
+{{% /note %}}
 
-###### Example
+###### Example query request with JWT authentication
 
 ```bash
-curl -G "http://localhost:8086/query?db=demodb" --data-urlencode "q=SHOW DATABASES" --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.he0ErCNloe4J7Id0Ry2SEDg09lKkZkfsRiGsdX_vgEg"
+curl -XGET "http://localhost:8086/query?db=demodb" \
+  --data-urlencode "q=SHOW DATABASES" \
+  --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.he0ErCNloe4J7Id0Ry2SEDg09lKkZkfsRiGsdX_vgEg"
 ```
-If you have [enabled HTTPS](/influxdb/v1.7/administration/https_setup/), you can send HTTPS requests instead of HTTP the same way for further encryption.
 
 
 ## Authenticate Telegraf requests to InfluxDB
