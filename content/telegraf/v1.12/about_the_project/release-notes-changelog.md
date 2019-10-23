@@ -8,6 +8,15 @@ menu:
     parent: About the project
 ---
 
+## v1.12.4 [2019-10-23]
+
+- Build official packages with Go 1.12.12.
+
+### Bugfixes
+- Fix metric generation with Ping (`ping`) input plugin `native` method.
+- Exclude alias tag if unset from plugin internal stats.
+- Fix `socket_mode` option in PowerDNS Recursor (`powerdns_recursor`) input plugin.
+
 ## v1.12.3 [2019-10-07]
 
 - Build official packages with Go 1.12.10.
