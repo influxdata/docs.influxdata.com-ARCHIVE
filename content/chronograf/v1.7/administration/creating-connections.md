@@ -37,6 +37,34 @@ To create an InfluxDB connection in the Chronograf UI:
    "Unable to create source: Error contacting source."
    If this occurs, ensure all connection credentials are correct and that the InfluxDB instance is running and accessible.
 
+The following dashboards are available:
+- Docker
+- Kubernetes Node
+- Riak
+- Consul
+- Kubernetes Overview
+- Mesos
+- IIS
+- RabbitMQ
+- System
+- VMware vSphere Overview
+- Apache
+- Elastisearch
+- InfluxDB
+- Memcached
+- NSQ
+- PostgreSQL
+- Consul Telemetry
+- HAProxy
+- Kubernetes Pod
+- NGINX
+- Redis
+- VMware vSphere VMs
+- VMware vSphere Hosts
+- PHPfpm
+- Win System
+- MySQL
+- Ping
 
 ## Managing InfluxDB connections using .src files
 Chronograf stores InfluxDB connection details `.src` files that can also be created manually.
