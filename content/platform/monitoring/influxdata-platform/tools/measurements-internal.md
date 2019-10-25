@@ -43,11 +43,11 @@ For more information, see [Configure a Watcher of Watchers](/platform/monitoring
 > metric field keys are prepended with `infuxdb_`, but are otherwise identical
 to those listed [below](#influxdb-internal-measurements-and-fields).
 
-### InfluxDB Enterprise tags
+## InfluxDB Enterprise tags
 InfluxDB Enterprise includes the following tags with each point:
 
 ##### clusterID
-The UUID of the cluster recording the `_internal` metrics
+The UUID of the cluster reporting the metrics.
 
 ##### hostname
 The hostname of the InfluxDB Enterprise node reporting the metrics as reported by the operating system.

@@ -14,6 +14,9 @@ The following tools are available to help monitor and troubleshoot the InfluxDat
 Understand the InfluxDB `_internal` measurements and fields and use them to monitor
 InfluxDB OSS and InfluxDB Enterprise servers.
 
+## [Kapacitor measurements](/platform/monitoring/influxdata-platform/tools/kapacitor-measurements)
+Understand the Kapacitor internal metrics and use them to monitor Kapacitor.
+
 ## [SHOW DIAGNOSTICS statement ](/platform/monitoring/influxdata-platform/tools/show-diagnostics)
 Use the `SHOW DIAGNOSTICS` statement to get current InfluxDB instance information, including build details, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics.
 
