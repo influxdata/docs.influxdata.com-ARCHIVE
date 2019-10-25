@@ -43,21 +43,7 @@ For more information, see [Configure a Watcher of Watchers](/platform/monitoring
 > metric field keys are prepended with `infuxdb_`, but are otherwise identical
 to those listed [below](#influxdb-internal-measurements-and-fields).
 
-## InfluxDB Enterprise tags
-InfluxDB Enterprise includes the following tags with each point:
-
-##### clusterID
-The UUID of the cluster reporting the metrics.
-
-##### hostname
-The hostname of the InfluxDB Enterprise node reporting the metrics as reported by the operating system.
-
-##### nodeID
-The hostname and port of the InfluxDB Enterprise node reporting the metrics, defined
-by the [`bind-address` setting](/influxdb/latest/administration/config/#bind-address-127-0-0-1-8088)
-in the InfluxDB Enterprise configuration file.
-
-## Visualize Kapacitor metrics
+## Visualize InfluxDB internal metrics
 Use the [InfluxDB OSS Monitor dashboard](/platform/monitoring/influxdata-platform/monitoring-dashboards/#monitor-influxdb-oss)
 or the [InfluxDB Enterprise Monitor dashboard](/platform/monitoring/influxdata-platform/monitoring-dashboards/#monitor-influxdb-enterprise)
 to visualize InfluxDB `_internal` metrics.
