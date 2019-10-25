@@ -3,18 +3,19 @@ title: Tools for monitoring the InfluxData Platform (TICK stack)
 description: Use the "internal" measurements, SHOW DIAGNOSTICS, and SHOW STATS to monitor your InfluxData Platform.
 menu:
   platform:
-    name: Tools for monitoring InfluxDB
+    name: Other monitoring tools
     parent: monitor-platform
-    weight: 2
+    weight: 5
 ---
 
 The following tools are available to help monitor and troubleshoot the InfluxData platform.
 
-## [Measurements for monitoring (`_internal`)](/platform/monitoring/influxdata-platform/tools/measurements-internal)
-Use and understand InfluxDB `_internal` measurements statistics and field keys that can be used to monitor InfluxDB OSS servers and InfluxDB Enterprise clusters.
+## [InfluxDB `_internal` measurements](/platform/monitoring/influxdata-platform/tools/measurements-internal)
+Understand the InfluxDB `_internal` measurements and fields and use them to monitor
+InfluxDB OSS and InfluxDB Enterprise servers.
 
-## [The SHOW DIAGNOSTICS statement ](/platform/monitoring/influxdata-platform/tools/show-diagnostics)
+## [SHOW DIAGNOSTICS statement ](/platform/monitoring/influxdata-platform/tools/show-diagnostics)
 Use the `SHOW DIAGNOSTICS` statement to get current InfluxDB instance information, including build details, uptime, hostname, server configuration, memory usage, and Go runtime diagnostics.
 
-## [The SHOW STATS statement](/platform/monitoring/influxdata-platform/tools/show-stats)
-Use the `SHOW STATS` statement for current measurement statistics of InfluxDB servers and available (enabled) components.
+## [SHOW STATS statement](/platform/monitoring/influxdata-platform/tools/show-stats)
+Use the `SHOW STATS` statement for current measurement statistics of InfluxDB servers and available (enabled) components.}}
