@@ -6,6 +6,104 @@ menu:
     weight: 1
 ---
 
+## v0.50.2 [2019-10-24]
+
+### Bug fixes
+- Make `keep()` and `drop()` throw an error if merging tables with different schemas.
+
+## v0.50.1 [2019-10-24]
+
+### Bug fixes
+- Add annotated errors to the execute package where it affects normal usage.
+- Reorder variables in the allocator for atomic operations.
+
+## v0.50.0 [2019-10-11]
+
+### Features
+- Add `experimental/prometheus` package.
+- Add a memory manager to the memory allocator.
+- Add an internal function for generating data.
+- Switch to using discarding mode for transformations.
+- Group key join on `_time`.
+
+### Bug fixes
+- Require `data` parameter in `monitor.check()`.
+- Return the EOF error when reading metadata.
+- Re-add missing import.
+- Fix broken links in SPEC.
+- Return error from cache.
+- Update the `universe` package to use flux errors throughout.
+- Parse escape characters in string interpolation expressions.
+- Improve CSV error message for serialized Flux error.
+- Have the interpreter return annotated Flux errors.
+
+## v0.49.0 [2019-09-24]
+
+### Features
+- Optimize `filter()` to pass through tables when possible.
+- Additional arrow builder utilities.
+- Add a `benchmark()` function to the testing package.
+- Add an arrow backed version of the table buffer.
+
+### Bug fixes
+- Fix `sql.from()` connection leak.
+- Fix some of the memory leaks within the standard library.
+- Fix `mqtt.to()` topic parameter.
+
+## v0.48.0 [2019-09-20]
+
+### Breaking changes
+- Convert the Flux memory allocator into an arrow allocator.
+
+### Features
+- New dependency injection framework.
+- Add planner options to Flux language.
+- Make Flux `internal/promql/quantile` behavior match PromQL `quantile` aggregate.
+
+### Bug fixes
+- Passing context to WalkIR.
+- Make `join()` reject input tables lacking `on` columns.
+
+
+## v0.47.1 [2019-09-18]
+
+### Bug fixes
+- Pass dependencies to WalkIR
+
+### Bug fixes
+- Introduce ParenExpression.
+- Make fmt runs cargo fmt on Rust directories.
+- Update `Hex.Dump` to `hex.EncodeToString`.
+- Integrate the Promql transpiler into Flux.
+
+## v0.46.2 [2019-09-12]
+
+### Bug fixes
+- Make `to` use URL validator.
+- Add filesystem to default test dependencies.
+
+## v0.46.1 [2019-09-11]
+
+### Bug fixes
+- Add a filesystem service.
+- Do a pointer comparison for table objects instead of a deep compare.
+
+## v0.46.0 [2019-09-10]
+
+### Features
+- Replace EnvironmentSecretService with EmptySecret….
+- Source location for rust parser.
+
+### Bug fixes
+- Push error for bad string expression.
+- Remove `token` parameter from `pagerduty.endpoint`.
+
+## v0.45.2 [2019-09-10]
+
+### Bug fixes
+- Push the tag before running goreleaser.
+- Additional opentracing spans for debugging query flow.
+
 ## v0.45.1 [2019-09-09]
 
 ### Bug fixes
