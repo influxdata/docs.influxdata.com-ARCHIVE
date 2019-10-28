@@ -25,7 +25,11 @@ _**Output data type:** Duration_
 > state duration will be 0.
 
 ```js
-stateDuration(fn: (r) => r._measurement == "state", column: "stateDuration", unit: 1s)
+stateDuration(
+  fn: (r) => r._field == "state" and r._value == "down",
+  column: "stateDuration",
+  unit: 1s
+)
 ```
 
 _If the expression generates an error during evaluation, the point is discarded,
@@ -54,6 +58,7 @@ _**Data type:** String_
 ### unit
 The unit of time in which the state duration is incremented.
 For example: `1s`, `1m`, `1h`, etc.
+Default is `1s`.
 
 _**Data type:** Duration_
 
