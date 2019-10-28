@@ -28,7 +28,7 @@ count(column: "_value")
 Column on which to operate.
 Defaults to `"_value"`.
 
-_**Data type: String**_
+_**Data type:** String_
 
 ## Examples
 ```js

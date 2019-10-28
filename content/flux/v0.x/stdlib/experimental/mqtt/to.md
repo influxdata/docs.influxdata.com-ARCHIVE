@@ -107,13 +107,13 @@ _**Data type:** String_
 The columns to use as tag sets in the output line protocol.
 Default is `[]`.  
 
-_**Data type: Array of strings**_
+_**Data type:** Array of strings_
 
 ### valueColumns
 The columns to use as field values in the output line protocol.
 Default is `["_value"]`.
 
-_**Data type: Array of strings**_
+_**Data type:** Array of strings_
 
 ## Examples
 

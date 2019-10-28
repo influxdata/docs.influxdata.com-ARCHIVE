@@ -70,36 +70,36 @@ to include "fitted" data points in results when [`withFit`](#withfit) is set to 
 ### n
 The number of values to predict.
 
-_**Data type: Integer**_
+_**Data type:** Integer_
 
 ### seasonality
 The number of points in a season.
 Defaults to `0`.
 
-_**Data type: Integer**_
+_**Data type:** Integer_
 
 ### interval
 The interval between two data points.
 
-_**Data type: Duration**_
+_**Data type:** Duration_
 
 ### withFit
 Return [fitted data](#fitted-model) in results.
 Defaults to `false`.
 
-_**Data type: Boolean**_
+_**Data type:** Boolean_
 
 ### timeColumn
 The time column to use.
 Defaults to `"_time"`.
 
-_**Data type: String**_
+_**Data type:** String_
 
 ### column
 The column to operate on.
 Defaults to `"_value"`.
 
-_**Data type: String**_
+_**Data type:** String_
 
 ## Examples
 

@@ -32,13 +32,13 @@ for market noise or volatility.
 ### n
 The period or number of points to use in the calculation.
 
-_**Data type: Integer**_
+_**Data type:** Integer_
 
 ### column
 The column to operate on.
 Defaults to `"_value"`.
 
-_**Data type: String**_
+_**Data type:** String_
 
 ## Examples
 ```js

@@ -31,7 +31,7 @@ Higher values represent a more efficient or trending market.
 ### n
 The period or number of points to use in the calculation.
 
-_**Data type: Integer**_
+_**Data type:** Integer_
 
 ## Examples
 ```js
