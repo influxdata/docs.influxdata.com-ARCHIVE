@@ -12,8 +12,8 @@ menu:
 Flux is InfluxData's new functional data scripting language designed for querying,
 analyzing, and acting on data.
 
-This multi-part getting started guide walks through important concepts related to Flux,
-how to query time series data from InfluxDB using Flux, and introduces Flux syntax and functions.
+This multi-part getting started guide walks through important concepts related to Flux.
+It covers querying time series data from InfluxDB using Flux, and introduces Flux syntax and functions.
 
 ## What you will need
 
@@ -81,6 +81,7 @@ they are further processed or manipulated.
 Flux structures all data in tables.
 When data is streamed from data sources, Flux formats it as annotated comma-separated values (CSV), representing tables.
 Functions then manipulate or process them and output new tables.
+This makes it easy to chain together functions to build sophisticated queries.
 
 #### Group keys
 Every table has a **group key** which describes the contents of the table.

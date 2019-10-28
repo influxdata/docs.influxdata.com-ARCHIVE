@@ -120,7 +120,9 @@ from(bucket:"telegraf/autogen")
 
 ## Congratulations!
 You have now queried data from InfluxDB using Flux.
-This is a barebones query that can now be transformed in other ways.
+
+The query shown here is a barebones example.
+Flux queries can be extended in many ways to form powerful scripts.
 
 <div class="page-nav-btns">
   <a class="btn prev" href="/flux/v0.x/introduction/getting-started/">Get started with Flux</a>

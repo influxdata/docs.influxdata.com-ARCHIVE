@@ -72,4 +72,4 @@ _**Used functions:**
 [filter](/flux/v0.x/stdlib/built-in/transformations/filter/),
 [keys](/flux/v0.x/stdlib/built-in/transformations/keys/),
 [keep](/flux/v0.x/stdlib/built-in/transformations/keep/),
-[distinct](/flux/v0.x/stdlib/built-in/transformations/selectors/distcint)_
+[distinct](/flux/v0.x/stdlib/built-in/transformations/selectors/distinct)_

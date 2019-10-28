@@ -171,8 +171,8 @@ topN = (tables=<-, n) =>
 
 _More information about creating custom functions is available in the [Custom functions](/flux/v0.x/stdlib/custom-functions) documentation._
 
-Using the `cpuUsageUser` data stream variable defined above, find the top five data
-points with the custom `topN` function and yield the results.
+Using this new custom function `topN` and the `cpuUsageUser` data stream variable defined above,
+find the top five data points and yield the results.
 
 ```js
 cpuUsageUser

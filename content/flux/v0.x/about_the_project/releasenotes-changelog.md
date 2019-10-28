@@ -64,7 +64,6 @@ menu:
 - Passing context to WalkIR.
 - Make `join()` reject input tables lacking `on` columns.
 
-
 ## v0.47.1 [2019-09-18]
 
 ### Bug fixes
