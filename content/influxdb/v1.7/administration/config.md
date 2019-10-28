@@ -41,14 +41,14 @@ The configuration settings in this document are set to their default settings.
 
 Configuration settings that specify a duration support the following duration units:
 
-- `ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds
-- `us` or `µs`&emsp;microseconds
-- `ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds
-- `s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds
-- `m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes
-- `h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours
-- `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
-- `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
+- `ns` _(nanoseconds)_
+- `us` or `µs` _(microseconds)_
+- `ms` _(milliseconds)_
+- `s` _(seconds)_
+- `m` _(minutes)_
+- `h` _(hours)_
+- `d` _(days)_
+- `w` _(weeks)_
 
 >**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/1.7/etc/config.sample.toml) might be slightly newer.
 
@@ -654,10 +654,28 @@ Useful for troubleshooting and monitoring.
 
 Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
+#### `pprof-auth-enabled = false`
+
+Enables authentication on the `/net/http/pprof` endpoint.
+Users need admin permissions to access the `/net/http/pprof` endpoint when this setting is enabled.
+This setting has no effect if either [`auth-enabled`](#auth-enabled-false) or
+[`pprof-enabled`](#pprof-enabled-true) are set to `false`.
+
+Environment variable: `INFLUXDB_HTTP_PPROF_AUTH_ENABLED`
+
 #### `debug-pprof-enabled = false`
 
 Enable the default `/net/http/pprof` endpoint and bind against `localhost:6060`.
 Useful for debugging startup performance issues.
+
+Environment variable: `INFLUXDB_HTTP_DEBUG_PPROF_ENABLED`
+
+#### `ping-auth-enabled = false`
+
+Enables authentication on the `/ping`, `/metrics`, and deprecated `/status` endpoints.
+This setting has no effect if [`auth-enabled`](#auth-enabled-false) is set to `false`.
+
+Environment variable: `INFLUXDB_HTTP_PING_AUTH_ENABLED`
 
 #### `https-enabled = false`
 
