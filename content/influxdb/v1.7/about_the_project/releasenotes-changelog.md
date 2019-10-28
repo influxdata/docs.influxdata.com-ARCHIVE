@@ -9,6 +9,10 @@ menu:
 
 ## v1.7.9 [2019-10-27]
 
+### Release notes
+- This release is built using Go 1.12.10 which eliminates the
+  [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
+
 ### Bugfixes
 - Guard against compaction burst throughput limit.
 - Replace TSI compaction wait group with counter.

@@ -656,8 +656,13 @@ Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
 #### `pprof-auth-enabled = false`
 
-Enables authentication on the `/net/http/pprof` endpoint.
-Users need admin permissions to access the `/net/http/pprof` endpoint when this setting is enabled.
+Enables authentication on `/debug` endpoints.
+If enabled, users need admin permissions to access the following endpoints:
+
+- `/debug/pprof`
+- `/debug/requests`
+- `/debug/vars`
+
 This setting has no effect if either [`auth-enabled`](#auth-enabled-false) or
 [`pprof-enabled`](#pprof-enabled-true) are set to `false`.
 
@@ -665,7 +670,7 @@ Environment variable: `INFLUXDB_HTTP_PPROF_AUTH_ENABLED`
 
 #### `debug-pprof-enabled = false`
 
-Enable the default `/net/http/pprof` endpoint and bind against `localhost:6060`.
+Enable the default `/pprof` endpoint and bind against `localhost:6060`.
 Useful for debugging startup performance issues.
 
 Environment variable: `INFLUXDB_HTTP_DEBUG_PPROF_ENABLED`
