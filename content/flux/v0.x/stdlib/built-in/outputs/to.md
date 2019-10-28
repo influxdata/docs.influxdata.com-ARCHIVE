@@ -38,26 +38,28 @@ to(
 
 ## Parameters
 
-> `bucket` OR `bucketID` is **required**.
+{{% note %}}
+You must provide a `bucket` or `bucketID` and an `org` or `orgID`.
+{{% /note %}}
 
 ### bucket
-The bucket to which data is written. Mutually exclusive with `bucketID`.
+The bucket to write data to.
+`bucket` and `bucketID` are mutually exclusive.
 
 _**Data type:** String_
 
 ### bucketID
-The ID of the bucket to which data is written. Mutually exclusive with `bucket`.
+The ID of the bucket to write data to.
+`bucketID` and `bucket` are mutually exclusive.
+
 
 _**Data type:** String_
 
 ### org
 The organization name of the specified [`bucket`](#bucket).
-Only required when writing to a remote host.
-Mutually exclusive with `orgID`
+`org` and `orgID` are mutually exclusive.
 
 _**Data type:** String_
-
-> Specify either an `org` or an `orgID`, but not both.
 
 ### orgID
 The organization ID of the specified [`bucket`](#bucket).
@@ -86,14 +88,16 @@ _**Data type:** String_
 
 ### tagColumns
 The tag columns of the output.
-Defaults to all columns with type `string`, excluding all value columns and the `_field` column if present.
+Defaults to all columns with type `string`, excluding all value columns and the
+`_field` column if present.
 
 _**Data type:** Array of strings_
 
 ### fieldFn
 Function that takes a record from the input table and returns an object.
-For each record from the input table, `fieldFn` returns an object that maps output the field key to the output value.
-Default is `(r) => ({ [r._field]: r._value })`
+For each record from the input table, `fieldFn` returns an object that maps output
+the field key to the output value.
+Default is `(r) => ({ [r._field]: r._value })`.
 
 _**Data type:** Function_
 _**Output data type:** Object_
