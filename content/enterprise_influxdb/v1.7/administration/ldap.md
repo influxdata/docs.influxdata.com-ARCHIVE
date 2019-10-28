@@ -15,7 +15,8 @@ Configure InfluxDB Enterprise to use LDAP (Lightweight Directory Access Protocol
 
 ## Requirements
 
-To configure InfluxDB Enterprise to support LDAP, all users must be managed in the remote LDAP service. If LDAP is configured and enabled, then you __must__ authenticate through LDAP, irrespective of any users who may have existed before.
+To configure InfluxDB Enterprise to support LDAP, all users must be managed in the remote LDAP service.
+If LDAP is configured and enabled, users **must** authenticate through LDAP, including users who may have existed before enabling LDAP.
 
 ## Configure LDAP for an InfluxDB Enterprise cluster
 
