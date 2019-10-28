@@ -31,13 +31,19 @@ To use LDAP with an InfluxDB Enterprise cluster, do the following:
 Update the following settings in each data node configuration file (`/etc/influxdb/influxdb.conf`):
 
 - Enable HTTP authentication:
-  - Set the `[http]` `auth-enabled` configuration setting, or corresponding environment variable `INFLUXDB_HTTP_AUTH_ENABLED`, to `true`. Default is `false`.
+  - Set the `[http]` `auth-enabled` configuration setting, or corresponding environment variable `INFLUXDB_HTTP_AUTH_ENABLED`, to `true`.
+    Default is `false`.
 - Configure the HTTP shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the secret and username:
-  - Set the `[http]` configuration setting for `shared-secret`, or the corresponding environment variable `INFLUXDB_HTTP_SHARED_SECRET`. Default value is `""`.
+  - Set the `[http]` configuration setting for `shared-secret`, or the corresponding environment variable `INFLUXDB_HTTP_SHARED_SECRET`.
+    Default value is `""`.
 - (Optional) If you're enabling authentication on meta nodes, data nodes must also include the following configurations:
 
-  - `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.auth-enabled` configuration.
-  - `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.internal-shared-secret`.
+  - `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`.
+    Default value is `false`.
+    This value must be the same value as the meta node's `meta.auth-enabled` configuration.
+  - `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`.
+    Default value is `false`.
+    This value must be the same value as the meta node's `meta.internal-shared-secret`.
 
 ### Configure meta nodes
 
@@ -67,9 +73,12 @@ For more detail on authentication, see [Authentication and authorization in Infl
     influxd-ctl ldap sample-config
     ```
 
-2. Save the sample file and edit as needed for your LDAP server. For detail, see the [sample LDAP configuration file](#sample-ldap-configuration) below.
+2. Save the sample file and edit as needed for your LDAP server.
+   For detail, see the [sample LDAP configuration file](#sample-ldap-configuration) below.
 
-    > **Note:** To use fine-grained authorization (FGA) with LDAP, you must map InfluxDB Enterprise roles to key-value pairs in the LDAP database. For more information, see [Fine-grained authorization in InfluxDB Enterprise](/enterprise_influxdb/v1.7/guides/fine-grained-authorization/). The InfluxDB admin user doesn't include permissions for InfluxDB Enterprise roles.
+    > **Note:** To use fine-grained authorization (FGA) with LDAP, you must map InfluxDB Enterprise roles to key-value pairs in the LDAP database.
+    For more information, see [Fine-grained authorization in InfluxDB Enterprise](/enterprise_influxdb/v1.7/guides/fine-grained-authorization/).
+    The InfluxDB admin user doesn't include permissions for InfluxDB Enterprise roles.
 
 3. To verify your LDAP configuration and see what happens as you authenticate through LDAP, run:
 
@@ -87,7 +96,9 @@ For more detail on authentication, see [Authentication and authorization in Infl
 
 The following is a sample configuration file that connects to a publicly available LDAP server.
 
-A `DN` is the distinguished name that uniquely identifies an entry and describes its position in the directory information tree (DIT) hierarchy. The DN of an LDAP entry is similar to a file path on a file system. `DNs` refers to multiple DN entries.
+A `DN` is the distinguished name that uniquely identifies an entry and describes its position in the directory information tree (DIT) hierarchy.
+The DN of an LDAP entry is similar to a file path on a file system.
+`DNs` refers to multiple DN entries.
 
 {{% truncate %}}
 ```toml
