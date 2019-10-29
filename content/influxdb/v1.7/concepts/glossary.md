@@ -238,7 +238,14 @@ Related entries: [field key](#field-key),[measurement](#measurement), [tag key](
 
 ## series key
 
-A series key identifies a particular series by measurement, tag key and value, and field key.
+A series key identifies a particular series by measurement, tag set, and field key.
+
+For example:
+
+```
+# measurement, tag set, field key
+h2o_level, location=santa_monica, h2o_feet
+```
 
 Related entries: [series](/influxdb/v1.7/concepts/glossary/#series)
 
