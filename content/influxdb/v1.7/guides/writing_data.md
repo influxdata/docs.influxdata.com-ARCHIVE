@@ -51,7 +51,7 @@ InfluxDB supports gzip compression. To reduce network traffic, consider the foll
 
 * To accept compressed data from InfluxDB, add the `Accept-Encoding: gzip` header to InfluxDB API requests.
 
-* To compress data before sending it to InfluxDB, add the `Content-Encoding: gzip` header to InfluxDB API requests.
+* To compress data before sending it to InfluxDB, add the `Content-Encoding: application/gzip` header to InfluxDB API requests.
 
 For details about enabling gzip for client libraries, see your client library documentation. 
   
