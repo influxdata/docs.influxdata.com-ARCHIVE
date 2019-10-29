@@ -34,13 +34,11 @@ Update the following settings in each data node configuration file (`/etc/influx
    (Or set the corresponding environment variable `INFLUXDB_HTTP_AUTH_ENABLED` to `true`.)
 2. Configure the HTTP shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the secret and username.
    Set the `[http]` configuration setting for `shared-secret`, or the corresponding environment variable `INFLUXDB_HTTP_SHARED_SECRET`.
-
-If you're enabling authentication on meta nodes, data nodes must also include the following configurations:
-
-- `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`.
-  This value must be the same value as the meta node's `meta.auth-enabled` configuration.
-- `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`.
-  This value must be the same value as the meta node's `meta.internal-shared-secret`.
+3. If you're enabling authentication on meta nodes, you must also include the following configurations:
+   - `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`.
+     This value must be the same value as the meta node's `meta.auth-enabled` configuration.
+   - `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`.
+     This value must be the same value as the meta node's `meta.internal-shared-secret`.
 
 ### Configure meta nodes
 
