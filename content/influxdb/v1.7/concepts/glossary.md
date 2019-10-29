@@ -207,12 +207,12 @@ different `status`es then the series cardinality for the measurement is 6
 
 | email                 | status |
 | :-------------------- | :----- |
-| lorr@influxdata.com | start  |
-| lorr@influxdata.com | finish |
-| marv@influxdata.com     | start  |
-| marv@influxdata.com     | finish |
-| cliff@influxdata.com | start  |
-| cliff@influxdata.com | finish |
+| lorr@influxdata.com   | start  |
+| lorr@influxdata.com   | finish |
+| marv@influxdata.com   | start  |
+| marv@influxdata.com   | finish |
+| cliff@influxdata.com  | start  |
+| cliff@influxdata.com  | finish |
 
 Note that, in some cases, simply performing that multiplication may overestimate series cardinality because of the presence of dependent tags.
 Dependent tags are tags that are scoped by another tag and do not increase series
@@ -223,12 +223,12 @@ It would remain unchanged at 6, as `firstname` is already scoped by the `email` 
 
 | email                 | status | firstname |
 | :-------------------- | :----- | :-------- |
-| lorr@influxdata.com | start  | lorraine  |
-| lorr@influxdata.com | finish | lorraine  |
-| marv@influxdata.com     | start  | marvin      |
-| marv@influxdata.com     | finish | marvin      |
-| cliff@influxdata.com | start  | clifford  |
-| cliff@influxdata.com | finish | clifford  |
+| lorr@influxdata.com   | start  | lorraine  |
+| lorr@influxdata.com   | finish | lorraine  |
+| marv@influxdata.com   | start  | marvin    |
+| marv@influxdata.com   | finish | marvin    |
+| cliff@influxdata.com  | start  | clifford  |
+| cliff@influxdata.com  | finish | clifford  |
 
 See [SHOW CARDINALITY](/influxdb/v1.7/query_language/spec/#show-cardinality) to learn about the InfluxQL commands for series cardinality.
 
@@ -333,7 +333,7 @@ See [InfluxQL Functions](/influxdb/v1.7/query_language/functions/#transformation
 
 Related entries: [aggregation](/influxdb/v1.7/concepts/glossary/#aggregation), [function](/influxdb/v1.7/concepts/glossary/#function), [selector](/influxdb/v1.7/concepts/glossary/#selector)
 
-## tsm (Time Structured Merge tree)
+## TSM (Time Structured Merge tree)
 
 The purpose-built data storage format for InfluxDB. TSM allows for greater compaction and higher write and read throughput than existing B+ or LSM tree implementations. See [Storage Engine](http://docs.influxdata.com/influxdb/v1.7/concepts/storage_engine/) for more.
 
@@ -355,7 +355,7 @@ To calculate the values per second rate, multiply the number of points written p
 
 Related entries: [batch](/influxdb/v1.7/concepts/glossary/#batch), [field](/influxdb/v1.7/concepts/glossary/#field), [point](/influxdb/v1.7/concepts/glossary/#point), [points per second](/influxdb/v1.7/concepts/glossary/#points-per-second)
 
-## wal (Write Ahead Log)
+## WAL (Write Ahead Log)
 
 The temporary cache for recently written points. To reduce the frequency with which the permanent storage files are accessed, InfluxDB caches new points in the WAL until their total size or age triggers a flush to more permanent storage. This allows for efficient batching of the writes into the TSM.
 
