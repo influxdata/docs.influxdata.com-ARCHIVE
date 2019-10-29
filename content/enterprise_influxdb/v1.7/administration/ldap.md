@@ -13,10 +13,10 @@ Configure InfluxDB Enterprise to use LDAP (Lightweight Directory Access Protocol
 - Validate user permissions
 - Synchronize InfluxDB and LDAP so each LDAP request doesn't need to be queried
 
-## Requirements
-
+{{% note %}}
 To configure InfluxDB Enterprise to support LDAP, all users must be managed in the remote LDAP service.
 If LDAP is configured and enabled, users **must** authenticate through LDAP, including users who may have existed before enabling LDAP.
+{{% /note %}}
 
 ## Configure LDAP for an InfluxDB Enterprise cluster
 
@@ -37,12 +37,10 @@ Update the following settings in each data node configuration file (`/etc/influx
 
 If you're enabling authentication on meta nodes, data nodes must also include the following configurations:
 
-  - `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`.
-    Default value is `false`.
-    This value must be the same value as the meta node's `meta.auth-enabled` configuration.
-  - `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`.
-    Default value is `false`.
-    This value must be the same value as the meta node's `meta.internal-shared-secret`.
+- `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`.
+  This value must be the same value as the meta node's `meta.auth-enabled` configuration.
+- `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`.
+  This value must be the same value as the meta node's `meta.internal-shared-secret`.
 
 ### Configure meta nodes
 
@@ -53,7 +51,6 @@ Update the following settings in each meta node configuration file (`/etc/influx
    (Or set the `INFLUXDB_META_INTERNAL_SHARED_SECRET` environment variable.)
 3. Set the `[meta]` configuration setting `meta.ldap-allowed` to `true` on all meta nodes in your cluster.
    (Or set the `INFLUXDB_META_LDAP_ALLOWED`environment variable.)
-<!-- - If using  to `true` on all meta nodes. -->
 
 ### Authenticate your connection to InfluxDB
 
@@ -80,7 +77,7 @@ For more detail on authentication, see [Authentication and authorization in Infl
     For more information, see [Fine-grained authorization in InfluxDB Enterprise](/enterprise_influxdb/v1.7/guides/fine-grained-authorization/).
     The InfluxDB admin user doesn't include permissions for InfluxDB Enterprise roles.
 
-3. To verify your LDAP configuration and see what happens as you authenticate through LDAP, run:
+3. To verify your LDAP configuration, run:
 
     ```bash
     influxd-ctl ldap verify -ldap-config /path/to/ldap.toml
@@ -92,11 +89,11 @@ For more detail on authentication, see [Authentication and authorization in Infl
     influxd-ctl ldap set-config /path/to/ldap.toml
     ```
 
-### Sample LDAP configuration
+## Sample LDAP configuration
 
 The following is a sample configuration file that connects to a publicly available LDAP server.
 
-A `DN` is the distinguished name that uniquely identifies an entry and describes its position in the directory information tree (DIT) hierarchy.
+A `DN` ("distinguished name") uniquely identifies an entry and describes its position in the directory information tree (DIT) hierarchy.
 The DN of an LDAP entry is similar to a file path on a file system.
 `DNs` refers to multiple DN entries.
 
@@ -154,7 +151,7 @@ enabled = true
   group-member-attribute = "uniqueMember"
   # On Active Directory you might use "member".
 
-  # Create an administrator role in InfluxDB and then log in as a member of the admin LDAP group. Only members of a group with the administrator role can complete admin tasks. 
+  # Create an administrator role in InfluxDB and then log in as a member of the admin LDAP group. Only members of a group with the administrator role can complete admin tasks.
   # For example, if tesla is the only member of the `italians` group, you must log in as tesla/password.
   admin-groups = ["italians"]
 
