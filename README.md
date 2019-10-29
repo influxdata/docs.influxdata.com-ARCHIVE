@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="/static/img/influx-logo-cubo-dark.png" width="200">
+</p>
+
 # InfluxData Documentation
 
 This repository powers [docs.influxdata.com](https://docs.influxdata.com), which
