@@ -13,10 +13,10 @@ Configure InfluxDB Enterprise to use LDAP (Lightweight Directory Access Protocol
 - Validate user permissions
 - Synchronize InfluxDB and LDAP so each LDAP request doesn't need to be queried
 
-## Requirements
-
+{{% note %}}
 To configure InfluxDB Enterprise to support LDAP, all users must be managed in the remote LDAP service.
 If LDAP is configured and enabled, users **must** authenticate through LDAP, including users who may have existed before enabling LDAP.
+{{% /note %}}
 
 ## Configure LDAP for an InfluxDB Enterprise cluster
 
@@ -30,31 +30,33 @@ To use LDAP with an InfluxDB Enterprise cluster, do the following:
 
 Update the following settings in each data node configuration file (`/etc/influxdb/influxdb.conf`):
 
-- Enable HTTP authentication:
-  - Set the `[http]` `auth-enabled` configuration setting, or corresponding environment variable `INFLUXDB_HTTP_AUTH_ENABLED`, to `true`. Default is `false`.
-- Configure the HTTP shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the secret and username:
-  - Set the `[http]` configuration setting for `shared-secret`, or the corresponding environment variable `INFLUXDB_HTTP_SHARED_SECRET`. Default value is `""`.
-- (Optional) If you're enabling authentication on meta nodes, data nodes must also include the following configurations:
-
-  - `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.auth-enabled` configuration.
-  - `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`. Default value is `false`. This value must be the same value as the meta node's `meta.internal-shared-secret`.
+1. Under `[http]`, enable HTTP authentication by setting `auth-enabled` to `true`.
+   (Or set the corresponding environment variable `INFLUXDB_HTTP_AUTH_ENABLED` to `true`.)
+2. Configure the HTTP shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the secret and username.
+   Set the `[http]` configuration setting for `shared-secret`, or the corresponding environment variable `INFLUXDB_HTTP_SHARED_SECRET`.
+3. If you're enabling authentication on meta nodes, you must also include the following configurations:
+   - `INFLUXDB_META_META_AUTH_ENABLED` environment variable, or `[http]` configuration setting `meta-auth-enabled`, is set to `true`.
+     This value must be the same value as the meta node's `meta.auth-enabled` configuration.
+   - `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`, or the corresponding `[meta]` configuration setting `meta-internal-shared-secret`, is set to `true`.
+     This value must be the same value as the meta node's `meta.internal-shared-secret`.
 
 ### Configure meta nodes
 
-Update the following settings in each meta node configuration file (/etc/influxdb/influxdb-meta.conf):
+Update the following settings in each meta node configuration file (`/etc/influxdb/influxdb-meta.conf`):
 
-- Configure the meta node META shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the username and shared secret.
-- Set the `[meta]` configuration setting `internal-shared-secret`, or the corresponding environment variable `INFLUXDB_META_INTERNAL_SHARED_SECRET`, to `"<internal-shared-secret>"`.
-- Set the `[meta]` configuration setting `meta.ldap-allowed`, or the corresponding environment variable `INFLUXDB_META_LDAP_ALLOWED`, to `true` on all meta nodes in your cluster.
-- If using  to `true` on all meta nodes.
+1. Configure the meta node META shared secret to validate requests using JSON web tokens (JWT) and sign each HTTP payload with the username and shared secret.
+2. Set the `[meta]` configuration setting `internal-shared-secret` to `"<internal-shared-secret>"`.
+   (Or set the `INFLUXDB_META_INTERNAL_SHARED_SECRET` environment variable.)
+3. Set the `[meta]` configuration setting `meta.ldap-allowed` to `true` on all meta nodes in your cluster.
+   (Or set the `INFLUXDB_META_LDAP_ALLOWED`environment variable.)
 
 ### Authenticate your connection to InfluxDB
 
-- To authenticate your InfluxDB connection, run the following command, replacing `username:password` with your credentials:
+To authenticate your InfluxDB connection, run the following command, replacing `username:password` with your credentials:
 
-    ```js
-    curl -u username:password -XPOST "http://localhost:8086/..."
-    ```
+```bash
+curl -u username:password -XPOST "http://localhost:8086/..."
+```
 
 For more detail on authentication, see [Authentication and authorization in InfluxDB](/influxdb/v1.7/administration/authentication_and_authorization/).
 
@@ -62,16 +64,18 @@ For more detail on authentication, see [Authentication and authorization in Infl
 
 1. To create a sample LDAP configuration file, run the following command:
 
-    ```js
-    bash
+    ```bash
     influxd-ctl ldap sample-config
     ```
 
-2. Save the sample file and edit as needed for your LDAP server. For detail, see the [sample LDAP configuration file](#sample-ldap-configuration) below.
+2. Save the sample file and edit as needed for your LDAP server.
+   For detail, see the [sample LDAP configuration file](#sample-ldap-configuration) below.
 
-    > **Note:** To use fine-grained authorization (FGA) with LDAP, you must map InfluxDB Enterprise roles to key-value pairs in the LDAP database. For more information, see [Fine-grained authorization in InfluxDB Enterprise](/enterprise_influxdb/v1.7/guides/fine-grained-authorization/). The InfluxDB admin user doesn't include permissions for InfluxDB Enterprise roles.
+    > To use fine-grained authorization (FGA) with LDAP, you must map InfluxDB Enterprise roles to key-value pairs in the LDAP database.
+    For more information, see [Fine-grained authorization in InfluxDB Enterprise](/enterprise_influxdb/v1.7/guides/fine-grained-authorization/).
+    The InfluxDB admin user doesn't include permissions for InfluxDB Enterprise roles.
 
-3. To verify your LDAP configuration and see what happens as you authenticate through LDAP, run:
+3. To verify your LDAP configuration, run:
 
     ```bash
     influxd-ctl ldap verify -ldap-config /path/to/ldap.toml
@@ -83,15 +87,16 @@ For more detail on authentication, see [Authentication and authorization in Infl
     influxd-ctl ldap set-config /path/to/ldap.toml
     ```
 
-### Sample LDAP configuration
+## Sample LDAP configuration
 
 The following is a sample configuration file that connects to a publicly available LDAP server.
 
-A `DN` is the distinguished name that uniquely identifies an entry and describes its position in the directory information tree (DIT) hierarchy. The DN of an LDAP entry is similar to a file path on a file system. `DNs` refers to multiple DN entries.
+A `DN` ("distinguished name") uniquely identifies an entry and describes its position in the directory information tree (DIT) hierarchy.
+The DN of an LDAP entry is similar to a file path on a file system.
+`DNs` refers to multiple DN entries.
 
 {{% truncate %}}
 ```toml
-
 enabled = true
 
 [[servers]]
@@ -144,7 +149,7 @@ enabled = true
   group-member-attribute = "uniqueMember"
   # On Active Directory you might use "member".
 
-  # Create an administrator role in InfluxDB and then log in as a member of the admin LDAP group. Only members of a group with the administrator role can complete admin tasks. 
+  # Create an administrator role in InfluxDB and then log in as a member of the admin LDAP group. Only members of a group with the administrator role can complete admin tasks.
   # For example, if tesla is the only member of the `italians` group, you must log in as tesla/password.
   admin-groups = ["italians"]
 
