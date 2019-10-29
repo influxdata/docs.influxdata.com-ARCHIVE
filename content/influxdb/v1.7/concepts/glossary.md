@@ -234,6 +234,12 @@ See [SHOW CARDINALITY](/influxdb/v1.7/query_language/spec/#show-cardinality) to 
 
 Related entries: [field key](#field-key),[measurement](#measurement), [tag key](#tag-key), [tag set](#tag-set)
 
+## series key
+
+A series key identifies a particular series by measurement, tag key and value, and field key.
+
+Related entries: [series](/influxdb/v1.7/concepts/glossary/#series)
+
 ## server
 
 A machine, virtual or physical, that is running InfluxDB.
