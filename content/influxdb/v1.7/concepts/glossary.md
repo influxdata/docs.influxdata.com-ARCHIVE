@@ -191,9 +191,9 @@ Related entries: [aggregation](/influxdb/v1.7/concepts/glossary/#aggregation), [
 
 ## series
 
-The collection of data in the InfluxDB data structure that share a measurement, tag set, and retention policy.
+A logical grouping of data defined by shared measurement, tag set, and field key.
 
-Related entries: [field set](/influxdb/v1.7/concepts/glossary/#field-set), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
+Related entries: [field set](/influxdb/v1.7/concepts/glossary/#field-set), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
 
 ## series cardinality
 
