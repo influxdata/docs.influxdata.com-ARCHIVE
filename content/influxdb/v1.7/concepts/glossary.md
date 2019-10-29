@@ -136,7 +136,6 @@ In InfluxDB, a point represents a single data record, similar to a row in a SQL 
 
 - Has four components: a measurement, a tag set, a field set, and a timestamp.
 - Is uniquely identified by its series and timestamp.
-- Is represented by one row in [line protocol](/influxdb/v1.7/write_protocols/line_protocol_reference).
 
 You cannot store more than one point with the same timestamp in a series. If you write a point to a series with a timestamp that matches an existing point, the field set becomes a union of the old and new field set, and any ties go to the new field set. For more information about duplicate points, see [How does InfluxDB handle duplicate points?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
 
@@ -193,8 +192,6 @@ Related entries: [aggregation](/influxdb/v1.7/concepts/glossary/#aggregation), [
 ## series
 
 The collection of data in the InfluxDB data structure that share a measurement, tag set, and retention policy.
-
-> **Note:** The field set is not part of the series identification!
 
 Related entries: [field set](/influxdb/v1.7/concepts/glossary/#field-set), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
 
