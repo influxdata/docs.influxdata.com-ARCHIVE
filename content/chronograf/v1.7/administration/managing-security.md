@@ -9,24 +9,7 @@ menu:
     parent: Administration
 ---
 
-**On this page**
-
-* [Chronograf security](#chronograf-security)
-* [OAuth 2.0 providers with JWT tokens](#oauth-2-0-providers-with-jwt-tokens)
-* [OAuth 2.0 providers](#oauth-2-0-providers)
-  * [Configuring GitHub authentication](#configuring-github-authentication)
-  * [Configuring Google authentication](#configuring-google-authentication)
-  * [Configuring Auth0 authentication](#configuring-auth0-authentication)
-  * [Configuring Heroku authentication](#configuring-heroku-authentication)
-  * [Configuring Okta authentication](#configuring-okta-authentication)
-  * [Configuring GitLab authentication](#configuring-gitlab-authentication)
-  * [Configuring Generic authentication](#configuring-generic-authentication)
-* [Configuring authentication duration](#configuring-authentication-duration)
-* [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
-  - [Testing with self-signed certificates](#testing-with-self-signed-certificates)
-
-## Chronograf security
-
+Chronograf supports OAuth and TLS.
 To enhance security, configure both of the following options for Chronograf:
 
 * OAuth 2.0 providers with JWT tokens
@@ -42,7 +25,21 @@ Both of these options are discussed in the following sections.
 > ***Note:*** All measures of Chronograf security are enforced by the server.
 > Any direct requests to the Chronograf server must comply with configured security options.
 
-## OAuth 2.0 providers with JWT tokens
+* [OAuth 2.0 providers with JWT tokens](#oauth-2-0-providers-with-jwt-tokens)
+* [OAuth 2.0 providers](#oauth-2-0-providers)
+  * [Configuring GitHub authentication](#configuring-github-authentication)
+  * [Configuring Google authentication](#configuring-google-authentication)
+  * [Configuring Auth0 authentication](#configuring-auth0-authentication)
+  * [Configuring Heroku authentication](#configuring-heroku-authentication)
+  * [Configuring Okta authentication](#configuring-okta-authentication)
+  * [Configuring GitLab authentication](#configuring-gitlab-authentication)
+  * [Configuring Generic authentication](#configuring-generic-authentication)
+* [Configuring authentication duration](#configuring-authentication-duration)
+* [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
+  - [Testing with self-signed certificates](#testing-with-self-signed-certificates)
+
+## Configure OAuth
+### OAuth 2.0 providers with JWT tokens
 
 [OAuth 2.0](https://tools.ietf.org/html/rfc6749) providers and [JWT (JSON Web Token)](https://tools.ietf.org/html/rfc7519) tokens
 are used in Chronograf to provide the authorization and authentication of Chronograf users and role-based access control.
@@ -72,7 +69,7 @@ export JWKS_URL=https://example.com/adfs/discovery/keys
 > ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration,
 > set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
 
-## OAuth 2.0 providers
+### OAuth 2.0 providers
 
 OAuth 2.0 authorization and authentication in Chronograf require you to specify configuration options for OAuth 2.0 authentication providers you want to use.
 
