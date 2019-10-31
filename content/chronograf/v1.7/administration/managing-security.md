@@ -482,12 +482,15 @@ To set the authentication duration to 1 hour, use the following shell command:
 ```sh
 export AUTH_DURATION=1h
 ```
+
 The duration uses the Go (golang) [time duration format](https://golang.org/pkg/time/#ParseDuration), so the largest time unit is `h` (hours).
 So to change it to 45 days, use:
+
 ```sh
 export AUTH_DURATION=1080h
 ```
-Additionally, for greater security, if you want to require re-authentication every time the browser is closed, set `AUTH_DURATION` to `0`.
+
+To require re-authentication every time the browser is closed, set `AUTH_DURATION` to `0`.
 This makes the cookie transient (aka "in-memory").
 
 ## Configuring TLS (Transport Layer Security) and HTTPS
