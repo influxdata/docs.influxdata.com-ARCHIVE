@@ -18,16 +18,8 @@ Both of these options are discussed in the following sections.
 > ***Note:*** All measures of Chronograf security are enforced by the server.
 > Any direct requests to the Chronograf server must comply with configured security options.
 
-* [OAuth 2.0 providers with JWT tokens](#oauth-2-0-providers-with-jwt-tokens)
-* [OAuth 2.0 providers](#oauth-2-0-providers)
-  * [Configuring GitHub authentication](#configuring-github-authentication)
-  * [Configuring Google authentication](#configuring-google-authentication)
-  * [Configuring Auth0 authentication](#configuring-auth0-authentication)
-  * [Configuring Heroku authentication](#configuring-heroku-authentication)
-  * [Configuring Okta authentication](#configuring-okta-authentication)
-  * [Configuring GitLab authentication](#configuring-gitlab-authentication)
-  * [Configuring Generic authentication](#configuring-generic-authentication)
-* [Configuring authentication duration](#configuring-authentication-duration)
+* [Configure OAuth](#configuring-authentication-duration)
+  - [OAuth 2.0 providers](#oauth-2.0-providers)
 * [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
   - [Testing with self-signed certificates](#testing-with-self-signed-certificates)
 
@@ -524,8 +516,8 @@ variables.
 
 **To configure Chronograf to support TLS:**
 
-1) Specify the certificate file using the `TLS_CERTIFICATE` environment variable (or the `--cert` CLI option).
-2) Specify the key file using the `TLS_PRIVATE_KEY` environment variable (or `--key` CLI option).
+1. Specify the certificate file using the `TLS_CERTIFICATE` environment variable (or the `--cert` CLI option).
+2. Specify the key file using the `TLS_PRIVATE_KEY` environment variable (or `--key` CLI option).
 
 > ***Note:*** If both the TLS certificate and key are in the same file, specify them using the `TLS_CERTIFICATE` environment variable (or the `--cert` CLI option).
 
