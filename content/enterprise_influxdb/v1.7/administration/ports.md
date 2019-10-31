@@ -3,7 +3,7 @@ title: TCP and UDP ports used in InfluxDB Enterprise
 
 menu:
   enterprise_influxdb_1_7:
-   name: TCP and UDP Ports
+    name: Configure TCP and UDP Ports
     weight: 120
     parent: Administration
 ---
