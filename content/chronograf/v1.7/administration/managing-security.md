@@ -9,11 +9,8 @@ menu:
     parent: Administration
 ---
 
-Chronograf supports OAuth and TLS.
-To enhance security, configure both of the following options for Chronograf:
-* OAuth 2.0 providers with JWT tokens
-* TLS (Transport Layer Security) for HTTPS
-Both of these options are discussed in the following sections.
+Chronograf supports [OAuth 2.0](https://oauth.net/) with JWT tokens and TLS/HTTPS.
+To enhance security, follow the instructions on this page to configure both features
 
 > ***Note:*** All measures of Chronograf security are enforced by the server.
 > Any direct requests to the Chronograf server must comply with configured security options.
@@ -59,9 +56,11 @@ export JWKS_URL=https://example.com/adfs/discovery/keys
 
 ### OAuth 2.0 providers
 
-OAuth 2.0 authorization and authentication in Chronograf require you to specify configuration options for OAuth 2.0 authentication providers you want to use.
+To enable OAuth 2.0 authorization and authentication in Chronograf,
+you must set configuration options that are specific for the OAuth 2.0 authentication provider you want to use.
 
-Configuration steps, including required and optional configuration options, for the following supported authentication providers are provided in these sections below:
+Configuration steps for the following supported authentication providers are provided in these sections below:
+<!-- including required and optional configuration options,  -->
 
 * [GitHub](#configuring-github-authentication)
 * [Google](#configuring-google-authentication)
@@ -322,7 +321,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 ### Configuring Okta authentication
 
-[Okta](https://developer.okta.com/) is a popular, OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
+[Okta](https://developer.okta.com/) is a popular OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
 **To enable Chronograf support using an Okta OAuth 2.0 application:**
 
