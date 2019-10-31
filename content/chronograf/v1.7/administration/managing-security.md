@@ -15,7 +15,7 @@ To enhance security, configure both of the following options for Chronograf:
 * OAuth 2.0 providers with JWT tokens
 
 > **Note**: After configuring OAuth 2.0, the Chronograf Admin tab becomes visible.
-> You can then set up [multiple organizations](https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/) 
+> You can then set up [multiple organizations](https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/)
 > and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
 
 * TLS (Transport Layer Security) for HTTPS
@@ -89,7 +89,6 @@ Configuration steps, including required and optional configuration options, for 
 Chronograf supports using the [GitHub OAuth 2.0 authentication](https://developer.github.com/apps/building-oauth-apps/)
 to request authorization and provide authentication.
 To use GitHub authentication, you need to register a GitHub application and use the assigned Client ID and Client Secret.
-
 
 #### Overview
 
@@ -170,21 +169,20 @@ The following steps will guide you in configuring Chronograf to support GitHub O
 
 If you want to require a GitHub organization membership for a user, set the `GH_ORGS` environment variable.
 
-**Example:**  
+**Example:**
 ```sh
 export GH_ORGS=biffs-gang
 ```
 If the user is not a member of the specified GitHub organization, then the user will not be granted access.
 To support multiple organizations, use a comma-delimited list.
 
-**Example:**  
+**Example:**
 ```sh
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 
 > When logging in for the first time, make sure to grant access to the organization you configured.
 > The OAuth application can only see membership in organizations it has been granted access to.
-
 
 ### Configuring Google authentication
 
@@ -206,7 +204,6 @@ Optionally, you can restrict access to specific domains using the following envi
 
 For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#google-specific-oauth-2-0-authentication-options).
 
-
 #### Creating Google OAuth 2.0 applications
 
 The following steps will guide you in configuring Google OAuth 2.0 authorization and authentication support in Chronograf.
@@ -221,7 +218,7 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
     * `GOOGLE_CLIENT_SECRET` (Google client Secret)
     * `PUBLIC_URL` (Public URL -- the URL used to access Chronograf)
 
-    **Example:**  
+    **Example:**
     ```sh
     export GOOGLE_CLIENT_ID= 812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
     export GOOGLE_CLIENT_SECRET= wwo0m29iLirM6LzHJWE84GRD
@@ -232,7 +229,7 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
 
     * `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
 
-    **Example:**  
+    **Example:**
     ```sh
     export TOKEN_SECRET=Super5uperUdn3verGu355!
     ```
@@ -291,7 +288,7 @@ The following steps will guide you in configuring Auth0 OAuth 2.0 authorization 
 
     * [`TOKEN_SECRET`](/chronograf/v1.7/administration/config-options/#general-authentication-options) (Secret used for generating and validating JWT tokens)
 
-    **Example:**  
+    **Example:**
     ```sh
     export TOKEN_SECRET=Super5uperUdn3verGu355!
     ```
@@ -390,7 +387,7 @@ Your users should now be able to sign into Chronograf using the new Okta provide
     ```
 
     Click **Submit** to save the service details.
-    
+
     Make sure your application has **openid** and **read_user** Scopes.
 
 2. Copy the provided **Application Id** and **Secret** and set the following environment variables:
@@ -464,7 +461,6 @@ The following environment variables (and corresponding command line options) are
   - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
   - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping.
 
-
 #### Examples
 
 ##### OpenID Connect (OIDC) / Active Directory Federation Services (AD FS)
@@ -487,7 +483,6 @@ TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
 ```
 
 > _**Note:**_ Do not use special characters for the GENERIC_CLIENT_ID as AD FS will split strings here, finally resulting in an identifier mismatch.
-
 
 ### Configuring authentication duration
 
