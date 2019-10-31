@@ -11,15 +11,8 @@ menu:
 
 Chronograf supports OAuth and TLS.
 To enhance security, configure both of the following options for Chronograf:
-
 * OAuth 2.0 providers with JWT tokens
-
-> **Note**: After configuring OAuth 2.0, the Chronograf Admin tab becomes visible.
-> You can then set up [multiple organizations](https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/)
-> and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
-
 * TLS (Transport Layer Security) for HTTPS
-
 Both of these options are discussed in the following sections.
 
 > ***Note:*** All measures of Chronograf security are enforced by the server.
@@ -39,10 +32,13 @@ Both of these options are discussed in the following sections.
   - [Testing with self-signed certificates](#testing-with-self-signed-certificates)
 
 ## Configure OAuth
-### OAuth 2.0 providers with JWT tokens
 
-[OAuth 2.0](https://tools.ietf.org/html/rfc6749) providers and [JWT (JSON Web Token)](https://tools.ietf.org/html/rfc7519) tokens
-are used in Chronograf to provide the authorization and authentication of Chronograf users and role-based access control.
+> **Note**: After configuring OAuth 2.0, the Chronograf Admin tab becomes visible.
+> You can then set up [multiple organizations](https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/)
+> and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
+
+Chronograf can use [OAuth 2.0](https://tools.ietf.org/html/rfc6749) providers and [JWT (JSON Web Token)](https://tools.ietf.org/html/rfc7519) tokens
+to provide authorization and authentication of Chronograf users and role-based access control.
 
 To configure any of the supported OAuth 2.0 providers to work with Chronograf,
 you must also configure the `TOKEN_SECRET` environment variable (or command line option), which is used for generating and validating JWT tokens.
