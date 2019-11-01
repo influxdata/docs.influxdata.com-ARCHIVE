@@ -9,20 +9,16 @@ menu:
     parent: Administration
 ---
 
-Chronograf supports [OAuth 2.0](https://oauth.net/) with JWT tokens and TLS/HTTPS.
-To enhance security, follow the instructions on this page to configure both features
+Chronograf supports authentication and authorization with [OAuth 2.0](https://oauth.net/) and can be configured to use TLS/HTTPS.
+To enhance security, follow the instructions on this page to configure both features.
 
-> ***Note:*** All measures of Chronograf security are enforced by the server.
-> Any direct requests to the Chronograf server must comply with configured security options.
+* [Configure OAuth 2.0](#configure-oauth-2-0)
+  - [OAuth 2.0 providers](#oauth-2-0-providers)
+* [Configure TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
 
-* [Configure OAuth](#configuring-authentication-duration)
-  - [OAuth 2.0 providers](#oauth-2.0-providers)
-* [Configuring TLS (Transport Layer Security) and HTTPS](#configuring-tls-transport-layer-security-and-https)
-  - [Testing with self-signed certificates](#testing-with-self-signed-certificates)
+## Configure OAuth 2.0
 
-## Configure OAuth
-
-> **Note**: After configuring OAuth 2.0, the Chronograf Admin tab becomes visible.
+> After configuring OAuth 2.0, the Chronograf Admin tab becomes visible.
 > You can then set up [multiple organizations](https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/)
 > and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
 
@@ -493,7 +489,7 @@ export AUTH_DURATION=1080h
 To require re-authentication every time the browser is closed, set `AUTH_DURATION` to `0`.
 This makes the cookie transient (aka "in-memory").
 
-## Configuring TLS (Transport Layer Security) and HTTPS
+## Configure TLS (Transport Layer Security) and HTTPS
 
 The TLS (Transport Layer Security) cryptographic protocol is supported in Chronograf to provides server authentication, data confidentiality, and data integrity.
 Using TLS secures traffic between a server and web browser and enables the use of HTTPS.
