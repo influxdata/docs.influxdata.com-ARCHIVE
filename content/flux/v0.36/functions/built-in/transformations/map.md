@@ -84,7 +84,7 @@ from(bucket:"telegraf/autogen")
 
 ###### Add new columns and preserve existing columns
 ```js
-from(bucket:"example-bucket")
+from(bucket:"telegraf/autogen")
     |> filter(fn: (r) =>
       r._measurement == "cpu" and
       r._field == "usage_system"

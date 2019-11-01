@@ -81,7 +81,7 @@ sensorInfo = sql.from(
 )
 
 // Query data from InfluxDB
-sensorMetrics = from(bucket: "example-bucket")
+sensorMetrics = from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> filter(fn: (r) => r._measurement == "airSensors")
 
