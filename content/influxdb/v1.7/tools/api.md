@@ -852,7 +852,7 @@ HTTP/1.1 404 Not Found
 {"error":"database not found: \"mydb1\""}
 ```
 
-##### Send to a server a request body too large
+##### Send a request body that is too large
 
 ```
 HTTP/2 413 Request Entity Too Large
