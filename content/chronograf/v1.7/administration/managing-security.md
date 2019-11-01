@@ -23,20 +23,31 @@ To enhance security, follow the instructions on this page to configure both feat
 > and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
 
 Chronograf can use [OAuth 2.0](https://tools.ietf.org/html/rfc6749) providers and [JWT (JSON Web Token)](https://tools.ietf.org/html/rfc7519) tokens
-to provide authorization and authentication of Chronograf users and role-based access control.
+to require authorization and authentication of Chronograf users and enable role-based access controls.
+
+### Generate a Token Secret
 
 To configure any of the supported OAuth 2.0 providers to work with Chronograf,
 you must also configure the `TOKEN_SECRET` environment variable (or command line option), which is used for generating and validating JWT tokens.
-
-**To set the TOKEN_SECRET option:**
-
-Set the value of the TOKEN_SECRET environment variable to a secure, arbitrary string.
 Chronograf will use this secret to generate the JWT Signature for all access tokens.
+Set this value to a secure, arbitrary string:
 
-**Example:** `TOKEN_SECRET=Super5uperUdn3verGu355!`
+```
+TOKEN_SECRET=<mysecret>
+```
 
-**JWKS Signature Verification**
-If the provider implements OpenID Connect with RS256 signatures (as Microsoft AD FS does),
+Generate a secret with OpenSSL by running this command:
+
+```
+openssl rand -base64 32
+```
+
+> ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration,
+> set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
+
+### JWKS Signature Verification
+
+If the OAuth provider implements OpenID Connect with RS256 signatures (as Microsoft AD FS does),
 you need to enable `id_token` support and provide a JWKS document (holding the certificate chain), to validate the RSA signatures against.
 This certificate chain is regularly rolled over (when the certificates expire), so it is fetched from the JWKS_URL on demand.
 
@@ -47,16 +58,12 @@ export USE_ID_TOKEN=true
 export JWKS_URL=https://example.com/adfs/discovery/keys
 ```
 
-> ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration,
-> set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
-
 ### OAuth 2.0 providers
 
 To enable OAuth 2.0 authorization and authentication in Chronograf,
 you must set configuration options that are specific for the OAuth 2.0 authentication provider you want to use.
 
 Configuration steps for the following supported authentication providers are provided in these sections below:
-<!-- including required and optional configuration options,  -->
 
 * [GitHub](#configuring-github-authentication)
 * [Google](#configuring-google-authentication)
@@ -65,7 +72,7 @@ Configuration steps for the following supported authentication providers are pro
 * [Okta](#configuring-okta-authentication)
 * [Generic](#configuring-generic-authentication)
 
-> ***Note:*** Each of the following OAuth 2.0 provider configurations require the `TOKEN_SECRET` you created in the previous section.
+> These configurations require a `TOKEN_SECRET`, described [above](#configure-oauth-2).
 
 ### Configuring GitHub authentication
 
@@ -509,8 +516,7 @@ Chronograf server has command line and environment variable options to specify t
 The server reads and parses a public/private key pair from these files.
 The files must contain PEM-encoded data.
 
-All Chronograf command line options have corresponding environment
-variables.
+All Chronograf command line options have corresponding environment variables.
 
 **To configure Chronograf to support TLS:**
 
