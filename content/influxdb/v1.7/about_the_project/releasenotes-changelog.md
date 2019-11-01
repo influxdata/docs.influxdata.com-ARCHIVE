@@ -18,7 +18,7 @@ menu:
 - Replace TSI compaction wait group with counter.
 - Update InfluxQL dependency.
 - Add option to authenticate debug/pprof and ping endpoints.
-- Honor insecure-skip-very even if custom tls config is specified.
+- Honor `insecure-skip-verify` even if custom TLS config is specified.
 
 ### Features
 - Update Go version to 1.12.10.
