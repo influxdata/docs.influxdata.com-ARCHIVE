@@ -60,10 +60,18 @@ Enable authentication by setting the `auth-enabled` option to `true` in the `[ht
   auth-enabled = true # ✨
   log-enabled = true
   write-tracing = false
-  pprof-enabled = false
+  pprof-enabled = true
+  pprof-auth-enabled = true
+  debug-pprof-enabled = false
+  ping-auth-enabled = true
   https-enabled = true
   https-certificate = "/etc/ssl/influxdb.pem"
 ```
+
+{{% note %}}
+If `pprof-enabled` is set to `true`, set `pprof-auth-enabled` and `ping-auth-enabled`
+to `true` to require authentication on profiling and ping endpoints.
+{{% /note %}}
 
 #### 3. Restart the process
 

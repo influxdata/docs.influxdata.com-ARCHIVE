@@ -7,6 +7,24 @@ menu:
     parent: About the project
 ---
 
+## v1.7.9 [2019-10-27]
+
+### Release notes
+- This release is built using Go 1.12.10 which eliminates the
+  [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
+
+### Bugfixes
+- Guard against compaction burst throughput limit.
+- Replace TSI compaction wait group with counter.
+- Update InfluxQL dependency.
+- Add option to authenticate debug/pprof and ping endpoints.
+- Honor `insecure-skip-verify` even if custom TLS config is specified.
+
+### Features
+- Update Go version to 1.12.10.
+- Remove Godeps file.
+- Update Flux version to v0.50.2.
+
 ## v1.7.8 [2019-08-20]
 
 {{% warn %}}
