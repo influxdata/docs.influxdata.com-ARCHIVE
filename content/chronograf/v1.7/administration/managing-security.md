@@ -359,7 +359,8 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 Your users should now be able to sign into Chronograf using the new Okta provider.
 
 #### Configuring GitLab authentication
-[GitLab](https://gitlab.com/) is a popular, OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
+
+[GitLab](https://gitlab.com/) is a popular OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
 **To enable Chronograf support using a GitLab OAuth 2.0 application:**
 
@@ -386,15 +387,15 @@ Your users should now be able to sign into Chronograf using the new Okta provide
     > These should be replaced by the actual URLs used to access each service.
 
     ```bash
-    GENERIC_NAME=gitlab
+    GENERIC_NAME="gitlab"
     GENERIC_CLIENT_ID=<gitlab_application_id>
     GENERIC_CLIENT_SECRET=<gitlab_secret>
-    GENERIC_AUTH_URL=http://<gitlab-server-example.com>/oauth/authorize
-    GENERIC_TOKEN_URL=http://gitlab-server-example.com/oauth/token
-    GENERIC_SCOPES=openid,read_user
-    TOKEN_SECRET=mysupersecret
-    GENERIC_API_URL=http://gitlab-server-example.com/api/v3/user
-    PUBLIC_URL=http://chronograf-example.com:8888/
+    GENERIC_AUTH_URL="https://gitlab.com/oauth/authorize"
+    GENERIC_TOKEN_URL="https://gitlab.com/oauth/token"
+    TOKEN_SECRET=<mytokensecret>
+    GENERIC_SCOPES="api,openid,read_user"
+    PUBLIC_URL="http://<chronograf-host>:8888"
+    GENERIC_API_URL="https://gitlab.com/api/v3/user"
     ```
 
     The equivalent command line options are:
