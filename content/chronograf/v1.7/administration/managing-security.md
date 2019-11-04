@@ -30,17 +30,19 @@ to require authorization and authentication of Chronograf users and enable role-
 To configure any of the supported OAuth 2.0 providers to work with Chronograf,
 you must also configure the `TOKEN_SECRET` environment variable (or command line option), which is used for generating and validating JWT tokens.
 Chronograf will use this secret to generate the JWT Signature for all access tokens.
-Set this value to a secure, arbitrary string:
+Set this value to a secure, arbitrary string.
 
-```
-TOKEN_SECRET=<mysecret>
-```
+1. Generate a secret with OpenSSL by running this command:
 
-Generate a secret with OpenSSL by running this command:
+    ```
+    openssl rand -base64 32
+    ```
 
-```
-openssl rand -base64 32
-```
+2. Set the environment variable:
+
+    ```
+    TOKEN_SECRET=<mysecret>
+    ```
 
 > ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration,
 > set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
