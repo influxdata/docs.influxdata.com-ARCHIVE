@@ -12,8 +12,8 @@ menu:
 To enhance security, configure Chronograf to authenticate and authorize with [OAuth 2.0](https://oauth.net/) and TLS/HTTPS.
 
 * [Configure OAuth 2.0](#configure-oauth-2-0)
-  - [Generate a Token Secret](#generate-a-token-secret)
-  - [Set configurations for your OAuth provider](#oauth-2-0-providers)
+  1. [Generate a Token Secret](#generate-a-token-secret)
+  2. [Set configurations for your OAuth provider](#oauth-2-0-providers)
 * [Configure TLS (Transport Layer Security) and HTTPS](#configure-tls-transport-layer-security-and-https)
 
 ## Configure OAuth 2.0
@@ -67,12 +67,12 @@ you must set configuration options that are specific for the OAuth 2.0 authentic
 
 Configuration steps for the following supported authentication providers are provided in these sections below:
 
-* [GitHub](#configuring-github-authentication)
-* [Google](#configuring-google-authentication)
-* [Auth0](#configuring-auth0-authentication)
-* [Heroku](#configuring-heroku-authentication)
-* [Okta](#configuring-okta-authentication)
-* [Generic](#configuring-generic-authentication)
+* [GitHub](#configure-github-authentication)
+* [Google](#configure-google-authentication)
+* [Auth0](#configure-auth0-authentication)
+* [Heroku](#configure-heroku-authentication)
+* [Okta](#configure-okta-authentication)
+* [Generic](#configure-generic-authentication)
 
 > If you haven't already, you must first [generate a token secret](#generate-a-token-secret) before proceeding.
 
@@ -326,7 +326,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
 ### Configure Okta authentication
 
-[Okta](https://developer.okta.com/) is a popular OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
+[Okta](https://developer.okta.com/) is an OAuth 2.0--compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
 **To enable Chronograf support using an Okta OAuth 2.0 application:**
 
@@ -362,7 +362,7 @@ Your users should now be able to sign into Chronograf using the new Okta provide
 
 ### Configure GitLab authentication
 
-[GitLab](https://gitlab.com/) is a popular OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
+[GitLab](https://gitlab.com/) is an OAuth 2.0--compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
 **To enable Chronograf support using a GitLab OAuth 2.0 application:**
 
@@ -418,7 +418,7 @@ Your users should now be able to sign into Chronograf using the new Okta provide
 
 Your users should now be able to sign into Chronograf using the new GitLab provider.
 
-### Configure Generic authentication
+### Configure generic authentication
 
 #### Configure Chronograf to use any OAuth 2.0 provider
 
