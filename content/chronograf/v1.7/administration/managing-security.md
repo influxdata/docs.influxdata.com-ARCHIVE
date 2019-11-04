@@ -359,7 +359,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 Your users should now be able to sign into Chronograf using the new Okta provider.
 
-#### Configuring GitLab authentication
+### Configuring GitLab authentication
 
 [GitLab](https://gitlab.com/) is a popular OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
