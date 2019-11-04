@@ -1151,7 +1151,7 @@
 							"range": null,
 							"shifts": null
 						},
-						"source": "/chronograf/v1/sources/1",
+						"source": "",
 						"type": "influxql"
 					},
 					{
@@ -1171,7 +1171,7 @@
 							"range": null,
 							"shifts": null
 						},
-						"source": "/chronograf/v1/sources/1",
+						"source": "",
 						"type": "influxql"
 					}
 				],
