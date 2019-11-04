@@ -72,9 +72,9 @@ Configuration steps for the following supported authentication providers are pro
 * [Okta](#configuring-okta-authentication)
 * [Generic](#configuring-generic-authentication)
 
-> These configurations require a `TOKEN_SECRET`, described [above](#configure-oauth-2).
+> If you haven't already, you must first [generate a token secret](#generate-a-token-secret) before proceeding.
 
-### Configuring GitHub authentication
+### Configure GitHub authentication
 
 Chronograf supports using the [GitHub OAuth 2.0 authentication](https://developer.github.com/apps/building-oauth-apps/)
 to request authorization and provide authentication.
@@ -174,7 +174,7 @@ export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 > When logging in for the first time, make sure to grant access to the organization you configured.
 > The OAuth application can only see membership in organizations it has been granted access to.
 
-### Configuring Google authentication
+### Configure Google authentication
 
 Chronograf supports using the [Google OAuth 2.0 authentication provider](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication.
 To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
@@ -241,7 +241,7 @@ For example, to permit access only from `biffspleasurepalace.com` and `savethecl
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```
 
-### Configuring Auth0 authentication
+### Configure Auth0 authentication
 
 [Auth0](https://auth0.com/) implements identity protocol support for OAuth 2.0.
 See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the Auth0 implementation.
@@ -297,7 +297,7 @@ For example, if you have one group of users with an `organization` key set to `b
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
 
-### Configuring Heroku authentication
+### Configure Heroku authentication
 
 To enable Chronograf support using the Heroku OAuth 2.0 provider:
 
@@ -322,7 +322,7 @@ To permit access from the `hill-valley-preservation-society` organization and `t
 ```sh
 export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
-### Configuring Okta authentication
+### Configure Okta authentication
 
 [Okta](https://developer.okta.com/) is a popular OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
@@ -358,7 +358,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 Your users should now be able to sign into Chronograf using the new Okta provider.
 
-### Configuring GitLab authentication
+### Configure GitLab authentication
 
 [GitLab](https://gitlab.com/) is a popular OAuth 2.0 compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
@@ -416,9 +416,9 @@ Your users should now be able to sign into Chronograf using the new Okta provide
 
 Your users should now be able to sign into Chronograf using the new GitLab provider.
 
-### Configuring Generic authentication
+### Configure Generic authentication
 
-#### Configuring Chronograf to use any OAuth 2.0 provider
+#### Configure Chronograf to use any OAuth 2.0 provider
 
 Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
 Additionally, the generic provider implements OpenID Connect (OIDC) as implemented by Active Directory Federation Services (AD FS).
@@ -475,7 +475,7 @@ TOKEN_SECRET="ZNh2N9toMwUVQxTVEe2ZnnMtgkh3xqKZ"
 
 > _**Note:**_ Do not use special characters for the GENERIC_CLIENT_ID as AD FS will split strings here, finally resulting in an identifier mismatch.
 
-### Configuring authentication duration
+### Configure authentication duration
 
 By default, user authentication remains valid for 30 days using a cookie stored in the web browser.
 To configure a different authorization duration, set a duration using the `AUTH_DURATION` environment variable.
