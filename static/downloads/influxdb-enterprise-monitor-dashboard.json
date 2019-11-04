@@ -373,7 +373,7 @@
 						"type": "influxql"
 					},
 					{
-						"query": "SELECT max(\"numMeasurements\") AS \"Measurements\" FROM :database:../database/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY time(:interval:), \"database\" fill(null)",
+						"query": "SELECT max(\"numMeasurements\") AS \"Measurements\" FROM :database:../database/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"database\" fill(null)",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -385,7 +385,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT max(\"numMeasurements\") AS \"Measurements\" FROM :database:../database/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY time(:interval:), \"database\" fill(null)",
+							"rawText": "SELECT max(\"numMeasurements\") AS \"Measurements\" FROM :database:../database/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"database\" fill(null)",
 							"range": null,
 							"shifts": null
 						},
@@ -520,7 +520,7 @@
 						"type": "influxql"
 					},
 					{
-						"query": "SELECT non_negative_derivative(percentile(\"queryReqDurationNs\", 99)) / non_negative_derivative(max(\"queryReq\")) AS \"Query Request\" FROM :database:../httpd/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY hostname, time(:interval:)",
+						"query": "SELECT non_negative_derivative(percentile(\"queryReqDurationNs\", 99)) / non_negative_derivative(max(\"queryReq\")) AS \"Query Request\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:)",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -532,7 +532,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT non_negative_derivative(percentile(\"queryReqDurationNs\", 99)) / non_negative_derivative(max(\"queryReq\")) AS \"Query Request\" FROM :database:../httpd/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY hostname, time(:interval:)",
+							"rawText": "SELECT non_negative_derivative(percentile(\"queryReqDurationNs\", 99)) / non_negative_derivative(max(\"queryReq\")) AS \"Query Request\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:)",
 							"range": null,
 							"shifts": null
 						},
@@ -873,7 +873,7 @@
 						"type": "influxql"
 					},
 					{
-						"query": "SELECT non_negative_derivative(max(\"writeReq\"), 60s) AS \"Writes\" FROM :database:../httpd/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY time(:interval:), \"hostname\"",
+						"query": "SELECT non_negative_derivative(max(\"writeReq\"), 60s) AS \"Writes\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -885,7 +885,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT non_negative_derivative(max(\"writeReq\"), 60s) AS \"Writes\" FROM :database:../httpd/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY time(:interval:), \"hostname\"",
+							"rawText": "SELECT non_negative_derivative(max(\"writeReq\"), 60s) AS \"Writes\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
 							"range": null,
 							"shifts": null
 						},
@@ -893,7 +893,7 @@
 						"type": "influxql"
 					},
 					{
-						"query": "SELECT non_negative_derivative(max(\"serverError\"), 60s) AS \"Server Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY time(:interval:), \"hostname\"",
+						"query": "SELECT non_negative_derivative(max(\"serverError\"), 60s) AS \"Server Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -905,7 +905,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT non_negative_derivative(max(\"serverError\"), 60s) AS \"Server Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY time(:interval:), \"hostname\"",
+							"rawText": "SELECT non_negative_derivative(max(\"serverError\"), 60s) AS \"Server Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
 							"range": null,
 							"shifts": null
 						},
@@ -913,7 +913,7 @@
 						"type": "influxql"
 					},
 					{
-						"query": "SELECT non_negative_derivative(max(\"clientError\"), 60s) AS \"Client Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY time(:interval:), \"hostname\"",
+						"query": "SELECT non_negative_derivative(max(\"clientError\"), 60s) AS \"Client Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -925,7 +925,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT non_negative_derivative(max(\"clientError\"), 60s) AS \"Client Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: AND clusterID = \":clusterID:\" GROUP BY time(:interval:), \"hostname\"",
+							"rawText": "SELECT non_negative_derivative(max(\"clientError\"), 60s) AS \"Client Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
 							"range": null,
 							"shifts": null
 						},
