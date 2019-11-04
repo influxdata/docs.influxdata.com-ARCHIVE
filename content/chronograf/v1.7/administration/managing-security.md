@@ -9,13 +9,12 @@ menu:
     parent: Administration
 ---
 
-Chronograf supports authentication and authorization with [OAuth 2.0](https://oauth.net/) and can be configured to use TLS/HTTPS.
-To enhance security, follow the instructions on this page to configure both features.
+To enhance security, configure Chronograf to authenticate and authorize with [OAuth 2.0](https://oauth.net/) and TLS/HTTPS.
 
 * [Configure OAuth 2.0](#configure-oauth-2-0)
   - [Generate a Token Secret](#generate-a-token-secret)
   - [Set configurations for your OAuth provider](#oauth-2-0-providers)
-* [Configure TLS (Transport Layer Security) and HTTPS](#confige-tls-transport-layer-security-and-https)
+* [Configure TLS (Transport Layer Security) and HTTPS](#configure-tls-transport-layer-security-and-https)
 
 ## Configure OAuth 2.0
 
