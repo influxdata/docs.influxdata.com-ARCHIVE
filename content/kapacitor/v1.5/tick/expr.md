@@ -205,6 +205,8 @@ This returns `TRUE` if `myfield` is a valid identifier and `FALSE` otherwise.
 
 #### Time functions
 
+##### The `time` field
+
 Within each expression the `time` field contains the time of the current data point.
 The following functions can be used on the `time` field.
 Each function returns an int64.
@@ -227,6 +229,20 @@ lambda: hour("time") >= 9 AND hour("time") < 19
 
 The above expression evaluates to `true` if the hour of the day for the data
 point falls between 0900 hours and 1900 hours.
+
+##### Now
+
+Returns the current time.
+
+```js
+now() time
+```
+
+Example usage:
+
+```js
+lambda: "expiration" < unixNano(now())
+```
 
 
 #### Math functions
