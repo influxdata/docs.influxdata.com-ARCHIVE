@@ -304,7 +304,7 @@ An `--auth0-organizations` command line option is also available, but it is limi
 
 To enable Chronograf support using the Heroku OAuth 2.0 provider:
 
-#### Creating Heroku Applications
+#### Creating Heroku applications
 
 To obtain a client ID and application secret for Heroku, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
 Once your application has been created, those two values should be inserted into the following environment variables (or associated command line option):
