@@ -454,44 +454,6 @@
 						},
 						"source": "/chronograf/v1/sources/1",
 						"type": "influxql"
-					},
-					{
-						"query": "SELECT mean(\"usage_user\") as \"Kach Usage\" FROM \"telegraf\".\"default\".\"cpu\" WHERE time > :dashboardTime: AND \"cpu\"='cpu-total' group by time(:interval:)",
-						"queryConfig": {
-							"database": "telegraf",
-							"measurement": "cpu",
-							"retentionPolicy": "default",
-							"fields": [
-								{
-									"value": "mean",
-									"type": "func",
-									"alias": "Kach Usage",
-									"args": [
-										{
-											"value": "usage_user",
-											"type": "field",
-											"alias": ""
-										}
-									]
-								}
-							],
-							"tags": {
-								"cpu": [
-									"cpu-total"
-								]
-							},
-							"groupBy": {
-								"time": "auto",
-								"tags": []
-							},
-							"areTagsAccepted": true,
-							"fill": "null",
-							"rawText": null,
-							"range": null,
-							"shifts": null
-						},
-						"source": "/chronograf/v1/sources/1",
-						"type": "influxql"
 					}
 				],
 				"axes": {
