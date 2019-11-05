@@ -14,6 +14,7 @@ To enhance security, configure Chronograf to authenticate and authorize with [OA
 * [Configure OAuth 2.0](#configure-oauth-2-0)
   1. [Generate a Token Secret](#generate-a-token-secret)
   2. [Set configurations for your OAuth provider](#oauth-2-0-providers)
+  3. [Configure authentication duration](#configure-authentication-duration)
 * [Configure TLS (Transport Layer Security) and HTTPS](#configure-tls-transport-layer-security-and-https)
 
 ## Configure OAuth 2.0
