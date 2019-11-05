@@ -6,7 +6,7 @@ menu:
     weight: 20
 ---
 
-To get up and running with InfluxDB, complete the following tasks:
+To get up and running with the open source (OSS) version of InfluxDB, complete the following tasks:
 
 ## [Download InfluxDB OSS](https://portal.influxdata.com/downloads)
 

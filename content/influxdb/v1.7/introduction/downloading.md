@@ -7,6 +7,4 @@ menu:
     parent: Introduction
 ---
 
-
-
 Download the latest InfluxDB OSS release at the [InfluxData download page](https://portal.influxdata.com/downloads).
