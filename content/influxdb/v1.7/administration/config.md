@@ -7,7 +7,7 @@ menu:
     parent: Administration
 ---
 
-The InfluxDB OSS configuration file contains configuration settings specific to a local node.
+The InfluxDB open source (OSS) configuration file contains configuration settings specific to a local node.
 
 #### Content
 

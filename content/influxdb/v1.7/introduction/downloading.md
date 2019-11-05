@@ -9,4 +9,4 @@ menu:
 
 
 
-Download the latest InfluxDB OSS release at the [InfluxData download page](https://portal.influxdata.com/downloads).
+Download the latest InfluxDB open source (OSS) release at the [InfluxData download page](https://portal.influxdata.com/downloads).

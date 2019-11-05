@@ -6,7 +6,7 @@ menu:
     weight: 20
 ---
 
-The introductory documentation includes all the information you need to get up and running with InfluxDB.
+The introductory documentation includes all the information you need to get up and running with InfluxDB open source (OSS).
 
 ## [Downloading InfluxDB OSS](https://portal.influxdata.com/downloads)
 

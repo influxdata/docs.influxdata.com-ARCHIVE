@@ -7,7 +7,7 @@ menu:
     parent: Introduction
 ---
 
-This page provides directions for installing, starting, and configuring InfluxDB.
+This page provides directions for installing, starting, and configuring InfluxDB open source (OSS).
 
 ## InfluxDB OSS installation requirements
 
