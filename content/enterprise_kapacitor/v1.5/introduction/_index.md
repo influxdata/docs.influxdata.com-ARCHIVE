@@ -9,9 +9,8 @@ menu:
     weight: 1
 ---
 
-The introductory documentation includes all the information you need to get up
-and running with Kapacitor Enterprise.
+To get up and running with Kapacitor Enterprise, complete the following tasks:
 
-## [Downloading Kapacitor Enterprise](/enterprise_kapacitor/v1.5/introduction/download/)
+## [Download Kapacitor Enterprise](/enterprise_kapacitor/v1.5/introduction/download/)
 
-## [Installing Kapacitor Enterprise](/enterprise_kapacitor/v1.5/introduction/installation_guide/)
+## [Install Kapacitor Enterprise](/enterprise_kapacitor/v1.5/introduction/installation_guide/)
