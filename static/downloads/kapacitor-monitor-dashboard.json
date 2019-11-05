@@ -131,7 +131,7 @@
 				"name": "Data Ingest Rate",
 				"queries": [
 					{
-						"query": "SELECT sum(points_received_rate) FROM (SELECT non_negative_derivative(first(\"points_received\"),1s) as \"points_received_rate\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: GROUP BY \"database\", \"retention_policy\", \"measurement\", time(:interval:)) WHERE time > :dashboardTime: GROUP BY time(:interval:)",
+						"query": "SELECT sum(points_received_rate) FROM (SELECT non_negative_derivative(first(\"points_received\"),1s) as \"points_received_rate\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: GROUP BY \"database\", \"retention_policy\", \"measurement\", time(:interval:)) WHERE time > :dashboardTime: GROUP BY time(:interval:) fill(previous)",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -143,7 +143,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT sum(points_received_rate) FROM (SELECT non_negative_derivative(first(\"points_received\"),1s) as \"points_received_rate\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: GROUP BY \"database\", \"retention_policy\", \"measurement\", time(:interval:)) WHERE time > :dashboardTime: GROUP BY time(:interval:)",
+							"rawText": "SELECT sum(points_received_rate) FROM (SELECT non_negative_derivative(first(\"points_received\"),1s) as \"points_received_rate\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: GROUP BY \"database\", \"retention_policy\", \"measurement\", time(:interval:)) WHERE time > :dashboardTime: GROUP BY time(:interval:) fill(previous)",
 							"range": null,
 							"shifts": null
 						},
