@@ -19,13 +19,13 @@ $ go get github.com/influxdata/inch/cmd/inch
 
 ## Use InfluxDB inch
 
-To use InfluxDB inch tool, log into InfluxDB and run the `inch` command with the `inch [options]` to simulate. 
+To use InfluxDB inch tool, log into the InfluxDB instance you want to test (for InfluxDB Enterprise, log into a data node), and then run the `inch` command with the `inch [options]` (specified metrics) to test.
 
 ### Syntax
 
 `inch [ options ]`
 
-### `Options
+#### `Options
 
 - `-b int`: Batch size (by default, 5000; the recommended batch size is between 5000-10000 points).
 - `-c int`: Specifies the number or write streams to run concurrently (default 1).
@@ -50,7 +50,7 @@ To use InfluxDB inch tool, log into InfluxDB and run the `inch` command with the
 
 The following example generates a test workload.
 
-# with 10,000 unique points per series, use the `-p` option:
+##### with 10,000 unique points per series, use the `-p` option:
 
 inch -v -c 8 -b 10000 -t 1,5000,1 -p 100000 -consistency any
 inch -v -c 8 -b 10000 -t 1,1,5000 -p 100000 -consistency any
