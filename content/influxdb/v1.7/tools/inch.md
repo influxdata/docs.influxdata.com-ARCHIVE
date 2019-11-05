@@ -7,7 +7,7 @@ menu:
     parent: Tools
 ---
 
- Use the InfluxDB inch tool to simulate streaming data to InfluxDB and measure your performance (for example, the impact of cardinality on write throughput). To do this, complete the following tasks:
+Use the InfluxDB inch tool to simulate streaming data to InfluxDB and measure your performance (for example, the impact of cardinality on write throughput). To do this, complete the following tasks:
 
 - [Install InfluxDB inch](#install-influxdb-inch)
 - [Use InfluxDB inch](#use-influxdb-inch)
