@@ -2,7 +2,7 @@
 title: InfluxDB _internal measurements and fields
 description: >
   Use and understand the InfluxDB _internal measurements statistics and field keys
-  that monitor InfluxDB OSS and InfluxDB Enterprise servers.
+  that monitor InfluxDB and InfluxDB Enterprise servers.
 menu:
   platform:
     name: InfluxDB _internal measurements
@@ -11,8 +11,7 @@ menu:
 ---
 
 By default, InfluxDB generates internal metrics and saves to the `_internal` database.
-Use these metrics to monitor InfluxDB OSS and InfluxDB Enterprise servers and to
-create alerts to notify you when problems arise.
+Use these metrics to monitor both InfluxDB open source (OSS) and InfluxDB Enterprise and to create alerts to notify you when problems arise.
 
 ### Disable the `_internal` database in production
 InfluxData does **not** recommend using the `_internal` database in a production cluster.
@@ -279,11 +278,11 @@ Exclusively incremented by use of the `influxd-ctl remove shard` command.
 
 #### writeShardFail
 The total number of internal write requests from a remote node that failed.
-It's the cousin of OSS shard stat `writeReqErr`.
+It's the cousin of InfluxDB shard stat `writeReqErr`.
 A write request over HTTP is received by Node A. Node A does not have the shard locally,
 so it creates an internal request to Node B instructing what to write and to which shard.
 If Node B sees the request and if anything goes wrong, Node B increments its own `writeShardFail`.
-Depending on what went wrong, in most circumstances Node B would also increment its `writeReqErr` stat inherited from OSS.
+Depending on what went wrong, in most circumstances Node B would also increment its `writeReqErr` stat inherited from InfluxDB OSS.
 If Node A had the shard locally, there would be no internal request to write data
 to a remote node, so `writeShardFail` would not be incremented.
 
