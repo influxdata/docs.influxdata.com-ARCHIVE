@@ -4,8 +4,8 @@ aliases:
   - /kapacitor/v1.5/introduction/downloading
 menu:
   kapacitor_1_5:
-    name: Introducing Kapacitor
-    identifier: Introducing Kapacitor
+    name: Introduction
+    identifier: Introduction
     weight: 10
 ---
 
