@@ -685,7 +685,7 @@ Environment variable: `INFLUXDB_HTTP_PING_AUTH_ENABLED`
 #### `https-enabled = false`
 
 Determines whether HTTPS is enabled.
-Tp enable HTTPS, set the value to `true`.
+To enable HTTPS, set the value to `true`.
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
 
