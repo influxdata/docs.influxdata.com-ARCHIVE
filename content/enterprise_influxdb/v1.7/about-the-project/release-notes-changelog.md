@@ -27,7 +27,6 @@ For details on changes incorporated from the InfluxDB OSS release, see
 ### Features
 - Add marketplace entitlements for Google Cloud Platform (GCP).
 
-
 ## 1.7.8 [2019-09-03]
 
 {{% warn %}}
