@@ -8,6 +8,26 @@ menu:
     parent: About the project
 ---
 
+## v1.7.9 [2019-10-27]
+
+The InfluxDB Enterprise 1.7.9 release builds on the InfluxDB OSS 1.7.9 release.
+For details on changes incorporated from the InfluxDB OSS release, see
+[InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Release notes
+- This release is built using Go 1.12.10 which eliminates the
+  [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
+
+### Bug fixes
+- Move `tsdb store open` to beginning of server initialization.
+- Enable Meta client and Raft to use verified TLS.
+- Fix RPC pool TLS configuration.
+- Update example config for authorization.
+
+### Features
+- Add marketplace entitlements for Google Cloud Platform (GCP).
+
+
 ## 1.7.8 [2019-09-03]
 
 {{% warn %}}
