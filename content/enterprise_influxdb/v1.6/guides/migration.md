@@ -109,14 +109,14 @@ If you have settings that you’d like to keep, please make a copy of your confi
 
 #### Ubuntu & Debian (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.5-c1.6.5_amd64.deb
-sudo dpkg -i influxdb-data_1.6.5-c1.6.5_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.6-c1.6.6_amd64.deb
+sudo dpkg -i influxdb-data_1.6.6-c1.6.6_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.5_c1.6.5.x86_64.rpm
-sudo yum localinstall influxdb-data-1.6.5_c1.6.5.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.6_c1.6.6.x86_64.rpm
+sudo yum localinstall influxdb-data-1.6.6_c1.6.6.x86_64.rpm
 ```
 
 ### 5. Update the configuration file

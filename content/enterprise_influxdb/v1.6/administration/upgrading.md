@@ -8,9 +8,9 @@ menu:
     parent: Administration
 ---
 
-## Upgrading InfluxDB Enterprise 1.3.x-1.5.x clusters to 1.6.5 (rolling upgrade)
+## Upgrading InfluxDB Enterprise 1.3.x-1.5.x clusters to 1.6.6 (rolling upgrade)
 
-### Step 0: Back up your cluster before upgrading to version 1.6.5.
+### Step 0: Back up your cluster before upgrading to version 1.6.6.
 
 Create a full backup of your InfluxDB Enterprise cluster before performing an upgrade.
 If you have incremental backups created as part of your standard operating procedures, make sure to
@@ -23,33 +23,33 @@ trigger a final incremental backup before proceeding with the upgrade.
 
 Follow these steps to upgrade all meta nodes in your InfluxDB Enterprise cluster. Ensure that the meta cluster is healthy before proceeding to the data nodes.
 
-### Step 1: Download the 1.6.5 meta node package.
+### Step 1: Download the 1.6.6 meta node package.
 
 #### Meta node package download
 **Ubuntu & Debian (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.5-c1.6.5_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.6-c1.6.6_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.5_c1.6.5.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.6_c1.6.6.x86_64.rpm
 ```
 
-### Step 2: Install the 1.6.5 meta nodes package.
+### Step 2: Install the 1.6.6 meta nodes package.
 
 #### Meta node package install
 
 ##### Ubuntu & Debian (64-bit)
 
 ```
-sudo dpkg -i influxdb-meta_1.6.5-c1.6.5_amd64.deb
+sudo dpkg -i influxdb-meta_1.6.6-c1.6.6_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```
-sudo yum localinstall influxdb-meta-1.6.5_c1.6.5.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.6.6_c1.6.6.x86_64.rpm
 ```
 
 ### Step 3: Restart the `influxdb-meta` service.
@@ -86,29 +86,29 @@ ID	TCP Address		Version
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.6.5_c1.6.5   # 1.6.5_c1.6.5 = 👍
-rk-upgrading-02:8091	1.6.5_c1.6.5
-rk-upgrading-03:8091	1.6.5_c1.6.5
+rk-upgrading-01:8091	1.6.6_c1.6.6   # 1.6.6_c1.6.6 = 👍
+rk-upgrading-02:8091	1.6.6_c1.6.6
+rk-upgrading-03:8091	1.6.6_c1.6.6
 ```
 
 ## Upgrading data nodes
 
 Repeat the following steps for each data node in your InfluxDB Enterprise cluster.
 
-### Step 1: Download the 1.6.5 data node package.
+### Step 1: Download the 1.6.6 data node package.
 
 #### Data node package download
 
 ##### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.5-c1.6.5_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.6-c1.6.6_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.5_c1.6.5.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.6_c1.6.6.x86_64.rpm
 ```
 
 ### Step 2: Stop traffic to the data node
@@ -117,24 +117,24 @@ Your cluster's load balancer distributes read and write requests among data node
 
 If you cannot access the load balancer configuration, we recommend working with your networking team to prevent traffic to the data node server before continuing to upgrade.
 
-### Step 3: Install the 1.6.5 data node packages.
+### Step 3: Install the 1.6.6 data node packages.
 
 #### Data node package install
 
 When you run the install command, your terminal asks if you want to keep your
-current configuration file or overwrite your current configuration file with the file for version 1.6.5.
+current configuration file or overwrite your current configuration file with the file for version 1.6.6.
 
 Keep your current configuration file by entering `N` or `O`.
-The configuration file will be updated with the necessary changes for version 1.6.5 in the next step.
+The configuration file will be updated with the necessary changes for version 1.6.6 in the next step.
 
 **Ubuntu & Debian (64-bit)**
 ```
-sudo dpkg -i influxdb-data_1.6.5-c1.6.5_amd64.deb
+sudo dpkg -i influxdb-data_1.6.6-c1.6.6_amd64.deb
 ```
 
 **RedHat & CentOS (64-bit)**
 ```
-sudo yum localinstall influxdb-data-1.6.5_c1.6.5.x86_64.rpm
+sudo yum localinstall influxdb-data-1.6.6_c1.6.6.x86_64.rpm
 ```
 
 ### Step 4: Update the data node configuration file.
@@ -234,16 +234,16 @@ The [`influxd-ctl`](/enterprise_influxdb/v1.6/administration/cluster-commands/) 
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.6.5_c1.6.5   # 1.6.5_c1.6.5 = 👍
-5	rk-upgrading-02:8088	1.6.5_c1.6.5
-6	rk-upgrading-03:8088	1.6.5_c1.6.5
+4	rk-upgrading-01:8088	1.6.6_c1.6.6   # 1.6.6_c1.6.6 = 👍
+5	rk-upgrading-02:8088	1.6.6_c1.6.6
+6	rk-upgrading-03:8088	1.6.6_c1.6.6
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.6.5_c1.6.5
-rk-upgrading-02:8091	1.6.5_c1.6.5
-rk-upgrading-03:8091	1.6.5_c1.6.5
+rk-upgrading-01:8091	1.6.6_c1.6.6
+rk-upgrading-02:8091	1.6.6_c1.6.6
+rk-upgrading-03:8091	1.6.6_c1.6.6
 ```
 
 If you have any issues upgrading your cluster, please do not hesitate to contact support at the email address
