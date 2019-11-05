@@ -23,8 +23,9 @@ To enhance security, configure Chronograf to authenticate and authorize with [OA
 > You can then set up [multiple organizations](https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/)
 > and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
 
-Chronograf can use [OAuth 2.0](https://tools.ietf.org/html/rfc6749) providers and [JWT (JSON Web Token)](https://tools.ietf.org/html/rfc7519) tokens
-to require authorization and authentication of Chronograf users and enable role-based access controls.
+Configure Chronograf to use an OAuth 2.0 provider and JWT (JSON Web Token) token to authenticate users and and enable role-based access controls.
+
+(For more details on OAuth and JWT, see [RFC 6749](https://tools.ietf.org/html/rfc6749) and [RFC 7519](https://tools.ietf.org/html/rfc7519).)
 
 ### Generate a Token Secret
 
