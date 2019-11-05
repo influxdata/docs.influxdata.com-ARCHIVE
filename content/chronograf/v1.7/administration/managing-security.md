@@ -72,7 +72,8 @@ Configuration steps for the following supported authentication providers are pro
 * [Auth0](#configure-auth0-authentication)
 * [Heroku](#configure-heroku-authentication)
 * [Okta](#configure-okta-authentication)
-* [Generic](#configure-generic-authentication)
+* [Gitlab](#configure-gitlab-authentication)
+* [Generic OAuth](#configure-generic-oauth-authentication)
 
 > If you haven't already, you must first [generate a token secret](#generate-a-token-secret) before proceeding.
 
@@ -406,19 +407,18 @@ Your users should now be able to sign into Chronograf using the new Okta provide
     --generic-name=gitlab
     --generic-client-id=<gitlab_application_id>
     --generic-client-secret=<gitlab_secret>
-    --generic-auth-url=http://<gitlab-server-example.com>/oauth/authorize
-    --generic-token-url=http://gitlab-server-example.com/oauth/token
+    --generic-auth-url=https://gitlab.com/oauth/authorize
+    --generic-token-url=https://gitlab.com/oauth/token
+    --token-secret=<mytokensecret>
     --generic-scopes=openid,read_user
-    --token-secret=mysupersecret
-    --generic-api-url=http://gitlab-server-example.com/api/v3/user
-    --public-url=http://chronograf-example.com:8888/
+    --generic-api-url=https://gitlab.com/api/v3/user
+    --public-url=http://<chronograf-host>:8888/
     ```
 
 3. Restart the Chronograf service.
 
 Your users should now be able to sign into Chronograf using the new GitLab provider.
-
-### Configure generic authentication
+### Configure generic OAuth authentication
 
 #### Configure Chronograf to use any OAuth 2.0 provider
 
