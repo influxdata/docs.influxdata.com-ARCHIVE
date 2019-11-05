@@ -77,13 +77,13 @@ Configuration steps for the following supported authentication providers are pro
 
 > If you haven't already, you must first [generate a token secret](#generate-a-token-secret) before proceeding.
 
-### Configure GitHub authentication
+#### Configure GitHub authentication
 
 Chronograf supports using the [GitHub OAuth 2.0 authentication](https://developer.github.com/apps/building-oauth-apps/)
 to request authorization and provide authentication.
 To use GitHub authentication, you need to register a GitHub application and use the assigned Client ID and Client Secret.
 
-#### Overview
+##### Overview
 
 Chronograf has five environment variables (and corresponding command line options) for use with GitHub OAuth 2.0 authentication.
 The steps below show you how to set the required values for:
@@ -118,7 +118,7 @@ export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
 export GH_ORGS=biffs-gang
 ```
 
-#### Creating GitHub OAuth 2.0 applications
+##### Creating GitHub OAuth 2.0 applications
 
 The following steps will guide you in configuring Chronograf to support GitHub OAuth 2.0 authorization and authentication.
 
@@ -158,7 +158,7 @@ The following steps will guide you in configuring Chronograf to support GitHub O
     * [`--github-client-secret=`](/chronograf/v1.7/administration/config-options/#github-client-secret-s)
     * [`--token_secret=`](/chronograf/v1.7/administration/config-options/#token-secret-t)
 
-#### Optional GitHub organizations
+##### Optional GitHub organizations
 
 If you want to require a GitHub organization membership for a user, set the `GH_ORGS` environment variable.
 
@@ -177,12 +177,12 @@ export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 > When logging in for the first time, make sure to grant access to the organization you configured.
 > The OAuth application can only see membership in organizations it has been granted access to.
 
-### Configure Google authentication
+#### Configure Google authentication
 
 Chronograf supports using the [Google OAuth 2.0 authentication provider](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication.
 To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
 
-#### Overview
+##### Overview
 
 Chronograf supports the use of the [Google OAuth 2.0 protocol](https://developers.google.com/identity/protocols/OAuth2) for authentication and authorization.
 The steps below guide you in creating the following required Chronograf environment variables (or corresponding command line options):
@@ -197,7 +197,7 @@ Optionally, you can restrict access to specific domains using the following envi
 
 For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#google-specific-oauth-2-0-authentication-options).
 
-#### Creating Google OAuth 2.0 applications
+##### Creating Google OAuth 2.0 applications
 
 The following steps will guide you in configuring Google OAuth 2.0 authorization and authentication support in Chronograf.
 
@@ -234,7 +234,7 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
     * [`--public-url=`](/chronograf/v1.7/administration/config-options/#public-url)
     * [`--token_secret=`](/chronograf/v1.7/administration/config-options/#token-secret-t)
 
-#### Optional Google domains
+##### Optional Google domains
 
 Similar to GitHub organization restrictions, Google authentication can be configured to restrict access to Chronograf to specific domains.
 These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.7/administration/config-options/#google-domains) command line options.
@@ -244,12 +244,12 @@ For example, to permit access only from `biffspleasurepalace.com` and `savethecl
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```
 
-### Configure Auth0 authentication
+#### Configure Auth0 authentication
 
 [Auth0](https://auth0.com/) implements identity protocol support for OAuth 2.0.
 See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the Auth0 implementation.
 
-#### Creating an Auth0 application
+##### Creating an Auth0 application
 
 The following steps will guide you in configuring Auth0 OAuth 2.0 authorization and authentication support in Chronograf.
 
@@ -286,7 +286,7 @@ The following steps will guide you in configuring Auth0 OAuth 2.0 authorization 
     export TOKEN_SECRET=Super5uperUdn3verGu355!
     ```
 
-#### Optional Auth0 organizations
+##### Optional Auth0 organizations
 
 Auth0 can be customized to the operator's requirements, so it has no official concept of an "organization."
 Organizations are supported in Chronograf using a lightweight `app_metadata` key that can be inserted into Auth0 user profiles automatically or manually.
@@ -300,11 +300,11 @@ For example, if you have one group of users with an `organization` key set to `b
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
 
-### Configure Heroku authentication
+#### Configure Heroku authentication
 
 To enable Chronograf support using the Heroku OAuth 2.0 provider:
 
-#### Creating Heroku applications
+##### Creating Heroku applications
 
 To obtain a client ID and application secret for Heroku, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
 Once your application has been created, those two values should be inserted into the following environment variables (or associated command line option):
@@ -312,7 +312,7 @@ Once your application has been created, those two values should be inserted into
 * `HEROKU_CLIENT_ID`
 * `HEROKU_SECRET`
 
-#### Optional Heroku organizations
+##### Optional Heroku organizations
 
 To restrict access to members of specific Heroku organizations, use
 the `HEROKU_ORGS` environment variable (or associated command line option).
@@ -325,7 +325,7 @@ To permit access from the `hill-valley-preservation-society` organization and `t
 ```sh
 export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
-### Configure Okta authentication
+#### Configure Okta authentication
 
 [Okta](https://developer.okta.com/) is an OAuth 2.0--compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
@@ -361,7 +361,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 Your users should now be able to sign into Chronograf using the new Okta provider.
 
-### Configure GitLab authentication
+#### Configure GitLab authentication
 
 [GitLab](https://gitlab.com/) is an OAuth 2.0--compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
 
@@ -418,9 +418,9 @@ Your users should now be able to sign into Chronograf using the new Okta provide
 3. Restart the Chronograf service.
 
 Your users should now be able to sign into Chronograf using the new GitLab provider.
-### Configure generic OAuth authentication
+#### Configure generic OAuth authentication
 
-#### Configure Chronograf to use any OAuth 2.0 provider
+##### Configure Chronograf to use any OAuth 2.0 provider
 
 Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
 Additionally, the generic provider implements OpenID Connect (OIDC) as implemented by Active Directory Federation Services (AD FS).
@@ -443,7 +443,7 @@ Depending on your OAuth 2.0 provider, many or all of the following environment v
   - Used by Chronograf, for example, to construct the callback URL
 * `TOKEN_SECRET`: Used to validate OAuth [state](https://tools.ietf.org/html/rfc6749#section-4.1.1) response. (see above)
 
-#### Optional environment variables
+##### Optional environment variables
 
 The following environment variables (and corresponding command line options) are also available for optional use:
 
@@ -454,9 +454,9 @@ The following environment variables (and corresponding command line options) are
   - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
   - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping.
 
-#### Examples
+##### Examples
 
-##### OpenID Connect (OIDC) / Active Directory Federation Services (AD FS)
+###### OpenID Connect (OIDC) / Active Directory Federation Services (AD FS)
 
 See [Enabling OpenID Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
 
