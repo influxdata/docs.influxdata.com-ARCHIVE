@@ -49,7 +49,7 @@ Influx Inspect is a tool designed to view detailed information about on disk sha
 
 ## [InfluxDB inch tool](/influxdb/v1.7/tools/inch/)
 
-Use the InfluxDB inch tool to test InfluxDB performance. Adjust the number of points and tag values to test ingesting different tag cardinalities.
+Use the InfluxDB inch tool to test InfluxDB performance. Adjust metrics such as the batch size, tag values, and concurrent write streams to test how ingesting different tag cardinalities and metrics affects performance.
 
 ## Graphs and dashboards
 
