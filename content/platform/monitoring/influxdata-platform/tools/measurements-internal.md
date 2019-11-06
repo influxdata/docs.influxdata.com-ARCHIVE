@@ -13,7 +13,7 @@ menu:
 ---
 
 By default, InfluxDB generates internal metrics and saves to the `_internal` database.
-Use these metrics to monitor InfluxDB OSS and InfluxDB Enterprise servers and to
+Use these metrics to monitor InfluxDB and InfluxDB Enterprise servers and to
 create alerts to notify you when problems arise.
 
 ### Disable the `_internal` database in production
