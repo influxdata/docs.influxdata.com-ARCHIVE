@@ -20,11 +20,11 @@ Use the InfluxDB inch tool to simulate streaming data to InfluxDB and measure yo
     $ go get github.com/influxdata/inch/cmd/inch
     ```
 
-2. Verify `inch` is successfully installed in your `GOPATH/bin` (default on Unix `$HOME/go/bin`; default on Windows `%USERPROFILE%\go\bin`).
+2. Verify `inch` is successfully installed in your `GOPATH/bin` (default on Unix `$HOME/go/bin`).
 
 ## Use InfluxDB inch
 
-1. Log into the InfluxDB instance you want to test (for InfluxDB Enterprise, log into the data nodes to test).
+1. Log into the InfluxDB instance you want to test (for InfluxDB Enterprise, log into the data node(s) to test).
 2. Run `inch`, specifying [`options`](#options) (metrics) to test (see [Options](#options) table below). For example, your syntax may look like this:
 
     ```bash
@@ -39,9 +39,9 @@ Use the InfluxDB inch tool to simulate streaming data to InfluxDB and measure yo
     - 10000 points (`-p`) per series
     - any write `-consistency`
 
-    > **Note:** By default, `inch` writes generated test results to a database named `stress`. To change the name of the database to write to, include the `-db string` option, for example, `inch -db test`.
+    > **Note:** By default, `inch` writes generated test results to a database named `stress`. To change the name of the inch database, include the `-db string` option, for example, `inch -db test`.
 
-3. To view the last 50 `inch` results, run the following query against the database that `inch` writes to:
+3. To view the last 50 `inch` results, run the following query against the inch database:
 
     ```bash
      > select * from stress limit 50
@@ -65,9 +65,9 @@ Use the InfluxDB inch tool to simulate streaming data to InfluxDB and measure yo
 | `-max-errors int`          |  the number of errors required to terminate the process                         | `-max-errors 5`                     |
 | `-p int`                   |  points per series (default 100)                                                | `-p 100`                            |
 | `-report-host string`      |  host to send metrics to                                                        | `report-host http://localhost:8086` |
-| `-report-tags string`      |  comma separated k=v (key-value?) tags to report alongside metrics              | `-report-tags cpu=cpu1`             |
+| `-report-tags string`      |  comma-separated k=v (key-value?) tags to report alongside metrics              | `-report-tags cpu=cpu1`             |
 | `-shard-duration string`   |  shard duration (default 7d)                                                    |`-shard-duration 7d`                 |
-| `-t [string]`&ast;&ast;    |  Comma separated integers that represent tags.                                  | `-t [100,20,4]`                     |
+| `-t [string]`&ast;&ast;    |  comma-separated integers that represent tags.                                  | `-t [100,20,4]`                     |
 | `-target-latency duration` |  if specified, attempt to adapt write delay to meet target.                     |                                     |
 | `-time duration`           |  time span to spread writes over.                                               | `-time 1h`                          |
 |  `-v`                      |  verbose; prints out details as you're running the test.                        | `-v`                                |
