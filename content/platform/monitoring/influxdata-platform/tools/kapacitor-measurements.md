@@ -3,6 +3,8 @@ title: Kapacitor measurements and fields
 description: >
   Understand internal Kapacitor measurements and fields and use them to monitor
   Kapacitor servers.
+aliases:
+  - /platform/monitoring/tools/kapacitor-measurements/
 menu:
   platform:
     name: Kapacitor measurements
