@@ -121,15 +121,15 @@ If you have settings that you’d like to keep, please make a copy of your confi
 #### Ubuntu and Debian (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.8-c1.7.8_amd64.deb
-sudo dpkg -i influxdb-data_1.7.8-c1.7.8_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.9-c1.7.9_amd64.deb
+sudo dpkg -i influxdb-data_1.7.9-c1.7.9_amd64.deb
 ```
 
 #### RedHat and CentOS (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.8_c1.7.8.x86_64.rpm
-sudo yum localinstall influxdb-data-1.7.8_c1.7.8.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.9_c1.7.9.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.9_c1.7.9.x86_64.rpm
 ```
 
 ### 5. Update the configuration file
