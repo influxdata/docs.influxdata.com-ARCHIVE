@@ -8,13 +8,12 @@ menu:
     weight: 10
 ---
 
-The introductory documentation includes all the information you need to get up and running with Telegraf.
+To get up and running with Telegraf, complete the following tasks:
 
-## [Downloading Telegraf](https://influxdata.com/downloads/#telegraf)
-Download Telegraf.
+## [Download Telegraf](https://influxdata.com/downloads/#telegraf)
 
 ## [Installing Telegraf](/telegraf/v1.5/introduction/installation/)
-Directions for installing, starting, and configuring Telegraf.
+Learn how to install, start, and configure Telegraf.
 
-## [Getting started with Telegraf](/telegraf/v1.5/introduction/getting-started/)
-This guide walks you through the download, installation, and configuration processes, and it shows how to use Telegraf to get data into InfluxDB.
+## [Get started with Telegraf](/telegraf/v1.5/introduction/getting-started/)
+Learn how to use Telegraf to get data into InfluxDB.

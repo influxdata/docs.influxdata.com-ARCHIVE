@@ -10,12 +10,10 @@ menu:
     weight: 20
 ---
 
-The introductory documentation includes all the information you need to get up
-and running with InfluxDB Enterprise.
+To get up and running with InfluxDB Enterprise, complete the following tasks:
 
+## [Download InfluxDB Enterprise](/enterprise_influxdb/v1.7/introduction/download/)
 
-## [Downloading InfluxDB Enterprise](/enterprise_influxdb/v1.7/introduction/download/)
+## [Install InfluxDB Enterprise](/enterprise_influxdb/v1.7/introduction/installation_guidelines/)
 
-## [Installation options](/enterprise_influxdb/v1.7/introduction/installation_guidelines/)
-
-## [Getting started with InfluxDB Enterprise](/enterprise_influxdb/v1.7/introduction/getting-started/)
+## [Get started with InfluxDB Enterprise](/enterprise_influxdb/v1.7/introduction/getting-started/)
