@@ -1,5 +1,7 @@
 ---
 title: InfluxDB _internal measurements and fields
+aliases:
+    - /platform/monitoring/tools/measurements-internal
 description: >
   Use and understand the InfluxDB _internal measurements statistics and field keys
   that monitor InfluxDB OSS and InfluxDB Enterprise servers.
