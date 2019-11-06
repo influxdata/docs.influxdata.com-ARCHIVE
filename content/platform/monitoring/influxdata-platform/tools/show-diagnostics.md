@@ -2,7 +2,7 @@
 title: Use the SHOW DIAGNOSTICS statement to monitoring InfluxDB diagnostic information
 description: Use the SHOW DIAGNOSTICS statement to monitor InfluxDB instances.
 aliases:
-  - /platform/monitoring/influxdata-platform/tools/show-diagnostics/
+  - /platform/monitoring/tools/show-diagnostics/
 menu:
   platform:
     name: SHOW DIAGNOSTICS
