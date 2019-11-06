@@ -22,7 +22,7 @@ For details on changes incorporated from the InfluxDB OSS release, see
 - Move `tsdb store open` to beginning of server initialization.
 - Enable Meta client and Raft to use verified TLS.
 - Fix RPC pool TLS configuration.
-- Update example config for authorization.
+- Update example configuration file with new authorization options.
 
 ### Features
 - Add marketplace entitlements for Google Cloud Platform (GCP).
