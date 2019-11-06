@@ -10,7 +10,7 @@ menu:
 
 ## [Release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/)
 
-Details about features, bug fixes, and breaking changes for the current and earlier InfluxDB OSS releases are available in the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+Details about features, bug fixes, and breaking changes for the current and earlier InfluxDB open source (OSS) releases are available in the [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 
 ## [Contributing to InfluxDB](/influxdb/v1.7/about_the_project/contributing/)
 

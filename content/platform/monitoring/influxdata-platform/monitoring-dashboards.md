@@ -15,7 +15,7 @@ aliases:
 
 
 The following dashboards provide visualizations of performance metrics for
-InfluxDB OSS, InfluxDB Enterprise, and Kapacitor.
+InfluxDB open source (OSS), InfluxDB Enterprise, and Kapacitor.
 
 ## Prebuilt dashboards
 Chronograf provides prebuilt monitoring dashboards that use data from specific

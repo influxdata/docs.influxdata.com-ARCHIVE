@@ -9,7 +9,7 @@ menu:
     parent: Guides
 ---
 
-The following guide has step-by-step instructions for migrating an InfluxDB OSS
+The following guide has step-by-step instructions for migrating an InfluxDB open source (OSS)
 instance into an InfluxDB Enterprise cluster.
 
 <dt>
