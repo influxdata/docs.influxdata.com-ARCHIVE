@@ -24,9 +24,6 @@ For details on changes incorporated from the InfluxDB OSS release, see
 - Fix RPC pool TLS configuration.
 - Update example configuration file with new authorization options.
 
-### Features
-- Add marketplace entitlements for Google Cloud Platform (GCP).
-
 ## 1.7.8 [2019-09-03]
 
 {{% warn %}}
