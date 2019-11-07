@@ -49,11 +49,11 @@ Set this value to a secure, arbitrary string.
 > ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration,
 > set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
 
-### JWKS Signature Verification (optional)
+### JSON Web Key Set (JWKS) Signature Verification (optional)
 
-If the OAuth provider implements OpenID Connect with RS256 signatures (as Microsoft AD FS does),
-you need to enable `id_token` support and provide a JWKS document (holding the certificate chain), to validate the RSA signatures against.
-This certificate chain is regularly rolled over (when the certificates expire), so it is fetched from the JWKS_URL on demand.
+If the OAuth provider implements OpenID Connect with RS256 signatures, you need to enable this feature with the `USE_ID_TOKEN` variable
+and provide a JWKS document (holding the certificate chain), to validate the RSA signatures against.
+This certificate chain is regularly rolled over (when the certificates expire), so it is fetched from the `JWKS_URL` on demand.
 
 **Example:**
 
@@ -82,7 +82,6 @@ Configuration steps for the following supported authentication providers are pro
 ---
 
 #### Configure GitHub authentication
-
 
 ##### Overview
 
