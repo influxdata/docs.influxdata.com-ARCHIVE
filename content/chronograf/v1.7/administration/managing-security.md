@@ -75,7 +75,7 @@ Configuration steps for the following supported authentication providers are pro
 * [Heroku](#configure-heroku-authentication)
 * [Okta](#configure-okta-authentication)
 * [Gitlab](#configure-gitlab-authentication)
-* [Generic OAuth](#configure-generic-oauth-authentication)
+* [Configure Chronograf to use any OAuth 2.0 provider](#configure-chronograf-to-use-any-oauth-2-0-provider)
 
 > If you haven't already, you must first [generate a token secret](#generate-a-token-secret) before proceeding.
 
@@ -418,9 +418,7 @@ Your users should now be able to sign into Chronograf using the new Okta provide
 3. Restart the Chronograf service.
 
 Your users should now be able to sign into Chronograf using the new GitLab provider.
-#### Configure generic OAuth authentication
-
-##### Configure Chronograf to use any OAuth 2.0 provider
+#### Configure Chronograf to use any OAuth 2.0 provider
 
 Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
 Additionally, the generic provider implements OpenID Connect (OIDC) as implemented by Active Directory Federation Services (AD FS).
