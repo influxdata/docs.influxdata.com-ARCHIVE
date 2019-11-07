@@ -49,7 +49,7 @@ Set this value to a secure, arbitrary string.
 > ***InfluxEnterprise clusters:*** If you are running multiple Chronograf servers in a high availability configuration,
 > set the `TOKEN_SECRET` environment variable on each server to ensure that users can stay logged in.
 
-### JWKS Signature Verification
+### JWKS Signature Verification (optional)
 
 If the OAuth provider implements OpenID Connect with RS256 signatures (as Microsoft AD FS does),
 you need to enable `id_token` support and provide a JWKS document (holding the certificate chain), to validate the RSA signatures against.
@@ -79,11 +79,10 @@ Configuration steps for the following supported authentication providers are pro
 
 > If you haven't already, you must first [generate a token secret](#generate-a-token-secret) before proceeding.
 
+---
+
 #### Configure GitHub authentication
 
-Chronograf supports using the [GitHub OAuth 2.0 authentication](https://developer.github.com/apps/building-oauth-apps/)
-to request authorization and provide authentication.
-To use GitHub authentication, you need to register a GitHub application and use the assigned Client ID and Client Secret.
 
 ##### Overview
 
