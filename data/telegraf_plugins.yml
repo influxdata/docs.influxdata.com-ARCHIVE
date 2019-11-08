@@ -621,13 +621,14 @@ input:
   - name: InfluxDB Listener
     id: influxdb_listener
     description: |
-      The InfluxDB Listener input plugin listens for requests sent
-      according to the [InfluxDB HTTP API](https://docs.influxdata.com/influxdb/latest/guides/writing_data/).
-      The intent of the plugin is to allow Telegraf to serve as a proxy, or router,
-      for the HTTP `/write` endpoint of the InfluxDB HTTP API.
+       > This plugin was previously known as `http_listener`. 
+       > This plugin is compatible with InfluxDB 1.x only. 
+      
+      Use the InfluxDB Listener input plugin to listen for and route requests through Telegraf to the
+      [InfluxDB HTTP API](https://docs.influxdata.com/influxdb/latest/guides/writing_data/) `/write` endpoint.
+      Telegraf serves as a proxy, or router to the `/write` endpoint.
 
-      > This plugin was previously known as `http_listener`. If you wish to
-      > send general metrics via HTTP, use the [HTTP Listener v2 input plugin](#http_listener_v2) instead.
+      > To send data via HTTP (outside of Telegraf), use the [HTTP Listener v2 input plugin](#http_listener_v2) instead.
 
       The `/write` endpoint supports the `precision` query parameter and can be set
       to one of `ns`, `u`, `ms`, `s`, `m`, `h`.  All other parameters are ignored and
