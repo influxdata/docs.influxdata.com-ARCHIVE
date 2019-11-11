@@ -118,7 +118,7 @@ export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
 export GH_ORGS=biffs-gang
 ```
 
-##### Creating GitHub OAuth 2.0 applications
+##### Create a GitHub OAuth 2.0 application
 
 Configure Chronograf to support GitHub OAuth 2.0 authorization and authentication.
 
@@ -160,16 +160,15 @@ Configure Chronograf to support GitHub OAuth 2.0 authorization and authenticatio
 
 ##### Optional GitHub organizations
 
-If you want to require a GitHub organization membership for a user, set the `GH_ORGS` environment variable.
+If you want to require a GitHub organization membership for a user, set the `GH_ORGS` environment variable with the name of your organization.
 
-**Example:**
 ```sh
 export GH_ORGS=biffs-gang
 ```
+
 If the user is not a member of the specified GitHub organization, then the user will not be granted access.
 To support multiple organizations, use a comma-delimited list.
 
-**Example:**
 ```sh
 export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
@@ -179,29 +178,21 @@ export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 #### Configure Google authentication
 
-Chronograf supports using the [Google OAuth 2.0 authentication provider](https://developers.google.com/identity/protocols/OAuth2) to request authorization and provide authentication.
 To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
 
 ##### Overview
 
-Chronograf supports the use of the [Google OAuth 2.0 protocol](https://developers.google.com/identity/protocols/OAuth2) for authentication and authorization.
 The steps below guide you in creating the following required Chronograf environment variables (or corresponding command line options):
 
 * `GOOGLE_CLIENT_ID` (Google Client ID)
 * `GOOGLE_CLIENT_SECRET` (Google Client Secret)
 * `PUBLIC_URL` (Public URL)
 
-Optionally, you can restrict access to specific domains using the following environment variable (or corresponding command line option):
-
-* `GOOGLE_DOMAINS` (Google domains)
-
 For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#google-specific-oauth-2-0-authentication-options).
 
-##### Creating Google OAuth 2.0 applications
+##### Create a Google OAuth 2.0 application
 
-The following steps will guide you in configuring Google OAuth 2.0 authorization and authentication support in Chronograf.
-
-**To create a Google OAuth 2.0 application:**
+To create a Google OAuth 2.0 application:
 
 1. Obtain the required Google OAuth 2.0 credentials, including a Google Client ID and Client Secret, by following the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials).
 2. Verify that Chronograf is publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
@@ -305,7 +296,7 @@ An `--auth0-organizations` command line option is also available, but it is limi
 
 To enable Chronograf support using the Heroku OAuth 2.0 provider:
 
-##### Creating Heroku applications
+##### Creating a Heroku application
 
 To obtain a client ID and application secret for Heroku, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
 Once your application has been created, those two values should be inserted into the following environment variables (or associated command line option):
@@ -422,17 +413,17 @@ Your users should now be able to sign into Chronograf using the new GitLab provi
 
 #### Configure Chronograf to use any OAuth 2.0 provider
 
-Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
+Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the generic configuration options below.
 Additionally, the generic provider implements OpenID Connect (OIDC) as implemented by Active Directory Federation Services (AD FS).
 
-Depending on your OAuth 2.0 provider, many or all of the following environment variables (or corresponding command line options) are required by Chronograf when using the Generic configuration:
+When using the generic configuration, some or all of the following environment variables (or corresponding command line options) are required (depending on your OAuth 2.0 provider):
 
 * `GENERIC_CLIENT_ID`: Application client [identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the provider
 * `GENERIC_CLIENT_SECRET`: Application client [secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the provider
 * `GENERIC_AUTH_URL`: Provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
 * `GENERIC_TOKEN_URL`: Provider's token [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) URL used by the Chronograf client to obtain an access token
 * `USE_ID_TOKEN`: Enable OpenID [id_token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3) processing
-* `JWKS_URL`: OAuth 2.0 provider's jwks [endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) is used by the client to validate RSA signatures
+* `JWKS_URL`: OAuth 2.0 provider's JWKS [endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) is used by the client to validate RSA signatures
 * `GENERIC_API_URL`: Provider's [OpenID UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] URL used by Chronograf to request user data
 * `GENERIC_API_KEY`: JSON lookup key for [OpenID UserInfo](https://connect2id.com/products/server/docs/api/userinfo)] (known to be required for Microsoft Azure, with the value `userPrincipalName`)
 * `GENERIC_SCOPES`: [Scopes](https://tools.ietf.org/html/rfc6749#section-3.3) of user data required for your instance of Chronograf, such as user email and OAuth provider organization
@@ -454,9 +445,7 @@ The following environment variables (and corresponding command line options) are
   - So, for example, if `PUBLIC_URL` is `https://localhost:8888` and `GENERIC_NAME` is its default value, then the callback URL would be `https://localhost:8888/oauth/generic/callback`, and the Chronograf Login button would read `Log in with Generic`
   - While using Chronograf, this value should be supplied in the `Provider` field when adding a user or creating an organization mapping.
 
-##### Examples
-
-###### OpenID Connect (OIDC) / Active Directory Federation Services (AD FS)
+##### Example: OIDC with AD FS
 
 See [Enabling OpenID Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
 
