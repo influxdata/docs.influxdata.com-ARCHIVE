@@ -23,14 +23,14 @@ To enhance security, configure Chronograf to authenticate and authorize with [OA
 > You can then set up [multiple organizations](https://docs.influxdata.com/chronograf/latest/administration/managing-organizations/)
 > and [users](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/).
 
-Configure Chronograf to use an OAuth 2.0 provider and JWT (JSON Web Token) token to authenticate users and and enable role-based access controls.
+Configure Chronograf to use an OAuth 2.0 provider and JWT (JSON Web Token) to authenticate users and enable role-based access controls.
 
 (For more details on OAuth and JWT, see [RFC 6749](https://tools.ietf.org/html/rfc6749) and [RFC 7519](https://tools.ietf.org/html/rfc7519).)
 
 ### Generate a Token Secret
 
 To configure any of the supported OAuth 2.0 providers to work with Chronograf,
-you must also configure the `TOKEN_SECRET` environment variable (or command line option), which is used for generating and validating JWT tokens.
+you must configure the `TOKEN_SECRET` environment variable (or command line option), which is used for generating and validating JWT tokens.
 Chronograf will use this secret to generate the JWT Signature for all access tokens.
 Set this value to a secure, arbitrary string.
 
@@ -83,14 +83,12 @@ Configuration steps for the following supported authentication providers are pro
 
 #### Configure GitHub authentication
 
-First create a GitHub OAuth 2.0 application:
-
 1. Follow the [Register your app](https://github.com/settings/applications/new) steps at the GitHub Developer website to register your GitHub application and obtain your assigned Client ID and Client Secret.
-   On the GitHub application registration page, you will need to enter the following values:
+   On the GitHub application registration page, enter the following values:
    - **Homepage URL**: the full Chronograf server name and port.
-   If you are running it locally with the default settings, it would be `http://localhost:8888`.
+   For example, to run the application locally with default settings, set the this URL to `http://localhost:8888`.
    - **Authorization callback URL**: the **Homepage URL** plus the callback URL path `/oauth/github/callback`
-   (e.g. `http://localhost:8888/oauth/github/callback`).
+   (for example, `http://localhost:8888/oauth/github/callback`).
 
 2. Set the Chronograf environment variables (or corresponding command line options) with the credentials provided by GitHub:
 
@@ -113,7 +111,7 @@ First create a GitHub OAuth 2.0 application:
     export TOKEN_SECRET=Super5uperUdn3verGu355!
     ```
 
-Alternatively, these environment variables can be set using the equivalent command line options:
+Alternatively, set environment variables using the equivalent command line options:
 
 * [`--github-client-id=`](/chronograf/v1.7/administration/config-options/#github-client-id-i)
 * [`--github-client-secret=`](/chronograf/v1.7/administration/config-options/#github-client-secret-s)
@@ -123,7 +121,7 @@ For details on the command line options and environment variables, see [GitHub O
 
 ##### GitHub organizations (optional)
 
-If you want to require a GitHub organization membership for a user, set the `GH_ORGS` environment variable with the name of your organization.
+To require GitHub organization membership for a user, set the `GH_ORGS` environment variable with the name of your organization.
 
 ```sh
 export GH_ORGS=biffs-gang
@@ -159,9 +157,7 @@ export GH_ORGS=biffs-gang
 
 To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
 
-##### Overview
-
-The steps below guide you in creating the following required Chronograf environment variables (or corresponding command line options):
+Configure the required Chronograf environment variables (or corresponding command line options):
 
 * `GOOGLE_CLIENT_ID` (Google Client ID)
 * `GOOGLE_CLIENT_SECRET` (Google Client Secret)
@@ -170,8 +166,6 @@ The steps below guide you in creating the following required Chronograf environm
 For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#google-specific-oauth-2-0-authentication-options).
 
 ##### Create a Google OAuth 2.0 application
-
-To create a Google OAuth 2.0 application:
 
 1. Obtain the required Google OAuth 2.0 credentials, including a Google Client ID and Client Secret, by following the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials).
 2. Verify that Chronograf is publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
@@ -220,9 +214,9 @@ export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 [Auth0](https://auth0.com/) implements identity protocol support for OAuth 2.0.
 See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the Auth0 implementation.
 
-##### Creating an Auth0 application
+##### Create an Auth0 application
 
-The following steps will guide you in configuring Auth0 OAuth 2.0 authorization and authentication support in Chronograf.
+Configure Auth0 OAuth 2.0 authorization and authentication support in Chronograf.
 
 **To create an Auth0 OAuth 2.0 application:**
 
@@ -402,7 +396,7 @@ When using the generic configuration, some or all of the following environment v
 * `GENERIC_AUTH_URL`: Provider's authorization [endpoint](https://tools.ietf.org/html/rfc6749#section-3.1) URL
 * `GENERIC_TOKEN_URL`: Provider's token [endpoint](https://tools.ietf.org/html/rfc6749#section-3.2) URL used by the Chronograf client to obtain an access token
 * `USE_ID_TOKEN`: Enable OpenID [id_token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3) processing
-* `JWKS_URL`: OAuth 2.0 provider's JWKS [endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) is used by the client to validate RSA signatures
+* `JWKS_URL`: Provider's JWKS [endpoint](https://tools.ietf.org/html/rfc7517#section-4.7) used by the client to validate RSA signatures
 * `GENERIC_API_URL`: Provider's [OpenID UserInfo endpoint](https://connect2id.com/products/server/docs/api/userinfo)] URL used by Chronograf to request user data
 * `GENERIC_API_KEY`: JSON lookup key for [OpenID UserInfo](https://connect2id.com/products/server/docs/api/userinfo)] (known to be required for Microsoft Azure, with the value `userPrincipalName`)
 * `GENERIC_SCOPES`: [Scopes](https://tools.ietf.org/html/rfc6749#section-3.3) of user data required for your instance of Chronograf, such as user email and OAuth provider organization
