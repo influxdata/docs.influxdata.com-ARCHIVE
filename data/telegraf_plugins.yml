@@ -621,8 +621,8 @@ input:
   - name: InfluxDB Listener
     id: influxdb_listener
     description: |
-       > This plugin was previously known as `http_listener`. 
-       > This plugin is compatible with InfluxDB 1.x only. 
+      > This plugin was previously known as `http_listener`.
+      > This plugin is compatible with InfluxDB 1.x only.
       
       Use the InfluxDB Listener input plugin to listen for and route requests through Telegraf to the
       [InfluxDB HTTP API](https://docs.influxdata.com/influxdb/latest/guides/writing_data/) `/write` endpoint.
