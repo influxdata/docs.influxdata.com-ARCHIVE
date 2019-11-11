@@ -9,7 +9,7 @@ menu:
     parent: Administration
 ---
 
-To enhance security, configure Chronograf to authenticate and authorize with [OAuth 2.0](https://oauth.net/) and TLS/HTTPS.
+To enhance security, configure Chronograf to authenticate and authorize with [OAuth 2.0](https://oauth.net/) and use TLS/HTTPS.
 
 * [Configure OAuth 2.0](#configure-oauth-2-0)
   1. [Generate a Token Secret](#generate-a-token-secret)
@@ -120,7 +120,7 @@ export GH_ORGS=biffs-gang
 
 ##### Creating GitHub OAuth 2.0 applications
 
-The following steps will guide you in configuring Chronograf to support GitHub OAuth 2.0 authorization and authentication.
+Configure Chronograf to support GitHub OAuth 2.0 authorization and authentication.
 
 **To create a GitHub OAuth 2.0 application:**
 
@@ -216,7 +216,7 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
     export GOOGLE_CLIENT_ID= 812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
     export GOOGLE_CLIENT_SECRET= wwo0m29iLirM6LzHJWE84GRD
     export PUBLIC_URL=http://localhost:8888
-```
+    ```
 
 4. Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
 
@@ -236,10 +236,11 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
 
 ##### Optional Google domains
 
-Similar to GitHub organization restrictions, Google authentication can be configured to restrict access to Chronograf to specific domains.
+Configure Google authentication to restrict access to Chronograf to specific domains.
 These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.7/administration/config-options/#google-domains) command line options.
-Multiple domains are separated using commas.
-For example, to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, the `GOOGLE_DOMAINS` environment variable is:
+Separate multiple domains using commas.
+For example, to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, set the environment variable as follows:
+
 ```sh
 export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 ```
@@ -418,6 +419,7 @@ Your users should now be able to sign into Chronograf using the new Okta provide
 3. Restart the Chronograf service.
 
 Your users should now be able to sign into Chronograf using the new GitLab provider.
+
 #### Configure Chronograf to use any OAuth 2.0 provider
 
 Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the Generic configuration options below.
