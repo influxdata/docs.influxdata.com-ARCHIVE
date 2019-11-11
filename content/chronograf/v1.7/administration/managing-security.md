@@ -83,55 +83,16 @@ Configuration steps for the following supported authentication providers are pro
 
 #### Configure GitHub authentication
 
-##### Overview
-
-Chronograf has five environment variables (and corresponding command line options) for use with GitHub OAuth 2.0 authentication.
-The steps below show you how to set the required values for:
-
-* `TOKEN_SECRET` (secret used for generating and validating JWT tokens)
-* `GH_CLIENT_ID` (GitHub Client ID)
-* `GH_CLIENT_SECRET` (GitHub Client Secret)
-
-Optionally, you can specify values for these two environment variables (or corresponding command line options):
-
-* `AUTH_DURATION` (authorization duration)
-* `GH_ORGS` (GitHub organizations)
-
-For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#github-specific-oauth-2-0-authentication-options).
-
-**Example:**
-
-```bash
-# Require users to reauthenticate after 1 hour
-export AUTH_DURATION=1h
-
-# Secret used to generate JWT tokens
-export TOKEN_SECRET=Super5uperUdn3verGu355!
-
-# GitHub Client ID
-export GH_CLIENT_ID=b339dd4fddd95abec9aa
-
-# GitHub Client Secret
-export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
-
-# Restrict to specific GitHub organizations
-export GH_ORGS=biffs-gang
-```
-
-##### Create a GitHub OAuth 2.0 application
-
-Configure Chronograf to support GitHub OAuth 2.0 authorization and authentication.
-
-**To create a GitHub OAuth 2.0 application:**
+First create a GitHub OAuth 2.0 application:
 
 1. Follow the [Register your app](https://github.com/settings/applications/new) steps at the GitHub Developer website to register your GitHub application and obtain your assigned Client ID and Client Secret.
+   On the GitHub application registration page, you will need to enter the following values:
+   - **Homepage URL**: the full Chronograf server name and port.
+   If you are running it locally with the default settings, it would be `http://localhost:8888`.
+   - **Authorization callback URL**: the **Homepage URL** plus the callback URL path `/oauth/github/callback`
+   (e.g. `http://localhost:8888/oauth/github/callback`).
 
-    * `Homepage URL`: should include the full Chronograf server name and port.
-      For example, if you are running it locally with the default settings, it would be `http://localhost:8888`.
-    * `Authorization callback URL`: The `Homepage URL` plus the callback URL path `/oauth/github/callback`.
-      Example: `http://localhost:8888/oauth/github/callback`
-
-2. Set the Chronograf environment variables (or corresponding command line options) for the GitHub OAuth 2.0 credentials:
+2. Set the Chronograf environment variables (or corresponding command line options) with the credentials provided by GitHub:
 
     * `GH_CLIENT_ID` (GitHub Client ID)
     * `GH_CLIENT_SECRET` (GitHub Client Secret)
@@ -152,13 +113,15 @@ Configure Chronograf to support GitHub OAuth 2.0 authorization and authenticatio
     export TOKEN_SECRET=Super5uperUdn3verGu355!
     ```
 
-    Alternatively, these environment variables can be set using the equivalent command line options:
+Alternatively, these environment variables can be set using the equivalent command line options:
 
-    * [`--github-client-id=`](/chronograf/v1.7/administration/config-options/#github-client-id-i)
-    * [`--github-client-secret=`](/chronograf/v1.7/administration/config-options/#github-client-secret-s)
-    * [`--token_secret=`](/chronograf/v1.7/administration/config-options/#token-secret-t)
+* [`--github-client-id=`](/chronograf/v1.7/administration/config-options/#github-client-id-i)
+* [`--github-client-secret=`](/chronograf/v1.7/administration/config-options/#github-client-secret-s)
+* [`--token_secret=`](/chronograf/v1.7/administration/config-options/#token-secret-t)
 
-##### Optional GitHub organizations
+For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#github-specific-oauth-2-0-authentication-options).
+
+##### GitHub organizations (optional)
 
 If you want to require a GitHub organization membership for a user, set the `GH_ORGS` environment variable with the name of your organization.
 
@@ -175,6 +138,22 @@ export GH_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 > When logging in for the first time, make sure to grant access to the organization you configured.
 > The OAuth application can only see membership in organizations it has been granted access to.
+
+##### Example GitHub OAuth configuration
+
+```bash
+# GitHub Client ID
+export GH_CLIENT_ID=b339dd4fddd95abec9aa
+
+# GitHub Client Secret
+export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
+
+# Secret used to generate JWT tokens
+export TOKEN_SECRET=Super5uperUdn3verGu355!
+
+# Restrict to specific GitHub organizations
+export GH_ORGS=biffs-gang
+```
 
 #### Configure Google authentication
 
