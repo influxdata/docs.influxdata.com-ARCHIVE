@@ -111,7 +111,7 @@ time			                 level description	      location	       water_level
 
 ### Data sources and things to note
 The sample data is publicly available data from the [National Oceanic and Atmospheric Administration’s (NOAA) Center for Operational Oceanographic Products and Services](http://tidesandcurrents.noaa.gov/stations.html?type=Water+Levels).
-The data include 15,258 observations of water levels (ft) collected every six seconds at two stations (Santa Monica, CA (ID 9410840) and Coyote Creek, CA (ID 9414575)) over the period from August 18, 2015 through September 18, 2015.
+The data include 15,258 observations of water levels (ft) collected every six minutes at two stations (Santa Monica, CA (ID 9410840) and Coyote Creek, CA (ID 9414575)) over the period from August 18, 2015 through September 18, 2015.
 
 Note that the measurements `average_temperature`, `h2o_pH`, `h2o_quality`, and `h2o_temperature` contain fictional data.
 Those measurements serve to illuminate query functionality in [Schema Exploration](../../query_language/schema_exploration/).
