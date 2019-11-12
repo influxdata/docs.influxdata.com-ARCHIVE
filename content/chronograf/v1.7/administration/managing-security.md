@@ -34,10 +34,10 @@ you must configure the `TOKEN_SECRET` environment variable (or command line opti
 Chronograf will use this secret to generate the JWT Signature for all access tokens.
 Set this value to a secure, arbitrary string.
 
-1. Generate a secret with OpenSSL by running this command:
+1. Generate a secret. You can do this with OpenSSL by running this command:
 
     ```
-    openssl rand -base64 32
+    openssl rand -base64 256 | tr -d '\n'
     ```
 
 2. Set the environment variable:
