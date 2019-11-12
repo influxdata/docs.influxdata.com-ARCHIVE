@@ -2,7 +2,7 @@
 title: OpenTSDB
 ---
 
-InfluxDB supports the OpenTSDB ["telnet" protocol](http://opentsdb.net/docs/build/html/user_guide/writing.html#telnet).
+InfluxDB supports the OpenTSDB ["telnet" protocol](http://opentsdb.net/docs/build/html/user_guide/writing/index.html#telnet).
 When OpenTSDB support is enabled, InfluxDB can act as a drop-in replacement for your OpenTSDB system.
 
 An example input point, and how it is processed, is shown below.
