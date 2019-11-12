@@ -30,15 +30,15 @@ Configure Chronograf to use an OAuth 2.0 provider and JWT (JSON Web Token) to au
 ### Generate a Token Secret
 
 To configure any of the supported OAuth 2.0 providers to work with Chronograf,
-you must configure the `TOKEN_SECRET` environment variable (or command line option), which is used for generating and validating JWT tokens.
+you must configure the `TOKEN_SECRET` environment variable (or command line option).
 Chronograf will use this secret to generate the JWT Signature for all access tokens.
-Set this value to a secure, arbitrary string.
 
-1. Generate a secret. You can do this with OpenSSL by running this command:
+1. Generate a secret, high-entropy pseudo-random string.
 
-    ```
-    openssl rand -base64 256 | tr -d '\n'
-    ```
+    > For example, to do this with OpenSSL, run this command:
+    > ```
+    > openssl rand -base64 256 | tr -d '\n'
+    > ```
 
 2. Set the environment variable:
 
@@ -189,18 +189,18 @@ export GOOGLE_DOMAINS=biffspleasurepalance.com,savetheclocktower.com
 
 See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the Auth0 implementation.
 
-1. Set up your Auth0 account to obtain the needed credentials.
-   - From the Auth0 user dashboard, click **Create Application**.
-   - Choose **Regular Web Applications** as the type of application and click **Create**.
-   - In the **Settings** tab, set **Token Endpoint Authentication** to **None**.
-   - Set **Allowed Callback URLs** to `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.7/administration/config-options/#general-authentication-options) of your Chronograf instance)
-   - Set **Allowed Logout URLs** to `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.7/administration/config-options/#general-authentication-options) of your Chronograf instance)
+1. Set up your Auth0 account to obtain the necessary credentials.
+   1. From the Auth0 user dashboard, click **Create Application**.
+   2. Choose **Regular Web Applications** as the type of application and click **Create**.
+   3. In the **Settings** tab, set **Token Endpoint Authentication** to **None**.
+   4. Set **Allowed Callback URLs** to `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.7/administration/config-options/#general-authentication-options) of your Chronograf instance)
+   5. Set **Allowed Logout URLs** to `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.7/administration/config-options/#general-authentication-options) of your Chronograf instance)
    <!-- ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows). -->
 
 2. Set the Chronograf environment variables based on your Auth0 client credentials:
 
     * `AUTH0_DOMAIN` (Auth0 domain)
-    * `AUTH0_CLIENT_ID` (Auth0 client ID)
+    * `AUTH0_CLIENT_ID` (Auth0 Client ID)
     * `AUTH0_CLIENT_SECRET` (Auth0 client Secret)
     * `PUBLIC_URL` (Public URL, used in callback URL and logout URL above)
 
@@ -263,9 +263,9 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 #### Configure Okta authentication
 
 1. Create an Okta web application by following the steps in the Okta documentation: [Implement the Authorization Code Flow](https://developer.okta.com/docs/guides/implement-auth-code/overview/).
-  - In the **General Settings** section, find the **Allowed grant types** listing and select
-    only the **Client acting on behalf of a user:** **Authorization Code** option.
-  - In the **LOGIN** section, set the **Login redirect URIs* and **Initiate login URI** to `http://localhost:8888/oauth/okta/callback` (the default callback URL for Chronograf).
+  1. In the **General Settings** section, find the **Allowed grant types** listing and select
+     only the **Client acting on behalf of a user:** **Authorization Code** option.
+  2. In the **LOGIN** section, set the **Login redirect URIs* and **Initiate login URI** to `http://localhost:8888/oauth/okta/callback` (the default callback URL for Chronograf).
 
 2. Set the following Chronograf environment variables:
 
@@ -295,10 +295,10 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 #### Configure GitLab authentication
 
 1. In your GitLab profile, [create a new OAuth2 authentication service](https://docs.gitlab.com/ee/integration/oauth_provider.html#adding-an-application-through-the-profile).
-   - Provide a name for your application, then enter your publicly accessible Chronograf URL with the `/oauth/gitlab/callback` path as your GitLab **callback URL**.
-     (For example, `http://<your_chronograf_server>:8888/oauth/gitlab/callback`.)
-   - Click **Submit** to save the service details.
-   - Make sure your application has **openid** and **read_user** scopes.
+   1. Provide a name for your application, then enter your publicly accessible Chronograf URL with the `/oauth/gitlab/callback` path as your GitLab **callback URL**.
+      (For example, `http://<your_chronograf_server>:8888/oauth/gitlab/callback`.)
+   2. Click **Submit** to save the service details.
+   3. Make sure your application has **openid** and **read_user** scopes.
 
 2. Copy the provided **Application Id** and **Secret** and set the following environment variables:
 
