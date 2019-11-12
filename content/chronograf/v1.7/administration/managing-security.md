@@ -148,53 +148,36 @@ export GH_ORGS=biffs-gang
 
 #### Configure Google authentication
 
-To use Google authentication, you need to register a Google application and use the assigned Client ID and Client Secret, as well as specify a Public URL.
-
-Configure the required Chronograf environment variables (or corresponding command line options):
-
-* `GOOGLE_CLIENT_ID` (Google Client ID)
-* `GOOGLE_CLIENT_SECRET` (Google Client Secret)
-* `PUBLIC_URL` (Public URL)
-
-For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#google-specific-oauth-2-0-authentication-options).
-
-##### Create a Google OAuth 2.0 application
-
-1. Obtain the required Google OAuth 2.0 credentials, including a Google Client ID and Client Secret, by following the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials).
+1. Follow the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials)
+   to obtain the required Google OAuth 2.0 credentials, including a Google Client ID and Client Secret, by 
 2. Verify that Chronograf is publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
-3. Set the Chronograf environment variables (or corresponding command line options) for the Google OAuth 2.0 credentials and Public URL:
+3. Set the Chronograf environment variables for the Google OAuth 2.0 credentials and **Public URL** used to access Chronograf:
 
-    * `GOOGLE_CLIENT_ID` (Google client ID)
-    * `GOOGLE_CLIENT_SECRET` (Google client Secret)
-    * `PUBLIC_URL` (Public URL -- the URL used to access Chronograf)
-
-    **Example:**
     ```sh
-    export GOOGLE_CLIENT_ID= 812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
-    export GOOGLE_CLIENT_SECRET= wwo0m29iLirM6LzHJWE84GRD
+    export GOOGLE_CLIENT_ID=812760930421-kj6rnscmlbv49pmkgr1jq5autblc49kr.apps.googleusercontent.com
+    export GOOGLE_CLIENT_SECRET=wwo0m29iLirM6LzHJWE84GRD
     export PUBLIC_URL=http://localhost:8888
     ```
 
-4. Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
+4. If you haven't already, set the Chronograf environment with your token secret:
 
-    * `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
-
-    **Example:**
     ```sh
     export TOKEN_SECRET=Super5uperUdn3verGu355!
     ```
 
-    Alternatively, the environment variables discussed above can be set using their corresponding command line options:
+Alternatively, the environment variables discussed above can be set using their corresponding command line options:
 
-    * [`--google-client-id=`](/chronograf/v1.7/administration/config-options/#google-client-id)
-    * [`--google-client-secret=`](/chronograf/v1.7/administration/config-options/#google-client-secret)
-    * [`--public-url=`](/chronograf/v1.7/administration/config-options/#public-url)
-    * [`--token_secret=`](/chronograf/v1.7/administration/config-options/#token-secret-t)
+* [`--google-client-id=`](/chronograf/v1.7/administration/config-options/#google-client-id)
+* [`--google-client-secret=`](/chronograf/v1.7/administration/config-options/#google-client-secret)
+* [`--public-url=`](/chronograf/v1.7/administration/config-options/#public-url)
+* [`--token_secret=`](/chronograf/v1.7/administration/config-options/#token-secret-t)
+
+For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#google-specific-oauth-2-0-authentication-options).
 
 ##### Optional Google domains
 
 Configure Google authentication to restrict access to Chronograf to specific domains.
-These are configured using the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.7/administration/config-options/#google-domains) command line options.
+Set the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.7/administration/config-options/#google-domains) command line option.
 Separate multiple domains using commas.
 For example, to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, set the environment variable as follows:
 
