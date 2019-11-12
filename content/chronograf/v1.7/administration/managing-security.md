@@ -83,30 +83,23 @@ Configuration steps for the following supported authentication providers are pro
 
 #### Configure GitHub authentication
 
-1. Follow the [Register your app](https://github.com/settings/applications/new) steps at the GitHub Developer website to register your GitHub application and obtain your assigned Client ID and Client Secret.
+1. Follow the steps to [Register a new OAuth application](https://github.com/settings/applications/new)
+   on GitHub to obtain your Client ID and Client Secret.
    On the GitHub application registration page, enter the following values:
    - **Homepage URL**: the full Chronograf server name and port.
    For example, to run the application locally with default settings, set the this URL to `http://localhost:8888`.
    - **Authorization callback URL**: the **Homepage URL** plus the callback URL path `/oauth/github/callback`
    (for example, `http://localhost:8888/oauth/github/callback`).
 
-2. Set the Chronograf environment variables (or corresponding command line options) with the credentials provided by GitHub:
-
-    * `GH_CLIENT_ID` (GitHub Client ID)
-    * `GH_CLIENT_SECRET` (GitHub Client Secret)
-
-    **Example:**
+2. Set the Chronograf environment variables with the credentials provided by GitHub:
 
     ```sh
-    export GH_CLIENT_ID=b339dd4fddd95abec9aa
-    export GH_CLIENT_SECRET=260041897d3252c146ece6b46ba39bc1e54416dc
+    export GH_CLIENT_ID=<client-id-from-github>
+    export GH_CLIENT_SECRET=<client-secret-from-github>
     ```
 
-3. Set the Chronograf environment variable (or corresponding command line option) required for JWT support:
+3. If you haven't already, set the Chronograf environment with your token secret:
 
-    * `TOKEN_SECRET` (Secret used for generating and validating JWT tokens)
-
-    **Example:**
     ```sh
     export TOKEN_SECRET=Super5uperUdn3verGu355!
     ```
@@ -121,7 +114,7 @@ For details on the command line options and environment variables, see [GitHub O
 
 ##### GitHub organizations (optional)
 
-To require GitHub organization membership for a user, set the `GH_ORGS` environment variable with the name of your organization.
+To require GitHub organization membership for authenticating users, set the `GH_ORGS` environment variable with the name of your organization.
 
 ```sh
 export GH_ORGS=biffs-gang
