@@ -8,6 +8,19 @@ menu:
     parent: About the project
 ---
 
+## v1.12.5 [2019-11-12]
+
+### Bugfixes
+- Fix incorrect results in Ping (`ping`) input plugin.
+- Add missing character replacement to `sql_instance` tag.
+- Change `no metric` error message to `debug` level in CloudWatch (`cloudwatch`) input plugin.
+- Add missing `ServerProperties` query to SQLServer (`sqlserver`) input plugin documentation.
+- Fix MongoDB `connections_total_created` field loading.
+- Fix metric creation when node is offline in Jenkins (`jenkins`) input plugin.
+- Fix Docker `uptime_ns` calculation when container has been restarted.
+- Fix MySQL field type conflict in conversion of `gtid_mode` to an integer.
+- Fix MySQL field type conflict with `ssl_verify_depth` and `ssl_ctx_verify_depth`.
+
 ## v1.12.4 [2019-10-23]
 
 - Build official packages with Go 1.12.12.
