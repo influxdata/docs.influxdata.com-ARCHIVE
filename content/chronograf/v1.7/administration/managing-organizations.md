@@ -21,8 +21,8 @@ menu:
 ## About Chronograf organizations
 
 > ***Note:*** Support for organizations and user roles is available in Chronograf 1.4 or later. 
-First, OAuth 2.0 authentication must be configured (if it is, you'll see the Chronograf Admin tab on the Admin menu). For more information, 
-see [managing security] (https://docs.influxdata.com/chronograf/1.7/administration/managing-security/).
+First, OAuth 2.0 authentication must be configured (if it is, you'll see the Chronograf Admin tab on the Admin menu).
+For more information, see [managing security](/chronograf/v1.7/administration/managing-security/).
 
 For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](https://docs.influxdata.com/chronograf/v1.7/administration/managing-chronograf-users/).
 
