@@ -233,29 +233,33 @@ An `--auth0-organizations` command line option is also available, but it is limi
 
 #### Configure Heroku authentication
 
-To enable Chronograf support using the Heroku OAuth 2.0 provider:
+1. Obtain a client ID and application secret for Heroku by following the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
+2. Set the Chronograf environment variables based on your Heroku client credentials:
 
-##### Creating a Heroku application
+    ```sh
+    export HEROKU_CLIENT_ID=<client-id-from-heroku>
+    export HEROKU_SECRET=<client-secret-from-heroku>
+    ```
 
-To obtain a client ID and application secret for Heroku, follow the guide posted [here](https://devcenter.heroku.com/articles/oauth#register-client).
-Once your application has been created, those two values should be inserted into the following environment variables (or associated command line option):
+3. If you haven't already, set the Chronograf environment with your token secret:
 
-* `HEROKU_CLIENT_ID`
-* `HEROKU_SECRET`
+    ```sh
+    export TOKEN_SECRET=Super5uperUdn3verGu355!
+    ```
 
-##### Optional Heroku organizations
+##### Heroku organizations (optional)
 
-To restrict access to members of specific Heroku organizations, use
-the `HEROKU_ORGS` environment variable (or associated command line option).
+To restrict access to members of specific Heroku organizations,
+use the `HEROKU_ORGS` environment variable (or associated command line option).
 Multiple values must be comma-separated.
 
-**Example**
-
-To permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization, we would use the following environment variable:
+For example, to permit access from the `hill-valley-preservation-society` organization and `the-pinheads` organization,
+use the following environment variable:
 
 ```sh
 export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 ```
+
 #### Configure Okta authentication
 
 [Okta](https://developer.okta.com/) is an OAuth 2.0--compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
