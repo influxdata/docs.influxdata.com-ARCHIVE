@@ -13,7 +13,7 @@ To enhance security, configure Chronograf to authenticate and authorize with [OA
 
 * [Configure OAuth 2.0](#configure-oauth-2-0)
   1. [Generate a Token Secret](#generate-a-token-secret)
-  2. [Set configurations for your OAuth provider](#oauth-2-0-providers)
+  2. [Set configurations for your OAuth provider](#set-configurations-for-your-oauth-provider)
   3. [Configure authentication duration](#configure-authentication-duration)
 * [Configure TLS (Transport Layer Security) and HTTPS](#configure-tls-transport-layer-security-and-https)
 
@@ -62,7 +62,7 @@ export USE_ID_TOKEN=true
 export JWKS_URL=https://example.com/adfs/discovery/keys
 ```
 
-### OAuth 2.0 providers
+### Set configurations for your OAuth provider
 
 To enable OAuth 2.0 authorization and authentication in Chronograf,
 you must set configuration options that are specific for the OAuth 2.0 authentication provider you want to use.
@@ -148,7 +148,7 @@ export GH_ORGS=biffs-gang
 
 #### Configure Google authentication
 
-1. Follow the steps in [Obtain Oauth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials)
+1. Follow the steps in [Obtain OAuth 2.0 credentials](https://developers.google.com/identity/protocols/OpenIDConnect#getcredentials)
    to obtain the required Google OAuth 2.0 credentials, including a Google Client ID and Client Secret, by
 2. Verify that Chronograf is publicly accessible using a fully-qualified domain name so that Google can properly redirect users back to the application.
 3. Set the Chronograf environment variables for the Google OAuth 2.0 credentials and **Public URL** used to access Chronograf:
