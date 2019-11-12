@@ -24,7 +24,7 @@ _The samples on this page use the [sample data provided below](#sample-data)._
 
 {{% warn %}}
 #### Current limitations
-- The InfluxDB user interface (UI) does not currently support raw scalar output.
+- Chronograf does not currently support raw scalar output.
   Use [`map()`](/flux/v0.50/stdlib/built-in/transformations/map/) to add
   scalar values to output data.
 - The [Flux REPL](/flux/v0.50/guides/executing-queries/#influx-cli-in-flux-mode) does not currently support
