@@ -242,6 +242,9 @@ Restrictions restrict either or both read and write permissions on InfluxDB asse
 Restrictions apply to all non-admin users.
 [Grants](#manage-grants) override restrictions.
 
+> In order to run meta queries (such as `SHOW MEASUREMENTS` or `SHOW TAGS` ),
+> users must have read permissions for the database and retention policy they are querying.
+
 Manage restrictions using the InfluxDB Meta API `acl/restrictions` endpoint.
 
 ```sh
