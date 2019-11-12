@@ -262,18 +262,12 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 #### Configure Okta authentication
 
-[Okta](https://developer.okta.com/) is an OAuth 2.0--compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
+1. Create an Okta web application by following the steps in the Okta documentation: [Implement the Authorization Code Flow](https://developer.okta.com/docs/guides/implement-auth-code/overview/).
+  - In the **General Settings** section, find the **Allowed grant types** listing and select
+    only the **Client acting on behalf of a user:** **Authorization Code** option.
+  - In the **LOGIN** section, set the **Login redirect URIs* and **Initiate login URI** to `http://localhost:8888/oauth/okta/callback` (the default callback URL for Chronograf).
 
-**To enable Chronograf support using an Okta OAuth 2.0 application:**
-
-1. Create a new Okta web app following the steps in the following Okta documentation: [Implement the Authorization Code Flow](https://developer.okta.com/authentication-guide/implementing-authentication/auth-code).
-
-  * In the **General Settings** section, find the **Allowed grant types** listing and select
-  only the **Client acting on behalf of a user:** **Authorization Code** option.
-  * In the **LOGIN** section, set the **Login redirect URIs* and **Initiate login URI** to `http://localhost:8888/oauth/okta/callback`
-    - This is the callback URL for Chronograf.
-
-2. Set the following Chronograf environment variables (or associated command line options):
+2. Set the following Chronograf environment variables:
 
   ```bash
   GENERIC_NAME=okta
@@ -292,9 +286,11 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
   GENERIC_SCOPES=openid,profile,email
   ```
 
-3. Restart the Chronograf service.
+3. If you haven't already, set the Chronograf environment with your token secret:
 
-Your users should now be able to sign into Chronograf using the new Okta provider.
+    ```sh
+    export TOKEN_SECRET=Super5uperUdn3verGu355!
+    ```
 
 #### Configure GitLab authentication
 
