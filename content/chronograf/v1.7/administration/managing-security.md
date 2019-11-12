@@ -294,26 +294,11 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 #### Configure GitLab authentication
 
-[GitLab](https://gitlab.com/) is an OAuth 2.0--compliant authorization and authentication provider that can be used with Chronograf to allow access based on granted scopes and permissions.
-
-**To enable Chronograf support using a GitLab OAuth 2.0 application:**
-
 1. In your GitLab profile, [create a new OAuth2 authentication service](https://docs.gitlab.com/ee/integration/oauth_provider.html#adding-an-application-through-the-profile).
-   Provide a name for your authentication service, then enter your publicly accessible Chronograf URL with the `/oauth/gitlab/callback` path as your GitLab **callback URL**:
-
-    **Callback URL**:
-
-    ```sh
-    # Pattern
-    http://<your_chronograf_server>:8888/oauth/gitlab/callback
-
-    # Example
-    http://chronograf-example.com:8888/oauth/gitlab/callback
-    ```
-
-    Click **Submit** to save the service details.
-
-    Make sure your application has **openid** and **read_user** Scopes.
+   - Provide a name for your application, then enter your publicly accessible Chronograf URL with the `/oauth/gitlab/callback` path as your GitLab **callback URL**.
+     (For example, `http://<your_chronograf_server>:8888/oauth/gitlab/callback`.)
+   - Click **Submit** to save the service details.
+   - Make sure your application has **openid** and **read_user** scopes.
 
 2. Copy the provided **Application Id** and **Secret** and set the following environment variables:
 
@@ -345,11 +330,6 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
     --generic-api-url=https://gitlab.com/api/v3/user
     --public-url=http://<chronograf-host>:8888/
     ```
-
-3. Restart the Chronograf service.
-
-Your users should now be able to sign into Chronograf using the new GitLab provider.
-
 #### Configure Chronograf to use any OAuth 2.0 provider
 
 Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the generic configuration options below.
