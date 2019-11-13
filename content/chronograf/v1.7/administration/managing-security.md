@@ -75,6 +75,7 @@ Configuration steps for the following supported authentication providers are pro
 * [Heroku](#configure-heroku-authentication)
 * [Okta](#configure-okta-authentication)
 * [Gitlab](#configure-gitlab-authentication)
+* [Azure Active Directory](#configure-azure-active-directory-authentication)
 * [Configure Chronograf to use any OAuth 2.0 provider](#configure-chronograf-to-use-any-oauth-2-0-provider)
 
 > If you haven't already, you must first [generate a token secret](#generate-a-token-secret) before proceeding.
@@ -330,6 +331,42 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
     --generic-api-url=https://gitlab.com/api/v3/user
     --public-url=http://<chronograf-host>:8888/
     ```
+
+#### Configure Azure Active Directory authentication
+
+1. Create a new application within Azure Active Directory.
+   You can find a detailed description outlining the process here:
+   [Create an Azure Active Directory application](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application).
+   You will next want to note down the following metadata information: `<APPLICATION-ID>`, `<TENANT-ID>`, and `<APPLICATION-KEY>`.
+   These values will be used to define your Chronograf environment and successfully authenticate user with access.
+
+4. Be sure to register a reply URL in your Azure application settings.
+   This should match the calling URL from Chronograf.
+   Otherwise, you will get an error stating no reply address is registered for the application.
+   For example, if Chronograf is configured with a `GENERIC_NAME` value of AzureAD, the reply URL would be `http://localhost:8888/AzureAD/callback`.
+
+5. After completing the application provisioning within Azure AD, you can now complete the configuration with Chronograf.
+   Using the metadata from your Azure AD instance, proceed to export the following environment variables:
+
+    Set the following environment variables in `/etc/default.chronograf`:
+
+    ```
+    GENERIC_TOKEN_URL=https://login.microsoftonline.com/<<TENANT-ID>>/oauth2/token
+    TENANT=<<TENANT-ID>>
+    GENERIC_NAME=AzureAD
+    GENERIC_API_KEY=userPrincipalName
+    GENERIC_SCOPES=openid
+    GENERIC_CLIENT_ID=<<APPLICATION-ID>>
+    GENERIC_AUTH_URL=https://login.microsoftonline.com/<<TENANT-ID>>/oauth2/authorize?resource=https://graph.windows.net
+    GENERIC_CLIENT_SECRET=<<APPLICATION-KEY>>
+    TOKEN_SECRET=secret
+    GENERIC_API_URL=https://graph.windows.net/<<TENANT-ID>>/me?api-version=1.6
+    PUBLIC_URL=http://localhost:8888
+    ```
+
+    Note: If you’ve additionally configured TLS/SSL security for Chronograf,
+    you will need to modify the protocol to make sure you have https:// protocol (not http://).
+
 #### Configure Chronograf to use any OAuth 2.0 provider
 
 Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the generic configuration options below.
