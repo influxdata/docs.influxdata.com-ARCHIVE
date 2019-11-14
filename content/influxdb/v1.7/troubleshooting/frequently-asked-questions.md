@@ -595,16 +595,20 @@ time                    sunflowers                 time                  mean
 
 ## Why do my queries return no data or partial data?
 
-There are several possible explanations for why a query returns no data or partial data.
-We list some of the most frequent cases below:
+The most common reasons why your query returns no data or partial data:
 
-### Retention policies
+- [Querying the wrong retention policy](#querying-wrong-retention-policies) (no data returned)
+- [No field key in the SELECT clause](#no-field-key-in-the-select-clause) (no data returned)
+- [SELECT query includes `GROUP BY time()`](#select-query-includes-group-by-time) (partial data before `now()` returned)
+- [Tag and field key with the same name](#tag-and-field-key-with-the-same-name)
+
+### Querying the wrong retention policy
 
 The first and most common explanation involves [retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP).
 InfluxDB automatically queries data in a database’s `DEFAULT` RP.
 If your data is stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you specify the alternative RP.
 
-### Tag keys in the SELECT clause
+### No field key in the SELECT clause
 
 A query requires at least one [field key](/influxdb/v1.7/concepts/glossary/#field-key)
 in the `SELECT` clause to return data.
@@ -612,7 +616,7 @@ If the `SELECT` clause only includes a single [tag key](/influxdb/v1.7/concepts/
 query returns an empty response.
 For more information, see [Data exploration](/influxdb/v1.7/query_language/data_exploration/#common-issues-with-the-select-statement).
 
-### Query time range
+### SELECT query includes `GROUP BY time()`
 
 Another possible explanation has to do with your query’s time range.
 By default, most [`SELECT` queries](/influxdb/v1.7/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.7/concepts/glossary/#now).
