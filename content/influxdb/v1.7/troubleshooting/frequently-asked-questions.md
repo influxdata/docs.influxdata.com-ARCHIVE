@@ -600,7 +600,7 @@ The most common reasons why your query returns partial or no data:
 - Querying the wrong retention policy (no data returned)
 - No field key in the SELECT clause (no data returned)
 - SELECT query includes `GROUP BY time()` (partial data before `now()` returned)
-- Identifier names
+- Tag and field key with the same name
 
 ### Querying wrong retention policies
 
@@ -616,11 +616,27 @@ If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/quer
 
 (By default, most [`SELECT` queries](/influxdb/v1.7/query_language/data_exploration/#the-basic-select-statement) query data with timestamps between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC.)
 
-### Identifier names
+### Tag and field key with the same name
 
-The final common explanation involves [schemas](/influxdb/v1.7/concepts/glossary/#schema) with [fields](/influxdb/v1.7/concepts/glossary/#field) and [tags](/influxdb/v1.7/concepts/glossary/#tag) that have the same key.
-If a field and tag have the same key, the field will take precedence in all queries.
-You’ll need to use the [`::tag` syntax](/influxdb/v1.7/query_language/data_exploration/#description-of-syntax) to specify the tag key in queries.
+Avoid using the same name for a tag and field key. Adding a duplicate key name will rename the original key by appending the key name with `_1`. Queries to the renamed key don't return results. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement,the tag key is renamed `cpu_1` and cannot be queried.
+
+**Warning** If you inadvertently add a duplicate key name, follow the steps in "To remove duplicate keys." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
+
+#### Remove a duplicate key
+
+Use the following queries to select the keys you want to keep, move them to a target measurement, and then drop the measurement with the duplicate key.
+
+```bash
+# select each field key you want to keep from the measurement, and then group by the tag keys you want to keep (leave out the duplicate key)
+SELECT "field_key","field_key2","field_key3" INTO <target_measurement> FROM <existing_measurement> WHERE <date range> GROUP BY "tag_key","tag_key2","tag_key3"
+
+# verify the field keys and tags keys were successfully moved to the target measurement
+SELECT * FROM "target_measurement"
+
+# drop measurement with the duplicate key
+DROP MEASUREMENT "existing_measurement"
+
+```
 
 ## Why don't my GROUP BY time() queries return timestamps that occur after now()?
 
