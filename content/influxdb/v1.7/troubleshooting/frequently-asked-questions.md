@@ -595,29 +595,26 @@ time                    sunflowers                 time                  mean
 
 ## Why do my queries return no data or partial data?
 
-There are several possible explanations for why a query returns no data or partial data.
-We list some of the most frequent cases below:
+The most common reasons why your query returns partial or no data:
 
-### Retention policies
+- Querying the wrong retention policy (no data returned)
+- No field key in the SELECT clause (no data returned)
+- SELECT query includes `GROUP BY time()` (partial data before `now()` returned)
+- Identifier names
 
-The first and most common explanation involves [retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP).
-InfluxDB automatically queries data in a database’s `DEFAULT` RP.
-If your data is stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you specify the alternative RP.
+### Querying wrong retention policies
 
-### Tag keys in the SELECT clause
+InfluxDB automatically queries data in a database’s `DEFAULT` retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP). If your data is stored in another RP, you must specify the RP in your query to get results.
 
-A query requires at least one [field key](/influxdb/v1.7/concepts/glossary/#field-key)
-in the `SELECT` clause to return data.
-If the `SELECT` clause only includes a single [tag key](/influxdb/v1.7/concepts/glossary/#tag-key) or several tag keys, the
-query returns an empty response.
-For more information, see [Data exploration](/influxdb/v1.7/query_language/data_exploration/#common-issues-with-the-select-statement).
+### No field key in the SELECT clause
 
-### Query time range
+A query requires at least one [field key](/influxdb/v1.7/concepts/glossary/#field-key) in the `SELECT` clause. If the `SELECT` clause includes only [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), the query returns an empty response. For more information, see [Data exploration](/influxdb/v1.7/query_language/data_exploration/#common-issues-with-the-select-statement).
 
-Another possible explanation has to do with your query’s time range.
-By default, most [`SELECT` queries](/influxdb/v1.7/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.7/concepts/glossary/#now).
-If any of your data occur after `now()` a `GROUP BY time()` query will not cover those data points.
-Your query will need to provide [an alternative upper bound](/influxdb/v1.7/query_language/data_exploration/#time-syntax) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
+### SELECT query includes `GROUP BY time()`
+
+If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals), only data points between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.7/concepts/glossary/#now) are returned. Therefore, if any of your data points occur after `now()`, specify [an alternative upper bound](/influxdb/v1.7/query_language/data_exploration/#time-syntax) in your time interval.
+
+(By default, most [`SELECT` queries](/influxdb/v1.7/query_language/data_exploration/#the-basic-select-statement) query data with timestamps between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC.)
 
 ### Identifier names
 
