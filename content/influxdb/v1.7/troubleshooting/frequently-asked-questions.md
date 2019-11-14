@@ -604,9 +604,7 @@ The most common reasons why your query returns no data or partial data:
 
 ### Querying the wrong retention policy
 
-The first and most common explanation involves [retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP).
-InfluxDB automatically queries data in a database’s `DEFAULT` RP.
-If your data is stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you specify the alternative RP.
+InfluxDB automatically queries data in a database’s `DEFAULT` retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP). If your data is stored in another RP, you must specify the RP in your query to get results.
 
 ### No field key in the SELECT clause
 
