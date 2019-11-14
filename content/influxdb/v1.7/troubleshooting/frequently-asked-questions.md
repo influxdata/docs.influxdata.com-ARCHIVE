@@ -595,7 +595,7 @@ time                    sunflowers                 time                  mean
 
 ## Why do my queries return no data or partial data?
 
-The most common reasons why your query returns partial or no data:
+The most common reasons why your query returns no data or partial data:
 
 - Querying the wrong retention policy (no data returned)
 - No field key in the SELECT clause (no data returned)
@@ -618,9 +618,9 @@ If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/quer
 
 ### Tag and field key with the same name
 
-Avoid using the same name for a tag and field key. Adding a duplicate key name will rename the original key by appending the key name with `_1`. Queries to the renamed key don't return results. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement,the tag key is renamed `cpu_1` and cannot be queried.
+Avoid using the same name for a tag and field key. Adding a duplicate key name will rename the original key by appending the key name with `_1`. Queries to the renamed key don't return results. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement, the tag key is renamed `cpu_1` and cannot be queried.
 
-**Warning** If you inadvertently add a duplicate key name, follow the steps in "To remove duplicate keys." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
+> **Warning:** If you inadvertently add a duplicate key name, follow the steps in "To remove duplicate keys." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
 
 #### Remove a duplicate key
 
