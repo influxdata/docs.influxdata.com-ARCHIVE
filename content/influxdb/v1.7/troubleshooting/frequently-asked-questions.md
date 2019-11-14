@@ -597,10 +597,10 @@ time                    sunflowers                 time                  mean
 
 The most common reasons why your query returns no data or partial data:
 
-- Querying the wrong retention policy (no data returned)
-- No field key in the SELECT clause (no data returned)
-- SELECT query includes `GROUP BY time()` (partial data before `now()` returned)
-- Tag and field key with the same name
+- [Querying the wrong retention policy](#querying-wrong-retention-policies) (no data returned)
+- [No field key in the SELECT clause](#no-field-key-in-the-select-clause) (no data returned)
+- [SELECT query includes `GROUP BY time()`](#select-query-includes-group-by-time) (partial data before `now()` returned)
+- [Tag and field key with the same name](#tag-and-field-key-with-the-same-name)
 
 ### Querying wrong retention policies
 
@@ -620,7 +620,7 @@ If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/quer
 
 Avoid using the same name for a tag and field key. Adding a duplicate key name will rename the original key by appending the key name with `_1`. Queries to the renamed key don't return results. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement, the tag key is renamed `cpu_1` and cannot be queried.
 
-> **Warning:** If you inadvertently add a duplicate key name, follow the steps in "To remove duplicate keys." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
+> **Warning:** If you inadvertently add a duplicate key name, follow the steps below in "Remove a duplicate key." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
 
 #### Remove a duplicate key
 
