@@ -95,9 +95,9 @@ The [`influxd-ctl` utility](/enterprise_influxdb/v1.7/administration/cluster-com
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.6.x_c1.6.y
-5	rk-upgrading-02:8088	1.6.x_c1.6.y
-6	rk-upgrading-03:8088	1.6.x_c1.6.y
+4	rk-upgrading-01:8088	1.7.x_c1.7.y
+5	rk-upgrading-02:8088	1.7.x_c1.7.y
+6	rk-upgrading-03:8088	1.7.x_c1.7.y
 
 Meta Nodes
 ==========
