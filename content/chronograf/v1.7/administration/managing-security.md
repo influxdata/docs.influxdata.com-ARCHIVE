@@ -270,22 +270,22 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 2. Set the following Chronograf environment variables:
 
-  ```bash
-  GENERIC_NAME=okta
+    ```bash
+    GENERIC_NAME=okta
 
-  # The client ID is provided in the "Client Credentials" section of the Okta dashboard.
-  GENERIC_CLIENT_ID=<okta_client_ID>
+    # The client ID is provided in the "Client Credentials" section of the Okta dashboard.
+    GENERIC_CLIENT_ID=<okta_client_ID>
 
-  # The client secret is in the "Client Credentials" section of the Okta dashboard.
-  GENERIC_CLIENT_SECRET=<okta_client_secret>
+    # The client secret is in the "Client Credentials" section of the Okta dashboard.
+    GENERIC_CLIENT_SECRET=<okta_client_secret>
 
-  GENERIC_AUTH_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/authorize
-  GENERIC_TOKEN_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/token
-  GENERIC_API_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/userinfo
-  PUBLIC_URL=http://localhost:8888
-  TOKEN_SECRET=secretsecretsecret
-  GENERIC_SCOPES=openid,profile,email
-  ```
+    GENERIC_AUTH_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/authorize
+    GENERIC_TOKEN_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/token
+    GENERIC_API_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/userinfo
+    PUBLIC_URL=http://localhost:8888
+    TOKEN_SECRET=secretsecretsecret
+    GENERIC_SCOPES=openid,profile,email
+    ```
 
 3. If you haven't already, set the Chronograf environment with your token secret:
 
