@@ -117,7 +117,7 @@ Complete the following steps to upgrade data nodes:
 2. [Stop traffic to data nodes](#stop-traffic-to-data-nodes).
 3. [Install the data node package](#install-the-data-node-package).
 4. [Update the data node configuration file](#update-the-data-node-configuration-file).
-5. For Time Series Index (TSI) only. [Prepare your data node to support TSI](#prepare-your-data-node-to-support-tsi).
+5. For Time Series Index (TSI) only. [Rebuild TSI indexes](#prepare-your-data-node-to-support-tsi).
 6. [Restart the `influxdb` service](#restart-the-influxdb-service).
 7. [Restart traffic to data nodes](#restart-traffic-to-data-nodes).
 8. Repeat steps 1-7 for each data node in your cluster.
@@ -177,7 +177,7 @@ Migrate any custom settings from your previous data node configuration file.
 
     For more information about TSI, see [TSI overview](/influxdb/v1.7/concepts/time-series-index/) and [TSI details](/influxdb/v1.7/concepts/tsi-details/).
 
-### Prepare your data node to support TSI
+### Rebuild TSI indexes
 
 Complete the following steps for Time Series Index (TSI) only.
 
