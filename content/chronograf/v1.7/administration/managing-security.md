@@ -75,6 +75,7 @@ Configuration steps for the following supported authentication providers are pro
 * [Heroku](#configure-heroku-authentication)
 * [Okta](#configure-okta-authentication)
 * [Gitlab](#configure-gitlab-authentication)
+* [Azure Active Directory](#configure-azure-active-directory-authentication)
 * [Configure Chronograf to use any OAuth 2.0 provider](#configure-chronograf-to-use-any-oauth-2-0-provider)
 
 > If you haven't already, you must first [generate a token secret](#generate-a-token-secret) before proceeding.
@@ -269,22 +270,22 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 
 2. Set the following Chronograf environment variables:
 
-  ```bash
-  GENERIC_NAME=okta
+    ```bash
+    GENERIC_NAME=okta
 
-  # The client ID is provided in the "Client Credentials" section of the Okta dashboard.
-  GENERIC_CLIENT_ID=<okta_client_ID>
+    # The client ID is provided in the "Client Credentials" section of the Okta dashboard.
+    GENERIC_CLIENT_ID=<okta_client_ID>
 
-  # The client secret is in the "Client Credentials" section of the Okta dashboard.
-  GENERIC_CLIENT_SECRET=<okta_client_secret>
+    # The client secret is in the "Client Credentials" section of the Okta dashboard.
+    GENERIC_CLIENT_SECRET=<okta_client_secret>
 
-  GENERIC_AUTH_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/authorize
-  GENERIC_TOKEN_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/token
-  GENERIC_API_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/userinfo
-  PUBLIC_URL=http://localhost:8888
-  TOKEN_SECRET=secretsecretsecret
-  GENERIC_SCOPES=openid,profile,email
-  ```
+    GENERIC_AUTH_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/authorize
+    GENERIC_TOKEN_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/token
+    GENERIC_API_URL=https://dev-553212.oktapreview.com/oauth2/default/v1/userinfo
+    PUBLIC_URL=http://localhost:8888
+    TOKEN_SECRET=secretsecretsecret
+    GENERIC_SCOPES=openid,profile,email
+    ```
 
 3. If you haven't already, set the Chronograf environment with your token secret:
 
@@ -330,6 +331,39 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
     --generic-api-url=https://gitlab.com/api/v3/user
     --public-url=http://<chronograf-host>:8888/
     ```
+
+#### Configure Azure Active Directory authentication
+
+1. [Create an Azure Active Directory application](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application).
+   Note the following information: `<APPLICATION-ID>`, `<TENANT-ID>`, and `<APPLICATION-KEY>`.
+   You'll need these to define your Chronograf environment.
+
+2. Be sure to register a reply URL in your Azure application settings.
+   This should match the calling URL from Chronograf.
+   Otherwise, you will get an error stating no reply address is registered for the application.
+   For example, if Chronograf is configured with a `GENERIC_NAME` value of AzureAD, the reply URL would be `http://localhost:8888/AzureAD/callback`.
+
+3. After completing the application provisioning within Azure AD, you can now complete the configuration with Chronograf.
+   Using the metadata from your Azure AD instance, proceed to export the following environment variables:
+
+    Set the following environment variables in `/etc/default.chronograf`:
+
+    ```
+    GENERIC_TOKEN_URL=https://login.microsoftonline.com/<<TENANT-ID>>/oauth2/token
+    TENANT=<<TENANT-ID>>
+    GENERIC_NAME=AzureAD
+    GENERIC_API_KEY=userPrincipalName
+    GENERIC_SCOPES=openid
+    GENERIC_CLIENT_ID=<<APPLICATION-ID>>
+    GENERIC_AUTH_URL=https://login.microsoftonline.com/<<TENANT-ID>>/oauth2/authorize?resource=https://graph.windows.net
+    GENERIC_CLIENT_SECRET=<<APPLICATION-KEY>>
+    TOKEN_SECRET=secret
+    GENERIC_API_URL=https://graph.windows.net/<<TENANT-ID>>/me?api-version=1.6
+    PUBLIC_URL=http://localhost:8888
+    ```
+
+    Note: If you’ve configured TLS/SSL, modify the `PUBLIC_URL` to ensure you're using HTTPS.
+
 #### Configure Chronograf to use any OAuth 2.0 provider
 
 Chronograf can be configured to work with any OAuth 2.0 provider, including those defined above, by using the generic configuration options below.
