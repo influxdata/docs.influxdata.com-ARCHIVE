@@ -604,7 +604,7 @@ The most common reasons why your query returns no data or partial data:
 
 ### Querying wrong retention policies
 
-InfluxDB automatically queries data in a database’s `DEFAULT` retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP). If your data is stored in another RP, you must specify the RP in your query to get results.
+InfluxDB automatically queries data in a database’s `DEFAULT` retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP). If your data is stored in another RP, you must specify the RP in your query to get results.
 
 ### No field key in the SELECT clause
 
@@ -618,7 +618,7 @@ If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/quer
 
 ### Tag and field key with the same name
 
-Avoid using the same name for a tag and field key. Adding a duplicate key name will rename the original key by appending the key name with `_1`. Queries to the renamed key don't return results. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement, the tag key is renamed `cpu_1` and cannot be queried.
+Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, query results show the second key returned (tag or field) appended with `_1` (also visible as the column header in Chronograf). Additionally, queries to the tag key don't return tag values. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement, the tag key is renamed `cpu_1` and cannot be queried.
 
 > **Warning:** If you inadvertently add a duplicate key name, follow the steps below in "Remove a duplicate key." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
 
