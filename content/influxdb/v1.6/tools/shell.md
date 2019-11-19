@@ -128,6 +128,10 @@ Turns on pretty print for the `json` format.
 `-ssl`
 Use HTTPS for requests.
 
+`-unsafeSsl`
+Disables SSL certificate verification.
+Use when connecting over HTTPS with a self-signed certificate.
+
 `-username 'username'`
 The username that `influx` uses to connect to the server.
 Alternatively, set the username for the CLI with the `INFLUX_USERNAME` environment variable.
