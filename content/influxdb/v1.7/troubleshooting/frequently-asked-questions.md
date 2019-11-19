@@ -618,7 +618,7 @@ If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/quer
 
 ### Tag and field key with the same name
 
-Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, the query results show the second key queried (tag or field) appended with `_1` (also visible as the column header in Chronograf). To query a tag or field key appended with `_1`, drop the appended `_1` and include the syntax `::tag` or `::field`.
+Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, the query results show the second key queried (tag or field) appended with `_1` (also visible as the column header in Chronograf). To query a tag or field key appended with `_1`, you **must drop** the appended `_1` **and include** the syntax `::tag` or `::field`.
 
 #### Example
 
