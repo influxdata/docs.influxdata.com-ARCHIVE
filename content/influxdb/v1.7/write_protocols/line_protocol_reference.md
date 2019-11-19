@@ -278,8 +278,8 @@ For a complete example of this behavior and how to avoid it, see
 
 ### Duplicate keys
 
-If you have a tag key called `location` and write a field key called `location` to the same measurement, the `location` tag key is **renamed** `location_1`. To retrieve data from the renamed tag key `location_1`, you **must** use the InfluxQL `::tag` syntax in your query, for example:
+If you have a tag key and field key with the same name in a measurement, one of the keys will return appended with a `_1` in query results (and as a column header in Chronograf). For example, `location` and `location_1`. To query a duplicate key, drop the `_1` and use the InfluxQL `::tag` or `::field` syntax in your query, for example:
 
 ```sql
-  SELECT "<location_1>"::tag
+  SELECT "location"::tag, "location"::field FROM "database_name"."retention_policy"."measurement"
 ```
