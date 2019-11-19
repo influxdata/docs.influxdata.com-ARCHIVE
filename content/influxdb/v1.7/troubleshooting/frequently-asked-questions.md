@@ -622,26 +622,31 @@ Avoid using the same name for a tag and field key. If you inadvertently add the 
 
 #### Example
 
-Write the following points to create both a field and tag key with the same name `leaves`:
+1. [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx).
 
-```bash
-# create the `leaves` tag key
-`insert grape,leaves=species leaves=6`
+2. Write the following points to create both a field and tag key with the same name `leaves`:
 
-#create the `leaves` field key
-`insert grape leaves=5`
-```
+    ```bash
+    # create the `leaves` tag key
+    INSERT grape,leaves=species leaves=6
 
-If you view both keys, you'll notice that neither key includes `_1`:
+    #create the `leaves` field key
+    INSERT grape leaves=5
+    ```
 
-```bash
-    > SHOW TAG KEYS
+3. If you view both keys, you'll notice that neither key includes `_1`:
+
+    ```bash
+    # show the `leaves` tag key
+    SHOW TAG KEYS
+
     name: grape
     tagKey
     ------
     leaves
 
-    > SHOW FIELD KEYS
+    # create the `leaves` field key
+    SHOW FIELD KEYS
 
     name: grape
     fieldKey   fieldType
@@ -649,60 +654,70 @@ If you view both keys, you'll notice that neither key includes `_1`:
     leaves     float
 ```
 
-However, when you query the `grape` measurement, you'll see the `leaves` tag key has an appended `_1`:
+4. If you query the `grape` measurement, you'll see the `leaves` tag key has an appended `_1`:
 
-```bash
-   SELECT * FROM <database_name>.<retention_policy>."grape"
+    ```bash
+    # query the `grape` measurement
+    SELECT * FROM <database_name>.<retention_policy>."grape"
 
-   name: grape
-   time                leaves     leaves_1
-   ----                --------   ----------
-   1574128162128468000 first      species
-   1574128238044155000
-```
+    name: grape
+    time                leaves      leaves_1
+    ----                --------    ----------
+    1574128162128468000 6.00        species
+    1574128238044155000 5.00
+    ```
 
-To query a duplicate key name, you **must drop** `_1` **and include** `::tag` or `::field` after the key:
+5. To query a duplicate key name, you **must drop** `_1` **and include** `::tag` or `::field` after the key:
 
-```bash
-   SELECT "leaves"::tag, "leaves"::field FROM <database_name>.<retention_policy>."grape"
+    ```bash
+    # query duplicate keys using the correct syntax
+    SELECT "leaves"::tag, "leaves"::field FROM <database_name>.<retention_policy>."grape"
 
-   name: grape
-   time                leaves     leaves_1
-   ----                --------   ----------
-   1574128162128468000 species    6.00
-   1574128238044155000            5.00
-```
+    name: grape
+    time                leaves     leaves_1
+    ----                --------   ----------
+    1574128162128468000 species    6.00
+    1574128238044155000            5.00
+    ```
 
-Therefore, queries that reference `leaves_1` don't return values.
+    Therefore, queries that reference `leaves_1` don't return values.
 
-> **Warning:** If you inadvertently add a duplicate key name, follow the steps below in "Remove a duplicate key." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
+{{% warn %}}**Warning:** If you inadvertently add a duplicate key name, follow the steps below to [remove a duplicate key](#remove-a-duplicate-key). Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
+{{% /warn %}}
 
 #### Remove a duplicate key
 
-Use the following queries to remove a duplicate key.
+1. [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx).
 
-```bash
-# select each field key to keep in the original measurement and send to a temporary measurement; then, group by the tag keys to keep (leave out the duplicate key)
-SELECT "field_key","field_key2","field_key3"
-INTO <temporary_measurement> FROM <original_measurement>
-WHERE <date range> GROUP BY "tag_key","tag_key2","tag_key3"
+2. Use the following queries to remove a duplicate key.
 
-# verify the field keys and tags keys were successfully moved to the temporary measurement
-SELECT * FROM "temporary_measurement"
+    ```sql
 
-# drop original measurement (with the duplicate key)
-DROP MEASUREMENT "original_measurement"
+    /* select each field key to keep in the original measurement and send to a temporary 
+       measurement; then, group by the tag keys to keep (leave out the duplicate key) */
 
-# move data from temporary measurement back to original measurement you just dropped
-SELECT * INTO "original_measurement" FROM "temporary_measurement" GROUP BY *
+    SELECT "field_key","field_key2","field_key3"
+    INTO <temporary_measurement> FROM <original_measurement>
+    WHERE <date range> GROUP BY "tag_key","tag_key2","tag_key3"
 
-# verify the field keys and tags keys were successfully moved back to the original measurement
-SELECT * FROM "original_measurement"
+    /* verify the field keys and tags keys were successfully moved to the temporary 
+    measurement */
+    SELECT * FROM "temporary_measurement"
 
-# drop temporary measurement
-DROP MEASUREMENT "temporary_measurement"
+    /* drop original measurement (with the duplicate key) */
+    DROP MEASUREMENT "original_measurement"
 
-```
+    /* move data from temporary measurement back to original measurement you just dropped */
+    SELECT * INTO "original_measurement" FROM "temporary_measurement" GROUP BY *
+
+    /* verify the field keys and tags keys were successfully moved back to the original
+     measurement */
+    SELECT * FROM "original_measurement"
+
+    /* drop temporary measurement */
+    DROP MEASUREMENT "temporary_measurement"
+
+    ```
 
 ## Why don't my GROUP BY time() queries return timestamps that occur after now()?
 
