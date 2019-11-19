@@ -18,7 +18,7 @@ Rebalancing a cluster involves two primary goals:
 [shards](/influxdb/v1.7/concepts/glossary/#shard) across all data nodes in the
 cluster
 * Ensure that every
-shard is on N number of nodes, where N is determined by the retention policy's
+shard is on *n* number of nodes, where *n* is determined by the retention policy's
 [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor)
 
 Rebalancing a cluster is essential for cluster health.
@@ -38,9 +38,11 @@ cluster, and they use the
 [`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) available on
 all meta nodes.
 
+<dt>
 Before you begin, stop writing historical data to InfluxDB.
-Historical data has a timestamp that occurs in the past (not real-time data).
+Historical data have timestamps that occur at anytime in the past.
 Performing a rebalance while writing historical data can lead to data loss.
+</dt>
 
 ## Rebalance Procedure 1: Rebalance a cluster to create space
 
