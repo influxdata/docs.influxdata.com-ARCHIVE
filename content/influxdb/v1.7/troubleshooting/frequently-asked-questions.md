@@ -618,9 +618,62 @@ If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/quer
 
 ### Tag and field key with the same name
 
-Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, the query results show the second key (tag or field) appended with `_1` (also visible as the column header in Chronograf).
+Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, the query results show the second key queried (tag or field) appended with `_1` (also visible as the column header in Chronograf). To query a tag or field key appended with `_1`, drop the appended `_1` and include the syntax `::tag` or `::field`.
 
-Additionally, queries to the tag key don't return tag values. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement, the tag key is renamed `cpu_1` and cannot be queried.
+#### Example
+
+Write the following points to create both a field and tag key with the same name `leaves`:
+
+```bash
+# create the `leaves` tag key
+`insert grape,leaves=species leaves=6`
+
+#create the `leaves` field key
+`insert grape leaves=5`
+```
+
+If you view both keys, you'll notice that neither key includes `_1`:
+
+```bash
+    > SHOW TAG KEYS
+    name: grape
+    tagKey
+    ------
+    leaves
+
+    > SHOW FIELD KEYS
+
+    name: grape
+    fieldKey   fieldType
+    ------     ---------
+    leaves     float
+```
+
+However, when you query the `grape` measurement, you'll see the `leaves` tag key has an appended `_1`:
+
+```bash
+   SELECT * FROM <database_name>.<retention_policy>."grape"
+
+   name: grape
+   time                leaves     leaves_1
+   ----                --------   ----------
+   1574128162128468000 first      species
+   1574128238044155000
+```
+
+To query a duplicate key name, you **must drop** `_1` **and include** `::tag` or `::field` after the key:
+
+```bash
+   SELECT "leaves"::tag, "leaves"::field FROM <database_name>.<retention_policy>."grape"
+
+   name: grape
+   time                leaves     leaves_1
+   ----                --------   ----------
+   1574128162128468000 species    6.00
+   1574128238044155000            5.00
+```
+
+Therefore, queries that reference `leaves_1` don't return values.
 
 > **Warning:** If you inadvertently add a duplicate key name, follow the steps below in "Remove a duplicate key." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
 
