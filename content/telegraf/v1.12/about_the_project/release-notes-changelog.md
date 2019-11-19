@@ -8,9 +8,17 @@ menu:
     parent: About the project
 ---
 
+## v1.12.6 [2019-11-19]
+
+### Bug fixes
+- Fix many plugin errors logged at debug logging level.
+- Use nanosecond precision in Docker Log (`docker_log`) input plugin.
+- Fix interface option with `method = native` in Ping (`ping`) input plugin.
+- Fix panic in MongoDB (`mongodb`) input plugin if shard connection pool stats are unreadable.
+
 ## v1.12.5 [2019-11-12]
 
-### Bugfixes
+### Bug fixes
 - Fix incorrect results in Ping (`ping`) input plugin.
 - Add missing character replacement to `sql_instance` tag.
 - Change `no metric` error message to `debug` level in CloudWatch (`cloudwatch`) input plugin.
@@ -25,7 +33,7 @@ menu:
 
 - Build official packages with Go 1.12.12.
 
-### Bugfixes
+### Bug fixes
 - Fix metric generation with Ping (`ping`) input plugin `native` method.
 - Exclude alias tag if unset from plugin internal stats.
 - Fix `socket_mode` option in PowerDNS Recursor (`powerdns_recursor`) input plugin.
@@ -34,7 +42,7 @@ menu:
 
 - Build official packages with Go 1.12.10.
 
-### Bugfixes
+### Bug fixes
 - Use batch serialization format in Exec (`exec`) output plugin.
 - Use case-insensitive serial number match in S.M.A.R.T. (`smart`) input plugin.
 - Add authorization header only when environment variable is set.
@@ -44,7 +52,7 @@ menu:
 
 ## v1.12.2 [2019-09-24]
 
-### Bugfixes
+### Bug fixes
 - Fix timestamp format detection in `csv` and `json` parsers.
 - Apcupsd input (`apcupsd`)
   - Fix parsing of `BATTDATE`.
@@ -55,7 +63,7 @@ menu:
 
 ## v1.12.1 [2019-09-10]
 
-### Bugfixes
+### Bug fixes
 - Fix dependenciess on GLIBC_2.14 symbol version.
 - Filecount input (`filecount`)
   - Fix filecount for paths with trailing slash.
@@ -152,7 +160,7 @@ menu:
 - Add ability to label inputs for logging.
 - Add TLS support to `nginx_plus`, `nginx_plus_api` and `nginx_vts`.
 
-### Bugfixes
+### Bug fixes
 - Fix sensor read error stops reporting of all sensors in `temp` input.
 - Fix double pct replacement in `sysstat` input.
 - Fix race in master node detection in `elasticsearch` input.
@@ -168,7 +176,7 @@ menu:
 
 ## v1.11.5 [2019-08-27]
 
-### Bugfixes
+### Bug fixes
 - Update `go-sql-driver/mysql` driver to 1.4.1 to address auth issues.
 - Return error status from `--test` if input plugins produce an error.
 - Fix with multiple instances only last configuration is used in smart input.
@@ -180,7 +188,7 @@ menu:
 
 ## v1.11.4 [2019-08-06]
 
-### Bugfixes
+### Bug fixes
 
 #### Plugins
 - Kubernetes input (`kubernetes`)
@@ -1074,7 +1082,7 @@ menu:
 
 ## v1.6.4 [2018-06-05]
 
-### Bugfixes
+### Bug fixes
 
 * Fix SNMP overriding of auto-configured table fields.
 * Fix uint support in CloudWatch output.
@@ -1652,7 +1660,7 @@ These plugins will replace [udp_listener](https://github.com/influxdata/telegraf
 - Add documentation for the [RabbitMQ input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/rabbitmq).
 - Make the [Logparser input plugin](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/logparser) check for newly-created files.
 
-### Bugfixes
+### Bug fixes
 
 - Allow `@` symbol in password for the ipmi_sensor plugin.
 - Fix arithmetic overflow error converting numeric to data type int in SQL Server input.
@@ -1694,7 +1702,7 @@ These plugins will replace [udp_listener](https://github.com/influxdata/telegraf
 
 ## v1.2.1 [2017-02-01]
 
-### Bugfixes
+### Bug fixes
 
 - Fix segfault on nil metrics with InfluxDB output.
 - Fix negative number handling.
@@ -1751,7 +1759,7 @@ plugins, not just statsd.
 - Configurable HTTP timeouts in Jolokia plugin.
 - Allow changing jolokia attribute delimiter.
 
-### Bugfixes
+### Bug fixes
 
 - Fix the Value data format not trimming null characters from input.
 - Fix windows `.net` plugin.
@@ -1778,14 +1786,14 @@ plugins, not just statsd.
 
 ## v1.1.2 [2016-12-12]
 
-### Bugfixes
+### Bug fixes
 
 - Make snmptranslate not required when using numeric OID.
 - Add a global snmp translation cache.
 
 ## v1.1.1 [2016-11-14]
 
-### Bugfixes
+### Bug fixes
 
 - Fix issue parsing toml durations with single quotes.
 
@@ -1832,7 +1840,7 @@ continue sending logs to /var/log/telegraf/telegraf.log.
 - HAProxy plugin socket glob matching.
 - Add Kubernetes plugin for retrieving pod metrics.
 
-### Bugfixes
+### Bug fixes
 
 - Fix NATS plug-ins reconnection logic.
 - Set required default values in udp_listener & tcp_listener.
@@ -1868,7 +1876,7 @@ continue sending logs to /var/log/telegraf/telegraf.log.
 
 ## v1.0.1 [2016-09-26]
 
-### Bugfixes
+### Bug fixes
 
 - Prometheus output: Fix bug with multi-batch writes.
 - Fix unmarshal of influxdb metrics with null tags.
@@ -1971,7 +1979,7 @@ consistent with the behavior of `collection_jitter`.
 - Forking sensors command to remove C package dependency.
 - Add a new SNMP plugin.
 
-### Bugfixes
+### Bug fixes
 
 - Fix `make windows` build target.
 - Fix error race conditions and partial failures.
