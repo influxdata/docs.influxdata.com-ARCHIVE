@@ -602,7 +602,7 @@ The most common reasons why your query returns no data or partial data:
 - [SELECT query includes `GROUP BY time()`](#select-query-includes-group-by-time) (partial data before `now()` returned)
 - [Tag and field key with the same name](#tag-and-field-key-with-the-same-name)
 
-### Querying wrong retention policies
+### Querying the wrong retention policy
 
 InfluxDB automatically queries data in a database’s `DEFAULT` retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP). If your data is stored in another RP, you must specify the RP in your query to get results.
 
@@ -618,23 +618,36 @@ If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/quer
 
 ### Tag and field key with the same name
 
-Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, query results show the second key returned (tag or field) appended with `_1` (also visible as the column header in Chronograf). Additionally, queries to the tag key don't return tag values. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement, the tag key is renamed `cpu_1` and cannot be queried.
+Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, the query results show the second key (tag or field) appended with `_1` (also visible as the column header in Chronograf).
+
+Additionally, queries to the tag key don't return tag values. For example, if you have a tag key named `cpu` and write a field key named `cpu` to the same measurement, the tag key is renamed `cpu_1` and cannot be queried.
 
 > **Warning:** If you inadvertently add a duplicate key name, follow the steps below in "Remove a duplicate key." Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
 
 #### Remove a duplicate key
 
-Use the following queries to select the keys you want to keep, move them to a target measurement, and then drop the measurement with the duplicate key.
+Use the following queries to remove a duplicate key.
 
 ```bash
-# select each field key you want to keep from the measurement, and then group by the tag keys you want to keep (leave out the duplicate key)
-SELECT "field_key","field_key2","field_key3" INTO <target_measurement> FROM <existing_measurement> WHERE <date range> GROUP BY "tag_key","tag_key2","tag_key3"
+# select each field key to keep in the original measurement and send to a temporary measurement; then, group by the tag keys to keep (leave out the duplicate key)
+SELECT "field_key","field_key2","field_key3"
+INTO <temporary_measurement> FROM <original_measurement>
+WHERE <date range> GROUP BY "tag_key","tag_key2","tag_key3"
 
-# verify the field keys and tags keys were successfully moved to the target measurement
-SELECT * FROM "target_measurement"
+# verify the field keys and tags keys were successfully moved to the temporary measurement
+SELECT * FROM "temporary_measurement"
 
-# drop measurement with the duplicate key
-DROP MEASUREMENT "existing_measurement"
+# drop original measurement (with the duplicate key)
+DROP MEASUREMENT "original_measurement"
+
+# move data from temporary measurement back to original measurement you just dropped
+SELECT * INTO "original_measurement" FROM "temporary_measurement" GROUP BY *
+
+# verify the field keys and tags keys were successfully moved back to the original measurement
+SELECT * FROM "original_measurement"
+
+# drop temporary measurement
+DROP MEASUREMENT "temporary_measurement"
 
 ```
 
