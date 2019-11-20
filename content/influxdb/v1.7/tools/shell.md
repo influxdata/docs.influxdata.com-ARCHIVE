@@ -146,6 +146,11 @@ Turns on pretty print for the `json` format.
 
 Use HTTPS for requests.
 
+###  `-unsafeSsl`
+
+Disables SSL certificate verification.
+Use when connecting over HTTPS with a self-signed certificate.
+
 ### `-type`
 
 Determines which interactive shell to use.
