@@ -32,6 +32,31 @@ influxd 2>$HOME/my_log_file
 
 ### Launched as a service
 
+<!--------------------------- BEGIN TABS  ---------------------->
+{{< tab-labels >}}
+{{% tabs %}}
+[systemd](#)
+[sysinit](#)
+{{% /tabs %}}
+{{< tab-content-container >}}
+<!--------------------------- BEGIN systemd  ------------------->
+{{% tab-content %}}
+#### systemd
+
+Starting with version 1.0, InfluxDB on `systemd` systems will no longer
+write files to `/var/log/influxdb` by default, and will now use the
+system configured default for logging (usually `journald`).  On most
+Linux systems, the logs will be directed to the `systemd` journal and can be accessed with the command:
+
+```
+sudo journalctl -u influxdb.service
+```
+
+See the `systemd` `journald` documentation about configuring `journald`.
+{{% /tab-content %}}
+<!--------------------------- END systemd  --------------------->
+<!--------------------------- BEGIN sysvinit  ------------------>
+{{% tab-content %}}
 #### sysvinit
 
 If InfluxDB was installed using a prebuilt package, and then launched
@@ -51,19 +76,11 @@ all log data will be discarded.  Likewise, you can direct output to
 sent to `/dev/null` by default when InfluxDB is launched as a service.
 
 InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
-
-#### systemd
-
-Starting with version 1.0, InfluxDB on `systemd` systems will no longer
-write files to `/var/log/influxdb` by default, and will now use the
-system configured default for logging (usually `journald`).  On most
-Linux systems, the logs will be directed to the `systemd` journal and can be accessed with the command:
-
-```
-sudo journalctl -u influxdb.service
-```
-
-See the `systemd` `journald` documentation about configuring `journald`.
+{{% /tab-content %}}
+<!--------------------------- END sysvinit --------------------->
+{{< /tab-content-container >}}
+{{< /tab-labels >}}
+<!--------------------------- END TABS  ------------------------>
 
 ### Using logrotate
 
