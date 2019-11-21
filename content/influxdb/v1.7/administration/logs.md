@@ -43,32 +43,32 @@ influxd 2>$HOME/my_log_file
 {{% tab-content %}}
 #### systemd
 
-InfluxDB uses the system-configured default for logging (usually `journald`).
-On most Linux systems, the logs will be directed to the `systemd` journal and can be accessed with the command:
+Most Linux systems direct logs to the `systemd` journal.
+To access these logs, use this command:
 
-```
+```sh
 sudo journalctl -u influxdb.service
 ```
 
-See the manual pages for `systemd` and `journald` for more information about configuring `journald`.
+For more information about configuring `journald`, see its [manual page](https://www.freedesktop.org/software/systemd/man/journald.conf.html).
 {{% /tab-content %}}
 <!--------------------------- END systemd  --------------------->
 <!--------------------------- BEGIN sysvinit  ------------------>
 {{% tab-content %}}
 #### sysvinit
 
-On older Linux sytems, all log data (and `stdedrr`) will be written to `/var/log/influxdb/influxd.log`. 
-You can override this location by setting the environment variable `STDERR` in the InfluxDB configuration file `/etc/default/influxdb`.
+On Linux sytems not using systemd, InfluxDB writes all log data and `stderr` to `/var/log/influxdb/influxd.log`.
+You can override this location by setting the environment variable `STDERR` in the InfluxDB configuration file (`/etc/default/influxdb`).
 
 For example, if `/etc/default/influxdb` contains:
 
-```
+```sh
 STDERR=/dev/null
 ```
 
-all log data will be discarded.
+all log data is discarded.
 Likewise, you can direct output to `stdout` by setting `STDOUT` in the same file.
-Output to `stdout` is sent to `/dev/null` by default when InfluxDB is launched as a service.
+`stdout` is sent to `/dev/null` by default when InfluxDB is launched as a service.
 
 InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
 {{% /tab-content %}}
@@ -77,7 +77,8 @@ InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
 {{< /tab-labels >}}
 <!--------------------------- END TABS  ------------------------>
 
->**Note:** macOS logs are stored, by default, in the file `/usr/local/var/log/influxdb.log`.
+> #### macOS log location
+> macOS logs are stored by default at `/usr/local/var/log/influxdb.log`.
 
 ### Using logrotate
 
