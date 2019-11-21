@@ -43,27 +43,22 @@ influxd 2>$HOME/my_log_file
 {{% tab-content %}}
 #### systemd
 
-Starting with version 1.0, InfluxDB on `systemd` systems will no longer
-write files to `/var/log/influxdb` by default, and will now use the
-system configured default for logging (usually `journald`).  On most
-Linux systems, the logs will be directed to the `systemd` journal and can be accessed with the command:
+InfluxDB uses the system-configured default for logging (usually `journald`).
+On most Linux systems, the logs will be directed to the `systemd` journal and can be accessed with the command:
 
 ```
 sudo journalctl -u influxdb.service
 ```
 
-See the `systemd` `journald` documentation about configuring `journald`.
+See the manual pages for `systemd` and `journald` for more information about configuring `journald`.
 {{% /tab-content %}}
 <!--------------------------- END systemd  --------------------->
 <!--------------------------- BEGIN sysvinit  ------------------>
 {{% tab-content %}}
 #### sysvinit
 
-If InfluxDB was installed using a prebuilt package, and then launched
-as a service, `stderr` is redirected to `/var/log/influxdb/influxd.log` and all log data will be written to that file.
+On older Linux sytems, all log data (and `stdedrr`) will be written to `/var/log/influxdb/influxd.log`. 
 You can override this location by setting the environment variable `STDERR` in the InfluxDB configuration file `/etc/default/influxdb`.
-
->**Note:** macOS logs are stored, by default, in the file `/usr/local/var/log/influxdb.log`.
 
 For example, if `/etc/default/influxdb` contains:
 
@@ -71,9 +66,9 @@ For example, if `/etc/default/influxdb` contains:
 STDERR=/dev/null
 ```
 
-all log data will be discarded.  Likewise, you can direct output to
-`stdout` by setting `STDOUT` in the same file.  Output to `stdout` is
-sent to `/dev/null` by default when InfluxDB is launched as a service.
+all log data will be discarded.
+Likewise, you can direct output to `stdout` by setting `STDOUT` in the same file.
+Output to `stdout` is sent to `/dev/null` by default when InfluxDB is launched as a service.
 
 InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
 {{% /tab-content %}}
@@ -81,6 +76,8 @@ InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
 {{< /tab-content-container >}}
 {{< /tab-labels >}}
 <!--------------------------- END TABS  ------------------------>
+
+>**Note:** macOS logs are stored, by default, in the file `/usr/local/var/log/influxdb.log`.
 
 ### Using logrotate
 
