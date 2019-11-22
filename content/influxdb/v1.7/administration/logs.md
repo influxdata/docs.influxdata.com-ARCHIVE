@@ -58,8 +58,8 @@ For more information, see the [`journald.conf` manual page](https://www.freedesk
 #### sysvinit
 
 On Linux sytems not using systemd, InfluxDB writes all log data and `stderr` to `/var/log/influxdb/influxd.log`.
-You can override this location by setting the environment variable `STDERR` in `/etc/default/influxdb`.
-(If this file doesn't exist you need to create it.)
+You can override this location by setting the environment variable `STDERR` in a start-up script at `/etc/default/influxdb`.
+(If this file doesn't exist, you need to create it.)
 
 For example, if `/etc/default/influxdb` contains:
 
@@ -78,8 +78,8 @@ InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
 {{< /tab-labels >}}
 <!--------------------------- END TABS  ------------------------>
 
-> #### macOS log location
-> macOS logs are stored by default at `/usr/local/var/log/influxdb.log`.
+> #### Log location on macOS
+> On macOs, InfluxDB stores logs at `/usr/local/var/log/influxdb.log` by default.
 
 ### Using logrotate
 
