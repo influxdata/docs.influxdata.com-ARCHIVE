@@ -50,7 +50,7 @@ To access these logs, use this command:
 sudo journalctl -u influxdb.service
 ```
 
-For more information about configuring `journald`, see its [manual page](https://www.freedesktop.org/software/systemd/man/journald.conf.html).
+For more information, see the [`journald.conf` manual page](https://www.freedesktop.org/software/systemd/man/journald.conf.html).
 {{% /tab-content %}}
 <!--------------------------- END systemd  --------------------->
 <!--------------------------- BEGIN sysvinit  ------------------>
@@ -58,7 +58,8 @@ For more information about configuring `journald`, see its [manual page](https:/
 #### sysvinit
 
 On Linux sytems not using systemd, InfluxDB writes all log data and `stderr` to `/var/log/influxdb/influxd.log`.
-You can override this location by setting the environment variable `STDERR` in the InfluxDB configuration file (`/etc/default/influxdb`).
+You can override this location by setting the environment variable `STDERR` in `/etc/default/influxdb`.
+(If this file doesn't exist you need to create it.)
 
 For example, if `/etc/default/influxdb` contains:
 
