@@ -9,26 +9,21 @@ menu:
     parent: Write protocols
 ---
 
+InfluxDB line protocol is a text based format for writing points to InfluxDB.
 
-The InfluxDB line protocol is a text based format for writing points to InfluxDB.
-
-## InfluxDB line protocol
-
-### Syntax
+## Line protocol syntax
 
 ```
 <measurement>[,<tag_key>=<tag_value>[,<tag_key>=<tag_value>]] <field_key>=<field_value>[,<field_key>=<field_value>] [<timestamp>]
 ```
 
-Lines separated by the newline character `\n` represent a single point
-in InfluxDB. Line protocol is whitespace-sensitive.
+Line protocol accepts the newline character `\n` and is whitespace-sensitive.
 
->**Note** Line protocol does not support the newline character `\n` within tag values or field values.
+>**Note** Line protocol does not support the newline character `\n` in tag values or field values.
 
-### Description of syntax
+### Syntax description
 
-InfluxDB line protocol informs InfluxDB of the data's measurement, tag set, field set,
-and timestamp.
+InfluxDB line protocol informs InfluxDB of the data's measurement, tag set, field set, and timestamp.
 
 | Element | Optional/Required | Description | Type<br>(See [data types](#data-types) for more information.) |
 | :-------| :---------------- |:----------- |:----------------
@@ -37,18 +32,12 @@ and timestamp.
 | [Field set](/influxdb/v1.7/concepts/glossary/#field-set) | Required. Points must have at least one field. | All field key-value pairs for the point. | [Field keys](/influxdb/v1.7/concepts/glossary/#field-key) are strings. [Field values](/influxdb/v1.7/concepts/glossary/#field-value) can be floats, integers, strings, or Booleans.
 | [Timestamp](/influxdb/v1.7/concepts/glossary/#timestamp) | Optional. InfluxDB uses the server's local nanosecond timestamp in UTC if the timestamp is not included with the point. | The timestamp for the data point. InfluxDB accepts one timestamp per point. | Unix nanosecond timestamp. Specify alternative precisions with the [InfluxDB API](/influxdb/v1.7/tools/api/#write-http-endpoint).
 
-> #### Performance and Setup Tips:
+> #### Performance tips:
 >
-* Sort tags by key before sending them to the database.
-The sort should match the results from the
+- Before sending data to InfluxDB, sort by tag key to match the results from the
 [Go bytes.Compare function](http://golang.org/pkg/bytes/#Compare).
-* Use the coarsest
-[precision](/influxdb/v1.7/tools/api/#write-http-endpoint) possible for timestamps.
-This can result in significant improvements in compression.
-* Use the Network Time Protocol (NTP) to synchronize time between hosts.
-InfluxDB uses a host's local time in UTC to assign timestamps to data; if
-hosts' clocks aren't synchronized with NTP, the timestamps on the data written
-to InfluxDB can be inaccurate.
+- To significantly improve compression, use the coarsest [precision](/influxdb/v1.7/tools/api/#write-http-endpoint) possible for timestamps.
+- Use the Network Time Protocol (NTP) to synchronize time between hosts. InfluxDB uses a host's local time in UTC to assign timestamps to data. If a host's clock isn't synchronized with NTP, the data that the host writes to InfluxDB may have inaccurate timestamps.
 
 ## Data types
 
@@ -68,15 +57,23 @@ For more information, see
 
 #### Field type discrepancies
 
-Within a measurement, a field's type cannot differ within a
-[shard](/influxdb/v1.7/concepts/glossary/#shard), but it can differ across
+In a measurement, a field's type cannot differ in a [shard](/influxdb/v1.7/concepts/glossary/#shard), but can differ across
 shards.
-For how field value type discrepancies can affect `SELECT *` queries, see
+
+To learn how field value type discrepancies can affect `SELECT *` queries, see
 [How does InfluxDB handle field type discrepancies across shards?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards).
 
 ### Examples
 
-#### Write the field value `1.0` as a float to InfluxDB
+#### Write the field value `-1.234456e+78` as a float to InfluxDB
+
+```sql
+> INSERT mymeas value=-1.234456e+78
+```
+
+InfluxDB supports field values specified in scientific notation.
+
+#### Write a field value `1.0` as a float to InfluxDB
 
 ```sql
 > INSERT mymeas value=1.0
@@ -87,14 +84,6 @@ For how field value type discrepancies can affect `SELECT *` queries, see
 ```sql
 > INSERT mymeas value=1
 ```
-
-#### Write the field value `-1.234456e+78` as a float to InfluxDB
-
-```sql
-> INSERT mymeas value=-1.234456e+78
-```
-
-InfluxDB supports field values specified in scientific notation.
 
 #### Write the field value `1` as an integer to InfluxDB
 
@@ -274,18 +263,23 @@ In those cases, `time` does not require double quotes in queries.
 InfluxDB rejects writes with `time` as a field key or tag key and returns an error.
 See [Frequently Asked Questions](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#time) for more information.
 
-## InfluxDB line protocol in Practice
+## InfluxDB line protocol in practice
 
-See the [Tools](/influxdb/v1.7/tools/) section for how to
-write line protocol to the database.
+To learn how to write line protocol to the database, see [Tools](/influxdb/v1.7/tools/).
 
 ### Duplicate points
 
-A point is uniquely identified by the measurement name, tag set, and timestamp.
-If you submit line protocol with the same measurement, tag set, and timestamp,
-but with a different field set, the field set becomes the union of the old
-field set and the new field set, where any conflicts favor the new field set.
+A point is uniquely identified by the measurement name, tag set, field set, and timestamp
+
+If you write a point to a series with a timestamp that matches an existing point, the field set becomes a union of the old and new field set, and conflicts favor the new field set.
 
 For a complete example of this behavior and how to avoid it, see
 [How does InfluxDB handle duplicate points?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
 
+### Duplicate keys
+
+If you have a tag key and field key with the same name in a measurement, one of the keys will return appended with a `_1` in query results (and as a column header in Chronograf). For example, `location` and `location_1`. To query a duplicate key, drop the `_1` and use the InfluxQL `::tag` or `::field` syntax in your query, for example:
+
+```sql
+  SELECT "location"::tag, "location"::field FROM "database_name"."retention_policy"."measurement"
+```

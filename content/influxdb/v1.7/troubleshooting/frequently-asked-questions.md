@@ -595,35 +595,129 @@ time                    sunflowers                 time                  mean
 
 ## Why do my queries return no data or partial data?
 
-There are several possible explanations for why a query returns no data or partial data.
-We list some of the most frequent cases below:
+The most common reasons why your query returns no data or partial data:
 
-### Retention policies
+- [Querying the wrong retention policy](#querying-wrong-retention-policies) (no data returned)
+- [No field key in the SELECT clause](#no-field-key-in-the-select-clause) (no data returned)
+- [SELECT query includes `GROUP BY time()`](#select-query-includes-group-by-time) (partial data before `now()` returned)
+- [Tag and field key with the same name](#tag-and-field-key-with-the-same-name)
 
-The first and most common explanation involves [retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP).
-InfluxDB automatically queries data in a database’s `DEFAULT` RP.
-If your data is stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you specify the alternative RP.
+### Querying the wrong retention policy
 
-### Tag keys in the SELECT clause
+InfluxDB automatically queries data in a database’s `DEFAULT` retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP). If your data is stored in another RP, you must specify the RP in your query to get results.
 
-A query requires at least one [field key](/influxdb/v1.7/concepts/glossary/#field-key)
-in the `SELECT` clause to return data.
-If the `SELECT` clause only includes a single [tag key](/influxdb/v1.7/concepts/glossary/#tag-key) or several tag keys, the
-query returns an empty response.
-For more information, see [Data exploration](/influxdb/v1.7/query_language/data_exploration/#common-issues-with-the-select-statement).
+### No field key in the SELECT clause
 
-### Query time range
+A query requires at least one [field key](/influxdb/v1.7/concepts/glossary/#field-key) in the `SELECT` clause. If the `SELECT` clause includes only [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), the query returns an empty response. For more information, see [Data exploration](/influxdb/v1.7/query_language/data_exploration/#common-issues-with-the-select-statement).
 
-Another possible explanation has to do with your query’s time range.
-By default, most [`SELECT` queries](/influxdb/v1.7/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.7/concepts/glossary/#now).
-If any of your data occur after `now()` a `GROUP BY time()` query will not cover those data points.
-Your query will need to provide [an alternative upper bound](/influxdb/v1.7/query_language/data_exploration/#time-syntax) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
+### SELECT query includes `GROUP BY time()`
 
-### Identifier names
+If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals), only data points between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.7/concepts/glossary/#now) are returned. Therefore, if any of your data points occur after `now()`, specify [an alternative upper bound](/influxdb/v1.7/query_language/data_exploration/#time-syntax) in your time interval.
 
-The final common explanation involves [schemas](/influxdb/v1.7/concepts/glossary/#schema) with [fields](/influxdb/v1.7/concepts/glossary/#field) and [tags](/influxdb/v1.7/concepts/glossary/#tag) that have the same key.
-If a field and tag have the same key, the field will take precedence in all queries.
-You’ll need to use the [`::tag` syntax](/influxdb/v1.7/query_language/data_exploration/#description-of-syntax) to specify the tag key in queries.
+(By default, most [`SELECT` queries](/influxdb/v1.7/query_language/data_exploration/#the-basic-select-statement) query data with timestamps between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC.)
+
+### Tag and field key with the same name
+
+Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, the query results show the second key queried (tag or field) appended with `_1` (also visible as the column header in Chronograf). To query a tag or field key appended with `_1`, you **must drop** the appended `_1` **and include** the syntax `::tag` or `::field`.
+
+#### Example
+
+1. [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx).
+
+2. Write the following points to create both a field and tag key with the same name `leaves`:
+
+    ```bash
+    # create the `leaves` tag key
+    INSERT grape,leaves=species leaves=6
+
+    #create the `leaves` field key
+    INSERT grape leaves=5
+    ```
+
+3. If you view both keys, you'll notice that neither key includes `_1`:
+
+    ```bash
+    # show the `leaves` tag key
+    SHOW TAG KEYS
+
+    name: grape
+    tagKey
+    ------
+    leaves
+
+    # create the `leaves` field key
+    SHOW FIELD KEYS
+
+    name: grape
+    fieldKey   fieldType
+    ------     ---------
+    leaves     float
+```
+
+4. If you query the `grape` measurement, you'll see the `leaves` tag key has an appended `_1`:
+
+    ```bash
+    # query the `grape` measurement
+    SELECT * FROM <database_name>.<retention_policy>."grape"
+
+    name: grape
+    time                leaves      leaves_1
+    ----                --------    ----------
+    1574128162128468000 6.00        species
+    1574128238044155000 5.00
+    ```
+
+5. To query a duplicate key name, you **must drop** `_1` **and include** `::tag` or `::field` after the key:
+
+    ```bash
+    # query duplicate keys using the correct syntax
+    SELECT "leaves"::tag, "leaves"::field FROM <database_name>.<retention_policy>."grape"
+
+    name: grape
+    time                leaves     leaves_1
+    ----                --------   ----------
+    1574128162128468000 species    6.00
+    1574128238044155000            5.00
+    ```
+
+    Therefore, queries that reference `leaves_1` don't return values.
+
+{{% warn %}}**Warning:** If you inadvertently add a duplicate key name, follow the steps below to [remove a duplicate key](#remove-a-duplicate-key). Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
+{{% /warn %}}
+
+#### Remove a duplicate key
+
+1. [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx).
+
+2. Use the following queries to remove a duplicate key.
+
+    ```sql
+
+    /* select each field key to keep in the original measurement and send to a temporary 
+       measurement; then, group by the tag keys to keep (leave out the duplicate key) */
+
+    SELECT "field_key","field_key2","field_key3"
+    INTO <temporary_measurement> FROM <original_measurement>
+    WHERE <date range> GROUP BY "tag_key","tag_key2","tag_key3"
+
+    /* verify the field keys and tags keys were successfully moved to the temporary 
+    measurement */
+    SELECT * FROM "temporary_measurement"
+
+    /* drop original measurement (with the duplicate key) */
+    DROP MEASUREMENT "original_measurement"
+
+    /* move data from temporary measurement back to original measurement you just dropped */
+    SELECT * INTO "original_measurement" FROM "temporary_measurement" GROUP BY *
+
+    /* verify the field keys and tags keys were successfully moved back to the original
+     measurement */
+    SELECT * FROM "original_measurement"
+
+    /* drop temporary measurement */
+    DROP MEASUREMENT "temporary_measurement"
+
+    ```
 
 ## Why don't my GROUP BY time() queries return timestamps that occur after now()?
 
