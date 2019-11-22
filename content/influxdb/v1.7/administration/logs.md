@@ -32,38 +32,54 @@ influxd 2>$HOME/my_log_file
 
 ### Launched as a service
 
-#### sysvinit
-
-If InfluxDB was installed using a prebuilt package, and then launched
-as a service, `stderr` is redirected to `/var/log/influxdb/influxd.log` and all log data will be written to that file.
-You can override this location by setting the environment variable `STDERR` in the InfluxDB configuration file `/etc/default/influxdb`.
-
->**Note:** macOS logs are stored, by default, in the file `/usr/local/var/log/influxdb.log`.
-
-For example, if `/etc/default/influxdb` contains:
-
-```
-STDERR=/dev/null
-```
-
-all log data will be discarded.  Likewise, you can direct output to
-`stdout` by setting `STDOUT` in the same file.  Output to `stdout` is
-sent to `/dev/null` by default when InfluxDB is launched as a service.
-
-InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
-
+<!--------------------------- BEGIN TABS  ---------------------->
+{{< tab-labels >}}
+{{% tabs %}}
+[systemd](#)
+[sysinit](#)
+{{% /tabs %}}
+{{< tab-content-container >}}
+<!--------------------------- BEGIN systemd  ------------------->
+{{% tab-content %}}
 #### systemd
 
-Starting with version 1.0, InfluxDB on `systemd` systems will no longer
-write files to `/var/log/influxdb` by default, and will now use the
-system configured default for logging (usually `journald`).  On most
-Linux systems, the logs will be directed to the `systemd` journal and can be accessed with the command:
+Most Linux systems direct logs to the `systemd` journal.
+To access these logs, use this command:
 
-```
+```sh
 sudo journalctl -u influxdb.service
 ```
 
-See the `systemd` `journald` documentation about configuring `journald`.
+For more information, see the [`journald.conf` manual page](https://www.freedesktop.org/software/systemd/man/journald.conf.html).
+{{% /tab-content %}}
+<!--------------------------- END systemd  --------------------->
+<!--------------------------- BEGIN sysvinit  ------------------>
+{{% tab-content %}}
+#### sysvinit
+
+On Linux sytems not using systemd, InfluxDB writes all log data and `stderr` to `/var/log/influxdb/influxd.log`.
+You can override this location by setting the environment variable `STDERR` in a start-up script at `/etc/default/influxdb`.
+(If this file doesn't exist, you need to create it.)
+
+For example, if `/etc/default/influxdb` contains:
+
+```sh
+STDERR=/dev/null
+```
+
+all log data is discarded.
+Likewise, you can direct output to `stdout` by setting `STDOUT` in the same file.
+`stdout` is sent to `/dev/null` by default when InfluxDB is launched as a service.
+
+InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
+{{% /tab-content %}}
+<!--------------------------- END sysvinit --------------------->
+{{< /tab-content-container >}}
+{{< /tab-labels >}}
+<!--------------------------- END TABS  ------------------------>
+
+> #### Log location on macOS
+> On macOs, InfluxDB stores logs at `/usr/local/var/log/influxdb.log` by default.
 
 ### Using logrotate
 
