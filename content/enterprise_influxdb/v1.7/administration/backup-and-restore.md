@@ -55,7 +55,7 @@ If there are no existing incremental backups, the system automatically performs 
 Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [restore](#restore), keep `-full` backups and incremental backups in separate directories.
 
-To perform a full restore of metastore, including users, credentials, and permissions, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents.
+To perform a full restore of metastore, including users, credentials, and permissions, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents. The message `Backing up meta data... Done.` indicates that your meta data (including users, credentials, and permissions) has been successfully backed up.
 
 >**Note:** The backup utility copies all data through the meta node that is used to
 execute the backup. As a result, performance of a backup and restore is typically limited by the network IO of the meta node. Increasing the resources available to this meta node (such as resizing the EC2 instance) can significantly improve backup and restore performance.
