@@ -18,7 +18,13 @@ TSI uses the operating system's page cache to pull hot data into memory and let 
 
 ## Enable TSI
 
-To enable TSI, set `index-version = tsi1` in the InfluxDB configuration file (`influxdb.conf`).
+To enable TSI, set the following line in the InfluxDB configuration file (`influxdb.conf`):
+
+```
+index-version = "tsi1"
+```
+
+(Be sure to include the double quotes.)
 
 ### InfluxDB Enterprise
 
