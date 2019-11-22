@@ -44,7 +44,7 @@ A backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#met
 All backups also include a manifest, a JSON file describing what was collected during the backup.
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
-- Metastore backup: `20060102T150405Z.meta`
+- Metastore backup: `20060102T150405Z.meta` (includes usernames and passwords)
 - Shard data backup: `20060102T150405Z.<shard_id>.tar.gz`
 - Manifest: `20060102T150405Z.manifest`
 
@@ -55,7 +55,7 @@ If there are no existing incremental backups, the system automatically performs 
 Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [restore](#restore), keep `-full` backups and incremental backups in separate directories.
 
-To perform a full restore of metastore, including users and permission, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents.
+To perform a full restore of metastore, including users, credentials, and permissions, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents.
 
 >**Note:** The backup utility copies all data through the meta node that is used to
 execute the backup. As a result, performance of a backup and restore is typically limited by the network IO of the meta node. Increasing the resources available to this meta node (such as resizing the EC2 instance) can significantly improve backup and restore performance.
@@ -65,6 +65,8 @@ execute the backup. As a result, performance of a backup and restore is typicall
 ```bash
 influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
 ```
+
+> **Note:** The `influxd-ctl backup` command exits with `0` for success and `1` for failure. If the backup fails, output can be directed to a log file to troubleshoot.
 
 ##### Global options
 
