@@ -370,10 +370,12 @@ input:
     introduced: 0.10.3
     tags: [linux, macos, windows, applications, web]
 
-  - name: ECS
+  - name: Amazon ECS
     id: ecs
     description: |
-      ECS, Fargate compatible, input plugin which uses the ECS v2 metadata and stats API endpoints to gather stats on running containers in a Task.
+      Amazon ECS input plugin (AWS Fargate compatible) uses the Amazon ECS v2 metadata and stats API endpoints to gather stats on running containers in a task. 
+      The Telegraf container and the workload that Telegraf is inspecting must be run in the same task. This is similar to (and reuses pieces of) the 
+      Docker input plugin, with some ECS-specific modifications for AWS metadata and stats formats.
     link: https://github.com/influxdata/telegraf/blob/master/plugins/inputs/ecs/README.md
     introduced: 1.11.0
     tags: [linux, macos, windows, cloud, containers]
