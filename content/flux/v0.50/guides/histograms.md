@@ -5,7 +5,7 @@ menu:
   flux_0_50:
     name: Create histograms
     parent: Guides
-    weight: 7
+    weight: 8
 ---
 
 
