@@ -143,7 +143,7 @@ hostname="<enterprise-data-0x>" #✨
   dir = "/var/lib/influxdb/meta" # data nodes do require a local meta directory
 ...
   # This setting must have the same value as the meta nodes' meta.auth-enabled configuration.
-  meta-auth-enabled - true
+  meta-auth-enabled = true
 
 [...]
 
