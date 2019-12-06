@@ -64,7 +64,7 @@ for a complete list of the global `influxd-ctl` options.
 * `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
 * `-shard <unit>`: the ID of the single shard to back up
 
-<dt> In versions 1.2.0 and 1.2.1, there is a known issue with restores from a backup directory
+{{% warn %}} In versions 1.2.0 and 1.2.1, there is a known issue with restores from a backup directory
 that stores several **different** incremental backups.
 For a restore to function properly, incremental backups that specify different
 options (for example: they specify a different database with `-db` or a
@@ -91,7 +91,7 @@ influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 ```
-</dt>
+{{% /warn %}}
 
 ### Examples
 
@@ -183,10 +183,10 @@ Use the syntax below to restore an incremental backup to a new cluster or an exi
 Note that the existing cluster must contain no data in the affected databases.*
 Performing a restore from an incremental backup requires the path to the incremental backup's directory.
 
-<dt> In versions 1.2.0 and 1.2.1, restoring from an incremental backup requires users to `cd` into
+{{% warn %}} In versions 1.2.0 and 1.2.1, restoring from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
 This issue is fixed in version 1.2.2.
-</dt>
+{{% /warn %}}
 
 ```
 influxd-ctl [global-options] restore [restore-options] <path-to-backup-directory>
@@ -249,10 +249,10 @@ for a complete list of the global `influxd-ctl` options.
 influxd-ctl restore <path-to-backup-directory>
 ```
 
-<dt> In versions 1.2.0 and 1.2.1, restoring from an incremental backup requires users to `cd` into
+{{% warn %}} In versions 1.2.0 and 1.2.1, restoring from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
 This issue is fixed in version 1.2.2.
-</dt>
+{{% /warn %}}
 
 Output:
 ```
@@ -287,10 +287,10 @@ Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 influxd-ctl restore -db <src> -newdb <dest> <path-to-backup-directory>
 ```
 
-<dt> In versions 1.2.0 and 1.2.1, a restore from an incremental backup requires users to `cd` into
+{{% warn %}} In versions 1.2.0 and 1.2.1, a restore from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
 This issue is fixed in version 1.2.2.
-</dt>
+{{% /warn %}}
 
 Output:
 ```
@@ -310,10 +310,10 @@ Your `telegraf` database was mistakenly dropped, but you have a recent backup so
 If [Telegraf](/telegraf/v1.2/) is still running, it will recreate the `telegraf` database shortly after the database is dropped.
 You might try to directly restore your `telegraf` backup just to find that you can't restore:
 
-<dt> In versions 1.2.0 and 1.2.1, a restore from an incremental backup requires users to `cd` into
+{{% warn %}} In versions 1.2.0 and 1.2.1, a restore from an incremental backup requires users to `cd` into
 the backup directory and run `influxd-ctl restore [options] .` from that directory.
 This issue is fixed in version 1.2.2.
-</dt>
+{{% /warn %}}
 
 ```
 $ influxd-ctl restore -db telegraf my-incremental-backup/

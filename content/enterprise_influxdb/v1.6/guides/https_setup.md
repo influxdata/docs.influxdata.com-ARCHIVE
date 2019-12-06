@@ -148,9 +148,9 @@ Verify that HTTPS is working on the meta nodes by using `influxd-ctl`.
 ```
 influxd-ctl -bind-tls show
 ```
-<dt>
+{{% warn %}}
    Once you have enabled HTTPS, you MUST use `-bind-tls` in order for influxd-ctl to connect to the meta node.
-</dt>
+{{% /warn %}}
 
 A successful connection returns output which should resemble the following:
 ```
@@ -291,9 +291,9 @@ Verify that HTTPS is working on the meta nodes by using `influxd-ctl`.
 ```
 influxd-ctl -bind-tls -k show
 ```
-<dt>
+{{% warn %}}
    Once you have enabled HTTPS, you MUST use `-bind-tls` in order for influxd-ctl to connect to the meta node.  Because the cert is self-signed, you MUST also use the `-k` option.  This skips certificate verification.
-</dt>
+{{% /warn %}}
 
 A successful connection returns output which should resemble the following:
 ```

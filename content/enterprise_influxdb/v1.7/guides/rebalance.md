@@ -38,11 +38,11 @@ cluster, and they use the
 [`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) available on
 all meta nodes.
 
-<dt>
+{{% warn %}}
 Before you begin, stop writing historical data to InfluxDB.
 Historical data have timestamps that occur at anytime in the past.
 Performing a rebalance while writing historical data can lead to data loss.
-</dt>
+{{% /warn %}}
 
 ## Rebalance Procedure 1: Rebalance a cluster to create space
 

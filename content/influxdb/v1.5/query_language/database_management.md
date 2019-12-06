@@ -205,9 +205,9 @@ It does not drop the associated continuous queries.
 
 A successful `DROP MEASUREMENT` query returns an empty result.
 
-<dt> Currently, InfluxDB does not support regular expressions with `DROP MEASUREMENTS`.
+{{% warn %}} Currently, InfluxDB does not support regular expressions with `DROP MEASUREMENTS`.
 See GitHub Issue [#4275](https://github.com/influxdb/influxdb/issues/4275) for more information.
-</dt>
+{{% /warn %}}
 
 ### Delete a shard with DROP SHARD
 
@@ -255,8 +255,8 @@ duration is `INF`.
 The `REPLICATION` clause determines how many independent copies of each point
 are stored in the [cluster](/influxdb/v1.5/high_availability/clusters/), where `n` is the number of data nodes.
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 ##### `SHARD DURATION`
 <br>
@@ -321,8 +321,8 @@ The `ALTER RETENTION POLICY` query takes the following form, where you must decl
 ALTER RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <duration> REPLICATION <n> SHARD DURATION <duration> DEFAULT
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 First, create the retention policy `what_is_time` with a `DURATION` of two days:
 ```sql

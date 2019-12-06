@@ -10,12 +10,12 @@ menu:
 
 ## Prometheus remote read and write API support
 
-<dt>
+{{% warn %}}
 Note: The Prometheus [API Stability Guarantees](https://prometheus.io/docs/prometheus/latest/stability/)
 states that remote read and remote write endpoints are features listed as experimental
 or subject to change, and thus considered unstable for 2.x. Any breaking changes
 will be included in the InfluxDB release notes.
-</dt>
+{{% /warn %}}
 
 InfluxDB support for the Prometheus remote read and write API adds the following
 HTTP endpoints to InfluxDB:
@@ -106,7 +106,7 @@ fields
 > named `_` and the Prometheus measurement name is stored in the `__name__` label.
 > In InfluxDB v1.6+, every Prometheus measurement gets its own InfluxDB measurement.
 
-<dt>
+{{% warn %}}
 This format is different than the format used by the Telegraf Prometheus input plugin,
 which is documented [here](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus).
-</dt>
+{{% /warn %}}

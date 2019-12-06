@@ -582,9 +582,9 @@ Killed shard copy 39 from cluster-data-node-02:8088 to cluster-data-node-03:8088
 Removes a meta node and/or data node from the cluster.
 Use `leave` instead of the [`remove-meta`](#remove-meta) and [`remove-data`](#remove-data) arguments if you set up your InfluxDB Enterprise cluster with the [QuickStart Installation](/enterprise_influxdb/v1.7/quickstart_installation/cluster_installation/) process.
 
-<dt>The `leave` argument is destructive; it erases all metastore information from meta nodes and all data from data nodes.
+{{% warn %}}The `leave` argument is destructive; it erases all metastore information from meta nodes and all data from data nodes.
 Use `leave` only if you want to *permanently* remove a node from a cluster.
-</dt>
+{{% /warn %}}
 
 #### Syntax
 
@@ -664,9 +664,9 @@ Successfully left cluster
 Removes a data node from a cluster.
 Use `remove-data` instead of the [`leave`](#leave) argument if you set up your InfluxDB Enterprise cluster with the [Production Installation](/enterprise_influxdb/v1.7/production_installation/) process.
 
-<dt>The `remove-data` argument is destructive; it erases all data from the specified data node.
+{{% warn %}}The `remove-data` argument is destructive; it erases all data from the specified data node.
 Use `remove-data` only if you want to *permanently* remove a data node from a cluster.
-</dt>
+{{% /warn %}}
 
 #### Syntax
 
@@ -699,9 +699,9 @@ Removed data node at cluster-data-node-03:8088
 Removes a meta node from the cluster.
 Use `remove-meta` instead of the [`leave`](#leave) command if you set up your InfluxDB Enterprise cluster with the [Production Installation](/enterprise_influxdb/v1.7/production_installation/) process.
 
-<dt>The `remove-meta` argument is destructive; it erases all metastore information from the specified meta node.
+{{% warn %}}The `remove-meta` argument is destructive; it erases all metastore information from the specified meta node.
 Use `remove-meta` only if you want to *permanently* remove a meta node from a cluster.
-</dt>
+{{% /warn %}}
 
 #### Syntax
 

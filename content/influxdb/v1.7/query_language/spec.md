@@ -379,8 +379,8 @@ create_database_stmt = "CREATE DATABASE" db_name
                        ] .
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 #### Examples
 
@@ -405,8 +405,8 @@ create_retention_policy_stmt = "CREATE RETENTION POLICY" policy_name on_clause
                                [ "DEFAULT" ] .
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 #### Examples
 

@@ -9,9 +9,9 @@ menu:
 This page documents errors, their descriptions, and, where applicable,
 common resolutions.
 
-<dt>
+{{% warn %}}
 **Disclaimer:** This document does not contain an exhaustive list of all possible InfluxDB errors.
-</dt>
+{{% /warn %}}
 
 ## error: max series per database exceeded: < >
 The `max series per database exceeded` error occurs when a write causes the

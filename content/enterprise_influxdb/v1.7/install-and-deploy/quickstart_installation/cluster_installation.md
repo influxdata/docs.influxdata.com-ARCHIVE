@@ -127,9 +127,9 @@ In `/etc/influxdb/influxdb-meta.conf`:
 * uncomment and set `hostname` to the full hostname of the meta node
 * set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
-<dt>
+{{% warn %}}
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 ```toml
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
@@ -205,9 +205,9 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 
 `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
-<dt>
+{{% warn %}}
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 ```toml
 # Change this option to true to disable reporting.

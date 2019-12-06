@@ -102,9 +102,9 @@ Delete all points in the series that have a specific tag set from all measuremen
 
 A successful `DROP SERIES` query returns an empty result.
 
-<dt> `DROP SERIES` does not support time intervals in the `WHERE` clause.
+{{% warn %}} `DROP SERIES` does not support time intervals in the `WHERE` clause.
 See GitHub Issue [#1647](https://github.com/influxdb/influxdb/issues/1647) for more information).
-</dt>
+{{% /warn %}}
 
 ### Delete measurements with DROP MEASUREMENT
 ---
@@ -124,9 +124,9 @@ It does not drop the associated continuous queries.
 
 A successful `DROP MEASUREMENT` query returns an empty result.
 
-<dt> Currently, InfluxDB does not support regular expressions with `DROP MEASUREMENTS`.
+{{% warn %}} Currently, InfluxDB does not support regular expressions with `DROP MEASUREMENTS`.
 See GitHub Issue [#4275](https://github.com/influxdb/influxdb/issues/4275) for more information.
-</dt>
+{{% /warn %}}
 
 ### Delete a shard with DROP SHARD
 ---
@@ -168,15 +168,15 @@ Note that the minimum retention period is one hour.
 `w` weeks  
 `INF` infinite
 
-    <dt> Currently, the `DURATION` attribute supports only single units.
+    {{% warn %}} Currently, the `DURATION` attribute supports only single units.
 For example, you cannot express the duration `7230m` as `120h 30m`.
 See GitHub Issue [#3634](https://github.com/influxdb/influxdb/issues/3634) for more information.
-</dt>
+{{% /warn %}}
 
 * `REPLICATION` determines how many independent copies of each point are stored in the cluster, where `n` is the number of data nodes.
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 * `SHARD DURATION` determines the time range covered by a shard group.
 The options for specifying the duration of the shard group are listed below.
@@ -189,9 +189,9 @@ The default shard group duration depends on your retention policy's `DURATION`.
 `d` days  
 `w` weeks
 
-<dt> Currently, the `SHARD DURATION` attribute supports only single units.
+{{% warn %}} Currently, the `SHARD DURATION` attribute supports only single units.
 For example, you cannot express the duration `7230m` as `120h 30m`.
-</dt>
+{{% /warn %}}
 
 * `DEFAULT` sets the new retention policy as the default retention policy for the database.
 
@@ -220,8 +220,8 @@ The `ALTER RETENTION POLICY` query takes the following form, where you must decl
 ALTER RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <duration> REPLICATION <n> SHARD DURATION <duration> DEFAULT
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 First, create the retention policy `what_is_time` with a `DURATION` of two days:
 ```sql

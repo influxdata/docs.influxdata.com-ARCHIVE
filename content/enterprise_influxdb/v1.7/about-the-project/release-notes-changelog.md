@@ -74,7 +74,7 @@ This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.6 release. For d
 
 ## 1.7.5 [2019-03-26]
 
-<dt>
+{{% warn %}}
 
 **If you are currently on this release, roll back to v1.7.4 until a fix is available.**
 
@@ -87,7 +87,7 @@ Examples:
 - Complex WHERE clauses with parentheses. For example, `WHERE d > 100 AND (c = 'foo' OR v = 'bar'`).
 - Conditions not including parentheses caysubg operator precedence to return `(a AND b) OR c` instead of `a AND (b OR c)`
 
-</dt>
+{{% /warn %}}
 
 This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.5 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 

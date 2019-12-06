@@ -1897,8 +1897,8 @@ location
 ## CEILING()
 `CEILING()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## CUMULATIVE_SUM()
 Returns the running total of subsequent [field values](/influxdb/v1.3/concepts/glossary/#field-value).
@@ -2686,14 +2686,14 @@ time                   min
 ## FLOOR()
 `FLOOR()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## HISTOGRAM()
 `HISTOGRAM()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## MOVING_AVERAGE()
 Returns the rolling average across a window of subsequent [field values](/influxdb/v1.3/concepts/glossary/#field-value).

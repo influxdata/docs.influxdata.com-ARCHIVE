@@ -139,8 +139,8 @@ See [Data Exploration](/influxdb/v1.4/query_language/data_exploration/), [Schema
 The attribute of the retention policy that determines how many copies of the data are stored in the cluster.
 InfluxDB replicates data across `N` data nodes, where `N` is the replication factor.
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 Related entries: [duration](/influxdb/v1.4/concepts/glossary/#duration), [node](/influxdb/v1.4/concepts/glossary/#node), [retention policy](/influxdb/v1.4/concepts/glossary/#retention-policy-rp)
 
@@ -151,8 +151,8 @@ RPs are unique per database and along with the measurement and tag set define a 
 When you create a database, InfluxDB automatically creates a retention policy called `autogen` with an infinite duration, a replication factor set to one, and a shard group duration set to seven days.
 See [Database Management](/influxdb/v1.4/query_language/database_management/#retention-policy-management) for retention policy management.
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 Related entries: [duration](/influxdb/v1.4/concepts/glossary/#duration), [measurement](/influxdb/v1.4/concepts/glossary/#measurement), [replication factor](/influxdb/v1.4/concepts/glossary/#replication-factor), [series](/influxdb/v1.4/concepts/glossary/#series), [shard duration](/influxdb/v1.4/concepts/glossary/#shard-duration), [tag set](/influxdb/v1.4/concepts/glossary/#tag-set)
 

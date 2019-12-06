@@ -9,9 +9,9 @@ menu:
     parent: Administration
 ---
 
-<dt>
+{{% warn %}}
 Prior to InfluxDB Enterprise 1.7.2, the Anti-Entropy (AE) service was enabled by default. When shards create digests with lots of time ranges (10s of thousands), some customers have experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, enable AE and monitor it closely to see if your performance is adversely impacted.
-</dt>
+{{% /warn %}}
 
 ## Introduction
 
