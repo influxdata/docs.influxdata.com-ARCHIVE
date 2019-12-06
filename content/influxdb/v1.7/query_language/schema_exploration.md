@@ -425,8 +425,7 @@ database with `USE <database_name>` in the [CLI](/influxdb/v1.7/tools/shell/) or
 string parameter in the [InfluxDB API](/influxdb/v1.7/tools/api/#query-string-parameters) request.
 
 The `WITH`, `WHERE`, `LIMIT` and `OFFSET` clauses are optional.
-The `WHERE` clause supports tag comparisons; field comparisons are not
-valid for the `SHOW SERIES` query.
+The `WHERE` clause supports tag comparisons; field comparisons are not valid for the `SHOW MEASUREMENTS` query.
 
 Supported operators in the `WHERE` clause:
 `=`&emsp;&nbsp;&thinsp;equal to
