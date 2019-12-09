@@ -4189,8 +4189,8 @@ InfluxDB then rounds those averages down to the nearest integer.
 ## HISTOGRAM()
 `HISTOGRAM()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## LN()
 Returns the natural logarithm of the field value.

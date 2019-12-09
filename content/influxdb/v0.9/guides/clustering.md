@@ -15,10 +15,10 @@ Additionally new data nodes can be added to a cluster.
 The first three nodes to join a cluster are raft peers.
 All subsequent nodes are data nodes and do not participate in consensus.
 
-<dt> Versions 0.9.4 and earlier do not support fully functional distributed meta-queries.
+{{% warn %}} Versions 0.9.4 and earlier do not support fully functional distributed meta-queries.
 See issue [3295](https://github.com/influxdb/influxdb/issues/3295) for more information.
 Clusters on running on those versions should be upgraded to version 0.9.5 for working meta-query support.
-</dt>
+{{% /warn %}}
 
 ## Configuration
 The following is the current recommended procedure for configuring a cluster.

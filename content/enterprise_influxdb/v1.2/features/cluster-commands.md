@@ -221,7 +221,7 @@ Options:
 > Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [`restore`](#restore), keep `-full` backups and incremental backups in separate directories.
 
-<dt> In versions 1.2.0 and 1.2.1, there is a known issue with restores from a backup directory
+{{% warn %}} In versions 1.2.0 and 1.2.1, there is a known issue with restores from a backup directory
 that stores several **different** incremental backups.
 For a [restore](#restore) to function properly, incremental backups that specify different
 options (for example: they specify a different database with `-db` or a
@@ -229,7 +229,7 @@ different retention policy with `-rp`) must be stored in different directories.
 If a single backup directory stores several different incremental backups, a
 restore only restores the most recent incremental backup.
 This issue is fixed in version 1.2.2.
-</dt>
+{{% /warn %}}
 
 Resources: [Backup and Restore](/enterprise_influxdb/v1.2/guides/backup-and-restore/)
 
@@ -460,8 +460,8 @@ The command aborts the `copy-shard` command that was copying shard `39` from `cl
 Removes a meta node and/or data node from the cluster.
 Use `leave` instead of the [`remove-meta`](#remove-meta) and [`remove-data`](#remove-data) arguments if you set up your InfluxEnterprise cluster with the [QuickStart Installation](/enterprise_influxdb/v1.2/quickstart_installation/cluster_installation/) process.
 
-<dt>The `leave` argument is destructive; it erases all metastore information from meta nodes and all data from data nodes.
-Use `leave` only if you want to *permanently* remove a node from a cluster.</dt>
+{{% warn %}}The `leave` argument is destructive; it erases all metastore information from meta nodes and all data from data nodes.
+Use `leave` only if you want to *permanently* remove a node from a cluster.{{% /warn %}}
 
 ```
 leave [-y]
@@ -536,8 +536,8 @@ The system doesn't remove a data node from the cluster because it doesn't find a
 Removes a data node from a cluster.
 Use `remove-data` instead of the [`leave`](#leave) argument if you set up your InfluxEnterprise cluster with the [Production Installation](/enterprise_influxdb/v1.2/production_installation/) process.
 
-<dt>The `remove-data` argument is destructive; it erases all data from the specified data node.
-Use `remove-data` only if you want to *permanently* remove a data node from a cluster.</dt>
+{{% warn %}}The `remove-data` argument is destructive; it erases all data from the specified data node.
+Use `remove-data` only if you want to *permanently* remove a data node from a cluster.{{% /warn %}}
 
 ```
 remove-data [-force] <data-node-TCP-bind-address>
@@ -564,8 +564,8 @@ The command removes a data node running at `cluster-data-node-03:8088` from an e
 Removes a meta node from the cluster.
 Use `remove-meta` instead of the [`leave`](#leave) argument if you set up your InfluxEnterprise cluster with the [Production Installation](/enterprise_influxdb/v1.2/production_installation/) process.
 
-<dt>The `remove-meta` argument is destructive; it erases all metastore information from the specified meta node.
-Use `remove-meta` only if you want to *permanently* remove a meta node from a cluster.</dt>
+{{% warn %}}The `remove-meta` argument is destructive; it erases all metastore information from the specified meta node.
+Use `remove-meta` only if you want to *permanently* remove a meta node from a cluster.{{% /warn %}}
 
 ```
 remove-meta [-force | -tcpAddr <meta-node-TCP-bind_address> | -y] <meta-node-HTTP-bind-address>
@@ -681,9 +681,9 @@ A restore command with the `-full` flag requires the `path-to-backup-manifest-fi
 
 Resources: [Backup and Restore](/enterprise_influxdb/v1.2/guides/backup-and-restore/#restore)
 
-<dt>
+{{% warn %}}
 In versions 1.2.0 and 1.2.1, a restore without the `-full` option requires users to `cd` into the backup directory and run `influxd-ctl restore [options] .` from that directory. This issue is fixed in version 1.2.2.
-</dt>
+{{% /warn %}}
 
 ##### Examples
 <br>

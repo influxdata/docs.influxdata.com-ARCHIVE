@@ -73,9 +73,9 @@ The `./sandbox up` command includes a `-nightly` option that will pull nightly
 builds for InfluxDB and Chronograf, giving you the most recent updates and
 experimental functionality.
 
-<dt>
+{{% warn %}}
 Nightly builds are experimental and are not guaranteed to be functional.
-</dt>
+{{% /warn %}}
 
 ```bash
 ./sandbox up -nightly

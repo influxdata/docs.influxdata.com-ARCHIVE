@@ -197,8 +197,8 @@ If you request a query that has no timestamp to return, such as an aggregation f
 ## INTEGRAL()
 `INTEGRAL()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## MEAN()
 Returns the arithmetic mean (average) for the values in a single [field](/influxdb/v0.12/concepts/glossary/#field).
@@ -298,9 +298,9 @@ time			               median
 2015-08-18T00:00:00Z	 2.0575
 ```
 
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
+{{% warn %}} The returned timestamps mark the start of the relevant time interval for the query.
 See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
+{{% /warn %}}
 
 ## SPREAD()
 Returns the difference between the minimum and maximum values of a [field](/influxdb/v0.12/concepts/glossary/#field).
@@ -556,10 +556,10 @@ time			               first
 1970-01-01T00:00:00Z	 2.064
 ```
 
-<dt> The returned timestamp marks the start of the relevant time interval
+{{% warn %}} The returned timestamp marks the start of the relevant time interval
 for the query.
 See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
-for more information.</dt>
+for more information.{{% /warn %}}
 
 * Select the oldest value of the field `water_level` between
 `2015-08-18T00:42:00Z` and `2015-08-18T00:54:00Z`, and output the relevant
@@ -620,10 +620,10 @@ time			               last
 1970-01-01T00:00:00Z	 4.938
 ```
 
-<dt> The returned timestamp marks the start of the relevant time interval
+{{% warn %}} The returned timestamp marks the start of the relevant time interval
 for the query.
 See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
-for more information.</dt>
+for more information.{{% /warn %}}
 
 * Select the newest value of the field `water_level` between
 `2015-08-18T00:42:00Z` and `2015-08-18T00:54:00Z`, and output the relevant
@@ -688,10 +688,10 @@ time			               max
 1970-01-01T00:00:00Z	 9.964
 ```
 
-<dt> The returned timestamp marks the start of the relevant time interval
+{{% warn %}} The returned timestamp marks the start of the relevant time interval
 for the query.
 See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
-for more information.</dt>
+for more information.{{% /warn %}}
 
 * Select the maximum `water_level` in the measurement `h2o_feet` and output the
 relevant `location` tag:
@@ -760,10 +760,10 @@ time			               min
 1970-01-01T00:00:00Z	 -0.61
 ```
 
-<dt> The returned timestamp marks the start of the relevant time interval
+{{% warn %}} The returned timestamp marks the start of the relevant time interval
 for the query.
 See GitHub Issue [#4680](https://github.com/influxdata/influxdb/issues/4680)
-for more information.</dt>
+for more information.{{% /warn %}}
 
 * Select the minimum `water_level` in the measurement `h2o_feet` and output the
 relevant `location` tag:
@@ -858,9 +858,9 @@ time			               percentile
 
 Notice that `PERCENTILE(<field_key>,100)` is equivalent to `MAX(<field_key>)`.
 
-<dt> Currently, `PERCENTILE(<field_key>,0)` is not equivalent to `MIN(<field_key>)`.
+{{% warn %}} Currently, `PERCENTILE(<field_key>,0)` is not equivalent to `MIN(<field_key>)`.
 See GitHub Issue [#4418](https://github.com/influxdata/influxdb/issues/4418) for more information.
-</dt>
+{{% /warn %}}
 
 > **Note**: `PERCENTILE(<field_key>, 50)` is nearly equivalent to `MEDIAN()`, except `MEDIAN()` returns the average of the two middle values if the field contains an even number of points.
 
@@ -1010,8 +1010,8 @@ In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 ## CEILING()
 `CEILING()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## DERIVATIVE()
 Returns the rate of change for the values in a single [field](/influxdb/v0.12/concepts/glossary/#field) in a [series](/influxdb/v0.12/concepts/glossary/#series).
@@ -1333,14 +1333,14 @@ values; the first value in the `difference` column is `2.028 - 2.064`.
 ## FLOOR()
 `FLOOR()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## HISTOGRAM()
 `HISTOGRAM()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## MOVING_AVERAGE()
 Returns the moving average across a `window` of consecutive chronological field values for a single [field](/influxdb/v0.12/concepts/glossary/#field).

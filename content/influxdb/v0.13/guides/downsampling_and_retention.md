@@ -17,8 +17,8 @@ This guide shows how to combine two InfluxDB features -- retention policies and 
 A retention policy (RP) is the part of InfluxDB's data structure that describes for how long InfluxDB keeps data (duration) and how many copies of this data is stored in the cluster (replication factor).
 A database can have several RPs and RPs are unique per database.
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 ### Purpose
 In general, InfluxDB wasn't built to process deletes.

@@ -73,9 +73,9 @@ Optional arguments are enclosed in brackets.
 
 - `[ -portable ]`: Generates backup files in the newer InfluxDB Enterprise-compatible format. Highly recommended for all InfluxDB OSS users.
 
-<dt>
+{{% warn %}}
 **Important:** If `-portable` is not specified, the default legacy backup utility is used -- only the host metastore is backed up, unless `-database` is specified. If not using `-portable`, review [Backup (legacy)](#backup-legacy) below for expected behavior.
-</dt>
+{{% /warn %}}
 
 - `[ -host <host:port> ]`: Host and port for InfluxDB OSS instance . Default value is `'127.0.0.1:8088'`. Required for remote connections. Example: `-host 127.0.0.1:8088`
 
@@ -130,7 +130,7 @@ influxd restore [ -db <db_name> ]
     [ -shard <shard_ID> ]
     <path-to-backup-files>
 ```
-<dt>
+{{% warn %}}
 Restoring backups that specified time periods (using `-start` and `-end`)
 
 Backups that specified time intervals using the `-start` or `-end` arguments are performed on blocks of data and not on a point-by-point basis. Since most blocks are highly compacted, extracting each block to inspect each point creates both a computational and disk-space burden on the running system.
@@ -140,7 +140,7 @@ Each data block is annotated with starting and ending timestamps for the time in
 
 - When restoring data, you are likely to see data that is outside of the specified time periods.
 - If  duplicate data points are included in the backup files, the points will be written again, overwriting any existing data.
-</dt>
+{{% /warn %}}
 
 #### Arguments
 
@@ -307,8 +307,8 @@ Follow the directions in [Configuring remote connections](#configuring-remote-co
 
 ## Restore (legacy)
 
-<dt> This offline restore method described here may result in data loss -- it clears all existing databases on the server. Consider using the `-online` flag with the newer [`restore` method (described above)](#restore) to import legacy data without any data loss.
-</dt>
+{{% warn %}} This offline restore method described here may result in data loss -- it clears all existing databases on the server. Consider using the `-online` flag with the newer [`restore` method (described above)](#restore) to import legacy data without any data loss.
+{{% /warn %}}
 
 To restore a backup, you will need to use the `influxd restore` command.
 

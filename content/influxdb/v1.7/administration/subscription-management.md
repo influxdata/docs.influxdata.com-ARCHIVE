@@ -69,10 +69,10 @@ In case authentication is enabled on the subscriber host, adapt the URL to conta
 CREATE SUBSCRIPTION "sub0" ON "mydb"."autogen" DESTINATIONS ALL 'http://subscriber:secret@example.com:8086'
 ```
 
-<dt>
+{{% warn %}}
 `SHOW SUBSCRIPTIONS` outputs all subscriber URL in plain text, including those with authentication credentials.
 Any user with the privileges to run `SHOW SUBSCRIPTIONS` is able to see these credentials.
-</dt>
+{{% /warn %}}
 
 ### Sending subscription data to multiple hosts
 

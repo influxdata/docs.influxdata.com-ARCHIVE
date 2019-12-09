@@ -117,6 +117,6 @@ In no particular order, we recommend that you:
     You won't be able to query the [tag key](/influxdb/v0.11/concepts/glossary/#tag-key) if the tag key is the same as a [field key](/influxdb/v0.11/concepts/glossary/#field-key) in your schema.
     Be sure to differentiate your tag keys and field keys.
 
-    <dt>
+    {{% warn %}}
     See GitHub Issue [#4630](https://github.com/influxdata/influxdb/issues/4630) for more information.
-    </dt>
+    {{% /warn %}}

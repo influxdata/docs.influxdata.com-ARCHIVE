@@ -44,11 +44,11 @@ data
 data...
 ```
 
-<dt>
+{{% warn %}}
 <strong>WARNING:</strong> It is not recommended to join the stats stream with the original data stream.
 Since they operate on different clocks you could potentially create a deadlock.
 This is a limitation of the current implementation and may be removed in the future.
-</dt>
+{{% /warn %}}
 
 ### Constructor
 

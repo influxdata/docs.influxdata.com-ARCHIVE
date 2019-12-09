@@ -12,11 +12,11 @@ menu:
 The following guide has step-by-step instructions for migrating an InfluxDB open source (OSS)
 instance into an InfluxDB Enterprise cluster.
 
-<dt>
+{{% warn %}}
 The process assumes that you already have a fully configured InfluxDB Enterprise cluster
 of three or more meta nodes and zero or more data nodes. If you need instructions for meta node installation:
 - [Production installation of meta nodes](/enterprise_influxdb/v1.7/production_installation/meta_node_installation/)
-</dt>
+{{% /warn %}}
 
 Please note that this migration process:
 
@@ -24,11 +24,11 @@ Please note that this migration process:
 * Will transfer all users from the OSS instance to the InfluxDB Enterprise Cluster*
 * Requires downtime for writes and reads for the OSS instance
 
-<dt>
+{{% warn %}}
 If you're using an InfluxDB Enterprise cluster version prior to 0.7.4, the
 following steps will **not** transfer users from the OSS instance to the
 InfluxDB Enterprise Cluster.
-</dt>
+{{% /warn %}}
 
 In addition, please refrain from creating a Global Admin user in the InfluxDB Enterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
 
@@ -140,9 +140,9 @@ In `/etc/influxdb/influxdb.conf`, set:
 * `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path`
 in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
-<dt>
+{{% warn %}}
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 ```toml
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all

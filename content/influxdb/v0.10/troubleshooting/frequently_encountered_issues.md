@@ -58,8 +58,8 @@ Those returns typically proceed from the combination of the following two featur
 If your `WHERE` time clause is simply `WHERE time < now()` InfluxDB queries the data back to epoch 0 - that behavior often causes the query to breach the 100,000 instances rule and InfluxDB returns a confusing error or result.
 Avoid perplexing `GROUP BY time()` returns by specifying a valid time interval in the `WHERE` clause.
 
-<dt> [GitHub Issue #2702](https://github.com/influxdb/influxdb/issues/2702) and [GitHub Issue #4004](https://github.com/influxdb/influxdb/issues/4004)
-</dt>
+{{% warn %}} [GitHub Issue #2702](https://github.com/influxdb/influxdb/issues/2702) and [GitHub Issue #4004](https://github.com/influxdb/influxdb/issues/4004)
+{{% /warn %}}
 
 ## Understanding the time intervals returned from `GROUP BY time()` queries
 With some `GROUP BY time()` queries, the returned time intervals may not reflect the time range specified in the `WHERE` clause.
@@ -100,8 +100,8 @@ August 23rd-24th
 Because InfluxDB automatically groups together August 19th and August 20th, August 19th is the first timestamp to appear in the results despite not being within the query's time range.
 The number in the `count` column, however, only includes data that occur on or after August 20th as that is the time range specified by the query's `WHERE` clause.
 
-<dt> See [GitHub Issue #1837](https://github.com/influxdb/influxdb/issues/1837) for more context on the future development of `GROUP BY time()` windows.
-</dt>
+{{% warn %}} See [GitHub Issue #1837](https://github.com/influxdb/influxdb/issues/1837) for more context on the future development of `GROUP BY time()` windows.
+{{% /warn %}}
 
 ## Querying after `now()`
 By default, InfluxDB uses `now()` (the current nanosecond timestamp of the node that is processing the query) as the upper bound in queries.
@@ -119,13 +119,13 @@ Queries with a time range that exceeds the minimum or maximum timestamps valid f
 Smallest valid timestamp: `-9023372036854775808` (approximately `1684-01-22T14:50:02Z`)  
 Largest valid timestamp: `9023372036854775807` (approximately `2255-12-09T23:13:56Z`)
 
-<dt> [GitHub Issue #3369](https://github.com/influxdb/influxdb/issues/3369)  </dt>
+{{% warn %}} [GitHub Issue #3369](https://github.com/influxdb/influxdb/issues/3369)  {{% /warn %}}
 
 ## Querying a time range that spans epoch 0
 Currently, InfluxDB can return results for queries that cover either the time range before epoch 0 or the time range after epoch 0, not both.
 A query with a time range that spans epoch 0 returns partial results.
 
-<dt> [GitHub Issue #2703](https://github.com/influxdb/influxdb/issues/2703)  </dt>
+{{% warn %}} [GitHub Issue #2703](https://github.com/influxdb/influxdb/issues/2703)  {{% /warn %}}
 
 ## Querying with booleans
 Acceptable boolean syntax differs for data writes and data queries.
@@ -140,7 +140,7 @@ Acceptable boolean syntax differs for data writes and data queries.
 
 For example, `SELECT * FROM hamlet WHERE bool=True` returns all points with `bool` set to `TRUE`, but `SELECT * FROM hamlet WHERE bool=T` returns all points with`bool` set to `false`.
 
-<dt> [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) </dt>
+{{% warn %}} [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) {{% /warn %}}
 
 ## Working with really big or really small integers
 InfluxDB stores all integers as signed int64 data types.
@@ -149,7 +149,7 @@ See [Go builtins](http://golang.org/pkg/builtin/#int64) for more information.
 
 Values close to but within those limits may lead to unexpected results; some functions and operators convert the int64 data type to float64 during calculation which can cause overflow issues.
 
-<dt> [GitHub Issue #3130](https://github.com/influxdb/influxdb/issues/3130)  </dt>
+{{% warn %}} [GitHub Issue #3130](https://github.com/influxdb/influxdb/issues/3130)  {{% /warn %}}
 
 ## Doing math on timestamps
 Currently, it is not possible to execute mathematical operators or functions against timestamp values in InfluxDB.
@@ -159,7 +159,7 @@ All time calculations must be carried out by the client receiving the query resu
 In InfluxDB, epoch 0  (`1970-01-01T00:00:00Z`)  is often used as a null timestamp equivalent.
 If you request a query that has no timestamp to return, such as an aggregation function with an unbounded time range, InfluxDB returns epoch 0 as the timestamp.
 
-<dt> [GitHub Issue #3337](https://github.com/influxdb/influxdb/issues/3337) </dt>
+{{% warn %}} [GitHub Issue #3337](https://github.com/influxdb/influxdb/issues/3337) {{% /warn %}}
 
 ## Getting large query returns in batches when using the HTTP API
 InfluxDB returns large query results in batches of 10,000 points unless you use the query string parameter `chunk_size` to explicitly set the batch size.
@@ -167,8 +167,8 @@ For example, get results in batches of 20,000 points with:
 
 `curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"`
 
-<dt> See [GitHub Issue #3242](https://github.com/influxdb/influxdb/issues/3242) for more information on the challenges that this can cause, especially with Grafana visualization.
-</dt>
+{{% warn %}} See [GitHub Issue #3242](https://github.com/influxdb/influxdb/issues/3242) for more information on the challenges that this can cause, especially with Grafana visualization.
+{{% /warn %}}
 
 ## Getting the `expected identifier` error, unexpectedly
 Receiving the error `ERR: error parsing query: found [WORD], expected identifier[, string, number, bool]` is often a gentle reminder that you forgot to include something in your query, as is the case in the following examples:
@@ -210,7 +210,7 @@ time                  value	 precision_supplied  timestamp_supplied
 1970-01-01T02:00:00Z  6      h                   2
 ```
 
-<dt> [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) </dt>
+{{% warn %}} [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) {{% /warn %}}
 
 ## Single quoting and double quoting in queries
 Single quote string values (for example, tag values) but do not single quote identifiers (database names, retention policy names, user names, measurement names, tag keys, and field keys).

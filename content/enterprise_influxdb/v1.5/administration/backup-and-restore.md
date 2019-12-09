@@ -95,7 +95,6 @@ influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 ```
-</dt>
 
 ### Examples
 

@@ -67,7 +67,7 @@ Optional arguments are in brackets.
 
 The size of the batches written to the index. Default value is `10000`.
 
-<dt>**Warning:** Setting this value can have adverse effects on performance and heap size.</dt>
+{{% warn %}}**Warning:** Setting this value can have adverse effects on performance and heap size.{{% /warn %}}
 
 
 ##### `[ -concurrency ]`
@@ -137,7 +137,7 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 
 Bulk deletes a measurement from a raw TSM file.
 
-<dt> **Warning:** Use the `deletetsm` command only when your InfluxDB instance is offline (`influxd` service is not running).</dt>
+{{% warn %}} **Warning:** Use the `deletetsm` command only when your InfluxDB instance is offline (`influxd` service is not running).{{% /warn %}}
 
 #### Syntax
 

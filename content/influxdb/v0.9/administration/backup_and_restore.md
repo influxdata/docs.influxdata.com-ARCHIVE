@@ -7,10 +7,10 @@ menu:
     parent: administration
 ---
 
-<dt> Backup and Restore in InfluxDB 0.9 are non-functional for a significant subset of users. 
+{{% warn %}} Backup and Restore in InfluxDB 0.9 are non-functional for a significant subset of users. 
 The underlying storage engine in InfluxDB 0.9 does not lend itself to hot backups. 
 The new storage engine released with InfluxDB 0.10 supports hot incremental backups by design. 
-If reliable hot or incremental backups are an important consideration for you, please upgrade to InfluxDB 0.10 as soon as feasible. </dt>
+If reliable hot or incremental backups are an important consideration for you, please upgrade to InfluxDB 0.10 as soon as feasible. {{% /warn %}}
 
 ## File-level Workaround
 

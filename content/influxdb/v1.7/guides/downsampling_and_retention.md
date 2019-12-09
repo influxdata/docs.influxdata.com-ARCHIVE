@@ -102,10 +102,10 @@ That query creates an RP called `two_hours` that exists in the database
 `two_hours` keeps data for a `DURATION` of two hours (`2h`) and it's the `DEFAULT`
 RP for the database `food_data`.
 
-<dt>
+{{% warn %}}
 The replication factor (`REPLICATION 1`) is a required parameter but must always
 be set to 1 for single node instances.
-</dt>
+{{% /warn %}}
 
 > **Note:** When we created the `food_data` database in step 1, InfluxDB
 automatically generated an RP named `autogen` and set it as the `DEFAULT`

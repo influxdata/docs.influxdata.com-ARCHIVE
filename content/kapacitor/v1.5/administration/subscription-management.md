@@ -76,12 +76,12 @@ Available options:
 - `"server"`
 - `"cluster"` _(See warning below)_
 
-<dt>
+{{% warn %}}
 The default setting for `subscription-mode` is `cluster`, however this should
 not be used with [Kapacitor Enterprise](/enterprise_kapacitor/).
 Multi-node Kapacitor Enterprise clusters should only use the `server` subscription-mode,
 otherwise subscription data will not be received.
-</dt>
+{{% /warn %}}
 
 ### `subscription-protocol`
 Defines which protocol to use for subscriptions.

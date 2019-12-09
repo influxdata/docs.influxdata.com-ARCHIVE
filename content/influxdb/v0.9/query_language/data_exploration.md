@@ -556,9 +556,9 @@ Use [fill()](/influxdb/v0.9/query_language/data_exploration/#the-group-by-clause
 InfluxQL supports two different clauses to limit your query results.
 Currently, they are mutually exclusive so you may use one or the other, but not both in the same query.
 
-<dt> Please note that using `LIMIT` and `SLIMIT` **without** a `GROUP BY *` clause can cause unexpected results.
+{{% warn %}} Please note that using `LIMIT` and `SLIMIT` **without** a `GROUP BY *` clause can cause unexpected results.
 See [GitHub Issue #4232](https://github.com/influxdb/influxdb/issues/4232) for more information.
-</dt>
+{{% /warn %}}
 
 ### Limit the number of results returned per series with `LIMIT`
 ---

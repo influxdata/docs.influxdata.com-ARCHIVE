@@ -117,9 +117,9 @@ In `/etc/influxdb/influxdb-meta.conf`:
 * Uncomment and set `hostname` to the hostname of the meta node.
 * Set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
-<dt>
+{{% warn %}}
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all

@@ -112,9 +112,9 @@ In the `/etc/influxdb/influxdb.conf` file, complete these steps:
 3. Uncomment `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. This value must be the same for all data nodes.
 4. Set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **or** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
-<dt>
+{{% warn %}}
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 ```
 # Change this option to true to disable reporting.
@@ -187,10 +187,10 @@ After all of your data nodes have been installed, configured, and launched, move
 
 ## Join the data nodes to the cluster
 
-<dt>Join your data nodes to the cluster only when you are adding a brand new node,
+{{% warn %}}Join your data nodes to the cluster only when you are adding a brand new node,
 either during the initial creation of your cluster or when growing the number of data nodes.
 If you are replacing an existing data node using the `influxd-ctl update-data` command, skip the rest of this guide.
-</dt>
+{{% /warn %}}
 
 Run the following commands on one of the meta nodes that you set up during
 [meta nodes installation](/enterprise_influxdb/v1.5/introduction/meta_node_installation/):
