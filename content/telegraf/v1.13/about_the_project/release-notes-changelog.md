@@ -1,5 +1,5 @@
 ---
-title: Telegraf 1.12 release notes
+title: Telegraf 1.13 release notes
 description: See the new features, bug fixes, breaking changes, and enhancements in the latest and earlier Telegraf releases.
 menu:
   telegraf_1_13:
@@ -7,6 +7,93 @@ menu:
     weight: 10
     parent: About the project
 ---
+
+## v1.13 [2019-12-10]
+
+### Release Notes
+Official packages built with Go 1.13.5.
+The Prometheus Format (`prometheus`) input plugin and Prometheus Client (`prometheus_client`)
+output have a new mapping to and from Telegraf metrics, which can be enabled by setting `metric_version = 2`.
+The original mapping is deprecated. When both plugins have the same setting,
+passthrough metrics are unchanged.
+Refer to the [Prometheus input plugin](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/inputs/prometheus/README.md)
+for details about the mapping.
+
+### New Inputs
+- [Azure Storage Queue](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/inputs/azure_storage_queue/README.md)
+  (`azure_storage_queue`) - Contributed by [@mjiderhamn](https://github.com/mjiderhamn)
+- [Ethtool](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/inputs/ethtool/README.md)
+  (`ethtool`) - Contributed by [@philippreston](https://github.com/philippreston)
+- [SNMP Trap](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/inputs/snmp_trap/README.md)
+  (`snmp_trap`) - Contributed by [@influxdata](https://github.com/influxdata)
+- [Suricata](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/inputs/suricata/README.md)
+  (`suricata`) - Contributed by [@satta](https://github.com/satta)
+- [Synproxy](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/inputs/synproxy/README.md)
+  (`synproxy`) - Contributed by [@rfrenayworldstream](https://github.com/rfrenayworldstream)
+- [Systemd Units](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/inputs/systemd_units/README.md)
+  (`systemd_units`) - Contributed by [@benschweizer](https://github.com/benschweizer)
+
+### New Processors
+- [Clone](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/processors/clone/README.md)
+  (`clone`) - Contributed by [@adrianlzt](https://github.com/adrianlzt)
+
+### New Aggregators
+- [Merge](https://github.com/influxdata/telegraf/blob/release-1.13/plugins/aggregators/merge/README.md)
+  (`merge`) - Contributed by [@influxdata](https://github.com/influxdata)
+
+### Features
+- Add per node memory stats to RabbitMQ (`rabbitmq`) input plugin.
+- Add ability to read query from file to PostgreSQL (`postgresql_extensible`) input plugin.
+- Add replication metrics to the Redis (`redis`) input plugin.
+- Support NX-OS telemetry extensions in Cisco Model-driven Telemetry (`cisco_telemetry_mdt`)
+  input plugin.
+- Allow `graphite` parser to create `Inf` and `NaN` values.
+- Use prefix base detection for ints in `grok` parser.
+- Add more performance counter metrics to Microsoft SQL Server (`sqlserver`) input plugin.
+- Add millisecond unix time support to `grok` parser.
+- Add container ID as optional source tag to Docker (`docker`) and Docker Log
+  (`docker_log`) input plugins.
+- Add `lang` parameter to OpenWeatherMap (`openweathermap`) input plugin.
+- Log file open errors at debug level in Tail (`tail`) input plugin.
+- Add timeout option to Amazon CloudWatch (`cloudwatch`) input plugin.
+- Support custom success codes in HTTP (`http`) input plugin.
+- Improve IPVS (`ipvs`) input plugin error strings and logging.
+- Add strict mode to JSON parser that can be disabled to ignore invalid items.
+- Add support for Kubernetes 1.16 and remove deprecated API usage.
+- Add gathering of RabbitMQ federation link metrics.
+- Add bearer token defaults for Kubernetes plugins.
+- Add support for SNMP over TCP.
+- Add support for per output flush jitter.
+- Add a nameable file tag to File (`file`) input plugin.
+- Add Splunk MultiMetric support.
+- Add support for sending HTTP Basic Auth in InfluxDB (`influxdb`) input plugin.
+- Add ability to configure the url tag in the Prometheus Format (`prometheus`) input plugin.
+- Add Prometheus `metric_version=2` mapping to internal metrics/line protocol.
+- Add Prometheus `metric_version=2` support to Prometheus Client (`prometheus_client`) output plugin.
+- Add content_encoding compression support to Socket Listener (`socket_listener`) input plugin.
+- Add high resolution metrics support to Amazon CloudWatch (`cloudwatch`) output plugin.
+- Add `SReclaimable` and `SUnreclaim ` to Memory (`mem`) input plugin.
+- Allow multiple certificates per file in X.509 Certificate (`x509_cert`) input plugin.
+- Add additional tags to the X.509 Certificate (`x509_cert`) input plugin.
+- Add batch data format support to File (`file`) output plugin.
+- Support partition assignment strategy configuration in Apache Kafka Consumer
+  (`kafka_consumer`) input plugin.
+- Add node type tag to MongoDB (`mongodb`) input plugin.
+- Add `uptime_ns` field to MongoDB (`mongodb`) input plugin.
+- Support resolution of symlinks in Filecount (`filecount`) input plugin.
+- Set message timestamp to the metric time in Apache Kafka (`kafka`) output plugin.
+- Add base64decode operation to String (`string`) processor.
+
+### Bug fixes
+- Show correct default settings in MySQL (`mysql`) sample configuration.
+- Use `1h` or `3h` rain values as appropriate in OpenWeatherMap (`openweathermap`) input plugin.
+- Fix `not a valid field` error in Windows with Nvidia SMI (`nvidia_smi`) input plugin.
+- Fix InfluxDB (`influxdb`) output serialization on connection closed.
+- Fix ping skips remaining hosts after DNS lookup error.
+- Log MongoDB oplog auth errors at debug level.
+- Remove trailing underscore trimming from json flattener.
+- Revert change causing CPU usage to be capped at 100 percent.
+- Accept any media type in the Prometheus Format (`prometheus`) input plugin.
 
 ## v1.12.6 [2019-11-19]
 
