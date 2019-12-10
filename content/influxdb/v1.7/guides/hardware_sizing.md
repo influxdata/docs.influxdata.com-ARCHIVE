@@ -31,7 +31,7 @@ If at least one of your performance requirements falls into the [Probably infeas
 
 # General hardware guidelines for a single node
 
-We define the load that you'll be placing on InfluxDB by the number of fields written per second, the number of queries per second, and the number of unique [series](/influxdb/v1.4/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
+We define the load that you'll be placing on InfluxDB by the number of fields written per second, the number of queries per second, and the number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
 
 InfluxDB should be run on locally attached SSDs. Any other storage configuration will have lower performance characteristics and may not be able to recover from even small interruptions in normal processing.
 
@@ -96,7 +96,7 @@ Meta nodes do not need very much computing power. Regardless of the cluster load
 * IOPS: 50
 
 ## Data Nodes
-A cluster with only one data node is valid but has no data redundancy. The redundancy is set by the [replication factor](/influxdb/v0.13/concepts/glossary/#replication-factor) on the retention policy to which the data is written. A cluster can lose `n - 1` data nodes and still return complete query results, where `n` is the replication factor. For optimal data distribution within the cluster, InfluxData recommends using an even number of data nodes.
+A cluster with only one data node is valid but has no data redundancy. The redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy to which the data is written. A cluster can lose `n - 1` data nodes and still return complete query results, where `n` is the replication factor. For optimal data distribution within the cluster, InfluxData recommends using an even number of data nodes.
 
 The hardware recommendations for cluster data nodes are similar to the standalone instance recommendations. Data nodes should always have at least 2 CPU cores, as they must handle regular read and write traffic, as well as intra-cluster read and write traffic. Due to the cluster communication overhead, data nodes in a cluster handle less throughput than a standalone instance on the same hardware.
 
@@ -155,8 +155,8 @@ The Enterprise Web server is primarily an HTTP server with similar load requirem
 # When do I need more RAM?
 In general, having more RAM helps queries return faster. There is no known downside to adding more RAM.
 
-The major component that affects your RAM needs is [series cardinality](/influxdb/v1.4/concepts/glossary/#series-cardinality).
-A series cardinality around or above 10 million can cause OOM failures even with large amounts of RAM. If this is the case, you can usually address the problem by redesigning your [schema](/influxdb/v1.4/concepts/glossary/#schema).
+The major component that affects your RAM needs is [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality).
+A series cardinality around or above 10 million can cause OOM failures even with large amounts of RAM. If this is the case, you can usually address the problem by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
 
 The increase in RAM needs relative to series cardinality is exponential where the exponent is between one and two:
 
@@ -168,7 +168,7 @@ InfluxDB is designed to run on SSDs. InfluxData does not test on HDDs or network
 Please note that cluster data nodes have very high IOPS requirements when the cluster is recovering from downtime. It is recommended that the storage system have at least 2000 IOPS to allow for rapid recovery. Below 1000 IOPS, the cluster may not be able to recover from even a brief outage.
 
 # How much storage do I need?
-Database names, [measurements](/influxdb/v1.4/concepts/glossary/#measurement), [tag keys](/influxdb/v1.4/concepts/glossary/#tag-key), [field keys](/influxdb/v1.4/concepts/glossary/#field-key), and [tag values](/influxdb/v1.4/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.4/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.4/concepts/glossary/#timestamp) are stored per-point.
+Database names, [measurements](/influxdb/v1.7/concepts/glossary/#measurement), [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), [field keys](/influxdb/v1.7/concepts/glossary/#field-key), and [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.7/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.7/concepts/glossary/#timestamp) are stored per-point.
 
 Non-string values require approximately three bytes. String values require variable space as determined by string compression.
 
