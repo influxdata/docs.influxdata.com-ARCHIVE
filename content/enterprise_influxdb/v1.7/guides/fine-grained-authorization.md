@@ -584,7 +584,7 @@ Results from meta queries will be restricted based on series-level permissions.
 For example, `SHOW TAG VALUES` only returns tag values that the user is authorized to see.
 
 With these grants in place, a user or role can only read or write data from or to
-the `network` measurement if the data includes the apropriate `datacenter` tag set.
+the `network` measurement if the data includes the appropriate `datacenter` tag set.
 
 {{% note %}}
 Note that this is only the requirement of the presence of that tag;
