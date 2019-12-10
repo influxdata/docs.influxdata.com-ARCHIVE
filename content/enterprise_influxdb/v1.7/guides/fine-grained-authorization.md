@@ -580,7 +580,7 @@ curl -s -L -XPOST "http://localhost:8091/influxdb/v2/acl/grants" \
 ```
 
 Grants for specific series also apply to [meta queries](https://docs.influxdata.com/influxdb/v1.7/query_language/schema_exploration).
-Results from meta queries will be restricted based on series-level permissions.
+Results from meta queries are restricted based on series-level permissions.
 For example, `SHOW TAG VALUES` only returns tag values that the user is authorized to see.
 
 With these grants in place, a user or role can only read or write data from or to
