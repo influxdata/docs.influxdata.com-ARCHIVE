@@ -1926,7 +1926,7 @@ aggregator:
     description: |
       The Merge aggregator plugin merges metrics together and generates line protocol with
       multiple fields per line. This optimizes memory and network transfer efficiency.
-      Use this plugin when fields are split over multiple lines of line protocol,
+      Use this plugin when fields are split over multiple lines of line protocol
       with the same measurement, tag set, and timestamp on each.
     introduced: 1.13.0
     tags: [linux, macos, windows]
@@ -2041,7 +2041,7 @@ processor:
       This transformation often results in data that is easier to use with mathematical operators and comparisons.
       It also flattens data into a more compact representation for write operations with some output data formats.
 
-      *To perform the reverse operation use the [Unpivot](#unpivot) processor.*
+      *To perform the reverse operation, use the [Unpivot](#unpivot) processor.*
     introduced: 1.12.0
     tags: [linux, macos, windows]
 
@@ -2129,6 +2129,6 @@ processor:
       The Unpivot processor plugin rotates a multi-field series into single-valued metrics.
       This transformation often results in data that is easier to aggregate across fields.
 
-      *To perform the reverse operation use the [Pivot](#pivot) processor.*
+      *To perform the reverse operation, use the [Pivot](#pivot) processor.*
     introduced: 1.12.0
     tags: [linux, macos, windows]
