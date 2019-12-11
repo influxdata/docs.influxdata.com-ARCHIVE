@@ -207,34 +207,38 @@ sudo systemctl start telegraf
 {{< /tab-content-container >}}
 {{< /tab-labels >}}
 
-### Verify the authenticity of downloaded binary
+### Verify the authenticity of downloaded binary (optional)
 
 InfluxData cryptographically signs each Telegraf binary release.
-To verify the signature of your download, first download and import our public key:
+For added secrurity, follow these steps to verify the signature of your download with `gpg`.
 
-```
-curl -sL https://repos.influxdata.com/influxdb.key | gpg --import
-```
+(Most operating systems include the `gpg` command by default.
+If `gpg` is not available, see the [GnuPG homepage](https://gnupg.org/download/) for installation instructions.)
 
-Next, download the signature file for the release by adding `.asc` to the download URL.
-For example:
+1. Download and import InfluxData's public key:
 
+    ```
+    curl -sL https://repos.influxdata.com/influxdb.key | gpg --import
+    ```
 
-```
-wget https://dl.influxdata.com/telegraf/releases/telegraf-1.12.6_linux_amd64.tar.gz.asc
-```
+2. Download the signature file for the release by adding `.asc` to the download URL.
+   For example:
 
-Finally, verify the signature with `gpg --verify`:
+    ```
+    wget https://dl.influxdata.com/telegraf/releases/telegraf-1.12.6_linux_amd64.tar.gz.asc
+    ```
 
-```
-gpg --verify telegraf-1.12.6_linux_amd64.tar.gz.asc telegraf-1.12.6_linux_amd64.tar.gz
-```
+3. Verify the signature with `gpg --verify`:
 
-The output from this command should include the following:
+    ```
+    gpg --verify telegraf-1.12.6_linux_amd64.tar.gz.asc telegraf-1.12.6_linux_amd64.tar.gz
+    ```
 
-```
-gpg: Good signature from "InfluxDB Packaging Service <support@influxdb.com>" [unknown]
-```
+    The output from this command should include the following:
+
+    ```
+    gpg: Good signature from "InfluxDB Packaging Service <support@influxdb.com>" [unknown]
+    ```
 
 ## Configuration
 
