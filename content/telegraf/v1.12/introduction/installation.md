@@ -210,7 +210,7 @@ sudo systemctl start telegraf
 ### Verify the authenticity of downloaded binary (optional)
 
 InfluxData cryptographically signs each Telegraf binary release.
-For added secrurity, follow these steps to verify the signature of your download with `gpg`.
+For added security, follow these steps to verify the signature of your download with `gpg`.
 
 (Most operating systems include the `gpg` command by default.
 If `gpg` is not available, see the [GnuPG homepage](https://gnupg.org/download/) for installation instructions.)
