@@ -267,7 +267,7 @@ interpreted as part of the tagpass/tagdrop map.
   tagexclude = ["fstype"]
 ```
 
-#### Input config: `prefix`, s`uffix`, and `override`
+#### Input config: `prefix`, `suffix`, and `override`
 
 This plugin will emit measurements with the name `cpu_total`.
 
