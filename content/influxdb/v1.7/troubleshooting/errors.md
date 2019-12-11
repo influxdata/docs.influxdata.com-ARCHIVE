@@ -242,7 +242,7 @@ time                   water_level
 ### Timestamp syntax
 
 The `bad timestamp` error occurs when the
-[line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) includes a
+[line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol) includes a
 timestamp in a format other than a UNIX timestamp.
 
 **Example**
@@ -311,7 +311,7 @@ Use a comma instead of a space between the two fields to avoid the error:
 ## `unable to parse < >: time outside range`
 
 The `time outside range` error occurs when the timestamp in the
-[InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol)
+[InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol)
 falls outside the valid time range for InfluxDB.
 
 The minimum valid timestamp is `-9223372036854775806` or `1677-09-21T00:12:43.145224194Z`.

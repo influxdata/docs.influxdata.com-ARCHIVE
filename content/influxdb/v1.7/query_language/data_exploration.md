@@ -168,7 +168,7 @@ Other supported features:
 begin with a digit, or if they are an [InfluxQL keyword](https://github.com/influxdata/influxql/blob/master/README.md#keywords).
 While not always necessary, we recommend that you double quote identifiers.
 
-> **Note:** The quoting syntax for queries differs from the [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol).
+> **Note:** The quoting syntax for queries differs from the [line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol).
 Please review the [rules for single and double-quoting](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#when-should-i-single-quote-and-when-should-i-double-quote-in-queries) in queries.
 
 ### Examples

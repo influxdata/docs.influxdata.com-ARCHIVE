@@ -21,7 +21,7 @@ A batch of points may be submitted to the database using a single HTTP request t
 This makes writes using the InfluxDB API much more performant by drastically reducing the HTTP overhead.
 InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
 
-Related entries: [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol), [point](/influxdb/v1.7/concepts/glossary/#point)
+Related entries: [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol), [point](/influxdb/v1.7/concepts/glossary/#point)
 
 ## continuous query (CQ)
 
@@ -161,10 +161,10 @@ See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema
 
 The attribute of the retention policy that determines how many copies of data to concurrently store (or retain) in the cluster. Replicating copies ensures that data is available when a data node (or more) is unavailable.
 
-For three nodes or less, the default replication factor equals the number of data nodes. 
+For three nodes or less, the default replication factor equals the number of data nodes.
 For more than three nodes, the default replication factor is 3. To change the default replication factor, specify the replication factor `n` in the retention policy.
 
-Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node), 
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node),
 [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)
 
 ## retention policy (RP)
