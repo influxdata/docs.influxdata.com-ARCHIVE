@@ -26,7 +26,7 @@ There are, however, general guidelines to follow and pitfalls to avoid when desi
 
 In no particular order, we recommend that you:
 
-### *Encode meta data in tags*
+### Encode meta data in tags
 
 [Tags](/influxdb/v1.7/concepts/glossary/#tag) are indexed and [fields](/influxdb/v1.7/concepts/glossary/#field) are not indexed.
 This means that queries on tags are more performant than those on fields.
@@ -38,7 +38,7 @@ In general, your queries should guide what gets stored as a tag and what gets st
 * Store data in fields if you plan to use them with an [InfluxQL function](/influxdb/v1.7/query_language/functions/)
 * Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are always interpreted as strings
 
-### *Avoid using InfluxQL keywords as identifier names*
+### Avoid using InfluxQL keywords as identifier names
 
 This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
 Identifiers are database names, [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v1.7/concepts/glossary/#user) names, [measurement](/influxdb/v1.7/concepts/glossary/#measurement) names, [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), and [field keys](/influxdb/v1.7/concepts/glossary/#field-key).
@@ -50,14 +50,23 @@ Note that you will also need to wrap identifiers in double quotes in queries if 
 
 In no particular order, we recommend that you:
 
-### *Don't have too many series*
+### Don't have too many series
 
 [Tags](/influxdb/v1.7/concepts/glossary/#tag) containing highly variable information like UUIDs, hashes, and random strings will lead to a large number of series in the database, known colloquially as high series cardinality.
 High series cardinality is a primary driver of high memory usage for many database workloads.
 
 See [Hardware sizing guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality) recommendations based on your hardware. If the system has memory constraints, consider storing high-cardinality data as a field rather than a tag.
 
-### *Don't encode data in measurement names*
+### Don't use the same name for a tag and a field
+
+Avoid using the same name for a tag and field key.
+This often results in unexpected behavior when querying data.
+
+If you inadvertently add the same name for a tag and field key, see
+[Frequently asked questions](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#tag-and-field-key-with-the-same-name)
+for information about how to query the data predictably and how to fix the issue.
+
+### Don't encode data in measurement names
 
 In general, taking this step will simplify your queries.
 InfluxDB queries merge data that fall within the same [measurement](/influxdb/v1.7/concepts/glossary/#measurement); it's better to differentiate data with [tags](/influxdb/v1.7/concepts/glossary/#tag) than with detailed measurement names.
@@ -97,7 +106,7 @@ While both queries are relatively simple, use of the regular expression make cer
 > SELECT mean("temp") FROM "weather_sensor" WHERE "region" = 'north'
 ```
 
-### *Don't put more than one piece of information in one tag*
+### Don't put more than one piece of information in one tag
 
 Similar to the point above, splitting a single tag with multiple pieces into separate tags will simplify your queries and reduce the need for regular expressions.
 
