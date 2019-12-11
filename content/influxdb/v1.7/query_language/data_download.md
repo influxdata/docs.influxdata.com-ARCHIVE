@@ -55,7 +55,7 @@ Throughout the query language exploration, we'll use the database name `NOAA_wat
 
 ### Download and write the data to InfluxDB
 
-From your terminal, download the text file that contains the data in [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) format:
+From your terminal, download the text file that contains the data in [line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol) format:
 ```
 curl https://s3.amazonaws.com/noaa.water-database/NOAA_data.txt -o NOAA_data.txt
 ```

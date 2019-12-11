@@ -275,7 +275,7 @@ The import file has two sections:
 
 * **DDL (Data Definition Language)**: Contains the [InfluxQL commands](/influxdb/v1.7/query_language/database_management/) for creating the relevant [database](/influxdb/v1.7/concepts/glossary/) and managing the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
 If your database and retention policy already exist, your file can skip this section.
-* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol).
+* **DML (Data Manipulation Language)**: Lists the relevant database and (if desired) retention policy and contains the data in [line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol).
 
 ##### Example
 
@@ -414,7 +414,7 @@ If you do not specify the retention policy, `influx` automatically queries the `
 
 #### Write data to InfluxDB with `insert`
 
-Enter `insert` followed by the data in [line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) to write data to InfluxDB.
+Enter `insert` followed by the data in [line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol) to write data to InfluxDB.
 Use `insert into <retention policy> <line protocol>` to write data to a specific [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp).
 
 Write data to a single field in the measurement `treasures` with the tag `captain_id = pirate_king`.

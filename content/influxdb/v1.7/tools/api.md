@@ -715,7 +715,7 @@ Content-Length: 33
 ```
 
 All data must be binary encoded and in the
-[InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) format.
+[InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol) format.
 Our example shows the `--data-binary` parameter from curl, which we will use in
 all examples on this page.
 Using any encoding method other than `--data-binary` will likely lead to issues;

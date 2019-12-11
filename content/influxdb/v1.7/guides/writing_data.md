@@ -35,7 +35,7 @@ When writing points, you must specify an existing database in the `db` query par
 Points will be written to `db`'s default retention policy if you do not supply a retention policy via the `rp` query parameter.
 See the [InfluxDB API Reference](/influxdb/v1.7/tools/api/#write-http-endpoint) documentation for a complete list of the available query parameters.
 
-The body of the POST - we call this the [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) - contains the time-series data that you wish to store.
+The body of the POST - we call this the [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol) - contains the time-series data that you wish to store.
 They consist of a measurement, tags, fields, and a timestamp.
 InfluxDB requires a measurement name.
 Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient.
