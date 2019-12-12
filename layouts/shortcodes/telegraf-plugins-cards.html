@@ -1,5 +1,6 @@
 {{ $type := .Get "type" }}
 {{ $telegrafVersion := replaceRE `^v` "" .Site.Data.default_versions.telegraf_semver }}
+
 {{ range (index .Site.Data.telegraf_plugins $type ) }}
   {{ $pluginTags := delimit .tags " " }}
   {{ $minorVer := replaceRE `\.[^.]*$` "" .introduced }}
@@ -12,6 +13,8 @@
       </p>
       <p>{{ .description | markdownify | safeHTML }}</p>
     </div>
-    <a class="btn github-link" href="{{ .link }}" target="_blank"><span class="icon github"></span> <span class="hide">View</span></a>
+    <a class="btn github-link" href="{{ if .link }}{{ .link }}{{ else }}https://github.com/influxdata/telegraf/blob/release-{{ $telegrafVersion }}/plugins/{{ $type }}s/{{ .id }}/README.md{{ end }}" target="_blank">
+      <span class="icon github"></span> <span class="hide">View</span>
+    </a>
   </div>
 {{ end }}
