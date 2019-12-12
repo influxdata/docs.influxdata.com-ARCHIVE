@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## v1.13 [2019-12-10]
+## v1.13 [2019-12-12]
 
 ### Release Notes
 Official packages built with Go 1.13.5.
@@ -83,6 +83,7 @@ for details about the mapping.
 - Support resolution of symlinks in Filecount (`filecount`) input plugin.
 - Set message timestamp to the metric time in Apache Kafka (`kafka`) output plugin.
 - Add base64decode operation to String (`string`) processor.
+- Add option to control collecting global variables to MySQL (`mysql`) input plugin.
 
 ### Bug fixes
 - Show correct default settings in MySQL (`mysql`) sample configuration.
@@ -94,6 +95,9 @@ for details about the mapping.
 - Remove trailing underscore trimming from json flattener.
 - Revert change causing CPU usage to be capped at 100 percent.
 - Accept any media type in the Prometheus Format (`prometheus`) input plugin.
+- Fix unix socket dial arguments in uWSGI (`uwsgi`) input plugin.
+- Replace colon characters in Prometheus (`prometheus_client`) output labels with `metric_version=1`.
+- Set TrimLeadingSpace when TrimSpace is on in CSV (`csv`) parser.
 
 ## v1.12.6 [2019-11-19]
 
