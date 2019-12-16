@@ -107,6 +107,35 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.9_c1.7.9.x8
 sudo yum localinstall influxdb-data-1.7.9_c1.7.9.x86_64.rpm
 ```
 
+#### Verify the authenticity of release download (recommended)
+
+For added security, follow these steps to verify the signature of your InfluxDB download with `gpg`.
+
+1. Download and import InfluxData's public key:
+
+    ```
+    curl -sL https://repos.influxdata.com/influxdb.key | gpg --import
+    ```
+
+2. Download the signature file for the release by adding `.asc` to the download URL.
+   For example:
+
+    ```
+    wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.9_c1.7.9.x86_64.rpm.asc
+    ```
+
+3. Verify the signature with `gpg --verify`:
+
+    ```
+    gpg --verify influxdb-data-1.7.9_c1.7.9.x86_64.rpm.asc influxdb-data-1.7.9_c1.7.9.x86_64.rpm
+    ```
+
+    The output from this command should include the following:
+
+    ```
+    gpg: Good signature from "InfluxDB Packaging Service <support@influxdb.com>" [unknown]
+    ```
+
 ### II. Edit the data node configuration files
 
 First, in `/etc/influxdb/influxdb.conf`:
