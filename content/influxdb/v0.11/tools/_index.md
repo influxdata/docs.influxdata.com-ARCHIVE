@@ -10,7 +10,7 @@ The Influx shell is an interactive shell for InfluxDB and the recommended *ad ho
 The built-in web administration GUI is a simple way to interact with InfluxDB.
 For any significant use, whether writing or querying data, the HTTP API is the preferred method.
 
-## [Grafana Graphs and Dashboards](http://docs.grafana.org/datasources/influxdb/)
+## [Grafana Graphs and Dashboards](https://grafana.com/docs/grafana/latest/features/datasources/influxdb/)
 
 Grafana is a convenient dashboard tool for visualizing time series data.
 It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.

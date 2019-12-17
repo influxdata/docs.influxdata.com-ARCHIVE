@@ -49,7 +49,7 @@ See [Chronograf's transition guide](/chronograf/v1.3/guides/transition-web-admin
 
 Influx Inspect is a tool designed to view detailed information about on disk shards, as well as export data from a shard to line protocol that can be inserted back into the database.
 
-## [Grafana Graphs and Dashboards](http://docs.grafana.org/datasources/influxdb/)
+## [Grafana Graphs and Dashboards](https://grafana.com/docs/grafana/latest/features/datasources/influxdb/)
 
 Grafana is a convenient dashboard tool for visualizing time series data.
 It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.

@@ -53,7 +53,7 @@ Use the InfluxDB inch tool to test InfluxDB performance. Adjust metrics such as 
 
 ## Graphs and dashboards
 
-Use [Chronograf](/chronograf/latest/) or [Grafana](http://docs.grafana.org/datasources/influxdb/) dashboards to visualize your time series data.
+Use [Chronograf](/chronograf/latest/) or [Grafana](https://grafana.com/docs/grafana/latest/features/datasources/influxdb/) dashboards to visualize your time series data.
 
 > **Tip:** Use template variables in your dashboards to filter meta query results by a specified period of time (see example below).
 
