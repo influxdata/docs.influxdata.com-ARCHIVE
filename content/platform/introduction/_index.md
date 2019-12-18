@@ -1,5 +1,5 @@
 ---
-title: InfluxData platform
+title: Introduction to the InfluxData platform
 description: The InfluxData platform is the leading modern time-series platform built for metrics and events.
 aliases:
   - /platform/
@@ -9,36 +9,42 @@ menu:
     weight: 10
 ---
 
-The InfluxData platform is the leading modern [time series](/platform/faq/#what-is-time-series-data) platform built for metrics and events:
+**InfluxData platform** is the leading modern [time series](/platform/faq/#what-is-time-series-data) platform, built for metrics and events. Explore both versions of our platform below--[**InfluxData 1.x**](#influxdata-1-x) and [**InfluxDB 2.0**](#influxdb-2-0).
 
-- **InfluxData 1.x platform** includes the following open source components:
+## InfluxData 1.x
+
+The **InfluxData 1.x platform** includes the following open source components ([TICK stack](#tick-stack-components) and Flux):
+
   - [Telegraf](#telegraf): collect data
   - [InfluxDB](#influxdb): store data
   - [Chronograf](#chronograf): visualize data
   - [Kapacitor](#kapacitor): process data and alerts
   - [Flux](https://docs.influxdata.com/flux): functional data scripting language
 
-- **InfluxData 1.x commercial offerings** include:
+**InfluxData 1.x** also includes the following **commercial offerings**:
 
   - [InfluxDB Enterprise](#influxdb-enterprise)
   - [Kapacitor Enterprise](#kapacitor-enterprise)
   - [InfluxCloud 1.x](https://help.influxcloud.net) (hosted cloud solution)
 
-- **InfluxDB 2.0 platform** consolidates features from the InfluxData 1.x platform into a single package, with added features and flexibility:
-  - [InfluxDB 2.0 alpha](https://v2.docs.influxdata.com/v2.0/get-started/) (open source solution as single binary)
-  - [Flux](https://v2.docs.influxdata.com/v2.0/query-data/get-started): functional data scripting language
+## InfluxDB 2.0
 
-- **InfluxData 2.0 commercial offering**:
-  - [InfluxDB Cloud 2.0](https://v2.docs.influxdata.com/v2.0/cloud/get-started/) (hosted cloud solution
-  - InfluxDB Enterprise 2.0 is in development.
+The **InfluxDB 2.0 platform** consolidates components from the **InfluxData 1.x platform** into a single packaged solution, with added features and flexibility:
+
+  - [InfluxDB 2.0 alpha](https://v2.docs.influxdata.com/v2.0/get-started/): open source platform solution in a single binary
+  - [InfluxDB Cloud 2.0](https://v2.docs.influxdata.com/v2.0/cloud/get-started/) (**commercial offering**): hosted cloud solution
+
+InfluxDB Enterprise 2.0 is in development.
+
+## InfluxData 1.x TICK stack
 
 ### Telegraf
 
 Telegraf is a data collection agent that captures data from a growing list of sources
-and translates it into [Line Protocol data format](/influxdb/latest/write_protocols/line_protocol_reference/)
-for storage in InfluxDB. It's "pluggable", extensible architecture makes it easy to
-create [plugins](/telegraf/latest/plugins/) that both pull and push data from and
-to different sources and endpoints.
+and translates it into [InfluxDB line protocol format](/influxdb/latest/write_protocols/line_protocol_reference/)
+for storage in InfluxDB. Telegraf's extensible architecture makes it easy to
+create [plugins](/telegraf/latest/plugins/) that both pull data (input plugins) and push data (output plugins)
+to and from different sources and endpoints.
 
 ### InfluxDB
 
@@ -60,11 +66,11 @@ Kapacitor is a data processing framework that enables you to process and act on 
 as it is written to InfluxDB. This includes detecting anomalies, creating alerts
 based on user-defined logic, and running ETL jobs.
 
-## Enterprise versions
+## InfluxData 1.x Enterprise versions
 
 InfluxDB Enterprise and Kapacitor Enterprise provide clustering, access control, and incremental backup functionality for production infrastructures at scale. You'll also receive direct support from the InfluxData support team.
 
-> InfluxDB Enterprise and Kapacitor Enterprise are compatible with open source versions of > Telegraf and Chronograf.
+> InfluxDB Enterprise and Kapacitor Enterprise are compatible with open source versions of Telegraf and Chronograf.
 
 ### InfluxDB Enterprise
 
@@ -137,8 +143,9 @@ communication between your Kapacitor Enterprise and InfluxDB Enterprise clusters
 
 ## Get started
 
-Now that you understand the platform from a high level, go ahead and dive in.
-The following links will help you get started:
+To get started with the **InfluxData 1.x** platform, see
 
 [Installation and Configuration](/platform/installation)  
-[Getting Started](/platform/introduction/getting-started)  
+[Getting Started](/platform/introduction/getting-started)
+
+To get started with the **InfluxDB 2.0** platform, see [**InfluxDB Cloud 2.0**](https://v2.docs.influxdata.com/v2.0/cloud/get-started/) or [**InfluxDB 2.0 alpha**](https://v2.docs.influxdata.com/v2.0/get-started/).
