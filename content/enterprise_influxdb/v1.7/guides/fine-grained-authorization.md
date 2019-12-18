@@ -9,15 +9,13 @@ menu:
     parent: Guides
 ---
 
-Fine-grained authorization (FGA) in InfluxDB Enterprise controls access at the database, measurement, and series level.
+Use fine-grained authorization (FGA) in InfluxDB Enterprise to control user access at the database, measurement, and series levels.
 
 > **Note:** InfluxDB OSS controls access at the database level only.
 
-## Set up fine-grained authorization
+You must have [admin permissions](/influxdb/v1.7/administration/authentication_and_authorization/#admin-user-management) to set up FGA.
 
-To set up fine-grained authorization (FGA), you must have
-[admin permissions](/influxdb/v1.7/administration/authentication_and_authorization/#admin-user-management),
-and then complete the following steps.
+## Set up fine-grained authorization
 
 1. [Enable authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication) in your InfluxDB configuration file.
 
@@ -27,19 +25,21 @@ and then complete the following steps.
     CREATE USER username WITH PASSWORD 'password'
     ```
 
-    For detail, see [User management commands](/influxdb/v1.7/administration/authentication_and_authorization/#user-management-commands).
+    For more information, see [User management commands](/influxdb/v1.7/administration/authentication_and_authorization/#user-management-commands).
 
-3. Obtain access to the **meta** nodes' HTTP API (port 8091 by default).
+3. Ensure that you can access the **meta node** API (port 8091 by default).
 
-    > In a typical cluster configuration, the data nodes' HTTP ports
-    > (8086 by default) are exposed to clients but the meta nodes' HTTP ports are not.
-    > You may need to work with your network administrator to gain access to the meta nodes' HTTP ports.
+    > In a typical cluster configuration, the HTTP ports for data nodes
+    > (8086 by default) are exposed to clients but the meta node HTTP ports are not.
+    > You may need to work with your network administrator to gain access to the meta node HTTP ports.
 
-4. _(Optional)_ [Create roles](#manage-roles). Roles let you grant permissions to groups of users assigned to each role.
+4. _(Optional)_ [Create roles](#manage-roles).
+   Roles let you grant permissions to groups of users assigned to each role.
 
     > For an overview of how users and roles work in InfluxDB Enterprise, see [InfluxDB Enterprise users](/enterprise_influxdb/v1.7/features/users/).
 
-5. [Set up restrictions](#manage-restrictions). Restrictions apply to all non-admin users.
+5. [Set up restrictions](#manage-restrictions).
+   Restrictions apply to all non-admin users.
 
     > Permissions (currently "read" and "write") may be restricted independently depending on the scenario.
 
@@ -54,8 +54,8 @@ HTTP requests to the Meta API, and `jq`, a command line JSON processor,
 to make the JSON output easier to read.
 Alternatives for each are available, but are not covered in this documentation.
 
-All examples  assume authentication is enabled in InfluxDB and require admin
-credentials with each request.
+All examples assume authentication is enabled in InfluxDB.
+Admin credentials must be sent with each request.
 Use the `curl -u` flag to pass authentication credentials:
 
 ```sh
@@ -66,11 +66,10 @@ curl -u `username:password` #...
 ---
 
 ## Matching methods
-As you manage restrictions and grants to databases, measurements, or seriesusing matching methods.
-The following matching methods are available:
+The following matching methods are available when managing restrictions and grants to databases, measurements, or series:
 
-- **exact**: Matches only exact string matches.
-- **prefix**: Matches strings the begin with a specified prefix.
+- `exact` (matches only exact string matches)
+- `prefix` (matches strings the begin with a specified prefix)
 
 ```sh
 # Match a database name exactly
@@ -123,8 +122,9 @@ curl -s -L -XPOST "http://localhost:8091/role" \
 ```
 
 ### Specify role permissions
-To specify permissions for a role, use the InfluxDB Meta API `/role` endpoint with the `action` field
-set to `add-permissions`. Specify the [permissions](https://docs.influxdata.com/chronograf/v1.7/administration/managing-influxdb-users/#permissions) to add for each database.
+To specify permissions for a role,
+use the InfluxDB Meta API `/role` endpoint with the `action` field set to `add-permissions`.
+Specify the [permissions](/chronograf/v1.7/administration/managing-influxdb-users/#permissions) to add for each database.
 
 The following example sets read and write permissions on `db1` for both `east` and `west` roles.
 
@@ -158,7 +158,8 @@ curl -s -L -XPOST "http://localhost:8091/role" \
 
 ### Remove role permissions
 To remove permissions from a role, use the InfluxDB Meta API `/role` endpoint with the `action` field
-set to `remove-permissions`. Specify the [permissions](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/#permissions) to remove from each database.
+set to `remove-permissions`.
+Specify the [permissions](https://docs.influxdata.com/chronograf/latest/administration/managing-influxdb-users/#permissions) to remove from each database.
 
 The following example removes read and write permissions from `db1` for the `east` role.
 
@@ -241,6 +242,9 @@ Deleting a role does not delete users assigned to the role.
 Restrictions restrict either or both read and write permissions on InfluxDB assets.
 Restrictions apply to all non-admin users.
 [Grants](#manage-grants) override restrictions.
+
+> In order to run meta queries (such as `SHOW MEASUREMENTS` or `SHOW TAGS` ),
+> users must have read permissions for the database and retention policy they are querying.
 
 Manage restrictions using the InfluxDB Meta API `acl/restrictions` endpoint.
 
