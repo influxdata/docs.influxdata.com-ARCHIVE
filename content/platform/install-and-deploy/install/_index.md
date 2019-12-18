@@ -9,7 +9,7 @@ menu:
     parent: install-and-deploy-platform
 ---
 
-Install and configure the InfluxData platform using one of the following methods:
+Install and configure the InfluxData platform (TICK stack) using one of the following methods:
 
 - For **non-production** environments. The quickest way to install the InfluxData platform is to [deploy the InfluxData 1.x platform in Docker containers](/platform/install-and-deploy/deploying/sandbox-install).
 - For **production** environments. Do one of the following:

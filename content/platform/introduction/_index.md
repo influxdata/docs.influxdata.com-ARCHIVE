@@ -13,13 +13,12 @@ menu:
 
 ## InfluxData 1.x
 
-The **InfluxData 1.x platform** includes the following open source components ([TICK stack](#tick-stack-components) and Flux):
+The **InfluxData 1.x platform** includes the following open source components ([TICK stack](#tick-stack-components)):
 
   - [Telegraf](#telegraf): collect data
   - [InfluxDB](#influxdb): store data
   - [Chronograf](#chronograf): visualize data
   - [Kapacitor](#kapacitor): process data and alerts
-  - [Flux](https://docs.influxdata.com/flux): functional data scripting language
 
 **InfluxData 1.x** also includes the following **commercial offerings**:
 
