@@ -8,15 +8,40 @@ menu:
     parent: About the project
 ---
 
+## v1.7.16 [2019-12-18]
+
+### Bug Fixes
+
+- Update the Flux schema explorer to use v1 package.
+- Restore blank y-axis labels by using a known y-axis label if available.
+- Resolve invalid query config error by allowing `:upperDashboardTime:` when generating a query config.
+- Improve heuristic when creating tasks--for string contains `batch` to include `batch|` and `batch\n`.
+
+## v1.7.15 [2019-11-12]
+
+### Features
+
+- Pin to latest minor GO version; improve Docker build process.
+
+### Bug Fixes
+
+- Remove optional ID in create dashboard swagger.
+- Resolve GitHub pagination error for users with more than 10 GitHub organizations.
+- Fix HTTP 400 error that occurred when making HTTP requests on an HTTPS server.
+- Upgrade to Flux v0.50.2, includes updated Flux functions.
+- Fix date range picker in Data Explorer.
+
 ## v1.7.14 [2019-08-27]
 
 ### Bug Fixes
+
 - Fix Data Explorer crashing due to empty query.
 - Fix styles in Kapacitor alert config page.
 
 ## v1.7.13 [2019-08-20]
 
 ### Bug Fixes
+
 - Fix scroll to row bug on table graphs.
 - Wrap inline commas in quotes to distinguish from CSV delimiters.
 - Fix TICKscript editor syntax coloring.
@@ -42,6 +67,7 @@ menu:
 ## v1.7.12 [2019-06-20]
 
 ## Bug Fixes
+
 - Clarify wording of PagerDuty v1 deprecation message.
 - Requesting info from an unavailable source no longer causes the page to hang.
 - Create Chronograf user before CentOS installation.
@@ -50,21 +76,25 @@ menu:
 - Fix an issue where Flux responses weren't parsed correctly.
 
 ### Features
+
 - Allow negative numbers for configured y-axis minimums
 
 ## v1.7.11 [2019-04-24]
 
 ## Bug Fixes
+
 - Fix fetching tag keys in Flux Builder.
 
 ## v1.7.10 [2019-04-16]
 
 ### Bug Fixes
+
 - Fix the input for line controls in visualization options.
 - Fix Cell editor visualization not using CEO time range.
 - Fix an issue where imports were not working in Flux scripts.
 
 ### Features
+
 - Updated the UI to work with the latest Flux version.
 
 ## v1.7.9 [2019-3-20]
@@ -208,6 +238,7 @@ menu:
 * Automatically scroll to the current measurement in the Data Explorer.
 
 ### Bug Fixes
+
 * Render null data point values in alerts table as em dashes.
 * Add validation to alert rule messages.
 * Fix search results updating race condition.
