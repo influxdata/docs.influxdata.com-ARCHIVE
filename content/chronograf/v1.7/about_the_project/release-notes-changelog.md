@@ -12,10 +12,10 @@ menu:
 
 ### Bug Fixes
 
-- Update the Flux schema explorer to use v1 package.
+- Update the Flux schema explorer to correctly use meta queries.
 - Restore blank y-axis labels by using a known y-axis label if available.
-- Resolve invalid query config error by allowing `:upperDashboardTime:` when generating a query config.
-- Improve heuristic when creating tasks--for string contains `batch` to include `batch|` and `batch\n`.
+- Add `:upperDashboardTime:` to InfluxQL queries to support custom dashboard time ranges.
+- Update the heuristic for matching Kapacitor TICKscripts when creating batch tasks.
 
 ## v1.7.15 [2019-11-12]
 
