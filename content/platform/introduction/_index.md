@@ -1,6 +1,6 @@
 ---
-title: Introduction to the InfluxData Platform
-description: The InfluxData Platform is the leading modern time-series platform designed from the ground up for metrics and events.
+title: Introduction to the InfluxData platform
+description: The InfluxData platform is the leading modern time-series platform built for metrics and events.
 aliases:
   - /platform/
 menu:
@@ -9,37 +9,43 @@ menu:
     weight: 10
 ---
 
-The InfluxData Platform is the leading modern [time series](/platform/faq/#what-is-time-series-data)
-platform designed from the ground up for metrics and events.
-It is comprised of four core components: Telegraf, InfluxDB, Chronograf, and Kapacitor
-(often referred to as the [TICK stack](#the-tick-stack-open-source-components)).
-Each fulfills a specific role in managing your time-series data: data collection,
-data storage, data visualization, and data processing and alerting.
+**InfluxData platform** is the leading modern [time series](/platform/faq/#what-is-time-series-data) platform, built for metrics and events. Explore both versions of our platform below--[**InfluxData 1.x**](#influxdata-1-x) and [**InfluxDB 2.0**](#influxdb-2-0).
 
-[Enterprise versions](#influxdata-enterprise-commercial-offerings) of InfluxDB and Kapacitor
-provide clustering, access control, and incremental backup functionality for
-production infrastructures at scale.
+## InfluxData 1.x
 
-## The TICK stack - Open Source Components
+The **InfluxData 1.x platform** includes the following open source components ([TICK stack](#tick-stack-components)):
 
-[**T**elegraf](#telegraf) - _Data collection_  
-[**I**nfluxDB](#influxdb) - _Data storage_  
-[**C**hronograf](#chronograf) - _Data visualization_  
-[**K**apacitor](#kapacitor) - _Data processing and events_  
+  - [Telegraf](#telegraf): collect data
+  - [InfluxDB](#influxdb): store data
+  - [Chronograf](#chronograf): visualize data
+  - [Kapacitor](#kapacitor): process data and alerts
+
+**InfluxData 1.x** also includes the following **commercial offerings**:
+
+  - [InfluxDB Enterprise](#influxdb-enterprise)
+  - [Kapacitor Enterprise](#kapacitor-enterprise)
+  - [InfluxCloud 1.x](https://help.influxcloud.net) (hosted cloud solution)
+
+## InfluxDB 2.0
+
+The **InfluxDB 2.0 platform** consolidates components from the **InfluxData 1.x platform** into a single packaged solution, with added features and flexibility:
+
+  - [InfluxDB 2.0 alpha](https://v2.docs.influxdata.com/v2.0/get-started/): open source platform solution in a single binary
+  - [InfluxDB Cloud 2.0](https://v2.docs.influxdata.com/v2.0/cloud/get-started/) (**commercial offering**): hosted cloud solution
+
+InfluxDB Enterprise 2.0 is in development.
+
+## InfluxData 1.x TICK stack
 
 ### Telegraf
 
-_Data Collection_  
-
 Telegraf is a data collection agent that captures data from a growing list of sources
-and translates it into [Line Protocol data format](/influxdb/latest/write_protocols/line_protocol_reference/)
-for storage in InfluxDB. It's "pluggable", extensible architecture makes it easy to
-create [plugins](/telegraf/latest/plugins/) that both pull and push data from and
-to different sources and endpoints.
+and translates it into [InfluxDB line protocol format](/influxdb/latest/write_protocols/line_protocol_reference/)
+for storage in InfluxDB. Telegraf's extensible architecture makes it easy to
+create [plugins](/telegraf/latest/plugins/) that both pull data (input plugins) and push data (output plugins)
+to and from different sources and endpoints.
 
 ### InfluxDB
-
-_Data Storage_
 
 InfluxDB stores data for any use case involving large amounts of timestamped data, including
 DevOps monitoring, log data, application metrics, IoT sensor data, and real-time analytics.
@@ -49,69 +55,83 @@ unneeded data from the system.
 
 ### Chronograf
 
-_Data Visuzalization_
-
 Chronograf is the user interface for the TICK stack that provides customizable dashboards,
 data visualizations, and data exploration. It also allows you to view and manage
 [Kapacitor](#kapacitor) tasks.
 
 ### Kapacitor
 
-_Data Processing & Events_
-
 Kapacitor is a data processing framework that enables you to process and act on data
 as it is written to InfluxDB. This includes detecting anomalies, creating alerts
 based on user-defined logic, and running ETL jobs.
 
-## InfluxData Enterprise - Commercial Offerings
-InfluxData's Enterprise offerings allow you to run the TICK stack at scale and provide
-enterprise-grade features added to our open source components as well as support directly from InfluxData's support team.
+## InfluxData 1.x Enterprise versions
 
-> The open source versions of Telegraf and Chronograf can be used in conjunction with either the open source or Enterprise
-> editions of InfluxDB and Kapacitor. Additionally, Telegraf and Chronograf do not require the purchase of an enterprise
-> subscription.
+InfluxDB Enterprise and Kapacitor Enterprise provide clustering, access control, and incremental backup functionality for production infrastructures at scale. You'll also receive direct support from the InfluxData support team.
+
+> InfluxDB Enterprise and Kapacitor Enterprise are compatible with open source versions of Telegraf and Chronograf.
 
 ### InfluxDB Enterprise
-InfluxDB Enterprise provides functionality necessary to run a high-availability (HA) InfluxDB cluster, providing clustering, horizontal scale out, and advanced access controls.
+
+InfluxDB Enterprise provides functionality necessary to run a high-availability (HA) InfluxDB cluster, providing clustering, horizontal scale out, and advanced access controls, including:
+
+- Hinted handoff
+- Anti-entropy
+- Fine-grained authorization
+- Cluster profiling
+- Incremental backups
 
 #### Hinted handoff
+
 Data is written across nodes using an eventually consistent write model.
 All writes are added to the [Hinted Handoff Queue (HHQ)](/enterprise_influxdb/latest/concepts/clustering/#hinted-handoff),
 then written to other nodes in the cluster.
 
 #### Anti-Entropy
+
 InfluxDB Enterprise's
 [Anti-Entropy (AE)](/enterprise_influxdb/latest/administration/anti-entropy/)
 process ensures data shards in the cluster are in sync. When "entropy" (out-of-sync
 data) is detected, AE will repair the affected shards, syncing the missing data.
 
 #### Fine-grained authorization
+
 In InfluxDB Enterprise, fine-grained authorization can be used to control access
 at the measurement or series levels rather than just the database level.
 
 #### Cluster profiling
+
 Enterprise meta nodes expose the `/debug/pprof` API endpoint that allows you to
 profile and potentially diagnose performance bottlenecks in your cluster.
 
 #### Incremental backups
+
 InfluxDB Enterprise allows for incremental backups that write only newly added
 data to existing backup files rather than backing up all data in a new backup.
 
 ### Kapacitor Enterprise
+
 Kapacitor Enterprise provides functionality necessary to run a high-availability
-Kapacitor cluster.
+Kapacitor cluster, including:
+
+- Kapacitor cluster management
+- Alert deduplication
+- Secure communication
 
 #### Kapacitor cluster management
+
 Kapacitor Enterprise is packaged with `kapactorctl`, a command line client for creating
 and managing Kapacitor clusters.
 
 #### Alert deduplication
+
 As alerts are triggered in a multi-node Kapacitor cluster, Kapacitor Enterprise
 deduplicates alert data to prevent duplicate alert notifications from being sent.
 
 #### Secure communication
+
 Data is passed between InfluxDB and Kapacitor via subscriptions.
-Kapacitor Enterprise includes configuration options that allow you to encrypt
+Kapacitor Enterprise includes configuration options that let you encrypt
 communication between your Kapacitor Enterprise and InfluxDB Enterprise clusters.
 
 <div style="display:inline-block;padding:.25em;margin:1em 0 2em; color:#fff;background:#4ed8a0;background:linear-gradient(to right,#4ed8a0 0,#22adf6 100%);border-radius:3px;">
@@ -120,9 +140,11 @@ communication between your Kapacitor Enterprise and InfluxDB Enterprise clusters
   </a>
 </div>
 
-## Get Started
-Now that you understand the platform from a high level, go ahead and dive in.
-The following links will help you get started:
+## Get started
+
+To get started with the **InfluxData 1.x** platform, see
 
 [Installation and Configuration](/platform/installation)  
-[Getting Started](/platform/introduction/getting-started)  
+[Getting Started](/platform/introduction/getting-started)
+
+To get started with the **InfluxDB 2.0** platform, see [**InfluxDB Cloud 2.0**](https://v2.docs.influxdata.com/v2.0/cloud/get-started/) or [**InfluxDB 2.0 alpha**](https://v2.docs.influxdata.com/v2.0/get-started/).

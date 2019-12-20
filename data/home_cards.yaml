@@ -4,15 +4,15 @@ cards:
   - id: influxdb2
     category: oss
     title: InfluxDB 2.0
-    description: InfluxDB 2.0 provides everything you need from a time series platform in a single binary.
+    description: The latest version of the leading time series platform built for metrics and events, packaged as one solution.
     links:
-      - text: Download InfluxDB v2.0
+      - text: Get started with InfluxDB Cloud 2.0
         type: absolute
-        href: https://portal.influxdata.com/downloads
-      - text: Get Started
+        href: https://v2.docs.influxdata.com/v2.0/cloud/get-started/
+      - text: Get started with InfluxDB 2.0 open source (alpha)
         type: absolute
         href: https://v2.docs.influxdata.com/v2.0/get-started/
-      - text: Documentation
+      - text: Documentation (Cloud and open source)
         type: absolute
         href: https://v2.docs.influxdata.com/
 
