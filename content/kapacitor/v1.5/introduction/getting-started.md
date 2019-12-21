@@ -10,28 +10,17 @@ Learn how to use Kapacitor to stream and batch your time series data.
 
 ## Get started
 
-1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install).
+1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install). (Necessary to say?: use the Linux system packages (`.deb`,`.rpm`) if available.? If yes, why?)
 2. Start InfluxDB and send it data from Telegraf.
 3. Start Kapacitor.
-4. Define and run a stream task to trigger CPU alerts.
-5. Define and run a batch task to trigger CPU alerts.
-
-## Examples
-
-For examples in this guide, we describe how to trigger an alert for high CPU usage on a server. Examples assume all TICKStack services are installed and running on the same host as Systemd.
-
-To explore how to use Kapacitor with a Docker deployment, [check out these instructions.](/kapacitor/v1.5/introduction/install-docker/)
-
-All examples will assume that Kapacitor is running on `http://localhost:9092` and InfluxDB on `http://localhost:8086`.
 
 ## Start InfluxDB and send it data from Telegraf
 
+1. Start InfluxDB using systemctl:
 
-Start InfluxDB using systemctl:
-
-```bash
-$ sudo systemctl start influxdb
-```
+    ```bash
+    $ sudo systemctl start influxdb
+    ```
 
 Verify InfluxDB startup:
 
@@ -70,8 +59,6 @@ zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Storing sta
 ```
 
 <!--- The following is a simple Telegraf configuration file that will send just cpu metrics to InfluxDB: -->
-
-Next install [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
 
 Once Telegraf is installed and started, it will, as configured by default, send system metrics to InfluxDB, which automatically creates the 'telegraf' database.
 
