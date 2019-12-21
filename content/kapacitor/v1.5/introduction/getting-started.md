@@ -11,7 +11,7 @@ Learn how to use Kapacitor to stream and batch your time series data.
 ## Get started
 
 1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install). (Necessary to say?: use the Linux system packages (`.deb`,`.rpm`) if available.? If yes, why?)
-2. Start InfluxDB and send it data from Telegraf.
+2. Start InfluxDB and start Telegraf. By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
 3. Start Kapacitor.
 
 ## Start InfluxDB and send it data from Telegraf
@@ -60,7 +60,7 @@ zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Storing sta
 
 <!--- The following is a simple Telegraf configuration file that will send just cpu metrics to InfluxDB: -->
 
-Once Telegraf is installed and started, it will, as configured by default, send system metrics to InfluxDB, which automatically creates the 'telegraf' database.
+
 
 The Telegraf configuration file can be found at its default location: `/etc/telegraf/telegraf.conf`.  For this introduction it is worth noting some values that will be relevant to the Kapacitor tasks that will be shown below. Namely:
 
