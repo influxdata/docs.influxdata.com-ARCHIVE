@@ -8,42 +8,24 @@ menu:
 
 Learn how to use Kapacitor to stream and batch your time series data.
 
-## Requirements
+## Get started
 
-[Download](https://portal.influxdata.com/downloads/) the latest versions of the following InfluxData products:
-
-- [InfluxDB](/influxdb/latest/)
-- [Telegraf](/telegraf/latest/)
-- [Kapacitor](/kapacitor/latest/)
+1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install).
+2. Start InfluxDB and send it data from Telegraf.
+3. Start Kapacitor.
+4. Define and run a stream task to trigger CPU alerts.
+5. Define and run a batch task to trigger CPU alerts.
 
 ## Examples
 
-For examples in this guide, we describe how to trigger an alert for high CPU usage on a server.
+For examples in this guide, we describe how to trigger an alert for high CPU usage on a server. Examples assume all TICKStack services are installed and running on the same host as Systemd.
 
-## Get started
-
-1. Install InfluxDB and Telegraf.
-2. Start InfluxDB and send it data from Telegraf.
-3. Install Kapacitor.
-4. Start Kapacitor.
-5. Define and run a stream task to trigger CPU alerts.
-6. Define and run a batch task to trigger CPU alerts.
-
-## Installing
-
-The TICKStack services can be installed to run on the host machine as a part of Systemd, or they can be run from Docker containers. This guide will focus on installing and running them all on the same host as Systemd services.
-
-If you would like to explore using Docker deployments of these components, [check out these instructions.](/kapacitor/v1.5/introduction/install-docker/)
-
-<!-- Install [InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/), [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) and [Kapacitor](/kapacitor/v1.3/introduction/installation/), on the same host, using the Linux system packages (`.deb`,`.rpm`) if available. -->
-
-The applications InfluxDB, Telegraf and Kapacitor will need to be installed in that order and on the same host.
+To explore how to use Kapacitor with a Docker deployment, [check out these instructions.](/kapacitor/v1.5/introduction/install-docker/)
 
 All examples will assume that Kapacitor is running on `http://localhost:9092` and InfluxDB on `http://localhost:8086`.
 
-## InfluxDB + Telegraf
+## Start InfluxDB and send it data from Telegraf
 
-Install [InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
 
 Start InfluxDB using systemctl:
 
