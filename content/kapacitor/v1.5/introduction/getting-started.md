@@ -14,7 +14,7 @@ Learn how to use Kapacitor to stream and batch your time series data.
 2. Start InfluxDB and start Telegraf. By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
 3. Start Kapacitor.
 
-## Start InfluxDB and send it data from Telegraf
+## Start InfluxDB and collect Telegraf data
 
 1. Start InfluxDB using systemctl:
 
@@ -90,9 +90,9 @@ In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure th
 
 ```
 
- It is likely that Telegraf has started upon installation.
+ Telegraf typically starts after installation.
 
- Check the current status of the Telegraf service:
+ Verify Telegraf is running:
 
  ```
  $ sudo systemctl status telegraf
