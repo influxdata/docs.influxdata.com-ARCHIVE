@@ -60,9 +60,9 @@ zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Storing sta
 
 In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send CPU metrics to InfluxDB:
 
-   * `[agent].interval` - declares the frequency at which system metrics will be sent to InfluxDB
-   * `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database.
-   * `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.
+   - `[agent].interval` - frequency to send system metrics to InfluxDB
+   - `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database. (so at least one URL and one database must be defined?)
+   - `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.
 
 *Example - relevant sections of `/etc/telegraf/telegraf.conf`*
 ```
@@ -72,23 +72,20 @@ In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure th
 
 ...
 [[outputs.influxdb]]
-  ## The HTTP or UDP URL for your InfluxDB instance.  Each item should be
-  ## of the form:
-  ##   scheme "://" host [ ":" port]
-  ##
-  ## Multiple urls can be specified as part of the same cluster,
-  ## this means that only ONE of the urls will be written to each interval.
-  # urls = ["udp://localhost:8089"] # UDP endpoint example
-  urls = ["http://localhost:8086"] # required
-  ## The target database for metrics (telegraf will create it if not exists).
-  database = "telegraf" # required
+  ## InfluxDB url is required and must be in the following form: http/udp "://" host [ ":" port]
+  ## Multiple urls can be specified as part of the same cluster; only ONE url is written to each interval.
+  ## InfluxDB URL
+  urls = ["http://localhost:8086"]
+
+  ## The target database for metrics is required (Telegraf creates if one doesn't exist).
+  database = "telegraf"
 ...
 [[inputs.cpu]]
-  ## Whether to report per-cpu stats or not
+  ## true reports per-cpu stats
   percpu = true
-  ## Whether to report total system cpu stats or not
+  ## true reports total system cpu stats
   totalcpu = true
-  ## If true, collect raw CPU time metrics.
+  ## true collects raw CPU time metrics
   collect_cpu_time = false
 
 ```
