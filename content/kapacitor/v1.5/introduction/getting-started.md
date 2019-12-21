@@ -20,7 +20,7 @@ Learn how to use Kapacitor to stream and batch your time series data.
 
 For examples in this guide, we describe how to trigger an alert for high CPU usage on a server.
 
-## The process
+## Get started
 
 1. Install InfluxDB and Telegraf.
 2. Start InfluxDB and send it data from Telegraf.
