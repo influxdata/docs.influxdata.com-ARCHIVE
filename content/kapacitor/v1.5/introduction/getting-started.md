@@ -6,10 +6,10 @@ menu:
     parent: introduction
 ---
 
-Kapacitor is a data processing engine that processes both stream and batch data.
-This guide walks through both workflows and teaches the basics of working with Kapacitor.
+Learn how to use the TICKstack data processing engine, Kapacitor, to stream and batch data:
 
 ## Requirements
+
 - [InfluxDB](/influxdb/latest/) 1.3.0+ - _You can use Kapacitor without InfluxDB,
   but it is easy to setup. The steps in this guide assume InfluxDB is installed._
 - [Telegraf](/telegraf/latest/) 1.4.0+
