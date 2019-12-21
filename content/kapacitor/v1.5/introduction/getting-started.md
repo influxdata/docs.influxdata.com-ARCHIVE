@@ -58,11 +58,7 @@ zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Storing sta
 ...
 ```
 
-<!--- The following is a simple Telegraf configuration file that will send just cpu metrics to InfluxDB: -->
-
-
-
-The Telegraf configuration file can be found at its default location: `/etc/telegraf/telegraf.conf`.  For this introduction it is worth noting some values that will be relevant to the Kapacitor tasks that will be shown below. Namely:
+In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send CPU metrics to InfluxDB:
 
    * `[agent].interval` - declares the frequency at which system metrics will be sent to InfluxDB
    * `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database.
