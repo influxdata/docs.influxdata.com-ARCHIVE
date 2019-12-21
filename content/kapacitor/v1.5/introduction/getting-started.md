@@ -6,7 +6,7 @@ menu:
     parent: introduction
 ---
 
-Learn how to use the TICKstack data processing engine, Kapacitor, to stream and batch data:
+Learn how to use Kapacitor to stream and batch your time series data.
 
 ## Requirements
 
