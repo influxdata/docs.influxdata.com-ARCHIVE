@@ -101,26 +101,25 @@ Results similar to the following appear:
 {"results":[{"statement_id":0,"series":[{"name":"cpu","columns":["time","mean"],"values":[["1970-01-01T00:00:00Z",91.82304336748372]]}]}]}
 ```
 
-## Installing and starting Kapacitor
+## Start Kapacitor
 
-Install [Kapacitor](/kapacitor/v1.5/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
+By default, the Kapacitor configuration file is saved in `/etc/kapacitor/kapacitor.conf`.
 
-The default Kapacitor configuration file is unpacked to `/etc/kapacitor/kapacitor.conf`.  A copy of the current configuration can be extracted from the Kapacitor daemon as follows:
+1. Extract a copy of the current configuration from the Kapacitor daemon:
 
 ```bash
 kapacitord config > kapacitor.conf
 ```
 
-The configuration is a [toml](https://github.com/toml-lang/toml) file and is very similar to the InfluxDB configuration.
-That is because any input that can be configured for InfluxDB also works for Kapacitor.
+> The Kapacitor configuration is a [toml](https://github.com/toml-lang/toml) file. Inputs configured for InfluxDB also work for Kapacitor.
 
-Start the Kapacitor service:
+2. Start the Kapacitor service:
 
 ```bash
 $ sudo systemctl start kapacitor
 ```
 
-Verify the status of the Kapacitor service:
+3. Verify the status of the Kapacitor service:
 
 ```bash
 $ sudo systemctl status kapacitor
@@ -136,42 +135,20 @@ $ sudo systemctl status kapacitor
            └─18526 /usr/bin/kapacitord -config /etc/kapacitor/kapacitor.conf
 
 zář 01 15:34:16 algonquin systemd[1]: Started Time series data processing engine..
-zář 01 15:34:16 algonquin kapacitord[18526]: '##:::'##::::'###::::'########:::::'###:::::'######::'####:'########::'#######::'########::
-zář 01 15:34:16 algonquin kapacitord[18526]:  ##::'##::::'## ##::: ##.... ##:::'## ##:::'##... ##:. ##::... ##..::'##.... ##: ##.... ##:
-zář 01 15:34:16 algonquin kapacitord[18526]:  ##:'##::::'##:. ##:: ##:::: ##::'##:. ##:: ##:::..::: ##::::: ##:::: ##:::: ##: ##:::: ##:
-zář 01 15:34:16 algonquin kapacitord[18526]:  #####::::'##:::. ##: ########::'##:::. ##: ##:::::::: ##::::: ##:::: ##:::: ##: ########::
-zář 01 15:34:16 algonquin kapacitord[18526]:  ##. ##::: #########: ##.....::: #########: ##:::::::: ##::::: ##:::: ##:::: ##: ##.. ##:::
-zář 01 15:34:16 algonquin kapacitord[18526]:  ##:. ##:: ##.... ##: ##:::::::: ##.... ##: ##::: ##:: ##::::: ##:::: ##:::: ##: ##::. ##::
-zář 01 15:34:16 algonquin kapacitord[18526]:  ##::. ##: ##:::: ##: ##:::::::: ##:::: ##:. ######::'####:::: ##::::. #######:: ##:::. ##:
-zář 01 15:34:16 algonquin kapacitord[18526]: ..::::..::..:::::..::..:::::::::..:::::..:::......:::....:::::..::::::.......:::..:::::..::
-zář 01 15:34:16 algonquin kapacitord[18526]: 2017/09/01 15:34:16 Using configuration at: /etc/kapacitor/kapacitor.conf
 
 ```
 
-Since InfluxDB is running on `http://localhost:8086` Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdata/influxql/blob/master/README.md#create-subscription) on InfluxDB.
-These subscriptions tell InfluxDB to send all the data it receives to Kapacitor.
+Because InfluxDB is running on `http://localhost:8086`, Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdata/influxql/blob/master/README.md#create-subscription) on InfluxDB.
+Subscriptions tell InfluxDB to send data to Kapacitor.
 
-For more log data check the log file in the traditional `/var/log/kapacitor` directory.
+4. For more log data, run the following command to check the log file in the `/var/log/kapacitor` directory.
 
 ```
 $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
-[run] 2017/09/01 15:34:16 I! Kapacitor starting, version 1.3.1, branch master, commit 3b5512f7276483326577907803167e4bb213c613
-[run] 2017/09/01 15:34:16 I! Go version go1.7.5
-[srv] 2017/09/01 15:34:16 I! Kapacitor hostname: localhost
-[srv] 2017/09/01 15:34:16 I! ClusterID: e181c0c9-f173-42b5-92c7-10878c15887b ServerID: b0a73d8a-dae8-473c-a053-c06fcaacae7d
-[task_master:main] 2017/09/01 15:34:16 I! opened
-[scrapers] 2017/09/01 15:34:17 I! [Starting target manager...]
-[httpd] 2017/09/01 15:34:17 I! Starting HTTP service
-[httpd] 2017/09/01 15:34:17 I! Authentication enabled: false
-[httpd] 2017/09/01 15:34:17 I! Listening on HTTP: [::]:9092
-[run] 2017/09/01 15:34:17 I! Listening for signals
-[httpd] 127.0.0.1 - - [01/Sep/2017:15:34:20 +0200] "POST /write?consistency=&db=_internal&precision=ns&rp=monitor HTTP/1.1" 204 0 "-" "InfluxDBClient" 422971ab-8f1a-11e7-8001-000000000000 1373
-[httpd] 127.0.0.1 - - [01/Sep/2017:15:34:20 +0200] "POST /write?consistency=&db=telegraf&precision=ns&rp=autogen HTTP/1.1" 204 0 "-" "InfluxDBClient" 42572567-8f1a-11e7-8002-000000000000 336
-...
 
 ```
-Here can be seen some basic start up messages: listening on an HTTP port and posting data to InfluxDB.
-At this point InfluxDB is streaming the data it is receiving from Telegraf to Kapacitor.
+
+Kapacitor listens on an HTTP port and posts data to InfluxDB. Now, InfluxDB streams data from Telegraf to Kapacitor.
 
 ## Kapacitor tasks
 A Kapacitor `task` defines work to do on a set of data.
