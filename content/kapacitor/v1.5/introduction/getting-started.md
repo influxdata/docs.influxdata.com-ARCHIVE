@@ -151,20 +151,18 @@ $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
 Kapacitor listens on an HTTP port and posts data to InfluxDB. Now, InfluxDB streams data from Telegraf to Kapacitor.
 
 ## Kapacitor tasks
-A Kapacitor `task` defines work to do on a set of data.
-There are two types of tasks: `stream` and `batch`.
 
-A `stream` task mirrors all data written from InfluxDB to Kapacitor.
-This offloads the query overhead from InfluxDB to Kapacitor, but requires Kapacitor to store the data on disk.
-
-A `batch` task queries data from InfluxDB at a set interval and processes the data as it's queried.
+A Kapacitor `task` defines work to do on a set of data. Kapacitor tasks include:
+- `stream` task. Mirrors data written from InfluxDB to Kapacitor. Offloads query overhead and requires Kapacitor to store the data on disk.
+- `batch` task. Queries data from InfluxDB at a set interval and processes the data as it's queried.
 
 Kapacitor tasks define data processing pipelines using [TICKscript](/kapacitor/v1.5/tick/) syntax.
 Task files are commonly referred to as "TICKscripts."
 
-### Task execution
-At the beginning of each TICKscript, you specify the database and retention policy
-that contain data the TICKscript should act on using the `dbrp` keyword.
+### Execute a task
+
+1. At the beginning of a TICKscript, specify the database and retention policy
+that contain data the TICKscript by running the following command:
 
 ```js
 dbrp "telegraf"."autogen"
@@ -173,11 +171,10 @@ dbrp "telegraf"."autogen"
 ```
 
 When Kapacitor receives data from a database and retention policy that matches those
-specified, it executes the TICKscript.
+specified, Kapacitor executes the TICKscript.
 
 {{% note %}}
-You can only execute Kapacitor tasks based on database and retention policy.
-Kapacitor does not support task execution based on other conditions.
+Kapacitor supports executing tasks based on database and retention policy (no other conditions).
 {{% /note %}}
 
 ## Triggering alerts from stream data
