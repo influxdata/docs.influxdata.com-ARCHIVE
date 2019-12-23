@@ -11,7 +11,7 @@ Learn how to use Kapacitor to stream and batch your time series data.
 ## Get started
 
 1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install). (Necessary to say?: use the Linux system packages (`.deb`,`.rpm`) if available.? If yes, why?)
-2. Start InfluxDB and start Telegraf. By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
+2. Start InfluxDB and collect Telegraf data. By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
 3. Start Kapacitor.
 
 ## Start InfluxDB and collect Telegraf data
@@ -22,43 +22,15 @@ Learn how to use Kapacitor to stream and batch your time series data.
     $ sudo systemctl start influxdb
     ```
 
-Verify InfluxDB startup:
+2. Verify InfluxDB startup:
 
 ```bash
 $ sudo journalctl -f -n 128 -u influxdb
 zář 01 14:47:43 algonquin systemd[1]: Started InfluxDB is an open-source, distributed, time series database.
-zář 01 14:47:43 algonquin influxd[14778]:  8888888           .d888 888                   8888888b.  888888b.
-zář 01 14:47:43 algonquin influxd[14778]:    888            d88P"  888                   888  "Y88b 888  "88b
-zář 01 14:47:43 algonquin influxd[14778]:    888            888    888                   888    888 888  .88P
-zář 01 14:47:43 algonquin influxd[14778]:    888   88888b.  888888 888 888  888 888  888 888    888 8888888K.
-zář 01 14:47:43 algonquin influxd[14778]:    888   888 "88b 888    888 888  888  Y8bd8P\' 888    888 888  "Y88b
-zář 01 14:47:43 algonquin influxd[14778]:    888   888  888 888    888 888  888   X88K   888    888 888    888
-zář 01 14:47:43 algonquin influxd[14778]:    888   888  888 888    888 Y88b 888 .d8""8b. 888  .d88P 888   d88P
-zář 01 14:47:43 algonquin influxd[14778]:  8888888 888  888 888    888  "Y88888 888  888 8888888P"  8888888P"
-zář 01 14:47:43 algonquin influxd[14778]: [I] 2017-09-01T12:47:43Z InfluxDB starting, version 1.3.5, branch HEAD, commit 9d9001036d3585cf21925c13a57881bc6c8dcc7e
-zář 01 14:47:43 algonquin influxd[14778]: [I] 2017-09-01T12:47:43Z Go version go1.8.3, GOMAXPROCS set to 8
-zář 01 14:47:43 algonquin influxd[14778]: [I] 2017-09-01T12:47:43Z Using configuration at: /etc/influxdb/influxdb.conf
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Using data dir: /var/lib/influxdb/data service=store
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z opened service service=subscriber
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Starting monitor system service=monitor
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z 'build' registered for diagnostics monitoring service=monitor
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z 'runtime' registered for diagnostics monitoring service=monitor
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z 'network' registered for diagnostics monitoring service=monitor
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z 'system' registered for diagnostics monitoring service=monitor
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Starting precreation service with check interval of 10m0s, advance period of 30m0s service=shard-precreation
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Starting snapshot service service=snapshot
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Starting continuous query service service=continuous_querier
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Starting HTTP service service=httpd
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Authentication enabled:false service=httpd
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Listening on HTTP:[::]:8086 service=httpd
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Starting retention policy enforcement service with check interval of 30m0s service=retention
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Listening for signals
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Sending usage statistics to usage.influxdata.com
-zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Storing statistics in database '_internal' retention policy 'monitor', at interval 10s service=monitor
 ...
 ```
 
-In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send CPU metrics to InfluxDB:
+2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send CPU metrics to InfluxDB:
 
    - `[agent].interval` - frequency to send system metrics to InfluxDB
    - `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database. (so at least one URL and one database must be defined?)
@@ -90,38 +62,18 @@ In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure th
 
 ```
 
- Telegraf typically starts after installation.
-
- Verify Telegraf is running:
+3. Verify Telegraf is running:
 
  ```
  $ sudo systemctl status telegraf
-● telegraf.service - The plugin-driven server agent for reporting metrics into InfluxDB
-   Loaded: loaded (/lib/systemd/system/telegraf.service; enabled; vendor preset: enabled)
-   Active: active (running) since Pá 2017-09-01 14:52:10 CEST; 20min ago
-     Docs: https://github.com/influxdata/telegraf
- Main PID: 15068 (telegraf)
-    Tasks: 18
-   Memory: 14.4M
-      CPU: 6.789s
-   CGroup: /system.slice/telegraf.service
-           └─15068 /usr/bin/telegraf -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
 
-zář 01 14:52:10 algonquin systemd[1]: Started The plugin-driven server agent for reporting metrics into InfluxDB.
-zář 01 14:52:11 algonquin telegraf[15068]: 2017-09-01T12:52:11Z I! Starting Telegraf (version 1.3.3)
-zář 01 14:52:11 algonquin telegraf[15068]: 2017-09-01T12:52:11Z I! Loaded outputs: influxdb
-zář 01 14:52:11 algonquin telegraf[15068]: 2017-09-01T12:52:11Z I! Loaded inputs: inputs.cpu inputs.disk inputs.diskio inputs.kernel inputs.mem inputs.processes in
-zář 01 14:52:11 algonquin telegraf[15068]: 2017-09-01T12:52:11Z I! Tags enabled: host=algonquin
-zář 01 14:52:11 algonquin telegraf[15068]: 2017-09-01T12:52:11Z I! Agent Config: Interval:10s, Quiet:false, Hostname:"algonquin", Flush Interval:10s
- ```
-
-If Telegraf is 'inactive' start it as follows:
+If Telegraf is inactive, run the following command to start Telegraf:
 
 ```
 $ sudo systemctl start telegraf
 ```
 
- Check its status as above, and check the system journal to ensure that there are no connection errors to InfluxDB.
+ Once Telegraf is running, run the following command to check the system journal to ensure no connection errors to InfluxDB exist:
 
  ```
  $ sudo journalctl -f -n 128 -u telegraf
@@ -135,17 +87,16 @@ zář 01 15:15:43 algonquin telegraf[16968]: 2017-09-01T13:15:43Z I! Agent Confi
 
  ```
 
-InfluxDB and Telegraf are now running and listening on localhost.  Wait about a minute for Telegraf to supply a small amount of system metric data to InfluxDB.  Then, confirm that InfluxDB has the data that Kapacitor will use.
+InfluxDB and Telegraf are now running and listening on localhost.
 
-This can be achieved with the following query:
+4. Wait a minute for Telegraf to supply a small amount of system metric data to InfluxDB. Then, run the following command to confirm that InfluxDB has the data for Kapacitor:
 
 ```bash
 $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT mean(usage_idle) FROM cpu'
 ```
 
-This should return results similar to the following example.
+Results similar to the following appear:
 
-*Example - results from InfluxDB REST query*
 ```
 {"results":[{"statement_id":0,"series":[{"name":"cpu","columns":["time","mean"],"values":[["1970-01-01T00:00:00Z",91.82304336748372]]}]}]}
 ```
