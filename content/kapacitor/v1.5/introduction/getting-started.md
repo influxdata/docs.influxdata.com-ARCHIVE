@@ -177,41 +177,37 @@ specified, Kapacitor executes the TICKscript.
 Kapacitor supports executing tasks based on database and retention policy (no other conditions).
 {{% /note %}}
 
-## Triggering alerts from stream data
+## Trigger alerts from stream data
 
-The TICKStack is now setup (excluding Chronograf, which is not covered here).  This guide will now introduce the fundamentals of actually working with Kapacitor.
+Triggering an alert is a common Kapacitor use case.
 
-So what should Kapacitor be instructed to do?
-
-The most common Kapacitor use case is triggering alerts. The example that follows will set up an alert on high cpu usage.
-How to define high cpu usage?  Telegraf writes to InfluxDB a cpu metric on the percentage of time a cpu spent in an idle state. For demonstration purposes assume that when idle usage drops below 70% a critical alert should be triggered.
-
-A TICKscript can now be written to cover these criteria.  Copy the script below into a file called `cpu_alert.tick`:
+For example, to alert on high CPU usage, use the following TICKscript.
+Telegraf writes the percentage of CPU idle time to InfluxDB. For example, to trigger a critical alert when the idle usage drops below 70%, copy the following TICKscript into a file called `cpu_alert.tick`:
 
 ```js
 dbrp "telegraf"."autogen"
 
 stream
-    // Select just the cpu measurement from our example database.
+    // Select the CPU measurement from the `telegraf` database.
     |from()
         .measurement('cpu')
     |alert()
         .crit(lambda: int("usage_idle") <  70)
-        // Whenever we get an alert write it to a file.
+        // Write each alert to a file.
         .log('/tmp/alerts.log')
 ```
 
-Kapacitor has an HTTP API with which all communication happens.
+Kapacitor communicates through an HTTP API.
 The `kapacitor` client application exposes the API over the command line.
-Now use this CLI tool to define the `task` and the database&mdash;including retention policy&mdash;that it can access:
+Run the following command to use the CLI tool to define the `task` and the database&mdash;including retention policy&mdash;to access:
 
 ```bash
 kapacitor define cpu_alert -tick cpu_alert.tick
 ```
 
-> Note on declaring Database and Retention policy:  As of Kapacitor 1.4 the database and retention policy to which the TICKscript will be applied can be declared using an optional statement in the script: e.g. `dbrp "telegraf"."autogen"`.  If not declared in the script, then it must be defined when the task is defined using the kapacitor flag `-dbrp` followed by the argument "&lt;DBNAME&gt;"."&lt;RETENTION_POLICY&gt;".
+> The database and retention policy can also be declared using an optional statement in the TICKscript: for example, `dbrp "telegraf"."autogen"`. Otherwise, the database and retention policy must be defined in the task using the kapacitor flag `-dbrp` followed by the argument "&lt;DBNAME&gt;"."&lt;RETENTION_POLICY&gt;".
 
-Verify that the alert has been created using the `list` command.
+Use the `list` command to verify the alert has been created:
 
 ```
 $ kapacitor list tasks
@@ -219,7 +215,7 @@ ID        Type      Status    Executing Databases and Retention Policies
 cpu_alert stream    disabled  false     ["telegraf"."autogen"]
 ```
 
-View details about the task using the `show` command.
+Use the `show` command to view details about the task:
 
 ```
 $ kapacitor show cpu_alert
@@ -231,31 +227,28 @@ Status: disabled
 Executing: false
 ...
 ```
-This command will be covered in more detail below.
+This command? will be covered in more detail below.
 
 Kapacitor now knows how to trigger the alert.
 
 However, nothing is going to happen until the task has been enabled.
-Before being enabled, the task should first be tested to ensure it does not spam the log files or communication channels with alerts.
-Record the current data stream for a bit and use it to test the new task:
+Before being enabled, the task should first be ?
+
+To test the task to ensure log files or communication channels aren't spammed with alerts, use the following command to record the data stream for the specified database and retention policy:
 
 ```bash
 kapacitor record stream -task cpu_alert -duration 60s
 ```
 
-Since the task was defined with a database and retention policy pair, the recording knows to
-only record data from that database and retention policy.
+   * **NOTE – troubleshooting connection refused –** If, when running the record command, an error is returned of the type `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), verify the Kapacitor service is running (see [Installing and Starting Kapacitor](#installing-and-starting-kapacitor)). If Kapacitor is started and this error is still encountered, check the firewall settings of the host machine and ensure that port `9092` is accessible. Also check the messages in `/var/log/kapacitor/kapacitor.log`. If there's an issue with the `http` or other configuration in `/etc/kapacitor/kapacitor.conf`, the issue appears in the log. If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.
 
-   * **NOTE – troubleshooting connection refused –** If, when running the record command, an error is returned of the type `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), please ensure that the Kapacitor service is running.  See the section above [Installing and Starting Kapacitor](#installing-and-starting-kapacitor).  If Kapacitor is started and this error is still encountered, check the firewall settings of the host machine and ensure that port `9092` is accessible.  Check as well the messages in `/var/log/kapacitor/kapacitor.log`.  There may be an issue with the `http` or other configuration in `/etc/kapacitor/kapacitor.conf` and this will appear in the log.  If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.
-
-
-Now grab the ID that was returned and put it in a bash variable for easy use later on (the actual UUID returned will be different):
+Retrieve the returned ID and put? add? the ID to a bash variable to use later (the actual UUID returned is different):
 
 ```bash
 rid=cd158f21-02e6-405c-8527-261ae6f26153
 ```
 
-Confirm that the recording captured some data. Run
+Confirm the recording captured some data by running:
 
 ```bash
 kapacitor list recordings $rid
@@ -268,10 +261,10 @@ ID                                      Type    Status    Size      Date
 cd158f21-02e6-405c-8527-261ae6f26153    stream  finished  2.2 kB    04 May 16 11:44 MDT
 ```
 
-As long as the size is more than a few bytes it is certain that some data was captured.
-If Kapacitor is not receiving data yet, check each layer: Telegraf &rarr; InfluxDB &rarr; Kapacitor.
-Telegraf will log errors if it cannot communicate to InfluxDB.
-InfluxDB will log an error about `connection refused` if it cannot send data to Kapacitor.
+If the size is more than a few bytes, data has been captured.
+If Kapacitor isn't receiving data, check each layer: Telegraf &rarr; InfluxDB &rarr; Kapacitor.
+Telegraf logs errors if it cannot communicate to InfluxDB.
+InfluxDB logs an error about `connection refused` if it cannot send data to Kapacitor.
 Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB is using to send data to Kapacitor.
 
 ```
