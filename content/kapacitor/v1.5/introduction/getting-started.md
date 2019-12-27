@@ -566,5 +566,4 @@ For more information see the [Load Directory](/kapacitor/v1.5/guides/load_direct
 
 ### What's next?
 
-Take a look at the [example guides](/kapacitor/v1.5/guides/) for how to use Kapacitor.
-The use cases demonstrated there explore some of the richer features of Kapacitor.
+To explore other ways to use Kapacitor, check out the [example guides](/kapacitor/v1.5/guides/).
