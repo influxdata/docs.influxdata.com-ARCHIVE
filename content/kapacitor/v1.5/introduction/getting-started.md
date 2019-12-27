@@ -207,7 +207,7 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 
 > In the example above, the database and retention policy is defined in the TICKscript: `dbrp "telegraf"."autogen"`. Alternatively, the database and retention policy can be defined in the `task` using the flag `-dbrp` followed by the argument "&lt;DBNAME&gt;"."&lt;RETENTION_POLICY&gt;".
 
-2. Use the `list` command to verify the alert has been created:
+3.(Optional) Use the `list` command to verify the alert has been created:
 
 ```
 $ kapacitor list tasks
@@ -215,7 +215,7 @@ ID        Type      Status    Executing Databases and Retention Policies
 cpu_alert stream    disabled  false     ["telegraf"."autogen"]
 ```
 
-3. Use the `show` command to view details about the task:
+4. (Optional) Use the `show` command to view details about the task:
 
 ```
 $ kapacitor show cpu_alert
@@ -228,83 +228,78 @@ Executing: false
 ...
 ```
 
-4. Test the task to ensure log files or communication channels aren't spammed with alerts. Use the following command to record the data stream for the specified database and retention policy:
+4. Test the task to ensure log files or communication channels aren't spammed with alerts.
+    a. Record the data stream:
 
-```bash
-kapacitor record stream -task cpu_alert -duration 60s
-```
+    ```bash
+    kapacitor record stream -task cpu_alert -duration 60s
+    ```
 
-   * **NOTE – troubleshooting connection refused –** If, when running the record command, an error is returned of the type `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), verify the Kapacitor service is running (see [Installing and Starting Kapacitor](#installing-and-starting-kapacitor)). If Kapacitor is started and this error is still encountered, check the firewall settings of the host machine and ensure that port `9092` is accessible. Also check the messages in `/var/log/kapacitor/kapacitor.log`. If there's an issue with the `http` or other configuration in `/etc/kapacitor/kapacitor.conf`, the issue appears in the log. If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.
+   - **Troubleshoot connection refused** If a connection error appears, for example: `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), verify the Kapacitor service is running (see [Installing and Starting Kapacitor](#installing-and-starting-kapacitor)). If Kapacitor is running, check the firewall settings of the host machine and ensure that port `9092` is accessible. Also, check messages in `/var/log/kapacitor/kapacitor.log`. If there's an issue with the `http` or other configuration in `/etc/kapacitor/kapacitor.conf`, the issue appears in the log. If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.
 
-Retrieve the returned ID and put? add? the ID to a bash variable to use later (the actual UUID returned is different):
+    b. Retrieve the returned ID and put? add? the ID to a bash variable to use later (the actual UUID returned is different):
 
-```bash
-rid=cd158f21-02e6-405c-8527-261ae6f26153
-```
+        ```bash
+        rid=cd158f21-02e6-405c-8527-261ae6f26153
+        ```
 
-Confirm the recording captured some data by running:
+    c. Confirm the recording captured some data by running:
 
-```bash
-kapacitor list recordings $rid
-```
+        ```bash
+        kapacitor list recordings $rid
+        ```
 
-The output should appear like:
+        The output should appear like:
 
-```
-ID                                      Type    Status    Size      Date
-cd158f21-02e6-405c-8527-261ae6f26153    stream  finished  2.2 kB    04 May 16 11:44 MDT
-```
+        ```
+        ID                                      Type    Status    Size      Date
+        cd158f21-02e6-405c-8527-261ae6f26153    stream  finished  2.2 kB    04 May 16 11:44 MDT
+        ```
 
-If the size is more than a few bytes, data has been captured.
-If Kapacitor isn't receiving data, check each layer: Telegraf &rarr; InfluxDB &rarr; Kapacitor.
-Telegraf logs errors if it cannot communicate to InfluxDB.
-InfluxDB logs an error about `connection refused` if it cannot send data to Kapacitor.
-Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB is using to send data to Kapacitor.
+        If the size is more than a few bytes, data has been captured.
+        If Kapacitor isn't receiving data, check each layer: Telegraf &rarr; InfluxDB &rarr; Kapacitor.
+        Telegraf logs errors if it cannot communicate to InfluxDB.
+        InfluxDB logs an error about `connection refused` if it cannot send data to Kapacitor.
+        Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB is using to send data to Kapacitor.
 
-```
-$ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SHOW SUBSCRIPTIONS'
+        ```
+        $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SHOW SUBSCRIPTIONS'
 
-{"results":[{"statement_id":0,"series":[{"name":"_internal","columns":["retention_policy","name","mode","destinations"],"values":[["monitor","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]},{"name":"telegraf","columns":["retention_policy","name","mode","destinations"],"values":[["autogen","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]}]}]}
-```
+        {"results":[{"statement_id":0,"series":[{"name":"_internal","columns":["retention_policy","name","mode","destinations"],"values":[["monitor","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]},{"name":"telegraf","columns":["retention_policy","name","mode","destinations"],"values":[["autogen","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]}]}]}
+        ```
 
-Recording a snapshot of data lets you `replay` and test the data for a specific task:
+    d. Use `replay` to test the recorded data for a specific task:
 
-```bash
-kapacitor replay -recording $rid -task cpu_alert
-```
+        ```bash
+        kapacitor replay -recording $rid -task cpu_alert
+        ```
 
-Since the data has already been recorded, it can be replayed as fast as possible instead of waiting for real time to pass.
-When the flag `-real-clock` is set, the data will be replayed by waiting for the deltas between the timestamps to pass, though the result is identical whether real time passes or not. This is because time is measured on each node by the data points it receives.
+        > Use the flag `-real-clock` to set the replay time by deltas between the timestamps. Time is measured on each node by the data points it receives.
 
-Check the log using the command below.
+    e. Review the log for alerts:
 
-```bash
-sudo cat /tmp/alerts.log
-```
-Were any alerts received?
-The file should contain lines of JSON, where each line represents one alert.
-The JSON line contains the alert level and the data that triggered the alert.
+        ```bash
+        sudo cat /tmp/alerts.log
+        ```
+        Each JSON line represents one alert, and includes the alert level and data that triggered the alert.
 
-Depending on how busy the host machine was, maybe not.
+        > If the host machine is busy, it may take awhile to log alerts.
 
-The task can be modified to be really sensitive to ensure the alerts are working.
-In the TICKscript change the lamda function `.crit(lambda: "usage_idle" < 70)` to `.crit(lambda: "usage_idle" < 100)`, and define the task once more.
+    f. (Optional) Modify the task to be really sensitive to ensure the alerts are working.
+        In the TICKscript, change the lamda function `.crit(lambda: "usage_idle" < 70)` to `.crit(lambda: "usage_idle" < 100)`, and run the `define` command with just the `TASK_NAME` and `-tick` arguments:
 
-Any time you want to update a task change the TICKscript and then run the `define` command again with just the `TASK_NAME` and `-tick` arguments:
+        ```bash
+        kapacitor define cpu_alert -tick cpu_alert.tick
+        ```
+        Every data point received during the recording triggers an alert.
 
-Now every data point that was received during the recording will trigger an alert.
+    g. Replay the modified task to verify the results.
 
-```bash
-kapacitor define cpu_alert -tick cpu_alert.tick
-```
+        ```bash
+        kapacitor replay -recording $rid -task cpu_alert
+        ```
 
-Replay it again and verify the results.
-
-```bash
-kapacitor replay -recording $rid -task cpu_alert
-```
-
-Once the `alerts.log` results verify that it is working, change the `usage_idle` threshold back to a more reasonable level and redefine the task once more using the `define` command as shown above.
+Once the `alerts.log` results verify that the task is working, change the `usage_idle` threshold back to a more reasonable level and redefine the task once more using the `define` command as shown above.
 
 5. Enable the task to start processing the live data stream:
 
@@ -314,11 +309,12 @@ kapacitor enable cpu_alert
 
 Alerts are written to the log in real time.
 
-To see that the task is receiving data and behaving as expected run the `show` command:
+6. Verify the task is receiving data and behaving as expected run the `show` command:
 
 ```bash
 $ kapacitor show cpu_alert
 |from()
+// Information about the state of the task and any error it may have encountered.
 ID: cpu_alert
 Error:
 Type: stream
@@ -328,6 +324,8 @@ Created: 04 May 16 21:01 MDT
 Modified: 04 May 16 21:04 MDT
 LastEnabled: 04 May 16 21:03 MDT
 Databases Retention Policies: [""."autogen"]
+
+// Displays the version of the TICKscript that Kapacitor has stored in its local database.
 TICKscript:
 stream
     // Select just the cpu me
@@ -351,14 +349,11 @@ alert2 [alerts_triggered="0" avg_exec_time_ns="0" ];
 }
 ```
 
-The first part has information about the state of the task and any error it may have encountered.
-The `TICKscript` section displays the version of the TICKscript that Kapacitor has stored in its local database.
+Returns a [graphviz dot](http://www.graphviz.org) formatted tree that shows the data processing pipeline defined by the TICKscript and key-value associative array entries with statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
+In the example above, the `stream0` node (aka the `stream` var from the TICKscript) has sent 12 points to the `from1` node.
+The `from1` node has also sent 12 points on to the `alert2` node. Since Telegraf is configured to send `cpu` data, all 12 points match the from/measurement criteria of the `from1` node and are passed on.
 
-The last section, `DOT`, is a [graphviz dot](http://www.graphviz.org) formatted tree that contains information about the data processing pipeline defined by the TICKscript. Its members are key-value associative array entries containing statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
-For example in the above the `stream0` node (aka the `stream` var from the TICKscript) has sent 12 points to the `from1` node.
-The `from1` node has also sent 12 points on to the `alert2` node.  Since Telegraf is configured to send `cpu` data, all 12 points match the from/measurement criteria of the `from1` node and are passed on.
-
->NOTE: When installing graphviz on Debian or RedHat (if not already installed) use the package provided by the OS provider.  The packages offered in the download section of the graphviz site are not up-to-date.
+>If necessary, install graphviz on Debian or RedHat using the package provided by the OS provider. The packages offered on the graphviz site are not up-to-date.
 
 Now that the task is running with live data, here is a quick hack to use 100% of one core to generate some artificial cpu activity:
 
