@@ -267,9 +267,7 @@ $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SHOW SUB
 {"results":[{"statement_id":0,"series":[{"name":"_internal","columns":["retention_policy","name","mode","destinations"],"values":[["monitor","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]},{"name":"telegraf","columns":["retention_policy","name","mode","destinations"],"values":[["autogen","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]}]}]}
 ```
 
-With a snapshot of data recorded from the stream, that data can then be replayed to the new task.
-The `replay` action replays data only to a specific task.
-This way the task can be tested in complete isolation:
+Recording a snapshot of data lets you `replay` and test the data for a specific task:
 
 ```bash
 kapacitor replay -recording $rid -task cpu_alert
