@@ -179,10 +179,11 @@ Kapacitor supports executing tasks based on database and retention policy (no ot
 
 ## Trigger alerts from stream data
 
-Triggering an alert is a common Kapacitor use case.
+Triggering an alert is a common Kapacitor use case. The database and retention policy to alert on must be defined.
 
-For example, to alert on high CPU usage, use the following TICKscript.
-Telegraf writes the percentage of CPU idle time to InfluxDB. For example, to trigger a critical alert when the idle usage drops below 70%, copy the following TICKscript into a file called `cpu_alert.tick`:
+##### Example alert on CPU usage
+
+1. Copy the following TICKscript into a file called `cpu_alert.tick`:
 
 ```js
 dbrp "telegraf"."autogen"
@@ -191,21 +192,20 @@ stream
     // Select the CPU measurement from the `telegraf` database.
     |from()
         .measurement('cpu')
+    // Triggers a critical alert when the CPU idle usage drops below 70%
     |alert()
         .crit(lambda: int("usage_idle") <  70)
         // Write each alert to a file.
         .log('/tmp/alerts.log')
 ```
 
-Kapacitor communicates through an HTTP API.
-The `kapacitor` client application exposes the API over the command line.
-Run the following command to use the CLI tool to define the `task` and the database&mdash;including retention policy&mdash;to access:
+2. In the command line, run the `kapacitor` CLI tool to define the `task` and TICKscript:
 
 ```bash
 kapacitor define cpu_alert -tick cpu_alert.tick
 ```
 
-> The database and retention policy can also be declared using an optional statement in the TICKscript: for example, `dbrp "telegraf"."autogen"`. Otherwise, the database and retention policy must be defined in the task using the kapacitor flag `-dbrp` followed by the argument "&lt;DBNAME&gt;"."&lt;RETENTION_POLICY&gt;".
+> In the example above, the database and retention policy is defined in the TICKscript: `dbrp "telegraf"."autogen"`. Alternatively, the database and retention policy can be defined in the `task` using the flag `-dbrp` followed by the argument "&lt;DBNAME&gt;"."&lt;RETENTION_POLICY&gt;".
 
 Use the `list` command to verify the alert has been created:
 
@@ -227,12 +227,13 @@ Status: disabled
 Executing: false
 ...
 ```
-This command? will be covered in more detail below.
 
-Kapacitor now knows how to trigger the alert.
+Kapacitor is set up to trigger the alert.
+
+
 
 However, nothing is going to happen until the task has been enabled.
-Before being enabled, the task should first be ?
+Before being enabled, the task should first be tested.
 
 To test the task to ensure log files or communication channels aren't spammed with alerts, use the following command to record the data stream for the specified database and retention policy:
 
