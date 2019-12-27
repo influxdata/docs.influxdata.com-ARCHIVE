@@ -207,7 +207,7 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 
 > In the example above, the database and retention policy is defined in the TICKscript: `dbrp "telegraf"."autogen"`. Alternatively, the database and retention policy can be defined in the `task` using the flag `-dbrp` followed by the argument "&lt;DBNAME&gt;"."&lt;RETENTION_POLICY&gt;".
 
-Use the `list` command to verify the alert has been created:
+2. Use the `list` command to verify the alert has been created:
 
 ```
 $ kapacitor list tasks
@@ -215,7 +215,7 @@ ID        Type      Status    Executing Databases and Retention Policies
 cpu_alert stream    disabled  false     ["telegraf"."autogen"]
 ```
 
-Use the `show` command to view details about the task:
+3. Use the `show` command to view details about the task:
 
 ```
 $ kapacitor show cpu_alert
@@ -228,14 +228,7 @@ Executing: false
 ...
 ```
 
-Kapacitor is set up to trigger the alert.
-
-
-
-However, nothing is going to happen until the task has been enabled.
-Before being enabled, the task should first be tested.
-
-To test the task to ensure log files or communication channels aren't spammed with alerts, use the following command to record the data stream for the specified database and retention policy:
+4. Test the task to ensure log files or communication channels aren't spammed with alerts. Use the following command to record the data stream for the specified database and retention policy:
 
 ```bash
 kapacitor record stream -task cpu_alert -duration 60s
@@ -315,15 +308,15 @@ kapacitor replay -recording $rid -task cpu_alert
 
 Once the `alerts.log` results verify that it is working, change the `usage_idle` threshold back to a more reasonable level and redefine the task once more using the `define` command as shown above.
 
-Enable the task, so it can start processing the live data stream, with:
+5. Enable the task to start processing the live data stream:
 
 ```bash
 kapacitor enable cpu_alert
 ```
 
-Now alerts will be written to the log in real time.
+Alerts are written to the log in real time.
 
-To see that the task is receiving data and behaving as expected run the `show` command once again to get more information about it:
+To see that the task is receiving data and behaving as expected run the `show` command:
 
 ```bash
 $ kapacitor show cpu_alert
@@ -363,7 +356,7 @@ alert2 [alerts_triggered="0" avg_exec_time_ns="0" ];
 The first part has information about the state of the task and any error it may have encountered.
 The `TICKscript` section displays the version of the TICKscript that Kapacitor has stored in its local database.
 
-The last section, `DOT`, is a [graphviz dot](http://www.graphviz.org) formatted tree that contains information about the data processing pipeline defined by the TICKscript.  Its members are key-value associative array entries containing statistics about each node and links along an edge to the next node also including associative array statistical information.  The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
+The last section, `DOT`, is a [graphviz dot](http://www.graphviz.org) formatted tree that contains information about the data processing pipeline defined by the TICKscript. Its members are key-value associative array entries containing statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
 For example in the above the `stream0` node (aka the `stream` var from the TICKscript) has sent 12 points to the `from1` node.
 The `from1` node has also sent 12 points on to the `alert2` node.  Since Telegraf is configured to send `cpu` data, all 12 points match the from/measurement criteria of the `from1` node and are passed on.
 
@@ -374,9 +367,6 @@ Now that the task is running with live data, here is a quick hack to use 100% of
 ```bash
 while true; do i=0; done
 ```
-
-There are plenty of ways to get a threshold alert.  So, why all this pipeline TICKscript stuff?
-In short because TICKscripts can quickly be extended to become *much* more powerful.
 
 ### Gotcha - single versus double quotes
 
