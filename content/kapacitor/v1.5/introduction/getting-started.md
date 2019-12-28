@@ -555,14 +555,11 @@ Check the alert log to make sure alerts were generated as expected.
 The `sigma` based alert above can also be adapted for working with batch data.
 Play around and get comfortable with updating, testing, and running tasks in Kapacitor.
 
-## Loading Tasks with the Kapacitor daemon
+## Loading tasks with the Kapacitor daemon
 
-It is also possible to save TICKscripts in a _load_ directory declared in
-`kapacitor.conf`.  In this way tasks and task templates can be loaded and
-enabled directly with the Kapacitor daemon, when it boots.  Such scripts must
-include the database and retention policy declaration `dbrp`.
+To load and enable tasks and task templates directly with the Kapacitor daemon when it boots, save TICKscripts in a _load_ directory specified in `kapacitor.conf`. TICKscripts must include the database and retention policy declaration `dbrp`.
 
-For more information see the [Load Directory](/kapacitor/v1.5/guides/load_directory/) guide.
+For more information, see [Load Directory](/kapacitor/v1.5/guides/load_directory/).
 
 ### What's next?
 
