@@ -76,7 +76,7 @@ Enable HTTPS for each Meta Node within the `[meta]` section of the configuration
 * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
-```
+```toml
 [meta]
 
  [...]
@@ -102,7 +102,7 @@ First, enable HTTPS for each Data Node within the `[http]` section of the config
 * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
-```
+```toml
 [http]
 
   [...]
@@ -119,11 +119,35 @@ First, enable HTTPS for each Data Node within the `[http]` section of the config
   https-private-key = "<bundled-certificate-file>.pem"
 ```
 
-Second, Configure the Data Nodes to use HTTPS when communicating with the Meta Nodes  within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
+Second, configure the Data Nodes to use HTTPS when communicating with other Data Nodes.
+Update the following settings within the `[cluster]` section of the configuration file (`/etc/influxdb/influxdb.conf`):
+
+* `https-enabled` to `true`
+* `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+* `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+
+```toml
+[cluster]
+
+  [...]
+
+  # Determines whether data nodes use HTTPS to communicate with each other.
+  https-enabled = true
+
+  # The SSL certificate to use when HTTPS is enabled.
+  https-certificate = "<bundled-certificate-file>.pem"
+
+  # Use a separate private key location.
+  https-private-key = "<bundled-certificate-file>.pem"
+```
+
+
+Third, configure the Data Nodes to use HTTPS when communicating with the Meta Nodes
+within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `meta-tls-enabled` to `true`
 
-```
+```toml
 [meta]
 
   [...]
@@ -133,19 +157,22 @@ Second, Configure the Data Nodes to use HTTPS when communicating with the Meta N
 #### Step 5: Restart InfluxDB Enterprise
 
 Restart the InfluxDB Enterprise meta node processes for the configuration changes to take effect:
-```
+
+```sh
 sudo systemctl start influxdb-meta
 ```
 
 Restart the InfluxDB Enterprise data node processes for the configuration changes to take effect:
-```
+
+```sh
 sudo systemctl restart influxdb
 ```
 
 #### Step 6: Verify the HTTPS Setup
 
 Verify that HTTPS is working on the meta nodes by using `influxd-ctl`.
-```
+
+```sh
 influxd-ctl -bind-tls show
 ```
 {{% warn %}}
@@ -153,6 +180,7 @@ influxd-ctl -bind-tls show
 {{% /warn %}}
 
 A successful connection returns output which should resemble the following:
+
 ```
 Data Nodes
 ==========
@@ -170,12 +198,14 @@ enterprise-meta-03:8091   1.x.y-c1.x.z
 
 
 Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.7/tools/shell/):
-```
+
+```sh
 influx -ssl -host <domain_name>.com
 ```
 
 A successful connection returns the following:
-```
+
+```sh
 Connected to https://<domain_name>.com:8086 version 1.x.y
 InfluxDB shell version: 1.x.y
 >
@@ -192,7 +222,7 @@ certificate file (`.crt`) which remain valid for the specified `NUMBER_OF_DAYS`.
 It outputs those files to InfluxDB Enterprise's default certificate file paths and gives them
 the required permissions.
 
-```
+```sh
 sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/ssl/influxdb-selfsigned.key -out /etc/ssl/influxdb-selfsigned.crt -days <NUMBER_OF_DAYS>
 ```
 
@@ -211,7 +241,7 @@ Enable HTTPS for each Meta Node within the `[meta]` section of the configuration
 * `https-insecure-tls` to `true` to indicate a self-signed key
 
 
-```
+```toml
 [meta]
 
   [...]
@@ -241,7 +271,7 @@ First, enable HTTPS for each Data Node within the `[http]` section of the config
 * `http-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
 * `http-private-key` to `/etc/ssl/influxdb-selfsigned.key`
 
-```
+```toml
 [http]
 
   [...]
@@ -258,12 +288,36 @@ First, enable HTTPS for each Data Node within the `[http]` section of the config
   https-private-key = "/etc/ssl/influxdb-selfsigned.key"
 ```
 
-Second, Configure the Data Nodes to use HTTPS when communicating with the Meta Nodes  within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
+Second, configure the Data Nodes to use HTTPS when communicating with other Data Nodes.
+Update the following settings within the `[cluster]` section of the configuration file (`/etc/influxdb/influxdb.conf`):
+
+* `https-enabled` to `true`
+* `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+* `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+
+```toml
+[cluster]
+
+  [...]
+
+  # Determines whether data nodes use HTTPS to communicate with each other.
+  https-enabled = true
+
+  # The SSL certificate to use when HTTPS is enabled.
+  https-certificate = "<bundled-certificate-file>.pem"
+
+  # Use a separate private key location.
+  https-private-key = "<bundled-certificate-file>.pem"
+```
+
+
+Third, configure the Data Nodes to use HTTPS when communicating with the Meta Nodes
+within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
 
 * `meta-tls-enabled` to `true`
 * `meta-insecure-tls` to `true` to indicate a self-signed key
 
-```
+```toml
 [meta]
 
   [...]
@@ -276,19 +330,22 @@ Second, Configure the Data Nodes to use HTTPS when communicating with the Meta N
 #### Step 4: Restart InfluxDB Enterprise
 
 Restart the InfluxDB Enterprise meta node processes for the configuration changes to take effect:
-```
+
+```sh
 sudo systemctl restart influxdb-meta
 ```
 
 Restart the InfluxDB Enterprise data node processes for the configuration changes to take effect:
-```
+
+```sh
 sudo systemctl restart influxdb
 ```
 
 #### Step 5: Verify the HTTPS Setup
 
 Verify that HTTPS is working on the meta nodes by using `influxd-ctl`.
-```
+
+```sh
 influxd-ctl -bind-tls -k show
 ```
 {{% warn %}}
@@ -296,6 +353,7 @@ influxd-ctl -bind-tls -k show
 {{% /warn %}}
 
 A successful connection returns output which should resemble the following:
+
 ```
 Data Nodes
 ==========
@@ -313,12 +371,14 @@ enterprise-meta-03:8091   1.x.y-c1.x.z
 
 
 Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/latest/tools/shell/):
-```
+
+```sh
 influx -ssl -unsafeSsl -host <domain_name>.com
 ```
 
 A successful connection returns the following:
-```
+
+```sh
 Connected to https://<domain_name>.com:8086 version 1.x.y
 InfluxDB shell version: 1.x.y
 >
@@ -341,27 +401,29 @@ The best practice in terms of security is to transfer the cert to the client and
 
 If you're using a self-signed certificate, uncomment the `insecure_skip_verify`
 setting and set it to `true`.
-```
-    ###############################################################################
-    #                            OUTPUT PLUGINS                                   #
-    ###############################################################################
 
-    # Configuration for influxdb server to send metrics to
-    [[outputs.influxdb]]
-      ## The full HTTP or UDP endpoint URL for your InfluxDB Enterprise instance.
-      ## Multiple urls can be specified as part of the same cluster,
-      ## this means that only ONE of the urls will be written to each interval.
-      # urls = ["udp://localhost:8089"] # UDP endpoint example
-      urls = ["https://<domain_name>.com:8086"]
+```toml
+###############################################################################
+#                            OUTPUT PLUGINS                                   #
+###############################################################################
 
-    [...]
+# Configuration for influxdb server to send metrics to
+[[outputs.influxdb]]
+  ## The full HTTP or UDP endpoint URL for your InfluxDB Enterprise instance.
+  ## Multiple urls can be specified as part of the same cluster,
+  ## this means that only ONE of the urls will be written to each interval.
+  # urls = ["udp://localhost:8089"] # UDP endpoint example
+  urls = ["https://<domain_name>.com:8086"]
 
-      ## Optional SSL Config
-      [...]
-      insecure_skip_verify = true # <-- Update only if you're using a self-signed certificate
+[...]
+
+  ## Optional SSL Config
+  [...]
+  insecure_skip_verify = true # <-- Update only if you're using a self-signed certificate
 ```
 
 Next, restart Telegraf and you're all set!
-```
+
+```sh
 sudo systemctl restart telegraf
 ```
