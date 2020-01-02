@@ -6,7 +6,16 @@ menu:
     parent: introduction
 ---
 
-Learn how to use Kapacitor to stream and batch your time series data.
+Learn how to use Kapacitor to stream and batch your time series data:
+
+- Get started
+    - Start InfluxDB and collect Telegraf data
+    - Start Kapacitor
+- Kapacitor tasks
+
+### What's next?
+
+To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/guides/).
 
 ## Get started
 
@@ -309,7 +318,7 @@ kapacitor enable cpu_alert
 
 Alerts are written to the log in real time.
 
-6. Verify the task is receiving data and behaving as expected run the `show` command:
+6. Run the `show` command to verify the task is receiving data and behaving as expected:
 
 ```bash
 $ kapacitor show cpu_alert
@@ -494,10 +503,11 @@ standard deviations away from normal behavior as defined by the historical 95th 
 
 For more information on how alerting works, see the [AlertNode](/kapacitor/v1.5/nodes/alert_node/) docs.
 
-## Triggering alerts from batch data
+## Trigger alerts from batch data
 
 Instead of just processing the data in streams, Kapacitor can also periodically query
 InfluxDB and then process that data in batches.
+
 While triggering an alert based off cpu usage is more suited for the streaming case, the basic idea
 of how `batch` tasks work is demonstrated here by following the same use case.
 
@@ -555,12 +565,8 @@ Check the alert log to make sure alerts were generated as expected.
 The `sigma` based alert above can also be adapted for working with batch data.
 Play around and get comfortable with updating, testing, and running tasks in Kapacitor.
 
-## Load tasks with the Kapacitor daemon
+## Load tasks with Kapacitor
 
-To load tasks and task templates directly with the Kapacitor daemon when it boots, save TICKscripts in a _load_ directory specified in `kapacitor.conf`. TICKscripts must include the database and retention policy declaration `dbrp`.
+To load a task with Kapacitor, save the TICKscript in a _load_ directory specified in `kapacitor.conf`. TICKscripts must include the database and retention policy declaration `dbrp`.
 
 For more information, see [Load Directory](/kapacitor/v1.5/guides/load_directory/).
-
-### What's next?
-
-To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/guides/).
