@@ -9,18 +9,29 @@ menu:
 Learn how to use Kapacitor to stream and batch your time series data:
 
 - Get started
+- Overview? (conceptual information)
+
     - Start InfluxDB and collect Telegraf data
     - Start Kapacitor
 - Kapacitor tasks
+    - Execute a task
+    - Trigger alerts from stream data
+    - Example alert on CPU usage
+    - Gotcha - single versus double quotes
+    - Extending TICKscripts
+    - A real world example
+    - Trigger alerts from batch data
 
-### What's next?
+    - Load tasks with Kapacitor
+
+## Overview
 
 To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/guides/).
 
 ## Get started
 
 1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install). (Necessary to say?: use the Linux system packages (`.deb`,`.rpm`) if available.? If yes, why?)
-2. Start InfluxDB and collect Telegraf data. By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
+2. Start InfluxDB and collect Telegraf data (start Telegraf?). By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
 3. Start Kapacitor.
 
 ## Start InfluxDB and collect Telegraf data
@@ -31,7 +42,7 @@ To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/g
     $ sudo systemctl start influxdb
     ```
 
-2. Verify InfluxDB startup:
+2. Verify InfluxDB startup (is this step necessary?):
 
 ```bash
 $ sudo journalctl -f -n 128 -u influxdb
@@ -41,8 +52,8 @@ zář 01 14:47:43 algonquin systemd[1]: Started InfluxDB is an open-source, dist
 
 2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send CPU metrics to InfluxDB:
 
-   - `[agent].interval` - frequency to send system metrics to InfluxDB
-   - `[[outputs.influxd]]` - declares how to connect to InfluxDB and the destination database, which is the default 'telegraf' database. (so at least one URL and one database must be defined?)
+   - `[agent].interval` - specifies how often to send system metrics to InfluxDB
+   - `[[outputs.influxd]]` - specifies how(how >>the URL?) to connect to InfluxDB and the destination database, which is the default 'telegraf' database. (so at least one URL and one database must be defined?)
    - `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.
 
 *Example - relevant sections of `/etc/telegraf/telegraf.conf`*
@@ -82,7 +93,7 @@ If Telegraf is inactive, run the following command to start Telegraf:
 $ sudo systemctl start telegraf
 ```
 
- Once Telegraf is running, run the following command to check the system journal to ensure no connection errors to InfluxDB exist:
+ Once Telegraf is running, run the following command to check the system journal to ensure no InfluxDB connection errors exist:
 
  ```
  $ sudo journalctl -f -n 128 -u telegraf
@@ -96,9 +107,9 @@ zář 01 15:15:43 algonquin telegraf[16968]: 2017-09-01T13:15:43Z I! Agent Confi
 
  ```
 
-InfluxDB and Telegraf are now running and listening on localhost.
+InfluxDB and Telegraf are now running on localhost.
 
-4. Wait a minute for Telegraf to supply a small amount of system metric data to InfluxDB. Then, run the following command to confirm that InfluxDB has the data for Kapacitor:
+4. After a minute, run the following command to confirm Telegraf has sent data to InfluxDB:
 
 ```bash
 $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT mean(usage_idle) FROM cpu'
@@ -114,7 +125,7 @@ Results similar to the following appear:
 
 By default, the Kapacitor configuration file is saved in `/etc/kapacitor/kapacitor.conf`.
 
-1. Extract a copy of the current configuration from the Kapacitor daemon:
+1. Extract a copy of the Kapacitor configuration:
 
 ```bash
 kapacitord config > kapacitor.conf
@@ -150,7 +161,7 @@ zář 01 15:34:16 algonquin systemd[1]: Started Time series data processing engi
 Because InfluxDB is running on `http://localhost:8086`, Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdata/influxql/blob/master/README.md#create-subscription) on InfluxDB.
 Subscriptions tell InfluxDB to send data to Kapacitor.
 
-4. For more log data, run the following command to check the log file in the `/var/log/kapacitor` directory.
+4. (Optional) To view log data, run the following command:
 
 ```
 $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
