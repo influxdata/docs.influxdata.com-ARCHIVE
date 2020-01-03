@@ -6,29 +6,35 @@ menu:
     parent: introduction
 ---
 
-Learn how to use Kapacitor to stream and batch your time series data:
 
+Use Kapacitor to stream and batch your time series data.
+
+- Overview
 - Get started
-- Overview? (conceptual information)
-
     - Start InfluxDB and collect Telegraf data
     - Start Kapacitor
 - Kapacitor tasks
     - Execute a task
-    - Trigger alerts from stream data
+    - Trigger an alert from stream data
     - Example alert on CPU usage
     - Gotcha - single versus double quotes
     - Extending TICKscripts
     - A real world example
-    - Trigger alerts from batch data
+    - Trigger an alert from batch data
 
     - Load tasks with Kapacitor
 
 ## Overview
 
+A Kapacitor `task` defines work to do on a set of data. Kapacitor tasks include:
+- `stream` task. Mirrors data written from InfluxDB to Kapacitor. Offloads query overhead and requires Kapacitor to store the data on disk.
+- `batch` task. Queries and processes InfluxDB data at a set interval.
+
+Kapacitor tasks define data processing pipelines using [TICKscript](/kapacitor/v1.5/tick/) syntax.
+Task files are commonly referred to as "TICKscripts."
+
 To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/guides/).
 
-## Get started
 
 1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install). (Necessary to say?: use the Linux system packages (`.deb`,`.rpm`) if available.? If yes, why?)
 2. Start InfluxDB and collect Telegraf data (start Telegraf?). By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
@@ -36,7 +42,7 @@ To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/g
 
 ## Start InfluxDB and collect Telegraf data
 
-1. Start InfluxDB using systemctl:
+1. Start InfluxDB by running the following command:
 
     ```bash
     $ sudo systemctl start influxdb
@@ -50,13 +56,12 @@ zář 01 14:47:43 algonquin systemd[1]: Started InfluxDB is an open-source, dist
 ...
 ```
 
-2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send CPU metrics to InfluxDB:
+2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send metrics to InfluxDB:
 
-   - `[agent].interval` - specifies how often to send system metrics to InfluxDB
-   - `[[outputs.influxd]]` - specifies how(how >>the URL?) to connect to InfluxDB and the destination database, which is the default 'telegraf' database. (so at least one URL and one database must be defined?)
+   - `[agent].interval` - specifies how often to send metrics to InfluxDB
+   - `[[outputs.influxd]]` - specifies how to connect to InfluxDB and the destination database, which is the default 'telegraf' database. (so at least one URL and one database must be defined?)
    - `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.
 
-*Example - relevant sections of `/etc/telegraf/telegraf.conf`*
 ```
 [agent]
   ## Default data collection interval for all inputs
@@ -169,15 +174,6 @@ $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
 ```
 
 Kapacitor listens on an HTTP port and posts data to InfluxDB. Now, InfluxDB streams data from Telegraf to Kapacitor.
-
-## Kapacitor tasks
-
-A Kapacitor `task` defines work to do on a set of data. Kapacitor tasks include:
-- `stream` task. Mirrors data written from InfluxDB to Kapacitor. Offloads query overhead and requires Kapacitor to store the data on disk.
-- `batch` task. Queries data from InfluxDB at a set interval and processes the data as it's queried.
-
-Kapacitor tasks define data processing pipelines using [TICKscript](/kapacitor/v1.5/tick/) syntax.
-Task files are commonly referred to as "TICKscripts."
 
 ### Execute a task
 
