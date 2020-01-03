@@ -5,7 +5,7 @@ aliases:
 menu:
   kapacitor_1_5:
     name: Introduction
-    identifier: Introduction
+    identifier: introduction
     weight: 10
 ---
 
