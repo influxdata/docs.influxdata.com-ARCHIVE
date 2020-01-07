@@ -1374,6 +1374,12 @@ the derivative of the mean:
 SELECT DERIVATIVE(MEAN(value), 20m) FROM cpu GROUP BY time(10m)
 ```
 
+### Understanding cursors
+
+A cursor identifies data by shard in tuples (time, value) for a single series (measurement, tag-set and field). Data is stored as a log-structured merge-tree and a **cursor** handles deduplication across levels, tombstones for deleted data, and merging the cache (Write Ahead Log). A cursor can produce the `(time, value)` tuples sorted by time (ascending or descending).
+
+For example, a query that evaluates one field for 1,000 series over 3 shards constructs a minimum of 3,000 cursors (1,000 per shard).
+
 ### Understanding auxiliary fields
 
 Because InfluxQL allows users to use selector functions such as `FIRST()`,
