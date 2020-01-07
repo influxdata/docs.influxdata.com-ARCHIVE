@@ -71,7 +71,27 @@ This field indicates how many rows to treat as a header. By default, the parser 
 For assigning custom names to columns. If this is specified, all columns should have a name unnamed columns will be ignored by the parser.  If `csv_header_row_count` is set to 0, this config must be used
 
 #### csv_timestamp_column, csv_timestamp_format
-By default the current time will be used for all created metrics, to set the time using the JSON document you can use the csv_timestamp_column and csv_timestamp_format options together to set the time to a value in the parsed document.
+By default, the current time will be used for all created metrics, to set the time using the JSON document you can use the csv_timestamp_column and csv_timestamp_format options together to set the time to a value in the parsed document.
+
 The csv_timestamp_column option specifies the key containing the time value and csv_timestamp_format must be set to unix, unix_ms, unix_us, unix_ns, or a format string in using the Go "reference time" which is defined to be the specific time: Mon Jan 2 15:04:05 MST 2006.
 
-Example (from rawkode): https://github.com/rawkode/influxdb-examples/blob/master/telegraf/csv/telegraf.conf
+#### Example
+`[agent]
+  debug = true
+
+[[outputs.influxdb]]
+  urls = ["http://influxdb:8086"]
+  database = "telegraf"
+
+[[inputs.tail]]
+  files = ["/data/**.csv"]
+  from_beginning = true
+
+  data_format = "csv"
+  csv_header_row_count = 1
+  csv_trim_space = true
+
+  csv_tag_columns = ["ComputerName", "UserName", "ProcessName"]
+
+#   csv_timestamp_column = "Time"
+#   csv_timestamp_format = "02.01.2006 15.04.05"`
