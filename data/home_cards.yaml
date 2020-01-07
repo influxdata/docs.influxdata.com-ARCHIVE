@@ -9,7 +9,7 @@ cards:
       - text: Get started with InfluxDB Cloud 2.0
         type: absolute
         href: https://v2.docs.influxdata.com/v2.0/cloud/get-started/
-      - text: Get started with InfluxDB 2.0 open source (alpha)
+      - text: Get started with InfluxDB 2.0 open source (beta)
         type: absolute
         href: https://v2.docs.influxdata.com/v2.0/get-started/
       - text: Documentation (Cloud and open source)
