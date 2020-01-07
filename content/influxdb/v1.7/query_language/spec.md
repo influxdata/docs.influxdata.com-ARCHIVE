@@ -612,7 +612,7 @@ SIZE OF BLOCKS: 931
 
 ### EXPLAIN ANALYZE
 
-Executes the specified SELECT statement and returns data on the query performance and storage during runtime, visualized as a tree. Use this statement to analyze query performance and storage, including [execution time](#execution_time) and [planning time](#planning_time), and the type of [iterator] and [cursor](#cursor-type).
+Executes the specified SELECT statement and returns data on the query performance and storage during runtime, visualized as a tree. Use this statement to analyze query performance and storage, including [execution time](#execution_time) and [planning time](#planning_time), and the [iterator type](#iterator-type) and [cursor type](#cursor-type).
 
 For example, executing the following statement:
 
@@ -674,6 +674,15 @@ Next, for each shard and each measurement, InfluxDB performs the following steps
 2. Group filtered series keys into tag sets based on the GROUP BY dimensions.
 3. Enumerate each tag set and create a cursor and iterator for each series key.
 4. Merge iterators and return the merged result to the query executor.
+
+#### iterator type
+
+EXPLAIN ANALYZE supports the following iterator types:
+
+- `create_iterator` node represents work done by the local influxd instance --a complex composition of nested iterators combined and merged to produce the final query output.
+- (InfluxDB Enterprise only) `remote_iterator` node represents work done on remote machines.
+
+For more information about iterators, see [Understanding iterators](#understanding-iterators).
 
 #### cursor type
 
