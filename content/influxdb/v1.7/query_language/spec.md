@@ -612,13 +612,76 @@ SIZE OF BLOCKS: 931
 
 ### EXPLAIN ANALYZE
 
-Executes the specified query and counts the actual costs during runtime, visualized as a tree. Use this statement to analyze query performance and storage, including [execution time](#execution_time) and [planning time](#planning_time).
+Executes the specified SELECT statement and returns data on the query performance and storage during runtime, visualized as a tree. Use this statement to analyze query performance and storage, including [execution time](#execution_time) and [planning time](#planning_time), and the type of [cursor](#understanding-cursors) for each [iterator].
 
-```
-explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
+For example, executing the following statement:
+
+```sql
+> explain analyze select mean(usage_steal) from cpu where time >= '2018-02-22T00:00:00Z' and time < '2018-02-22T12:00:00Z'
 ```
 
-> Note: This statement ignores query output, so the cost of serialization to JSON or CSV is not accounted for.
+May produce an output similar to the following:
+
+```sql
+EXPLAIN ANALYZE
+---------------
+.
+└── select
+    ├── execution_time: 2.25823ms
+    ├── planning_time: 18.381616ms
+    ├── total_time: 20.639846ms
+    └── field_iterators
+        ├── labels
+        │   └── statement: SELECT mean(usage_steal::float) FROM telegraf."default".cpu
+        └── expression
+            ├── labels
+            │   └── expr: mean(usage_steal::float)
+            └── create_iterator
+                ├── labels
+                │   ├── measurement: cpu
+                │   └── shard_id: 608
+                ├── cursors_ref: 779
+                ├── cursors_aux: 0
+                ├── cursors_cond: 0
+                ├── float_blocks_decoded: 431
+                ├── float_blocks_size_bytes: 1003552
+                ├── integer_blocks_decoded: 0
+                ├── integer_blocks_size_bytes: 0
+                ├── unsigned_blocks_decoded: 0
+                ├── unsigned_blocks_size_bytes: 0
+                ├── string_blocks_decoded: 0
+                ├── string_blocks_size_bytes: 0
+                ├── boolean_blocks_decoded: 0
+                ├── boolean_blocks_size_bytes: 0
+                └── planning_time: 14.805277ms```
+```
+
+> Note: EXPLAIN ANALYZE ignores query output, so the cost of serialization to JSON or CSV is not accounted for.
+
+#### execution_time
+
+Shows the amount of time the query took to execute, which includes reading the time series data, performing operations as data flows through iterators, and draining processed data from iterators. Then, typically, drained data is serialized to JSON or another supported format.
+
+#### planning_time
+
+Shows the amount of time the query took to plan. 
+Planning a query in InfluxDB requires a number of steps. Depending on the complexity of the query, planning may require more work and consume more CPU and memory resources than the executing the query. For example, the number of series keys required to execute a query affects how quickly the query is planned and the required memory. 
+
+First, InfluxDB determines the effective time range of the query and selects the shards to access (may include remote nodes in InfluxDB Enterprise). 
+Next, for each shard and each measurement, InfluxDB performs the following steps:
+
+1. Select matching series keys from the index, filtered by tag predicates in the WHERE clause.
+2. Group filtered series keys into tag sets based on the GROUP BY dimensions.
+3. Enumerate each tag set and create a cursor and iterator for each series key.
+4. Merge iterators and return the merged result to the query executor.
+
+#### cursor type
+
+The EXPLAIN ANALYZE output distinguishes 3 cursor types. These are the same data structures with equal CPU and I/O cost, but are constructed for different reasons, so we chose to keep them separate in the final output. Understanding those reasons may help when attempting to tune a statement.
+
+- cursor_ref	A reference cursor is created for any SELECT projections that are call expressions, such as last or mean
+- cursor_aux	An auxiliary cursor is created for any projections that are simple expressions (that is, not selectors or an aggregation). An example would be SELECT foo FROM m or SELECT foo+bar FROM m, where foo and bar are the names of fields.
+- cursor_cond	A condition cursor is created for any fields referenced in a WHERE clause.
 
 #### Example
 
@@ -674,14 +737,6 @@ explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
 ├── boolean_blocks_size_bytes: 0
 └── planning_time: 76.192µs
 ```
-
-#### execution_time
-
-The amount of time the query took to execute, which includes reading the time series data, performing any operations as it flows through iterators and draining the processed data from the iterators. Normally, this drained data would then be serialized to JSON or another supported format.
-
-#### planning_time
-
-The amount of time the query took to plan. Planning a query in InfluxDB requires a number of steps and depending on the complexity of the query, may end up doing more work and consuming more CPU and memory resources than the actual execution. The first step is to determine the effective time range of the query and select the shards that must be accessed, which may include remote nodes in InfluxDB Enterprise. Next, the following sequence of high-level steps is performed for each shard and each measurement
 
 ### GRANT
 
