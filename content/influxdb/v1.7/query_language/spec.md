@@ -683,6 +683,8 @@ EXPLAIN ANALYZE distinguishes 3 cursor types. While the cursor types have the sa
 - cursor_aux:	Auxiliary cursor created for simple expression projections (not selectors or an aggregation). For example, `SELECT foo FROM m` or `SELECT foo+bar FROM m`, where `foo` and `bar` are fields.
 - cursor_cond: Condition cursor created for fields referenced in a WHERE clause.
 
+For more information about cursors, see [Understanding cursors](#understanding-cursors).
+
 ### GRANT
 
 > **NOTE:** Users can be granted privileges on databases that do not exist.
