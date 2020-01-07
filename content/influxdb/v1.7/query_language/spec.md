@@ -677,11 +677,11 @@ Next, for each shard and each measurement, InfluxDB performs the following steps
 
 #### cursor type
 
-The EXPLAIN ANALYZE output distinguishes 3 cursor types. These are the same data structures with equal CPU and I/O cost, but are constructed for different reasons, so we chose to keep them separate in the final output. Understanding those reasons may help when attempting to tune a statement.
+EXPLAIN ANALYZE distinguishes 3 cursor types. While the cursor types have the same data structures and equal CPU and I/O costs, each cursor type is constructed for a different reason and separated in the final output. Consider the following cursor types when tuning a statement:
 
-- cursor_ref	A reference cursor is created for any SELECT projections that are call expressions, such as last or mean
-- cursor_aux	An auxiliary cursor is created for any projections that are simple expressions (that is, not selectors or an aggregation). An example would be SELECT foo FROM m or SELECT foo+bar FROM m, where foo and bar are the names of fields.
-- cursor_cond	A condition cursor is created for any fields referenced in a WHERE clause.
+- cursor_ref:	Reference cursor created for SELECT projections that are call expressions, such as `last()` or `mean()`.
+- cursor_aux:	Auxiliary cursor created for simple expression projections (not selectors or an aggregation). For example, `SELECT foo FROM m` or `SELECT foo+bar FROM m`, where `foo` and `bar` are fields.
+- cursor_cond: Condition cursor created for fields referenced in a WHERE clause.
 
 #### Example
 
