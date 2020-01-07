@@ -13,7 +13,6 @@ Find Influx Query Language (InfluxQL) definitions and details, including:
 
 * [Notation](/influxdb/v1.7/query_language/spec/#notation)
 * [Query representation](/influxdb/v1.7/query_language/spec/#query-representation)
-* [Letters and digits](/influxdb/v1.7/query_language/spec/#letters-and-digits)
 * [Identifiers](/influxdb/v1.7/query_language/spec/#identifiers)
 * [Keywords](/influxdb/v1.7/query_language/spec/#keywords)
 * [Literals](/influxdb/v1.7/query_language/spec/#literals)
@@ -613,11 +612,13 @@ SIZE OF BLOCKS: 931
 
 ### EXPLAIN ANALYZE
 
-Executes the query and counts the actual costs during runtime.
+Executes the specified query and counts the actual costs during runtime, visualized as a tree. Use this statement to analyze query performance and storage, including [execution time](#execution_time) and [planning time](#planning_time).
 
 ```
 explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
 ```
+
+> Note: This statement ignores query output, so the cost of serialization to JSON or CSV is not accounted for.
 
 #### Example
 
@@ -673,6 +674,14 @@ explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
 ├── boolean_blocks_size_bytes: 0
 └── planning_time: 76.192µs
 ```
+
+#### execution_time
+
+The amount of time the query took to execute, which includes reading the time series data, performing any operations as it flows through iterators and draining the processed data from the iterators. Normally, this drained data would then be serialized to JSON or another supported format.
+
+#### planning_time
+
+The amount of time the query took to plan. Planning a query in InfluxDB requires a number of steps and depending on the complexity of the query, may end up doing more work and consuming more CPU and memory resources than the actual execution. The first step is to determine the effective time range of the query and select the shards that must be accessed, which may include remote nodes in InfluxDB Enterprise. Next, the following sequence of high-level steps is performed for each shard and each measurement
 
 ### GRANT
 
