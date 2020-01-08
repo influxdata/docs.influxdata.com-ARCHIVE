@@ -8,7 +8,7 @@ aliases:
   - /chronograf/v1.7/guides/transition-web-admin-interface/
 ---
 
-Versions 1.3 and later of [InfluxDB](/influxdb/latest/) and [InfluxEnterprise](/enterprise/latest/) do not support the [web admin interface](/influxdb/latest/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
+Versions 1.3 and later of [InfluxDB](/influxdb/latest/) and [InfluxEnterprise](/enterprise/latest/) do not support the web admin interface, the previous built-in user interface for writing and querying data in InfluxDB.
 Chronograf replaces the web admin interface with improved tooling for querying data, writing data, and database management.
 
 The following sections describe the Chronograf features that relate to the web admin interface:
@@ -39,7 +39,7 @@ Note that unlike the web admin interface, Chronograf does not have a database dr
 
 ### Web admin interface
 
-To write data to InfluxDB, users selected the target database in the top right corner, clicked the `Write Data` icon, and entered their [line protocol](/influxdb/latest/concepts/glossary/#line-protocol) in the text input:
+To write data to InfluxDB, users selected the target database in the top right corner, clicked the `Write Data` icon, and entered their [line protocol](/influxdb/latest/concepts/glossary/#influxdb-line-protocol) in the text input:
 
 ![WAI Writing Data](/img/chronograf/v1.7/g-admin-write.png)
 
@@ -80,7 +80,7 @@ In the web admin interface, the `Query Template` dropdown was the only way to ma
 ### Chronograf
 
 In Chronograf, the `Admin` page includes a complete interface for user management.
-The `Admin` page supports both InfluxDB OSS users and InfluxEnterprise users; see the [User Management](/chronograf/latest/administration/user-management/) page for more information.
+The `Admin` page supports both InfluxDB OSS users and InfluxDB Enterprise users; see [Managing Chronograf Users](/chronograf/latest/administration/managing-chronograf-users/) page for more information.
 The `Admin` page allows users to:
 
 * View, create, and delete users
