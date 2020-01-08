@@ -6,9 +6,7 @@ menu:
     parent: Guides
 ---
 
-This guide offers test general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing. These recommendations are only for the [Time Structured Merge](/influxdb/v1.7/concepts/storage_engine/#the-new-influxdb-storage-engine-from-lsm-tree-to-b-tree-and-back-again-to-create-the-time-structured-merge-tree) tree (`TSM`) storage engine. 
-
-> **Note** Hardware guidelines for Time Series Index (TSI) are currently in testing.
+This guide offers test general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing.
 
 * [Single node or Cluster?](/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster)
 * [General hardware guidelines for a single node](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
