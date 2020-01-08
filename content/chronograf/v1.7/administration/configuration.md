@@ -49,8 +49,8 @@ It is neither created nor used in macOS.
 
 To set up security for Chronograf, configure:
 
-* [OAuth 2.0 authentication](https://docs.influxdata.com/chronograf/v1.7/administration/managing-security/#oauth-2-0-providers-with-jwt-tokens)
-* [TLS (Transport Layer Security) for HTTPS](https://docs.influxdata.com/chronograf/v1.7/administration/managing-security/#configuring-tls-transport-layer-security-and-https)
+* [OAuth 2.0 authentication](/chronograf/v1.7/administration/managing-security/#configure-oauth-2-0)
+* [TLS (Transport Layer Security) for HTTPS](/chronograf/v1.7/administration/managing-security/#configure-tls-transport-layer-security-and-https)
 
 After you configure OAuth 2.0 authentication, you can set up multiple organizations, roles, and users. For details, check out the following topics:
 
