@@ -800,7 +800,7 @@ The following new configuration options are available.
 ### Bugfixes
 
 - Several statements were missing the DefaultDatabase method
-- Fix spelling mistake in HTTP section of config -- shared-sercret
+- Fix spelling mistake in HTTP section of config -- shared-secret
 - History file should redact passwords before saving to history
 - Suppress headers in output for influx cli when they are the same
 - Add chunked/chunk size as setting/options in cli
