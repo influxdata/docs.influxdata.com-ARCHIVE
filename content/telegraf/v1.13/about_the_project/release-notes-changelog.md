@@ -19,9 +19,10 @@ menu:
 - Encode query hash fields as hex strings in SQL Server (`sqlserver`) input plugin.
 - Invalidate diskio cache if the metadata mtime has changed.
 - Show platform not supported warning only on plugin creation.
-- Fix "rabbitmq cannot complete gather after request error.
+- Fix rabbitmq cannot complete gather after request error.
 - Fix `/sbin/init --version` executed on Telegraf startup.
-- Use last path element as field key if path fully specified.
+- Use last path element as field key if path fully specified in Cisco GNMI Telemetry
+  (`cisco_telemetry_gnmi`) input plugin.
 
 ## v1.13 [2019-12-12]
 
