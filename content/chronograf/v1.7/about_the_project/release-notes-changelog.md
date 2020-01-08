@@ -7,6 +7,11 @@ menu:
     weight: 10
     parent: About the project
 ---
+## v1.7.17 [2020-01-08]
+
+### Bug Fixes
+
+- Allow logging out when using OAuth.
 
 ## v1.7.16 [2019-12-18]
 
