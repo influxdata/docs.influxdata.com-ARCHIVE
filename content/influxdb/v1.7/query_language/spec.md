@@ -660,14 +660,14 @@ EXPLAIN ANALYZE
 
 #### execution_time
 
-Shows the amount of time the query took to execute, including reading the time series data, performing operations as data flows through iterators, and draining processed data from iterators. Then, typically, drained data is serialized to JSON or another supported format.
+Shows the amount of time the query took to execute, including reading the time series data, performing operations as data flows through iterators, and draining processed data from iterators. Execution time doesn't include the time taken to serialize the output into JSON or other formats.
 
 #### planning_time
 
-Shows the amount of time the query took to plan. 
-Planning a query in InfluxDB requires a number of steps. Depending on the complexity of the query, planning may require more work and consume more CPU and memory resources than the executing the query. For example, the number of series keys required to execute a query affects how quickly the query is planned and the required memory. 
+Shows the amount of time the query took to plan.
+Planning a query in InfluxDB requires a number of steps. Depending on the complexity of the query, planning can require more work and consume more CPU and memory resources than the executing the query. For example, the number of series keys required to execute a query affects how quickly the query is planned and the required memory.
 
-First, InfluxDB determines the effective time range of the query and selects the shards to access (may include remote nodes in InfluxDB Enterprise). 
+First, InfluxDB determines the effective time range of the query and selects the shards to access (in InfluxDB Enterprise, shards may be on remote nodes).
 Next, for each shard and each measurement, InfluxDB performs the following steps:
 
 1. Select matching series keys from the index, filtered by tag predicates in the WHERE clause.
@@ -679,7 +679,7 @@ Next, for each shard and each measurement, InfluxDB performs the following steps
 
 EXPLAIN ANALYZE supports the following iterator types:
 
-- `create_iterator` node represents work done by the local influxd instance --a complex composition of nested iterators combined and merged to produce the final query output.
+- `create_iterator` node represents work done by the local influxd instance──a complex composition of nested iterators combined and merged to produce the final query output.
 - (InfluxDB Enterprise only) `remote_iterator` node represents work done on remote machines.
 
 For more information about iterators, see [Understanding iterators](#understanding-iterators).
@@ -698,11 +698,11 @@ For more information about cursors, see [Understanding cursors](#understanding-c
 
 EXPLAIN ANALYZE separates storage block types, and reports the total number of blocks decoded and their size (in bytes) on disk. The following block types are supported:
 
-- float:	64-bit IEEE-754 floating-point number
-- integer:	64-bit signed integer
-- unsigned:	64-bit unsigned integer
-- boolean:	1-bit, LSB encoded
-- string:	UTF-8 string
+| `float`    | 64-bit IEEE-754 floating-point number |
+| `integer`  | 64-bit signed integer                 |
+| `unsigned` | 64-bit unsigned integer               |
+| `boolean`  | 1-bit, LSB encoded                    |
+| `string`   | UTF-8 string                          |
 
 For more information about storage blocks, see [TSM files](/influxdb/v1.7/concepts/storage_engine/#tsm-files).
 
@@ -1397,7 +1397,7 @@ SELECT DERIVATIVE(MEAN(value), 20m) FROM cpu GROUP BY time(10m)
 
 ### Understanding cursors
 
-A cursor identifies data by shard in tuples (time, value) for a single series (measurement, tag-set and field). The **cursor** trasverses data stored as a log-structured merge-tree and handles deduplication across levels, tombstones for deleted data, and merging the cache (Write Ahead Log). A cursor can sort the `(time, value)` tuples by time in ascending or descending order.
+A **cursor** identifies data by shard in tuples (time, value) for a single series (measurement, tag-set and field). The cursor trasverses data stored as a log-structured merge-tree and handles deduplication across levels, tombstones for deleted data, and merging the cache (Write Ahead Log). A cursor can sort the `(time, value)` tuples by time in ascending or descending order.
 
 For example, a query that evaluates one field for 1,000 series over 3 shards constructs a minimum of 3,000 cursors (1,000 per shard).
 
