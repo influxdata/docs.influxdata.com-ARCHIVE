@@ -54,7 +54,7 @@ To set up security for Chronograf, configure:
 
 After you configure OAuth 2.0 authentication, you can set up multiple organizations, roles, and users. For details, check out the following topics:
 
-* [Managing organizations](https://docs.influxdata.com/chronograf/v1.7/administration/managing-organizations/)
+* [Managing organizations](chronograf/v1.7/administration/managing-organizations/)
 * [Managing Chronograf users](https://docs.influxdata.com/chronograf/v1.7/administration/managing-chronograf-users/)
 
 
