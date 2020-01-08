@@ -660,7 +660,7 @@ EXPLAIN ANALYZE
 
 #### execution_time
 
-Shows the amount of time the query took to execute, which includes reading the time series data, performing operations as data flows through iterators, and draining processed data from iterators. Then, typically, drained data is serialized to JSON or another supported format.
+Shows the amount of time the query took to execute, including reading the time series data, performing operations as data flows through iterators, and draining processed data from iterators. Then, typically, drained data is serialized to JSON or another supported format.
 
 #### planning_time
 
@@ -693,6 +693,18 @@ EXPLAIN ANALYZE distinguishes 3 cursor types. While the cursor types have the sa
 - cursor_cond: Condition cursor created for fields referenced in a WHERE clause.
 
 For more information about cursors, see [Understanding cursors](#understanding-cursors).
+
+#### block types
+
+EXPLAIN ANALYZE separates storage block types, and reports the total number of blocks decoded and their size (in bytes) on disk. The following block types are supported:
+
+- float:	64-bit IEEE-754 floating-point number
+- integer:	64-bit signed integer
+- unsigned:	64-bit unsigned integer
+- boolean:	1-bit, LSB encoded
+- string:	UTF-8 string
+
+For more information about storage blocks, see [TSM files](/influxdb/v1.7/concepts/storage_engine/#tsm-files).
 
 ### GRANT
 
