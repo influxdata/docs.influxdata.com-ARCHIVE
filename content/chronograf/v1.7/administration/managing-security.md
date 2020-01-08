@@ -225,9 +225,9 @@ Organizations are supported in Chronograf using a lightweight `app_metadata` key
 
 To assign a user to an organization, add an `organization` key to the user `app_metadata` field with the value corresponding to the user's organization.
 For example, you can assign the user Marty McFly to the "time-travelers" organization by setting `app_metadata` to `{"organization": "time-travelers"}`.
-This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules/metadata-in-rules#updating-app_metadata) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/extensibility-points/pre-user-registration).
+This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/concepts/pre-user-registration-extensibility-point).
 
-Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/v1.7/administration/config-options/#auth0-client-secret) environment variable to a comma-separated list of the allowed organizations.
+Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/v1.7/administration/config-options/#auth0-organizations) environment variable to a comma-separated list of the allowed organizations.
 For example, if you have one group of users with an `organization` key set to `biffs-gang` and another group with an `organization` key set to `time-travelers`, you can permit access to both with this environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.
