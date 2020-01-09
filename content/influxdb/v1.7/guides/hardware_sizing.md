@@ -40,9 +40,9 @@ Run InfluxDB on locally attached solid state drives (SSDs). Other storage config
 
 | Load             | Field writes per second  | Moderate queries per second | Unique series   |
 |------------------|--------------------------|-----------------------------|-----------------|
-|  **Low**         |  < 5 thousand            |  < 5                        |  < 100 thousand |
-|  **Moderate**    |  < 250 thousand          |  < 25                       |  < 1 million    |
-|  **High**        |  > 250 thousand          |  > 25                       |  > 1 million    |
+|  **Low**         |  < 5,000                 |  < 5                        |  < 100,000      |
+|  **Moderate**    |  < 250,000               |  < 25                       |  < 1,000,000    |
+|  **High**        |  > 250,000               |  > 25                       |  > 1,000,000    |
 
 > **Note:** Queries vary widely in their impact on the system.
 >
