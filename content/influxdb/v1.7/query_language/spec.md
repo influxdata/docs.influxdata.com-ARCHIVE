@@ -688,7 +688,7 @@ For more information about iterators, see [Understanding iterators](#understandi
 
 EXPLAIN ANALYZE distinguishes 3 cursor types. While the cursor types have the same data structures and equal CPU and I/O costs, each cursor type is constructed for a different reason and separated in the final output. Consider the following cursor types when tuning a statement:
 
-- cursor_ref:	Reference cursor created for SELECT projections that are call expressions, such as `last()` or `mean()`.
+- cursor_ref:	Reference cursor created for SELECT projections that include a function, such as `last()` or `mean()`.
 - cursor_aux:	Auxiliary cursor created for simple expression projections (not selectors or an aggregation). For example, `SELECT foo FROM m` or `SELECT foo+bar FROM m`, where `foo` and `bar` are fields.
 - cursor_cond: Condition cursor created for fields referenced in a WHERE clause.
 
@@ -708,7 +708,7 @@ For more information about storage blocks, see [TSM files](/influxdb/v1.7/concep
 
 ### GRANT
 
-> **NOTE:** Users can be granted privileges on databases that do not exist.
+> **NOTE:** Users can be granted privileges on databases that do not yet exist.
 
 ```
 grant_stmt = "GRANT" privilege [ on_clause ] to_clause .
@@ -1397,7 +1397,7 @@ SELECT DERIVATIVE(MEAN(value), 20m) FROM cpu GROUP BY time(10m)
 
 ### Understanding cursors
 
-A **cursor** identifies data by shard in tuples (time, value) for a single series (measurement, tag-set and field). The cursor trasverses data stored as a log-structured merge-tree and handles deduplication across levels, tombstones for deleted data, and merging the cache (Write Ahead Log). A cursor can sort the `(time, value)` tuples by time in ascending or descending order.
+A **cursor** identifies data by shard in tuples (time, value) for a single series (measurement, tag set and field). The cursor trasverses data stored as a log-structured merge-tree and handles deduplication across levels, tombstones for deleted data, and merging the cache (Write Ahead Log). A cursor sorts the `(time, value)` tuples by time in ascending or descending order.
 
 For example, a query that evaluates one field for 1,000 series over 3 shards constructs a minimum of 3,000 cursors (1,000 per shard).
 
