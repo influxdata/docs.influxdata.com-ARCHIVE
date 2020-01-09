@@ -20,7 +20,7 @@ Review general hardware recommendations for InfluxDB and addresses some frequent
 
 InfluxDB single node instances are fully open source and offer no redundancy. If the server is unavailable, writes and queries immediately fail.
 
-InfluxDB clustering requires InfluxDB Enterprise. Clustering offers high-availability and redundancy.
+Multiple nodes (cluster) of InfluxDB requires InfluxDB Enterprise. A cluster offers high-availability and redundancy.
 Multiple copies of data are distributed across multiple servers, and the loss of any one server doesn't significantly impact the cluster.
 
 If your performance requirements fall into the [moderate](#general-hardware-guidelines-for-a-single-node) or [low load](#general-hardware-guidelines-for-a-single-node) ranges, you can likely use a single node instance of InfluxDB.
