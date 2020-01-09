@@ -23,8 +23,15 @@ InfluxDB single node instances are fully open source and offer no redundancy. If
 InfluxDB clustering requires InfluxDB Enterprise. Clustering offers high-availability and redundancy.
 Multiple copies of data are distributed across multiple servers, and the loss of any one server doesn't significantly impact the cluster.
 
-If your performance requirements fall into the [Moderate](#general-hardware-guidelines-for-a-single-node) or [Low load](#general-hardware-guidelines-for-a-single-node) ranges then you can likely use a single node instance of InfluxDB.
-If at least one of your performance requirements falls into the [Probably infeasible category](#general-hardware-guidelines-for-a-single-node), then you will likely need to use a cluster to distribute the load among multiple servers.
+If your performance requirements fall into the [moderate](#general-hardware-guidelines-for-a-single-node) or [low load](#general-hardware-guidelines-for-a-single-node) ranges, you can likely use a single node instance of InfluxDB.
+
+If your performance requires at least one of the following:
+
+- > 750,000 writes per second
+- > 100 moderate queries
+- > 10,000,000 unique series
+
+We recommend a cluster to distribute the load among multiple servers.
 
 ## Guidelines for a single node
 
@@ -37,7 +44,6 @@ InfluxDB should be run on locally attached SSDs. Any other storage configuration
 |  **Low**         |  < 5 thousand         |  < 5           |  < 100 thousand         |
 |  **Moderate**    |  < 250 thousand        |  < 25          |  < 1 million        |
 |  **High**        |  > 250 thousand        |  > 25          |  > 1 million        |
-| **Probably infeasible**  |  > 750 thousand        |  > 100         |  > 10 million       |
 
 > **Note:** Queries vary widely in their impact on the system.
 >
