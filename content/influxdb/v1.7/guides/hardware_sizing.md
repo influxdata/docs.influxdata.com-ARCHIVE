@@ -20,8 +20,7 @@ Review general hardware recommendations for InfluxDB and addresses some frequent
 
 InfluxDB single node instances are fully open source and offer no redundancy. If the server is unavailable, writes and queries immediately fail.
 
-Multiple nodes (cluster) of InfluxDB requires InfluxDB Enterprise. A cluster offers high-availability and redundancy.
-Multiple copies of data are distributed across multiple servers, and the loss of any one server doesn't significantly impact the cluster.
+Multiple nodes (cluster) of InfluxDB requires InfluxDB Enterprise. A cluster offers high-availability and redundancy. Multiple copies of data are distributed across multiple servers, so the loss of one server doesn't significantly impact the cluster.
 
 If your performance requirements fall into the [moderate](#general-hardware-guidelines-for-a-single-node) or [low load](#general-hardware-guidelines-for-a-single-node) ranges, you can likely use a single node instance of InfluxDB.
 
@@ -35,9 +34,9 @@ We recommend a cluster to distribute the load among multiple servers.
 
 ## Guidelines for a single node
 
-We define the load that you'll be placing on InfluxDB by the number of fields written per second, the number of queries per second, and the number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
+We define the InfluxDB load by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
 
-InfluxDB should be run on locally attached SSDs. Any other storage configuration will have lower performance characteristics and may not be able to recover from even small interruptions in normal processing.
+Run InfluxDB on locally attached solid state drives (SSDs). Other storage configurations have lower performance and may not be able to recover from small interruptions in normal processing.
 
 | Load             | Field writes per second  | Moderate queries per second | Unique series   |
 |------------------|--------------------------|-----------------------------|-----------------|
