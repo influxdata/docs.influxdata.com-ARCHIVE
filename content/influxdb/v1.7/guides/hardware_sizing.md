@@ -39,11 +39,11 @@ We define the load that you'll be placing on InfluxDB by the number of fields wr
 
 InfluxDB should be run on locally attached SSDs. Any other storage configuration will have lower performance characteristics and may not be able to recover from even small interruptions in normal processing.
 
-| Load         | Field writes per second  | Moderate queries per second | Unique series |
-|--------------|----------------|----------------|---------------|
-|  **Low**         |  < 5 thousand         |  < 5           |  < 100 thousand         |
-|  **Moderate**    |  < 250 thousand        |  < 25          |  < 1 million        |
-|  **High**        |  > 250 thousand        |  > 25          |  > 1 million        |
+| Load             | Field writes per second  | Moderate queries per second | Unique series   |
+|------------------|--------------------------|-----------------------------|-----------------|
+|  **Low**         |  < 5 thousand            |  < 5                        |  < 100 thousand |
+|  **Moderate**    |  < 250 thousand          |  < 25                       |  < 1 million    |
+|  **High**        |  > 250 thousand          |  > 25                       |  > 1 million    |
 
 > **Note:** Queries vary widely in their impact on the system.
 >
