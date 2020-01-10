@@ -6,7 +6,7 @@ menu:
     parent: Guides
 ---
 
-Review general hardware recommendations for InfluxDB and addresses some frequently asked questions about hardware sizing.
+Review general hardware recommendations for InfluxDB and find answers to frequently asked questions about hardware sizing.
 
 * [Single node or cluster](/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster)
 * [Guidelines for a single node](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
@@ -18,11 +18,11 @@ Review general hardware recommendations for InfluxDB and addresses some frequent
 
 ## Single node or cluster
 
-InfluxDB single node instances are fully open source and offer no redundancy. If the server is unavailable, writes and queries immediately fail.
+InfluxDB OSS (open source) is a single node instance that's fully open source without redundancy. If the server is unavailable, writes and queries immediately fail.
 
-Multiple nodes (cluster) of InfluxDB requires InfluxDB Enterprise. A cluster offers high-availability and redundancy. Multiple copies of data are distributed across multiple servers, so the loss of one server doesn't significantly impact the cluster.
+InfluxDB Enterprise offers multiple nodes (cluster) of InfluxDB with high-availability and redundancy. Multiple copies of data are distributed across multiple servers, so the loss of one server doesn't significantly impact the cluster.
 
-If your performance requirements fall into the [moderate](#general-hardware-guidelines-for-a-single-node) or [low load](#general-hardware-guidelines-for-a-single-node) ranges, you can likely use a single node instance of InfluxDB.
+If your performance requirements fall into the [moderate](#guidelines-for-a-single-node) or [low](#guidelines-for-a-single-node) load ranges, you can likely use a single node instance of InfluxDB.
 
 If your performance requires at least one of the following:
 
@@ -30,109 +30,67 @@ If your performance requires at least one of the following:
 - > 100 moderate queries
 - > 10,000,000 unique series
 
-We recommend a cluster to distribute the load among multiple servers.
+We recommend a cluster to distribute the load among multiple servers. Performance at this scale on a single node may not be achievable. Please contact us at <sales@influxdb.com> for assistance with tuning your systems.
 
 ## Guidelines for a single node
 
-We define the InfluxDB load by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Based on your load, we make general CPU, RAM, and IOPS recommendations.
+We define the InfluxDB load by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). General CPU, RAM, and IOPS recommendations are based on the load.
 
 Run InfluxDB on locally attached solid state drives (SSDs). Other storage configurations have lower performance and may not be able to recover from small interruptions in normal processing.
 
-| Load             | Field writes per second  | Moderate queries per second | Unique series   |
+| Load             | Field writes per second  | Moderate queries* per second | Unique series   |
 |------------------|--------------------------|-----------------------------|-----------------|
 |  **Low**         |  < 5,000                 |  < 5                        |  < 100,000      |
 |  **Moderate**    |  < 250,000               |  < 25                       |  < 1,000,000    |
 |  **High**        |  > 250,000               |  > 25                       |  > 1,000,000    |
 
-> **Note:** Queries vary widely in their impact on the system.
->
-Simple queries:
->
-* Have few if any functions and no regular expressions
-* Are bounded in time to a few minutes, hours, or maybe a day
-* Typically execute in a few milliseconds to a few dozen milliseconds
->
-Moderate queries:
->
-* Have multiple functions and one or two regular expressions
-* May also have complex `GROUP BY` clauses or sample a time range of multiple weeks
-* Typically execute in a few hundred or a few thousand milliseconds
->
-Complex queries:
->
-* Have multiple aggregation or transformation functions or multiple regular expressions
-* May sample a very large time range of months or years
-* Typically take multiple seconds to execute
+* Queries vary widely in their impact on the system. Recommendations are provided for moderate query loads. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
-#### Low load recommendations
+### Low load recommendations
 
 * CPU: 2-4 cores
 * RAM: 2-4 GB
 * IOPS: 500
 
-#### Moderate load recommendations
+### Moderate load recommendations
 
 * CPU: 4-6 cores
 * RAM: 8-32 GB
 * IOPS: 500-1000
 
-#### High load recommendations
+### High load recommendations
 
 * CPU: 8+ cores
 * RAM: 32+ GB
 * IOPS: 1000+
 
-#### Probably infeasible load
-
-Performance at this scale is a significant challenge and may not be achievable. Please contact us at <sales@influxdb.com> for assistance with tuning your systems.
-
-
-## General hardware guidelines for a cluster
+## Guidelines for a cluster
 
 ### Meta nodes
 
-A cluster must have at least three independent meta nodes to survive the loss of a server. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes. Clusters should have an odd number of meta nodes. There is no reason to have an even number of meta nodes, and it can lead to issues in certain configurations.
+A cluster must have a minimum of three independent meta nodes to survive the loss of a server. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes. Clusters should have an odd number of meta nodes. An even number of meta nodes may cause issues in certain configurations.
 
 Meta nodes do not need very much computing power. Regardless of the cluster load, we recommend the following for the meta nodes:
 
-#### Universal recommendation
+#### Meta node recommendations
 
 * CPU: 1-2 cores
 * RAM: 512 MB - 1 GB
 * IOPS: 50
 
-### Data Nodes
+### Data nodes
 
 A cluster with only one data node is valid but has no data redundancy. The redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy to which the data is written. A cluster can lose `n - 1` data nodes and still return complete query results, where `n` is the replication factor. For optimal data distribution within the cluster, InfluxData recommends using an even number of data nodes.
 
-The hardware recommendations for cluster data nodes are similar to the standalone instance recommendations. Data nodes should always have at least 2 CPU cores, as they must handle regular read and write traffic, as well as intra-cluster read and write traffic. Due to the cluster communication overhead, data nodes in a cluster handle less throughput than a standalone instance on the same hardware.
+ Data nodes should have at least 4 vCPUs or CPU cores for handling read and write traffic per node and intra-cluster. Because of intra-cluster communication, data nodes in a cluster handle less throughput than a standalone instance on the same hardware.
 
-| Load         | Field writes per second per node  | Moderate queries per second per node | Unique series per node |
-|--------------|----------------|----------------|---------------|
-|  **Low**         |  < 5 thousand         |  < 5           |  < 100 thousand         |
-|  **Moderate**    |  < 100 thousand        |  < 25          |  < 1 million        |
-|  **High**        |  > 100 thousand        |  > 25          |  > 1 million        |
-| **Probably infeasible**  |  > 500 thousand        |  > 100         |  > 10 million       |
+| Load         | Writes per second per node  | Moderate queries* per second per node | Unique series per node |
+|--------------|-----------------------------|---------------------------------------|------------------------|
+|  **Low**     |  < 5,000                    |  < 5                                  |  < 100,000             |
+|  **Moderate**|  < 100,000                  |  < 25                                 |  < 1,000,000           |
+|  **High**    |  > 100,000                  |  > 25                                 |  > 1,000,000           |
 
-> **Note:** Queries vary widely in their impact on the system.
->
-Simple queries:
->
-* Have few if any functions and no regular expressions
-* Are bounded in time to a few minutes, hours, or maybe a day
-* Typically execute in a few milliseconds to a few dozen milliseconds
->
-Moderate queries:
->
-* Have multiple functions and one or two regular expressions
-* May also have complex `GROUP BY` clauses or sample a time range of multiple weeks
-* Typically execute in a few hundred or a few thousand milliseconds
->
-Complex queries:
->
-* Have multiple aggregation or transformation functions or multiple regular expressions
-* May sample a very large time range of months or years
-* Typically take multiple seconds to execute
+* Queries vary widely in their impact on the system. Recommendations are provided for moderate query loads. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
 #### Low load recommendations
 
@@ -154,15 +112,31 @@ Complex queries:
 
 ### Enterprise Web Node
 
-The Enterprise Web server is primarily an HTTP server with similar load requirements. For most applications it does not need to be very robust. The cluster will function with only one Web server, but for redundancy multiple Web servers can be connected to a single back-end Postgres database.
+The Enterprise Web server is primarily an HTTP server with similar load requirements. For most applications, the server doesn'tt need to be very robust. A cluster can function with only one web server, but for redundancy, we recommend multiple web servers be connected to a single back-end Postgres database.
 
-> **Note:** Production clusters should not use the SQLite database as it does not allow for redundant Web servers, nor can it handle high loads as gracefully as Postgres.
+> **Note:** Production clusters should not use the SQLite database (lacks support for redundant web servers and handling high loads).
 
-#### Universal recommendation
+#### Data node recommendations
 
 * CPU: 1-4 cores
 * RAM: 1-2 GB
 * IOPS: 50
+
+##### Query guidelines
+
+|Query complexity| Criteria|
+
+|Simple | Have few or no functions and no regular expressions
+||Are bounded in time to a few minutes, hours, or maybe a day|
+||Typically execute in a few milliseconds to a few dozen milliseconds|
+
+|Moderate queries| Have multiple functions and one or two regular expressions|
+||May also have complex `GROUP BY` clauses or sample a time range of multiple weeks|
+||Typically execute in a few hundred or a few thousand milliseconds|
+
+|Complex queries| Have multiple aggregation or transformation functions or multiple regular expressions
+||May sample a very large time range of months or years|
+||Typically take multiple seconds to execute|
 
 ## When do I need more RAM?
 
