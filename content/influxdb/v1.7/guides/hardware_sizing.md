@@ -6,7 +6,7 @@ menu:
     parent: Guides
 ---
 
-Review general hardware recommendations for InfluxDB and find answers to frequently asked questions about hardware sizing.
+Review hardware and configuration recommendations for InfluxDB OSS (open source) and InfluxDB Enterprise:
 
 * [Single node or cluster](/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster)
 * [Guidelines for a single node](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
@@ -18,11 +18,9 @@ Review general hardware recommendations for InfluxDB and find answers to frequen
 
 ## Single node or cluster
 
-InfluxDB OSS (open source) is a single node instance that's fully open source without redundancy. If the server is unavailable, writes and queries immediately fail.
+InfluxDB OSS is a single node instance that's fully open source without redundancy. If the server is unavailable, writes and queries immediately fail.
 
 InfluxDB Enterprise offers multiple nodes (cluster) of InfluxDB with high-availability and redundancy. Multiple copies of data are distributed across multiple servers, so the loss of one server doesn't significantly impact the cluster.
-
-If your performance requirements fall into the [moderate](#guidelines-for-a-single-node) or [low](#guidelines-for-a-single-node) load ranges, you can likely use a single node instance of InfluxDB.
 
 If your performance requires at least one of the following:
 
@@ -32,11 +30,13 @@ If your performance requires at least one of the following:
 
 We recommend a cluster to distribute the load among multiple servers. Performance at this scale on a single node may not be achievable. Please contact us at <sales@influxdb.com> for assistance with tuning your systems.
 
+If your performance requirements fall into the [moderate](#guidelines-for-a-single-node) or [low](#guidelines-for-a-single-node) load ranges, you can likely use a single node instance of InfluxDB.
+
 ## Guidelines for a single node
 
-We define the InfluxDB load by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). General CPU, RAM, and IOPS recommendations are based on the load.
-
 Run InfluxDB on locally attached solid state drives (SSDs). Other storage configurations have lower performance and may not be able to recover from small interruptions in normal processing.
+
+InfluxDB loads are estimated by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). General CPU, RAM, and IOPS recommendations are based on the load.
 
 | Load             | Field writes per second  | Moderate queries* per second | Unique series   |
 |------------------|--------------------------|-----------------------------|-----------------|
@@ -68,7 +68,7 @@ Run InfluxDB on locally attached solid state drives (SSDs). Other storage config
 
 ### Meta nodes
 
-A cluster must have a minimum of three independent meta nodes to survive the loss of a server. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes. Clusters should have an odd number of meta nodes. An even number of meta nodes may cause issues in certain configurations.
+A cluster must have a minimum of three independent meta nodes to survive the loss of a server. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes. Clusters should have an odd number of meta nodes──and even number may cause issues in certain configurations.
 
 Meta nodes do not need very much computing power. Regardless of the cluster load, we recommend the following for the meta nodes:
 
@@ -80,9 +80,9 @@ Meta nodes do not need very much computing power. Regardless of the cluster load
 
 ### Data nodes
 
-A cluster with only one data node is valid but has no data redundancy. The redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy to which the data is written. A cluster can lose `n - 1` data nodes and still return complete query results, where `n` is the replication factor. For optimal data distribution within the cluster, InfluxData recommends using an even number of data nodes.
+A cluster with only one data node is valid but has no data redundancy. The redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy to which the data is written. A cluster can lose `n - 1` data nodes and still return complete query results, where `n` is the replication factor. For optimal data distribution within the cluster, use an even number of data nodes.
 
- Data nodes should have at least 4 vCPUs or CPU cores for handling read and write traffic per node and intra-cluster. Because of intra-cluster communication, data nodes in a cluster handle less throughput than a standalone instance on the same hardware.
+ Data nodes should have at least 4 vCPUs or CPU cores for handling read and write traffic per node and intra-cluster.
 
 | Load         | Writes per second per node  | Moderate queries* per second per node | Unique series per node |
 |--------------|-----------------------------|---------------------------------------|------------------------|
@@ -101,7 +101,7 @@ A cluster with only one data node is valid but has no data redundancy. The redun
 #### Moderate load recommendations
 
 * CPU: 4-6
-* RAM: 8-32GB
+* RAM: 8-32 GB
 * IOPS: 1000+
 
 #### High load recommendations
@@ -110,9 +110,9 @@ A cluster with only one data node is valid but has no data redundancy. The redun
 * RAM: 32+ GB
 * IOPS: 1000+
 
-### Enterprise Web Node
+### Enterprise web node
 
-The Enterprise Web server is primarily an HTTP server with similar load requirements. For most applications, the server doesn'tt need to be very robust. A cluster can function with only one web server, but for redundancy, we recommend multiple web servers be connected to a single back-end Postgres database.
+The Enterprise web server is primarily an HTTP server with similar load requirements. For most applications, the server doesn't need to be very robust. A cluster can function with only one web server, but for redundancy, we recommend connecting multiple web servers to a single back-end Postgres database.
 
 > **Note:** Production clusters should not use the SQLite database (lacks support for redundant web servers and handling high loads).
 
@@ -140,10 +140,7 @@ The Enterprise Web server is primarily an HTTP server with similar load requirem
 
 ## When do I need more RAM?
 
-In general, having more RAM helps queries return faster. There is no known downside to adding more RAM.
-
-The major component that affects your RAM needs is [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality).
-A series cardinality around or above 10 million can cause OOM failures even with large amounts of RAM. If this is the case, you can usually address the problem by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
+In general, more RAM helps queries return faster. Your RAM requirements are primarily determined by [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality). Higher cardinality requires more RAM. Regardless of RAM, a series cardinality of 10 million or more can cause OOM failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
 
 The increase in RAM needs relative to series cardinality is exponential where the exponent is between one and two:
 
@@ -163,4 +160,4 @@ Non-string values require approximately three bytes. String values require varia
 
 ## How should I configure my hardware?
 
-When running InfluxDB in a production environment the `wal` directory and the `data` directory should be on separate storage devices. This optimization significantly reduces disk contention when the system is under heavy write load. This is an important consideration if the write load is highly variable. If the write load does not vary by more than 15% the optimization is probably unneeded.
+When running InfluxDB in a production environment, store the `wal` directory and the `data` directory on separate storage devices. This optimization significantly reduces disk contention under heavy write load──an important consideration if the write load is highly variable. If the write load does not vary by more than 15%, the optimization is probably not necessary.
