@@ -8,19 +8,17 @@ menu:
 
 Review configuration and hardware guidelines for InfluxDB OSS (open source) and InfluxDB Enterprise:
 
-* [Single node or cluster](/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster)
-* [Guidelines for a single node](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
-* [Guidelines for a cluster](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
+* [Single node or cluster?](/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster?)
+* [Single node guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
+* [Cluster guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
 * [When do I need more RAM?](/influxdb/v1.7/guides/hardware_sizing/#when-do-i-need-more-ram)
-* [What kind of storage do I need?](/influxdb/v1.7/guides/hardware_sizing/#what-kind-of-storage-do-i-need)
-* [How much storage do I need?](/influxdb/v1.7/guides/hardware_sizing/#how-much-storage-do-i-need)
-* [Separate `wal` and `data` directories](/influxdb/v1.7/guides/hardware_sizing/#separate-wal-and-data-directories)
+* [Storage: type, amount, and configuration](/influxdb/v1.7/guides/hardware_sizing/#storage:-type-,-amount-,-and-configuration)
 
-## Single node or cluster
+## Single node or cluster?
 
-InfluxDB OSS is a single node instance that's fully open source without redundancy. If the server is unavailable, writes and queries immediately fail.
+If you need a single node instance of InfluxDB that's fully open source without redundancy, InfluxDB OSS works. (Without redundancy means if the server is unavailable, writes and queries immediately fail.)
 
-InfluxDB Enterprise offers multiple nodes (cluster) of InfluxDB with high-availability and redundancy. Multiple copies of data are distributed across multiple servers, so the loss of one server doesn't significantly impact the cluster.
+If you need high-availability and redundancy, InfluxDB Enterprise offers multiple nodes (called a cluster). Multiple copies of data are distributed across multiple servers, so the loss of one server doesn't significantly impact the cluster.
 
 If your performance requires at least one of the following:
 
@@ -28,15 +26,35 @@ If your performance requires at least one of the following:
 - > 100 moderate queries
 - > 10,000,000 unique series
 
-We recommend a cluster to distribute the load among multiple servers. Performance at this scale on a single node may not be achievable. Please contact us at <sales@influxdb.com> for assistance with tuning your systems.
+We recommend a cluster to distribute the load among multiple servers. Performance at this scale on a single node may not be achievable. Please contact us at <sales@influxdb.com> for assistance tuning your systems.
 
-If your performance requirements fall into the [moderate](#guidelines-for-a-single-node) or [low](#guidelines-for-a-single-node) load ranges, you can likely use a single node instance of InfluxDB.
+### Queries guidelines
+
+Queries complexity varies widely on system impact. We provide recommendations for a single node and clusters based on **moderate** query loads. For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
+
+|Query complexity| Criteria|
+|----------------|----------|
+|Simple          |Have few or no functions and no regular expressions|
+|                |Are bounded in time to a few minutes, hours, or maybe a day|
+|                |Typically execute in a few milliseconds to a few dozen milliseconds|
+
+|Moderate queries| Have multiple functions and one or two regular expressions|
+||May also have complex `GROUP BY` clauses or sample a time range of multiple weeks|
+||Typically execute in a few hundred or a few thousand milliseconds|
+
+|Complex queries| Have multiple aggregation or transformation functions or multiple regular expressions
+||May sample a very large time range of months or years|
+||Typically take multiple seconds to execute|
+
+If your performance requirements fall into the **moderate** or **low** [load ranges](#load-ranges), you can likely use a single node instance of InfluxDB.
 
 ## Single node guidelines
 
 Run InfluxDB on locally attached solid state drives (SSDs). Other storage configurations have lower performance and may not be able to recover from small interruptions in normal processing.
 
 InfluxDB loads are estimated by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). General CPU, RAM, and IOPS recommendations are based on the load.
+
+### Load ranges
 
 | Load             | Field writes per second  | Moderate queries* per second | Unique series   |
 |------------------|--------------------------|------------------------------|-----------------|
@@ -78,7 +96,7 @@ A cluster must have a minimum of three independent meta nodes to survive the los
 
 A cluster with one data node is valid but has no data redundancy. Redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy the data is written to. Where `n` is the replication factor, a cluster can lose `n - 1` data nodes and return complete query results. For optimal data distribution within the cluster, use an even number of data nodes.
 
- Data nodes guidelines vary by estimated load on the cluster.
+ Data nodes guidelines vary by estimated load on each node in the cluster.
 
 | Load         | Writes per second per node  | Moderate queries* per second per node | Unique series per node |
 |--------------|-----------------------------|---------------------------------------|------------------------|
@@ -116,29 +134,13 @@ The Enterprise web server is primarily an HTTP server with similar load requirem
 * RAM: 2-4 GB
 * IOPS: 100
 
-##### Query guidelines
-
-|Query complexity| Criteria|
-|----------------|----------|
-|Simple          |Have few or no functions and no regular expressions|
-|                |Are bounded in time to a few minutes, hours, or maybe a day|
-|                |Typically execute in a few milliseconds to a few dozen milliseconds|
-
-|Moderate queries| Have multiple functions and one or two regular expressions|
-||May also have complex `GROUP BY` clauses or sample a time range of multiple weeks|
-||Typically execute in a few hundred or a few thousand milliseconds|
-
-|Complex queries| Have multiple aggregation or transformation functions or multiple regular expressions
-||May sample a very large time range of months or years|
-||Typically take multiple seconds to execute|
-
-## Considering cardinality
+## When do I need more RAM?
 
 In general, more RAM helps queries return faster. Your RAM requirements are primarily determined by [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality). Higher cardinality requires more RAM. Regardless of RAM, a series cardinality of 10 million or more can cause OOM failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
 
 ### Cluster sizing guidelines
 
-Review ingest and query guidelines for InfluxDB Enterprise by infrastructure (in this case, AWS EC2 R4 instances), replication factor, and cardinality. 
+Review ingest and query guidelines for InfluxDB Enterprise by infrastructure (in this case, AWS EC2 R4 instances), replication factor, and cardinality.
 
 > Note, guidelines stem from testing a DevOps monitoring use case.
 
@@ -158,7 +160,7 @@ Ingest|	Query|	Node|	Ingest	Query
 972759	54	2N16C	456255	50
 1860063	84	2N32C	881730	74
 
-## Storage guidelines
+## Storage: type, amount, and configuration
 
 ### Storage volume and IOPS
 
@@ -166,12 +168,12 @@ Consider the type of storage you'll need and the amount. InfluxDB is designed to
 
 See your cloud provider documentation for IOPS detail on your storage volumes.
 
-### Data bytes and compression
+### Bytes and compression
 
 Database names, [measurements](/influxdb/v1.7/concepts/glossary/#measurement), [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), [field keys](/influxdb/v1.7/concepts/glossary/#field-key), and [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.7/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.7/concepts/glossary/#timestamp) are stored per-point.
 
 Non-string values require approximately three bytes. String values require variable space as determined by string compression.
 
-## Separate `wal` and `data` directories
+### Separate `wal` and `data` directories
 
 When running InfluxDB in a production environment, store the `wal` directory and the `data` directory on separate storage devices. This optimization significantly reduces disk contention under heavy write load──an important consideration if the write load is highly variable. If the write load does not vary by more than 15%, the optimization is probably not necessary.
