@@ -140,7 +140,7 @@ In general, more RAM helps queries return faster. Your RAM requirements are prim
 
 ### Cluster sizing guidelines
 
-Review ingest and query guidelines for InfluxDB Enterprise by infrastructure (in this case, AWS EC2 R4 instances), replication factor, and cardinality.
+Review cluster sizing guidelines below for InfluxDB Enterprise. Guidelines consider infrastructure (in this case, AWS EC2 R4 instances), replication factor, and cardinality, ingest, and query.
 
 > Note, guidelines stem from testing a DevOps monitoring use case.
 
