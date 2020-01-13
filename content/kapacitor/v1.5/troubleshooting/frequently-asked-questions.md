@@ -84,7 +84,7 @@ There is no software limit, but it will be limited by available server resources
 
 ### What causes duplicate values with same timestamp or unexpected additional values?
 
-If data is ingested at irregular intervals, duplicate values with the same timestamp and unexpected additional values may occur. To resolve this issue, use `align ()` when ingesting data https://docs.influxdata.com/kapacitor/v1.5/nodes/window_node/#align in your TICKscript.
+If data is ingested at irregular intervals, duplicate values with the same timestamp and unexpected additional values may occur. To resolve this issue, use [`align ()`](/kapacitor/v1.5/nodes/window_node/#align) when ingesting data in your TICKscript.
 
 ## Performance
 
