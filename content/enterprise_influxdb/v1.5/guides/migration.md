@@ -20,9 +20,7 @@ instance to InfluxDB Enterprise by following the steps in this guide.
 We will update this guide to reflect the new upgrade process after the release of InfluxDB 1.7.10.
 {{% /warn %}}
 
----
-
-The following guide has step-by-step instructions for migrating an InfluxDB OSS
+<!-- The following guide has step-by-step instructions for migrating an InfluxDB OSS
 instance into an InfluxDB Enterprise cluster.
 
 {{% warn %}}
@@ -213,4 +211,4 @@ replication factor for existing shards.
 Finally, if you were using [Chronograf](/chronograf/latest/), you can
 add your Enterprise instance as a new data source.  If you were not using
 [Chronograf](/chronograf/latest/introduction/installation/), we recommend going through
-the installation instructions and using it as your primary management UI for the instance.
+the installation instructions and using it as your primary management UI for the instance. -->
