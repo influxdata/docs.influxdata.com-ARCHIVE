@@ -73,10 +73,11 @@ that combine the private key file and the signed certificate file into a single 
 
     In subsequent steps, you will need to copy the certificate to each node in the cluster.
 
-2. **Install the SSL/TLS certificate in each Meta Node**
+2. **Install the SSL/TLS certificate in each Node**
 
     Place the private key file (`.key`) and the signed certificate file (`.crt`)
-    or the single bundled file (`.pem`) in the `/etc/ssl` directory of each Meta Node and Data Node.
+    or the single bundled file (`.pem`)
+    in the `/etc/ssl` directory of each Meta Node and Data Node.
 
 3. **Ensure file permissions for each Node**
    
