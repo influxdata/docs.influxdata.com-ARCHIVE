@@ -120,130 +120,68 @@ that combine the private key file and the signed certificate file into a single 
 
 5. **Enable HTTPS within the configuration file for each Data Node**
 
-    HTTPS is disabled by default. There are two sets of configuration changes required.
+    Enable HTTPS by making the following changes in `/etc/influxdb/influxdb.conf`.
 
-    First, enable HTTPS for each Data Node within the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
+    1. Enable HTTPS for each Data Node within the `[http]` section of the configuration file by setting:
 
-    * `https-enabled` to `true`
-    * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-    * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+      * `https-enabled` to `true`
+      * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+      * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
-    ```toml
-    [http]
+      ```toml
+      [http]
 
-      [...]
+        [...]
 
-      # Determines whether HTTPS is enabled.
-      https-enabled = true
+        # Determines whether HTTPS is enabled.
+        https-enabled = true
 
-      [...]
+        [...]
 
-      # The SSL certificate to use when HTTPS is enabled.
-      https-certificate = "<bundled-certificate-file>.pem"
+        # The SSL certificate to use when HTTPS is enabled.
+        https-certificate = "<bundled-certificate-file>.pem"
 
-      # Use a separate private key location.
-      https-private-key = "<bundled-certificate-file>.pem"
-    ```
+        # Use a separate private key location.
+        https-private-key = "<bundled-certificate-file>.pem"
+      ```
 
-    Second, configure the Data Nodes to use HTTPS when communicating with other Data Nodes.
-    Update the following settings within the `[cluster]` section of the configuration file (`/etc/influxdb/influxdb.conf`):
+   2. Configure the Data Nodes to use HTTPS when communicating with other Data Nodes.
+      In the `[cluster]` section of the configuration file, set the following:
 
-    * `https-enabled` to `true`
-    * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-    * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+      * `https-enabled` to `true`
+      * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
+      * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
-    ```toml
-    [cluster]
+      ```toml
+      [cluster]
 
-      [...]
+        [...]
 
-      # Determines whether data nodes use HTTPS to communicate with each other.
-      https-enabled = true
+        # Determines whether data nodes use HTTPS to communicate with each other.
+        https-enabled = true
 
-      # The SSL certificate to use when HTTPS is enabled.
-      https-certificate = "<bundled-certificate-file>.pem"
+        # The SSL certificate to use when HTTPS is enabled.
+        https-certificate = "<bundled-certificate-file>.pem"
 
-      # Use a separate private key location.
-      https-private-key = "<bundled-certificate-file>.pem"
-    ```
+        # Use a separate private key location.
+        https-private-key = "<bundled-certificate-file>.pem"
+      ```
 
-    Third, configure the Data Nodes to use HTTPS when communicating with the Meta Nodes
-    within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
+   3. Configure the Data Nodes to use HTTPS when communicating with the Meta Nodes.
+      In the `[meta]` section of the configuration file, set the following:
 
-    * `meta-tls-enabled` to `true`
+      * `meta-tls-enabled` to `true`
+      * `meta-insecure-tls` to `true` (if using a self-signed key)
 
-    ```toml
-    [meta]
+      ```toml
+      [meta]
 
-      [...]
-        meta-tls-enabled = true
-    ```
+        [...]
+          meta-tls-enabled = true
 
-    ---
-
-    HTTPS is disabled by default.  There are two sets of configuration changes required.
-
-    First, enable HTTPS for each Data Node within the `[http]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
-
-    * `https-enabled` to `true`
-    * `http-certificate` to `/etc/ssl/influxdb-selfsigned.crt`
-    * `http-private-key` to `/etc/ssl/influxdb-selfsigned.key`
-
-    ```toml
-    [http]
-
-      [...]
-
-      # Determines whether HTTPS is enabled.
-      https-enabled = true
-
-      [...]
-
-      # The SSL certificate to use when HTTPS is enabled.
-      https-certificate = "/etc/ssl/influxdb-selfsigned.crt"
-
-      # Use a separate private key location.
-      https-private-key = "/etc/ssl/influxdb-selfsigned.key"
-    ```
-
-    Second, configure the Data Nodes to use HTTPS when communicating with other Data Nodes.
-    Update the following settings within the `[cluster]` section of the configuration file (`/etc/influxdb/influxdb.conf`):
-
-    * `https-enabled` to `true`
-    * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-    * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-
-    ```toml
-    [cluster]
-
-      [...]
-
-      # Determines whether data nodes use HTTPS to communicate with each other.
-      https-enabled = true
-
-      # The SSL certificate to use when HTTPS is enabled.
-      https-certificate = "<bundled-certificate-file>.pem"
-
-      # Use a separate private key location.
-      https-private-key = "<bundled-certificate-file>.pem"
-    ```
-
-    Third, configure the Data Nodes to use HTTPS when communicating with the Meta Nodes
-    within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb.conf`) by setting:
-
-    * `meta-tls-enabled` to `true`
-    * `meta-insecure-tls` to `true` to indicate a self-signed key
-
-    ```toml
-    [meta]
-
-      [...]
-        meta-tls-enabled = true
-
-        #for self-signed key
-        meta-insecure-tls = true
-    ```
-
+          #for self-signed key
+          meta-insecure-tls = true
+      ```
 6. **Restart InfluxDB Enterprise**
 
     Restart the InfluxDB Enterprise meta node processes for the configuration changes to take effect:
