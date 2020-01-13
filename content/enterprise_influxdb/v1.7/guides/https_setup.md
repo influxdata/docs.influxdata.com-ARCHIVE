@@ -25,14 +25,14 @@ Specific steps may vary on different operating systems.
 
 ## Requirements
 
-To set up HTTPS with InfluxDB Enterprise, you'll need an existing or new InfluxDB Enterprise instance
-and a Transport Layer Security (TLS) certificate (also known as a Secured Sockets Layer (SSL) certificate).
-InfluxDB Enterprise supports three types of TLS/SSL certificates:
+To enable HTTPS with InfluxDB Enterprise, you need a Transport Layer Security (TLS) certificate, also known as a Secured Sockets Layer (SSL) certificate.
+InfluxDB supports three types of TLS certificates:
 
 * **Single domain certificates signed by a [Certificate Authority](https://en.wikipedia.org/wiki/Certificate_authority)**
 
-    These certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB Enterprise server.
-    With this certificate option, every InfluxDB Enterprise instance requires a unique single domain certificate.
+    Single domain certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
+    These certificates are signed and issued by a trusted, third-party Certificate Authority (CA).
+    With this certificate option, every InfluxDB instance requires a unique single domain certificate.
 
 * **Wildcard certificates signed by a Certificate Authority**
 
@@ -41,20 +41,15 @@ InfluxDB Enterprise supports three types of TLS/SSL certificates:
 
 * **Self-signed certificates**
 
-    Self-signed certificates are not signed by a CA and you can [generate](#step-1-generate-a-self-signed-certificate) them on your own machine.
+    Self-signed certificates are _not_ signed by a trusted, third-party CA.
     Unlike CA-signed certificates, self-signed certificates only provide cryptographic security to HTTPS requests.
     They do not allow clients to verify the identity of the InfluxDB server.
-    We recommend using a self-signed certificate if you are unable to obtain a CA-signed certificate.
     With this certificate option, every InfluxDB Enterprise instance requires a unique self-signed certificate.
+    You can generate a self-signed certificate on your own machine.
 
 Regardless of your certificate's type, InfluxDB Enterprise supports certificates composed of
 a private key file (`.key`) and a signed certificate file (`.crt`) file pair, as well as certificates
 that combine the private key file and the signed certificate file into a single bundled file (`.pem`).
-
-The following two sections outline how to set up HTTPS with InfluxDB Enterprise [using a CA-signed
-certificate](#setup-https-with-a-ca-signed-certificate) and [using a self-signed certificate](#setup-https-with-a-self-signed-certificate)
-on Ubuntu 16.04.
-Specific steps may be different for other operating systems.
 
 ## Setup HTTPS with a CA-Signed Certificate
 
