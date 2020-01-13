@@ -1,21 +1,27 @@
 ---
-title: Enabling HTTPS for InfluxDB Enterprise
+title: Enable HTTPS for InfluxDB Enterprise
 menu:
   enterprise_influxdb_1_7:
-    name: Enabling HTTPS
+    name: Enable HTTPS
     weight: 100
     parent: Guides
 ---
 
-This guide describes how to enable HTTPS with InfluxDB Enterprise.
-Setting up HTTPS secures the communication between clients and the InfluxDB Enterprise
-server,
-and, in some cases, HTTPS verifies the authenticity of the InfluxDB Enterprise server to
-clients.
+Enabling HTTPS encrypts the communication between clients and the InfluxDB Enterprise server,
+and between nodes in the cluster.
+When configured with a signed certificate, HTTPS can also verify the authenticity of the InfluxDB Enterprise server to connecting clients.
 
-If you plan on sending requests to InfluxDB Enterprise over a network, we
-[strongly recommend](/enterprise_influxdb/v1.7/administration/security/)
-that you set up HTTPS.
+<dt>
+InfluxData **strongly recommends** enabling HTTPS, especially if you plan on sending requests to InfluxDB Enterprise over a network.
+</dt>
+
+The following two sections outline how to set up HTTPS with InfluxDB Enterprise:
+
+- [using a CA-signed certificate](#setup-https-with-a-ca-signed-certificate)
+- [using a self-signed certificate](#setup-https-with-a-self-signed-certificate)
+
+These steps have been tested on Debian-based Linux distributions.
+Specific steps may vary on different operating systems.
 
 ## Requirements
 
