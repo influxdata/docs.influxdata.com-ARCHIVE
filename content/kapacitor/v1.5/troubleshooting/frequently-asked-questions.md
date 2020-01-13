@@ -19,7 +19,8 @@ Where applicable, it links to outstanding issues on Github.
 **TICKscript**  
 
 - [Batches work but streams do not. Why?](#batches-work-but-streams-do-not-why)  
-- [Is there a limit on the number of scripts Kapacitor can handle?](#is-there-a-limit-on-the-number-of-scripts-kapacitor-can-handle)  
+- [Is there a limit on the number of scripts Kapacitor can handle?](#is-there-a-limit-on-the-number-of-scripts-kapacitor-can-handle)
+- [What causes duplicate values with same timestamp or unexpected additional values?](#what-causes-duplicate-values-with-same-timestamp-or-unexpected-additional-values)
 
 **Performance**  
 
@@ -31,9 +32,11 @@ Where applicable, it links to outstanding issues on Github.
 ## Administration
 
 ### Is the alert state and alert data lost happen when updating a script?
+
 Kapacitor will remember the last level of an alert, but other state-like data, such as data buffered in a window, will be lost.
 
 ### How do I verify that Kapacitor is receiving data from InfluxDB?
+
 There are a few ways to determine whether or not Kapacitor is receiving data from InfluxDB.
 The [`kapacitor stats ingress`](/kapacitor/v1.5/working/cli_client/#stats-ingress) command
 outputs InfluxDB measurements stored in the Kapacitor database as well as the number
@@ -71,15 +74,22 @@ SELECT non_negative_derivative("collected",1s) FROM "_kapacitor"."autogen"."edge
 ## TICKscript
 
 ### Batches work but streams do not. Why?
+
 Make sure port `9092` is open to inbound connections.
 Streams are a `PUSH`'d to port `9092` so it must be allowed through the firewall.
 
 ### Is there a limit on the number of scripts Kapacitor can handle?
+
 There is no software limit, but it will be limited by available server resources.
+
+### What causes duplicate values with same timestamp or unexpected additional values?
+
+If data is ingested at irregular intervals, duplicate values with the same timestamp and unexpected additional values may occur. To resolve this issue, use `align ()` when ingesting data https://docs.influxdata.com/kapacitor/v1.5/nodes/window_node/#align in your TICKscript.
 
 ## Performance
 
 ### Do you get better performance with running one complex script or having multiple scripts running in parallel?
+
 Taking things to the extreme, best-case is one task that consumes all the data and does all the work since there is added overhead when managing multiple tasks.
 However, significant effort has gone into reducing the overhead of each task.
 Use tasks in a way that makes logical sense for your project and organization.
@@ -87,9 +97,11 @@ If you run into performance issues with multiple tasks, [let us know](https://gi
 _**As a last resort**_, merge tasks into more complex tasks.
 
 ### Do template-based scripts use less resources or are they just an ease-of-use tool?
+
 Templates are just an ease-of-use tool and make no difference in regards to performance.
 
 ### How does Kapacitor handle high load?
+
 If Kapacitor is unable to ingest and process incoming data before it receives new data,
 Kapacitor queues incoming data in memory and processes it when able.
 Memory requirements of queued data depend on the ingest rate and shape of the incoming data.
@@ -109,9 +121,11 @@ CPU, disk and network IO, etc., which will affect the overall performance of you
 {{% /note %}}
 
 ### How can I optimize Kapacitor tasks?
+
 As you optimize Kapacitor tasks, consider the following:
 
 #### "Batch" incoming data
+
 [`batch`](/kapacitor/v1.5/nodes/batch_node/) queries data from InfluxDB in batches.
 As long as Kapacitor is able to process a batch before the next batch is queried,
 it won't need to queue anything.
