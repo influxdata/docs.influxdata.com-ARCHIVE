@@ -182,15 +182,16 @@ that combine the private key file and the signed certificate file into a single 
           #for self-signed key
           meta-insecure-tls = true
       ```
+
 6. **Restart InfluxDB Enterprise**
 
-    Restart the InfluxDB Enterprise meta node processes for the configuration changes to take effect:
+    Restart the InfluxDB Enterprise Meta Node processes for the configuration changes to take effect:
 
     ```sh
     sudo systemctl start influxdb-meta
     ```
 
-    Restart the InfluxDB Enterprise data node processes for the configuration changes to take effect:
+    Restart the InfluxDB Enterprise Data Node processes for the configuration changes to take effect:
 
     ```sh
     sudo systemctl restart influxdb
@@ -204,8 +205,15 @@ that combine the private key file and the signed certificate file into a single 
     influxd-ctl -bind-tls show
     ```
 
+    If using a self-signed certificate, use
+
+    ```sh
+    influxd-ctl -bind-tls -k show
+    ```
+
     {{% warn %}}
-Once you have enabled HTTPS, you MUST use `-bind-tls` in order for influxd-ctl to connect to the meta node.
+Once you have enabled HTTPS, you must use `-bind-tls` in order for `influxd-ctl` to connect to the Meta Node.
+With a self-signed certificate, you must also use the `-k` option to skip certificate verification.
     {{% /warn %}}
 
     A successful connection returns output which should resemble the following:
@@ -231,48 +239,8 @@ Once you have enabled HTTPS, you MUST use `-bind-tls` in order for influxd-ctl t
     influx -ssl -host <domain_name>.com
     ```
 
-    A successful connection returns the following:
-
-    ```sh
-    Connected to https://<domain_name>.com:8086 version 1.x.y
-    InfluxDB shell version: 1.x.y
-    >
-    ```
-
-    That's it! You've successfully set up HTTPS with InfluxDB Enterprise.
-
-    ---
-
-    Verify that HTTPS is working on the meta nodes by using `influxd-ctl`.
-
-    ```sh
-    influxd-ctl -bind-tls -k show
-    ```
+    If using a self-signed certificate, use
     
-    {{% warn %}}
-Once you have enabled HTTPS, you MUST use `-bind-tls` in order for influxd-ctl to connect to the meta node.  Because the cert is self-signed, you MUST also use the `-k` option.  This skips certificate verification.
-    {{% /warn %}}
-
-    A successful connection returns output which should resemble the following:
-
-    ```
-    Data Nodes
-    ==========
-    ID   TCP Address               Version
-    4    enterprise-data-01:8088   1.x.y-c1.x.y
-    5    enterprise-data-02:8088   1.x.y-c1.x.y
-    
-    Meta Nodes
-    ==========
-    TCP Address               Version
-    enterprise-meta-01:8091   1.x.y-c1.x.z
-    enterprise-meta-02:8091   1.x.y-c1.x.z
-    enterprise-meta-03:8091   1.x.y-c1.x.z
-    ```
-
-
-    Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/latest/tools/shell/):
-
     ```sh
     influx -ssl -unsafeSsl -host <domain_name>.com
     ```
