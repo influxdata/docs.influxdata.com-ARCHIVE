@@ -7,16 +7,14 @@ menu:
     parent: Guides
 ---
 
-Enabling HTTPS encrypts the communication between clients and the InfluxDB Enterprise server,
-and between nodes in the cluster.
+Enabling HTTPS encrypts the communication between clients and the InfluxDB Enterprise server, and between nodes in the cluster.
 When configured with a signed certificate, HTTPS can also verify the authenticity of the InfluxDB Enterprise server to connecting clients.
+
+This pages outlines how to set up HTTPS with InfluxDB Enterprise using either a signed or self-signed certificate.
 
 <dt>
 InfluxData **strongly recommends** enabling HTTPS, especially if you plan on sending requests to InfluxDB Enterprise over a network.
 </dt>
-
-The following two sections outline how to set up HTTPS with InfluxDB Enterprise
-using either a CA-signed or self-signed certificate.
 
 {{% note %}}
 These steps have been tested on Debian-based Linux distributions.
@@ -92,7 +90,6 @@ that combine the private key file and the signed certificate file into a single 
 
 4. **Enable HTTPS within the configuration file for each Meta Node**
 
-    HTTPS is disabled by default.
     Enable HTTPS for each Meta Node within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
 
     * `https-enabled` to `true`
@@ -120,7 +117,7 @@ that combine the private key file and the signed certificate file into a single 
 
 5. **Enable HTTPS within the configuration file for each Data Node**
 
-    Enable HTTPS by making the following changes in `/etc/influxdb/influxdb.conf`.
+    Make the following sets of changes in the configuration file at `/etc/influxdb/influxdb.conf` on each Data Node:
 
     1. Enable HTTPS for each Data Node within the `[http]` section of the configuration file by setting:
 
