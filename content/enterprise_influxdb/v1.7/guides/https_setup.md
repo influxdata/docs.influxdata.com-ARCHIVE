@@ -20,8 +20,10 @@ The following two sections outline how to set up HTTPS with InfluxDB Enterprise:
 - [using a CA-signed certificate](#setup-https-with-a-ca-signed-certificate)
 - [using a self-signed certificate](#setup-https-with-a-self-signed-certificate)
 
+{{% note %}}
 These steps have been tested on Debian-based Linux distributions.
-Specific steps may vary on different operating systems.
+Specific steps may vary on other operating systems.
+{{% /note %}}
 
 ## Requirements
 
