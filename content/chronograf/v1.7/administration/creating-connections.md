@@ -10,10 +10,10 @@ menu:
 
 Connections to InfluxDB and Kapacitor can be configured through the Chronograf user interface (UI) or with JSON configuration files:
 
-- [Manage InfluxDB connections using the Chronograf UI](#manage -influxdb-connections-using-the-chronograf-ui)
+- [Manage InfluxDB connections using the Chronograf UI](#manage-influxdb-connections-using-the-chronograf-ui)
 - [Manage InfluxDB connections using .src files](#manage-influxdb-connections-using-src-files)
 - [Manage Kapacitor connections using the Chronograf UI](#manage-kapacitor-connections-using-the-chronograf-ui)
-- [Manage Kapacitor connections using .kap files](#manage -kapacitor-connections-using-kap-files)
+- [Manage Kapacitor connections using .kap files](#manage-kapacitor-connections-using-kap-files)
 
 > Note: Connection details are stored in Chronograf’s internal database `chronograf-v1.db` `.src`. Typically, the only time you'll need to administer the internal database is when you're [restoring a Chronograf database](/chronograf/v1.7/administration/restoring-chronograf-db/).
 
@@ -45,6 +45,7 @@ To create an InfluxDB connection in the Chronograf UI:
    If this occurs, ensure all connection credentials are correct and that the InfluxDB instance is running and accessible.
 
 The following dashboards are available:
+
 - Docker
 - Kubernetes Node
 - Riak
