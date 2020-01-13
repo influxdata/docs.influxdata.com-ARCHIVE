@@ -15,10 +15,8 @@ When configured with a signed certificate, HTTPS can also verify the authenticit
 InfluxData **strongly recommends** enabling HTTPS, especially if you plan on sending requests to InfluxDB Enterprise over a network.
 </dt>
 
-The following two sections outline how to set up HTTPS with InfluxDB Enterprise:
-
-- [using a CA-signed certificate](#setup-https-with-a-ca-signed-certificate)
-- [using a self-signed certificate](#setup-https-with-a-self-signed-certificate)
+The following two sections outline how to set up HTTPS with InfluxDB Enterprise
+using either a CA-signed or self-signed certificate.
 
 {{% note %}}
 These steps have been tested on Debian-based Linux distributions.
@@ -57,29 +55,33 @@ that combine the private key file and the signed certificate file into a single 
 
 1. **Generate a self-signed certificate** (optional)
 
+    If using a self-signed certificate, use the `openssl` utility (preinstalled on many OSes) to create a certificate.
     The following command generates a private key file (`.key`) and a self-signed
     certificate file (`.crt`) which remain valid for the specified `NUMBER_OF_DAYS`.
-    It outputs those files to InfluxDB Enterprise's default certificate file paths and gives them
-    the required permissions.
+    It outputs those files to `/etc/ssl/` and gives them the required permissions.
+    (Other paths will also work.)
 
-    ```sh
-    sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/ssl/influxdb-selfsigned.key -out /etc/ssl/influxdb-selfsigned.crt -days <NUMBER_OF_DAYS>
+    ```
+    sudo openssl req -x509 -nodes -newkey rsa:2048 \
+      -keyout /etc/ssl/influxdb-selfsigned.key \
+      -out /etc/ssl/influxdb-selfsigned.crt \
+      -days <NUMBER_OF_DAYS>
     ```
 
     When you execute the command, it will prompt you for more information.
-    You can choose to fill out that information or leave it blank;
-    both actions generate valid certificate files.
+    You can choose to fill out that information or leave it blank; both actions generate valid certificate files.
 
-2. **Install the SSL/TLS certificate in each Data Node**
+    In subsequent steps, you will need to copy the certificate to each node in the cluster.
+
+2. **Install the SSL/TLS certificate in each Meta Node**
 
     Place the private key file (`.key`) and the signed certificate file (`.crt`)
-    or the single bundled file (`.pem`) in the `/etc/ssl` directory of each Data Node.
+    or the single bundled file (`.pem`) in the `/etc/ssl` directory of each Meta Node and Data Node.
 
-3. **Ensure file permissions for each Data Node**
+3. **Ensure file permissions for each Node**
    
     Certificate files require read and write access by the `root` user.
-    Ensure that you have the correct file permissions in each Data Node by running the following
-    commands:
+    Ensure that you have the correct file permissions in each Meta Node and Data Node by running the following commands:
 
     ```
     sudo chown root:root /etc/ssl/<CA-certificate-file>
