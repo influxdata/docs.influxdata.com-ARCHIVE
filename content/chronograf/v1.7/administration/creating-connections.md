@@ -8,11 +8,16 @@ menu:
     parent: Administration
 ---
 
-Connections to InfluxDB and Kapacitor can be configured through the Chronograf user interface (UI) or with JSON configuration files.
+Connections to InfluxDB and Kapacitor can be configured through the Chronograf user interface (UI) or with JSON configuration files:
+
+- [Manage InfluxDB connections using the Chronograf UI](#manage -influxdb-connections-using-the-chronograf-ui)
+- [Manage InfluxDB connections using .src files](#manage-influxdb-connections-using-src-files)
+- [Manage Kapacitor connections using the Chronograf UI](#manage-kapacitor-connections-using-the-chronograf-ui)
+- [Manage Kapacitor connections using .kap files](#manage -kapacitor-connections-using-kap-files)
 
 > Note: Connection details are stored in Chronograf’s internal database `chronograf-v1.db` `.src`. Typically, the only time you'll need to administer the internal database is when you're [restoring a Chronograf database](/chronograf/v1.7/administration/restoring-chronograf-db/).
 
-## Managing InfluxDB connections using the Chronograf UI
+## Manage InfluxDB connections using the Chronograf UI
 
 To create an InfluxDB connection in the Chronograf UI:
 
@@ -68,7 +73,7 @@ The following dashboards are available:
 - MySQL
 - Ping
 
-## Managing InfluxDB connections using .src files
+## Manage InfluxDB connections using .src files
 
 Manually create `.src` files to store InfluxDB connection details.
 `.src` files are simple JSON files that contain key-value paired connection details.
@@ -153,7 +158,7 @@ Environment variables can be loaded using the `"{{ .VARIABLE_KEY }}"` syntax:
 }
 ```
 
-## Managing Kapacitor connections using the Chronograf UI
+## Manage Kapacitor connections using the Chronograf UI
 
 Kapacitor is the data processing component of the TICK stack.
 To use Kapacitor in Chronograf, create Kapacitor connections and configure alert endpoints.
@@ -176,7 +181,7 @@ To create a Kapacitor connection using the Chronograf UI:
 
 4. Click **Continue**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.7/guides/configuring-alert-endpoints/).
 
-## Managing Kapacitor connections using .kap files
+## Manage Kapacitor connections using .kap files
 
 Manually create `.kap` files to store Kapacitor connection details.
 `.kap` files are simple JSON files that contain key-value paired connection details.
