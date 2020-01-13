@@ -9,6 +9,19 @@ menu:
     parent: Guides
 ---
 
+{{% warn %}}
+## IMPORTANT
+Due to a known issue in InfluxDB, attempts to upgrade an InfluxDB OSS instance to
+InfluxDB Enterprise will fail.
+A fix is in place and will be released with InfluxDB v1.7.10.
+Until InfluxDB v1.7.10 is released, **DO NOT** attempt to migrate an InfluxDB OSS
+instance to InfluxDB Enterprise by following the steps in this guide.
+
+We will update this guide to reflect the new upgrade process after the release of InfluxDB 1.7.10.
+{{% /warn %}}
+
+---
+
 The following guide has step-by-step instructions for migrating an InfluxDB OSS
 instance into an InfluxDB Enterprise cluster.
 
