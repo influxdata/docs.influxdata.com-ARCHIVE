@@ -10,6 +10,8 @@ menu:
 
 Connections to InfluxDB and Kapacitor can be configured through the Chronograf user interface (UI) or with JSON configuration files.
 
+> Note: Connection details are stored in Chronograf’s internal database `chronograf-v1.db` `.src`. Typically, the only time you'll need to administer the internal database is when you're [restoring a Chronograf database](/chronograf/v1.7/administration/restoring-chronograf-db/).
+
 ## Managing InfluxDB connections using the Chronograf UI
 
 To create an InfluxDB connection in the Chronograf UI:
@@ -67,6 +69,7 @@ The following dashboards are available:
 - Ping
 
 ## Managing InfluxDB connections using .src files
+
 Chronograf stores InfluxDB connection details `.src` files that can also be created manually.
 `.src` files are simple JSON files that contain key-value paired connection details.
 The location of `.src` files is defined by the [`--resources-path`](/chronograf/v1.7/administration/config-options/#resources-path)
