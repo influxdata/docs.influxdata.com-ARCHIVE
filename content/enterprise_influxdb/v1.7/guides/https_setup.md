@@ -53,13 +53,13 @@ that combine the private key file and the signed certificate file into a single 
 
 1. **Generate a self-signed certificate** (optional)
 
-    If using a self-signed certificate, use the `openssl` utility (preinstalled on many OSes) to create a certificate.
+    If using a self-signed certificate, use the `openssl` utility to create a certificate.
     The following command generates a private key file (`.key`) and a self-signed
     certificate file (`.crt`) which remain valid for the specified `NUMBER_OF_DAYS`.
     It outputs those files to `/etc/ssl/` and gives them the required permissions.
     (Other paths will also work.)
 
-    ```
+    ```sh
     sudo openssl req -x509 -nodes -newkey rsa:2048 \
       -keyout /etc/ssl/influxdb-selfsigned.key \
       -out /etc/ssl/influxdb-selfsigned.crt \
@@ -75,22 +75,22 @@ that combine the private key file and the signed certificate file into a single 
 
     Place the private key file (`.key`) and the signed certificate file (`.crt`)
     or the single bundled file (`.pem`)
-    in the `/etc/ssl/` directory of each Meta Node and Data Node.
+    in the `/etc/ssl/` directory of each meta node and data node.
 
 3. **Ensure file permissions for each Node**
    
     Certificate files require read and write access by the `root` user.
-    Ensure that you have the correct file permissions in each Meta Node and Data Node by running the following commands:
+    Ensure that you have the correct file permissions in each meta node and data node by running the following commands:
 
-    ```
+    ```sh
     sudo chown root:root /etc/ssl/<CA-certificate-file>
     sudo chmod 644 /etc/ssl/<CA-certificate-file>
     sudo chmod 600 /etc/ssl/<private-key-file>
     ```
 
-4. **Enable HTTPS within the configuration file for each Meta Node**
+4. **Enable HTTPS within the configuration file for each meta node**
 
-    Enable HTTPS for each Meta Node within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
+    Enable HTTPS for each meta node within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
 
     ```toml
     [meta]
@@ -110,11 +110,11 @@ that combine the private key file and the signed certificate file into a single 
       https-insecure-tls = true
     ```
 
-5. **Enable HTTPS within the configuration file for each Data Node**
+5. **Enable HTTPS within the configuration file for each data node**
 
-    Make the following sets of changes in the configuration file at `/etc/influxdb/influxdb.conf` on each Data Node:
+    Make the following sets of changes in the configuration file at `/etc/influxdb/influxdb.conf` on each data node:
 
-    1. Enable HTTPS for each Data Node within the `[http]` section of the configuration file by setting:
+    1. Enable HTTPS for each data node within the `[http]` section of the configuration file by setting:
 
       ```toml
       [http]
@@ -133,7 +133,7 @@ that combine the private key file and the signed certificate file into a single 
         https-private-key = "influxdb.key"
       ```
 
-   2. Configure the Data Nodes to use HTTPS when communicating with other Data Nodes.
+   2. Configure the data nodes to use HTTPS when communicating with other data nodes.
       In the `[cluster]` section of the configuration file, set the following:
 
       ```toml
@@ -151,7 +151,7 @@ that combine the private key file and the signed certificate file into a single 
         https-private-key = "influxdb.key"
       ```
 
-   3. Configure the Data Nodes to use HTTPS when communicating with the Meta Nodes.
+   3. Configure the data nodes to use HTTPS when communicating with the meta nodes.
       In the `[meta]` section of the configuration file, set the following:
 
       ```toml
@@ -172,7 +172,7 @@ that combine the private key file and the signed certificate file into a single 
     sudo systemctl start influxdb-meta
     ```
 
-    Restart the InfluxDB Enterprise Data Node processes for the configuration changes to take effect:
+    Restart the InfluxDB Enterprise data node processes for the configuration changes to take effect:
 
     ```sh
     sudo systemctl restart influxdb
@@ -193,7 +193,7 @@ that combine the private key file and the signed certificate file into a single 
     ```
 
     {{% warn %}}
-Once you have enabled HTTPS, you must use `-bind-tls` in order for `influxd-ctl` to connect to the Meta Node.
+Once you have enabled HTTPS, you must use `-bind-tls` in order for `influxd-ctl` to connect to the meta node.
 With a self-signed certificate, you must also use the `-k` option to skip certificate verification.
     {{% /warn %}}
 
@@ -214,7 +214,7 @@ With a self-signed certificate, you must also use the `-k` option to skip certif
     enterprise-meta-03:8091   1.x.y-c1.x.z
     ```
 
-    Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.7/tools/shell/):
+    Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [`influx` command line interface](/influxdb/v1.7/tools/shell/):
 
     ```sh
     influx -ssl -host <domain_name>.com
@@ -246,8 +246,8 @@ edit the `urls` setting to indicate `https` instead of `http`.
 Also change `localhost` to the relevant domain name.
 
 The best practice in terms of security is to transfer the certificate to the client and make it trusted
-(either by putting in the OS's trusted certificate system or using the `ssl_ca` option).
-The alternative is to sign the cert using an internal CA and then trust the CA cert.
+(either by putting in the operating system's trusted certificate system or using the `ssl_ca` option).
+The alternative is to sign the certificate using an internal CA and then trust the CA certificate.
 
 If you're using a self-signed certificate,
 uncomment the `insecure_skip_verify` setting and set it to `true`.
