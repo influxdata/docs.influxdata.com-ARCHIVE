@@ -24,7 +24,6 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Does InfluxDB have a file system size limit?](#does-influxdb-have-a-file-system-size-limit)
 * [How do I manually trigger a compaction?](#how-do-i-manually-trigger-a-compaction)
 
-
 **Command line interface (CLI)**
 
 * [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-make-influxdb-s-cli-return-human-readable-timestamps)
@@ -218,7 +217,7 @@ If you anticipate growing over 16TB per volume/file system, we recommend finding
 Trigger a compaction by doing one of the following:
 
 - Use the offline-compact tooling to do a full compaction of a shard offline (influxd must be down).
-- Do a full compaction after startup by adjusting the [`compact-full-write-cold-duration`](/influxdb/v1.7/administration/config/#compact-full-write-cold-duration-4h) setting in your InfluxDB configuration file. For more information, see [Using the configuration file](/administration/config/#using-the-configuration-file).
+- Do a full compaction after startup by adjusting the [`compact-full-write-cold-duration`](/influxdb/v1.7/administration/config/#compact-full-write-cold-duration-4h) setting in your InfluxDB configuration file. For more information, see [Using the configuration file](/influxdb/v1.7/administration/config/#using-the-configuration-file/).
 
 > Note: You can't manually trigger a compaction via the API.
 
