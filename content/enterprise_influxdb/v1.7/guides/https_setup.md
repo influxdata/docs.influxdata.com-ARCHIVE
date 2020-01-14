@@ -75,7 +75,7 @@ that combine the private key file and the signed certificate file into a single 
 
     Place the private key file (`.key`) and the signed certificate file (`.crt`)
     or the single bundled file (`.pem`)
-    in the `/etc/ssl` directory of each Meta Node and Data Node.
+    in the `/etc/ssl/` directory of each Meta Node and Data Node.
 
 3. **Ensure file permissions for each Node**
    
