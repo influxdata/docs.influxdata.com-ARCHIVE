@@ -58,7 +58,7 @@ Restart the InfluxDB service for your configuration changes to take effect:
 
 ### Step 3: Create an admin user.
 
-Because authentication is enabled, you need to create an [admin user](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) before you can do anything else in the database.
+Because authentication is enabled, you need to create an [admin user](/influxdb/latest/administration/authentication_and_authorization/#user-types-and-privileges) before you can do anything else in the database.
 Run the `curl` command below to create an admin user, replacing:
 
 * `localhost` with the IP or hostname of your InfluxDB OSS instance or one of your InfluxEnterprise data nodes
@@ -77,7 +77,7 @@ A successful `CREATE USER` query returns a blank result:
 
 ### Step 4: Edit the InfluxDB source in Chronograf.
 
-If you've already [connected your database to Chronograf](/chronograf/latest/introduction/getting-started/#3-connect-to-chronograf), update the connection configuration in Chronograf with your new username and password.
+If you've already [connected your database to Chronograf](chronograf/latest/introduction/installation#connect-chronograf-to-your-influxdb-instance-or-influxdb-enterprise-cluster), update the connection configuration in Chronograf with your new username and password.
 Edit existing InfluxDB database sources by navigating to the Chronograf configuration page and clicking on the name of the source.
 
 ## InfluxDB OSS User Management
@@ -91,7 +91,7 @@ On the **Chronograf Admin** page:
 ![InfluxDB OSS user management](/img/chronograf/chrono-admin-usermanagement-oss.png)
 
 InfluxDB users are either admin users or non-admin users.
-See InfluxDB's [authentication and authorization](/influxdb/latest/query_language/authentication_and_authorization/#user-types-and-privileges) documentation for more information about those user types.
+See InfluxDB's [authentication and authorization](/influxdb/latest/administration/authentication_and_authorization/#user-types-and-privileges) documentation for more information about those user types.
 
 > ***Note:*** Note that Chronograf currently does not support assigning InfluxDB database `READ`or `WRITE` access to non-admin users.
 >This is a known issue.
@@ -156,12 +156,12 @@ Assign permissions and roles to both admin and non-admin users.
 Permission to add or remove nodes from a cluster.
 
 **Relevant `influxd-ctl` arguments**:
-[`add-data`](/enterprise_influxdb/latest/features/cluster-commands/#add-data),
-[`add-meta`](/enterprise_influxdb/latest/features/cluster-commands/#add-meta),
-[`join`](/enterprise_influxdb/latest/features/cluster-commands/#join),
-[`remove-data`](/enterprise_influxdb/latest/features/cluster-commands/#remove-data),
-[`remove-meta`](/enterprise_influxdb/latest/features/cluster-commands/#remove-meta), and
-[`leave`](/enterprise_influxdb/latest/features/cluster-commands/#leave)
+[`add-data`](/enterprise_influxdb/latest/administration/cluster-commands/#add-data),
+[`add-meta`](/enterprise_influxdb/latest/administration/cluster-commands/#add-meta),
+[`join`](/enterprise_influxdb/latest/administration/cluster-commands/#join),
+[`remove-data`](/enterprise_influxdb/latest/administration/cluster-commands/#remove-data),
+[`remove-meta`](/enterprise_influxdb/latest/administration/cluster-commands/#remove-meta), and
+[`leave`](/enterprise_influxdb/latest/administration/cluster-commands/#leave)
 
 **Pages in Chronograf that require this permission**: NA
 
@@ -169,7 +169,7 @@ Permission to add or remove nodes from a cluster.
 Permission to copy shards.
 
 **Relevant `influxd-ctl` arguments**:
-[copy-shard](/enterprise_influxdb/latest/features/cluster-commands/#copy-shard)
+[`copy-shard`](/enterprise_influxdb/latest/administration/cluster-commands/#copy-shard)
 
 **Pages in Chronograf that require this permission**: NA
 
@@ -188,15 +188,15 @@ Permission to create databases, create [retention policies](/influxdb/latest/con
 Permission to manage users and roles; create users, drop users, grant admin status to users, grant permissions to users, revoke admin status from users, revoke permissions from users, change user passwords, view user permissions, and view users and their admin status.
 
 **Relevant InfluxQL queries**:
-[`CREATE USER`](/influxdb/latest/query_language/authentication_and_authorization/#user-management-commands),
-[`DROP USER`](/influxdb/latest/query_language/authentication_and_authorization/#general-admin-and-non-admin-user-management),
-[`GRANT ALL PRIVILEGES`](/influxdb/latest/query_language/authentication_and_authorization/#user-management-commands),
-[`GRANT [READ,WRITE,ALL]`](/influxdb/latest/query_language/authentication_and_authorization/#non-admin-user-management),
-[`REVOKE ALL PRIVILEGES`](/influxdb/latest/query_language/authentication_and_authorization/#user-management-commands),
-[`REVOKE [READ,WRITE,ALL]`](/influxdb/latest/query_language/authentication_and_authorization/#non-admin-user-management),
-[`SET PASSWORD`](/influxdb/latest/query_language/authentication_and_authorization/#general-admin-and-non-admin-user-management),
-[`SHOW GRANTS`](/influxdb/latest/query_language/authentication_and_authorization/#non-admin-user-management), and
-[`SHOW USERS`](/influxdb/latest/query_language/authentication_and_authorization/#user-management-commands)
+[`CREATE USER`](/influxdb/latest/administration/authentication_and_authorization/#user-management-commands),
+[`DROP USER`](/influxdb/latest/administration/authentication_and_authorization/#general-admin-and-non-admin-user-management),
+[`GRANT ALL PRIVILEGES`](/influxdb/latest/administration/authentication_and_authorization/#user-management-commands),
+[`GRANT [READ,WRITE,ALL]`](/influxdb/latest/administration/authentication_and_authorization/#non-admin-user-management),
+[`REVOKE ALL PRIVILEGES`](/influxdb/latest/administration/authentication_and_authorization/#user-management-commands),
+[`REVOKE [READ,WRITE,ALL]`](/influxdb/latest/administration/authentication_and_authorization/#non-admin-user-management),
+[`SET PASSWORD`](/influxdb/latest/administration/authentication_and_authorization/#general-admin-and-non-admin-user-management),
+[`SHOW GRANTS`](/influxdb/latest/administration/authentication_and_authorization/#non-admin-user-management), and
+[`SHOW USERS`](/influxdb/latest/administration/authentication_and_authorization/#user-management-commands)
 
 **Pages in Chronograf that require this permission**: Data Explorer, Dashboards, Users and Roles on the Admin page
 
@@ -235,8 +235,8 @@ Permission to create, drop, and view [continuous queries](/influxdb/latest/conce
 
 **Relevant InfluxQL queries**:
 [`CreateContinuousQueryStatement`](/influxdb/latest/query_language/continuous_queries/),
-[`DropContinuousQueryStatement`](), and
-[`ShowContinuousQueriesStatement`](/influxdb/latest/query_language/continuous_queries/#list-cqs)
+[`DropContinuousQueryStatement`](/influxdb/latest/query_language/continuous_queries/#deleting-continuous-queries), and
+[`ShowContinuousQueriesStatement`](/influxdb/latest/query_language/continuous_queries/#listing-continuous-queries)
 
 **Pages in Chronograf that require this permission**: Data Explorer, Dashboards
 
@@ -273,8 +273,8 @@ Permission to create, drop, and view [subscriptions](/influxdb/latest/concepts/g
 Permission to view cluster statistics and diagnostics.
 
 **Relevant InfluxQL queries**:
-[`SHOW DIAGNOSTICS`](/influxdb/latest/troubleshooting/statistics/) and
-[`SHOW STATS`](/influxdb/latest/troubleshooting/statistics/)
+[`SHOW DIAGNOSTICS`](/influxdb/administration/server_monitoring/#show-diagnostics) and
+[`SHOW STATS`](/influxdb/administration/server_monitoring/#show-stats)
 
 **Pages in Chronograf that require this permission**: Data Explorer, Dashboards
 
