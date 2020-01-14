@@ -66,10 +66,10 @@ that combine the private key file and the signed certificate file into a single 
       -days <NUMBER_OF_DAYS>
     ```
 
-    When you execute the command, it will prompt you for more information.
-    You can choose to fill out that information or leave it blank; both actions generate valid certificate files.
+    The command will prompt you for more information.
+    You can choose to fill out these fields or leave them blank; both actions generate valid certificate files.
 
-    In subsequent steps, you will need to copy the certificate to each node in the cluster.
+    In subsequent steps, you will need to copy the certificate and key (or `.pem` file) to each node in the cluster.
 
 2. **Install the SSL/TLS certificate in each Node**
 
