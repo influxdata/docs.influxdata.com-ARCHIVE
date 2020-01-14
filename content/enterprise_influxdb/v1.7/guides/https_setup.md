@@ -92,11 +92,6 @@ that combine the private key file and the signed certificate file into a single 
 
     Enable HTTPS for each Meta Node within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
 
-    * `https-enabled` to `true`
-    * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-    * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-    * `https-insecure-tls` to `true` (if using a self-signed key)
-
     ```toml
     [meta]
 
@@ -106,11 +101,15 @@ that combine the private key file and the signed certificate file into a single 
       https-enabled = true
 
       # The SSL certificate to use when HTTPS is enabled.
-      https-certificate = "<bundled-certificate-file>.pem"
+      https-certificate = "influxdb.crt"
 
       # Use a separate private key location.
-      https-private-key = "<bundled-certificate-file>.pem"
-      
+      https-private-key = "influxdb.key"
+    ```
+
+    If using a self-signed certificate, also set:
+
+    ```
       # For self-signed key
       https-insecure-tls = true
     ```
