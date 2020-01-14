@@ -105,12 +105,8 @@ that combine the private key file and the signed certificate file into a single 
 
       # Use a separate private key location.
       https-private-key = "influxdb.key"
-    ```
 
-    If using a self-signed certificate, also set:
-
-    ```
-      # For self-signed key
+      # If using a self-signed certificate:
       https-insecure-tls = true
     ```
 
@@ -119,10 +115,6 @@ that combine the private key file and the signed certificate file into a single 
     Make the following sets of changes in the configuration file at `/etc/influxdb/influxdb.conf` on each Data Node:
 
     1. Enable HTTPS for each Data Node within the `[http]` section of the configuration file by setting:
-
-      * `https-enabled` to `true`
-      * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-      * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
       ```toml
       [http]
@@ -135,18 +127,14 @@ that combine the private key file and the signed certificate file into a single 
         [...]
 
         # The SSL certificate to use when HTTPS is enabled.
-        https-certificate = "<bundled-certificate-file>.pem"
+        https-certificate = "influxdb.crt"
 
         # Use a separate private key location.
-        https-private-key = "<bundled-certificate-file>.pem"
+        https-private-key = "influxdb.key"
       ```
 
    2. Configure the Data Nodes to use HTTPS when communicating with other Data Nodes.
       In the `[cluster]` section of the configuration file, set the following:
-
-      * `https-enabled` to `true`
-      * `http-certificate` to `/etc/ssl/<signed-certificate-file>.crt` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
-      * `http-private-key` to `/etc/ssl/<private-key-file>.key` (or to `/etc/ssl/<bundled-certificate-file>.pem`)
 
       ```toml
       [cluster]
@@ -157,17 +145,14 @@ that combine the private key file and the signed certificate file into a single 
         https-enabled = true
 
         # The SSL certificate to use when HTTPS is enabled.
-        https-certificate = "<bundled-certificate-file>.pem"
+        https-certificate = "influxdb.crt"
 
         # Use a separate private key location.
-        https-private-key = "<bundled-certificate-file>.pem"
+        https-private-key = "influxdb.key"
       ```
 
    3. Configure the Data Nodes to use HTTPS when communicating with the Meta Nodes.
       In the `[meta]` section of the configuration file, set the following:
-
-      * `meta-tls-enabled` to `true`
-      * `meta-insecure-tls` to `true` (if using a self-signed key)
 
       ```toml
       [meta]
@@ -175,13 +160,13 @@ that combine the private key file and the signed certificate file into a single 
         [...]
           meta-tls-enabled = true
 
-          #for self-signed key
+          # If using a self-signed certificate:
           meta-insecure-tls = true
       ```
 
 6. **Restart InfluxDB Enterprise**
 
-    Restart the InfluxDB Enterprise Meta Node processes for the configuration changes to take effect:
+    Restart the InfluxDB Enterprise processes for the configuration changes to take effect:
 
     ```sh
     sudo systemctl start influxdb-meta
@@ -201,7 +186,7 @@ that combine the private key file and the signed certificate file into a single 
     influxd-ctl -bind-tls show
     ```
 
-    If using a self-signed certificate, use
+    If using a self-signed certificate, use:
 
     ```sh
     influxd-ctl -bind-tls -k show
