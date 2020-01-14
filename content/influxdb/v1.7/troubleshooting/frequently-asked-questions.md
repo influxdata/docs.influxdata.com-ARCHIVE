@@ -22,7 +22,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
 * [Why does InfluxDB fail to parse microsecond units in the configuration file?](#why-does-influxdb-fail-to-parse-microsecond-units-in-the-configuration-file)
 * [Does InfluxDB have a file system size limit?](#does-influxdb-have-a-file-system-size-limit)
-* [How do I manually trigger a compaction?](#how-do-I-manually-trigger-a-compaction])
+* [How do I manually trigger a compaction?](#how-do-I-manually-trigger-a-compaction)
 
 
 **Command line interface (CLI)**
