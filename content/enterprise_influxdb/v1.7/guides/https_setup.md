@@ -254,18 +254,19 @@ With a self-signed certificate, you must also use the `-k` option to skip certif
 
 ## Connect Telegraf to a secured InfluxDB Enterprise instance
 
-Connecting [Telegraf](/telegraf/latest/) to an InfluxDB Enterprise instance that's using
-HTTPS requires some additional steps.
+Connecting [Telegraf](/telegraf/latest/)
+to an HTTPS-enabled InfluxDB Enterprise instance requires some additional steps.
 
-In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), under the OUTPUT PLUGINS section, edit the `urls`
-setting to indicate `https` instead of `http` and change `localhost` to the
-relevant domain name.
->
-The best practice in terms of security is to transfer the cert to the client and make it trusted (e.g. by putting in OS cert repo or using `ssl_ca` option).  The alternative is to sign the cert using an internal CA and then trust the CA cert.
+In Telegraf's configuration file (`/etc/telegraf/telegraf.conf`), under the OUTPUT PLUGINS section,
+edit the `urls` setting to indicate `https` instead of `http`.
+Also change `localhost` to the relevant domain name.
 
+The best practice in terms of security is to transfer the certificate to the client and make it trusted
+(either by putting in the OS's trusted certificate system or using the `ssl_ca` option).
+The alternative is to sign the cert using an internal CA and then trust the CA cert.
 
-If you're using a self-signed certificate, uncomment the `insecure_skip_verify`
-setting and set it to `true`.
+If you're using a self-signed certificate,
+uncomment the `insecure_skip_verify` setting and set it to `true`.
 
 ```toml
 ###############################################################################
