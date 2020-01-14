@@ -219,7 +219,7 @@ Trigger a compaction by doing one of the following:
 - Use the offline-compact tooling to do a full compaction of a shard offline (influxd must be down).
 - Do a full compaction after startup by adjusting the [`compact-full-write-cold-duration`](/influxdb/v1.7/administration/config/#compact-full-write-cold-duration-4h) setting in your InfluxDB configuration file. For more information, see [Using the configuration file](/influxdb/v1.7/administration/config/#using-the-configuration-file/).
 
-> Note: You can't manually trigger a compaction via the API.
+> **Note:** You can't manually trigger a compaction via the API.
 
 ## How do I use the InfluxDB CLI to return human readable timestamps?
 
