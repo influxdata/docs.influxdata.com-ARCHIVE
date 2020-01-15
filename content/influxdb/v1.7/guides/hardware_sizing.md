@@ -9,6 +9,7 @@ menu:
 Review configuration and hardware guidelines for InfluxDB OSS (open source) and InfluxDB Enterprise:
 
 * [Single node or cluster?](/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster?)
+* [Queries guidelines](#queries-guidelines)
 * [Single node guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
 * [Cluster guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
 * [When do I need more RAM?](/influxdb/v1.7/guides/hardware_sizing/#when-do-i-need-more-ram)
@@ -30,21 +31,19 @@ We recommend a cluster to distribute the load among multiple servers. Performanc
 
 ### Queries guidelines
 
-Queries complexity varies widely on system impact. We provide recommendations for a single node and clusters based on **moderate** query loads. For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
+Queries complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads. For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
 
 |Query complexity| Criteria|
 |----------------|----------|
-|Simple          |Have few or no functions and no regular expressions|
-|                |Are bounded in time to a few minutes, hours, or maybe a day|
-|                |Typically execute in a few milliseconds to a few dozen milliseconds|
-
+|Simple          | Have few or no functions and no regular expressions|
+|                | Are bounded in time to a few minutes, hours, or maybe a day|
+|                | Typically execute in a few milliseconds to a few dozen milliseconds|
 |Moderate queries| Have multiple functions and one or two regular expressions|
-||May also have complex `GROUP BY` clauses or sample a time range of multiple weeks|
-||Typically execute in a few hundred or a few thousand milliseconds|
-
-|Complex queries| Have multiple aggregation or transformation functions or multiple regular expressions
-||May sample a very large time range of months or years|
-||Typically take multiple seconds to execute|
+|                | May also have complex `GROUP BY` clauses or sample a time range of multiple weeks|
+|                | Typically execute in a few hundred or a few thousand milliseconds|
+|Complex queries | Have multiple aggregation or transformation functions or multiple regular expressions
+|                | May sample a very large time range of months or years|
+|                |Typically take multiple seconds to execute|
 
 If your performance requirements fall into the **moderate** or **low** [load ranges](#load-ranges), you can likely use a single node instance of InfluxDB.
 
