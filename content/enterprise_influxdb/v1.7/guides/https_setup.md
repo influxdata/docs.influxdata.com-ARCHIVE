@@ -51,7 +51,9 @@ that combine the private key file and the signed certificate file into a single 
 
 ## Setup HTTPS in an InfluxDB Enterprise cluster
 
-1. **Generate a self-signed certificate** (optional)
+1. **Download or generate certificate files**
+
+    If using a certificate provided by a CA, follow their instructions to download the certificate files.
 
     If using a self-signed certificate, use the `openssl` utility to create a certificate.
     The following command generates a private key file (`.key`) and a self-signed
@@ -77,6 +79,11 @@ that combine the private key file and the signed certificate file into a single 
     or the single bundled file (`.pem`)
     in the `/etc/ssl/` directory of each meta node and data node.
 
+    {{% note %}}
+Some Certificate Authorities provide certificate files with other extensions.
+Consult your CA if you are unsure about how to use these files.
+    {{% /note %}}
+
 3. **Ensure file permissions for each Node**
    
     Certificate files require read and write access by the `root` user.
@@ -90,7 +97,7 @@ that combine the private key file and the signed certificate file into a single 
 
 4. **Enable HTTPS within the configuration file for each meta node**
 
-    Enable HTTPS for each meta node within the `[meta]` section of the configuration file (`/etc/influxdb/influxdb-meta.conf`) by setting:
+    Enable HTTPS for each meta node within the `[meta]` section of the meta node configuration file (`influxdb-meta.conf`) by setting:
 
     ```toml
     [meta]
@@ -112,7 +119,7 @@ that combine the private key file and the signed certificate file into a single 
 
 5. **Enable HTTPS within the configuration file for each data node**
 
-    Make the following sets of changes in the configuration file at `/etc/influxdb/influxdb.conf` on each data node:
+    Make the following sets of changes in the configuration file (`influxdb.conf`) on each data node:
 
     1. Enable HTTPS for each data node within the `[http]` section of the configuration file by setting:
 
