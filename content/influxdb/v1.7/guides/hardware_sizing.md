@@ -43,7 +43,7 @@ Queries complexity varies widely on system impact. Recommendations for both sing
 |                | Typically execute in a few hundred or a few thousand milliseconds|
 |Complex queries | Have multiple aggregation or transformation functions or multiple regular expressions
 |                | May sample a very large time range of months or years|
-|                |Typically take multiple seconds to execute|
+|                | Typically take multiple seconds to execute|
 
 If your performance requirements fall into the **moderate** or **low** [load ranges](#load-ranges), you can likely use a single node instance of InfluxDB.
 
@@ -87,7 +87,7 @@ InfluxDB loads are estimated by writes per second, queries per second, and numbe
 
 A cluster must have a minimum of three independent meta nodes to survive the loss of a server. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes. Set up clusters with an odd number of meta nodes──an even number may cause issues in certain configurations. Meta nodes do not need very much computing power. Regardless of the cluster load, we recommend the following for the meta nodes:
 
-* CPU: 1-2 cores
+* vCPU or CPU: 1-2 cores
 * RAM: 512 MB - 1 GB
 * IOPS: 50
 
@@ -137,13 +137,13 @@ The Enterprise web server is primarily an HTTP server with similar load requirem
 
 In general, more RAM helps queries return faster. Your RAM requirements are primarily determined by [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality). Higher cardinality requires more RAM. Regardless of RAM, a series cardinality of 10 million or more can cause OOM failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
 
-### Cluster sizing guidelines
+## Additional cluster sizing guidelines
 
-Review cluster sizing guidelines below for InfluxDB Enterprise. Guidelines consider infrastructure (in this case, AWS EC2 R4 instances), replication factor, and cardinality, ingest, and query.
+The following InfluxDB Enterprise guidelines consider criteria, such as infrastructure (in this case, AWS EC2 R4 instances), replication factor, cardinality, and write loads, query loads, and write/query loads combined.
 
-> Note, guidelines stem from testing a DevOps monitoring use case.
+> These guidelines stem from a DevOps monitoring use case, maintaining a group of computers, monitoring server metrics, such as CPU, kernel, memory, disk space, disk I/O, network, and so on. Nine measurements have 10 tags, from 6-20 values, totaling 101 values written during each simulated data collection cycle of 10 seconds. Data is generated randomly to ensure real-life, varied data.
 
-#### Infrastructure
+### Infrastructure
 
 For the following AWS EC2 memory optimized instances:
 
@@ -152,12 +152,36 @@ For the following AWS EC2 memory optimized instances:
 - R4.4xlarge (16 cores)
 - R4.8xlarge (32 cores)
 
-|Isolated| Combined|
-Ingest|	Query|	Node|	Ingest	Query
-296922	16	2N4C	151547	16
+|Writes|	Query|	Node|	Combined writes and queries
+|296922	|16	2N4C|	151547|	16|
 560403	30	2N8C	290768	26
 972759	54	2N16C	456255	50
 1860063	84	2N32C	881730	74
+
+### Guidelines by cardinality (number of series)
+
+#### 10,000
+
+|Nodes x Core | Writes per second | Queries per second | Queries and writes per second |
+|2x4          | 296,922           | 16                 | 151547       |
+|2x8          | 560,403           | 30                 | 290768
+|2x16         | 972,759           | 54                 | 456255
+|2x32         | 1,860,063         | 84                 | 881730
+|4x8          | 1,781,458         | 100                | 682098
+|4x16         | 3,430,677         | 192                | 1732683
+|4x32         | 6,351,300         | 432                | 3283359
+|6x8          | 2,923,294         | 216                | 1049786
+|6x16         | 5,650,887         | 498                | 2246123
+|6x32         | 9,842,464         | 1248               | 5229244
+|8x8          | 3,987,819         | 632                | 1722621
+|8x16         | 7,798,848         | 1384               | 3911525
+|8x32         | 13,189,694        | 3648               | 7891207
+
+#### 100,000
+
+#### 1,000,000
+
+#### 10,000,000
 
 ## Storage: type, amount, and configuration
 
