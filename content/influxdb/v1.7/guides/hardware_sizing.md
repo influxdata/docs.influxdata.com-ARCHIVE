@@ -14,7 +14,7 @@ Review configuration and hardware guidelines for InfluxDB OSS (open source) and 
 * [Cluster guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
 * [When do I need more RAM?](/influxdb/v1.7/guides/hardware_sizing/#when-do-i-need-more-ram)
 * [Recommended cluster configurations](#recommended-cluster-configurations)
-* [Storage: type, amount, and configuration](/influxdb/v1.7/guides/hardware_sizing/#storage:-type-,-amount-,-and-configuration)
+* [Storage: type, amount, and configuration](#storage-type-amount-and-configuration)
 
 ## Single node or cluster?
 
