@@ -8,7 +8,7 @@ menu:
     parent: Administration
 ---
 
-* [Data node configuration settings](#data-node-configurations)
+* [Data node configuration settings](#data-node-configuration-settings)
   * [Global](#global-settings)
   * [Enterprise license [enterprise]](#enterprise-license-settings)
   * [Meta node `[meta]`](#meta-node-settings)
@@ -191,7 +191,7 @@ Controls where the actual shard data for InfluxDB lives and how it is compacted 
 "dir" may need to be changed to a suitable place for your system.
 The defaults should work for most systems.
 
-For InfluxDB OSS, see the [OSS documentation](/influxdb/v1.7/administration/config/#data-settings-data).
+For InfluxDB OSS, see the [OSS documentation](/influxdb/v1.7/administration/config/#data-settings).
 
 #### `dir = "/var/lib/influxdb/data"`
 

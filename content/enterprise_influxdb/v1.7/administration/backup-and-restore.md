@@ -53,7 +53,7 @@ Incremental backups create a copy of the metastore and shard data that have chan
 If there are no existing incremental backups, the system automatically performs a complete backup.
 
 Restoring a `-full` backup and restoring an incremental backup require different syntax.
-To prevent issues with [restore](#restore), keep `-full` backups and incremental backups in separate directories.
+To prevent issues with [restore](#restore-utility), keep `-full` backups and incremental backups in separate directories.
 
 To perform a full restore of metastore, including users, credentials, and permissions, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents. The message `Backing up meta data... Done.` indicates that your meta data (including users, credentials, and permissions) has been successfully backed up.
 
@@ -366,7 +366,7 @@ time                  written
 
 ##### Restore writes information not part of the original backup
 
-If a [restore from an incremental backup](#syntax-for-a-restore-from-an-incremental-backup) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
+If a [restore from an incremental backup](#syntax-to-restore-from-an-incremental-backup) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
 Backups consist of a shard data backup and a metastore backup.
 The **shard data backup** contains the actual time series data: the measurements, tags, fields, and so on.
 The **metastore backup** contains user information, database names, retention policy names, shard metadata, continuous queries, and subscriptions.
@@ -383,7 +383,7 @@ The unintended data, however, include only the metastore information, not the sh
 
 InfluxDB Enterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, be sure to follow the syntax
-for [restoring from a full backup](#syntax-for-a-restore-from-a-full-backup).
+for [restoring from a full backup](#syntax-to-restore-from-a-full-backup).
 
 ## Exporting and importing data
 

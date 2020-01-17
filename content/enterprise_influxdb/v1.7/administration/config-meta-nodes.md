@@ -8,7 +8,7 @@ menu:
     parent: Administration
 ---
 
-* [Meta node configuration settings](#meta-node-configurations)
+* [Meta node configuration settings](#meta-node-configuration-settings)
   * [Global options](#global-options)
   * [Enterprise license `[enterprise]`](#enterprise)
   * [Meta node `[meta]`](#meta)

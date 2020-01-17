@@ -257,7 +257,7 @@ TCP address of the target data node.
 
 ###### [ `-full` ]
 
-Perform a [full](/enterprise_influxdb/v1.7/administration/backup-and-restore/#backup) backup.
+Perform a [full backup](/enterprise_influxdb/v1.7/administration/backup-and-restore/#backup-utility).
 
 ###### [ `-rp <rp_name>` ]
 
@@ -341,7 +341,7 @@ Resources: [Rebalance InfluxDB Enterprise clusters](/enterprise_influxdb/v1.7/gu
 In the following example, the `copy-shard` command copies the shard with the id `22` from the data node running at `cluster-data-node-01:8088` to the data node running at `cluster-data-node-02:8088`.
 
 ```bash
-$ influxd-ctl copy-shard cluster-data-node-01:8088 cluster-data-node-02:8088 22'
+$ influxd-ctl copy-shard cluster-data-node-01:8088 cluster-data-node-02:8088 22
 
 Copied shard 22 from cluster-data-node-01:8088 to cluster-data-node-02:8088
 ```
@@ -840,7 +840,7 @@ Name of the single retention policy to restore.
 
 Identifier of the [shard](/influxdb/v1.7/concepts/glossary/#shard) to restore.
 
-Resources: [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/backup-and-restore/#restore)
+Resources: [Backing up and restoring in InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/backup-and-restore/)
 
 #### Examples
 

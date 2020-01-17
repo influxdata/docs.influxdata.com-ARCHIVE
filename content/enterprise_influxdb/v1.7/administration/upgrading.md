@@ -114,10 +114,10 @@ Ensure that the meta cluster is healthy before upgrading the data nodes.
 Complete the following steps to upgrade data nodes:
 
 1. [Download the data node package](#download-the-data-node-package).
-2. [Stop traffic to data nodes](#stop-traffic-to-data-nodes).
+2. [Stop traffic to data nodes](#stop-traffic-to-the-data-node).
 3. [Install the data node package](#install-the-data-node-package).
 4. [Update the data node configuration file](#update-the-data-node-configuration-file).
-5. For Time Series Index (TSI) only. [Rebuild TSI indexes](#prepare-your-data-node-to-support-tsi).
+5. For Time Series Index (TSI) only. [Rebuild TSI indexes](#rebuild-tsi-indexes).
 6. [Restart the `influxdb` service](#restart-the-influxdb-service).
 7. [Restart traffic to data nodes](#restart-traffic-to-data-nodes).
 8. Repeat steps 1-7 for each data node in your cluster.
@@ -171,7 +171,7 @@ Migrate any custom settings from your previous data node configuration file.
     | Section | Setting                                                   |
     | --------| ----------------------------------------------------------|
     | `[data]` |  <ul><li>To use Time Series Index (TSI) disk-based indexing, add [`index-version = "tsi1"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#index-version-inmem) <li>To use TSM in-memory index, add [`index-version = "inmem"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#index-version-inmem) <li>Add [`wal-fsync-delay = "0s"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#wal-fsync-delay-0s) <li>Add [`max-concurrent-compactions = 0`](/enterprise_influxdb/v1.7/administration/config-data-nodes#max-concurrent-compactions-0)<li>Set[`cache-max-memory-size`](/enterprise_influxdb/v1.7/administration/config-data-nodes#cache-max-memory-size-1g) to `1073741824` |
-    | `[cluster]`| <ul><li>Add [`pool-max-idle-streams = 100`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-streams-100) <li>Add[`pool-max-idle-time = "1m0s"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-time-60s) <li>Remove `max-remote-write-connections` 
+    | `[cluster]`| <ul><li>Add [`pool-max-idle-streams = 100`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-streams-100) <li>Add[`pool-max-idle-time = "1m0s"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-time-60s) <li>Remove `max-remote-write-connections`
     |[`[anti-entropy]`](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy)| <ul><li>Add `enabled = true` <li>Add `check-interval = "30s"` <li>Add `max-fetch = 10`|
     |`[admin]`| Remove entire section.|
 
@@ -188,8 +188,8 @@ Complete the following steps for Time Series Index (TSI) only.
 3. Use the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi) utility to rebuild the TSI index. For example, run the following command:
 
     ```js
-    influx_inspect buildtsi -datadir /yourDataDirectory -waldir /wal`
-    ``` 
+    influx_inspect buildtsi -datadir /yourDataDirectory -waldir /wal
+    ```
 
     Replacing `yourDataDirectory` with the name of your directory. Running this command converts TSM-based shards to TSI shards or rebuilds existing TSI shards.
 
