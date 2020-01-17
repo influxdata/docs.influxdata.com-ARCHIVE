@@ -43,7 +43,7 @@ a private key file (`.key`) and a signed certificate file (`.crt`) file pair, as
 that combine the private key file and the signed certificate file into a single bundled file (`.pem`).
 
 The following two sections outline how to set up HTTPS with InfluxDB [using a CA-signed
-certificate](#setup-https-with-a-ca-signed-certificate) and [using a self-signed certificate](#setup-https-with-a-self-signed-certificate)
+certificate](#set-up-https-with-a-ca-certificate) and [using a self-signed certificate](#set-up-https-with-a-self-signed-certificate)
 on Ubuntu 16.04.
 Steps may vary for other operating systems.
 
@@ -179,7 +179,7 @@ Enable HTTPS in the `[http]` section of the configuration file (`/etc/influxdb/i
 ```
 
 > If setting up HTTPS for [InfluxDB Enterprise](/enterprise_influxdb), you also need to configure insecure TLS connections between both meta and data nodes in your cluster.
-> Instructions are provided in the [InfluxDB Enterprise HTTPS Setup guide](/enterprise_influxdb/latest/guides/https_setup/#setup-https-with-a-self-signed-certificate).
+> Instructions are provided in the [InfluxDB Enterprise HTTPS Setup guide](/enterprise_influxdb/latest/guides/https_setup/#set-up-https-with-a-self-signed-certificate).
 
 #### Step 4: Restart InfluxDB
 

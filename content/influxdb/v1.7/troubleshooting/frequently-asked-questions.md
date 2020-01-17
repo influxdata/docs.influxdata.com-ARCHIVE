@@ -26,9 +26,9 @@ Where applicable, it links to outstanding issues on GitHub.
 
 **Command line interface (CLI)**
 
-* [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-make-influxdb-s-cli-return-human-readable-timestamps)
-* [How can a non-admin user `USE` a database in the InfluxDB CLI?](#how-can-a-non-admin-user-use-a-database-in-influxdb-s-cli)
-* [How do I write to a non-`DEFAULT` retention policy with the InfluxDB CLI?](#how-do-i-write-to-a-non-default-retention-policy-with-influxdb-s-cli)
+* [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-use-the-influxdb-cli-to-return-human-readable-timestamps)
+* [How can a non-admin user `USE` a database in the InfluxDB CLI?](#how-can-a-non-admin-user-use-a-database-in-the-influxdb-cli)
+* [How do I write to a non-`DEFAULT` retention policy with the InfluxDB CLI?](#how-do-i-write-to-a-non-default-retention-policy-with-the-influxdb-cli)
 * [How do I cancel a long-running query?](#how-do-i-cancel-a-long-running-query)
 
 **Data types**
@@ -72,7 +72,7 @@ Where applicable, it links to outstanding issues on GitHub.
 
 * [How do I write integer field values?](#how-do-i-write-integer-field-values)
 * [How does InfluxDB handle duplicate points?](#how-does-influxdb-handle-duplicate-points)
-* [What newline character does the InfluxDB API require?](#what-newline-character-does-the-http-api-require)
+* [What newline character does the InfluxDB API require?](#what-newline-character-does-the-influxdb-api-require)
 * [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)
 * [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)
 * [Does the precision of the timestamp matter?](#does-the-precision-of-the-timestamp-matter)
@@ -207,7 +207,7 @@ run: parse config: time: unknown unit [µ|u] in duration [<integer>µ|<integer>u
 InfluxDB works within file system size restrictions for Linux and Windows POSIX. Some storage providers and distributions have size restrictions; for example:
 
 - Amazon EBS volume limits size to ~16TB
-- Linux ext3 file system limits size ~16TB 
+- Linux ext3 file system limits size ~16TB
 - Linux ext4 file system limits size to ~1EB (with file size limit ~16TB)
 
 If you anticipate growing over 16TB per volume/file system, we recommend finding a provider and distribution that supports your storage requirements.
@@ -597,7 +597,7 @@ time                    sunflowers                 time                  mean
 
 The most common reasons why your query returns no data or partial data:
 
-- [Querying the wrong retention policy](#querying-wrong-retention-policies) (no data returned)
+- [Querying the wrong retention policy](#querying-wrong-retention-policy) (no data returned)
 - [No field key in the SELECT clause](#no-field-key-in-the-select-clause) (no data returned)
 - [SELECT query includes `GROUP BY time()`](#select-query-includes-group-by-time) (partial data before `now()` returned)
 - [Tag and field key with the same name](#tag-and-field-key-with-the-same-name)
@@ -693,14 +693,14 @@ Avoid using the same name for a tag and field key. If you inadvertently add the 
 
     ```sql
 
-    /* select each field key to keep in the original measurement and send to a temporary 
+    /* select each field key to keep in the original measurement and send to a temporary
        measurement; then, group by the tag keys to keep (leave out the duplicate key) */
 
     SELECT "field_key","field_key2","field_key3"
     INTO <temporary_measurement> FROM <original_measurement>
     WHERE <date range> GROUP BY "tag_key","tag_key2","tag_key3"
 
-    /* verify the field keys and tags keys were successfully moved to the temporary 
+    /* verify the field keys and tags keys were successfully moved to the temporary
     measurement */
     SELECT * FROM "temporary_measurement"
 
@@ -906,7 +906,7 @@ This can cause InfluxDB to overwrite [points](/influxdb/v1.7/concepts/glossary/#
 Include `GROUP BY *` in all `INTO` queries to preserve tags in the newly written data.
 
 Note that this behavior does not apply to queries that use the [`TOP()`](/influxdb/v1.7/query_language/functions/#top) or [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#bottom) functions.
-See the [`TOP()`](/influxdb/v1.7/query_language/functions/#issue-3-top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) documentation for more information.
+See the [`TOP()`](/influxdb/v1.7/query_language/functions/#top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#bottom-tags-and-the-into-clause) documentation for more information.
 
 #### Example
 

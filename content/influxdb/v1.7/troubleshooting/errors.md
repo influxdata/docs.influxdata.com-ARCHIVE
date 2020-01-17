@@ -367,7 +367,7 @@ Find common errors that occur when importing data in the command line interface 
   - [Inconsistent data types](#inconsistent-data-types)
   - [Data points older than retention policy](#data-points-older-than-retention-policy)
   - [Unnamed import file](#unnamed-import-file)
-  - [Docker container cannot read host files](#container-cannot-read-host-files)
+  - [Docker container cannot read host files](#docker-container-cannot-read-host-files)
 
   >**Note:** To learn how to use the `-import` command, see [Import data from a file with `-import`](/influxdb/v1.7/tools/shell/#import-data-from-a-file-with-import).
 
