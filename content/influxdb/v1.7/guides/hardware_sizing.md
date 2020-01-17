@@ -32,17 +32,17 @@ If you want a single node instance of InfluxDB that's fully open source without 
 
 Queries complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads. For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
 
-|Query complexity| Criteria|
-|----------------|----------|
-|Simple          | Have few or no functions and no regular expressions|
-|                | Are bounded in time to a few minutes, hours, or maybe a day|
-|                | Typically execute in a few milliseconds to a few dozen milliseconds|
-|Moderate queries| Have multiple functions and one or two regular expressions|
-|                | May also have complex `GROUP BY` clauses or sample a time range of multiple weeks|
-|                | Typically execute in a few hundred or a few thousand milliseconds|
-|Complex queries | Have multiple aggregation or transformation functions or multiple regular expressions
-|                | May sample a very large time range of months or years|
-|                | Typically take multiple seconds to execute|
+| Query complexity |                                       Criteria                                        |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| Simple           | Have few or no functions and no regular expressions                                   |
+|                  | Are bounded in time to a few minutes, hours, or maybe a day                           |
+|                  | Typically execute in a few milliseconds to a few dozen milliseconds                   |
+| Moderate queries | Have multiple functions and one or two regular expressions                            |
+|                  | May also have complex `GROUP BY` clauses or sample a time range of multiple weeks     |
+|                  | Typically execute in a few hundred or a few thousand milliseconds                     |
+| Complex queries  | Have multiple aggregation or transformation functions or multiple regular expressions |
+|                  | May sample a very large time range of months or years                                 |
+|                  | Typically take multiple seconds to execute                                            |
 
 If your performance requirements fall into the **moderate** or **low** [load ranges](#load-ranges), you can likely use a single node instance of InfluxDB.
 
@@ -55,7 +55,7 @@ InfluxDB loads are estimated by writes per second, queries per second, and numbe
 ### Load ranges
 
 | Load             | Field writes per second  | Moderate queries* per second | Unique series   |
-|------------------|--------------------------|------------------------------|-----------------|
+|------------------|-------------------------:|-----------------------------:|----------------:|
 |  **Low**         |  < 5,000                 |  < 5                         |  < 100,000      |
 |  **Moderate**    |  < 250,000               |  < 25                        |  < 1,000,000    |
 |  **High**        |  > 250,000               |  > 25                        |  > 1,000,000    |
@@ -96,11 +96,13 @@ A cluster with one data node is valid but has no data redundancy. Redundancy is 
 
  Data nodes guidelines vary by estimated load on each node in the cluster.
 
-| Load         | Writes per second per node  | Moderate queries* per second per node | Unique series per node |
-|--------------|-----------------------------|---------------------------------------|------------------------|
-|  **Low**     |  < 5,000                    |  < 5                                  |  < 100,000             |
-|  **Moderate**|  < 100,000                  |  < 25                                 |  < 1,000,000           |
-|  **High**    |  > 100,000                  |  > 25                                 |  > 1,000,000           |
+### Load ranges
+
+|   Load   | Writes per second per node | Moderate queries* per second per node | Unique series per node |
+| -------- | --------------------------:| -------------------------------------:| ----------------------:|
+| Low      | < 5,000                    | < 5                                   | < 100,000              |
+| Moderate | < 100,000                  | < 25                                  | < 1,000,000            |
+| High     | > 100,000                  | > 25                                  | > 1,000,000            |
 
 * Queries vary widely in their impact on the system. Recommendations are provided for moderate query loads. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
