@@ -13,6 +13,7 @@ Review configuration and hardware guidelines for InfluxDB OSS (open source) and 
 * [Single node guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node)
 * [Cluster guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-cluster)
 * [When do I need more RAM?](/influxdb/v1.7/guides/hardware_sizing/#when-do-i-need-more-ram)
+* [Recommended cluster configurations](#recommended-cluster-configurations)
 * [Storage: type, amount, and configuration](/influxdb/v1.7/guides/hardware_sizing/#storage:-type-,-amount-,-and-configuration)
 
 ## Single node or cluster?
@@ -168,7 +169,34 @@ To find your recommended cluster configuration, select the cardinality (number o
 - **queries per second only** (no data is being written)
 - **simultaneous queries and writes per second**
 
-tabs: 10,000 series
+## Storage: type, amount, and configuration
+
+### Storage volume and IOPS
+
+Consider the type of storage you'll need and the amount. InfluxDB is designed to run on solid state drives (SSDs) and memory-optimized cloud instances, for example, AWS EC2 R5 or R4 instances. InfluxDB isn't tested on hard disk drives (HDDs) and we don't recommend HDDs for production. For best results, InfluxDB servers must have a minimum of 1000 IOPS on the storage to ensure recovery and availability. We recommend at least 2000 IOPS for rapid recovery of cluster data nodes after downtime.
+
+See your cloud provider documentation for IOPS detail on your storage volumes.
+
+### Bytes and compression
+
+Database names, [measurements](/influxdb/v1.7/concepts/glossary/#measurement), [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), [field keys](/influxdb/v1.7/concepts/glossary/#field-key), and [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.7/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.7/concepts/glossary/#timestamp) are stored per-point.
+
+Non-string values require approximately three bytes. String values require variable space as determined by string compression.
+
+### Separate `wal` and `data` directories
+
+When running InfluxDB in a production environment, store the `wal` directory and the `data` directory on separate storage devices. This optimization significantly reduces disk contention under heavy write load──an important consideration if the write load is highly variable. If the write load does not vary by more than 15%, the optimization is probably not necessary.
+
+{{< tab-labels >}}
+{{% tabs %}}
+[10,000 series](#)
+[100,000 series](#)
+[1,000,000 series](#)
+[10,000,000 series](#)
+{{% /tabs %}}
+{{< tab-content-container >}}
+
+{{% tab-content %}}
 
 expand: Replication factor, 2
 
@@ -188,8 +216,9 @@ expand: Replication factor, 2
 |     8 x 16    |         7,798,848 |               1384 |     544 + 3,911,525         |
 |     8 x 32    |        13,189,694 |               3648 |   1,152 + 7,891,207         |
 
+{{% /tab-content %}}
 
-#### 100,000
+{{% tab-content %}}
 
 expand: Replication factor, 2
 
@@ -209,7 +238,10 @@ expand: Replication factor, 2
 |     8 x 16    |         5,478,839 |               1632 |   1,024 + 1,843,951         |
 |     8 x 32    |        1,0527,091 |               3392 |   1,792 + 4,998,321         |
 
-#### 1,000,000
+
+{{% /tab-content %}}
+
+{{% tab-content %}}
 
 expand: Replication factor, 2
 
@@ -229,7 +261,9 @@ expand: Replication factor, 2
 |     8 x 16    |         4,167,813 |              1,856 |     640 + 2,031,420         |
 |     8 x 32    |         7,813,034 |              3,201 |     896 + 4,897,955         |
 
-#### 10,000,000
+{{% /tab-content %}}
+
+{{% tab-content %}}
 
 expand: Replication factor, 2
 
@@ -249,20 +283,7 @@ expand: Replication factor, 2
 |     8 x 16    |         1,345,521 |              2,048 |     640 +  2,031,420        |
 |     8 x 32    |                 - |              3,201 |     896 +  4,897,955        |
 
-## Storage: type, amount, and configuration
+{{% /tab-content %}}
 
-### Storage volume and IOPS
-
-Consider the type of storage you'll need and the amount. InfluxDB is designed to run on solid state drives (SSDs) and memory-optimized cloud instances, for example, AWS EC2 R5 or R4 instances. InfluxDB isn't tested on hard disk drives (HDDs) and we don't recommend HDDs for production. For best results, InfluxDB servers must have a minimum of 1000 IOPS on the storage to ensure recovery and availability. We recommend at least 2000 IOPS for rapid recovery of cluster data nodes after downtime.
-
-See your cloud provider documentation for IOPS detail on your storage volumes.
-
-### Bytes and compression
-
-Database names, [measurements](/influxdb/v1.7/concepts/glossary/#measurement), [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), [field keys](/influxdb/v1.7/concepts/glossary/#field-key), and [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.7/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.7/concepts/glossary/#timestamp) are stored per-point.
-
-Non-string values require approximately three bytes. String values require variable space as determined by string compression.
-
-### Separate `wal` and `data` directories
-
-When running InfluxDB in a production environment, store the `wal` directory and the `data` directory on separate storage devices. This optimization significantly reduces disk contention under heavy write load──an important consideration if the write load is highly variable. If the write load does not vary by more than 15%, the optimization is probably not necessary.
+{{< /tab-content-container >}}
+{{< /tab-labels >}}
