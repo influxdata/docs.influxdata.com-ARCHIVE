@@ -18,17 +18,15 @@ Review configuration and hardware guidelines for InfluxDB OSS (open source) and 
 
 ## Single node or cluster?
 
-If you need a single node instance of InfluxDB that's fully open source without redundancy, InfluxDB OSS works. (Without redundancy means if the server is unavailable, writes and queries immediately fail.)
-
-If you need high-availability and redundancy, InfluxDB Enterprise offers multiple nodes (called a cluster). Multiple copies of data are distributed across multiple servers, so the loss of one server doesn't significantly impact the cluster.
-
-If your performance requires at least one of the following:
+If your InfluxDB performance requires at least one of the following:
 
 - > 750,000 writes per second
 - > 100 moderate queries
 - > 10,000,000 unique series
 
-We recommend a cluster to distribute the load among multiple servers. Performance at this scale on a single node may not be achievable. Please contact us at <sales@influxdb.com> for assistance tuning your systems.
+A single node may not support performance at this scale. We recommend InfluxDB Enterprise, which supports multiple nodes (a cluster) of servers. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy——a server down doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
+
+If you want a single node instance of InfluxDB that's fully open source without redundancy, InfluxDB OSS (open source) works. (Without redundancy means if the server is unavailable, writes and queries immediately fail.)
 
 ## Queries guidelines
 
