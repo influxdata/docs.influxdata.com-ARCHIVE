@@ -105,7 +105,7 @@ For example, assume there are two data nodes in your cluster: `node1` and `node2
 Both `node1` and `node2` own `shard1` so `shard1` is replicated across each.
 
 When a status check runs, `node1` will ask `node2` when `shard1` was last modified.
-If the reported modification time differs from the previous check, then 
+If the reported modification time differs from the previous check, then
 `node1` asks `node2` for a new digest of `shard1`, checks for differences (performs a "diff") between the `shard1` digest for `node2` and the local `shard1` digest.
 If a difference exists, `shard1` is flagged as having entropy.
 
@@ -161,12 +161,12 @@ While write replication between shard owner nodes (with a
 greater than 1) typically happens in milliseconds, this slight difference is
 still enough to cause the appearance of entropy where there is none.
 
-Because the Anti-Entropy service repairs only cold shards, unexpected effects can occur. 
+Because the Anti-Entropy service repairs only cold shards, unexpected effects can occur.
 Consider the following scenario:
 
 1. A shard goes cold.
 2. Anti-Entropy detects entropy.
-3. Entropy is reported by the [Anti-Entropy `/status` API](/enterprise_influxdb/v1.7/administration/anti-entropy-api#status) or with the `influxd-ctl entropy show` command.
+3. Entropy is reported by the [Anti-Entropy `/status` API](/enterprise_influxdb/v1.7/administration/anti-entropy-api/#get-status) or with the `influxd-ctl entropy show` command.
 4. Shard takes a write, gets compacted, or something else causes it to go hot.
   _These actions are out of Anti-Entropy's control._
 5. A repair is requested, but is ignored because the shard is now hot.
