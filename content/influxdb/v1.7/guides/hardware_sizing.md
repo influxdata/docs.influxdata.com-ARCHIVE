@@ -106,19 +106,19 @@ A cluster with one data node is valid but has no data redundancy. Redundancy is 
 
 * Queries vary widely in their impact on the system. Recommendations are provided for moderate query loads. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
-#### Low load
+### Low load
 
 * vCPU or CPU: 2 cores
 * RAM: 4-8 GB
 * IOPS: 1000
 
-#### Moderate load
+### Moderate load
 
 * vCPU or CPU: 4-6 cores
 * RAM: 16-32 GB
 * IOPS: 1000+
 
-#### High load
+### High load
 
 * vCPU or CPU: 8+ cores
 * RAM: 32+ GB
