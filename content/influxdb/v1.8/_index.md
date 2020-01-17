@@ -1,11 +1,11 @@
 ---
-title: InfluxDB 1.7 documentation
+title: InfluxDB 1.8 documentation
 
 menu:
   influxdb:
-    name: v1.7
-    identifier: influxdb_1_7
-    weight: 8
+    name: v1.8
+    identifier: influxdb_1_8
+    weight: 1
 ---
 
 InfluxDB is a [time series database](https://www.influxdata.com/time-series-database/) designed to handle high write and query loads.
