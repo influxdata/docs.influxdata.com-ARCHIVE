@@ -249,7 +249,7 @@ expand: Replication factor, 2
 
 expand: Replication factor, 2
 
-| Nodes x Core  | Writes per second | Queries per second | Queries + writes per second |
+| Nodes x Core  | Writes per second | Queries per second | Queries + Writes per second |
 |:-------------:| ----------------: | -----------------: | :-------------------------: |
 |     2 x 4     |            87,602 |                 18 |      12 +  54,797           |
 |     2 x 8     |           169,039 |                 38 |      24 +  99,180           |
