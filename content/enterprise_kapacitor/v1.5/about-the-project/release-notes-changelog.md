@@ -6,6 +6,15 @@ menu:
     parent: About the Project
 ---
 
+## v1.5.4 [2020-01-16]
+
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.4 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+
+## Features
+
+- Add support for custom Certificate Authority (CA) certificates when connecting to Plutonium meta node.
+- Update to Kapacitor master, includes upgrade to Go 1.13.6 and updated release build.
+
 ## v1.5.3 [2019-06-18]
 
 This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.3 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
@@ -25,7 +34,6 @@ failed to create handler: could not verify liveness of topic owners: status of 4
 ## Features
 
 - Ensure all owner nodes are alive before creating, updating, or deleting topic handlers. See note above.
-
 - Support insecure TLS and auth when connecting to InfluxDB Enterprise meta node.
 
 ### Bug fixes
