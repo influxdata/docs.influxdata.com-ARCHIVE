@@ -12,7 +12,7 @@ This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.4 release. For
 
 ## Features
 
-- Add support for custom Certificate Authority (CA) certificates when connecting to Plutonium meta node.
+- Add support for custom Certificate Authority (CA) certificates when connecting to InfluxDB Enterprise meta node.
 - Update to Kapacitor master, includes upgrade to Go 1.13.6 and updated release build.
 
 ## v1.5.3 [2019-06-18]
