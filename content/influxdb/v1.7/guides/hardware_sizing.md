@@ -153,12 +153,6 @@ For the following AWS EC2 memory optimized instances:
 - R4.4xlarge (16 cores)
 - R4.8xlarge (32 cores)
 
-|Writes|	Query|	Node|	Combined writes and queries
-|296922	|16	2N4C|	151547|	16|
-560403	30	2N8C	290768	26
-972759	54	2N16C	456255	50
-1860063	84	2N32C	881730	74
-
 ### Recommended cluster configurations
 
 #### Guidelines by cardinality
