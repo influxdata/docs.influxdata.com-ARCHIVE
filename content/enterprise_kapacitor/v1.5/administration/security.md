@@ -58,14 +58,25 @@ group of the configuration schema.
   # host:port
   meta-addr = "cluster_node_1:8091"
   meta-use-tls = true
+  # Absolute path to PEM encoded Certificate Authority (CA) file.
+  # A CA can be provided without a key/certificate pair.
+  meta-ca = "/etc/kapacitor/ca.pem"
+  # Absolute paths to PEM encoded private key and server certificate files.
+  meta-cert = "/etc/kapacitor/cert.pem"
+  meta-key = "/etc/kapacitor/key.pem"
+  meta-insecure-skip-verify = false
 ```
 
-The properties can be understood as follows:
+Details on the following properties:
 
 * `cache-expiration`: Length of time credentials should be held in the Kapacitor local cache.
 * `bcrypt-cost`: Number of iterations used when hashing the password using the bcrypt algorithm.
 * `meta-addr`: Address to the InfluxDB meta node API endpoint.  Note that if this endpoint is secured using TLS, then the host and domain name portion of this string must match the string specified in the CN field of the certificate.  Otherwise, Kapacitor will reject the certificate, terminate the credential verification transaction, and return `401` to all requests.
-* `meta-use-tls`: Sets up Kapacitor to connect to the InfluxDB meta node using TLS/HTTPS.
+* `meta-use-tls`: Sets up Kapacitor to connect to the InfluxDB Enterprise meta node using TLS/HTTPS.
+* `meta-ca`: Path to the certificate authority file for the InfluxDB Enterprise meta node.
+* `meta-cert` = Path to the (Kapacitor host?) certificate.
+* `meta-key` = Path to the certificate private key.
+* `meta-insecure-skip-verify` = (Is default `false`?) Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
 
 More detailed information is available in
 [Authentication and authorization](/enterprise_kapacitor/v1.5/administration/auth/).  

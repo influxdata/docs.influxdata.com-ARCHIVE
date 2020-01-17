@@ -258,6 +258,13 @@ groups: `[http]` and `[auth]`.
   # host:port
   meta-addr = "cluster_node_1:8091"
   # meta-use-tls = false
+  # Absolute path to PEM encoded Certificate Authority (CA) file.
+  # A CA can be provided without a private key/certificate pair.
+  meta-ca = "/etc/kapacitor/ca.pem"
+  # Absolute paths to PEM encoded private key and server certificate files.
+  meta-cert = "/etc/kapacitor/cert.pem"
+  meta-key = "/etc/kapacitor/key.pem"
+  meta-insecure-skip-verify = false
 ```
 
 In the `[http]` group the value of `auth-enabled` needs to be set to `true`.
@@ -269,6 +276,10 @@ in the `[auth]` group.  These include:
 * `bcrypt-cost`: The number of iterations used when hashing the password using the bcrypt algorithm.  Higher values generate hashes more resilient to brute force cracking attempts, but lead to marginally longer resolution times.
 * `meta-addr`: Declares the address of the InfluxDB Enterprise meta node to connect to in order to access the user and permission store.
 * `meta-use-tls`: Declares whether to use TLS when communication with the influxdb-meta node or not.  Default is `false`.
+* `meta-ca`: Path to the certificate authority file for the InfluxDB Enterprise meta node.
+* `meta-cert` = Path to the (Kapacitor host?) certificate.
+* `meta-key` = Path to the certificate private key.
+* `meta-insecure-skip-verify` = (Is default `false`?) Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
 
 Currently no alternative exists to using InfluxDB Enterprise meta nodes as the backend
 user and privilege store, so an address and port need to be supplied.

@@ -89,7 +89,14 @@ By default, this store is handled by the influxdb-meta cluster.
   # If empty then meta is not used as a user backend.
   # host:port
   meta-addr = "172.17.0.2:8091"
-  # meta-use-tls = false
+  meta-use-tls = false
+  # Absolute path to PEM encoded Certificate Authority (CA) file.
+  # A CA can be provided without a key/certificate pair.
+  meta-ca = "/etc/kapacitor/ca.pem"
+  # Absolute paths to PEM encoded private key and server certificate files.
+  meta-cert = "/etc/kapacitor/cert.pem"
+  meta-key = "/etc/kapacitor/key.pem"
+  meta-insecure-skip-verify = false
 ```
 
 This group includes the following properties:
@@ -98,10 +105,13 @@ This group includes the following properties:
 * `bcrypt-cost`: The number of iterations used when hashing the password using the bcrypt algorithm.
 * `meta-addr`: Address of the influxdb-meta server.  A string containing its host and port. Host can be an IP Address or a domain name.  When using TLS the host part must contain the name used in the CN part of the server certificate.
 * `meta-use-tls`: Whether to connect to the influxdb-meta server over TLS or not. The default value is `false`.
+* `meta-ca`: Path to the certificate authority file for the InfluxDB Enterprise meta node.
+* `meta-cert` = Path to the (Kapacitor host?) certificate.
+* `meta-key` = Path to the certificate private key.
+* `meta-insecure-skip-verify` = (Is default `false`?) Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
 
 Authentication configuration is explained in greater detail in
 [Authentication and Authorization](/enterprise_kapacitor/v1.5/administration/auth/).
-
 
 ### Cluster communications
 
