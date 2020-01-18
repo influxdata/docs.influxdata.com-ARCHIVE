@@ -32,8 +32,8 @@ If you want a single node instance of InfluxDB that's fully open source without 
 
 Queries complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads. For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
 
-| Query complexity |                                       Criteria                                        |
-| ---------------- | ------------------------------------------------------------------------------------- |
+| Query complexity | Criteria                                                                              |
+|------------------|---------------------------------------------------------------------------------------|
 | Simple           | Have few or no functions and no regular expressions                                   |
 |                  | Are bounded in time to a few minutes, hours, or maybe a day                           |
 |                  | Typically execute in a few milliseconds to a few dozen milliseconds                   |
@@ -54,11 +54,11 @@ InfluxDB loads are estimated by writes per second, queries per second, and numbe
 
 ### Load ranges
 
-| Load             | Field writes per second  | Moderate queries* per second | Unique series   |
-|------------------|-------------------------:|-----------------------------:|----------------:|
-|  **Low**         |  < 5,000                 |  < 5                         |  < 100,000      |
-|  **Moderate**    |  < 250,000               |  < 25                        |  < 1,000,000    |
-|  **High**        |  > 250,000               |  > 25                        |  > 1,000,000    |
+| Load         | Field writes per second | Moderate queries* per second | Unique series |
+|--------------|------------------------:|-----------------------------:|--------------:|
+| **Low**      |                 < 5,000 |                          < 5 |     < 100,000 |
+| **Moderate** |               < 250,000 |                         < 25 |   < 1,000,000 |
+| **High**     |               > 250,000 |                         > 25 |   > 1,000,000 |
 
 * Queries vary widely in their impact on the system. Recommendations are provided for moderate query loads. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
@@ -98,11 +98,11 @@ A cluster with one data node is valid but has no data redundancy. Redundancy is 
 
 ### Load ranges
 
-|   Load   | Writes per second per node | Moderate queries* per second per node | Unique series per node |
-| -------- | --------------------------:| -------------------------------------:| ----------------------:|
-| Low      | < 5,000                    | < 5                                   | < 100,000              |
-| Moderate | < 100,000                  | < 25                                  | < 1,000,000            |
-| High     | > 100,000                  | > 25                                  | > 1,000,000            |
+| Load     | Writes per second per node | Moderate queries* per second per node | Unique series per node |
+|----------|---------------------------:|--------------------------------------:|-----------------------:|
+| Low      |                    < 5,000 |                                   < 5 |              < 100,000 |
+| Moderate |                  < 100,000 |                                  < 25 |            < 1,000,000 |
+| High     |                  > 100,000 |                                  > 25 |            > 1,000,000 |
 
 * Queries vary widely in their impact on the system. Recommendations are provided for moderate query loads. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
@@ -176,21 +176,32 @@ To find your recommended cluster configuration, select the cardinality (number o
 
 expand: Replication factor, 2
 
-| Nodes x Core  | Writes per second | Queries per second | Queries + Writes per second |
-|:-------------:| ----------------: | -----------------: | :-------------------------: |
-|     2 x 4     |           296,922 |                 16 |      16 + 151,547           |
-|     2 x 8     |           560,403 |                 30 |      26 + 290,768           |
-|     2 x 16    |           972,759 |                 54 |      50 + 456,255           |
-|     2 x 32    |         1,860,063 |                 84 |      74 + 881,730           |
-|     4 x 8     |         1,781,458 |                100 |      64 + 682,098           |
-|     4 x 16    |         3,430,677 |                192 |     104 + 1,732,683         |
-|     4 x 32    |         6,351,300 |                432 |     188 + 3,283,359         |
-|     6 x 8     |         2,923,294 |                216 |     138 + 1,049,786         |
-|     6 x 16    |         5,650,887 |                498 |     246 + 2,246,123         |
-|     6 x 32    |         9,842,464 |               1248 |     528 + 5,229,244         |
-|     8 x 8     |         3,987,819 |                632 |     336 + 1,722,621         |
-|     8 x 16    |         7,798,848 |               1384 |     544 + 3,911,525         |
-|     8 x 32    |        13,189,694 |               3648 |   1,152 + 7,891,207         |
+| Nodes x Core | Writes per second | Queries per second | Queries + Writes per second |
+|:------------:|------------------:|-------------------:|:---------------------------:|
+|    2 x 4     |           296,922 |                 16 |        16 + 151,547         |
+|    2 x 8     |           560,403 |                 30 |        26 + 290,768         |
+|    2 x 16    |           972,759 |                 54 |        50 + 456,255         |
+|    2 x 32    |         1,860,063 |                 84 |        74 + 881,730         |
+|    4 x 8     |         1,781,458 |                100 |        64 + 682,098         |
+|    4 x 16    |         3,430,677 |                192 |       104 + 1,732,683       |
+|    4 x 32    |         6,351,300 |                432 |       188 + 3,283,359       |
+|    6 x 8     |         2,923,294 |                216 |       138 + 1,049,786       |
+|    6 x 16    |         5,650,887 |                498 |       246 + 2,246,123       |
+|    6 x 32    |         9,842,464 |               1248 |       528 + 5,229,244       |
+|    8 x 8     |         3,987,819 |                632 |       336 + 1,722,621       |
+|    8 x 16    |         7,798,848 |               1384 |       544 + 3,911,525       |
+|    8 x 32    |        13,189,694 |               3648 |      1,152 + 7,891,207      |
+
+Replication factor, 3
+
+| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
+|:------------:|------------------:|-------------------:|:---------------------------:|
+|     3 x 8     |          815,309 |                 63 |      54 + 335,764           |
+|     3 x 16    |         1688,952 |                120 |      87 + 705,324           |
+|     3 x 32    |         3164,758 |                255 |     132 + 1626,721          |
+|     6 x 8     |         2269,541 |                252 |     168 + 838,749           |
+|     6 x 16    |         4593,947 |                624 |     336 + 2019,668          |
+|     6 x 32    |         7776,913 |               1340 |     576 + 3624,521          |
 
 {{% /tab-content %}}
 
@@ -198,21 +209,21 @@ expand: Replication factor, 2
 
 expand: Replication factor, 2
 
-| Nodes x Core  | Writes per second | Queries per second | Queries + writes per second |
-|:-------------:| ----------------: | -----------------: | :-------------------------: |
-|     2 x 4     |           196,922 |                 16 |      14 + 77,006            |
-|     2 x 8     |           482,774 |                 30 |      24 + 203,599           |
-|     2 x 16    |         1,060,909 |                 60 |      42 + 415,314           |
-|     2 x 32    |         1,958,268 |                 94 |      64 + 984,983           |
-|     4 x 8     |         1,144,717 |                108 |      68 + 406,542           |
-|     4 x 16    |         2,512,352 |                228 |     148 + 866,786           |
-|     4 x 32    |         4,346,070 |                564 |     320 + 1,886,596         |
-|     6 x 8     |         1,802,258 |                252 |     156 + 618,193           |
-|     6 x 16    |         3,924,065 |                562 |     384 + 1,068,244         |
-|     6 x 32    |         6,533,499 |               1340 |     912 + 2,083,936         |
-|     8 x 8     |         2,516,332 |                712 |     360 + 1,020,254         |
-|     8 x 16    |         5,478,839 |               1632 |   1,024 + 1,843,951         |
-|     8 x 32    |        1,0527,091 |               3392 |   1,792 + 4,998,321         |
+| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
+|:------------:|------------------:|-------------------:|:---------------------------:|
+|    2 x 4     |           196,922 |                 16 |         14 + 77,006         |
+|    2 x 8     |           482,774 |                 30 |        24 + 203,599         |
+|    2 x 16    |         1,060,909 |                 60 |        42 + 415,314         |
+|    2 x 32    |         1,958,268 |                 94 |        64 + 984,983         |
+|    4 x 8     |         1,144,717 |                108 |        68 + 406,542         |
+|    4 x 16    |         2,512,352 |                228 |        148 + 866,786        |
+|    4 x 32    |         4,346,070 |                564 |       320 + 1,886,596       |
+|    6 x 8     |         1,802,258 |                252 |        156 + 618,193        |
+|    6 x 16    |         3,924,065 |                562 |       384 + 1,068,244       |
+|    6 x 32    |         6,533,499 |               1340 |       912 + 2,083,936       |
+|    8 x 8     |         2,516,332 |                712 |       360 + 1,020,254       |
+|    8 x 16    |         5,478,839 |               1632 |      1,024 + 1,843,951      |
+|    8 x 32    |        1,0527,091 |               3392 |      1,792 + 4,998,321      |
 
 
 {{% /tab-content %}}
@@ -221,21 +232,22 @@ expand: Replication factor, 2
 
 expand: Replication factor, 2
 
-| Nodes x Core  | Writes per second | Queries per second | Queries + writes per second |
-|:-------------:| ----------------: | -----------------: | :-------------------------: |
-|     2 x 4     |           104,805 |                 18 |      12 + 54,797            |
-|     2 x 8     |           195,341 |                 36 |      24 + 99,180            |
-|     2 x 16    |           498,786 |                 70 |      44 + 145,538           |
-|     2 x 32    |         1,195,548 |                102 |      84 + 232,423           |
-|     4 x 8     |           488,460 |                120 |      56 + 222,041           |
-|     4 x 16    |         1,023,072 |                244 |     112 + 428,140           |
-|     4 x 32    |         2,686,660 |                468 |     208 + 729,019           |
-|     6 x 8     |           845,439 |                270 |     126 + 356,401           |
-|     6 x 16    |         1,780,407 |                606 |     288 + 663,920           |
-|     6 x 32    |          430,5148 |              1,488 |     624 + 1,209,530         |
-|     8 x 8     |         1,831,287 |                808 |     296 + 778,020           |
-|     8 x 16    |         4,167,813 |              1,856 |     640 + 2,031,420         |
-|     8 x 32    |         7,813,034 |              3,201 |     896 + 4,897,955         |
+| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
+|:------------:|------------------:|-------------------:|:---------------------------:|
+|    2 x 4     |           104,805 |                 18 |         12 + 54,797         |
+|    2 x 8     |           195,341 |                 36 |         24 + 99,180         |
+|    2 x 16    |           498,786 |                 70 |        44 + 145,538         |
+|    2 x 32    |         1,195,548 |                102 |        84 + 232,423         |
+|    4 x 8     |           488,460 |                120 |        56 + 222,041         |
+|    4 x 16    |         1,023,072 |                244 |        112 + 428,140        |
+|    4 x 32    |         2,686,660 |                468 |        208 + 729,019        |
+|    6 x 8     |           845,439 |                270 |        126 + 356,401        |
+|    6 x 16    |         1,780,407 |                606 |        288 + 663,920        |
+|    6 x 32    |          430,5148 |              1,488 |       624 + 1,209,530       |
+|    8 x 8     |         1,831,287 |                808 |        296 + 778,020        |
+|    8 x 16    |         4,167,813 |              1,856 |       640 + 2,031,420       |
+|    8 x 32    |         7,813,034 |              3,201 |       896 + 4,897,955       |
+
 
 {{% /tab-content %}}
 
@@ -243,21 +255,21 @@ expand: Replication factor, 2
 
 expand: Replication factor, 2
 
-| Nodes x Core  | Writes per second | Queries per second | Queries + Writes per second |
-|:-------------:| ----------------: | -----------------: | :-------------------------: |
-|     2 x 4     |            87,602 |                 18 |      12 +  54,797           |
-|     2 x 8     |           169,039 |                 38 |      24 +  99,180           |
-|     2 x 16    |           334,739 |                 76 |      44 +  145,538          |
-|     2 x 32    |           534,453 |                136 |      84 +  232,423          |
-|     4 x 8     |           335,241 |                120 |      56 +  222,041          |
-|     4 x 16    |           643,198 |                256 |     112 +  428,140          |
-|     4 x 32    |           967,191 |                560 |     208 +   729,019         |
-|     6 x 8     |           521,205 |                378 |     126 +  356,401          |
-|     6 x 16    |           890,659 |                582 |     288 +  663,920          |
-|     6 x 32    |                 - |                  - |     624 +  1,209,530        |
-|     8 x 8     |           699,042 |              1,032 |     296 +  778,020          |
-|     8 x 16    |         1,345,521 |              2,048 |     640 +  2,031,420        |
-|     8 x 32    |                 - |              3,201 |     896 +  4,897,955        |
+| Nodes x Core | Writes per second | Queries per second | Queries + Writes per second |
+|:------------:|------------------:|-------------------:|:---------------------------:|
+|    2 x 4     |            87,602 |                 18 |        12 +  54,797         |
+|    2 x 8     |           169,039 |                 38 |        24 +  99,180         |
+|    2 x 16    |           334,739 |                 76 |        44 +  145,538        |
+|    2 x 32    |           534,453 |                136 |        84 +  232,423        |
+|    4 x 8     |           335,241 |                120 |        56 +  222,041        |
+|    4 x 16    |           643,198 |                256 |       112 +  428,140        |
+|    4 x 32    |           967,191 |                560 |       208 +   729,019       |
+|    6 x 8     |           521,205 |                378 |       126 +  356,401        |
+|    6 x 16    |           890,659 |                582 |       288 +  663,920        |
+|    6 x 32    |                 - |                  - |      624 +  1,209,530       |
+|    8 x 8     |           699,042 |              1,032 |       296 +  778,020        |
+|    8 x 16    |         1,345,521 |              2,048 |      640 +  2,031,420       |
+|    8 x 32    |                 - |              3,201 |      896 +  4,897,955       |
 
 {{% /tab-content %}}
 
