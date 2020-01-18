@@ -52,9 +52,8 @@ qid	  query                              database   duration   status
   for an explanation of time units in InfluxDB databases.
 
     {{% note %}}
-`duration` represents the time between the start of the query and the current time.
-If a query is killed, it may not immediately disappear from the output of `SHOW QUERIES`
-and its duration will continue to increment until the the query record is cleared from memory.
+`SHOW QUERIES` may output a killed query and continue to increment its duration
+until the query record is cleared from memory.
     {{% /note %}}
 
 - `status`: The current status of the query.
