@@ -8,6 +8,32 @@ menu:
     parent: About the project
 ---
 
+## v1.13.2 [2020-01-21]
+
+### Bug fixes
+
+- Warn without error when processes input is started on Windows.
+- Only parse certificate blocks in `x509_cert` input plugin.
+- Add custom attributes for all resource types in `vsphere` input plugin.
+- Support URL agent address form with udp in `snmp` input plugin.
+- Record device fields when attributes is `false`.
+- Remove invalid timestamps from Kafka messages.
+- Fix `json_strict` option and set `default` to `true`.
+
+### Bug fixes
+- Fix ServerProperty query stops working on Azure after failover.
+- Add leading period to OID in SNMP v1 generic traps.
+- Fix missing config fields in prometheus serializer.
+- Fix panic on connection loss with undelivered messages in MQTT Consumer
+  (`mqtt_consumer`) input plugin.
+- Encode query hash fields as hex strings in SQL Server (`sqlserver`) input plugin.
+- Invalidate diskio cache if the metadata mtime has changed.
+- Show platform not supported warning only on plugin creation.
+- Fix rabbitmq cannot complete gather after request error.
+- Fix `/sbin/init --version` executed on Telegraf startup.
+- Use last path element as field key if path fully specified in Cisco GNMI Telemetry
+  (`cisco_telemetry_gnmi`) input plugin.
+
 ## v1.13.1 [2020-01-08]
 
 ### Bug fixes
