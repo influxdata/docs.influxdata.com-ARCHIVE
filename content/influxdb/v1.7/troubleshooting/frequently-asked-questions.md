@@ -22,7 +22,7 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
 * [Why does InfluxDB fail to parse microsecond units in the configuration file?](#why-does-influxdb-fail-to-parse-microsecond-units-in-the-configuration-file)
 * [Does InfluxDB have a file system size limit?](#does-influxdb-have-a-file-system-size-limit)
-
+* [How do I manually trigger a compaction?](#how-do-i-manually-trigger-a-compaction)
 
 **Command line interface (CLI)**
 
@@ -211,6 +211,15 @@ InfluxDB works within file system size restrictions for Linux and Windows POSIX.
 - Linux ext4 file system limits size to ~1EB (with file size limit ~16TB)
 
 If you anticipate growing over 16TB per volume/file system, we recommend finding a provider and distribution that supports your storage requirements.
+
+## How do I manually trigger a compaction?
+
+Trigger a full compaction after startup by adjusting the [`compact-full-write-cold-duration`](/influxdb/v1.7/administration/config/#compact-full-write-cold-duration-4h) setting in your InfluxDB configuration file. For more information, see [Using the configuration file](/influxdb/v1.7/administration/config/#using-the-configuration-file/). Consider the following items may affect the schedule for compaction:
+
+- Shard duration and write patterns. For example, frequently writing to old shards may affect compaction.
+- Number of concurrent compactions (`max-concurrent-compactions`). For example, multiple shards pending compaction may affect when a compaction is run.
+
+> **Note:** You can't manually trigger a compaction via the API.
 
 ## How do I use the InfluxDB CLI to return human readable timestamps?
 
