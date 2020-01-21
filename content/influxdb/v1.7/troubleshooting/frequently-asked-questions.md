@@ -214,10 +214,10 @@ If you anticipate growing over 16TB per volume/file system, we recommend finding
 
 ## How do I manually trigger a compaction?
 
-Trigger a compaction by doing one of the following:
+Trigger a full compaction after startup by adjusting the [`compact-full-write-cold-duration`](/influxdb/v1.7/administration/config/#compact-full-write-cold-duration-4h) setting in your InfluxDB configuration file. For more information, see [Using the configuration file](/influxdb/v1.7/administration/config/#using-the-configuration-file/). Consider the following items may affect the schedule for compaction:
 
-- Use the offline-compact tooling to do a full compaction of a shard offline (influxd must be down).
-- Do a full compaction after startup by adjusting the [`compact-full-write-cold-duration`](/influxdb/v1.7/administration/config/#compact-full-write-cold-duration-4h) setting in your InfluxDB configuration file. For more information, see [Using the configuration file](/influxdb/v1.7/administration/config/#using-the-configuration-file/).
+-Shard duration and write patterns. For example, frequently writing to old shards may affect compaction.
+- Number of concurrent compactions (`max-concurrent-compactions`). For example, multiple shards pending compaction may affect when a compaction is run.
 
 > **Note:** You can't manually trigger a compaction via the API.
 
