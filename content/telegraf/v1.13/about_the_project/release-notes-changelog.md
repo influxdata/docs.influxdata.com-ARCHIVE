@@ -12,10 +12,10 @@ menu:
 
 ### Bug fixes
 
-- Warn without error when processes input is started on Windows.
-- Only parse certificate blocks in `x509_cert` input plugin.
-- Add custom attributes for all resource types in `vsphere` input plugin.
-- Support URL agent address form with udp in `snmp` input plugin.
+- Warn without error when Processes (`processes`) input is started on Windows.
+- Only parse certificate blocks in X.509 Certificate (`x509_cert`) input plugin.
+- Add custom attributes for all resource types in VMware vSphere (`vsphere`) input plugin.
+- Support URL agent address form with UDP in SNMP (`snmp`) input plugin.
 - Record device fields when attributes is `false`.
 - Remove invalid timestamps from Kafka messages.
 - Fix `json_strict` option and set `default` to `true`.
