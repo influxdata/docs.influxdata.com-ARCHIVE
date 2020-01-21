@@ -49,15 +49,18 @@ information is considered a best practice.
 
 ### Example: Telegraf environment variables
 
-```
-/etc/default/telegraf:
+Example of environment variables in `/etc/default/telegraf`:
 
+```sh
 USER="alice"
 INFLUX_URL="http://localhost:8086"
 INFLUX_SKIP_DATABASE_CREATION="true"
 INFLUX_PASSWORD="monkey123"
-/etc/telegraf.conf:
+```
 
+Example of environment variables in `/etc/telegraf.conf`:
+
+```sh
 [global_tags]
   user = "${USER}"
 
@@ -67,7 +70,9 @@ INFLUX_PASSWORD="monkey123"
   urls = ["${INFLUX_URL}"]
   skip_database_creation = ${INFLUX_SKIP_DATABASE_CREATION}
   password = "${INFLUX_PASSWORD}"
-The above files will produce the following effective configuration file to be parsed:
+```
+
+The environment variables above add the following configuration settings to the Telegraf:
 
 [global_tags]
   user = "alice"
