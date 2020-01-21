@@ -8,6 +8,18 @@ menu:
     parent: About the project
 ---
 
+## v1.13.2 [2020-01-21]
+
+### Bug fixes
+
+- Warn without error when Processes (`processes`) input is started on Windows.
+- Only parse certificate blocks in X.509 Certificate (`x509_cert`) input plugin.
+- Add custom attributes for all resource types in VMware vSphere (`vsphere`) input plugin.
+- Support URL agent address form with UDP in SNMP (`snmp`) input plugin.
+- Record device fields in the SMART (`smart`) input plugin when attributes is `false`.
+- Remove invalid timestamps from Kafka messages.
+- Update `json` parser to fix `json_strict` option and set `default` to `true`.
+
 ## v1.13.1 [2020-01-08]
 
 ### Bug fixes
