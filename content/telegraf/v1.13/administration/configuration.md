@@ -8,8 +8,7 @@ menu:
     parent: Administration
 ---
 
-The Telegraf configuration file (`telegraf.conf`) lists all of the available plugins. The current version is available here:
-[telegraf.conf](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf)
+The Telegraf configuration file (`telegraf.conf`) lists all available Telegraf plugins. See the current version here: [telegraf.conf](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf).
 
 ## Generate a configuration file
 
@@ -74,9 +73,10 @@ Example of environment variables in `/etc/telegraf.conf`:
   password = "${INFLUX_PASSWORD}"
 ```
 
-The environment variables above add the following configuration settings to the Telegraf:
+The environment variables above add the following configuration settings to Telegraf:
 
-```[global_tags]
+```sh
+[global_tags]
   user = "alice"
 
 [[outputs.influxdb]]
