@@ -47,7 +47,7 @@ For numbers and Booleans, variables should be unquoted (for example, `$INT_VAR`,
 
 Environment variables can be set using the Linux `export` command: `export password=mypassword`
 
-We recommend using environment variables for sensitive information.
+> **Note:** We recommend using environment variables for sensitive information.
 
 ### Example: Telegraf environment variables
 
