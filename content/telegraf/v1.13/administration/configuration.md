@@ -34,6 +34,38 @@ Environment variables can be set using the Linux `export` command
 (i.e., `export password=mypassword`). Using enviroment variables for sensitive
 information is considered a best practice.
 
+### Example: Telegraf environment variables
+
+```
+/etc/default/telegraf:
+
+USER="alice"
+INFLUX_URL="http://localhost:8086"
+INFLUX_SKIP_DATABASE_CREATION="true"
+INFLUX_PASSWORD="monkey123"
+/etc/telegraf.conf:
+
+[global_tags]
+  user = "${USER}"
+
+[[inputs.mem]]
+
+[[outputs.influxdb]]
+  urls = ["${INFLUX_URL}"]
+  skip_database_creation = ${INFLUX_SKIP_DATABASE_CREATION}
+  password = "${INFLUX_PASSWORD}"
+The above files will produce the following effective configuration file to be parsed:
+
+[global_tags]
+  user = "alice"
+
+[[outputs.influxdb]]
+  urls = "http://localhost:8086"
+  skip_database_creation = true
+  password = "monkey123"
+
+```
+
 ## Configuration file locations
 
 The location of the configuration file can be set via the `--config` command
