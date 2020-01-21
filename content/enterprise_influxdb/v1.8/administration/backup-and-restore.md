@@ -77,7 +77,12 @@ for a complete list of the global `influxd-ctl` options.
 
 - `-db <string>`: the name of the single database to back up
 - `-from <TCP-address>`: the data node TCP address to prefer when backing up
-- `-full`: perform a full backup
+- `-strategy`: select the backup strategy to apply during backup
+    - `incremental`: _**(Default)**_ backup only data added since the previous backup.
+    - `full` perform a full backup. Same as `-full`
+    - `only-meta` perform a backup for meta data only: users, roles,
+      databases, continuous queries, retention policies. Shards are not exported.
+- `-full`: perform a full backup. Deprecated in favour of `-strategy=full`
 - `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
 - `-shard <unit>`: the ID of the single shard to back up
 
