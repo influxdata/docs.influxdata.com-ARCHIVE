@@ -26,6 +26,19 @@ To generate a configuration file with specific inputs and outputs, you can use t
 telegraf --input-filter cpu:mem:net:swap --output-filter influxdb:kafka config
 ```
 
+## Configuration file locations
+
+The location of the configuration file can be set via the `--config` command
+line flag.
+
+When the `--config-directory` command line flag is used, files ending with
+`.conf` in the specified directory will also be included in the Telegraf
+configuration.
+
+On most systems, the default locations are `/etc/telegraf/telegraf.conf` for
+the main configuration file and `/etc/telegraf/telegraf.d` for the directory of
+configuration files.
+
 ## Environment variables
 
 Environment variables can be used anywhere in the configuration file by prepending them with `$`. For strings, the variables must be within quotes (i.e., `"$STR_VAR"`) and for numbers and Booleans they should be unquoted (i.e., `$INT_VAR`, `$BOOL_VAR`)
@@ -65,19 +78,6 @@ The above files will produce the following effective configuration file to be pa
   password = "monkey123"
 
 ```
-
-## Configuration file locations
-
-The location of the configuration file can be set via the `--config` command
-line flag.
-
-When the `--config-directory` command line flag is used, files ending with
-`.conf` in the specified directory will also be included in the Telegraf
-configuration.
-
-On most systems, the default locations are `/etc/telegraf/telegraf.conf` for
-the main configuration file and `/etc/telegraf/telegraf.d` for the directory of
-configuration files.
 
 # Global tags
 
