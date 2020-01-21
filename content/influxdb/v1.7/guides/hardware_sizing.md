@@ -174,7 +174,7 @@ To find your recommended cluster configuration, select the cardinality (number o
 
 {{% tab-content %}}
 
-expand: Replication factor, 2
+Replication factor, 2
 
 | Nodes x Core | Writes per second | Queries per second | Queries + Writes per second |
 |:------------:|------------------:|-------------------:|:---------------------------:|
@@ -191,7 +191,6 @@ expand: Replication factor, 2
 |     8 x 8    |         3,987,819 |                632 |     336 + 1,722,621         |
 |     8 x 16   |         7,798,848 |               1384 |     544 + 3,911,525         |
 |     8 x 32   |        13,189,694 |               3648 |   1,152 + 7,891,207         |
-
 
 Replication factor, 3
 
