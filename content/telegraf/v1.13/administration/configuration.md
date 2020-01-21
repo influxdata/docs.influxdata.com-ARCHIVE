@@ -74,7 +74,7 @@ Example of environment variables in `/etc/telegraf.conf`:
 
 The environment variables above add the following configuration settings to the Telegraf:
 
-[global_tags]
+```[global_tags]
   user = "alice"
 
 [[outputs.influxdb]]
