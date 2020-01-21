@@ -41,11 +41,13 @@ configuration files.
 
 ## Environment variables
 
-Environment variables can be used anywhere in the configuration file by prepending them with `$`. For strings, the variables must be within quotes (i.e., `"$STR_VAR"`) and for numbers and Booleans they should be unquoted (i.e., `$INT_VAR`, `$BOOL_VAR`)
+Use environment variables anywhere in the configuration file by prepending them with `$`.
+For strings, variables must be in quotes (for example, `"$STR_VAR"`). 
+For numbers and Booleans, variables should be unquoted (for example, `$INT_VAR`, `$BOOL_VAR`).
 
-Environment variables can be set using the Linux `export` command
-(i.e., `export password=mypassword`). Using environment variables for sensitive
-information is considered a best practice.
+Environment variables can be set using the Linux `export` command: `export password=mypassword`
+
+We recommend using environment variables for sensitive information.
 
 ### Example: Telegraf environment variables
 
