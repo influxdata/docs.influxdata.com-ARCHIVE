@@ -39,14 +39,14 @@ For **simple** or **complex** queries, we recommend testing and adjusting the su
 
 | Query complexity | Criteria                                                                              |
 |------------------|---------------------------------------------------------------------------------------|
-|                  | Are bounded in time to a few minutes, hours, or maybe a day                           |
 | Simple           | Have few or no functions and no regular expressions                                   |
-| Complex queries  | Have multiple aggregation or transformation functions or multiple regular expressions |
-| Moderate queries | Have multiple functions and one or two regular expressions                            |
-|                  | May also have complex `GROUP BY` clauses or sample a time range of multiple weeks     |
-|                  | May sample a very large time range of months or years                                 |
-|                  | Typically execute in a few hundred or a few thousand milliseconds                     |
+|                  | Are bounded in time to a few minutes, hours, or maybe a day                           |
 |                  | Typically execute in a few milliseconds to a few dozen milliseconds                   |
+| Moderate         | Have multiple functions and one or two regular expressions                            |
+|                  | May also have complex `GROUP BY` clauses or sample a time range of multiple weeks     |
+|                  | Typically execute in a few hundred or a few thousand milliseconds                     |
+| Complex          | Have multiple aggregation or transformation functions or multiple regular expressions |
+|                  | May sample a very large time range of months or years                                 |
 |                  | Typically take multiple seconds to execute                                            |
 
 ## Single node guidelines
