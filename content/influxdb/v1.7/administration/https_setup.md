@@ -23,14 +23,13 @@ InfluxData **strongly recommends** enabling HTTPS, especially if you plan on sen
 
 ## Requirements
 
-To enable HTTPS with InfluxDB, you'll need an existing or new InfluxDB instance
-and a Transport Layer Security (TLS) certificate (also known as a Secured Sockets Layer (SSL) certificate).
-
+To enable HTTPS with InfluxDB, you need a Transport Layer Security (TLS) certificate, also known as a Secured Sockets Layer (SSL) certificate.
 InfluxDB supports three types of TLS certificates:
 
-* **Single domain certificates signed by a Certificate Authority**
+* **Single domain certificates signed by a [Certificate Authority](https://en.wikipedia.org/wiki/Certificate_authority)**
 
     Single domain certificates provide cryptographic security to HTTPS requests and allow clients to verify the identity of the InfluxDB server.
+    These certificates are signed and issued by a trusted, third-party Certificate Authority (CA).
     With this certificate option, every InfluxDB instance requires a unique single domain certificate.
 
 * **Wildcard certificates signed by a Certificate Authority**
@@ -40,20 +39,14 @@ InfluxDB supports three types of TLS certificates:
 
 * **Self-signed certificates**
 
-    Self-signed certificates are _not_ signed by a Certificate Authority (CA).
-    [Generate a self-signed certificate](#step-1-generate-a-self-signed-certificate) on your own machine.
+    Self-signed certificates are _not_ signed by a trusted, third-party CA.
     Unlike CA-signed certificates, self-signed certificates only provide cryptographic security to HTTPS requests.
     They do not allow clients to verify the identity of the InfluxDB server.
     With this certificate option, every InfluxDB instance requires a unique self-signed certificate.
+    You can generate a self-signed certificate on your own machine.
 
-Regardless of your certificate's type, InfluxDB supports certificates composed of
-a private key file (`.key`) and a signed certificate file (`.crt`) file pair, as well as certificates
-that combine the private key file and the signed certificate file into a single bundled file (`.pem`).
-
-The following two sections outline how to set up HTTPS with InfluxDB [using a CA-signed
-certificate](#set-up-https-with-a-ca-certificate) and [using a self-signed certificate](#set-up-https-with-a-self-signed-certificate)
-on Ubuntu 16.04.
-Steps may vary for other operating systems.
+<!-- InfluxDB supports certificates composed of a private key file (`.key`) and a signed certificate file (`.crt`) file pair, -->
+<!-- as well as certificates that combine the private key file and the signed certificate file into a single bundled file (`.pem`). -->
 
 ## Set up HTTPS with a CA certificate
 
