@@ -33,7 +33,9 @@ If you want a single node instance of InfluxDB that's fully open source, require
 
 ## Query guidelines
 
-Query complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads. For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
+> **Note:** Query complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads.
+
+For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
 
 | Query complexity | Criteria                                                                              |
 |------------------|---------------------------------------------------------------------------------------|
@@ -51,73 +53,29 @@ Query complexity varies widely on system impact. Recommendations for both single
 
 Run InfluxDB on locally attached solid state drives (SSDs). Other storage configurations have lower performance and may not be able to recover from small interruptions in normal processing.
 
-InfluxDB loads are estimated by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). General CPU, RAM, and IOPS recommendations are based on the load.
+InfluxDB loads are estimated by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Recommended CPU, RAM, and IOPS are based on the load.
 
 ### Load ranges
 
-| Load         | Field writes per second | Moderate queries* per second | Unique series |
-|--------------|------------------------:|-----------------------------:|--------------:|
-| **Low**      |                 < 5,000 |                          < 5 |     < 100,000 |
-| **Moderate** |               < 250,000 |                         < 25 |   < 1,000,000 |
-| **High**     |               > 250,000 |                         > 25 |   > 1,000,000 |
+| Load         | Writes per second | Moderate queries* per second | Unique series |
+|--------------|------------------:|-----------------------------:|--------------:|
+| **Low**      |           < 5,000 |                          < 5 |     < 100,000 |
+| **Moderate** |         < 250,000 |                         < 25 |   < 1,000,000 |
+| **High**     |         > 250,000 |                         > 25 |   > 1,000,000 |
 
-* Queries vary widely in their impact on the system. Recommendations are provided for moderate query loads. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
+* Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
 ### Low load
 
-* CPU: 2-4 cores
+* vCPU or CPU: 2-4 cores
 * RAM: 2-4 GB
 * IOPS: 500
 
 ### Moderate load
 
-* CPU: 4-6 cores
+* vCPU or CPU: 4-6 cores
 * RAM: 8-32 GB
 * IOPS: 500-1000
-
-### High load
-
-* CPU: 8+ cores
-* RAM: 32+ GB
-* IOPS: 1000+
-
-## Cluster guidelines
-
-### Meta nodes
-
-A cluster must have a minimum of three independent meta nodes to survive the loss of a server. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes. Set up clusters with an odd number of meta nodes──an even number may cause issues in certain configurations. Meta nodes do not need very much computing power. Regardless of the cluster load, we recommend the following for the meta nodes:
-
-* vCPU or CPU: 1-2 cores
-* RAM: 512 MB - 1 GB
-* IOPS: 50
-
-### Data nodes
-
-A cluster with one data node is valid but has no data redundancy. Redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy the data is written to. Where `n` is the replication factor, a cluster can lose `n - 1` data nodes and return complete query results. For optimal data distribution within the cluster, use an even number of data nodes.
-
- Data nodes guidelines vary by estimated load on each node in the cluster.
-
-### Load ranges
-
-| Load     | Writes per second per node | Moderate queries* per second per node | Unique series per node |
-|----------|---------------------------:|--------------------------------------:|-----------------------:|
-| Low      |                    < 5,000 |                                   < 5 |              < 100,000 |
-| Moderate |                  < 100,000 |                                  < 25 |            < 1,000,000 |
-| High     |                  > 100,000 |                                  > 25 |            > 1,000,000 |
-
-* Queries vary widely in their impact on the system. Recommendations are provided for moderate query loads. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
-
-### Low load
-
-* vCPU or CPU: 2 cores
-* RAM: 4-8 GB
-* IOPS: 1000
-
-### Moderate load
-
-* vCPU or CPU: 4-6 cores
-* RAM: 16-32 GB
-* IOPS: 1000+
 
 ### High load
 
@@ -125,15 +83,47 @@ A cluster with one data node is valid but has no data redundancy. Redundancy is 
 * RAM: 32+ GB
 * IOPS: 1000+
 
+## Cluster guidelines
+
+### Meta nodes
+
+> **Note:** Set up clusters with an odd number of meta nodes──an even number may cause issues in certain configurations.
+
+A cluster must have a **minimum of three** independent meta nodes for data redundancy and availability. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes.
+
+Meta nodes do not need very much computing power. Regardless of the cluster load, we recommend the following guidelines for the meta nodes:
+
+* vCPU or CPU: 1-2 cores
+* RAM: 512 MB - 1 GB
+* IOPS: 50
+
 ### Enterprise web node
 
 The Enterprise web server is primarily an HTTP server with similar load requirements. For most applications, the server doesn't need to be very robust. A cluster can function with only one web server, but for redundancy, we recommend connecting multiple web servers to a single back-end Postgres database.
 
 > **Note:** Production clusters should not use the SQLite database (lacks support for redundant web servers and handling high loads).
 
-* vCPU CPU: 2-4 cores
+* vCPU or CPU: 2-4 cores
 * RAM: 2-4 GB
 * IOPS: 100
+
+### Data nodes
+
+A cluster with one data node is valid but has no data redundancy. Redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy the data is written to. Where `n` is the replication factor, a cluster can lose `n - 1` data nodes and return complete query results. 
+
+>**Note:** For optimal data distribution within the cluster, use an even number of data nodes.
+
+Guidelines vary by writes per second per node, moderate* queries per second per node, and unique series per node.
+
+ ### Guidelines per node
+
+| vCPU or CPU| RAM     | IOPS    | Writes per second | Queries per second| Unique series |
+|------------|---------|---------|------------------:|------------------:|--------------:|
+|    2 cores |   4-8 GB|    1000 |           < 5,000 |               < 5 |     < 100,000 |
+|  4-6 cores | 16-32 GB|    1000+|         < 100,000 |              < 25 |   < 1,000,000 |
+|   8+ cores |   32+ GB|    1000+|         > 100,000 |              > 25 |   > 1,000,000 |
+
+* Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
 ## When do I need more RAM?
 
