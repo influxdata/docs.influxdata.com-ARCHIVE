@@ -61,7 +61,7 @@ Guidelines are estimated by writes per second, queries per second, and number of
 |  4-6 cores |  8-32 GB| 500-1000 |         < 250,000 |              < 25 |    < 1,000,000 |
 |   8+ cores |   32+ GB|    1000+|          > 250,000 |              > 25 |    > 1,000,000 |
 
-* Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
+* **Queries per second refers to moderate queries.** Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
 ## Cluster guidelines
 
