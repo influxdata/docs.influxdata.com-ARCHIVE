@@ -55,33 +55,13 @@ Run InfluxDB on locally attached solid state drives (SSDs). Other storage config
 
 InfluxDB loads are estimated by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Recommended CPU, RAM, and IOPS are based on the load.
 
-### Load ranges
-
-| Load         | Writes per second | Queries* per second | Unique series |
-|--------------|------------------:|--------------------:|--------------:|
-| **Low**      |           < 5,000 |                 < 5 |     < 100,000 |
-| **Moderate** |         < 250,000 |                < 25 |   < 1,000,000 |
-| **High**     |         > 250,000 |                > 25 |   > 1,000,000 |
+| vCPU or CPU| RAM     | IOPS     | Writes per second | Queries* per second| Unique series |
+|------------|---------|----------|------------------:|------------------:|---------------:|
+|  2-4 cores |   2-4 GB|      500 |           < 5,000 |               < 5 |      < 100,000 |
+|  4-6 cores |  8-32 GB| 500-1000 |         < 250,000 |              < 25 |    < 1,000,000 |
+|   8+ cores |   32+ GB|    1000+|          > 250,000 |              > 25 |    > 1,000,000 |
 
 * Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
-
-### Low load
-
-* vCPU or CPU: 2-4 cores
-* RAM: 2-4 GB
-* IOPS: 500
-
-### Moderate load
-
-* vCPU or CPU: 4-6 cores
-* RAM: 8-32 GB
-* IOPS: 500-1000
-
-### High load
-
-* vCPU or CPU: 8+ cores
-* RAM: 32+ GB
-* IOPS: 1000+
 
 ## Cluster guidelines
 
@@ -115,13 +95,13 @@ A cluster with one data node is valid but has no data redundancy. Redundancy is 
 
 Guidelines vary by writes per second per node, moderate* queries per second per node, and unique series per node.
 
- ### Guidelines per node
+ ### Guidelines per data node
 
 | vCPU or CPU| RAM     | IOPS    | Writes per second | Queries* per second| Unique series |
-|------------|---------|---------|------------------:|------------------:|--------------:|
-|    2 cores |   4-8 GB|    1000 |           < 5,000 |               < 5 |     < 100,000 |
-|  4-6 cores | 16-32 GB|    1000+|         < 100,000 |              < 25 |   < 1,000,000 |
-|   8+ cores |   32+ GB|    1000+|         > 100,000 |              > 25 |   > 1,000,000 |
+|------------|---------|---------|------------------:|------------------:|---------------:|
+|    2 cores |   4-8 GB|    1000 |           < 5,000 |               < 5 |      < 100,000 |
+|  4-6 cores | 16-32 GB|    1000+|         < 100,000 |              < 25 |    < 1,000,000 |
+|   8+ cores |   32+ GB|    1000+|         > 100,000 |              > 25 |    > 1,000,000 |
 
 * Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
