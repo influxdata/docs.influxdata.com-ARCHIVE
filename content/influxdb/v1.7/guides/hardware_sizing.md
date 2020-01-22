@@ -53,13 +53,13 @@ For **simple** or **complex** queries, we recommend testing and adjusting the su
 
 Run InfluxDB on locally attached solid state drives (SSDs). Other storage configurations have lower performance and may not be able to recover from small interruptions in normal processing.
 
-Guidelines are estimated by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Recommended CPU, RAM, and IOPS are based on the load.
+Estimated guidelines include writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series), CPU, RAM, and IOPS.
 
-| vCPU or CPU| RAM     | IOPS     | Writes per second | Queries* per second| Unique series |
-|------------|---------|----------|------------------:|------------------:|---------------:|
-|  2-4 cores |   2-4 GB|      500 |           < 5,000 |               < 5 |      < 100,000 |
-|  4-6 cores |  8-32 GB| 500-1000 |         < 250,000 |              < 25 |    < 1,000,000 |
-|   8+ cores |   32+ GB|    1000+|          > 250,000 |              > 25 |    > 1,000,000 |
+| vCPU or CPU |   RAM   |   IOPS   | Writes per second | Queries* per second | Unique series |
+| ----------: | ------: | -------: | ----------------: | ------------------: | ------------: |
+|   2-4 cores |  2-4 GB |      500 |           < 5,000 |                 < 5 |     < 100,000 |
+|   4-6 cores | 8-32 GB | 500-1000 |         < 250,000 |                < 25 |   < 1,000,000 |
+|    8+ cores |  32+ GB |    1000+ |         > 250,000 |                > 25 |   > 1,000,000 |
 
 * **Queries per second for moderate queries.** Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
@@ -67,7 +67,7 @@ Guidelines are estimated by writes per second, queries per second, and number of
 
 ### Meta nodes
 
-> **Note:** Set up clusters with an odd number of meta nodes──an even number may cause issues in certain configurations.
+> Set up clusters with an odd number of meta nodes──an even number may cause issues in certain configurations.
 
 A cluster must have a **minimum of three** independent meta nodes for data redundancy and availability. A cluster with `2n + 1` meta nodes can tolerate the loss of `n` meta nodes.
 
@@ -97,11 +97,11 @@ Guidelines vary by writes per second per node, moderate* queries per second per 
 
  #### Guidelines per node
 
-| vCPU or CPU|     RAM |    IOPS | Writes per second | Queries* per second| Unique series |
-|------------|---------|---------|------------------:|------------------:|---------------:|
-|    2 cores |   4-8 GB|    1000 |           < 5,000 |               < 5 |      < 100,000 |
-|  4-6 cores | 16-32 GB|    1000+|         < 100,000 |              < 25 |    < 1,000,000 |
-|   8+ cores |   32+ GB|    1000+|         > 100,000 |              > 25 |    > 1,000,000 |
+| vCPU or CPU |   RAM    | IOPS  | Writes per second | Queries* per second | Unique series |
+| ----------: | -------: | ----: | ----------------: | ------------------: | ------------: |
+|     2 cores |   4-8 GB |  1000 |           < 5,000 |                 < 5 |     < 100,000 |
+|   4-6 cores | 16-32 GB | 1000+ |         < 100,000 |                < 25 |   < 1,000,000 |
+|    8+ cores |   32+ GB | 1000+ |         > 100,000 |                > 25 |   > 1,000,000 |
 
 * Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
