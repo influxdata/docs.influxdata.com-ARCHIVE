@@ -9,7 +9,7 @@ menu:
 Review configuration and hardware guidelines for InfluxDB OSS (open source) and InfluxDB Enterprise:
 
 * [Single node or cluster?](/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster?)
-* [Queries guidelines](#queries-guidelines)
+* [Query guidelines](#queries-guidelines)
 * [Single node guidelines](#single-node-guidelines)
 * [Cluster guidelines](#cluster-guidelines)
 * [When do I need more RAM?](#when-do-i-need-more-ram)
@@ -20,17 +20,19 @@ Review configuration and hardware guidelines for InfluxDB OSS (open source) and 
 
 If your InfluxDB performance requires at least one of the following:
 
-- > 750,000 writes per second
-- > 100 moderate queries
-- > 10,000,000 unique series
+- more than 750,000 writes per second
+- more than 100 moderate queries
+- more than 10,000,000 unique series
 
-A single node may not support performance at this scale. We recommend InfluxDB Enterprise, which supports multiple nodes (a cluster) of servers. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy——a server down doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
+A single node may not support performance at this scale. We recommend InfluxDB Enterprise, which supports multiple nodes (a cluster) of servers. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy, so an unavailable node doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
 
-If you want a single node instance of InfluxDB that's fully open source without redundancy, InfluxDB OSS (open source) works. (Without redundancy means if the server is unavailable, writes and queries immediately fail.)
+If you want a single node instance of InfluxDB that's fully open source, requires fewer writes, queries, and unique series than listed above, and do **not** require redundancy, we recommend InfluxDB OSS (open source).
 
-## Queries guidelines
+> **Note:** Without the redundancy of a cluster, writes and queries fail immediately when a server is unavailable.
 
-Queries complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads. For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
+## Query guidelines
+
+Query complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads. For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
 
 | Query complexity | Criteria                                                                              |
 |------------------|---------------------------------------------------------------------------------------|
@@ -140,9 +142,9 @@ In general, more RAM helps queries return faster. Your RAM requirements are prim
 
 ## Additional cluster sizing guidelines
 
-The following InfluxDB Enterprise guidelines consider criteria, such as infrastructure (in this case, AWS EC2 R4 instances), replication factor, cardinality, and write loads, query loads, and write/query loads combined.
+The following InfluxDB Enterprise guidelines consider criteria, such as series cardinality, infrastructure (in this case, AWS EC2 R4 instances), replication factor, and write loads, query loads, and write/query loads combined.
 
-> These guidelines stem from a DevOps monitoring use case, maintaining a group of computers, monitoring server metrics, such as CPU, kernel, memory, disk space, disk I/O, network, and so on. Nine measurements have 10 tags, from 6-20 values, totaling 101 values written during each simulated data collection cycle of 10 seconds. Data is generated randomly to ensure real-life, varied data.
+> These guidelines stem from a DevOps monitoring use case, maintaining a group of computers, monitoring server metrics, such as CPU, kernel, memory, disk space, disk I/O, network, and so on.
 
 ### Infrastructure
 
@@ -153,15 +155,20 @@ For the following AWS EC2 memory optimized instances:
 - R4.4xlarge (16 cores)
 - R4.8xlarge (32 cores)
 
-### Recommended cluster configurations
+### Recommended cluster configurations by cardinality
 
-#### Guidelines by cardinality
+We recommend cluster configurations depending on the cardinality (number of series) in your data set: 10,000, 100,000, 1,000,000, or 10,000,000.
 
-To find your recommended cluster configuration, select the cardinality (number of series) in your dataset below, expand your specified replication factor, and then find the number of nodes and cores in your cluster. Each configuration shows estimates for:
+Depending on cardinality, and the number of nodes and cores in your configuration, you'll find the following data:
 
-- **writes per second only** (no dashboard queries are running)
-- **queries per second only** (no data is being written)
-- **simultaneous queries and writes per second**
+- **maximum writes per second only** (no dashboard queries are running)
+- **maximum queries per second only** (no data is being written)
+- **maximum simultaneous queries and writes per second, combined**
+
+#### Review cluster configuration tables
+
+1. Select the number of series in your dataset below, and then expand your replication factor.
+2. In the **Nodes x Core** column, find the nodes and cores in your configuration, and then review the recommended **maximum** guidelines.
 
 {{< tab-labels >}}
 {{% tabs %}}
@@ -174,7 +181,8 @@ To find your recommended cluster configuration, select the cardinality (number o
 
 {{% tab-content %}}
 
-Replication factor, 2
+Select one of the following replication factors to see the recommended cluster configuration:
+{{%expand "> Replication factor, 2" %}}
 
 | Nodes x Core | Writes per second | Queries per second | Queries + Writes per second |
 |:------------:|------------------:|-------------------:|:---------------------------:|
@@ -192,7 +200,9 @@ Replication factor, 2
 |     8 x 16   |         7,798,848 |               1384 |     544 + 3,911,525         |
 |     8 x 32   |        13,189,694 |               3648 |   1,152 + 7,891,207         |
 
-Replication factor, 3
+{{% /expand%}}
+
+{{%expand "> Replication factor, 3" %}}
 
 | Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
 |:------------:|------------------:|-------------------:|:---------------------------:|
@@ -203,8 +213,9 @@ Replication factor, 3
 |     6 x 16   |        4,593,947 |                624 |      336 + 2,019,668         |
 |     6 x 32   |        7,776,913 |               1340 |      576 + 3,624,521         |
 
+{{% /expand%}}
 
-Replication factor, 4
+{{%expand "> Replication factor, 4" %}}
 
 | Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
 |:------------:| -----------------:| ------------------:|:---------------------------:|
@@ -215,8 +226,9 @@ Replication factor, 4
 |     8 x 16   |         5,225,548 |               2176 |     800 + 2,799,548         |
 |     8 x 32   |         8,555,405 |               5184 |    1088 + 6,055,367         |
 
+{{% /expand%}}
 
-Replication factor, 6
+{{%expand "> Replication factor, 6" %}}
 
 | Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
 |:------------:| -----------------:| ------------------:|:---------------------------:|
@@ -224,14 +236,17 @@ Replication factor, 6
 |     6 x 16   |         2,370,669 |                576 |     288 + 1,275,668         |
 |     6 x 32   |         3,601,554 |               1056 |     336 + 2,390,880         |
 
+{{% /expand%}}
 
-Replication factor, 8
+{{%expand "> Replication factor, 8" %}}
 
 | Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
 |:------------:| ----------------: | -----------------: |:---------------------------:|
 |     8 x 8    |         1,382,653 |               1184 |     416 + 915,295           |
 |     8 x 16   |         2,658,546 |               2504 |     448 + 2,204,466         |
 |     8 x 32   |         3,887,155 |               5184 |     602 + 4,120,379         |
+
+{{% /expand%}}
 
 {{% /tab-content %}}
 
