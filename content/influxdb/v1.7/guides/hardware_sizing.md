@@ -9,7 +9,7 @@ menu:
 Review configuration and hardware guidelines for InfluxDB OSS (open source) and InfluxDB Enterprise:
 
 * [Single node or cluster?](#single-node-or-cluster)
-* [Query guidelines](#queries-guidelines)
+* [Query guidelines](#query-guidelines)
 * [Single node guidelines](#single-node-guidelines)
 * [Cluster guidelines](#cluster-guidelines)
 * [When do I need more RAM?](#when-do-i-need-more-ram)
@@ -33,7 +33,7 @@ If you want a single node instance of InfluxDB that's fully open source, require
 
 ## Query guidelines
 
-> **Note:** Query complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads.
+> Query complexity varies widely on system impact. Recommendations for both single nodes and clusters are based on **moderate** query loads.
 
 For **simple** or **complex** queries, we recommend testing and adjusting the suggested requirements as needed. Query complexity is defined by the following criteria:
 
@@ -95,7 +95,7 @@ A cluster with one data node is valid but has no data redundancy. Redundancy is 
 
 Guidelines vary by writes per second per node, moderate* queries per second per node, and unique series per node.
 
- ### Guidelines per data node
+ #### Guidelines per node
 
 | vCPU or CPU|     RAM |    IOPS | Writes per second | Queries* per second| Unique series |
 |------------|---------|---------|------------------:|------------------:|---------------:|
