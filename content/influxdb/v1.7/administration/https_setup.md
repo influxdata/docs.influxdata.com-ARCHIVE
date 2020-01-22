@@ -8,10 +8,18 @@ menu:
     parent: Administration
 ---
 
-Enabling HTTPS encrypts the communication between clients and the InfluxDB server.
-When configured with a signed certificate, HTTPS can also verify the authenticity of the InfluxDB server to connecting clients.
 
-InfluxData [strongly recommends](/influxdb/v1.7/administration/security/) enabling HTTPS, especially if you plan on sending requests to InfluxDB over a network.
+Enabling TLS encrypts the communication between clients and the InfluxDB server.
+When configured with a signed certificate, TLS also allows clients to verify the authenticity of the InfluxDB server.
+
+To set up TLS over HTTPS, do the following:
+
+- [Obtain requirements](#requirements)
+- [Configure InfluxDB to use TLS](#configure-influxdb-to-use-tls)
+
+{{% warn %}}
+InfluxData **strongly recommends** enabling HTTPS, especially if you plan on sending requests to InfluxDB over a network.
+{{% /warn %}}
 
 ## Requirements
 
