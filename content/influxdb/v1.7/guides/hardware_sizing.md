@@ -23,10 +23,11 @@ If your InfluxDB performance requires at least one of the following:
 - more than 750,000 writes per second
 - more than 100 moderate queries
 - more than 10,000,000 unique series
+- complex queries (span months/years or include multiple transformations, aggregations)
 
-A single node may not support performance at this scale. We recommend InfluxDB Enterprise, which supports multiple nodes (a cluster) of servers. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy, so an unavailable node doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
+A single node may not support performance at this scale. We recommend InfluxDB Enterprise, which supports multiple data nodes (a cluster) across multiple server cores. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy, so an unavailable node doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
 
-If you want a single node instance of InfluxDB that's fully open source, requires fewer writes, queries, and unique series than listed above, and do **not** require redundancy, we recommend InfluxDB OSS (open source).
+If you want a single node instance of InfluxDB that's fully open source, requires fewer writes, queries, and unique series than listed above, and do **not require** redundancy, we recommend InfluxDB OSS (open source).
 
 > **Note:** Without the redundancy of a cluster, writes and queries fail immediately when a server is unavailable.
 
@@ -45,8 +46,6 @@ Query complexity varies widely on system impact. Recommendations for both single
 | Complex queries  | Have multiple aggregation or transformation functions or multiple regular expressions |
 |                  | May sample a very large time range of months or years                                 |
 |                  | Typically take multiple seconds to execute                                            |
-
-If your performance requirements fall into the **moderate** or **low** [load ranges](#load-ranges), you can likely use a single node instance of InfluxDB.
 
 ## Single node guidelines
 
@@ -481,15 +480,15 @@ Select one of the following replication factors to see the recommended cluster c
 
 ### Storage volume and IOPS
 
-Consider the type of storage you'll need and the amount. InfluxDB is designed to run on solid state drives (SSDs) and memory-optimized cloud instances, for example, AWS EC2 R5 or R4 instances. InfluxDB isn't tested on hard disk drives (HDDs) and we don't recommend HDDs for production. For best results, InfluxDB servers must have a minimum of 1000 IOPS on the storage to ensure recovery and availability. We recommend at least 2000 IOPS for rapid recovery of cluster data nodes after downtime.
+Consider the type of storage you need and the amount. InfluxDB is designed to run on solid state drives (SSDs) and memory-optimized cloud instances, for example, AWS EC2 R5 or R4 instances. InfluxDB isn't tested on hard disk drives (HDDs) and we don't recommend HDDs for production. For best results, InfluxDB servers must have a minimum of 1000 IOPS on storage to ensure recovery and availability. We recommend at least 2000 IOPS for rapid recovery of cluster data nodes after downtime.
 
 See your cloud provider documentation for IOPS detail on your storage volumes.
 
 ### Bytes and compression
 
-Database names, [measurements](/influxdb/v1.7/concepts/glossary/#measurement), [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), [field keys](/influxdb/v1.7/concepts/glossary/#field-key), and [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are stored only once and always as strings. Only [field values](/influxdb/v1.7/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.7/concepts/glossary/#timestamp) are stored per-point.
+Database names, [measurements](/influxdb/v1.7/concepts/glossary/#measurement), [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), [field keys](/influxdb/v1.7/concepts/glossary/#field-key), and [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are stored only once and always as strings. [Field values](/influxdb/v1.7/concepts/glossary/#field-value) and [timestamps](/influxdb/v1.7/concepts/glossary/#timestamp) are stored for every point.
 
-Non-string values require approximately three bytes. String values require variable space as determined by string compression.
+Non-string values require approximately three bytes. String values require variable space, determined by string compression.
 
 ### Separate `wal` and `data` directories
 
