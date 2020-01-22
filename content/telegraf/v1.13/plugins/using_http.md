@@ -10,8 +10,6 @@ menu:
 
 The HTTP input plugin collects metrics from one or more HTTP(S) URL endpoints. The endpoint should have metrics formatted in one of the supported input data formats.
 
-Note: Each data format has its own unique set of configuration options which may need to be added to the input configuration. See <data format link>.
-
 ## Configure the HTTP Input plugin
 To retrieve data from an HTTP url endpoint, enable the `inputs.http` input plugin in the `telegraf.conf`.
 
@@ -79,15 +77,20 @@ The default timezone is UTC. To specify to another timezone, or to local time, s
 ### CSV parser
 
 #### `csv_header_row_count`
-This field indicates how many rows to treat as a header. By default, the parser assumes there is no header and will parse the first row as data. If set to anything more than 1, column names will be concatenated with the name listed in the next header row. If `csv_column_names` is specified, the column names in header will be overridden.
+Determines how many rows to treat as a header. By default, the parser assumes there is no header and will parse the first row as data. If set to anything more than 1, column names will be concatenated with the name listed in the next header row. If `csv_column_names` is also specified, the column names in header will be overridden.
 
 #### `csv_column_names`
-For assigning custom names to columns. If this is specified, all columns should have a name unnamed columns will be ignored by the parser.  If `csv_header_row_count` is set to 0, this config must be used
+For assigning custom names to columns. If this is specified, all columns should have a name and unnamed columns will be ignored by the parser.  If `csv_header_row_count` is set to 0, this config must be used.
 
-#### csv_timestamp_column, csv_timestamp_format
-By default, the current time will be used for all created metrics, to set the time using the JSON document you can use the csv_timestamp_column and csv_timestamp_format options together to set the time to a value in the parsed document.
+#### `csv_timestamp_column`, `csv_timestamp_format`
+By default, the current time will be used for all created metrics. To set the time using the JSON document, you can use the `csv_timestamp_column` and `csv_timestamp_format` options together to set the time to a value in the parsed document.
 
-The csv_timestamp_column option specifies the key containing the time value and csv_timestamp_format must be set to unix, unix_ms, unix_us, unix_ns, or a format string in using the Go "reference time" which is defined to be the specific time: Mon Jan 2 15:04:05 MST 2006.
+The `csv_timestamp_column` option specifies the key containing the time value. `csv_timestamp_format` must be set to one of the following:
+- `unix`
+- `unix_ms`
+- `unix_us`
+- `unix_ns`
+- A format string in using the Go "reference time" format which is defined to be a specific time: Mon Jan 2 15:04:05 MST 2006.
 
 #### Example
 `[agent]
