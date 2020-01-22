@@ -8,7 +8,7 @@ menu:
 
 Review configuration and hardware guidelines for InfluxDB OSS (open source) and InfluxDB Enterprise:
 
-* [Single node or cluster?](/influxdb/v1.7/guides/hardware_sizing/#single-node-or-cluster?)
+* [Single node or cluster?](#single-node-or-cluster?)
 * [Query guidelines](#queries-guidelines)
 * [Single node guidelines](#single-node-guidelines)
 * [Cluster guidelines](#cluster-guidelines)
