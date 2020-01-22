@@ -39,14 +39,14 @@ For **simple** or **complex** queries, we recommend testing and adjusting the su
 
 | Query complexity | Criteria                                                                              |
 |------------------|---------------------------------------------------------------------------------------|
-| Simple           | Have few or no functions and no regular expressions                                   |
 |                  | Are bounded in time to a few minutes, hours, or maybe a day                           |
-|                  | Typically execute in a few milliseconds to a few dozen milliseconds                   |
+| Simple           | Have few or no functions and no regular expressions                                   |
+| Complex queries  | Have multiple aggregation or transformation functions or multiple regular expressions |
 | Moderate queries | Have multiple functions and one or two regular expressions                            |
 |                  | May also have complex `GROUP BY` clauses or sample a time range of multiple weeks     |
-|                  | Typically execute in a few hundred or a few thousand milliseconds                     |
-| Complex queries  | Have multiple aggregation or transformation functions or multiple regular expressions |
 |                  | May sample a very large time range of months or years                                 |
+|                  | Typically execute in a few hundred or a few thousand milliseconds                     |
+|                  | Typically execute in a few milliseconds to a few dozen milliseconds                   |
 |                  | Typically take multiple seconds to execute                                            |
 
 ## Single node guidelines
@@ -61,7 +61,7 @@ Guidelines are estimated by writes per second, queries per second, and number of
 |  4-6 cores |  8-32 GB| 500-1000 |         < 250,000 |              < 25 |    < 1,000,000 |
 |   8+ cores |   32+ GB|    1000+|          > 250,000 |              > 25 |    > 1,000,000 |
 
-* **Queries per second refers to moderate queries.** Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
+* **Queries per second for moderate queries.** Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
 ## Cluster guidelines
 
