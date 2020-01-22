@@ -52,8 +52,12 @@ A key in your JSON file to be used as the measurement name.
 Key from the JSON file that will be used in creating the timestamp metric.  If no key is specified, the time that the data is read will be set as the timestamp.
 
 #### `json_time_format`
-The format used to interpret the designated `json_time_key`.  The time must be set to `unix`, `unix_ms`, `unix_us`, `unix_ns`, or a time in Go “reference time”
-Ex: `json_time_format = "2006-01-02T15:04:05Z07:00"``
+The format used to interpret the designated `json_time_key`.  The time must be set to one of the following:
+- `unix`
+- `unix_ms`
+- `unix_us`
+- `unix_ns`
+- A format string in using the [Go reference time format](https://golang.org/pkg/time/#Time.Format). For example, `Mon Jan 2 15:04:05 MST 2006`.
 
 #### `json_timezone`
 The default timezone is UTC. To specify to another timezone, or to local time, specify the json_timezone option. This option should be set to a Unix TZ value, such as America/New_York, to Local to utilize the system timezone, or to UTC.
@@ -90,7 +94,7 @@ The `csv_timestamp_column` option specifies the key containing the time value. `
 - `unix_ms`
 - `unix_us`
 - `unix_ns`
-- A format string in using the Go "reference time" format which is defined to be a specific time: Mon Jan 2 15:04:05 MST 2006.
+- A format string in using the [Go reference time format](https://golang.org/pkg/time/#Time.Format). For example, `Mon Jan 2 15:04:05 MST 2006`.
 
 #### Example
 `[agent]
