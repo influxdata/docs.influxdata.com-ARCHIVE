@@ -25,49 +25,63 @@ Action to perform for a given HTTP resource. Requests using the default configur
 
 ### `data_format`
 The format of the data in the HTTP endpoints that Telegraf will ingest.
-Each data format has its own unique set of configuration options that you'll need to add.  
-[list of data formats that links to parser information]
+
+Each data format has its own unique set of configuration options that you'll need to add. For details on each type of data format and the related options to configure, see [Telegraf input data formats](telegraf/v1.13/data_formats/input/).
 
 
 ## Telegraf Parsers
 
 ### JSON
-#### strict
+
+#### `strict`
 When strict is set to true, all objects in the JSON array must be valid
 
 #### `json_query`
-To parse only a specific portion of JSON, you need to specific the `json_query`, otherwise the whole document will be parsed.  The `json_query` is a GJSON path that can be used to limit the portion of the overall JSON document that should be parsed. The result of the query should contain a JSON object or an array of objects.
-Refer to the GJSON path syntax for details and examples or test out your query on the GJSON playground.
-https://github.com/influxdata/telegraf/tree/master/plugins/parsers/json#query
+To parse only a specific portion of JSON, you need to specific the `json_query`, otherwise the whole document will be parsed.  The `json_query` is a [GJSON](https://github.com/tidwall/gjson) path that can be used to limit the portion of the overall JSON document that should be parsed. The result of the query should contain a JSON object or an array of objects.
+Refer to the [GJSON path syntax](https://github.com/tidwall/gjson#path-syntax) for details and examples or test out your query on the GJSON playground.
 
-#### tag_keys
+
+#### `tag_keys`
 List of one or more JSON keys that should be added as tags.
 
-#### json_string_fields
+#### `json_string_fields`
 List of one or more string keys in your JSON file that need to be configured as string type fields.
 
-#### json_name_key
+#### `json_name_key`
 A key in your JSON file to be used as the measurement name.
 
-#### json_time_key
+#### `json_time_key`
 Key from the JSON file that will be used in creating the timestamp metric.  If no key is specified, the time that the data is read will be set as the timestamp.
 
-#### json_time_format
+#### `json_time_format`
 The format used to interpret the designated `json_time_key`.  The time must be set to `unix`, `unix_ms`, `unix_us`, `unix_ns`, or a time in Go “reference time”
 Ex: `json_time_format = "2006-01-02T15:04:05Z07:00"``
 
-#### json_timezone
-When parsing times that don't include a timezone specifier, times are assumed to be UTC. To default to another timezone, or to local time, specify the json_timezone option. This option should be set to a Unix TZ value, such as America/New_York, to Local to utilize the system timezone, or to UTC.
+#### `json_timezone`
+The default timezone is UTC. To specify to another timezone, or to local time, specify the json_timezone option. This option should be set to a Unix TZ value, such as America/New_York, to Local to utilize the system timezone, or to UTC.
 
 
-[EXAMPLE Configurations]
+#### Example JSON configuration
 
-### CSV
+``[[inputs.http]]
+  urls = [
+    "https://api.data.gov.sg/v1/environment/pm25"
+  ]
+  headers = {"accept" = "application/json"}
+  data_format = "json"
+  json_query = "items"
+  json_name_key = "singapore_pm25"
+  fieldpass = ["readings_pm25_one_hourly_west", "readings_pm25_one_hourly_east", "readings_pm25_one_hourly_north", "readings_pm25_one_hourly_south", "readings_pm25_one_hourly_central"]
+  json_time_key = "timestamp"
+  json_time_format = "2006-01-02T15:04:05Z07:00"``
 
-#### csv_header_row_count
+
+### CSV parser
+
+#### `csv_header_row_count`
 This field indicates how many rows to treat as a header. By default, the parser assumes there is no header and will parse the first row as data. If set to anything more than 1, column names will be concatenated with the name listed in the next header row. If `csv_column_names` is specified, the column names in header will be overridden.
 
-#### csv_column_names
+#### `csv_column_names`
 For assigning custom names to columns. If this is specified, all columns should have a name unnamed columns will be ignored by the parser.  If `csv_header_row_count` is set to 0, this config must be used
 
 #### csv_timestamp_column, csv_timestamp_format
