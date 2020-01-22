@@ -38,19 +38,19 @@ On most systems, the default locations are `/etc/telegraf/telegraf.conf` for
 the main configuration file and `/etc/telegraf/telegraf.d` for the directory of
 configuration files.
 
-## Environment variables
+## Set environment variables
 
-Use environment variables anywhere in the configuration file by prepending them with `$`.
+Add environment variables anywhere in the configuration file by prepending them with `$`.
 For strings, variables must be in quotes (for example, `"$STR_VAR"`). 
-For numbers and Booleans, variables should be unquoted (for example, `$INT_VAR`, `$BOOL_VAR`).
+For numbers and Booleans, variables must be unquoted (for example, `$INT_VAR`, `$BOOL_VAR`).
 
-Environment variables can be set using the Linux `export` command: `export password=mypassword`
+You can also set environment variables using the Linux `export` command: `export password=mypassword`
 
 > **Note:** We recommend using environment variables for sensitive information.
 
 ### Example: Telegraf environment variables
 
-Example of environment variables in `/etc/default/telegraf`:
+In the Telegraf environment variables file (`/etc/default/telegraf`):
 
 ```sh
 USER="alice"
@@ -59,7 +59,7 @@ INFLUX_SKIP_DATABASE_CREATION="true"
 INFLUX_PASSWORD="monkey123"
 ```
 
-Example of environment variables in `/etc/telegraf.conf`:
+In the Telegraf configuration file (`/etc/telegraf.conf`):
 
 ```sh
 [global_tags]
