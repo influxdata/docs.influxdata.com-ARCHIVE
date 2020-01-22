@@ -155,11 +155,15 @@ For the following AWS EC2 memory optimized instances:
 - R4.4xlarge (16 cores)
 - R4.8xlarge (32 cores)
 
-### Recommended cluster configurations by cardinality
+### Recommended cluster configurations
 
-We recommend cluster configurations depending on the cardinality (number of series) in your data set: 10,000, 100,000, 1,000,000, or 10,000,000.
+We recommend cluster configurations depending on a combination of the following criteria:
 
-Depending on cardinality, and the number of nodes and cores in your configuration, you'll find the following data:
+- Series cardinality in your data set: 10,000, 100,000, 1,000,000, or 10,000,000
+- Number of data nodes
+- Number of server cores
+
+For each cluster configuration, you'll find guidelines for the following:
 
 - **maximum writes per second only** (no dashboard queries are running)
 - **maximum queries per second only** (no data is being written)
@@ -167,8 +171,8 @@ Depending on cardinality, and the number of nodes and cores in your configuratio
 
 #### Review cluster configuration tables
 
-1. Select the number of series in your dataset below, and then expand your replication factor.
-2. In the **Nodes x Core** column, find the nodes and cores in your configuration, and then review the recommended **maximum** guidelines.
+1. Select the series cardinality tab below, and then click to expand a replication factor.
+2. In the **Nodes x Core** column, find the number of data nodes and server cores in your configuration, and then review the recommended **maximum** guidelines.
 
 {{< tab-labels >}}
 {{% tabs %}}
@@ -181,7 +185,7 @@ Depending on cardinality, and the number of nodes and cores in your configuratio
 
 {{% tab-content %}}
 
-Select one of the following replication factors to see the recommended cluster configuration:
+Select one of the following replication factors to see the recommended cluster configuration for 10,000 series:
 {{%expand "> Replication factor, 2" %}}
 
 | Nodes x Core | Writes per second | Queries per second | Queries + Writes per second |
@@ -251,6 +255,24 @@ Select one of the following replication factors to see the recommended cluster c
 {{% /tab-content %}}
 
 {{% tab-content %}}
+
+Select one of the following replication factors to see the recommended cluster configuration for 100,000 series:
+
+{{%expand "> Replication factor, 1" %}}
+
+| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
+|:------------:|------------------:|-------------------:|:---------------------------:|
+|     1 x 4    |           196,922 |                 16 |      14 + 77,006            |
+|     1 x 8    |           482,774 |                 30 |      24 + 203,599           |
+|     1 x 16   |         1,060,909 |                 60 |      42 + 415,314           |
+|     1 x 32   |         1,958,268 |                 94 |      64 + 984,983           | 
+|     2 x 4    |         1,144,717 |                108 |      68 + 406,542           |
+|     2 x 8   |         2,512,352 |                228 |     148 + 866,786           |
+|     2 x 16   |         4,346,070 |                564 |     320 + 1,886,596         |
+|     2 x 32    |         1,802,258 |                252 |     156 + 618,193           |
+
+
+{{% /expand%}}
 
 {{%expand "> Replication factor, 2" %}}
 
