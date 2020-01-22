@@ -21,9 +21,8 @@ Review configuration and hardware guidelines for InfluxDB OSS (open source) and 
 If your InfluxDB performance requires at least one of the following:
 
 - more than 750,000 writes per second
-- more than 100 moderate queries
-- more than 10,000,000 unique series
-- complex queries (span months/years or include multiple transformations, aggregations)
+- more than 100 moderate* queries ([see Query guides](#query-guidelines))
+- more than 10,000,000 [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality)
 
 A single node may not support performance at this scale. We recommend InfluxDB Enterprise, which supports multiple data nodes (a cluster) across multiple server cores. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy, so an unavailable node doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
 
