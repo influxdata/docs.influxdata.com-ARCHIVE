@@ -466,32 +466,9 @@ Select one of the following replication factors to see the recommended cluster c
 
 | Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
 |:------------:| -----------------:| ------------------:|:---------------------------:|
-|     4 x 8    |           170,897 |                60 |      42 + 98,538            |
-|     4 x 16   |           333,665 |                129 |     76 + 206,306           |
-|     4 x 32   |           609,223 |                178 |     60? + 162,897?           |
-|     8 x 8    |           395,645 |               402 |     132 + 247,952           |
-|     8 x 16   |           679,169 |               894 |    150 + 527,783           |
-|     8 x 32   |           937,314 |               1248 |        -                   |
-
-{{% /expand%}}
-
-{{%expand "> Replication factor, 6" %}}
-
-| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
-|:------------:| -----------------:| ------------------:|:---------------------------:|
-|     6 x 8    |           694,904 |                302 |     198 + 204,487           |
-|     6 x 16   |         1,397,898 |                552 |     360 + 450,489           |
-|     6 x 32   |         2,298,177 |               1248 |     384 + 1,261,676         |
-
-{{% /expand%}}
-
-{{%expand "> Replication factor, 8" %}}
-
-| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
-|:------------:| ----------------: | -----------------: |:---------------------------:|
-|     8 x 8    |           739,140 |               1296 |     480 + 371,331           |
-|     8 x 16   |         1,396,492 |               2592 |     672 + 843,223           |
-|     8 x 32   |         2,614,848 |               2496 |     960 + 1,371,593         |
+|     4 x 8    |            183365 |                132 |      52 + 100359            |
+|     4 x 16   |                 - |                  - |         -                   |
+|     4 x 32   |                 - |                  - |         -                   |
 
 {{% /expand%}}
 
