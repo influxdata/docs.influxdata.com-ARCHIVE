@@ -7,7 +7,7 @@ menu:
     parent: deploy-in-aws
 ---
 
-<!-- Gunnar--can you add some pverview/intro text here?-->
+Follow these steps to deploy an InfluxDB Enterprise cluster on AWS.
 
 ## Step 1: Specify template
 

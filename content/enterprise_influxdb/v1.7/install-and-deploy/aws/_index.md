@@ -9,8 +9,7 @@ menu:
     weight: 30
     parent: Install and deploy
 ---
-<!--Gunnar can you help with some intro text here too? Maybe the same general overview text here as for the setting up page?-->
+The following articles detail how to deploy InfluxDB clusters in AWS:
 
-- Set up AWS
-- Configuration options
-- Architecture
+- [Deploy an InfluxDB Enterprise cluster on Amazon Web Services](/enterprise_influxdb/v1.7/install-and-deploy/aws/setting-up-template)
+- [AWS configuration options](/enterprise_influxdb/v1.7/install-and-deploy/aws/config-options)
