@@ -24,7 +24,7 @@ Statement = OptionAssignment
 ## Import declaration
 
 ```js
-ImportDeclaration = "import" [identifier] string_lit
+ImportDeclaration = "import" [identifier] string_lit .
 ```
 
 A package name and an import path is associated with every package.

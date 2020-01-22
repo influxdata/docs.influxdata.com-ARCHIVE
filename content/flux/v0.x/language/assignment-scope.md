@@ -39,7 +39,7 @@ An identifier assigned to a variable in a block cannot be reassigned in the same
 An identifier can be reassigned or shadowed in an inner block.
 
 ```js
-VariableAssignment = identifier "=" Expression
+VariableAssignment = identifier "=" Expression .
 ```
 
 ##### Examples of variable assignment
@@ -57,7 +57,7 @@ f = () => {
 
 ## Option assignment
 ```js
-OptionAssignment = "option" [ identifier "." ] identifier "=" Expression
+OptionAssignment = "option" [ identifier "." ] identifier "=" Expression .
 ```
 
 An option assignment creates an option bound to an identifier and gives it a type and a value.
