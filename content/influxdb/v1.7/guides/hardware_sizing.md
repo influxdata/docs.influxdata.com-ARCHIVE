@@ -53,7 +53,7 @@ For **simple** or **complex** queries, we recommend testing and adjusting the su
 
 Run InfluxDB on locally attached solid state drives (SSDs). Other storage configurations have lower performance and may not be able to recover from small interruptions in normal processing.
 
-InfluxDB loads are estimated by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Recommended CPU, RAM, and IOPS are based on the load.
+Guidelines are estimated by writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series). Recommended CPU, RAM, and IOPS are based on the load.
 
 | vCPU or CPU| RAM     | IOPS     | Writes per second | Queries* per second| Unique series |
 |------------|---------|----------|------------------:|------------------:|---------------:|
@@ -97,7 +97,7 @@ Guidelines vary by writes per second per node, moderate* queries per second per 
 
  ### Guidelines per data node
 
-| vCPU or CPU| RAM     | IOPS    | Writes per second | Queries* per second| Unique series |
+| vCPU or CPU|     RAM |    IOPS | Writes per second | Queries* per second| Unique series |
 |------------|---------|---------|------------------:|------------------:|---------------:|
 |    2 cores |   4-8 GB|    1000 |           < 5,000 |               < 5 |      < 100,000 |
 |  4-6 cores | 16-32 GB|    1000+|         < 100,000 |              < 25 |    < 1,000,000 |
@@ -109,24 +109,19 @@ Guidelines vary by writes per second per node, moderate* queries per second per 
 
 In general, more RAM helps queries return faster. Your RAM requirements are primarily determined by [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality). Higher cardinality requires more RAM. Regardless of RAM, a series cardinality of 10 million or more can cause OOM failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
 
-## Additional cluster sizing guidelines
+## Guidelines per cluster
 
-The following InfluxDB Enterprise guidelines consider criteria, such as series cardinality, infrastructure (in this case, AWS EC2 R4 instances), replication factor, and write loads, query loads, and write/query loads combined.
-
-> These guidelines stem from a DevOps monitoring use case, maintaining a group of computers, monitoring server metrics, such as CPU, kernel, memory, disk space, disk I/O, network, and so on.
-
-### Infrastructure
-
-For the following AWS EC2 memory optimized instances:
-
+InfluxDB Enterprise guidelines vary by writes and queries per second (both isolated and combined), series cardinality, replication factor, and infrastructure-AWS EC2 R4 instances or equivalent:
 - R4.xlarge (4 cores)
 - R4.2xlarge (8 cores)
 - R4.4xlarge (16 cores)
 - R4.8xlarge (32 cores)
 
+> Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on).
+
 ### Recommended cluster configurations
 
-We recommend cluster configurations depending on a combination of the following criteria:
+Cluster configurations guidelines are organized by:
 
 - Series cardinality in your data set: 10,000, 100,000, 1,000,000, or 10,000,000
 - Number of data nodes
@@ -379,7 +374,6 @@ Select one of the following replication factors to see the recommended cluster c
 |     8 x 32   |         2,614,848 |               2496 |     960 + 1,371,593         |
 
 {{% /expand%}}
-
 
 {{% /tab-content %}}
 
