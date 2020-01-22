@@ -57,11 +57,11 @@ InfluxDB loads are estimated by writes per second, queries per second, and numbe
 
 ### Load ranges
 
-| Load         | Writes per second | Moderate queries* per second | Unique series |
-|--------------|------------------:|-----------------------------:|--------------:|
-| **Low**      |           < 5,000 |                          < 5 |     < 100,000 |
-| **Moderate** |         < 250,000 |                         < 25 |   < 1,000,000 |
-| **High**     |         > 250,000 |                         > 25 |   > 1,000,000 |
+| Load         | Writes per second | Queries* per second | Unique series |
+|--------------|------------------:|--------------------:|--------------:|
+| **Low**      |           < 5,000 |                 < 5 |     < 100,000 |
+| **Moderate** |         < 250,000 |                < 25 |   < 1,000,000 |
+| **High**     |         > 250,000 |                > 25 |   > 1,000,000 |
 
 * Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
@@ -117,7 +117,7 @@ Guidelines vary by writes per second per node, moderate* queries per second per 
 
  ### Guidelines per node
 
-| vCPU or CPU| RAM     | IOPS    | Writes per second | Queries per second| Unique series |
+| vCPU or CPU| RAM     | IOPS    | Writes per second | Queries* per second| Unique series |
 |------------|---------|---------|------------------:|------------------:|--------------:|
 |    2 cores |   4-8 GB|    1000 |           < 5,000 |               < 5 |     < 100,000 |
 |  4-6 cores | 16-32 GB|    1000+|         < 100,000 |              < 25 |   < 1,000,000 |
