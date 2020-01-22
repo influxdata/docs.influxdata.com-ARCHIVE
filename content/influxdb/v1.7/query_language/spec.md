@@ -772,7 +772,7 @@ REVOKE READ ON "mydb" FROM "jdoe"
 ### SELECT
 
 ```
-select_stmt = "SELECT" fields from_clause [ into_clause ] [ where_clause ]
+select_stmt = "SELECT" fields [ into_clause ] from_clause [ where_clause ]
               [ group_by_clause ] [ order_by_clause ] [ limit_clause ]
               [ offset_clause ] [ slimit_clause ] [ soffset_clause ] [ timezone_clause ] .
 ```
