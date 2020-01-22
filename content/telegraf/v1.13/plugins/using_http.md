@@ -10,22 +10,22 @@ menu:
 
 The HTTP input plugin collects metrics from one or more HTTP(S) URL endpoints. The endpoint should have metrics formatted in one of the supported input data formats.
 
-Note: Each data format has its own unique set of configuration options which may need to be added to the input configuration.
+Note: Each data format has its own unique set of configuration options which may need to be added to the input configuration. See <data format link>.
 
 ## Configure the HTTP Input plugin
 To retrieve data from an HTTP url endpoint, enable the `inputs.http` input plugin in the `telegraf.conf`.
 
-Specify the following:
+Specify the following options:
 
-### urls
+### `urls`
 One or more URLs from which you wanted to read metrics from.
 
-### method
-Desired action to be performed for a given HTTP resource. Requests using the default configuration `method = “GET”` value will perform the action to retrieve data from your HTTP endpoint.
+### `method`
+Action to perform for a given HTTP resource. Requests using the default configuration `method = “GET”` value will perform the action to retrieve data from your HTTP endpoint.
 
-### data_format
-The format of the data in the HTTP endpoint(s) that telegraf will consume.
-Each data format will have its own unique set of configuration options that will need to be added.  
+### `data_format`
+The format of the data in the HTTP endpoints that Telegraf will ingest.
+Each data format has its own unique set of configuration options that you'll need to add.  
 [list of data formats that links to parser information]
 
 
@@ -35,8 +35,8 @@ Each data format will have its own unique set of configuration options that will
 #### strict
 When strict is set to true, all objects in the JSON array must be valid
 
-#### json_query
-In order to parse only a specific portion of JSON you must specificy the `json_query`, otherwise the whole document will be parsed.  The json_query is a GJSON path that can be used to limit the portion of the overall JSON document that should be parsed. The result of the query should contain a JSON object or an array of objects.
+#### `json_query`
+To parse only a specific portion of JSON, you need to specific the `json_query`, otherwise the whole document will be parsed.  The `json_query` is a GJSON path that can be used to limit the portion of the overall JSON document that should be parsed. The result of the query should contain a JSON object or an array of objects.
 Refer to the GJSON path syntax for details and examples or test out your query on the GJSON playground.
 https://github.com/influxdata/telegraf/tree/master/plugins/parsers/json#query
 
