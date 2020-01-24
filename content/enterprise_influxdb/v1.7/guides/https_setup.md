@@ -176,7 +176,7 @@ Consult your CA if you are unsure about how to use these files.
     Restart the InfluxDB Enterprise processes for the configuration changes to take effect:
 
     ```sh
-    sudo systemctl start influxdb-meta
+    sudo systemctl restart influxdb-meta
     ```
 
     Restart the InfluxDB Enterprise data node processes for the configuration changes to take effect:
