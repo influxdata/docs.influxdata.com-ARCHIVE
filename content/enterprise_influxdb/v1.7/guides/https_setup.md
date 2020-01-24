@@ -90,7 +90,7 @@ Consult your CA if you are unsure about how to use these files.
     Ensure that you have the correct file permissions in each meta node and data node by running the following commands:
 
     ```sh
-    sudo chown root:root /etc/ssl/<CA-certificate-file>
+    sudo chown influxdb:influxdb /etc/ssl/
     sudo chmod 644 /etc/ssl/<CA-certificate-file>
     sudo chmod 600 /etc/ssl/<private-key-file>
     ```
