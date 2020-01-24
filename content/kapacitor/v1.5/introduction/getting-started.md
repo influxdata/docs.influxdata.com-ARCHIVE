@@ -7,36 +7,31 @@ menu:
 ---
 
 
-Use Kapacitor to stream and batch your time series data.
+Use Kapacitor to import (stream or batch) time series data, and then transform, analyze, and act on the data.
 
-- Overview
+- [Overview](#overview)
 - Get started
-    - Start InfluxDB and collect Telegraf data
-    - Start Kapacitor
+    - [Start InfluxDB and collect Telegraf data](#start-influxdb-and-collect-telegraf-data)
+    - [Start Kapacitor](#start-kapacitor)
 - Kapacitor tasks
-    - Execute a task
-    - Trigger an alert from stream data
-    - Example alert on CPU usage
-    - Gotcha - single versus double quotes
-    - Extending TICKscripts
-    - A real world example
-    - Trigger an alert from batch data
-
-    - Load tasks with Kapacitor
+    - [Execute a task](#execute-a-task)
+    - [Trigger an alert from stream data](#trigger-alerts-from-stream-data)
+    - [Example alert on CPU usage](#example-alert-on-cpu-usage)
+    - [Gotcha - single versus double quotes](#gotcha-single-versus-double-quotes)
+    - [Extending TICKscripts](#extending-tickscripts)
+    - [A real world example](#a-real-world-example)
+    - [Trigger an alert from batch data](#trigger-alerts-from-batch-data)
+    - [Load tasks](#load-tasks-with-Kapacitor)
 
 ## Overview
 
-A Kapacitor `task` defines work to do on a set of data. Kapacitor tasks include:
+Kapacitor tasks define work to do on a set of data using [TICKscript](/kapacitor/v1.5/tick/) syntax. Kapacitor tasks include:
 - `stream` task. Mirrors data written from InfluxDB to Kapacitor. Offloads query overhead and requires Kapacitor to store the data on disk.
 - `batch` task. Queries and processes InfluxDB data at a set interval.
 
-Kapacitor tasks define data processing pipelines using [TICKscript](/kapacitor/v1.5/tick/) syntax.
-Task files are commonly referred to as "TICKscripts."
-
 To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/guides/).
 
-
-1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install). (Necessary to say?: use the Linux system packages (`.deb`,`.rpm`) if available.? If yes, why?)
+1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install).
 2. Start InfluxDB and collect Telegraf data (start Telegraf?). By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
 3. Start Kapacitor.
 
@@ -47,14 +42,6 @@ To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/g
     ```bash
     $ sudo systemctl start influxdb
     ```
-
-2. Verify InfluxDB startup (is this step necessary?):
-
-```bash
-$ sudo journalctl -f -n 128 -u influxdb
-zář 01 14:47:43 algonquin systemd[1]: Started InfluxDB is an open-source, distributed, time series database.
-...
-```
 
 2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send metrics to InfluxDB:
 
@@ -87,30 +74,11 @@ zář 01 14:47:43 algonquin systemd[1]: Started InfluxDB is an open-source, dist
 
 ```
 
-3. Verify Telegraf is running:
-
- ```
- $ sudo systemctl status telegraf
-
-If Telegraf is inactive, run the following command to start Telegraf:
+3. Run the following command to start Telegraf:
 
 ```
 $ sudo systemctl start telegraf
 ```
-
- Once Telegraf is running, run the following command to check the system journal to ensure no InfluxDB connection errors exist:
-
- ```
- $ sudo journalctl -f -n 128 -u telegraf
--- Logs begin at Pá 2017-09-01 09:59:06 CEST. --
-zář 01 15:15:42 algonquin systemd[1]: Started The plugin-driven server agent for reporting metrics into InfluxDB.
-zář 01 15:15:43 algonquin telegraf[16968]: 2017-09-01T13:15:43Z I! Starting Telegraf (version 1.3.3)
-zář 01 15:15:43 algonquin telegraf[16968]: 2017-09-01T13:15:43Z I! Loaded outputs: influxdb
-zář 01 15:15:43 algonquin telegraf[16968]: 2017-09-01T13:15:43Z I! Loaded inputs: inputs.disk inputs.diskio inputs.kernel inputs.mem inputs.processes inputs.swap inputs.system inputs.cpu
-zář 01 15:15:43 algonquin telegraf[16968]: 2017-09-01T13:15:43Z I! Tags enabled: host=algonquin
-zář 01 15:15:43 algonquin telegraf[16968]: 2017-09-01T13:15:43Z I! Agent Config: Interval:10s, Quiet:false, Hostname:"algonquin", Flush Interval:10s
-
- ```
 
 InfluxDB and Telegraf are now running on localhost.
 
@@ -144,29 +112,10 @@ kapacitord config > kapacitor.conf
 $ sudo systemctl start kapacitor
 ```
 
-3. Verify the status of the Kapacitor service:
-
-```bash
-$ sudo systemctl status kapacitor
-● kapacitor.service - Time series data processing engine.
-   Loaded: loaded (/lib/systemd/system/kapacitor.service; enabled; vendor preset: enabled)
-   Active: active (running) since Pá 2017-09-01 15:34:16 CEST; 3s ago
-     Docs: https://github.com/influxdb/kapacitor
- Main PID: 18526 (kapacitord)
-    Tasks: 13
-   Memory: 9.3M
-      CPU: 122ms
-   CGroup: /system.slice/kapacitor.service
-           └─18526 /usr/bin/kapacitord -config /etc/kapacitor/kapacitor.conf
-
-zář 01 15:34:16 algonquin systemd[1]: Started Time series data processing engine..
-
-```
-
-Because InfluxDB is running on `http://localhost:8086`, Kapacitor finds it during start up and creates several [subscriptions](https://github.com/influxdata/influxql/blob/master/README.md#create-subscription) on InfluxDB.
+Because InfluxDB is running on `http://localhost:8086`, Kapacitor finds it during start up and creates several [subscriptions](/kapacitor/v1.5/administration/subscription-management/) on InfluxDB.
 Subscriptions tell InfluxDB to send data to Kapacitor.
 
-4. (Optional) To view log data, run the following command:
+3. (Optional) To view log data, run the following command:
 
 ```
 $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
@@ -253,7 +202,7 @@ Executing: false
 
    - **Troubleshoot connection refused** If a connection error appears, for example: `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), verify the Kapacitor service is running (see [Installing and Starting Kapacitor](#installing-and-starting-kapacitor)). If Kapacitor is running, check the firewall settings of the host machine and ensure that port `9092` is accessible. Also, check messages in `/var/log/kapacitor/kapacitor.log`. If there's an issue with the `http` or other configuration in `/etc/kapacitor/kapacitor.conf`, the issue appears in the log. If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.
 
-    b. Retrieve the returned ID and put? add? the ID to a bash variable to use later (the actual UUID returned is different):
+    b. Retrieve the returned ID and assign the ID to a bash variable to use later (the actual UUID returned is different):
 
         ```bash
         rid=cd158f21-02e6-405c-8527-261ae6f26153
@@ -273,7 +222,7 @@ Executing: false
         ```
 
         If the size is more than a few bytes, data has been captured.
-        If Kapacitor isn't receiving data, check each layer: Telegraf &rarr; InfluxDB &rarr; Kapacitor.
+        If Kapacitor isn't receiving data, check each layer: Telegraf → InfluxDB → Kapacitor.
         Telegraf logs errors if it cannot communicate to InfluxDB.
         InfluxDB logs an error about `connection refused` if it cannot send data to Kapacitor.
         Run the query `SHOW SUBSCRIPTIONS` to find the endpoint that InfluxDB is using to send data to Kapacitor.
@@ -367,7 +316,7 @@ alert2 [alerts_triggered="0" avg_exec_time_ns="0" ];
 
 Returns a [graphviz dot](http://www.graphviz.org) formatted tree that shows the data processing pipeline defined by the TICKscript and key-value associative array entries with statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
 In the example above, the `stream0` node (aka the `stream` var from the TICKscript) has sent 12 points to the `from1` node.
-The `from1` node has also sent 12 points on to the `alert2` node. Since Telegraf is configured to send `cpu` data, all 12 points match the from/measurement criteria of the `from1` node and are passed on.
+The `from1` node has also sent 12 points on to the `alert2` node. Since Telegraf is configured to send `cpu` data, all 12 points match the database/measurement criteria of the `from1` node and are passed on.
 
 >If necessary, install graphviz on Debian or RedHat using the package provided by the OS provider. The packages offered on the graphviz site are not up-to-date.
 
