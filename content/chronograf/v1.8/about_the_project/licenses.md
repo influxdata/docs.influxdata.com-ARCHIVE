@@ -1,7 +1,7 @@
 ---
 title: Open source license for Chronograf
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     Name: Open source license
     weight: 40
     parent: About the project

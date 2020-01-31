@@ -1,7 +1,7 @@
 ---
 title: Contributing to Chronograf
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Contributing
     weight: 20
     parent: About the project
