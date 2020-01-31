@@ -90,7 +90,7 @@ Consult your CA if you are unsure about how to use these files.
     Ensure that you have the correct file permissions in each meta node and data node by running the following commands:
 
     ```sh
-    sudo chown root:root /etc/ssl/<CA-certificate-file>
+    sudo chown influxdb:influxdb /etc/ssl/
     sudo chmod 644 /etc/ssl/<CA-certificate-file>
     sudo chmod 600 /etc/ssl/<private-key-file>
     ```
@@ -176,7 +176,7 @@ Consult your CA if you are unsure about how to use these files.
     Restart the InfluxDB Enterprise processes for the configuration changes to take effect:
 
     ```sh
-    sudo systemctl start influxdb-meta
+    sudo systemctl restart influxdb-meta
     ```
 
     Restart the InfluxDB Enterprise data node processes for the configuration changes to take effect:
