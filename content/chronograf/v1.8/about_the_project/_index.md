@@ -10,9 +10,9 @@ Chronograf is the user interface component of the [InfluxData time series platfo
 
 Follow the links below for more information.
 
-## [Chronograf 1.7 release notes](/chronograf/v1.7/about_the_project/release-notes-changelog/)
+## [Chronograf 1.8 release notes](/chronograf/v1.8/about_the_project/release-notes-changelog/)
 
-The [Chronograf 1.7 release notes](/chronograf/v1.7/about_the_project/release-notes-changelog/) includes details about features, bug fixes, and breaking changes for current and earlier Chronograf OSS releases.
+The [Chronograf 1.8 release notes](/chronograf/v1.8/about_the_project/release-notes-changelog/) includes details about features, bug fixes, and breaking changes for current and earlier Chronograf OSS releases.
 
 ## [Contributing to Chronograf](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md)
 
