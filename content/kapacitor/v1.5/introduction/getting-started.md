@@ -7,12 +7,11 @@ menu:
 ---
 
 
-Use Kapacitor to import (stream or batch) time series data, and then transform, analyze, and act on the data.
+Use Kapacitor to import (stream or batch) time series data, and then transform, analyze, and act on the data. To get started using Kapacitor, use Telegraf to collect system metrics on your local machine and store them in InfluxDB. Then, use Kapacitor to process your system data.
 
 - [Overview](#overview)
-- Get started
-    - [Start InfluxDB and collect Telegraf data](#start-influxdb-and-collect-telegraf-data)
-    - [Start Kapacitor](#start-kapacitor)
+- [Start InfluxDB and collect Telegraf data](#start-influxdb-and-collect-telegraf-data)
+- [Start Kapacitor](#start-kapacitor)
 - Kapacitor tasks
     - [Execute a task](#execute-a-task)
     - [Trigger an alert from stream data](#trigger-alerts-from-stream-data)
@@ -26,14 +25,16 @@ Use Kapacitor to import (stream or batch) time series data, and then transform, 
 ## Overview
 
 Kapacitor tasks define work to do on a set of data using [TICKscript](/kapacitor/v1.5/tick/) syntax. Kapacitor tasks include:
-- `stream` task. Mirrors data written from InfluxDB to Kapacitor. Offloads query overhead and requires Kapacitor to store the data on disk.
-- `batch` task. Queries and processes InfluxDB data at a set interval.
+- `stream` tasks. A stream task replicates data written to InfluxDB in Kapacitor. Offloads query overhead and requires Kapacitor to store the data on disk.
+- `batch` tasks. A batch task queries and processes data for a specified interval.
 
-To explore other ways to use Kapacitor, see [Kapacitor guides](/kapacitor/v1.5/guides/).
+To get started, do the following:
 
 1. If you haven't already, [download and install the InfluxData TICK stack (OSS)](/platform/install-and-deploy/install/oss-install).
-2. Start InfluxDB and collect Telegraf data (start Telegraf?). By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
+2. [Start InfluxDB and start Telegraf](#start-influxdb-and-collect-telegraf-data). By default, Telegraf starts sending system metrics to InfluxDB and creates a 'telegraf' database.
 3. Start Kapacitor.
+
+> **Note:** Example commands in the following procedures are written for Linux.
 
 ## Start InfluxDB and collect Telegraf data
 
