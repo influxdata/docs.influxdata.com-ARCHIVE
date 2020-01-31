@@ -8,16 +8,11 @@ menu:
     parent: Administration
 ---
 
-Enabling TLS encrypts the communication between clients and the InfluxDB server.
+Enable TLS to encrypt communication between clients and the InfluxDB server.
 When configured with a signed certificate, TLS also allows clients to verify the authenticity of the InfluxDB server.
 
-To set up TLS over HTTPS, do the following:
-
-- [Obtain requirements](#requirements)
-- [Configure InfluxDB to use TLS](#configure-influxdb-to-use-tls)
-
 {{% warn %}}
-InfluxData **strongly recommends** enabling HTTPS, especially if you plan on sending requests to InfluxDB over a network.
+InfluxData **strongly recommends** enabling HTTPS, especially if you plan to send requests to InfluxDB over a network.
 {{% /warn %}}
 
 {{% note %}}
@@ -43,9 +38,8 @@ InfluxDB supports three types of TLS certificates:
 * **Self-signed certificates**
 
     Self-signed certificates are _not_ signed by a trusted, third-party CA.
-    Unlike CA-signed certificates, self-signed certificates only provide cryptographic security to HTTPS requests.
-    They do not allow clients to verify the identity of the InfluxDB server.
-    With this certificate option, every InfluxDB instance requires a unique self-signed certificate.
+    Self-signed certificates provide cryptographic security to HTTPS requests but don't allow clients to verify the identity of the InfluxDB server.
+    With this kind of certificate, every InfluxDB instance requires a unique self-signed certificate.
     You can generate a self-signed certificate on your own machine.
 
 <!-- InfluxDB supports certificates composed of a private key file (`.key`) and a signed certificate file (`.crt`) file pair, -->
@@ -59,10 +53,8 @@ InfluxDB supports three types of TLS certificates:
 
     If using a self-signed certificate, use the `openssl` utility to create a certificate.
 
-    The following command generates a private key file (.key) and a self-signed certificate file (.crt) with required permissions
-    and saves them to `/etc/ssl/`.
-    (Other paths will also work.)
-    Files remain valid for the specified `NUMBER_OF_DAYS`.
+    Use the following command to generate a private key file (`.key`) and a self-signed certificate file (`.crt`) and save them to `/etc/ssl/`.
+    Set `NUMBER_OF_DAYS` to specify the amount of time the files will remain valid.
 
     ```sh
     sudo openssl req -x509 -nodes -newkey rsa:2048 \
