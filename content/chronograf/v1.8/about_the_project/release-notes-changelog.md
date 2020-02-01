@@ -1,12 +1,27 @@
 ---
-title: Chronograf 1.7 release notes
+title: Chronograf 1.8 release notes
 description: Features, breaking features, user interface improvements, and bug fixes for the latest and earlier Chronograf releases for the InfluxData time series platform.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Release notes
     weight: 10
     parent: About the project
 ---
+## v1.8.0 [2020-1-31]
+
+### Features
+
+* Add query parameter to support dashboard auto refresh.
+* Add [`etcd`](https://etcd.io/) as an alternate backend store to support multiple instances of Chronograf for high availability.
+
+### Bug Fixes
+
+* Log Viewer uses a default if the mapped severity doesn't exist.
+
+### Miscellaneous
+
+* No longer support direct upgrade from Chronograf 1.3.x. If you're upgrading 1.3.x, first install 1.4-1.7, and then install 1.8.
+
 ## v1.7.17 [2020-01-08]
 
 ### Bug Fixes
