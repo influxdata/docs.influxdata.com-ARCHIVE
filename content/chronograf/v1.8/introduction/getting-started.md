@@ -2,9 +2,9 @@
 title: Getting started with Chronograf
 aliases:
     - /chronograf/latest/introduction/getting-started/
-    - /chronograf/v1.7/introduction/getting_started/
+    - /chronograf/v1.8/introduction/getting_started/
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Getting started
     weight: 30
     parent: Introduction

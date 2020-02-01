@@ -2,7 +2,7 @@
 title: Troubleshooting Chronograf
 
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Troubleshooting
     weight: 50
 ---

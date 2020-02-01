@@ -1,7 +1,7 @@
 ---
 title: Downloading Chronograf
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Downloading
     weight: 10
     parent: Introduction

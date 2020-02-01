@@ -1,7 +1,7 @@
 ---
 title: Installing Chronograf
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Installing
     weight: 20
     parent: Introduction
@@ -68,7 +68,7 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 2. Fill out the form with the following details:
   * **Connection String**: Enter the hostname or IP of the machine that InfluxDB is running on, and be sure to include InfluxDB's default port `8086`.
   * **Connection Name**: Enter a name for your connection string.
-  * **Username** and **Password**: These fields can remain blank unless you've [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization.md) in InfluxDB.
+  * **Username** and **Password**: These fields can remain blank unless you've [enabled authentication](/influxdb/v1.8/administration/authentication_and_authorization.md) in InfluxDB.
   * **Telegraf Database Name**: Optionally, enter a name for your Telegraf database. The default name is Telegraf.
 3. Click **Add Source**.
 
