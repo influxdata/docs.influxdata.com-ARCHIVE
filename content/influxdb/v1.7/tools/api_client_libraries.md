@@ -47,6 +47,8 @@ Thanks to the open source community for your contributions, commitment, and effo
   * Maintained by [Stefan Majer (majst01)](https://github.com/majst01)
 * [Alpakka InfluxDB](https://doc.akka.io/docs/alpakka/current/influxdb.html)
   * Maintained by the Alpakka community with help from [Lightbend](https://www.lightbend.com/)
+* [JFlux](https://github.com/nickRm/jflux)
+  * Maintained by [Nick Rammos (nickRm)](https://github.com/nickRm)
 
 ## JavaScript/Node.js
 
