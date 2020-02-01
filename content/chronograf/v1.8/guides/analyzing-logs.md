@@ -2,7 +2,7 @@
 title: Analyzing logs with Chronograf
 description: View, search, filter, visualize, and analyze log information using Chronograf and InfluxDB.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     weight: 120
     parent: Guides
 ---
@@ -13,12 +13,12 @@ This helps to recognize and diagnose patterns, then quickly dive into logged eve
 ## Logging setup
 Logs data is a first class citizen in InfluxDB and is populated using available log-related [Telegraf input plugins](/telegraf/latest/plugins/inputs/):
 
-[syslog](https://github.com/influxdata/telegraf/tree/release-1.7/plugins/inputs/syslog)  
+[syslog](https://github.com/influxdata/telegraf/tree/release-1.8/plugins/inputs/syslog)  
 
 ## Viewing logs in Chronograf
 Chronograf has a dedicated log viewer accessed by clicking the **Log Viewer** button in the left navigation.
 
-<img src="/img/chronograf/v1.7/logs-nav-log-viewer.png" alt="Log viewer in the left nav" style="width:100%;max-width:209px;"/>
+<img src="/img/chronograf/v1.8/logs-nav-log-viewer.png" alt="Log viewer in the left nav" style="width:100%;max-width:209px;"/>
 
 The log viewer provides a detailed histogram showing the time-based distribution of log entries color-coded by log severity.
 It also includes a live stream of logs that can be searched, filtered, and paused to analyze specific time ranges.
@@ -51,7 +51,7 @@ timeframe selection allows you to go to to a specific event and see logs for a t
 The log viewer can be customized to fit your specific needs.
 Open the log viewer configuration options by clicking the gear button in the top right corner of the log viewer. Once done, click **Save** to apply the changes.
 
-<img src="/img/chronograf/v1.7/logs-log-viewer-config-options.png" alt="Log viewer configuration options" style="width:100%;max-width:819px;"/>
+<img src="/img/chronograf/v1.8/logs-log-viewer-config-options.png" alt="Log viewer configuration options" style="width:100%;max-width:819px;"/>
 
 ### Severity colors
 Every log severity is assigned a color which is used in the display of log entries.
@@ -67,9 +67,9 @@ Below are the options and how they appear in the log table:
 
 | Severity Format | Display                                                                                                                                           |
 | --------------- |:-------                                                                                                                                           |
-| Dot             | <img src="/img/chronograf/v1.7/logs-serverity-fmt-dot.png" alt="Log serverity format 'Dot'" style="display:inline;max-height:24px;"/>             |
-| Dot + Text      | <img src="/img/chronograf/v1.7/logs-serverity-fmt-dot-text.png" alt="Log serverity format 'Dot + Text'" style="display:inline;max-height:24px;"/> |
-| Text            | <img src="/img/chronograf/v1.7/logs-serverity-fmt-text.png" alt="Log serverity format 'Text'" style="display:inline;max-height:24px;"/>           |
+| Dot             | <img src="/img/chronograf/v1.8/logs-serverity-fmt-dot.png" alt="Log serverity format 'Dot'" style="display:inline;max-height:24px;"/>             |
+| Dot + Text      | <img src="/img/chronograf/v1.8/logs-serverity-fmt-dot-text.png" alt="Log serverity format 'Dot + Text'" style="display:inline;max-height:24px;"/> |
+| Text            | <img src="/img/chronograf/v1.8/logs-serverity-fmt-text.png" alt="Log serverity format 'Text'" style="display:inline;max-height:24px;"/>           |
 
 ### Truncate or wrap log messages
 By default, text in Log Viewer columns is truncated if it exceeds the column width. You can choose to wrap the text instead to display the full content of each cell.
@@ -80,7 +80,7 @@ To copy the complete, untruncated log message, select the message cell and click
 
 ## Logs in dashboards
 An incredibly powerful way to analyze log data is by creating dashboards that include log data.
-This is possible by using the [Table visualization type](/chronograf/v1.7/guides/visualization-types/#table) to display log data in your dashboard.
+This is possible by using the [Table visualization type](/chronograf/v1.8/guides/visualization-types/#table) to display log data in your dashboard.
 
 ![Correlating logs with other metrics](/img/chronograf/log-viewer-dashboard.gif)
 

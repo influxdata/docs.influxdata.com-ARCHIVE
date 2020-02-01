@@ -1,10 +1,10 @@
 ---
 title: Configuring Chronograf alert endpoints
 aliases:
-  - /chronograf/v1.7/guides/configure-kapacitor-event-handlers/
+  - /chronograf/v1.8/guides/configure-kapacitor-event-handlers/
 description: Use Chronograf alert endpoints to send alert messages using Chronograf support for Alerta, Exec, HipChat, HTTP/Post, Kafka, Log, OpsGenie, PagerDuty, Sensu, Slack, SMTP/email, Talk, Telegram, TCP, and VictorOps.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Configuring alert endpoints
     weight: 70
     parent: Guides
@@ -228,7 +228,7 @@ Note that you can configure Chronograf to send messages to a different Slack cha
 Chronograf sends alert messages to the specified Slack channel, or DM (direct message).
 Prefix the Slack channel with `#`, or the DM (direct message) with `@`. For example, `#chronocats` is a channel and `@chronothan` is a DM.
 
-If this field is empty (not specified), Chronograf sends alert messages to the channel or DM selected for the **Slack WebHook URL** or to the channel or DM specified in the [alert rule](/chronograf/v1.7/guides/create-a-kapacitor-alert/).
+If this field is empty (not specified), Chronograf sends alert messages to the channel or DM selected for the **Slack WebHook URL** or to the channel or DM specified in the [alert rule](/chronograf/v1.8/guides/create-a-kapacitor-alert/).
 The channel or DM specified in the alert rule takes precedence over both the `Slack Channel` configuration option and the WebHook URL configuration.
 
 #### Configuration Enabled
@@ -253,7 +253,7 @@ Click **Add Another Config** to add additional Slack alert endpoints. Each addit
 Configure Chronograf to send alert messages to an existing Telegram bot.
 The sections below describe each configuration option.
 
-![Telegram configuration](/img/chronograf/v1.7/g-eventhandlers-telegram.png)
+![Telegram configuration](/img/chronograf/v1.8/g-eventhandlers-telegram.png)
 
 #### Telegram bot
 

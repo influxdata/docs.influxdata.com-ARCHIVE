@@ -2,9 +2,9 @@
 title: Creating Chronograf alert rules
 description: Creating Chronograf alert rules, specifying time series data and thresholds. Example sends alerts to a Slack channel.
 aliases:
-  - /chronograf/v1.7/guides/create-a-kapacitor-alert/
+  - /chronograf/v1.8/guides/create-a-kapacitor-alert/
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Creating alert rules
     weight: 60
     parent: Guides
@@ -38,12 +38,12 @@ See the [Configuring Kapacitor Event Handlers](/chronograf/latest/guides/configu
 
 Navigate to the **Manage Tasks** page under **Alerting** in the left navigation, then click **+ Build Alert Rule** in the top right corner.
 
-![Navigate to Manage Tasks](/img/chronograf/v1.7/alerts-manage-tasks-nav.png)
+![Navigate to Manage Tasks](/img/chronograf/v1.8/alerts-manage-tasks-nav.png)
 
 The **Manage Tasks** page is used to create and edit your Chronograf alert rules.
 The steps below guide you through the process of creating a Chronograf alert rule.
 
-![Empty Rule Configuration](/img/chronograf/v1.7/alerts-rule-builder.png)
+![Empty Rule Configuration](/img/chronograf/v1.8/alerts-rule-builder.png)
 
 ### Step 1: Name the alert rule
 
@@ -72,7 +72,7 @@ Navigate through databases, measurements, fields, and tags to select the relevan
 
 In this example, select the `telegraf` [database](/influxdb/latest/concepts/glossary/#database), the `autogen` [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/influxdb/latest/concepts/glossary/#measurement), and the `usage_idle` [field](/influxdb/latest/concepts/glossary/#field).
 
-![Select your data](/img/chronograf/v1.7/alerts-time-series.png)
+![Select your data](/img/chronograf/v1.8/alerts-time-series.png)
 
 ### Step 4: Define the rule condition
 
@@ -80,7 +80,7 @@ Define the threshold condition.
 Condition options are determined by the [alert type](#step-2-select-the-alert-type).
 For this example, the alert conditions are if `usage_idle` is less than `80`.
 
-![Create a condition](/img/chronograf/v1.7/alerts-conditions.png)
+![Create a condition](/img/chronograf/v1.8/alerts-conditions.png)
 
 The graph shows a preview of the relevant data and the threshold number.
 By default, the graph shows data from the past 15 minutes.
@@ -98,7 +98,7 @@ Each handler has unique configurable options.
 
 For this example, choose the **slack** alert handler and enter the desired options.
 
-![Select the alert handler](/img/chronograf/v1.7/alerts-configure-handlers.png)
+![Select the alert handler](/img/chronograf/v1.8/alerts-configure-handlers.png)
 
 > Multiple alert handlers can be added to send alerts to multiple endpoints.
 
@@ -111,7 +111,7 @@ As you type your alert message, clicking the data templates will insert them at 
 
 In this example, use the alert message, `Your idle CPU usage is {{.Level}} at {{ index .Fields "value" }}.`.
 
-![Specify event handler and alert message](/img/chronograf/v1.7/alerts-message.png)
+![Specify event handler and alert message](/img/chronograf/v1.8/alerts-message.png)
 
 *View the Kapacitor documentation for more information about [message template data](/kapacitor/latest/nodes/alert_node/#message).*
 
@@ -120,7 +120,7 @@ In this example, use the alert message, `Your idle CPU usage is {{.Level}} at {{
 Click **Save Rule** in the top right corner and navigate to the **Manage Tasks** page to see your rule.
 Notice that you can easily enable and disable the rule by toggling the checkbox in the **Enabled** column.
 
-![See the alert rule](/img/chronograf/v1.7/alerts-view-rules.png)
+![See the alert rule](/img/chronograf/v1.8/alerts-view-rules.png)
 
 Next, move on to the section below to experience your alert rule in action.
 
@@ -149,10 +149,10 @@ Assuming the first step was successful, `#ohnos` should reveal at least two aler
 * The first alert message indicates that your idle CPU usage was `CRITICAL`, meaning it dipped below `80%`.
 * The second alert message indicates that your idle CPU usage returned to an `OK` level of `80%` or above.
 
-![See the alerts](/img/chronograf/v1.7/alerts-slack-notifications.png)
+![See the alerts](/img/chronograf/v1.8/alerts-slack-notifications.png)
 
 You can also see alerts on the **Alert History** page available under **Alerting** in the left navigation.
 
-![Chronograf alert history](/img/chronograf/v1.7/alerts-history.png)
+![Chronograf alert history](/img/chronograf/v1.8/alerts-history.png)
 
 That's it! You've successfully used Chronograf to configure an alert rule to monitor your idle CPU usage and send notifications to Slack.

@@ -2,7 +2,7 @@
 title: Creating Chronograf dashboards
 description: This tutorial guides you quickly through the essential steps required to create custom Chronograf dashboards for use with InfluxDB and the InfluxData Platform.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Creating dashboards
     weight: 30
     parent: Guides
@@ -17,7 +17,7 @@ Chronograf offers a complete dashboard solution for visualizing your data and mo
 
 By the end of this guide, you'll be aware of the tools available to you for creating dashboards similar to this example:
 
-![Oh, the Chronobilities](/img/chronograf/v1.7/g-dashboard-possibilities.png)
+![Oh, the Chronobilities](/img/chronograf/v1.8/g-dashboard-possibilities.png)
 
 ## Requirements
 
@@ -54,13 +54,13 @@ Those defaults are configurable using the query builder or by manually editing t
 
 In addition, the time range (`:dashboardTime:`) is [configurable on the dashboard](#step-6-configure-your-dashboard).
 
-![Build your query](/img/chronograf/v1.7/g-dashboard-builder.png)
+![Build your query](/img/chronograf/v1.8/g-dashboard-builder.png)
 
 ### Step 4: Choose your visualization type
 
 Chronograf supports many different [visualization types](/chronograf/latest/guides/visualization-types/). To choose a visualization type, click **Visualization** and select **Step-Plot Graph**.
 
-![Visualization type](/img/chronograf/v1.7/g-dashboard-visualization.png)
+![Visualization type](/img/chronograf/v1.8/g-dashboard-visualization.png)
 
 ### Step 5: Save your cell
 Click **Save** (the green checkmark icon) to save your cell.
@@ -95,10 +95,10 @@ Now, you're ready to experiment and complete your dashboard by creating, editing
 
 Select from a variety of dashboard templates to import and customize based on which Telegraf plugins you have enabled, such as the following examples:
 
-<img src="/img/chronograf/v1.7/protoboard-kubernetes.png" style="width:100%; max-width:600px;">
-<img src="/img/chronograf/v1.7/protoboard-mysql.png" style="width:100%; max-width:600px;">
-<img src="/img/chronograf/v1.7/protoboard-system.png" style="width:100%; max-width:600px;">
-<img src="/img/chronograf/v1.7/protoboard-vsphere.png" style="width:100%; max-width:600px;">
+<img src="/img/chronograf/v1.8/protoboard-kubernetes.png" style="width:100%; max-width:600px;">
+<img src="/img/chronograf/v1.8/protoboard-mysql.png" style="width:100%; max-width:600px;">
+<img src="/img/chronograf/v1.8/protoboard-system.png" style="width:100%; max-width:600px;">
+<img src="/img/chronograf/v1.8/protoboard-vsphere.png" style="width:100%; max-width:600px;">
 
 **To import dashboard templates:**
 
@@ -106,7 +106,7 @@ Select from a variety of dashboard templates to import and customize based on wh
 2. In the **InfluxDB Connection** window, enter or verify your connection details and click **Add** or **Update Connection**.
 3. In the **Dashboards** window, select from the available dashboard templates to import based on which Telegraf plugins you have enabled.
 
-    <img src="/img/chronograf/v1.7/protoboard-select.png" style="width:100%; max-width:500px;">
+    <img src="/img/chronograf/v1.8/protoboard-select.png" style="width:100%; max-width:500px;">
 4. Click **Create (x) Dashboards**.    
 5. Edit, clone, or configure the dashboards as needed.
 
