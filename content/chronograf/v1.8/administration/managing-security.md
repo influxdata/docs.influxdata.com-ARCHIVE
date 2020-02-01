@@ -1,9 +1,9 @@
 ---
 title: Managing Chronograf security
 description: Managing Chronograf security using authentication and authorization with OAuth 2.0 providers (GitHub, Google, Heroku, Okta, and generic). Also covers TLS and HTTPS setup.
-aliases: /chronograf/v1.7/administration/security-best-practices/
+aliases: /chronograf/v1.8/administration/security-best-practices/
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Managing Chronograf security
     weight: 70
     parent: Administration
@@ -107,11 +107,11 @@ Configuration steps for the following supported authentication providers are pro
 
 Alternatively, set environment variables using the equivalent command line options:
 
-* [`--github-client-id=`](/chronograf/v1.7/administration/config-options/#github-client-id-i)
-* [`--github-client-secret=`](/chronograf/v1.7/administration/config-options/#github-client-secret-s)
-* [`--token_secret=`](/chronograf/v1.7/administration/config-options/#token-secret-t)
+* [`--github-client-id=`](/chronograf/v1.8/administration/config-options/#github-client-id-i)
+* [`--github-client-secret=`](/chronograf/v1.8/administration/config-options/#github-client-secret-s)
+* [`--token_secret=`](/chronograf/v1.8/administration/config-options/#token-secret-t)
 
-For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#github-specific-oauth-2-0-authentication-options).
+For details on the command line options and environment variables, see [GitHub OAuth 2.0 authentication options](/chronograf/v1.8/administration/config-options#github-specific-oauth-2-0-authentication-options).
 
 ##### GitHub organizations (optional)
 
@@ -168,17 +168,17 @@ export GH_ORGS=biffs-gang
 
 Alternatively, the environment variables discussed above can be set using their corresponding command line options:
 
-* [`--google-client-id=`](/chronograf/v1.7/administration/config-options/#google-client-id)
-* [`--google-client-secret=`](/chronograf/v1.7/administration/config-options/#google-client-secret)
-* [`--public-url=`](/chronograf/v1.7/administration/config-options/#public-url)
-* [`--token_secret=`](/chronograf/v1.7/administration/config-options/#token-secret-t)
+* [`--google-client-id=`](/chronograf/v1.8/administration/config-options/#google-client-id)
+* [`--google-client-secret=`](/chronograf/v1.8/administration/config-options/#google-client-secret)
+* [`--public-url=`](/chronograf/v1.8/administration/config-options/#public-url)
+* [`--token_secret=`](/chronograf/v1.8/administration/config-options/#token-secret-t)
 
-For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.7/administration/config-options#google-specific-oauth-2-0-authentication-options).
+For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.8/administration/config-options#google-specific-oauth-2-0-authentication-options).
 
 ##### Optional Google domains
 
 Configure Google authentication to restrict access to Chronograf to specific domains.
-Set the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.7/administration/config-options/#google-domains) command line option.
+Set the `GOOGLE_DOMAINS` environment variable or the [`--google-domains`](/chronograf/v1.8/administration/config-options/#google-domains) command line option.
 Separate multiple domains using commas.
 For example, to permit access only from `biffspleasurepalace.com` and `savetheclocktower.com`, set the environment variable as follows:
 
@@ -194,8 +194,8 @@ See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the A
    1. From the Auth0 user dashboard, click **Create Application**.
    2. Choose **Regular Web Applications** as the type of application and click **Create**.
    3. In the **Settings** tab, set **Token Endpoint Authentication** to **None**.
-   4. Set **Allowed Callback URLs** to `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.7/administration/config-options/#general-authentication-options) of your Chronograf instance)
-   5. Set **Allowed Logout URLs** to `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.7/administration/config-options/#general-authentication-options) of your Chronograf instance)
+   4. Set **Allowed Callback URLs** to `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.8/administration/config-options/#general-authentication-options) of your Chronograf instance)
+   5. Set **Allowed Logout URLs** to `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.8/administration/config-options/#general-authentication-options) of your Chronograf instance)
    <!-- ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows). -->
 
 2. Set the Chronograf environment variables based on your Auth0 client credentials:
@@ -213,10 +213,10 @@ See [OAuth 2.0](https://auth0.com/docs/protocols/oauth2) for details about the A
 
 Alternatively, the environment variables discussed above can be set using their corresponding command line options:
 
-* [`--auth0-domain`](/chronograf/v1.7/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
-* [`--auth0-client-id`](/chronograf/v1.7/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
-* [`--auth0-client-secret`](/chronograf/v1.7/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
-* [`--public-url`](/chronograf/v1.7/administration/config-options/#general-authentication-options)
+* [`--auth0-domain`](/chronograf/v1.8/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+* [`--auth0-client-id`](/chronograf/v1.8/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+* [`--auth0-client-secret`](/chronograf/v1.8/administration/config-options/#auth0-specific-oauth-2-0-authentication-options)
+* [`--public-url`](/chronograf/v1.8/administration/config-options/#general-authentication-options)
 
 ##### Auth0 organizations (optional)
 
@@ -227,7 +227,7 @@ To assign a user to an organization, add an `organization` key to the user `app_
 For example, you can assign the user Marty McFly to the "time-travelers" organization by setting `app_metadata` to `{"organization": "time-travelers"}`.
 This can be done either manually by an operator or automatically through the use of an [Auth0 Rule](https://auth0.com/docs/rules) or a [pre-user registration Auth0 Hook](https://auth0.com/docs/hooks/concepts/pre-user-registration-extensibility-point).
 
-Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/v1.7/administration/config-options/#auth0-organizations) environment variable to a comma-separated list of the allowed organizations.
+Next, you will need to set the Chronograf [`AUTH0_ORGS`](/chronograf/v1.8/administration/config-options/#auth0-organizations) environment variable to a comma-separated list of the allowed organizations.
 For example, if you have one group of users with an `organization` key set to `biffs-gang` and another group with an `organization` key set to `time-travelers`, you can permit access to both with this environment variable: `AUTH0_ORGS=biffs-gang,time-travelers`.
 
 An `--auth0-organizations` command line option is also available, but it is limited to a single organization and does not accept a comma-separated list like its environment variable equivalent.

@@ -2,7 +2,7 @@
 title: Chronograf configuration options
 description: Details on configuration settings (command line options and environment variables) for Chronograf services, Kapacitor and InfluxDB connections, and OAuth 2.0 authentication providers.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Configuration options
     weight: 30
     parent: Administration
@@ -119,7 +119,7 @@ $ chronograf -v
 ## InfluxDB connection options
 
 > InfluxDB connection details specified via command line when starting Chronograf do not persist when Chronograf is shut down.
-> To persist connection details, [include them in a `.src` file](/chronograf/v1.7/administration/creating-connections/#managing-influxdb-connections-using-src-files) located in your [`--resources-path`](#resources-path).
+> To persist connection details, [include them in a `.src` file](/chronograf/v1.8/administration/creating-connections/#managing-influxdb-connections-using-src-files) located in your [`--resources-path`](#resources-path).
 
 ### `--influxdb-url=`
 
@@ -144,7 +144,7 @@ Environment variable: `$INFLUXDB_PASSWORD`
 ## Kapacitor connection options
 
 > Kapacitor connection details specified via command line when starting Chronograf do not persist when Chronograf is shut down.
-> To persist connection details, [include them in a `.kap` file](/chronograf/v1.7/administration/creating-connections/#managing-kapacitor-connections-using-kap-files) located in your [`--resources-path`](#resources-path).
+> To persist connection details, [include them in a `.kap` file](/chronograf/v1.8/administration/creating-connections/#managing-kapacitor-connections-using-kap-files) located in your [`--resources-path`](#resources-path).
 
 ### `--kapacitor-url=`
 
@@ -168,7 +168,7 @@ Environment variable: `$KAPACITOR_PASSWORD`
 
 ### TLS (Transport Layer Security) options
 
-See [Configuring TLS (Transport Layer Security) and HTTPS](/chronograf/v1.7/administration/managing-security/#configure-tls-transport-layer-security-and-https) for more information.
+See [Configuring TLS (Transport Layer Security) and HTTPS](/chronograf/v1.8/administration/managing-security/#configure-tls-transport-layer-security-and-https) for more information.
 
 #### `--cert=`
 
@@ -248,7 +248,7 @@ Environment variable: `$PUBLIC_URL`
 
 ### GitHub-specific OAuth 2.0 authentication options
 
-See [Configuring GitHub authentication](/chronograf/v1.7/administration/managing-security/#configure-github-authentication) for more information.
+See [Configuring GitHub authentication](/chronograf/v1.8/administration/managing-security/#configure-github-authentication) for more information.
 
 #### `--github-client-id=` | `-i`
 
@@ -270,7 +270,7 @@ Environment variable: `$GH_ORGS`
 
 ### Google-specific OAuth 2.0 authentication options
 
-See [Configuring Google authentication](/chronograf/v1.7/administration/managing-security/#configure-google-authentication) for more information.
+See [Configuring Google authentication](/chronograf/v1.8/administration/managing-security/#configure-google-authentication) for more information.
 
 #### `--google-client-id=`
 
@@ -292,7 +292,7 @@ Environment variable: `$GOOGLE_DOMAINS`
 
 ### Auth0-specific OAuth 2.0 authentication options
 
-See [Configuring Auth0 authentication](/chronograf/v1.7/administration/managing-security/#configure-auth0-authentication) for more information.
+See [Configuring Auth0 authentication](/chronograf/v1.8/administration/managing-security/#configure-auth0-authentication) for more information.
 
 #### `--auth0-domain=`
 
@@ -324,7 +324,7 @@ Environment variable: `$AUTH0_ORGS`
 
 ### Heroku-specific OAuth 2.0 authentication options
 
-See [Configuring Heroku authentication](/chronograf/v1.7/administration/managing-security/#configure-heroku-authentication) for more information.
+See [Configuring Heroku authentication](/chronograf/v1.8/administration/managing-security/#configure-heroku-authentication) for more information.
 
 ### `--heroku-client-id=`                         
 The Heroku Client ID for OAuth 2.0 support.
@@ -345,7 +345,7 @@ Lists are comma-separated.
 
 ### Generic OAuth 2.0 authentication options
 
-See [Configuring Generic authentication](/chronograf/v1.7/administration/managing-security/#configure-generic-authentication) for more information.
+See [Configuring Generic authentication](/chronograf/v1.8/administration/managing-security/#configure-generic-authentication) for more information.
 
 #### `--generic-name=`
 

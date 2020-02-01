@@ -2,15 +2,15 @@
 title: Upgrading to Chronograf 1.4
 description: Covers upgrading Chronograf to the latest version.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Upgrading
     weight: 10
     parent: Administration
 ---
 
-## Upgrading to 1.7 from 1.6
+## Upgrading to 1.8 from 1.6
 
-Version 1.7.x is a drop-in upgrade for the 1.6.x releases.
+Version 1.8.x is a drop-in upgrade for the 1.6.x releases.
 [Download and install](https://portal.influxdata.com/downloads) the most recent version and restart the process.
 
 > ***Note:*** In Chronograf 1.3.1+, installing a new version of Chronograf automatically clears the localStorage settings.

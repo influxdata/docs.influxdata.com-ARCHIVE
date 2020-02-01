@@ -2,7 +2,7 @@
 title: Managing Chronograf users
 description: Managing Chronograf users and roles, SuperAdmin status, and InfluxDB and Kapacitor users.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Managing Chronograf users
     weight: 90
     parent: Administration
@@ -31,7 +31,7 @@ menu:
 
 ## Managing Chronograf users and roles
 
-> ***Note:*** Support for organizations and user roles is available in Chronograf 1.4 or later. First, OAuth 2.0 authentication must be configured (if it is, you'll see the Chronograf Admin tab on the Admin menu). For more information, see [Managing security] (https://docs.influxdata.com/chronograf/v1.7/administration/managing-security/).
+> ***Note:*** Support for organizations and user roles is available in Chronograf 1.4 or later. First, OAuth 2.0 authentication must be configured (if it is, you'll see the Chronograf Admin tab on the Admin menu). For more information, see [Managing security] (https://docs.influxdata.com/chronograf/v1.8/administration/managing-security/).
 
 Chronograf includes four organization-bound user roles and one cross-organization SuperAdmin status. In an organization, admins (with the `admin` role) or users with SuperAdmin status can create, update, and assign roles to a user or remove a role assignment.
 
@@ -53,7 +53,7 @@ Chronograf uses InfluxDB and Kapacitor connections to manage user access control
 > **Note:** Chronograf users are entirely separate from InfluxDB and Kapacitor users.
 > The Chronograf user and authentication system applies to the Chronograf user interface.
 > InfluxDB and Kapacitor users and their permissions are managed separately.
-> [Chronograf connections](/chronograf/v1.7/administration/creating-connections/)
+> [Chronograf connections](/chronograf/v1.8/administration/creating-connections/)
 > determine which InfluxDB or Kapacitor users to use when when connecting to each service.
 
 #### Chronograf-owned resources
@@ -195,7 +195,7 @@ Role required: `admin`
 3. Add the following user information:
    * **Username**: Enter the username as provided by the OAuth provider.
    * **Role**: Select the Chronograf role.
-   * **Provider**: Enter the OAuth 2.0 provider to be used for authentication. Valid values are: `github`, `google`, `auth0`, `heroku`, or other names defined in the [`GENERIC_NAME` environment variable](/chronograf/v1.7/administration/config-options#generic-name).
+   * **Provider**: Enter the OAuth 2.0 provider to be used for authentication. Valid values are: `github`, `google`, `auth0`, `heroku`, or other names defined in the [`GENERIC_NAME` environment variable](/chronograf/v1.8/administration/config-options#generic-name).
    * **Scheme**: Displays `oauth2`, which is the only supported authentication scheme in this release.
 4. Click **Save** to finish creating the user.
 
@@ -223,7 +223,7 @@ Role required: `admin`
 
 ### Navigating organizations
 
-Chronograf is always used in the context of an organization. When a user logs in to Chronograf, that user will access only the resources owned by their current organization. The only exception to this is that users with SuperAdmin status will also be able to [manage organizations](/chronograf/v1.7/administration/managing-organizations/) in the Chronograf Admin page.
+Chronograf is always used in the context of an organization. When a user logs in to Chronograf, that user will access only the resources owned by their current organization. The only exception to this is that users with SuperAdmin status will also be able to [manage organizations](/chronograf/v1.8/administration/managing-organizations/) in the Chronograf Admin page.
 
 #### Logging in and logging out
 

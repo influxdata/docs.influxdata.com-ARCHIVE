@@ -2,7 +2,7 @@
 title: Restoring a Chronograf database
 description: 'An outline of the process required to roll the Chronoraf internal database back to a previous version and/or rerun update migrations.'
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     weight: 110
     parent: Administration
 ---
@@ -13,7 +13,7 @@ However, rolling back to a previous version of Chronograf does require restoring
 the data and data-structure specific to that version.
 
 Chronograf's internal database, `chronograf-v1.db`, is stored at your specified
-[`--bolt-path`](/chronograf/v1.7/administration/config-options/#bolt-path-b) which,
+[`--bolt-path`](/chronograf/v1.8/administration/config-options/#bolt-path-b) which,
 by default, is the current working directory where the `chronograf` binary is executed.
 In the upgrade process, an unmodified backup of your Chronograf data is stored inside the
 `backup` directory before any necessary migrations are run.
@@ -22,7 +22,7 @@ or the upgrade process in general.
 
 The `backup` directory is a sibling of your `chronograf-v1.db` file.
 Each backup file is appended with the corresponding Chronograf version.
-For example, if you moved from Chronograf 1.4.4.2 to 1.7.0, there will be a
+For example, if you moved from Chronograf 1.4.4.2 to 1.8.0, there will be a
 file called `backup/chronograf-v1.db.1.4.4.2`.
 
 _**Chronograf backup directory structure**_

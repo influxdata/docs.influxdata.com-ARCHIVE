@@ -2,7 +2,7 @@
 title: Creating InfluxDB and Kapacitor connections
 description: Creating and managing InfluxDB and Kapacitor connections for use with Chronograf.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Creating InfluxDB and Kapacitor connections
     weight: 50
     parent: Administration
@@ -15,7 +15,7 @@ Connections to InfluxDB and Kapacitor can be configured through the Chronograf u
 - [Manage Kapacitor connections using the Chronograf UI](#manage-kapacitor-connections-using-the-chronograf-ui)
 - [Manage Kapacitor connections using .kap files](#manage-kapacitor-connections-using-kap-files)
 
-> Note: Connection details are stored in Chronograf’s internal database `chronograf-v1.db` `.src`. Typically, the only time you'll need to administer the internal database is when you're [restoring a Chronograf database](/chronograf/v1.7/administration/restoring-chronograf-db/).
+> Note: Connection details are stored in Chronograf’s internal database `chronograf-v1.db` `.src`. Typically, the only time you'll need to administer the internal database is when you're [restoring a Chronograf database](/chronograf/v1.8/administration/restoring-chronograf-db/).
 
 ## Manage InfluxDB connections using the Chronograf UI
 
@@ -23,10 +23,10 @@ To create an InfluxDB connection in the Chronograf UI:
 
 1. Open Chronograf and click **Configuration** (wrench icon) in the navigation menu.
 2. Click **Add Connection**.
-  ![Chronograf connections landing page](/img/chronograf/v1.7/connection-landing-page.png)
+  ![Chronograf connections landing page](/img/chronograf/v1.8/connection-landing-page.png)
 3. Enter values for the following fields:
 
-    <img src="/img/chronograf/v1.7/influxdb-connection-config.png" style="width:100%; max-width:600px;">
+    <img src="/img/chronograf/v1.8/influxdb-connection-config.png" style="width:100%; max-width:600px;">
 
     * **Connection URL**: Enter the hostname or IP address of the InfluxDB instance and the port. The field is prefilled with  `http://localhost:8086`.
     * **Connection Name**: Enter the name for this connection.
@@ -78,8 +78,8 @@ The following dashboards are available:
 
 Manually create `.src` files to store InfluxDB connection details.
 `.src` files are simple JSON files that contain key-value paired connection details.
-The location of `.src` files is defined by the [`--resources-path`](/chronograf/v1.7/administration/config-options/#resources-path)
-command line option, which is, by default, the same as the [`--canned-path`](/chronograf/v1.7/administration/config-options/#canned-path-c).
+The location of `.src` files is defined by the [`--resources-path`](/chronograf/v1.8/administration/config-options/#resources-path)
+command line option, which is, by default, the same as the [`--canned-path`](/chronograf/v1.8/administration/config-options/#canned-path-c).
 An `.src` files contains the details for a single InfluxDB connection.
 
 Create a new file named `example.src` (the filename is arbitrary) and place it at Chronograf's `resource-path`.
@@ -167,11 +167,11 @@ To create a Kapacitor connection using the Chronograf UI:
 
 1. Open Chronograf and click **Configuration** (wrench icon) in the navigation menu.
 2. Next to an existing [InfluxDB connection](#managing-influxdb-connections-using-the-chronograf-ui), click **Add Kapacitor Connection** if there are no existing Kapacitor connections or select **Add Kapacitor Connection** in the **Kapacitor Connection** dropdown list.
-  ![Add a new Kapacitor connection in Chronograf](/img/chronograf/v1.7/connection-kapacitor.png)
+  ![Add a new Kapacitor connection in Chronograf](/img/chronograf/v1.8/connection-kapacitor.png)
 
 3. In the **Connection Details** section, enter values for the following fields:
 
-    <img src="/img/chronograf/v1.7/kapacitor-connection-config.png" style="width:100%; max-width:600px;">
+    <img src="/img/chronograf/v1.8/kapacitor-connection-config.png" style="width:100%; max-width:600px;">
 
     * **Kapacitor URL**: Enter the hostname or IP address of the Kapacitor instance and the port. The field is prefilled with  `http://localhost:9092`.
     * **Name**: Enter the name for this connection.
@@ -180,13 +180,13 @@ To create a Kapacitor connection using the Chronograf UI:
     * **Password**: Enter the password.
       *Only required if [authorization is enabled](/kapacitor/latest/administration/security/#kapacitor-authentication-and-authorization) on the Kapacitor instance or cluster to which you're connecting.*
 
-4. Click **Continue**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.7/guides/configuring-alert-endpoints/).
+4. Click **Continue**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.8/guides/configuring-alert-endpoints/).
 
 ## Manage Kapacitor connections using .kap files
 
 Manually create `.kap` files to store Kapacitor connection details.
 `.kap` files are simple JSON files that contain key-value paired connection details.
-The location of `.kap` files is defined by the `--resources-path` command line option, which is, by default, the same as the [`--canned-path`](/chronograf/v1.7/administration/config-options/#canned-path-c).
+The location of `.kap` files is defined by the `--resources-path` command line option, which is, by default, the same as the [`--canned-path`](/chronograf/v1.8/administration/config-options/#canned-path-c).
 A `.kap` files contains the details for a single InfluxDB connection.
 
 Create a new file named `example.kap` (the filename is arbitrary) and place it at Chronograf's `resource-path`.
