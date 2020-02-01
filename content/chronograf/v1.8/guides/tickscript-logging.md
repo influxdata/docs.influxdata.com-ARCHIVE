@@ -2,7 +2,7 @@
 title: Editing TICKscripts in Chronograf
 description: Editing and viewing TICKscript logs in Chronograf
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     weight: 20
     parent: Guides
 ---

@@ -2,7 +2,7 @@
 title: Explore data in Chronograf
 description: Query and visualize data in the Data Explorer.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Exploring data in Chronograf
     weight: 130
     parent: Guides
@@ -11,7 +11,7 @@ Explore and visualize your data in the **Data Explorer**. For both InfluxQL and 
 
 To open the **Data Explorer**, click the **Explore** icon in the navigation bar:
 
-<img src="/img/chronograf/v1.7/data-explorer-icon.png" style="width:100%; max-width:400px; margin:2em 0; display: block;">
+<img src="/img/chronograf/v1.8/data-explorer-icon.png" style="width:100%; max-width:400px; margin:2em 0; display: block;">
 
 ## Select local time or UTC (Coordinated Universal Time)
 
@@ -35,7 +35,7 @@ InfluxQL is a SQL-like query language you can use to interact with data in Influ
 
 Flux is InfluxData's new functional data scripting language designed for querying, analyzing, and acting on time series data. To learn more about Flux, see [Getting started with Flux](/flux/v0.7/introduction/getting-started).
 
-> ***Note:*** Flux v0.7 is a technical preview included with [InfluxDB v1.7](/influxdb/v1.7). It is still in active development and many functions provided by InfluxQL and TICKscript have yet to be implemented.
+> ***Note:*** Flux v0.7 is a technical preview included with [InfluxDB v1.8](/influxdb/v1.8). It is still in active development and many functions provided by InfluxQL and TICKscript have yet to be implemented.
 
 
 1. Open the Data Explorer and click **Add a Query**.
@@ -47,7 +47,7 @@ Flux is InfluxData's new functional data scripting language designed for queryin
 
     * To get started with your query, click the **Script Wizard**. In the wizard, you can select a bucket, measurement, fields and an aggregate.
 
-      <img src="/img/chronograf/v1.7/flux-script-wizard.png" style="width:100%; max-width:400px; margin:2em 0; display:block;">
+      <img src="/img/chronograf/v1.8/flux-script-wizard.png" style="width:100%; max-width:400px; margin:2em 0; display:block;">
 
     For example, if you make the above selections, the wizard inserts the following script:
 
@@ -80,4 +80,4 @@ To add your query and graph to a dashboard:
 3. Enter a name for the new cell and, if you created a new dashboard, the new dashboard.
 4. Click **Send to Dashboard(s)**.
 
-    <img src="/img/chronograf/v1.7/send-to-dashboard-send.png" style="width:100%; max-width:597px; display:block; margin:2em 0;">
+    <img src="/img/chronograf/v1.8/send-to-dashboard-send.png" style="width:100%; max-width:597px; display:block; margin:2em 0;">

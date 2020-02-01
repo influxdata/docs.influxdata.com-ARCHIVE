@@ -2,9 +2,9 @@
 title: Monitoring InfluxDB Enterprise clusters
 description: Use Chronograf dashboards with an InfluxDB OSS server to measure and monitor InfluxDB Enterprise cluster data nodes using Telegraf output plugins and input plugins.
 aliases:
-  - /chronograf/v1.7/guides/monitor-an-influxenterprise-cluster/
+  - /chronograf/v1.8/guides/monitor-an-influxenterprise-cluster/
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     weight: 80
     parent: Guides
 

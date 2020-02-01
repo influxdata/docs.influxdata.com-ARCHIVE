@@ -2,7 +2,7 @@
 title: Viewing Chronograf dashboards in presentation mode
 description: View dashboards in full screen using presentation mode.
 menu:
-  chronograf_1_7:
+  chronograf_1_8:
     name: Viewing dashboards in presentation mode
     weight: 130
     parent: Guides
