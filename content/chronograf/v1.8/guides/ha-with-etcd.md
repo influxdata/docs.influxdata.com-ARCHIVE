@@ -7,34 +7,26 @@ menu:
     parent: Guides
 ---
 
-In order to run multiple instances of chronograf, you need a shared data store.
-By default, chronograf uses BoltDB. 
+Run multiple instances of Chronograf to provide high availability.
+To do this, you need to use a shared data store.
+This can be accomplished using [etcd](https://github.com/etcd-io/etcd).
 
-End goal to allow higher http throughput.
+### Install etcd
 
-### etcd
+Download the latest etcd release [from GitHub](https://github.com/etcd-io/etcd/releases/).
+Extract the `etcd` binary and place it somewhere in your path.
+Ensure that `etcd` is running before starting Chronograf.
 
-Get latest etcd release [from GitHub](https://github.com/etcd-io/etcd/releases/tag/v3.3.18):
 
-For Linux:
+### Start Chronograf with etcd
 
-```sh
-# fetch the binary
-curl -L https://github.com/etcd-io/etcd/releases/download/v3.3.18/etcd-v3.3.18-linux-amd64.tar.gz | tar -zxf -
-
-# run the binary
-./etcd-v3.3.18*/etcd
-```
-
-### Start chronograf with etcd
-
-Start chronograf and use etcd as the storage layer:
+Use the following command to start Chronograf using etcd as the storage layer:
 
 ```sh
 chronograf --etcd-endpoints=localhost:2379
 ```
 
-Other usage:
+The flags listed below provide more configuration options.
 
 ```
 -e, --etcd-endpoints=                       List of etcd endpoints [$ETCD_HOSTS]
