@@ -182,6 +182,37 @@ The file path to private key associated with given certificate.
 
 Environment variable: `$TLS_PRIVATE_KEY`
 
+## etcd options
+
+### `--etcd-endpoints=` | `-e`
+
+List of etcd endpoints.
+
+Environment variable: `$ETCD_HOSTS`
+
+### `--etcd-username=`
+
+Username to log into etcd.
+
+Environment variable: `$ETCD_USERNAME`
+
+### `--etcd-password=`
+
+Password to log into etcd.
+
+Environment variable: `$ETCD_PASSWORD`
+
+### `--etcd-dial-timeout=`
+
+Total time to wait before timing out while connecting to etcd endpoints. 0 means no timeout. (default: -1s) 
+
+Environment variable: `$ETCD_DIAL_TIMEOUT`
+
+### `--etcd-request-timeout=`
+
+Total time to wait before timing out the etcd view or update. 0 means no timeout. (default: -1s)
+
+Environment variable: `$ETCD_REQUEST_TIMEOUT`
 
 ### Other service options
 
