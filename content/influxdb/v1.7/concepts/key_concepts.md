@@ -164,15 +164,19 @@ In the sample data, everything in the `census` measurement belongs to the `autog
 InfluxDB automatically creates that retention policy; it has an infinite duration and a replication factor set to one.
 
 Now that you're familiar with measurements, tag sets, and retention policies, let's discuss series.
-In InfluxDB, a <a name=series></a>_**series**_ is the collection of data that share a retention policy, measurement, and tag set.
-The data above consist of four series:
+In InfluxDB, a <a name=series></a>_**series**_ is a collection of points that share a measurement, tag set, and field key.
+The data above consist of eight series:
 
-| Arbitrary series number  |  Retention policy | Measurement  |  Tag set |
-|---|---|---|---|
-| series 1  | `autogen` | `census` | `location = 1`,`scientist = langstroth` |
-| series 2  | `autogen` | `census` | `location = 2`,`scientist = langstroth` |
-| series 3  | `autogen` | `census` | `location = 1`,`scientist = perpetua` |
-| series 4  | `autogen` | `census` | `location = 2`,`scientist = perpetua` |
+| Series number            | Measurement | Tag set                                 | Field key     |
+|:------------------------ | ----------- | -------                                 | ---------     |
+| series 1                 | `census`    | `location = 1`,`scientist = langstroth` | `butterflies` |
+| series 2                 | `census`    | `location = 2`,`scientist = langstroth` | `butterflies` |
+| series 3                 | `census`    | `location = 1`,`scientist = perpetua`   | `butterflies` |
+| series 4                 | `census`    | `location = 2`,`scientist = perpetua`   | `butterflies` |
+| series 5                 | `census`    | `location = 1`,`scientist = langstroth` | `honeybees`   |
+| series 6                 | `census`    | `location = 2`,`scientist = langstroth` | `honeybees`   |
+| series 7                 | `census`    | `location = 1`,`scientist = perpetua`   | `honeybees`   |
+| series 8                 | `census`    | `location = 2`,`scientist = perpetua`   | `honeybees`   |
 
 Understanding the concept of a series is essential when designing your [schema](/influxdb/v1.7/concepts/glossary/#schema) and when working with your data in InfluxDB.
 
