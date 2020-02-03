@@ -1,5 +1,5 @@
 ---
-title: Upgrading to Chronograf
+title: Upgrading Chronograf
 description: Covers upgrading Chronograf to the latest version.
 menu:
   chronograf_1_8:
