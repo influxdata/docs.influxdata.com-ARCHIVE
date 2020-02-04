@@ -725,7 +725,7 @@ The `topic-handlers` command removes a topic handler.
 
 ```bash
 # Pattern
-kapacitor delete topic-handler [TOPIC_ID] [HANDLER_ID]
+kapacitor delete topic-handlers [TOPIC_ID] [HANDLER_ID]
 
 # Example
 kapacitor delete topic-handlers cpu slack
