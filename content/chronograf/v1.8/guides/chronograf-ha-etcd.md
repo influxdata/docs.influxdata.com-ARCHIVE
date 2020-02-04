@@ -7,7 +7,7 @@ menu:
     parent: Guides
 ---
 
-Create a high-availability (HA) Chronograf cluster using etcd as a shared Chronograf data store.
+Create a high-availability (HA) Chronograf cluster using etcd as a shared data store.
 
 ## Install etcd
 
