@@ -10,23 +10,23 @@ Review configuration and hardware guidelines for InfluxDB OSS (open source) and 
 
 * [Single node or cluster?](#single-node-or-cluster)
 * [Query guidelines](#query-guidelines)
-* [Single node guidelines](#single-node-guidelines)
-* [Cluster guidelines](#cluster-guidelines)
+* [InfluxDB OSS guidelines](#influxdb-oss-guidelines)
+* [InfluxDB Enterprise cluster guidelines](#cluster-guidelines)
 * [When do I need more RAM?](#when-do-i-need-more-ram)
 * [Recommended cluster configurations](#recommended-cluster-configurations)
 * [Storage: type, amount, and configuration](#storage-type-amount-and-configuration)
 
 ## Single node or cluster?
 
-If your InfluxDB performance requires any of the following, a single node may not support your needs:
+If your InfluxDB performance requires any of the following, a single node (InfluxDB OSS) may not support your needs:
 
-- more than 750,000 writes per second
+- more than 750,000 field writes per second
 - more than 100 moderate queries ([see Query guides](#query-guidelines))
 - more than 10,000,000 [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality)
 
  We recommend InfluxDB Enterprise, which supports multiple data nodes (a cluster) across multiple server cores. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy, so an unavailable node doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
 
-If you want a single node instance of InfluxDB that's fully open source, requires fewer writes, queries, and unique series than listed above, and do **not require** redundancy, we recommend InfluxDB OSS (open source).
+If you want a single node instance of InfluxDB that's fully open source, requires fewer writes, queries, and unique series than listed above, and do **not require** redundancy, we recommend InfluxDB OSS.
 
 > **Note:** Without the redundancy of a cluster, writes and queries fail immediately when a server is unavailable.
 
@@ -48,11 +48,11 @@ For **simple** or **complex** queries, we recommend testing and adjusting the su
 |                  | May sample a very large time range of months or years                                 |
 |                  | Typically take multiple seconds to execute                                            |
 
-## Single node guidelines
+## InfluxDB OSS guidelines
 
 Run InfluxDB on locally attached solid state drives (SSDs). Other storage configurations have lower performance and may not be able to recover from small interruptions in normal processing.
 
-Estimated guidelines include writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series), CPU, RAM, and IOPS.
+Estimated guidelines include writes per second, queries per second, and number of unique [series](/influxdb/v1.7/concepts/glossary/#series), CPU, RAM, and IOPS (input/output operations per second).
 
 | vCPU or CPU |   RAM   |   IOPS   | Writes per second | Queries* per second | Unique series |
 | ----------: | ------: | -------: | ----------------: | ------------------: | ------------: |
@@ -62,7 +62,7 @@ Estimated guidelines include writes per second, queries per second, and number o
 
 * **Queries per second for moderate queries.** Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for details.
 
-## Cluster guidelines
+## InfluxDB Enterprise cluster guidelines
 
 ### Meta nodes
 
@@ -76,9 +76,9 @@ Meta nodes do not need very much computing power. Regardless of the cluster load
 * RAM: 512 MB - 1 GB
 * IOPS: 50
 
-### Enterprise web node
+### Web node
 
-The Enterprise web server is primarily an HTTP server with similar load requirements. For most applications, the server doesn't need to be very robust. A cluster can function with only one web server, but for redundancy, we recommend connecting multiple web servers to a single back-end Postgres database.
+The InfluxDB Enterprise web server is primarily an HTTP server with similar load requirements. For most applications, the server doesn't need to be very robust. A cluster can function with only one web server, but for redundancy, we recommend connecting multiple web servers to a single back-end Postgres database.
 
 > **Note:** Production clusters should not use the SQLite database (lacks support for redundant web servers and handling high loads).
 
@@ -92,7 +92,7 @@ A cluster with one data node is valid but has no data redundancy. Redundancy is 
 
 >**Note:** For optimal data distribution within the cluster, use an even number of data nodes.
 
-Guidelines vary by writes per second per node, moderate queries per second per node, and number of unique series per node.
+Guidelines vary by writes per second per node, moderate queries per second per node, and the number of unique series per node.
 
  #### Guidelines per node
 
@@ -445,7 +445,7 @@ Select one of the following replication factors to see the recommended cluster c
 
 ## Storage: type, amount, and configuration
 
-### Storage volume and IOPS (input/output operations per second)
+### Storage volume and IOPS
 
 Consider the type of storage you need and the amount. InfluxDB is designed to run on solid state drives (SSDs) and memory-optimized cloud instances, for example, AWS EC2 R5 or R4 instances. InfluxDB isn't tested on hard disk drives (HDDs) and we don't recommend HDDs for production. For best results, InfluxDB servers must have a minimum of 1000 IOPS on storage to ensure recovery and availability. We recommend at least 2000 IOPS for rapid recovery of cluster data nodes after downtime.
 
