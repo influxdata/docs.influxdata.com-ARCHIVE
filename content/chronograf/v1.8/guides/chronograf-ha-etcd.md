@@ -24,4 +24,4 @@ To start Chronograf using etcd as the storage layer, use the following command:
 chronograf --etcd-endpoints=localhost:2379
 ```
 
-For more information, see [Chronograf configuration options](/chronograf/v1.8/administration/configuration.md).
+For more information, see [Chronograf configuration options](/chronograf/v1.8/administration/config-options#etcd-options).
