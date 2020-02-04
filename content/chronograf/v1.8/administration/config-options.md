@@ -205,13 +205,17 @@ Environment variable: `$ETCD_PASSWORD`
 
 #### `--etcd-dial-timeout=`
 
-Total time to wait before timing out while connecting to etcd endpoints. 0 means no timeout. (default: -1s)
+Total time to wait before timing out while connecting to etcd endpoints.
+0 means no timeout.
+The default is 1s.
 
 Environment variable: `$ETCD_DIAL_TIMEOUT`
 
 #### `--etcd-request-timeout=`
 
-Total time to wait before timing out the etcd view or update. 0 means no timeout. (default: -1s)
+Total time to wait before timing out an etcd view or update request.
+0 means no timeout.
+The default is 1s.
 
 Environment variable: `$ETCD_REQUEST_TIMEOUT`
 
