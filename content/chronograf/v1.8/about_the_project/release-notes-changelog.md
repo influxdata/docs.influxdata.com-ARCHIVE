@@ -7,11 +7,11 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v1.8.0 [2020-2-03]
+## v1.8.0 [2020-02-03]
 
 ### Features
 
-* Add query parameter to support dashboard auto refresh.
+* Add the `RefreshRate` query parameter to set the dashboard auto-refresh interval (by default, 10000 milliseconds).
 * Add [`etcd`](https://etcd.io/) as an alternate backend store to support multiple instances of Chronograf for high availability.
 
 ### Bug Fixes

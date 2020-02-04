@@ -14,7 +14,6 @@ Chronograf offers a complete dashboard solution for visualizing your data and mo
 * Create custom dashboards from scratch by building queries in the Data Explorer, as described [below](#build-a-dashboard).
 * Import dashboard templates when you add or update a connection in Chronograf. See [Dashboard templates](#dashboard-templates) for details.
 
-
 By the end of this guide, you'll be aware of the tools available to you for creating dashboards similar to this example:
 
 ![Oh, the Chronobilities](/img/chronograf/v1.8/g-dashboard-possibilities.png)
@@ -63,18 +62,21 @@ Chronograf supports many different [visualization types](/chronograf/latest/guid
 ![Visualization type](/img/chronograf/v1.8/g-dashboard-visualization.png)
 
 ### Step 5: Save your cell
+
 Click **Save** (the green checkmark icon) to save your cell.
 
 > ***Note:*** If you navigate away from this page without clicking Save, your work will not be saved.
 
 ### Step 6: Configure your dashboard
 
-#### Customize cells:
+#### Customize cells
+
 * You can change the name of the cell from "Untitled Cell" by returning to the cell editor mode, clicking on the name, and renaming it. Remember to save your changes.
 * **Move** your cell around by clicking its top bar and dragging it around the page
 * **Resize** your cell by clicking and dragging its bottom right corner
 
-#### Explore cell data:
+#### Explore cell data
+
 * **Zoom** in on your cell by clicking and dragging your mouse over the area of interest
 * **Pan** over your cell data by pressing the shift key and clicking and dragging your mouse over the graph
 * **Reset** your cell by double-clicking your mouse in the cell window
@@ -82,11 +84,16 @@ Click **Save** (the green checkmark icon) to save your cell.
     > **Note:**
     These tips only apply to the line, stacked, step-plot, and line+stat [visualization types](/chronograf/latest/guides/visualization-types/).
 
-#### Configure dashboard-wide settings:
+#### Configure dashboard-wide settings
+
 * Change the dashboard's *selected time* at the top of the page - the default time is **Local**, which uses your browser's local time. Select **UTC** to use Coordinated Universal Time.
 
-    > **Note:** If your organization spans multiple time zones, we recommend using UTC (Coordinated Universal Time) to ensure that everyone sees metrics and events for the same time.
-* Change the dashboard's *auto-refresh interval* at the top of the page - the default interval selected is **Every 15 seconds**.
+> **Note:** If your organization spans multiple time zones, we recommend using UTC (Coordinated Universal Time) to ensure that everyone sees metrics and events for the same time.
+
+* Change the dashboard's *auto-refresh interval* at the top of the page - the default interval selected is **Every 10 seconds**.
+
+> **Note:** A dashboard's refresh rate persists in local storage, so the default refresh rate is only used when a refresh rate isn't found in local storage.
+
 * Modify the dashboard's *time range* at the top of the page - the default range is **Past 15 minutes**.
 
 Now, you're ready to experiment and complete your dashboard by creating, editing, and repositioning more cells!
@@ -107,16 +114,17 @@ Select from a variety of dashboard templates to import and customize based on wh
 3. In the **Dashboards** window, select from the available dashboard templates to import based on which Telegraf plugins you have enabled.
 
     <img src="/img/chronograf/v1.8/protoboard-select.png" style="width:100%; max-width:500px;">
-4. Click **Create (x) Dashboards**.    
+4. Click **Create (x) Dashboards**.
 5. Edit, clone, or configure the dashboards as needed.
-
 
 ## Extra Tips
 
 ### Full screen mode
+
 View your dashboard in full screen mode by clicking on the full screen icon in the top right corner of your dashboard.
 To exit full screen mode, press the Esc key.
 
 ### Template variables
+
 Dashboards support template variables.
 See the [Dashboard Template Variables](/chronograf/latest/guides/dashboard-template-variables/) guide for more information.

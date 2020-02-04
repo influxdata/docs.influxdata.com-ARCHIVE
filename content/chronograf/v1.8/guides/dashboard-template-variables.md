@@ -67,6 +67,7 @@ WHERE time > :dashboardTime: AND time < :upperDashboardTime:
 ```
 
 ### interval
+
 The `:interval:` template variable is defined by the interval dropdown in the Chronograf dashboard.
 
 <img src="/img/chronograf/v1.8/template-vars-interval-dropdown.png" style="width:100%;max-width:549px;" alt="Dashboard interval selector"/>
@@ -79,7 +80,6 @@ FROM "telegraf".."cpu"
 WHERE time > :dashboardtime:
 GROUP BY time(:interval:)
 ```
-
 
 ## Create custom template variables
 Template variables are essentially an array of potential values used to populate parts of your cells' queries.
