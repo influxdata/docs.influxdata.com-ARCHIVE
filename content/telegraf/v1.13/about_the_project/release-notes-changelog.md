@@ -13,9 +13,15 @@ menu:
 ### Bug fixes
 
 - Update Kibana (`kibana`) input plugin to support Kibana 6.4 and later.
-- Prevent duplicate TrackingIDs from being returned in queue consumer plugins.
+- Prevent duplicate TrackingIDs from being returned in the following queue consumer input plugins:
+    - Amazon Kineses Consumer (`kinesis_consumer`)
+    - AMQP Consumer (`amqp_consumer`)
+    - Apache Consumer (`apache_consumer`)
+    - MQTT Consumer (`mqtt_consumer`)
+    - NATS Consumer (`nats_consumer`)
+    - NSQ Consumer (`nsq_consumer`)
 - Increase support for up to 4096 statistics in the Ethtool (`ethtool`) input plugin.
-- Remove expired metrics even when no new data is sent to the Prometheus Client (`prometheus_client`) output plugin.
+- Remove expired metrics from the Prometheus Client (`prometheus_client`) output plugin without new data being sent.
 
 ## v1.13.2 [2020-01-21]
 
