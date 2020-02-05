@@ -27,11 +27,14 @@ sudo systemctl start chronograf
 chronograf [OPTIONS]
 ```
 
-**Windows:**
+<!--**Windows:**
+
+> **Note** Windows not fully supported and provided for experimental use only.
 
 ```bash
 chronograf.exe [OPTIONS]
 ```
+-->>
 
 `[OPTIONS]` are available Chronograf command line options, separated by spaces. See the [Chronograf configuration options](https://docs.influxdata.com/chronograf/v1.8/administration/config-options) documentation for details about configuration options, including command line options and corresponding environment variables.
 
