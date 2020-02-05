@@ -15,7 +15,8 @@ menu:
   - [InfluxDB connection options](#influxdb-connection-options)
   - [Kapacitor connection options](#kapacitor-connection-options)
   - [TLS (Transport Layer Security) options](#tls-transport-layer-security-options)
-  * [Other service options](#other-service-options)
+  - [etcd options](#etcd-options)
+  - [Other service options](#other-service-options)
 * [Authentication options](#authentication-options)
     * [General authentication options](#general-authentication-options)
     * [GitHub-specific OAuth 2.0 authentication options](#github-specific-oauth-2-0-authentication-options)
@@ -182,6 +183,41 @@ The file path to private key associated with given certificate.
 
 Environment variable: `$TLS_PRIVATE_KEY`
 
+### etcd options
+
+#### `--etcd-endpoints=` | `-e`
+
+List of etcd endpoints.
+
+Environment variable: `$ETCD_ENDPOINTS`
+
+#### `--etcd-username=`
+
+Username to log into etcd.
+
+Environment variable: `$ETCD_USERNAME`
+
+#### `--etcd-password=`
+
+Password to log into etcd.
+
+Environment variable: `$ETCD_PASSWORD`
+
+#### `--etcd-dial-timeout=`
+
+Total time to wait before timing out while connecting to etcd endpoints.
+0 means no timeout.
+The default is 1s.
+
+Environment variable: `$ETCD_DIAL_TIMEOUT`
+
+#### `--etcd-request-timeout=`
+
+Total time to wait before timing out an etcd view or update request.
+0 means no timeout.
+The default is 1s.
+
+Environment variable: `$ETCD_REQUEST_TIMEOUT`
 
 ### Other service options
 
