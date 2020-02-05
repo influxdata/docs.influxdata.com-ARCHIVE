@@ -66,7 +66,10 @@ The format used to interpret the designated `json_time_key`.  The time must be s
 - A format string in using the [Go reference time format](https://golang.org/pkg/time/#Time.Format). For example, `Mon Jan 2 15:04:05 MST 2006`.
 
 #### `json_timezone`
-The default timezone is UTC. To specify to another timezone, or to local time, specify the json_timezone option. This option should be set to a Unix TZ value, such as America/New_York, to Local to utilize the system timezone, or to UTC.
+Set this option to one of the following:
+- A Unix TZ value, such as `America/New_York`
+- `Local` to use the system timezone
+- `UTC` (default)
 
 
 #### Example JSON configuration
