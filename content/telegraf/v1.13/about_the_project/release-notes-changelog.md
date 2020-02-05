@@ -21,7 +21,7 @@ menu:
     - NATS Consumer (`nats_consumer`)
     - NSQ Consumer (`nsq_consumer`)
 - Increase support for up to 4096 statistics in the Ethtool (`ethtool`) input plugin.
-- Remove expired metrics from the Prometheus Client (`prometheus_client`) output plugin without new data being sent.
+- Remove expired metrics from the Prometheus Client (`prometheus_client`) output plugin. Previously, expired metrics were only removed when new metrics were added.
 
 ## v1.13.2 [2020-01-21]
 
