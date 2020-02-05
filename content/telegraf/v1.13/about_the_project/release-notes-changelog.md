@@ -8,6 +8,15 @@ menu:
     parent: About the project
 ---
 
+## v1.13.3 [2020-02-04]
+
+### Bug fixes
+
+- Update Kibana (`kibana`) input plugin to support Kibana 6.4 and later.
+- Prevent duplicate TrackingIDs from being returned in queue consumer plugins.
+- Increase support for up to 4096 statistics in the Ethtool (`ethtool`) input plugin.
+- Remove expired metrics even when no new data is sent to the Prometheus Client (`prometheus_client`) output plugin.
+
 ## v1.13.2 [2020-01-21]
 
 ### Bug fixes
