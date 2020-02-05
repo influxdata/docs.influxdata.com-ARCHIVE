@@ -16,7 +16,7 @@ menu:
 
 ### Bug Fixes
 
-* Log Viewer uses a default if the mapped severity doesn't exist.
+* The Log Viewer no longer crashes if an invalid severity is used (for example, `emreg` instead of `emerg`). Now, by default, the Log Viewer assigns the first color in the list on the Configure Log View page to an invalid severity.
 
 ### Miscellaneous
 
