@@ -13,7 +13,7 @@ menu:
 ### Bug fixes
 
 - Update Kibana (`kibana`) input plugin to support Kibana 6.4 and later.
-- Prevent duplicate TrackingIDs from being returned in the following queue consumer input plugins:
+- Prevent duplicate `TrackingIDs` from being returned in the following queue consumer input plugins:
     - Amazon Kineses Consumer (`kinesis_consumer`)
     - AMQP Consumer (`amqp_consumer`)
     - Apache Consumer (`apache_consumer`)
