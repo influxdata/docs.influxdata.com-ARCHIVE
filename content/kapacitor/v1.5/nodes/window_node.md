@@ -128,7 +128,7 @@ If the `align` property isn't used to modify the `window` node, the window align
 ```js
 window.align()
 ```
-> Note: When ingesting data at irregular intervals, we recommend using `window.align()` to prevent duplicate values with the same timestamp or unexpected additional values.
+> Note: When ingesting data at irregular intervals, we recommend using `window.align()` to group data.
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 

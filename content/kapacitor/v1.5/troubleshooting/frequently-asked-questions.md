@@ -20,7 +20,7 @@ Where applicable, it links to outstanding issues on Github.
 
 - [Batches work but streams do not. Why?](#batches-work-but-streams-do-not-why)  
 - [Is there a limit on the number of scripts Kapacitor can handle?](#is-there-a-limit-on-the-number-of-scripts-kapacitor-can-handle)
-- [What causes duplicate values with same timestamp or unexpected additional values?](#what-causes-duplicate-values-with-same-timestamp-or-unexpected-additional-values)
+- [What causes unexpected or additional values with same timestamp??](#what-causes-unexpected-or-additional-values-with-same-timestamp)
 
 **Performance**  
 
@@ -82,9 +82,9 @@ Streams are a `PUSH`'d to port `9092` so it must be allowed through the firewall
 
 There is no software limit, but it will be limited by available server resources.
 
-### What causes duplicate values with same timestamp or unexpected additional values?
+### What causes unexpected or additional values with same timestamp?
 
-If data is ingested at irregular intervals, duplicate values with the same timestamp and unexpected additional values may occur. To resolve this issue, use [`align ()`](/kapacitor/v1.5/nodes/window_node/#align) when ingesting data in your TICKscript.
+If data is ingested at irregular intervals and you see unexpected results with the same timestamp, use the [`log node`](/kapacitor/v1.5/nodes/log_node) when ingesting data in your TICKscript to debug issues. This surfaces issues, for example, duplicate data hidden by httpOut.
 
 ## Performance
 
