@@ -8,9 +8,13 @@ menu:
     parent: Plugins
 ---
 
+This example walks through the
+
 The HTTP input plugin collects metrics from one or more HTTP(S) URL endpoints. The endpoint should have metrics formatted in one of the supported input data formats.
 
-## Configure the HTTP Input plugin
+For the following example to work, you must have already configured the [`influxdb` output plugin](telegraf/v1.13/plugins/plugin-list/#influxdb).
+
+## Step 1: Configure the HTTP Input plugin in your telegraf config file
 To retrieve data from an HTTP url endpoint, enable the `inputs.http` input plugin in the `telegraf.conf`.
 
 Specify the following options:
@@ -27,7 +31,10 @@ The format of the data in the HTTP endpoints that Telegraf will ingest.
 Each data format has its own unique set of configuration options that you'll need to add. For details on each type of data format and the related options to configure, see [Telegraf input data formats](telegraf/v1.13/data_formats/input/).
 
 
-## Telegraf Parsers
+## Step 2: Add Jparser information to telegraf.conf
+ (Telegraf Parsers)
+
+ Based off your data format type, use one of the following parsers.
 
 ### JSON
 
@@ -35,7 +42,7 @@ Each data format has its own unique set of configuration options that you'll nee
 When strict is set to true, all objects in the JSON array must be valid
 
 #### `json_query`
-To parse only a specific portion of JSON, you need to specific the `json_query`, otherwise the whole document will be parsed.  The `json_query` is a [GJSON](https://github.com/tidwall/gjson) path that can be used to limit the portion of the overall JSON document that should be parsed. The result of the query should contain a JSON object or an array of objects.
+To parse only a specific portion of JSON, you need to specify the `json_query`, otherwise the whole document will be parsed.  The `json_query` is a [GJSON](https://github.com/tidwall/gjson) path that can be used to limit the portion of the overall JSON document that should be parsed. The result of the query should contain a JSON object or an array of objects.
 Refer to the [GJSON path syntax](https://github.com/tidwall/gjson#path-syntax) for details and examples or test out your query on the GJSON playground.
 
 
@@ -116,3 +123,6 @@ The `csv_timestamp_column` option specifies the key containing the time value. `
 
 #   csv_timestamp_column = "Time"
 #   csv_timestamp_format = "02.01.2006 15.04.05"`
+
+
+## Step 3: Start Telegraf
