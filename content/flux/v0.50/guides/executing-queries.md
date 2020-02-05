@@ -47,7 +47,7 @@ influx -type=flux -execute '<flux query>'
 
 ## Influx CLI via STDIN
 Flux queries an be piped into the `influx` CLI via STDIN.
-Query results are otuput in your terminal.
+Query results are output in your terminal.
 
 ```bash
 echo '<flux query>' | influx -type=flux
