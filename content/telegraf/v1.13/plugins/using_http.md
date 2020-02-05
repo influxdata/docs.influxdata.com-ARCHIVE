@@ -33,7 +33,8 @@ Each data format has its own unique set of configuration options that you'll nee
 
 ## Step 2: Add Jparser information to telegraf.conf
 
- Based on your data format type, use one of the following parsers.
+
+Based on your data format type, use one of the following parsers.
 
 ### JSON
 
@@ -129,4 +130,6 @@ The `csv_timestamp_column` option specifies the key containing the time value. `
 #   csv_timestamp_format = "02.01.2006 15.04.05"`
 
 
-## Step 3: Start Telegraf
+## Step 3: Start Telegraf and verify data appears
+
+Start the Telegraf service. 
