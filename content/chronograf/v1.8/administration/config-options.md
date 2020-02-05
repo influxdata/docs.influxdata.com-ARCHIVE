@@ -189,7 +189,7 @@ Environment variable: `$TLS_PRIVATE_KEY`
 
 List of etcd endpoints.
 
-Environment variable: `$ETCD_HOSTS`
+Environment variable: `$ETCD_ENDPOINTS`
 
 #### `--etcd-username=`
 

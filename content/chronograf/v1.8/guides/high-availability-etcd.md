@@ -1,5 +1,5 @@
 ---
-title: Running HA Chronograf with etcd
+title: Creating a Chronograf cluster
 description: Create a high-availability (HA) Chronograf cluster using etcd.
 menu:
   chronograf_1_8:
@@ -7,16 +7,16 @@ menu:
     parent: Guides
 ---
 
-Create a high-availability (HA) Chronograf cluster using etcd as a shared data store.
+To create a high-availability (HA) Chronograf cluster using etcd as a shared data store, do the following:
 
-## Install etcd
+## Install and start etcd
 
 1. Download the latest etcd release [from GitHub](https://github.com/etcd-io/etcd/releases/).
    (For detailed installation instructions specific to your operating system, see [Install and deploy etcd](http://play.etcd.io/install).)
 2. Extract the `etcd` binary and place it in your system PATH.
-3. Start etcd (before starting Chronograf).
+3. Start etcd.
 
-## Start Chronograf with etcd
+## Start Chronograf
 
 To start Chronograf using etcd as the storage layer, use the following command:
 
