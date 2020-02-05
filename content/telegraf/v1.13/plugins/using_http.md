@@ -38,7 +38,7 @@ Each data format has its own unique set of configuration options that you'll nee
 ### JSON
 
 #### `strict`
-When strict is set to true, all objects in the JSON array must be valid
+When set to true, all objects in the JSON array must be valid.
 
 #### `json_query`
 To parse only a specific portion of JSON, you need to specify the `json_query`, otherwise the whole document will be parsed.  The `json_query` is a [GJSON](https://github.com/tidwall/gjson) path that can be used to limit the portion of the overall JSON document that should be parsed. The result of the query should contain a JSON object or an array of objects.
@@ -55,10 +55,10 @@ List of one or more string keys in your JSON file that need to be configured as 
 A key in your JSON file to be used as the measurement name.
 
 #### `json_time_key`
-Key from the JSON file that will be used in creating the timestamp metric.  If no key is specified, the time that the data is read will be set as the timestamp.
+Key from the JSON file that creates the timestamp metric. If you don't specify a key, the time that the data is read becomes the timestamp.
 
 #### `json_time_format`
-The format used to interpret the designated `json_time_key`.  The time must be set to one of the following:
+The format used to interpret the designated `json_time_key`. The time must be set to one of the following:
 - `unix`
 - `unix_ms`
 - `unix_us`
