@@ -32,9 +32,8 @@ Each data format has its own unique set of configuration options that you'll nee
 
 
 ## Step 2: Add Jparser information to telegraf.conf
- (Telegraf Parsers)
 
- Based off your data format type, use one of the following parsers.
+ Based on your data format type, use one of the following parsers.
 
 ### JSON
 
@@ -88,14 +87,15 @@ The default timezone is UTC. To specify to another timezone, or to local time, s
 ### CSV parser
 
 #### `csv_header_row_count`
-Determines how many rows to treat as a header. By default, the value is 0 and there is no header. If set to anything more than 1, column names will be appended with the name listed in the next header row. If `csv_column_names` is also specified, the column names in the header row are overridden.
+Determines how many rows to treat as a header. By default, the value is 0 and there is no header. If set to anything more than 1, column names will be appended with the name listed in the next header row.
+Names specified in `csv_column_names` will override column names in the header row.
 
 #### `csv_column_names`
-Assigns custom names to columns. If you specify this option, all columns must have a name. Any unnamed columns will be ignored by the parser.  
+Assigns custom names to columns. If you specify this option, all columns must have a name. Any unnamed columns will be ignored by the parser.
 If `csv_header_row_count` is set to 0, you must specify this option.
 
 #### `csv_timestamp_column`, `csv_timestamp_format`
-By default, the current time will be used for all created metrics. To set the time using the JSON document, you can use the `csv_timestamp_column` and `csv_timestamp_format` options together to set the time to a value in the parsed document.
+By default, all created metrics use the current time. To specify a time, use the `csv_timestamp_column` and `csv_timestamp_format` options together to set the time to a value in the parsed document.
 
 The `csv_timestamp_column` option specifies the key containing the time value. `csv_timestamp_format` must be set to one of the following:
 - `unix`
