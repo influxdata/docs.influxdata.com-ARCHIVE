@@ -15,7 +15,7 @@ The HTTP input plugin collects metrics from one or more HTTP(S) URL endpoints. T
 For the following example to work, you must have already configured the [`influxdb` output plugin](telegraf/v1.13/plugins/plugin-list/#influxdb).
 
 ## Step 1: Configure the HTTP Input plugin in your telegraf config file
-To retrieve data from an HTTP url endpoint, enable the `inputs.http` input plugin in the `telegraf.conf`.
+To retrieve data from an HTTP url endpoint, enable the `inputs.http` input plugin in your `telegraf.conf` file.
 
 Specify the following options:
 
@@ -88,10 +88,11 @@ The default timezone is UTC. To specify to another timezone, or to local time, s
 ### CSV parser
 
 #### `csv_header_row_count`
-Determines how many rows to treat as a header. By default, the parser assumes there is no header and will parse the first row as data. If set to anything more than 1, column names will be concatenated with the name listed in the next header row. If `csv_column_names` is also specified, the column names in header will be overridden.
+Determines how many rows to treat as a header. By default, the value is 0 and there is no header. If set to anything more than 1, column names will be appended with the name listed in the next header row. If `csv_column_names` is also specified, the column names in the header row are overridden.
 
 #### `csv_column_names`
-For assigning custom names to columns. If this is specified, all columns should have a name and unnamed columns will be ignored by the parser.  If `csv_header_row_count` is set to 0, this config must be used.
+Assigns custom names to columns. If you specify this option, all columns must have a name. Any unnamed columns will be ignored by the parser.  
+If `csv_header_row_count` is set to 0, you must specify this option.
 
 #### `csv_timestamp_column`, `csv_timestamp_format`
 By default, the current time will be used for all created metrics. To set the time using the JSON document, you can use the `csv_timestamp_column` and `csv_timestamp_format` options together to set the time to a value in the parsed document.
