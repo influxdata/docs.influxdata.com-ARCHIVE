@@ -12,7 +12,7 @@ menu:
     weight: 2
 ---
 
-Kapacitor exppses internal performance through the `/kacapitor/v1/debug/vars` endpoint.
+Kapacitor exposes internal performance through the `/kacapitor/v1/debug/vars` endpoint.
 Use the Telegraf `kapacitor` plugins to capture these metrics and store them in InfluxDB.
 
 Enable the Kapacitor input plugin in your Telegraf configuration file:
