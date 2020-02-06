@@ -44,35 +44,17 @@ To get started, do the following:
     $ sudo systemctl start influxdb
     ```
 
-2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure the following values to send metrics to InfluxDB:
+2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure `[[outputs.influxd]]' to specify how to connect to InfluxDB and the destination database.
 
-   - `[agent].interval` - specifies how often to send metrics to InfluxDB
-   - `[[outputs.influxd]]` - specifies how to connect to InfluxDB and the destination database, which is the default 'telegraf' database. (so at least one URL and one database must be defined?)
-   - `[[inputs.cpu]]` - declares how to collect the system cpu metrics to be sent to InfluxDB.
-
-```
-[agent]
-  ## Default data collection interval for all inputs
-  interval = "10s"
-
-...
+```sh
 [[outputs.influxdb]]
   ## InfluxDB url is required and must be in the following form: http/udp "://" host [ ":" port]
   ## Multiple urls can be specified as part of the same cluster; only ONE url is written to each interval.
-  ## InfluxDB URL
+  ## InfluxDB url
   urls = ["http://localhost:8086"]
 
   ## The target database for metrics is required (Telegraf creates if one doesn't exist).
   database = "telegraf"
-...
-[[inputs.cpu]]
-  ## true reports per-cpu stats
-  percpu = true
-  ## true reports total system cpu stats
-  totalcpu = true
-  ## true collects raw CPU time metrics
-  collect_cpu_time = false
-
 ```
 
 3. Run the following command to start Telegraf:
@@ -83,7 +65,7 @@ $ sudo systemctl start telegraf
 
 InfluxDB and Telegraf are now running on localhost.
 
-4. After a minute, run the following command to confirm Telegraf has sent data to InfluxDB:
+4. After a minute, run the following command to use the InfluxDB API to query for the Telegraf data:
 
 ```bash
 $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT mean(usage_idle) FROM cpu'
