@@ -7,13 +7,23 @@ menu:
     parent: About the project
 ---
 
+## v1.7.10 [2020-02-07]
+
+### Bug fixes
+- Renaming corrupt data files fails.
+- Make digest safe for concurrent use.
+- Index defect with negated equality filters.
+- Fix compaction logic on infrequent cache snapshots.
+- Ensure all block data returned.
+- Skip TSM files with block read errors.
+
 ## v1.7.9 [2019-10-27]
 
 ### Release notes
 - This release is built using Go 1.12.10 which eliminates the
   [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
 
-### Bugfixes
+### Bug fixes
 - Guard against compaction burst throughput limit.
 - Replace TSI compaction wait group with counter.
 - Update InfluxQL dependency.
@@ -33,7 +43,7 @@ To successfully write data to InfluxDB, use only UTF-8 characters in
 database names, measurement names, tag sets, and field sets.
 {{% /warn %}}
 
-### Bugfixes
+### Bug fixes
 - Fix Prometheus read panic.
 - Remove stray `fmt.Println` in `tsm1.StringArrayEncodeAll`.
 - Fix issue where fields re-appear after `DROP MEASUREMENT`.
@@ -797,7 +807,7 @@ The following new configuration options are available.
 - Maintain the tags of points selected by top() or bottom() when writing the results.
 - Write CQ stats to the `_internal` database
 
-### Bugfixes
+### Bug fixes
 
 - Several statements were missing the DefaultDatabase method
 - Fix spelling mistake in HTTP section of config -- shared-secret
@@ -846,13 +856,13 @@ The following new configuration options are available.
 
 ## v1.2.4 [2017-05-08]
 
-### Bugfixes
+### Bug fixes
 
 - Prefix partial write errors with `partial write:` to generalize identification in other subsystems.
 
 ## v1.2.3 [2017-04-17]
 
-### Bugfixes
+### Bug fixes
 
 - Redact passwords before saving them to the history file.
 - Add the missing DefaultDatabase method to several InfluxQL statements.
@@ -883,7 +893,7 @@ The following new configuration options are available.
 
 ### Release Notes
 
-### Bugfixes
+### Bug fixes
 
 -	 Treat non-reserved measurement names with underscores as normal measurements.
   - Reduce the expression in a subquery to avoid a panic.
@@ -945,7 +955,7 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 - Verbose output for SSL connection errors.
 - Cache snapshotting performance improvements
 
-### Bugfixes
+### Bug fixes
 
 - Fix potential race condition in correctness of tsm1_cache memBytes statistic.
 - Fix broken error return on meta client's UpdateUser and DropContinuousQuery methods.
@@ -971,26 +981,26 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 
 ## v1.1.5 [2017-05-08]
 
-### Bugfixes
+### Bug fixes
 
 - Redact passwords before saving them to the history file.
 - Add the missing DefaultDatabase method to several InfluxQL statements.
 
 ## v1.1.4 [2017-02-27]
 
-### Bugfixes
+### Bug fixes
 
 - Backport from 1.2.0: Reduce GC allocations.
 
 ## v1.1.3 [2017-02-17]
 
-### Bugfixes
+### Bug fixes
 
 - Remove Tags.shouldCopy, replace with forceCopy on series creation.
 
 ## v1.1.2 [2017-02-16]
 
-### Bugfixes
+### Bug fixes
 
 - Fix memory leak when writing new series over HTTP.
 - Fix series tag iteration segfault.
@@ -1002,7 +1012,7 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 
 - Update Go version to 1.7.4.
 
-### Bugfixes
+### Bug fixes
 
 - Fix string fields w/ trailing slashes.
 - Quote the empty string as an ident.
@@ -1079,7 +1089,7 @@ All Changes:
 - Change default time boundaries for raw queries.
 - Support mixed duration units.
 
-### Bugfixes
+### Bug fixes
 
 - Avoid deadlock when `max-row-limit` is hit.
 - Fix incorrect grouping when multiple aggregates are used with sparse data.
@@ -1109,7 +1119,7 @@ All Changes:
 
 ## v1.0.2 [2016-10-05]
 
-### Bugfixes
+### Bug fixes
 
 - Fix RLE integer decoding producing negative numbers.
 - Avoid stat syscall when planning compactions.
@@ -1119,7 +1129,7 @@ All Changes:
 
 ## v1.0.1 [2016-09-26]
 
-### Bugfixes
+### Bug fixes
 
 - Prevent users from manually using system queries since incorrect use would result in a panic.
 - Ensure fieldsCreated stat available in shard measurement.
@@ -1190,7 +1200,7 @@ With this release the systemd configuration files for InfluxDB will use the syst
 - Add https-private-key option to httpd config.
 - Support loading a folder for collectd typesdb files.
 
-### Bugfixes
+### Bug fixes
 
 - Optimize queries that compare a tag value to an empty string.
 - Allow blank lines in the line protocol input.
