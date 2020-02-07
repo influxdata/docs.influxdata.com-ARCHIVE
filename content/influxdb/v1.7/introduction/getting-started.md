@@ -59,7 +59,7 @@ Throughout this guide, we'll use the database name `mydb`:
 ```
 > **Notes:**
 >
-* `default` is a [reserved InfluxQL keyword](/influxdb/v1.7/query_language/spec/#keywords) and cannot be used as a database name
+* `default` is a [reserved InfluxQL keyword](/influxdb/v1.7/query_language/spec/#keywords) and cannot be used as a database name.
 * After hitting enter, a new prompt appears and nothing else is displayed.
 In the CLI, this means the statement was executed and there were no errors to display.
 If something goes wrong, an error is displayed. No news is good news!
