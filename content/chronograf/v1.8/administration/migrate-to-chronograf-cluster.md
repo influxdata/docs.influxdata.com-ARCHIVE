@@ -1,6 +1,6 @@
 ---
 title: Migrate to a Chronograf cluster
-description: Migrate to a high-availability (HA) Chronograf cluster.
+description: Migrate to a Chronograf high-availability (HA) cluster.
 menu:
   chronograf_1_8:
     weight: 10
