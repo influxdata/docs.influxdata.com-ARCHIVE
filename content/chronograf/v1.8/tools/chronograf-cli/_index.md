@@ -90,3 +90,12 @@ chronograf [flags]
 
 
 ### Auth0-specific OAuth 2.0 authentication flags
+
+| Flag                    | Description                                                                                                                                                                                                                   | Env. Variable          |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
+| `--auth0-domain`        | Subdomain of your Auth0 client. Available on the configuration page for your Auth0 client.                                                                                                                                    | `$AUTH0_DOMAIN`        |
+| `--auth0-client-id`     | Auth0 client ID value for OAuth 2.0 support                                                                                                                                                                                   | `$AUTH0_CLIENT_ID`     |
+| `--auth0-client-secret` | Auth0 client secret value for OAuth 2.0 support                                                                                                                                                                               | `$AUTH0_CLIENT_SECRET` |
+| `--auth0-organizations` | Auth0 organization membership required to access Chronograf. Organizations are set using an organization key in the user’s `app_metadata`. Lists are comma-separated and are only available when using environment variables. | `$AUTH0_ORGS`          |
+
+### Heroku-specific OAuth 2.0 authentication flags
