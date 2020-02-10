@@ -1,6 +1,6 @@
 ---
 title: chronoctl migrate
-description: placeholder
+description: The `migrate` command allows you to migrate your Chronograf configuration store.
 menu:
   chronograf_1_8:
     name: chronoctl migrate
