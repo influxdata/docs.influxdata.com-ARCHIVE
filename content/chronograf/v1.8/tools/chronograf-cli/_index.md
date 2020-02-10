@@ -1,6 +1,6 @@
 ---
 title: chronograf cli
-description:
+description: The `chronograf` command line interface (CLI) includes options to manage many aspects of Chronograf security.
 menu:
   chronograf_1_8:
     name: chronograf CLI
@@ -9,7 +9,7 @@ menu:
 
 ---
 
-The `chronograf` command line interface (CLI) includes options to manage many aspects of Chronograf security.
+The `chronograf` command line interface (CLI) includes options to manage Chronograf security.
 
 ## Usage
 ```

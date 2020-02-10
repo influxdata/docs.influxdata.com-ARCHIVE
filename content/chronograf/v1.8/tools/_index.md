@@ -1,6 +1,6 @@
 ---
 title: Chronograf Tools
-description:
+description: Chronograf provides command line tools designed to aid in managing and working with Chronograf from the command line.
 menu:
   chronograf_1_8:
     name: Tools
@@ -15,4 +15,4 @@ The `chronograf` command line interface (CLI) includes options to manage Chronog
 
 ## [`chronoctl` command line interface](/chronograf/v1.8/tools/chronoctl/)
 
-The `chronoctl` command line interface (CLI) includes commands to interact with an instance of Chronograf's data store. 
+The `chronoctl` command line interface (CLI) includes commands to interact with an instance of Chronograf's data store.
