@@ -28,3 +28,11 @@ chronograf [flags]
 | `--b`, `--basepath`   | URL path prefix under which all Chronograf routes will be mounted.                        |                                         | `$BASE_PATH`       |
 | `--status-feed-url`   | URL of JSON feed to display as a news feed on the client status page                      | `https://www.influxdata.com/feed/json` | `$STATUS_FEED_URL` |
 | `--v`, `--version`    | Displays the version of the Chronograf service                                           |                                         |                    |
+
+## InfluxDB connection flags
+
+| Flag                  | Description                                                                   | Env. Variable        |
+|-----------------------|-------------------------------------------------------------------------------|----------------------|
+| `--influxdb-url`      | Location of your InfluxDB instance, including `http://`, IP address, and port | `$INFLUXDB_URL`      |
+| `--influxdb-username` | Username for your InfluxDB instance                                           | `$INFLUXDB_USERNAME` |
+| `--influxdb-password` | Password for your InfluxDB instance                                           | `$INFLUXDB_PASSWORD` |
