@@ -1,10 +1,8 @@
 ---
 title: Tools
-description:
+description: placeholder
 menu:
   chronograf_1_8:
-    name:
-    parent:
     weight: 40
 
 ---
