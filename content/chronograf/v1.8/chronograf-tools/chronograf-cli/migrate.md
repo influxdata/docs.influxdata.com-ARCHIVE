@@ -1,10 +1,10 @@
 ---
-title: chronoctl migrate
+title: chronograf placeholder 3
 description:
 menu:
   chronograf_1_8:
-    name: chronoctl migrate
-    parent: chronoctl CLI
+    name: chronograf placeholder 3
+    parent: chronograf CLI
     weight: 40
 
 ---

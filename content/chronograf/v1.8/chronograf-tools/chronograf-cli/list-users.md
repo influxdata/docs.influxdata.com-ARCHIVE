@@ -1,10 +1,10 @@
 ---
-title: chronoctl list-users
+title: chronograf placeholder 2
 description:
 menu:
   chronograf_1_8:
-    name: chronoctl list-users
-    parent: chronoctl CLI
+    name: chronograf placeholder 2
+    parent: chronograf CLI
     weight: 30
 
 ---

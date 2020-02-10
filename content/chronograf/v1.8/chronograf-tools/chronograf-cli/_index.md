@@ -1,9 +1,9 @@
 ---
-title: chronoctl
+title: chronograf cli
 description:
 menu:
   chronograf_1_8:
-    name: chronoctl CLI
+    name: chronograf CLI
     parent: Tools
     weight: 10
 

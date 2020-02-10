@@ -1,10 +1,10 @@
 ---
-title: chronoctl add-superadmin
+title: chronograf placeholder 1
 description:
 menu:
   chronograf_1_8:
-    name: chronoctl add-superadmin
-    parent: chronoctl CLI
+    name: chronograf placeholder 1
+    parent: chronograf CLI
     weight: 20
 
 ---
