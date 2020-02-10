@@ -1,9 +1,9 @@
 ---
-title: Chronograf Tools
+title: Tools
 description:
 menu:
   chronograf_1_8:
-    name: Tools
+    name:
     parent:
     weight: 40
 

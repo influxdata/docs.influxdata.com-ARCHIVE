@@ -3,7 +3,6 @@ title: chronoctl list-users
 description:
 menu:
   chronograf_1_8:
-    name: chronoctl list-users
     parent: chronoctl CLI
     weight: 30
 
