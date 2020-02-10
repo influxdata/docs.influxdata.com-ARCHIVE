@@ -548,6 +548,7 @@ document.
 The following handlers are currently supported:
 
 * [Alerta](/kapacitor/v1.5/event_handlers/alerta/): Sending alerts to Alerta.
+* [Discord](/kapacitor/v1.5/event_handlers/discord/): Sending alerts to Discord.
 * [Email](/kapacitor/v1.5/event_handlers/email/): To send alerts by email.
 * [HipChat](/kapacitor/v1.5/event_handlers/hipchat/): Sending alerts to the HipChat service.
 * [Kafka](/kapacitor/v1.5/event_handlers/kafka/): Sending alerts to an Apache Kafka cluster.
