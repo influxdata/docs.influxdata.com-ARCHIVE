@@ -142,7 +142,7 @@ Telegraf must be aware your username and password to successfully write data to 
 ```
 
 The [Telegraf System input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) is enabled by default and requires no additional configuration.
-The input plugin automatically collects monitoring information about your data node, including CPU, disk, and memory usage data.
+The input plugin automatically collects general statistics on system load, uptime, and the number of users logged in.
 Enabled input plugins are configured in the `INPUT PLUGINS` section of the configuration file; for example, here's the section that controls the CPU data collection:
 
 ```

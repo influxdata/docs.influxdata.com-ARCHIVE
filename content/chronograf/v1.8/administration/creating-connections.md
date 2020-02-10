@@ -15,7 +15,7 @@ Connections to InfluxDB and Kapacitor can be configured through the Chronograf u
 - [Manage Kapacitor connections using the Chronograf UI](#manage-kapacitor-connections-using-the-chronograf-ui)
 - [Manage Kapacitor connections using .kap files](#manage-kapacitor-connections-using-kap-files)
 
-> Note: Connection details are stored in Chronograf’s internal database `chronograf-v1.db` `.src`. Typically, the only time you'll need to administer the internal database is when you're [restoring a Chronograf database](/chronograf/v1.8/administration/restoring-chronograf-db/).
+> Note: Connection details are stored in Chronograf’s internal database `chronograf-v1.db` `.src`. You may administer the internal database when [restoring a Chronograf database](/chronograf/v1.8/administration/restoring-chronograf-db/) or when [migrating a Chronograf configuration from BoltDB to etcd]. 
 
 ## Manage InfluxDB connections using the Chronograf UI
 
@@ -34,8 +34,8 @@ To create an InfluxDB connection in the Chronograf UI:
       *Required only if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
     * **Password**: Enter the password.
       *Required only if [authorization is enabled](/influxdb/latest/administration/authentication_and_authorization/) on the InfluxDB instance to which you're connecting.*
-    * **Telegraf Database Name**: This field specifies the database that Chronograf will use for populating different parts of the application, including the Host List page. If you've changed the default retention policy in your InfluxDB instance, you may want to change it here as well. If none is provided, we will use `autogen`. You will still be able to query any database you have access to in the InfluxDB instance when building dashboards or exploring data.
-    * **Default Retention Policy**: Enter the name of the default [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp). If none i s provided, it assumes `autogen`.
+    * **Telegraf Database Name**: This field specifies the database that Chronograf will use for populating different parts of the application, including the Host List page. If none is provided, we will use `autogen`. You will still be able to query any database you have access to in the InfluxDB instance when building dashboards or exploring data.
+    * **Default Retention Policy**: Enter the name of the default [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp). If none is provided, it assumes `autogen`. If you've changed the default retention policy in your InfluxDB instance, you may want to change it here as well.
     * **Make this the default connection**: When this option is selected, this InfluxDB connection will be used when Chronograf is launched.
 
 4. Click **Add Connection**

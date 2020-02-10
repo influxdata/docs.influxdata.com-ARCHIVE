@@ -8,7 +8,7 @@ menu:
     parent: Administration
 ---
 
-**On this page:**
+Chronograf is configured using the configuration file (/etc/default/chronograf) and environment variables. If you do not uncomment a configuration option, the system uses its default setting. The configuration settings in this document are set to their default settings. For more information, see [Configuration Chronograf](/chronograf/v1.8/administration/configuration/).
 
 * [Usage](#usage)
 * [Chronograf service options](#chronograf-service-options)
@@ -27,20 +27,35 @@ menu:
 
 ## Usage
 
-When starting the Chronograf service, include any options after `chronograf`, where `[OPTIONS]` are options separated by spaces:
+Start the Chronograf service, and include any options after `chronograf`, where `[OPTIONS]` are options separated by spaces:
 
 ```sh
  chronograf [OPTIONS]
 ```
 
-Examples:
+**Linux examples**
 
-* Linux: Setting options for develop mode and disabling reporting
+- To start `chronograf` without options:
+
+```sh
+  sudo systemctl start chronograf
+```
+
+- To start `chronograf` and set options for develop mode and to disable reporting:
 
 ```sh
   sudo systemctl start chronograf --develop --reporting-disabled
 ```
-* Mac OS X: Using shortcut options to set develop mode and disable reporting
+
+**MacOS X examples**
+
+- To start `chronograf` without options:
+
+```sh
+  chronograf
+```
+
+- To start `chronograf` and add shortcut options for develop mode and to disable reporting:
 
 ```sh
   chronograf -d -r
