@@ -36,3 +36,11 @@ chronograf [flags]
 | `--influxdb-url`      | Location of your InfluxDB instance, including `http://`, IP address, and port | `$INFLUXDB_URL`      |
 | `--influxdb-username` | Username for your InfluxDB instance                                           | `$INFLUXDB_USERNAME` |
 | `--influxdb-password` | Password for your InfluxDB instance                                           | `$INFLUXDB_PASSWORD` |
+
+## Kapacitor connection flags
+
+| Flag                   | Description                                                                    | Env. Variable         |
+|------------------------|--------------------------------------------------------------------------------|-----------------------|
+| `--kapacitor-url`      | Location of your Kapacitor instance, including `http://`, IP address, and port | `$KAPACITOR_URL`      |
+| `--kapacitor-username` | Username for your Kapacitor instance                                           | `$KAPACITOR_USERNAME` |
+| `--kapacitor-password` | Password for your Kapacitor instance                                           | `$KAPACITOR_PASSWORD` |
