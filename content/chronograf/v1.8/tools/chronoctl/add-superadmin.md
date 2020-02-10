@@ -18,7 +18,7 @@ chronoctl add-superadmin [flags]
 ## Flags
 | Flag                       | Description                                                                                           | Input type |
 | :---------------------     | :---------------------------------------------------------------------------------------------------- | :--------: |
-| `--b-`, `--bolt-path`      | Full path to boltDB file (e.g. './chronograf-v1.db')" env:"BOLT_PATH" default:"chronograf-v1.db"                      | string     |
+| `--b`, `--bolt-path`      | Full path to boltDB file (e.g. './chronograf-v1.db')" env:"BOLT_PATH" default:"chronograf-v1.db"                      | string     |
 | `--i`, `--id`              | User ID for an existing user                                     | uint64     |
 | `--n`, `--name`             | User's name. Must be Oauth-able email address or username.                |            |
 | `--p`, `--provider`            | Name of the Auth provider (e.g. Google, GitHub, auth0, or generic)                                      | string     |
