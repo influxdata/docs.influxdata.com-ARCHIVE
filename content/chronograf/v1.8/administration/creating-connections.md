@@ -15,7 +15,7 @@ Connections to InfluxDB and Kapacitor can be configured through the Chronograf u
 - [Manage Kapacitor connections using the Chronograf UI](#manage-kapacitor-connections-using-the-chronograf-ui)
 - [Manage Kapacitor connections using .kap files](#manage-kapacitor-connections-using-kap-files)
 
-> **Note:** Connection details are stored in Chronograf’s internal database `chronograf-v1.db`. You may administer the internal database when [restoring a Chronograf database](/chronograf/v1.8/administration/restoring-chronograf-db/) or when [migrating a Chronograf configuration from BoltDB to etcd](/chronograf/v1.8/administration/migrate-to-chronograf-cluster/).
+> **Note:** Connection details are stored in Chronograf’s internal database `chronograf-v1.db`. You may administer the internal database when [restoring a Chronograf database](/chronograf/v1.8/administration/restoring-chronograf-db/) or when [migrating a Chronograf configuration from BoltDB to etcd](/chronograf/v1.8/administration/migrate-to-high-availability-etcd/).
 
 ## Manage InfluxDB connections using the Chronograf UI
 
