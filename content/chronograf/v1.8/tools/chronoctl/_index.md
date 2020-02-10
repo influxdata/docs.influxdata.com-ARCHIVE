@@ -10,6 +10,12 @@ menu:
 
 The `chronoctl` command line interface (CLI) includes commands to interact with an instance of Chronograf's Bolt database.
 
+## Usage
+```
+chronoctl [command]
+chronoctl [flags]
+```
+
 ## Commands
 
 | Command                                          | Description                                       |
