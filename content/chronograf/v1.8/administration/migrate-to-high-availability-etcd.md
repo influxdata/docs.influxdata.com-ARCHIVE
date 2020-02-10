@@ -1,15 +1,15 @@
 ---
-title: Migrate to a Chronograf cluster
-description: Migrate to a Chronograf high-availability (HA) cluster.
+title: Migrating to a Chronograf HA configuration
+description: Migrate a Chronograf single instance configuration using BoltDB to a Chronograf high-availability (HA) cluster configuration using etcd.
 menu:
   chronograf_1_8:
     weight: 10
     parent: Administration
 ---
 
-Use [`chronoctl`](add link to tool) to migrate your Chronograf configuration store from BoltDB to a shared `etcd` data store used for Chronograf high-availability (HA) clusters.
+Use [`chronoctl migrate`](add link to tool) to migrate your Chronograf configuration store from BoltDB to a shared `etcd` data store used for Chronograf high-availability (HA) clusters.
 
-> **Note:**  Migrating your Chronograf data source changes the source IDs. You must update external links to Chronograf dashboards to reflect new source IDs.
+> **Note:**  Migrating your Chronograf to a shared data source creates new source IDs for each resource. You must update external links to Chronograf dashboards to reflect new source IDs.
 
 1. Stop the Chronograf server by killing the `chronograf` process.
 
