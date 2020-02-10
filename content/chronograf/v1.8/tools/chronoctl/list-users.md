@@ -4,9 +4,8 @@ description:
 menu:
   chronograf_1_8:
     name: chronoctl list-users
-    parent: chronoctl CLI
+    parent: chronoctl
     weight: 30
-
 ---
 
 The `list-users` command lists all users in the Chronograf BoltDB instance.

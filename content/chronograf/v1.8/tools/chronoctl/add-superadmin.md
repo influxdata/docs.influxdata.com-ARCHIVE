@@ -1,12 +1,11 @@
 ---
 title: chronoctl add-superadmin
-description:
+description: placeholder
 menu:
   chronograf_1_8:
     name: chronoctl add-superadmin
-    parent: chronoctl CLI
+    parent: chronoctl
     weight: 20
-
 ---
 
 The `add-superadmin` command creates a new user with superadmin status.

@@ -1,10 +1,11 @@
 ---
 title: Chronograf Tools
-description:
+description: >
+ placeholder
 menu:
   chronograf_1_8:
     name: Tools
-    parent:
     weight: 40
-
 ---
+
+placeholder (will add content with chronograf cli PR)
