@@ -7,7 +7,7 @@ menu:
     parent: Administration
 ---
 
-Use [`chronoctl migrate`](add link to tool) to migrate your Chronograf configuration store from BoltDB to a shared `etcd` data store used for Chronograf high-availability (HA) clusters.
+Use [`chronoctl`](/chronograf/v1.8/tools/chronoctl/) to migrate your Chronograf configuration store from BoltDB to a shared `etcd` data store used for Chronograf high-availability (HA) clusters.
 
 > **Note:**  Migrating your Chronograf to a shared data source creates new source IDs for each resource. You must update external links to Chronograf dashboards to reflect new source IDs.
 
