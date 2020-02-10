@@ -26,5 +26,5 @@ chronograf [flags]
 | `--c`,`--canned-path` | File path to the directory of canned dashboard files                                      | `/usr/share/chronograf/canned`          | `$CANNED_PATH`     |
 | `--resources-path`    | Path to directory of canned dashboards, sources, Kapacitor connections, and organizations | `/usr/share/chronograf/resources`       | `$RESOURCES_PATH`  |
 | `--b`, `--basepath`   | URL path prefix under which all Chronograf routes will be mounted.                        |                                         | `$BASE_PATH`       |
-| `--status-feed-url`   | URL of JSON feed to display as a news feed on the client status page                      | `/https://www.influxdata.com/feed/json` | `$STATUS_FEED_URL` |
-| `--v`, `--version`    | Displays the version of the Chronograf service.                                           |                                         |                    |
+| `--status-feed-url`   | URL of JSON feed to display as a news feed on the client status page                      | `https://www.influxdata.com/feed/json` | `$STATUS_FEED_URL` |
+| `--v`, `--version`    | Displays the version of the Chronograf service                                           |                                         |                    |
