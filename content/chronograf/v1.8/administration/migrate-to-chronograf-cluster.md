@@ -1,6 +1,6 @@
 ---
 title: Migrate to a Chronograf cluster
-description: Migrate to a high-availability (HA) Chronograf cluster.
+description: Migrate to a Chronograf high-availability (HA) cluster.
 menu:
   chronograf_1_8:
     weight: 10
@@ -17,7 +17,7 @@ Use [`chronoctl`](add link to tool) to migrate your Chronograf configuration sto
 
 3. [Install and start `etcd`](/chronograf/v1.8/guides/high-availability-etcd#install-and-start-etcd).
 
-4. Run the following command, specifying the local BoltDB file and the `etcd` endpoint beginning with `etcd://`. (We recommend adding the prefix `bolt://` to an absolute path, but a relative path without the prefix is also accepted.)
+4. Run the following command, specifying the local BoltDB file and the `etcd` endpoint beginning with `etcd://`. (We recommend adding the prefix `bolt://` to an absolute path. To specify a relative path to the BoltDB file, the prefix cannot be used.)
 
 ```sh
 $ chronoctl migrate -f bolt:///path/to/chronograf-v1.db -t etcd://localhost:2379
