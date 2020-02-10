@@ -8,7 +8,7 @@ menu:
     weight: 30
 ---
 
-The `list-users` command lists all users in the Chronograf BoltDB instance.
+The `list-users` command lists all users in the Chronograf data store.
 
 ## Usage
 ```
