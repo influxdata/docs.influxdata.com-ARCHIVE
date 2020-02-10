@@ -24,7 +24,7 @@ $ chronoctl migrate -f bolt:///path/to/chronograf-v1.db -t etcd://localhost:2379
 ```
 
     > **Note:** 
-      If you have authentication on `etcd`, use the standard URI format to define a username and password. For example, `etcd://user:pass@localhost:2379` (by default, chronograf-v1.db)`
+      If you have authentication on `etcd`, use the standard URI format to define a username and password. For example, `etcd://user:pass@localhost:2379`
 
 5. Update links to Chronograf (for example, from external sources) to reflect your new URLs:
     - **from BoltDB:**
