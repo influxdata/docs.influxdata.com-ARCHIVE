@@ -8,7 +8,7 @@ menu:
     weight: 40
 ---
 
-The `migrate` command allows you to migrate your chronograf configuration store.
+The `migrate` command allows you to migrate your Chronograf configuration store.
 
 ## Usage
 ```

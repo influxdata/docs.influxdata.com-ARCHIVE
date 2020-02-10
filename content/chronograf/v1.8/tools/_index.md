@@ -8,6 +8,4 @@ menu:
     weight: 40
 ---
 
-placeholder
-
-{{< children >}}
+placeholder (will add content with chronograf cli PR)
