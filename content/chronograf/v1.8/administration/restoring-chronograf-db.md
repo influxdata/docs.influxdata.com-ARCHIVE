@@ -20,7 +20,7 @@ In the upgrade process, an unmodified backup of your Chronograf data is stored i
 This is done as a convenience in case issues arise with the data migrations
 or the upgrade process in general.
 
-The `backup` directory is a sibling of your `chronograf-v1.db` file.
+The `backup` directory contains a copy of your previous `chronograf-v1.db` file.
 Each backup file is appended with the corresponding Chronograf version.
 For example, if you moved from Chronograf 1.4.4.2 to 1.8.0, there will be a
 file called `backup/chronograf-v1.db.1.4.4.2`.

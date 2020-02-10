@@ -319,7 +319,8 @@ conflict with existing URL query parameters.
 `:upper:`  
 `:lower:`  
 `:zoomedUpper:`  
-`:zoomedLower:`  
+`:zoomedLower:` 
+`refreshRate:` 
 
 ## Advanced template variable usage
 

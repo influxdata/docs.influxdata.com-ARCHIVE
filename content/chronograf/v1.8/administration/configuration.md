@@ -51,8 +51,7 @@ TOKEN_SECRET=MySup3rS3cretT0k3n
 LOG_LEVEL=info
 ```
 
-> **Note:** `/etc/default/chronograf` is only created in Linux-based operating systems.
-It is neither created nor used in macOS.
+> **Note:** `/etc/default/chronograf` is only created when installing the `.deb or `.rpm` package.
 
 ## Setting up security, organizations, and users
 
