@@ -87,3 +87,6 @@ chronograf [flags]
 | `--google-client-id`     | Google client ID value for OAuth 2.0 support                                    | `$GOOGLE_CLIENT_ID`     |
 | `--google-client-secret` | Google client secret value for OAuth 2.0 support                                | `$GOOGLE_CLIENT_SECRET` |
 | `--google-domains`       | Restricts authorization to users from specified Google email domains. Optional. | `$GOOGLE_DOMAINS`       |
+
+
+### Auth0-specific OAuth 2.0 authentication flags
