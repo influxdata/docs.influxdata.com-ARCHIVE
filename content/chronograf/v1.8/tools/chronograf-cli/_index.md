@@ -99,3 +99,22 @@ chronograf [flags]
 | `--auth0-organizations` | Auth0 organization membership required to access Chronograf. Organizations are set using an organization key in the user’s `app_metadata`. Lists are comma-separated and are only available when using environment variables. | `$AUTH0_ORGS`          |
 
 ### Heroku-specific OAuth 2.0 authentication flags
+
+| Flag                    | Description                                                                              | Env. Variable       |
+|-------------------------|------------------------------------------------------------------------------------------|---------------------|
+| `--heroku-client-id`    | Heroku client ID value for OAuth 2.0 support                                             | `$HEROKU_CLIENT_ID` |
+| `--heroku-secret`       | Heroku secret for OAuth 2.0 support                                                      | `$HEROKU_SECRET`    |
+| `--heroku-organization` | Heroku organization membership required to access Chronograf. Lists are comma-separated. | `$HEROKU_ORGS`      |
+
+### Generic OAuth 2.0 authentication flags
+
+| Flag                      | Description                                                                    | Env. Variable            |
+|---------------------------|--------------------------------------------------------------------------------|--------------------------|
+| `--generic-name`          | Generic OAuth 2.0 name presented on the login page                             | `$GENERIC_NAME`          |
+| `--generic-client-id`     | Generic OAuth 2.0 client ID value. Can be used for a custom OAuth 2.0 service. | `$GENERIC_CLIENT_ID`     |
+| `--generic-client-secret` | Generic OAuth 2.0 client secret value                                          | `$GENERIC_CLIENT_SECRET` |
+| `--generic-scopes`        | Scopes requested by provider of web client                                     | `$GENERIC_SCOPES`        |
+| `--generic-domains`       | Email domain required for user email addresses                                 | `$GENERIC_DOMAINS`       |
+| `--generic-auth-url`      | Authorization endpoint URL for the OAuth 2.0 provider                          | `$GENERIC_AUTH_URL`      |
+| `--generic-token-url`     | Token endpoint URL for the OAuth 2.0 provider                                  | `$GENERIC_TOKEN_URL`     |
+| `--generic-api-url`       | URL that returns OpenID UserInfo-compatible information                        | `$GENERIC_API_URL`       |
