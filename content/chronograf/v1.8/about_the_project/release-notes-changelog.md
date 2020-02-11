@@ -7,17 +7,21 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v1.8.0 [2020-02-03]
+## v1.8.0 
 
 ### Features
 
 * Add the `RefreshRate` query parameter to set the dashboard auto-refresh interval (by default, 10000 milliseconds). Discover ways to [configure your dashboard](/chronograf/v1.8/guides/create-a-dashboard/#step-6-configure-your-dashboard).
-* Add [`etcd`](https://etcd.io/) as an alternate backend store to support multiple instances of Chronograf for a high availability (HA) configuration. Learn how to [create a new Chronograf HA configuration](/chronograf/v1.8/administration/create-high-availability-etcd/) or [migrate your existing configuration to HA](/chronograf/v1.8/administration/migrate-to-high-availability-etcd/).
+* Add [`etcd`](https://etcd.io/) as an alternate backend store to support multiple instances of Chronograf for a high availability (HA) configuration. Also add migrate command to `chronoctl` tool. Learn how to [create a new Chronograf HA configuration](/chronograf/v1.8/administration/create-high-availability-etcd/) or [migrate your existing Chronograf configuration to HA](/chronograf/v1.8/administration/migrate-to-high-availability-etcd/).
 * Add configuration option to [disable the Host List page](/chronograf/v1.8/administration/config-options/#host-page-disabled-h).
+* Add ability to select a data source when [creating a template variable](/chronograf/v1.8/guides/dashboard-template-variables/#create-custom-template-variables).
 
 ### Bug Fixes
 
 * The Log Viewer no longer crashes if an invalid severity is used (for example, `emreg` instead of `emerg`). Now, by default, the Log Viewer assigns the first color in the list on the Configure Log View page to an invalid severity.
+* Resolve issue when using InfluxDB self-signed certificates that caused Chronograf to fail to check for Flux support. Now the source `insecureSkipVerify` setting is passed to the Flux client.
+* Update `non_negative_derivative` calls to use 1s.
+* Update InfluxData URL to use the correct Cross-Origin Resource Sharing (CORS) headers.
 
 ### Miscellaneous
 
