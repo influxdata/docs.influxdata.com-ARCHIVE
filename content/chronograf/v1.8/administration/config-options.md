@@ -269,7 +269,7 @@ Run the `chronograf` service in developer mode.
 
 Displays the command line help for `chronograf`.
 
-#### `--host-page-disabled | `-H`
+#### `--host-page-disabled` | `-H`
 
 Disables rendering and serving of the Hosts List page (/sources/$sourceId/hosts).
 
