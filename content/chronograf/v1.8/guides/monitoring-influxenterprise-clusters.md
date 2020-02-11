@@ -163,8 +163,23 @@ Enabled input plugins are configured in the `INPUT PLUGINS` section of the confi
 #### Step 3: Restart the Telegraf service.
 
 Restart the Telegraf service so that your configuration changes take effect:
+
+**macOS**
+
+```sh
+telegraf --config telegraf.conf
 ```
-~# sudo systemctl restart telegraf
+
+**Linux (sysvinit and upstart installations)**
+
+```sh
+sudo service telegraf restart
+```
+
+**Linux (systemd installations)**
+
+```sh
+systemctl restart telegraf
 ```
 
 Repeat steps one through four for each data node in your cluster.
