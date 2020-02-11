@@ -7,7 +7,7 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v1.8.0 
+## v1.8.0
 
 ### Features
 

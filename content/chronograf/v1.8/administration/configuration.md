@@ -8,28 +8,35 @@ menu:
     parent: Administration
 ---
 
-Chronograf is configured by passing command line options when starting the Chronograf service.
-However, it is also possible to set custom default configuration options in the filesystem so they don't have to be passed in when starting Chronograf.
+Configure Chronograf by passing command line options when starting the Chronograf service. Or set custom default configuration options in the filesystem so they don’t have to be passed in when starting Chronograf.
 
-## Starting the Chronograf service
+- [Start the Chronograf service](#start-the-chronograf-service)
+- [Set custom default Chronograf configuration options](#set-custom-default-chronograf-configuration-options)
+- [Set up security, organizations, and users](#set-up-security-organizations-and-users)
 
-Start Chronograf using the default configuration options, or [customize your configuration](https://docs.influxdata.com/chronograf/v1.8/administration/configuration/) with environment variables and command line options (for example, to configure OAuth 2.0 authentication) based on your requirements.
+## Start the Chronograf service
 
-**Linux:**
+Use one of the following commands to start Chronograf:
 
-```bash
-sudo systemctl start chronograf
-```
+- **If you installed Chronograf using an official Debian or RPM package and are running a distro with `systemd`. For example, Ubuntu 15 or later.**
 
-**macOS:**
+  ```sh 
+  systemctl start chronograf
+  ```
 
-```bash
-chronograf [OPTIONS]
-```
+- **If you installed Chronograf using an official Debian or RPM package:**
 
-`[OPTIONS]` are available Chronograf command line options, separated by spaces. See the [Chronograf configuration options](https://docs.influxdata.com/chronograf/v1.8/administration/config-options) documentation for details about configuration options, including command line options and corresponding environment variables.
+  ```sh
+  service chronograf start
+  ```
 
-## Setting custom default Chronograf config options
+- **mIf you built Chronograf from source:**
+
+  ```bash
+  $GOPATH/bin/chronograf
+  ```
+
+## Set custom default Chronograf configuration options
 
 Custom default Chronograf configuration settings can be defined in `/etc/default/chronograf`.
 This file consists of key-value pairs. See keys (environment variables) for [Chronograf configuration options](https://docs.influxdata.com/chronograf/v1.8/administration/config-options), and set values for the keys you want to configure.
@@ -44,7 +51,7 @@ LOG_LEVEL=info
 
 > **Note:** `/etc/default/chronograf` is only created when installing the `.deb or `.rpm` package.
 
-## Setting up security, organizations, and users
+## Set up security, organizations, and users
 
 To set up security for Chronograf, configure:
 
