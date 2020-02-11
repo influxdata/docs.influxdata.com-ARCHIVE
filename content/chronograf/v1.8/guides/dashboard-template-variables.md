@@ -88,14 +88,14 @@ Chronograf lets you create custom template variables powered by meta queries or 
 To create a template variable:
 
 1. Click on **Template Variables** at the top of your dashboard, then **+ Add Variable**.
-2. Provide a name for the variable.
-3. Select the [variable type](#template-variable-types).
+2. Select a data source from the **Data Source** dropdown menu.
+3. Provide a name for the variable.
+4. Select the [variable type](#template-variable-types).
    The type defines the method for retrieving the array of possible values.
-4. View the list of potential values and select a default.
+5. View the list of potential values and select a default.
    If using the CSV or Map types, upload or input the CSV with the desired values in the appropriate format then select a default value.
-5. Click **Create**.
+6. Click **Create**.
 
-![Create a template variable](/img/chronograf/v1.8/template-vars-create.gif)
 
 Once created, the template variable can be used in any of your cell's queries or titles
 and a dropdown for the variable will be included at the top of your dashboard.
