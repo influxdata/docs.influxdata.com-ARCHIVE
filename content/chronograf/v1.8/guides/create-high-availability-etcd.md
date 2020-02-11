@@ -3,8 +3,8 @@ title: Creating a Chronograf HA configuration
 description: Create a Chronograf high-availability (HA) cluster using etcd.
 menu:
   chronograf_1_8:
-    weight: 100
-    parent: Guides
+    weight: 10
+    parent: Administration
 ---
 
 To create a Chronograf high-availability (HA) cluster using etcd as a shared data store, do the following:
