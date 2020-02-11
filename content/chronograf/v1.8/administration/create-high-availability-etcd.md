@@ -12,7 +12,7 @@ To create a Chronograf high-availability (HA) cluster using etcd as a shared dat
 - [Install and start etcd](#install-and-start-etcd)
 - [Start Chronograf](#start-chronograf)
 
-Have an existing Chronograf configuration store that you want to use with a Chronograf HA configuration? After you [install and start etcd](#install-and-start-etcd), learn how to [migrate your Chrongraf configuration](/chronograf/v1.8/administration/migrate-to-chronograf-cluster/) to a shared data store.
+Have an existing Chronograf configuration store that you want to use with a Chronograf HA configuration? After you [install and start etcd](#install-and-start-etcd), learn how to [migrate your Chrongraf configuration](/chronograf/v1.8/administration/migrate-to-high-availability-etcd/) to a shared data store.
 
 ## Install and start etcd
 

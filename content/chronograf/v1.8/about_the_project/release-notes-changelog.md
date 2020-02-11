@@ -11,8 +11,9 @@ menu:
 
 ### Features
 
-* Add the `RefreshRate` query parameter to set the dashboard auto-refresh interval (by default, 10000 milliseconds).
-* Add [`etcd`](https://etcd.io/) as an alternate backend store to support multiple instances of Chronograf for high availability.
+* Add the `RefreshRate` query parameter to set the dashboard auto-refresh interval (by default, 10000 milliseconds). Discover ways to [configure your dashboard](/chronograf/v1.8/guides/create-a-dashboard/#step-6-configure-your-dashboard).
+* Add [`etcd`](https://etcd.io/) as an alternate backend store to support multiple instances of Chronograf for a high availability (HA) configuration. Learn how to [create a new Chronograf HA configuration](/chronograf/v1.8/administration/create-high-availability-etcd/) or [migrate your existing configuration to HA](/chronograf/v1.8/administration/migrate-to-high-availability-etcd/).
+* Add configuration option to [disable the Host List page](/chronograf/v1.8/administration/config-options/#host-page-disabled-h).
 
 ### Bug Fixes
 
@@ -20,7 +21,7 @@ menu:
 
 ### Miscellaneous
 
-* No longer support direct upgrade from Chronograf 1.3.x. If you're upgrading 1.3.x, first install 1.4-1.7, and then install 1.8.
+* No longer support direct upgrade from Chronograf 1.3.x. If you're upgrading 1.3.x, first install 1.7.x, and then install 1.8.
 
 ## v1.7.17 [2020-01-08]
 
