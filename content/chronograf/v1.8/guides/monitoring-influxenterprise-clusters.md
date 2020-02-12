@@ -186,13 +186,24 @@ Repeat steps one through four for each data node in your cluster.
 
 #### Step 4: Confirm the Telegraf setup.
 
-Run the following command on your InfluxDB OSS instance to see if your Telegraf instances are successfully collecting and writing data.
+To verify Telegraf is successfully collecting and writing data, use one of the following methods to query your InfluxDB OSS instance:
+
+**InfluxDB CLI (`influx`)**
+
+```sh
+$ influx
+> SHOW TAG VALUES FROM cpu WITH KEY = host
+```
+
+**`curl`**
+
 Replace the `chronothan` and `supersecret` values with your actual username and password.
+
 ```
 ~# curl -G "http://localhost:8086/query?db=telegraf&u=chronothan&p=supersecret&pretty=true" --data-urlencode "q=SHOW TAG VALUES FROM cpu WITH KEY=host"
 ```
 
-The expected output is similar to the JSON in the codeblock below.
+The expected output is similar to the JSON code block below.
 In this case, the `telegraf` database has three different [tag values](/influxdb/latest/concepts/glossary/#tag-value) for the `host` [tag key](/influxdb/latest/concepts/glossary/#tag-key): `data-node-01`, `data-node-02`, and `data-node-03`.
 Those values match the hostnames of the three data nodes in the cluster; this means Telegraf is successfully writing monitoring data from those hosts to the InfluxDB OSS instance!
 ```
