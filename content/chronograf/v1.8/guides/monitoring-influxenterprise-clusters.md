@@ -192,7 +192,7 @@ To verify Telegraf is successfully collecting and writing data, use one of the f
 
 ```sh
 $ influx
-> SHOW TAG VALUES FROM cpu WITH KEY = host
+> SHOW TAG VALUES FROM cpu WITH KEY=host
 ```
 
 **`curl`**
