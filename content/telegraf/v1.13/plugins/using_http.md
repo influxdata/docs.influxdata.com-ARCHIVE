@@ -14,8 +14,8 @@ The HTTP input plugin collects metrics from one or more HTTP(S) URL endpoints. T
 
 For the following example to work, you must have already configured the [`influxdb` output plugin](telegraf/v1.13/plugins/plugin-list/#influxdb).
 
-## Step 1: Configure the HTTP Input plugin in your telegraf config file
-To retrieve data from an HTTP url endpoint, enable the `inputs.http` input plugin in your `telegraf.conf` file.
+## Step 1: Configure the HTTP Input plugin in your Telegraf configuration file
+To retrieve data from an HTTP url endpoint, enable the `inputs.http` input plugin in your Telegraf configuration file.
 
 Specify the following options:
 
@@ -31,8 +31,7 @@ The format of the data in the HTTP endpoints that Telegraf will ingest.
 Each data format has its own unique set of configuration options that you'll need to add. For details on each type of data format and the related options to configure, see [Telegraf input data formats](telegraf/v1.13/data_formats/input/).
 
 
-## Step 2: Add Jparser information to telegraf.conf
-
+## Step 2: Add Jparser information to your Telegraf configuration
 
 Based on your data format type, use one of the following parsers.
 
@@ -75,17 +74,39 @@ Set this option to one of the following:
 
 #### Example JSON configuration
 
-``[[inputs.http]]
-  urls = [
-    "https://api.data.gov.sg/v1/environment/pm25"
-  ]
-  headers = {"accept" = "application/json"}
+  ``[[inputs.http]]
+  #URL for NYC's CitiBike station data in JSON format
+  urls = ["https://feeds.citibikenyc.com/stations/stations.json"]
+
+  #Overwrite measurement name from default `http` to `citibikenyc`
+  name_override = "citibikenyc"
+
+  #Exclude url and host items from tags
+  tagexclude = ["url", "host"]
+
+  #Data from HTTP in JSON format
   data_format = "json"
-  json_query = "items"
-  json_name_key = "singapore_pm25"
-  fieldpass = ["readings_pm25_one_hourly_west", "readings_pm25_one_hourly_east", "readings_pm25_one_hourly_north", "readings_pm25_one_hourly_south", "readings_pm25_one_hourly_central"]
-  json_time_key = "timestamp"
-  json_time_format = "2006-01-02T15:04:05Z07:00"``
+
+  #Parse `stationBeanList` array only
+  json_query = "stationBeanList"
+
+  #Set station metadata as tags
+  tag_keys = ["id", "stationName", "city", "postalCode"]
+
+  #Do not include station landmark data as fields
+  fielddrop = ["landMark"]
+
+  #JSON values to set as string fields
+  json_string_fields = ["statusValue", "stAddress1", "stAddress2", "location", "landMark"]
+
+  #Latest station information reported at `lastCommunicationTime`
+  json_time_key = "lastCommunicationTime"
+
+  #Time is reported in Golang "reference time" format
+  json_time_format = "2006-01-02 03:04:05 PM"
+
+  #Time is reported in Eastern Standard Time (EST)
+  json_timezone = "America/New_York"``
 
 
 ### CSV parser
@@ -132,4 +153,4 @@ The `csv_timestamp_column` option specifies the key containing the time value. `
 
 ## Step 3: Start Telegraf and verify data appears
 
-Start the Telegraf service. 
+Start the Telegraf service.
