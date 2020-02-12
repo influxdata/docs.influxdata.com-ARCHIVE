@@ -27,16 +27,19 @@ Pre-created dashboards are delivered in Chronograf installations and are ready t
 
 1. Open Chronograf in your web browser and click **Host List** in the navigation bar.
 2. Select an application listed under **Apps**. By default, the system `app` should be listed next to a host listing. Other apps appear depending on the Telegraf input plugins that you have enabled.
-3. The selected application appears in a page showing all of the pre-created cells, based on the measurements that are available.
+   The selected application appears showing pre-created cells, based on available measurements.
 
 ## Creating or editing dashboards
 
-The pre-created dashboards available for use with Chronograf are listed below as Apps and appear in the Apps listing for hosts in the Host List page.  The listings for apps (pre-created dashboards) on this page include information about the required Telegraf input plugins, JSON files included in the apps, and listings of the cell titles that are included in each of the JSON files.
+Find a list of apps (pre-created dashboards) available to use with Chronograf below. For each app, you'll find:
 
-The JSON files for the precreated dashboards are delivered on installation in the `/usr/share/chronograf/canned` directory. Information about the  configuration option `--canned-path` can be found in the [Chronograf configuration options](/chronograf/latest/administration/config-options/#) page.
+- Required Telegraf input plugins for the app
+- JSON files included in the app
+- Cell titles included in each JSON file
 
-You can enable and disable applications in your [Telegraf configuration file](https://github.com/influxdata/telegraf/blob/master/etc/telegraf.conf).
-See [Telegraf configuration](https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md) for details.
+The JSON files for apps are included in the `/usr/share/chronograf/canned` directory. Find information about the configuration option `--canned-path` on the [Chronograf configuration options](/chronograf/latest/administration/config-options/#) page.
+
+Enable and disable apps in your [Telegraf configuration file](by default, `/etc/telegraf/telegraf.conf`). See [Configuring Telegraf](/telegraf/v1.13/administration/configuration/) for details.
 
 ## Apps (pre-created dashboards):
 
