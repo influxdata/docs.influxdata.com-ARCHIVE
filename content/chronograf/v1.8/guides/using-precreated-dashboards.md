@@ -37,7 +37,7 @@ Find a list of apps (pre-created dashboards) available to use with Chronograf be
 - JSON files included in the app
 - Cell titles included in each JSON file
 
-The JSON files for apps are included in the `/usr/share/chronograf/canned` directory. Find information about the configuration option `--canned-path` on the [Chronograf configuration options](/chronograf/latest/administration/config-options/#) page.
+The JSON files for apps are included in the `/usr/share/chronograf/canned` directory. Find information about the configuration option `--canned-path` on the [Chronograf configuration options](/chronograf/latest/administration/config-options/) page.
 
 Enable and disable apps in your [Telegraf configuration file](by default, `/etc/telegraf/telegraf.conf`). See [Configuring Telegraf](/telegraf/v1.13/administration/configuration/) for details.
 
