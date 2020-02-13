@@ -29,5 +29,4 @@ $ chronoctl migrate -f bolt:///path/to/chronograf-v1.db -t etcd://localhost:2379
     - **to etcd:**
     http://localhost:8888/sources/373921399246786560/status
 6. Set up a load balancer for Chronograf.
-
-7. [Start Chronograf instances](/chronograf/v1.8/administration/create-high-availability-etcd/#start-chronograf-instances).
+7. [Start Chronograf](/chronograf/v1.8/administration/create-high-availability-etcd/#start-chronograf).

@@ -11,7 +11,7 @@ To create a Chronograf high-availability (HA) configuration using an etcd cluste
 
 1. [Install and start etcd](#install-and-start-etcd)
 2. Set up a load balancer for Chronograf
-3. [Start Chronograf instances](#start-chronograf-instances)
+3. [Start Chronograf](#start-chronograf)
 
 Have an existing Chronograf configuration store that you want to use with a Chronograf HA configuration? Learn how to [migrate your Chrongraf configuration](/chronograf/v1.8/administration/migrate-to-high-availability-etcd/) to a shared data store.
 
@@ -26,9 +26,9 @@ Have an existing Chronograf configuration store that you want to use with a Chro
 2. Extract the `etcd` binary and place it in your system PATH.
 3. Start etcd.
 
-## Start Chronograf instances
+## Start Chronograf
 
-For each Chronograf instance that you want to spin up, run the following command to start Chronograf using etcd as the storage layer, including the port number for your Chronograf instance:
+Run the following command to start Chronograf using etcd as the storage layer:
 
 ```sh
 chronograf --etcd-endpoints=localhost:2379 --port <insert-port-number>
