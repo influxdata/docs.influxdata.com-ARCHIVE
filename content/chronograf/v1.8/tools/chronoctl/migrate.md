@@ -10,6 +10,9 @@ menu:
 
 The `migrate` command allows you to migrate your Chronograf configuration store.
 
+For more information on using this command, see [Migrating to a Chronograf HA configuration](/chronograf/v1.8
+/administration/migrate-to-high-availability-etcd/).
+
 ## Usage
 ```
 chronoctl migrate [flags]
