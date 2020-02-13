@@ -22,4 +22,4 @@ chronoctl [flags]
 |:-------                                          |:-----------                                       |
 | [add-superadmin](/chronograf/v1.8/tools/chronoctl/add-superadmin/) | Create a new user with superadmin status |
 | [list-users](/chronograf/v1.8/tools/chronoctl/list-users)   | List all users in the Chronograf data store                    |
-| [migrate](//chronografv1.8/tools/chronoctl/migrate)   | Migrate your Chronograf configuration store  |
+| [migrate](/chronograf/v1.8/tools/chronoctl/migrate)   | Migrate your Chronograf configuration store  |
