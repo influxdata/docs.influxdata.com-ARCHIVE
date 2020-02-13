@@ -99,15 +99,15 @@ Perform the following steps on each meta server.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.9-c1.7.9_amd64.deb
-sudo dpkg -i influxdb-meta_1.7.9-c1.7.9_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.10-c1.7.10_amd64.deb
+sudo dpkg -i influxdb-meta_1.7.10-c1.7.10_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.9_c1.7.9.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.7.9_c1.7.9.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 #### Verify the authenticity of release download (recommended)
@@ -124,13 +124,13 @@ For added security, follow these steps to verify the signature of your InfluxDB 
    For example:
 
     ```
-    wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.9_c1.7.9.x86_64.rpm.asc
+    wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.10_c1.7.10.x86_64.rpm.asc
     ```
 
 3. Verify the signature with `gpg --verify`:
 
     ```
-    gpg --verify influxdb-meta-1.7.9_c1.7.9.x86_64.rpm.asc influxdb-meta-1.7.9_c1.7.9.x86_64.rpm
+    gpg --verify influxdb-meta-1.7.10_c1.7.10.x86_64.rpm.asc influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
     ```
 
     The output from this command should include the following:
@@ -230,9 +230,9 @@ The expected output is:
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.7.9-c1.7.9
-    enterprise-meta-02:8091   1.7.9-c1.7.9
-    enterprise-meta-03:8091   1.7.9-c1.7.9
+    enterprise-meta-01:8091   1.7.10-c1.7.10
+    enterprise-meta-02:8091   1.7.10-c1.7.10
+    enterprise-meta-03:8091   1.7.10-c1.7.10
 
 
 Note that your cluster must have at least three meta nodes.
