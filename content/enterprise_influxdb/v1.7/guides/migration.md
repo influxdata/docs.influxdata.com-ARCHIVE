@@ -4,46 +4,40 @@ aliases:
     - /enterprise/v1.7/guides/migration/
 menu:
   enterprise_influxdb_1_7:
-    name: Migrate InfluxDB OSS to Enterprise clusters
+    name: Migrate InfluxDB OSS to Enterprise
     weight: 10
     parent: Guides
 ---
 
-{{% warn %}}
-## IMPORTANT
-Due to a known issue in InfluxDB, attempts to upgrade an InfluxDB OSS instance to
-InfluxDB Enterprise will fail.
-A fix is in place and will be released with InfluxDB v1.7.10.
-Until InfluxDB v1.7.10 is released, **DO NOT** attempt to migrate an InfluxDB OSS
-instance to InfluxDB Enterprise by following the steps in this guide.
-
-We will update this guide to reflect the new upgrade process after the release of InfluxDB 1.7.10.
-{{% /warn %}}
-
-<!-- The following guide has step-by-step instructions for migrating an InfluxDB open source (OSS)
+The following guide has step-by-step instructions for migrating an InfluxDB open source (OSS)
 instance into an InfluxDB Enterprise cluster.
 
-{{% warn %}}
-The process assumes that you already have a fully configured InfluxDB Enterprise cluster
-of three or more meta nodes and zero or more data nodes. If you need instructions for meta node installation:
-- [Production installation of meta nodes](/enterprise_influxdb/v1.7/production_installation/meta_node_installation/)
-{{% /warn %}}
-
-Please note that this migration process:
-
-* Deletes all data from any data nodes that are already part of the InfluxDB Enterprise cluster
-* Will transfer all users from the OSS instance to the InfluxDB Enterprise Cluster*
-* Requires downtime for writes and reads for the OSS instance
+## Requirements
+- An InfluxDB OSS instance running **InfluxDB 1.7.10 or newer**.
+- An InfluxDB Enterprise cluster
+- Network accessibility between the OSS instances and all data and meta nodes.
 
 {{% warn %}}
-If you're using an InfluxDB Enterprise cluster version prior to 0.7.4, the
-following steps will **not** transfer users from the OSS instance to the
-InfluxDB Enterprise Cluster.
+**Please note that this migration process:**
+
+- Deletes all data from any data nodes that are already part of an InfluxDB Enterprise cluster
+- Transfers all users from the OSS instance to the InfluxDB Enterprise Cluster
+- Requires downtime for writes and reads for the OSS instance
+
+In addition, please refrain from creating a Global Admin user in the InfluxDB Enterprise Web Console before implementing these steps.
+If you’ve already created a Global Admin user, contact support.
 {{% /warn %}}
 
-In addition, please refrain from creating a Global Admin user in the InfluxDB Enterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
+## Process overview
+Migrate a running instance of InfluxDB OSS and to an InfluxDB Enterprise Cluster.
 
-## Modify the `/etc/hosts` file
+1. Upgrade to **InfluxDB 1.7.10 or newer**.
+2. Set up InfluxDB Enterprise meta nodes
+3. Set up InfluxDB Enterprise data nodes
+4. Upgrade the InfluxDB binary on your OSS instance.
+5. Add the former OSS instance as a data node in the InfluxDB Enterprise Cluster.
+
+<!-- ## Modify the `/etc/hosts` file
 
 Add the IP and hostname of the InfluxDB OSS instance to the
 `/etc/hosts` file on all nodes in the InfluxDB Enterprise cluster.
@@ -52,7 +46,27 @@ instance’s `/etc/hosts` file.
 
 **Note:** All node hostnames must be completely resolvable by all
 other nodes in the cluster. If you have DNS already setup in your
-environment, then this step can be skipped.
+environment, then this step can be skipped. -->
+
+## Upgrade to InfluxDB 1.7.10 or newer
+
+InfluxDB 1.7.10 (both OSS and Enterprise) fixed an issue that prevented upgrading
+and InfluxDB OSS instance to InfluxDB Enterprise successfully.
+Upgrade to **InfluxDB 1.7.10** or newer before proceeding.
+
+- [Upgrade InfluxDB OSS](/influxdb/latest/administration/upgrading/)
+- [Upgrade InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/upgrading/)
+---
+
+## Set up InfluxDB Enterprise meta nodes
+{{% warn %}}
+The process assumes that you already have a fully configured InfluxDB Enterprise cluster
+of three or more meta nodes and zero or more data nodes.
+For information about installing meta nodes, see
+[Production installation of meta nodes](/enterprise_influxdb/v1.7/production_installation/meta_node_installation/)
+{{% /warn %}}
+
+## Set up InfluxDB Enterprise data nodes
 
 ## For all existing InfluxDB Enterprise data nodes:
 
@@ -232,4 +246,4 @@ replication factor for existing shards.
 Finally, if you were using [Chronograf](/chronograf/latest/), you can
 add your Enterprise instance as a new data source.  If you were not using
 [Chronograf](/chronograf/latest/introduction/installation/), we recommend going through
-the installation instructions and using it as your primary management UI for the instance. -->
+the installation instructions and using it as your primary management UI for the instance.
