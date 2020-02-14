@@ -18,7 +18,7 @@ Influx Inspect is an InfluxDB disk utility that can be used to:
 ### Syntax
 
 ```
-influx_inspect [ [ command ] [ options ] ]`
+influx_inspect [ [ command ] [ options ] ]
 ```
 
 `-help` is the default command and prints syntax and usage information for the tool.
@@ -150,19 +150,6 @@ Path to the `.tsm` file, located by default in the `data` directory.
 
 When specifying the path, wildcards (`*`) can replace one or more characters.
 
-#### Examples
-
-##### Delete a measurement from a single shard
-
-```
-./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
-```
-##### Delete a measurement from all shards in the database
-
-```
-./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
-```
-
 #### Options
 
 Optional arguments are in brackets.
@@ -179,6 +166,18 @@ Flag to remove all keys containing non-printable Unicode characters.
 
 Flag to enable verbose logging.
 
+#### Examples
+
+##### Delete a measurement from a single shard
+
+```
+./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
+```
+##### Delete a measurement from all shards in the database
+
+```
+./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
+```
 
 ### `dumptsi`
 
@@ -348,8 +347,8 @@ RFC3339 requires very specific formatting. For example, to indicate no time zone
 **No offset**
 
 ```
-YYYY-MM-DDTHH:MM:SS+00:00 
-YYYY-MM-DDTHH:MM:SSZ 
+YYYY-MM-DDTHH:MM:SS+00:00
+YYYY-MM-DDTHH:MM:SSZ
 YYYY-MM-DDTHH:MM:SS.nnnnnnZ (fractional seconds (.nnnnnn) are optional)
 ```
 
