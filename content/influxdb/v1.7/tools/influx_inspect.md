@@ -18,7 +18,7 @@ Influx Inspect is an InfluxDB disk utility that can be used to:
 ### Syntax
 
 ```
-influx_inspect [ [ command ] [ options ] ]`
+influx_inspect [ [ command ] [ options ] ]
 ```
 
 `-help` is the default command and prints syntax and usage information for the tool.
@@ -348,8 +348,8 @@ RFC3339 requires very specific formatting. For example, to indicate no time zone
 **No offset**
 
 ```
-YYYY-MM-DDTHH:MM:SS+00:00 
-YYYY-MM-DDTHH:MM:SSZ 
+YYYY-MM-DDTHH:MM:SS+00:00
+YYYY-MM-DDTHH:MM:SSZ
 YYYY-MM-DDTHH:MM:SS.nnnnnnZ (fractional seconds (.nnnnnn) are optional)
 ```
 
