@@ -31,6 +31,8 @@ Kapacitor has two binaries:
 You can download the binaries directly from the
 [downloads](https://portal.influxdata.com/downloads) page.
 
+> **Note:** Windows support is experimental.
+
 ### Starting the Kapacitor service
 
 For packaged installations, please see the respective sections below
