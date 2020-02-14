@@ -150,19 +150,6 @@ Path to the `.tsm` file, located by default in the `data` directory.
 
 When specifying the path, wildcards (`*`) can replace one or more characters.
 
-#### Examples
-
-##### Delete a measurement from a single shard
-
-```
-./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
-```
-##### Delete a measurement from all shards in the database
-
-```
-./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
-```
-
 #### Options
 
 Optional arguments are in brackets.
@@ -178,6 +165,20 @@ Flag to remove all keys containing non-printable Unicode characters.
 ##### [ `-v` ]
 
 Flag to enable verbose logging.
+
+#### Examples
+
+##### Delete a measurement from a single shard
+
+```
+./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
+```
+
+##### Delete a measurement from all shards in the database
+
+```
+./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
+```
 
 
 ### `dumptsi`
