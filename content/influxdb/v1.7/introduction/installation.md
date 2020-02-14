@@ -35,9 +35,10 @@ can be inaccurate.
 
 ## Installing InfluxDB OSS
 
-For users who don't want to install any software and are ready to use InfluxDB,
-you may want to check out our
+If you want to use InfluxDB but don't want to install software, check out our
 [managed hosted InfluxDB offering](https://cloud.influxdata.com).
+
+> **Note:** Windows support is experimental.
 
 {{< tab-labels >}}
 {{% tabs %}}
