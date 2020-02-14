@@ -93,7 +93,7 @@ For more detail on authentication, see [Authentication and authorization in Infl
 Restart all meta and data nodes in your InfluxDB Enterprise cluster to load your
 updated configuration.
 
-On each **meta** node:
+On each **meta** node, run:
 
 {{< code-tabs-wrapper >}}
 {{% code-tabs %}}
@@ -112,7 +112,7 @@ sudo systemctl restart influxdb-meta
 {{% /code-tab-content %}}
 {{< /code-tabs-wrapper >}}
 
-On each **data** node:
+On each **data** node, run:
 
 {{< code-tabs-wrapper >}}
 {{% code-tabs %}}
