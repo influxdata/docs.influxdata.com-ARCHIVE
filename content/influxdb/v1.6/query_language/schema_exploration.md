@@ -358,7 +358,7 @@ for the specified [database](/influxdb/v1.6/concepts/glossary/#database).
 ### Syntax
 
 ```sql
-SHOW MEASUREMENTS [ON <database_name>] [WITH MEASUREMENT <operator> ['<measurement-name>' | <regular_expression>]] [WHERE <tag_key> <operator> ['<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
+SHOW MEASUREMENTS [ON <database_name>] [WITH MEASUREMENT <operator> ['<measurement_name>' | <regular_expression>]] [WHERE <tag_key> <operator> ['<tag_value>' | <regular_expression>]] [LIMIT_clause] [OFFSET_clause]
 ```
 
 ### Description of Syntax
