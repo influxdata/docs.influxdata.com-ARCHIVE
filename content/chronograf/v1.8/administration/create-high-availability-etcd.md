@@ -17,7 +17,7 @@ Have an existing Chronograf configuration store that you want to use with a Chro
 
 ## Architecture
 
-![Chronograf high-availability architecture](/img/chronograf/chrono-HA.png)
+<img src="/img/svgs/chronograf-ha-architecture.svg" alt="Chronograf high-availability architecture" style="width:100%;max-width:500px"/>
 
 ## Install and start etcd
 
