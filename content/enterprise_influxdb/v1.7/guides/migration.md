@@ -24,9 +24,6 @@ Migrate a running instance of InfluxDB open source (OSS) and to an InfluxDB Ente
 - Deletes all data from any data nodes that are already part of an InfluxDB Enterprise cluster
 - Transfers all users from the OSS instance to the InfluxDB Enterprise Cluster
 - Requires downtime for writes and reads for the OSS instance
-
-In addition, please refrain from creating a Global Admin user in the InfluxDB Enterprise Web Console before implementing these steps.
-If you’ve already created a Global Admin user, contact support.
 {{% /warn %}}
 
 ## Process overview
@@ -209,6 +206,11 @@ The `license-key` and `license-path` settings are mutually exclusive and one mus
       license-path = "/path/to/readable/JSON.license.file"
     ```
 
+    {{% note %}}
+Transfer any custom settings from the backup of your OSS configuration file
+to the new Enterprise configuration file.
+    {{% /note %}}
+
 7. **Update the `/etc/hosts` file**
 
     Add all meta and data nodes to the `/etc/hosts` file to allow the OSS instance
@@ -272,8 +274,8 @@ Verify that all nodes are now members of the cluster as expected:
 influxd-ctl show
 ```
 
-Once added to the cluster, InfluxDB will begin synchronized data stored on the
-upgraded OSS node to other data nodes in the cluster.
+Once added to the cluster, InfluxDB synchronizes data stored on the upgraded OSS
+node to other data nodes in the cluster.
 It may take a few minutes before the existing data is available.
 
 ## Rebalance the cluster
