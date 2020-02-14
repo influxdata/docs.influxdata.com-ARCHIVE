@@ -1,7 +1,7 @@
 ---
 title: Migrate InfluxDB OSS instances to InfluxDB Enterprise clusters
 description: >
-  Migrate a running instance of InfluxDB open source (OSS) and to an InfluxDB Enterprise Cluster.
+  Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterprise cluster.
 aliases:
     - /enterprise/v1.7/guides/migration/
 menu:
@@ -11,38 +11,36 @@ menu:
     parent: Guides
 ---
 
-Migrate a running instance of InfluxDB open source (OSS) and to an InfluxDB Enterprise Cluster.
+Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterprise cluster.
 
-## Requirements
-- An InfluxDB OSS instance running **InfluxDB 1.7.10 or newer**.
-- An InfluxDB Enterprise cluster
+## Prerequisites
+- An InfluxDB OSS instance running **InfluxDB 1.7.10 or later**.
+- An InfluxDB Enterprise cluster running **InfluxDB Enterprise 1.7.10 or later**
 - Network accessibility between the OSS instances and all data and meta nodes.
 
 {{% warn %}}
-**Please note that this migration process:**
+**Migrating does the following:**
 
-- Deletes all data from any data nodes that are already part of an InfluxDB Enterprise cluster
-- Transfers all users from the OSS instance to the InfluxDB Enterprise Cluster
-- Requires downtime for writes and reads for the OSS instance
+- Deletes data in existing InfluxDB Enterprise data nodes
+- Transfers all users from the OSS instance to the InfluxDB Enterprise cluster
+- Requires downtime for the OSS instance
 {{% /warn %}}
 
-## Process overview
+## To migrate to InfluxDB Enterprise
+Complete the following tasks:
 
-1. [Upgrade to **InfluxDB 1.7.10 or newer**.](#upgrade-to-influxdb-1-7-10-or-newer)
+1. [Upgrade to **InfluxDB 1.7.10 or later**](#upgrade-to-influxdb-1-7-10-or-later)
 2. [Set up InfluxDB Enterprise meta nodes](#set-up-influxdb-enterprise-meta-nodes)
 3. [Set up InfluxDB Enterprise data nodes](#set-up-influxdb-enterprise-data-nodes)
 4. [Upgrade the InfluxDB binary on your OSS instance](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise)
-5. [Add the upgraded OSS instance to the InfluxDB Enterprise Cluster](#add-the-new-data-node-to-the-cluster)
+5. [Add the upgraded OSS instance to the InfluxDB Enterprise cluster](#add-the-new-data-node-to-the-cluster)
 6. [Add existing data nodes back to the cluster](#add-existing-data-nodes-back-to-the-cluster)
 7. [Rebalance the cluster](#rebalance-the-cluster)
 
-## Upgrade to InfluxDB 1.7.10 or newer
-
+## Upgrade to InfluxDB 1.7.10 or later
 InfluxDB 1.7.10 (both OSS and Enterprise) fixed an issue that prevented upgrading
-and InfluxDB OSS instance to InfluxDB Enterprise successfully.
-Upgrade to **InfluxDB 1.7.10** or newer before proceeding.
-
-For upgrade instructions, see the following:
+an InfluxDB OSS instance to InfluxDB Enterprise successfully.
+Upgrade to **InfluxDB 1.7.10** or later before proceeding.
 
 - [Upgrade InfluxDB OSS](/influxdb/latest/administration/upgrading/)
 - [Upgrade InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/upgrading/)
@@ -150,14 +148,13 @@ sudo yum remove influxdb
 
 4. **Back up your InfluxDB OSS configuration file**
 
-    If you have any custom configuration settings in your InfluxDB OSS configuration file,
-    copy that configuration file and keep it as a backup.
-    **After updating the InfluxDB binary, the configuration file stored at the default location will be overwritten**.
+    If you have custom configuration settings for InfluxDB OSS, back up and save your configuration file.
+    **Without a backup, you'll lose custom configuration settings when updating the InfluxDB binary.**
 
 5. **Update the InfluxDB binary**
 
-    > This step will overwrite your current configuration file.
-    If you have settings that you’d like to keep, please make a copy of your config file before running the following command.
+    > Updating the InfluxDB binary overwrites the existing configuration file.
+    > To keep custom settings, back up your configuration file.
 
     {{< code-tabs-wrapper >}}
     {{% code-tabs %}}
@@ -193,16 +190,13 @@ The `license-key` and `license-path` settings are mutually exclusive and one mus
     <!-- -->
     ```toml
     # Hostname advertised by this host for remote addresses.
-    # This must be resolvable by all other nodes in the cluster.
+    # This must be accessible to all nodes in the cluster.
     hostname="<data-node-hostname>"
 
     [enterprise]
       # license-key and license-path are mutually exclusive,
       # use only one and leave the other blank
       license-key = "<your_license_key>"
-
-      # license-key and license-path are mutually exclusive,
-      # use only one and leave the other blank
       license-path = "/path/to/readable/JSON.license.file"
     ```
 
@@ -237,7 +231,7 @@ sudo systemctl start influxdb
 
 
 ## Add the new data node to the cluster
-With the OSS instance is upgrading to InfluxDB Enterprise, add it to the Enterprise cluster.
+After you upgrade your OSS instance to InfluxDB Enterprise, add the node to your Enterprise cluster.
 
 From a **meta** node in the cluster, run:
 
@@ -255,7 +249,7 @@ Added data node y at new-data-node-hostname:8088
 If you removed any existing data nodes from your InfluxDB Enterprise cluster,
 add them back to the cluster.
 
-From a **meta** node in the InfluxDB Enterprise Cluster, run the following for
+From a **meta** node in the InfluxDB Enterprise cluster, run the following for
 **each data node**:
 
 ```bash
@@ -284,4 +278,4 @@ It may take a few minutes before the existing data is available.
    on all existing retention polices to the number of data nodes in your cluster.
 2. [Rebalance your cluster manually](/enterprise_influxdb/v1.7/guides/rebalance/)
    to meet the desired replication factor for existing shards.
-3. If you were using [Chronograf](/chronograf/latest/),add your Enterprise instance as a new data source.
+3. If you were using [Chronograf](/chronograf/latest/), add your Enterprise instance as a new data source.
