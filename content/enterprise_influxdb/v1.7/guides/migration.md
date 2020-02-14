@@ -3,7 +3,7 @@ title: Migrate InfluxDB OSS instances to InfluxDB Enterprise clusters
 description: >
   Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterprise cluster.
 aliases:
-    - /enterprise/v1.7/guides/migration/
+  - /enterprise/v1.7/guides/migration/
 menu:
   enterprise_influxdb_1_7:
     name: Migrate InfluxDB OSS to Enterprise
