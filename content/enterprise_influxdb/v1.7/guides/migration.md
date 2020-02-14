@@ -269,7 +269,7 @@ influxd-ctl show
 ```
 
 Once added to the cluster, InfluxDB synchronizes data stored on the upgraded OSS
-node to other data nodes in the cluster.
+node with other data nodes in the cluster.
 It may take a few minutes before the existing data is available.
 
 ## Rebalance the cluster
