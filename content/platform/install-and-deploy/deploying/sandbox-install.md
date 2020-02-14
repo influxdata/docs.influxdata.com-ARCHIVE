@@ -13,6 +13,7 @@ menu:
 The quickest way to start using the InfluxData Platform (TICK stack) OSS is to download and deploy the [InfluxData Sandbox](https://github.com/influxdata/sandbox). The InfluxData Sandbox uses Docker containers to deploy the InfluxData Platform components. The InfluxData Sandbox provides a containerized, ready-to-use TICK stack, built using [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/overview/), to capture data from your local machine and the Docker containers.
 
 After deploying using the InfluxData Sandbox, you will have the latest versions of:
+
 * Telegraf
 * InfluxDB OSS
 * Chronograf
@@ -22,7 +23,7 @@ After deploying using the InfluxData Sandbox, you will have the latest versions 
 
 ## Requirements
 
-- Linux or macOS <em style="opacity:.5;margin-left:.5em;">(Windows support is coming)</em>
+- Linux or macOS <em style="opacity:.5;margin-left:.5em;">(Windows support is experimental)</em>
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/install/#supported-platforms)
 - [Docker Compose](https://docs.docker.com/compose/install/)
