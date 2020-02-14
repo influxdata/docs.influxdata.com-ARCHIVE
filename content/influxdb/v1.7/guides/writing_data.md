@@ -95,7 +95,7 @@ cpu_load_short,direction=in,host=server01,region=us-west value=2.0 1422568543702
 Write the data in `cpu_data.txt` to the `mydb` database with:
 
 ```bash
-curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary @cpu_data.txt`
+curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary @cpu_data.txt
 ```
 
 > **Note:** If your data file has more than 5,000 points, it may be necessary to split that file into several files in order to write your data in batches to InfluxDB.

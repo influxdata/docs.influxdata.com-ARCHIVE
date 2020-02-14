@@ -173,6 +173,7 @@ Flag to enable verbose logging.
 ```
 ./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
 ```
+
 ##### Delete a measurement from all shards in the database
 
 ```

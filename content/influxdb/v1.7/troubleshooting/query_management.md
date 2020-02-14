@@ -34,21 +34,29 @@ SHOW QUERIES
 
 #### Example
 
-```sql
+```
 > SHOW QUERIES
-qid	  query															               database		  duration
-37	   SHOW QUERIES																                	  100368u
-36	   SELECT mean(myfield) FROM mymeas   mydb        3s
+qid	  query                              database   duration   status
+---   -----                              --------   --------   ------
+37    SHOW QUERIES                                  100368u    running
+36    SELECT mean(myfield) FROM mymeas   mydb       3s         running
 ```
 
 ##### Explanation of the output
 
-- `qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL - QUERY`](/influxdb/v1.7/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
-- `query`&emsp;&emsp;&thinsp;&thinsp;The query text.  
-- `database`&emsp;The database targeted by the query.  
-- `duration`&emsp;The length of time that the query has been running.
-See [Query Language Reference](/influxdb/v1.7/query_language/spec/#durations)
-for an explanation of time units in InfluxDB databases.
+- `qid`: The id number of the query. Use this value with [`KILL - QUERY`](/influxdb/v1.7/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
+- `query`: The query text.  
+- `database`: The database targeted by the query.  
+- `duration`: The length of time that the query has been running.
+  See [Query Language Reference](/influxdb/v1.7/query_language/spec/#durations)
+  for an explanation of time units in InfluxDB databases.
+
+    {{% note %}}
+`SHOW QUERIES` may output a killed query and continue to increment its duration
+until the query record is cleared from memory.
+    {{% /note %}}
+
+- `status`: The current status of the query.
 
 ## Stop currently-running queries with `KILL QUERY`
 
