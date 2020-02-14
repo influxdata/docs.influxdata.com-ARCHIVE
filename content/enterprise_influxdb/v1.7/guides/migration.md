@@ -1,5 +1,7 @@
 ---
 title: Migrate InfluxDB OSS instances to InfluxDB Enterprise clusters
+description: >
+  Migrate a running instance of InfluxDB open source (OSS) and to an InfluxDB Enterprise Cluster.
 aliases:
     - /enterprise/v1.7/guides/migration/
 menu:
@@ -9,8 +11,7 @@ menu:
     parent: Guides
 ---
 
-The following guide has step-by-step instructions for migrating an InfluxDB open source (OSS)
-instance into an InfluxDB Enterprise cluster.
+Migrate a running instance of InfluxDB open source (OSS) and to an InfluxDB Enterprise Cluster.
 
 ## Requirements
 - An InfluxDB OSS instance running **InfluxDB 1.7.10 or newer**.
@@ -29,24 +30,14 @@ If you’ve already created a Global Admin user, contact support.
 {{% /warn %}}
 
 ## Process overview
-Migrate a running instance of InfluxDB OSS and to an InfluxDB Enterprise Cluster.
 
-1. Upgrade to **InfluxDB 1.7.10 or newer**.
-2. Set up InfluxDB Enterprise meta nodes
-3. Set up InfluxDB Enterprise data nodes
-4. Upgrade the InfluxDB binary on your OSS instance.
-5. Add the former OSS instance as a data node in the InfluxDB Enterprise Cluster.
-
-<!-- ## Modify the `/etc/hosts` file
-
-Add the IP and hostname of the InfluxDB OSS instance to the
-`/etc/hosts` file on all nodes in the InfluxDB Enterprise cluster.
-Ensure that all cluster IPs and hostnames are also in the OSS
-instance’s `/etc/hosts` file.
-
-**Note:** All node hostnames must be completely resolvable by all
-other nodes in the cluster. If you have DNS already setup in your
-environment, then this step can be skipped. -->
+1. [Upgrade to **InfluxDB 1.7.10 or newer**.](#upgrade-to-influxdb-1-7-10-or-newer)
+2. [Set up InfluxDB Enterprise meta nodes](#set-up-influxdb-enterprise-meta-nodes)
+3. [Set up InfluxDB Enterprise data nodes](#set-up-influxdb-enterprise-data-nodes)
+4. [Upgrade the InfluxDB binary on your OSS instance](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise)
+5. [Add the upgraded OSS instance to the InfluxDB Enterprise Cluster](#add-the-new-data-node-to-the-cluster)
+6. [Add existing data nodes back to the cluster](#add-existing-data-nodes-back-to-the-cluster)
+7. [Rebalance the cluster](#rebalance-the-cluster)
 
 ## Upgrade to InfluxDB 1.7.10 or newer
 
@@ -54,196 +45,241 @@ InfluxDB 1.7.10 (both OSS and Enterprise) fixed an issue that prevented upgradin
 and InfluxDB OSS instance to InfluxDB Enterprise successfully.
 Upgrade to **InfluxDB 1.7.10** or newer before proceeding.
 
+For upgrade instructions, see the following:
+
 - [Upgrade InfluxDB OSS](/influxdb/latest/administration/upgrading/)
 - [Upgrade InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/upgrading/)
----
 
 ## Set up InfluxDB Enterprise meta nodes
-{{% warn %}}
-The process assumes that you already have a fully configured InfluxDB Enterprise cluster
-of three or more meta nodes and zero or more data nodes.
-For information about installing meta nodes, see
-[Production installation of meta nodes](/enterprise_influxdb/v1.7/production_installation/meta_node_installation/)
-{{% /warn %}}
+Set up all meta nodes in your InfluxDB Enterprise cluster.
+For information about installing and setting up meta nodes, see
+[Install meta nodes](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/meta_node_installation/).
+
+{{% note %}}
+#### Add the OSS instance to the meta /etc/hosts files
+When [modifying the `/etc/hosts` file](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/meta_node_installation/#step-1-modify-the-etc-hosts-file)
+on each meta node, include the IP and host name of your InfluxDB OSS instance so
+meta nodes can communicate with the OSS instance.
+{{% /note %}}
 
 ## Set up InfluxDB Enterprise data nodes
+If you don't have any existing data nodes in your InfluxDB Enterprise cluster,
+[skip to the next step](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise).
 
-## For all existing InfluxDB Enterprise data nodes:
+### For each existing data node:
+1. **Remove the data node from the InfluxDB Enterprise cluster**
 
-### 1. Remove the data node from the InfluxDB Enterprise cluster
+    From a **meta** node in your InfluxDB Enterprise cluster, run:
 
-From a **meta** node in your InfluxDB Enterprise cluster, enter:
+    ```bash
+    influxd-ctl remove-data <data_node_hostname>:8088
+    ```
 
-```bash
-influxd-ctl remove-data <data_node_hostname>:8088
-```
+2. **Delete existing data**
 
-### 2. Delete any existing data
+    On each **data** node dropped from the cluster, run:
 
-On each **data** node that you dropped from the cluster, enter:
+    ```bash
+    sudo rm -rf /var/lib/influxdb/{meta,data,hh}
+    ```
 
-```bash
-sudo rm -rf /var/lib/influxdb/{meta,data,hh}
-```
+3. **Recreate data directories**
 
-### 3. Create new directories
+    On each **data** node dropped from the cluster, run:
 
-On each data node that you dropped from the cluster, enter:
+    ```bash
+    sudo mkdir /var/lib/influxdb/{data,hh,meta}
+    ```
 
-```bash
-sudo mkdir /var/lib/influxdb/{data,hh,meta}
-```
+4. **Ensure file permissions are correct**
 
-To ensure the file permissions are correct please run:
+    On each **data** node dropped from the cluster, run:
 
-```bash
-sudo chown -R influxdb:influxdb /var/lib/influxdb
-```
+    ```bash
+    sudo chown -R influxdb:influxdb /var/lib/influxdb
+    ```
 
-## For the InfluxDB OSS instance:
+5. **Update the `/etc/hosts` file**
 
-### 1. Stop all writes to the InfluxDB OSS instance
+    On each **data** node, add the IP and hostname of the OSS instance to the
+    `/etc/hosts` file to allow the data node to communicate with the OSS instance.
 
-### 2. Stop the influxdb service on the InfluxDB OSS instance
+## Upgrade the InfluxDB OSS instance to InfluxDB Enterprise
 
-On sysvinit systems, use the `service` command:
+1. **Stop all writes to the InfluxDB OSS instance**
+2. **Stop the `influxdb` service on the InfluxDB OSS instance**
 
+    {{< code-tabs-wrapper >}}
+    {{% code-tabs %}}
+[sysvinit](#)
+[systemd](#)
+    {{% /code-tabs %}}
+    {{% code-tab-content %}}
 ```bash
 sudo service influxdb stop
 ```
-
-On systemd systems, use the `systemctl` command:
-
+    {{% /code-tab-content %}}
+    {{% code-tab-content %}}
 ```bash
 sudo systemctl stop influxdb
 ```
+    {{% /code-tab-content %}}
+    {{< /code-tabs-wrapper >}}
 
-Double check that the service is stopped (the following should return nothing):
+    Double check that the service is stopped. The following command should return nothing:
 
-```bash
-ps ax | grep influxd
-```
+    ```bash
+    ps ax | grep influxd
+    ```
 
-### 3. Remove the InfluxDB OSS package
+3. **Remove the InfluxDB OSS package**
 
-On Debian and Ubuntu systems:
-
+    {{< code-tabs-wrapper >}}
+    {{% code-tabs %}}
+[Debian & Ubuntu](#)
+[RHEL & CentOS](#)
+    {{% /code-tabs %}}
+    {{% code-tab-content %}}
 ```bash
 sudo apt-get remove influxdb
 ```
-
-On RHEL and CentOS systems:
-
+    {{% /code-tab-content %}}
+    {{% code-tab-content %}}
 ```bash
 sudo yum remove influxdb
 ```
+    {{% /code-tab-content %}}
+    {{< /code-tabs-wrapper >}}
 
-### 4. Update the binary
+4. **Back up your InfluxDB OSS configuration file**
 
-> **Note:** This step will overwrite your current configuration file.
-If you have settings that you’d like to keep, please make a copy of your config file before running the following command.
+    If you have any custom configuration settings in your InfluxDB OSS configuration file,
+    copy that configuration file and keep it as a backup.
+    **After updating the InfluxDB binary, the configuration file stored at the default location will be overwritten**.
 
-#### Ubuntu and Debian (64-bit)
+5. **Update the InfluxDB binary**
 
+    > This step will overwrite your current configuration file.
+    If you have settings that you’d like to keep, please make a copy of your config file before running the following command.
+
+    {{< code-tabs-wrapper >}}
+    {{% code-tabs %}}
+[Debian & Ubuntu](#)
+[RHEL & CentOS](#)
+    {{% /code-tabs %}}
+    {{% code-tab-content %}}
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.9-c1.7.9_amd64.deb
-sudo dpkg -i influxdb-data_1.7.9-c1.7.9_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.10-c1.7.10_amd64.deb
+sudo dpkg -i influxdb-data_1.7.10-c1.7.10_amd64.deb
 ```
-
-#### RedHat and CentOS (64-bit)
-
+    {{% /code-tab-content %}}
+    {{% code-tab-content %}}
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.9_c1.7.9.x86_64.rpm
-sudo yum localinstall influxdb-data-1.7.9_c1.7.9.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.10_c1.7.10.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.10_c1.7.10.x86_64.rpm
 ```
+    {{% /code-tab-content %}}
+    {{< /code-tabs-wrapper >}}
 
-### 5. Update the configuration file
+6. **Update the configuration file**
 
-In `/etc/influxdb/influxdb.conf`, set:
+    In `/etc/influxdb/influxdb.conf`, set:
 
-* `hostname` to the full hostname of the data node
-* `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path`
-in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
+    - `hostname` to the full hostname of the data node
+    - `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path`
+    in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.  
 
-{{% warn %}}
-The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-{{% /warn %}}
+        {{% warn %}}
+The `license-key` and `license-path` settings are mutually exclusive and one must remain set to an empty string.
+        {{% /warn %}}
 
-```toml
-# Hostname advertised by this host for remote addresses.  This must be resolvable by all
-# other nodes in the cluster
-hostname="<data-node-hostname>" #✨
+    <!-- -->
+    ```toml
+    # Hostname advertised by this host for remote addresses.
+    # This must be resolvable by all other nodes in the cluster.
+    hostname="<data-node-hostname>"
 
-[enterprise]
-  # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+    [enterprise]
+      # license-key and license-path are mutually exclusive,
+      # use only one and leave the other blank
+      license-key = "<your_license_key>"
 
-  # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
-```
+      # license-key and license-path are mutually exclusive,
+      # use only one and leave the other blank
+      license-path = "/path/to/readable/JSON.license.file"
+    ```
 
-### 6. Start the data node
+7. **Update the `/etc/hosts` file**
 
-On sysvinit systems, use the `service` command:
+    Add all meta and data nodes to the `/etc/hosts` file to allow the OSS instance
+    to communicate with other nodes in the InfluxDB Enterprise cluster.
 
+8. **Start the data node**
+
+    {{< code-tabs-wrapper >}}
+    {{% code-tabs %}}
+[sysvinit](#)
+[systemd](#)
+    {{% /code-tabs %}}
+    {{% code-tab-content %}}
 ```bash
 sudo service influxdb start
 ```
-
-On systemd systems, use the `systemctl` command:
-
+    {{% /code-tab-content %}}
+    {{% code-tab-content %}}
 ```bash
 sudo systemctl start influxdb
 ```
+    {{% /code-tab-content %}}
+    {{< /code-tabs-wrapper >}}
 
-### 7. Add the node to the cluster
+
+## Add the new data node to the cluster
+With the OSS instance is upgrading to InfluxDB Enterprise, add it to the Enterprise cluster.
 
 From a **meta** node in the cluster, run:
 
 ```bash
-influxd-ctl add-data <data-node-hostname>:8088
+influxd-ctl add-data <new-data-node-hostname>:8088
 ```
 
-You should see:
+It should output:
 
 ```bash
-Added data node y at data-node-hostname:8088
+Added data node y at new-data-node-hostname:8088
 ```
 
-Note: it may take a few minutes before the existing data become available in the cluster.
+## Add existing data nodes back to the cluster
+If you removed any existing data nodes from your InfluxDB Enterprise cluster,
+add them back to the cluster.
 
-## Final steps
-
-### 1. Add any data nodes that you removed from cluster back into the cluster
-
-From a **meta** node in the InfluxDB Enterprise Cluster, run:
+From a **meta** node in the InfluxDB Enterprise Cluster, run the following for
+**each data node**:
 
 ```bash
 influxd-ctl add-data <the-hostname>:8088
 ```
 
-Output:
+It should output:
 
 ```bash
 Added data node y at the-hostname:8088
 ```
 
-Finally verify that all nodes are now members of the cluster as expected:
+Verify that all nodes are now members of the cluster as expected:
 
 ```bash
 influxd-ctl show
 ```
 
-### 2. Rebalance the cluster
+Once added to the cluster, InfluxDB will begin synchronized data stored on the
+upgraded OSS node to other data nodes in the cluster.
+It may take a few minutes before the existing data is available.
 
-Increase the [replication factor](/enterprise_influxdb/v1.7/concepts/glossary/#replication-factor)
-on all existing retention polices to the number of data nodes in your cluster.
-You can do this with [ALTER RETENTION POLICY](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
-
-Next, [rebalance](/enterprise_influxdb/v1.7/guides/rebalance/) your cluster manually to meet the desired
-replication factor for existing shards.
-
-Finally, if you were using [Chronograf](/chronograf/latest/), you can
-add your Enterprise instance as a new data source.  If you were not using
-[Chronograf](/chronograf/latest/introduction/installation/), we recommend going through
-the installation instructions and using it as your primary management UI for the instance.
+## Rebalance the cluster
+1. Use the [ALTER RETENTION POLICY](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
+   statement to increase the [replication factor](/enterprise_influxdb/v1.7/concepts/glossary/#replication-factor)
+   on all existing retention polices to the number of data nodes in your cluster.
+2. [Rebalance your cluster manually](/enterprise_influxdb/v1.7/guides/rebalance/)
+   to meet the desired replication factor for existing shards.
+3. If you were using [Chronograf](/chronograf/latest/),add your Enterprise instance as a new data source.
