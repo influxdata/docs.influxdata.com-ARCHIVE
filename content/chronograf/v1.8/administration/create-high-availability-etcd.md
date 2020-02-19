@@ -31,7 +31,7 @@ Have an existing Chronograf configuration store that you want to use with a Chro
 Run the following command to start Chronograf using etcd as the storage layer:
 
 ```sh
-chronograf --etcd-endpoints=localhost:2379 --port <insert-port-number>
+chronograf --etcd-endpoints=localhost:2379
 ```
 
 For more information, see [Chronograf etcd configuration options](/chronograf/v1.8/administration/config-options#etcd-options).
