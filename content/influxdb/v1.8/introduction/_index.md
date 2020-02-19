@@ -1,5 +1,5 @@
 ---
-title: Introduction to InfluxDB OSS
+title: Learn about InfluxDB OSS
 menu:
   influxdb_1_8:
     name: Introduction

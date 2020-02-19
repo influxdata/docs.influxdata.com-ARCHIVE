@@ -5,8 +5,6 @@ menu:
     name: Contribute to InfluxDB
     weight: 20
     parent: About the project
-aliases:
-  - /influxdb/v1.8/about_the_project/contributing/
 ---
 
 To learn how you can contribute to the InfluxDB OSS project, see
