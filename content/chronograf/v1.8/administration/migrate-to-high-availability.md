@@ -9,11 +9,11 @@ menu:
 
 Use [`chronoctl`](/chronograf/v1.8/tools/chronoctl/) to migrate your Chronograf configuration store from BoltDB to a shared `etcd` data store used for Chronograf high-availability (HA) clusters.
 
-> **Note:**  Migrating your Chronograf to a shared data source creates new source IDs for each resource. You must update external links to Chronograf dashboards to reflect new source IDs.
+> **Note:**  Migrating Chronograf to a shared data source creates new source IDs for each resource. Update external links to Chronograf dashboards to reflect new source IDs.
 
 1. Stop the Chronograf server by killing the `chronograf` process.
 2. To prevent data loss, we **strongly recommend** that you back up your Chronograf data store before migrating to a Chronograf cluster.
-3. [Install and start etcd](/chronograf/v1.8/administration/create-high-availability-etcd/#install-and-start-etcd).
+3. [Install and start etcd](/chronograf/v1.8/administration/create-high-availability/#install-and-start-etcd).
 4. Run the following command, specifying the local BoltDB file and the `etcd` endpoint beginning with `etcd://`. (We recommend adding the prefix `bolt://` to an absolute path. To specify a relative path to the BoltDB file, the prefix cannot be used.)
 
 ```sh
@@ -29,4 +29,4 @@ $ chronoctl migrate -f bolt:///path/to/chronograf-v1.db -t etcd://localhost:2379
     - **to etcd:**
     http://localhost:8888/sources/373921399246786560/status
 6. Set up a load balancer for Chronograf.
-7. [Start Chronograf](/chronograf/v1.8/administration/create-high-availability-etcd/#start-chronograf).
+7. [Start Chronograf](/chronograf/v1.8/administration/create-high-availability/#start-chronograf).

@@ -13,7 +13,7 @@ To create a Chronograf high-availability (HA) configuration using an etcd cluste
 2. Set up a load balancer for Chronograf
 3. [Start Chronograf](#start-chronograf)
 
-Have an existing Chronograf configuration store that you want to use with a Chronograf HA configuration? Learn how to [migrate your Chrongraf configuration](/chronograf/v1.8/administration/migrate-to-high-availability-etcd/) to a shared data store.
+Have an existing Chronograf configuration store that you want to use with a Chronograf HA configuration? Learn how to [migrate your Chrongraf configuration](/chronograf/v1.8/administration/migrate-to-high-availability/) to a shared data store.
 
 ## Architecture
 
@@ -31,6 +31,10 @@ Have an existing Chronograf configuration store that you want to use with a Chro
 Run the following command to start Chronograf using etcd as the storage layer:
 
 ```sh
+# Sytnax
+chronograf --etcd-endpoints=<etcd-host>
+
+# Example
 chronograf --etcd-endpoints=localhost:2379
 ```
 
