@@ -1,5 +1,5 @@
 ---
-title: Migrating to a Chronograf HA configuration
+title: Migrate to a Chronograf HA configuration
 description: Migrate a Chronograf single instance configuration using BoltDB to a Chronograf high-availability (HA) cluster configuration using etcd.
 menu:
   chronograf_1_8:

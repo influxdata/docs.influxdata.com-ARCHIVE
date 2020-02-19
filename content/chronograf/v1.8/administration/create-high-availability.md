@@ -1,5 +1,5 @@
 ---
-title: Creating a Chronograf HA configuration
+title: Create a Chronograf HA configuration
 description: Create a Chronograf high-availability (HA) cluster using etcd.
 menu:
   chronograf_1_8:
