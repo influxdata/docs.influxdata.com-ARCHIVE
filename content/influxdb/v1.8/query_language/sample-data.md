@@ -6,6 +6,7 @@ menu:
     parent: InfluxQL
 aliases:
   - /influxdb/v1.8/sample_data/data_download/
+  - /influxdb/v1.8/query_language/data_download/
 ---
 
 In order to explore the query language further, these instructions help you create a database,

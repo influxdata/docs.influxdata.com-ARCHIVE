@@ -1,11 +1,11 @@
 ---
-title: InfluxDB server monitoring
+title: Monitor InfluxDB servers
 aliases:
     - /influxdb/v1.8/administration/statistics/
     - /influxdb/v1.8/troubleshooting/statistics/
 menu:
   influxdb_1_8:
-    name: Server monitoring
+    name: Monitor InfluxDB
     weight: 80
     parent: Administration
 ---

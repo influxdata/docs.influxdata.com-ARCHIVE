@@ -4,31 +4,20 @@ aliases:
     - influxdb/v1.8/administration/authentication_and_authorization/
 menu:
   influxdb_1_8:
-    name: Authentication and authorization
+    name: Manage authentication and authorization
     weight: 20
     parent: Administration
 ---
 
 This document covers setting up and managing authentication and authorization in InfluxDB.
 
-<table style="width:100%">
-  <tr>
-    <td><a href="#authentication">Authentication:</a></td>
-    <td><a href="#authorization">Authorization:</a></td>
-  </tr>
-  <tr>
-    <td><a href="#set-up-authentication">Set up Authentication</a></td>
-    <td><a href="#user-types-and-privileges">User Types and Privileges</a></td>
-  </tr>
-  <tr>
-    <td><a href="#authenticate-requests">Authenticate Requests</a></td>
-    <td><a href="#user-management-commands">User Management Commands</a></td>
-  </tr>
-  <tr>
-      <td><a href="#authentication-and-authorization-http-errors">HTTP Errors</a></td>
-      <td><a href="#authentication-and-authorization-http-errors">HTTP Errors</a></td>
-  </tr>
-</table>
+- [Authentication](#authentication)
+  - [Set up Authentication](#set-up-authentication")
+  - [Authenticate Requests](#authenticate-requests)
+- [Authorization](#authorization)
+  - [User Types and Privileges](#user-types-and-privileges)
+  - [User Management Commands](#user-management-commands)
+- [HTTP Errors](#authentication-and-authorization-http-errors)
 
 > **Note:** Authentication and authorization should not be relied upon to prevent access and protect data from malicious actors.
 If additional security or compliance features are desired, InfluxDB should be run behind a third-party service.

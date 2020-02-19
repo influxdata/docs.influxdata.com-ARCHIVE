@@ -1,11 +1,11 @@
 ---
-title: Upgrading to InfluxDB 1.8.x
+title: Upgrade to InfluxDB 1.8.x
 
 menu:
-    influxdb_1_8:
-        name: Upgrading
-        weight: 25
-        parent: Administration
+  influxdb_1_8:
+    name: Upgrade InfluxDB
+    weight: 25
+    parent: Administration
 ---
 
 

@@ -1,11 +1,13 @@
 ---
-title: Querying data with the InfluxDB API
+title: Query data with the InfluxDB API
 alias:
   -/docs/v1.8/query_language/querying_data/
 menu:
   influxdb_1_8:
     weight: 20
     parent: Guides
+aliases:
+  - /influxdb/v1.8/guides/querying_data/
 ---
 
 ## Querying data with the InfluxDB API

@@ -1,10 +1,13 @@
 ---
-title: Calculating percentages in a query
+title: Calculate percentages in a query
 description: Percentages can be calculated using basic math operators available in InfluxQL. This guide walks through use-cases and examples of calculating percentages from two values in a single query.
 menu:
   influxdb_1_8:
     weight: 50
     parent: Guides
+    name: Calculate percentages
+aliases:
+  - /influxdb/v1.8/guides/calculating_percentages/
 ---
 
 [InfluxQL](/influxdb/v1.8/query_language/) lets you perform simple math equations
