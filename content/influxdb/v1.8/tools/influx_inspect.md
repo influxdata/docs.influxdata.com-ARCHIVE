@@ -69,6 +69,9 @@ The size of the batches written to the index. Default value is `10000`.
 
 {{% warn %}}**Warning:** Setting this value can have adverse effects on performance and heap size.{{% /warn %}}
 
+##### `[ -compact-series-file ]`
+
+Compact the existing series file. **Does not rebuild the index.**
 
 ##### `[ -concurrency ]`
 

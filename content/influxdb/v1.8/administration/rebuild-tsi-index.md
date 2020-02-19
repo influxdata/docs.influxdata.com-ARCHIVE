@@ -30,7 +30,7 @@ Use the [`influx_inspect` command line client (CLI)](/influxdb/v1.8/tools/influx
 to rebuild the TSI index:
 
 ```sh
-# Pattern
+# Syntax
 influx_inspect buildtsi -datadir <data_dir> -waldir <wal_dir>
 
 # Example
@@ -43,7 +43,7 @@ Restart InfluxDB by starting the `influxd` process.
 ---
 
 {{% note %}}
-## Rebuilding the TSI index in an InfluxDB Enterprise cluster
+## Rebuild the TSI index in an InfluxDB Enterprise cluster
 To rebuild the TSI index in an InfluxDB Enterprise cluster, perform the steps
 above on each data node in the cluster one after the other.
 After restarting the `influxd` process on a data node, allow the
