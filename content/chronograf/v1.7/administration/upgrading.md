@@ -1,5 +1,5 @@
 ---
-title: Upgrading to Chronograf 1.4
+title: Upgrading to Chronograf
 description: Covers upgrading Chronograf to the latest version.
 menu:
   chronograf_1_7:
