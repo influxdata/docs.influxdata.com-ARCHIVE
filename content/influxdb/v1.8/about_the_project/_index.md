@@ -1,5 +1,5 @@
 ---
-title: About the InfluxDB OSS project
+title: About InfluxDB OSS
 alias:
   -/docs/v1.8/about/
 menu:

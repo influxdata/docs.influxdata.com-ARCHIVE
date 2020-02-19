@@ -1,4 +1,4 @@
-v1.8---
+---
 title: InfluxDB guides
 menu:
   influxdb_1_8:

@@ -1,10 +1,11 @@
 ---
-title: Getting started with InfluxDB OSS
+title: Get started with InfluxDB OSS
 aliases:
   - /influxdb/v1.8/introduction/getting_started/
+  - /influxdb/v1.8/introduction/getting-started/
 menu:
   influxdb_1_8:
-    name: Getting started
+    name: Get started with InfluxDB
     weight: 30
     parent: Introduction
 ---

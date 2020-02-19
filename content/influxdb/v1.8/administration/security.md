@@ -1,8 +1,8 @@
 ---
-title: Managing InfluxDB security
+title: Manage InfluxDB security
 menu:
   influxdb_1_8:
-    name: Managing security
+    name: Manage security
     weight: 70
     parent: Administration
 ---

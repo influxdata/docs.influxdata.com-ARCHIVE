@@ -1,10 +1,11 @@
 ---
-title: Administering InfluxDB
+title: Administer InfluxDB
 menu:
   influxdb_1_8:
     name: Administration
     weight: 50
 ---
+
 The administration documentation contains all the information needed to administer a working InfluxDB installation.
 
 ## [Configuring InfluxDB](/influxdb/v1.8/administration/config/)

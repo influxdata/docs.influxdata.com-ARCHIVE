@@ -1,9 +1,11 @@
 ---
-title: Downsampling and data retention
+title: Downsample and retain data
 menu:
   influxdb_1_8:
     weight: 30
     parent: Guides
+aliases:
+  - /influxdb/v1.8/guides/downsampling_and_retention/
 ---
 
 InfluxDB can handle hundreds of thousands of data points per second.

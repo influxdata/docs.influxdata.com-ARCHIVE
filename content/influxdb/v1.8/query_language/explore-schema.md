@@ -1,10 +1,12 @@
 ---
-title: Schema exploration using InfluxQL
+title: Explore your schema using InfluxQL
 menu:
   influxdb_1_8:
-    name: Schema exploration
+    name: Explore your schema
     weight: 30
     parent: InfluxQL
+aliases:
+  - /influxdb/v1.8/query_language/schema_exploration/
 ---
 
 InfluxQL is an SQL-like query language for interacting with data in InfluxDB.

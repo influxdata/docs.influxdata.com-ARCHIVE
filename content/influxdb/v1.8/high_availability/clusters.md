@@ -1,5 +1,5 @@
 ---
-title: Clustering with InfluxDB Enterprise
+title: Create an InfluxDB Enterprise cluster
 aliases:
     - /influxdb/v1.8/clustering/
     - /influxdb/v1.8/clustering/cluster_setup/
@@ -7,7 +7,7 @@ aliases:
     - /influxdb/v1.8/guides/clustering/
 menu:
   influxdb_1_8:
-    name: Clustering
+    name: Create a cluster
     weight: 10
     parent: High availability
 ---

@@ -1,9 +1,9 @@
 ---
-title: Logging and tracing in InfluxDB
+title: Log and trace with InfluxDB
 
 menu:
   influxdb_1_8:
-    name: Logging and tracing
+    name: Log and trace
     weight: 40
     parent: Administration
 ---

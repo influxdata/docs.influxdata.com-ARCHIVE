@@ -1,10 +1,12 @@
 ---
-title: Installing InfluxDB OSS
+title: Install InfluxDB OSS
 menu:
   influxdb_1_8:
-    name: Installing
+    name: Install InfluxDB
     weight: 20
     parent: Introduction
+aliases:
+  - /influxdb/v1.8/introduction/installation/
 ---
 
 This page provides directions for installing, starting, and configuring InfluxDB open source (OSS).

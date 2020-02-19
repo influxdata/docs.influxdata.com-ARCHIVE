@@ -1,8 +1,8 @@
 ---
-title: Configuring InfluxDB OSS
+title: Configure InfluxDB OSS
 menu:
   influxdb_1_8:
-    name: Configuring InfluxDB
+    name: Configure InfluxDB
     weight: 10
     parent: Administration
 ---

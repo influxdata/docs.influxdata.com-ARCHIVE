@@ -1,10 +1,12 @@
 ---
-title: Writing data with the InfluxDB API
+title: Write data with the InfluxDB API
 
 menu:
   influxdb_1_8:
     weight: 10
     parent: Guides
+alises:
+  - /influxdb/v1.8/guides/writing_data/
 ---
 
 Write data into InfluxDB using the [command line interface](/influxdb/v1.8/tools/shell/), [client libraries](/influxdb/v1.8/clients/api/), and plugins for common data formats such as [Graphite](/influxdb/v1.8/write_protocols/graphite/).
@@ -47,17 +49,17 @@ Anything that has to do with time in InfluxDB is always UTC.
 
 ### Configure gzip compression
 
-InfluxDB supports gzip compression. To reduce network traffic, consider the following options: 
+InfluxDB supports gzip compression. To reduce network traffic, consider the following options:
 
 * To accept compressed data from InfluxDB, add the `Accept-Encoding: gzip` header to InfluxDB API requests.
 
 * To compress data before sending it to InfluxDB, add the `Content-Encoding: gzip` header to InfluxDB API requests.
 
-For details about enabling gzip for client libraries, see your client library documentation. 
-  
+For details about enabling gzip for client libraries, see your client library documentation.
+
 #### Enable gzip compression in the Telegraf InfluxDB output plugin
-  
-* In the Telegraf configuration file (telegraf.conf), under [[outputs.influxdb]], change 
+
+* In the Telegraf configuration file (telegraf.conf), under [[outputs.influxdb]], change
   `content_encoding = "identity"` (default) to `content_encoding = "gzip"`
 
 >**Note**
