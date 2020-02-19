@@ -16,9 +16,9 @@ Use [`chronoctl`](/chronograf/v1.8/tools/chronoctl/) to migrate your Chronograf 
 3. [Install and start etcd](/chronograf/v1.8/administration/create-high-availability/#install-and-start-etcd).
 4. Run the following command, specifying the local BoltDB file and the `etcd` endpoint beginning with `etcd://`. (We recommend adding the prefix `bolt://` to an absolute path. To specify a relative path to the BoltDB file, the prefix cannot be used.)
 
-```sh
-$ chronoctl migrate -f bolt:///path/to/chronograf-v1.db -t etcd://localhost:2379
-```
+    ```sh
+      $ chronoctl migrate -f bolt:///path/to/chronograf-v1.db -t etcd://localhost:2379
+    ```
 
     > **Note:** 
       If you have authentication on `etcd`, use the standard URI format to define a username and password. For example, `etcd://user:pass@localhost:2379`
