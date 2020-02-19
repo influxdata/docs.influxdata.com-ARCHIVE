@@ -19,7 +19,7 @@ menu:
         If you're upgrading Chronograf, learn how to [migrate your existing Chronograf configuration to HA](/chronograf/v1.8/administration/migrate-to-high-availability/).
 - Add configuration option to [disable the Host List page](/chronograf/v1.8/administration/config-options/#host-page-disabled-h).
 - Add ability to select a data source when [creating a template variable](/chronograf/v1.8/guides/dashboard-template-variables/#create-custom-template-variables).
-- Add the `RefreshRate` query parameter to set the dashboard auto-refresh interval (by default, 10000 milliseconds). Discover ways to [configure your dashboard](/chronograf/v1.8/guides/create-a-dashboard/#step-6-configure-your-dashboard).
+- Add the `refresh` query parameter to set the dashboard auto-refresh interval (by default, 10000 milliseconds). Discover ways to [configure your dashboard](/chronograf/v1.8/guides/create-a-dashboard/#step-6-configure-your-dashboard).
 
 ### Bug Fixes
 
