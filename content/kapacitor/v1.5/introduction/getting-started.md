@@ -84,7 +84,7 @@ $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT m
 ```bash
 kapacitord config > kapacitor.conf
 ```
-By default, the Kapacitor configuration file is saved in `/etc/kapacitor/kapacitor.conf`. If you save the file to another location, you must specify the location when starting Kapacitor.
+    By default, the Kapacitor configuration file is saved in `/etc/kapacitor/kapacitor.conf`. If you save the file to another location, you must specify the location when starting Kapacitor.
 
     > The Kapacitor configuration is a [toml](https://github.com/toml-lang/toml) file. Inputs configured for InfluxDB also work for Kapacitor.
 
