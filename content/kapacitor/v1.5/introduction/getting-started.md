@@ -295,17 +295,17 @@ alert2 [alerts_triggered="0" avg_exec_time_ns="0" ];
 }
 ```
 
-Returns a [graphviz dot](http://www.graphviz.org) formatted tree that shows the data processing pipeline defined by the TICKscript and key-value associative array entries with statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
+    Returns a [graphviz dot](http://www.graphviz.org) formatted tree that shows the data processing pipeline defined by the TICKscript and key-value associative array entries with statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
 In the example above, the `stream0` node (aka the `stream` var from the TICKscript) has sent 12 points to the `from1` node.
 The `from1` node has also sent 12 points on to the `alert2` node. Since Telegraf is configured to send `cpu` data, all 12 points match the database/measurement criteria of the `from1` node and are passed on.
 
->If necessary, install graphviz on Debian or RedHat using the package provided by the OS provider. The packages offered on the graphviz site are not up-to-date.
+    > If necessary, install graphviz on Debian or RedHat using the package provided by the OS provider. The packages offered on the graphviz site are not up-to-date.
 
-Now that the task is running with live data, here is a quick hack to use 100% of one core to generate some artificial cpu activity:
+    Now that the task is running with live data, here is a quick hack to use 100% of one core to generate some artificial cpu activity:
 
-```bash
-while true; do i=0; done
-```
+    ```bash
+    while true; do i=0; done
+    ```
 
 ### Gotcha - single versus double quotes
 
