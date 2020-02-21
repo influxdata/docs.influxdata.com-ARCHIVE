@@ -74,8 +74,7 @@ TICK stack – Telegraf, InfluxDB, Chronograf, and Kapacitor in Kubernetes.
 
 ### Helm Charts
 
-InfluxData maintains Helm charts for setting up data collection and monitoring in Kubernetes using InfluxDB and related applications.
-The charts are available in [this GitHub repository](https://github.com/influxdata/helm-charts).
+InfluxData maintains [Helm charts](https://github.com/influxdata/helm-charts) for setting up data collection and monitoring in Kubernetes using InfluxDB and related applications.
 
 > **Note:** Helm charts are currently in beta and subject to change.
 
