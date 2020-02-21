@@ -4,7 +4,7 @@ title: Installing Kapacitor
 menu:
   kapacitor_1_5:
     weight: 10
-    parent: introduction
+    parent: Introduction
 ---
 
 This page provides directions for installing, starting, and configuring Kapacitor.

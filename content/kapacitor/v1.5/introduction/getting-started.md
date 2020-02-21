@@ -3,7 +3,7 @@ title: Getting started with Kapacitor
 menu:
   kapacitor_1_5:
     weight: 20
-    parent: introduction
+    parent: Introduction
 ---
 
 
