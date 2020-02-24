@@ -410,10 +410,8 @@ Select one of the following replication factors to see the recommended cluster c
 |    4 x 32    |           967,000 |                560 |       158 +  806,000        |
 |    6 x 8     |           521,000 |                378 |       144 +  319,000        |
 |    6 x 16    |           890,000 |                582 |       186 +  513,000        |
-|    6 x 32    |         1,364,000 |                990 |           -                 |
 |    8 x 8     |           699,000 |              1,032 |       256 +  477,000        |
 |    8 x 16    |         1,345,000 |              2,048 |       544 +  741,000        |
-|    8 x 32    |         1,768,000 |              4,608 |           -                 |
 
 {{% /expand%}}
 
@@ -426,7 +424,6 @@ Select one of the following replication factors to see the recommended cluster c
 |     3 x 32   |           609,000 |                178 |     60? + 162,000?          |
 |     6 x 8    |           395,000 |                402 |     132 + 247,000           |
 |     6 x 16   |           679,000 |                894 |     150 + 527,000           |
-|     6 x 32   |           937,000 |               1248 |         -                   |
 
 {{% /expand%}}
 
@@ -435,8 +432,6 @@ Select one of the following replication factors to see the recommended cluster c
 | Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
 |:------------:| -----------------:| ------------------:|:---------------------------:|
 |     4 x 8    |            183365 |                132 |      52 + 100,000           |
-|     4 x 16   |                 - |                  - |         -                   |
-|     4 x 32   |                 - |                  - |         -                   |
 
 {{% /expand%}}
 
