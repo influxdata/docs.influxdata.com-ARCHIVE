@@ -11,7 +11,7 @@ Review configuration and hardware guidelines for InfluxDB OSS (open source) and 
 * [Single node or cluster?](#single-node-or-cluster)
 * [Query guidelines](#query-guidelines)
 * [InfluxDB OSS guidelines](#influxdb-oss-guidelines)
-* [InfluxDB Enterprise cluster guidelines](#cluster-guidelines)
+* [InfluxDB Enterprise cluster guidelines](#influxdb-enterprise-cluster-guidelines)
 * [When do I need more RAM?](#when-do-i-need-more-ram)
 * [Recommended cluster configurations](#recommended-cluster-configurations)
 * [Storage: type, amount, and configuration](#storage-type-amount-and-configuration)
@@ -155,9 +155,25 @@ For each cluster configuration, you'll find guidelines for the following:
 {{% tab-content %}}
 
 Select one of the following replication factors to see the recommended cluster configuration for 10,000 series:
+
+{{%expand "> Replication factor, 1" %}}
+
+| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
+|:------------:|------------------:|-------------------:|:---------------------------:|
+|     1 x 4    |           188,000 |                 5 |        4 + 99,000            |
+|     1 x 8    |           405,000 |                 9 |        8 + 207,000           |
+|     1 x 16   |           673,000 |                15 |       14 + 375,000           |
+|     1 x 32   |         1,056,000 |                24 |       22 + 650,000           |
+|     2 x 4    |           384,000 |                14 |       14 + 184,000           |
+|     2 x 8    |           746,000 |                22 |       22 + 334,000           |
+|     2 x 16   |         1,511,000 |                56 |       40 + 878,000           |
+|     2 x 32   |         2,426,000 |                96 |       68 + 1,746,000         |
+
+{{% /expand%}}
+
 {{%expand "> Replication factor, 2" %}}
 
-| Nodes x Core | Writes per second | Queries per second | Queries + Writes per second |
+| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
 |:------------:|------------------:|-------------------:|:---------------------------:|
 |     2 x 4    |           296,000 |                 16 |      16 + 151,000           |
 |     2 x 8    |           560,000 |                 30 |      26 + 290,000           |
@@ -399,7 +415,7 @@ Select one of the following replication factors to see the recommended cluster c
 
 {{%expand "> Replication factor, 2" %}}
 
-| Nodes x Core | Writes per second | Queries per second | Queries + Writes per second |
+| Nodes x Core | Writes per second | Queries per second | Queries + writes per second |
 |:------------:|------------------:|-------------------:|:---------------------------:|
 |    2 x 4     |            87,000 |                 18 |        14 +  56,000         |
 |    2 x 8     |           169,000 |                 38 |        24 +  98,000         |
