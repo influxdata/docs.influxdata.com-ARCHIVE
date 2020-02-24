@@ -1,6 +1,6 @@
 ---
 title: Discord event handler
-description: The Discord event handler allows you to send Kapacitor alerts to Discord. This page includes configuration options and usage examples.
+description: The Discord event handler lets you send Kapacitor alerts to Discord. This page includes configuration options and usage examples.
 menu:
   kapacitor_1_5:
     name: Discord
@@ -8,8 +8,8 @@ menu:
     parent: event-handlers
 ---
 
-[Discord](https://discordapp.com) is a popular chat service targeted primarily at gamers but is used by some teams.
-Kapacitor can be configured to send alert messages to Discord.
+[Discord](https://discordapp.com) is a popular chat service targeted primarily at gamers and by teams outside of gaming looking for a free solution.
+To configure Kapacitor to send alert messages to Discord, set the applicable configuration options.
 
 ## Configuration
 Configuration as well as default [option](#options) values for the Discord event
@@ -41,38 +41,32 @@ The `workspace` acts as a unique identifier for each configured Discord client.
 Set to `true` to enable the Discord event handler.
 
 #### `default`
-Identify one of the Discord configurations as the default if there are multiple
-Discord configurations.
+If multiple Discord client configurations are specified, identify one configuration as the default.
 
 #### `workspace`
 The Discord workspace ID.
-This can be any string that identifies this particular Discord configuration.
-A logical choice is the name of the Discord channel and the guild it's a part 
-of, e.g. `<guild>-<channel>`.
+Set this string to identify this particular Discord configuration.
+For example, the name of the Discord channel and the guild it's a part 
+of, such as `<guild>-<channel>`.
 
 #### `timestamp`
 Boolean signifying whether the timestamp should be shown in the embed.
 
 #### `url`
-The Discord webhook URL. This can be obtained by adding an Incoming Webhook integration.
-Follow [this guide](https://support.discordapp.com/hc/en-us/articles/228383668) and add a webhook for Kapacitor.
+The Discord webhook URL. This can be obtained by adding a webhook in the channel settings - see [Intro to Webhooks](https://support.discordapp.com/hc/en-us/articles/228383668) for a full guide.
 Discord will provide you with the webhook URL.
 
 #### `username`
-The username of the Discord bot. If set, this will override the username 
-set when generating the webhook.
+Set the Discord bot username to override the username set when generating the webhook.
 
 #### `avatar-url`
-A URL pointing to the desired avatar of the bot. If set, this will
-override the avatar set when generating the webhook.
+Set a URL to a specified avatar to override the avatar set when generating the webhook.
 
 #### `embed-title`
-The title displayed in the alert embed. If left blank, no title will
-be set
+Set the title to display in the alert embed. If blank, no title will is set.
 
 #### `global`
-If true all the alerts will be sent to Discord without explicitly specifying Discord
-in the TICKscript.
+Set to `true` to send all alerts to Discord without explicitly specifying Discord in the TICKscript.
 
 #### `state-changes-only`
 Sets all alerts in state-changes-only mode, meaning alerts will only be sent if
@@ -80,20 +74,20 @@ the alert state changes.
 _Only applies if `global` is `true`._
 
 #### `ssl-ca`
-Path to certificate authority file.
+Set path to certificate authority file.
 
 #### `ssl-cert`
-Path to host certificate file.
+Set path to host certificate file.
 
 #### `ssl-key`
-Path to certificate private key file.
+Set path to certificate private key file.
 
 #### `insecure-skip-verify`
-Use SSL but skip chain and host verification.
+Set to `true` to use SSL but skip chain and host verification.
 _This is necessary if using a self-signed certificate._
 
 ## Options
-The following Discord event handler options can be set in a
+Set the following Discord event handler options in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.discord()` in a TICKscript.
 
@@ -130,10 +124,9 @@ options:
     .embedTitle('Kapacitor Alert')
 ```
 
-## Guild Setup
-To allow Kapacitor to send alerts to Discord, follow [this guide](https://support.discordapp.com/hc/en-us/articles/228383668)
-to generate a webhook for Kapacitor. Add the generated webhook 
-URL as the `url` in the `[[discord]]` configuration section of
+## Set up Guild
+To allow Kapacitor to send alerts to Discord, obtain a webhook url from Discord - see [Intro to Webhooks](https://support.discordapp.com/hc/en-us/articles/228383668)
+Then, add the generated webhook URL as the `url` in the `[[discord]]` configuration section of
 your `kapacitor.conf`.
 
 ## Using the Discord event handler
@@ -146,7 +139,7 @@ published alerts to Discord.
 > [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
 > so only events where the alert changed state are sent to Discord.
 
-The examples below use the following Discord configurations defined in the `kapacitor.conf`:
+See examples below for sample Discord configurations defined the `kapacitor.conf`:
 
 _**Discord settings in kapacitor.conf**_
 ```toml
@@ -176,8 +169,9 @@ _**Discord settings in kapacitor.conf**_
 ```
 
 ### Send alerts to Discord from a TICKscript
-The following TICKscript uses the `.discord()` event handler to send the message,
-"Hey, check your CPU", to the Discord webhook channel whenever idle CPU usage
+Use the `.discord()` event handler in your TICKscript to send an alert.
+For example, this configuration will send an alert with the message
+"Hey, check your CPU", to the Discord channel whenever idle CPU usage
 drops below 20%.
 
 _**discord-cpu-alert.tick**_  
@@ -195,8 +189,8 @@ stream
 
 ### Send alerts to Discord from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message,
-"Hey, check your CPU".
+Add a Discord handler that subscribes to the `cpu` by creating a TICKscript that publishes alert messages to a topic.
+For example, this configuration will send an alert with the message "Hey, check your CPU".
 A Discord handler is added that subscribes to the `cpu` topic and publishes all
 alert messages to Discord.
 
@@ -269,7 +263,7 @@ stream
       .embedTitle('AAAAAAAAAAAAAAAAAAAAAA')
 ```
 
-Error rates are also being stored in the same InfluxDB instance and we want to
+Error rates are also stored in the same InfluxDB instance and we want to
 send daily reports of `500` errors to the `error-reports` Discord workspace.
 The following TICKscript collects `500` error occurances and publishes them to
 the `500-errors` topic.
