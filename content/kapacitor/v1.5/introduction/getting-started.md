@@ -20,7 +20,7 @@ Use Kapacitor to import (stream or batch) time series data, and then transform, 
     - [Extending TICKscripts](#extending-tickscripts)
     - [A real world example](#a-real-world-example)
     - [Trigger an alert from batch data](#trigger-alerts-from-batch-data)
-    - [Load tasks](#load-tasks-with-Kapacitor)
+    - [Load tasks](#load-tasks-with-kapacitor)
 
 ## Overview
 
