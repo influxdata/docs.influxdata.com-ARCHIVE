@@ -80,14 +80,14 @@ $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT m
 
 ## Start Kapacitor
 
-1. Run the following command to generate a the Kapacitor configuration file:
+1. Run the following command to generate a Kapacitor configuration file:
 
 ```bash
 kapacitord config > kapacitor.conf
 ```
-    By default, the Kapacitor configuration file is saved in `/etc/kapacitor/kapacitor.conf`. If you save the file to another location, you must specify the location when starting Kapacitor.
+    By default, the Kapacitor configuration file is saved in `/etc/kapacitor/kapacitor.conf`. If you save the file to another location, specify the location when starting Kapacitor.
 
-    > The Kapacitor configuration is a [toml](https://github.com/toml-lang/toml) file. Inputs configured for InfluxDB also work for Kapacitor.
+    > The Kapacitor configuration is a [TOML](https://github.com/toml-lang/toml) file. Inputs configured for InfluxDB also work for Kapacitor.
 
 2. Start the Kapacitor service:
 
@@ -110,7 +110,7 @@ $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
 ### Execute a task
 
 - At the beginning of a TICKscript, specify the database and retention policy
-that contain data the TICKscript by running the following command:
+that contain data:
 
 ```js
 dbrp "telegraf"."autogen"
@@ -145,13 +145,13 @@ stream
         .log('/tmp/alerts.log')
 ```
 
-2. In the command line, run the `kapacitor` CLI tool to define the `task` and TICKscript:
+2. In the command line, use the `kapacitor` CLI to define the task using the `cpu_alert.tick` TICKscript:
 
 ```bash
 kapacitor define cpu_alert -tick cpu_alert.tick
 ```
 
-    > If the database and retention policy aren't included in the TICKscript (for example, `dbrp "telegraf"."autogen"`), use the `kapacitor define` command with the `-dbrp` flag followed by "&lt;DBNAME&gt;"."&lt;RETENTION_POLICY&gt;" to specify them when adding the task.
+    > If the database and retention policy aren't included in the TICKscript (for example, `dbrp "telegraf"."autogen"`), use the `kapacitor define` command with the `-dbrp` flag followed by <DBNAME>"."<RETENTION_POLICY>" to specify them when adding the task.
 
 3. (Optional) Use the `list` command to verify the alert has been created:
 
@@ -223,7 +223,8 @@ alert2 [alerts_triggered="0" avg_exec_time_ns="0" ];
 }
 ```
 
-    Returns a [graphviz dot](http://www.graphviz.org) formatted tree that shows the data processing pipeline defined by the TICKscript and key-value associative array entries with statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
+Returns a [graphviz dot](http://www.graphviz.org) formatted tree that shows the data processing pipeline defined by the TICKscript and key-value associative array entries with statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
+
 In the example above, the `stream0` node (aka the `stream` var from the TICKscript) has sent 12 points to the `from1` node.
 The `from1` node has also sent 12 points on to the `alert2` node. Since Telegraf is configured to send `cpu` data, all 12 points match the database/measurement criteria of the `from1` node and are passed on.
 
@@ -241,74 +242,77 @@ Complete the following steps to ensure log files and communication channels aren
     
 1. Record the data stream:
 
-    bash
-    kapacitor record stream -task cpu_alert -duration 60s
-                
+```bash
+kapacitor record stream -task cpu_alert -duration 60s
+ ```
 
    - **Troubleshoot connection refused** If a connection error appears, for example: `getsockopt: connection refused` (Linux) or `connectex: No connection could be made...` (Windows), verify the Kapacitor service is running (see [Installing and Starting Kapacitor](#installing-and-starting-kapacitor)). If Kapacitor is running, check the firewall settings of the host machine and ensure that port `9092` is accessible. Also, check messages in `/var/log/kapacitor/kapacitor.log`. If there's an issue with the `http` or other configuration in `/etc/kapacitor/kapacitor.conf`, the issue appears in the log. If the Kapacitor service is running on another host machine, set the `KAPACITOR_URL` environment variable in the local shell to the Kapacitor endpoint on the remote machine.
 
 2. Retrieve the returned ID and assign the ID to a bash variable to use later (the actual UUID returned is different):
 
-        bash
-        rid=cd158f21-02e6-405c-8527-261ae6f26153
-        
+```bash
+rid=cd158f21-02e6-405c-8527-261ae6f26153
+```
 
 3. Confirm the recording captured some data by running:
 
-        bash
-        kapacitor list recordings $rid
-        
+```bash
+kapacitor list recordings $rid
+```
 
-        The output should appear like:
+The output should appear like:
 
-        
-        ID                                      Type    Status    Size      Date
-        cd158f21-02e6-405c-8527-261ae6f26153    stream  finished  2.2 kB    04 May 16 11:44 MDT
-        
+```
+ID                                      Type    Status    Size      Date
+cd158f21-02e6-405c-8527-261ae6f26153    stream  finished  2.2 kB    04 May 16 11:44 MDT
+```
 
-        If the size is more than a few bytes, data has been captured.
-        If Kapacitor isn't receiving data, check each layer: Telegraf → InfluxDB → Kapacitor.
-        Telegraf logs errors if it cannot communicate to InfluxDB.
-        InfluxDB logs an error about `connection refused` if it cannot send data to Kapacitor.
-        Run the query `SHOW SUBSCRIPTIONS` against InfluxDB to find the endpoint that InfluxDB is using to send data to Kapacitor. 
-        
-        In the following example, InfluxDB must be running on localhost:8086:
-        
-        $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SHOW SUBSCRIPTIONS'
+If the size is more than a few bytes, data has been captured.
+If Kapacitor isn't receiving data, check each layer: Telegraf → InfluxDB → Kapacitor.
+Telegraf logs errors if it cannot communicate to InfluxDB.
+InfluxDB logs an error about `connection refused` if it cannot send data to Kapacitor.
+Run the query `SHOW SUBSCRIPTIONS` against InfluxDB to find the endpoint that InfluxDB is using to send data to Kapacitor.
 
-        {"results":[{"statement_id":0,"series":[{"name":"_internal","columns":["retention_policy","name","mode","destinations"],"values":[["monitor","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]},{"name":"telegraf","columns":["retention_policy","name","mode","destinations"],"values":[["autogen","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]}]}]}
-        
+In the following example, InfluxDB must be running on localhost:8086:
+
+```$ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SHOW SUBSCRIPTIONS'
+
+{"results":[{"statement_id":0,"series":[{"name":"_internal","columns":["retention_policy","name","mode","destinations"],"values":[["monitor","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]},{"name":"telegraf","columns":["retention_policy","name","mode","destinations"],"values":[["autogen","kapacitor-ef3b3f9d-0997-4c0b-b1b6-5d0fb37fe509","ANY",["http://localhost:9092"]]]}]}]}
+```
+
 4. Use `replay` to test the recorded data for a specific task:
 
-        bash
-        kapacitor replay -recording $rid -task cpu_alert
-        
+```bash
+kapacitor replay -recording $rid -task cpu_alert
+```
 
-        > Use the flag `-real-clock` to set the replay time by deltas between the timestamps. Time is measured on each node by the data points it receives.
+> Use the flag `-real-clock` to set the replay time by deltas between the timestamps. Time is measured on each node by the data points it receives.
 
 5. Review the log for alerts:
 
-        bash
-        sudo cat /tmp/alerts.log
-        
-        Each JSON line represents one alert, and includes the alert level and data that triggered the alert.
+```bash
+sudo cat /tmp/alerts.log
+```
 
-        > If the host machine is busy, it may take awhile to log alerts.
+Each JSON line represents one alert, and includes the alert level and data that triggered the alert.
+
+> If the host machine is busy, it may take awhile to log alerts.
 
 6. (Optional) Modify the task to be really sensitive to ensure the alerts are working.
-        In the TICKscript, change the lamda function `.crit(lambda: "usage_idle" < 70)` to `.crit(lambda: "usage_idle" < 100)`, and run the `define` command with just the `TASK_NAME` and `-tick` arguments:
+In the TICKscript, change the lamda function `.crit(lambda: "usage_idle" < 70)` to `.crit(lambda: "usage_idle" < 100)`, and run the `define` command with just the `TASK_NAME` and `-tick` arguments:
 
-        bash
-        kapacitor define cpu_alert -tick cpu_alert.tick
-        ```
-        Every data point received during the recording triggers an alert.
+```bash
+kapacitor define cpu_alert -tick cpu_alert.tick
+```
+Every data point received during the recording triggers an alert.
 
 7. Replay the modified task to verify the results.
 
-        bash
-        kapacitor replay -recording $rid -task cpu_alert
+```bash
+kapacitor replay -recording $rid -task cpu_alert
+```
 
-    Once the `alerts.log` results verify that the task is working, change the `usage_idle` threshold back to a more reasonable level and redefine the task once more using the `define` command as shown above.
+Once the `alerts.log` results verify that the task is working, change the `usage_idle` threshold back to a more reasonable level and redefine the task once more using the `define` command as shown in step 6.
 
 ### Gotcha - single versus double quotes
 
@@ -362,8 +366,8 @@ Use `define` to update the task TICKscript.
 kapacitor define cpu_alert -tick cpu_alert.tick
 ```
 
->NOTE: If a task is already enabled, redefining the task with the `define` command will automatically `reload` it.
-To define a task without reloading it use `-no-reload`
+>**Note:** If a task is already enabled, redefining the task with the `define` command automatically reloads (`reload`) the task.
+To define a task without reloading it, use `-no-reload`
 
 Now tail the alert log:
 
