@@ -108,19 +108,25 @@ Guidelines are provided for moderate queries. Queries vary widely in their impac
 
 ## When do I need more RAM?
 
-In general, more RAM helps queries return faster. Your RAM requirements are primarily determined by [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality). Higher cardinality requires more RAM. Regardless of RAM, a series cardinality of 10 million or more can cause OOM (out of memory) failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
+In general, more RAM improves query speed. RAM requirements are primarily determined by series cardinality. Higher cardinality requires more RAM.
 
-The increase in RAM needs relative to series cardinality is exponential where the exponent is between one and two:
+### RAM guidelines
 
-![Series Cardinality](/img/influxdb/series-cardinality.png)
+Start with the recommended RAM, and then adjust as needed:
+
+- For InfluxDB OSS, determine your unique number of series, and then refer to [InfluxDB OSS guidelines](#influxdb-oss-guidelines).
+- For InfluxDB Enterprise, consider your server cores (AWS EC2 R4 instances or equivalent), and then refer to [Guidelines per cluster](#guidelines-per-cluster).
+
+Regardless of RAM, a series cardinality of 10 million or more can cause OOM (out of memory) failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
 
 ## Guidelines per cluster
 
 InfluxDB Enterprise guidelines vary by writes and queries per second, series cardinality, replication factor, and infrastructure-AWS EC2 R4 instances or equivalent:
-- R4.xlarge (4 cores)
-- R4.2xlarge (8 cores)
-- R4.4xlarge (16 cores)
-- R4.8xlarge (32 cores)
+
+- R4.xlarge (4 cores); 30.5 GB RAM
+- R4.2xlarge (8 cores); 61 GB RAM
+- R4.4xlarge (16 cores); 122 GB RAM
+- R4.8xlarge (32 cores); 244 GB RAM
 
 > Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on).
 
