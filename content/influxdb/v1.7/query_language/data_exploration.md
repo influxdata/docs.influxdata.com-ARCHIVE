@@ -131,6 +131,8 @@ Other supported features:
 [Basic cast operations](#data-types-and-cast-operations),
 [Regular expressions](#regular-expressions)
 
+> **Note:** The SELECT statement cannot include an aggregate function **and** a non-aggregate function, field key, or tag key. For more information, see [error about mixing aggregate and non-aggregate queries](/influxdb/v1.7/troubleshooting/errors/#error-parsing-query-mixing-aggregate-and-non-aggregate-queries-is-not-supported).
+
 #### `FROM` clause
 
 The `FROM` clause supports several formats for specifying a [measurement(s)](/influxdb/v1.7/concepts/glossary/#measurement):
@@ -415,7 +417,7 @@ SELECT_clause FROM_clause WHERE <conditional_expression> [(AND|OR) <conditional_
 The `WHERE` clause supports `conditional_expression`s on fields, tags, and
 timestamps.
 
->**Note** InfluxDB does not support using OR in the WHERE clause to specify multiple time ranges. For example, InfluxDB will return an empty response for the following query:
+>**Note** InfluxDB does not support using OR in the WHERE clause to specify multiple time ranges. For example, InfluxDB returns an empty response for the following query:
 
 `> SELECT * FROM "absolutismus" WHERE time = '2016-07-31T20:07:00Z' OR time = '2016-07-31T23:07:17Z'`
 
