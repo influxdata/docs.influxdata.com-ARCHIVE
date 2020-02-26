@@ -86,7 +86,7 @@ The following occurs when a write comes into the system:
 
 ### Compaction
 
-Once the LogFile exceeds a threshold (5MB), then a new active log file is created and the previous one begins compacting into an IndexFile.
+Once the LogFile exceeds a threshold (1MB), then a new active log file is created and the previous one begins compacting into an IndexFile.
 This first index file is at level 1 (L1).
 The log file is considered level 0 (L0).
 
@@ -128,7 +128,7 @@ DifferenceSeriesIDIterators(
 
 ### Log File Structure
 
-The log file is simply structured as a list of LogEntry objects written to disk in sequential order. Log files are written until they reach 5MB and then they are compacted into index files.
+The log file is simply structured as a list of LogEntry objects written to disk in sequential order. Log files are written until they reach 1MB and then they are compacted into index files.
 The entry objects in the log can be of any of the following types:
 
 * AddSeries
