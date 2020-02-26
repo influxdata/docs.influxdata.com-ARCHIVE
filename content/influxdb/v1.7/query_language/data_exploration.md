@@ -659,8 +659,12 @@ time                   level description
 
 # The GROUP BY clause
 
-The `GROUP BY` clause groups query results by a user-specified
-set of [tags](/influxdb/v1.7/concepts/glossary/#tag) or a time interval.
+The `GROUP BY` clause groups query results by:
+
+- one or more specified [tags](/influxdb/v1.7/concepts/glossary/#tag)
+- specified time interval
+
+>**Note:** You cannot use `GROUP BY` to group fields.
 
 <table style="width:100%">
   <tr>
@@ -681,9 +685,9 @@ set of [tags](/influxdb/v1.7/concepts/glossary/#tag) or a time interval.
 
 ## GROUP BY tags
 
-`GROUP BY <tag>` queries group query results by a user-specified set of [tags](/influxdb/v1.7/concepts/glossary/#tag).
+`GROUP BY <tag>` groups query results by one or more specified tags.
 
-Tired of reading? Check out this InfluxQL Short:
+Watch InfluxQL short about `GROUP BY` with tags:
 <br>
 <br>
 <iframe src="https://player.vimeo.com/video/200898048?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
