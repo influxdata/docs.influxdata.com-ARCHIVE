@@ -110,3 +110,7 @@ citibikenyc,id=367,stationName=E\ 53\ St\ &\ Lexington\ Ave availableBikes=8,stA
 citibikenyc,id=359,stationName=E\ 47\ St\ &\ Park\ Ave totalDocks=64,availableBikes=15,statusValue="In Service",location="",latitude=40.75510267,availableDocks=49,stAddress1="E 47 St & Park Ave",longitude=-73.97498696,statusKey=1,stAddress2="" 1581533535000000000
 citibikenyc,id=304,stationName=Broadway\ &\ Battery\ Pl statusValue="In Service",availableDocks=11,stAddress1="Broadway & Battery Pl",statusKey=1,stAddress2="",location="",totalDocks=33,latitude=40.70463334,longitude=-74.01361706,availableBikes=22 1581533499000000000
 ```
+
+Now, you can explore and query the Citi Bike data in InfluxDB. The example below is an InfluxQL query and visualization showing the number of available bikes over the past 15 minutes at the Broadway and West 29th Street station.
+
+![Citi Bike visualization](/img/citibike_query.png)
