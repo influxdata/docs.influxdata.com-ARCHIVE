@@ -115,7 +115,7 @@ In general, more RAM improves query speed. RAM requirements are primarily determ
 Start with the recommended RAM, and then adjust as needed:
 
 - For InfluxDB OSS, determine your unique number of series, and then refer to [InfluxDB OSS guidelines](#influxdb-oss-guidelines).
-- For InfluxDB Enterprise, consider your server cores (AWS EC2 R4 instances or equivalent), and then refer to [Guidelines per cluster](#guidelines-per-cluster).
+- For InfluxDB Enterprise, consider your server cores (AWS EC2 R4 instances or equivalent), and then refer to [guidelines per cluster](#guidelines-per-cluster).
 
 Regardless of RAM, a series cardinality of 10 million or more can cause OOM (out of memory) failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
 
