@@ -8,74 +8,53 @@ menu:
     parent: Plugins
 ---
 
-This example walks through the
+This example walks through using the Telegraf HTTP input plugin to collect live metrics on Citi Bike stations in New York City. Live station data is available in JSON format from [NYC OpenData](https://data.cityofnewyork.us/NYC-BigApps/Citi-Bike-Live-Station-Feed-JSON-/p94q-8hxh).
 
-The HTTP input plugin collects metrics from one or more HTTP(S) URL endpoints. The endpoint should have metrics formatted in one of the supported input data formats.
-
-For the following example to work, you must have already configured the [`influxdb` output plugin](telegraf/v1.13/plugins/plugin-list/#influxdb).
+For the following example to work, you must have already configured the [`influxdb` output plugin](telegraf/v1.13/plugins/plugin-list/#influxdb). This plugin is what allows Telegraf to write the metrics to your InfluxDB.
 
 ## Step 1: Configure the HTTP Input plugin in your Telegraf configuration file
-To retrieve data from an HTTP url endpoint, enable the `inputs.http` input plugin in your Telegraf configuration file.
+
+To retrieve data from an the Citi Bike URL endpoint, enable the `inputs.http` input plugin in your Telegraf configuration file.
 
 Specify the following options:
 
 ### `urls`
-One or more URLs from which you wanted to read metrics from.
-
-### `method`
-Action to perform for a given HTTP resource. Requests using the default configuration `method = “GET”` value will perform the action to retrieve data from your HTTP endpoint.
+One or more URLs from which you wanted to read metrics from. In this case, we'll use `https://feeds.citibikenyc.com/stations/stations.json`.
 
 ### `data_format`
-The format of the data in the HTTP endpoints that Telegraf will ingest.
-
-Each data format has its own unique set of configuration options that you'll need to add. For details on each type of data format and the related options to configure, see [Telegraf input data formats](telegraf/v1.13/data_formats/input/).
+The format of the data in the HTTP endpoints that Telegraf will ingest. For this example, the format is JSON.
 
 
-## Step 2: Add Jparser information to your Telegraf configuration
+## Step 2: Add parser information to your Telegraf configuration
 
-Based on your data format type, use one of the following parsers.
+Because we're using JSON data, we need to specify the following JSON-specific options.
 
 ### JSON
 
-#### `strict`
-When set to true, all objects in the JSON array must be valid.
-
 #### `json_query`
-To parse only a specific portion of JSON, you need to specify the `json_query`, otherwise the whole document will be parsed.  The `json_query` is a [GJSON](https://github.com/tidwall/gjson) path that can be used to limit the portion of the overall JSON document that should be parsed. The result of the query should contain a JSON object or an array of objects.
-Refer to the [GJSON path syntax](https://github.com/tidwall/gjson#path-syntax) for details and examples or test out your query on the GJSON playground.
-
+To parse only the relevant portion of JSON data, you need to set the `json_query` option with a [GJSON](https://github.com/tidwall/gjson) path. The result of the query should contain a JSON object or an array of objects.
+In this case, we don't want to parse the JSON query's `executionTime` at the beginning of the data, so we'll limit this to include only the data in the `stationBeanList` array.
 
 #### `tag_keys`
-List of one or more JSON keys that should be added as tags.
+List of one or more JSON keys that should be added as tags. For this example, we'll use the tag keys `id`, `stationName`, `city`, and `postalCode`.
 
 #### `json_string_fields`
-List of one or more string keys in your JSON file that need to be configured as string type fields.
-
-#### `json_name_key`
-A key in your JSON file to be used as the measurement name.
+List the keys of fields that are in string format so that they can be parsed as strings. Here, the string fields are `statusValue`, `stAddress1`, `stAddress2`, `location`, and `landMark`.
 
 #### `json_time_key`
-Key from the JSON file that creates the timestamp metric. If you don't specify a key, the time that the data is read becomes the timestamp.
+Key from the JSON file that creates the timestamp metric. In this case, we want to use the time that station data was last reported, or the `lastCommunicationTime`. If you don't specify a key, the time that Telegraf reads the data becomes the timestamp.
 
 #### `json_time_format`
-The format used to interpret the designated `json_time_key`. The time must be set to one of the following:
-- `unix`
-- `unix_ms`
-- `unix_us`
-- `unix_ns`
-- A format string in using the [Go reference time format](https://golang.org/pkg/time/#Time.Format). For example, `Mon Jan 2 15:04:05 MST 2006`.
+The format used to interpret the designated `json_time_key`. This example uses [Go reference time format](https://golang.org/pkg/time/#Time.Format). For example, `Mon Jan 2 15:04:05 MST 2006`.
 
 #### `json_timezone`
-Set this option to one of the following:
-- A Unix TZ value, such as `America/New_York`
-- `Local` to use the system timezone
-- `UTC` (default)
+We'll set this to the Unix TZ value where our bike data takes place, `America/New_York`.
 
 
-#### Example JSON configuration
+#### Example configuration
 
   ``[[inputs.http]]
-  #URL for NYC's CitiBike station data in JSON format
+  #URL for NYC's Citi Bike station data in JSON format
   urls = ["https://feeds.citibikenyc.com/stations/stations.json"]
 
   #Overwrite measurement name from default `http` to `citibikenyc`
@@ -109,48 +88,22 @@ Set this option to one of the following:
   json_timezone = "America/New_York"``
 
 
-### CSV parser
-
-#### `csv_header_row_count`
-Determines how many rows to treat as a header. By default, the value is 0 and there is no header. If set to anything more than 1, column names will be appended with the name listed in the next header row.
-Names specified in `csv_column_names` will override column names in the header row.
-
-#### `csv_column_names`
-Assigns custom names to columns. If you specify this option, all columns must have a name. Any unnamed columns will be ignored by the parser.
-If `csv_header_row_count` is set to 0, you must specify this option.
-
-#### `csv_timestamp_column`, `csv_timestamp_format`
-By default, all created metrics use the current time. To specify a time, use the `csv_timestamp_column` and `csv_timestamp_format` options together to set the time to a value in the parsed document.
-
-The `csv_timestamp_column` option specifies the key containing the time value. `csv_timestamp_format` must be set to one of the following:
-- `unix`
-- `unix_ms`
-- `unix_us`
-- `unix_ns`
-- A format string in using the [Go reference time format](https://golang.org/pkg/time/#Time.Format). For example, `Mon Jan 2 15:04:05 MST 2006`.
-
-#### Example
-`[agent]
-  debug = true
-
-[[outputs.influxdb]]
-  urls = ["http://influxdb:8086"]
-  database = "telegraf"
-
-[[inputs.tail]]
-  files = ["/data/**.csv"]
-  from_beginning = true
-
-  data_format = "csv"
-  csv_header_row_count = 1
-  csv_trim_space = true
-
-  csv_tag_columns = ["ComputerName", "UserName", "ProcessName"]
-
-#   csv_timestamp_column = "Time"
-#   csv_timestamp_format = "02.01.2006 15.04.05"`
-
 
 ## Step 3: Start Telegraf and verify data appears
 
-Start the Telegraf service.
+[Start the Telegraf service](/telegraf/v1.13/introduction/getting-started/#start-the-telegraf-service) to get Telegraf up and running so it can write your Citi Bike data to the `influxdb` output.
+
+To test that the data is being ingested, run the following (replacing `telegraf.conf` with the path to the configuration file you're using):
+
+```
+telegraf -config ~/telegraf.conf -test
+```
+
+You should get something that looks like the following output in line protocol:
+
+```
+citibikenyc,id=3443,stationName=W\ 52\ St\ &\ 6\ Ave statusKey=1,location="",totalDocks=41,availableDocks=32,latitude=40.76132983124814,longitude=-73.97982001304626,availableBikes=8,stAddress2="",stAddress1="W 52 St & 6 Ave",statusValue="In Service" 1581533519000000000
+citibikenyc,id=367,stationName=E\ 53\ St\ &\ Lexington\ Ave availableBikes=8,stAddress1="E 53 St & Lexington Ave",longitude=-73.97069431,latitude=40.75828065,stAddress2="",statusKey=1,location="",statusValue="In Service",totalDocks=34,availableDocks=24 1581533492000000000
+citibikenyc,id=359,stationName=E\ 47\ St\ &\ Park\ Ave totalDocks=64,availableBikes=15,statusValue="In Service",location="",latitude=40.75510267,availableDocks=49,stAddress1="E 47 St & Park Ave",longitude=-73.97498696,statusKey=1,stAddress2="" 1581533535000000000
+citibikenyc,id=304,stationName=Broadway\ &\ Battery\ Pl statusValue="In Service",availableDocks=11,stAddress1="Broadway & Battery Pl",statusKey=1,stAddress2="",location="",totalDocks=33,latitude=40.70463334,longitude=-74.01361706,availableBikes=22 1581533499000000000
+```
