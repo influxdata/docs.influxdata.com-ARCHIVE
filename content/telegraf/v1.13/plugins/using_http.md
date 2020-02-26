@@ -3,7 +3,7 @@ title: Using the HTTP input plugin
 description:
 menu:
   telegraf_1_13:
-    name: Using HTTP plugin
+    name: Using the HTTP plugin
     weight: 30
     parent: Plugins
 ---
