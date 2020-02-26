@@ -6,7 +6,6 @@ menu:
     parent: Introduction
 ---
 
-
 Use Kapacitor to import (stream or batch) time series data, and then transform, analyze, and act on the data. To get started using Kapacitor, use Telegraf to collect system metrics on your local machine and store them in InfluxDB. Then, use Kapacitor to process your system data.
 
 - [Overview](#overview)
@@ -20,7 +19,7 @@ Use Kapacitor to import (stream or batch) time series data, and then transform, 
     - [Extending TICKscripts](#extending-tickscripts)
     - [A real world example](#a-real-world-example)
     - [Trigger an alert from batch data](#trigger-alerts-from-batch-data)
-    - [Load tasks](#load-tasks-with-Kapacitor)
+    - [Load tasks](#load-tasks-with-kapacitor)
 
 ## Overview
 
