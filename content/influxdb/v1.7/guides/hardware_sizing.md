@@ -96,7 +96,7 @@ A cluster with one data node is valid but has no data redundancy. Redundancy is 
 
 Guidelines vary by writes per second per node, moderate queries per second per node, and the number of unique series per node.
 
- #### Guidelines per node
+#### Guidelines per node
 
 | vCPU or CPU |   RAM    | IOPS  | Writes per second | Queries* per second | Unique series |
 | ----------: | -------: | ----: | ----------------: | ------------------: | ------------: |
@@ -104,7 +104,7 @@ Guidelines vary by writes per second per node, moderate queries per second per n
 |   4-6 cores | 16-32 GB | 1000+ |         < 100,000 |                < 25 |   < 1,000,000 |
 |    8+ cores |   32+ GB | 1000+ |         > 100,000 |                > 25 |   > 1,000,000 |
 
-* Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
+Guidelines are provided for moderate queries. Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for detail.
 
 ## When do I need more RAM?
 
