@@ -10,29 +10,29 @@ menu:
 
 This example walks through using the Telegraf HTTP input plugin to collect live metrics on Citi Bike stations in New York City. Live station data is available in JSON format from [NYC OpenData](https://data.cityofnewyork.us/NYC-BigApps/Citi-Bike-Live-Station-Feed-JSON-/p94q-8hxh).
 
-For the following example to work, you must have already configured the [`influxdb` output plugin](telegraf/v1.13/plugins/plugin-list/#influxdb). This plugin is what allows Telegraf to write the metrics to your InfluxDB.
+For the following example to work, configure [`influxdb` output plugin](telegraf/v1.13/plugins/plugin-list/#influxdb). This plugin is what allows Telegraf to write the metrics to your InfluxDB.
 
-## Step 1: Configure the HTTP Input plugin in your Telegraf configuration file
+## Configure the HTTP Input plugin in your Telegraf configuration file
 
-To retrieve data from an the Citi Bike URL endpoint, enable the `inputs.http` input plugin in your Telegraf configuration file.
+To retrieve data from the Citi Bike URL endpoint, enable the `inputs.http` input plugin in your Telegraf configuration file.
 
 Specify the following options:
 
 ### `urls`
-One or more URLs from which you wanted to read metrics from. In this case, we'll use `https://feeds.citibikenyc.com/stations/stations.json`.
+One or more URLs to read metrics from. For this example,  use `https://feeds.citibikenyc.com/stations/stations.json`.
 
 ### `data_format`
-The format of the data in the HTTP endpoints that Telegraf will ingest. For this example, the format is JSON.
+The format of the data in the HTTP endpoints that Telegraf will ingest. For this example, use JSON.
 
 
-## Step 2: Add parser information to your Telegraf configuration
+## Add parser information to your Telegraf configuration
 
-Because we're using JSON data, we need to specify the following JSON-specific options.
+Specify the following JSON-specific options.
 
 ### JSON
 
 #### `json_query`
-To parse only the relevant portion of JSON data, you need to set the `json_query` option with a [GJSON](https://github.com/tidwall/gjson) path. The result of the query should contain a JSON object or an array of objects.
+To parse only the relevant portion of JSON data, set the `json_query` option with a [GJSON](https://github.com/tidwall/gjson) path. The result of the query should contain a JSON object or an array of objects.
 In this case, we don't want to parse the JSON query's `executionTime` at the beginning of the data, so we'll limit this to include only the data in the `stationBeanList` array.
 
 #### `tag_keys`
@@ -48,12 +48,13 @@ Key from the JSON file that creates the timestamp metric. In this case, we want 
 The format used to interpret the designated `json_time_key`. This example uses [Go reference time format](https://golang.org/pkg/time/#Time.Format). For example, `Mon Jan 2 15:04:05 MST 2006`.
 
 #### `json_timezone`
-We'll set this to the Unix TZ value where our bike data takes place, `America/New_York`.
+The timezone We'll set this to the Unix TZ value where our bike data takes place, `America/New_York`.
 
 
 #### Example configuration
 
-  ``[[inputs.http]]
+  ```
+  [[inputs.http]]
   #URL for NYC's Citi Bike station data in JSON format
   urls = ["https://feeds.citibikenyc.com/stations/stations.json"]
 
@@ -85,21 +86,23 @@ We'll set this to the Unix TZ value where our bike data takes place, `America/Ne
   json_time_format = "2006-01-02 03:04:05 PM"
 
   #Time is reported in Eastern Standard Time (EST)
-  json_timezone = "America/New_York"``
+  json_timezone = "America/New_York"
+  ```
 
 
 
-## Step 3: Start Telegraf and verify data appears
+## Start Telegraf and verify data appears
 
-[Start the Telegraf service](/telegraf/v1.13/introduction/getting-started/#start-the-telegraf-service) to get Telegraf up and running so it can write your Citi Bike data to the `influxdb` output.
+[Start the Telegraf service](/telegraf/v1.13/introduction/getting-started/#start-the-telegraf-service).
 
-To test that the data is being ingested, run the following (replacing `telegraf.conf` with the path to the configuration file you're using):
+To test that the data is being sent to InfluxDB, run the following (replacing `telegraf.conf` with the path to your configuration file):
 
 ```
 telegraf -config ~/telegraf.conf -test
 ```
 
-You should get something that looks like the following output in line protocol:
+This command should return line protocol that looks similar to the following:
+
 
 ```
 citibikenyc,id=3443,stationName=W\ 52\ St\ &\ 6\ Ave statusKey=1,location="",totalDocks=41,availableDocks=32,latitude=40.76132983124814,longitude=-73.97982001304626,availableBikes=8,stAddress2="",stAddress1="W 52 St & 6 Ave",statusValue="In Service" 1581533519000000000
