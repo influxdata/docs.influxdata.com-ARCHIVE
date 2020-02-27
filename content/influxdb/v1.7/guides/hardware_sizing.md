@@ -108,7 +108,7 @@ Guidelines are provided for moderate queries. Queries vary widely in their impac
 
 ## When do I need more RAM?
 
-In general, more RAM improves query speed. RAM requirements are primarily determined by series cardinality. Higher cardinality requires more RAM.
+In general, more RAM improves query speed. Your RAM requirements are primarily determined by series cardinality. Higher cardinality requires more RAM.
 
 ### RAM guidelines
 
