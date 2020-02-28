@@ -37,7 +37,7 @@ We recommend enabling Time Series Index (TSI) (step 3 of Upgrade to InfluxDB 1.7
 
 ## Switch between `tsi1` and `inmem`
 
-After enabling TSI (`tsi1`), switch between using TSI (`tsi1`) and in-memory index (`inmem`) as needed by completing step 3 and 4 above in [Upgrade to InfluxDB 1.7.x](#upgrade-to-influxdb-1-7-x), altering `inmem` and `tsi` as applicable.
+After enabling TSI (`tsi1`), switch between using TSI (`tsi1`) and in-memory index (`inmem`) as needed by completing steps 3 and 4 above in [Upgrade to InfluxDB 1.7.x](#upgrade-to-influxdb-1-7-x), altering `inmem` and `tsi` as applicable.
 
 ## Downgrade InfluxDB
 
