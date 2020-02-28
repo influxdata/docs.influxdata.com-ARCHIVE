@@ -8,53 +8,34 @@ menu:
     parent: Concepts
 ---
 
-When InfluxDB ingests data, we store not only the value but we also index the measurement and tag information so that it can be queried quickly.
-In earlier versions, index data could only be stored in-memory, however, that requires a lot of RAM and places an upper bound on the number of series a machine can hold.
-This upper bound is usually somewhere between 1 - 4 million series depending on the machine used.
+InfluxDB stores measurement and tag information in an index so data can be queried quickly. In earlier versions, the index was stored in-memory, requiring a lot of RAM and restricting the number of series that a machine could hold (typically, 1-4 million series, depending on machine).
 
-The Time Series Index (TSI) was developed to allow us to go past that upper bound.
-TSI stores index data on disk so that we are no longer restricted by RAM.
-TSI uses the operating system's page cache to pull hot data into memory and let cold data rest on disk.
+Time Series Index (TSI) stores index data on disk, removing RAM restrictions. This lets you store more series.
+TSI uses the operating system's page cache to pull hot data into memory, leaving cold data on disk.
 
 ## Enable TSI
 
-To enable TSI, set the following line in the InfluxDB configuration file (`influxdb.conf`):
+For **InfluxDB OSS**, complete step 3 and 4 of [Upgrading to InfluxDB 1.7.x](https://docs.influxdata.com/influxdb/v1.7/administration/upgrading/#upgrade-to-influxdb-1-7-x).
 
-```
-index-version = "tsi1"
-```
-
-(Be sure to include the double quotes.)
-
-### InfluxDB Enterprise
-
-- To convert your data nodes to support TSI, see [Upgrade InfluxDB Enterprise clusters](https://docs.influxdata.com/enterprise_influxdb/v1.7/administration/upgrading/).
-
-- For detail on configuration, see [Configure InfluxDB Enterprise clusters](https://docs.influxdata.com/enterprise_influxdb/v1.7/administration/configuration/#sidebar).
-
-### InfluxDB OSS
-
-- For detail on configuration, see [Configuring InfluxDB OSS](https://docs.influxdata.com/influxdb/v1.7/administration/config/#sidebar).
+For **InfluxDB Enterprise**, on each data node in your cluster, complete step 2 and steps 4-7 of [Upgrade data nodes](/enterprise_influxdb/v1.7/administration/upgrading/#upgrade-data-nodes).
 
 ## Tooling
 
 ### `influx_inspect dumptsi`
 
-If you are troubleshooting an issue with an index, you can use the `influx_inspect dumptsi` command.
-This command allows you to print summary statistics on an index, file, or a set of files.
-This command only works on one index at a time.
+Use the `influx_inspect dumptsi` command to troubleshoot an issue with an index: print summary statistics on an index, file, or a set of files.
 
-For details on this command, see [influx_inspect dumptsi](/influxdb/v1.7/tools/influx_inspect/#dumptsi).
+> **Note:** This command only works on one index at a time.
+
+For more details, see [influx_inspect dumptsi](/influxdb/v1.7/tools/influx_inspect/#dumptsi).
 
 ### `influx_inspect buildtsi`
 
-If you want to convert an existing shard from an in-memory index to a TSI index, or if you have an existing TSI index which has become corrupt, you can use the `buildtsi` command to create the index from the underlying TSM data.
-If you have an existing TSI index that you want to rebuild, first delete the `index` directory within your shard.
+If you have a corrupted TSI, delete the `index` directory within your shard, and then use the `buildtsi` command to rebuild TSI.
 
 This command works at the server-level but you can optionally add database, retention policy and shard filters to only apply to a subset of shards.
 
 For details on this command, see [influx inspect buildtsi](/influxdb/v1.7/tools/influx_inspect/#buildtsi).
-
 
 ## Understanding TSI
 
