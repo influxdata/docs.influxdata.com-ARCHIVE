@@ -8,16 +8,18 @@ menu:
     parent: Concepts
 ---
 
-InfluxDB stores measurement and tag information in an index so data can be queried quickly. In earlier versions, the index was stored in-memory, requiring a lot of RAM and restricting the number of series that a machine could hold (typically, 1-4 million series, depending on machine).
+InfluxDB stores measurement and tag information in an index so that data can be queried quickly. 
+
+In earlier versions, the index was stored in-memory, requiring a lot of RAM and restricting the number of series that a machine could hold (typically, 1-4 million series, depending on machine).
 
 Time Series Index (TSI) stores index data on disk, removing RAM restrictions. This lets you store more series.
 TSI uses the operating system's page cache to pull hot data into memory, leaving cold data on disk.
 
 ## Enable TSI
 
-For **InfluxDB OSS**, complete step 3 and 4 of [Upgrading to InfluxDB 1.7.x](https://docs.influxdata.com/influxdb/v1.7/administration/upgrading/#upgrade-to-influxdb-1-7-x).
+- For **InfluxDB OSS**, complete step 3 and 4 of [Upgrading to InfluxDB 1.7.x](https://docs.influxdata.com/influxdb/v1.7/administration/upgrading/#upgrade-to-influxdb-1-7-x).
 
-For **InfluxDB Enterprise**, on each data node in your cluster, complete step 2 and steps 4-7 of [Upgrade data nodes](/enterprise_influxdb/v1.7/administration/upgrading/#upgrade-data-nodes).
+- For **InfluxDB Enterprise**, on each data node in your cluster, complete step 2 and steps 4-7 of [Upgrade data nodes](/enterprise_influxdb/v1.7/administration/upgrading/#upgrade-data-nodes).
 
 ## Tooling
 
