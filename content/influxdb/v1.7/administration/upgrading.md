@@ -13,7 +13,7 @@ We recommend enabling Time Series Index (TSI) (step 3 of Upgrade to InfluxDB 1.7
 - [Time Series Index (TSI) overview](/influxdb/v1.7/concepts/time-series-index/)
 - [Time Series Index (TSI) details](/influxdb/v1.7/concepts/tsi-details/)
 
-> **_Note:_** The default InfluxDB configuration continues to use TSM-based shards with in-memory indexes (`inmem`) (as in earlier versions).
+> **_Note:_** The default InfluxDB configuration continues to use in-memory indexes (`inmem`) (as in earlier versions).
 
 ## Upgrade to InfluxDB 1.7.x
 
@@ -35,9 +35,12 @@ We recommend enabling Time Series Index (TSI) (step 3 of Upgrade to InfluxDB 1.7
 
 4. Restart the `influxdb` service.
 
-## Switch between `tsi1` and `inmem`
+## Switch index types
 
-After enabling TSI (`tsi1`), switch between using TSI (`tsi1`) and in-memory index (`inmem`) as needed by completing steps 3 and 4 above in [Upgrade to InfluxDB 1.7.x](#upgrade-to-influxdb-1-7-x), altering `inmem` and `tsi` as applicable.
+Switch index types at any time by doing one of the following:
+
+- To switch from to `inmem` to `tsi1`, complete steps 3 and 4 above in [Upgrade to InfluxDB 1.7.x](#upgrade-to-influxdb-1-7-x).
+- To switch from to `tsi1` to `inmem`, change `tsi1` to `inmem` by completing steps 3a-3c and 4 above in [Upgrade to InfluxDB 1.7.x](#upgrade-to-influxdb-1-7-x).
 
 ## Downgrade InfluxDB
 

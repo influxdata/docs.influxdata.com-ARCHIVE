@@ -138,7 +138,7 @@ Cluster configurations guidelines are organized by:
 - Number of data nodes
 - Number of server cores
 
-> Recommended configuration guidelines were tested against Time Series Index (TSI) (`tsi1`). To prevent multiple indexes types from being used simultaneously (`tsi1` and the earlier `inmem`), TSI isn't enabled by default. We recommend enabling TSI; for more information, see [TSI details](/influxdb/v1.7/concepts/tsi-details/). For `inmem`, use the guidelines below as a benchmark and adjust as needed.
+> Recommended configuration guidelines were tested against Time Series Index (TSI) (`tsi1`). To prevent multiple index types from being used simultaneously (`tsi1` and the earlier `inmem`), TSI isn't enabled by default. We recommend enabling TSI; for more information, see [TSI details](/influxdb/v1.7/concepts/tsi-details/). For `inmem`, use the guidelines below as a benchmark and adjust as needed.
 
 For each cluster configuration, you'll find guidelines for the following:
 

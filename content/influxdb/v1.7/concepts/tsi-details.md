@@ -8,11 +8,11 @@ menu:
     parent: Concepts
 ---
 
-InfluxDB stores measurement and tag information in an index so that data can be queried quickly. 
+InfluxDB stores measurement and tag information in an index so data can be queried quickly.
 
 In earlier versions, the index was stored in-memory, requiring a lot of RAM and restricting the number of series that a machine could hold (typically, 1-4 million series, depending on the machine).
 
-Time Series Index (TSI) stores index data on disk, removing RAM restrictions. This lets you store more series on a machine.
+Time Series Index (TSI) stores index data both in memory and on disk, removing RAM restrictions. This lets you store more series on a machine.
 TSI uses the operating system's page cache to pull hot data into memory, leaving cold data on disk.
 
 ## Enable TSI
