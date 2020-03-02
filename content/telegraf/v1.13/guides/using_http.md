@@ -1,5 +1,5 @@
 ---
-title: Using the HTTP input plugin
+title: Using the HTTP input plugin with Citi Bike data
 description:
 menu:
   telegraf_1_13:
