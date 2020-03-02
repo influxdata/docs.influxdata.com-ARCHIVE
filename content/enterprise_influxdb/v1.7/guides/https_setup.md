@@ -140,36 +140,36 @@ Consult your CA if you are unsure about how to use these files.
         https-private-key = "influxdb.key"
       ```
 
-   2. Configure the data nodes to use HTTPS when communicating with other data nodes.
-      In the `[cluster]` section of the configuration file, set the following:
+    2. Configure the data nodes to use HTTPS when communicating with other data nodes.
+       In the `[cluster]` section of the configuration file, set the following:
 
-      ```toml
-      [cluster]
+       ```toml
+       [cluster]
 
-        [...]
+         [...]
 
-        # Determines whether data nodes use HTTPS to communicate with each other.
-        https-enabled = true
+         # Determines whether data nodes use HTTPS to communicate with each other.
+         https-enabled = true
 
-        # The SSL certificate to use when HTTPS is enabled.
-        https-certificate = "influxdb.crt"
+         # The SSL certificate to use when HTTPS is enabled.
+         https-certificate = "influxdb.crt"
 
-        # Use a separate private key location.
-        https-private-key = "influxdb.key"
-      ```
+         # Use a separate private key location.
+         https-private-key = "influxdb.key"
+       ```
 
-   3. Configure the data nodes to use HTTPS when communicating with the meta nodes.
-      In the `[meta]` section of the configuration file, set the following:
+    3. Configure the data nodes to use HTTPS when communicating with the meta nodes.
+       In the `[meta]` section of the configuration file, set the following:
 
-      ```toml
-      [meta]
+       ```toml
+       [meta]
 
-        [...]
-          meta-tls-enabled = true
+         [...]
+           meta-tls-enabled = true
 
-          # If using a self-signed certificate:
-          meta-insecure-tls = true
-      ```
+           # If using a self-signed certificate:
+           meta-insecure-tls = true
+       ```
 
 6. **Restart InfluxDB Enterprise**
 
