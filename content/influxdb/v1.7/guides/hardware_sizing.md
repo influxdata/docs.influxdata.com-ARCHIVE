@@ -128,7 +128,7 @@ InfluxDB Enterprise guidelines vary by writes and queries per second, series car
 - R4.4xlarge (16 cores); 122 GB RAM
 - R4.8xlarge (32 cores); 244 GB RAM
 
-> Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on).
+> Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on). 
 
 ### Recommended cluster configurations
 
@@ -137,6 +137,8 @@ Cluster configurations guidelines are organized by:
 - Series cardinality in your data set: 10,000, 100,000, 1,000,000, or 10,000,000
 - Number of data nodes
 - Number of server cores
+
+> Recommended configuration guidelines were tested against Time Series Index (TSI) (`tsi1`). To prevent multiple index types from being used simultaneously (`tsi1` and the earlier `inmem`), TSI isn't enabled by default. We recommend enabling TSI; for more information, see [TSI details](/influxdb/v1.7/concepts/tsi-details/). For `inmem`, use the guidelines below as a benchmark and adjust as needed.
 
 For each cluster configuration, you'll find guidelines for the following:
 
