@@ -108,21 +108,27 @@ Guidelines are provided for moderate queries. Queries vary widely in their impac
 
 ## When do I need more RAM?
 
-In general, more RAM helps queries return faster. Your RAM requirements are primarily determined by [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality). Higher cardinality requires more RAM. Regardless of RAM, a series cardinality of 10 million or more can cause OOM (out of memory) failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
+In general, more RAM improves query speed. Your RAM requirements are primarily determined by series cardinality. Higher cardinality requires more RAM.
 
-The increase in RAM needs relative to series cardinality is exponential where the exponent is between one and two:
+### RAM guidelines
 
-![Series Cardinality](/img/influxdb/series-cardinality.png)
+Start with the recommended RAM, and then adjust as needed:
+
+- For InfluxDB OSS, determine your unique number of series, and then refer to [InfluxDB OSS guidelines](#influxdb-oss-guidelines).
+- For InfluxDB Enterprise, consider your server cores (AWS EC2 R4 instances or equivalent), and then refer to [guidelines per cluster](#guidelines-per-cluster).
+
+Regardless of RAM, a series cardinality of 10 million or more can cause OOM (out of memory) failures. You can usually resolve OOM issues by redesigning your [schema](/influxdb/v1.7/concepts/glossary/#schema).
 
 ## Guidelines per cluster
 
 InfluxDB Enterprise guidelines vary by writes and queries per second, series cardinality, replication factor, and infrastructure-AWS EC2 R4 instances or equivalent:
-- R4.xlarge (4 cores)
-- R4.2xlarge (8 cores)
-- R4.4xlarge (16 cores)
-- R4.8xlarge (32 cores)
 
-> Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on).
+- R4.xlarge (4 cores); 30.5 GB RAM
+- R4.2xlarge (8 cores); 61 GB RAM
+- R4.4xlarge (16 cores); 122 GB RAM
+- R4.8xlarge (32 cores); 244 GB RAM
+
+> Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on). 
 
 ### Recommended cluster configurations
 
@@ -131,6 +137,8 @@ Cluster configurations guidelines are organized by:
 - Series cardinality in your data set: 10,000, 100,000, 1,000,000, or 10,000,000
 - Number of data nodes
 - Number of server cores
+
+> Recommended configuration guidelines were tested against Time Series Index (TSI) (`tsi1`). To prevent multiple index types from being used simultaneously (`tsi1` and the earlier `inmem`), TSI isn't enabled by default. We recommend enabling TSI; for more information, see [TSI details](/influxdb/v1.7/concepts/tsi-details/). For `inmem`, use the guidelines below as a benchmark and adjust as needed.
 
 For each cluster configuration, you'll find guidelines for the following:
 
@@ -472,4 +480,4 @@ Non-string values require approximately three bytes. String values require varia
 
 ### Separate `wal` and `data` directories
 
-When running InfluxDB in a production environment, store the `wal` directory and the `data` directory on separate storage devices. This optimization significantly reduces disk contention under heavy write load──an important consideration if the write load is highly variable. If the write load does not vary by more than 15%, the optimization is probably not necessary.
+When running InfluxDB in a production environment, store the `wal` directory and the `data` directory on separate storage devices. This optimization significantly reduces disk contention under heavy write load──an important consideration if the write load is highly variable. If the write load does not vary by more than 15%, this optimization is probably not necessary.
