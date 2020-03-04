@@ -8,6 +8,35 @@ menu:
     parent: About the project
 ---
 
+## v1.13.4 [2020-02-25]
+
+### Release Notes
+Official packages now built with Go 1.13.8.
+
+### Bug fixes
+- Parse NaN values from summary types in Promethues (`prometheus`) input plugin.
+- Fix PgBouncer (`pgbouncer`) input plugin when used with newer PgBouncer versions.
+- Support up to 8192 stats in the Ethtool (`ethtool`) input plugin.
+- Fix performance counters collection on named instances in Microsoft SQL Server (`sqlserver`) input plugin.
+- Use add time for Prometheus expiration calculation.
+- Fix inconsistency with input error counting in Telegraf v1.x (`internal`) input plugin.
+- Use the same timestamp per call if no time is provided in Prometheus (`prometheus`) input plugin.
+
+## v1.13.3 [2020-02-04]
+
+### Bug fixes
+
+- Update Kibana (`kibana`) input plugin to support Kibana 6.4 and later.
+- Prevent duplicate `TrackingIDs` from being returned in the following queue consumer input plugins:
+    - Amazon Kineses Consumer (`kinesis_consumer`)
+    - AMQP Consumer (`amqp_consumer`)
+    - Apache Consumer (`apache_consumer`)
+    - MQTT Consumer (`mqtt_consumer`)
+    - NATS Consumer (`nats_consumer`)
+    - NSQ Consumer (`nsq_consumer`)
+- Increase support for up to 4096 statistics in the Ethtool (`ethtool`) input plugin.
+- Remove expired metrics from the Prometheus Client (`prometheus_client`) output plugin. Previously, expired metrics were only removed when new metrics were added.
+
 ## v1.13.2 [2020-01-21]
 
 ### Bug fixes

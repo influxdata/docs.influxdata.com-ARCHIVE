@@ -35,9 +35,10 @@ can be inaccurate.
 
 ## Installing InfluxDB OSS
 
-For users who don't want to install any software and are ready to use InfluxDB,
-you may want to check out our
+If you want to use InfluxDB but don't want to install software, check out our
 [managed hosted InfluxDB offering](https://cloud.influxdata.com).
+
+> **Note:** Windows support is experimental.
 
 {{< tab-labels >}}
 {{% tabs %}}
@@ -240,13 +241,13 @@ If `gpg` is not available, see the [GnuPG homepage](https://gnupg.org/download/)
    For example:
 
     ```
-    wget https://dl.influxdata.com/influxdb/releases/influxdb-1.7.9_linux_amd64.tar.gz.asc
+    wget https://dl.influxdata.com/influxdb/releases/influxdb-1.7.10_linux_amd64.tar.gz.asc
     ```
 
 3. Verify the signature with `gpg --verify`:
 
     ```
-    gpg --verify influxdb-1.7.9_linux_amd64.tar.gz.asc influxdb-1.7.9_linux_amd64.tar.gz
+    gpg --verify influxdb-1.7.10_linux_amd64.tar.gz.asc influxdb-1.7.10_linux_amd64.tar.gz
     ```
 
     The output from this command should include the following:
