@@ -259,7 +259,7 @@ are stored in the [cluster](/influxdb/v1.7/high_availability/clusters/).
 
 - A cluster fully replicates data across each data node in the cluster. This lets a data node respond to a query without communicating with other data nodes.
 
-- The number of data nodes in a cluster **must be** evenly divisible by the replication factor. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes. A replication factor of 3 works with 3, 6, or 9 data nodes.
+- The number of data nodes in a cluster **must be evenly divisible** by the replication factor. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on.
 
     > **Important:** If data nodes aren’t evenly divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor query performance.
 
