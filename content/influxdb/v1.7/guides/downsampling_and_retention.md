@@ -103,8 +103,8 @@ That query creates an RP called `two_hours` that exists in the database
 RP for the database `food_data`.
 
 {{% warn %}}
-The replication factor (`REPLICATION 1`) is a required parameter but must always
-be set to 1 for single node instances.
+The replication factor (`REPLICATION 1`) is a required parameter set to 1 for single node instances. For multiple data nodes in a cluster, the replication factor **must be evenly divisible** into the number of data nodes. For example, a replication factor of 2 works with 2, 4, or 6 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on.
+
 {{% /warn %}}
 
 > **Note:** When we created the `food_data` database in step 1, InfluxDB
