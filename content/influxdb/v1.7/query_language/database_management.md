@@ -303,6 +303,10 @@ This setting is optional.
 The query creates a retention policy called `one_day_only` for the database
 `NOAA_water_database` with a one day duration and a replication factor of one.
 
+> **Note:** To ensure data is successfully replicated across a cluster, the number of data nodes in a cluster **must be evenly divisible** by the replication factor.
+
+A cluster fully replicates data across each data node in the cluster. This lets a data node respond to a query without communicating with other data nodes. If data nodes aren’t divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor query performance.
+
 ##### Create a DEFAULT retention policy
 
 ```sql
@@ -344,6 +348,12 @@ Modify `what_is_time` to have a three week `DURATION`, a two hour shard group du
 In the last example, `what_is_time` retains its original replication factor of 1.
 
 A successful `ALTER RETENTION POLICY` query returns an empty result.
+
+To store more series within the database, increase the number of data nodes and update the replication factor if needed. The number of data nodes must be evenly divisible by the replication factor.
+
+For example, if you have RF=3 in a 6 node cluster, you can add 3 nodes or change the RF to 2 and add 2 data nodes. 
+
+> **Note:** Decreasing the replication factor (fewer copies of data in a cluster) may reduce query performance, depending on query loads.
 
 ### Delete retention policies with DROP RETENTION POLICY
 
