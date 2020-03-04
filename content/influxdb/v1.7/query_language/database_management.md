@@ -257,11 +257,11 @@ duration is `INF`.
 - The `REPLICATION` clause determines how many independent copies of each point
 are stored in the [cluster](/influxdb/v1.7/high_availability/clusters/).
 
-- By default, the replication factor `n` usually equals the number of data nodes. However, if you have four or more data nodes, the default replication factor `n` is 3.
+- A cluster fully replicates data across each data node in the cluster. This lets a data node respond to a query without communicating with other data nodes.
 
-- To ensure data is immediately available for queries, set the replication factor `n` to less than or equal to the number of data nodes in the cluster.
+- The number of data nodes in a cluster **must be** evenly divisible by the replication factor. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes. A replication factor of 3 works with 3, 6, or 9 data nodes.
 
-> **Important:** If you have four or more data nodes, verify that the database replication factor is correct.
+> **Important:** If data nodes aren’t evenly divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor query performance.
 
 - Replication factors do not serve a purpose with single node instances.
 
