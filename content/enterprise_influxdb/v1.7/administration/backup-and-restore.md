@@ -9,21 +9,25 @@ menu:
     parent: Administration
 ---
 
-## Overview
+When deploying InfluxDB Enterprise in a production environment, we recommend that you prepare for unexpected data loss with a strategy for backing up and restoring your InfluxDB Enterprise clusters.
 
-When deploying InfluxDB Enterprise in production environments, you should have a strategy and procedures for backing up and restoring your InfluxDB Enterprise clusters to be prepared for unexpected data loss.
+## Plan your back up and restore strategy
 
-The tools provided by InfluxDB Enterprise can be used to:
+Plan a back up and restore strategy for the following scenarios:
 
-- Provide disaster recovery due to unexpected events
-- Migrate data to new environments or servers
-- Restore clusters to a consistent state
+- Disaster recovery due to unexpected events
+- Migrating data to new environments or servers
+- Restoring clusters to a consistent state
 - Debugging
 
-Depending on the volume of data to be protected and your application requirements, InfluxDB Enterprise offers two methods, described below, for managing backups and restoring data:
+### Choose a strategy that fits your needs
 
-- [Backup and restore utilities](#backup-and-restore-utilities) — For most applications
-- [Exporting and importing data](#exporting-and-importing-data) — For large datasets
+Consider your use cases, volume of data, and application requirements, and then plan a backup and restore strategy that suits your needs. Use one or more of the following methods as part of your strategy:
+
+- [Backup and restore utilities](#backup-and-restore-utilities)
+- [Export and import commands](#export-and-import-commands) (preferred for large datasets)
+- [Take AWS snapshot with EBS volumes](#take-aws-snapshot-with-ebs-volumes)
+- [Run two clusters in separate AWS regions](#run-two-clusters-in-separate-aws-regions)
 
 > **Note:** Use the [`backup` and `restore` utilities (InfluxDB OSS 1.5 and later)](/influxdb/latest/administration/backup_and_restore/) to:
 >
@@ -385,13 +389,13 @@ InfluxDB Enterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, be sure to follow the syntax
 for [restoring from a full backup](#syntax-to-restore-from-a-full-backup).
 
-## Exporting and importing data
+## Export and import commands
 
 For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. However, when working with data volumes 100s of gigabytes or more, the standard backup and restore utilities may not adequately handle the volumes of data in your application.  
 
-As an alternative to the standard backup and restore utilities, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. These commands can be executed manually or included in shell scripts that run the export and import operations at scheduled intervals (example below).
+As an alternative to the standard backup and restore utilities, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. Execute these commands manually or include them in shell scripts to run at scheduled intervals (example below).
 
-### Exporting data
+### Export data
 
 Use the [`influx_inspect export` command](/influxdb/latest/tools/influx_inspect#export) to export data in line protocol format from your InfluxDB Enterprise cluster. Options include:
 
@@ -407,7 +411,7 @@ In the following example, the database is exported filtered to include only one 
 influx_inspect export -database myDB -compress -start 2019-05-19T00:00:00.000Z -end 2019-05-19T23:59:59.999Z
 ```
 
-### Importing data
+### Import data
 
 After exporting the data in line protocol format, you can import the data using the [`influx -import` CLI command](https://docs.influxdata.com/influxdb/latest/tools/shell/#import).
 
@@ -428,3 +432,73 @@ For an example of using the exporting and importing data approach for disaster r
 - Importing data every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
 - Advantages of the export-import approach over the standard backup and restore utilities for large volumes of data.
 - Managing users and scheduled exports and imports with a custom administration tool.
+
+## Take AWS snapshot with EBS volumes
+
+1. Set up at least two EBS volumes: one for your OS root directory and one for your InfluxDB data:
+  
+  a. Create a VM with OS of choice.
+  b. Create a secondary storage device (EBS) that's associated with the VM.
+  c. Create filesystem on secondary device using fdisk and mkfs.
+  d. Create directory structure for influx on secondary device (we use /influxdb).
+  e. Set VM to mount secondary device as '/influxdb' by changing the /etc/fstab.
+  f. Download and install Influx, then stop service if it starts.
+  g. Change storage location for influx files from inside the configuration files.
+
+    ```
+    "/var/lib/influxdb/"
+    ```
+
+    to
+
+    ```
+    /influxdb
+    ```
+
+8) Copy any contents from /var/lib/influxdb to /influxdb (meta, wal, data, et. al.)
+9) Restart influxdb service, monitor logs.
+10) Make backup copy of conf files to /influxdb/conf
+
+Once steps 1-10 are completed, the data should be homed on the 'secondary' drive, which means that snapshots are only necessary for that drive, saving snapshot space.
+
+1. Copy all Enterprise cluster data to a separate EBS volume for backup, including the following directories:
+  
+  - For meta nodes: `/meta`
+  - For data nodes: `/data`, `/hh`, `/wal`, and `/meta`
+
+2. Review how to [automate the Amazon EBS Snapshot Lifestyle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html) and complete the following tasks as needed:
+  
+  a. Create an EBS snapshot.
+  b. Recover data from a snapshot by detaching your existing EBS volume and attaching the snapshot.
+  c. Re-sync a recovered single node.
+
+## Run two clusters in separate AWS regions
+
+First, run two clusters in separate AWS regions, and then transfer your data using custom scripts and S3 buckets.
+
+1. Create two AWS regions to use:
+
+  - one for disaster recovery (DR)
+  - one for actively working with data
+
+2. In both regions, create separate “availability zones” for each data node in your cluster.
+3. In your “active” region, use `influx inspect export` to export data from your cluster to an AWS S3 bucket. This S3 bucket automatically replicates cluster data to an S3 bucket in your disaster recovery region.
+4. Create a script to import data (`influx-import`) from your disaster recovery S3 bucket into your disaster recovery cluster.
+5. (Optional) Create an admin tool to administer data traffic to your clusters and ensure all users go through this tool.
+6. On the “active” cluster, create a script to run on one data node, and then run your script from cron (for example, every 15 minutes) to gather all of the databases. In your script, use a “for loop” to gather data from each database with the `influx_inspect tool,` and then move data to your S3 bucket.
+
+    > **Note:** Consider your import/export time interval; what is an acceptable time frame difference between your active region and disaster recovery region?
+
+7. On the “disaster recovery” cluster, create another script to run from cron (for your specified interval). In this script, include the following:
+
+  - Pull files from the S3 bucket and store them locally.
+  - Run `influx -import` to move data to the cluster.
+
+      > Note: For best performance, make sure each database has a separate file.
+  - Delete files from the S3 bucket.
+
+8. Run your admin commands, for example, `CREATE DB` or `CREATE USERS` on both your disaster recovery and active clusters, which can be handled by your custom admin tool.
+
+9. Use a separate data node for monitoring metrics.
+
+    > **Limitations:** This solution cannot handle much backfill. To capture backfill, you must create an ad hoc solution. Also, if your disaster recovery site goes down, data on the active site is still getting backed up into S3, but isn’t imported until your disaster recovery cluster is back up and your import script runs.
