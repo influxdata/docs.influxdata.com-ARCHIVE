@@ -21,15 +21,14 @@ cluster
 shard is on *n* number of nodes, where *n* is determined by the retention policy's
 [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor)
 
-Rebalancing a cluster is essential for cluster health.
-Perform a rebalance if you add a new data node to your cluster.
-The proper rebalance path depends on the purpose of the new data node.
-If you added a data node to expand the disk size of the cluster or increase
-write throughput, follow the steps in
-[Rebalance Procedure 1](#rebalance-procedure-1-rebalance-a-cluster-to-create-space).
-If you added a data node to increase data availability for queries and query
-throughput, follow the steps in
-[Rebalance Procedure 2](#rebalance-procedure-2-rebalance-a-cluster-to-increase-availability).
+Rebalancing a cluster is essential for cluster health. Perform a rebalance if you add a new data node to your cluster.
+
+The proper rebalance path depends on the purpose of the new data node:
+
+- If you added a data node to expand the disk size of the cluster or increase write throughput, 
+follow the steps in [Rebalance Procedure 1](#rebalance-procedure-1-rebalance-a-cluster-to-create-space).
+- If you added a data node to increase data availability for queries and query throughput, 
+follow the steps in [Rebalance Procedure 2](#rebalance-procedure-2-rebalance-a-cluster-to-increase-availability).
 
 ### Requirements
 
@@ -46,31 +45,27 @@ Performing a rebalance while writing historical data can lead to data loss.
 
 ## Rebalance Procedure 1: Rebalance a cluster to create space
 
-For demonstration purposes, the next steps assume that you added a third
+For demonstration purposes, this procedures shows how to add a third
 data node to a previously two-data-node cluster that has a
 [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) of
-two.
-This rebalance procedure is applicable for different cluster sizes and
-replication factors, but some of the specific, user-provided values will depend
-on that cluster size.
+two; alter the replication factor and data nodes as needed for your for your cluster.
 
-Rebalance Procedure 1 focuses on how to rebalance a cluster after adding a
-data node to expand the total disk capacity of the cluster.
-In the next steps, you will safely move shards from one of the two original data
-nodes to the new data node.
+> **Important:** The number of data nodes in a cluster **must be** evenly divisible by the replication factor. 
+For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes. A replication factor of 3 works with 3, 6, or 9 data nodes.
+
+After adding a data node, rebalance a cluster to expand the total disk capacity of the cluster.
+Safely move shards from one of the two original data nodes to the new data node.
 
 ### Step 1: Truncate Hot Shards
 
-Hot shards are shards that are currently receiving writes.
+Hot shards actively receive writes.
 Performing any action on a hot shard can lead to data inconsistency within the
-cluster which requires manual intervention from the user.
+cluster and require manual intervention.
 
 To prevent data inconsistency, truncate hot shards before moving any shards
 across data nodes.
-The command below creates a new hot shard which is automatically distributed
-across all data nodes in the cluster, and the system writes all new points to
-that shard.
-All previous writes are now stored in cold shards.
+Use the command below to create a new hot shard distributed across all data nodes in the cluster that the system writes new points to.
+Previous writes are stored in cold shards.
 
 ```
 influxd-ctl truncate-shards
@@ -82,23 +77,20 @@ The expected ouput of this command is:
 Truncated shards.
 ```
 
-Once you truncate the shards, you can work on redistributing the cold shards
-without the threat of data inconsistency in the cluster.
-Any hot or new shards are now evenly distributed across the cluster and require
+After truncating the shards, redistribute the cold shards as needed. New shards are evenly distributed across the cluster and require
 no further intervention.
 
 ### Step 2: Identify Cold Shards
 
-In this step, you identify the cold shards that you will copy to the new data node
-and remove from one of the original two data nodes.
+Identify the cold shards to copy to the new data node and remove from one of the original two data nodes.
 
-The following command lists every shard in our cluster:
+The following command lists every shard in the cluster:
 
 ```
 influxd-ctl show-shards
 ```
 
-The expected output is similar to the items in the codeblock below:
+The expected output is similar to the following:
 
 ```
 Shards
@@ -141,7 +133,7 @@ your cluster:
 >
 In general, we recommend moving larger shards to the new data node to increase the
 available disk space on the original data nodes.
-Users should note that moving shards will impact network traffic.
+Note that moving shards impacts network traffic.
 
 ### Step 3: Copy Cold Shards
 
@@ -197,17 +189,16 @@ Here's an example of the correct output for shard `22`:
 000000001-000000001.tsm # 👍
 ```
 
-It is essential that every copied shard appears on the new data node both
+Verify that every copied shard appears on the new data node both
 in the `influxd-ctl show-shards` output and in the shard directory.
-If a shard does not pass both of the tests above, please repeat step 3.
+If a shard does not pass both of the tests above, repeat step 3.
 
 ### Step 5: Remove Unnecessary Cold Shards
 
 Next, remove the copied shard from the original data node with the command below.
 Repeat this command for every cold shard that you'd like to remove from one of
 the original data nodes.
-**Removing a shard is an irrecoverable, destructive action; please be
-cautious with this command.**
+**Removing a shard is an irrecoverable, destructive action; use this command with caution.**
 
 ```
 influxd-ctl remove-shard <source_TCP_address> <shard_ID>
@@ -252,9 +243,7 @@ This rebalance procedure is applicable for different cluster sizes and
 replication factors, but some of the specific, user-provided values will depend
 on that cluster size.
 
-Rebalance Procedure 2 focuses on how to rebalance a cluster to improve availability
-and query throughput.
-In the next steps, you will increase the retention policy's replication factor and
+Rebalance a cluster to improve availability and query throughput by increasing the replication factor and
 safely copy shards from one of the two original data nodes to the new data node.
 
 ### Step 1: Update the Retention Policy
@@ -264,8 +253,9 @@ every retention policy to have a replication factor of three.
 This step ensures that the system automatically distributes all newly-created
 shards across the three data nodes in the cluster.
 
-The following query increases the replication factor to three.
-Run the query on any data node for each retention policy and database.
+**Important:** To successfully replicate data across a cluster, the number of data nodes **must be evenly divisible** by the replication factor.
+
+Increase the replication factor to three by running the following query on any data node for each retention policy and database.
 Here, we use InfluxDB's [CLI](/influxdb/v1.7/tools/shell/) to execute the query:
 
 ```
