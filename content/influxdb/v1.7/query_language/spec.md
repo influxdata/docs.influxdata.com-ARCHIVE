@@ -422,6 +422,8 @@ CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2 DEFA
 CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2 SHARD DURATION 30m
 ```
 
+> **Note:** To ensure data is successfully replicated across a cluster, the number of data nodes in a cluster **must be evenly divisible** by the replication factor.
+
 ### CREATE SUBSCRIPTION
 
 Subscriptions tell InfluxDB to send all the data it receives to [Kapacitor](/kapacitor/latest/introduction/).
