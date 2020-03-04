@@ -161,7 +161,7 @@ See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema
 
 The attribute of the retention policy that determines how many copies of data to concurrently store (or retain) in the cluster. A cluster fully replicates data across each data node in the cluster. Replicating copies ensures that data is available when a data node (or more) is unavailable.
 
-The number of data nodes in a cluster **must be evenly divisible** by the replication factor. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on.
+The number of data nodes in a cluster **must be evenly divisible** by the replication factor. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on. Any time you update the number of data nodes, you must update the replication factor accordingly. For example, if you have RF=3 in a 6 node cluster, you can add 3 nodes or change the RF to 2 and add 2 data nodes.
 
 > **Important:** If the replication factor isn't evenly divisible into the number of data nodes, data may be distributed unevenly across the cluster and cause poor query performance. Likewise, decreasing the replication factor (fewer copies of data in a cluster) may reduce query performance depending on query load.
 
