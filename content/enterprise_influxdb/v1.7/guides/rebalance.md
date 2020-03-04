@@ -50,7 +50,7 @@ data node to a previously two-data-node cluster that has a
 [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) of
 two; alter the replication factor and data nodes as needed for your for your cluster.
 
-> **Important:** The number of data nodes in a cluster **must be** evenly divisible by the replication factor. 
+> **Important:** The number of data nodes in a cluster **must be** evenly divisible by the replication factor.
 For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes. A replication factor of 3 works with 3, 6, or 9 data nodes.
 
 After adding a data node, rebalance a cluster to expand the total disk capacity of the cluster.
@@ -238,10 +238,10 @@ size on the original data nodes and increased the cluster's write throughput.
 For demonstration purposes, the next steps assume that you added a third
 data node to a previously two-data-node cluster that has a
 [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) of
-two.
-This rebalance procedure is applicable for different cluster sizes and
-replication factors, but some of the specific, user-provided values will depend
-on that cluster size.
+two; alter the replication factor and data nodes as needed for your for your cluster.
+
+> **Important:** The number of data nodes in a cluster **must be** evenly divisible by the replication factor.
+For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes. A replication factor of 3 works with 3, 6, or 9 data nodes.
 
 Rebalance a cluster to improve availability and query throughput by increasing the replication factor and
 safely copy shards from one of the two original data nodes to the new data node.
