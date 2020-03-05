@@ -262,7 +262,7 @@ Replication ensures data is available on multiple nodes and more likely availabl
 
 - The number of data nodes in a cluster **must be evenly divisible by the replication factor**. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on.
 
-    > **Important:** If data nodes aren’t evenly divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor query performance.
+    > **Important:** If data nodes aren’t evenly divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor performance.
 
 - Replication factors do not serve a purpose with single node instances.
 
