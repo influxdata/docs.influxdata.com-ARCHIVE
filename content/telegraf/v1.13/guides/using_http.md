@@ -5,7 +5,7 @@ menu:
   telegraf_1_13:
     name: Using the HTTP plugin
     weight: 30
-    parent: Plugins
+    parent: Guides
 ---
 
 This example walks through using the Telegraf HTTP input plugin to collect live metrics on Citi Bike stations in New York City. Live station data is available in JSON format from [NYC OpenData](https://data.cityofnewyork.us/NYC-BigApps/Citi-Bike-Live-Station-Feed-JSON-/p94q-8hxh).
