@@ -7,3 +7,4 @@ menu:
     weight: 10
     parent: influxd
 ---
+restore: backup path should be a valid directory: help
