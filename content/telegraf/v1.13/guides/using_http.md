@@ -53,7 +53,7 @@ The timezone We'll set this to the Unix TZ value where our bike data takes place
 
 #### Example configuration
 
-  ```
+  ```toml
   [[inputs.http]]
   #URL for NYC's Citi Bike station data in JSON format
   urls = ["https://feeds.citibikenyc.com/stations/stations.json"]
