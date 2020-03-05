@@ -257,9 +257,10 @@ duration is `INF`.
 - The `REPLICATION` clause determines how many independent copies of each point
 are stored in the [cluster](/influxdb/v1.7/high_availability/clusters/).
 
-- A cluster fully replicates data across each data node in the cluster. This lets a data node respond to a query without communicating with other data nodes.
+- If the replication factor is set to 2, each series is stored on 2 separate nodes. If the replication factor is equal to the number of data nodes, data is replicated on each node in the cluster.
+Replication ensures data is available on multiple nodes and more likely available when a data node (or more) is unavailable.
 
-- The number of data nodes in a cluster **must be evenly divisible** by the replication factor. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on.
+- The number of data nodes in a cluster **must be evenly divisible by the replication factor**. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on.
 
     > **Important:** If data nodes aren’t evenly divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor query performance.
 
@@ -305,7 +306,10 @@ The query creates a retention policy called `one_day_only` for the database
 
 > **Note:** To ensure data is successfully replicated across a cluster, the number of data nodes in a cluster **must be evenly divisible** by the replication factor.
 
-A cluster fully replicates data across each data node in the cluster. This lets a data node respond to a query without communicating with other data nodes. If data nodes aren’t divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor query performance.
+If the replication factor is set to 2, each series is stored on 2 separate nodes. If the replication factor is equal to the number of data nodes, data is replicated on each node in the cluster.
+Replication ensures data is available on multiple nodes and more likely available when a data node (or more) is unavailable.
+
+If data nodes aren’t divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor performance.
 
 ##### Create a DEFAULT retention policy
 
