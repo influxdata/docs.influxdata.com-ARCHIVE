@@ -6,18 +6,294 @@ menu:
     weight: 1
 ---
 
-## v0.x.2 [2019-10-24]
+## v0.63.0 [2020-03-03]
+
+### Features
+- Experimental `geo` package.
+- Initial grammar for Flux and a partial grammar for InfluxQL.
+
+## v0.62.0 [2020-02-28]
+
+### Features
+- InfluxQL decode and series aggregation tests.
+
+### Bug fixes
+- Properly categorize parse errors as "invalid".
+- Fail gracefully when `tableFind` does not have an execution context.
+
+## v0.61.0 [2020-02-21]
+
+### Features
+- Add experimental aggregate package with `rate()` function.
+
+### Bug fixes
+- Deserialize the default vector if array elements are null.
+- Allow array and row types to be equatable.
+
+## v0.60.0 [2020-02-19]
+
+### Features
+- Add experimental `query` package.
+- Create a Docker environment for Flux releases.
+- Validate there are no free type variables in prelude/stdlib build.
+- Add formatter library.
+
+### Bug fixes
+- `derivative()` works properly across multiple buffers.
+- Fix free type variable found in `tripleExponentialDerivative()`.
+- Update type of `window()` function.
+- Freshen row types using deterministic property order.
+- Libflux JSON deserialization uses type properly.
+- Expose the builtin polytypes when analyzing a `stdlib` package.
+- Deserialize call expressions when arguments are missing.
+- Handled malformed data as well as EOF.
+- Allow unsigned integers to be subtractable.
+- Link both `libflux` and `liblibstd` for flux-config.
+- Link `libstd` into the `lib` directory instead of `libflux`.
+- Flux-config correctly copies `stdlib` when using a module.
+- Add 169.254/16 range to URL validator.
+- Update `uuid` library to improve security.
+- Handle invalid string literals.
+- Remove 'tags' line from local tags.
+
+## v0.59.6 [2020-02-13]
+
+### Bug fixes
+- `derivative()` works properly across multiple buffers.
+
+## v0.59.5 [2020-01-24]
+
+### Bug fixes
+- Revert window optimizations to fix regression in output row sorting.
+
+## v0.59.4 [2020-01-21]
+
+### Bug fixes
+- Remove `tags` line from local tags.
+- Handle malformed data as well as EOF.
+
+## v0.59.3 [2020-01-16]
+
+### Bug fixes
+- Link both `libflux` and `libstd` for flux-config.
+
+## v0.59.2 [2020-01-16]
+
+### Bug fixes
+- Link `libstd` into the lib directory instead of `libflux`.
+
+## v0.59.1 [2020-01-16]
+
+### Bug fixes
+- Flux-config correctly copies `stdlib` when using a module.
+- UUID security.
+
+## v0.59.0 [2020-01-14]
+
+### Features
+- Add Go/Rust API for getting semantic graph..
+- Optimize `limit()` transformation.
+- Optimize `group()` transformation.
+
+### Bug fixes
+- AST json serialization glitches.
+- Better messaging for malformed CSV.
+- Skip stdlib symlink was removed erroneously.
+- Ensure stdlib directory is created.
+- Correctly skip the stdlib symlink in libflux.
+- Ensure that stdlib is present when building with flux-config.
+
+## v0.58.4 [2020-01-07]
+
+### Bug fixes
+- Skip stdlib symlink was removed erroneously.
+
+## v0.58.3 [2020-01-07]
+
+### Bug fixes
+- Ensure stdlib directory is created.
+
+## v0.58.2 [2020-01-07]
+
+### Bug fixes
+- Correctly skip the stdlib symlink in libflux.
+
+## v0.58.1 [2020-01-07]
+
+### Bug fixes
+- Ensure that stdlib is present when building with flux-config.
+
+## v0.58.0 [2020-01-06]
+
+### Features
+- Serialize semantic graph flatbuffers.
+- Implement `onEmpty` parameter for `filter()`.
+- Serialize Flux standard library types as part of build process.
+- Add type declarations for universe.
+- Methods for type checking package dependencies.
+- Add type declarations for strings.
+
+### Bug fixes
+- Expose tracing flag.
+- Update `count` builtin type.
+- Update `experimental.set` builtin type.
+- Update the type of `influxdb.to` to be a passthrough.
+- Update `fill` builtin type.
+- Remove redundant clones found by a new version of clippy.
+- Fix durations in Rust semantic graph.
+- Removes unnecessary rc clone in semantic serializer.
+- Do not stall forever in flux-config when an error happens with verbose.
+- Update function block return statements to produce a stmt and not an expression.
+- Fix token location for `scan_with_regex`.
+- Cache environment variable for performance.
+- Fix a couple errors in builtin types.
+- Annotate variable assignment with polytype (not monotype).
+
+## v0.57.0 [2019-12-10]
+
+### Features
+- Categorize more flux errors with codes.
+- Teach flux-config how to download the sources when using vendor.
+- Opentracing in query execution runtime.
+- Reduce memory allocations for operations in values.
+- Translate FlatBuffers semantic graph to Go.
+- Add types for some universe builtins.
+- Add type declarations for builtins.
+- Add Numeric and Row kind constraints.
+
+### Bug fixes
+- Enable strict mode by default.
+
+## v0.56.0 [2019-12-05]
+
+### Features
+- Crate for typing Flux standard library.
+- Serialize type environment.
+- Improve filter performance when filtering on values.
+- Update usage duration test to exclude queue and requeue time.
+- Add types for some built-ins.
+- Add `timeout` parameter to experimental `http.get()`.
+
+### Bug fixes
+- Properly use a fake version with `flux-config` when no version is present.
+- Address clippy lints.
+- Add bytes monotype to Rust semantic module.
+- Allow underscores (`_`) in type expressions.
+
+## v0.55.1 [2019-12-02]
+
+### Bug fixes
+- Fix e2e usage test so that their queries are properly pushed down.
+
+## v0.55.0 [2019-12-02]
+
+### Breaking changes
+- Expand the interface for `BufferedTable`.
+
+### Features
+- Expose optimized `pivot()` function.
+- Create utility program for building `libflux`.
+- Create a tool that measures performance of calling Rust from Go.
+- Inject types in the semantic graph.
+- MonoType and PolyType flatbuffer encodings.
+- MonoType and PolyType flatbuffer schemas.
+- Update Rust flatbuffers to more closely match Rust semantic graph.
+- Flatbuffers AST to Go AST.
+- Port immutable walk and fix mutable walk.
+- Define the flatbuffers schema for semantic graph.
+- Infer imported package types.
+- Unify and infer function types.
+- Add support for safely converting bytes to strings.
+- Add sqlite3 support.
+- Add internal table utility for streaming tables.
+
+### Bug fixes
+- Update semantic graph FlatBuffers schema for identifiers.
+- Ignore order when comparing record types.
+- Operands for `<=` and `>=` are comparable AND equatable.
+- Constrain unary expressions to be same type as operand.
+
+## v0.54.0 [2019-11-11]
+
+### Features
+- Expose function to analyze from string.
+- Added semantic expression constraints to libflux.
+- Custom `PartialEq` for polytypes.
+- Extensible record unification.
+- `Semantic.Walk`.
+
+### Bug fixes
+- Do not constrain type variables with empty kinds.
+- Update usage tests to filter on `_field`.
+- Record labels are scoped and fields are ordered.
+- Parse row variables.
+- Update make release to confirm remote and local are in sync.
+- Make `walk_rc` public.
+
+## v0.53.0 [2019-11-05]
+
+### Breaking changes
+- Interpret months as part of the semantic duration.
+
+### Features
+- Macros for type inference tests.
+- Let-polymorphism with test example.
+- Generalization, instantiation, and constraint solving.
+- Type environment.
+- Convert Rust AST to FlatBuffers format.
+- Allow lexing and parsing of string polytypes according to polytype grammar rules.
+- Add month support when adding durations to a time value.
+- Interpret months as part of the semantic duration.
+
+### Bug fixes
+- Type variable constraints.
+- Apply sub to both sides of constraint before unifying.
+- Instantiate quantified vars, not free vars.
+
+## v0.52.0 [2019-10-30]
+
+### Features
+- `Visitor` uses `Rc` for nodes.
+- Add `EvalOptions`.
+
+### Bug fixes
+- Correctly lex `µs`.
+
+## v0.51.0 [2019-10-24]
+
+### Breaking changes
+- Update the Flux SPEC to remove duration addition and subtraction.
+- Turn duration value into a vector.
+
+### Features
+- Implementations for type substitutions and constraints.
+- Add semantic analysis.
+- Updated the duration value to include months and negative flag.
+- Create a flatbuffers schema for AST.
+- Add initial C binding for parsing an AST.
+- Create a tool for updating `.flux` tests in-place.
+- Add walk implementation.
+- Turn duration value into a vector.
+- Define initial Flux data types.
+
+### Bug fixes
+- Update libflux parser to match the Go parser.
+- Allow data collected by `prometheus.scrape()` to be used by `histogramQuantile()`.
+- Remove mock allocator.
+- Validate url for `sql.from()`, `sql.to()`, and `socket.from()`.
+
+## v0.50.2 [2019-10-24]
 
 ### Bug fixes
 - Make `keep()` and `drop()` throw an error if merging tables with different schemas.
 
-## v0.x.1 [2019-10-24]
+## v0.50.1 [2019-10-24]
 
 ### Bug fixes
 - Add annotated errors to the execute package where it affects normal usage.
 - Reorder variables in the allocator for atomic operations.
 
-## v0.x.0 [2019-10-11]
+## v0.50.0 [2019-10-11]
 
 ### Features
 - Add `experimental/prometheus` package.
