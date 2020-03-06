@@ -195,13 +195,12 @@ measurement require both double quotes and escaped (`\`) double quotes in the
 
 ### Special characters
 
-You must use a backslash character `\` to escape the following special characters:
+In field values, you must use a backslash character (`\`) to escape:
 
-* In string field values, you must escape:
-  * double quotes  
-  * backslash character
+- double quotes (`"`)
+- the backslash character itself (`\`).
 
-For example, `\"` escapes double quote.
+For example, `\"` escapes a double quote.
    
 >#### Note on backslashes:
 >
@@ -210,16 +209,20 @@ For example, `\"` escapes double quote.
   *	`\\\` or `\\\\` interpreted as `\\` 
   * `\\\\\` or `\\\\\\` interpreted as `\\\`, and so on
 
-* In tag keys, tag values, and field keys, you must escape: 
-  * commas
-  * equal signs
-  * spaces
+In tag keys, tag values, and field keys, you must escape:
+
+- commas (`,`)
+- equal signs (`=`)
+- spaces
 
 For example, `\,` escapes a comma.
-    
-* In measurements, you must escape:
-  * commas  
-  * spaces
+
+> Tag values cannot end with the backslash character, even if it is escaped.
+
+In measurements, you must escape:
+
+- commas (`,`)
+- spaces
 
 You do not need to escape other special characters.
 
