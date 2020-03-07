@@ -15,6 +15,7 @@ format to PATH (directory where backups are saved).
 ```
 influxd backup [flags] PATH
 ```
+
 ## Flags
 
 | Flag                 | Description                                                                                                                                                   |
