@@ -2,7 +2,7 @@
 title: now() function
 description: The `now()` function returns the current time (UTC).
 menu:
-  v2_0_ref:
+  flux_0_50:
     name: now
     parent: Miscellaneous
 weight: 1

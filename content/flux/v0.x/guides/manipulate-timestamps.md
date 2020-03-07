@@ -59,13 +59,33 @@ to convert the duration to a string.
 
 ## Time-related Flux functions
 
-### Retrieve the current time
+### Retrieve the current UTC time
 Use the [`now()` function](/flux/v0.x/stdlib/built-in/misc/now/) to
 return the current UTC time in RFC3339 format.
 
 ```js
 now()
 ```
+
+{{% note %}}
+`now()`  is cached at runtime, so all instances of `now()` in a Flux script
+return the same value.
+{{% /note %}}
+
+### Retrieve the current system time
+Import the `system` package and use the [`system.time()` function](/v2.0/reference/flux/stdlib/system/time/)
+to return the current system time of the host machine in RFC3339 format.
+
+```js
+import "system"
+system.time()
+```
+
+{{% note %}}
+`system.time()` returns the time it is executed, so each instance of `system.time()`
+in a Flux script returns a unique value.
+{{% /note %}}
+
 
 ### Add a duration to a timestamp
 The [`experimental.addDuration()` function](/flux/v0.x/stdlib/experimental/addduration/)

@@ -146,7 +146,12 @@ The operation:
 
 ```js
 // ...
-|> to(bucket:"my-bucket", org:"my-org", tagColumns:["tag1"], fieldFn: (r) => return {"hum": r.hum, "temp": r.temp})
+|> to(
+  bucket:"my-bucket",
+  org:"my-org",
+  tagColumns:["tag1"],
+  fieldFn: (r) => ({"hum": r.hum, "temp": r.temp})
+)
 ```
 
 is equivalent to writing the above data using the following line protocol:
