@@ -46,14 +46,8 @@ $ influxd backup -portable -database mydatabase -host <remote-node-IP>:8088 /tmp
 ```
 
 ### `backup`
-
-`backup` generates an InfluxDB Enterprise-compatible format with filtering options to constrain the range of data points exported to the backup. `backup` creates and stores the following in a specified directory (filenames include UTC timestamp when created):
-
- - copy of metastore **on disk**: 20060102T150405Z.meta (includes usernames and passwords)
- - copy of shard data **on disk**: 20060102T150405Z.<shard_id>.tar.gz
- - manifest (JSON file) describes collected backup data: 20060102T150405Z.manifest
-
->**Note:** `backup` ignores WAL files and in-memory cache data.
+The improved `backup` command is similar to previous versions, except that it
+generates backups in an InfluxDB Enterprise-compatible format and has some new filtering options to constrain the range of data points that are exported to the backup.
 
 ```
 influxd backup
