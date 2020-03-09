@@ -11,7 +11,10 @@ menu:
     parent: Tools
 ---
 
-InfluxDB client libraries are developed by the open source community. These client libraries support the InfluxDB API and should be fully compatible with InfluxDB version 1.5. Functionality will vary as there are no standard features that all libraries must implement in order to be listed here.
+InfluxDB client libraries are developed by the open source community. These client libraries support the InfluxDB API and should be fully compatible with InfluxDB version 1.7. Functionality will vary as there are no standard features that all libraries must implement in order to be listed here.
+
+> [Client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/) are also available for InfluxDB 2.0.
+> These are backwards-compatible with 1.x using the [`/v2/write` API endpoint](/influxdb/v1.7/tools/api#v2-write-http-endpoint).
 
 Thanks to the open source community for your contributions, commitment, and effort!
 
