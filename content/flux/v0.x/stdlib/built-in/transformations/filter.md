@@ -47,23 +47,55 @@ Defines the behavior for empty tables.
 Potential values are `keep` and `drop`.
 Defaults to `drop`.
 
-##### drop
-Empty tables are dropped.
-
-##### keep
-Empty tables are output to the next transformation.
-
 _**Data type:** String_
 
+##### drop
+Tables left without rows are dropped.
+
+##### keep
+Tables left without rows are output to the next transformation.
+
+{{% warn %}}
+Keeping empty tables with your first `filter()` function can have severe performance
+costs since it retains empty tables from your entire data set.
+For higher performance, use your first `filter()` function to do basic filtering,
+then keep empty tables on subsequent `filter()` calls with smaller data sets.
+_[See the example below](#keep-empty-tables-when-filtering)._
+{{% /warn %}}
+
 ## Examples
+
+##### Filter based on measurement, field, and tag
 ```js
-from(bucket:"telegraf/autogen")
+from(bucket:"db/rp")
   |> range(start:-1h)
   |> filter(fn: (r) =>
     r._measurement == "cpu" and
     r._field == "usage_system" and
     r.cpu == "cpu-total"
   )
+```
+
+##### Filter out null values
+```js
+from(bucket:"db/rp")
+  |> range(start:-1h)
+  |> filter(fn: (r) => exists r._value )
+```
+
+##### Filter values based on thresholds
+```js
+from(bucket:"db/rp")
+  |> range(start:-1h)
+  |> filter(fn: (r) => r._value > 50.0 and r._value < 65.0 )
+```
+
+##### Keep empty tables when filtering
+```js
+from(bucket: "db/rp")
+  |> range(start: -1h)
+  |> filter(fn: (r) => r._measurement == "events" and r._field == "open")
+  |> filter(fn: (r) => r.doorId =~ /^2.*/, onEmpty: "keep")
 ```
 
 <hr style="margin-top:4rem"/>
