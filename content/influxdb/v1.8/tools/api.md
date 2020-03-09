@@ -26,6 +26,7 @@ Those settings [are configurable](/influxdb/v1.8/administration/config/#http-end
 | [/debug/vars](#debug-vars-http-endpoint)  | Use `/debug/vars` to collect statistics  |
 | [/ping](#ping-http-endpoint) | Use `/ping` to check the status of your InfluxDB instance and your version of InfluxDB. |
 | [/query](#query-http-endpoint) | Use `/query` to query data and manage databases, retention policies, and users. |
+| [/v2/write](#v2-write-http-endpoint) | Use InfluxDB 2.0 client libraries to write to InfluxDB 1.8.0+. |
 | [/write](#write-http-endpoint) | Use `/write` to write data to a pre-existing database. |
 
 ## `/debug/pprof` HTTP endpoint
@@ -591,6 +592,15 @@ Content-Length: 33
 
 {"error":"authorization failed"}
 ```
+
+## `/v2/write/` HTTP endpoint
+
+The `/v2/write` endpoint accepts `POST` HTTP requests.
+Use this endpoint to write to an InfluxDB 1.8.0+ database using InfluxDB 2.0 client libraries.
+This endpoint maps the supplied bucket and organization to a version 1.8 database and retention policy.
+
+For more information, see [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
+
 
 ## `/write` HTTP endpoint
 
