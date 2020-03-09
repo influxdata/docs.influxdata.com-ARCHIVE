@@ -64,7 +64,7 @@ Estimated guidelines include writes per second, queries per second, and number o
 
 * **Queries per second for moderate queries.** Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for details.
 
-> We recommend no more than 50 databases per host to prevent file handler issues on your OS. Please contact us at <presales-support@influxdata.com> for assistance tuning your system.
+> We recommend no more than 50 databases per host to prevent OS file handler issues. Please contact <presales-support@influxdata.com> for assistance tuning your system.
 
 ## InfluxDB Enterprise cluster guidelines
 
@@ -128,7 +128,7 @@ InfluxDB Enterprise guidelines vary by writes and queries per second, series car
 
 > Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on).
 
-> We recommend no more than 50 databases per cluster to prevent file handler issues on your OS. Please contact us at <presales-support@influxdata.com> for assistance tuning your system.
+> We recommend no more than 50 databases per cluster to prevent file handler issues on your OS. Please contact [presales-support@influxdata.com](mailto:presales-support@influxdata.com)<presales-support@influxdata.com> for assistance tuning your system.
 
 ### Recommended cluster configurations
 
