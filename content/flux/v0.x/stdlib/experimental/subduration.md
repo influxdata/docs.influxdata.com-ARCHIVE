@@ -7,7 +7,7 @@ menu:
   flux_0_x:
     name: experimental.subDuration
     parent: Experimental
-weight: 1
+weight: 2
 ---
 
 The `experimental.subDuration()` function subtracts a duration from a time value and
@@ -16,10 +16,7 @@ returns the resulting time value.
 _**Function type:** Transformation_
 
 {{% warn %}}
-The `experimental.subDuration()` function is subject to change at any time.
-By using this function, you accept the [risks of experimental functions](/flux/v0.x/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
-
-This specific function will be removed once duration vectors are implemented.
+This function will be removed once duration vectors are implemented.
 See [influxdata/flux#413](https://github.com/influxdata/flux/issues/413).
 {{% /warn %}}
 

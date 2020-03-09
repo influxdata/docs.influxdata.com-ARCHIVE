@@ -4,7 +4,7 @@ description: >
   The `http.get()` function submits an HTTP GET request to the specified URL and
   returns the HTTP status code, response body, and response headers.
 menu:
-  flux_0_x::
+  flux_0_x:
     name: http.get
     parent: HTTP-exp
 weight: 1
@@ -14,12 +14,6 @@ The `http.get()` function submits an HTTP GET request to the specified URL and
 returns the HTTP status code, response body, and response headers.
 
 _**Function type:** Miscellaneous_
-
-{{% warn %}}
-The `http.get()` function is currently experimental and subject to change at any time.
-By using this function, you accept the [risks of experimental functions](/flux/v0.x/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
-{{% /warn %}}
-
 
 ```js
 import "experimental/http"

@@ -4,7 +4,7 @@ description: >
   The `query.inBucket()` function queries data from a specified bucket within given
   time bounds, filters data by measurement, field, and optional predicate expressions.
 menu:
-  flux_0_x::
+  flux_0_x:
     name: query.inBucket
     parent: Query
 weight: 1

@@ -12,12 +12,6 @@ weight: 1
 ---
 
 Flux MQTT functions provide tools for working with Message Queuing Telemetry Transport (MQTT) protocol.
-
-{{% warn %}}
-The MQTT package is currently experimental and subject to change at any time.
-By using this package, you accept the [risks of experimental functions](/flux/v0.x/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
-{{% /warn %}}
-
 Import the `experimental/mqtt` package:
 
 ```js

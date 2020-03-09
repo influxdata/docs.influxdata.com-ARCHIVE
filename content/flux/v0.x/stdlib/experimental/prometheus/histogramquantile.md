@@ -15,11 +15,6 @@ assuming the given histogram data is scraped or read from a Prometheus data sour
 
 _**Function type:** Aggregate_
 
-{{% warn %}}
-The `prometheus.histogramQuantile()` function is currently experimental and subject to change at any time.
-By using this function, you accept the [risks of experimental functions](/flux/v0.x/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
-{{% /warn %}}
-
 ```js
 import "experimental/prometheus"
 

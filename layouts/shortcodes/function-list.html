@@ -1,4 +1,4 @@
-{{ $pages := .Page.Pages }}
+{{ $pages := .Page.RegularPages }}
 <ul>
 {{ range $pages.ByWeight }}
 	{{ $title := replaceRE `\ function` "" .Title }}

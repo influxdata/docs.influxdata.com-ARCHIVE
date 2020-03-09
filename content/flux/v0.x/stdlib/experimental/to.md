@@ -7,7 +7,7 @@ menu:
   flux_0_x:
     name: experimental.to
     parent: Experimental
-weight: 1
+weight: 2
 ---
 
 The `experimental.to()` function writes data to an InfluxDB v2.0 bucket, but in
@@ -15,11 +15,6 @@ a [different structure](#expected-data-structure) than the
 [built-in `to()` function](/flux/v0.x/stdlib/built-in/outputs/to/).
 
 _**Function type:** Output_
-
-{{% warn %}}
-The `experimental.to()` function is subject to change at any time.
-By using this function, you accept the [risks of experimental functions](/flux/v0.x/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
-{{% /warn %}}
 
 ```js
 import "experimental"

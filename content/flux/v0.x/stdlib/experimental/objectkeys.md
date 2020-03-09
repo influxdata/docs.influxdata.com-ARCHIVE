@@ -6,17 +6,12 @@ menu:
   flux_0_x:
     name: experimental.objectKeys
     parent: Experimental
-weight: 1
+weight: 2
 ---
 
 The `experimental.objectKeys()` function returns an array of keys in a specified object.
 
 _**Function type:** Transformation_
-
-{{% warn %}}
-The `experimental.objectKeys()` function is subject to change at any time.
-By using this function, you accept the [risks of experimental functions](/flux/v0.x/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
-{{% /warn %}}
 
 ```js
 import "experimental"

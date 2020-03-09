@@ -3,7 +3,7 @@ title: query.filterMeasurement() function
 description: >
   The `query.filterMeasurement()` function filters input data by measurement.
 menu:
-  flux_0_x::
+  flux_0_x:
     name: query.filterMeasurement
     parent: Query
 weight: 1

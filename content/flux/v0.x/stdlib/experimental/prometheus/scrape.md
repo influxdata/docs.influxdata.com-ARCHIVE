@@ -18,11 +18,6 @@ The function groups metrics (including histogram and summary values) into indivi
 
 _**Function type:** Input_
 
-{{% warn %}}
-The `prometheus.scrape()` function is currently experimental and subject to change at any time.
-By using this function, you accept the [risks of experimental functions](/flux/v0.x/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
-{{% /warn %}}
-
 ```js
 import "experimental/prometheus"
 

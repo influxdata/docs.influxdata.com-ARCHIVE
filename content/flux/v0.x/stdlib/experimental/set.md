@@ -6,7 +6,7 @@ menu:
   flux_0_x:
     name: experimental.set
     parent: Experimental
-weight: 1
+weight: 2
 ---
 
 The `experimental.set()` function sets multiple static column values on all records.
@@ -17,11 +17,6 @@ _Once sufficiently vetted, `experimental.set()` will replace the existing
 [`set()` function](/flux/v0.x/stdlib/built-in/transformations/set/)._
 
 _**Function type:** Transformation_
-
-{{% warn %}}
-The `experimental.set()` function is subject to change at any time.
-By using this function, you accept the [risks of experimental functions](/flux/v0.x/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
-{{% /warn %}}
 
 ```js
 import "experimental"

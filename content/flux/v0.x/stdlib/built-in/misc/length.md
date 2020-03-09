@@ -2,7 +2,7 @@
 title: length() function
 description: The `length()` function returns the number of items in an array.
 menu:
-  flux_0_x::
+  flux_0_x:
     name: length
     parent: Miscellaneous
 weight: 1

@@ -5,7 +5,7 @@ description: >
   The Flux Query package provides functions meant to simplify common InfluxDB queries.
   Import the `experimental/query` package.
 menu:
-  flux_0_x::
+  flux_0_x:
     name: Query
     parent: Experimental
 weight: 1

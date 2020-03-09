@@ -4,7 +4,7 @@ description: >
   The `query.fromRange()` function returns all data from a specified bucket within
   given time bounds.
 menu:
-  flux_0_x::
+  flux_0_x:
     name: query.fromRange
     parent: Query
 weight: 1
