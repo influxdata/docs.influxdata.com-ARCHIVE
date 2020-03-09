@@ -21,7 +21,7 @@ If you're just getting started with Flux queries, check out the following:
 
 ## Find how long a state persists
 
-1. Use the [`stateDuration()`](/v2.0/reference/flux/stdlib/built-in/transformations/stateduration/) function to calculate how long a column value has remained the same value (or state). Include the following information:
+1. Use the [`stateDuration()`](/flux/v0.x/stdlib/built-in/transformations/stateduration/) function to calculate how long a column value has remained the same value (or state). Include the following information:
 
     - **Column to search:** any tag key, tag value, field key, field value, or measurement.
     - **Value:** the value (or state) to search for in the specified column.

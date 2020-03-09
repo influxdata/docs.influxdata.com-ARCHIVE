@@ -44,4 +44,4 @@ The returned object must include the following fields:
 - `headers`
 - `data`
 
-_For more information, see [`http.post()`](/v2.0/reference/flux/stdlib/http/post/)_
+_For more information, see [`http.post()`](/flux/v0.x/stdlib/http/post/)_

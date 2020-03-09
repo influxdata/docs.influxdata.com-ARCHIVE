@@ -73,7 +73,7 @@ return the same value.
 {{% /note %}}
 
 ### Retrieve the current system time
-Import the `system` package and use the [`system.time()` function](/v2.0/reference/flux/stdlib/system/time/)
+Import the `system` package and use the [`system.time()` function](/flux/v0.x/stdlib/system/time/)
 to return the current system time of the host machine in RFC3339 format.
 
 ```js

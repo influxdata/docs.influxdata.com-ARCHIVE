@@ -50,7 +50,7 @@ import "json"
 import "http"
 
 lastReported =
-  from(bucket: "example-bucket")
+  from(bucket: "telegraf/autogen")
     |> range(start: -1m)
     |> filter(fn: (r) => r._measurement == "statuses")
     |> last()

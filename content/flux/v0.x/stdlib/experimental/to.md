@@ -95,7 +95,7 @@ _**Data type:** String_
 ```js
 import "experimental"
 
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: -1h)
   |> pivot(
       rowKey:["_time"],

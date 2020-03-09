@@ -47,6 +47,6 @@ import "experimental/prometheus"
 prometheus.scrape(url: "https://example-url.com/metrics")
   |> to(
     org: "example-org",
-    bucket: "example-bucket"
+    bucket: "telegraf/autogen"
   )
 ```
