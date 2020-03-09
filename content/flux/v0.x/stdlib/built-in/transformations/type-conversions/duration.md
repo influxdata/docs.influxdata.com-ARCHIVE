@@ -24,6 +24,13 @@ duration(v: "1m")
 ### v
 The value to convert.
 
+_**Data type:** String | Integer | Uinteger_
+
+{{% note %}}
+`duration()` assumes **numeric** input values are **nanoseconds**.
+**String** input values must use [duration literal representation](/flux/v0.x/language/lexical-elements/#duration-literals).
+{{% /note %}}
+
 ## Examples
 ```js
 from(bucket: "sensor-data")

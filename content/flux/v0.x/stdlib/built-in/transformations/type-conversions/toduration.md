@@ -18,11 +18,17 @@ menu:
 The `toDuration()` function converts a value to a duration.
 
 _**Function type:** Type conversion_  
-_**Output data type:** Duration_
 
 ```js
 toDuration()
 ```
+
+_**Supported data types:** String | Integer | Uinteger_
+
+{{% note %}}
+`duration()` assumes **numeric** input values are **nanoseconds**.
+**String** input values must use [duration literal representation](/flux/v0.x/language/lexical-elements/#duration-literals).
+{{% /note %}}
 
 {{% note %}}
 To convert values in a column other than `_value`, define a custom function

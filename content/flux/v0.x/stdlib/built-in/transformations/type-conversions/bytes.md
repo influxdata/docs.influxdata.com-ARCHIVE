@@ -24,6 +24,8 @@ bytes(v: "1m")
 ### v
 The value to convert.
 
+_**Data type:** String_
+
 ## Examples
 ```js
 from(bucket: "sensor-data")

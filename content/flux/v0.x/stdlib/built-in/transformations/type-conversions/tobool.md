@@ -14,11 +14,12 @@ menu:
 The `toBool()` function converts a value to a boolean.
 
 _**Function type:** Type conversion_  
-_**Output data type:** Boolean_
 
 ```js
 toBool()
 ```
+
+_**Supported data types:** Float | Integer | String | Uinteger_
 
 ## Examples
 ```js

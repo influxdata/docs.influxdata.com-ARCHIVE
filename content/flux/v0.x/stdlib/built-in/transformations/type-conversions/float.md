@@ -24,6 +24,8 @@ float(v: "3.14")
 ### v
 The value to convert.
 
+_**Data type:** Boolean | Numeric String | Integer | Uinteger_
+
 ## Examples
 ```js
 from(bucket: "sensor-data")

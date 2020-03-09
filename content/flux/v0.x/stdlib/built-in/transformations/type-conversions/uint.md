@@ -13,11 +13,19 @@ aliases:
 The `uint()` function converts a single value to a UInteger.
 
 _**Function type:** Type conversion_  
-_**Output data type:** UInteger_
 
 ```js
 uint(v: "4")
 ```
+
+_**Data type:** Boolean | Duration | Float | Integer | Numeric String | Time_
+
+For duration and time values, `uint()` returns the following:
+
+| Input type | Returned value                                      |
+|:---------- |:--------------                                      |
+| Duration   | The number of nanoseconds in the specified duration |
+| Time       | A nanosecond epoch timestamp                        |
 
 ## Parameters
 

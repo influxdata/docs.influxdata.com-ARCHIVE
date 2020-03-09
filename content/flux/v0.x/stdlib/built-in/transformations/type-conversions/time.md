@@ -24,6 +24,12 @@ time(v: "2016-06-13T17:43:50.1004002Z")
 ### v
 The value to convert.
 
+_**Data type:** String | Integer | Uinteger_
+
+{{% note %}}
+`time()` assumes all numeric input values are nanosecond epoch timestamps.
+{{% /note %}}
+
 ## Examples
 ```js
 from(bucket: "sensor-data")

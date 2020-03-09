@@ -24,6 +24,8 @@ bool(v: "true")
 ### v
 The value to convert.
 
+_**Data type:** String | Float | Integer | Uinteger_
+
 ## Examples
 ```js
 from(bucket: "sensor-data")

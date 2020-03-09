@@ -24,6 +24,8 @@ string(v: 123456789)
 ### v
 The value to convert.
 
+_**Data type:** Boolean | Bytes | Duration | Float | Integer | Time | Uinteger_
+
 ## Examples
 ```js
 from(bucket: "sensor-data")
