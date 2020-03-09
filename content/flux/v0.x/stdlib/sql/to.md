@@ -20,7 +20,8 @@ import "sql"
 sql.to(
   driverName: "mysql",
   dataSourceName: "username:password@tcp(localhost:3306)/dbname?param=value",
-  table: "ExampleTable"
+  table: "ExampleTable",
+  batchSize: 10000
 )
 ```
 
@@ -35,26 +36,40 @@ The following drivers are available:
 
 - mysql
 - postgres
+- sqlite3
 
 ### dataSourceName
-The connection string used to connect to the SQL database.
+The data source name (DSN) or connection string used to connect to the SQL database.
 The string's form and structure depend on the [driver](#drivername) used.
 
 _**Data type:** String_
 
 ##### Driver dataSourceName examples
 ```sh
-# Postgres Driver
+# Postgres Driver DSN
 postgres://pqgotest:password@localhost/pqgotest?sslmode=verify-full
 
-# MySQL Driver
+# MySQL Driver DSN
 username:password@tcp(localhost:3306)/dbname?param=value
+
+# SQLite Driver DSN
+file:test.db?cache=shared&mode=memory
 ```
 
 ### table
 The destination table.
 
 _**Data type:** String_
+
+### batchSize
+The number of parameters or columns that can be queued within each call to `Exec`.
+Defaults to `10000`.
+
+_**Data type:** Integer_
+
+{{% note %}}
+If writing to a **SQLite** database, set `batchSize` to `999` or less.
+{{% /note %}}
 
 ## Examples
 
@@ -76,6 +91,16 @@ import "sql"
 sql.to(
   driverName: "postgres",
   dataSourceName: "postgresql://user:password@localhost",
+  table: "ExampleTable"
+)
+```
+
+### Write data to an SQLite database
+```js
+import "sql"
+sql.to(
+  driverName: "sqlite3",
+  dataSourceName: "file:test.db?cache=shared&mode=memory",
   table: "ExampleTable"
 )
 ```

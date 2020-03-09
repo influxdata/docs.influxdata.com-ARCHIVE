@@ -66,12 +66,15 @@ _**Data type:** String_
 
 ###### Possible Values:
 - `inner`
+
+<!-- 
 - `cross`
 - `left`
 - `right`
 - `full`
 
 > The `on` parameter and the cross method are mutually exclusive.
+-->
 
 ## Examples
 

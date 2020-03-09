@@ -68,8 +68,8 @@ empty  in      or   package  builtin
 The following character sequences represent operators:
 
 ```
-+   ==   !=   (   )
--   <    !~   [   ]
++   ==   !=   (   )   =>
+-   <    !~   [   ]   ^
 *   >    =~   {   }
 /   <=   =    ,   :
 %   >=   <-   .   |>

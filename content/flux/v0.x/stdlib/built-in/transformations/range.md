@@ -28,6 +28,7 @@ range(start: -15m, stop: now)
 
 ### start
 The earliest time to include in results.
+Results **include** points that match the specified start time.
 Use a relative duration or absolute time.
 For example, `-1h` or `2019-08-28T22:00:00Z`.
 Durations are relative to `now()`.
@@ -36,6 +37,7 @@ _**Data type:** Duration | Time_
 
 ### stop
 The latest time to include in results.
+Results **exclude** points that match the specified stop time.
 Use a relative duration or absolute time.
 For example, `-1h` or `2019-08-28T22:00:00Z`.
 Durations are relative to `now()`.

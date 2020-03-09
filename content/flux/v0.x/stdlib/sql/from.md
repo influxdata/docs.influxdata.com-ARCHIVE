@@ -35,20 +35,24 @@ The following drivers are available:
 
 - mysql
 - postgres
+- sqlite3
 
 ### dataSourceName
-The connection string used to connect to the SQL database.
+The data source name (DSN) or connection string used to connect to the SQL database.
 The string's form and structure depend on the [driver](#drivername) used.
 
 _**Data type:** String_
 
 ##### Driver dataSourceName examples
 ```sh
-# Postgres Driver:
+# Postgres Driver DSN:
 postgres://pqgotest:password@localhost/pqgotest?sslmode=verify-full
 
-# MySQL Driver:
+# MySQL Driver DSN:
 username:password@tcp(localhost:3306)/dbname?param=value
+
+# SQLite Driver DSN
+file:test.db?cache=shared&mode=memory
 ```
 
 ### query
@@ -76,6 +80,16 @@ import "sql"
 sql.from(
   driverName: "postgres",
   dataSourceName: "postgresql://user:password@localhost",
+  query:"SELECT * FROM ExampleTable"
+)
+```
+
+### Query an SQLite database
+```js
+import "sql"
+sql.from(
+  driverName: "sqlite3",
+  dataSourceName: "file:test.db?cache=shared&mode=memory",
   query:"SELECT * FROM ExampleTable"
 )
 ```
