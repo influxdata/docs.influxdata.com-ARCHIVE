@@ -5,7 +5,7 @@ description: >
   `else`, and `then`, to query and transform data.
 menu:
   flux_0_x:
-    name: Query using conditionals
+    name: Use conditional logic
     parent: Guides
 weight: 9
 ---
