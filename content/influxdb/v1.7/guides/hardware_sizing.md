@@ -26,7 +26,7 @@ If your InfluxDB performance requires any of the following, a single node (Influ
 - more than 100 moderate queries per second ([see Query guides](#query-guidelines))
 - more than 10,000,000 [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality)
 
- We recommend InfluxDB Enterprise, which supports multiple data nodes (a cluster) across multiple server cores. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy, so an unavailable node doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
+ We recommend InfluxDB Enterprise, which supports multiple data nodes (a cluster) across multiple server cores. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy, so an unavailable node doesn't significantly impact the cluster. Please contact <presales-support@influxdata.com> for assistance tuning your system.
 
 If you want a single node instance of InfluxDB that's fully open source, requires fewer writes, queries, and unique series than listed above, and do **not require** redundancy, we recommend InfluxDB OSS.
 
@@ -63,6 +63,8 @@ Estimated guidelines include writes per second, queries per second, and number o
 |    8+ cores |  32+ GB |    1000+ |         > 250,000 |                > 25 |   > 1,000,000 |
 
 * **Queries per second for moderate queries.** Queries vary widely in their impact on the system. For simple or complex queries, we recommend testing and adjusting the suggested requirements as needed. See [query guidelines](#query-guidelines) for details.
+
+> We recommend no more than 50 databases per host to prevent OS file handler issues. Please contact <presales-support@influxdata.com> for assistance tuning your system.
 
 ## InfluxDB Enterprise cluster guidelines
 
@@ -124,7 +126,9 @@ InfluxDB Enterprise guidelines vary by writes and queries per second, series car
 - R4.4xlarge (16 cores); 122 GB RAM
 - R4.8xlarge (32 cores); 244 GB RAM
 
-> Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on). 
+> Guidelines stem from a DevOps monitoring use case: maintaining a group of computers and monitoring server metrics (such as CPU, kernel, memory, disk space, disk I/O, network, and so on).
+
+> We recommend no more than 50 databases per cluster to prevent file handler issues on your OS. Please contact [presales-support@influxdata.com](mailto:presales-support@influxdata.com)<presales-support@influxdata.com> for assistance tuning your system.
 
 ### Recommended cluster configurations
 
