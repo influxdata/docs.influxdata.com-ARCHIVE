@@ -54,3 +54,10 @@ right = from(bucket: "test")
 
 union(tables: [left, right])
 ```
+
+## union() versus join()
+`union()` merges separate streams of tables into a single stream of tables and
+groups rows of data based on existing [group keys](/flux/v0.x/introduction/getting-started/#group-keys).
+`union()` does not modify individual rows of data.
+`join()` creates new rows based on common values in one or more specified columns.
+Output rows also contain the differing values from each of the joined streams.

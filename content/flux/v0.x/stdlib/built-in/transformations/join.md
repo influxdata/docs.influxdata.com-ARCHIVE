@@ -67,7 +67,7 @@ _**Data type:** String_
 ###### Possible Values:
 - `inner`
 
-<!-- 
+<!--
 - `cross`
 - `left`
 - `right`
@@ -136,3 +136,10 @@ join(
   on: ["_time", "host"]
 )
 ```
+
+## join() versus union()
+`join()` creates new rows based on common values in one or more specified columns.
+Output rows also contain the differing values from each of the joined streams.
+`union()` does not modify data in rows, but unifies separate streams of tables
+into a single stream of tables and groups rows of data based on existing
+[group keys](/flux/v0.x/introduction/getting-started/#group-keys).
