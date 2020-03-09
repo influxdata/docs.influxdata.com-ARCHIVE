@@ -19,7 +19,10 @@ _**Function type:** Transformation_
 _**Output data type:** Object_
 
 ```js
-filter(fn: (r) => r._measurement == "cpu")
+filter(
+  fn: (r) => r._measurement == "cpu",
+  onEmpty: "drop"
+)
 ```
 
 ## Parameters
@@ -38,6 +41,19 @@ _**Data type:** Function_
 Make sure `fn` parameter names match each specified parameter.
 To learn why, see [Match parameter names](/flux/v0.x/language/data-model/#match-parameter-names).
 {{% /note %}}
+
+### onEmpty
+Defines the behavior for empty tables.
+Potential values are `keep` and `drop`.
+Defaults to `drop`.
+
+##### drop
+Empty tables are dropped.
+
+##### keep
+Empty tables are output to the next transformation.
+
+_**Data type:** String_
 
 ## Examples
 ```js
