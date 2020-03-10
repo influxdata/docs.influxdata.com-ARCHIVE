@@ -423,10 +423,11 @@ Note that when the request includes `-H "Accept: application/csv"`, the system r
 
 ##### Bind parameters
 
-The API supports binding parameters to particular field values or tag values in
-the [`WHERE` clause](/influxdb/v1.8/query_language/data_exploration/#the-where-clause).
+The API supports binding parameters to particular field values or tag values.
 Use the syntax `$<placeholder_key>` as a placeholder in the query, and URL
-encode the map of placeholder keys to placeholder values in the request body:
+encode the map of placeholder keys to placeholder values in the request body.
+This allows all InfluxQL queries where the value is customizable---such as field
+values, function names, or intervals---to be represented using bind parameters.
 
 Query syntax:
 
