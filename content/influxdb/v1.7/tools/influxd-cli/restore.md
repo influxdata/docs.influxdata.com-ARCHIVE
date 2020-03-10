@@ -7,4 +7,8 @@ menu:
     weight: 10
     parent: influxd
 ---
-restore: backup path should be a valid directory: help
+The `influxd restore` command restores backup data and metadata from an InfluxDB backup directory.
+
+{{% warn %}}
+Shut down the `influxd` server before restoring data.
+{{% /warn %}}
