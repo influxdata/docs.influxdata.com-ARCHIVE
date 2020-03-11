@@ -435,37 +435,26 @@ For an example of using the exporting and importing data approach for disaster r
 
 ## Take AWS snapshot with EBS volumes
 
-Set up at least two EBS volumes, one for your OS root directory and one for your InfluxDB data.
+Set up at least two EBS volumes, one for your OS root directory and one for your InfluxDB Enterprise cluster data.
 
-1. Copy all Enterprise cluster data to a separate EBS volume for backup, including the following directories:
+1. Identify InfluxDB Enterprise directories to place on your secondary storage device for backup, including the following directories:
   
   - For meta nodes: `/meta`
   - For data nodes: `/data`, `/hh`, `/wal`, and `/meta`
 
 2. Create a virtual machine (VM) with your operating system (OS).
 3. Create a secondary storage device (EBS) and associate it with your VM.
-4. Create filesystem on secondary device using `fdisk` and `mkfs`.
-5. Create directory structure for InfluxDB on secondary device (`/influxdb`).
-6. Set VM to mount secondary device as `/influxdb` by changing the path to `/etc/fstab`.
+4. Create filesystem on the secondary storage device using `fdisk` and `mkfs`.
+5. Create directory structure for InfluxDB on the secondary storage device (`/influxdb`).
+6. In `/etc/fstab`, mount the VM to the secondary storage device. For example, on Linux, set the mount point for `/dev/sdb` to `/influxdb`.
 7. Download and install InfluxDB, and then stop `influxdb` service if it starts.
-8. Change storage location for InfluxDB files in InfluxDB configuration files from:
-
-    ```
-    "/var/lib/influxdb/"
-    ```
-
-    to
-
-    ```
-    /influxdb
-    ```
-
-8. Copy files from /var/lib/influxdb to /influxdb (meta, wal, data, and others.)
-9. Restart the `influxdb` service, monitor logs.
-10. Make backup copy of conf files to `/influxdb/conf`
+8. In InfluxDB configuration files, find the default storage location on the root volume (`/var/lib/influxdb/`) and update this location to point to the secondary storage device (`/influxdb`).
+9. Copy files from /var/lib/influxdb to /influxdb (meta, wal, data, and others.)
+10. Restart the `influxdb` service, monitor logs to ensure that the service starts successfully.
+11. Make backup copy of conf files to `/influxdb/conf`
     Data should be on the secondary drive, so you can take snapshots of that drive only to save snapshot space. For detail about AWS snapshots, see how to [automate the Amazon EBS Snapshot Lifestyle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html).
 
-11. To take a snapshot, complete the following tasks as needed:
+12. Complete the following tasks to take a snapshot of the secondary storage device:
   
     a. Create an EBS snapshot.
     b. Recover data from a snapshot by detaching your existing EBS volume and attaching the snapshot.
