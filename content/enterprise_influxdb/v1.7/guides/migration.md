@@ -276,6 +276,7 @@ It may take a few minutes before the existing data is available.
 1. Use the [ALTER RETENTION POLICY](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
    statement to increase the [replication factor](/enterprise_influxdb/v1.7/concepts/glossary/#replication-factor)
    on all existing retention polices to the number of data nodes in your cluster.
+    > **Note:** The number of data nodes in a cluster **must be** evenly divisible by the replication factor. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes. A replication factor of 3 works with 3, 6, or 9 data nodes.
 2. [Rebalance your cluster manually](/enterprise_influxdb/v1.7/guides/rebalance/)
    to meet the desired replication factor for existing shards.
 3. If you were using [Chronograf](/chronograf/latest/), add your Enterprise instance as a new data source.

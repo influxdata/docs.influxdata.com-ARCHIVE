@@ -159,10 +159,12 @@ See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema
 
 ## replication factor  
 
-The attribute of the retention policy that determines how many copies of data to concurrently store (or retain) in the cluster. Replicating copies ensures that data is available when a data node (or more) is unavailable.
+The attribute of the retention policy that determines how many copies of data to concurrently store (or retain) in the cluster. If replication factor is set to 2, each series is stored on 2 separate nodes. If the replication factor is equal to the number of data nodes, data is replicated on each node in the cluster.
+Replication ensures data is available on multiple nodes and more likely available when a data node (or more) is unavailable.
 
-For three nodes or less, the default replication factor equals the number of data nodes.
-For more than three nodes, the default replication factor is 3. To change the default replication factor, specify the replication factor `n` in the retention policy.
+The number of data nodes in a cluster **must be evenly divisible by the replication factor**. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on. To increase the read or write capacity of a cluster, add a number of data nodes by a multiple of the replication factor. For example, to increase the capacity of a 6 node cluster with an RF=3, add 3 additional nodes. To further increase the capacity, continue to add nodes in groups of 3.
+
+> **Important:** If the replication factor isn't evenly divisible into the number of data nodes, data may be distributed unevenly across the cluster and cause poor performance. Likewise, decreasing the replication factor (fewer copies of data in a cluster) may reduce performance depending on query and write load.
 
 Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node),
 [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)

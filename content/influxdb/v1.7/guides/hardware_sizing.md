@@ -92,9 +92,9 @@ The InfluxDB Enterprise web server is primarily an HTTP server with similar load
 
 ### Data nodes
 
-A cluster with one data node is valid but has no data redundancy. Redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy the data is written to. Where `n` is the replication factor, a cluster can lose `n - 1` data nodes and return complete query results.
+A cluster with one data node is valid but has no data redundancy. Redundancy is set by the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) on the retention policy the data is written to. To ensure data is successfully replicated across a cluster, the number of data nodes in a cluster **must be evenly divisible** by the replication factor.
 
->**Note:** For optimal data distribution within the cluster, use an even number of data nodes.
+>**Note:** If data nodes aren’t divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor performance.
 
 Guidelines vary by writes per second per node, moderate queries per second per node, and the number of unique series per node.
 
