@@ -18,7 +18,7 @@ Functionality will vary as there are no standard features that all libraries mus
 Thanks to the open source community for your contributions, commitment, and effort!
 
 > [Client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/) are also available for InfluxDB 2.0.
-> These are backwards-compatible with 1.8.0+ using the [`/v2/write` API endpoint](/influxdb/v1.8/tools/api#v2-write-http-endpoint).
+> These are backwards-compatible with 1.8.0+ using the [`/api/v2/write` API endpoint](/influxdb/v1.8/tools/api#api-v2-write-http-endpoint).
 
 ## C++
 * [influxdb-cxx](https://github.com/awegrzyn/influxdb-cxx.git)
