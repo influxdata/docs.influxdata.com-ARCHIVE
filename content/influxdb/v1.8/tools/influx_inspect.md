@@ -37,6 +37,7 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 * [`reporttsi`](#reporttsi): Reports on cardinality for measurements and shards.
 * [`verify`](#verify): Verifies the integrity of TSM files.
 * [`verify-seriesfile`](#verify-seriesfile): Verifies the integrity of series files.
+* [`verify-tombstone`](#verify-tombstone): Verifies the integrity of tombstones.
 
 
 ### `buildtsi`
@@ -532,6 +533,40 @@ Path to a specific series file; overrides `-db` and `-dir`.
 ##### [ `-v` ]
 
 Enables verbose logging.
+
+### `verify-tombstone`
+
+Verifies the integrity of tombstones.
+
+#### Syntax
+
+```
+influx_inspect verify-tombstone [ options ]
+```
+
+Find all tombstone entries in each file recursively under the specified directory path (by default, `~/.influxdb/data`) and verify each entry. Verifies files serially.
+
+#### Options
+
+Optional arguments are in brackets.
+
+##### [ `-dir <path>` ]
+
+Specifies the root data path. Defaults to `~/.influxdb/data`. This path can be arbitrary, for example, it doesn't need to be an InfluxDB data directory.
+
+> Note higher verbosity levels override lower levels.
+
+##### [ `-v` ]
+
+Enables verbose logging. Confirms a file is being verified and displays progress every 5 million tombstone entries.
+
+##### [ `-vv` ]
+
+Enables very verbose logging. Displays progress for every series key and time range in the tombstone files. Timestamps are displayed in nanoseconds since the Epoch (`1970-01-01T00:00:00Z`).
+
+##### [ `-vvv` ]
+
+Enables very very verbose logging. Displays progress for every series key and time range in the tombstone files. Timestamps are displayed in [RFC3339 format](https://tools.ietf.org/html/rfc3339) with nanosecond precision.
 
 ## Caveats
 
