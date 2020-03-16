@@ -538,7 +538,7 @@ Enables verbose logging.
 
 Verifies the integrity of tombstones.
 
-> **Note on verbose logging:** higher verbosity levels override lower levels.
+> **Note on verbose logging:** Higher verbosity levels override lower levels.
 
 #### Syntax
 
