@@ -544,7 +544,7 @@ Verifies the integrity of tombstones.
 influx_inspect verify-tombstone [ options ]
 ```
 
-Finds all tombstone in each file recursively under the specified directory path (by default, `~/.influxdb/data`) and verifies each tombstone. Files are verified serially.
+Finds and verifies all tombstones under the specified directory path (by default, `~/.influxdb/data`). Files are verified serially.
 
 #### Options
 
