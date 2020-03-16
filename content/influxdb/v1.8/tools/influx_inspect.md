@@ -538,8 +538,6 @@ Enables verbose logging.
 
 Verifies the integrity of tombstones.
 
-> **Note on verbose logging:** Higher verbosity levels override lower levels.
-
 #### Syntax
 
 ```
@@ -567,6 +565,8 @@ Enables very verbose logging. Displays progress for every series key and time ra
 ##### [ `-vvv` ]
 
 Enables very very verbose logging. Displays progress for every series key and time range in the tombstone files. Timestamps are displayed in [RFC3339 format](https://tools.ietf.org/html/rfc3339) with nanosecond precision.
+
+> **Note on verbose logging:** Higher verbosity levels override lower levels.
 
 ## Caveats
 
