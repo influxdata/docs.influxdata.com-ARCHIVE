@@ -538,13 +538,15 @@ Enables verbose logging.
 
 Verifies the integrity of tombstones.
 
+> **Note on verbose logging:** higher verbosity levels override lower levels.
+
 #### Syntax
 
 ```
 influx_inspect verify-tombstone [ options ]
 ```
 
-Finds all tombstone entries in each file recursively under the specified directory path (by default, `~/.influxdb/data`) and verify each entry. Verifies files serially.
+Finds all tombstone in each file recursively under the specified directory path (by default, `~/.influxdb/data`) and verifies each tombstone. Files are verified serially.
 
 #### Options
 
@@ -553,8 +555,6 @@ Optional arguments are in brackets.
 ##### [ `-dir <path>` ]
 
 Specifies the root data path. Defaults to `~/.influxdb/data`. This path can be arbitrary, for example, it doesn't need to be an InfluxDB data directory.
-
-> Note higher verbosity levels override lower levels.
 
 ##### [ `-v` ]
 
