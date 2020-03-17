@@ -15,18 +15,32 @@ TBD
 
 ### Features
 
-- Add option to back up and restore meta data only.
-- Add [`influx inspect tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
-- Update Go version to 1.13.8.
-- Add InfluxDB 2.0 write API compatibility to use InfluxDB 2.0 client libraries.
-- Update Flux version to v0.64.0.
+- Add [`influx inspect verify-tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
+- Add offline series compaction to influx_inspect buildtsi
+- Make influx CLI support custom HTTP endpoint
+- Update Go version to 1.13.8
+- Add InfluxDB 2.0 write API compatibility to use InfluxDB 2.0 client libraries
+- Enhance support for bound parameters.
+- Update Flux version to v0.64.0
   To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.64/introduction/).
 
   > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
 
 ### Bug fixes
 
-- Make anti-entropy ignore expired shards.
+- Delete rebuilds series index when series to be deleted are only found in cache.
+- Delete rebuilds series index when series to be deleted are outside timerange.
+- Parse Accept header correctly.
+- Upgrade compaction error log from Info to Warn.
+- Remove double increment of meta index.
+- Improve series cardinality limit for inmem index.
+- Ensure all block data returned.
+- Skip WriteSnapshot during backup if snapshotter is busy.
+- Reduce influxd and influx startup time if Flux isn't used.
+- Fix bugs in -compact-series-file.
+- Update to Go 1.13.8 and Go modules.
+- Fix a SIGSEGV when accessing tsi active log.
+- Remove unsafe marshalling.
 
 ## v1.7.9 [2019-10-27]
 
