@@ -12,12 +12,12 @@ menu:
 ### Features
 
 - Add [`influx inspect verify-tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
-- Add offline series compaction to influx_inspect buildtsi
-- Make influx CLI support custom HTTP endpoint
-- Update Go version to 1.13.8
-- Add InfluxDB 2.0 write API compatibility to use InfluxDB 2.0 client libraries
+- Add offline series compaction to `influx_inspect buildtsi`.
+- Add support for connecting to a custom HTTP endpoint using `-path-prefix` in `influx` CLI.
+- Update Go version to 1.13.8.
+- Add InfluxDB 2.0 write API compatibility to use InfluxDB 2.0 client libraries.
 - Enhance support for bound parameters.
-- Update Flux version to v0.64.0
+- Update Flux version to v0.64.0.
   To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.64/introduction/).
 
   > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
