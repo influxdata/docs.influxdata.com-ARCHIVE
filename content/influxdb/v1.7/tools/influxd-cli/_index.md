@@ -1,14 +1,14 @@
 ---
-title: `influxd` command line interface (CLI)
-
+title: influxd - InfluxDB daemon
+description: The influxd daemon starts and runs all the processes necessary for InfluxDB to function.
 menu:
-  influxdb_1_7:
+ influxdb_1_7:
     name: influxd
     weight: 10
     parent: Tools
 ---
 
-The `influxd` command line interface (CLI) includes commands to manage many aspects of InfluxDB, including databases, organizations, users, and tasks.
+The `influxd` command line interface (CLI) starts and runs all the processes necessary for InfluxDB to function.
 
 
 ## Usage

@@ -5,7 +5,7 @@ menu:
   influxdb_1_7:
     name: influxd restore
     weight: 10
-    parent: influxd
+    parent: influxd-cli
 ---
 The `influxd restore` command restores backup data and metadata from an InfluxDB backup directory.
 

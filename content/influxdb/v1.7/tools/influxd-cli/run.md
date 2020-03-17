@@ -1,11 +1,11 @@
 ---
 title: influxd run
-description: The `influxd run` command restores backup data and metadata from an InfluxDB backup directory.
+description: The `influxd run` command starts and runs all the processes necessary for InfluxDB to function.
 menu:
   influxdb_1_7:
     name: influxd run
     weight: 10
-    parent: influxd
+    parent: influxd-cli
 ---
 
 The `influxd run` command is the default command for `influxd`.
@@ -17,14 +17,14 @@ It starts and runs all the processes necessary for InfluxDB to function.
 influxd run [flags]
 ```
 
-{{% note %}}
 Because `run` is the default command for `influxd`, the following commands are the same:
 
 ```bash
 influxd
 influxd run
 ```
-{{% /note %}}
+
+## Flags
 
 | Flag          | Description                                                                                                                                                                                                                                                                                                                    |
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

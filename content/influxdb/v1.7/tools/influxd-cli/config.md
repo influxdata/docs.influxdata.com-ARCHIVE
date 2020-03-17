@@ -5,7 +5,7 @@ menu:
   influxdb_1_7:
     name: influxd config
     weight: 10
-    parent: influxd
+    parent: influxd-cli
 ---
 The `influxd config` command displays the default configuration.
 

@@ -1,11 +1,11 @@
 ---
 title: influxd version
-description: The `influxd version` command restores backup data and metadata from an InfluxDB backup directory.
+description: The `influxd version` command outputs the current version of InfluxDB.
 menu:
   influxdb_1_7:
     name: influxd version
     weight: 10
-    parent: influxd
+    parent: influxd-cli
 ---
 
 
