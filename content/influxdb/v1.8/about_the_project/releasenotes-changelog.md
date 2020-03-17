@@ -9,10 +9,6 @@ menu:
 
 ## v1.8.0 [2020-3-TBD]
 
-### Breaking changes
-
-TBD
-
 ### Features
 
 - Add [`influx inspect verify-tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
