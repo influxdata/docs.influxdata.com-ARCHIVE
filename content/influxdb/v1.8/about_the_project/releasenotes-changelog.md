@@ -16,6 +16,7 @@ TBD
 ### Features
 
 - Add option to back up and restore meta data only.
+- Add [`influx inspect tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
 - Update Go version to 1.13.8.
 - Add InfluxDB 2.0 write API compatibility to use InfluxDB 2.0 client libraries.
 - Update Flux version to v0.64.0.
