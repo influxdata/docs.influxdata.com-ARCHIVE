@@ -1,5 +1,5 @@
 ---
-title: InfluxDB 1.7 release notes
+title: InfluxDB 1.8 release notes
 menu:
   influxdb_1_8:
     name: Release notes
@@ -7,9 +7,33 @@ menu:
     parent: About the project
 ---
 
+## v1.8.0 [2020-3-TBD]
+
+### Breaking changes
+
+TBD
+
+### Features
+
+#### Flux v0.64.0 technical preview
+
+* Update Flux version to v0.64.0
+
+* Enable Flux using the configuration setting [`[http] flux-enabled = true`](/influxdb/v1.8/administration/config/#flux-enabled-false).
+* Use the new [`influx -type=flux`](/influxdb/v1.8/tools/shell/#type) option to enable the Flux REPL shell for creating Flux queries.
+* Read about Flux and the Flux language, enabling Flux, or jump into the getting started and other guides in the [Flux v0.7 (technical preview) documentation](/flux/v0.7/).
+
+#### Other features
+
+* Option to back up and restore meta data only.
+* Update Go version to 1.13.8.
+
+### Bug fixes
+
+* Make anti-entropy ignore expired shards.
+
 ## v1.7.9 [2019-10-27]
 
-### Release notes
 - This release is built using Go 1.12.10 which eliminates the
   [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
 
