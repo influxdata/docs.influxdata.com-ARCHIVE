@@ -15,10 +15,12 @@ TBD
 
 ### Features
 
-- Option to back up and restore meta data only.
+- Add option to back up and restore meta data only.
 - Update Go version to 1.13.8.
 - Update Flux version to v0.64.0.
   To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.64/introduction/).
+
+  > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on our community website https://community.influxdata.com/, reach out to us on Slack https://influxcommunity.slack.com/) or GitHub. Enterprise customers, please contact <support@influxdata.com>.
 - Add InfluxDB 2.0 write API compatibility to use InfluxDB 2.0 client libraries.
 
 ### Bug fixes
