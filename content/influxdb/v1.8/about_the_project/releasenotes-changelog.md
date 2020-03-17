@@ -15,22 +15,15 @@ TBD
 
 ### Features
 
-#### Flux v0.64.0 technical preview
-
-* Update Flux version to v0.64.0
-
-* Enable Flux using the configuration setting [`[http] flux-enabled = true`](/influxdb/v1.8/administration/config/#flux-enabled-false).
-* Use the new [`influx -type=flux`](/influxdb/v1.8/tools/shell/#type) option to enable the Flux REPL shell for creating Flux queries.
-* Read about Flux and the Flux language, enabling Flux, or jump into the getting started and other guides in the [Flux v0.7 (technical preview) documentation](/flux/v0.7/).
-
-#### Other features
-
-* Option to back up and restore meta data only.
-* Update Go version to 1.13.8.
+- Option to back up and restore meta data only.
+- Update Go version to 1.13.8.
+- Update Flux version to v0.64.0.
+  To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.64/introduction/).
+- Add InfluxDB 2.0 write API compatibility to use InfluxDB 2.0 client libraries.
 
 ### Bug fixes
 
-* Make anti-entropy ignore expired shards.
+- Make anti-entropy ignore expired shards.
 
 ## v1.7.9 [2019-10-27]
 
