@@ -10,14 +10,11 @@ menu:
 
 The `influxd` command line interface (CLI) starts and runs all the processes necessary for InfluxDB to function.
 
-
 ## Usage
 
 ```
 influxd [[command] [arguments]]
 ```
-
-
 
 ## Commands
 | Command                                               | Description                                              |

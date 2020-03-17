@@ -20,7 +20,7 @@ influxd backup [flags] PATH
 
 | Flag          | Description                                                                                                                                                   |
 |---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-portable`   | Required to generate backup files in a portable format that can be restored to InfluxDB OSS or InfluxDB,Enterprise. Use unless the legacy backup is required. |
+| `-portable`   | Generate backup files in a portable format that can be restored to InfluxDB OSS or InfluxDB Enterprise. Use unless the legacy backup is required. |
 | `-host`       | InfluxDB OSS host to back up from. Optional. Defaults to 127.0.0.1:8088.                                                                                      |
 | `-db`         | InfluxDB OSS database name to back up. Optional. If not specified, all databases are backed up when using '-portable'.                                        |
 | `-db`         | Retention policy to use for the backup. Optional. If not specified, all retention policies are used by default.                                               |
@@ -28,4 +28,4 @@ influxd backup [flags] PATH
 | `-start`      | Include all points starting with specified timestamp (RFC3339 format). Not compatible with '-since '.                                                         |
 | `-end`        | Exclude all points after timestamp (RFC3339 format). Not compatible with '-since '.                                                                           |
 | `-since`      | Create an incremental backup of all points after the timestamp (RFC3339 format). Optional. Recommend using '-start ' instead.                                 |
-| `skip-errors` | Optional flag to continue backing up the remaining shards when the current shard fails to backup.                                                             |
+| `-skip-errors` | Continue backing up the remaining shards when the current shard fails to backup.                                                             |
