@@ -24,6 +24,7 @@ influx [flags]
 | Flag                        | Description                                                                                           |
 |-----------------------------|-------------------------------------------------------------------------------------------------------|
 | `-version`                  | Display the version and exit                                                                          |
+| `-url-prefix`               | Path to add to the URL after the host and port. Specifies a custom endpoint to connect to.            |
 | `-host`                     | HTTP address of InfluxDB (default: `http://localhost:8086`)                                           |
 | `-port`                     | Port to connect to                                                                                    |
 | `-socket`                   | Unix socket to connect to                                                                             |
