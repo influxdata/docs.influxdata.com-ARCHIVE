@@ -72,7 +72,7 @@ The size of the batches written to the index. Default value is `10000`.
 
 ##### `[ -compact-series-file ]`
 
-Compact the existing series file. **Does not rebuild the index.**
+**Does not rebuild the index.** Compacts the existing series file, including offline series. Iterates series in each segment and rewrites non-tombstoned series in the index to a new .tmp file next to the segment. Once all segments are converted, the temporary files overwrite the original segments.
 
 ##### `[ -concurrency ]`
 
