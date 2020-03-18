@@ -435,7 +435,9 @@ For an example of using the exporting and importing data approach for disaster r
 
 ## Take AWS snapshot with EBS volumes
 
-Set up at least two EBS volumes, one for your OS root directory and one for your InfluxDB Enterprise cluster data.
+Set up at least two EBS volumes, one for your OS root directory and one for your InfluxDB Enterprise cluster. Then, restore your backup to the empty EBS volume created for your InfluxDB Enterprise cluster.
+
+> **Important:** Backups must be restored to an empty EBS volume.
 
 1. Identify InfluxDB Enterprise directories to place on your secondary storage device for backup, including the following directories:
   
