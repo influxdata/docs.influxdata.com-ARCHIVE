@@ -596,58 +596,37 @@ Content-Length: 33
 
 ## `/api/v2/write/` HTTP endpoint
 
-<!-- Add a /v2/write endpoint to handle the v2.0 write protocol. -->
-<!-- This involves mapping the org and bucket parameters to db (database) and rp (retention policy). -->
-<!-- The implementation is here. -->
-<!-- Auth should "just work" since Authorization: Token support has already been added for Flux. -->
-
 Use this endpoint to write to an InfluxDB 1.8.0+ database using InfluxDB 2.0 client libraries.
 
-Both APIs support the same line protocol format for the raw time series data.
-The APIs differ only in the /write endpoints' request headers and URL parameters.
+Both InfluxDB 1.x and 2.0 APIs support the same line protocol format for raw time series data.
+For the purposes of writing data, the APIs differ only in the request headers and URL parameters.
 
 InfluxDB 2.0 uses [buckets](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket)
 and [organizations](https://v2.docs.influxdata.com/v2.0/reference/glossary/#organization)
 instead of databases and retention policies.
-This endpoint maps the supplied bucket and organization to a version 1.8 database and retention policy.
+The `/api/v2/write` endpoint maps the supplied bucket to a version 1.8 database and retention policy.
+(The organization is currently ignored.)
 
 The `/api/v2/write` endpoint accepts `POST` HTTP requests.
 
 The following URL parameters are used:
 
-- org
-- bucket
-- precision
+- `org`: The `org` parameter is ignored and can be left as an empty string (`""`).
+- `bucket`: Buckets will be encoded to include the database name and retention policy separated by a forward slash (`/`).
+  If you have a database called `foo` and retention policy `bar`, you will write to the "bucket" `foo/bar`.
+  (Since the database and retention policies are encoded in the bucket, an empty retention policy should map to the default retention policy.)
+- `precision`: Precision is the same in both APIs.
 
-The 1.x username and password needs to be passed as the token in the `Authorization: Token` HTTP header as `username:password`.
+The following are examples encodings of database and retention policy that could be passed as the bucket parameter.
 
-The `org` parameter is ignored and can be left as an empty string (`""`).
-Buckets will be encoded to include the database name and retention policy separated by a forward slash (`/`).
-If you have a database called `foo` and retention policy `bar`, you will write to the "bucket" `foo/bar`.
+- `database/weekly` - maps to a database named "database" and retention policy named "weekly".
+- `database/` - maps to a database named "database and the default retention policy.
+- `database` - likewise maps to a database named "database" and the default retention policy.
 
-Since the database and retention policies are encoded in the bucket, an empty retention policy should map to the default retention policy.
-
-The following encodings should work:
-`database/weekly` - maps to a database named "database" and retention policy named "weekly"
-`database/` - maps to a database named "database and the default retention policy
-`database` - likewise maps to a database named "database" and the default retention policy.
+In addition to URL paramaters, there is one required HTTP header:
+a 1.x username and password needs to be passed as the token in the `Authorization: Token` HTTP header as `username:password`.
 
 For more information, see [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
-
---------
-
-Proposed mappings:
-
-URL Parameters
-| 2.0       | 1.x       | Notes                                                                                                  |
-| org       | n/a       | currently the org is ignored. at some point we might try to encode which orgs are valid                |
-| bucket    | db/rp     | buckets will be encoded to include the database name and retention policy separated by a forward slash |
-| precision | precision | same in both APIs                                                                                      |
-|           |           |                                                                                                        |
-
-HTTP Headers
-| 2.0                  | 1.x                                                                                                                                       | Notes |
-| Authorization: Token | Authorization: Token	Appears support for this was added as part of Flux support in 1.x. Clients send `username:password` as the Token. |       |
 
 ## `/write` HTTP endpoint
 
