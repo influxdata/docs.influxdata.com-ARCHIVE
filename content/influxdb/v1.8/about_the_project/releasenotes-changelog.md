@@ -24,18 +24,16 @@ menu:
 
 ### Bug fixes
 
-- Delete rebuilds series index when series to be deleted are only found in cache.
-- Delete rebuilds series index when series to be deleted are outside timerange.
+- Rebuild the series index when data is actually deleted (not when deleted data is only found in cache or outside of time range).
 - Parse Accept header correctly.
-- Upgrade compaction error log from Info to Warn.
-- Remove double increment of meta index.
-- Improve series cardinality limit for inmem index.
+- Upgrade compaction error log from `Info` to `Warn`.
+- Remove double increment of `meta` index.
+- Improve series cardinality limit for `inmem` index.
 - Ensure all block data returned.
-- Skip WriteSnapshot during backup if snapshotter is busy.
-- Reduce influxd and influx startup time if Flux isn't used.
-- Fix bugs in -compact-series-file.
-- Update to Go 1.13.8 and Go modules.
-- Fix a SIGSEGV when accessing tsi active log.
+- Skip `WriteSnapshot` during back up if `snapshotter` is busy.
+- Reduce `influxd` and `influx` startup time if Flux isn't used.
+- Fix bugs in `-compact-series-file` flag.
+- Fix a SIGSEGV when accessing `tsi` active log.
 - Remove unsafe marshalling.
 
 ## v1.7.9 [2019-10-27]
