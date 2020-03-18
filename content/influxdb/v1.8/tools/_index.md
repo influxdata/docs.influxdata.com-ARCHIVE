@@ -12,32 +12,13 @@ menu:
 
 This section covers the available tools for interacting with InfluxDB.
 
-## [InfluxDB command line interface (CLI/Shell)](/influxdb/v1.8/tools/shell/)
+## [`influx` command line interface (CLI)](/influxdb/v1.8/tools/influx-cli/)
 
-The InfluxDB command line interface (`influx`) is an interactive shell for the
-InfluxDB API that comes with every InfluxDB package.
-Use `influx` to write data (manually or from a file), query data interactively,
-and view query output in different formats:
+The InfluxDB command line interface (`influx`) includes commands to manage many aspects of InfluxDB, including databases, organizations, users, and tasks.
 
-![CLI GIF](/img/influxdb/cli-1.0-beta.gif)
+## [`influxd` command line interface (CLI)](/influxdb/v1.8/tools/influxd-cli/)
 
-Go straight to the documentation on:
-
-* [Launching `influx`](/influxdb/v1.8/tools/shell/#launch-influx)
-* [Writing data with `influx`](/influxdb/v1.8/tools/shell/#write-data-to-influxdb-with-insert)
-
-## [InfluxDB API Reference](/influxdb/v1.8/tools/api/)
-
-Reference documentation for the InfluxDB API.
-
-Go straight to the reference documentation on:
-
-* [Writing data with the InfluxDB API](/influxdb/v1.8/tools/api/#write-http-endpoint)
-* [Querying data with the InfluxDB API](/influxdb/v1.8/tools/api/#query-http-endpoint)
-
-For friendlier documentation, see the guides on
-[writing data](/influxdb/v1.8/guides/writing_data/) and
-[querying data](/influxdb/v1.8/guides/querying_data/) with the InfluxDB API.
+The `influxd` command line interface (CLI) starts and runs all the processes necessary for InfluxDB to function.
 
 ## [InfluxDB API client libraries](/influxdb/v1.8/tools/api_client_libraries/)
 
