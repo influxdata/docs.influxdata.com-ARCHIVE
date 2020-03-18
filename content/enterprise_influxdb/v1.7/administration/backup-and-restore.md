@@ -44,9 +44,12 @@ Use the `backup` and `restore` utilities to back up and restore between `influxd
 
 ### Backup utility
 
-A backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#metastore) and [shard](/influxdb/v1.7/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
+A backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#metastore) and [shard](/influxdb/v1.7/concepts/glossary/#shard) data **on disk** at that point in time and stores the copy in the specified directory.
+
+>**Note:** `backup` ignores WAL files and in-memory cache data.
+
 All backups also include a manifest, a JSON file describing what was collected during the backup.
-The filenames reflect the UTC timestamp of when the backup was created, for example:
+The filenames reflect the UTC timestamp of when the backup **from disk** was created, for example:
 
 - Metastore backup: `20060102T150405Z.meta` (includes usernames and passwords)
 - Shard data backup: `20060102T150405Z.<shard_id>.tar.gz`
