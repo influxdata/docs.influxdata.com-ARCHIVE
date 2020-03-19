@@ -596,37 +596,33 @@ Content-Length: 33
 
 ## `/api/v2/write/` HTTP endpoint
 
-Use this endpoint to write to an InfluxDB 1.8.0+ database using InfluxDB 2.0 client libraries.
+The `/api/v2/write` endpoint accepts `POST` HTTP requests.
+Use this endpoint to write to an InfluxDB 1.8.0+ database using [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
 
 Both InfluxDB 1.x and 2.0 APIs support the same line protocol format for raw time series data.
-For the purposes of writing data, the APIs differ only in the request headers and URL parameters.
-
+For the purposes of writing data, the APIs differ only in the URL parameters and request headers.
 InfluxDB 2.0 uses [buckets](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket)
 and [organizations](https://v2.docs.influxdata.com/v2.0/reference/glossary/#organization)
 instead of databases and retention policies.
-The `/api/v2/write` endpoint maps the supplied bucket to a version 1.8 database and retention policy.
-(The organization is currently ignored.)
-
-The `/api/v2/write` endpoint accepts `POST` HTTP requests.
+The `/api/v2/write` endpoint maps the supplied version 1.8 database and retention policy to a bucket.
 
 The following URL parameters are used:
 
-- `org`: The `org` parameter is ignored and can be left as an empty string (`""`).
 - `bucket`: Buckets will be encoded to include the database name and retention policy separated by a forward slash (`/`).
   If you have a database called `foo` and retention policy `bar`, you will write to the "bucket" `foo/bar`.
   (Since the database and retention policies are encoded in the bucket, an empty retention policy should map to the default retention policy.)
+- `org`: The `org` parameter is ignored and can be left empty.
 - `precision`: Precision is the same in both APIs.
 
 The following are examples encodings of database and retention policy that could be passed as the bucket parameter.
 
-- `database/weekly` - maps to a database named "database" and retention policy named "weekly".
-- `database/` - maps to a database named "database and the default retention policy.
-- `database` - likewise maps to a database named "database" and the default retention policy.
+- `database/weekly` maps to a database named "database" and retention policy named "weekly".
+- `database/` maps to a database named "database" and the default retention policy.
+- `database` likewise maps to a database named "database" and the default retention policy.
 
 In addition to URL paramaters, there is one required HTTP header:
 a 1.x username and password needs to be passed as the token in the `Authorization: Token` HTTP header as `username:password`.
 
-For more information, see [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
 
 ## `/write` HTTP endpoint
 
