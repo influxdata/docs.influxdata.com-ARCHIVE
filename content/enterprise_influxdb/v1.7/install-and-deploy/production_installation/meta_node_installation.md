@@ -66,8 +66,8 @@ setting in the meta node configuration file.
 ## Step 1: Add appropriate DNS entries for each of your servers
 
 Ensure that your servers' hostnames and IP addresses are added to your network's DNS environment.
-The addition of DNS entries and IP assignment is usually site and policy specific, so contact your local DNS administrator for assistance as necessary.
-Ultimately you will need entries similar to the following (the hostnames and domain below are representative).
+The addition of DNS entries and IP assignment is usually site and policy specific; contact your DNS administrator for assistance as necessary.
+Ultimately, use entries similar to the following (hostnames and domain IP addresses are representative).
 
 | Record Type |               Hostname                |                IP |
 |:------------|:-------------------------------------:|------------------:|
@@ -86,9 +86,8 @@ servers are resolvable. Here is an example set of shell commands using `ping`:
     ping -qc 1 enterprise-meta-03
 >
 
-It is highly recommended that each server be able to resolve the IP from the hostname alone as shown here.
-If there are any connectivity issues resolve them before proceeding with the
-installation.
+We highly recommend that each server be able to resolve the IP from the hostname alone as shown here.
+Resolve any connectivity issues before proceeding with the installation.
 A healthy cluster requires that every meta node can communicate with every other
 meta node.
 
