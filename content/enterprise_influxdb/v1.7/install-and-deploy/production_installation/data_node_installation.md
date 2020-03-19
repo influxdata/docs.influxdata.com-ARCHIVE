@@ -60,16 +60,17 @@ You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.7/tools/api/)).
 
 # Data node setup
+## Step 1: Add appropriate DNS entries for each of your servers
 
-## Step 1: Modify the `/etc/hosts` file
+Ensure that your servers' hostnames and IP addresses are added to your network's DNS environment.
 
-Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
-file (the hostnames below are representative).
+The addition of DNS entries and IP assignment is usually site and policy specific; contact your DNS administrator for assistance as needed.
+Ultimately, use entries similar to the following (hostnames and domain IP addresses are representative):
 
-```
-<Data_1_IP> enterprise-data-01
-<Data_2_IP> enterprise-data-02
-```
+| Record Type |               Hostname                |                IP |
+|:------------|:-------------------------------------:|------------------:|
+| A           | ```enterprise-data-01.mydomain.com``` | ```<Data_1_IP>``` |
+| A           | ```enterprise-data-02.mydomain.com``` | ```<Data_2_IP>``` |
 
 > **Verification steps:**
 >
@@ -82,8 +83,8 @@ servers are resolvable. Here is an example set of shell commands using `ping`:
     ping -qc 1 enterprise-data-01
     ping -qc 1 enterprise-data-02
 
-If there are any connectivity issues resolve them before proceeding with the
-installation.
+We highly recommend that each server be able to resolve the IP from the hostname alone as shown here.
+Resolve any connectivity issues before proceeding with the installation.
 A healthy cluster requires that every meta and data node can communicate
 with every other meta and data node.
 
