@@ -140,7 +140,7 @@ input:
     introduced: 1.12.0
     tags: [linux, macos, windows, systems]
 
-   - name: Arista LANZ Consumer
+  - name: Arista LANZ Consumer
     id: lanz
     description: |
       The AArista LANZ Consumer input plugin provides a consumer for use with Arista Networks’ Latency Analyzer (LANZ).
