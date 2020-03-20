@@ -143,7 +143,7 @@ input:
   - name: Arista LANZ Consumer
     id: lanz
     description: |
-      The AArista LANZ Consumer input plugin provides a consumer for use with Arista Networks’ Latency Analyzer (LANZ).
+      The Arista LANZ Consumer input plugin provides a consumer for use with Arista Networks’ Latency Analyzer (LANZ).
       Metrics are read from a stream of data via TCP through port 50001 on the switches management IP. Data is in Protobuffers format.
       For more information, see [Arista LANZ](https://www.arista.com/en/um-eos/eos-latency-analyzer-lanz).
     introduced: 1.14.0
@@ -248,7 +248,7 @@ input:
     introduced: 1.11.0
     tags: [linux, macos, windows, applications]
 
-   - name: ClickHouse
+  - name: ClickHouse
     id: clickhouse
     description: |
       Gathers statistics from a [ClickHouse](https://github.com/ClickHouse/ClickHouse) server, an open-source column-oriented database management system 
@@ -1321,7 +1321,7 @@ input:
     introduced: 0.10.1
     tags: [linux, macos, windows, iot]
 
- - name: SFlow
+  - name: SFlow
     id: sflow
     description: |
       The SFlow input plugin provides support for acting as an SFlow V5 collector
