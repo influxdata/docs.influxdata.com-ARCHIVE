@@ -1949,7 +1949,7 @@ output:
   - name: Warp10
     id: warp10
     description: |
-      The Warp10 output plugin writes metrics to SenX Warp 10.
+      Writes metrics to SenX Warp 10.
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
@@ -2157,10 +2157,9 @@ processor:
   - name: S2 Geo
     id: s2geo
     description: |
-      Use the S2 Geo processor plugin to add a tag with an S2 cell ID token of specified 
-      [cell level](https://s2geometry.io/resources/s2cell_statistics.html). The tag is used
-      in `experimental/geo` Flux package functions. Include `lat` and `lon` field values
-      with WGS-84 coordinates in decimal degrees.
+      Add tags with an S2 cell ID token of specified [cell level](https://s2geometry.io/resources/s2cell_statistics.html).
+      Tags are used in `experimental/geo` Flux package functions. 
+      Include `lat` and `lon` field values with WGS-84 coordinates in decimal degrees.
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
@@ -2203,11 +2202,10 @@ processor:
   - name: Template
     id: template
     description: |
-      The Template processor plugin applies a Go template to metrics to generate a new tag. 
-      The primary use case of this plugin is to create a tag that can be used for dynamic routing 
-      to multiple output plugins or using an output specific routing option. The template has access 
-      to each metric's measurement name, tags, fields, and timestamp using the interface in
-      </template_metric.go>.
+      Applies a Go template to metrics to generate a new tag. 
+      This plugin is primarily used to create a tag for dynamic routing to multiple output plugins
+      or to an output specific routing option. The template has access to each metric's measurement name,
+      tags, fields, and timestamp using the interface in </template_metric.go>.
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
