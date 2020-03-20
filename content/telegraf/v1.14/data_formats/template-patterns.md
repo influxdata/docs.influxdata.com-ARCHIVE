@@ -142,4 +142,4 @@ cpu.usage.idle.eu-east 100
 => cpu_usage,region=eu-east,datacenter=1a idle=100
 ```
 
-[metrics]: /telegraf/v1.13/concepts/metrics/
+[metrics]: /telegraf/v1.14/concepts/metrics/
