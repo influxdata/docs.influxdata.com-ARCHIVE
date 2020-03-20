@@ -8,6 +8,100 @@ menu:
     parent: About the project
 ---
 
+## v1.14 [2020-03-24]
+
+### Release notes
+
+- In the `sqlserver` input, the `sqlserver_azurestats` measurement has been renamed to `sqlserver_azure_db_resource_stats` due to an issue where numeric metrics were previously being reported incorrectly as strings.
+- The `date` processor now uses the UTC timezone when creating its tag. In previous versions the local time was used.
+
+### New input plugins
+
+- [ClickHouse](https://github.com/influxdata/telegraf/blob/release-1.14/plugins/inputs/clickhouse/README.md)(`clickhouse`) - Contributed by [@kshvakov](https://github.com/kshvakov)
+- [Execd](https://github.com/influxdata/telegraf/blob/release-1.14/plugins/inputs/execd/README.md)(`execd`) - Contributed by [@jgraichen](https://github.com/jgraichen)
+Event Hub Consumer(`eventhub_consumer`) - Contributed by [@R290](https://github.com/R290)
+- [InfiniBand](`infiniband`) - Contributed by [@willfurnell](https://github.com/willfurnell)
+- [Arista LANZ Consumer](`lanz`): Contributed by [@timhughes](https://github.com/timhughes)
+- [Modbus](`modbus`) - Contributed by [@garciaolais](https://github.com/garciaolais)
+- [Monit](`monit`) - Contributed by [@SirishaGopigiri](https://github.com/SirishaGopigiri)
+- [SFlow](`sflow`) - Contributed by [@influxdata](https://github.com/influxdata)
+- [Wireguard](`wireguard`) - Contributed by [@LINKIWI](https://github.com/LINKIWI)
+
+### New processors plugins
+
+- [Dedup](`dedup`) - Contributed by [@igomura](https://github.com/igomura)
+- [Template](`template`) - Contributed by [@RobMalvern](https://github.com/RobMalvern)
+- [S2 Geo](`s2geo`) - Contributed by [@alespour](https://github.com/alespour)
+
+### New output plugins
+
+- [Warp10](`warp10`) - Contributed by [@aurrelhebert](https://github.com/aurrelhebert)
+
+### Features
+
+- Add `page_faults` for WiredTiger storage engine `mongodb` input plugin.
+- Add `use_sudo` option to `ipmi_sensor` input plugin.
+- Add ability to collect pod labels to `kubernetes` input plugin.
+- Expose `unbound-control -c cfgfile` config file option.
+- Add support for new nginx plus api endpoints.
+- Add Apache Kafka SASL version control to support Azure Event Hub.
+- Add RBPEX IO statistics to DatabaseIO query in `sqlserver` input plugin.
+- Add space on disk for each file to DatabaseIO query in the `sqlserver` input.
+- Calculate DB Name instead of GUID in physical_db_name in the `sqlserver` input.
+- Add latency stats to `mongodb` input plugin.
+- Add `source` and `port` tags to `jenkins_job` metrics.
+- Add date offset and timezone options to `date` processor plugin.
+- Exclude resources by inventory path in `vsphere` input plugin.
+- Allow a user defined field to be used as the graylog short_message.
+- Add server_name override for `x509_cert` plugin.
+- Add udp internal metrics for the `statsd` input plugin.
+- Add replica set tag to `mongodb` input plugin.
+- Add counters for merged reads and writes to `diskio` input plugin.
+- Add support for titlecase transformation to `strings` processor plugin.
+- Add support for MDB database information to `openldap` input plugin.
+- Add new fields for Jenkins total and busy executors.
+- Fix dash to underscore replacement when handling embedded tags in Cisco MDT.
+- Add process created_at time to `procstat` input plugin.
+- Add support for credentials file to `nats_consumer` and `nats` output plugins.
+- Add additional tags and fields to `apcupsd` input plugin.
+- Add RabbitMQ slave_nodes and synchronized_slave_nodes metrics.
+- Allow globs in FPM unix socket paths.
+- Add non-cumulative histogram to `histogram` aggregator plugin.
+- Add label and field selectors to `prometheus` input plugin? k8s discovery.
+- Add support for converting tag or field to measurement in `converter` processor plugin.
+- Add volume_mount_point to DatabaseIO query in `sqlserver` input plugin.
+- Add topic tag options to `kafka` output plugin.
+- Add support for setting InfluxDB retention policy using tag.
+- Add Database IO Tempdb per Azure DB to `sqlserver` input plugin.
+- Add option for explicitly including queries in `sqlserver` input plugin.
+- Add support for GNMI DecimalVal type to cisco_telemetry_gnmi.
+- Add support for credentials file to `nats_consumer` and `nats` output plugins.
+- Add additional tags and fields to `apcupsd`.
+- Add RabbitMQ slave_nodes and synchronized_slave_nodes metrics.
+- Allow globs in FPM unix socket paths.
+- Add non-cumulative histogram to histogram aggregator plugin.
+- Add label and field selectors to prometheus input plugin? k8s discovery.
+- Add support for converting tag or field to measurement in converter processor plugin.
+- Add volume_mount_point to DatabaseIO query in sqlserver input plugin.
+- Add topic tag options to kafka output plugin.
+- Add support for setting InfluxDB retention policy using tag.
+- Add Database IO Tempdb per Azure DB to sqlserver input plugin.
+- Add option for explicitly including queries in `sqlserver` input plugin.
+- Add support for GNMI DecimalVal type to `cisco_telemetry_gnmi`.
+
+### Bug fixes
+
+- Fix conversion to floats in AzureDBResourceStats query in the `sqlserver` input plugin.
+- Fix case sensitive collation in `sqlserver` input plugin.
+- Search for chronyc only when `chrony` input plugin is enabled.
+- Fix request to InfluxDB Listener failing with EOF.
+- Fix InfluxDB listener to continue parsing after error.
+- Fix log rotation to use actual file size instead of bytes written.
+- Fix several issues with DatabaseIO query in `sqlserver` input plugin.
+- Fix internal metrics for output split into multiple lines.
+- Fix schedulers query compatibility with pre SQL-2016.
+- Set headers on `influxdb_listener` ping URL.
+
 ## v1.13.4 [2020-02-25]
 
 ### Release Notes
