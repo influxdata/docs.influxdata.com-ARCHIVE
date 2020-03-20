@@ -143,7 +143,7 @@ input:
    - name: Arista LANZ Consumer
     id: lanz
     description: |
-      The Arista LANZ Consumer plugin provides a consumer for use with Arista Networks’ Latency Analyzer (LANZ).
+      Provides a consumer for use with Arista Networks’ Latency Analyzer (LANZ).
       Metrics are read from a stream of data via TCP through port 50001 on the switches management IP. The data is in Protobuffers format. 
       For more information, see [Arista LANZ](https://www.arista.com/en/um-eos/eos-latency-analyzer-lanz).
     introduced: 1.14.0
@@ -251,7 +251,7 @@ input:
    - name: ClickHouse
     id: clickhouse
     description: |
-      Gathers statistics from [ClickHouse](https://github.com/ClickHouse/ClickHouse) server, an open-source column-oriented database management system 
+      Gathers statistics from a [ClickHouse](https://github.com/ClickHouse/ClickHouse) server, an open-source column-oriented database management system 
       that lets you generate analytical data reports in real time.
     introduced: 1.14.0
     tags: [linux, macos, windows, servers, systems]
@@ -385,7 +385,7 @@ input:
   - name: Event Hub Consumer
     id: eventhub_consumer
     description: |
-     The Event Hub Consumer plugin provides a consumer for use with Azure Event Hubs and Azure IoT Hub.
+     Provides a consumer for use with Azure Event Hubs and Azure IoT Hub.
     introduced: 1.14.0
     tags: [linux, macos, windows, iot]
 
@@ -401,10 +401,10 @@ input:
   - name: Execd
     id: execd
     description: |
-      The Execd input plugin runs an external program as a daemon. The programs must output metrics in an accepted
-       [Telegraf input data formats](https://docs.influxdata.com/telegraf/latest/data_formats/input/) on its standard output.
-      The signal can be configured to send a signal the running daemon on each collection interval.
-      Program output on standard error is mirrored to the telegraf log.
+      Runs an external program as a daemon. Programs must output metrics in an accepted
+      [Telegraf input data format](https://docs.influxdata.com/telegraf/latest/data_formats/input/)
+      on its standard output. Configure `signal` to send a signal to the running daemon on each collection interval.
+      Program output on standard error is mirrored to the Telegraf log.
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
@@ -584,7 +584,7 @@ input:
   - name: InfiniBand
     id: infiniband
     description: |
-      The InfiniBand input plugin gathers statistics for all InfiniBand devices and ports on the system. Counters stored in `/sys/class/infiniband/<dev>/port/<port>/counters/`.
+      Gathers statistics for all InfiniBand devices and ports on the system. Stores counters in `/sys/class/infiniband/<dev>/port/<port>/counters/`.
     introduced: 1.14.0
     tags: [linux, systems]
 
@@ -901,7 +901,8 @@ input:
   - name: Modbus
     id: modbus
     description: |
-      The Modbus plugin collects `discrete_inputs`, `coils`, `input_registers` and `holding_registers` via Modbus TCP or Modbus RTU/ASCII.
+      Collects `discrete_inputs`, `coils`, `input_registers` and `holding_registers` via Modbus TCP
+      or Modbus RTU/ASCII.
     introduced: 1.14.0
     tags: [linux, macos, windows, networking]
 
@@ -916,8 +917,8 @@ input:
   - name: Monit
     id: monit
     description: |
-      The monit plugin gathers metrics and status information about local processes, remote hosts, file, 
-      file systems, directories and network interfaces managed and watched over by Monit. To use this plugin, 
+      Gathers metrics and status information about local processes, remote hosts, files, 
+      file systems, directories and network interfaces managed and watched by Monit. To use this plugin, 
       enable the [HTTPD TCP port](https://mmonit.com/monit/documentation/monit.html#TCP-PORT) in Monit.
     introduced: 1.14.0
     tags: [linux, macos, windows, systems, networking]
@@ -1322,8 +1323,8 @@ input:
  - name: SFlow
     id: sflow
     description: |
-      The SFlow input plugin provides support for acting as an SFlow V5 collector in accordance
-      with the specification from <sflow.org>.
+      Provides support for acting as an SFlow V5 collector in accordance with 
+      the specification from <sflow.org>.
     introduced: 1.14.0
     tags: [linux, macos, windows, networking]
 
@@ -1620,8 +1621,8 @@ input:
   - name: Wireguard
     id: wireguard
     description: |
-      The Wireguard input plugin collects statistics on the local Wireguard server using the `wgctrl` library.
-      Reports gauge metrics for Wireguard interface device(s) and its peers.
+      Collects statistics on the local Wireguard server using the `wgctrl` library.
+      Reports gauge metrics for Wireguard interface device(s) and peers.
     introduced: 1.14.0
     tags: [linux, macos, windows, networking]
 
