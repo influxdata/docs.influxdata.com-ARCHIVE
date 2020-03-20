@@ -251,8 +251,8 @@ input:
   - name: ClickHouse
     id: clickhouse
     description: |
-      Gathers statistics from a [ClickHouse](https://github.com/ClickHouse/ClickHouse) server, an open-source column-oriented database management system 
-      that lets you generate analytical data reports in real time.
+      The ClickHouse input plugin gathers statistics from a [ClickHouse](https://github.com/ClickHouse/ClickHouse) server, an open-source
+      column-oriented database management system that lets you generate analytical data reports in real time.
     introduced: 1.14.0
     tags: [linux, macos, windows, servers, systems]
 
@@ -401,10 +401,10 @@ input:
   - name: Execd
     id: execd
     description: |
-      Runs an external program as a daemon. Programs must output metrics in an accepted
+      The Execd input plugin runs an external program as a daemon. Programs must output metrics in an accepted
       [Telegraf input data format](https://docs.influxdata.com/telegraf/latest/data_formats/input/)
-      on its standard output. Configure `signal` to send a signal to the running daemon on each collection interval.
-      Program output on standard error is mirrored to the Telegraf log.
+      on its standard output. Configure `signal` to send a signal to the daemon running on each collection interval.
+      The program output on standard error is mirrored to the Telegraf log.
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
@@ -585,7 +585,7 @@ input:
     id: infiniband
     description: |
       The InfiniBand input plugin gathers statistics for all InfiniBand devices and ports on the system. 
-      Stores counters in `/sys/class/infiniband/<dev>/port/<port>/counters/`.
+      Counters are stored in `/sys/class/infiniband/<dev>/port/<port>/counters/`.
     introduced: 1.14.0
     tags: [linux, systems]
 
@@ -919,7 +919,7 @@ input:
     id: monit
     description: |
       The Monit input plugin gathers metrics and status information about local processes, remote hosts, files, 
-      file systems, directories and network interfaces managed and watched by Monit. To use this plugin, 
+      file systems, directories, and network interfaces managed and watched by Monit. To use this plugin, 
       enable the [HTTPD TCP port](https://mmonit.com/monit/documentation/monit.html#TCP-PORT) in Monit.
     introduced: 1.14.0
     tags: [linux, macos, windows, systems, networking]
@@ -1325,7 +1325,7 @@ input:
     id: sflow
     description: |
       The SFlow input plugin provides support for acting as an SFlow V5 collector
-      in accordance with the <sflow.org> specification.
+      in accordance with the [sflow.org](https://sflow.org/) specification.
     introduced: 1.14.0
     tags: [linux, macos, windows, networking]
 
@@ -1623,7 +1623,7 @@ input:
     id: wireguard
     description: |
       The Wireguard input plugin collects statistics on the local Wireguard server using the `wgctrl` library.
-      Reports gauge metrics for Wireguard interface device(s) and peers.
+      Reports gauge metrics for Wireguard interface device(s) and its peers.
     introduced: 1.14.0
     tags: [linux, macos, windows, networking]
 
@@ -1950,7 +1950,7 @@ output:
   - name: Warp10
     id: warp10
     description: |
-      The Warp10 output plugin writes metrics to SenX Warp 10.
+      The Warp10 output plugin writes metrics to [SenX Warp 10](https://www.warp10.io/).
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
@@ -2158,9 +2158,9 @@ processor:
   - name: S2 Geo
     id: s2geo
     description: |
-      The S2 Geo processor plugin add tags with an S2 cell ID token of specified [cell level](https://s2geometry.io/resources/s2cell_statistics.html).
-      Tags are used in `experimental/geo` Flux package functions. 
-      Include `lat` and `lon` field values with WGS-84 coordinates in decimal degrees.
+      The S2 Geo processor plugin adds tags with an S2 cell ID token of a specified [cell level](https://s2geometry.io/resources/s2cell_statistics.html).
+      Tags are used in Flux `experimental/geo` functions. 
+      Specify `lat` and `lon` field values with WGS-84 coordinates in decimal degrees.
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
@@ -2206,7 +2206,7 @@ processor:
       The Template processor plugin applies a Go template to metrics to generate a new tag. 
       Primarily used to create a tag for dynamic routing to multiple output plugins
       or to an output specific routing option. The template has access to each metric's measurement name,
-      tags, fields, and timestamp using the interface in </template_metric.go>.
+      tags, fields, and timestamp using the interface in [template_metric.go](https://github.com/influxdata/telegraf/blob/release-1.14/plugins/processors/template/template_metric.go).
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
