@@ -1943,6 +1943,13 @@ output:
       Syslog messages are formatted according to RFC 5424.
     introduced: 1.11.0
     tags: [linux, macos, windows, logging]
+    
+  - name: Warp10
+    id: warp10
+    description: |
+      The Warp10 output plugin writes metrics to SenX Warp 10.
+    introduced: 1.14.0
+    tags: [linux, macos, windows]
 
   - name: Wavefront
     id: wavefront
@@ -2060,6 +2067,13 @@ processor:
       The Date processor plugin adds the metric timestamp as a human readable tag.
     introduced: 1.12.0
     tags: [linux, macos, windows]
+    
+  - name: Dedup
+    id: dedup
+    description: |
+      Filter metrics whose field values are exact repetitions of the previous values.
+    introduced: 1.14.0
+    tags: [linux, macos, windows]
 
   - name: Enum
     id: enum
@@ -2138,6 +2152,16 @@ processor:
     introduced: 1.8.0
     tags: [linux, macos, windows]
 
+  - name: S2 Geo
+    id: s2geo
+    description: |
+      Use the S2 Geo processor plugin to add a tag with an S2 cell ID token of specified 
+      [cell level](https://s2geometry.io/resources/s2cell_statistics.html). The tag is used
+      in `experimental/geo` Flux package functions. Include `lat` and `lon` field values
+      with WGS-84 coordinates in decimal degrees.
+    introduced: 1.14.0
+    tags: [linux, macos, windows]
+
   - name: Strings
     id: strings
     description: |
@@ -2172,6 +2196,17 @@ processor:
       hard limits on the number of tags or labels per metric or where high levels of
       cardinality are computationally or financially expensive.
     introduced: 1.12.0
+    tags: [linux, macos, windows]
+
+  - name: Template
+    id: template
+    description: |
+      The Template processor plugin applies a Go template to metrics to generate a new tag. 
+      The primary use case of this plugin is to create a tag that can be used for dynamic routing 
+      to multiple output plugins or using an output specific routing option. The template has access 
+      to each metric's measurement name, tags, fields, and timestamp using the interface in
+      </template_metric.go>.
+    introduced: 1.14.0
     tags: [linux, macos, windows]
 
   - name: TopK
