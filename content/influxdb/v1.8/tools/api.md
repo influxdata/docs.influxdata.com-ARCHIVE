@@ -597,11 +597,31 @@ Content-Length: 33
 ## `/api/v2/write/` HTTP endpoint
 
 The `/api/v2/write` endpoint accepts `POST` HTTP requests.
-Use this endpoint to write to an InfluxDB 1.8.0+ database using InfluxDB 2.0 client libraries.
-This endpoint maps the supplied bucket and organization to a version 1.8 database and retention policy.
+Use this endpoint to write to an InfluxDB 1.8.0+ database using [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
 
-For more information, see [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
+Both InfluxDB 1.x and 2.0 APIs support the same line protocol format for raw time series data.
+For the purposes of writing data, the APIs differ only in the URL parameters and request headers.
+InfluxDB 2.0 uses [organizations](https://v2.docs.influxdata.com/v2.0/reference/glossary/#organization)
+and [buckets](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket)
+instead of databases and retention policies.
+The `/api/v2/write` endpoint maps the supplied version 1.8 database and retention policy to a bucket.
 
+
+Include the following URL parameters:
+
+- `bucket`: Provide the database name and retention policy separated by a forward slash (`/`).
+  For example: `database/retention-policy`.
+  Empty retention policies map to the default retention policy.
+  `database/weekly` maps to a database named "database" and retention policy named "weekly".
+  `database/` and `database` map to a database named "database" and the default retention policy.
+- `org`: The `org` parameter is ignored and can be left empty.
+- `precision`: Precision of timestamps in the line protocol.
+  Accepts `ns` (nanoseconds), `us`(microseconds), `ms` (milliseconds) and `s` (seconds).
+
+Include the following HTTP header:
+
+- `Authorization`: Use the Token schema to provide your InfluxDB 1.x username and password separated by a colon (`:`).
+  For example: `Authorization: Token username:password`.
 
 ## `/write` HTTP endpoint
 
