@@ -251,7 +251,8 @@ input:
    - name: ClickHouse
     id: clickhouse
     description: |
-      Gathers statistic data from ClickHouse server.
+      Gathers statistics from [ClickHouse](https://github.com/ClickHouse/ClickHouse) server, an open-source column-oriented database management system 
+      that lets you generate analytical data reports in real time.
     introduced: 1.14.0
     tags: [linux, macos, windows, servers, systems]
 
