@@ -69,7 +69,7 @@ menu:
 - **NGINX Plus API** (`nginx_plus_api`): Add support for new endpoints.
 - **OpenLDAP** (`openldap`): Add support for MDB database information.
 - **PHP-FPM** (`phpfpm`): Allow globs in FPM unix socket paths (`unixsocket`).
-- **Procstat** (`procstat`): Add process created_at time.
+- **Procstat** (`procstat`): Add process `created_at` time.
 - **Prometheus** (`prometheus`) input plugin: Add `label` and `field` selectors for Kubernetes service discovery.
 - **RabbitMQ** (`rabbitmq`): Add `slave_nodes` and `synchronized_slave_nodes` metrics.
 - **StatsD** (`statsd`): Add UDP internal metrics.
