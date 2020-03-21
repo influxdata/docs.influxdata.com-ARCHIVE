@@ -32,8 +32,8 @@ menu:
 #### Processors
 
 - [Dedup](`dedup`) - Contributed by [@igomura](https://github.com/igomura)
-- [Template](`template`) - Contributed by [@RobMalvern](https://github.com/RobMalvern)
 - [S2 Geo](`s2geo`) - Contributed by [@alespour](https://github.com/alespour)
+- [Template](`template`) - Contributed by [@RobMalvern](https://github.com/RobMalvern)
 
 #### Outputs
 
