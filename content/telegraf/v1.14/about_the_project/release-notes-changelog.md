@@ -90,7 +90,7 @@ menu:
 
 #### Processor plugin updates
 
-- **Converter** (`converter`): Add support for converting tag or field to measurement.
+- **Converter** (`converter`): Add support for converting `tag` or `field` to `measurement`.
 - **Date** (`date`): Add date offset and timezone options.
 - **Strings** (`strings`): Add support for titlecase transformation.
 
