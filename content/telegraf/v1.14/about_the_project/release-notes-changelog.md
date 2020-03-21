@@ -97,7 +97,7 @@ menu:
 ### Bug fixes
 
 - Fix log rotation to use actual file size instead of bytes written.
-- Fix internal metrics to prevent output split into multiple lines.
+- Fix internal Telegraf metrics to prevent output split into multiple lines.
 - **Chrony** (`chrony`) input plugin: When plugin is enabled, search for `chronyc` only.
 - **Microsoft SQL Server** (`sqlserver`) input plugin:
   - Fix conversion to floats in AzureDBResourceStats query.
