@@ -12,85 +12,102 @@ menu:
 
 ### Release notes
 
-- In the `sqlserver` input plugin, the `sqlserver_azurestats` measurement has been renamed to `sqlserver_azure_db_resource_stats` due to an issue where numeric metrics were previously being reported incorrectly as strings.
-- The `date` processor plugin now uses the UTC timezone when creating its tag. Previously, the local time was used.
+- Renamed the `sqlserver_azurestats` measurement to `sqlserver_azure_db_resource_stats` in Microsoft SQL Server (`sqlserver`) input plugin, due to an issue where numeric metrics were previously being reported incorrectly as strings.
+- The Date (`date`) processor plugin now uses the UTC timezone when creating its tag. Previously, the local time was used.
 
-### New input plugins
+### New plugins
+
+#### Inputs
 
 - [Arista LANZ Consumer](`lanz`) - Contributed by [@timhughes](https://github.com/timhughes)
 - [ClickHouse](https://github.com/influxdata/telegraf/blob/release-1.14/plugins/inputs/clickhouse/README.md)(`clickhouse`) - Contributed by [@kshvakov](https://github.com/kshvakov)
 - [Execd](https://github.com/influxdata/telegraf/blob/release-1.14/plugins/inputs/execd/README.md)(`execd`) - Contributed by [@jgraichen](https://github.com/jgraichen)
-Event Hub Consumer(`eventhub_consumer`) - Contributed by [@R290](https://github.com/R290)
-- [InfiniBand](`infiniband`) - Contributed by [@willfurnell](https://github.com/willfurnell)
-- [Modbus](`modbus`) - Contributed by [@garciaolais](https://github.com/garciaolais)
-- [Monit](`monit`) - Contributed by [@SirishaGopigiri](https://github.com/SirishaGopigiri)
-- [SFlow](`sflow`) - Contributed by [@influxdata](https://github.com/influxdata)
-- [Wireguard](`wireguard`) - Contributed by [@LINKIWI](https://github.com/LINKIWI)
+- [Event Hub Consumer](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/eventhub_consumer/README.md)(`eventhub_consumer`) - Contributed by [@R290](https://github.com/R290)
+- [InfiniBand](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/infiniband/README.md)(`infiniband`) - Contributed by [@willfurnell](https://github.com/willfurnell)
+- [Modbus](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/modbus/README.md)(`modbus`) - Contributed by [@garciaolais](https://github.com/garciaolais)
+- [Monit](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/monit/README.md)(`monit`) - Contributed by [@SirishaGopigiri](https://github.com/SirishaGopigiri)
+- [SFlow](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/sflow/README.md)(`sflow`) - Contributed by [@influxdata](https://github.com/influxdata)
+- [Wireguard](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/wireguard/README.md)(`wireguard`) - Contributed by [@LINKIWI](https://github.com/LINKIWI)
 
-### New processors plugins
+#### Processors
 
 - [Dedup](`dedup`) - Contributed by [@igomura](https://github.com/igomura)
 - [Template](`template`) - Contributed by [@RobMalvern](https://github.com/RobMalvern)
 - [S2 Geo](`s2geo`) - Contributed by [@alespour](https://github.com/alespour)
 
-### New output plugins
+#### Outputs
 
 - [Warp10](`warp10`) - Contributed by [@aurrelhebert](https://github.com/aurrelhebert)
 
 ### Features
 
-- Add `page_faults` for WiredTiger storage engine to MongoDB (`mongodb`) input plugin.
-- Add `use_sudo` option to `ipmi_sensor` input plugin.
-- Add ability to collect pod labels to `kubernetes` input plugin.
-- Expose `unbound-control -c cfgfile` config file option.
-- Add support for new nginx plus API endpoints.
-- Add Apache Kafka SASL version control to support Azure Event Hub.
-- Add RBPEX IO statistics to DatabaseIO query in `sqlserver` input plugin.
-- Add space on disk for each file to DatabaseIO query in the `sqlserver` input.
-- Calculate DB Name instead of GUID in `physical_db_name` in the `sqlserver` input.
-- Add latency statistics to MongoDB (`mongodb`) input plugin.
-- Add `source` and `port` tags to `jenkins_job` metrics.
-- Add date offset and timezone options to `date` processor plugin.
-- Exclude resources by inventory path in `vsphere` input plugin.
-- Allow a user defined field (`short_message_field`) to be used as the `GELF short_message` in the Graylog (`graylog`) output plugin.
-- Add `server_name` override for `x509_cert` input plugin.
-- Add udp internal metrics for the `statsd` input plugin.
-- Add replica set tag to `mongodb` input plugin.
-- Add counters for merged reads and writes to `diskio` input plugin.
-- Add support for titlecase transformation to `strings` processor plugin.
-- Add support for MDB database information to `openldap` input plugin.
-- Add new fields for Jenkins total and busy executors.
-- Fix dash to underscore replacement when handling embedded tags in Cisco MDT.
-- Add process created_at time to `procstat` input plugin.
+#### Input plugin updates
 
+- **Apache Kafka Consumer** (`kafka_consumer`): Add SASL version control to support Microsoft Azure Event Hub.
+- **Apcupsd** (`apcupsd`): Add additional tags and fields.
+- **Cisco Model-driven Telemetry (MDT)** (`cisco_telemetry_gnmi`) input plugin:
+  - Add support for GNMI DecimalVal type.
+  - Replace dash (`-`) with underscore (`_`) when handling embedded tags.
+- **DiskIO** (`diskio`): Add counters for merged reads and writes.
+- **IPMI Sensor** (`ipmi_sensor`): Add `use_sudo` option.
+- **Jenkins** (`jenkins`):
+  - Add `source` and `port` tags to `jenkins_job` metrics.
+  - Add new fields `total_executors` and `busy_executors`.
+- **Kubernetes** (`kubernetes`): Add ability to collect pod labels.
+- **Microsoft SQL Server** (`sqlserver`):
+  - Add RBPEX IO statistics to DatabaseIO query.
+  - Add space on disk for each file to DatabaseIO query.
+  - Calculate DB Name instead of GUID in `physical_db_name`.
+  - Add Database IO TempDB per Azure DB.
+  - Add option for explicitly including queries.
+  - Add `volume_mount_point` to DatabaseIO query.
+- **MongoDB** (`mongodb`):
+  - Add `page_faults` for WiredTiger storage engine.
+  - Add latency statistics.
+  - Add replica set tag (`rs_name`).
+- **NATS Consumer** (`nats_consumer`): Add support for credentials file.
+- **NGINX Plus API** (`nginx_plus_api`): Add support for new endpoints.
+- **OpenLDAP** (`openldap`): Add support for MDB database information.
+- **PHP-FPM** (`phpfpm`): Allow globs in FPM unix socket paths (`unixsocket`).
+- **Procstat** (`procstat`): Add process created_at time.
+- **Prometheus** (`prometheus`) input plugin: Add `label` and `field` selectors for Kubernetes service discovery.
+- **RabbitMQ** (`rabbitmq`): Add `slave_nodes` and `synchronized_slave_nodes` metrics.
+- **StatsD** (`statsd`): Add UDP internal metrics.
+- **Unbound** (`unbound`): Expose [`-c cfgfile` option of `unbound-control`](https://linux.die.net/man/8/unbound-control) and set the default unbound configuration (`config_file= "/etc/unbound/unbound.conf`) in the Telegraf configuration file.
+- **VMware vSphere** (`vsphere`): Exclude resources by inventory path.
+- **X.509 Certificate** (`x509_cert`): Add `server_name` override.
 
+#### Output plugin updates
 
-- Add support for credentials file to `nats_consumer` and `nats` output plugins.
-- Add additional tags and fields to `apcupsd` input plugin.
-- Add RabbitMQ slave_nodes and synchronized_slave_nodes metrics.
-- Allow globs in FPM unix socket paths.
-- Add non-cumulative histogram to `histogram` aggregator plugin.
-- Add `label` and `field` selectors to Prometheus (`prometheus`) input plugin Kubernetes service discovery.
-- Add support for converting tag or field to measurement in `converter` processor plugin.
-- Add `volume_mount_point` to DatabaseIO query in `sqlserver` input plugin.
-- Add topic tag options to `kafka` output plugin.
-- Add support for setting InfluxDB retention policy using tag.
-- Add Database IO Tempdb per Azure DB to `sqlserver` input plugin.
-- Add option for explicitly including queries in `sqlserver` input plugin.
-- Add support for GNMI DecimalVal type to `cisco_telemetry_gnmi`.
+- **Apache Kafka** (`kafka`): Add topic tag options.
+- **Graylog** (`graylog`): Allow a user defined field (`short_message_field`) to be used as the `GELF short_message`.
+- **InfluxDB v1.x** (`influxdb`): Add support for setting the retention policy using a tag (`retention_policy_tag`).
+- **NATS Output** (`nats`): Add support for credentials file.
+
+#### Aggregator plugin updates
+
+- **Histogram** (`histogram`): Add non-cumulative histogram.
+
+#### Processor plugin updates
+
+- **Converter** (`converter`): Add support for converting tag or field to measurement.
+- **Date** (`date`): Add date offset and timezone options.
+- **Strings** (`strings`): Add support for titlecase transformation.
 
 ### Bug fixes
 
-- Fix conversion to floats in AzureDBResourceStats query in the `sqlserver` input plugin.
-- Fix case sensitive collation in `sqlserver` input plugin.
-- Search for chronyc only when `chrony` input plugin is enabled.
-- Fix request to `influxdb_listener` failing with EOF.
-- Fix `influxdb_listener` to continue parsing after error.
 - Fix log rotation to use actual file size instead of bytes written.
-- Fix several issues with DatabaseIO query in `sqlserver` input plugin.
-- Fix internal metrics for output split into multiple lines.
-- Fix schedulers query compatibility with pre SQL-2016.
-- Set headers on `influxdb_listener` ping URL.
+- Fix internal metrics to prevent output split into multiple lines.
+- **Microsoft SQL Server** (`sqlserver`) input plugin:
+  - Fix conversion to floats in AzureDBResourceStats query.
+  - Fix case sensitive collation.
+  - Fix several issues with DatabaseIO query.
+  - Fix schedulers query compatibility with pre SQL-2016.
+- **Chrony** (`chrony`) input plugin: When plugin is enabled, search for `chronyc` only.
+- **InfluxDB Listener** (`influxdb_listener`):
+  - Fix request failing with EOF.
+  - Continue parsing after error.
+  - Set headers on plugin ping URL.
 
 ## v1.13.4 [2020-02-25]
 
@@ -98,7 +115,7 @@ Event Hub Consumer(`eventhub_consumer`) - Contributed by [@R290](https://github.
 Official packages now built with Go 1.13.8.
 
 ### Bug fixes
-- Parse NaN values from summary types in Promethues (`prometheus`) input plugin.
+- Parse NaN values from summary types in Prometheus (`prometheus`) input plugin.
 - Fix PgBouncer (`pgbouncer`) input plugin when used with newer PgBouncer versions.
 - Support up to 8192 stats in the Ethtool (`ethtool`) input plugin.
 - Fix performance counters collection on named instances in Microsoft SQL Server (`sqlserver`) input plugin.
