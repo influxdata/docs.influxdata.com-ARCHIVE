@@ -76,7 +76,7 @@ Breaking changes are updates that may cause Telegraf plugins to fail or function
 - **RabbitMQ** (`rabbitmq`): Add `slave_nodes` and `synchronized_slave_nodes` metrics.
 - **StatsD** (`statsd`): Add UDP internal metrics.
 - **Unbound** (`unbound`): Expose [`-c cfgfile` option of `unbound-control`](https://linux.die.net/man/8/unbound-control) and set the default unbound configuration (`config_file= "/etc/unbound/unbound.conf`) in the Telegraf configuration file.
-- **VMware vSphere** (`vsphere`): Exclude resources by inventory path.
+- **VMware vSphere** (`vsphere`): Add option to exclude resources by inventory path, including `vm_exclude`, `host_exclude`, `cluster_exclude` (for both clusters and datastores), and `datacenter_exclude`.
 - **X.509 Certificate** (`x509_cert`): Add `server_name` override.
 
 #### Output plugin updates
