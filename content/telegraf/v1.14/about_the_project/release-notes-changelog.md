@@ -46,7 +46,7 @@ Breaking changes are updates that may cause Telegraf plugins to fail or function
 #### Input plugin updates
 
 - **Apache Kafka Consumer** (`kafka_consumer`): Add SASL version control to support Microsoft Azure Event Hub.
-- **Apcupsd** (`apcupsd`): Add additional tags and fields.
+- **Apcupsd** (`apcupsd`): Add new tag `model` and new metrics: `battery_date`, `nominal_input_voltage`, `nominal_battery_voltage`, `nominal_power`, `firmware`.
 - **Cisco Model-driven Telemetry (MDT)** (`cisco_telemetry_gnmi`) input plugin:
   - Add support for GNMI DecimalVal type.
   - Replace dash (`-`) with underscore (`_`) when handling embedded tags.
