@@ -278,7 +278,8 @@ A successful [`CREATE DATABASE` query](/influxdb/v1.7/query_language/database_ma
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
-| chunked=[true \| \<number_of_points>] | Optional | Returns points in streamed batches instead of in a single response. If set to `true`, InfluxDB chunks responses by series or by every 10,000 points, whichever occurs first. If set to a specific value, InfluxDB chunks responses by series or by that number of points.*  |
+| chunked=true | Optional | Returns points in streamed batches instead of in a single response. If set to `true`, InfluxDB chunks responses by series or by every 10,000 points, whichever occurs first. |
+| chunk_size=\<number_of_points> | Optional | If set to a specific value, InfluxDB chunks responses by series or by that number of points. This requires `chunked` to be set to `true` to work.  |
 | db=\<database_name> | Required for database-dependent queries (most [`SELECT`](/influxdb/v1.7/query_language/spec/#select) queries and [`SHOW`](/influxdb/v1.7/query_language/spec/#show-continuous-queries) queries require this parameter). | Sets the target [database](/influxdb/v1.7/concepts/glossary/#database) for the query. |
 | epoch=[ns,u,µ,ms,s,m,h] | Optional | Returns epoch timestamps with the specified precision. By default, InfluxDB returns timestamps in RFC3339 format with nanosecond precision. Both `u` and `µ` indicate microseconds. |
 | p=\<password> | Optional if you haven't [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication). Required if you've enabled authentication.** | Sets the password for authentication if you've enabled authentication. Use with the query string parameter `u`. |
