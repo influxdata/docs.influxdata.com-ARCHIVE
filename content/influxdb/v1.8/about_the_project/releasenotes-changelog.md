@@ -15,7 +15,7 @@ menu:
 - Add offline series compaction to `influx_inspect buildtsi`.
 - Add support for connecting to a custom HTTP endpoint using `-url-prefix` in [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index).
 - Update Go version to 1.13.8.
-- Add InfluxDB 2.0 write API compatibility to use InfluxDB 2.0 client libraries.
+- Add [InfluxDB 2.0 write API compatibility](/v1.8/tools/api/#api-v2-write-http-endpoint) to use InfluxDB 2.0 client libraries.
 - Enhance support for bound parameters.
 - Update Flux version to v0.64.0.
   To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.64/introduction/).
