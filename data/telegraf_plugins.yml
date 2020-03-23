@@ -251,7 +251,7 @@ input:
   - name: ClickHouse
     id: clickhouse
     description: |
-      The ClickHouse input plugin gathers statistics from a [ClickHouse](https://github.com/ClickHouse/ClickHouse) server, an open-source
+      The ClickHouse input plugin gathers statistics from a [ClickHouse](https://github.com/ClickHouse/ClickHouse) server, an open source
       column-oriented database management system that lets you generate analytical data reports in real time.
     introduced: 1.14.0
     tags: [linux, macos, windows, servers, systems]
