@@ -12,7 +12,7 @@ menu:
 ### Features
 
 - Add [`influx inspect verify-tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
-- Add offline series compaction to `influx_inspect buildtsi`.
+- Add [offline series compaction to `influx_inspect buildtsi`](/influxdb/v1.8/administration/compact-series-file/).
 - Add support for connecting to a custom HTTP endpoint using `-url-prefix` in [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index).
 - Update Go version to 1.13.8.
 - Add [InfluxDB 2.0 write API compatibility](/v1.8/tools/api/#api-v2-write-http-endpoint) to use InfluxDB 2.0 client libraries.
