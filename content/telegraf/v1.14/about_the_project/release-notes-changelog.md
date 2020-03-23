@@ -60,8 +60,8 @@ Breaking changes are updates that may cause Telegraf plugins to fail or function
   - Add RBPEX IO statistics to DatabaseIO query.
   - Add space on disk for each file to DatabaseIO query.
   - Calculate DB Name instead of GUID in `physical_db_name`.
-  - Add Database IO TempDB per Azure DB.
-  - Add option for explicitly including queries.
+  - Add `DatabaseIO` TempDB per Azure DB.
+  - Add `query_include` option for explicitly including queries.
   - Add `volume_mount_point` to DatabaseIO query.
 - **MongoDB** (`mongodb`):
   - Add `page_faults` for WiredTiger storage engine.
@@ -81,7 +81,7 @@ Breaking changes are updates that may cause Telegraf plugins to fail or function
 
 #### Output plugin updates
 
-- **Apache Kafka** (`kafka`): Add topic tag options.
+- **Apache Kafka** (`kafka`): Add `topic_tag` and `exclude_topic_tag` options.
 - **Graylog** (`graylog`): Allow a user defined field (`short_message_field`) to be used as the `GELF short_message`.
 - **InfluxDB v1.x** (`influxdb`): Add support for setting the retention policy using a tag (`retention_policy_tag`).
 - **NATS Output** (`nats`): Add support for credentials file.
