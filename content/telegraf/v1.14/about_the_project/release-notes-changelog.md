@@ -98,7 +98,7 @@ Breaking changes are updates that may cause Telegraf plugins to fail or function
 
 ### Bug fixes
 
-- Fix log rotation to use actual file size instead of bytes written.
+- Fix Telegraf log rotation to use actual file size instead of bytes written.
 - Fix internal Telegraf metrics to prevent output split into multiple lines.
 - **Chrony** (`chrony`) input plugin: When plugin is enabled, search for `chronyc` only.
 - **Microsoft SQL Server** (`sqlserver`) input plugin:
