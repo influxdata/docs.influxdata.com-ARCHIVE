@@ -10,10 +10,12 @@ menu:
 
 ## v1.14 [2020-03-24]
 
-### Release notes
+### Breaking changes
 
-- Renamed the `sqlserver_azurestats` measurement to `sqlserver_azure_db_resource_stats` in Microsoft SQL Server (`sqlserver`) input plugin, due to an issue where numeric metrics were previously being reported incorrectly as strings.
-- The Date (`date`) processor plugin now uses the UTC timezone when creating its tag. Previously, the local time was used.
+Breaking changes are updates that may cause Telegraf plugins to fail or function incorrectly. If you have one of the following plugins installed, make sure to update your plugin as needed:
+
+- **Microsoft SQL Server** (`sqlserver`) input plugin: Renamed the `sqlserver_azurestats` measurement to `sqlserver_azure_db_resource_stats` to resolve an issue where numeric metrics were previously being reported incorrectly as strings.
+- **Date** (`date`) processor plugin: Now uses the UTC timezone when creating its tag. Previously, the local time was used.
 
 ### New plugins
 
@@ -107,7 +109,7 @@ menu:
 - **InfluxDB Listener** (`influxdb_listener`):
   - Fix request failing with EOF.
   - Continue parsing after error.
-  - Set headers on plugin ping URL.
+  - Set headers on ping URL.
 
 ## v1.13.4 [2020-02-25]
 
