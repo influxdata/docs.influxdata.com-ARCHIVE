@@ -21,11 +21,11 @@ Please note that this migration process:
 * Will **not** transfer any users from the OSS instance to the InfluxEnterprise Web Console
 * Requires downtime for writes and reads for the OSS instance
 
-<dt>
+{{% warn %}}
 \* If you're using an InfluxEnterprise cluster version prior to 0.7.4, the
 following steps will **not** transfer users from the OSS instance to the
 InfluxEnterprise Cluster.
-</dt>
+{{% /warn %}}
 
 In addition, please refrain from creating a Global Admin user in the InfluxEnterprise Web Console before implementing these steps. If you’ve already created a Global Admin user, contact support.
 

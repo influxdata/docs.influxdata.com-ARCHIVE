@@ -25,7 +25,7 @@ Depending on the volume of data to be protected and your application requirement
 - [Backup and restore utilities](#backup-and-restore-utilities) — For most applications
 - [Exporting and importing data](#exporting-and-importing-data) — For large datasets
 
-> **Note:** You can use the [new `backup` and `restore` utilities (InfluxDB OSS 1.5 and later](/influxdb/latest/administration/backup_and_restore/) to:
+> **Note:** Use the [`backup` and `restore` utilities (InfluxDB OSS 1.5 and later)](/influxdb/latest/administration/backup_and_restore/) to:
 >
 > - Restore InfluxDB Enterprise backup files to InfluxDB OSS instances.
 > - Back up InfluxDB OSS data that can be restored in InfluxDB Enterprise clusters.
@@ -34,7 +34,7 @@ Depending on the volume of data to be protected and your application requirement
 
 InfluxDB Enterprise supports backing up and restoring data in a cluster, a single database, a single database and retention policy, and single shards. Most InfluxDB Enterprise applications can use the backup and restore utilities.
 
-Use the `backup` and `restore` utilities to back up and restore between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.7.8.
+Use the `backup` and `restore` utilities to back up and restore between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.7.10.
 
 >**Note:** For large datasets (100s of gigabytes of data or more), you might need to use the [export and import method](#exporting-and-importing-data) method.
 
@@ -44,7 +44,7 @@ A backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#met
 All backups also include a manifest, a JSON file describing what was collected during the backup.
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
-- Metastore backup: `20060102T150405Z.meta`
+- Metastore backup: `20060102T150405Z.meta` (includes usernames and passwords)
 - Shard data backup: `20060102T150405Z.<shard_id>.tar.gz`
 - Manifest: `20060102T150405Z.manifest`
 
@@ -53,9 +53,9 @@ Incremental backups create a copy of the metastore and shard data that have chan
 If there are no existing incremental backups, the system automatically performs a complete backup.
 
 Restoring a `-full` backup and restoring an incremental backup require different syntax.
-To prevent issues with [restore](#restore), keep `-full` backups and incremental backups in separate directories.
+To prevent issues with [restore](#restore-utility), keep `-full` backups and incremental backups in separate directories.
 
-To perform a full restore of metastore, including users and permission, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents.
+To perform a full restore of metastore, including users, credentials, and permissions, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents. The message `Backing up meta data... Done.` indicates that your meta data (including users, credentials, and permissions) has been successfully backed up.
 
 >**Note:** The backup utility copies all data through the meta node that is used to
 execute the backup. As a result, performance of a backup and restore is typically limited by the network IO of the meta node. Increasing the resources available to this meta node (such as resizing the EC2 instance) can significantly improve backup and restore performance.
@@ -65,6 +65,8 @@ execute the backup. As a result, performance of a backup and restore is typicall
 ```bash
 influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
 ```
+
+> **Note:** The `influxd-ctl backup` command exits with `0` for success and `1` for failure. If the backup fails, output can be directed to a log file to troubleshoot.
 
 ##### Global options
 
@@ -364,7 +366,7 @@ time                  written
 
 ##### Restore writes information not part of the original backup
 
-If a [restore from an incremental backup](#syntax-for-a-restore-from-an-incremental-backup) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
+If a [restore from an incremental backup](#syntax-to-restore-from-an-incremental-backup) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
 Backups consist of a shard data backup and a metastore backup.
 The **shard data backup** contains the actual time series data: the measurements, tags, fields, and so on.
 The **metastore backup** contains user information, database names, retention policy names, shard metadata, continuous queries, and subscriptions.
@@ -381,17 +383,17 @@ The unintended data, however, include only the metastore information, not the sh
 
 InfluxDB Enterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, be sure to follow the syntax
-for [restoring from a full backup](#syntax-for-a-restore-from-a-full-backup).
+for [restoring from a full backup](#syntax-to-restore-from-a-full-backup).
 
 ## Exporting and importing data
 
-For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. When you are working with large data volumes (100s of gigabytes or more), however, you may find that the standard backup and restore utilities cannot adequately hande the volumes of data in your application.  
+For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. However, when working with data volumes 100s of gigabytes or more, the standard backup and restore utilities may not adequately handle the volumes of data in your application.  
 
-As an alternative to the standard backup and restore utilities, you can use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures to be followed for your disaster recovery and backup strategy. These commands can be executed manually or included in shell scripts that can run the export and import operations at scheduled intervals. An example is provided below.
+As an alternative to the standard backup and restore utilities, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. These commands can be executed manually or included in shell scripts that run the export and import operations at scheduled intervals (example below).
 
 ### Exporting data
 
-You can use the [`influx_inspect export` command](/influxdb/latest/tools/influx_inspect#export) to export data in line protocol format from your InfluxDB Enterprise cluster. Options include:
+Use the [`influx_inspect export` command](/influxdb/latest/tools/influx_inspect#export) to export data in line protocol format from your InfluxDB Enterprise cluster. Options include:
 
 - Exporting all, or specific, databases
 - Filtering with starting and ending timestamps
@@ -421,8 +423,8 @@ For details on using the `influx -import` command, see [Import data from a file 
 
 For an example of using the exporting and importing data approach for disaster recovery, see the Capital One presentation from Influxdays 2019 on ["Architecting for Disaster Recovery."](https://www.youtube.com/watch?v=LyQDhSdnm4A). In this presentation, Capital One discusses the following:
 
-- Data is exported every 15 minutes from an active cluster to an AWS S3 bucket.
-- The export file in the S3 bucket is replicated using the AWS S3 copy command.
-- Data is imported every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
+- Exporting data every 15 minutes from an active cluster to an AWS S3 bucket.
+- Replicating the export file in the S3 bucket using the AWS S3 copy command.
+- Importing data every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
 - Advantages of the export-import approach over the standard backup and restore utilities for large volumes of data.
-- Use of a custom administration tool to manage users and scheduled exports and imports.
+- Managing users and scheduled exports and imports with a custom administration tool.

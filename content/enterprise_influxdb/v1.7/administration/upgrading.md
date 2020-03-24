@@ -9,7 +9,7 @@ menu:
     parent: Administration
 ---
 
-To successfully upgrade InfluxDB Enterprise clusters to 1.7.8, complete the following steps:
+To successfully upgrade InfluxDB Enterprise clusters to 1.7.10, complete the following steps:
 
 1. [Back up your cluster](#back-up-your-cluster).
 2. [Upgrade meta nodes](#upgrade-meta-nodes).
@@ -40,13 +40,13 @@ Complete the following steps to upgrade meta nodes:
 ##### Ubuntu and Debian (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.8-c1.7.8_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.10-c1.7.10_amd64.deb
 ```
 
 ##### RedHat and CentOS (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.8_c1.7.8.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 ### Install the meta node package
@@ -54,13 +54,13 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.8_c1.7.8.x8
 ##### Ubuntu and Debian (64-bit)
 
 ```bash
-sudo dpkg -i influxdb-meta_1.7.8-c1.7.8_amd64.deb
+sudo dpkg -i influxdb-meta_1.7.10-c1.7.10_amd64.deb
 ```
 
 ##### RedHat and CentOS (64-bit)
 
 ```bash
-sudo yum localinstall influxdb-meta-1.7.8_c1.7.8.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 ### Update the meta node configuration file
@@ -95,16 +95,16 @@ The [`influxd-ctl` utility](/enterprise_influxdb/v1.7/administration/cluster-com
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.6.x_c1.6.y
-5	rk-upgrading-02:8088	1.6.x_c1.6.y
-6	rk-upgrading-03:8088	1.6.x_c1.6.y
+4	rk-upgrading-01:8088	1.7.x_c1.7.y
+5	rk-upgrading-02:8088	1.7.x_c1.7.y
+6	rk-upgrading-03:8088	1.7.x_c1.7.y
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.7.8_c1.7.8   # 1.7.8_c1.7.8 = 👍
-rk-upgrading-02:8091	1.7.8_c1.7.8
-rk-upgrading-03:8091	1.7.8_c1.7.8
+rk-upgrading-01:8091	1.7.10_c1.7.10   # 1.7.10_c1.7.10 = 👍
+rk-upgrading-02:8091	1.7.10_c1.7.10
+rk-upgrading-03:8091	1.7.10_c1.7.10
 ```
 
 Ensure that the meta cluster is healthy before upgrading the data nodes.
@@ -114,10 +114,10 @@ Ensure that the meta cluster is healthy before upgrading the data nodes.
 Complete the following steps to upgrade data nodes:
 
 1. [Download the data node package](#download-the-data-node-package).
-2. [Stop traffic to data nodes](#stop-traffic-to-data-nodes).
+2. [Stop traffic to data nodes](#stop-traffic-to-the-data-node).
 3. [Install the data node package](#install-the-data-node-package).
 4. [Update the data node configuration file](#update-the-data-node-configuration-file).
-5. For Time Series Index (TSI) only. [Prepare your data node to support TSI](#prepare-your-data-node-to-support-tsi).
+5. For Time Series Index (TSI) only. [Rebuild TSI indexes](#rebuild-tsi-indexes).
 6. [Restart the `influxdb` service](#restart-the-influxdb-service).
 7. [Restart traffic to data nodes](#restart-traffic-to-data-nodes).
 8. Repeat steps 1-7 for each data node in your cluster.
@@ -128,13 +128,13 @@ Complete the following steps to upgrade data nodes:
 ##### Ubuntu and Debian (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.8-c1.7.8_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.10-c1.7.10_amd64.deb
 ```
 
 ##### RedHat and CentOS (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.8_c1.7.8.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 ### Stop traffic to the data node
@@ -145,19 +145,19 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.8_c1.7.8.x8
 
 ### Install the data node package
 
-When you run the install command, you're prompted to keep or overwrite your current configuration file with the file for version 1.7.8. Enter `N` or `O` to keep your current configuration file. You'll make the configuration changes for version 1.7.8. in the next procedure, [Update the data node configuration file](#update-the-data-node-configuration-file).
+When you run the install command, you're prompted to keep or overwrite your current configuration file with the file for version 1.7.10. Enter `N` or `O` to keep your current configuration file. You'll make the configuration changes for version 1.7.10. in the next procedure, [Update the data node configuration file](#update-the-data-node-configuration-file).
 
 
 ##### Ubuntu and Debian (64-bit)
 
 ```bash
-sudo dpkg -i influxdb-data_1.7.8-c1.7.8_amd64.deb
+sudo dpkg -i influxdb-data_1.7.10-c1.7.10_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```bash
-sudo yum localinstall influxdb-data-1.7.8_c1.7.8.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 ### Update the data node configuration file
@@ -171,13 +171,13 @@ Migrate any custom settings from your previous data node configuration file.
     | Section | Setting                                                   |
     | --------| ----------------------------------------------------------|
     | `[data]` |  <ul><li>To use Time Series Index (TSI) disk-based indexing, add [`index-version = "tsi1"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#index-version-inmem) <li>To use TSM in-memory index, add [`index-version = "inmem"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#index-version-inmem) <li>Add [`wal-fsync-delay = "0s"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#wal-fsync-delay-0s) <li>Add [`max-concurrent-compactions = 0`](/enterprise_influxdb/v1.7/administration/config-data-nodes#max-concurrent-compactions-0)<li>Set[`cache-max-memory-size`](/enterprise_influxdb/v1.7/administration/config-data-nodes#cache-max-memory-size-1g) to `1073741824` |
-    | `[cluster]`| <ul><li>Add [`pool-max-idle-streams = 100`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-streams-100) <li>Add[`pool-max-idle-time = "1m0s"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-time-60s) <li>Remove `max-remote-write-connections` 
+    | `[cluster]`| <ul><li>Add [`pool-max-idle-streams = 100`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-streams-100) <li>Add[`pool-max-idle-time = "1m0s"`](/enterprise_influxdb/v1.7/administration/config-data-nodes#pool-max-idle-time-60s) <li>Remove `max-remote-write-connections`
     |[`[anti-entropy]`](/enterprise_influxdb/v1.7/administration/config-data-nodes#anti-entropy)| <ul><li>Add `enabled = true` <li>Add `check-interval = "30s"` <li>Add `max-fetch = 10`|
     |`[admin]`| Remove entire section.|
 
     For more information about TSI, see [TSI overview](/influxdb/v1.7/concepts/time-series-index/) and [TSI details](/influxdb/v1.7/concepts/tsi-details/).
 
-### Prepare your data node to support TSI
+### Rebuild TSI indexes
 
 Complete the following steps for Time Series Index (TSI) only.
 
@@ -188,8 +188,8 @@ Complete the following steps for Time Series Index (TSI) only.
 3. Use the [`influx_inspect buildtsi`](/influxdb/v1.7/tools/influx_inspect#buildtsi) utility to rebuild the TSI index. For example, run the following command:
 
     ```js
-    influx_inspect buildtsi -datadir /yourDataDirectory -waldir /wal`
-    ``` 
+    influx_inspect buildtsi -datadir /yourDataDirectory -waldir /wal
+    ```
 
     Replacing `yourDataDirectory` with the name of your directory. Running this command converts TSM-based shards to TSI shards or rebuilds existing TSI shards.
 
@@ -229,16 +229,16 @@ The [`influxd-ctl` utility](/enterprise_influxdb/v1.7/administration/cluster-com
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.7.8_c1.7.8   # 1.7.8_c1.7.8 = 👍
-5	rk-upgrading-02:8088	1.7.8_c1.7.8
-6	rk-upgrading-03:8088	1.7.8_c1.7.8
+4	rk-upgrading-01:8088	1.7.10_c1.7.10   # 1.7.10_c1.7.10 = 👍
+5	rk-upgrading-02:8088	1.7.10_c1.7.10
+6	rk-upgrading-03:8088	1.7.10_c1.7.10
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.7.8_c1.7.8
-rk-upgrading-02:8091	1.7.8_c1.7.8
-rk-upgrading-03:8091	1.7.8_c1.7.8
+rk-upgrading-01:8091	1.7.10_c1.7.10
+rk-upgrading-02:8091	1.7.10_c1.7.10
+rk-upgrading-03:8091	1.7.10_c1.7.10
 ```
 
 If you have any issues upgrading your cluster, contact InfluxData support.

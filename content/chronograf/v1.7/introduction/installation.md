@@ -22,6 +22,8 @@ Chronograf is the user interface for InfluxData's [TICK stack](https://www.influ
 
 ## Download and install
 
+> **Note:** Windows support is experimental.
+
 {{< tab-labels >}}
 {{% tabs %}}
 [macOS](#)
@@ -36,21 +38,21 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 
     > If your download includes a TAR package, save the underlying datastore `chronograf-v1.db` in directory outside of where you start Chronograf. This preserves and references your existing datastore, including configurations and dashboards, when you download future versions.
 
-2. Install Chronograf:
+2. Install Chronograf, replacing `<version#>` with the appropriate version:
 
     {{< tab-content-container >}}
     {{% tab-content %}}
 
-    tar zxvf chronograf-1.7.7_darwin_amd64.tar.gz
+    tar zxvf chronograf-<version#>_darwin_amd64.tar.gz
 
     {{% /tab-content %}}
 
     {{% tab-content %}}
-    sudo dpkg -i chronograf_1.7.7_amd64.deb
+    sudo dpkg -i chronograf_<version#>_amd64.deb
     {{% /tab-content %}}
 
     {{% tab-content %}}
-    sudo yum localinstall chronograf-1.6.2.x86_64.rpm
+    sudo yum localinstall chronograf-<version#>.x86_64.rpm
     {{% /tab-content %}}
 
     {{< /tab-content-container >}}
@@ -68,7 +70,7 @@ The latest Chronograf builds are available on InfluxData's [Downloads page](http
 2. Fill out the form with the following details:
   * **Connection String**: Enter the hostname or IP of the machine that InfluxDB is running on, and be sure to include InfluxDB's default port `8086`.
   * **Connection Name**: Enter a name for your connection string.
-  * **Username** and **Password**: These fields can remain blank unless you've [enabled authorization](/influxdb/v1.6/administration/config/#auth-enabled-false) in InfluxDB.
+  * **Username** and **Password**: These fields can remain blank unless you've [enabled authentication](/influxdb/v1.7/administration/authentication_and_authorization.md) in InfluxDB.
   * **Telegraf Database Name**: Optionally, enter a name for your Telegraf database. The default name is Telegraf.
 3. Click **Add Source**.
 

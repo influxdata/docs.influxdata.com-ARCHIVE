@@ -9,9 +9,9 @@ menu:
     parent: Administration
 ---
 
-<dt>
-Prior to InfluxDB Enterprise 1.7.2, the Anti-Entropy (AE) service was enabled by default. When shards create large digests with lots of time ranges (10s of thousands), some customers have experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, then you can enable AE and monitor it closely to see if your performance is adversely impacted.
-</dt>
+{{% warn %}}
+Prior to InfluxDB Enterprise 1.7.2, the Anti-Entropy (AE) service was enabled by default. When shards create digests with lots of time ranges (10s of thousands), some customers have experienced significant performance issues, including CPU usage spikes. If your shards include a small number of time ranges (most have 1 to 10, some have up to several hundreds) and you can benefit from the AE service, enable AE and monitor it closely to see if your performance is adversely impacted.
+{{% /warn %}}
 
 ## Introduction
 
@@ -26,17 +26,13 @@ This topic covers how the Anti-Entropy service works and some of the basic situa
 
 ## Concepts
 
-The Anti-Entropy service is a component of the `influxd` service available on each of your data nodes
-and can be used to ensure that each data node has all of the shards that the metastore says it owns and
-that those shards are in sync with other ones within the same shard group.
+The Anti-Entropy service is a component of the `influxd` service available on each of your data nodes. Use this service to ensure that each data node has all of the shards that the metastore says it owns and ensure all shards in a shard group are in sync.
 If any shards are missing, the Anti-Entropy service will copy existing shards from other shard owners.
-If data inconsistencies are detected among shards in a shard group, you can
-[invoke the Anti-Entropy service](#command-line-tools-for-managing-entropy) and queue the
-out-of-sync shards for repair.
+If data inconsistencies are detected among shards in a shard group, [invoke the Anti-Entropy service](#command-line-tools-for-managing-entropy) and queue the out-of-sync shards for repair.
 In the repair process, the Anti-Entropy service will sync the necessary updates from other shards
 within a shard group.
 
-By default, the service performs consistency checks every 5 minutes. The interval can be modified in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.7/administration/config-data-nodes/#check-interval-5m) configuration setting.
+By default, the service performs consistency checks every 5 minutes. This interval can be modified in the [`anti-entropy.check-interval`](/enterprise_influxdb/v1.7/administration/config-data-nodes/#check-interval-5m) configuration setting.
 
 The Anti-Entropy service can only address missing or inconsistent shards when
 there is at least one copy of the shard available.
@@ -55,7 +51,7 @@ There are symptoms of entropy that, if seen, would indicate an entropy repair is
 
 When running queries against an InfluxDB Enterprise cluster, each query may be routed to a different data node.
 If entropy affects data within the queried range, the same query will return different
-results depending on which node it is run against.
+results depending on which node the query runs against.
 
 _**Query attempt 1**_
 
@@ -87,11 +83,11 @@ time                  mean
 1528308720000000000   99.18584290492262
 ```
 
-This indicates that data is missing in the queried time range and entropy is present.
+The results indicate that data is missing in the queried time range and entropy is present.
 
 ### Flapping dashboards
 
-A "flapping" dashboard means data visualizations changing when data is refreshed
+A "flapping" dashboard means data visualizations change when data is refreshed
 and pulled from a node with entropy (inconsistent data).
 It is the visual manifestation of getting [different results from the same query](#different-results-for-the-same-query).
 
@@ -103,13 +99,13 @@ It is the visual manifestation of getting [different results from the same query
 
 The Anti-Entropy service runs on each data node and periodically checks its shards' statuses
 relative to the next data node in the ownership list.
-It does this by creating a "digest" or summary of data in the shards on the node.
+The service creates a "digest" or summary of data in the shards on the node.
 
 For example, assume there are two data nodes in your cluster: `node1` and `node2`.
 Both `node1` and `node2` own `shard1` so `shard1` is replicated across each.
 
 When a status check runs, `node1` will ask `node2` when `shard1` was last modified.
-If the reported modification time differs from the previous check, then 
+If the reported modification time differs from the previous check, then
 `node1` asks `node2` for a new digest of `shard1`, checks for differences (performs a "diff") between the `shard1` digest for `node2` and the local `shard1` digest.
 If a difference exists, `shard1` is flagged as having entropy.
 
@@ -165,12 +161,12 @@ While write replication between shard owner nodes (with a
 greater than 1) typically happens in milliseconds, this slight difference is
 still enough to cause the appearance of entropy where there is none.
 
-Because the Anti-Entropy service repairs only cold shards, unexpected effects can occur. 
+Because the Anti-Entropy service repairs only cold shards, unexpected effects can occur.
 Consider the following scenario:
 
 1. A shard goes cold.
 2. Anti-Entropy detects entropy.
-3. Entropy is reported by the [Anti-Entropy `/status` API](/enterprise_influxdb/v1.7/administration/anti-entropy-api#status) or with the `influxd-ctl entropy show` command.
+3. Entropy is reported by the [Anti-Entropy `/status` API](/enterprise_influxdb/v1.7/administration/anti-entropy-api/#get-status) or with the `influxd-ctl entropy show` command.
 4. Shard takes a write, gets compacted, or something else causes it to go hot.
   _These actions are out of Anti-Entropy's control._
 5. A repair is requested, but is ignored because the shard is now hot.
@@ -334,8 +330,8 @@ The Anti-Entropy service only repairs cold shards or shards that are not current
 If the shard is hot, the Anti-Entropy service will wait until it goes cold again before performing the repair.
 
 If the shard is "old" and writes to it are part of a backfill process, you simply
-have to wait the until the backfill process is finished. If the shard is the active
-shard, you can `truncate-shards` to stop writes to active shards. This process is
+have to wait until the backfill process is finished. If the shard is the active
+shard, run `truncate-shards` to stop writes to active shards. This process is
 outlined [above](#fixing-entropy-in-active-shards).
 
 ### Anti-Entropy log messages

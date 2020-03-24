@@ -22,13 +22,13 @@ Where applicable, it links to outstanding issues on GitHub.
 * [Why aren't data dropped after I've altered a retention policy?](#why-aren-t-data-dropped-after-i-ve-altered-a-retention-policy)
 * [Why does InfluxDB fail to parse microsecond units in the configuration file?](#why-does-influxdb-fail-to-parse-microsecond-units-in-the-configuration-file)
 * [Does InfluxDB have a file system size limit?](#does-influxdb-have-a-file-system-size-limit)
-
+* [How do I manually trigger a compaction?](#how-do-i-manually-trigger-a-compaction)
 
 **Command line interface (CLI)**
 
-* [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-make-influxdb-s-cli-return-human-readable-timestamps)
-* [How can a non-admin user `USE` a database in the InfluxDB CLI?](#how-can-a-non-admin-user-use-a-database-in-influxdb-s-cli)
-* [How do I write to a non-`DEFAULT` retention policy with the InfluxDB CLI?](#how-do-i-write-to-a-non-default-retention-policy-with-influxdb-s-cli)
+* [How do I make InfluxDB’s CLI return human readable timestamps?](#how-do-i-use-the-influxdb-cli-to-return-human-readable-timestamps)
+* [How can a non-admin user `USE` a database in the InfluxDB CLI?](#how-can-a-non-admin-user-use-a-database-in-the-influxdb-cli)
+* [How do I write to a non-`DEFAULT` retention policy with the InfluxDB CLI?](#how-do-i-write-to-a-non-default-retention-policy-with-the-influxdb-cli)
 * [How do I cancel a long-running query?](#how-do-i-cancel-a-long-running-query)
 
 **Data types**
@@ -72,7 +72,7 @@ Where applicable, it links to outstanding issues on GitHub.
 
 * [How do I write integer field values?](#how-do-i-write-integer-field-values)
 * [How does InfluxDB handle duplicate points?](#how-does-influxdb-handle-duplicate-points)
-* [What newline character does the InfluxDB API require?](#what-newline-character-does-the-http-api-require)
+* [What newline character does the InfluxDB API require?](#what-newline-character-does-the-influxdb-api-require)
 * [What words and characters should I avoid when writing data to InfluxDB?](#what-words-and-characters-should-i-avoid-when-writing-data-to-influxdb)
 * [When should I single quote and when should I double quote when writing data?](#when-should-i-single-quote-and-when-should-i-double-quote-when-writing-data)
 * [Does the precision of the timestamp matter?](#does-the-precision-of-the-timestamp-matter)
@@ -119,7 +119,7 @@ InfluxDB shell version: 1.4.x
 #### Check the HTTP response in your logs:
 
 ```bash
-$ journald-ctl -u influxdb.service
+$ journalctl -u influxdb.service
 
 Mar 01 20:49:45 rk-api influxd[29560]: [httpd] 127.0.0.1 - - [01/Mar/2017:20:49:45 +0000] "POST /query?db=&epoch=ns&q=SHOW+DATABASES HTTP/1.1" 200 151 "-" ✨ "InfluxDBShell/1.4.x" ✨ 9a4371a1-fec0-11e6-84b6-000000000000 1709
 ```
@@ -207,10 +207,19 @@ run: parse config: time: unknown unit [µ|u] in duration [<integer>µ|<integer>u
 InfluxDB works within file system size restrictions for Linux and Windows POSIX. Some storage providers and distributions have size restrictions; for example:
 
 - Amazon EBS volume limits size to ~16TB
-- Linux ext3 file system limits size ~16TB 
+- Linux ext3 file system limits size ~16TB
 - Linux ext4 file system limits size to ~1EB (with file size limit ~16TB)
 
 If you anticipate growing over 16TB per volume/file system, we recommend finding a provider and distribution that supports your storage requirements.
+
+## How do I manually trigger a compaction?
+
+Trigger a full compaction after startup by adjusting the [`compact-full-write-cold-duration`](/influxdb/v1.7/administration/config/#compact-full-write-cold-duration-4h) setting in your InfluxDB configuration file. For more information, see [Using the configuration file](/influxdb/v1.7/administration/config/#using-the-configuration-file/). Consider the following items may affect the schedule for compaction:
+
+- Shard duration and write patterns. For example, frequently writing to old shards may affect compaction.
+- Number of concurrent compactions (`max-concurrent-compactions`). For example, multiple shards pending compaction may affect when a compaction is run.
+
+> **Note:** You can't manually trigger a compaction via the API.
 
 ## How do I use the InfluxDB CLI to return human readable timestamps?
 
@@ -288,7 +297,7 @@ Acceptable Boolean syntax differs for data writes and data queries.
 
 For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with `bool` set to `TRUE`, but `SELECT * FROM "hamlet" WHERE "bool"=T` returns nothing.
 
-<dt> [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) </dt>
+{{% warn %}} [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) {{% /warn %}}
 
 ## How does InfluxDB handle field type discrepancies across shards?
 
@@ -595,35 +604,129 @@ time                    sunflowers                 time                  mean
 
 ## Why do my queries return no data or partial data?
 
-There are several possible explanations for why a query returns no data or partial data.
-We list some of the most frequent cases below:
+The most common reasons why your query returns no data or partial data:
 
-### Retention policies
+- [Querying the wrong retention policy](#querying-wrong-retention-policy) (no data returned)
+- [No field key in the SELECT clause](#no-field-key-in-the-select-clause) (no data returned)
+- [SELECT query includes `GROUP BY time()`](#select-query-includes-group-by-time) (partial data before `now()` returned)
+- [Tag and field key with the same name](#tag-and-field-key-with-the-same-name)
 
-The first and most common explanation involves [retention policies](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP).
-InfluxDB automatically queries data in a database’s `DEFAULT` RP.
-If your data is stored in an RP other than the `DEFAULT` RP, InfluxDB won’t return any results unless you specify the alternative RP.
+### Querying the wrong retention policy
 
-### Tag keys in the SELECT clause
+InfluxDB automatically queries data in a database’s `DEFAULT` retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP). If your data is stored in another RP, you must specify the RP in your query to get results.
 
-A query requires at least one [field key](/influxdb/v1.7/concepts/glossary/#field-key)
-in the `SELECT` clause to return data.
-If the `SELECT` clause only includes a single [tag key](/influxdb/v1.7/concepts/glossary/#tag-key) or several tag keys, the
-query returns an empty response.
-For more information, see [Data exploration](/influxdb/v1.7/query_language/data_exploration/#common-issues-with-the-select-statement).
+### No field key in the SELECT clause
 
-### Query time range
+A query requires at least one [field key](/influxdb/v1.7/concepts/glossary/#field-key) in the `SELECT` clause. If the `SELECT` clause includes only [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), the query returns an empty response. For more information, see [Data exploration](/influxdb/v1.7/query_language/data_exploration/#common-issues-with-the-select-statement).
 
-Another possible explanation has to do with your query’s time range.
-By default, most [`SELECT` queries](/influxdb/v1.7/query_language/data_exploration/#the-basic-select-statement) cover the time range between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC. `SELECT` queries that also include a [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals), however, cover the time range between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.7/concepts/glossary/#now).
-If any of your data occur after `now()` a `GROUP BY time()` query will not cover those data points.
-Your query will need to provide [an alternative upper bound](/influxdb/v1.7/query_language/data_exploration/#time-syntax) for the time range if the query includes a `GROUP BY time()` clause and if any of your data occur after `now()`.
+### SELECT query includes `GROUP BY time()`
 
-### Identifier names
+If your `SELECT` query includes a [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals), only data points between `1677-09-21 00:12:43.145224194` and [`now()`](/influxdb/v1.7/concepts/glossary/#now) are returned. Therefore, if any of your data points occur after `now()`, specify [an alternative upper bound](/influxdb/v1.7/query_language/data_exploration/#time-syntax) in your time interval.
 
-The final common explanation involves [schemas](/influxdb/v1.7/concepts/glossary/#schema) with [fields](/influxdb/v1.7/concepts/glossary/#field) and [tags](/influxdb/v1.7/concepts/glossary/#tag) that have the same key.
-If a field and tag have the same key, the field will take precedence in all queries.
-You’ll need to use the [`::tag` syntax](/influxdb/v1.7/query_language/data_exploration/#description-of-syntax) to specify the tag key in queries.
+(By default, most [`SELECT` queries](/influxdb/v1.7/query_language/data_exploration/#the-basic-select-statement) query data with timestamps between `1677-09-21 00:12:43.145224194` and `2262-04-11T23:47:16.854775806Z` UTC.)
+
+### Tag and field key with the same name
+
+Avoid using the same name for a tag and field key. If you inadvertently add the same name for a tag and field key, and then query both keys together, the query results show the second key queried (tag or field) appended with `_1` (also visible as the column header in Chronograf). To query a tag or field key appended with `_1`, you **must drop** the appended `_1` **and include** the syntax `::tag` or `::field`.
+
+#### Example
+
+1. [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx).
+
+2. Write the following points to create both a field and tag key with the same name `leaves`:
+
+    ```bash
+    # create the `leaves` tag key
+    INSERT grape,leaves=species leaves=6
+
+    #create the `leaves` field key
+    INSERT grape leaves=5
+    ```
+
+3. If you view both keys, you'll notice that neither key includes `_1`:
+
+    ```bash
+    # show the `leaves` tag key
+    SHOW TAG KEYS
+
+    name: grape
+    tagKey
+    ------
+    leaves
+
+    # create the `leaves` field key
+    SHOW FIELD KEYS
+
+    name: grape
+    fieldKey   fieldType
+    ------     ---------
+    leaves     float
+```
+
+4. If you query the `grape` measurement, you'll see the `leaves` tag key has an appended `_1`:
+
+    ```bash
+    # query the `grape` measurement
+    SELECT * FROM <database_name>.<retention_policy>."grape"
+
+    name: grape
+    time                leaves      leaves_1
+    ----                --------    ----------
+    1574128162128468000 6.00        species
+    1574128238044155000 5.00
+    ```
+
+5. To query a duplicate key name, you **must drop** `_1` **and include** `::tag` or `::field` after the key:
+
+    ```bash
+    # query duplicate keys using the correct syntax
+    SELECT "leaves"::tag, "leaves"::field FROM <database_name>.<retention_policy>."grape"
+
+    name: grape
+    time                leaves     leaves_1
+    ----                --------   ----------
+    1574128162128468000 species    6.00
+    1574128238044155000            5.00
+    ```
+
+    Therefore, queries that reference `leaves_1` don't return values.
+
+{{% warn %}}**Warning:** If you inadvertently add a duplicate key name, follow the steps below to [remove a duplicate key](#remove-a-duplicate-key). Because of memory requirements, if you have large amounts of data, we recommend chunking your data (while selecting it) by a specified interval (for example, date range) to fit the allotted memory.
+{{% /warn %}}
+
+#### Remove a duplicate key
+
+1. [Launch `influx`](/influxdb/v1.7/tools/shell/#launch-influx).
+
+2. Use the following queries to remove a duplicate key.
+
+    ```sql
+
+    /* select each field key to keep in the original measurement and send to a temporary
+       measurement; then, group by the tag keys to keep (leave out the duplicate key) */
+
+    SELECT "field_key","field_key2","field_key3"
+    INTO <temporary_measurement> FROM <original_measurement>
+    WHERE <date range> GROUP BY "tag_key","tag_key2","tag_key3"
+
+    /* verify the field keys and tags keys were successfully moved to the temporary
+    measurement */
+    SELECT * FROM "temporary_measurement"
+
+    /* drop original measurement (with the duplicate key) */
+    DROP MEASUREMENT "original_measurement"
+
+    /* move data from temporary measurement back to original measurement you just dropped */
+    SELECT * INTO "original_measurement" FROM "temporary_measurement" GROUP BY *
+
+    /* verify the field keys and tags keys were successfully moved back to the original
+     measurement */
+    SELECT * FROM "original_measurement"
+
+    /* drop temporary measurement */
+    DROP MEASUREMENT "temporary_measurement"
+
+    ```
 
 ## Why don't my GROUP BY time() queries return timestamps that occur after now()?
 
@@ -684,7 +787,7 @@ time                  value	 precision_supplied  timestamp_supplied
 1970-01-01T02:00:00Z  6      h                   2
 ```
 
-<dt> [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) </dt>
+{{% warn %}} [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) {{% /warn %}}
 
 ## When should I single quote and when should I double quote in queries?
 
@@ -768,8 +871,8 @@ Example:
 >
 ```
 
-<dt> [GitHub Issue #7530](https://github.com/influxdata/influxdb/issues/7530)
-</dt>
+{{% warn %}} [GitHub Issue #7530](https://github.com/influxdata/influxdb/issues/7530)
+{{% /warn %}}
 
 ## Why does `fill(previous)` return empty results?
 
@@ -812,7 +915,7 @@ This can cause InfluxDB to overwrite [points](/influxdb/v1.7/concepts/glossary/#
 Include `GROUP BY *` in all `INTO` queries to preserve tags in the newly written data.
 
 Note that this behavior does not apply to queries that use the [`TOP()`](/influxdb/v1.7/query_language/functions/#top) or [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#bottom) functions.
-See the [`TOP()`](/influxdb/v1.7/query_language/functions/#issue-3-top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#issue-3-bottom-tags-and-the-into-clause) documentation for more information.
+See the [`TOP()`](/influxdb/v1.7/query_language/functions/#top-tags-and-the-into-clause) and [`BOTTOM()`](/influxdb/v1.7/query_language/functions/#bottom-tags-and-the-into-clause) documentation for more information.
 
 #### Example
 

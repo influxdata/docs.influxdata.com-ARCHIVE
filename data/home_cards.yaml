@@ -1,9 +1,26 @@
 cards:
 
+  # InfluxDB v2 card
+  - id: influxdb2
+    category: oss
+    title: InfluxDB 2.0
+    description: The latest version of the leading time series platform built for metrics and events, packaged as one solution.
+    links:
+      - text: Get started with InfluxDB Cloud 2.0
+        type: absolute
+        href: https://v2.docs.influxdata.com/v2.0/cloud/get-started/
+      - text: Get started with InfluxDB 2.0 open source (beta)
+        type: absolute
+        href: https://v2.docs.influxdata.com/v2.0/get-started/
+      - text: Documentation (Cloud and open source)
+        type: absolute
+        href: https://v2.docs.influxdata.com/
+
+
   # Flux card
   - id: flux
     category: oss
-    title: Introducing Flux
+    title: Flux
     description: Flux is InfluxData's new functional data scripting language designed for querying, analyzing, and transforming data.
     links:
       - text: Get Started

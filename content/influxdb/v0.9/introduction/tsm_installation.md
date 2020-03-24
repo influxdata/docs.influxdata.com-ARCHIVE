@@ -2,8 +2,8 @@
 title: Installation with the TSM Tree Storage Engine
 ---
 
-<dt>The new storage engine is for testing purposes only at this point.
-Until the 0.9.5 release is made, assume that any data could be corrupted or lost and that you may have to blow away your data when upgrading from one nightly build to another.</dt>
+{{% warn %}}The new storage engine is for testing purposes only at this point.
+Until the 0.9.5 release is made, assume that any data could be corrupted or lost and that you may have to blow away your data when upgrading from one nightly build to another.{{% /warn %}}
 
 First, you'll need to install the nightly build, available on the <a href="/download/index.html" target="_">download page</a>.
 

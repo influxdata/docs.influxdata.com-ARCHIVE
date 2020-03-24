@@ -12,12 +12,25 @@ has become a popular way to deploy and manage containers across multiple servers
 
 ![InfluxDB Kubernetes Logos](/img/platform/flux-kube.png)
 
-There are several ways use the InfluxData Platform (also known as the TICK
-stack) with Kubernetes:
+{{% note %}}
+This page is about using Kubernetes with the TICK stack and 1.x versions of InfluxDB.
+
+To start experimenting with InfluxDB 2.0 and Kubernetes, go to the **Kubernetes** section of the [Get Started page for InfluxDB 2.0](https://v2.docs.influxdata.com/v2.0/get-started/).
+{{% /note %}}
+
+There are several ways use the InfluxData Platform with Kubernetes:
 
 - [Monitor Kubernetes](#monitor-kubernetes)
+  - [kube-influxdb Kubernetes monitoring project](#kube-influxdb-kubernetes-monitoring-project)
+  - [Collect Kubernetes metrics with Telegraf](#collect-kubernetes-metrics-with-telegraf)
+  - [Prometheus remote read and write support](#prometheus-remote-read-and-write-support)
 - [Deploy the TICK stack in Kubernetes](#deploy-the-tick-stack-in-kubernetes)
+  - [Helm Charts](#helm-charts)
+  - [K8s Operator](#k8s-operator)
+  - [Solutions for Kubernetes services](#solutions-for-kubernetes-services)
 - [Frequently asked questions](#frequently-asked-questions)
+  - [How is the InfluxData Platform (TICK) different from Prometheus?](#how-is-the-influxdata-platform-tick-different-from-prometheus)
+  - [Should I run InfluxDB in Kubernetes?](#should-i-run-influxdb-in-kubernetes)
 
 ## Monitor Kubernetes
 
@@ -61,11 +74,9 @@ TICK stack – Telegraf, InfluxDB, Chronograf, and Kapacitor in Kubernetes.
 
 ### Helm Charts
 
-The [TICK Charts](https://github.com/influxdata/tick-charts) repository provides
-a set of [Helm charts](https://docs.helm.sh/) to deploy every component of the
-InfluxData Platform in Kubernetes.
+InfluxData maintains [Helm charts](https://github.com/influxdata/helm-charts) for setting up data collection and monitoring in Kubernetes using InfluxDB and related applications.
 
-Learn how to [deploy the InfluxData Platform using Helm Charts](https://github.com/influxdata/tick-charts/blob/master/README.md)
+> **Note:** Helm charts are currently in beta and subject to change.
 
 ### K8s Operator
 

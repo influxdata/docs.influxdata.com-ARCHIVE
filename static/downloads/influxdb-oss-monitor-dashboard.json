@@ -1,0 +1,1051 @@
+{
+	"meta": {
+		"chronografVersion": "1.7.14",
+		"sources": {
+			"1": {
+				"name": "InfluxDB",
+				"link": "/chronograf/v1/sources/1"
+			}
+		}
+	},
+	"dashboard": {
+		"id": 22,
+		"cells": [
+			{
+				"i": "4f7570dc-3f58-4d0f-a911-feccde07a692",
+				"x": 0,
+				"y": 13,
+				"w": 12,
+				"h": 4,
+				"name": "Continuous Queries Executed Per Minute",
+				"queries": [
+					{
+						"query": "SELECT non_negative_derivative(max(/.*/),60s) FROM :database:../cq/ WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(null)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(max(/.*/),60s) FROM :database:../cq/ WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(null)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "731cb197-e6ac-48d5-974f-03c32ba864de",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "a64b1fce-50e3-471c-a78b-2df4ed07798d",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "9211508a-a22c-4000-a71b-96b17c14b447",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `influxdb` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/cells/4f7570dc-3f58-4d0f-a911-feccde07a692"
+				}
+			},
+			{
+				"i": "5b8effe0-a646-40e0-b45d-d696524717c5",
+				"x": 0,
+				"y": 9,
+				"w": 6,
+				"h": 4,
+				"name": "Heap Size",
+				"queries": [
+					{
+						"query": "SELECT mean(\"HeapInUse\") FROM :database:../runtime/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT mean(\"HeapInUse\") FROM :database:../runtime/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "2",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "731cb197-e6ac-48d5-974f-03c32ba864de",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "a64b1fce-50e3-471c-a78b-2df4ed07798d",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "9211508a-a22c-4000-a71b-96b17c14b447",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `influxdb` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb)._",
+				"noteVisibility": "default",
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/cells/5b8effe0-a646-40e0-b45d-d696524717c5"
+				}
+			},
+			{
+				"i": "f392f2ee-e12b-48ce-bca4-8d70d7f59165",
+				"x": 6,
+				"y": 9,
+				"w": 6,
+				"h": 4,
+				"name": "Shard Write Errors",
+				"queries": [
+					{
+						"query": "SELECT non_negative_derivative(max(\"writeError\"), 10s) FROM :database:../write/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(max(\"writeError\"), 10s) FROM :database:../write/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "731cb197-e6ac-48d5-974f-03c32ba864de",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "a64b1fce-50e3-471c-a78b-2df4ed07798d",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "9211508a-a22c-4000-a71b-96b17c14b447",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `influxdb` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/cells/f392f2ee-e12b-48ce-bca4-8d70d7f59165"
+				}
+			},
+			{
+				"i": "279bb92e-2d3a-4ca0-ab21-34c39321d64c",
+				"x": 0,
+				"y": 5,
+				"w": 6,
+				"h": 4,
+				"name": "Series Cardinality & Measurements by Database",
+				"queries": [
+					{
+						"query": "SELECT max(\"numSeries\") AS \"Series Cardinality\" FROM :database:../database/ WHERE time > :dashboardTime:  GROUP BY time(:interval:), \"database\" fill(null)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT max(\"numSeries\") AS \"Series Cardinality\" FROM :database:../database/ WHERE time > :dashboardTime:  GROUP BY time(:interval:), \"database\" fill(null)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					},
+					{
+						"query": "SELECT max(\"numMeasurements\") AS \"Measurements\" FROM :database:../database/ WHERE time > :dashboardTime:  GROUP BY time(:interval:), \"database\" fill(null)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT max(\"numMeasurements\") AS \"Measurements\" FROM :database:../database/ WHERE time > :dashboardTime:  GROUP BY time(:interval:), \"database\" fill(null)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "918d1196-dcca-4a61-ba54-83cbd0929dea",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "ea81a8b6-ace5-4a73-a1e4-06c62d72e0cf",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "ebc1b6a4-5218-46b0-b1c0-89b7f1a58c9d",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": true,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [
+					{
+						"internalName": "time",
+						"displayName": "",
+						"visible": true
+					},
+					{
+						"internalName": "database",
+						"displayName": "",
+						"visible": true
+					},
+					{
+						"internalName": "influxdb_database.Series Cardinality",
+						"displayName": "",
+						"visible": true
+					}
+				],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `influxdb` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/cells/279bb92e-2d3a-4ca0-ab21-34c39321d64c"
+				}
+			},
+			{
+				"i": "1fe19766-08b3-4c21-afaf-f31c606ddcf2",
+				"x": 6,
+				"y": 5,
+				"w": 6,
+				"h": 4,
+				"name": "HTTP Request Duration (99th %)",
+				"queries": [
+					{
+						"query": "SELECT non_negative_derivative(percentile(\"writeReqDurationNs\", 99)) /  non_negative_derivative(max(\"writeReq\")) AS \"Write Request\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(0)\t",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(percentile(\"writeReqDurationNs\", 99)) /  non_negative_derivative(max(\"writeReq\")) AS \"Write Request\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:) fill(0)\t",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					},
+					{
+						"query": "SELECT non_negative_derivative(percentile(\"queryReqDurationNs\", 99)) / non_negative_derivative(max(\"queryReq\")) AS \"Query Request\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(percentile(\"queryReqDurationNs\", 99)) / non_negative_derivative(max(\"queryReq\")) AS \"Query Request\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY hostname, time(:interval:)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "2",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "731cb197-e6ac-48d5-974f-03c32ba864de",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "a64b1fce-50e3-471c-a78b-2df4ed07798d",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "9211508a-a22c-4000-a71b-96b17c14b447",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `influxdb` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/cells/1fe19766-08b3-4c21-afaf-f31c606ddcf2"
+				}
+			},
+			{
+				"i": "3b8c6aa4-5563-45b5-884c-1a0fa1c24d33",
+				"x": 8,
+				"y": 0,
+				"w": 4,
+				"h": 5,
+				"name": "Points Throughput Per Min by Hostname",
+				"queries": [
+					{
+						"query": "SELECT non_negative_derivative(max(\"pointReq\"), 60s) FROM :database:../write/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(max(\"pointReq\"), 60s) FROM :database:../write/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "731cb197-e6ac-48d5-974f-03c32ba864de",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "a64b1fce-50e3-471c-a78b-2df4ed07798d",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "9211508a-a22c-4000-a71b-96b17c14b447",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `influxdb` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/cells/3b8c6aa4-5563-45b5-884c-1a0fa1c24d33"
+				}
+			},
+			{
+				"i": "3864d65d-b56a-4d22-8f08-299566d1b74f",
+				"x": 0,
+				"y": 0,
+				"w": 4,
+				"h": 5,
+				"name": "Queries Executed Per Minute",
+				"queries": [
+					{
+						"query": "SELECT non_negative_derivative(max(\"queriesExecuted\"), 60s) AS \"Queries Executed\" FROM :database:../queryExecutor/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(max(\"queriesExecuted\"), 60s) AS \"Queries Executed\" FROM :database:../queryExecutor/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\" fill(null)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "731cb197-e6ac-48d5-974f-03c32ba864de",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "a64b1fce-50e3-471c-a78b-2df4ed07798d",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "9211508a-a22c-4000-a71b-96b17c14b447",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `influxdb` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/cells/3864d65d-b56a-4d22-8f08-299566d1b74f"
+				}
+			},
+			{
+				"i": "99e040ba-322c-4232-b449-6c7882a15266",
+				"x": 4,
+				"y": 0,
+				"w": 4,
+				"h": 5,
+				"name": "HTTP Requests Per Minute",
+				"queries": [
+					{
+						"query": "SELECT non_negative_derivative(max(\"queryReq\"), 60s) AS \"Query\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(max(\"queryReq\"), 60s) AS \"Query\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					},
+					{
+						"query": "SELECT non_negative_derivative(max(\"writeReq\"), 60s) AS \"Writes\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(max(\"writeReq\"), 60s) AS \"Writes\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					},
+					{
+						"query": "SELECT non_negative_derivative(max(\"serverError\"), 60s) AS \"Server Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(max(\"serverError\"), 60s) AS \"Server Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					},
+					{
+						"query": "SELECT non_negative_derivative(max(\"clientError\"), 60s) AS \"Client Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(max(\"clientError\"), 60s) AS \"Client Errors\" FROM :database:../httpd/ WHERE time > :dashboardTime: GROUP BY time(:interval:), \"hostname\"",
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "731cb197-e6ac-48d5-974f-03c32ba864de",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "a64b1fce-50e3-471c-a78b-2df4ed07798d",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "9211508a-a22c-4000-a71b-96b17c14b447",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `influxdb` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/cells/99e040ba-322c-4232-b449-6c7882a15266"
+				}
+			}
+		],
+		"templates": [
+			{
+				"tempVar": ":database:",
+				"values": [
+					{
+						"value": "_internal",
+						"type": "database",
+						"selected": true
+					}
+				],
+				"id": "fed70906-55d4-49e3-bec0-62e3cbabc8bc",
+				"type": "databases",
+				"label": "",
+				"query": {
+					"influxql": "SHOW DATABASES",
+					"measurement": "",
+					"tagKey": "",
+					"fieldKey": ""
+				},
+				"links": {
+					"self": "/chronograf/v1/dashboards/22/templates/fed70906-55d4-49e3-bec0-62e3cbabc8bc"
+				}
+			}
+		],
+		"name": "InfluxDB OSS Monitor",
+		"organization": "default",
+		"links": {
+			"self": "/chronograf/v1/dashboards/22",
+			"cells": "/chronograf/v1/dashboards/22/cells",
+			"templates": "/chronograf/v1/dashboards/22/templates"
+		}
+	}
+}

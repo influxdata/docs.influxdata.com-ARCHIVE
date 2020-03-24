@@ -172,7 +172,7 @@ The query [fills](/influxdb/v1.7/query_language/data_exploration/#group-by-time-
 
 ##### Count the distinct field values associated with a field key
 
-```sql 
+```sql
 > SELECT COUNT(DISTINCT("level description")) FROM "h2o_feet"
 
 name: h2o_feet
@@ -1051,7 +1051,7 @@ time                  bottom  location
 The query returns the smallest three values in the `water_level` field key for each 24-minute [interval](/influxdb/v1.7/query_language/data_exploration/#basic-group-by-time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:54:00Z`.
 It also returns results in [descending timestamp](/influxdb/v1.7/query_language/data_exploration/#order-by-time-desc) order.
 
-Notice that the [GROUP BY time() clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) does not override the points’ original timestamps. See [Issue 1](#issue-1-bottom-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
+Notice that the [GROUP BY time() clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) does not override the points’ original timestamps. See [Issue 1](#bottom-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 #### Common Issues with `BOTTOM()`
 
@@ -1756,7 +1756,7 @@ The query returns one randomly selected point from the `water_level` field key.
 It covers the [time range](/influxdb/v1.7/query_language/data_exploration/#time-syntax) between `2015-08-18T00:00:00Z` and `2015-08-18T00:30:00Z` and [groups](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) results into 18-minute intervals.
 
 Notice that the [`GROUP BY time()` clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) does not override the points' original timestamps.
-See [Issue 1](#issue-1-sample-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
+See [Issue 1](#sample-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 #### Common Issues with `SAMPLE()`
 
@@ -1890,7 +1890,7 @@ The query returns the greatest three values in the `water_level` field key for e
 It also returns results in [descending timestamp](/influxdb/v1.7/query_language/data_exploration/#order-by-time-desc) order.
 
 Notice that the [GROUP BY time() clause](/influxdb/v1.7/query_language/data_exploration/#group-by-time-intervals) does not override the points’ original timestamps.
-See [Issue 1](#issue-1-top-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
+See [Issue 1](#top-with-a-group-by-time-clause) in the section below for a more detailed explanation of that behavior.
 
 #### Common Issues with `TOP()`
 
@@ -4127,7 +4127,7 @@ time                  exp_water_level
 ```
 ```
 
-The query returns the exponential of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement. 
+The query returns the exponential of field values for each field key that stores numerical values and includes the word `water` in the `h2o_feet` measurement.
 -->
 
 ###### Calculate the exponential of field values associated with a field key and include several clauses
@@ -5250,7 +5250,7 @@ See the [Advanced Syntax](#advanced-syntax-4) section for how to use `NON_NEGATI
 
 ##### Examples
 
-See the examples in the [`DERIVATIVE()` documentation](#examples-of-basic-syntax-1).
+See the examples in the [`DERIVATIVE()` documentation](#basic-syntax-8).
 `NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
 
 #### Advanced syntax
@@ -5281,7 +5281,7 @@ Note that this behavior is different from the [basic syntax's](#basic-syntax-4) 
 
 ##### Examples
 
-See the examples in the [`DERIVATIVE()` documentation](#examples-of-advanced-syntax-1).
+See the examples in the [`DERIVATIVE()` documentation](#advanced-syntax-8).
 `NON_NEGATIVE_DERIVATIVE()` behaves the same as the `DERIVATIVE()` function but `NON_NEGATIVE_DERIVATIVE()` returns only positive rates of change or rates of change that equal zero.
 
 ### NON_NEGATIVE_DIFFERENCE()
@@ -5311,7 +5311,7 @@ See the [Advanced Syntax](#advanced-syntax-5) section for how to use `NON_NEGATI
 
 ##### Examples
 
-See the examples in the [`DIFFERENCE()` documentation](#examples-of-basic-syntax-2).
+See the examples in the [`DIFFERENCE()` documentation](#basic-syntax-9).
 `NON_NEGATIVE_DIFFERENCE()` behaves the same as the `DIFFERENCE()` function but `NON_NEGATIVE_DIFFERENCE()` returns only positive differences or differences that equal zero.
 
 #### Advanced syntax
@@ -5337,7 +5337,7 @@ The query first calculates the results for the nested function at the specified 
 
 ##### Examples
 
-See the examples in the [`DIFFERENCE()` documentation](#examples-of-advanced-syntax-2).
+See the examples in the [`DIFFERENCE()` documentation](#advanced-syntax-9).
 `NON_NEGATIVE_DIFFERENCE()` behaves the same as the `DIFFERENCE()` function but `NON_NEGATIVE_DIFFERENCE()` returns only positive differences or differences that equal zero.
 
 ### POW()

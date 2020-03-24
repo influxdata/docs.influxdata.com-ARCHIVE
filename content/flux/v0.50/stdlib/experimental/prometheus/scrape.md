@@ -27,7 +27,7 @@ By using this function, you accept the [risks of experimental functions](/flux/v
 import "experimental/prometheus"
 
 prometheus.scrape(
-  url: "http://localhost:9999/metrics"
+  url: "http://localhost:8086/metrics"
 )
 ```
 

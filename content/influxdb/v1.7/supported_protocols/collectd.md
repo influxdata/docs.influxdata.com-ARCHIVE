@@ -49,6 +49,4 @@ Please note that UDP packets larger than the standard size of 1452 are dropped a
   parse-multivalue-plugin = "split"  # "split" or "join"
 ```
 
-
-
-Content from  [README](https://github.com/influxdata/influxdb/blob/master/services/collectd/README.md) on GitHub.
+Content from [README](https://github.com/influxdata/influxdb/tree/1.7/services/collectd/README.md) on GitHub.

@@ -29,14 +29,14 @@ You will need to append this section to the Telegraf configuration file and rest
 Now you are ready to start listening on the destination port (`8089` in this example) using a simple tool like `netcat`:
 
 ```
-nc -lu 8089
+nc -lup 8089
 ```
 
 `nc` will print the exact Telegraf output on stdout.
 You can also direct the output to a file for further inspection:
 
 ```
-nc -lu 8089 > telegraf_dump.txt
+nc -lup 8089 > telegraf_dump.txt
 ```
 
 ## Submit test inputs

@@ -1,0 +1,796 @@
+{
+	"meta": {
+		"chronografVersion": "1.7.14",
+		"sources": {
+			"1": {
+				"name": "InfluxDB",
+				"link": "/chronograf/v1/sources/1"
+			}
+		}
+	},
+	"dashboard": {
+		"id": 21,
+		"cells": [
+			{
+				"i": "e448a790-3612-45cc-9d8b-037b1d280e76",
+				"x": 0,
+				"y": 8,
+				"w": 12,
+				"h": 4,
+				"name": "Ingest by Task",
+				"queries": [
+					{
+						"query": "SELECT non_negative_derivative(\"collected\",1s) FROM :database:../kapacitor/ WHERE time > :dashboardTime: AND (\"parent\"='stream' OR \"parent\"='batch') GROUP BY task",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT non_negative_derivative(\"collected\",1s) FROM :database:../kapacitor/ WHERE time > :dashboardTime: AND (\"parent\"='stream' OR \"parent\"='batch') GROUP BY task",
+							"range": null,
+							"shifts": null
+						},
+						"source": "/chronograf/v1/sources/1",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": " pts/s",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "bar",
+				"colors": [
+					{
+						"id": "007ac4bf-c005-4c7b-bf5f-7dbacf7d7064",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "b3c8579a-d594-4a98-bc6c-712d59021164",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "e9001346-498a-4f31-b2fd-319e4fff33c9",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `kapacitor` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kapacitor)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/cells/e448a790-3612-45cc-9d8b-037b1d280e76"
+				}
+			},
+			{
+				"i": "c1f1ced8-1be2-4289-8f00-8308b18d80dc",
+				"x": 6,
+				"y": 4,
+				"w": 6,
+				"h": 4,
+				"name": "Data Ingest Rate",
+				"queries": [
+					{
+						"query": "SELECT sum(points_received_rate) FROM (SELECT non_negative_derivative(first(\"points_received\"),1s) as \"points_received_rate\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: GROUP BY \"database\", \"retention_policy\", \"measurement\", time(1s)) WHERE time > :dashboardTime: GROUP BY time(1s) fill(previous)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT sum(points_received_rate) FROM (SELECT non_negative_derivative(first(\"points_received\"),1s) as \"points_received_rate\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: GROUP BY \"database\", \"retention_policy\", \"measurement\", time(1s)) WHERE time > :dashboardTime: GROUP BY time(1s) fill(previous)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "/chronograf/v1/sources/1",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": " pts/s",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line-plus-single-stat",
+				"colors": [
+					{
+						"id": "base",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "b3c8579a-d594-4a98-bc6c-712d59021164",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "e9001346-498a-4f31-b2fd-319e4fff33c9",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": true,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `kapacitor` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kapacitor)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/cells/c1f1ced8-1be2-4289-8f00-8308b18d80dc"
+				}
+			},
+			{
+				"i": "460014ac-9716-41f3-8999-0d35ff3fbf9c",
+				"x": 0,
+				"y": 4,
+				"w": 3,
+				"h": 4,
+				"name": "Number of Subscriptions",
+				"queries": [
+					{
+						"query": "SELECT \"num_subscriptions\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: fill(0)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT \"num_subscriptions\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: fill(0)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "/chronograf/v1/sources/1",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "single-stat",
+				"colors": [
+					{
+						"id": "base",
+						"type": "text",
+						"hex": "#00C9FF",
+						"name": "laser",
+						"value": "-1000000000000000000"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `kapacitor` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kapacitor)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/cells/460014ac-9716-41f3-8999-0d35ff3fbf9c"
+				}
+			},
+			{
+				"i": "67cb0219-f359-4459-a815-4a38a989b9f0",
+				"x": 3,
+				"y": 4,
+				"w": 3,
+				"h": 4,
+				"name": "Number of Running Tasks",
+				"queries": [
+					{
+						"query": "SELECT \"num_enabled_tasks\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: and time < :upperDashboardTime: fill(0)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT \"num_enabled_tasks\" FROM :database:../kapacitor/ WHERE time > :dashboardTime: and time < :upperDashboardTime: fill(0)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "/chronograf/v1/sources/1",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "single-stat",
+				"colors": [
+					{
+						"id": "base",
+						"type": "text",
+						"hex": "#00C9FF",
+						"name": "laser",
+						"value": "-1000000000000000000"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `kapacitor` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kapacitor)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/cells/67cb0219-f359-4459-a815-4a38a989b9f0"
+				}
+			},
+			{
+				"i": "71ffc4af-d571-4cf8-93ce-aee979abb165",
+				"x": 4,
+				"y": 0,
+				"w": 4,
+				"h": 4,
+				"name": "Kapacitor Host CPU Usage",
+				"queries": [
+					{
+						"query": "SELECT mean(\"usage_user\") as \"Kapacitor Usage\" FROM :database:../cpu/ WHERE time > :dashboardTime: AND \"cpu\"='cpu-total' group by time(:interval:)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT mean(\"usage_user\") as \"Kapacitor Usage\" FROM :database:../cpu/ WHERE time > :dashboardTime: AND \"cpu\"='cpu-total' group by time(:interval:)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "/chronograf/v1/sources/1",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "%",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "007ac4bf-c005-4c7b-bf5f-7dbacf7d7064",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "b3c8579a-d594-4a98-bc6c-712d59021164",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "e9001346-498a-4f31-b2fd-319e4fff33c9",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `cpu` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/cpu)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/cells/71ffc4af-d571-4cf8-93ce-aee979abb165"
+				}
+			},
+			{
+				"i": "b5287b2a-a81f-43b1-a646-3bd41d869602",
+				"x": 8,
+				"y": 0,
+				"w": 4,
+				"h": 4,
+				"name": "Kapacitor Host Load (1, 5, 15)",
+				"queries": [
+					{
+						"query": "SELECT mean(\"load5\") as \"Kapacitor Load5\", mean(\"load15\") as \"Kapacitor Load15\", mean(\"load1\") as \"Kapacitor Load1\" FROM :database:../system/ WHERE time > :dashboardTime: group by time(:interval:)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT mean(\"load5\") as \"Kapacitor Load5\", mean(\"load15\") as \"Kapacitor Load15\", mean(\"load1\") as \"Kapacitor Load1\" FROM :database:../system/ WHERE time > :dashboardTime: group by time(:interval:)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "/chronograf/v1/sources/1",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "007ac4bf-c005-4c7b-bf5f-7dbacf7d7064",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "b3c8579a-d594-4a98-bc6c-712d59021164",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "e9001346-498a-4f31-b2fd-319e4fff33c9",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `sytstem` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/cells/b5287b2a-a81f-43b1-a646-3bd41d869602"
+				}
+			},
+			{
+				"i": "a270623d-bcd1-421b-93ce-48e189aa808f",
+				"x": 0,
+				"y": 0,
+				"w": 4,
+				"h": 4,
+				"name": "Kapacitor Host RAM Usage",
+				"queries": [
+					{
+						"query": "SELECT mean(\"used_percent\") AS \"Kapacitor Mean Used Percent\" FROM :database:../mem/ WHERE time > :dashboardTime: GROUP BY time(:interval:)",
+						"queryConfig": {
+							"database": "",
+							"measurement": "",
+							"retentionPolicy": "",
+							"fields": [],
+							"tags": {},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": false,
+							"rawText": "SELECT mean(\"used_percent\") AS \"Kapacitor Mean Used Percent\" FROM :database:../mem/ WHERE time > :dashboardTime: GROUP BY time(:interval:)",
+							"range": null,
+							"shifts": null
+						},
+						"source": "/chronograf/v1/sources/1",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "%",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "007ac4bf-c005-4c7b-bf5f-7dbacf7d7064",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "b3c8579a-d594-4a98-bc6c-712d59021164",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "e9001346-498a-4f31-b2fd-319e4fff33c9",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": false,
+					"sortBy": {
+						"internalName": "",
+						"displayName": "",
+						"visible": false
+					},
+					"wrapping": "",
+					"fixFirstColumn": false
+				},
+				"fieldOptions": [],
+				"timeFormat": "",
+				"decimalPlaces": {
+					"isEnforced": false,
+					"digits": 3
+				},
+				"note": "---\n\n##### No Results?\nBe sure to select the correct database using the **:database:** template variable or choose a different time range.\n\n_This cell requires the [Telegraf `mem` input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mem)._",
+				"noteVisibility": "showWhenNoData",
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/cells/a270623d-bcd1-421b-93ce-48e189aa808f"
+				}
+			}
+		],
+		"templates": [
+			{
+				"tempVar": ":database:",
+				"values": [
+					{
+						"value": "_internal",
+						"type": "database",
+						"selected": true
+					}
+				],
+				"id": "1c40a52e-fa26-4d4d-9f0f-9620658f355f",
+				"type": "databases",
+				"label": "",
+				"query": {
+					"influxql": "SHOW DATABASES",
+					"measurement": "",
+					"tagKey": "",
+					"fieldKey": ""
+				},
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/templates/1c40a52e-fa26-4d4d-9f0f-9620658f355f"
+				}
+			}
+		],
+		"name": "Kapacitor Monitor",
+		"organization": "default",
+		"links": {
+			"self": "/chronograf/v1/dashboards/21",
+			"cells": "/chronograf/v1/dashboards/21/cells",
+			"templates": "/chronograf/v1/dashboards/21/templates"
+		}
+	}
+}

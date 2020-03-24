@@ -21,7 +21,7 @@ A batch of points may be submitted to the database using a single HTTP request t
 This makes writes using the InfluxDB API much more performant by drastically reducing the HTTP overhead.
 InfluxData recommends batch sizes of 5,000-10,000 points, although different use cases may be better served by significantly smaller or larger batches.
 
-Related entries: [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol), [point](/influxdb/v1.7/concepts/glossary/#point)
+Related entries: [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol), [point](/influxdb/v1.7/concepts/glossary/#point)
 
 ## continuous query (CQ)
 
@@ -134,11 +134,12 @@ The local server's nanosecond timestamp.
 
 In InfluxDB, a point represents a single data record, similar to a row in a SQL database table. Each point:
 
-- Has four components: a measurement, a tag set, a field set, and a timestamp.
-- Is uniquely identified by its series and timestamp.
-- Is represented by one row in [line protocol](/influxdb/v1.7/write_protocols/line_protocol_reference).
+- has a measurement, a tag set, a field key, a field value, and a timestamp;
+- is uniquely identified by its series and timestamp.
 
-You cannot store more than one point with the same timestamp in a series. If you write a point to a series with a timestamp that matches an existing point, the field set becomes a union of the old and new field set, and any ties go to the new field set. For more information about duplicate points, see [How does InfluxDB handle duplicate points?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
+You cannot store more than one point with the same timestamp in a series.
+If you write a point to a series with a timestamp that matches an existing point, the field set becomes a union of the old and new field set, and any ties go to the new field set.
+For more information about duplicate points, see [How does InfluxDB handle duplicate points?](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)
 
 Related entries: [field set](/influxdb/v1.7/concepts/glossary/#field-set), [series](/influxdb/v1.7/concepts/glossary/#series), [timestamp](/influxdb/v1.7/concepts/glossary/#timestamp)
 
@@ -158,12 +159,14 @@ See [Data Exploration](/influxdb/v1.7/query_language/data_exploration/), [Schema
 
 ## replication factor  
 
-The attribute of the retention policy that determines how many copies of data to concurrently store (or retain) in the cluster. Replicating copies ensures that data is available when a data node (or more) is unavailable.
+The attribute of the retention policy that determines how many copies of data to concurrently store (or retain) in the cluster. If replication factor is set to 2, each series is stored on 2 separate nodes. If the replication factor is equal to the number of data nodes, data is replicated on each node in the cluster.
+Replication ensures data is available on multiple nodes and more likely available when a data node (or more) is unavailable.
 
-For three nodes or less, the default replication factor equals the number of data nodes. 
-For more than three nodes, the default replication factor is 3. To change the default replication factor, specify the replication factor `n` in the retention policy.
+The number of data nodes in a cluster **must be evenly divisible by the replication factor**. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on. To increase the read or write capacity of a cluster, add a number of data nodes by a multiple of the replication factor. For example, to increase the capacity of a 6 node cluster with an RF=3, add 3 additional nodes. To further increase the capacity, continue to add nodes in groups of 3.
 
-Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node), 
+> **Important:** If the replication factor isn't evenly divisible into the number of data nodes, data may be distributed unevenly across the cluster and cause poor performance. Likewise, decreasing the replication factor (fewer copies of data in a cluster) may reduce performance depending on query and write load.
+
+Related entries: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.7/concepts/glossary/#duration), [node](/influxdb/v1.7/concepts/glossary/#node),
 [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp)
 
 ## retention policy (RP)
@@ -192,11 +195,9 @@ Related entries: [aggregation](/influxdb/v1.7/concepts/glossary/#aggregation), [
 
 ## series
 
-The collection of data in the InfluxDB data structure that share a measurement, tag set, and retention policy.
+A logical grouping of data defined by shared measurement, tag set, and field key.
 
-> **Note:** The field set is not part of the series identification!
-
-Related entries: [field set](/influxdb/v1.7/concepts/glossary/#field-set), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
+Related entries: [field set](/influxdb/v1.7/concepts/glossary/#field-set), [measurement](/influxdb/v1.7/concepts/glossary/#measurement), [tag set](/influxdb/v1.7/concepts/glossary/#tag-set)
 
 ## series cardinality
 
@@ -210,12 +211,12 @@ different `status`es then the series cardinality for the measurement is 6
 
 | email                 | status |
 | :-------------------- | :----- |
-| lorr@influxdata.com | start  |
-| lorr@influxdata.com | finish |
-| marv@influxdata.com     | start  |
-| marv@influxdata.com     | finish |
-| cliff@influxdata.com | start  |
-| cliff@influxdata.com | finish |
+| lorr@influxdata.com   | start  |
+| lorr@influxdata.com   | finish |
+| marv@influxdata.com   | start  |
+| marv@influxdata.com   | finish |
+| cliff@influxdata.com  | start  |
+| cliff@influxdata.com  | finish |
 
 Note that, in some cases, simply performing that multiplication may overestimate series cardinality because of the presence of dependent tags.
 Dependent tags are tags that are scoped by another tag and do not increase series
@@ -226,16 +227,29 @@ It would remain unchanged at 6, as `firstname` is already scoped by the `email` 
 
 | email                 | status | firstname |
 | :-------------------- | :----- | :-------- |
-| lorr@influxdata.com | start  | lorraine  |
-| lorr@influxdata.com | finish | lorraine  |
-| marv@influxdata.com     | start  | marvin      |
-| marv@influxdata.com     | finish | marvin      |
-| cliff@influxdata.com | start  | clifford  |
-| cliff@influxdata.com | finish | clifford  |
+| lorr@influxdata.com   | start  | lorraine  |
+| lorr@influxdata.com   | finish | lorraine  |
+| marv@influxdata.com   | start  | marvin    |
+| marv@influxdata.com   | finish | marvin    |
+| cliff@influxdata.com  | start  | clifford  |
+| cliff@influxdata.com  | finish | clifford  |
 
 See [SHOW CARDINALITY](/influxdb/v1.7/query_language/spec/#show-cardinality) to learn about the InfluxQL commands for series cardinality.
 
 Related entries: [field key](#field-key),[measurement](#measurement), [tag key](#tag-key), [tag set](#tag-set)
+
+## series key
+
+A series key identifies a particular series by measurement, tag set, and field key.
+
+For example:
+
+```
+# measurement, tag set, field key
+h2o_level, location=santa_monica, h2o_feet
+```
+
+Related entries: [series](/influxdb/v1.7/concepts/glossary/#series)
 
 ## server
 
@@ -330,7 +344,7 @@ See [InfluxQL Functions](/influxdb/v1.7/query_language/functions/#transformation
 
 Related entries: [aggregation](/influxdb/v1.7/concepts/glossary/#aggregation), [function](/influxdb/v1.7/concepts/glossary/#function), [selector](/influxdb/v1.7/concepts/glossary/#selector)
 
-## tsm (Time Structured Merge tree)
+## TSM (Time Structured Merge tree)
 
 The purpose-built data storage format for InfluxDB. TSM allows for greater compaction and higher write and read throughput than existing B+ or LSM tree implementations. See [Storage Engine](http://docs.influxdata.com/influxdb/v1.7/concepts/storage_engine/) for more.
 
@@ -352,7 +366,7 @@ To calculate the values per second rate, multiply the number of points written p
 
 Related entries: [batch](/influxdb/v1.7/concepts/glossary/#batch), [field](/influxdb/v1.7/concepts/glossary/#field), [point](/influxdb/v1.7/concepts/glossary/#point), [points per second](/influxdb/v1.7/concepts/glossary/#points-per-second)
 
-## wal (Write Ahead Log)
+## WAL (Write Ahead Log)
 
 The temporary cache for recently written points. To reduce the frequency with which the permanent storage files are accessed, InfluxDB caches new points in the WAL until their total size or age triggers a flush to more permanent storage. This allows for efficient batching of the writes into the TSM.
 

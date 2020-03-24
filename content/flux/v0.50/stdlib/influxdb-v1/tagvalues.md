@@ -81,3 +81,8 @@ _**Used functions:**
 [group](/flux/v0.50/stdlib/built-in/transformations/group/),
 [distinct](/flux/v0.50/stdlib/built-in/transformations/selectors/distinct/),
 [keep](/flux/v0.50/stdlib/built-in/transformations/keep/)_
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+- [SHOW DATABASES](/influxdb/latest/query_language/schema_exploration#show-databases)

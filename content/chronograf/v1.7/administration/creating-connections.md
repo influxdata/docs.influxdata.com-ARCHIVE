@@ -8,9 +8,16 @@ menu:
     parent: Administration
 ---
 
-Connections to InfluxDB and Kapacitor can be configured through the Chronograf user interface (UI) or with JSON configuration files.
+Connections to InfluxDB and Kapacitor can be configured through the Chronograf user interface (UI) or with JSON configuration files:
 
-## Managing InfluxDB connections using the Chronograf UI
+- [Manage InfluxDB connections using the Chronograf UI](#manage-influxdb-connections-using-the-chronograf-ui)
+- [Manage InfluxDB connections using .src files](#manage-influxdb-connections-using-src-files)
+- [Manage Kapacitor connections using the Chronograf UI](#manage-kapacitor-connections-using-the-chronograf-ui)
+- [Manage Kapacitor connections using .kap files](#manage-kapacitor-connections-using-kap-files)
+
+> Note: Connection details are stored in Chronograf’s internal database `chronograf-v1.db` `.src`. Typically, the only time you'll need to administer the internal database is when you're [restoring a Chronograf database](/chronograf/v1.7/administration/restoring-chronograf-db/).
+
+## Manage InfluxDB connections using the Chronograf UI
 
 To create an InfluxDB connection in the Chronograf UI:
 
@@ -37,9 +44,39 @@ To create an InfluxDB connection in the Chronograf UI:
    "Unable to create source: Error contacting source."
    If this occurs, ensure all connection credentials are correct and that the InfluxDB instance is running and accessible.
 
+The following dashboards are available:
 
-## Managing InfluxDB connections using .src files
-Chronograf stores InfluxDB connection details `.src` files that can also be created manually.
+- Docker
+- Kubernetes Node
+- Riak
+- Consul
+- Kubernetes Overview
+- Mesos
+- IIS
+- RabbitMQ
+- System
+- VMware vSphere Overview
+- Apache
+- Elastisearch
+- InfluxDB
+- Memcached
+- NSQ
+- PostgreSQL
+- Consul Telemetry
+- HAProxy
+- Kubernetes Pod
+- NGINX
+- Redis
+- VMware vSphere VMs
+- VMware vSphere Hosts
+- PHPfpm
+- Win System
+- MySQL
+- Ping
+
+## Manage InfluxDB connections using .src files
+
+Manually create `.src` files to store InfluxDB connection details.
 `.src` files are simple JSON files that contain key-value paired connection details.
 The location of `.src` files is defined by the [`--resources-path`](/chronograf/v1.7/administration/config-options/#resources-path)
 command line option, which is, by default, the same as the [`--canned-path`](/chronograf/v1.7/administration/config-options/#canned-path-c).
@@ -122,7 +159,7 @@ Environment variables can be loaded using the `"{{ .VARIABLE_KEY }}"` syntax:
 }
 ```
 
-## Managing Kapacitor connections using the Chronograf UI
+## Manage Kapacitor connections using the Chronograf UI
 
 Kapacitor is the data processing component of the TICK stack.
 To use Kapacitor in Chronograf, create Kapacitor connections and configure alert endpoints.
@@ -145,9 +182,9 @@ To create a Kapacitor connection using the Chronograf UI:
 
 4. Click **Continue**. If the connection is valid, the message "Kapacitor Created! Configuring endpoints is optional." appears. To configure alert endpoints, see [Configuring alert endpoints](/chronograf/v1.7/guides/configuring-alert-endpoints/).
 
-## Managing Kapacitor connections using .kap files
+## Manage Kapacitor connections using .kap files
 
-Chronograf stores Kapacitor connection details `.kap` files that can also be created manually.
+Manually create `.kap` files to store Kapacitor connection details.
 `.kap` files are simple JSON files that contain key-value paired connection details.
 The location of `.kap` files is defined by the `--resources-path` command line option, which is, by default, the same as the [`--canned-path`](/chronograf/v1.7/administration/config-options/#canned-path-c).
 A `.kap` files contains the details for a single InfluxDB connection.

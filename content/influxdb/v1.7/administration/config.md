@@ -7,7 +7,7 @@ menu:
     parent: Administration
 ---
 
-The InfluxDB OSS configuration file contains configuration settings specific to a local node.
+The InfluxDB open source (OSS) configuration file contains configuration settings specific to a local node.
 
 #### Content
 
@@ -41,14 +41,14 @@ The configuration settings in this document are set to their default settings.
 
 Configuration settings that specify a duration support the following duration units:
 
-- `ns`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;nanoseconds
-- `us` or `µs`&emsp;microseconds
-- `ms`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;&thinsp;&thinsp;milliseconds
-- `s`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;seconds
-- `m`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;minutes
-- `h`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;hours
-- `d`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;days
-- `w`&nbsp;&emsp;&emsp;&emsp;&emsp;&nbsp;weeks
+- `ns` _(nanoseconds)_
+- `us` or `µs` _(microseconds)_
+- `ms` _(milliseconds)_
+- `s` _(seconds)_
+- `m` _(minutes)_
+- `h` _(hours)_
+- `d` _(days)_
+- `w` _(weeks)_
 
 >**Note:** Configuration file settings are documented here for the latest official release - the [sample configuration file on GitHub](https://github.com/influxdb/influxdb/blob/1.7/etc/config.sample.toml) might be slightly newer.
 
@@ -326,7 +326,7 @@ Environment variable: `INFLUXDB_DATA_COMPACT_THROUGHPUT_BURST`
 
 #### `tsm-use-madv-willneed = false`
 
-If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped 
+If `true`, then the MMap Advise value `MADV_WILLNEED` advises the kernel about how to handle the mapped
 memory region in terms of input/output paging and to expect access to the mapped memory region in the near future, with respect to TSM files.
 Because this setting has been problematic on some kernels (including CentOS and RHEL ), the default is `false`.
 Changing the value to `true` might help users who have slow disks in some cases.
@@ -386,14 +386,12 @@ Environment variable: `INFLUXDB_DATA_MAX_INDEX_LOG_FILE_SIZE`
 
 #### `series-id-set-cache-size = 100`
 
-The size of the internal cache used in the TSI index to store previously 
-calculated series results. Cached results will be returned quickly from the cache rather 
-than needing to be recalculated when a subsequent query with a matching tag key-value 
-predicate is executed. 
-Setting this value to `0` will disable the cache, which may lead to query performance issues.
-This value should only be increased if it is known that the set of regularly used 
-tag key-value predicates across all measurements for a database is larger than 100. An 
-increase in cache size may lead to an increase in heap usage.
+Specifies the number of series ID sets to cache for the TSI index (by default, 100). Series IDs in a set refer to series that match on the same index predicate (tag filter). An example filter might be `region = west`. When the index plans a query, it produces a set for each tag filter in the query. These sets are then cached in the index.
+
+The series ID set is an LRU cache, so once the cache is full, the least recently used set is evicted. Cached results are returned quickly because they don’t need to be recalculated when a subsequent query with a matching tag filter is executed. For example, if a query includes `region = west`, the series IDs matching `region = west` are cached and subsequent queries that include `region = west` are retrieved from the cache.
+
+We recommend using the default setting. Changing this value to `0` disables the cache, which may lead to query performance issues.
+Increase this value only if you know the set of tag key-value predicates across all measurements for a database is larger than 100. Increasing the cache size may lead to an increase in heap usage.
 
 Environment variable: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
 
@@ -406,7 +404,7 @@ For more on managing queries, see [Query Management](/influxdb/v1.7/troubleshoot
 
 #### `write-timeout = "10s"`
 
-The duration a write request waits until a "timeout" error is returned to the caller.
+The duration a write request waits until a "timeout" error is returned to the caller. The default value is 10 seconds.
 
 Environment variable: `INFLUXDB_COORDINATOR_WRITE_TIMEOUT`
 
@@ -654,15 +652,38 @@ Useful for troubleshooting and monitoring.
 
 Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
+#### `pprof-auth-enabled = false`
+
+Enables authentication on `/debug` endpoints.
+If enabled, users need admin permissions to access the following endpoints:
+
+- `/debug/pprof`
+- `/debug/requests`
+- `/debug/vars`
+
+This setting has no effect if either [`auth-enabled`](#auth-enabled-false) or
+[`pprof-enabled`](#pprof-enabled-true) are set to `false`.
+
+Environment variable: `INFLUXDB_HTTP_PPROF_AUTH_ENABLED`
+
 #### `debug-pprof-enabled = false`
 
-Enable the default `/net/http/pprof` endpoint and bind against `localhost:6060`.
+Enable the default `/pprof` endpoint and bind against `localhost:6060`.
 Useful for debugging startup performance issues.
+
+Environment variable: `INFLUXDB_HTTP_DEBUG_PPROF_ENABLED`
+
+#### `ping-auth-enabled = false`
+
+Enables authentication on the `/ping`, `/metrics`, and deprecated `/status` endpoints.
+This setting has no effect if [`auth-enabled`](#auth-enabled-false) is set to `false`.
+
+Environment variable: `INFLUXDB_HTTP_PING_AUTH_ENABLED`
 
 #### `https-enabled = false`
 
 Determines whether HTTPS is enabled.
-Tp enable HTTPS, set the value to `true`.
+To enable HTTPS, set the value to `true`.
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
 

@@ -7,6 +7,36 @@ menu:
     parent: About the project
 ---
 
+## v1.7.10 [2020-02-07]
+
+### Bug fixes
+- Fix failing corrupt data file renaming process.
+- Make shard digests safe for concurrent use.
+- Fix defect in TSI index where negative equality filters (`!=`) could result in no matching series.
+- Fix compaction logic on infrequent cache snapshots which resulted in frequent full
+  compactions rather than [level compactions](/influxdb/v1.7/concepts/storage_engine/#compactions).
+- Fix for series key block data being truncated when read into an empty buffer.
+  Ensure all block data is returned.
+- During compactions, skip TSM files with block read errors from previous compactions.
+
+## v1.7.9 [2019-10-27]
+
+### Release notes
+- This release is built using Go 1.12.10 which eliminates the
+  [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
+
+### Bug fixes
+- Guard against compaction burst throughput limit.
+- Replace TSI compaction wait group with counter.
+- Update InfluxQL dependency.
+- Add option to authenticate debug/pprof and ping endpoints.
+- Honor `insecure-skip-verify` even if custom TLS config is specified.
+
+### Features
+- Update Go version to 1.12.10.
+- Remove Godeps file.
+- Update Flux version to v0.50.2.
+
 ## v1.7.8 [2019-08-20]
 
 {{% warn %}}
@@ -15,7 +45,7 @@ To successfully write data to InfluxDB, use only UTF-8 characters in
 database names, measurement names, tag sets, and field sets.
 {{% /warn %}}
 
-### Bugfixes
+### Bug fixes
 - Fix Prometheus read panic.
 - Remove stray `fmt.Println` in `tsm1.StringArrayEncodeAll`.
 - Fix issue where fields re-appear after `DROP MEASUREMENT`.
@@ -46,10 +76,10 @@ database names, measurement names, tag sets, and field sets.
 
 ## 1.7.6 [2019-04-16]
 
-<dt>
+{{% warn %}}
 If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`),
 this release includes the fix for InfluxDB 1.7.5 servers that stopped responding without warning.
-</dt>
+{{% /warn %}}
 
 ### Features
 
@@ -73,9 +103,9 @@ this release includes the fix for InfluxDB 1.7.5 servers that stopped responding
 
 ## 1.7.5 [2019-03-26]
 
-<dt>
+{{% warn %}}
 **Update (2019-04-01):** If your InfluxDB OSS server is using the default in-memory index (`[data].index-version = "inmem"`), then do not upgrade to this release. Customers have reported that InfluxDB 1.7.5 stops responding without warning. For details, see [GitHub issue #13010](https://github.com/influxdata/influxdb/issues/13010). The [planned fix](https://github.com/influxdata/influxdb/issues/13053) will be available soon.
-</dt>
+{{% /warn %}}
 
 ### Bug fixes
 
@@ -698,7 +728,7 @@ Minor bug fixes were identified via Community and InfluxCloud.
 Version 1.3.0 marks the first official release of the new InfluxDB time series index (TSI) engine.
 
 The TSI engine is a significant technical advancement in InfluxDB.
-It offers a solution to the [time-structured merge tree](https://docs.influxdata.com/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).
+It offers a solution to the [time-structured merge tree](/influxdb/v1.2/concepts/storage_engine/) engine's [high series cardinality issue](/influxdb/v1.3/troubleshooting/frequently-asked-questions/#why-does-series-cardinality-matter).
 With TSI, the number of series should be unbounded by the memory on the server hardware and the number of existing series will have a negligible impact on database startup time.
 See Paul Dix's blogpost [Path to 1 Billion Time Series: InfluxDB High Cardinality Indexing Ready for Testing](https://www.influxdata.com/path-1-billion-time-series-influxdb-high-cardinality-indexing-ready-testing/) for additional information.
 
@@ -779,10 +809,10 @@ The following new configuration options are available.
 - Maintain the tags of points selected by top() or bottom() when writing the results.
 - Write CQ stats to the `_internal` database
 
-### Bugfixes
+### Bug fixes
 
 - Several statements were missing the DefaultDatabase method
-- Fix spelling mistake in HTTP section of config -- shared-sercret
+- Fix spelling mistake in HTTP section of config -- shared-secret
 - History file should redact passwords before saving to history
 - Suppress headers in output for influx cli when they are the same
 - Add chunked/chunk size as setting/options in cli
@@ -828,13 +858,13 @@ The following new configuration options are available.
 
 ## v1.2.4 [2017-05-08]
 
-### Bugfixes
+### Bug fixes
 
 - Prefix partial write errors with `partial write:` to generalize identification in other subsystems.
 
 ## v1.2.3 [2017-04-17]
 
-### Bugfixes
+### Bug fixes
 
 - Redact passwords before saving them to the history file.
 - Add the missing DefaultDatabase method to several InfluxQL statements.
@@ -865,7 +895,7 @@ The following new configuration options are available.
 
 ### Release Notes
 
-### Bugfixes
+### Bug fixes
 
 -	 Treat non-reserved measurement names with underscores as normal measurements.
   - Reduce the expression in a subquery to avoid a panic.
@@ -927,7 +957,7 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 - Verbose output for SSL connection errors.
 - Cache snapshotting performance improvements
 
-### Bugfixes
+### Bug fixes
 
 - Fix potential race condition in correctness of tsm1_cache memBytes statistic.
 - Fix broken error return on meta client's UpdateUser and DropContinuousQuery methods.
@@ -953,26 +983,26 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 
 ## v1.1.5 [2017-05-08]
 
-### Bugfixes
+### Bug fixes
 
 - Redact passwords before saving them to the history file.
 - Add the missing DefaultDatabase method to several InfluxQL statements.
 
 ## v1.1.4 [2017-02-27]
 
-### Bugfixes
+### Bug fixes
 
 - Backport from 1.2.0: Reduce GC allocations.
 
 ## v1.1.3 [2017-02-17]
 
-### Bugfixes
+### Bug fixes
 
 - Remove Tags.shouldCopy, replace with forceCopy on series creation.
 
 ## v1.1.2 [2017-02-16]
 
-### Bugfixes
+### Bug fixes
 
 - Fix memory leak when writing new series over HTTP.
 - Fix series tag iteration segfault.
@@ -984,7 +1014,7 @@ The stress tool `influx_stress` will be removed in a subsequent release. We reco
 
 - Update Go version to 1.7.4.
 
-### Bugfixes
+### Bug fixes
 
 - Fix string fields w/ trailing slashes.
 - Quote the empty string as an ident.
@@ -1061,7 +1091,7 @@ All Changes:
 - Change default time boundaries for raw queries.
 - Support mixed duration units.
 
-### Bugfixes
+### Bug fixes
 
 - Avoid deadlock when `max-row-limit` is hit.
 - Fix incorrect grouping when multiple aggregates are used with sparse data.
@@ -1091,7 +1121,7 @@ All Changes:
 
 ## v1.0.2 [2016-10-05]
 
-### Bugfixes
+### Bug fixes
 
 - Fix RLE integer decoding producing negative numbers.
 - Avoid stat syscall when planning compactions.
@@ -1101,7 +1131,7 @@ All Changes:
 
 ## v1.0.1 [2016-09-26]
 
-### Bugfixes
+### Bug fixes
 
 - Prevent users from manually using system queries since incorrect use would result in a panic.
 - Ensure fieldsCreated stat available in shard measurement.
@@ -1172,7 +1202,7 @@ With this release the systemd configuration files for InfluxDB will use the syst
 - Add https-private-key option to httpd config.
 - Support loading a folder for collectd typesdb files.
 
-### Bugfixes
+### Bug fixes
 
 - Optimize queries that compare a tag value to an empty string.
 - Allow blank lines in the line protocol input.

@@ -34,9 +34,9 @@ Before getting into the details of installing and running an Kapacitor Enterpris
 This release of Kapacitor Enterprise is not elastic. Adding and removing members from the cluster dynamically can cause the cluster to get out of sync with itself.
 To prevent synchronization issues, decide in advance how many members you want to run.
 
-<dt>
+{{% warn %}}
 Define a clustered set of members before defining any tasks, alert handlers, etc.
-</dt>
+{{% /warn %}}
 
 You can add or remove members once a cluster is running, but this must be done correctly. See step 4 for details.
 

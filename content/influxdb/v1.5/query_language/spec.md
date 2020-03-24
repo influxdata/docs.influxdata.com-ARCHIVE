@@ -379,8 +379,8 @@ create_database_stmt = "CREATE DATABASE" db_name
                        ] .
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 #### Examples:
 
@@ -405,8 +405,8 @@ create_retention_policy_stmt = "CREATE RETENTION POLICY" policy_name on_clause
                                [ "DEFAULT" ] .
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 #### Examples
 
@@ -611,74 +611,105 @@ NUMBER OF BLOCKS: 1
 SIZE OF BLOCKS: 931
 ```
 
-
 ### EXPLAIN ANALYZE
 
-Executes the query and counts the actual costs during runtime.
+Executes the specified SELECT statement and returns data on the query performance and storage during runtime, visualized as a tree. Use this statement to analyze query performance and storage, including [execution time](#execution_time) and [planning time](#planning_time), and the [iterator type](#iterator-type) and [cursor type](#cursor-type).
 
-```
-explain_analyze_stmt = "EXPLAIN ANALYZE" select_stmt .
+For example, executing the following statement:
+
+```sql
+> explain analyze select mean(usage_steal) from cpu where time >= '2018-02-22T00:00:00Z' and time < '2018-02-22T12:00:00Z'
 ```
 
-#### Example:
+May produce an output similar to the following:
 
-```
-> explain analyze select sum(pointReq) from "_internal"."monitor"."write" group by hostname;
-> EXPLAIN ANALYZE
------------
+```sql
+EXPLAIN ANALYZE
+---------------
 .
 └── select
-├── execution_time: 242.167µs
-├── planning_time: 2.165637ms
-├── total_time: 2.407804ms
-└── field_iterators
-├── labels
-│   └── statement: SELECT sum(pointReq::integer) FROM "_internal"."monitor"."write" GROUP BY hostname
-└── expression
-├── labels
-│   └── expr: sum(pointReq::integer)
-├── create_iterator
-│   ├── labels
-│   │   ├── measurement: write
-│   │   └── shard_id: 57
-│   ├── cursors_ref: 1
-│   ├── cursors_aux: 0
-│   ├── cursors_cond: 0
-│   ├── float_blocks_decoded: 0
-│   ├── float_blocks_size_bytes: 0
-│   ├── integer_blocks_decoded: 1
-│   ├── integer_blocks_size_bytes: 931
-│   ├── unsigned_blocks_decoded: 0
-│   ├── unsigned_blocks_size_bytes: 0
-│   ├── string_blocks_decoded: 0
-│   ├── string_blocks_size_bytes: 0
-│   ├── boolean_blocks_decoded: 0
-│   ├── boolean_blocks_size_bytes: 0
-│   └── planning_time: 1.401099ms
-└── create_iterator
-├── labels
-│   ├── measurement: write
-│   └── shard_id: 58
-├── cursors_ref: 1
-├── cursors_aux: 0
-├── cursors_cond: 0
-├── float_blocks_decoded: 0
-├── float_blocks_size_bytes: 0
-├── integer_blocks_decoded: 0
-├── integer_blocks_size_bytes: 0
-├── unsigned_blocks_decoded: 0
-├── unsigned_blocks_size_bytes: 0
-├── string_blocks_decoded: 0
-├── string_blocks_size_bytes: 0
-├── boolean_blocks_decoded: 0
-├── boolean_blocks_size_bytes: 0
-└── planning_time: 76.192µs
+    ├── execution_time: 2.25823ms
+    ├── planning_time: 18.381616ms
+    ├── total_time: 20.639846ms
+    └── field_iterators
+        ├── labels
+        │   └── statement: SELECT mean(usage_steal::float) FROM telegraf."default".cpu
+        └── expression
+            ├── labels
+            │   └── expr: mean(usage_steal::float)
+            └── create_iterator
+                ├── labels
+                │   ├── measurement: cpu
+                │   └── shard_id: 608
+                ├── cursors_ref: 779
+                ├── cursors_aux: 0
+                ├── cursors_cond: 0
+                ├── float_blocks_decoded: 431
+                ├── float_blocks_size_bytes: 1003552
+                ├── integer_blocks_decoded: 0
+                ├── integer_blocks_size_bytes: 0
+                ├── unsigned_blocks_decoded: 0
+                ├── unsigned_blocks_size_bytes: 0
+                ├── string_blocks_decoded: 0
+                ├── string_blocks_size_bytes: 0
+                ├── boolean_blocks_decoded: 0
+                ├── boolean_blocks_size_bytes: 0
+                └── planning_time: 14.805277ms```
 ```
 
+> Note: EXPLAIN ANALYZE ignores query output, so the cost of serialization to JSON or CSV is not accounted for.
+
+#### execution_time
+
+Shows the amount of time the query took to execute, including reading the time series data, performing operations as data flows through iterators, and draining processed data from iterators. Execution time doesn't include the time taken to serialize the output into JSON or other formats.
+
+#### planning_time
+
+Shows the amount of time the query took to plan.
+Planning a query in InfluxDB requires a number of steps. Depending on the complexity of the query, planning can require more work and consume more CPU and memory resources than the executing the query. For example, the number of series keys required to execute a query affects how quickly the query is planned and the required memory.
+
+First, InfluxDB determines the effective time range of the query and selects the shards to access (in InfluxDB Enterprise, shards may be on remote nodes).
+Next, for each shard and each measurement, InfluxDB performs the following steps:
+
+1. Select matching series keys from the index, filtered by tag predicates in the WHERE clause.
+2. Group filtered series keys into tag sets based on the GROUP BY dimensions.
+3. Enumerate each tag set and create a cursor and iterator for each series key.
+4. Merge iterators and return the merged result to the query executor.
+
+#### iterator type
+
+EXPLAIN ANALYZE supports the following iterator types:
+
+- `create_iterator` node represents work done by the local influxd instance──a complex composition of nested iterators combined and merged to produce the final query output.
+- (InfluxDB Enterprise only) `remote_iterator` node represents work done on remote machines.
+
+For more information about iterators, see [Understanding iterators](#understanding-iterators).
+
+#### cursor type
+
+EXPLAIN ANALYZE distinguishes 3 cursor types. While the cursor types have the same data structures and equal CPU and I/O costs, each cursor type is constructed for a different reason and separated in the final output. Consider the following cursor types when tuning a statement:
+
+- cursor_ref:	Reference cursor created for SELECT projections that include a function, such as `last()` or `mean()`.
+- cursor_aux:	Auxiliary cursor created for simple expression projections (not selectors or an aggregation). For example, `SELECT foo FROM m` or `SELECT foo+bar FROM m`, where `foo` and `bar` are fields.
+- cursor_cond: Condition cursor created for fields referenced in a WHERE clause.
+
+For more information about cursors, see [Understanding cursors](#understanding-cursors).
+
+#### block types
+
+EXPLAIN ANALYZE separates storage block types, and reports the total number of blocks decoded and their size (in bytes) on disk. The following block types are supported:
+
+| `float`    | 64-bit IEEE-754 floating-point number |
+| `integer`  | 64-bit signed integer                 |
+| `unsigned` | 64-bit unsigned integer               |
+| `boolean`  | 1-bit, LSB encoded                    |
+| `string`   | UTF-8 string                          |
+
+For more information about storage blocks, see [TSM files](/influxdb/v1.7/concepts/storage_engine/#tsm-files).
 
 ### GRANT
 
-> **NOTE:** Users can be granted privileges on databases that do not exist.
+> **NOTE:** Users can be granted privileges on databases that do not yet exist.
 
 ```
 grant_stmt = "GRANT" privilege [ on_clause ] to_clause .
@@ -1313,8 +1344,13 @@ the derivative of the mean:
 SELECT DERIVATIVE(MEAN(value), 20m) FROM cpu GROUP BY time(10m)
 ```
 
+### Understanding cursors
 
-### Understanding Auxiliary Fields
+A **cursor** identifies data by shard in tuples (time, value) for a single series (measurement, tag set and field). The cursor trasverses data stored as a log-structured merge-tree and handles deduplication across levels, tombstones for deleted data, and merging the cache (Write Ahead Log). A cursor sorts the `(time, value)` tuples by time in ascending or descending order.
+
+For example, a query that evaluates one field for 1,000 series over 3 shards constructs a minimum of 3,000 cursors (1,000 per shard).
+
+### Understanding auxiliary fields
 
 Because InfluxQL allows users to use selector functions such as `FIRST()`,
 `LAST()`, `MIN()`, and `MAX()`, the engine must provide a way to return related

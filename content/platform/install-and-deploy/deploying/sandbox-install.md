@@ -2,7 +2,7 @@
 title: Deploy the InfluxData Platform (TICK stack) in Docker containers
 description: Install the InfluxData Sandbox, the quickest way to get a TICK stack up and running and ready for exploration and testing.
 aliases:
-  - /platform/install-and-deploy/deploying/sandbox-install
+  - /platform/installation/sandbox-install
 menu:
   platform:
     name: Deploy InfluxData Platform (OSS)
@@ -13,6 +13,7 @@ menu:
 The quickest way to start using the InfluxData Platform (TICK stack) OSS is to download and deploy the [InfluxData Sandbox](https://github.com/influxdata/sandbox). The InfluxData Sandbox uses Docker containers to deploy the InfluxData Platform components. The InfluxData Sandbox provides a containerized, ready-to-use TICK stack, built using [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/overview/), to capture data from your local machine and the Docker containers.
 
 After deploying using the InfluxData Sandbox, you will have the latest versions of:
+
 * Telegraf
 * InfluxDB OSS
 * Chronograf
@@ -22,7 +23,7 @@ After deploying using the InfluxData Sandbox, you will have the latest versions 
 
 ## Requirements
 
-- Linux or macOS <em style="opacity:.5;margin-left:.5em;">(Windows support is coming)</em>
+- Linux or macOS <em style="opacity:.5;margin-left:.5em;">(Windows support is experimental)</em>
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/install/#supported-platforms)
 - [Docker Compose](https://docs.docker.com/compose/install/)
@@ -73,9 +74,9 @@ The `./sandbox up` command includes a `-nightly` option that will pull nightly
 builds for InfluxDB and Chronograf, giving you the most recent updates and
 experimental functionality.
 
-<dt>
+{{% warn %}}
 Nightly builds are experimental and are not guaranteed to be functional.
-</dt>
+{{% /warn %}}
 
 ```bash
 ./sandbox up -nightly

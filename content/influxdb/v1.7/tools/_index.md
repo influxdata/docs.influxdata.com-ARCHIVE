@@ -12,19 +12,13 @@ menu:
 
 This section covers the available tools for interacting with InfluxDB.
 
-## [InfluxDB command line interface (CLI/Shell)](/influxdb/v1.7/tools/shell/)
+## [`influx` command line interface (CLI)](/influxdb/v1.7/tools/influx-cli/)
 
-The InfluxDB command line interface (`influx`) is an interactive shell for the
-InfluxDB API that comes with every InfluxDB package.
-Use `influx` to write data (manually or from a file), query data interactively,
-and view query output in different formats:
+The InfluxDB command line interface (`influx`) includes commands to manage many aspects of InfluxDB, including databases, organizations, users, and tasks.
 
-![CLI GIF](/img/influxdb/cli-1.0-beta.gif)
+## [`influxd` command line interface (CLI)](/influxdb/v1.7/tools/influxd-cli/)
 
-Go straight to the documentation on:
-
-* [Launching `influx`](/influxdb/v1.7/tools/shell/#launch-influx)
-* [Writing data with `influx`](/influxdb/v1.7/tools/shell/#write-data-to-influxdb-with-insert)
+The `influxd` command line interface (CLI) starts and runs all the processes necessary for InfluxDB to function.
 
 ## [InfluxDB API Reference](/influxdb/v1.7/tools/api/)
 
@@ -47,10 +41,32 @@ The list of client libraries for interacting with the InfluxDB API.
 
 Influx Inspect is a tool designed to view detailed information about on disk shards, as well as export data from a shard to line protocol that can be inserted back into the database.
 
-## [Grafana graphs and dashboards](http://docs.grafana.org/datasources/influxdb/)
+## [InfluxDB inch tool](/influxdb/v1.7/tools/inch/)
 
-Grafana is a convenient dashboard tool for visualizing time series data.
-It was originally built for Graphite, modeled after Kibana, and since been updated to support InfluxDB.
+Use the InfluxDB inch tool to test InfluxDB performance. Adjust metrics such as the batch size, tag values, and concurrent write streams to test how ingesting different tag cardinalities and metrics affects performance.
 
-<dt> Because of the [changes](/influxdb/v0.11/concepts/010_vs_011/#breaking-api-changes) to the `SHOW SERIES` and `SHOW TAG VALUES` formats in InfluxDB 0.11, InfluxDB 1.3+ will not work with the Query Editor in Grafana 2.6.
-This issue does not affect existing queries and dashboards or users working with Grafana 3.0. </dt>
+## Graphs and dashboards
+
+Use [Chronograf](/chronograf/latest/) or [Grafana](https://grafana.com/docs/grafana/latest/features/datasources/influxdb/) dashboards to visualize your time series data.
+
+> **Tip:** Use template variables in your dashboards to filter meta query results by a specified period of time (see example below).
+
+### Filter meta query results using template variables
+
+The example below shows how to filter hosts retrieving data in the past hour.
+
+##### Example
+
+```sh
+# Create a retention policy.
+CREATE RETENTION POLICY "lookup" ON "prod" DURATION 1d REPLICATION 1
+
+# Create a continuous query that groups by the tags you want to use in your template variables.
+CREATE CONTINUOUS QUERY "lookupquery" ON "prod" BEGIN SELECT mean(value) as value INTO "your.system"."host_info" FROM "cpuload"
+WHERE time > now() - 1h GROUP BY time(1h), host, team, status, location END;
+
+# In your Grafana or Chronograf templates, include your tag values.
+SHOW TAG VALUES FROM "your.system"."host_info" WITH KEY = “host”
+```
+
+> **Note:** In Chronograf, you can also filter meta query results for a specified time range by [creating a `custom meta query` template variable](/chronograf/latest/guides/dashboard-template-variables/#create-custom-template-variables) and adding a time range filter.

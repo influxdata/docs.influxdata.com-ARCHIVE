@@ -206,9 +206,9 @@ It does not drop the associated continuous queries.
 
 A successful `DROP MEASUREMENT` query returns an empty result.
 
-<dt> Currently, InfluxDB does not support regular expressions with `DROP MEASUREMENTS`.
+{{% warn %}} Currently, InfluxDB does not support regular expressions with `DROP MEASUREMENTS`.
 See GitHub Issue [#4275](https://github.com/influxdb/influxdb/issues/4275) for more information.
-</dt>
+{{% /warn %}}
 
 ### Delete a shard with DROP SHARD
 
@@ -257,11 +257,12 @@ duration is `INF`.
 - The `REPLICATION` clause determines how many independent copies of each point
 are stored in the [cluster](/influxdb/v1.7/high_availability/clusters/).
 
-- By default, the replication factor `n` usually equals the number of data nodes. However, if you have four or more data nodes, the default replication factor `n` is 3.
+- If the replication factor is set to 2, each series is stored on 2 separate nodes. If the replication factor is equal to the number of data nodes, data is replicated on each node in the cluster.
+Replication ensures data is available on multiple nodes and more likely available when a data node (or more) is unavailable.
 
-- To ensure data is immediately available for queries, set the replication factor `n` to less than or equal to the number of data nodes in the cluster.
+- The number of data nodes in a cluster **must be evenly divisible by the replication factor**. For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes, and so on. A replication factor of 3 works with 3, 6, or 9 data nodes, and so on.
 
-> **Important:** If you have four or more data nodes, verify that the database replication factor is correct.
+    > **Important:** If data nodes aren’t evenly divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor performance.
 
 - Replication factors do not serve a purpose with single node instances.
 
@@ -303,6 +304,13 @@ This setting is optional.
 The query creates a retention policy called `one_day_only` for the database
 `NOAA_water_database` with a one day duration and a replication factor of one.
 
+> **Note:** To ensure data is successfully replicated across a cluster, the number of data nodes in a cluster **must be evenly divisible** by the replication factor.
+
+If the replication factor is set to 2, each series is stored on 2 separate nodes. If the replication factor is equal to the number of data nodes, data is replicated on each node in the cluster.
+Replication ensures data is available on multiple nodes and more likely available when a data node (or more) is unavailable.
+
+If data nodes aren’t divisible by the replication factor, data may be distributed unevenly across the cluster, causing poor performance.
+
 ##### Create a DEFAULT retention policy
 
 ```sql
@@ -327,8 +335,8 @@ The `ALTER RETENTION POLICY` query takes the following form, where you must decl
 ALTER RETENTION POLICY <retention_policy_name> ON <database_name> DURATION <duration> REPLICATION <n> SHARD DURATION <duration> DEFAULT
 ```
 
-<dt> Replication factors do not serve a purpose with single node instances.
-</dt>
+{{% warn %}} Replication factors do not serve a purpose with single node instances.
+{{% /warn %}}
 
 First, create the retention policy `what_is_time` with a `DURATION` of two days:
 ```sql
@@ -344,6 +352,10 @@ Modify `what_is_time` to have a three week `DURATION`, a two hour shard group du
 In the last example, `what_is_time` retains its original replication factor of 1.
 
 A successful `ALTER RETENTION POLICY` query returns an empty result.
+
+To store more series within the database, increase the number of data nodes and update the replication factor as needed. **The number of data nodes must be evenly divisible by the replication factor (RF).** For example, if you have RF=3 in a 6 node cluster, you could add 3 nodes or change the RF to 2 and add 2 data nodes.
+
+> **Note:** Decreasing the replication factor (fewer copies of data in a cluster) may reduce query performance, depending on query loads.
 
 ### Delete retention policies with DROP RETENTION POLICY
 

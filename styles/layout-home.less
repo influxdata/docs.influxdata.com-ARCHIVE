@@ -67,7 +67,7 @@
 			width: 100%;
 			display: inline-block;
 			text-align: center;
-			padding: 4rem 3rem;
+			padding: 3.5rem 3rem;
 			font-size: 0;
 
 			a:link,
@@ -141,7 +141,7 @@
 				background-color: @g20-white;
 			}
 		}
-		&.card-influxdb {
+		&.card-influxdb, &.card-influxdb2 {
 			.homepage--card-mask {
 				background-image: url(/img/home-influxdb.svg);
 				background-color: @c-ocean;
@@ -162,6 +162,21 @@
 			}
 			a.homepage--card-link:hover {
 				color: @c-pool;
+				background-color: @g20-white;
+			}
+		}
+		&.card-influxdb2 {
+			.homepage--card-mask {
+				background-image: url(/img/home-chronograf.svg);
+				background-color: @c-comet;
+				opacity: .85;
+			}
+			.homepage--card-title {
+				color: @g20-white;
+			}
+			
+			a.homepage--card-link:hover {
+				color: @c-comet;
 				background-color: @g20-white;
 			}
 		}
@@ -361,7 +376,7 @@
 }
 @media (min-width: @breakpoint-large) {
 	.homepage--card-container {
-		padding: 3.5rem;
+		padding: 3.25rem;
 	}
 	.homepage--card-description {
 		font-size: 1.075rem;
@@ -371,7 +386,7 @@
 		height: auto;
 
 		&.card-platform {
-			width: 75%;
+			width: 50%;
 		}
 
 		&.card-enterprise_influxdb,

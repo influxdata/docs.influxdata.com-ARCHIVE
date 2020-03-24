@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Introducing Kapacitor
 aliases:
   - /kapacitor/v1.5/introduction/downloading
 menu:
@@ -9,13 +9,12 @@ menu:
     weight: 10
 ---
 
-The introductory documentation includes all the information you need to get up and running with Kapacitor.
+To get up and running with Kapacitor, complete the following tasks:
 
-## [Download](https://portal.influxdata.com/downloads)
-Download Kapacitor.
+## [Download Kapacitor](https://portal.influxdata.com/downloads)
 
-## [Installing Kapacitor](/kapacitor/v1.5/introduction/installation/)
-Directions for installing, starting, and configuring Kapacitor.
+## [Install Kapacitor](/kapacitor/v1.5/introduction/installation/)
+Learn how to install, start, and configure Kapacitor.
 
 ## [Getting started with Kapacitor](/kapacitor/v1.5/introduction/getting-started/)
-This guide will walk you through how to process stream and batch data and teaches you the basics of using and running a Kapacitor daemon.
+Learn how to process stream and batch data and discover how to run and use a Kapacitor daemon.

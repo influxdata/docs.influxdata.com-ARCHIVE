@@ -5,6 +5,18 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.4 [2020-01-16]
+
+## Features
+
+- Add the ability to use templates when specifying MQTT (message queue telemetry transport) topic.
+- Upgrade to support Python 3.0 for user defined functions (UDFs).
+
+### Bug fixes
+
+- Upgrade the Kafka library to set the timestamp correctly.
+- Upgrade to Go 1.13, fixes various `go vet` issues.
+
 ## v1.5.3 [2019-06-18]
 
 {{% warn %}}

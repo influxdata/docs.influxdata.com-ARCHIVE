@@ -108,14 +108,14 @@ Perform the following steps on all three servers.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.4-c1.6.4_amd64.deb
-sudo dpkg -i influxdb-meta_1.6.4-c1.6.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.6.6-c1.6.6_amd64.deb
+sudo dpkg -i influxdb-meta_1.6.6-c1.6.6_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)]
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.6.4_c1.6.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.6.6_c1.6.6.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.6.6_c1.6.6.x86_64.rpm
 ```
 
 ### II. Edit the meta service configuration file
@@ -125,9 +125,9 @@ In `/etc/influxdb/influxdb-meta.conf`:
 * uncomment and set `hostname` to the full hostname of the meta node
 * set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
-<dt>
+{{% warn %}}
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
@@ -175,14 +175,14 @@ Perform the following steps on all three servers.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.4-c1.6.4_amd64.deb
-sudo dpkg -i influxdb-data_1.6.4-c1.6.4_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.6.6-c1.6.6_amd64.deb
+sudo dpkg -i influxdb-data_1.6.6-c1.6.6_amd64.deb
 ```
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.4_c1.6.4.x86_64.rpm
-sudo yum localinstall influxdb-data-1.6.4_c1.6.4.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.6.6_c1.6.6.x86_64.rpm
+sudo yum localinstall influxdb-data-1.6.6_c1.6.6.x86_64.rpm
 ```
 
 ### II. Edit the data service configuration file
@@ -200,9 +200,9 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 
 `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
-<dt>
+{{% warn %}}
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 ```
 # Change this option to true to disable reporting.
@@ -345,16 +345,16 @@ The expected output is:
 Data Nodes
 ==========
 ID   TCP Address                  Version
-2    quickstart-cluster-01:8088   1.6.4-c1.6.4
-4    quickstart-cluster-02:8088   1.6.4-c1.6.4
-6    quickstart-cluster-03:8088   1.6.4-c1.6.4
+2    quickstart-cluster-01:8088   1.6.6-c1.6.6
+4    quickstart-cluster-02:8088   1.6.6-c1.6.6
+6    quickstart-cluster-03:8088   1.6.6-c1.6.6
 
 Meta Nodes
 ==========
 TCP Address                  Version
-quickstart-cluster-01:8091   1.6.4-c1.6.4
-quickstart-cluster-02:8091   1.6.4-c1.6.4
-quickstart-cluster-03:8091   1.6.4-c1.6.4
+quickstart-cluster-01:8091   1.6.6-c1.6.6
+quickstart-cluster-02:8091   1.6.6-c1.6.6
+quickstart-cluster-03:8091   1.6.6-c1.6.6
 ```
 
 Your InfluxDB Enterprise cluster should have three data nodes and three meta nodes.

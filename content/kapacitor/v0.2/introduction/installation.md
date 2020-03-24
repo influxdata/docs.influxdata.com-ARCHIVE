@@ -4,7 +4,7 @@ title: Installing Kapacitor
 menu:
   kapacitor_02:
     weight: 20
-    parent: introduction
+    parent: Introduction
 ---
 
 Kapacitor has two binaries:

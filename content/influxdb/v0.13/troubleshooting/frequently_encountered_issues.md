@@ -99,7 +99,7 @@ The second query asks InfluxDB to return everything from `hillvalley` that occur
 Currently, InfluxDB can return results for queries that cover either the time range before epoch 0 or the time range after epoch 0, not both.
 A query with a time range that spans epoch 0 returns partial results.
 
-<dt> [GitHub Issue #2703](https://github.com/influxdb/influxdb/issues/2703)  </dt>
+{{% warn %}} [GitHub Issue #2703](https://github.com/influxdb/influxdb/issues/2703)  {{% /warn %}}
 
 ## Querying with booleans
 Acceptable boolean syntax differs for data writes and data queries.
@@ -114,7 +114,7 @@ Acceptable boolean syntax differs for data writes and data queries.
 
 For example, `SELECT * FROM hamlet WHERE bool=True` returns all points with `bool` set to `TRUE`, but `SELECT * FROM hamlet WHERE bool=T` returns all points with`bool` set to `false`.
 
-<dt> [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) </dt>
+{{% warn %}} [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) {{% /warn %}}
 
 ## Working with really big or really small integers
 InfluxDB stores all integers as signed int64 data types.
@@ -171,7 +171,7 @@ time                  value	 precision_supplied  timestamp_supplied
 1970-01-01T02:00:00Z  6      h                   2
 ```
 
-<dt> [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) </dt>
+{{% warn %}} [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) {{% /warn %}}
 
 ## Single quoting and double quoting in queries
 Single quote string values (for example, tag values) but do not single quote identifiers (database names, retention policy names, user names, measurement names, tag keys, and field keys).

@@ -2,11 +2,11 @@
 title: Use the SHOW DIAGNOSTICS statement to monitoring InfluxDB diagnostic information
 description: Use the SHOW DIAGNOSTICS statement to monitor InfluxDB instances.
 aliases:
-  - /platform/monitoring/influxdata-platform/tools/show-diagnostics/
+  - /platform/monitoring/tools/show-diagnostics/
 menu:
   platform:
     name: SHOW DIAGNOSTICS
-    parent: Tools for monitoring InfluxDB
+    parent: Other monitoring tools
     weight: 3
 ---
 
@@ -20,85 +20,85 @@ To see InfluxDB server or node diagnostic information, you can use the [`SHOW DI
 The `SHOW DIAGNOSTICS` statement returns the following information.
 
 #### build
-* Branch
-* Build Time
-* Commit
+- Branch
+- Build Time
+- Commit
 
 #### config
-* bind-address
-* reporting-disabled
+- bind-address
+- reporting-disabled
 
 #### config-coordinator
-* log-queries-after
-* max-concurrent-queries
-* max-select-buckets
-* max-select-point
-* max-select-series
-* query-timeout
-* write-timeout
+- log-queries-after
+- max-concurrent-queries
+- max-select-buckets
+- max-select-point
+- max-select-series
+- query-timeout
+- write-timeout
 
 #### config-cqs
-* enabled
-* query-stats-enabled
-* run-interval
+- enabled
+- query-stats-enabled
+- run-interval
 
 #### config-data
-* cache-max-memory-size
-* cache-snapshot-memory-size
-* cache-snapshot-write-cold-duration
-* compact-full-write-cold-duration
-* dir                          
-* max-concurrent-compactions
-* max-series-per-database
-* max-values-per-tag
-* wal-dir
-* wal-fsync-delay
+- cache-max-memory-size
+- cache-snapshot-memory-size
+- cache-snapshot-write-cold-duration
+- compact-full-write-cold-duration
+- dir                          
+- max-concurrent-compactions
+- max-series-per-database
+- max-values-per-tag
+- wal-dir
+- wal-fsync-delay
 
 
 #### config-httpd
-* access-log-path
-* bind-address
-* enabled
-* https-enabled
-* max-connection-limit
-* max-row-limit
+- access-log-path
+- bind-address
+- enabled
+- https-enabled
+- max-connection-limit
+- max-row-limit
 
 #### config-meta
-* dir
+- dir
 
 #### config-monitor
-* store-database
-* store-enabled
-* store-interval
+- store-database
+- store-enabled
+- store-interval
 
 #### config-precreator
-* advance-period
-* check-interval
-* enabled
+- advance-period
+- check-interval
+- enabled
 
 #### config-retention
-* check-interval
-* enabled
+- check-interval
+- enabled
 
 #### config-subscriber
-* enabled
-* http-timeout
-* write-buffer-size
-* write-concurrency
+- enabled
+- http-timeout
+- write-buffer-size
+- write-concurrency
 
 #### network
-* hostname
+- hostname
 
 #### runtime
-* GOARCH
-* GOMAXPROCS
-* GOOS
-* version
+- GOARCH
+- GOMAXPROCS
+- GOOS
+- version
 
 #### system
-* PID currentTime
-* started
-* uptime
+- PID currentTime
+- started
+- uptime
 
 
 ## Example of `SHOW DIAGNOSTICS` output

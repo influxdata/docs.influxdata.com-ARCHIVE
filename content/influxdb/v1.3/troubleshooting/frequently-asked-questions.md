@@ -262,7 +262,7 @@ Acceptable boolean syntax differs for data writes and data queries.
 
 For example, `SELECT * FROM "hamlet" WHERE "bool"=True` returns all points with `bool` set to `TRUE`, but `SELECT * FROM "hamlet" WHERE "bool"=T` returns nothing.
 
-<dt> [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) </dt>
+{{% warn %}} [GitHub Issue #3939](https://github.com/influxdb/influxdb/issues/3939) {{% /warn %}}
 
 ## How does InfluxDB handle field type discrepancies across shards?
 
@@ -641,7 +641,7 @@ time                  value	 precision_supplied  timestamp_supplied
 1970-01-01T02:00:00Z  6      h                   2
 ```
 
-<dt> [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) </dt>
+{{% warn %}} [GitHub Issue #2977](https://github.com/influxdb/influxdb/issues/2977) {{% /warn %}}
 
 ## When should I single quote and when should I double quote in queries?
 Single quote string values (for example, tag values) but do not single quote identifiers (database names, retention policy names, user names, measurement names, tag keys, and field keys).
@@ -719,8 +719,8 @@ Example:
 >
 ```
 
-<dt> [GitHub Issue #7530](https://github.com/influxdata/influxdb/issues/7530)
-</dt>
+{{% warn %}} [GitHub Issue #7530](https://github.com/influxdata/influxdb/issues/7530)
+{{% /warn %}}
 
 ## Why does `fill(previous)` return empty results?
 

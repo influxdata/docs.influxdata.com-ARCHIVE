@@ -8,6 +8,35 @@ menu:
     parent: About the project
 ---
 
+## v1.7.10 [2020-02-07]
+
+The InfluxDB Enterprise 1.7.10 release builds on the InfluxDB OSS 1.7.10 release.
+For details on changes incorporated from the InfluxDB OSS release, see
+[InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+- Log when meta state file cannot be opened.
+
+### Bugfixes
+- Update `MaxShardGroupID` on meta update.
+- Don't reassign shard ownership when removing a data node.
+
+## v1.7.9 [2019-10-27]
+
+The InfluxDB Enterprise 1.7.9 release builds on the InfluxDB OSS 1.7.9 release.
+For details on changes incorporated from the InfluxDB OSS release, see
+[InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Release notes
+- This release is built using Go 1.12.10 which eliminates the
+  [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
+
+### Bug fixes
+- Move `tsdb store open` to beginning of server initialization.
+- Enable Meta client and Raft to use verified TLS.
+- Fix RPC pool TLS configuration.
+- Update example configuration file with new authorization options.
+
 ## 1.7.8 [2019-09-03]
 
 {{% warn %}}
@@ -58,7 +87,7 @@ This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.6 release. For d
 
 ## 1.7.5 [2019-03-26]
 
-<dt>
+{{% warn %}}
 
 **If you are currently on this release, roll back to v1.7.4 until a fix is available.**
 
@@ -71,7 +100,7 @@ Examples:
 - Complex WHERE clauses with parentheses. For example, `WHERE d > 100 AND (c = 'foo' OR v = 'bar'`).
 - Conditions not including parentheses caysubg operator precedence to return `(a AND b) OR c` instead of `a AND (b OR c)`
 
-</dt>
+{{% /warn %}}
 
 This InfluxDB Enterprise release builds on the InfluxDB OSS 1.7.5 release. For details on changes incorporated from the InfluxDB OSS release, see [InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
 

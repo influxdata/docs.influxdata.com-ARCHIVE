@@ -10,19 +10,20 @@ menu:
 
 ## Prometheus remote read and write API support
 
-<dt>
+{{% warn %}}
 Note: The Prometheus [API Stability Guarantees](https://prometheus.io/docs/prometheus/latest/stability/)
 states that remote read and remote write endpoints are features listed as experimental
 or subject to change, and thus considered unstable for 2.x. Any breaking changes
 will be included in the InfluxDB release notes.
-</dt>
+{{% /warn %}}
 
 InfluxDB support for the Prometheus remote read and write API adds the following
 HTTP endpoints to InfluxDB:
 
 * `/api/v1/prom/read`
 * `/api/v1/prom/write`
-* `/api/v1/prom/metrics`
+
+Additionally, there is a [`/metrics` endpoint](/influxdb/v1.6/administration/server_monitoring/#influxdb-metrics-http-endpoint) configured to produce default Go metrics in Prometheus metrics format.
 
 ### Create a target database
 Create a database in your InfluxDB instance to house data sent from Prometheus.
@@ -36,7 +37,7 @@ CREATE DATABASE "prometheus"
 ### Configuration
 
 To enable the use of Prometheus' remote read and write APIs with InfluxDB, add URL
-values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/):
+values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file):
 
 - [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_write%3E)
 - [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_read%3E)
@@ -105,7 +106,7 @@ fields
 > named `_` and the Prometheus measurement name is stored in the `__name__` label.
 > In InfluxDB v1.6+, every Prometheus measurement gets its own InfluxDB measurement.
 
-<dt>
+{{% warn %}}
 This format is different than the format used by the Telegraf Prometheus input plugin,
 which is documented [here](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus).
-</dt>
+{{% /warn %}}

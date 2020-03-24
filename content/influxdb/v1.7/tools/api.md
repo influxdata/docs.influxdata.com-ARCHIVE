@@ -715,7 +715,7 @@ Content-Length: 33
 ```
 
 All data must be binary encoded and in the
-[InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#line-protocol) format.
+[InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol) format.
 Our example shows the `--data-binary` parameter from curl, which we will use in
 all examples on this page.
 Using any encoding method other than `--data-binary` will likely lead to issues;
@@ -809,6 +809,7 @@ Errors are returned in JSON.
 | 400 Bad Request  | Unacceptable request. Can occur with an InfluxDB line protocol syntax error or if a user attempts to write values to a field that previously accepted a different value type. The returned JSON offers further information. |
 | 401 Unauthorized | Unacceptable request. Can occur with invalid authentication credentials.  |
 | 404 Not Found    | Unacceptable request. Can occur if a user attempts to write to a database that does not exist. The returned JSON offers further information. |
+| 413 Request Entity Too Large | Unaccetable request. It will occur if the payload of the POST request is bigger than the maximum size allowed. See [`max-body-size`](https://docs.influxdata.com/influxdb/latest/administration/config/#max-body-size-25000000) parameter for more details.
 | 500 Internal Server Error  | The system is overloaded or significantly impaired. Can occur if a user attempts to write to a retention policy that does not exist. The returned JSON offers further information. |
 
 #### Examples
@@ -849,6 +850,14 @@ HTTP/1.1 401 Unauthorized
 HTTP/1.1 404 Not Found
 [...]
 {"error":"database not found: \"mydb1\""}
+```
+
+##### Send a request body that is too large
+
+```
+HTTP/2 413 Request Entity Too Large
+[...]
+{"error":"Request Entity Too Large"}
 ```
 
 ##### Write a point to a retention policy that doesn't exist

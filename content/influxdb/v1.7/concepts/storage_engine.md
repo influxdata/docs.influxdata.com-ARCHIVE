@@ -81,21 +81,21 @@ The structure of these files looks very similar to an SSTable in LevelDB or othe
 A TSM file is composed of four sections: header, blocks, index, and footer.
 
 ```
-┌────────┬────────────────────────────────────┬─────────────┬──────────────┐
-│ Header │               Blocks               │    Index    │    Footer    │
-│5 bytes │              N bytes               │   N bytes   │   4 bytes    │
-└────────┴────────────────────────────────────┴─────────────┴──────────────┘
++--------+------------------------------------+-------------+--------------+
+| Header |               Blocks               |    Index    |    Footer    |
+|5 bytes |              N bytes               |   N bytes   |   4 bytes    |
++--------+------------------------------------+-------------+--------------+
 ```
 
 The Header is a magic number to identify the file type and a version number.
 
 ```
-┌───────────────────┐
-│      Header       │
-├─────────┬─────────┤
-│  Magic  │ Version │
-│ 4 bytes │ 1 byte  │
-└─────────┴─────────┘
++-------------------+
+|      Header       |
++-------------------+
+|  Magic  │ Version |
+| 4 bytes │ 1 byte  |
++-------------------+
 ```
 
 Blocks are sequences of pairs of CRC32 checksums and data.
@@ -104,14 +104,14 @@ The CRC32 is used for block level error detection.
 The length of the blocks is stored in the index.
 
 ```
-┌───────────────────────────────────────────────────────────┐
-│                          Blocks                           │
-├───────────────────┬───────────────────┬───────────────────┤
-│      Block 1      │      Block 2      │      Block N      │
-├─────────┬─────────┼─────────┬─────────┼─────────┬─────────┤
-│  CRC    │  Data   │  CRC    │  Data   │  CRC    │  Data   │
-│ 4 bytes │ N bytes │ 4 bytes │ N bytes │ 4 bytes │ N bytes │
-└─────────┴─────────┴─────────┴─────────┴─────────┴─────────┘
++--------------------------------------------------------------------+
+│                           Blocks                                   │
++---------------------+-----------------------+----------------------+
+|       Block 1       |        Block 2        |       Block N        |
++---------------------+-----------------------+----------------------+
+|   CRC    |  Data    |    CRC    |   Data    |   CRC    |   Data    |
+| 4 bytes  | N bytes  |  4 bytes  | N bytes   | 4 bytes  |  N bytes  |
++---------------------+-----------------------+----------------------+
 ```
 
 Following the blocks is the index for the blocks in the file.
@@ -127,23 +127,23 @@ We can also determine where that block resides and how much data must be read to
 Knowing the size of the block, we can efficiently provision our IO statements.
 
 ```
-┌────────────────────────────────────────────────────────────────────────────┐
-│                                   Index                                    │
-├─────────┬─────────┬──────┬───────┬─────────┬─────────┬────────┬────────┬───┤
++-----------------------------------------------------------------------------+
+│                                   Index                                     │
++-----------------------------------------------------------------------------+
 │ Key Len │   Key   │ Type │ Count │Min Time │Max Time │ Offset │  Size  │...│
 │ 2 bytes │ N bytes │1 byte│2 bytes│ 8 bytes │ 8 bytes │8 bytes │4 bytes │   │
-└─────────┴─────────┴──────┴───────┴─────────┴─────────┴────────┴────────┴───┘
++-----------------------------------------------------------------------------+
 ```
 
 The last section is the footer that stores the offset of the start of the index.
 
 ```
-┌─────────┐
++---------+
 │ Footer  │
-├─────────┤
++---------+
 │Index Ofs│
 │ 8 bytes │
-└─────────┘
++---------+
 ```
 
 ### Compression
@@ -153,10 +153,10 @@ A block contains the timestamps and values for a given series and field.
 Each block has one byte header, followed by the compressed timestamps and then the compressed values.
 
 ```
-┌───────┬─────┬─────────────────┬──────────────────┐
-│ Type  │ Len │   Timestamps    │      Values      │
-│1 Byte │VByte│     N Bytes     │     N Bytes      │
-└───────┴─────┴─────────────────┴──────────────────┘
++--------------------------------------------------+
+| Type  |  Len  |   Timestamps    |      Values    |
+|1 Byte | VByte |     N Bytes     |    N Bytes     │
++--------------------------------------------------+
 ```
 
 The timestamps and values are compressed and stored separately using encodings dependent on the data type and its shape.

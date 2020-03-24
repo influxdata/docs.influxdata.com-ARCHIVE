@@ -193,8 +193,8 @@ If you request a query that has no timestamp to return, such as an aggregation f
 ## INTEGRAL()
 `INTEGRAL()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## MEAN()
 Returns the arithmetic mean (average) for the values in a single [field](/influxdb/v0.11/concepts/glossary/#field).
@@ -294,9 +294,9 @@ time			               median
 2015-08-18T00:00:00Z	 2.0575
 ```
 
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
+{{% warn %}} The returned timestamps mark the start of the relevant time interval for the query.
 See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
+{{% /warn %}}
 
 ## SPREAD()
 Returns the difference between the minimum and maximum values of a [field](/influxdb/v0.11/concepts/glossary/#field).
@@ -573,9 +573,9 @@ time			               first
 1970-01-01T00:00:00Z	 2.064
 ```
 
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
+{{% warn %}} The returned timestamps mark the start of the relevant time interval for the query.
 See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
+{{% /warn %}}
 
 ## LAST()
 Returns the newest value (determined by the timestamp) of a single [field](/influxdb/v0.11/concepts/glossary/#field).
@@ -620,9 +620,9 @@ time			               last
 1970-01-01T00:00:00Z	 4.938
 ```
 
-<dt> The returned timestamps mark the start of the relevant time interval for the query.
+{{% warn %}} The returned timestamps mark the start of the relevant time interval for the query.
 See GitHub Issue [#4680](https://github.com/influxdb/influxdb/issues/4680) for more information.
-</dt>
+{{% /warn %}}
 
 > **Note:** `LAST()` does not return points that occur after `now()` unless the `WHERE` clause specifies that time range.
 See [Frequently Encountered Issues](/influxdb/v0.11/troubleshooting/frequently_encountered_issues/#querying-after-now) for how to query after `now()`.
@@ -780,9 +780,9 @@ time			               percentile
 
 Notice that `PERCENTILE(<field_key>,100)` is equivalent to `MAX(<field_key>)`.
 
-<dt> Currently, `PERCENTILE(<field_key>,0)` is not equivalent to `MIN(<field_key>)`.
+{{% warn %}} Currently, `PERCENTILE(<field_key>,0)` is not equivalent to `MIN(<field_key>)`.
 See GitHub Issue [#4418](https://github.com/influxdata/influxdb/issues/4418) for more information.
-</dt>
+{{% /warn %}}
 
 > **Note**: `PERCENTILE(<field_key>, 50)` is nearly equivalent to `MEDIAN()`, except `MEDIAN()` returns the average of the two middle values if the field contains an even number of points.
 
@@ -932,8 +932,8 @@ In the case of a tie, InfluxDB returns the value with the earlier timestamp.
 ## CEILING()
 `CEILING()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## DERIVATIVE()
 Returns the rate of change for the values in a single [field](/influxdb/v0.11/concepts/glossary/#field) in a [series](/influxdb/v0.11/concepts/glossary/#series).
@@ -1155,20 +1155,20 @@ This returns the rate of change per six minutes for the aggregated data from `20
 ## DIFFERENCE()
 `DIFFERENCE()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdata/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## FLOOR()
 `FLOOR()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## HISTOGRAM()
 `HISTOGRAM()` is not yet functional.
 
-<dt> See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
-</dt>
+{{% warn %}} See GitHub Issue [#5930](https://github.com/influxdb/influxdb/issues/5930) for more information.
+{{% /warn %}}
 
 ## NON_NEGATIVE_DERIVATIVE()
 Returns the non-negative rate of change for the values in a single [field](/influxdb/v0.11/concepts/glossary/#field) in a [series](/influxdb/v0.11/concepts/glossary/#series).

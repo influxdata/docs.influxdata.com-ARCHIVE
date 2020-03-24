@@ -7,7 +7,7 @@ menu:
     parent: Introduction
 ---
 
-This page provides directions for installing, starting, and configuring InfluxDB.
+This page provides directions for installing, starting, and configuring InfluxDB open source (OSS).
 
 ## InfluxDB OSS installation requirements
 
@@ -35,9 +35,10 @@ can be inaccurate.
 
 ## Installing InfluxDB OSS
 
-For users who don't want to install any software and are ready to use InfluxDB,
-you may want to check out our
+If you want to use InfluxDB but don't want to install software, check out our
 [managed hosted InfluxDB offering](https://cloud.influxdata.com).
+
+> **Note:** Windows support is experimental.
 
 {{< tab-labels >}}
 {{% tabs %}}
@@ -92,9 +93,7 @@ For Debian users, add the InfluxData repository:
 ```bash
 wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 source /etc/os-release
-test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+echo "deb https://repos.influxdata.com/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 {{% /code-tab-content %}}
 
@@ -102,9 +101,7 @@ test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch 
 ```bash
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 source /etc/os-release
-test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+echo "deb https://repos.influxdata.com/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 {{% /code-tab-content %}}
 {{< /code-tabs-wrapper >}}
@@ -227,6 +224,39 @@ influxd -config /usr/local/etc/influxdb.conf
 {{< /tab-content-container >}}
 {{< /tab-labels >}}
 
+### Verify the authenticity of downloaded binary (optional)
+
+For added security, follow these steps to verify the signature of your InfluxDB download with `gpg`.
+
+(Most operating systems include the `gpg` command by default.
+If `gpg` is not available, see the [GnuPG homepage](https://gnupg.org/download/) for installation instructions.)
+
+1. Download and import InfluxData's public key:
+
+    ```
+    curl -sL https://repos.influxdata.com/influxdb.key | gpg --import
+    ```
+
+2. Download the signature file for the release by adding `.asc` to the download URL.
+   For example:
+
+    ```
+    wget https://dl.influxdata.com/influxdb/releases/influxdb-1.7.10_linux_amd64.tar.gz.asc
+    ```
+
+3. Verify the signature with `gpg --verify`:
+
+    ```
+    gpg --verify influxdb-1.7.10_linux_amd64.tar.gz.asc influxdb-1.7.10_linux_amd64.tar.gz
+    ```
+
+    The output from this command should include the following:
+
+    ```
+    gpg: Good signature from "InfluxDB Packaging Service <support@influxdb.com>" [unknown]
+    ```
+
+
 ## Configuring InfluxDB OSS
 
 The system has internal defaults for every configuration file setting.
@@ -324,3 +354,19 @@ When using non-standard directories for InfluxDB data and configurations, also b
 chown influxdb:influxdb /mnt/influx
 chown influxdb:influxdb /mnt/db
 ```
+
+For InfluxDB 1.7.6 or later, you must give owner permissions to the `init.sh` file. To do this, run the following script in your `influxdb` directory:
+
+```sh
+if [ ! -f "$STDOUT" ]; then
+    mkdir -p $(dirname $STDOUT)
+    chown $USER:$GROUP $(dirname $STDOUT)
+ fi
+
+ if [ ! -f "$STDERR" ]; then
+    mkdir -p $(dirname $STDERR)
+    chown $USER:$GROUP $(dirname $STDERR)
+ fi
+
+ # Override init script variables with DEFAULT values
+ ```

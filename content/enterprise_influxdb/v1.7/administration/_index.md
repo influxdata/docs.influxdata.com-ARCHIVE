@@ -21,7 +21,7 @@ menu:
 
 ## [Authenticate and authorize](/influxdb/v1.7/administration/authentication_and_authorization/)
 
-See [Authenticate and authorize](/influxdb/v1.7/administration/authentication_and_authorization/) in the InfluxDB OSS documentation for details on
+See [Authenticate and authorize](/influxdb/v1.7/administration/authentication_and_authorization/) in the InfluxDB open source (OSS) documentation for details on:
 
 * how to
 [set up authentication](/influxdb/v1.7/administration/authentication_and_authorization/#set-up-authentication)

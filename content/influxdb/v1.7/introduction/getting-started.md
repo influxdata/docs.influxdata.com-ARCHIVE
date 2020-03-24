@@ -9,7 +9,7 @@ menu:
     parent: Introduction
 ---
 
-With InfluxDB [installed](/influxdb/v1.7/introduction/installation), you're ready to start doing some awesome things.
+With InfluxDB open source (OSS) [installed](/influxdb/v1.7/introduction/installation), you're ready to start doing some awesome things.
 In this section we'll use the `influx` [command line interface](/influxdb/v1.7/tools/shell/) (CLI), which is included in all
 InfluxDB packages and is a lightweight and simple way to interact with the database.
 The CLI communicates with InfluxDB directly by making requests to the InfluxDB API over port `8086` by default.
@@ -20,8 +20,8 @@ for examples with the `curl` application.
 
 ## Creating a database
 
-If you've installed InfluxDB locally, the `influx` command should be available via the command line.
-Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance
+If you've installed InfluxDB locally, the `influx` command is available via the command line.
+Execute `influx` to start the CLI and automatically connect to the local InfluxDB instance
 (assuming you have already started the server with `service influxdb start` or by running `influxd` directly).
 The output should look like this:
 
@@ -57,11 +57,12 @@ Throughout this guide, we'll use the database name `mydb`:
 > CREATE DATABASE mydb
 >
 ```
-
-> **Note:** After hitting enter, a new prompt appears and nothing else is displayed.
+> **Notes:**
+>
+* `default` is a [reserved InfluxQL keyword](/influxdb/v1.7/query_language/spec/#keywords) and cannot be used as a database name.
+* After hitting enter, a new prompt appears and nothing else is displayed.
 In the CLI, this means the statement was executed and there were no errors to display.
-There will always be an error displayed if something went wrong.
-No news is good news!
+If something goes wrong, an error is displayed. No news is good news!
 
 Now that the `mydb` database is created, we'll use the `SHOW DATABASES` statement
 to display all existing databases:
@@ -128,7 +129,7 @@ stock,symbol=AAPL bid=127.46,ask=127.48
 temperature,machine=unit42,type=assembly external=25,internal=37 1434067467000000000
 ```
 
-> **Note:** For details on the InfluxDB line protocol, see [InfluxDB line protocol syntax](/influxdb/v1.7/write_protocols/line_protocol_reference/#syntax) page.
+> **Note:** For details on the InfluxDB line protocol, see [InfluxDB line protocol syntax](/influxdb/v1.7/write_protocols/line_protocol_reference/#line-protocol-syntax) page.
 
 To insert a single time series data point into InfluxDB using the CLI, enter `INSERT` followed by a point:
 
@@ -183,9 +184,7 @@ including support for Go-style regex. For example:
 ```sql
 > SELECT * FROM /.*/ LIMIT 1
 --
-> SELECT * FROM "cpu_load_short"
---
-> SELECT * FROM "cpu_load_short" WHERE "value" > 0.9
+> SELECT * FROM "cpu" WHERE "value" > 0.9
 ```
 
 This is all you need to know to write data into InfluxDB and query it back.

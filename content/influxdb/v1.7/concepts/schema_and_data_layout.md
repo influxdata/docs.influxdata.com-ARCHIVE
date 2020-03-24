@@ -26,7 +26,7 @@ There are, however, general guidelines to follow and pitfalls to avoid when desi
 
 In no particular order, we recommend that you:
 
-### *Encode meta data in tags*
+### Encode meta data in tags
 
 [Tags](/influxdb/v1.7/concepts/glossary/#tag) are indexed and [fields](/influxdb/v1.7/concepts/glossary/#field) are not indexed.
 This means that queries on tags are more performant than those on fields.
@@ -38,7 +38,7 @@ In general, your queries should guide what gets stored as a tag and what gets st
 * Store data in fields if you plan to use them with an [InfluxQL function](/influxdb/v1.7/query_language/functions/)
 * Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.7/concepts/glossary/#tag-value) are always interpreted as strings
 
-### *Avoid using InfluxQL keywords as identifier names*
+### Avoid using InfluxQL keywords as identifier names
 
 This isn't necessary, but it simplifies writing queries; you won't have to wrap those identifiers in double quotes.
 Identifiers are database names, [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) names, [user](/influxdb/v1.7/concepts/glossary/#user) names, [measurement](/influxdb/v1.7/concepts/glossary/#measurement) names, [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key), and [field keys](/influxdb/v1.7/concepts/glossary/#field-key).
@@ -50,14 +50,23 @@ Note that you will also need to wrap identifiers in double quotes in queries if 
 
 In no particular order, we recommend that you:
 
-### *Don't have too many series*
+### Don't have too many series
 
 [Tags](/influxdb/v1.7/concepts/glossary/#tag) containing highly variable information like UUIDs, hashes, and random strings will lead to a large number of series in the database, known colloquially as high series cardinality.
 High series cardinality is a primary driver of high memory usage for many database workloads.
 
 See [Hardware sizing guidelines](/influxdb/v1.7/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v1.7/concepts/glossary/#series-cardinality) recommendations based on your hardware. If the system has memory constraints, consider storing high-cardinality data as a field rather than a tag.
 
-### *Don't encode data in measurement names*
+### Don't use the same name for a tag and a field
+
+Avoid using the same name for a tag and field key.
+This often results in unexpected behavior when querying data.
+
+If you inadvertently add the same name for a tag and field key, see
+[Frequently asked questions](/influxdb/v1.7/troubleshooting/frequently-asked-questions/#tag-and-field-key-with-the-same-name)
+for information about how to query the data predictably and how to fix the issue.
+
+### Don't encode data in measurement names
 
 In general, taking this step will simplify your queries.
 InfluxDB queries merge data that fall within the same [measurement](/influxdb/v1.7/concepts/glossary/#measurement); it's better to differentiate data with [tags](/influxdb/v1.7/concepts/glossary/#tag) than with detailed measurement names.
@@ -97,7 +106,7 @@ While both queries are relatively simple, use of the regular expression make cer
 > SELECT mean("temp") FROM "weather_sensor" WHERE "region" = 'north'
 ```
 
-### *Don't put more than one piece of information in one tag*
+### Don't put more than one piece of information in one tag
 
 Similar to the point above, splitting a single tag with multiple pieces into separate tags will simplify your queries and reduce the need for regular expressions.
 
@@ -138,8 +147,7 @@ While both queries are similar, the use of multiple tags in Schema 2 avoids the 
 ## Shard group duration overview
 
 InfluxDB stores data in shard groups.
-Shard groups are organized by [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP) and store data with timestamps that fall within a specific time interval.
-The length of that time interval is called the [shard group duration](/influxdb/v1.7/concepts/glossary/#shard-duration).
+Shard groups are organized by [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) (RP) and store data with timestamps that fall within a specific time interval called the [shard duration](/influxdb/v1.7/concepts/glossary/#shard-duration).
 
 If no shard group duration is provided, the shard group duration is determined by the RP's [duration](/influxdb/v1.7/concepts/glossary/#duration) at the time the RP is created. The default values are:
 
@@ -150,8 +158,7 @@ If no shard group duration is provided, the shard group duration is determined b
 | > 6 months  | 7 days  |
 
 The shard group duration is also configurable per RP.
-See [Retention Policy Management](/influxdb/v1.7/query_language/database_management/#retention-policy-management) for how to configure the
-shard group duration.
+To configure the shard group duration, see [Retention Policy Management](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
 
 ## Shard group duration tradeoffs
 
@@ -169,14 +176,15 @@ This reduces data duplication, improves compression efficiency, and allows faste
 
 Shorter shard group durations allow the system to more efficiently drop data and record incremental backups.
 When InfluxDB enforces an RP it drops entire shard groups, not individual data points, even if the points are older than the RP duration.
-A shard group will only be removed once a shard group's *end time* is older than the RP duration.
+A shard group will only be removed once a shard group's duration *end time* is older than the RP duration.
 
-For example, if your RP has a duration of one day, InfluxDB will drop an hour's worth of data every hour and will always have 25 shard groups. One for each hour in the day and an extra shard group that is partially expiring, but will not be removed until the whole shard group is older than 24 hours.
+For example, if your RP has a duration of one day, InfluxDB will drop an hour's worth of data every hour and will always have 25 shard groups. One for each hour in the day and an extra shard group that is partially expiring, but isn't removed until the whole shard group is older than 24 hours.
+
+>**Note:** A special use case to consider: filtering queries on schema data (such as tags, series, measurements) by time. For example, if you want to filter schema data within a one hour interval, you must set the shard group duration to 1h. For more information, see [filter schema data by time](/influxdb/v1.7/query_language/schema_exploration/#filter-meta-queries-by-time).
 
 ## Shard group duration recommendations
 
-The default shard group durations works well for most cases.
-However, high-throughput or long-running instances will benefit from using longer shard group durations.
+The default shard group durations work well for most cases. However, high-throughput or long-running instances will benefit from using longer shard group durations.
 Here are some recommendations for longer shard group durations:
 
 | RP Duration  | Shard Group Duration  |
@@ -190,7 +198,7 @@ Here are some recommendations for longer shard group durations:
 > **Note:** Note that `INF` (infinite) is not a [valid shard group duration](/influxdb/v1.7/query_language/database_management/#retention-policy-management).
 In extreme cases where data covers decades and will never be deleted, a long shard group duration like `1040w` (20 years) is perfectly valid.
 
-Here are some other factors to take into consideration when determining shard group duration:
+Other factors to consider before setting shard group duration:
 
 * Shard groups should be twice as long as the longest time range of the most frequent queries
 * Shard groups should each contain more than 100,000 [points](/influxdb/v1.7/concepts/glossary/#point) per shard group
@@ -201,5 +209,4 @@ Here are some other factors to take into consideration when determining shard gr
 Bulk insertion of historical data covering a large time range in the past will trigger the creation of a large number of shards at once.
 The concurrent access and overhead of writing to hundreds or thousands of shards can quickly lead to slow performance and memory exhaustion.
 
-When writing historical data, we highly recommend temporarily setting a longer shard group duration so fewer shards are created.
-Typically, a shard group duration of 52 weeks works well for backfilling.
+When writing historical data, we highly recommend temporarily setting a longer shard group duration so fewer shards are created. Typically, a shard group duration of 52 weeks works well for backfilling.

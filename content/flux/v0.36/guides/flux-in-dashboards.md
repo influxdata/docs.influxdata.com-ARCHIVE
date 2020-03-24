@@ -139,9 +139,9 @@ dataSet
 ```
 
 ### Custom template variables
-<dt>
+{{% warn %}}
 Chronograf does not yet support the use of custom template variables in Flux queries.
-</dt>
+{{% /warn %}}
 
 ## Using Flux and InfluxQL
 Within individual dashboard cells, the use of Flux and InfluxQL is mutually exclusive.

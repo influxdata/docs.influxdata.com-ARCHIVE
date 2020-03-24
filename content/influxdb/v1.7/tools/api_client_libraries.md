@@ -28,8 +28,8 @@ Thanks to the open source community for your contributions, commitment, and effo
 
 * [Erlang InfluxDB UDP Writer](https://github.com/palkan/influx_udp)
   * Maintained by [Vladimir Dementyev (palkan)](https://github.com/palkan)
-* [InfluxDB line encoder](https://github.com/emeter/influxdb_encoderl)
-  * Maintained by [Pouriya Jahanbakhsh (emeter)](https://github.com/emeter)
+* [InfluxDB line encoder](https://github.com/Pouriya-Jahanbakhsh/influxdb_encoderl)
+  * Maintained by [Pouriya Jahanbakhsh](https://github.com/Pouriya-Jahanbakhsh)
 
 ## Go
 
@@ -47,6 +47,8 @@ Thanks to the open source community for your contributions, commitment, and effo
   * Maintained by [Stefan Majer (majst01)](https://github.com/majst01)
 * [Alpakka InfluxDB](https://doc.akka.io/docs/alpakka/current/influxdb.html)
   * Maintained by the Alpakka community with help from [Lightbend](https://www.lightbend.com/)
+* [JFlux](https://github.com/nickRm/jflux)
+  * Maintained by [Nick Rammos (nickRm)](https://github.com/nickRm)
 
 ## JavaScript/Node.js
 

@@ -63,17 +63,18 @@ setting in the meta node configuration file.
 
 <br>
 # Meta node setup
-## Step 1: Modify the `/etc/hosts` File
+## Step 1: Add appropriate DNS entries for each of your servers
 
-Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
-file (the hostnames below are representative).
+Ensure that your servers' hostnames and IP addresses are added to your network's DNS environment.
+The addition of DNS entries and IP assignment is usually site and policy specific; contact your DNS administrator for assistance as necessary.
+Ultimately, use entries similar to the following (hostnames and domain IP addresses are representative).
 
+| Record Type |               Hostname                |                IP |
+|:------------|:-------------------------------------:|------------------:|
+| A           | ```enterprise-meta-01.mydomain.com``` | ```<Meta_1_IP>``` |
+| A           | ```enterprise-meta-02.mydomain.com``` | ```<Meta_2_IP>``` |
+| A           | ```enterprise-meta-03.mydomain.com``` | ```<Meta_3_IP>``` |
 
-```
-<Meta_1_IP> enterprise-meta-01
-<Meta_2_IP> enterprise-meta-02
-<Meta_3_IP> enterprise-meta-03
-```
 
 > **Verification steps:**
 >
@@ -83,10 +84,10 @@ servers are resolvable. Here is an example set of shell commands using `ping`:
     ping -qc 1 enterprise-meta-01
     ping -qc 1 enterprise-meta-02
     ping -qc 1 enterprise-meta-03
+>
 
-
-If there are any connectivity issues resolve them before proceeding with the
-installation.
+We highly recommend that each server be able to resolve the IP from the hostname alone as shown here.
+Resolve any connectivity issues before proceeding with the installation.
 A healthy cluster requires that every meta node can communicate with every other
 meta node.
 
@@ -99,16 +100,45 @@ Perform the following steps on each meta server.
 #### Ubuntu & Debian (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.8-c1.7.8_amd64.deb
-sudo dpkg -i influxdb-meta_1.7.8-c1.7.8_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.10-c1.7.10_amd64.deb
+sudo dpkg -i influxdb-meta_1.7.10-c1.7.10_amd64.deb
 ```
 
 #### RedHat & CentOS (64-bit)
 
 ```
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.8_c1.7.8.x86_64.rpm
-sudo yum localinstall influxdb-meta-1.7.8_c1.7.8.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
 ```
+
+#### Verify the authenticity of release download (recommended)
+
+For added security, follow these steps to verify the signature of your InfluxDB download with `gpg`.
+
+1. Download and import InfluxData's public key:
+
+    ```
+    curl -sL https://repos.influxdata.com/influxdb.key | gpg --import
+    ```
+
+2. Download the signature file for the release by adding `.asc` to the download URL.
+   For example:
+
+    ```
+    wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.10_c1.7.10.x86_64.rpm.asc
+    ```
+
+3. Verify the signature with `gpg --verify`:
+
+    ```
+    gpg --verify influxdb-meta-1.7.10_c1.7.10.x86_64.rpm.asc influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
+    ```
+
+    The output from this command should include the following:
+
+    ```
+    gpg: Good signature from "InfluxDB Packaging Service <support@influxdb.com>" [unknown]
+    ```
 
 ### II. Edit the configuration file
 
@@ -118,9 +148,9 @@ In `/etc/influxdb/influxdb-meta.conf`:
 * Uncomment `internal-shared-secret` in the `[meta]` section and set it to a long pass phrase to be used in JWT authentication for intra-node communication. This value must the same for all of your meta nodes and match the `[meta] meta-internal-shared-secret` settings in the configuration files of your data nodes.
 * Set `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData.
 
-<dt>
+{{% warn %}}
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
@@ -201,9 +231,9 @@ The expected output is:
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.7.8-c1.7.8
-    enterprise-meta-02:8091   1.7.8-c1.7.8
-    enterprise-meta-03:8091   1.7.8-c1.7.8
+    enterprise-meta-01:8091   1.7.10-c1.7.10
+    enterprise-meta-02:8091   1.7.10-c1.7.10
+    enterprise-meta-03:8091   1.7.10-c1.7.10
 
 
 Note that your cluster must have at least three meta nodes.

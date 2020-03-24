@@ -207,11 +207,4 @@ If you need to add the same set of tags to all metrics, you can define them glob
   udp-read-buffer = 8388608 # (8*1024*1024) UDP read buffer size
 ```
 
-
-
-
-
-
-
-
-Content from  [README](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md) on GitHub.
+Content from [README](https://github.com/influxdata/influxdb/tree/1.7/services/graphite/README.md) on GitHub.

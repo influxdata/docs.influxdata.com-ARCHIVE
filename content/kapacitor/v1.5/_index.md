@@ -20,7 +20,7 @@ great choice for data processing.
 * Process both streaming data and batch data.
 * Query data from InfluxDB on a schedule, and receive data via the
 [line protocol](/influxdb/v1.4/write_protocols/line/) and any other method InfluxDB supports.
-* Perform any transformation currently possible in [InfluxQL](/influxdb/v1.4/query_language/spec/).
+* Perform any transformation currently possible in [InfluxQL](/influxdb/v1.7/query_language/spec/).
 * Store transformed data back in InfluxDB.
 * Add custom user defined functions to detect anomalies.
 * Integrate with HipChat, OpsGenie, Alerta, Sensu, PagerDuty, Slack, and more.

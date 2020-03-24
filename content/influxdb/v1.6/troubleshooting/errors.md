@@ -11,9 +11,9 @@ menu:
 This page documents errors, their descriptions, and, where applicable,
 common resolutions.
 
-<dt>
+{{% warn %}}
 **Disclaimer:** This document does not contain an exhaustive list of all possible InfluxDB errors.
-</dt>
+{{% /warn %}}
 
 ## error: database name required
 The `database name required` error occurs when certain `SHOW` queries do

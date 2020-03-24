@@ -11,7 +11,7 @@ menu:
 **Content**
 
 * [Logging locations](#logging-locations)
-* [Redirecting HTTP request logging](#redirecting-http-request-logging)
+* [HTTP access logging](#http-access-logging)
 * [Structured logging](#structured-logging)
 * [Tracing](#tracing)
 
@@ -32,38 +32,54 @@ influxd 2>$HOME/my_log_file
 
 ### Launched as a service
 
-#### sysvinit
-
-If InfluxDB was installed using a prebuilt package, and then launched
-as a service, `stderr` is redirected to `/var/log/influxdb/influxd.log` and all log data will be written to that file.
-You can override this location by setting the environment variable `STDERR` in the InfluxDB configuration file `/etc/default/influxdb`.
-
->**Note:** macOS logs are stored, by default, in the file `/usr/local/var/log/influxdb.log`.
-
-For example, if `/etc/default/influxdb` contains:
-
-```
-STDERR=/dev/null
-```
-
-all log data will be discarded.  Likewise, you can direct output to
-`stdout` by setting `STDOUT` in the same file.  Output to `stdout` is
-sent to `/dev/null` by default when InfluxDB is launched as a service.
-
-InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
-
+<!--------------------------- BEGIN TABS  ---------------------->
+{{< tab-labels >}}
+{{% tabs %}}
+[systemd](#)
+[sysinit](#)
+{{% /tabs %}}
+{{< tab-content-container >}}
+<!--------------------------- BEGIN systemd  ------------------->
+{{% tab-content %}}
 #### systemd
 
-Starting with version 1.0, InfluxDB on `systemd` systems will no longer
-write files to `/var/log/influxdb` by default, and will now use the
-system configured default for logging (usually `journald`).  On most
-Linux systems, the logs will be directed to the `systemd` journal and can be accessed with the command:
+Most Linux systems direct logs to the `systemd` journal.
+To access these logs, use this command:
 
-```
+```sh
 sudo journalctl -u influxdb.service
 ```
 
-See the `systemd` `journald` documentation about configuring `journald`.
+For more information, see the [`journald.conf` manual page](https://www.freedesktop.org/software/systemd/man/journald.conf.html).
+{{% /tab-content %}}
+<!--------------------------- END systemd  --------------------->
+<!--------------------------- BEGIN sysvinit  ------------------>
+{{% tab-content %}}
+#### sysvinit
+
+On Linux sytems not using systemd, InfluxDB writes all log data and `stderr` to `/var/log/influxdb/influxd.log`.
+You can override this location by setting the environment variable `STDERR` in a start-up script at `/etc/default/influxdb`.
+(If this file doesn't exist, you need to create it.)
+
+For example, if `/etc/default/influxdb` contains:
+
+```sh
+STDERR=/dev/null
+```
+
+all log data is discarded.
+Likewise, you can direct output to `stdout` by setting `STDOUT` in the same file.
+`stdout` is sent to `/dev/null` by default when InfluxDB is launched as a service.
+
+InfluxDB must be restarted to use any changes to `/etc/default/influxdb`.
+{{% /tab-content %}}
+<!--------------------------- END sysvinit --------------------->
+{{< /tab-content-container >}}
+{{< /tab-labels >}}
+<!--------------------------- END TABS  ------------------------>
+
+> #### Log location on macOS
+> On macOs, InfluxDB stores logs at `/usr/local/var/log/influxdb.log` by default.
 
 ### Using logrotate
 
@@ -72,9 +88,39 @@ If using the package install on a `sysvinit` system, the config file for logrota
 You can view the file [here](https://github.com/influxdb/influxdb/blob/1.7/scripts/logrotate).
 
 
-## Redirecting HTTP request logging
+## HTTP access logging
 
-InfluxDB 1.5 introduces the option to log HTTP request traffic separately from the other InfluxDB log output. When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
+Use the HTTP access log to log HTTP request traffic separately from the other InfluxDB log output.
+
+### HTTP access log format
+
+The following is an example of the HTTP access log format. The table below describes each component of the HTTP access log.
+
+```
+172.13.8.13,172.39.5.169 - - [21/Jul/2019:03:01:27 +0000] "GET /query?db=metrics&q=SELECT+MEAN%28value%29+as+average_cpu%2C+MAX%28value%29+as+peak_cpu+FROM+%22foo.load%22+WHERE+time+%3E%3D+now%28%29+-+1m+AND+org_id+%21%3D+%27%27+AND+group_id+%21%3D+%27%27+GROUP+BY+org_id%2Cgroup_id HTTP/1.0" 200 11450 "-" "Baz Service" d6ca5a13-at63-11o9-8942-000000000000 9337349
+```
+
+
+
+| Component                    | Example                                                                                                                      |
+|---                           |---                                                                                                                           |
+|Host                          |`172.13.8.13,172.39.5.169`                                                                                                    |
+|Time of log event             |`[21/Jul/2019:03:01:27 +0000]`                                                                                                |
+|Request method                |`GET`                                                                                                                         |
+|Username                      |`user`                                                                                                                        |
+|HTTP API call being made&ast;                           |`/query?db=metrics%26q=SELECT%20used_percent%20FROM%20%22telegraf.autogen.mem%22%20WHERE%20time%20%3E=%20now()%20-%201m%20	` |
+|Request protocol              |`HTTP/1.0` 	                                                                                                                  |
+|HTTP response code            |`200`                                                                                                                         |
+|Size of response in bytes     |`11450`                                                                                                                       |
+|Referrer                      |`-`                                                                                                                           |
+|User agent                    |`Baz Service`                                                                                                                 |
+|Request ID                    |`d4ca9a10-ab63-11e9-8942-000000000000`                                                                                        |
+|Response time in microseconds |`9357049`                                                                                                                       |
+&ast; This field shows the database being acessed and the query being run. For more details, see [InfluxDB API reference](/influxdb/v1.7/tools/api/). Note that this field is URL-encoded.  
+
+### Redirecting HTTP access logging
+
+When HTTP request logging is enabled, the HTTP logs are intermingled by default with internal InfluxDB logging. By redirecting the HTTP request log entries to a separate file, both log files are easier to read, monitor, and debug.
 
 **To redirect HTTP request logging:**
 
@@ -89,7 +135,7 @@ Locate the `[http]` section of your InfluxDB configuration file and set the `acc
 
 ## Structured logging
 
-With InfluxDB 1.5, structured logging is supported and enable machine-readable and more developer-friendly log output formats. The two new structured log formats, `logfmt` and `json`, provide easier filtering and searching with external tools and simplifies integration of InfluxDB logs  with Splunk, Papertrail, Elasticsearch, and other third party tools.
+Structured logging enables machine-readable and more developer-friendly log output formats. The two structured log formats, `logfmt` and `json`, provide easier filtering and searching with external tools and simplifies integration of InfluxDB logs  with Splunk, Papertrail, Elasticsearch, and other third party tools.
 
 The InfluxDB logging configuration options (in the `[logging]` section) now include the following options:
 

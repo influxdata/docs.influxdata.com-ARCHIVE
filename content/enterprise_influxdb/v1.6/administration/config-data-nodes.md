@@ -89,11 +89,11 @@ The server caches the license file locally.
 The data process will only function for a limited time without a valid license file.
 You must use the [`license-path` setting](#license-path) if your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
 
-<dt>
+{{% warn %}}
 Use the same key for all nodes in the same cluster.  
 The `license-key` and `license-path` settings are
 mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 InfluxData recommends performing rolling restarts on the nodes after the license key update.
 Restart one meta, data, or Enterprise service at a time and wait for it to come back up successfully.
@@ -113,10 +113,10 @@ InfluxData recommends performing rolling restarts on the nodes after the license
 Restart one meta, data, or Enterprise service at a time and wait for it to come back up successfully.
 The cluster should remain unaffected as long as only one node is restarting at a time as long as there are two or more data nodes.
 
-<dt>
+{{% warn %}}
 Use the same license file for all nodes in the same cluster.
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
-</dt>
+{{% /warn %}}
 
 Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
