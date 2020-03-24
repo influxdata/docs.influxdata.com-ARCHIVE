@@ -22,11 +22,11 @@ _**Function type:** Input_
 ```js
 import "csv"
 
-csv.from(file: "/path/to/data-file.csv")
+csv.from(csv: csvData)
 
 // OR
 
-csv.from(csv: csvData)
+csv.from(file: "/path/to/data-file.csv")
 ```
 
 {{% warn %}}
@@ -35,22 +35,29 @@ csv.from(csv: csvData)
 
 ## Parameters
 
+### csv
+Annotated CSV text.
+
+{{% note %}}
+CSV data must be in the CSV format produced by the Flux HTTP response standard.
+See [Annotated CSV in the InfluxDB 2.0 documentation](https://v2.docs.influxdata.com/v2.0/reference/syntax/annotated-csv/)
+for information about this format.
+{{% /note %}}
+
+_**Data type:** String_
+
 ### file
 The file path of the CSV file to query.
 The path can be absolute or relative.
 If relative, it is relative to the working directory of the `influxd` process.
 _The CSV file must exist in the same file system running the `influxd` process._
 
-_**Data type:** String_
-
-### csv
-Raw CSV-formatted text.
-
-{{% note %}}
-CSV data must be in the CSV format produced by the Flux HTTP response standard.
-See the [Flux technical specification](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#csv)
-for information about this format.
-{{% /note %}}
+{{% warn %}}
+**InfluxDB** does _**not**_ support the `file` parameter because of restricted
+access to the underlying filesystem.
+However, the [Flux REPL](/flux/v0.x/guides/executing-queries/#influx-cli-in-flux-mode)
+does support the `file` parameter.
+{{% /warn %}}
 
 _**Data type:** String_
 
