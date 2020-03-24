@@ -1,0 +1,30 @@
+<svg version="1.1" id="geo-s2-cells-strict" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 300 329.19" style="enable-background:new 0 0 300 329.19;" xml:space="preserve">
+<g>
+	<polygon class="geo-cell" points="170.66,324.46 5.81,293.56 5.81,110.47 170.66,141.37 	"/>
+	<polygon class="geo-cell" points="88.24,125.92 5.81,110.47 5.81,18.93 88.24,34.37 	"/>
+	<polygon class="geo-cell" points="170.66,141.37 88.24,125.92 88.24,34.37 170.66,49.82 	"/>
+	<polygon class="geo-cell" points="253.08,156.82 170.66,141.37 170.66,49.82 253.08,65.27 	"/>
+	<polygon class="geo-cell" points="253.08,248.36 170.66,232.91 170.66,141.37 253.08,156.82 	"/>
+	<polygon class="geo-cell" points="211.87,286.41 170.66,278.69 170.66,232.91 211.87,240.64 	"/>
+	<polygon class="geo-cell" points="253.08,294.14 211.87,286.41 211.87,240.64 253.08,248.36 	"/>
+	<polygon class="geo-cell" points="294.29,301.86 253.08,294.14 253.08,248.36 294.29,256.09 	"/>
+	<polygon class="geo-cell" points="294.29,256.09 253.08,248.36 253.08,202.59 294.29,210.31 	"/>
+	<polygon class="geo-cell" points="294.29,210.31 253.08,202.59 253.08,156.82 294.29,164.54 	"/>
+	<polygon class="geo-cell" points="294.29,164.54 253.08,156.82 253.08,111.04 294.29,118.77 	"/>
+	<polygon class="geo-cell" points="294.29,118.77 253.08,111.04 253.08,65.27 294.29,72.99 	"/>
+	<polygon class="geo-cell" points="294.29,72.99 253.08,65.27 253.08,19.5 294.29,27.22 	"/>
+	<polygon class="geo-cell" points="253.08,65.27 211.87,57.55 211.87,11.77 253.08,19.5 	"/>
+	<polygon class="geo-cell" points="211.87,57.55 170.66,49.82 170.66,4.05 211.87,11.77 	"/>
+</g>
+<rect x="40.85" y="53.82" class="geo-region" width="218.41" height="218.41"/>
+<circle class="geo-point" cx="111.31" cy="80.8" r="4.81"/>
+<circle class="geo-point" cx="108.65" cy="199.68" r="4.81"/>
+<circle class="geo-point" cx="40.85" cy="235.82" r="4.81"/>
+<circle class="geo-point" cx="207.05" cy="111.04" r="4.81"/>
+<circle class="geo-point" cx="191.26" cy="128.98" r="4.81"/>
+<circle class="geo-point" cx="151.74" cy="243.55" r="4.81"/>
+<circle class="geo-point" cx="237.29" cy="256.09" r="4.81"/>
+<circle class="geo-point" cx="243.06" cy="232.91" r="4.81"/>
+<circle class="geo-point" cx="191.26" cy="113.95" r="4.81"/>
+</svg>

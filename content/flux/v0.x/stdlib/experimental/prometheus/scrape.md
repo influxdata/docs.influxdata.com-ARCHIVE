@@ -7,9 +7,7 @@ menu:
   flux_0_x:
     name: prometheus.scrape
     parent: Prometheus
-weight: 301
-related:
-  - /v2.0/write-data/scrape-data/scrapable-endpoints/
+weight: 1
 ---
 
 The `prometheus.scrape()` function retrieves [Prometheus-formatted metrics](https://prometheus.io/docs/instrumenting/exposition_formats/)

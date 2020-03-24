@@ -11,7 +11,7 @@
 {{ $pages := .Scratch.Get "pages" }}
 
 {{ range $pages.ByWeight }}
-	<h2><a href="{{ .RelPermalink }}" >{{ .Title }}</a></h2>
+	<h2 id="{{ anchorize .Title}}"><a href="{{ .RelPermalink }}" >{{ .Title }}</a></h2>
 	<p>
 		{{- if .Description }}{{- .Description | markdownify -}}
 		{{ else }}{{- .Summary | markdownify -}}

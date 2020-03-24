@@ -47,9 +47,9 @@ Geometry Library to generate `s2_cell_id` tags.
 Specify your [S2 Cell ID level](https://s2geometry.io/resources/s2cell_statistics.html).
 
 {{% note %}}
-For faster filtering, use higher S2 Cell ID levels.
-But know that that higher levels increase
-[series cardinality](/v2.0/reference/glossary/#series-cardinality).
+To filter more quickly, use higher S2 Cell ID levels,
+but know that that higher levels increase
+[series cardinality](/influxdb/latest/concepts/glossary/#series-cardinality).
 {{% /note %}}
 
 Language-specific implementations of the S2 Geometry Library provide methods for

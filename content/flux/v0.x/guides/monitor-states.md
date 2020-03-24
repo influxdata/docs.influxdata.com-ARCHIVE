@@ -16,8 +16,8 @@ Flux helps you monitor states in your metrics and events:
 
 If you're just getting started with Flux queries, check out the following:
 
-- [Get started with Flux](/v2.0/query-data/get-started/) for a conceptual overview of Flux.
-- [Execute queries](/v2.0/query-data/execute-queries/) to discover a variety of ways to run your queries.
+- [Get started with Flux](/flux/v0.x/introduction/getting-started/) for a conceptual overview of Flux.
+- [Execute queries](/flux/v0.x/guides/executing-queries/) to discover a variety of ways to run your queries.
 
 ## Find how long a state persists
 

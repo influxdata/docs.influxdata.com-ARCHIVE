@@ -1,0 +1,26 @@
+/////////////////////////// Flex Content Blocks ///////////////////////////
+
+.article-content {
+  .flex-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .flex-container {
+    margin-right: 2rem;
+    &.half { width: ~"calc(50% - 2rem)"; }
+    &.third { width: ~"calc(33.33% - 2rem)"; }
+    &.quarter { width: ~"calc(25% - 2rem)"; }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// MEDIA QUERIES ////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+@include media(small) {
+  .article-content .flex-container {
+    &.half, &.third { width: ~"calc(100% - 2rem)"; }
+    &.quarter { width: ~"calc(50% - 2rem)"; }
+  }
+}

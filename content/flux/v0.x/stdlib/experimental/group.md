@@ -44,7 +44,7 @@ _**Data type:** String_
 
 #### extend
 Appends columns defined in the [`columns` parameter](#columns) to all existing
-[group keys](/v2.0/query-data/get-started/#group-keys).
+[group keys](/flux/v0.x/introduction/getting-started/#group-keys).
 
 ## Examples
 

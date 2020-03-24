@@ -18,6 +18,7 @@ data with coordinates outside the region, but inside S2 grid cells partially cov
 Use [`toRows()`](/flux/v0.x/stdlib/experimental/geo/toRows/) and
 [`geo.strictFilter()`](/flux/v0.x/stdlib/experimental/geo/strictfilter/)
 after `geo.gridFilter()` to precisely filter points.
+_See [Non-strict and strict filtering](#non-strict-and-strict-filtering) below._
 {{% /note %}}
 
 _**Function type:** Transformation_
@@ -33,6 +34,28 @@ geo.gridFilter(
   s2cellIDLevel: -1
 )
 ```
+
+### Non-strict and strict filtering
+In most cases, the specified geographic region does not perfectly align with S2 grid cells.
+
+- **Non-strict filtering** returns points that may be outside of the specified region but
+  inside S2 grid cells partially covered by the region.
+- **Strict filtering** returns only points inside the specified region.
+
+<span class="key-geo-cell"></span> S2 grid cell  
+<span class="key-geo-region"></span> Filter region  
+<span class="key-geo-point"></span> Returned point
+
+{{< flex >}}
+{{% flex-content %}}
+**Non-strict filtering**
+{{< svg "/static/img/svgs/geo-non-strict.svg" >}}
+{{% /flex-content %}}
+{{% flex-content %}}
+**Strict filtering**
+{{< svg "/static/img/svgs/geo-strict.svg" >}}
+{{% /flex-content %}}
+{{< /flex >}}
 
 ## Parameters
 

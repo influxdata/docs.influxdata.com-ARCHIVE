@@ -101,7 +101,7 @@ sql.to(
 {{% warn %}}
 **InfluxDB OSS** and **InfluxDB Cloud** do not have direct access to the local filesystem
 and cannot write to SQLite data sources.
-Use the [Flux REPL](/v2.0/reference/cli/influx/repl/) to write to an SQLite data
+Use the [Flux REPL](/flux/v0.x/guides/executing-queries#influx-cli-in-flux-mode) to write to an SQLite data
 source on your local filesystem.
 {{% /warn %}}
 

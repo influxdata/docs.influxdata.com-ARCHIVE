@@ -90,7 +90,7 @@ sql.from(
 {{% warn %}}
 **InfluxDB OSS** and **InfluxDB Cloud** do not have direct access to the local filesystem
 and cannot query SQLite data sources.
-Use the [Flux REPL](/v2.0/reference/cli/influx/repl/) to query a SQLite data source
+Use the [Flux REPL](/flux/v0.x/guides/executing-queries#influx-cli-in-flux-mode) to query a SQLite data source
 on your local filesystem.
 {{% /warn %}}
 

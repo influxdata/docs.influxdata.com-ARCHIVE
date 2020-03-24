@@ -95,7 +95,7 @@ Function operators facilitate the creation of functions and control the flow of 
 
 ---
 
-_See [Custom functions](/v2.0/query-data/guides/custom-functions) for examples of function operators is use._
+_See [Custom functions](/flux/v0.x/stdlib/custom-functions/) for examples of function operators is use._
 
 ---
 
