@@ -269,16 +269,6 @@ for a complete list of the global `influxd-ctl` options.
 - `-rp <string>`: the name of the single retention policy to restore
 - `-shard <unit>`: the shard ID to restore
 
-##### Restore options
-
-- `-db <string>`: the name of the single database to restore
-- `-list`: shows the contents of the backup
-- `-newdb <string>`: the name of the new database to restore to (must specify with `-db`)
-- `-newrf <int>`: the new replication factor to restore to (this is capped to the number of data nodes in the cluster)
-- `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
-- `-rp <string>`: the name of the single retention policy to restore
-- `-shard <unit>`: the shard ID to restore
-
 #### Examples
 
 {{%expand "> Restore from an incremental backup" %}}
