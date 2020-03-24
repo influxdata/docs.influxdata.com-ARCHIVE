@@ -24,7 +24,7 @@ To choose a strategy that best suits your use case, we recommend considering you
 
 - [Backup and restore utilities](#backup-and-restore-utilities) (suits **most InfluxDB Enterprise applications**)
 - [Export and import commands](#export-and-import-commands) (best for **100s of gigabytes of data or more**)
-- [Take AWS snapshot with EBS volumes](#take-aws-snapshot-with-ebs-volumes) (optimal **convenience if budget permits**)
+- [Take AWS snapshot with EBS volumes](#take-aws-snapshots-with-ebs-volumes) (optimal **convenience if budget permits**)
 - [Run two clusters in separate AWS regions](#run-two-clusters-in-separate-aws-regions) (also optimal **convenience if budget permits**, more custom work upfront)
 
  > Test your backup and restore strategy for all applicable scenarios.
@@ -193,71 +193,43 @@ $ ls ./telegrafbackup
 
 ### Restore utility
 
-> **Important:** Restore backups to an empty directory. Otherwise, the backup may fail.
+- Restores [users](/influxdb/v1.7/concepts/glossary/#user), roles,
+[databases](/influxdb/v1.7/concepts/glossary/#database), and [continuous queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq).
+- Does not restore Kapacitor [subscriptions](/influxdb/v1.7/concepts/glossary/#subscription).
+- Drops data in the new cluster's `_internal` database and begins writing to `_internal` anew.
+- By default, restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
+To specify an alternate replication factor when restoring a single database, use the `-newrf` flag.
+
+> **Important:** Restore backups to an empty directory on a new or existing cluster. Otherwise, the backup may fail. Specifically, the cluster you're restoring to cannot contain data in affected databases (except the `_internal` database). The system automatically drops the `_internal` database when it performs a
+complete restore.
 
 #### Disable anti-entropy (AE) before restoring a backup
 
-> Before restoring a backup, stop the anti-entropy (AE) service (if enabled) on **each data node in the cluster, one at a time**.
+Before restoring a backup, stop the anti-entropy (AE) service (if enabled) on **each data node in the cluster, one at a time**.
 
->
-> 1. Stop the `influxd` service.
-> 2. Set `[anti-entropy].enabled` to `false` in the influx configuration file (by default, influx.conf).
-> 3. Restart the `influxd` service and wait for the data node to receive read and write requests and for the [hinted handoff queue](/enterprise_influxdb/v1.7/concepts/clustering/#hinted-handoff) to drain.
-> 4. Once AE is disabled on all data nodes and each node returns to a healthy state, you're ready to restore the backup. For details on how to restore your backup, see examples below.
-> 5. After restoring the backup, restart AE services on each data node.
+1. Stop the `influxd` service.
+2. Set `[anti-entropy].enabled` to `false` in the influx configuration file (by default, influx.conf).
+3. Restart the `influxd` service and wait for the data node to receive read and write requests and for the [hinted handoff queue](/enterprise_influxdb/v1.7/concepts/clustering/#hinted-handoff) to drain.
+4. Once AE is disabled on all data nodes and each node returns to a healthy state, you're ready to restore the backup. For details on how to restore your backup, see examples below.
+5. After restoring the backup, restart AE services on each data node.
 
-#### Restore a backup
+#### Syntax
 
-Restore a backup to an existing cluster or a new cluster.
-
-> By default, a restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
-> An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
-
-Restore supports both `-full` backups and incremental backups; the syntax differs depending on the backup type.
-
-#### Restore from an existing cluster to a new cluster
-
-Restore from an existing cluster to a new cluster:
-
-- Restores the existing cluster's [users](/influxdb/v1.7/concepts/glossary/#user), roles,
-[databases](/influxdb/v1.7/concepts/glossary/#database), and [continuous queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq) to the new cluster.
-- Does not restore Kapacitor [subscriptions](/influxdb/v1.7/concepts/glossary/#subscription).
-- Drops data in the new cluster's `_internal` database and begins writing to `_internal` anew.
-
-#### Syntax to restore from an incremental backup
-
-To restore an incremental backup to a new cluster or an existing cluster, specify the path to the incremental backup's directory.
+**Incremental backup**
 
 ```bash
 influxd-ctl [global-options] restore [restore-options] <path-to-backup-directory>
 ```
 
-> The existing cluster must contain no data in the affected databases (except the `_internal` database).
-The system automatically drops the `_internal` database when it performs a complete restore.
-
-#### Syntax to restore from a full backup
-
-Use the syntax below to restore a backup that you made with the `-full` flag.
-Restore the `-full` backup to a new cluster or an existing cluster.
-Note that the existing cluster must contain no data in the affected databases.
-Performing a restore from a `-full` backup requires the `-full` flag and the path to the full backup's manifest file.
+**Full backup**
 
 ```bash
 influxd-ctl [global-options] restore [options] -full <path-to-manifest-file>
 ```
 
-The system automatically drops the `_internal` database when it performs a
-complete restore.
-
-
 ##### Global options
 
 For a complete list of the global `influxd-ctl` options, see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options).
-
-##### Global options
-
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options)
-for a complete list of the global `influxd-ctl` options.
 
 ##### Restore options
 
@@ -269,11 +241,9 @@ for a complete list of the global `influxd-ctl` options.
 - `-rp <string>`: the name of the single retention policy to restore
 - `-shard <unit>`: the shard ID to restore
 
-#### Examples
+#### Restore examples
 
 {{%expand "> Restore from an incremental backup" %}}
-
-##### Restore from an incremental back up
 
 ```bash
 influxd-ctl restore <path-to-backup-directory>
@@ -293,9 +263,7 @@ Restored from my-incremental-backup/ in 83.892591ms, transferred 588800 bytes
 
 {{% /expand%}}
 
-{{%expand "> Restore from an incremental backup" %}}
-
-##### Restore from a `-full` backup
+{{%expand "> Restore from a full backup" %}}
 
 ```bash
 influxd-ctl restore -full <path-to-manifest-file>
@@ -315,8 +283,6 @@ Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 {{% /expand%}}
 
 {{%expand "> Restore from an incremental backup for a single database and give the database a new name" %}}
-
-##### Restore from an incremental backup for a single database and give the database a new name
 
 ```bash
 influxd-ctl restore -db <src> -newdb <dest> <path-to-backup-directory>
@@ -338,9 +304,7 @@ Restored from my-incremental-backup/ in 66.715524ms, transferred 588800 bytes
 
 {{%expand "> Restore from an incremental backup for a single database and give the database a new name" %}}
 
-##### Restore from an incremental backup for a single database and give the database a new name
-
-Your `telegraf` database was mistakenly dropped, but you have a recent backup so you've only lost a small amount of data.
+> Your `telegraf` database was mistakenly dropped, but you have a recent backup so you've only lost a small amount of data.
 
 If Telegraf is still running, it will recreate the `telegraf` database shortly after the database is dropped.
 You might try to directly restore your `telegraf` backup just to find that you can't restore:
@@ -443,8 +407,7 @@ influx -import -database myDB -compress
 
 For details on using the `influx -import` command, see [Import data from a file with -import](https://docs.influxdata.com/influxdb/latest/tools/shell/#import-data-from-a-file-with-import).
 
-
-## Take AWS snapshot with EBS volumes
+## Take AWS snapshots with EBS volumes
 
 Set up at least two EBS volumes, one for your OS root directory and one for your InfluxDB Enterprise cluster.
 
