@@ -22,12 +22,14 @@ Plan a back up and restore strategy for the following scenarios:
 
 ### Choose a strategy that fits your needs
 
-Consider your use cases, volume of data, and application requirements, and then plan a backup and restore strategy that suits your needs. Use one or more of the following methods as part of your strategy:
+We offer the following methods for backup and restore:
 
 - [Backup and restore utilities](#backup-and-restore-utilities)
 - [Export and import commands](#export-and-import-commands) (preferred for large datasets)
 - [Take AWS snapshot with EBS volumes](#take-aws-snapshot-with-ebs-volumes)
 - [Run two clusters in separate AWS regions](#run-two-clusters-in-separate-aws-regions)
+
+To pick a strategy that best suits your use case, we recommend considering your volume of data, application requirements, acceptable recovery time, and budget. For example, if you're short on recovery time, our `backup` and `restore` utilities may be your best bet. If you're looking for convenience and budget permits, taking AWS snapshots may be optimal. Plan (and test) a backup and restore strategy that suits your needs.
 
 > **Note:** Use the [`backup` and `restore` utilities (InfluxDB OSS 1.5 and later)](/influxdb/latest/administration/backup_and_restore/) to:
 >
@@ -438,14 +440,19 @@ For an example of using the exporting and importing data approach for disaster r
 
 ## Take AWS snapshot with EBS volumes
 
-Set up at least two EBS volumes, one for your OS root directory and one for your InfluxDB Enterprise cluster. Then, restore your backup to the empty EBS volume created for your InfluxDB Enterprise cluster.
+Set up at least two EBS volumes, one for your OS root directory and one for your InfluxDB Enterprise cluster.
 
-> **Important:** Backups must be restored to an empty EBS volume.
-
-1. Identify InfluxDB Enterprise directories to place on your secondary storage device for backup, including the following directories:
+1. Identify InfluxDB Enterprise directories to place on your secondary storage device for backup, including the following directories (and others you'd like to back up):
   
-  - For meta nodes: `/meta`
-  - For data nodes: `/data`, `/hh`, `/wal`, and `/meta`
+  - For meta nodes:
+    - `/meta`
+    - (optional) `/conf`
+  - For data nodes:
+    - `/data`
+    - `/hh`
+    - `/wal`
+    - `/meta`
+    -  (optional) `/conf`
 
 2. Create a virtual machine (VM) with your operating system (OS).
 3. Create a secondary storage device (EBS) and associate it with your VM.
@@ -454,16 +461,18 @@ Set up at least two EBS volumes, one for your OS root directory and one for your
 6. In `/etc/fstab`, mount the VM to the secondary storage device. For example, on Linux, set the mount point for `/dev/sdb` to `/influxdb`.
 7. Download and install InfluxDB, and then stop `influxdb` service if it starts.
 8. In InfluxDB configuration files, find the default storage location on the root volume (`/var/lib/influxdb/`) and update this location to point to the secondary storage device (`/influxdb`).
-9. Copy files from `/var/lib/influxdb` to `/influxdb` (`meta`, `wal`, `data`, and others.)
+9. Copy files from `/var/lib/influxdb` to `/influxdb` (`meta`, `wal`, `data`, and others youi identified in step 1.)
 10. Restart the `influxdb` service, monitor logs to ensure that the service starts successfully.
-11. Make backup copy of conf files to `/influxdb/conf`
-    Data should be on the secondary drive, so you can take snapshots of that drive only to save snapshot space. For detail about AWS snapshots, see how to [automate the Amazon EBS Snapshot Lifestyle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html).
+11. Make backup copy of configuration files to `/influxdb/conf`.
+    Data should be on the secondary storage device, so you can take snapshots of that drive only to save snapshot space.
 
 12. Take a snapshot of the secondary storage device:
   
     a. Create an EBS snapshot.
     b. Recover data from a snapshot by detaching your existing EBS volume and attaching the snapshot.
     c. Re-sync a recovered single node.
+  
+    For detail about AWS snapshots, see how to [automate the Amazon EBS Snapshot Lifestyle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html).
 
 ## Run two clusters in separate AWS regions
 
