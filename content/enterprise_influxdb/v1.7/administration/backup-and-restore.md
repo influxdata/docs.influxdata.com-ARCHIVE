@@ -13,51 +13,51 @@ When deploying InfluxDB Enterprise in a production environment, we recommend tha
 
 ## Plan your back up and restore strategy
 
-Plan a back up and restore strategy for the following scenarios:
+For each of the following scenarios, plan a back up and restore strategy that suits your needs:
 
 - Disaster recovery due to unexpected events
 - Migrating data to new environments or servers
 - Restoring clusters to a consistent state
 - Debugging
 
-### Choose a strategy that fits your needs
+To choose a strategy that best suits your use case, we recommend considering your volume of data, application requirements, acceptable recovery time, and budget. We offer the following methods for backup and restore:
 
-We offer the following methods for backup and restore:
+- [Backup and restore utilities](#backup-and-restore-utilities) (suits **most InfluxDB Enterprise applications**)
+- [Export and import commands](#export-and-import-commands) (best for **100s of gigabytes of data or more**)
+- [Take AWS snapshot with EBS volumes](#take-aws-snapshot-with-ebs-volumes) (optimal **convenience if budget permits**)
+- [Run two clusters in separate AWS regions](#run-two-clusters-in-separate-aws-regions) (also optimal **convenience if budget permits**, more custom work upfront)
 
-- [Backup and restore utilities](#backup-and-restore-utilities)
-- [Export and import commands](#export-and-import-commands) (preferred for large datasets)
-- [Take AWS snapshot with EBS volumes](#take-aws-snapshot-with-ebs-volumes)
-- [Run two clusters in separate AWS regions](#run-two-clusters-in-separate-aws-regions)
-
-To pick a strategy that best suits your use case, we recommend considering your volume of data, application requirements, acceptable recovery time, and budget. For example, if you're short on recovery time, our `backup` and `restore` utilities may be your best bet. If you're looking for convenience and budget permits, taking AWS snapshots may be optimal. Plan (and test) a backup and restore strategy that suits your needs.
-
-> **Note:** Use the [`backup` and `restore` utilities (InfluxDB OSS 1.5 and later)](/influxdb/latest/administration/backup_and_restore/) to:
->
-> - Restore InfluxDB Enterprise backup files to InfluxDB OSS instances.
-> - Back up InfluxDB OSS data that can be restored in InfluxDB Enterprise clusters.
+ > Test your backup and restore strategy for all applicable scenarios.
 
 ## Backup and restore utilities
 
-InfluxDB Enterprise supports backing up and restoring data in a cluster, a single database, a single database and retention policy, and single shards. Most InfluxDB Enterprise applications can use the backup and restore utilities.
+Use `backup` and `restore` utilities to back up and restore InfluxDB data from any of the following:
 
-Use the `backup` and `restore` utilities to back up and restore between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.7.10.
+- Cluster
+- Database
+- Database and retention policy
+- Single shard
 
->**Note:** For large datasets (100s of gigabytes of data or more), you might need to use the [export and import method](#exporting-and-importing-data) method.
+> **Note:** You can also back up data from InfluxDB Enterprise to an InfluxDB OSS instance or from OSS to Enterprise.
+
+Back up and restore data between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.7.10.
 
 ### Backup utility
+
+> **Important:** Save backups to an empty directory. Otherwise, the backup may fail.
 
 A backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#metastore) and [shard](/influxdb/v1.7/concepts/glossary/#shard) data **on disk** at that point in time and stores the copy in the specified directory.
 
 >**Note:** `backup` ignores WAL files and in-memory cache data.
 
-All backups also include a manifest, a JSON file describing what was collected during the backup.
-The filenames reflect the UTC timestamp of when the backup **from disk** was created, for example:
+Backups also include a manifest (JSON file) describing what was collected during the backup.
+Backup filenames reflect the UTC timestamp of when the backup **from disk** was created, for example:
 
 - Metastore backup: `20060102T150405Z.meta` (includes usernames and passwords)
 - Shard data backup: `20060102T150405Z.<shard_id>.tar.gz`
 - Manifest: `20060102T150405Z.manifest`
 
-Backups can be full (using the `-full` flag) or incremental, and they are incremental by default.
+Backups can be full (using the `-full` flag) or incremental (by default).
 Incremental backups create a copy of the metastore and shard data that have changed since the last incremental backup.
 If there are no existing incremental backups, the system automatically performs a complete backup.
 
@@ -79,8 +79,7 @@ influxd-ctl [global-options] backup [backup-options] <path-to-backup-directory>
 
 ##### Global options
 
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options)
-for a complete list of the global `influxd-ctl` options.
+For a complete list of the global `influxd-ctl` options, see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options).
 
 ##### Backup options
 
@@ -92,9 +91,9 @@ for a complete list of the global `influxd-ctl` options.
 
 ##### Examples
 
-Store the following incremental backups in different directories.
-The first backup specifies `-db myfirstdb` and the second backup specifies
-different options: `-db myfirstdb` and `-rp autogen`.
+{{%expand "> Store incremental backups in different directories" %}}
+
+If you're backing up an entire database and a specific retention policy for a database, store backups in different directories.
 
 ```bash
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
@@ -102,8 +101,11 @@ influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 influxd-ctl backup -db myfirstdb -rp autogen ./myfirstdb-autogen-backup
 ```
 
-Store the following incremental backups in the same directory.
-Both backups specify the same `-db` flag and the same database.
+{{% /expand%}}
+
+{{%expand "> Store incremental backups in the same directory" %}}
+
+If you're backing up multiple copies of the same database, store backups in the same directory.
 
 ```bash
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
@@ -111,9 +113,9 @@ influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 ```
 
-#### Examples
+{{% /expand%}}
 
-##### Perform an incremental backup
+{{%expand "> Perform an incremental back up" %}}
 
 Perform an incremental backup into the current directory with the command below.
 If there are any existing backups the current directory, the system performs an incremental backup.
@@ -138,14 +140,17 @@ $ ls
 20160803T222310Z.meta      20160803T222310Z.s2.tar.gz  20160803T222310Z.s4.tar.gz
 ```
 
-##### Perform a full backup
+{{% /expand%}}
 
-Perform a full backup into a specific directory with the command below.
-The directory must already exist.
+{{%expand "> Perform an full back up" %}}
+
+To perform a full backup into a specific directory, use the following command:
 
 ```bash
 influxd-ctl backup -full <path-to-backup-directory>
 ```
+
+> Note: The directory must already exist.
 
 Output:
 
@@ -162,7 +167,9 @@ Backed up to backup_dir in 51.388233ms, transferred 333793 bytes
 20170130T184058Z.s2.tar.gz
 ```
 
-##### Perform an incremental backup on a single database
+{{% /expand%}}
+
+{{%expand "> Perform an incremental back up on a single database" %}}
 
 Point at a remote meta server and back up only one database into a given directory (the directory must already exist):
 
@@ -180,8 +187,11 @@ Backed up to ./telegrafbackup in 1.002358077s, transferred 400190 bytes
 $ ls ./telegrafbackup
 20160803T222811Z.manifest  20160803T222811Z.meta  20160803T222811Z.s4.tar.gz
 ```
+{{% /expand%}}
 
 ### Restore utility
+
+> **Important:** Restore backups to an empty directory. Otherwise, the backup may fail.
 
 #### Disable anti-entropy (AE) before restoring a backup
 
@@ -278,7 +288,9 @@ for a complete list of the global `influxd-ctl` options.
 
 #### Examples
 
-##### Restore from an incremental backup
+{{%expand "> Restore from an incremental backup" %}}
+
+##### Restore from an incremental back up
 
 ```bash
 influxd-ctl restore <path-to-backup-directory>
@@ -296,6 +308,10 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 83.892591ms, transferred 588800 bytes
 ```
 
+{{% /expand%}}
+
+{{%expand "> Restore from an incremental backup" %}}
+
 ##### Restore from a `-full` backup
 
 ```bash
@@ -312,6 +328,10 @@ Restoring db telegraf, rp autogen, shard 2 to shard 2...
 Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Restored shard 2 into shard 2 in 48.095082ms, 569344 bytes transferred
 Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 ```
+
+{{% /expand%}}
+
+{{%expand "> Restore from an incremental backup for a single database and give the database a new name" %}}
 
 ##### Restore from an incremental backup for a single database and give the database a new name
 
@@ -331,7 +351,11 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 66.715524ms, transferred 588800 bytes
 ```
 
-##### Restore from an incremental backup for a database and merge that database into an existing database
+{{% /expand%}}
+
+{{%expand "> Restore from an incremental backup for a single database and give the database a new name" %}}
+
+##### Restore from an incremental backup for a single database and give the database a new name
 
 Your `telegraf` database was mistakenly dropped, but you have a recent backup so you've only lost a small amount of data.
 
@@ -371,7 +395,11 @@ time                  written
 1970-01-01T00:00:00Z  471
 ```
 
+{{% /expand%}}
+
 #### Common issues with restore
+
+{{%expand "> Restore writes information not part of the original backup" %}}
 
 ##### Restore writes information not part of the original backup
 
@@ -388,17 +416,21 @@ When the system creates a backup, the backup includes:
 Because a backup always includes the complete metastore information, a restore that doesn't include the same options specified by the backup command may appear to restore data that were not targeted by the original backup.
 The unintended data, however, include only the metastore information, not the shard data associated with that metastore information.
 
+{{% /expand%}}
+
+{{%expand "> Restore a backup created prior to version 1.2.0" %}}
+
 ##### Restore a backup created prior to version 1.2.0
 
 InfluxDB Enterprise introduced incremental backups in version 1.2.0.
 To restore a backup created prior to version 1.2.0, be sure to follow the syntax
 for [restoring from a full backup](#syntax-to-restore-from-a-full-backup).
 
+{{% /expand%}}
+
 ## Export and import commands
 
-For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. However, when working with data volumes 100s of gigabytes or more, the standard backup and restore utilities may not adequately handle the volumes of data in your application.  
-
-As an alternative to the standard backup and restore utilities, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. Execute these commands manually or include them in shell scripts to run at scheduled intervals (example below).
+When working with data volumes 100s of gigabytes or more, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. Execute these commands manually or include them in shell scripts to run at scheduled intervals.
 
 ### Export data
 
@@ -428,15 +460,6 @@ influx -import -database myDB -compress
 
 For details on using the `influx -import` command, see [Import data from a file with -import](https://docs.influxdata.com/influxdb/latest/tools/shell/#import-data-from-a-file-with-import).
 
-### Example
-
-For an example of using the exporting and importing data approach for disaster recovery, see the Capital One presentation from Influxdays 2019 on ["Architecting for Disaster Recovery."](https://www.youtube.com/watch?v=LyQDhSdnm4A). In this presentation, Capital One discusses the following:
-
-- Exporting data every 15 minutes from an active cluster to an AWS S3 bucket.
-- Replicating the export file in the S3 bucket using the AWS S3 copy command.
-- Importing data every 15 minutes from the AWS S3 bucket to a cluster available for disaster recovery.
-- Advantages of the export-import approach over the standard backup and restore utilities for large volumes of data.
-- Managing users and scheduled exports and imports with a custom administration tool.
 
 ## Take AWS snapshot with EBS volumes
 
@@ -475,6 +498,14 @@ Set up at least two EBS volumes, one for your OS root directory and one for your
     For detail about AWS snapshots, see how to [automate the Amazon EBS Snapshot Lifestyle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html).
 
 ## Run two clusters in separate AWS regions
+
+The advantages to running 2 clusters is you can set the following up in advance:
+
+- How often to export data from an active cluster to an AWS S3 bucket.
+- How often to replicate the export file in the S3 bucket (use AWS S3 copy command).
+- How often to import data from the AWS S3 bucket to a cluster available for disaster recovery.
+
+> To further automate the recovery process, create a customer administration tool to manage users and schedule exports and imports.
 
 First, run two clusters in separate AWS regions, and then transfer your data using custom scripts and S3 buckets.
 
