@@ -37,8 +37,7 @@ Use `backup` and `restore` utilities to back up and restore InfluxDB data from a
 - Database
 - Database and retention policy
 - Single shard
-
-> **Note:** You can also back up data from InfluxDB Enterprise to an InfluxDB OSS instance or from OSS to Enterprise.
+- From InfluxDB Enterprise to InfluxDB OSS or OSS to Enterprise
 
 Back up and restore data between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.7.10.
 
@@ -46,7 +45,7 @@ Back up and restore data between `influxd` instances with the same versions or w
 
 > **Important:** Save backups to an empty directory. Otherwise, the backup may fail.
 
-A backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#metastore) and [shard](/influxdb/v1.7/concepts/glossary/#shard) data **on disk** at that point in time and stores the copy in the specified directory.
+Backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#metastore) and [shard](/influxdb/v1.7/concepts/glossary/#shard) data **on disk** at that point in time and stores the copy in the specified directory.
 
 >**Note:** `backup` ignores WAL files and in-memory cache data.
 
@@ -57,17 +56,18 @@ Backup filenames reflect the UTC timestamp of when the backup **from disk** was 
 - Shard data backup: `20060102T150405Z.<shard_id>.tar.gz`
 - Manifest: `20060102T150405Z.manifest`
 
-Backups can be full (using the `-full` flag) or incremental (by default).
-Incremental backups create a copy of the metastore and shard data that have changed since the last incremental backup.
-If there are no existing incremental backups, the system automatically performs a complete backup.
+>**Note:** The backup utility copies all data through the meta node used to execute the backup.
+As a result, performance of a backup and restore is typically limited by the network IO of the meta node.
+Increasing the resources available to this meta node (such as resizing the EC2 instance) can significantly improve backup and restore performance.
 
-Restoring a `-full` backup and restoring an incremental backup require different syntax.
-To prevent issues with [restore](#restore-utility), keep `-full` backups and incremental backups in separate directories.
+#### Full versus incremental backup
 
-To perform a full restore of metastore, including users, credentials, and permissions, you must do a full backup of databases (using the `-full` option), and then perform a full restore. You cannot backup only the metastore contents. The message `Backing up meta data... Done.` indicates that your meta data (including users, credentials, and permissions) has been successfully backed up.
+Backups can be full (using the `-full` flag) or incremental (by default):
 
->**Note:** The backup utility copies all data through the meta node that is used to
-execute the backup. As a result, performance of a backup and restore is typically limited by the network IO of the meta node. Increasing the resources available to this meta node (such as resizing the EC2 instance) can significantly improve backup and restore performance.
+- Full backups include a copy of the metastore (users, credentials, and permissions) and shard data.
+- Incremental backups include a copy of the metastore and shard data that have changed since the last incremental backup.
+If there are no existing incremental backups, the system automatically performs a full backup.
+- Keep full backups and incremental backups in separate directories.
 
 #### Syntax
 
@@ -89,13 +89,14 @@ For a complete list of the global `influxd-ctl` options, see the [influxd-ctl do
 - `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
 - `-shard <unit>`: the ID of the single shard to back up
 
-##### Examples
+### Backup examples
 
 {{%expand "> Store incremental backups in different directories" %}}
 
-If you're backing up an entire database and a specific retention policy for a database, store backups in different directories.
+> If you're backing up different units, for example all retention policies in a database and a specific retention policy, store backups in different directories.
 
 ```bash
+
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 
 influxd-ctl backup -db myfirstdb -rp autogen ./myfirstdb-autogen-backup
@@ -105,7 +106,7 @@ influxd-ctl backup -db myfirstdb -rp autogen ./myfirstdb-autogen-backup
 
 {{%expand "> Store incremental backups in the same directory" %}}
 
-If you're backing up multiple copies of the same database, store backups in the same directory.
+> If you're backing up multiple copies of the same database, store backups in the same directory.
 
 ```bash
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
@@ -117,7 +118,8 @@ influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 
 {{%expand "> Perform an incremental back up" %}}
 
-Perform an incremental backup into the current directory with the command below.
+> Perform an incremental backup into the current directory with the command below.
+
 If there are any existing backups the current directory, the system performs an incremental backup.
 If there aren't any existing backups in the current directory, the system performs a backup of all data in InfluxDB.
 
@@ -144,7 +146,7 @@ $ ls
 
 {{%expand "> Perform an full back up" %}}
 
-To perform a full backup into a specific directory, use the following command:
+> Perform a full backup into a specific directory with the command below:
 
 ```bash
 influxd-ctl backup -full <path-to-backup-directory>
@@ -171,7 +173,7 @@ Backed up to backup_dir in 51.388233ms, transferred 333793 bytes
 
 {{%expand "> Perform an incremental back up on a single database" %}}
 
-Point at a remote meta server and back up only one database into a given directory (the directory must already exist):
+> Point at a remote meta server and back up only one database into a given directory (the directory must already exist):
 
 ```bash
 influxd-ctl -bind <metahost>:8091 backup -db <db-name> <path-to-backup-directory>
@@ -204,41 +206,53 @@ $ ls ./telegrafbackup
 > 4. Once AE is disabled on all data nodes and each node returns to a healthy state, you're ready to restore the backup. For details on how to restore your backup, see examples below.
 > 5. After restoring the backup, restart AE services on each data node.
 
-##### Restore a backup
+#### Restore a backup
 
 Restore a backup to an existing cluster or a new cluster.
-By default, a restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
-An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
-Restore supports both `-full` backups and incremental backups; the syntax for
-a restore differs depending on the backup type.
 
-##### Restores from an existing cluster to a new cluster
+> By default, a restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
+> An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
 
-Restores from an existing cluster to a new cluster restore the existing cluster's
-[users](/influxdb/v1.7/concepts/glossary/#user), roles,
-[databases](/influxdb/v1.7/concepts/glossary/#database), and
-[continuous queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq) to
-the new cluster.
+Restore supports both `-full` backups and incremental backups; the syntax differs depending on the backup type.
 
-They do not restore Kapacitor [subscriptions](/influxdb/v1.7/concepts/glossary/#subscription).
-In addition, restores to a new cluster drop any data in the new cluster's
-`_internal` database and begin writing to that database anew.
-The restore does not write the existing cluster's `_internal` database to
-the new cluster.
+#### Restore from an existing cluster to a new cluster
+
+Restore from an existing cluster to a new cluster:
+
+- Restores the existing cluster's [users](/influxdb/v1.7/concepts/glossary/#user), roles,
+[databases](/influxdb/v1.7/concepts/glossary/#database), and [continuous queries](/influxdb/v1.7/concepts/glossary/#continuous-query-cq) to the new cluster.
+- Does not restore Kapacitor [subscriptions](/influxdb/v1.7/concepts/glossary/#subscription).
+- Drops data in the new cluster's `_internal` database and begins writing to `_internal` anew.
 
 #### Syntax to restore from an incremental backup
 
-Use the syntax below to restore an incremental backup to a new cluster or an existing cluster.
-Note that the existing cluster must contain no data in the affected databases.*
-Performing a restore from an incremental backup requires the path to the incremental backup's directory.
+To restore an incremental backup to a new cluster or an existing cluster, specify the path to the incremental backup's directory.
 
 ```bash
 influxd-ctl [global-options] restore [restore-options] <path-to-backup-directory>
 ```
 
-\* The existing cluster can have data in the `_internal` database, the database
-that the system creates by default.
+> The existing cluster must contain no data in the affected databases (except the `_internal` database).
 The system automatically drops the `_internal` database when it performs a complete restore.
+
+#### Syntax to restore from a full backup
+
+Use the syntax below to restore a backup that you made with the `-full` flag.
+Restore the `-full` backup to a new cluster or an existing cluster.
+Note that the existing cluster must contain no data in the affected databases.
+Performing a restore from a `-full` backup requires the `-full` flag and the path to the full backup's manifest file.
+
+```bash
+influxd-ctl [global-options] restore [options] -full <path-to-manifest-file>
+```
+
+The system automatically drops the `_internal` database when it performs a
+complete restore.
+
+
+##### Global options
+
+For a complete list of the global `influxd-ctl` options, see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options).
 
 ##### Global options
 
@@ -254,27 +268,6 @@ for a complete list of the global `influxd-ctl` options.
 - `-newrp <string>`: the name of the new retention policy to restore to (must specify with `-rp`)
 - `-rp <string>`: the name of the single retention policy to restore
 - `-shard <unit>`: the shard ID to restore
-
-#### Syntax to restore from a full backup
-
-Use the syntax below to restore a backup that you made with the `-full` flag.
-Restore the `-full` backup to a new cluster or an existing cluster.
-Note that the existing cluster must contain no data in the affected databases.*
-Performing a restore from a `-full` backup requires the `-full` flag and the path to the full backup's manifest file.
-
-```bash
-influxd-ctl [global-options] restore [options] -full <path-to-manifest-file>
-```
-
-\* The existing cluster can have data in the `_internal` database, the database
-that the system creates by default.
-The system automatically drops the `_internal` database when it performs a
-complete restore.
-
-##### Global options
-
-Please see the [influxd-ctl documentation](/enterprise_influxdb/v1.7/administration/cluster-commands/#global-options)
-for a complete list of the global `influxd-ctl` options.
 
 ##### Restore options
 
