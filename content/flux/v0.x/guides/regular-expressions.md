@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: Regular expressions
     parent: Guides
-    weight: 7
+    weight: 10
 ---
 
 Regular expressions (regexes) are incredibly powerful when matching patterns in large collections of data.

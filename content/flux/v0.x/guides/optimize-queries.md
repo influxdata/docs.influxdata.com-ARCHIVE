@@ -2,7 +2,7 @@
 title: Optimize Flux queries
 description: >
   Optimize your Flux queries to reduce their memory and compute (CPU) requirements.
-weight: 1
+weight: 2
 menu:
   flux_0_x:
     name: Optimize queries

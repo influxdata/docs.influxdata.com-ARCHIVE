@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: Transform data with math
     parent: Guides
-weight: 9
+weight: 6
 ---
 
 Flux supports mathematic expressions in data transformations.

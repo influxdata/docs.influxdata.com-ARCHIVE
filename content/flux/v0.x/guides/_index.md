@@ -7,21 +7,22 @@ menu:
     weight: 3
 ---
 
-## [Different ways to execute Flux queries](/flux/v0.x/guides/executing-queries)
-A guide that covers the different options for executing Flux queries with InfluxDB and Chronograf v1.7+.
+The following guides walk through both common and complex queries and use cases for Flux.
 
-## [How to window and aggregate data with Flux](/flux/v0.x/guides/windowing-aggregating)
-This guide walks through windowing and aggregating data with Flux and demonstrates
-how data is shaped in the process.
+{{% note %}}
+#### Example data variable
+Many of the examples provided in the following guides use a `data` variable,
+which represents a basic query that filters data by measurement and field.
+`data` is defined as:
 
-## [How to group data with Flux](/flux/v0.x/guides/grouping-data)
-This guide walks through grouping data in Flux with examples of how data is shaped in the process.
+```js
+data = from(bucket: "example-bucket")
+  |> range(start: -1h)
+  |> filter(fn: (r) =>
+    r._measurement == "example-measurement" and
+    r._field == "example-field"
+  )
+```
+{{% /note %}}
 
-## [How to join data with Flux](/flux/v0.x/guides/join)
-This guide walks through joining data with Flux, illustrating how joined data is output and how it can be used.
-
-## [How to sort and limit data with Flux](/flux/v0.x/guides/sort-limit)
-This guide walks through sorting and limiting data with Flux.
-
-## [Regular expressions in Flux](/flux/v0.x/guides/regular-expressions)
-This guide walks through using regular expressions in evaluation logic in Flux functions.
+{{< children >}}

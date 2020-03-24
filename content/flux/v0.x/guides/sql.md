@@ -7,7 +7,7 @@ description: >
 menu:
   flux_0_x:
     parent: Guides
-    weight: 7
+    weight: 20
 ---
 
 The [Flux](/flux/v0.x) `sql` package provides functions for working with SQL data sources.

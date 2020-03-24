@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: Use Flux in dashboards
     parent: Guides
-    weight: 7
+    weight: 1
 ---
 
 [Chronograf](/chronograf/latest/) is the web user interface for managing for the

@@ -1,5 +1,5 @@
 ---
-title: Query using conditional logic
+title: Use conditional logic
 description: >
   This guide describes how to use Flux conditional expressions, such as `if`,
   `else`, and `then`, to query and transform data.

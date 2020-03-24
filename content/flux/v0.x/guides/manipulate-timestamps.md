@@ -6,7 +6,7 @@ menu:
   flux_0_x:
     name: Manipulate timestamps
     parent: Guides
-weight: 9
+weight: 20
 ---
 
 Every point stored in InfluxDB has an associated timestamp.

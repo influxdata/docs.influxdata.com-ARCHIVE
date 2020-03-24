@@ -7,7 +7,7 @@ menu:
   flux_0_x:
     name: Extract scalar values
     parent:  Guides
-weight: 10
+weight: 20
 ---
 
 Use Flux [stream and table functions](/flux/v0.x/stdlib/built-in/transformations/stream-table/)

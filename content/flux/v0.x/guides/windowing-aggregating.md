@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: Window and aggregate data
     parent: Guides
-    weight: 2
+    weight: 5
 ---
 
 A common operation performed with time series data is grouping data into windows of time,

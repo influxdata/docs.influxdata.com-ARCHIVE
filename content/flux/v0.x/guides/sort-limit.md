@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: Sort and limit data
     parent: Guides
-    weight: 6
+    weight: 4
 ---
 
 The [`sort()`function](/flux/v0.x/stdlib/built-in/transformations/sort) orders the records within each table. The following example orders system uptime first by region, then host, then value.

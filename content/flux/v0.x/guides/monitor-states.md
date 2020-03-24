@@ -5,7 +5,7 @@ menu:
   flux_0_x:
     name: Monitor states
     parent: Guides
-weight: 10
+weight: 20
 ---
 
 Flux helps you monitor states in your metrics and events:
