@@ -73,3 +73,8 @@ _**Used functions:**
 [keys](/flux/v0.x/stdlib/built-in/transformations/keys/),
 [keep](/flux/v0.x/stdlib/built-in/transformations/keep/),
 [distinct](/flux/v0.x/stdlib/built-in/transformations/selectors/distinct)_
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SHOW TAG KEYS](/influxdb/latest/query_language/schema_exploration#show-tag-keys)

@@ -45,3 +45,8 @@ measurementTagKeys = (bucket, measurement) =>
 
 _**Used functions:**
 [tagKeys()](/flux/v0.x/stdlib/influxdb-v1/tagkeys)_
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SHOW TAG KEYS](/influxdb/latest/query_language/schema_exploration#show-tag-keys)
