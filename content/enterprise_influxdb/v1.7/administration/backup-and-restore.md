@@ -23,7 +23,7 @@ For each of the following scenarios, plan a back up and restore strategy that su
 To choose a strategy that best suits your use case, we recommend considering your volume of data, application requirements, acceptable recovery time, and budget. We offer the following methods for backup and restore:
 
 - [Backup and restore utilities](#backup-and-restore-utilities) (suits **most InfluxDB Enterprise applications**)
-- [Export and import commands](#export-and-import-commands) (best for **100s of gigabytes of data or more**)
+- [Export and import commands](#export-and-import-commands) (best for **backfill or recover shards as files**)
 - [Take AWS snapshot with EBS volumes](#take-aws-snapshots-with-ebs-volumes) (optimal **convenience if budget permits**)
 - [Run two clusters in separate AWS regions](#run-two-clusters-in-separate-aws-regions) (also optimal **convenience if budget permits**, more custom work upfront)
 
@@ -430,7 +430,7 @@ Set up at least two EBS volumes, one for your OS root directory and one for your
 6. In `/etc/fstab`, mount the VM to the secondary storage device. For example, on Linux, set the mount point for `/dev/sdb` to `/influxdb`.
 7. Download and install InfluxDB, and then stop `influxdb` service if it starts.
 8. In InfluxDB configuration files, find the default storage location on the root volume (`/var/lib/influxdb/`) and update this location to point to the secondary storage device (`/influxdb`).
-9. Copy files from `/var/lib/influxdb` to `/influxdb` (`meta`, `wal`, `data`, and others youi identified in step 1.)
+9. Copy files from `/var/lib/influxdb` to `/influxdb` (`meta`, `wal`, `data`, and others you identified in step 1.)
 10. Restart the `influxdb` service, monitor logs to ensure that the service starts successfully.
 11. Make backup copy of configuration files to `/influxdb/conf`.
     Data should be on the secondary storage device, so you can take snapshots of that drive only to save snapshot space.
@@ -439,7 +439,7 @@ Set up at least two EBS volumes, one for your OS root directory and one for your
   
     a. Create an EBS snapshot.
     b. Recover data from a snapshot by detaching your existing EBS volume and attaching the snapshot.
-    c. Re-sync a recovered single node.
+    c. Use the [`influx_inspect export` command](/influxdb/latest/tools/influx_inspect#export) to filter data by timestamps, and then export data for the specified timeframe in line protocol format. On your new cluster, use `influx -import` to import the line protocol.
   
     For detail about AWS snapshots, see how to [automate the Amazon EBS Snapshot Lifestyle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html).
 
