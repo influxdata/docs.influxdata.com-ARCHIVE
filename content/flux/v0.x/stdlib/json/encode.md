@@ -34,7 +34,7 @@ This function encodes [Flux types](/flux/v0.x/language/types/) as follows:
 ### v
 The value to convert.
 
-_**Data type:** Boolean | Duration | Float | Integer | String | Time | UInteger_
+_**Data type:** Object | Array | Boolean | Duration | Float | Integer | String | Time | UInteger_
 
 ## Examples
 

@@ -180,7 +180,7 @@ table2 = from(bucket: "telegraf/autogen")
 cov(x: table1, y: table2, on: ["_time", "_field"])
 ```
 
-## Not yet supported in Flux
+## InfluxQL and Flux parity
 Flux is working towards complete parity with InfluxQL and new functions are being added to that end.
 The table below shows InfluxQL statements, clauses, and functions along with their equivalent Flux functions.
 

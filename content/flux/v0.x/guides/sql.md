@@ -60,10 +60,14 @@ sql.from(
 
 {{% code-tab-content %}}
 ```js
+// NOTE: InfluxDB OSS and InfluxDB Cloud do not have access to
+// the local filesystem and cannot query SQLite data sources.
+// Use the Flux REPL to query an SQLite data source.
+
 import "sql"
 sql.from(
   driverName: "sqlite3",
-  dataSourceName: "file:test.db?cache=shared&mode=memory",
+  dataSourceName: "file:/path/to/test.db?cache=shared&mode=ro",
   query: "SELECT * FROM example_table"
 )
 ```

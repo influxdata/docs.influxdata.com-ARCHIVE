@@ -81,22 +81,22 @@ _Required when a `host` is specified._
 _**Data type:** String_ -->
 
 ### timeColumn
-The time column of the output.
+Time column of the output.
 Default is `"_time"`.
 
 _**Data type:** String_
 
 ### tagColumns
-The tag columns of the output.
-Defaults to all columns with type `string`, excluding all value columns and the
-`_field` column if present.
+Tag columns in the output.
+Defaults to all columns with type `string`, excluding all value columns and columns
+identified by [`fieldFn`](#fieldfn).
 
 _**Data type:** Array of strings_
 
 ### fieldFn
 Function that takes a record from the input table and returns an object.
-For each record from the input table, `fieldFn` returns an object that maps output
-the field key to the output value.
+For each record from the input table, `fieldFn` returns an object that maps the
+output field key to the output value.
 Default is `(r) => ({ [r._field]: r._value })`.
 
 _**Data type:** Function_

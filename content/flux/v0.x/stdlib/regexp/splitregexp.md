@@ -39,6 +39,7 @@ The string value to search.
 _**Data type:** String_
 
 ### i
-The number of substrings to return.
+The maximum number of substrings to return.
+`-1` returns all matching substrings.
 
 _**Data type:** Integer_
