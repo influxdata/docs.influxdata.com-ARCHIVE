@@ -19,7 +19,7 @@ list_code_example: |
   ```
 ---
 
-Use the [`geo.filterRows` function](/flux/v0.x/stdlib/geo/filterrows/)
+Use the [`geo.filterRows` function](/flux/v0.x/stdlib/experimental/geo/filterrows/)
 to filter geo-temporal data by geographic region:
 
 1. [Define a geographic region](#define-a-geographic-region)

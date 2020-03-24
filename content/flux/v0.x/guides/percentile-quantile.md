@@ -144,7 +144,7 @@ segments data into windows of time, aggregates data in each window into a single
 point, and then removes the time-based segmentation.
 It is primarily used to [downsample data](/v2.0/process-data/common-tasks/downsample-data/).
 
-To specify the [quantile calculation method](#quantile-calculation-methods) in
+To specify the [quantile calculation method](#select-a-method-for-calculating-the-quantile) in
 `aggregateWindow()`, use the [full function syntax](/flux/v0.x/stdlib/built-in/transformations/aggregates/aggregatewindow/#specify-parameters-of-the-aggregate-function):
 
 ```js

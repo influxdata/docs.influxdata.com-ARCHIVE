@@ -37,7 +37,7 @@ The following drivers are available:
 - mysql
 - postgres
 - sqlite3 – _Does not work with InfluxDB OSS, InfluxDB Enterprise, or InfluxDB Cloud.
-  More information [below](#query-an-sqlite-database)._
+  More information [below](#write-data-to-an-sqlite-database)._
 
 ### dataSourceName
 The data source name (DSN) or connection string used to connect to the SQL database.
