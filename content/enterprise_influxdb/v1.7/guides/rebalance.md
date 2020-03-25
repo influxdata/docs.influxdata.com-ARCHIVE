@@ -9,13 +9,13 @@ menu:
     parent: Guides
 ---
 
-Rebalancing an InfluxDB Enterprise cluster is essential for cluster health. Rebalancing a cluster ensures:
+Rebalancing an InfluxDB Enterprise cluster is essential for cluster health. Rebalance a cluster to ensure:
 
 - [Shards](/influxdb/v1.7/concepts/glossary/#shard) are evenly distributed across all data nodes in the
 cluster
 - Every shard is on *n* number of nodes, where *n* is the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
 
-Rebalance your cluster in the following cases:
+## When to rebalance your cluster
 
 - Any time you add or remove a data node.
 - Any time you adjust your replication factor.
@@ -25,13 +25,11 @@ Rebalance your cluster in the following cases:
   - Adjust fully replicated data
 - To improve bandwidth. Adjust a cluster with fully replicated data (replication factor equals number of nodes) to partially replicated data.
 
-## Requirements
+## Rebalance your cluster
 
 {{% warn %}}
 Before you begin, stop writing historical data (timestamps occur in the past) to InfluxDB. Historical data has timestamps that occur in the past. Rebalancing while writing historical data can lead to data loss.
 {{% /warn %}}
-
-## Rebalance your cluster
 
 Complete the following steps to rebalance your cluster:
 
