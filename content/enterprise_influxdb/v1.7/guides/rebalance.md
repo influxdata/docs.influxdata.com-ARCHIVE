@@ -9,8 +9,6 @@ menu:
     parent: Guides
 ---
 
-## Introduction
-
 Rebalancing an InfluxDB Enterprise cluster is essential for cluster health. Rebalancing a cluster ensures:
 
 - [Shards](/influxdb/v1.7/concepts/glossary/#shard) are evenly distributed across all data nodes in the
