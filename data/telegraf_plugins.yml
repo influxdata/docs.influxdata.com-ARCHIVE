@@ -890,7 +890,7 @@ input:
   - name: MySQL
     id: mysql
     description: |
-      The MySQL input plugin gathers the statistics data from MySQL servers.
+      The MySQL input plugin gathers the statistics data from MySQL, MariaDB, and Percona servers.
     introduced: 0.1.1
     tags: [linux, macos, windows, data-stores]
 
