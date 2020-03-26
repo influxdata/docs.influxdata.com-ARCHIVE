@@ -86,7 +86,7 @@ Consult your CA if you are unsure about how to use these files.
 
 3. **Ensure file permissions for each Node**
    
-    Certificate files require read and write access by the `root` user.
+    Certificate files require read and write access by the `influxdb` user.
     Ensure that you have the correct file permissions in each meta node and data node by running the following commands:
 
     ```sh
