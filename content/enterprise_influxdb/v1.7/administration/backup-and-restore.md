@@ -24,7 +24,7 @@ To choose a strategy that best suits your use case, we recommend considering you
 
 - [Backup and restore utilities](#backup-and-restore-utilities) (suits **most InfluxDB Enterprise applications**)
 - [Export and import commands](#export-and-import-commands) (best for **backfill or recovering shards as files**)
-- [Take AWS snapshot with EBS volumes](#take-aws-snapshots-with-ebs-volumes) (optimal **convenience if budget permits**)
+- [Take AWS snapshot with EBS volumes as backup for data recovery](#take-aws-snapshots-with-ebs-volumes) (optimal **convenience if budget permits**)
 - [Run two clusters in separate AWS regions](#run-two-clusters-in-separate-aws-regions) (also optimal **convenience if budget permits**, more custom work upfront)
 
  > Test your backup and restore strategy for all applicable scenarios.
@@ -43,7 +43,7 @@ Back up and restore data between `influxd` instances with the same versions or w
 
 ### Backup utility
 
-> **Important:** Save backups to an empty directory. Otherwise, the backup may fail.
+> **Important:** Save backups to a new cluster or existing cluster with a different database name.
 
 Backup creates a copy of the [metastore](/influxdb/v1.7/concepts/glossary/#metastore) and [shard](/influxdb/v1.7/concepts/glossary/#shard) data **on disk** at that point in time and stores the copy in the specified directory.
 
@@ -200,8 +200,7 @@ $ ls ./telegrafbackup
 - By default, restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
 To specify an alternate replication factor when restoring a single database, use the `-newrf` flag.
 
-> **Important:** Restore backups to an empty directory on a new or existing cluster. Otherwise, the backup may fail. Specifically, the cluster you're restoring to cannot contain data in affected databases (except the `_internal` database). The system automatically drops the `_internal` database when it performs a
-complete restore.
+> **Important:** Restore backups to a new cluster or existing cluster with a different database name. Otherwise, the restore may fail.
 
 #### Disable anti-entropy (AE) before restoring a backup
 
@@ -411,7 +410,7 @@ For details on using the `influx -import` command, see [Import data from a file 
 
 Set up at least two EBS volumes, one for your OS root directory and one for your InfluxDB Enterprise cluster.
 
-1. Identify InfluxDB Enterprise directories to place on your secondary storage device for backup, including the following directories (and others you'd like to back up):
+1. Identify InfluxDB Enterprise directories to place on your secondary storage device for backup (including all files to snapshot, such as configuration files (`conf`)):
   
   - For meta nodes:
     - `/meta`
@@ -429,10 +428,10 @@ Set up at least two EBS volumes, one for your OS root directory and one for your
 5. Create directory structure for InfluxDB on the secondary storage device (`/influxdb`).
 6. In `/etc/fstab`, mount the VM to the secondary storage device. For example, on Linux, set the mount point for `/dev/sdb` to `/influxdb`.
 7. Download and install InfluxDB, and then stop `influxdb` service if it starts.
-8. In InfluxDB configuration files, find the default storage location on the root volume (`/var/lib/influxdb/`) and update this location to point to the secondary storage device (`/influxdb`).
+8. In InfluxDB configuration files, replace the default directory location (`/var/lib/influxdb/`) with the new directory location (`/influxdb`).
 9. Copy files from `/var/lib/influxdb` to `/influxdb` (`meta`, `wal`, `data`, and others you identified in step 1.)
 10. Restart the `influxdb` service, monitor logs to ensure that the service starts successfully.
-11. Make backup copy of configuration files to `/influxdb/conf`.
+11. Make a backup copy of configuration files, for example `/etc/influxdb/influxdb.conf`.
     Data should be on the secondary storage device, so you can take snapshots of that drive only to save snapshot space.
 
 12. Take a snapshot of the secondary storage device:
