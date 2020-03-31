@@ -14,22 +14,25 @@ Nodes in an InfluxDB Enterprise cluster may need to be replaced at some point du
 This guide outlines processes for replacing both meta nodes and data nodes in an InfluxDB Enterprise cluster.
 
 ## Concepts
+
 Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.7/concepts/glossary/#shard) among nodes in the cluster.
 They hold information about which data nodes own which shards; information on which the
 [anti-entropy](/enterprise_influxdb/v1.7/administration/anti-entropy/) (AE) process depends.
 
 Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
 
-`influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
+Use `influxd-ctl` (a CLI included in each meta node) to manage your InfluxDB Enterprise cluster.
 
 ## Scenarios
 
 ### Replacing nodes in clusters with security enabled
+
 Many InfluxDB Enterprise clusters are configured with security enabled, forcing secure TLS encryption between all nodes in the cluster.
 Both `influxd-ctl` and `curl`, the command line tools used when replacing nodes, have options that facilitate the use of TLS.
 
 #### `influxd-ctl -bind-tls`
-In order to manage your cluster over TLS, pass the `-bind-tls` flag with any `influxd-ctl` commmand.
+
+To manage your cluster over TLS, pass the `-bind-tls` flag with any `influxd-ctl` command.
 
 > If using a self-signed certificate, pass the `-k` flag to skip certificate verification.
 
@@ -69,14 +72,12 @@ The process of replacing both responsive and unresponsive data nodes is the same
 
 ### Reconnecting a data node with a failed disk
 
-A disk drive failing is never a good thing, but it does happen, and when it does,
-all shards on that node are lost.
+If a disk drive fails, all shards on that node are lost. Often in this scenario, you can replace the disk rather than replacing the entire host.
 
-Often in this scenario, rather than replacing the entire host, you just need to replace the disk.
-Host information remains the same, but once started again, the `influxd` process doesn't know
-to communicate with the meta nodes so the AE process can't start the shard-sync process.
+To restart AE and sync shards across the cluster, connect the `influxd` process running on the newly replaced disk to the cluster by doing one of the following:
 
-To resolve this, log in to a meta node and use the [`influxd-ctl update-data`](/enterprise_influxdb/v1.7/administration/cluster-commands/#update-data) command
+- For nodes with more than ≈20 GB of data on disk, ?
+- For nodes with less than ≈20 GB of data on disk, log in to any meta node in your cluster and use the [`influxd-ctl update-data`](/enterprise_influxdb/v1.7/administration/cluster-commands/#update-data) command
 to [update the failed data node to itself](#2-replace-the-old-data-node-with-the-new-data-node).
 
 ```bash
@@ -87,10 +88,8 @@ influxd-ctl update-data <data-node-tcp-bind-address> <data-node-tcp-bind-address
 influxd-ctl update-data enterprise-data-01:8088 enterprise-data-01:8088
 ```
 
-This will connect the `influxd` process running on the newly replaced disk to the cluster.
 The AE process will detect the missing shards and begin to sync data from other
 shards in the same shard group.
-
 
 ## Replacing meta nodes in an InfluxDB Enterprise cluster
 
@@ -274,7 +273,9 @@ The process of replacing data nodes is as follows:
 
 ### 2. Replace the old data node with the new data node
 
-Log into any of your cluster's meta nodes and use `influxd-ctl update-data` to replace the old data node with the new data node:
+- For nodes with more than ≈20 GB of data on disk, ?
+- For nodes with less than ≈20 GB of data on disk, log in to any meta node in your cluster and use the [`influxd-ctl update-data`](/enterprise_influxdb/v1.7/administration/cluster-commands/#update-data) command
+to replace the old data node with the new data node.
 
 ```bash
 # Pattern
