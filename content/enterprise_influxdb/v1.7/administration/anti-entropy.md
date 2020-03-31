@@ -286,15 +286,14 @@ If a data node suddenly disappears due to a catastrophic hardware failure or for
 
 _View the [Replacing Data Nodes](/enterprise_influxdb/v1.7/guides/replacing-nodes/#replacing-data-nodes-in-an-influxdb-enterprise-cluster) documentation for instructions on replacing data nodes in your InfluxDB Enterprise cluster._
 
-### Replacing a machine that is running a data node
+### Replacing a machine running a data node
 
-Perhaps you are replacing a machine that is being decommissioned, upgrading hardware, or something else entirely.
-The Anti-Entropy service will automatically copy shards to the new machines.
+To replace a machine running a data node, start the Anti-Entropy service to copy shards to the new machines by doing one of the following:
 
-Once you have successfully run the `influxd-ctl update-data` command, you are free
-to shut down the retired node without causing any interruption to the cluster.
-The Anti-Entropy process will continue copying the appropriate shards from the
-remaining replicas in the cluster.
+- For nodes with more than ≈20 GB of data on disk, ?
+- For nodes with less than ≈20 GB of data on disk, run the `influxd-ctl update-data` command, and then shut down the retired node without causing any interruption to the cluster.
+
+The Anti-Entropy process copies the appropriate shards from the remaining replicas in the cluster.
 
 ### Fixing entropy in active shards
 
