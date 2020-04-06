@@ -5,7 +5,7 @@ aliases:
     - /enterprise_influxdb/v1.7/other_installation/google_marketplace/
 menu:
   enterprise_influxdb_1_7:
-    name: Deploy on Google Cloud Platform
+    name: Deploy on GCP
     weight: 30
     parent: Install and deploy
 ---
