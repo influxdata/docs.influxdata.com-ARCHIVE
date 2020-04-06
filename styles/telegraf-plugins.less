@@ -46,11 +46,12 @@
 
   .github-link {
     position: absolute;
-    color: @g20-white !important;
+    color: @article-text !important;
     top: .5rem;
     right: .5rem;
-    opacity: 0;
-    transition: opacity .2s, background .2s, color 2s;
+    opacity: .35;
+    transition: opacity .2s, background .2s, color .2s;
+    background: fade(@telegraf-link, 0%) !important;
 
     .icon-github {
       font-size: 1.2rem;
@@ -59,7 +60,11 @@
   }
 
   &:hover {
-    .github-link { opacity: 1; }
+    .github-link {
+      opacity: 1;
+      background: @telegraf-link !important;
+      color: @g20-white !important;
+    }
   }
 
   // Special use-case for using block quotes in the yaml provided by the data file
