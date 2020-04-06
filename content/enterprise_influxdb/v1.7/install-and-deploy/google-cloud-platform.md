@@ -5,8 +5,8 @@ aliases:
 menu:
   enterprise_influxdb_1_7:
     name: Deploy on Google Cloud Platform
-    weight: 20
-    parent: install-and-deploy
+    weight: 30
+    parent: Install and deploy
 ---
 
 For deploying InfluxDB Enterprise clusters on Google Cloud Platform (GCP) infrastructure, InfluxData provides an [InfluxDB Enterprise bring-your-own-license (BYOL) solution](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) that makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
