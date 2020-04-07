@@ -38,10 +38,33 @@ Before deploying an InfluxDB Enterprise cluster on GCP, verify you have the foll
 
 3. Copy the InfluxDB Enterprise license key to the __InfluxDB Enterprise license key__ field or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp) to obtain a license key.
 
-4. Adjust other fields as needed. (Typically, fields in collapsed sections don't need to be altered).
-  The cluster is only accessible within the network (or subnetwork, if specified) where it's deployed.
+4. Adjust cluster fields as needed, including:
 
-5. Click **Deploy** to launch the InfluxDB Enterprise cluster.
+- Deployment name: Enter a name for the InfluxDB Enterprise cluster.
+- InfluxDB Enterprise admin username: Enter the username of your cluster administrator.
+- Zone: Select a region for your cluster.
+- Network: Select a network for your cluster.
+- Subnetwork: Select a subnetwork for your cluster, if applicable.
+
+  > **Note:** The cluster is only accessible within the network (or subnetwork, if specified) where it's deployed.
+
+5. Adjust data node fields as needed, including:
+
+- Data node instance count: Enter the number of data nodes to include in your cluster (we recommend starting with the default, 2).
+- Data node machine type: Select the virtual machine type to use for data nodes (by default, 4 vCPUs). Use the down arrow to scroll through list. Notice the amount of memory available for the selected machine. To alter the number of cores and memory for your selected machine type, click the **Customize** link.
+- (Optional) By default, the data node disk type is SSD Persistent Disk and the disk size is 250 GB. To alter these defaults, click More and update if needed.
+
+  > **Note:** Typically, fields in collapsed sections don't need to be altered.
+
+6. Adjust meta node fields as needed, including:
+
+- Meta node instance count: Enter the number of meta nodes to include in your cluster (we recommend using the default, 3, in most cases).
+- Meta node machine type: Select the virtual machine type to use for meta nodes (by default, 1 vCPUs). Use the down arrow to scroll through list. Notice the amount of memory available for the selected machine. To alter the number of cores and memory for your selected machine type, click the **Customize** link.
+- By default, the meta node disk type is SSD Persistent Disk and the disk size is 10 GB. Alter these defaults if needed.
+
+7. (Optional) Adjust boot disk options fields is needed. By default the boot disk type is Standard Persistent disk and boot disk is 10 GB .
+
+8. Accept terms and conditions by selecting both check boxes, and then click **Deploy** to launch the InfluxDB Enterprise cluster.
 
   <!--![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/intro-3.png) -->
 
