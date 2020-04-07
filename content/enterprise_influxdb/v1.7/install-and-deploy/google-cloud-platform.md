@@ -28,22 +28,22 @@ Before deploying an InfluxDB Enterprise cluster on GCP, verify you have the foll
 
 ## Deploy a cluster
 
-1. Log in to your Google Cloud Platform account and go to [InfluxDB Enterprise by InfluxData](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-vm).
+1. Log in to your Google Cloud Platform account and go to [InfluxDB Enterprise](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-vm).
 
-     <!--![GCP InfluxDB Enterprise solution page](/img/enterprise/gcp/intro-1.png) -->
+    ![GCP InfluxDB Enterprise page](/img/enterprise/gcp/intro-1.png)
 
 2. Click **Launch** to create or select a project to open up your cluster's configuration page.
 
-    <!--![GCP InfluxDB Enterprise configuration page](/img/enterprise/gcp/intro-2.png) -->
+    ![GCP InfluxDB Enterprise configuration page](/img/enterprise/gcp/intro-2.png)
 
 3. Copy the InfluxDB Enterprise license key to the __InfluxDB Enterprise license key__ field or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp) to obtain a license key.
 
-4. Adjust other fields as needed. (Typically, fields in collapsed sections don't need to be altered.
+4. Adjust other fields as needed. (Typically, fields in collapsed sections don't need to be altered).
   The cluster is only accessible within the network (or subnetwork, if specified) where it's deployed.
 
 5. Click **Deploy** to launch the InfluxDB Enterprise cluster.
 
-  <!--![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/intro-3.png) --> 
+  <!--![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/intro-3.png) -->
 
 The cluster may take a few minutes to fully deploy. If the deployment does not complete or reports an error, read through the list of [common deployment errors](https://cloud.google.com/marketplace/docs/troubleshooting).
 
