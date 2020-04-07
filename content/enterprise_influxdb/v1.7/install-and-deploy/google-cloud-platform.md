@@ -10,9 +10,17 @@ menu:
     parent: Install and deploy
 ---
 
-Follow these steps to deploy an InfluxDB Enterprise cluster on Google Cloud Platform (GCP).
+Complete the following steps to deploy an InfluxDB Enterprise cluster on Google Cloud Platform (GCP):
 
-## Prerequisites
+1. [Verify prerequistes](#verify-prerequisites).
+2. [Deploy a cluster](#deploy-a-cluster).
+2. [Access the cluster](#access-the-cluster).
+
+After deploying your cluster, see [Getting started with InfluxDB](/platform/introduction/getting-started) for an introduction to InfluxDB database and the InfluxData platform.
+
+## Verify prerequisites
+
+Before deploying an InfluxDB Enterprise cluster on GCP, verify you have the following prerequisites:
 
 - A [GCP](https://console.cloud.google.com/) account with access to the [GCP Marketplace](https://console.cloud.google.com/marketplace).
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
@@ -20,61 +28,56 @@ Follow these steps to deploy an InfluxDB Enterprise cluster on Google Cloud Plat
 
 ## Deploy a cluster
 
-To deploy an InfluxDB Enterprise cluster, log in to your Google Cloud Platform account and navigate to [InfluxData's InfluxDB Enterprise (BYOL)](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) solution in the GCP Marketplace.
+1. Log in to your Google Cloud Platform account and go to [InfluxDB Enterprise by InfluxData](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-vm).
 
-![GCP InfluxDB Enterprise solution page](/img/enterprise/gcp/byol-intro-1.png)
+     <!--![GCP InfluxDB Enterprise solution page](/img/enterprise/gcp/intro-1.png) -->
 
-Click __Launch on compute engine__ to open up the configuration page.
+2. Click **Launch** to create or select a project to open up your cluster's configuration page.
 
-![GCP InfluxDB Enterprise configuration page](/img/enterprise/gcp/byol-intro-2.png)
+    <!--![GCP InfluxDB Enterprise configuration page](/img/enterprise/gcp/intro-2.png) -->
 
-Copy the InfluxDB Enterprise license key to the __InfluxDB Enterprise license key__ field or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp) to obtain a license key.
+3. Copy the InfluxDB Enterprise license key to the __InfluxDB Enterprise license key__ field or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp) to obtain a license key.
 
-Adjust any other fields as desired. The cluster will only be accessible within the network (or subnetwork, if specified) in which it is deployed. The fields in collapsed sections generally do not need to be altered.
+4. Adjust other fields as needed. (Typically, fields in collapsed sections don't need to be altered.
+  The cluster is only accessible within the network (or subnetwork, if specified) where it's deployed.
 
-Click __Deploy__ to launch the InfluxDB Enterprise cluster.
+5. Click **Deploy** to launch the InfluxDB Enterprise cluster.
 
-![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/byol-intro-3.png)
+  <!--![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/intro-3.png) --> 
 
-The cluster will take up to five minutes to fully deploy. If the deployment does not complete or reports an error, read through the list of [common deployment errors](https://cloud.google.com/marketplace/docs/troubleshooting).
+The cluster may take a few minutes to fully deploy. If the deployment does not complete or reports an error, read through the list of [common deployment errors](https://cloud.google.com/marketplace/docs/troubleshooting).
 
-![GCP InfluxDB Enterprise deployment complete page](/img/enterprise/gcp/byol-intro-4.png)
+  <!-- ![GCP InfluxDB Enterprise deployment complete page](/img/enterprise/gcp/intro-4.png) -->
 
-Your cluster is now deployed!
-
-> **Note:** Make sure you save the "Admin username", "Admin password", and "Connection internal IP" values displayed on the screen. They will be required when attempting to access the cluster.
+> **Important:** Make sure you save the "Admin username", "Admin password", and "Connection internal IP" values displayed on the screen. They are required to access the cluster.
 
 ## Access the cluster
 
-The cluster's IP address is only reachable from within the GCP network (or subnetwork) specified in the solution configuration. A cluster can only be reached from instances or services within the same GCP network or subnetwork in which it was provisioned.
+Access the cluster's IP address from the GCP network (or subnetwork) specified when you deployed the cluster. A cluster can only be reached from instances or services in the same GCP network or subnetwork.
 
-Using the GCP Cloud Shell or `gcloud` CLI, create a new instance that will be used to access the InfluxDB Enterprise cluster.
+1. In the GCP Cloud Shell or `gcloud` CLI, create a new instance to access the InfluxDB Enterprise cluster.
 
-```
-gcloud compute instances create influxdb-access --zone us-central1-f --image-family debian-9 --image-project debian-cloud
-```
+  ```
+  gcloud compute instances create influxdb-access --zone us-central1-f --image-family debian-9 --image-project debian-cloud
+  ```
 
-SSH into the instance.
+2. SSH into the instance.
 
-```
-gcloud compute ssh influxdb-access
-```
+  ```
+  gcloud compute ssh influxdb-access
+  ```
 
-On the instance, install the `influx` command line tool via the InfluxDB open source package.
+3. On the instance, install the `influx` command line tool via the InfluxDB open source package.
 
-```
-wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.3_amd64.deb
-sudo dpkg -i influxdb_1.7.3_amd64.deb
-```
+  ```
+  wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.3_amd64.deb
+  sudo dpkg -i influxdb_1.7.3_amd64.deb
+  ```
 
-Now the InfluxDB Enterprise cluster can be accessed using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.
+4. Access the InfluxDB Enterprise cluster using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.
 
 ```
 influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "CREATE DATABASE test"
 
 influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "SHOW DATABASES"
 ```
-
-### Next steps
-
-For an introduction to InfluxDB database and the InfluxData Platform, see [Getting started with InfluxDB](/platform/introduction/getting-started).
