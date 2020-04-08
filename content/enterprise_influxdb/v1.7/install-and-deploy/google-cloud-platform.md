@@ -2,105 +2,84 @@
 title: Deploy an InfluxDB Enterprise cluster on Google Cloud Platform
 aliases:
     - /enterprise_influxdb/v1.7/other-options/google-cloud/
-    - /enterprise_influxdb/v1.7/other_installation/google_marketplace/
 menu:
   enterprise_influxdb_1_7:
-    name: Deploy on GCP
-    weight: 30
-    parent: Install and deploy
+    name: Deploy on Google Cloud Platform
+    weight: 20
+    parent: install-and-deploy
 ---
 
-Complete the following steps to deploy an InfluxDB Enterprise cluster on Google Cloud Platform (GCP):
+For deploying InfluxDB Enterprise clusters on Google Cloud Platform (GCP) infrastructure, InfluxData provides an [InfluxDB Enterprise bring-your-own-license (BYOL) solution](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-byol) on the [Google Cloud Platform Marketplace](https://cloud.google.com/marketplace/) that makes the installation and setup process easy and straightforward. Clusters deployed through the GCP Marketplace are ready for production.
 
-1. [Verify prerequistes](#verify-prerequisites).
-2. [Deploy a cluster](#deploy-a-cluster).
-2. [Access the cluster](#access-the-cluster).
+> **Note:** The [Deployment Manager templates](https://cloud.google.com/deployment-manager/) used for the InfluxDB Enterprise BYOL solution are [open source](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise). Issues and feature requests for the Marketplace deployment should be [submitted through the related GitHub repository](https://github.com/influxdata/google-deployment-manager-influxdb-enterprise/issues/new) (requires a GitHub account) or by contacting [InfluxData support](mailto:Support@InfluxData.com).
 
-After deploying your cluster, see [Getting started with InfluxDB](/platform/introduction/getting-started) for an introduction to InfluxDB database and the InfluxData platform.
+## Prerequisites
 
-## Verify prerequisites
+This guide requires the following:
 
-Before deploying an InfluxDB Enterprise cluster on GCP, verify you have the following prerequisites:
-
-- A [GCP](https://console.cloud.google.com/) account with access to the [GCP Marketplace](https://console.cloud.google.com/marketplace).
+- A [Google Cloud Platform (GCP)](https://cloud.google.com/) account with access to the [GCP Marketplace](https://cloud.google.com/marketplace/).
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
 - Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
 
+To deploy InfluxDB Enterprise on platforms other than GCP, please see [InfluxDB Enterprise installation options](/enterprise_influxdb/v1.7/introduction/installation_guidelines).
+
 ## Deploy a cluster
 
-1. Log in to your Google Cloud Platform account and go to [InfluxDB Enterprise](https://console.cloud.google.com/marketplace/details/influxdata-public/influxdb-enterprise-vm).
+To deploy an InfluxDB Enterprise cluster, log in to your Google Cloud Platform account and navigate to [InfluxData's InfluxDB Enterprise (BYOL)](https://console.cloud.google.com/partner/editor/influxdata-public/influxdb-enterprise-byol) solution in the GCP Marketplace.
 
-    ![GCP InfluxDB Enterprise page](/img/enterprise/gcp/intro-1.png)
+![GCP InfluxDB Enterprise solution page](/img/enterprise/gcp/byol-intro-1.png)
 
-2. Click **Launch** to create or select a project to open up your cluster's configuration page.
+Click __Launch on compute engine__ to open up the configuration page.
 
-    ![GCP InfluxDB Enterprise configuration page](/img/enterprise/gcp/intro-2.png)
+![GCP InfluxDB Enterprise configuration page](/img/enterprise/gcp/byol-intro-2.png)
 
-3. Copy the InfluxDB Enterprise license key to the __InfluxDB Enterprise license key__ field or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp) to obtain a license key.
+Copy the InfluxDB Enterprise license key to the __InfluxDB Enterprise license key__ field or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp) to obtain a license key.
 
-4. Adjust cluster fields as needed, including:
+Adjust any other fields as desired. The cluster will only be accessible within the network (or subnetwork, if specified) in which it is deployed. The fields in collapsed sections generally do not need to be altered.
 
-- Deployment name: Enter a name for the InfluxDB Enterprise cluster.
-- InfluxDB Enterprise admin username: Enter the username of your cluster administrator.
-- Zone: Select a region for your cluster.
-- Network: Select a network for your cluster.
-- Subnetwork: Select a subnetwork for your cluster, if applicable.
+Click __Deploy__ to launch the InfluxDB Enterprise cluster.
 
-  > **Note:** The cluster is only accessible within the network (or subnetwork, if specified) where it's deployed.
+![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/byol-intro-3.png)
 
-5. Adjust data node fields as needed, including:
+The cluster will take up to five minutes to fully deploy. If the deployment does not complete or reports an error, read through the list of [common deployment errors](https://cloud.google.com/marketplace/docs/troubleshooting).
 
-- Data node instance count: Enter the number of data nodes to include in your cluster (we recommend starting with the default, 2).
-- Data node machine type: Select the virtual machine type to use for data nodes (by default, 4 vCPUs). Use the down arrow to scroll through list. Notice the amount of memory available for the selected machine. To alter the number of cores and memory for your selected machine type, click the **Customize** link.
-- (Optional) By default, the data node disk type is SSD Persistent Disk and the disk size is 250 GB. To alter these defaults, click More and update if needed.
+![GCP InfluxDB Enterprise deployment complete page](/img/enterprise/gcp/byol-intro-4.png)
 
-  > **Note:** Typically, fields in collapsed sections don't need to be altered.
+Your cluster is now deployed!
 
-6. Adjust meta node fields as needed, including:
-
-- Meta node instance count: Enter the number of meta nodes to include in your cluster (we recommend using the default, 3, in most cases).
-- Meta node machine type: Select the virtual machine type to use for meta nodes (by default, 1 vCPUs). Use the down arrow to scroll through list. Notice the amount of memory available for the selected machine. To alter the number of cores and memory for your selected machine type, click the **Customize** link.
-- By default, the meta node disk type is SSD Persistent Disk and the disk size is 10 GB. Alter these defaults if needed.
-
-7. (Optional) Adjust boot disk options fields is needed. By default the boot disk type is Standard Persistent disk and boot disk is 10 GB .
-
-8. Accept terms and conditions by selecting both check boxes, and then click **Deploy** to launch the InfluxDB Enterprise cluster.
-
-  <!--![GCP InfluxDB Enterprise deployment pending page](/img/enterprise/gcp/intro-3.png) -->
-
-The cluster may take a few minutes to fully deploy. If the deployment does not complete or reports an error, read through the list of [common deployment errors](https://cloud.google.com/marketplace/docs/troubleshooting).
-
-  <!-- ![GCP InfluxDB Enterprise deployment complete page](/img/enterprise/gcp/intro-4.png) -->
-
-> **Important:** Make sure you save the "Admin username", "Admin password", and "Connection internal IP" values displayed on the screen. They are required to access the cluster.
+> **Note:** Make sure you save the "Admin username", "Admin password", and "Connection internal IP" values displayed on the screen. They will be required when attempting to access the cluster.
 
 ## Access the cluster
 
-Access the cluster's IP address from the GCP network (or subnetwork) specified when you deployed the cluster. A cluster can only be reached from instances or services in the same GCP network or subnetwork.
+The cluster's IP address is only reachable from within the GCP network (or subnetwork) specified in the solution configuration. A cluster can only be reached from instances or services within the same GCP network or subnetwork in which it was provisioned.
 
-1. In the GCP Cloud Shell or `gcloud` CLI, create a new instance to access the InfluxDB Enterprise cluster.
+Using the GCP Cloud Shell or `gcloud` CLI, create a new instance that will be used to access the InfluxDB Enterprise cluster.
 
-  ```
-  gcloud compute instances create influxdb-access --zone us-central1-f --image-family debian-9 --image-project debian-cloud
-  ```
+```
+gcloud compute instances create influxdb-access --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud
+```
 
-2. SSH into the instance.
+SSH into the instance.
 
-  ```
-  gcloud compute ssh influxdb-access
-  ```
+```
+gcloud compute ssh influxdb-access
+```
 
-3. On the instance, install the `influx` command line tool via the InfluxDB open source package.
+On the instance, install the `influx` command line tool via the InfluxDB open source package.
 
-  ```
-  wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.3_amd64.deb
-  sudo dpkg -i influxdb_1.7.3_amd64.deb
-  ```
+```
+wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.3_amd64.deb
+sudo dpkg -i influxdb_1.7.3_amd64.deb
+```
 
-4. Access the InfluxDB Enterprise cluster using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.
+Now the InfluxDB Enterprise cluster can be accessed using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.
 
 ```
 influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "CREATE DATABASE test"
 
 influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "SHOW DATABASES"
 ```
+
+### Next steps
+
+For an introduction to InfluxDB database and the InfluxData Platform, see [Getting started with InfluxDB](/platform/introduction/getting-started).
