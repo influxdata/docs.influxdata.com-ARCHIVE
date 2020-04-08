@@ -7,7 +7,7 @@ menu:
     weight: 10
     parent: About the project
 ---
-## v1.8.1 [2020-04-06]
+<!-- ## v1.8.1 [2020-04-06]
 
 ### Features
 - Add ability to directly authenticate single SuperAdmin user against the API.
@@ -16,6 +16,7 @@ menu:
 - Update Flux functions for latest Flux version.
 - Update table results to output formatted strings rather than as single-line values.
 - Handle change to newsfeed data structure.
+-->
 
 ## v1.8.0 [2020-02-19]
 
