@@ -17,6 +17,8 @@ Complete the following steps to deploy an InfluxDB Enterprise cluster on Google 
 
 After deploying your cluster, see [Getting started with InfluxDB](/platform/introduction/getting-started) for an introduction to InfluxDB database and the InfluxData platform.
 
+>**Note:** Want to deploy your InfluxDB cluster on the Cloud? Check out [InfluxDB Cloud 2.0](/https://v2.docs.influxdata.com/v2.0/cloud/get-started/).
+
 ## Verify prerequisites
 
 - A [Google Cloud Platform (GCP)](https://cloud.google.com/) account with access to the [GCP Marketplace](https://cloud.google.com/marketplace/).	Before deploying an InfluxDB Enterprise cluster on GCP, verify you have the following prerequisites:
@@ -24,8 +26,6 @@ After deploying your cluster, see [Getting started with InfluxDB](/platform/intr
 - A [GCP](https://console.cloud.google.com/) account with access to the [GCP Marketplace](https://console.cloud.google.com/marketplace).
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
 - Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
-
-Want to deploy your InfluxDB cluster on the Cloud? Check out [InfluxDB Cloud 2.0](/https://v2.docs.influxdata.com/v2.0/cloud/get-started/).
 
 ## Deploy a cluster
 
