@@ -55,23 +55,23 @@ that combine the private key file and the signed certificate file into a single 
 
     If using a certificate provided by a CA, follow their instructions to download the certificate files.
 
-    If using a self-signed certificate, use the `openssl` utility to create a certificate.
-    The following command generates a private key file (`.key`) and a self-signed
-    certificate file (`.crt`) which remain valid for the specified `NUMBER_OF_DAYS`.
-    It outputs those files to `/etc/ssl/` and gives them the required permissions.
-    (Other paths will also work.)
+    {{% note %}}
+If using one or more self-signed certificates, use the `openssl` utility to create a certificate.
+The following command generates a private key file (`.key`) and a self-signed
+certificate file (`.crt`) which remain valid for the specified `NUMBER_OF_DAYS`.
 
-    ```sh
-    sudo openssl req -x509 -nodes -newkey rsa:2048 \
-      -keyout /etc/ssl/influxdb-selfsigned.key \
-      -out /etc/ssl/influxdb-selfsigned.crt \
-      -days <NUMBER_OF_DAYS>
-    ```
+```sh
+sudo openssl req -x509 -nodes -newkey rsa:2048 \
+  -keyout influxdb-selfsigned.key \
+  -out influxdb-selfsigned.crt \
+  -days <NUMBER_OF_DAYS>
+```
 
-    The command will prompt you for more information.
-    You can choose to fill out these fields or leave them blank; both actions generate valid certificate files.
+The command will prompt you for more information.
+You can choose to fill out these fields or leave them blank; both actions generate valid certificate files.
 
-    In subsequent steps, you will need to copy the certificate and key (or `.pem` file) to each node in the cluster.
+In subsequent steps, you will need to copy the certificate and key (or `.pem` file) to each node in the cluster.
+    {{% /note %}}
 
 2. **Install the SSL/TLS certificate in each Node**
 
@@ -108,10 +108,10 @@ Consult your CA if you are unsure about how to use these files.
       https-enabled = true
 
       # The SSL certificate to use when HTTPS is enabled.
-      https-certificate = "influxdb.crt"
+      https-certificate = "influxdb-meta.crt"
 
       # Use a separate private key location.
-      https-private-key = "influxdb.key"
+      https-private-key = "influxdb-meta.key"
 
       # If using a self-signed certificate:
       https-insecure-tls = true
@@ -134,10 +134,10 @@ Consult your CA if you are unsure about how to use these files.
         [...]
 
         # The SSL certificate to use when HTTPS is enabled.
-        https-certificate = "influxdb.crt"
+        https-certificate = "influxdb-data.crt"
 
         # Use a separate private key location.
-        https-private-key = "influxdb.key"
+        https-private-key = "influxdb-data.key"
       ```
 
     2. Configure the data nodes to use HTTPS when communicating with other data nodes.
@@ -152,10 +152,10 @@ Consult your CA if you are unsure about how to use these files.
          https-enabled = true
 
          # The SSL certificate to use when HTTPS is enabled.
-         https-certificate = "influxdb.crt"
+         https-certificate = "influxdb-data.crt"
 
          # Use a separate private key location.
-         https-private-key = "influxdb.key"
+         https-private-key = "influxdb-data.key"
        ```
 
     3. Configure the data nodes to use HTTPS when communicating with the meta nodes.
