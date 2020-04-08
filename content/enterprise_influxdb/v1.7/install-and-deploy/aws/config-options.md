@@ -4,7 +4,7 @@ menu:
   enterprise_influxdb_1_7:
     name: AWS configuration options
     weight: 30
-    parent: deploy-in-aws
+    parent: deploy-on-aws
 ---
 When deploying InfluxDB Enterprise on AWS using the template described in [Deploy an InfluxDB Enterprise cluster on Amazon Web Services](/enterprise_influxdb/v1.7/install-and-deploy/aws/setting-up-template), the following configuration options are available:
 

@@ -4,7 +4,7 @@ menu:
   enterprise_influxdb_1_7:
     name: Deploy on Amazon Web Services
     weight: 30
-    parent: deploy-in-aws
+    parent: deploy-on-aws
 ---
 
 Follow these steps to deploy an InfluxDB Enterprise cluster on AWS.
