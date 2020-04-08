@@ -25,7 +25,7 @@ After deploying your cluster, see [Getting started with InfluxDB](/platform/intr
 - A valid InfluxDB Enterprise license key, or [sign up for a free InfluxDB Enterprise trial for GCP](https://portal.influxdata.com/users/gcp).
 - Access to [GCP Cloud Shell](https://cloud.google.com/shell/) or the [`gcloud` SDK and command line tools](https://cloud.google.com/sdk/).
 
-Want us to handle your InfluxDB cluster? Check out [InfluxDB Cloud 2.0](/https://v2.docs.influxdata.com/v2.0/cloud/get-started/).
+Want to deploy your InfluxDB cluster on the Cloud? Check out [InfluxDB Cloud 2.0](/https://v2.docs.influxdata.com/v2.0/cloud/get-started/).
 
 ## Deploy a cluster
 
