@@ -61,20 +61,43 @@ For information about client libraries compatible with InfluxDB 1.7 and earlier,
 
 Use a InfluxDB client library to integrate InfluxDB into your scripts and applications.
 
-1. Install the client library.
-
-  For example, to install the InfluxDB Python client library:
+1. Install the client library. Refer to the client library documentation for detail. For example, to install the Python client library:
 
   ```sh
       pip install influxd-client
   ```
 
-2. Ensure that InfluxDB is running. If running InfluxDB locally, visit http://localhost:9999. (If using InfluxDB Cloud, visit the URL of your InfluxDB Cloud UI.)
+2. Ensure that InfluxDB is running. If running InfluxDB locally, visit http://localhost:8086. (If using InfluxDB Cloud, visit the URL of your InfluxDB Cloud UI.)
 
-3. Import the client library. For example, to import the Python client library:
+3. In your program, import the client library and use it to write data to InfluxDB. For example:
 
-```sh 
-   import influxdb_client`
-```
+  ```sh 
+    import influxdb_client
+    from influxdb_client.client.write_api import SYNCHRONOUS
+  ```
 
-For example, for Python program, import the InfluxDB client library and use it to write data to InfluxDB.
+4. Define your database and token variables, and create a client and writer object. The InfluxDBClient object takes 2 parameters: `url` and `token`.
+
+   ```sh 
+     Database = "<my-db>"
+    token = "<my-token>"
+    client = influxdb_client.InfluxDBClient(
+    url="http://localhost:8086",
+    token=token,
+   ```
+
+5. Instantiate a writer object using the client object and the write_api method. Use the `write_api` method to configure the writer object.
+
+   ```sh 
+    client = influxdb_client.InfluxDBClient(url=url, token=token)
+    write_api = client.write_api(write_options=SYNCHRONOUS)
+   ```
+
+6. Create a point object and write it to InfluxDB using the write method of the API writer object. The write method requires three parameters: database, (optional) retention policy, and record.
+
+  ```sh 
+  p = influxdb_client.Point("my_measurement").tag("location", "Prague").field("temperature", 25.3)
+  write_api.write(database:rp, record=p)
+  ```
+
+The database (and retention policy, if applicable) are converted to a [bucket](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket) data store compatible with InfluxDB 2.0.
