@@ -1,6 +1,6 @@
 ---
 title: InfluxDB API client libraries
-description: InfluxDB API client libraries includes support for Arduino, Go, Haskell, Java, JavaScript/Node.js, Lisp, MATLAB, .Net, Perl, PHP, Python, R, Ruby, Rust, Scala, Sensu, and the SNMP agent.
+description: InfluxDB API client libraries includes support for Arduino, C#, Go, Java, JavaScript, PHP, Python, and Ruby.
 aliases:
     - /influxdb/v1.8/clients/api_client_libraries/
     - /influxdb/v1.8/clients/
@@ -47,14 +47,14 @@ For information about client libraries compatible with InfluxDB 1.7 and earlier,
 - [influxdb-client-php](https://github.com/influxdata/influxdb-client-php)
    - Maintained by [InfluxData](https://github.com/influxdata)
 
-### Ruby
-
-- [influxdb-client-ruby](https://github.com/influxdata/influxdb-client-ruby)
-   - Maintained by [InfluxData](https://github.com/influxdata)
-
 ### Python
 
 * [influxdb-client-python](https://github.com/influxdata/influxdb-client-python)
+   - Maintained by [InfluxData](https://github.com/influxdata)
+
+### Ruby
+
+- [influxdb-client-ruby](https://github.com/influxdata/influxdb-client-ruby)
    - Maintained by [InfluxData](https://github.com/influxdata)
 
 ## Use a client library
