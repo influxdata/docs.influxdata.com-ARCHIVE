@@ -11,9 +11,7 @@ menu:
     parent: Tools
 ---
 
-## Overview
-
-InfluxDB client libraries are language-specific packages that integrate with the InfluxDB API and support both InfluxDB 1.8+ and InfluxDB 2.0. The client libraries on this page are available for writing data to InfluxDB using the [`/api/v2/write` endpoint](/influxdb/v1.8/tools/api#api-v2-write-http-endpoint).
+InfluxDB client libraries are language-specific packages that integrate with the InfluxDB API and support both **InfluxDB 1.8+** and **InfluxDB 2.0**. The client libraries on this page are available for writing data to InfluxDB using the [`/api/v2/write` endpoint](/influxdb/v1.8/tools/api#api-v2-write-http-endpoint).
 
 For information about client libraries compatible with InfluxDB 1.7 and earlier, see [InfluxDB 1.7 API client libraries](/influxdb/v1.7/tools/api-client-libraries).
 
@@ -58,3 +56,25 @@ For information about client libraries compatible with InfluxDB 1.7 and earlier,
 
 * [influxdb-client-python](https://github.com/influxdata/influxdb-client-python)
    - Maintained by [InfluxData](https://github.com/influxdata)
+
+## Use a client library
+
+Use a InfluxDB client library to integrate InfluxDB into your scripts and applications.
+
+1. Install the client library.
+
+  For example, to install the InfluxDB Python client library:
+
+  ```sh
+      pip install influxd-client
+  ```
+
+2. Ensure that InfluxDB is running. If running InfluxDB locally, visit http://localhost:9999. (If using InfluxDB Cloud, visit the URL of your InfluxDB Cloud UI.)
+
+3. Import the client library. For example, to import the Python client library:
+
+```sh 
+   import influxdb_client`
+```
+
+For example, for Python program, import the InfluxDB client library and use it to write data to InfluxDB.
