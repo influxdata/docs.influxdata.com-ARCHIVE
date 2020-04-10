@@ -17,25 +17,39 @@ The following sections assume your InfluxDB instance is running on `localhost`
 port `8086` and HTTPS is not enabled.
 Those settings [are configurable](/influxdb/v1.8/administration/config/#http-endpoints-settings).
 
-## InfluxDB HTTP endpoints
+- [InfluxDB 2.0 API compatibility endpoints](#influxdb-2-0-api-compatibility-endpoints)
+- [InfluxDB HTTP endpoints](#influxdb-http-endpoints)
 
-| Endpoint                                         | Description                                                                              |
-|:----------                                       |:----------                                                                               |
-| [/api/v2/query](#api-v2-query-http-endpoint)     | Query data using [Flux](/flux/latest/) _(compatible with InfluxDB 2.0 client libraries)_ |
-| [/api/v2/write](#api-v2-write-http-endpoint)     | Write data to InfluxDB 1.8.0+ _(compatible with InfluxDB 2.0 client libraries)_          |
-| [/debug/pprof ](#debug-pprof-http-endpoint)      | Generate profiles for troubleshooting.                                                   |
-| [/debug/requests](#debug-requests-http-endpoint) | Track HTTP client requests to the `/write` and `/query` endpoints.                       |
-| [/debug/vars](#debug-vars-http-endpoint)         | Collect internal InfluxDB statistics                                                     |
-| [/ping](#ping-http-endpoint)                     | Check the status of your InfluxDB instance and your version of InfluxDB.                 |
-| [/query](#query-http-endpoint)                   | Query data and manage databases, retention policies, and users.                          |
-| [/write](#write-http-endpoint)                   | Write data to a database.                                                                |
+## InfluxDB 2.0 API compatibility endpoints
 
-## `/api/v2/query/` HTTP endpoint
+InfluxDB 1.8.0 introduced forward compatibility APIs for InfluxDB 2.0.
+There are multiple reasons for introducing these:
+
+- The latest [InfluxDB client libraries](/influxdb/v1.8/tools/api_client_libraries/)
+  are built for the InfluxDB 2.0 API, but now also work with **InfluxDB 1.8.0+**.
+- InfluxDB Cloud 2.0 is a generally available service across multiple cloud service providers and regions
+  that is fully compatible with the **latest** client libraries.
+
+If you are just getting started with InfluxDB 1.x today, we recommend adopting
+the [latest client libraries](/influxdb/v1.8/tools/api_client_libraries/).
+They allow you to easily move from InfluxDB 1.x to InfluxDB 2.0 Cloud or open source,
+(when you are ready).
+
+The following forward compatible APIs are available:
+
+| Endpoint                                     | Description                                                                                                |
+|:----------                                   |:----------                                                                                                 |
+| [/api/v2/query](#api-v2-query-http-endpoint) | Query data in InfluxDB 1.8.0+ using the InfluxDB 2.0 API and [Flux](/flux/latest/)                         |
+| [/api/v2/write](#api-v2-write-http-endpoint) | Write data to InfluxDB 1.8.0+ using the InfluxDB 2.0 API _(compatible with InfluxDB 2.0 client libraries)_ |
+| [/health](#health-http-endpoint)             | Check the health of your InfluxDB instance                                                                 |
+
+### `/api/v2/query/` HTTP endpoint
 
 The `/api/v2/query` endpoint accepts `POST` HTTP requests.
 Use this endpoint to query data using [Flux](/flux/latest/) and [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
+ Flux is the primary language for working with data in InfluxDB 2.0.
 
-Include the following HTTP headers:
+**Include the following HTTP headers:**
 
 - `Accept: application/csv`
 - `Content-type: application/vnd.flux`
@@ -71,7 +85,7 @@ curl -XPOST localhost:8086/api/v2/query -sS \
 {{% /code-tab-content %}}
 {{< /code-tabs-wrapper >}}
 
-## `/api/v2/write/` HTTP endpoint
+### `/api/v2/write/` HTTP endpoint
 
 The `/api/v2/write` endpoint accepts `POST` HTTP requests.
 Use this endpoint to write to an InfluxDB 1.8.0+ database using [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
@@ -83,20 +97,23 @@ and [buckets](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket)
 instead of databases and retention policies.
 The `/api/v2/write` endpoint maps the supplied version 1.8 database and retention policy to a bucket.
 
-Include the following URL parameters:
+**Include the following URL parameters:**
 
 - `bucket`: Provide the database name and retention policy separated by a forward slash (`/`).
   For example: `database/retention-policy`.
   Empty retention policies map to the default retention policy.
   `database/weekly` maps to a database named "database" and retention policy named "weekly".
   `database/` and `database` map to a database named "database" and the default retention policy.
-- `org`: The `org` parameter is ignored and can be left empty.
+- `org`: In InfluxDB 1.x, there is no concept of organization. The `org` parameter is ignored and can be left empty.
 - `precision`: Precision of timestamps in the line protocol.
   Accepts `ns` (nanoseconds), `us`(microseconds), `ms` (milliseconds) and `s` (seconds).
 
-Include the following HTTP header:
+**Include the following HTTP header:**
 
-- `Authorization`: Use the Token schema to provide your InfluxDB 1.x username and password separated by a colon (`:`).
+- `Authorization`: In InfluxDB 2.0 uses [API Tokens](https://v2.docs.influxdata.com/v2.0/security/tokens/)
+  to access the platform and all its capabilities.
+  InfluxDB v1.x uses a username and password combination when accessing the HTTP APIs.
+  Use the Token schema to provide your InfluxDB 1.x username and password separated by a colon (`:`).
   For example: `Authorization: Token username:password`.
 
 {{< code-tabs-wrapper >}}
@@ -119,7 +136,29 @@ curl -XPOST "localhost:8086/api/v2/write?bucket=db/rp&precision=s" \
 {{% /code-tab-content %}}
 {{< /code-tabs-wrapper >}}
 
-## `/debug/pprof` HTTP endpoint
+### `/health` HTTP endpoint
+The `/health` endpoint accepts `Get` HTTP requests.
+Use this endpoint to check the health of your InfluxDB instance.
+
+```bash
+curl -XGET "localhost:8086/health"
+```
+
+---
+
+## InfluxDB HTTP endpoints
+The following InfluxDB API endpoints are available:
+
+| Endpoint                                         | Description                                                                    |
+|:----------                                       |:----------                                                                     |
+| [/debug/pprof ](#debug-pprof-http-endpoint)      | Generate profiles for troubleshooting                                          |
+| [/debug/requests](#debug-requests-http-endpoint) | Track HTTP client requests to the `/write` and `/query` endpoints              |
+| [/debug/vars](#debug-vars-http-endpoint)         | Collect internal InfluxDB statistics                                           |
+| [/ping](#ping-http-endpoint)                     | Check the status of your InfluxDB instance and your version of InfluxDB        |
+| [/query](#query-http-endpoint)                   | Query data using **InfluxQL**, manage databases, retention policies, and users |
+| [/write](#write-http-endpoint)                   | Write data to a database                                                       |
+
+### `/debug/pprof` HTTP endpoint
 
 InfluxDB supports the Go [`net/http/pprof`](https://golang.org/pkg/net/http/pprof/) HTTP endpoints, which are useful for troubleshooting. The `pprof` package serves runtime profiling data in the format expected by the _pprof_ visualization tool.
 
@@ -187,18 +226,18 @@ As the following example shows, the cURL output includes "Time Spent," the time 
 100  237k    0  237k    0     0   8025      0 --:--:--  0:00:30 --:--:-- 79588
 ```
 
-## `/debug/requests` HTTP endpoint
+### `/debug/requests` HTTP endpoint
 
 Use this endpoint to track HTTP client requests to the `/write` and `/query` endpoints.
 The `/debug/requests` endpoint returns the number of writes and queries to InfluxDB per username and IP address.
 
-### Definition
+#### Definition
 
 ```bash
 curl http://localhost:8086/debug/requests
 ```
 
-### Query string parameters
+#### Query string parameters
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
@@ -232,7 +271,7 @@ $ curl http://localhost:8086/debug/requests?seconds=60
 
 The response shows that, over the past minute, `user1` sent three requests to the `/write` endpoint from `123.45.678.91`, `user1` sent 16 requests to the `/query` endpoint from `000.0.0.0`, and `user2` sent four requests to the `/write` endpoint from `xx.xx.xxx.xxx`.
 
-## `/debug/vars` HTTP endpoint
+### `/debug/vars` HTTP endpoint
 
 InfluxDB exposes statistics and information about its runtime through the `/debug/vars` endpoint, which can be accessed using the following cURL command:
 
@@ -244,13 +283,13 @@ Server statistics and information are displayed in JSON format.
 
 >**Note:** The [InfluxDB input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb) is available to collect metrics (using the `/debug/vars` endpoint) from specified Kapacitor instances. For a list of the measurements and fields, see the [InfluxDB input plugin README](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/influxdb#readme).
 
-## `/ping` HTTP endpoint
+### `/ping` HTTP endpoint
 
 The ping endpoint accepts both `GET` and `HEAD` HTTP requests.
 Use this endpoint to check the status of your InfluxDB instance and your version
 of InfluxDB.
 
-### Definition
+#### Definition
 
 ```
 GET http://localhost:8086/ping
@@ -260,13 +299,13 @@ GET http://localhost:8086/ping
 HEAD http://localhost:8086/ping
 ```
 
-### `verbose` option
+#### `verbose` option
 
 By default, the `/ping` HTTP endpoint returns a simple HTTP 204 status response to let the client know that the server is running. Default value is `false`.
 When `verbose` option is set to `true` (`/ping?verbose=true`), an HTTP 200 status  is returned.
 The `verbose=true` option is required for [Google Cloud Load Balancing](https://cloud.google.com/load-balancing/docs/health-check-concepts) health checks.
 
-### Example
+#### Example
 
 You can use the `/ping` endpoint to find the build and version of an InfluxDB instance.
 The `X-Influxdb-Build` header field displays the InfluxDB build type, either `OSS` (open source) or `ENT` (Enterprise).
@@ -284,7 +323,7 @@ X-Request-Id: 9c353b0e-aadc-11e8-8023-000000000000
 Date: Tue, 05 Nov 2018 16:08:32 GMT
 ```
 
-### Status Codes and Responses
+#### Status Codes and Responses
 
 The response body is empty.
 
@@ -292,13 +331,13 @@ The response body is empty.
 | :----------------- | :------------- |
 | 204      | Success! Your InfluxDB instance is up and running.      |
 
-## `/query` HTTP endpoint
+### `/query` HTTP endpoint
 
 The `/query` endpoint accepts `GET` and `POST` HTTP requests.
 Use this endpoint to query data and manage databases, retention policies,
 and users.
 
-### Definition
+#### Definition
 
 ```
 GET http://localhost:8086/query
@@ -308,7 +347,7 @@ GET http://localhost:8086/query
 POST http://localhost:8086/query
 ```
 
-### Verb usage
+#### Verb usage
 
 | Verb  | Query Type |
 | :---- | :--------- |
@@ -320,7 +359,7 @@ Those `SELECT` queries require a `POST` request.
 
 #### Examples
 
-##### Query data with a `SELECT` statement
+###### Query data with a `SELECT` statement
 
 ```bash
 $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FROM "mymeas"'
@@ -365,7 +404,7 @@ $ curl -XPOST 'http://localhost:8086/query' --data-urlencode 'q=CREATE DATABASE 
 
 A successful [`CREATE DATABASE` query](/influxdb/v1.8/query_language/database_management/#create-database) returns no additional information.
 
-### Query string parameters
+#### Query string parameters
 
 | Query String Parameter | Optional/Required | Definition |
 | :--------------------- | :---------------- |:---------- |
@@ -474,7 +513,7 @@ $ curl -XPOST -u myusername:notmypassword 'http://localhost:8086/query' --data-u
 {"error":"authorization failed"}
 ```
 
-### Request body
+#### Request body
 
 ```
 --data-urlencode "q=<InfluxQL query>"
@@ -507,7 +546,7 @@ curl -F "q=@<path_to_file>" -F "async=true" http://localhost:8086/query
 Syntax:
 
 ```bash
-curl -H "Accept: application/csv" -G 'http://localhost:8086/query [...]
+curl -H "Accept: application/csv" -G 'http://localhost:8086/query' [...]
 ```
 
 Note that when the request includes `-H "Accept: application/csv"`, the system returns timestamps in `epoch` format, not RFC3339 format.
@@ -605,13 +644,13 @@ $ curl -G 'http://localhost:8086/query?db=mydb' --data-urlencode 'q=SELECT * FRO
 
 The request maps `$tag_value` to `12` and `$field_value` to `30`.
 
-### Status codes and responses
+#### Status codes and responses
 
 Responses are returned in JSON.
 Include the query string parameter `pretty=true`
 to enable pretty-print JSON.
 
-#### Summary table
+##### Summary table
 
 | HTTP status code | Description |
 | :--------------- | :---------- |
@@ -684,18 +723,18 @@ Content-Length: 33
 {"error":"authorization failed"}
 ```
 
-## `/write` HTTP endpoint
+### `/write` HTTP endpoint
 
 The `/write` endpoint accepts `POST` HTTP requests.
 Use this endpoint to write data to a pre-existing database.
 
-### Definition
+#### Definition
 
 ```
 POST http://localhost:8086/write
 ```
 
-### Query string parameters
+#### Query string parameters
 
 | Query String Parameter | Optional/Required | Description |
 | :--------------------- | :---------------- | :---------- |
@@ -800,7 +839,7 @@ Content-Length: 33
 {"error":"authorization failed"}
 ```
 
-### Request body
+#### Request body
 
 ```bash
 --data-binary '<Data in InfluxDB line protocol format>'
@@ -886,14 +925,14 @@ mymeas,mytag2=8 value=78 1463689700000000000
 mymeas,mytag3=9 value=89 1463689710000000000
 ```
 
-### Status codes and responses
+#### Status codes and responses
 
 In general, status codes of the form `2xx` indicate success, `4xx` indicate
 that InfluxDB could not understand the request, and `5xx` indicate that the
 system is overloaded or significantly impaired.
 Errors are returned in JSON.
 
-#### Summary table
+##### Summary table
 
 | HTTP status code | Description    |
 | :--------------- | :------------- |
