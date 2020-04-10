@@ -39,7 +39,7 @@ curl -i -XPOST 'http://localhost:8086/write?db=mydb'
 
 Alternatively, to write data to InfluxDB 1.8+ using the InfluxDB 2.0 API, include the [`/api/v2/write` endpoint](/influxdb/v1.8/tools/api/#-client-libraries/#client-libraries) in your curl request:
 
-````bash
+```bash
 curl -i -XPOST 'http://localhost:8086/api/v2/write?bucket=db/rp&precision=ns' \
   --header 'Authorization: Token username:password' \
   --data-raw 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
