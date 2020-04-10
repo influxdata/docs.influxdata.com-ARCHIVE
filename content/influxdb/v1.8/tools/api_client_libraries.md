@@ -19,6 +19,8 @@ For information about client libraries compatible with InfluxDB 1.7 and earlier,
 
 ## Client libraries
 
+Functionality varies between client libraries. Refer to client libraries on GitHub for specifics regarding each client library.
+
 ### Arduino
 - [InfluxDB Arduino Client](https://github.com/tobiasschuerg/InfluxDB-Client-for-Arduino)
   - Contributed by [Tobias Schürg (tobiasschuerg)](https://github.com/tobiasschuerg)
