@@ -59,8 +59,10 @@ Queried data is returned in annotated CSV format.
 
 In your request, set the following:
 
-- `accept` header to `application/csv`
-- `content-type` header to `application/vnd.flux`
+- `Accept` header to `application/csv`
+- `Content-type` header to `application/vnd.flux`
+- If [authentication is enabled](/influxdb/latest/administration/authentication_and_authorization),
+  `Authorization` header to `Token <username>:<password>`
 
 This allows you to POST the Flux query in plain text and receive the annotated CSV response.
 
@@ -68,28 +70,34 @@ Below is an example `curl` command that queries InfluxDB using Flux:
 
 {{< tab-labels >}}
 {{% tabs %}}
-[Multi-line](#)
-[Single-line](#)
+[No Auth](#)
+[Auth Enabled](#)
 {{% /tabs %}}
+{{< /tab-labels >}}
 
 {{< tab-content-container >}}
 
 {{% tab-content %}}
 ```bash
-curl localhost:8086/api/v2/query -XPOST -sS \
--H 'accept:application/csv' \
--H 'content-type:application/vnd.flux' \
--d 'from(bucket:"telegraf")
-      |> range(start:-5m)
-      |> filter(fn:(r) => r._measurement == "cpu")'
+curl -XPOST localhost:8086/api/v2/query -sS \
+  -H 'Accept:application/csv' \
+  -H 'Content-type:application/vnd.flux' \
+  -d 'from(bucket:"telegraf")
+        |> range(start:-5m)
+        |> filter(fn:(r) => r._measurement == "cpu")'
 ```
 {{% /tab-content %}}
 
 {{% tab-content %}}
 ```bash
-curl localhost:8086/api/v2/query -XPOST -sS -H 'accept:application/csv' -H 'content-type:application/vnd.flux' -d 'from(bucket:"telegraf") |> range(start:-5m) |> filter(fn:(r) => r._measurement == "cpu")'
+curl -XPOST localhost:8086/api/v2/query -sS \
+  -H 'Accept:application/csv' \
+  -H 'Content-type:application/vnd.flux' \
+  -H 'Authorization: Token <username>:<password>' \
+  -d 'from(bucket:"telegraf")
+        |> range(start:-5m)
+        |> filter(fn:(r) => r._measurement == "cpu")'
 ```
 {{% /tab-content %}}
 
 {{< /tab-content-container >}}
-{{< /tab-labels >}}
