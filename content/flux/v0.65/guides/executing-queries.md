@@ -12,10 +12,8 @@ There are multiple ways to execute Flux queries with InfluxDB and Chronograf v1.
 This guide covers the different options:
 
 1. [Chronograf's Data Explorer](#chronograf-s-data-explorer)
-2. [Influx CLI in "Flux mode"](#influx-cli-in-flux-mode)
-3. [Influx CLI via parameter](#influx-cli-via-parameter)
-4. [Influx CLI via STDIN](#influx-cli-via-stdin)
-5. [InfluxDB API](#influxdb-api)
+2. [Influx CLI](#influx-cli)
+3. [InfluxDB API](#influxdb-api)
 
 > Before attempting these methods, make sure Flux is enabled by setting
 > `flux-enabled = true` in the `[http]` section of your InfluxDB configuration file.
@@ -24,34 +22,78 @@ This guide covers the different options:
 Chronograf v1.7+ supports Flux in its Data Explorer.
 Flux queries can be built, executed, and visualized from within the Chronograf user interface.
 
-![Chronograf Data Explorer with Flux](/img/flux/flux-builder-start.gif)
-
-## Influx CLI in "Flux mode"
+## Influx CLI
 InfluxDB v1.7+'s `influx` CLI includes a `-type` option which allows you specify
 what type of interactive session to start.
 `-type=flux` will start an interactive read-eval-print-loop (REPL) that supports Flux.
 
+{{% note %}}
+If [authentication is enabled](/influxdb/latest/administration/authentication_and_authorization)
+on your InfluxDB instance, use the `-username` flag to provide your InfluxDB username and
+the `-password` flag to provide your password.
+{{% /note %}}
+
+##### Enter an interactive Flux REPL
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[No Auth](#)
+[Auth Enabled](#)
+{{% /code-tabs %}}
+{{% code-tab-content %}}
 ```bash
 influx -type=flux
 ```
+{{% /code-tab-content %}}
+{{% code-tab-content %}}
+```bash
+influx -type=flux -username myuser -password PasSw0rd
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
 
 Any Flux query can be executed within the REPL.
 
-## Influx CLI via parameter
+### Submit a Flux query via parameter
 Flux queries can also be passed to the Flux REPL as a parameter using the `influx` CLI's `-type=flux` option and the `-execute` parameter.
 The accompanying string is executed as a Flux query and results are output in your terminal.
 
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[No Auth](#)
+[Auth Enabled](#)
+{{% /code-tabs %}}
+{{% code-tab-content %}}
 ```bash
 influx -type=flux -execute '<flux query>'
 ```
+{{% /code-tab-content %}}
+{{% code-tab-content %}}
+```bash
+influx -type=flux -username myuser -password PasSw0rd -execute '<flux query>'
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
 
-## Influx CLI via STDIN
+### Submit a Flux query via via STDIN
 Flux queries an be piped into the `influx` CLI via STDIN.
 Query results are otuput in your terminal.
 
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[No Auth](#)
+[Auth Enabled](#)
+{{% /code-tabs %}}
+{{% code-tab-content %}}
 ```bash
 echo '<flux query>' | influx -type=flux
 ```
+{{% /code-tab-content %}}
+{{% code-tab-content %}}
+```bash
+echo '<flux query>' | influx -type=flux -username myuser -password PasSw0rd
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
 
 ## InfluxDB API
 Flux can be used to query InfluxDB through InfluxDB's `/api/v2/query` endpoint.
@@ -61,8 +103,8 @@ In your request, set the following:
 
 - `Accept` header to `application/csv`
 - `Content-type` header to `application/vnd.flux`
-- If [authentication is enabled](/influxdb/latest/administration/authentication_and_authorization),
-  `Authorization` header to `Token <username>:<password>`
+- If [authentication is enabled](/influxdb/latest/administration/authentication_and_authorization)
+  on your InfluxDB instance, `Authorization` header to `Token <username>:<password>`
 
 This allows you to POST the Flux query in plain text and receive the annotated CSV response.
 
