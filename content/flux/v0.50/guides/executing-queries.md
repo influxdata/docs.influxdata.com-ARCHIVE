@@ -68,16 +68,12 @@ This allows you to POST the Flux query in plain text and receive the annotated C
 
 Below is an example `curl` command that queries InfluxDB using Flux:
 
-{{< tab-labels >}}
-{{% tabs %}}
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
 [No Auth](#)
 [Auth Enabled](#)
-{{% /tabs %}}
-{{< /tab-labels >}}
-
-{{< tab-content-container >}}
-
-{{% tab-content %}}
+{{% /code-tabs %}}
+{{% code-tab-content %}}
 ```bash
 curl -XPOST localhost:8086/api/v2/query -sS \
   -H 'Accept:application/csv' \
@@ -86,9 +82,8 @@ curl -XPOST localhost:8086/api/v2/query -sS \
         |> range(start:-5m)
         |> filter(fn:(r) => r._measurement == "cpu")'
 ```
-{{% /tab-content %}}
-
-{{% tab-content %}}
+{{% /code-tab-content %}}
+{{% code-tab-content %}}
 ```bash
 curl -XPOST localhost:8086/api/v2/query -sS \
   -H 'Accept:application/csv' \
@@ -98,6 +93,5 @@ curl -XPOST localhost:8086/api/v2/query -sS \
         |> range(start:-5m)
         |> filter(fn:(r) => r._measurement == "cpu")'
 ```
-{{% /tab-content %}}
-
-{{< /tab-content-container >}}
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
