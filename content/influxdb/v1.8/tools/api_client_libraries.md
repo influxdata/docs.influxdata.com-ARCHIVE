@@ -59,7 +59,7 @@ Functionality varies between client libraries. Refer to client libraries on GitH
 
 ## Use a client library
 
-Use a InfluxDB client library to integrate InfluxDB into your scripts and applications.
+Use an InfluxDB client library to integrate InfluxDB into your scripts and applications.
 
 1. Install the client library. Refer to the client library documentation for detail. For example, to install the Python client library:
 

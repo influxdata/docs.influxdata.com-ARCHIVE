@@ -27,7 +27,7 @@ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE m
 The InfluxDB API is the primary means of writing data into InfluxDB.
 
 - To write to an existing database, send `POST` requests to the `/write` endpoint.
-- To write to a database created in 1.8 or later using [InfluxDB client libraries (with InfluxDB 2.0 compatibility)](/influxdb/v1.8/tools/api-client-libraries/#client-libraries), send `POST` requests to the [`/api/v2/write` endpoint](/influxdb/v1.8/tools/api/#-client-libraries/#client-libraries).
+- To write to a database created in 1.8 or later using [InfluxDB client libraries (with InfluxDB 2.0 compatibility)](/influxdb/v1.8/tools/api_client_libraries/#client-libraries), send `POST` requests to the [`/api/v2/write` endpoint](/influxdb/v1.8/tools/api/#client-libraries).
 
 For example, to write a single point to the `mydb` database.
 The data consists of the [measurement](/influxdb/v1.8/concepts/glossary/#measurement) `cpu_load_short`, the [tag keys](/influxdb/v1.8/concepts/glossary/#tag-key) `host` and `region` with the [tag values](/influxdb/v1.8/concepts/glossary/#tag-value) `server01` and `us-west`, the [field key](/influxdb/v1.8/concepts/glossary/#field-key) `value` with a [field value](/influxdb/v1.8/concepts/glossary/#field-value) of `0.64`, and the [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp) `1434055562000000000`.
