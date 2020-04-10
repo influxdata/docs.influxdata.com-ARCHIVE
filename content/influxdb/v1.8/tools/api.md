@@ -19,15 +19,105 @@ Those settings [are configurable](/influxdb/v1.8/administration/config/#http-end
 
 ## InfluxDB HTTP endpoints
 
-| Endpoint    | Description |
-| :---------- | :---------- |
-| [/debug/pprof ](#debug-pprof-http-endpoint)   | Use `/debug/pprof` to generate profiles for troubleshooting.  |   
-| [/debug/requests](#debug-requests-http-endpoint) | Use `/debug/requests/` to track HTTP client requests to the `/write` and `/query` endpoints. |
-| [/debug/vars](#debug-vars-http-endpoint)  | Use `/debug/vars` to collect statistics  |
-| [/ping](#ping-http-endpoint) | Use `/ping` to check the status of your InfluxDB instance and your version of InfluxDB. |
-| [/query](#query-http-endpoint) | Use `/query` to query data and manage databases, retention policies, and users. |
-| [/api/v2/write](#api-v2-write-http-endpoint) | Use InfluxDB 2.0 client libraries to write to InfluxDB 1.8.0+. |
-| [/write](#write-http-endpoint) | Use `/write` to write data to a pre-existing database. |
+| Endpoint                                         | Description                                                                              |
+|:----------                                       |:----------                                                                               |
+| [/api/v2/query](#api-v2-query-http-endpoint)     | Query data using [Flux](/flux/latest/) _(compatible with InfluxDB 2.0 client libraries)_ |
+| [/api/v2/write](#api-v2-write-http-endpoint)     | Write data to InfluxDB 1.8.0+ _(compatible with InfluxDB 2.0 client libraries)_          |
+| [/debug/pprof ](#debug-pprof-http-endpoint)      | Generate profiles for troubleshooting.                                                   |
+| [/debug/requests](#debug-requests-http-endpoint) | Track HTTP client requests to the `/write` and `/query` endpoints.                       |
+| [/debug/vars](#debug-vars-http-endpoint)         | Collect internal InfluxDB statistics                                                     |
+| [/ping](#ping-http-endpoint)                     | Check the status of your InfluxDB instance and your version of InfluxDB.                 |
+| [/query](#query-http-endpoint)                   | Query data and manage databases, retention policies, and users.                          |
+| [/write](#write-http-endpoint)                   | Write data to a database.                                                                |
+
+## `/api/v2/query/` HTTP endpoint
+
+The `/api/v2/query` endpoint accepts `POST` HTTP requests.
+Use this endpoint to query data using [Flux](/flux/latest/) and [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
+
+Include the following HTTP headers:
+
+- `Accept: application/csv`
+- `Content-type: application/vnd.flux`
+- If [authentication is enabled](/influxdb/v1.8/administration/authentication_and_authorization),
+  provide your InfluxDB username and password:  
+  `Authorization: Token username:password`
+
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[No Auth](#)
+[Auth Enabled](#)
+{{% /code-tabs %}}
+{{% code-tab-content %}}
+```bash
+curl -XPOST localhost:8086/api/v2/query -sS \
+  -H 'Accept:application/csv' \
+  -H 'Content-type:application/vnd.flux' \
+  -d 'from(bucket:"telegraf")
+        |> range(start:-5m)
+        |> filter(fn:(r) => r._measurement == "cpu")'
+```
+{{% /code-tab-content %}}
+{{% code-tab-content %}}
+```bash
+curl -XPOST localhost:8086/api/v2/query -sS \
+  -H 'Accept:application/csv' \
+  -H 'Content-type:application/vnd.flux' \
+  -H 'Authorization: Token username:password' \
+  -d 'from(bucket:"telegraf")
+        |> range(start:-5m)
+        |> filter(fn:(r) => r._measurement == "cpu")'
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
+
+## `/api/v2/write/` HTTP endpoint
+
+The `/api/v2/write` endpoint accepts `POST` HTTP requests.
+Use this endpoint to write to an InfluxDB 1.8.0+ database using [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
+
+Both InfluxDB 1.x and 2.0 APIs support the same line protocol format for raw time series data.
+For the purposes of writing data, the APIs differ only in the URL parameters and request headers.
+InfluxDB 2.0 uses [organizations](https://v2.docs.influxdata.com/v2.0/reference/glossary/#organization)
+and [buckets](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket)
+instead of databases and retention policies.
+The `/api/v2/write` endpoint maps the supplied version 1.8 database and retention policy to a bucket.
+
+Include the following URL parameters:
+
+- `bucket`: Provide the database name and retention policy separated by a forward slash (`/`).
+  For example: `database/retention-policy`.
+  Empty retention policies map to the default retention policy.
+  `database/weekly` maps to a database named "database" and retention policy named "weekly".
+  `database/` and `database` map to a database named "database" and the default retention policy.
+- `org`: The `org` parameter is ignored and can be left empty.
+- `precision`: Precision of timestamps in the line protocol.
+  Accepts `ns` (nanoseconds), `us`(microseconds), `ms` (milliseconds) and `s` (seconds).
+
+Include the following HTTP header:
+
+- `Authorization`: Use the Token schema to provide your InfluxDB 1.x username and password separated by a colon (`:`).
+  For example: `Authorization: Token username:password`.
+
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[No Auth](#)
+[Auth Enabled](#)
+{{% /code-tabs %}}
+{{% code-tab-content %}}
+```bash
+curl -XPOST "localhost:8086/api/v2/write?bucket=db/rp&precision=s" \
+  --data-raw "mem,host=host1 used_percent=23.43234543 1556896326"
+```
+{{% /code-tab-content %}}
+{{% code-tab-content %}}
+```bash
+curl -XPOST "localhost:8086/api/v2/write?bucket=db/rp&precision=s" \
+  -H 'Authorization: Token <username>:<password>' \
+  --data-raw "mem,host=host1 used_percent=23.43234543 1556896326"
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
 
 ## `/debug/pprof` HTTP endpoint
 
@@ -593,35 +683,6 @@ Content-Length: 33
 
 {"error":"authorization failed"}
 ```
-
-## `/api/v2/write/` HTTP endpoint
-
-The `/api/v2/write` endpoint accepts `POST` HTTP requests.
-Use this endpoint to write to an InfluxDB 1.8.0+ database using [InfluxDB 2.0 client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/).
-
-Both InfluxDB 1.x and 2.0 APIs support the same line protocol format for raw time series data.
-For the purposes of writing data, the APIs differ only in the URL parameters and request headers.
-InfluxDB 2.0 uses [organizations](https://v2.docs.influxdata.com/v2.0/reference/glossary/#organization)
-and [buckets](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket)
-instead of databases and retention policies.
-The `/api/v2/write` endpoint maps the supplied version 1.8 database and retention policy to a bucket.
-
-
-Include the following URL parameters:
-
-- `bucket`: Provide the database name and retention policy separated by a forward slash (`/`).
-  For example: `database/retention-policy`.
-  Empty retention policies map to the default retention policy.
-  `database/weekly` maps to a database named "database" and retention policy named "weekly".
-  `database/` and `database` map to a database named "database" and the default retention policy.
-- `org`: The `org` parameter is ignored and can be left empty.
-- `precision`: Precision of timestamps in the line protocol.
-  Accepts `ns` (nanoseconds), `us`(microseconds), `ms` (milliseconds) and `s` (seconds).
-
-Include the following HTTP header:
-
-- `Authorization`: Use the Token schema to provide your InfluxDB 1.x username and password separated by a colon (`:`).
-  For example: `Authorization: Token username:password`.
 
 ## `/write` HTTP endpoint
 
