@@ -147,7 +147,7 @@ curl -XGET "localhost:8086/health"
 ---
 
 ## InfluxDB 1.x HTTP endpoints
-The following InfluxDB API endpoints are available:
+The following InfluxDB 1.x API endpoints are available:
 
 | Endpoint                                         | Description                                                                    |
 |:----------                                       |:----------                                                                     |
