@@ -24,28 +24,36 @@ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE m
 
 ### Write data using the InfluxDB API
 
-The InfluxDB API is the primary means of writing data into InfluxDB, by sending `POST` requests to the `/write` endpoint.
+The InfluxDB API is the primary means of writing data into InfluxDB.
 
-The example below writes a single point to the `mydb` database.
-The data consist of the [measurement](/influxdb/v1.8/concepts/glossary/#measurement) `cpu_load_short`, the [tag keys](/influxdb/v1.8/concepts/glossary/#tag-key) `host` and `region` with the [tag values](/influxdb/v1.8/concepts/glossary/#tag-value) `server01` and `us-west`, the [field key](/influxdb/v1.8/concepts/glossary/#field-key) `value` with a [field value](/influxdb/v1.8/concepts/glossary/#field-value) of `0.64`, and the [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp) `1434055562000000000`.
+- To **write to a database using the InfluxDB 1.8 API**, send `POST` requests to the `/write` endpoint. For example, to write a single point to the `mydb` database.
+The data consists of the [measurement](/influxdb/v1.8/concepts/glossary/#measurement) `cpu_load_short`, the [tag keys](/influxdb/v1.8/concepts/glossary/#tag-key) `host` and `region` with the [tag values](/influxdb/v1.8/concepts/glossary/#tag-value) `server01` and `us-west`, the [field key](/influxdb/v1.8/concepts/glossary/#field-key) `value` with a [field value](/influxdb/v1.8/concepts/glossary/#field-value) of `0.64`, and the [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp) `1434055562000000000`.
 
 ```bash
-curl -i -XPOST 'http://localhost:8086/write?db=mydb' --data-binary 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
+curl -i -XPOST 'http://localhost:8086/write?db=mydb'
+--data-binary 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
+```
+
+- To **write to a database using the InfluxDB 2.0 API (compatible with InfluxDB 1.8+)**, send `POST` requests to the [`/api/v2/write` endpoint](/influxdb/v1.8/tools/api/#client-libraries):
+
+```bash
+curl -i -XPOST 'http://localhost:8086/api/v2/write?bucket=db/rp&precision=ns' \
+  --header 'Authorization: Token username:password' \
+  --data-raw 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
 ```
 
 When writing points, you must specify an existing database in the `db` query parameter.
 Points will be written to `db`'s default retention policy if you do not supply a retention policy via the `rp` query parameter.
 See the [InfluxDB API Reference](/influxdb/v1.8/tools/api/#write-http-endpoint) documentation for a complete list of the available query parameters.
 
-The body of the POST - we call this the [InfluxDB line protocol](/influxdb/v1.8/concepts/glossary/#influxdb-line-protocol) - contains the time-series data that you wish to store.
-They consist of a measurement, tags, fields, and a timestamp.
-InfluxDB requires a measurement name.
-Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient.
+The body of the POST or [InfluxDB line protocol](/influxdb/v1.8/concepts/glossary/#influxdb-line-protocol) contains the time series data that you want to store. Data includes:
+
+- **Measurement (required)**
+- **Tags**: Strictly speaking, tags are optional but most series include tags to differentiate data sources and to make querying both easy and efficient.
 Both tag keys and tag values are strings.
-Field keys are required and are always strings, and, [by default](/influxdb/v1.8/write_protocols/line_protocol_reference/#data-types), field values are floats.
-The timestamp - supplied at the end of the line in Unix time in nanoseconds since January 1, 1970 UTC - is optional.
-If you do not specify a timestamp InfluxDB uses the server's local nanosecond timestamp in Unix epoch.
-Anything that has to do with time in InfluxDB is always UTC.
+- **Fields (required)**: Field keys are required and are always strings, and, [by default](/influxdb/v1.8/write_protocols/line_protocol_reference/#data-types), field values are floats.
+- **Timestamp**: Supplied at the end of the line in Unix time in nanoseconds since January 1, 1970 UTC - is optional. If you do not specify a timestamp, InfluxDB uses the server's local nanosecond timestamp in Unix epoch.
+Time in InfluxDB is in UTC format by default.
 
 ### Configure gzip compression
 

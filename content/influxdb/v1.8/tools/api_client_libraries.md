@@ -1,6 +1,6 @@
 ---
-title: InfluxDB API client libraries
-description: InfluxDB API client libraries includes support for Elixir, Go, Haskell, Java, JavaScript/Node.js, Lisp, MATLAB, .Net, Perl, PHP, Python, R, Ruby, Rust, Scala, Sensu, and the SNMP agent.
+title: InfluxDB client libraries
+description: InfluxDB client libraries includes support for Arduino, C#, Go, Java, JavaScript, PHP, Python, and Ruby.
 aliases:
     - /influxdb/v1.8/clients/api_client_libraries/
     - /influxdb/v1.8/clients/
@@ -11,131 +11,93 @@ menu:
     parent: Tools
 ---
 
-InfluxDB client libraries are developed by the open source community and InfluxData.
-These client libraries support the InfluxDB API and should be fully compatible with InfluxDB version 1.5+.
-Functionality will vary as there are no standard features that all libraries must implement in order to be listed here.
+InfluxDB client libraries are language-specific packages that integrate with the InfluxDB 2.0 API and support both **InfluxDB 1.8+** and **InfluxDB 2.0**.
 
-Thanks to the open source community for your contributions, commitment, and effort!
+>**Note:** We recommend using the new client libraries on this page to write to the `/api/v2/write` endpoint and prepare for conversion to InfluxDB 2.0 and InfluxDB Cloud 2.0. For more information, see [InfluxDB 2.0 API compatibility endpoints](/influxdb/v1.8/tools/api/#influxdb-2.0-compatibility-endpoints). Client libraries for [InfluxDB 1.7 and earlier](/influxdb/v1.7/tools/api_client_libraries/) may continue to work, but are not maintained by InfluxData.
 
-> [Client libraries](https://v2.docs.influxdata.com/v2.0/reference/api/client-libraries/) are also available for InfluxDB 2.0.
-> These are backwards-compatible with 1.8.0+ using the [`/api/v2/write` API endpoint](/influxdb/v1.8/tools/api#api-v2-write-http-endpoint).
+## Client libraries
 
-## C++
-* [influxdb-cxx](https://github.com/awegrzyn/influxdb-cxx.git)
-  * Maintained by [Adam Wegrzynek (awegrzyn)](https://github.com/awegrzyn)
+Functionality varies between client libraries. Refer to client libraries on GitHub for specifics regarding each client library.
 
-## Elixir
+### Arduino
+- [InfluxDB Arduino Client](https://github.com/tobiasschuerg/InfluxDB-Client-for-Arduino)
+  - Contributed by [Tobias Schürg (tobiasschuerg)](https://github.com/tobiasschuerg)
 
-* [Instream (instream)](https://github.com/mneudert/instream)
-  * Maintained by [Marc Neudert (mneudert)](https://github.com/mneudert)
+### #C
+- [influxdb-client-csharp](https://github.com/influxdata/influxdb-client-csharp)
+  - Maintained by [InfluxData](https://github.com/influxdata)
 
-## Erlang
+### Go
 
-* [Erlang InfluxDB UDP Writer](https://github.com/palkan/influx_udp)
-  * Maintained by [Vladimir Dementyev (palkan)](https://github.com/palkan)
-* [InfluxDB line encoder](https://github.com/emeter/influxdb_encoderl)
-  * Maintained by [Pouriya Jahanbakhsh (emeter)](https://github.com/emeter)
+- [influxdb-client-go](https://github.com/influxdata/influxdb-client-go)
+  - Maintained by [InfluxData](https://github.com/influxdata)
 
-## Go
+### Java
 
-* [InfluxDB Client](https://github.com/influxdata/influxdb1-client)
-  * Maintained by [InfluxData](https://github.com/influxdata)
+- [influxdb-client-java](https://github.com/influxdata/influxdb-client-java)
+   - Maintained by [InfluxData](https://github.com/influxdata)
 
-## Haskell
+### JavaScript
 
-* [influxdb-haskell](https://github.com/maoe/influxdb-haskell)
-  * Maintained by [Mitsutoshi Aoe (maoe)](https://github.com/maoe)
+* [influxdb-javascript](https://github.com/influxdata/influxdb-client-js)
+   - Maintained by [InfluxData](https://github.com/influxdata)
 
-## Java
+### PHP
 
-* [influxdb-java](https://github.com/influxdb/influxdb-java)
-  * Maintained by [Stefan Majer (majst01)](https://github.com/majst01)
-* [Alpakka InfluxDB](https://doc.akka.io/docs/alpakka/current/influxdb.html)
-  * Maintained by the Alpakka community with help from [Lightbend](https://www.lightbend.com/)
+- [influxdb-client-php](https://github.com/influxdata/influxdb-client-php)
+   - Maintained by [InfluxData](https://github.com/influxdata)
 
-## JavaScript/Node.js
+### Python
 
-* [node-influx](https://github.com/node-influx/node-influx)
-  * Maintained by [Ben Evans (bencevans)](https://github.com/bencevans) and [Connor Peet (connor4312)](https://github.com/connor4312)
+* [influxdb-client-python](https://github.com/influxdata/influxdb-client-python)
+   - Maintained by [InfluxData](https://github.com/influxdata)
 
-## Lisp
+### Ruby
 
-* [CL-INFLUXDB](https://github.com/mmaul/cl-influxdb)
-  * Maintained by [Mike Maul (mmaul)](https://github.com/mmaul)
+- [influxdb-client-ruby](https://github.com/influxdata/influxdb-client-ruby)
+   - Maintained by [InfluxData](https://github.com/influxdata)
 
-## MATLAB
+## Use a client library
 
-* [influxdb-matlab](https://github.com/EnricSala/influxdb-matlab)
-  * Maintained by [Enric Sala (EnricSala)](https://github.com/EnricSala)
+Use an InfluxDB client library to integrate InfluxDB into your scripts and applications.
 
-## .Net
+1. Install the client library. Refer to the client library documentation for detail. For example, to install the Python client library:
 
-* [InfluxDB.Client.Net](https://github.com/AdysTech/InfluxDB.Client.Net)
-  * Maintained by [Adarsha (mvadu)](https://github.com/mvadu)
-  * Supports .Net and .Net Core
-* [InfluxData.Net](https://github.com/pootzko/InfluxData.Net)
-  * Maintained by [Tijhomir Kit (pootzko)](https://github.com/pootzko)
-* [InfluxDB Client for .NET](https://github.com/MikaelGRA/InfluxDB.Client)
-  * Maintained by [Mikael Guldborg Rask Andersen (MikaelGRA)](https://github.com/MikaelGRA)
-* [InfluxClient](https://github.com/danesparza/InfluxClient)
-  * Maintained by [Dan Esparza (danesparza)](https://github.com/danesparza)
+  ```sh
+      pip install influxd-client
+  ```
 
-## Perl
+2. Ensure that InfluxDB is running. If running InfluxDB locally, visit http://localhost:8086. (If using InfluxDB Cloud, visit the URL of your InfluxDB Cloud UI.)
 
-* [AnyEvent::InfluxDB](https://github.com/ajgb/anyevent-influxdb)
-  * Maintained by [Alex Burzyński (ajgb)](https://github.com/ajgb)
-* [InfluxDB-LineProtocol](http://search.cpan.org/~domm/InfluxDB-LineProtocol/)
-  * Maintained by [Thomas Klausner (domm)](https://domm.plix.at/)
-* [InfluxDB::HTTP](https://github.com/raphaelthomas/InfluxDB-HTTP)
-  * Maintained by [Raphael Seebacher (raphaelthomas)](https://github.com/raphaelthomas)
+3. In your program, import the client library and use it to write data to InfluxDB. For example:
 
-## PHP
+  ```sh
+     import influxdb_client
+     from influxdb_client.client.write_api import SYNCHRONOUS
+  ```
 
-* [influxdb-php](https://github.com/influxdb/influxdb-php)
-  * Maintained by [TheCodeAssassin (thecodeassassin)](https://github.com/thecodeassassin) and [Gianluca Arbezzano (gianarb)](https://github.com/gianarb)
-* [InfluxDB PHP SDK (influxdb-php-sdk)](https://github.com/corley/influxdb-php-sdk)
-  * Maintained by [Corley (corley)](https://github.com/corley)
+4. Define your database and token variables, and create a client and writer object. The InfluxDBClient object takes 2 parameters: `url` and `token`.
 
-## Python
+   ```sh
+      database = "<my-db>"
+      token = "<my-token>"
+      client = influxdb_client.InfluxDBClient(
+      url="http://localhost:8086",
+      token=token,
+   ```
 
-* [InfluxDB-Python (influxdb-python)](https://github.com/influxdb/influxdb-python)
-  * Maintained by [Alexandre Viau (aviau)](https://github.com/aviau), [xginn8](https://github.com/xginn8), and [Sebastian Borza (sebito91)](https://github.com/sebito91)
+  >**Note:** The database (and retention policy, if applicable) are converted to a [bucket](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket) data store compatible with InfluxDB 2.0.
+  
+5. Instantiate a writer object using the client object and the write_api method. Use the `write_api` method to configure the writer object.
 
-## R
+   ```sh
+      client = influxdb_client.InfluxDBClient(url=url, token=token)
+      write_api = client.write_api(write_options=SYNCHRONOUS)
+   ```
 
-* [influxdbr](https://cran.r-project.org/web/packages/influxdbr/)
-  * Maintained by [Dominik Leutnant (dleutant)](https://github.com/dleutnant)
+6. Create a point object and write it to InfluxDB using the write method of the API writer object. The write method requires three parameters: database, (optional) retention policy, and record.
 
-## Ruby
-
-* [influxdb-ruby](https://github.com/influxdb/influxdb-ruby)
-  * Maintained by [Todd Persen (toddboom)](https://github.com/toddboom) and [Dominik Menke (dmke)](https://github.com/dmke).
-* [Influxer (influxer)](https://github.com/palkan/influxer)
-  * Maintained by [Vladimir Dementyev (palkan)](https://github.com/palkan).
-
-## Rust
-
-* [Flux (flux)](https://crates.io/crates/flux)
-  * Maintained by [Chris Holcombe (cholcombe973)](https://crates.io/users/cholcombe973) and [Chris MacNaughton](https://crates.io/users/ChrisMacNaughton)
-* [Influent (influent)](https://crates.io/crates/influent)
-  * Maintained by [gobwas](https://crates.io/users/gobwas) and [Eijebong](https://crates.io/users/Eijebong).
-
-## Scala
-
-* [scala-influxdb-client](https://github.com/paulgoldbaum/scala-influxdb-client)
-  * Maintained by [Paul Goldbaum (paulgoldbaum)](https://github.com/paulgoldbaum)
-* [chronicler](https://github.com/fsanaulla/chronicler)
-  * Maintained by [Faiaz Sanaulla (fsanaulla)](https://github.com/fsanaulla)
-* [Alpakka InfluxDB](https://doc.akka.io/docs/alpakka/current/influxdb.html)
-  * Maintained by the Alpakka community with help from [Lightbend](https://www.lightbend.com/)
-
-## Sensu
-
-* [sensu-influxdb-extension](https://github.com/jhrv/sensu-influxdb-extension)
-  * Maintained by [Johnny Horvi (jhrv)](https://github.com/jhrv)
-
-## SNMP agent
-
-* [SnmpCollector (snmpcollector)](https://github.com/toni-moreno/snmpcollector)
-  * Maintained by [Toni Moreno (toni-moreno)](https://github.com/toni-moreno).
-  * A full featured Generic SNMP data collector with Web Administration Interface for InfluxDB.
+  ```sh 
+      p = influxdb_client.Point("my_measurement").tag("location", "Prague").field("temperature", 25.3)
+       write_api.write(database:rp, record=p)
+  ```
