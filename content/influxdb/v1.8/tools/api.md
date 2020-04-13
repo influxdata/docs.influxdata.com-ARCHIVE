@@ -18,7 +18,7 @@ port `8086` and HTTPS is not enabled.
 Those settings [are configurable](/influxdb/v1.8/administration/config/#http-endpoints-settings).
 
 - [InfluxDB 2.0 API compatibility endpoints](#influxdb-2-0-api-compatibility-endpoints)
-- [InfluxDB HTTP endpoints](#influxdb-http-endpoints)
+- [InfluxDB  1.x HTTP endpoints](#influxdb-1-x-http-endpoints)
 
 ## InfluxDB 2.0 API compatibility endpoints
 
@@ -146,7 +146,7 @@ curl -XGET "localhost:8086/health"
 
 ---
 
-## InfluxDB HTTP endpoints
+## InfluxDB 1.x HTTP endpoints
 The following InfluxDB API endpoints are available:
 
 | Endpoint                                         | Description                                                                    |
