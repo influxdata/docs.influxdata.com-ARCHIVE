@@ -7,7 +7,7 @@ menu:
     parent: About the project
 ---
 
-## v1.8.0 [2020-3-TBD]
+## v1.8.0 [2020-4-13]
 
 ### Features
 
@@ -15,10 +15,10 @@ menu:
 - Add [offline series compaction to `influx_inspect buildtsi`](/influxdb/v1.8/administration/compact-series-file/).
 - Add support for connecting to a custom HTTP endpoint using `-url-prefix` in [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index).
 - Update Go version to 1.13.8.
-- Add [InfluxDB 2.0 write API compatibility](/v1.8/tools/api/#api-v2-write-http-endpoint) to use InfluxDB 2.0 client libraries.
+- Add [InfluxDB 2.0 API compatibility endpoints](/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints) to use InfluxDB 2.0 client libraries.
 - Enhance support for bound parameters.
-- Update Flux version to v0.64.0.
-  To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.64/introduction/).
+- Update Flux version to v0.65.0.
+  To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.65/introduction/).
 
   > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
 
@@ -34,7 +34,7 @@ menu:
 - Reduce `influxd` and `influx` startup time if Flux isn't used.
 - Fix bugs in `-compact-series-file` flag.
 - Fix a SIGSEGV when accessing `tsi` active log.
-- Remove unsafe marshalling.
+- Verify precision in write requests.
 
 ## v1.7.9 [2019-10-27]
 
