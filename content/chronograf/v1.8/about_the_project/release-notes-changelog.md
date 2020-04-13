@@ -20,7 +20,7 @@ menu:
 
 ## v1.8.1 [2020-04-06]
 
-{{% warn %}} **Warning:** Critical bug that impacted table rendering was introduced in 1.8.1. Do not install this release, install [Chronograf 1.8.2](##v1-8-2-2020-04-13), which includes the features and bug fixes below.
+{{% warn %}} **Warning:** Critical bug that impacted table rendering was introduced in 1.8.1. **Do not install this release**, install [v1.8.2](##v1-8-2-2020-04-13), which includes the features and bug fixes below.
 {{% /warn %}}
 
 ### Features
