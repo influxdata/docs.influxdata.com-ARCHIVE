@@ -2,7 +2,7 @@
 title: Influx Inspect disk utility
 description: Use the "influx_inspect" commands to manage InfluxDB disks and shards.
 menu:
-  influxdb_1_7:
+  influxdb_1_8:
     weight: 50
     parent: Tools
 ---
@@ -10,7 +10,7 @@ menu:
 Influx Inspect is an InfluxDB disk utility that can be used to:
 
 * View detailed information about disk shards.
-* Export data from a shard to [InfluxDB line protocol](/influxdb/v1.7/concepts/glossary/#influxdb-line-protocol) that can be inserted back into the database.
+* Export data from a shard to [InfluxDB line protocol](/influxdb/v1.8/concepts/glossary/#influxdb-line-protocol) that can be inserted back into the database.
 * Convert TSM index shards to TSI index shards.
 
 ## `influx_inspect` utility
@@ -37,6 +37,7 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 * [`reporttsi`](#reporttsi): Reports on cardinality for measurements and shards.
 * [`verify`](#verify): Verifies the integrity of TSM files.
 * [`verify-seriesfile`](#verify-seriesfile): Verifies the integrity of series files.
+* [`verify-tombstone`](#verify-tombstone): Verifies the integrity of tombstones.
 
 
 ### `buildtsi`
@@ -69,11 +70,14 @@ The size of the batches written to the index. Default value is `10000`.
 
 {{% warn %}}**Warning:** Setting this value can have adverse effects on performance and heap size.{{% /warn %}}
 
+##### `[ -compact-series-file ]`
+
+**Does not rebuild the index.** Compacts the existing series file, including offline series. Iterates series in each segment and rewrites non-tombstoned series in the index to a new .tmp file next to the segment. Once all segments are converted, the temporary files overwrite the original segments.
 
 ##### `[ -concurrency ]`
 
 The number of workers to dedicate to shard index building.
-Defaults to [`GOMAXPROCS`](/influxdb/v1.7/administration/config#gomaxprocs-environment-variable) value.
+Defaults to [`GOMAXPROCS`](/influxdb/v1.8/administration/config#gomaxprocs-environment-variable) value.
 
 ##### `[ -database <db_name> ]`
 
@@ -173,7 +177,6 @@ Flag to enable verbose logging.
 ```
 ./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
 ```
-
 ##### Delete a measurement from all shards in the database
 
 ```
@@ -205,15 +208,15 @@ Dump raw series data.
 
 ##### [ `-measurements` ]
 
-Dump raw [measurement](/influxdb/v1.7/concepts/glossary/#measurement) data.
+Dump raw [measurement](/influxdb/v1.8/concepts/glossary/#measurement) data.
 
 ##### [ `-tag-keys` ]
 
-Dump raw [tag keys](/influxdb/v1.7/concepts/glossary/#tag-key).
+Dump raw [tag keys](/influxdb/v1.8/concepts/glossary/#tag-key).
 
 ##### [ `-tag-values` ]
 
-Dump raw [tag values](/influxdb/v1.7/concepts/glossary/#tag-value).
+Dump raw [tag values](/influxdb/v1.8/concepts/glossary/#tag-value).
 
 ##### [ `-tag-value-series` ]
 
@@ -252,7 +255,7 @@ $ influx_inspect dumptsi -series-file /path/to/db/_series /path/to/index/file0 /
 
 ### `dumptsm`
 
-Dumps low-level details about [TSM](/influxdb/v1.7/concepts/glossary/#tsm-time-structured-merge-tree) files, including TSM (`.tsm`) files and WAL (`.wal`) files.
+Dumps low-level details about [TSM](/influxdb/v1.8/concepts/glossary/#tsm-time-structured-merge-tree) files, including TSM (`.tsm`) files and WAL (`.wal`) files.
 
 #### Syntax
 
@@ -312,7 +315,7 @@ If a user writes points with timestamps set by the client, then multiple points 
 Exports all TSM files in InfluxDB line protocol data format.
 Writes all WAL file data for `_internal/monitor`.
 This output file can be imported using the
-[influx](/influxdb/v1.7/tools/shell/#import-data-from-a-file-with-import) command.
+[influx](/influxdb/v1.8/tools/shell/#import-data-from-a-file-with-import) command.
 
 #### Syntax
 
@@ -369,7 +372,7 @@ Default value is `"$HOME/.influxdb/export"`.
 
 ##### [ `-retention <rp_name> ` ]
 
-The name of the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) to export. Default value is `""`.
+The name of the [retention policy](/influxdb/v1.8/concepts/glossary/#retention-policy-rp) to export. Default value is `""`.
 
 ##### [ `-start <timestamp>` ]
 
@@ -378,7 +381,7 @@ The timestamp string must be in [RFC3339 format](https://tools.ietf.org/html/rfc
 
 ##### [ `-waldir <wal_dir>` ]
 
-Path to the [WAL](/influxdb/v1.7/concepts/glossary/#wal-write-ahead-log) directory.
+Path to the [WAL](/influxdb/v1.8/concepts/glossary/#wal-write-ahead-log) directory.
 Default value is `"$HOME/.influxdb/wal"`.
 
 #### Examples
@@ -531,9 +534,42 @@ Path to a specific series file; overrides `-db` and `-dir`.
 
 Enables verbose logging.
 
+### `verify-tombstone`
+
+Verifies the integrity of tombstones.
+
+#### Syntax
+
+```
+influx_inspect verify-tombstone [ options ]
+```
+
+Finds and verifies all tombstones under the specified directory path (by default, `~/.influxdb/data`). Files are verified serially.
+
+#### Options
+
+Optional arguments are in brackets.
+
+##### [ `-dir <path>` ]
+
+Specifies the root data path. Defaults to `~/.influxdb/data`. This path can be arbitrary, for example, it doesn't need to be an InfluxDB data directory.
+
+##### [ `-v` ]
+
+Enables verbose logging. Confirms a file is being verified and displays progress every 5 million tombstone entries.
+
+##### [ `-vv` ]
+
+Enables very verbose logging. Displays progress for every series key and time range in the tombstone files. Timestamps are displayed in nanoseconds since the Epoch (`1970-01-01T00:00:00Z`).
+
+##### [ `-vvv` ]
+
+Enables very very verbose logging. Displays progress for every series key and time range in the tombstone files. Timestamps are displayed in [RFC3339 format](https://tools.ietf.org/html/rfc3339) with nanosecond precision.
+
+> **Note on verbose logging:** Higher verbosity levels override lower levels.
+
 ## Caveats
 
 The system does not have access to the metastore when exporting TSM shards.
-As such, it always creates the [retention policy](/influxdb/v1.7/concepts/glossary/#retention-policy-rp) with infinite duration and replication factor of 1. If you're importing data into a cluster (or want to change this duration and replication factor), update the retention policy **prior to reimporting**.
-
-> **Note:** To ensure data is successfully replicated across a cluster, the number of data nodes in a cluster **must be evenly divisible** by the replication factor.
+As such, it always creates the [retention policy](/influxdb/v1.8/concepts/glossary/#retention-policy-rp) with infinite duration and replication factor of 1.  End users may want to change this prior to reimporting if they are importing to a cluster or want a different duration
+for retention.

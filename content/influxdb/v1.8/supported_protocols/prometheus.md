@@ -1,0 +1,120 @@
+---
+title: Prometheus endpoints support in InfluxDB
+
+menu:
+  influxdb_1_8:
+    name: Prometheus
+    weight: 40
+    parent: Supported protocols
+---
+
+## Prometheus remote read and write API support
+
+{{% warn %}}
+Note: The Prometheus [API Stability Guarantees](https://prometheus.io/docs/prometheus/latest/stability/)
+states that remote read and remote write endpoints are features listed as experimental
+or subject to change, and thus considered unstable for 2.x. Any breaking changes
+will be included in the InfluxDB release notes.
+{{% /warn %}}
+
+InfluxDB support for the Prometheus remote read and write API adds the following
+HTTP endpoints to InfluxDB:
+
+* `/api/v1/prom/read`
+* `/api/v1/prom/write`
+
+Additionally, there is a [`/metrics` endpoint](/influxdb/v1.8/administration/server_monitoring/#influxdb-metrics-http-endpoint) configured to produce default Go metrics in Prometheus metrics format.
+
+### Create a target database
+
+Create a database in your InfluxDB instance to house data sent from Prometheus.
+In the examples provided below, `prometheus` is used as the database name, but
+you're welcome to use the whatever database name you like.
+
+```sql
+CREATE DATABASE "prometheus"
+```
+
+### Configuration
+
+To enable the use of the Prometheus remote read and write APIs with InfluxDB, add URL
+values to the following settings in the [Prometheus configuration file](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file):
+
+* [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_write%3E)
+* [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cremote_read%3E)
+
+The URLs must be resolvable from your running Prometheus server and use the port
+on which InfluxDB is running (`8086` by default).
+Also include the database name using the `db=` query parameter.
+
+#### Example: Endpoints in Prometheus configuration file
+
+```yaml
+remote_write:
+  - url: "http://localhost:8086/api/v1/prom/write?db=prometheus"
+
+remote_read:
+  - url: "http://localhost:8086/api/v1/prom/read?db=prometheus"
+```
+
+#### Read and write URLs with authentication
+
+If [authentication is enabled on InfluxDB](/influxdb/v1.8/administration/authentication_and_authorization/),
+pass the `username` and `password` of an InfluxDB user with read and write privileges
+using the `u=` and `p=` query parameters respectively.
+
+##### Examples of endpoints with authentication enabled**_  
+
+```yaml
+remote_write:
+  - url: "http://localhost:8086/api/v1/prom/write?db=prometheus&u=username&p=password"
+
+remote_read:
+  - url: "http://localhost:8086/api/v1/prom/read?db=prometheus&u=username&p=password"
+```
+
+> Including plain text passwords in your Prometheus configuration file is not ideal.
+> Unfortunately, environment variables and secrets are not supported in Prometheus configuration files.
+> See this Prometheus issue for more information:
+>
+>[Support for environment variable substitution in configuration file](https://github.com/prometheus/prometheus/issues/2357)
+
+## How Prometheus metrics are parsed in InfluxDB
+
+As Prometheus data is brought into InfluxDB, the following transformations are
+made to match the InfluxDB data structure:
+
+* The Prometheus metric name becomes the InfluxDB [measurement](/influxdb/v1.8/concepts/key_concepts/#measurement) name.
+* The Prometheus sample (value) becomes an InfluxDB field using the `value` field key. It is always a float.
+* Prometheus labels become InfluxDB tags.
+* All `# HELP` and `# TYPE` lines are ignored.
+* [v1.8.6 and later] Prometheus remote write endpoint drops unsupported Prometheus values (`NaN`,`-Inf`, and `+Inf`) rather than reject the entire batch.
+  * If [write trace logging is enabled (`[http] write-tracing = true`)](/influxdb/v1.8/administration/config/#write-tracing-false), then summaries of dropped values are logged.
+  * If a batch of values contains values that are subsequently dropped, HTTP status code `204` is returned.
+
+### Example: Parse Prometheus to InfluxDB
+
+```shell
+# Prometheus metric
+example_metric{queue="0:http://example:8086/api/v1/prom/write?db=prometheus",le="0.005"} 308
+
+# Same metric parsed into InfluxDB
+measurement
+  example_metric
+tags
+  queue = "0:http://example:8086/api/v1/prom/write?db=prometheus"
+  le = "0.005"
+  job = "prometheus"
+  instance = "localhost:9090"
+  __name__ = "example_metric"
+fields
+  value = 308
+```
+
+> In InfluxDB v1.5 and earlier, all Prometheus data goes into a single measurement
+> named `_` and the Prometheus measurement name is stored in the `__name__` label.
+> In InfluxDB v1.6 or later, every Prometheus measurement gets its own InfluxDB measurement.
+
+{{% warn %}}
+This format is different than the format used by the [Telegraf Prometheus input plugin](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/prometheus).
+{{% /warn %}}
