@@ -7,6 +7,17 @@ menu:
     weight: 10
     parent: About the project
 ---
+<!-- ## v1.8.1 [2020-04-06]
+
+### Features
+- Add ability to directly authenticate single SuperAdmin user against the API.
+
+### Bug Fixes
+- Update Flux functions for latest Flux version.
+- Update table results to output formatted strings rather than as single-line values.
+- Handle change to newsfeed data structure.
+-->
+
 ## v1.8.0 [2020-02-19]
 
 ### Features
@@ -15,7 +26,7 @@ menu:
   - Support for [`etcd`](https://etcd.io/) as an alternate backend store for multiple instances of Chronograf
   - `chronoctl` tool to migrate from BoltDB to etcd
 
-        If you're installing Chronograf for the first time, learn how to [create a new Chronograf HA configuration](/chronograf/v1.8/administration/create-high-availability/). 
+        If you're installing Chronograf for the first time, learn how to [create a new Chronograf HA configuration](/chronograf/v1.8/administration/create-high-availability/).
         If you're upgrading Chronograf, learn how to [migrate your existing Chronograf configuration to HA](/chronograf/v1.8/administration/migrate-to-high-availability/).
 - Add configuration option to [disable the Host List page](/chronograf/v1.8/administration/config-options/#host-page-disabled-h).
 - Add ability to select a data source when [creating a template variable](/chronograf/v1.8/guides/dashboard-template-variables/#create-custom-template-variables).

@@ -23,7 +23,7 @@ influxd backup [flags] PATH
 | `-portable`   | Generate backup files in a portable format that can be restored to InfluxDB OSS or InfluxDB Enterprise. Use unless the legacy backup is required. |
 | `-host`       | InfluxDB OSS host to back up from. Optional. Defaults to 127.0.0.1:8088.                                                                                      |
 | `-db`         | InfluxDB OSS database name to back up. Optional. If not specified, all databases are backed up when using '-portable'.                                        |
-| `-db`         | Retention policy to use for the backup. Optional. If not specified, all retention policies are used by default.                                               |
+| `-rp`         | Retention policy to use for the backup. Optional. If not specified, all retention policies are used by default.                                               |
 | `-shard`      | The identifier of the shard to back up. Optional. If specified, '-rp ' is required.                                                                           |
 | `-start`      | Include all points starting with specified timestamp (RFC3339 format). Not compatible with '-since '.                                                         |
 | `-end`        | Exclude all points after timestamp (RFC3339 format). Not compatible with '-since '.                                                                           |
