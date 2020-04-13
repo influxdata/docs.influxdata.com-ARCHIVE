@@ -17,6 +17,7 @@ menu:
 - Update Go version to 1.13.8.
 - Add [InfluxDB 2.0 API compatibility endpoints](/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints) to use InfluxDB 2.0 client libraries.
 - Enhance support for bound parameters.
+- Add support to enable TLS 1.3 configuration and update current list of [Go ciphers](https://golang.org/pkg/crypto/tls/#pkg-constants).
 - Update Flux version to v0.65.0.
   To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.65/introduction/).
 
