@@ -1,5 +1,5 @@
 ---
-title: InfluxDB 1.7 release notes
+title: InfluxDB 1.8 release notes
 menu:
   influxdb_1_8:
     name: Release notes
@@ -7,9 +7,38 @@ menu:
     parent: About the project
 ---
 
+## v1.8.0 [2020-4-13]
+
+### Features
+
+- Add [`influx inspect verify-tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
+- Add [offline series compaction to `influx_inspect buildtsi`](/influxdb/v1.8/administration/compact-series-file/).
+- Add support for connecting to a custom HTTP endpoint using `-url-prefix` in [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index).
+- Update Go version to 1.13.8.
+- Add [InfluxDB 2.0 API compatibility endpoints](/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints) to use InfluxDB 2.0 client libraries.
+- Enhance support for bound parameters.
+- Add support to enable TLS 1.3 configuration and update current list of [Go ciphers](https://golang.org/pkg/crypto/tls/#pkg-constants).
+- Update Flux version to v0.65.0.
+  To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.65/introduction/).
+
+  > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
+
+### Bug fixes
+
+- Rebuild the series index when data is actually deleted (not when deleted data is only found in cache or outside of time range).
+- Parse Accept header correctly.
+- Upgrade compaction error log from `Info` to `Warn`.
+- Remove double increment of `meta` index.
+- Improve series cardinality limit for `inmem` index.
+- Ensure all block data returned.
+- Skip `WriteSnapshot` during back up if `snapshotter` is busy.
+- Reduce `influxd` and `influx` startup time if Flux isn't used.
+- Fix bugs in `-compact-series-file` flag.
+- Fix a SIGSEGV when accessing `tsi` active log.
+- Verify precision in write requests.
+
 ## v1.7.9 [2019-10-27]
 
-### Release notes
 - This release is built using Go 1.12.10 which eliminates the
   [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
 
