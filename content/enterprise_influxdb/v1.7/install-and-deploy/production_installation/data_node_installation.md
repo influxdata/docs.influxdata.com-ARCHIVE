@@ -60,16 +60,17 @@ You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.7/tools/api/)).
 
 # Data node setup
+## Step 1: Add appropriate DNS entries for each of your servers
 
-## Step 1: Modify the `/etc/hosts` file
+Ensure that your servers' hostnames and IP addresses are added to your network's DNS environment.
 
-Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
-file (the hostnames below are representative).
+The addition of DNS entries and IP assignment is usually site and policy specific; contact your DNS administrator for assistance as needed.
+Ultimately, use entries similar to the following (hostnames and domain IP addresses are representative):
 
-```
-<Data_1_IP> enterprise-data-01
-<Data_2_IP> enterprise-data-02
-```
+| Record Type |               Hostname                |                IP |
+|:------------|:-------------------------------------:|------------------:|
+| A           | ```enterprise-data-01.mydomain.com``` | ```<Data_1_IP>``` |
+| A           | ```enterprise-data-02.mydomain.com``` | ```<Data_2_IP>``` |
 
 > **Verification steps:**
 >
@@ -82,8 +83,8 @@ servers are resolvable. Here is an example set of shell commands using `ping`:
     ping -qc 1 enterprise-data-01
     ping -qc 1 enterprise-data-02
 
-If there are any connectivity issues resolve them before proceeding with the
-installation.
+We highly recommend that each server be able to resolve the IP from the hostname alone as shown here.
+Resolve any connectivity issues before proceeding with the installation.
 A healthy cluster requires that every meta and data node can communicate
 with every other meta and data node.
 
@@ -96,15 +97,15 @@ Perform the following steps on each data node.
 #### Ubuntu and Debian (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.9-c1.7.9_amd64.deb
-sudo dpkg -i influxdb-data_1.7.9-c1.7.9_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.10-c1.7.10_amd64.deb
+sudo dpkg -i influxdb-data_1.7.10-c1.7.10_amd64.deb
 ```
 
 #### RedHat and CentOS (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.9_c1.7.9.x86_64.rpm
-sudo yum localinstall influxdb-data-1.7.9_c1.7.9.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.10_c1.7.10.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 #### Verify the authenticity of release download (recommended)
@@ -121,13 +122,13 @@ For added security, follow these steps to verify the signature of your InfluxDB 
    For example:
 
     ```
-    wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.9_c1.7.9.x86_64.rpm.asc
+    wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.10_c1.7.10.x86_64.rpm.asc
     ```
 
 3. Verify the signature with `gpg --verify`:
 
     ```
-    gpg --verify influxdb-data-1.7.9_c1.7.9.x86_64.rpm.asc influxdb-data-1.7.9_c1.7.9.x86_64.rpm
+    gpg --verify influxdb-data-1.7.10_c1.7.10.x86_64.rpm.asc influxdb-data-1.7.10_c1.7.10.x86_64.rpm
     ```
 
     The output from this command should include the following:
@@ -258,16 +259,16 @@ The expected output is:
     Data Nodes
     ==========
     ID   TCP Address               Version
-    4    enterprise-data-01:8088   1.7.9-c1.7.9
-    5    enterprise-data-02:8088   1.7.9-c1.7.9
+    4    enterprise-data-01:8088   1.7.10-c1.7.10
+    5    enterprise-data-02:8088   1.7.10-c1.7.10
 
 >
     Meta Nodes
     ==========
     TCP Address               Version
-    enterprise-meta-01:8091   1.7.9-c1.7.9
-    enterprise-meta-02:8091   1.7.9-c1.7.9
-    enterprise-meta-03:8091   1.7.9-c1.7.9
+    enterprise-meta-01:8091   1.7.10-c1.7.10
+    enterprise-meta-02:8091   1.7.10-c1.7.10
+    enterprise-meta-03:8091   1.7.10-c1.7.10
 
 
 The output should include every data node that was added to the cluster.

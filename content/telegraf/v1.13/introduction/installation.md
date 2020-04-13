@@ -199,7 +199,7 @@ sudo systemctl start telegraf
   ```
 {{% /tab-content %}}
 {{% tab-content %}}
-  Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md) (Windows support is still experimental):
+  Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md) (Windows support is experimental):
   ```
   telegraf.exe -service install -config <path_to_config>
   ```
@@ -225,13 +225,13 @@ If `gpg` is not available, see the [GnuPG homepage](https://gnupg.org/download/)
    For example:
 
     ```
-    wget https://dl.influxdata.com/telegraf/releases/telegraf-1.13-1_linux_amd64.tar.gz.asc
+    wget https://dl.influxdata.com/telegraf/releases/telegraf-1.13.1_linux_amd64.tar.gz.asc
     ```
 
 3. Verify the signature with `gpg --verify`:
 
     ```
-    gpg --verify telegraf-1.13-1_linux_amd64.tar.gz.asc telegraf-1.13-1_linux_amd64.tar.gz
+    gpg --verify telegraf-1.13.1_linux_amd64.tar.gz.asc telegraf-1.13.1_linux_amd64.tar.gz
     ```
 
     The output from this command should include the following:

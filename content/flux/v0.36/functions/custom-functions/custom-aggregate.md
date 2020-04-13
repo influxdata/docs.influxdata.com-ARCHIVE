@@ -43,7 +43,7 @@ in an input table.
 |> reduce(fn: (r, accumulator) => ({
     sum: r._value + accumulator.sum,
     product: r._value * accumulator.product
-  })
+  }),
   identity: {sum: 0.0, product: 1.0}
 )
 ```
@@ -170,7 +170,7 @@ average = (tables=<-, outputField="average") =>
         count: 1.0,
         sum:   0.0,
         avg:   0.0
-      }
+      },
       fn: (r, accumulator) => ({
         // Increment the counter on each reduce loop
         count: accumulator.count + 1.0,
@@ -199,7 +199,7 @@ average = (tables=<-, outputField="average") =>
         count: 1.0,
         sum:   0.0,
         avg:   0.0
-      }
+      },
       fn: (r, accumulator) => ({
         count: accumulator.count + 1.0,
         sum:   accumulator.sum + r._value,
@@ -230,7 +230,7 @@ multiAvg = (tables=<-) =>
         c1_avg: 0.0,
         c2_sum: 0.0,
         c2_avg: 0.0
-      }
+      },
       fn: (r, accumulator) => ({
         count:  accumulator.count + 1.0,
         c1_sum: accumulator.c1_sum + r.c1_value,
@@ -252,7 +252,7 @@ profitSummary = (tables=<-) =>
       identity: {
         gross: 0.0,
         net:   0.0
-      }
+      },
       fn: (r, accumulator) => ({
         gross: accumulator.gross + r.profit,
         net:   accumulator.net + r.profit - r.expenses

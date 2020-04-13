@@ -121,7 +121,7 @@ _**Data type:** Array of strings_
 ```js
 import "experimental/mqtt"
 
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: -5m)
   |> filter(fn: (r) => r._measurement == "airSensor")
   |> mqtt.to(

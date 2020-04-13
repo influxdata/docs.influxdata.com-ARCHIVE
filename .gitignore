@@ -5,3 +5,5 @@ deploy
 .*.swp
 node_modules
 *.log
+resources
+chronograf-v1.db

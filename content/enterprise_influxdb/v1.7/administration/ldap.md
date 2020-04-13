@@ -25,6 +25,7 @@ To use LDAP with an InfluxDB Enterprise cluster, do the following:
 1. [Configure data nodes](#configure-data-nodes)
 2. [Configure meta nodes](#configure-meta-nodes)
 3. [Create, verify, and upload the LDAP configuration file](#create-verify-and-upload-the-ldap-configuration-file)
+4. [Restart meta and data nodes](#restart-meta-and-data-nodes)
 
 ### Configure data nodes
 
@@ -86,6 +87,49 @@ For more detail on authentication, see [Authentication and authorization in Infl
     ```bash
     influxd-ctl ldap set-config /path/to/ldap.toml
     ```
+
+###  Restart meta and data nodes
+
+Restart all meta and data nodes in your InfluxDB Enterprise cluster to load your
+updated configuration.
+
+On each **meta** node, run:
+
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[sysvinit](#)
+[systemd](#)
+{{% /code-tabs %}}
+{{% code-tab-content %}}
+```sh
+service influxdb-meta restart
+```
+{{% /code-tab-content %}}
+{{% code-tab-content %}}
+```sh
+sudo systemctl restart influxdb-meta
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
+
+On each **data** node, run:
+
+{{< code-tabs-wrapper >}}
+{{% code-tabs %}}
+[sysvinit](#)
+[systemd](#)
+{{% /code-tabs %}}
+{{% code-tab-content %}}
+```sh
+service influxdb restart
+```
+{{% /code-tab-content %}}
+{{% code-tab-content %}}
+```sh
+sudo systemctl restart influxdb
+```
+{{% /code-tab-content %}}
+{{< /code-tabs-wrapper >}}
 
 ## Sample LDAP configuration
 

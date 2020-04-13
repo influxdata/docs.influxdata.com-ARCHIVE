@@ -22,6 +22,8 @@ Chronograf is the user interface for InfluxData's [TICK stack](https://www.influ
 
 ## Download and install
 
+> **Note:** Windows support is experimental.
+
 {{< tab-labels >}}
 {{% tabs %}}
 [macOS](#)

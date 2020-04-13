@@ -184,9 +184,7 @@ including support for Go-style regex. For example:
 ```sql
 > SELECT * FROM /.*/ LIMIT 1
 --
-> SELECT * FROM "cpu_load_short"
---
-> SELECT * FROM "cpu_load_short" WHERE "value" > 0.9
+> SELECT * FROM "cpu" WHERE "value" > 0.9
 ```
 
 This is all you need to know to write data into InfluxDB and query it back.

@@ -183,7 +183,7 @@ Returns: [InfluxQLNode](/kapacitor/v1.4/nodes/influx_q_l_node/)
 
 Helper function for creating an alert on low throughput, a.k.a. deadman's switch.
 
-- Threshold -- trigger alert if throughput drops below threshold in points/interval.
+- Threshold -- trigger alert if throughput drops below or equal to threshold "<=" in points/interval.
 - Interval -- how often to check the throughput.
 - Expressions -- optional list of expressions to also evaluate. Useful for time of day alerting.
 
@@ -193,7 +193,7 @@ Example:
 ```javascript
     var data = stream
         |from()...
-    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
+    // Trigger critical alert if the throughput drops below or equal to 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
     //Do normal processing of data
@@ -207,7 +207,7 @@ Example:
 ```javascript
     var data = stream
         |from()...
-    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
+    // Trigger critical alert if the throughput drops below or equal to 100 points per 10s and checked every 10s.
     data
         |stats(10s)
             .align()
@@ -231,7 +231,7 @@ Example:
 ```javascript
     var data = stream
         |from()...
-    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
+    // Trigger critical alert if the throughput drops below or equal to 100 points per 10s and checked every 10s.
     data
         |deadman(100.0, 10s)
             .slack()
@@ -247,7 +247,7 @@ Example:
 ```javascript
     var data = stream
         |from()...
-    // Trigger critical alert if the throughput drops below 100 points per 10s and checked every 10s.
+    // Trigger critical alert if the throughput drops below or equal to 100 points per 10s and checked every 10s.
     // Only trigger the alert if the time of day is between 8am-5pm.
     data
         |deadman(100.0, 10s, lambda: hour("time") >= 8 AND hour("time") <= 17)

@@ -15,8 +15,12 @@ Install and configure the InfluxData platform (TICK stack) using one of the foll
 - For **production** environments. Do one of the following:
 
   - [Install the open source version of InfluxData 1.x platform](/platform/install-and-deploy/install/oss-install)
-  - Install the InfluxData 1.x Enterprise:
+  - Install InfluxData 1.x Enterprise:
 
-      a. [Install Telegraf](/telegraf/latest/introduction/installation)
-      b. [Install InfluxDB Enterprise](/enterprise_influxdb/latest/install-and-deploy/production-installation)
-      c. [Install Kapacitor Enterprise](/enterprise_kapacitor/latest/introduction/installation_guide/)
+        a. [Install Telegraf](/telegraf/latest/introduction/installation/)
+
+        b. [Install InfluxDB Enterprise](/enterprise_influxdb/latest/install-and-deploy/)
+        
+        c. [Install Kapacitor Enterprise](/enterprise_kapacitor/latest/introduction/installation_guide/)
+
+> **Note:** Windows support is experimental.

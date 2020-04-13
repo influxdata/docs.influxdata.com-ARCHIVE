@@ -30,8 +30,8 @@ Thanks to the open source community for your contributions, commitment, and effo
 
 * [Erlang InfluxDB UDP Writer](https://github.com/palkan/influx_udp)
   * Maintained by [Vladimir Dementyev (palkan)](https://github.com/palkan)
-* [InfluxDB line encoder](https://github.com/emeter/influxdb_encoderl)
-  * Maintained by [Pouriya Jahanbakhsh (emeter)](https://github.com/emeter)
+* [InfluxDB line encoder](https://github.com/Pouriya-Jahanbakhsh/influxdb_encoderl)
+  * Maintained by [Pouriya Jahanbakhsh](https://github.com/Pouriya-Jahanbakhsh)
 
 ## Go
 

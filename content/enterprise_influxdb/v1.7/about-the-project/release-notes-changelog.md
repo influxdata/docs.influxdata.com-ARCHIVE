@@ -8,6 +8,19 @@ menu:
     parent: About the project
 ---
 
+## v1.7.10 [2020-02-07]
+
+The InfluxDB Enterprise 1.7.10 release builds on the InfluxDB OSS 1.7.10 release.
+For details on changes incorporated from the InfluxDB OSS release, see
+[InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+
+### Features
+- Log when meta state file cannot be opened.
+
+### Bugfixes
+- Update `MaxShardGroupID` on meta update.
+- Don't reassign shard ownership when removing a data node.
+
 ## v1.7.9 [2019-10-27]
 
 The InfluxDB Enterprise 1.7.9 release builds on the InfluxDB OSS 1.7.9 release.

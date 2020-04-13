@@ -8,6 +8,20 @@ menu:
     parent: About the project
 ---
 
+## v1.13.4 [2020-02-25]
+
+### Release Notes
+Official packages now built with Go 1.13.8.
+
+### Bug fixes
+- Parse NaN values from summary types in Promethues (`prometheus`) input plugin.
+- Fix PgBouncer (`pgbouncer`) input plugin when used with newer PgBouncer versions.
+- Support up to 8192 stats in the Ethtool (`ethtool`) input plugin.
+- Fix performance counters collection on named instances in Microsoft SQL Server (`sqlserver`) input plugin.
+- Use add time for Prometheus expiration calculation.
+- Fix inconsistency with input error counting in Telegraf v1.x (`internal`) input plugin.
+- Use the same timestamp per call if no time is provided in Prometheus (`prometheus`) input plugin.
+
 ## v1.13.3 [2020-02-04]
 
 ### Bug fixes

@@ -1,17 +1,17 @@
 {{ $show := .Get "show" | default "all" }}
 
 {{ if eq $show "all" }}
-	{{ .Scratch.Set "pages" (union .Page.Pages .Page.Sections) }}
+	{{ .Scratch.Set "pages" (union .Page.RegularPages .Page.Sections) }}
 {{ else if (eq $show "sections") }}
 	{{ .Scratch.Set "pages" .Page.Sections }}
 {{ else if (eq $show "pages") }}
-	{{ .Scratch.Set "pages" .Page.Pages }}
+	{{ .Scratch.Set "pages" .Page.RegularPages }}
 {{ end }}
 
 {{ $pages := .Scratch.Get "pages" }}
 
 {{ range $pages.ByWeight }}
-	<h2><a href="{{ .RelPermalink }}" >{{ .Title }}</a></h2>
+	<h2 id="{{ anchorize .Title}}"><a href="{{ .RelPermalink }}" >{{ .Title }}</a></h2>
 	<p>
 		{{- if .Description }}{{- .Description | markdownify -}}
 		{{ else }}{{- .Summary | markdownify -}}
