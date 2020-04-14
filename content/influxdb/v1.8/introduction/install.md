@@ -359,7 +359,7 @@ For all AWS deployments, we strongly recommend authentication be enabled. Withou
 instance may be publicly available to any unauthenticated user. The default settings do **NOT** enable 
 authentication and authorization. Further authentication and authorization should not be solely relied upon to prevent access
 and protect data from malicious actors. If additional security or compliance features are desired, InfluxDB should be run 
-behind additional services offered by AWS. Review the [authentication and authorization] (/administration/authentication_and_authorization/) settings.
+behind additional services offered by AWS. Review the [authentication and authorization] (/influxdb/v1.8/administration/authentication_and_authorization/) settings.
 
 ### InfluxDB OSS permissions
 
