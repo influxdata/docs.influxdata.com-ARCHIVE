@@ -10,18 +10,43 @@ aliases:
   - /influxdb/v1.8/guides/querying_data/
 ---
 
-## Querying data with the InfluxDB API
 
 The InfluxDB API is the primary means for querying data in InfluxDB (see the [command line interface](/influxdb/v1.8/tools/shell/) and [client libraries](/influxdb/v1.8/tools/api_client_libraries/) for alternative ways to query the database).
 
+Query data with the InfluxDB API using [Flux](#query-data-with-flux) or [InfluxQL](#query-data-with-influxql).
+
 > **Note**: The following examples use `curl`, a command line tool that transfers data using URLs. Learn the basics of `curl` with the [HTTP Scripting Guide](https://curl.haxx.se/docs/httpscripting.html).
 
-### Querying data with Flux
+## Query data with Flux
 
-The `/api/v2/query` endpoint accepts `POST` HTTP requests.
+The `/api/v2/query` endpoint accepts `POST` HTTP requests. Use the following HTTP headers:
+- `Accept: application/csv`
+- `Content-type: application/vnd.flux`
+
+if you have authentication enabled, need to provide username and password. in authorization header
+
+The following example queries data with the 'SELECT' command:
+
+```bash
+$ curl -XPOST localhost:8086/api/v2/query -sS \
+  -H 'Accept:application/csv' \
+  -H 'Content-type:application/vnd.flux' \
+  -d 'from(bucket:"telegraf")
+        |> range(start:-5m)
+        |> filter(fn:(r) => r._measurement == "cpu")'  'q=SELECT * FROM "mymeas"'
+```
+Flux returns annotated CSV:
+
+```
+{"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2017-03-01T00:16:18Z",33.1,null,null],["2017-03-01T00:17:18Z",12.4,"12","14"]]}]}]}
+```
+
+The `mymeas` [measurement](/influxdb/v1.8/concepts/glossary/#measurement) has two points.
+The first point has the [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp) `2017-03-01T00:16:18Z`, a `myfield` value of `33.1`, and no tag values for the `mytag1` and `mytag2` [tag keys](/influxdb/v1.8/concepts/glossary/#tag-key).
+The second point has the timestamp `2017-03-01T00:17:18Z`, a `myfield` value of `12.4`, a `mytag1` value of `12`, and a `mytag2` value of `14`.
 
 
-### Querying data with InfluxQL
+## Query data with InfluxQL
 
 To perform a query send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
 You may also use a `POST` request by sending the same parameters either as URL parameters or as part of the body with `application/x-www-form-urlencoded`.
@@ -31,9 +56,7 @@ The example below uses the InfluxDB API to query the same database that you enco
 curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
 ```
 
-InfluxDB returns JSON.
-The results of your query appear in the `"results"` array.
-If an error occurs, InfluxDB sets an `"error"` key with an explanation of the error.
+InfluxDB returns JSON:
 
 
 ```json
@@ -71,44 +94,3 @@ If an error occurs, InfluxDB sets an `"error"` key with an explanation of the er
 
 > **Note:** Appending `pretty=true` to the URL enables pretty-printed JSON output.
 While this is useful for debugging or when querying directly with tools like `curl`, it is not recommended for production use as it consumes unnecessary network bandwidth.
-
-
-### Other options when querying data
-
-#### Timestamp format
-
-Everything in InfluxDB is stored and reported in UTC.
-By default, timestamps are returned in RFC3339 UTC and have nanosecond precision, for example `2015-08-04T19:05:14.318570484Z`.
-If you want timestamps in Unix epoch format include in your request the query string parameter `epoch` where `epoch=[h,m,s,ms,u,ns]`.
-For example, get epoch in seconds with:
-
-```bash
-curl -G 'http://localhost:8086/query' --data-urlencode "db=mydb" --data-urlencode "epoch=s" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
-```
-
-#### Authentication
-
-Authentication in InfluxDB is disabled by default.
-See [Authentication and Authorization](/influxdb/v1.8/administration/authentication_and_authorization/) for how to enable and set up authentication.
-
-#### Maximum row limit
-
-The [`max-row-limit` configuration option](/influxdb/v1.8/administration/config#max-row-limit-0) allows users to limit the maximum number of returned results to prevent InfluxDB from running out of memory while it aggregates the results.
-The `max-row-limit` configuration option is set to `0` by default.
-That default setting allows for an unlimited number of rows returned per request.
-
-The maximum row limit only applies to non-chunked queries. Chunked queries can return an unlimited number of points.
-
-#### Chunking
-
-Chunking can be used to return results in streamed batches rather than as a single response by setting the query string parameter `chunked=true`. Responses will be chunked by series or by every 10,000 points, whichever occurs first. To change the maximum chunk size to a different value, set the query string parameter `chunk_size` to a different value.
-For example, get your results in batches of 20,000 points with:
-
-```bash
-curl -G 'http://localhost:8086/query' --data-urlencode "db=deluge" --data-urlencode "chunked=true" --data-urlencode "chunk_size=20000" --data-urlencode "q=SELECT * FROM liters"
-```
-
-### InfluxQL
-
-Now that you know how to query data, check out the [Data Exploration page](/influxdb/v1.8/query_language/data_exploration/) to get acquainted with InfluxQL.
-For more information about querying data with the InfluxDB API, please see the [API reference documentation](/influxdb/v1.8/tools/api/#query-http-endpoint).
