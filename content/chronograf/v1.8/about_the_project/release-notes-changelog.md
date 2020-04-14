@@ -24,9 +24,11 @@ menu:
 {{% /warn %}}
 
 ### Features
+
 - Add ability to directly authenticate single SuperAdmin user against the API.
 
 ### Bug Fixes
+
 - Update table results to output formatted strings rather than as single-line values.
 - Handle change to newsfeed data structure.
 
