@@ -19,7 +19,7 @@ Query data with the InfluxDB API using [Flux](#query-data-with-flux) or [InfluxQ
 
 ## Query data with Flux
 
-The `/api/v2/query` endpoint accepts `POST` HTTP requests. Use the following HTTP headers:
+For Flux queries, the `/api/v2/query` endpoint accepts `POST` HTTP requests. Use the following HTTP headers:
 - `Accept: application/csv`
 - `Content-type: application/vnd.flux`
 
@@ -52,8 +52,8 @@ The header row defines column labels for the table. The `cpu` [measurement](/inf
 
 ## Query data with InfluxQL
 
-To perform a query send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
-You may also use a `POST` request by sending the same parameters either as URL parameters or as part of the body with `application/x-www-form-urlencoded`.
+To perform an InfluxQL query, send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
+You can also use a `POST` request by sending the same parameters either as URL parameters or as part of the body with `application/x-www-form-urlencoded`.
 The example below uses the InfluxDB API to query the same database that you encountered in [Writing Data](/influxdb/v1.8/guides/writing_data/).
 
 ```bash
