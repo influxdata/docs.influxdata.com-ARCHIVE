@@ -1,4 +1,4 @@
-{{ $pages := .Page.RegularPages }}
+{{ $pages := where .Page.Pages "Kind" "page" }}
 <ul>
 {{ range $pages.ByWeight }}
 	{{ $title := replaceRE `\ function` "" .Title }}
