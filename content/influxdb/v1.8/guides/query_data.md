@@ -16,6 +16,13 @@ The InfluxDB API is the primary means for querying data in InfluxDB (see the [co
 
 > **Note**: The following examples use `curl`, a command line tool that transfers data using URLs. Learn the basics of `curl` with the [HTTP Scripting Guide](https://curl.haxx.se/docs/httpscripting.html).
 
+### Querying data with Flux
+
+The `/api/v2/query` endpoint accepts `POST` HTTP requests.
+
+
+### Querying data with InfluxQL
+
 To perform a query send a `GET` request to the `/query` endpoint, set the URL parameter `db` as the target database, and set the URL parameter `q` as your query.
 You may also use a `POST` request by sending the same parameters either as URL parameters or as part of the body with `application/x-www-form-urlencoded`.
 The example below uses the InfluxDB API to query the same database that you encountered in [Writing Data](/influxdb/v1.8/guides/writing_data/).
@@ -65,67 +72,6 @@ If an error occurs, InfluxDB sets an `"error"` key with an explanation of the er
 > **Note:** Appending `pretty=true` to the URL enables pretty-printed JSON output.
 While this is useful for debugging or when querying directly with tools like `curl`, it is not recommended for production use as it consumes unnecessary network bandwidth.
 
-### Multiple queries
-
-Send multiple queries to InfluxDB in a single API call.
-Simply delimit each query using a semicolon, for example:
-
-```bash
-curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=mydb" --data-urlencode "q=SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west';SELECT count(\"value\") FROM \"cpu_load_short\" WHERE \"region\"='us-west'"
-```
-
-returns:
-
-```json
-{
-    "results": [
-        {
-            "statement_id": 0,
-            "series": [
-                {
-                    "name": "cpu_load_short",
-                    "columns": [
-                        "time",
-                        "value"
-                    ],
-                    "values": [
-                        [
-                            "2015-01-29T21:55:43.702900257Z",
-                            2
-                        ],
-                        [
-                            "2015-01-29T21:55:43.702900257Z",
-                            0.55
-                        ],
-                        [
-                            "2015-06-11T20:46:02Z",
-                            0.64
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "statement_id": 1,
-            "series": [
-                {
-                    "name": "cpu_load_short",
-                    "columns": [
-                        "time",
-                        "count"
-                    ],
-                    "values": [
-                        [
-                            "1970-01-01T00:00:00Z",
-                            3
-                        ]
-                    ]
-                }
-            ]
-        }
-    ]
-}
-```
 
 ### Other options when querying data
 
