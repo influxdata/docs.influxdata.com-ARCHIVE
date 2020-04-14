@@ -1,11 +1,11 @@
 {{ $show := .Get "show" | default "all" }}
 
 {{ if eq $show "all" }}
-	{{ .Scratch.Set "pages" (union .Page.RegularPages .Page.Sections) }}
+	{{ .Scratch.Set "pages" (union .Page.Pages .Page.Sections) }}
 {{ else if (eq $show "sections") }}
 	{{ .Scratch.Set "pages" .Page.Sections }}
 {{ else if (eq $show "pages") }}
-	{{ .Scratch.Set "pages" .Page.RegularPages }}
+	{{ .Scratch.Set "pages" (where .Site.Pages "Kind" "page") }}
 {{ end }}
 
 {{ $pages := .Scratch.Get "pages" }}
