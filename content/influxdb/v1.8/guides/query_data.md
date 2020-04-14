@@ -23,9 +23,11 @@ The `/api/v2/query` endpoint accepts `POST` HTTP requests. Use the following HTT
 - `Accept: application/csv`
 - `Content-type: application/vnd.flux`
 
-if you have authentication enabled, need to provide username and password. in authorization header
+If you have authentication enabled, provide your InfluxDB username and password with the `Authorization` header and `Token` schema. For example: `Authorization: Token username:password`.
 
-The following example queries data with the 'SELECT' command:
+
+The following example queries Telegraf data using Flux:
+:
 
 ```bash
 $ curl -XPOST localhost:8086/api/v2/query -sS \
@@ -33,17 +35,19 @@ $ curl -XPOST localhost:8086/api/v2/query -sS \
   -H 'Content-type:application/vnd.flux' \
   -d 'from(bucket:"telegraf")
         |> range(start:-5m)
-        |> filter(fn:(r) => r._measurement == "cpu")'  'q=SELECT * FROM "mymeas"'
+        |> filter(fn:(r) => r._measurement == "cpu")'  
 ```
-Flux returns annotated CSV:
+Flux returns [annotated CSV](https://v2.docs.influxdata.com/v2.0/reference/syntax/annotated-csv/):
 
 ```
-{"results":[{"statement_id":0,"series":[{"name":"mymeas","columns":["time","myfield","mytag1","mytag2"],"values":[["2017-03-01T00:16:18Z",33.1,null,null],["2017-03-01T00:17:18Z",12.4,"12","14"]]}]}]}
+{,result,table,_start,_stop,_time,_value,_field,_measurement,cpu,host
+,_result,0,2020-04-07T18:02:54.924273Z,2020-04-07T19:02:54.924273Z,2020-04-07T18:08:19Z,4.152553004641827,usage_user,cpu,cpu-total,host1
+,_result,0,2020-04-07T18:02:54.924273Z,2020-04-07T19:02:54.924273Z,2020-04-07T18:08:29Z,7.608695652173913,usage_user,cpu,cpu-total,host1
+,_result,0,2020-04-07T18:02:54.924273Z,2020-04-07T19:02:54.924273Z,2020-04-07T18:08:39Z,2.9363988504310883,usage_user,cpu,cpu-total,host1
+,_result,0,2020-04-07T18:02:54.924273Z,2020-04-07T19:02:54.924273Z,2020-04-07T18:08:49Z,6.915093159934975,usage_user,cpu,cpu-total,host1}
 ```
 
-The `mymeas` [measurement](/influxdb/v1.8/concepts/glossary/#measurement) has two points.
-The first point has the [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp) `2017-03-01T00:16:18Z`, a `myfield` value of `33.1`, and no tag values for the `mytag1` and `mytag2` [tag keys](/influxdb/v1.8/concepts/glossary/#tag-key).
-The second point has the timestamp `2017-03-01T00:17:18Z`, a `myfield` value of `12.4`, a `mytag1` value of `12`, and a `mytag2` value of `14`.
+The header row defines column labels for the table. The `cpu` [measurement](/influxdb/v1.8/concepts/glossary/#measurement) has four points, each represented by one of the record rows. For example the first point has a [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp) of `2020-04-07T18:08:19`.  
 
 
 ## Query data with InfluxQL
