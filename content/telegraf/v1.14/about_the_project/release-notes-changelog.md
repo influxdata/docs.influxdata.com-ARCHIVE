@@ -8,6 +8,16 @@ menu:
     parent: About the project
 ---
 
+## v1.14 [2020-04-14]
+
+### Bug fixes
+
+- Fix `PerformanceCounter` query performance degradation in `sqlserver` input.
+- Fix error when using the `Name` field in template processor.
+- Fix export timestamp not working for Prometheus on v2.
+- Fix exclude database and retention policy tags.
+- Fix status path when using globs in `phpfpm`.
+
 ## v1.14 [2020-03-26]
 
 ### Breaking changes
