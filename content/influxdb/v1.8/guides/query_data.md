@@ -49,6 +49,10 @@ Flux returns [annotated CSV](https://v2.docs.influxdata.com/v2.0/reference/synta
 
 The header row defines column labels for the table. The `cpu` [measurement](/influxdb/v1.8/concepts/glossary/#measurement) has four points, each represented by one of the record rows. For example the first point has a [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp) of `2020-04-07T18:08:19`.  
 
+### Flux
+
+Check out the [Get started with Flux](https://v2.docs.influxdata.com/v2.0/query-data/get-started/) to learn more about building queries with Flux.
+For more information about querying data with the InfluxDB API using Flux, see the [API reference documentation](/influxdb/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints).
 
 ## Query data with InfluxQL
 
@@ -98,3 +102,8 @@ InfluxDB returns JSON:
 
 > **Note:** Appending `pretty=true` to the URL enables pretty-printed JSON output.
 While this is useful for debugging or when querying directly with tools like `curl`, it is not recommended for production use as it consumes unnecessary network bandwidth.
+
+### InfluxQL
+
+Check out the [Data Exploration page](/influxdb/v1.8/query_language/data_exploration/) to get acquainted with InfluxQL.
+For more information about querying data with the InfluxDB API using InfluxQL, see the [API reference documentation](/influxdb/v1.8/tools/api/#influxdb-1-x-http-endpoints).
