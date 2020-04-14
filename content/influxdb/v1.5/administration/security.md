@@ -9,6 +9,10 @@ menu:
 
 Some customers may choose to install InfluxDB with public internet access, however
 doing so can inadvertently expose your data and invite unwelcome attacks on your database.
+
+If InfluxDB is being deployed on a publicly accessible endpoint, we strongly recommend authentication be enabled. 
+Otherwise the data will be publicly available to any unauthenticated user.
+
 Check out the sections below for how protect the data in your InfluxDB instance.
 
 ## Enabling authentication
