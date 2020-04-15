@@ -17,25 +17,25 @@ It covers querying time series data from InfluxDB using Flux, and introduces Flu
 
 ## What you will need
 
-##### InfluxDB v1.7+
-Flux v0.65 (technical preview) is built into InfluxDB v1.7 and can be used to query data stored in InfluxDB.
-InfluxDB v1.7's `influx` CLI also includes a new `-type=` option that, when set to `flux`, will start an
+##### InfluxDB v1.8+
+Flux v0.65 is built into InfluxDB v1.8 and can be used to query data stored in InfluxDB.
+InfluxDB v1.8's `influx` CLI also includes a `-type=` option that, when set to `flux`, will start an
 interactive Flux Read-Eval-Print-Loop (REPL) allowing you to write and run Flux queries from the command line.
 
 ---
 
-_For information about downloading and installing InfluxDB v1.7, see [InfluxDB installation](/influxdb/latest/introduction/installation)._
+_For information about downloading and installing InfluxDB, see [InfluxDB installation](/influxdb/latest/introduction/installation)._
 
 ---
 
-##### Chronograf v1.7+
+##### Chronograf v1.8+
 **Not required but strongly recommended**.
-Chronograf v1.7's Data Explorer provides a user interface (UI) for writing Flux scripts and visualizing results.
-Dashboards in Chronograf v1.7+ also support Flux queries.
+Chronograf v1.8's Data Explorer provides a user interface (UI) for writing Flux scripts and visualizing results.
+Dashboards in Chronograf v1.8+ also support Flux queries.
 
 ---
 
-_For information about downloading and installing Chronograf v1.7, see [Chronograf installation](/chronograf/v1.7/introduction/installation)._
+_For information about downloading and installing Chronograf, see [Chronograf installation](/chronograf/latest/introduction/installation)._
 
 ---
 

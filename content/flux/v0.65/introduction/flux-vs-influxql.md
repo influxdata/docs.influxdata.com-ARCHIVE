@@ -26,6 +26,7 @@ This article outlines many of the tasks possible with Flux but not InfluxQL and 
 - [Pivot](#pivot)
 - [Histograms](#histograms)
 - [Covariance](#covariance)
+- [Cast booleans to integers](#cast-booleans-to-integers)
 - [String manipulation and data shaping](#string-manipulation-and-data-shaping)
 - [Work with geo-temporal data](#work-with-geo-temporal-data)
 
@@ -249,6 +250,23 @@ table2 = from(bucket: "telegraf/autogen")
   )
 
 cov(x: table1, y: table2, on: ["_time", "_field"])
+```
+
+### Cast booleans to integers
+InfluxQL supports type casting, but only for numeric data types (floats to integers and vice versa).
+[Flux type conversion functions](/flux/v0.65/stdlib/built-in/transformations/type-conversions/)
+provide much broader support for type conversions and let you perform some long-requested
+operations like casting a boolean values to integers.
+
+##### Cast boolean field values to integers
+```js
+from(bucket: "telegraf/autogen")
+  |> range(start: -1h)
+  |> filter(fn: (r) =>
+    r._measurement == "m" and
+    r._field == "bool_field"
+  )
+  |> toInt()
 ```
 
 ### String manipulation and data shaping
