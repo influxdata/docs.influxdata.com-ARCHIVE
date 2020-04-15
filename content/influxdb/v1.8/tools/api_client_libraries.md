@@ -13,7 +13,7 @@ menu:
 
 InfluxDB client libraries are language-specific packages that integrate with the InfluxDB 2.0 API and support both **InfluxDB 1.8+** and **InfluxDB 2.0**.
 
->**Note:** We recommend using the new client libraries on this page to write to the `/api/v2/write` endpoint and prepare for conversion to InfluxDB 2.0 and InfluxDB Cloud 2.0. For more information, see [InfluxDB 2.0 API compatibility endpoints](/influxdb/v1.8/tools/api/#influxdb-2.0-compatibility-endpoints). Client libraries for [InfluxDB 1.7 and earlier](/influxdb/v1.7/tools/api_client_libraries/) may continue to work, but are not maintained by InfluxData.
+>**Note:** We recommend using the new client libraries on this page to leverage the new read (via Flux) and write APIs and prepare for conversion to InfluxDB 2.0 and InfluxDB Cloud 2.0. For more information, see [InfluxDB 2.0 API compatibility endpoints](/influxdb/v1.8/tools/api/#influxdb-2.0-compatibility-endpoints). Client libraries for [InfluxDB 1.7 and earlier](/influxdb/v1.7/tools/api_client_libraries/) may continue to work, but are not maintained by InfluxData.
 
 ## Client libraries
 
