@@ -18,16 +18,16 @@ Support for the Flux language and queries has been updated in this release. To l
 * Use the new [`influx -type=flux`](/influxdb/v1.8/tools/shell/#type) option to enable the Flux REPL shell for creating Flux queries.
 
 * This version include capabilities such as: 
--- Join data residing in multiple measurements, buckets, or data sources
--- Performing mathematical operations using data gathered across measurements/buckets
--- String manipulation through an extensive library of string related functions
--- Data shaping through `pivot()` and other functions
--- Group based on any data column: tags, fields, etc.
--- Window and aggregate based on calendar months, years
--- Support for joining data across Influx and non-Influx sources
--- Casting booleans to integers
--- Experimental functions for geo-temporal queries
--- ...and so many more functions for working with data
+    - Join data residing in multiple measurements, buckets, or data sources
+    - Performing mathematical operations using data gathered across measurements/buckets
+    - String manipulation through an extensive library of string related functions
+    - Data shaping through `pivot()` and other functions
+    - Group based on any data column: tags, fields, etc.
+    - Window and aggregate based on calendar months, years
+    - Support for joining data across Influx and non-Influx sources
+    - Casting booleans to integers
+    - Experimental functions for geo-temporal queries
+    - ...and so many more functions for working with data
 
   > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
 
@@ -40,7 +40,10 @@ while readying your implementation for a move to InfluxDB 2.0 Cloud when you are
 
 #### Operational Improvements
 - Add [`influx inspect verify-tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
-- Add [offline series compaction to `influx_inspect buildtsi`](/influxdb/v1.8/administration/compact-series-file/).
+- Add [offline series compaction to `influx_inspect buildtsi`](/influxdb/v1.8/administration/compact-series-file/). 
+Currently, if you are using the Time Series Index [tsi1](/influxdb/v1.8/concepts/time-series-index/), the index files grow 
+over time and are not automatically compacted.  This tool provides the ability for an administrator to perform a compaction
+while the database is offline.
 - Add support for connecting to a custom HTTP endpoint using `-url-prefix` in [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index). This makes it possible to use the Influx CLI to connect to an InfluxDB instance running behind a reverse proxy with a custom subpath / endpoint.
 
 #### Security Enhancements 
