@@ -29,7 +29,9 @@ This document covers setting up and managing authentication and authorization in
 </table>
 
 > **Note:** Authentication and authorization should not be relied upon to prevent access and protect data from malicious actors.
-If additional security or compliance features are desired, InfluxDB should be run behind a third-party service.
+If additional security or compliance features are desired, InfluxDB should be run behind a third-party service. If InfluxDB 
+is being deployed on a publicly accessible endpoint, we strongly recommend authentication be enabled. Otherwise the data will
+be publicly available to any unauthenticated user.
 
 ## Authentication
 
