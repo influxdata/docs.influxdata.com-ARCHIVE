@@ -11,27 +11,56 @@ menu:
 
 ### Features
 
+#### Flux v0.65 ready for production use
+
+This release updates support for the Flux language and queries. To learn about Flux design principles and see how to get started with Flux, see [Introduction to Flux](/flux/v0.65/introduction/).
+
+* Use the new [`influx -type=flux`](/influxdb/v1.8/tools/shell/#type) option to enable the Flux REPL shell for creating Flux queries.
+
+* Flux v0.65 includes the following capabilities:
+    - Join data residing in multiple measurements, buckets, or data sources
+    - Perform mathematical operations using data gathered across measurements/buckets
+    - Manipulate Strings through an extensive library of string related functions
+    - Shape data through `pivot()` and other functions
+    - Group based on any data column: tags, fields, etc.
+    - Window and aggregate based on calendar months, years
+    - Join data across Influx and non-Influx sources
+    - Cast booleans to integers
+    - Query geo-temporal data (experimental)
+    - Many additional functions for working with data
+
+
+  > We're evaluating the need for Flux query management controls equivalent to existing InfluxQL [query management controls](/influxdb/v1.8/troubleshooting/query_management/#configuration-settings-for-query-management) based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
+
+#### Forward compatibility
+
+- [InfluxDB 2.0 API compatibility endpoints](/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints) are now part of the InfluxDB 1.x line.  
+This allows you to leverage the new InfluxDB 2.0 [client libraries](/influxdb/v1.8/tools/api_client_libraries/)
+for both writing and querying data with Flux. Take advantage of the latest client libraries
+while readying your implementation for a move to InfluxDB 2.0 Cloud when you're ready to scale.
+
+#### Operational improvements
 - Add [`influx inspect verify-tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
 - Add [offline series compaction to `influx_inspect buildtsi`](/influxdb/v1.8/administration/compact-series-file/).
-- Add support for connecting to a custom HTTP endpoint using `-url-prefix` in [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index).
-- Update Go version to 1.13.8.
-- Add [InfluxDB 2.0 API compatibility endpoints](/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints) to use InfluxDB 2.0 client libraries.
-- Enhance support for bound parameters.
-- Add support to enable [TLS 1.3 configuration](/influxdb/v1.8/administration/config/#transport-layer-security-tls-settings) and update current list of [Go ciphers](https://golang.org/pkg/crypto/tls/#pkg-constants).
-- Update Flux version to v0.65.0.
-  To learn about Flux design principles and see how to enable and get started with Flux, see [Introduction to Flux](/flux/v0.65/introduction/).
+  If you're currently using the Time Series Index [(tsi1)](/influxdb/v1.8/concepts/time-series-index/), the index files grow over time and aren't automatically compacted.  This tool enables an administrator to perform a compaction while the database is offline.
+- Add support for connecting to a custom HTTP endpoint using `-url-prefix` in the [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index). This allows the Influx CLI to connect to an InfluxDB instance running behind a reverse proxy with a custom subpath `/` endpoint.
 
-  > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
+#### Security enhancements
+- Add upport for [TLS 1.3 configuration](/influxdb/v1.8/administration/config/#transport-layer-security-tls-settings) and update current list of [Go ciphers](https://golang.org/pkg/crypto/tls/#pkg-constants).
+- Expand support for bound parameters in queries to prevent injection attacks.
+
+#### Other updates
+- Update Go version to 1.13.8.
 
 ### Bug fixes
 
+- Skip `WriteSnapshot` during backup if `snapshotter` is busy. This fix eliminates contention between snapshot and backup processes, allowing backups to complete more reliably.
 - Rebuild the series index when data is actually deleted (not when deleted data is only found in cache or outside of time range).
 - Parse Accept header correctly.
 - Upgrade compaction error log from `Info` to `Warn`.
 - Remove double increment of `meta` index.
 - Improve series cardinality limit for `inmem` index.
 - Ensure all block data returned.
-- Skip `WriteSnapshot` during back up if `snapshotter` is busy.
 - Reduce `influxd` and `influx` startup time if Flux isn't used.
 - Fix bugs in `-compact-series-file` flag.
 - Fix a SIGSEGV when accessing `tsi` active log.
@@ -42,7 +71,7 @@ menu:
 - This release is built using Go 1.12.10 which eliminates the
   [HTTP desync vulnerability](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn).
 
-### Bugfixes
+### Bug fixes
 - Guard against compaction burst throughput limit.
 - Replace TSI compaction wait group with counter.
 - Update InfluxQL dependency.
