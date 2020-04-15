@@ -252,7 +252,7 @@ cov(x: table1, y: table2, on: ["_time", "_field"])
 ```
 
 ### String manipulation and data shaping
-InfluxQL doesn't support any string manipulation when querying data.
+InfluxQL doesn't support string manipulation when querying data.
 The [Flux Strings package](/flux/v0.65/stdlib/strings/) is a collection of functions that operate on string data.
 When combined with the [`map()` function](/flux/v0.65/stdlib/built-in/transformations/map/),
 functions in the string package allow for operations like string sanitization and normalization.

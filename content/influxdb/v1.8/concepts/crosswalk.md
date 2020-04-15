@@ -112,7 +112,7 @@ InfluxDB timestamps must be in UNIX epoch (GMT) or formatted as a date-time stri
 For more detailed descriptions of the InfluxDB terms mentioned in this section see our [Glossary of Terms](/influxdb/v1.8/concepts/glossary/).
 
 ## Query languages
-InfluxDB provides supports multiple query languages:
+InfluxDB supports multiple query languages:
 
 - [Flux](#flux)
 - [InfluxQL](#influxql)
