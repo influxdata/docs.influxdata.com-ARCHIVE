@@ -42,7 +42,7 @@ while readying your implementation for a move to InfluxDB 2.0 Cloud when you are
 #### Operational Improvements
 - Add [`influx inspect verify-tombstone` command](/influxdb/v1.8/tools/influx_inspect/#verify-tombstone)
 - Add [offline series compaction to `influx_inspect buildtsi`](/influxdb/v1.8/administration/compact-series-file/). 
-Currently, if you are using the Time Series Index [tsi1](/influxdb/v1.8/concepts/time-series-index/), the index files grow 
+Currently, if you are using the Time Series Index [(tsi1)](/influxdb/v1.8/concepts/time-series-index/), the index files grow 
 over time and are not automatically compacted.  This tool provides the ability for an administrator to perform a compaction
 while the database is offline.
 - Add support for connecting to a custom HTTP endpoint using `-url-prefix` in [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index). This makes it possible to use the Influx CLI to connect to an InfluxDB instance running behind a reverse proxy with a custom subpath / endpoint.
