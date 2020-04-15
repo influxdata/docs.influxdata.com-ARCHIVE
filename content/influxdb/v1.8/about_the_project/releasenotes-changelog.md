@@ -30,7 +30,7 @@ Support for the Flux language and queries has been updated in this release. To l
     - ...and so many more functions for working with data
   
 
-  > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
+  > We're evaluating the need for Flux query management controls equivalent to existing InfluxQL [query management controls](/influxdb/v1.8/troubleshooting/query_management/#configuration-settings-for-query-management) based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
 
 #### Forward Compatibility
 
