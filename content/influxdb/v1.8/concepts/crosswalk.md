@@ -7,16 +7,10 @@ menu:
     parent: Concepts
 ---
 
-# What's in a database?
-
-This page gives SQL users an overview of how InfluxDB is like an SQL database and how it's not.
-It highlights some of the major distinctions between the two and provides a loose crosswalk between the different database terminologies and query languages.
-
-## In general...
-
-InfluxDB is designed to work with time-series data.
-SQL databases can handle time-series but weren't created strictly for that purpose.
-In short, InfluxDB is made to store a large volume of time-series data and perform real-time analysis on those data, quickly.
+InfluxDB is similar to a SQL database, but different in many ways.
+InfluxDB is purpose-built for time series data.
+Relational databases _can_ handle time series data, but are not optimized for common time series workloads.
+InfluxDB is designed to store large volumes of time series data and quickly perform real-time analysis on that data.
 
 ### Timing is everything
 
@@ -117,7 +111,28 @@ InfluxDB timestamps must be in UNIX epoch (GMT) or formatted as a date-time stri
 
 For more detailed descriptions of the InfluxDB terms mentioned in this section see our [Glossary of Terms](/influxdb/v1.8/concepts/glossary/).
 
-## InfluxQL and SQL
+## Query languages
+InfluxDB provides supports multiple query languages:
+
+- [Flux](#flux)
+- [InfluxQL](#influxql)
+
+### Flux
+
+[Flux](/flux/latest/introduction) is a data scripting language designed for querying, analyzing, and acting on time series data.
+Beginning with **InfluxDB 1.8.0**, Flux is available for production use along side InfluxQL.
+
+For those familiar with [InfluxQL](#influxql-and-sql), Flux is intended to address
+many of the outstanding feature requests that we've received since introducing InfluxDB 1.0.
+For a comparison between Flux and InfluxQL, see [Flux vs InfluxQL](/flux/latest/introduction/flux-vs-influxql).
+
+Flux is the primary language for working with data in [InfluxDB 2.0 OSS](https://v2.docs.influxdata.com/v2.0/get-started)
+(currently in _beta_) and [InfluxDB Cloud 2.0](https://v2.docs.influxdata.com/v2.0/cloud/get-started/),
+a generally available Platform as a Service (PaaS) available across multiple Cloud Service Providers.
+Using Flux with InfluxDB 1.8+ lets you get familiar with Flux concepts and syntax
+and prepare for InfluxDB 2.0 OSS general availability planned for later this year.
+
+### InfluxQL
 
 InfluxQL is an SQL-like query language for interacting with InfluxDB.
 It has been lovingly crafted to feel familiar to those coming from other
@@ -181,7 +196,7 @@ For a full list check out the [functions](/influxdb/v1.8/query_language/function
 
 Now that you have the general idea, check out our [Getting Started Guide](/influxdb/v1.8/introduction/getting-started/).
 
-## A note on why InfluxDB isn't CRUD
+## InfluxDB is not CRUD
 
 InfluxDB is a database that has been optimized for time series data.
 This data commonly comes from sources like distributed sensor groups, click data from large websites, or lists of financial transactions.
