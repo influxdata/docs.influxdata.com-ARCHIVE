@@ -46,7 +46,7 @@ while readying your implementation for a move to InfluxDB 2.0 Cloud when you're 
 - Add support for connecting to a custom HTTP endpoint using `-url-prefix` in the [`influx` CLI](/influxdb/v1.8/tools/influx-cli/_index). This allows the Influx CLI to connect to an InfluxDB instance running behind a reverse proxy with a custom subpath `/` endpoint.
 
 #### Security enhancements
-- Add upport for [TLS 1.3 configuration](/influxdb/v1.8/administration/config/#transport-layer-security-tls-settings) and update current list of [Go ciphers](https://golang.org/pkg/crypto/tls/#pkg-constants).
+- Add support for [TLS 1.3 configuration](/influxdb/v1.8/administration/config/#transport-layer-security-tls-settings) and update current list of [Go ciphers](https://golang.org/pkg/crypto/tls/#pkg-constants).
 - Expand support for bound parameters in queries to prevent injection attacks.
 
 #### Other updates
