@@ -36,7 +36,7 @@ Support for the Flux language and queries has been updated in this release. To l
 
 - [InfluxDB 2.0 API compatibility endpoints](/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints) are now part of the InfluxDB 1.x line.  
 This allows you to leverage the new InfluxDB 2.0 [client libraries](/influxdb/v1.8/tools/api_client_libraries/) 
-for both query (using Flux) and writing data. This allows you to take advantage of the latest client libraries 
+for both query (using Flux) and writing data. You can take advantage of the latest client libraries 
 while readying your implementation for a move to InfluxDB 2.0 Cloud when you are ready to scale.
 
 #### Operational Improvements
