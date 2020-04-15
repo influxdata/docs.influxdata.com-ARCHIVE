@@ -135,9 +135,12 @@ and prepare for InfluxDB 2.0 OSS general availability planned for later this yea
 ### InfluxQL
 
 InfluxQL is an SQL-like query language for interacting with InfluxDB.
-It has been lovingly crafted to feel familiar to those coming from other
+It has been crafted to feel familiar to those coming from other
 SQL or SQL-like environments while also providing features specific
 to storing and analyzing time series data.
+However **InfluxQL is not SQL** and lacks support for more advanced operations
+like `UNION`, `JOIN` and `HAVING` that SQL power-users are accustomed to.
+This functionality is available with [Flux](/flux/latest/introduction).
 
 InfluxQL's `SELECT` statement follows the form of an SQL `SELECT` statement:
 
