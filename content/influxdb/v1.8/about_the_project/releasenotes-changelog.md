@@ -56,7 +56,7 @@ while the database is offline.
   
 ### Bug fixes
 
-- Skip `WriteSnapshot` during back up if `snapshotter` is busy. This fix eliminates contention between snapshots and backup processe which should allow backups to more reliably complete.
+- Skip `WriteSnapshot` during back up if `snapshotter` is busy. This fix eliminates contention between snapshot and backup processes which should allow backups to more reliably complete.
 - Rebuild the series index when data is actually deleted (not when deleted data is only found in cache or outside of time range).
 - Parse Accept header correctly.
 - Upgrade compaction error log from `Info` to `Warn`.
