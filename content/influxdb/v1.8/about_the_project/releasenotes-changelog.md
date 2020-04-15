@@ -28,6 +28,7 @@ Support for the Flux language and queries has been updated in this release. To l
     - Casting booleans to integers
     - Experimental functions for geo-temporal queries
     - ...and so many more functions for working with data
+  
 
   > We're evaluating the need for Flux controls equivalent to existing InfluxQL controls based on your feedback. Please join the discussion on [InfluxCommunity](https://community.influxdata.com/), [Slack](https://influxcommunity.slack.com/), or [GitHub](https://github.com/influxdata/flux). InfluxDB Enterprise customers, please contact <support@influxdata.com>.
 
