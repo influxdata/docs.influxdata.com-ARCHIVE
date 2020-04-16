@@ -24,7 +24,10 @@ There are, however, general guidelines to follow and pitfalls to avoid when desi
 
 ### Encouraged schema design
 
-In no particular order, we recommend that you:
+We recommend that you:
+
+- [Encode meta data in tags](#encode-meta-data-in-tags)
+- [Avoid using keywords as tag or field names](#avoid-using-keywords-as-tag-or-field-names)
 
 #### Encode meta data in tags
 
@@ -33,21 +36,26 @@ This means that queries on tags are more performant than those on fields.
 
 In general, your queries should guide what gets stored as a tag and what gets stored as a field:
 
-* Store data in tags if they're commonly-queried meta data
-* Store data in tags if you plan to use them with `GROUP BY()`
-* Store data in fields if you plan to use them with an [InfluxQL](/influxdb/v1.8/query_language/functions/) or [Flux](/flux/v0.65/) function
-* Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.8/concepts/glossary/#tag-value) are always interpreted as strings
+- Store data in tags if they're commonly-queried meta data
+- Store data in tags if you plan to use them with `GROUP BY()`
+- Store data in fields if you plan to use them with an [InfluxQL](/influxdb/v1.8/query_language/functions/) or [Flux](/flux/v0.65/) function
+- Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.8/concepts/glossary/#tag-value) are always interpreted as strings
 
-#### Avoid using keywords as field or tag names
+#### Avoid using keywords as tag or field names
 
-Not required, but simplifies writing queries because you won't have to wrap field or tag names in double quotes.
+Not required, but simplifies writing queries because you won't have to wrap tag or field names in double quotes.
 See [InfluxQL](https://github.com/influxdata/influxql/blob/master/README.md#keywords) and [Flux](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#keywords) keywords to avoid.
 
-Also, if a field or tag name contains characters other than `[A-z,_]`, you must wrap it in double quotes in a query.
+Also, if a tag or field name contains characters other than `[A-z,_]`, you must wrap it in double quotes in a query.
 
 ### Discouraged schema design
 
-In no particular order, we recommend that you:
+We recommend that you:
+
+- [Avoid too many series](#avoid-too-many-series)
+- [Avoid the same name for a tag and a field](#avoid-the-same-name-for-a-tag-and-a-field)
+- [Avoid encoding data in measurement names](#avoid-encoding-data-in-measurement-names)
+- [Avoid putting more than one piece of information in one tag](#avoid-putting-more-than-one-piece-of-information-in-one-tag)
 
 #### Avoid too many series
 
@@ -64,7 +72,7 @@ If you inadvertently add the same name for a tag and field key, see
 [Frequently asked questions](/influxdb/v1.8/troubleshooting/frequently-asked-questions/#tag-and-field-key-with-the-same-name)
 for information about how to query the data predictably and how to fix the issue.
 
-#### Don't encode data in measurement names
+#### Avoid encoding data in measurement names
 
 InfluxDB queries merge data that falls within the same [measurement](/influxdb/v1.8/concepts/glossary/#measurement); it's better to differentiate data with [tags](/influxdb/v1.8/concepts/glossary/#tag) than with detailed measurement names. If you encode data in a measurement name, you must use a regular expression to query the data, making some queries more complicated or impossible.
 
@@ -120,11 +128,9 @@ from(bucket:"<database>/<retention_policy>")
 > SELECT mean("temp") FROM "weather_sensor" WHERE "region" = 'north'
 ```
 
-### Don't put more than one piece of information in one tag
+### Avoid putting more than one piece of information in one tag
 
 Splitting a single tag with multiple pieces into separate tags simplifies your queries and reduces the need for regular expressions.
-
-_Example:_
 
 Consider the following schema represented by line protocol.
 
