@@ -36,10 +36,12 @@ This means that queries on tags are more performant than those on fields.
 
 In general, your queries should guide what gets stored as a tag and what gets stored as a field:
 
-- Store data in tags if they're commonly-queried meta data
-- Store data in tags if you plan to use them with `GROUP BY()`
-- Store data in fields if you plan to use them with an [InfluxQL](/influxdb/v1.8/query_language/functions/) or [Flux](/flux/v0.65/) function
-- Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.8/concepts/glossary/#tag-value) are always interpreted as strings
+- If you plan to use [Flux](flux/v0.65/) to query data, store data in fields if you expect different values for every point. Otherwise, store data in tags.
+- If you plan to use [InfluxQL](/influxdb/v1.8/query_language/) to query your data:
+  - Store commonly-queried meta data in tags
+  - Store data in tags if you plan to use them with `GROUP BY()`
+  - Store data in fields if you plan to use them with an [InfluxQL](/influxdb/v1.8/query_language/functions/) function
+  - Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.8/concepts/glossary/#tag-value) are always interpreted as strings
 
 #### Avoid using keywords as tag or field names
 
@@ -59,7 +61,7 @@ We recommend that you:
 
 #### Avoid too many series
 
-[Tags](/influxdb/v1.8/concepts/glossary/#tag) containing highly variable information like UUIDs, hashes, and random strings lead to a large number of series in the database, also known as high series cardinality. High series cardinality is a primary driver of high memory usage for many database workloads.
+[Tags](/influxdb/v1.8/concepts/glossary/#tag) containing highly variable information like UUIDs, hashes, and random strings lead to a large number of [series](/influxdb/v1.8/concepts/glossary/#series) in the database, also known as high series cardinality. High series cardinality is a primary driver of high memory usage for many database workloads.
 
 See [Hardware sizing guidelines](/influxdb/v1.8/guides/hardware_sizing/#general-hardware-guidelines-for-a-single-node) for [series cardinality](/influxdb/v1.8/concepts/glossary/#series-cardinality) recommendations based on your hardware. If the system has memory constraints, consider storing high-cardinality data as a field rather than a tag.
 
@@ -104,16 +106,16 @@ Use Flux or InfluxQL to calculate the average `temp` for blueberries in the `nor
 
 ##### Flux
 
-```sh
+```js
 // Schema 1 - Query for data encoded in the measurement name
 from(bucket:"<database>/<retention_policy>")
-  |> range(start:2016-08-30T00:00:00)
+  |> range(start:2016-08-30T00:00:00Z)
   |> filter(fn: (r) =>  r._measurement =~ /\.north$/ and r._field == "temp")
   |> mean()
 
 // Schema 2 - Query for data encoded in tags
 from(bucket:"<database>/<retention_policy>")
-  |> range(start:2016-08-30T00:00:00)
+  |> range(start:2016-08-30T00:00:00Z)
   |> filter(fn: (r) =>  r._measurement == "weather_sensor" and r.region == "north" and r._field == "temp")
   |> mean()
 ```
@@ -156,16 +158,16 @@ Schema 2 is preferable because using multiple tags, you don't need a regular exp
 
 ##### Flux
 
-```sh
+```js
 // Schema 1 -  Query for multiple data encoded in a single tag
 from(bucket:"<database>/<retention_policy>")
-  |> range(start:2016-08-30T00:00:00)
+  |> range(start:2016-08-30T00:00:00Z)
   |> filter(fn: (r) =>  r._measurement == weather_sensor and r.location =~ /\.north$/ and r._field == "temp")
   |> mean()
 
 // Schema 2 - Query for data encoded in multiple tags
 from(bucket:"<database>/<retention_policy>")
-  |> range(start:2016-08-30T00:00:00)
+  |> range(start:2016-08-30T00:00:00Z)
   |> filter(fn: (r) =>  r._measurement == "weather_sensor" and r.region == "north" and r._field == "temp")
   |> mean()
 ```

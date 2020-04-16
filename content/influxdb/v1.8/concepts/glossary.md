@@ -23,6 +23,10 @@ InfluxData recommends batch sizes of 5,000-10,000 points, although different use
 
 Related entries: [InfluxDB line protocol](/influxdb/v1.8/concepts/glossary/#influxdb-line-protocol), [point](/influxdb/v1.8/concepts/glossary/#point)
 
+## bucket
+
+A bucket is a named location where time series data is stored in InfluxDB 2.0. In InfluxDB 1.8+, you can write data to buckets using Flux and the [`/api/v2/write` HTTP endpoint](/influxdb/v1.8/tools/api/#api-v2-write-http-endpoint). All buckets have a retention policy, a duration of time that each data point persists. A bucket belongs to an organization.
+
 ## continuous query (CQ)
 
 An InfluxQL query that runs automatically and periodically within a database.

@@ -10,41 +10,37 @@ aliases:
 
 InfluxDB can handle hundreds of thousands of data points per second.
 Working with that much data over a long period of time can create storage
-concerns.
-A natural solution is to downsample the data; keep the high precision raw data
-for only a limited time, and store the lower precision, summarized data for much
-longer or forever.
+concerns. A natural solution is to downsample the data; keep the high precision raw data
+for only a limited time, and store the lower precision, summarized data longer.
 
-InfluxDB offers two features - continuous queries (CQ) and retention policies
-(RP) - that automate the process of downsampling data and expiring old data.
-This guide describes a practical use case for CQs and RPs and covers how to
-set up those features in InfluxDB databases.
+Automate the process of downsampling data and expiring old data using one of the following features:
+
+- For InfluxQL, use continuous queries (CQ) and retention policies
+- For Flux, use tasks
 
 ### Definitions
 
-A **continuous query** (CQ) is an InfluxQL query that runs automatically and
-periodically within a database.
-CQs require a function in the `SELECT` clause and must include a
+- **Continuous query** (CQ) is an InfluxQL query that runs automatically and
+periodically within a database. CQs require a function in the `SELECT` clause and must include a
 `GROUP BY time()` clause.
 
-A **retention policy** (RP) is the part of InfluxDB data structure
-that describes for how long InfluxDB keeps data.
-InfluxDB compares your local server's timestamp to the timestamps on your data
-and deletes data that are older than the RP's `DURATION`.
+- **Retention policy** (RP) is the part of InfluxDB data structure that describes for how long InfluxDB keeps data.
+InfluxDB compares your local server's timestamp to the timestamps on your data and deletes data older than the RP's `DURATION`.
 A single database can have several RPs and RPs are unique per database.
 
-This guide will not go into detail about the syntax for creating and managing
-CQs and RPs.
-If you're new to both concepts, we recommend looking over the detailed
-[CQ documentation](/influxdb/v1.8/query_language/continuous_queries/) and
-[RP documentation](/influxdb/v1.8/query_language/database_management/#retention-policy-management).
+- **Tasks**
+
+This guide doesn't go into detail about the syntax for creating and managing
+CQs and RPs. If you're new to both concepts, we recommend reviewing the following:
+
+- [CQ documentation](/influxdb/v1.8/query_language/continuous_queries/) and
+- [RP documentation](/influxdb/v1.8/query_language/database_management/#retention-policy-management).
 
 ### Sample data
 
-This section uses fictional real-time data that track the number of food orders
+This section uses fictional real-time data to track the number of food orders
 to a restaurant via phone and via website at ten second intervals.
-We will store those data in a
-[database](/influxdb/v1.8/concepts/glossary/#database) called `food_data`, in
+We store this data in a [database](/influxdb/v1.8/concepts/glossary/#database) or [bucket]() called `food_data`, in
 the [measurement](/influxdb/v1.8/concepts/glossary/#measurement) `orders`, and
 in the [fields](/influxdb/v1.8/concepts/glossary/#field) `phone` and `website`.
 
