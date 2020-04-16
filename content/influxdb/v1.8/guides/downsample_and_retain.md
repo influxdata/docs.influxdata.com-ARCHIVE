@@ -8,30 +8,22 @@ aliases:
   - /influxdb/v1.8/guides/downsampling_and_retention/
 ---
 
-InfluxDB can handle hundreds of thousands of data points per second.
-Working with that much data over a long period of time can create storage
-concerns. A natural solution is to downsample the data; keep the high precision raw data
-for only a limited time, and store the lower precision, summarized data longer.
-
-Automate the process of downsampling data and expiring old data using one of the following features:
-
-- For InfluxQL, use continuous queries (CQ) and retention policies
-- For Flux, use tasks
+InfluxDB can handle hundreds of thousands of data points per second. Working with that much data over a long period of time can create storage concerns.
+A natural solution is to downsample the data; keep the high precision raw data for only a limited time, and store the lower precision, summarized data longer.
+This guide describes how to automate the process of downsampling data and expiring old data using InfluxQL. To downsample and retain data using Flux,
+see [Process Data with InfluxDB tasks](https://v2.docs.influxdata.com/v2.0/process-data/).
 
 ### Definitions
 
-- **Continuous query** (CQ) is an InfluxQL query that runs automatically and
-periodically within a database. CQs require a function in the `SELECT` clause and must include a
-`GROUP BY time()` clause.
+- **Continuous query** (CQ) is an InfluxQL query that runs automatically and periodically within a database.
+CQs require a function in the `SELECT` clause and must include a `GROUP BY time()` clause.
 
 - **Retention policy** (RP) is the part of InfluxDB data structure that describes for how long InfluxDB keeps data.
 InfluxDB compares your local server's timestamp to the timestamps on your data and deletes data older than the RP's `DURATION`.
 A single database can have several RPs and RPs are unique per database.
 
-- **Tasks**
-
-This guide doesn't go into detail about the syntax for creating and managing
-CQs and RPs. If you're new to both concepts, we recommend reviewing the following:
+This guide doesn't go into detail about the syntax for creating and managing CQs and RPs or tasks.
+If you're new to these concepts, we recommend reviewing the following:
 
 - [CQ documentation](/influxdb/v1.8/query_language/continuous_queries/) and
 - [RP documentation](/influxdb/v1.8/query_language/database_management/#retention-policy-management).
