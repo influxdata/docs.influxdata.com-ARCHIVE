@@ -104,14 +104,14 @@ Use Flux or InfluxQL to calculate the average `temp` for blueberries in the `nor
 
 ##### Flux
 
-```
-# Schema 1 - Query for data encoded in the measurement name
+```sh
+// Schema 1 - Query for data encoded in the measurement name
 from(bucket:"<database>/<retention_policy>")
   |> range(start:2016-08-30T00:00:00)
   |> filter(fn: (r) =>  r._measurement =~ /\.north$/ and r._field == "temp")
   |> mean()
 
-# Schema 2 - Query for data encoded in tags
+// Schema 2 - Query for data encoded in tags
 from(bucket:"<database>/<retention_policy>")
   |> range(start:2016-08-30T00:00:00)
   |> filter(fn: (r) =>  r._measurement == "weather_sensor" and r.region == "north" and r._field == "temp")
@@ -156,14 +156,14 @@ Schema 2 is preferable because using multiple tags, you don't need a regular exp
 
 ##### Flux
 
-```
-# Schema 1 -  Query for multiple data encoded in a single tag
+```sh
+// Schema 1 -  Query for multiple data encoded in a single tag
 from(bucket:"<database>/<retention_policy>")
   |> range(start:2016-08-30T00:00:00)
   |> filter(fn: (r) =>  r._measurement == weather_sensor and r.location =~ /\.north$/ and r._field == "temp")
   |> mean()
 
-# Schema 2 - Query for data encoded in multiple tags
+// Schema 2 - Query for data encoded in multiple tags
 from(bucket:"<database>/<retention_policy>")
   |> range(start:2016-08-30T00:00:00)
   |> filter(fn: (r) =>  r._measurement == "weather_sensor" and r.region == "north" and r._field == "temp")
