@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-Flux is packaged with InfluxDB v1.7+ and does not require any additional installation,
+Flux is packaged with **InfluxDB v1.8+** and does not require any additional installation,
 however it is **disabled by default and needs to be enabled**.
 
 ## Enable Flux
