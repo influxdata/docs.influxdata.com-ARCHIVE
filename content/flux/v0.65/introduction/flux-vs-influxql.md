@@ -23,6 +23,7 @@ This article outlines many of the tasks possible with Flux but not InfluxQL and 
 - [Group by any column](#group-by-any-column)
 - [Window by calendar months and years](#window-by-calendar-months-and-years)
 - [Work with multiple data sources](#work-with-multiple-data-sources)
+- [DatePart-like queries](#datepart-like-queries)
 - [Pivot](#pivot)
 - [Histograms](#histograms)
 - [Covariance](#covariance)
@@ -179,6 +180,21 @@ enrichedData
 _For an in-depth walkthrough of querying SQL data, see [Query SQL data sources](/flux/v0.65/guides/sql)._
 
 ---
+
+### DatePart-like queries
+InfluxQL doesn't support DatePart-like queries that only return results during specified hours of the day.
+The Flux [`hourSelection` function](/flux/v0.65/stdlib/built-in/transformations/hourselection/)
+returns only data with time values in a specified hour range.
+
+```js
+from(bucket: "telegraf/autogen")
+  |> range(start: -1h)
+  |> filter(fn: (r) =>
+    r._measurement == "cpu" and
+    r.cpu == "cpu-total"
+  )
+  |> hourSelection(start: 9, stop: 17)
+```
 
 ### Pivot
 Pivoting data tables has never been supported in InfluxQL.
