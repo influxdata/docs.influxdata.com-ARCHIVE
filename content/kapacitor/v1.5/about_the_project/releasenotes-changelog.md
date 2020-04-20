@@ -5,6 +5,16 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.5 [2020-04-20]
+
+## Features
+
+- Switch release checksums from MD5 (Message Digest, 128-bit digest) to SHA-256 (Secure Hash Algorithm 2, 256-bit digest).
+
+### Bug fixes
+
+- Update the Kafka client to ensure errors are added to Kapacitor logs.
+
 ## v1.5.4 [2020-01-16]
 
 ## Features
