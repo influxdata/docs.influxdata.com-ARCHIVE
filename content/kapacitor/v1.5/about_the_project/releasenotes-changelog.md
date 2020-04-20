@@ -7,9 +7,9 @@ menu:
 
 ## v1.5.5 [2020-04-20]
 
-## Features
+## Breaking changes
 
-- Switch release checksums from MD5 (Message Digest, 128-bit digest) to SHA-256 (Secure Hash Algorithm 2, 256-bit digest).
+- Update release checksums (used to verify release bits haven't been tampered with) from MD5 (Message Digest, 128-bit digest) to SHA-256 (Secure Hash Algorithm 2, 256-bit digest).
 
 ### Bug fixes
 
