@@ -36,19 +36,17 @@ This means that queries on tags are more performant than those on fields.
 
 In general, your queries should guide what gets stored as a tag and what gets stored as a field:
 
-- If you plan to use [Flux](flux/v0.65/) to query data, store data in fields if you expect different values for every point. Otherwise, store data in tags.
-- If you plan to use [InfluxQL](/influxdb/v1.8/query_language/) to query your data:
-  - Store commonly-queried meta data in tags
-  - Store data in tags if you plan to use them with `GROUP BY()`
-  - Store data in fields if you plan to use them with an [InfluxQL](/influxdb/v1.8/query_language/functions/) function
-  - Store data in fields if you *need* them to be something other than a string - [tag values](/influxdb/v1.8/concepts/glossary/#tag-value) are always interpreted as strings
+- Store commonly-queried meta data in tags
+- Store data in tags if you plan to use them with the InfluxQL `GROUP BY` clause
+- Store data in fields if you plan to use them with an [InfluxQL](/influxdb/v1.8/query_language/functions/) function
+- Store numeric values as fields ([tag values](/influxdb/v1.8/concepts/glossary/#tag-value) only support string values)
 
 #### Avoid using keywords as tag or field names
 
 Not required, but simplifies writing queries because you won't have to wrap tag or field names in double quotes.
 See [InfluxQL](https://github.com/influxdata/influxql/blob/master/README.md#keywords) and [Flux](https://github.com/influxdata/flux/blob/master/docs/SPEC.md#keywords) keywords to avoid.
 
-Also, if a tag or field name contains characters other than `[A-z,_]`, you must wrap it in double quotes in a query.
+Also, if a tag or field name contains characters other than `[A-z,_]`, you must wrap it in double quotes in InfluxQL or use [bracket notation](/flux/latest/introduction/getting-started/syntax-basics/#objects) in Flux.
 
 ### Discouraged schema design
 
@@ -162,7 +160,7 @@ Schema 2 is preferable because using multiple tags, you don't need a regular exp
 // Schema 1 -  Query for multiple data encoded in a single tag
 from(bucket:"<database>/<retention_policy>")
   |> range(start:2016-08-30T00:00:00Z)
-  |> filter(fn: (r) =>  r._measurement == weather_sensor and r.location =~ /\.north$/ and r._field == "temp")
+  |> filter(fn: (r) =>  r._measurement == "weather_sensor" and r.location =~ /\.north$/ and r._field == "temp")
   |> mean()
 
 // Schema 2 - Query for data encoded in multiple tags

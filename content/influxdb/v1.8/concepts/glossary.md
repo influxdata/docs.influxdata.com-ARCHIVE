@@ -25,7 +25,7 @@ Related entries: [InfluxDB line protocol](/influxdb/v1.8/concepts/glossary/#infl
 
 ## bucket
 
-A bucket is a named location where time series data is stored in InfluxDB 2.0. In InfluxDB 1.8+, you can write data to buckets using Flux and the [`/api/v2/write` HTTP endpoint](/influxdb/v1.8/tools/api/#api-v2-write-http-endpoint). All buckets have a retention policy, a duration of time that each data point persists. A bucket belongs to an organization.
+A bucket is a named location where time series data is stored in **InfluxDB 2.0**. In InfluxDB 1.8+, each combination of a database and a retention policy (database/retention-policy) represents a bucket. Use the [InfluxDB 2.0 API compatibility endpoints](/influxdb/v1.8/tools/api#influxdb-2-0-api-compatibility-endpoints) included with InfluxDB 1.8+ to interact with buckets.
 
 ## continuous query (CQ)
 
