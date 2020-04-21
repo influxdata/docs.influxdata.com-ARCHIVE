@@ -25,7 +25,7 @@ are taken:
 ### The Data generator
 
 Data for such a website can be primed and generated to InfluxDB using the Python
-3 script rolled into [page.zip](/downloads/pages.zip)([md5](/downloads/pages.zip.md5), [sha256](/downloads/pages.zip.sha256)) and created for this purpose.
+3 script rolled into [page.zip](/downloads/pages.zip)([sha256](/downloads/pages.zip.sha256)) and created for this purpose.
 It leverages the [InfluxDB-Python](https://github.com/influxdata/influxdb-python) library.
 See that Github project for instructions on how to install the library in Python.
 
@@ -46,7 +46,6 @@ generator now running. CTRL+C to stop
 ```
 
 Priming two days worth of data can take about a minute.
-
 
 ### Joining with batch data
 
