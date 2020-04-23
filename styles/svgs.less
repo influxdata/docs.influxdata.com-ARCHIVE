@@ -1,0 +1,39 @@
+@svg-geo-s2-cell: @c-pool;
+@svg-geo-region: @c-star;
+@svg-geo-point: @c-dreamsicle;
+
+svg[id^='geo-s2-cells-'] {
+  max-width: 250px;
+  .geo-cell{fill:fade(@svg-geo-s2-cell, 25%);stroke:@svg-geo-s2-cell;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;}
+	.geo-region{fill:fade(@svg-geo-region, 35%);stroke:@svg-geo-region;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;}
+	.geo-point{fill:@svg-geo-point;}
+}
+
+span.key-geo-cell {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 .5rem .25rem 0;
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid @svg-geo-s2-cell;
+  background: fade(@svg-geo-s2-cell, 25%);
+  border-radius: 2px;
+}
+span.key-geo-region {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 .5rem .25rem 0;
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid @svg-geo-region;
+  background: fade(@svg-geo-region, 35%);
+  border-radius: 2px;
+}
+span.key-geo-point {
+  display: inline-block;
+  margin: 0 .7rem 0 .25rem;
+  width: .65rem;
+  height: .65rem;
+  border-radius: 50%;
+  background: @svg-geo-point;
+}

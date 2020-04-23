@@ -180,7 +180,6 @@ Flag to enable verbose logging.
 ./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
 ```
 
-
 ### `dumptsi`
 
 Dumps low-level details about TSI files, including `.tsl` log files and `.tsi` index files.

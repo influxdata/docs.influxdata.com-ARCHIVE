@@ -6,6 +6,14 @@ menu:
     parent: About the Project
 ---
 
+## v1.5.5 [2020-04-22]
+
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.5 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+
+### Breaking changes
+
+- Update release checksums (used to verify release bits haven't been tampered with) from MD5 (Message Digest, 128-bit digest) to SHA-256 (Secure Hash Algorithm 2, 256-bit digest).
+
 ## v1.5.4 [2020-01-16]
 
 This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.4 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).

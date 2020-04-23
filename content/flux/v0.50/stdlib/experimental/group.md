@@ -53,7 +53,7 @@ Appends columns defined in the [`columns` parameter](#columns) to all existing
 
 ###### Include the value column in each groups' group key
 ```js
-from(bucket: "example-bucket")
+from(bucket: "telegraf/autogen")
   |> range(start: -1m)
   |> group(columns: ["_value"], mode: "extend")
 ```
