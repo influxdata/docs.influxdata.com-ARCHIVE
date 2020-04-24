@@ -12,7 +12,7 @@ menu:
 > is enabled in the data node configuration settings. For information on the configuration settings, see
 > [Anti-Entropy settings](/enterprise_influxdb/v1.7/administration/config-data-nodes/#anti-entropy-ae-settings).
 
-The [Anti-Entropy service](/enterprise_influxdb/v1.7/administration/anti-entropy) is used by InfluxDB Enterprise clusters to monitor and repair entropy in data nodes and their shards. Access to this API is integrated into the `influxd-ctl` tool which is also available on the meta nodes. [More information about working with `influxd-ctl` and the anti-entropy service can be found here.](https://docs.influxdata.com/enterprise_influxdb/v1.7/administration/cluster-commands/#entropy) 
+Use the [Anti-Entropy service](/enterprise_influxdb/v1.7/administration/anti-entropy) in InfluxDB Enterprise to monitor and repair entropy in data nodes and their shards. To access the Anti-Entropy API and work with this service, use [ `influx-ctl entropy`](/enterprise_influxdb/v1.7/administration/cluster-commands/#entropy) (also available on meta nodes).
 
 The base URL is:
 
