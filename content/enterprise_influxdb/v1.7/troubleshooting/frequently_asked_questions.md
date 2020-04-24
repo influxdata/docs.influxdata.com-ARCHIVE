@@ -13,6 +13,8 @@ menu:
 
 **Known issues**
 
+* [Why do I see entropy when rebalancing shards?]
+(#why-do-I-see-entropy-when-rebalancing-shards?)
 
 **Log errors**
 
@@ -22,9 +24,6 @@ menu:
 * [Why am I seeing `error writing count stats ...: partial write` errors in my data node logs?](#why-am-i-seeing-error-writing-count-stats-partial-write-errors-in-my-data-node-logs)
 * [Why am I seeing `queue is full` errors in my data node logs?](#why-am-i-seeing-queue-is-full-errors-in-my-data-node-logs)
 * [Why am I seeing `unable to determine if "hostname" is a meta node` when I try to add a meta node with `influxd-ctl join`?](#why-am-i-seeing-unable-to-determine-if-hostname-is-a-meta-node-when-i-try-to-add-a-meta-node-with-influxd-ctl-join)
-
-
-**Other**
 
 ## Where can I find InfluxDB Enterprise logs?
 
@@ -82,7 +81,6 @@ Note that for some [write consistency](/enterprise_influxdb/v1.7/concepts/cluste
 
 The `_internal` database collects per-node and also cluster-wide information about the InfluxDB Enterprise cluster. The cluster metrics are replicated to other nodes using `consistency=all`. For a [write consistency](/enterprise_influxdb/v1.7/concepts/clustering/#write-consistency) of `all`, InfluxDB returns a write error (500) for the write attempt even if the points are successfully queued in hinted handoff. Thus, if there are points still in hinted handoff, the `_internal` writes will fail the consistency check and log the error, even though the data is in the durable hinted handoff queue and should eventually persist.
 
-
 ## Why am I seeing `queue is full` errors in my data node logs?
 
 This error indicates that the coordinating node that received the write cannot add the incoming write to the hinted handoff queue for the destination node because it would exceed the maximum size of the queue. This error typically indicates a catastrophic condition for the cluster - one data node may have been offline or unable to accept writes for an extended duration.
@@ -96,3 +94,7 @@ Meta nodes use the `/status` endpoint to determine the current state of another 
 `"nodeType":"meta","leader":"","httpAddr":"<hostname>:8091","raftAddr":"<hostname>:8089","peers":null}`
 
 If you are getting an error message while attempting to `influxd-ctl join` a new meta node, it means that the JSON string returned from the `/status` endpoint is incorrect. This generally indicates that the meta node configuration file is incomplete or incorrect. Inspect the HTTP response with `curl -v "http://<hostname>:8091/status"` and make sure that the `hostname`, the `bind-address`, and the `http-bind-address` are correctly populated. Also check the `license-key` or `license-path` in the configuration file of the meta nodes. Finally, make sure that you specify the `http-bind-address` port in the join command, e.g. `influxd-ctl join hostname:8091`.
+
+## Why do I see entropy when rebalancing shards?
+
+Before rebalancing shards, we recommend enabling anti-entropy (AE) to ensure all shard data is successfully copied. To learn more about AE, see [Use Anti-Entropy service in InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/anti-entropy).
