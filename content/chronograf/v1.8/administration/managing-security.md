@@ -341,7 +341,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 2. Be sure to register a reply URL in your Azure application settings.
    This should match the calling URL from Chronograf.
    Otherwise, you will get an error stating no reply address is registered for the application.
-   For example, if Chronograf is configured with a `GENERIC_NAME` value of AzureAD, the reply URL would be `http://localhost:8888/AzureAD/callback`.
+   For example, if Chronograf is configured with a `GENERIC_NAME` value of AzureAD, the reply URL would be `http://localhost:8888/oauth/AzureAD/callback`.
 
 3. After completing the application provisioning within Azure AD, you can now complete the configuration with Chronograf.
    Using the metadata from your Azure AD instance, proceed to export the following environment variables:
