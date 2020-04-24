@@ -35,7 +35,7 @@ When replication factor equals the number of data nodes, data is fully replicate
 {{% warn %}}
 Before you begin, do the following:
 
-- Stop writing historical data (timestamps occur in the past) to InfluxDB. Historical data has timestamps that occur in the past. Rebalancing while writing historical data can lead to data loss.
+- Stop writing data to InfluxDB. Rebalancing while writing data can lead to data loss.
 - Enable anti-entropy (AE) to ensure all shard data is successfully copied. To learn more about AE, see [Use Anti-Entropy service in InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/anti-entropy).
 {{% /warn %}}
 
