@@ -233,7 +233,7 @@ Added meta node 3 at cluster-meta-node-03:8091
 
 ### `backup`
 
-Creates a backup of a cluster's [metastore](/influxdb/v1.8/concepts/glossary/#metastore) and [shard](/influxdb/v1.8/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory. Or, back up only the cluster metastore using [`backup -strategy] only-meta`.
+Creates a backup of a cluster's [metastore](/influxdb/v1.8/concepts/glossary/#metastore) and [shard](/influxdb/v1.8/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory. To back up only the cluster metastore, use the `-strategy` flag with the `only-meta` option.
 Backups are incremental by default; they create a copy of the metastore and shard data that have changed since the previous incremental backup.
 If there are no existing incremental backups, the system automatically performs a complete backup.
 
