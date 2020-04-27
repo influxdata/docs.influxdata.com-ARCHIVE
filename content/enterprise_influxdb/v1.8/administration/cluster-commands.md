@@ -233,14 +233,14 @@ Added meta node 3 at cluster-meta-node-03:8091
 
 ### `backup`
 
-Creates a backup of a cluster's [metastore](/influxdb/v1.8/concepts/glossary/#metastore) and [shard](/influxdb/v1.8/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
+Creates a backup of a cluster's [metastore](/influxdb/v1.8/concepts/glossary/#metastore) and [shard](/influxdb/v1.8/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory. Or, back up only the cluster metastore using [`backup -strategy] only-meta`.
 Backups are incremental by default; they create a copy of the metastore and shard data that have changed since the previous incremental backup.
 If there are no existing incremental backups, the system automatically performs a complete backup.
 
 #### Syntax
 
 ```
-influxd-ctl backup [ -db <database> | -from <data-node-TCP-bind-address> | -full | -rp <retention-policy> | -shard <shard-id> ] <backup-directory>
+influxd-ctl backup [ -db <database> | -from <data-node-TCP-bind-address> | -full | -rp <retention-policy> | -shard <shard-id> | -strategy <only-meta|incremental|full|> ] <backup-directory>
 ```
 
 ##### Arguments
@@ -269,6 +269,14 @@ Identifier of the shard to back up.
 
 > Restoring a `-full` backup and restoring an incremental backup require different syntax.
 To prevent issues with [`restore`](#restore), keep `-full` backups and incremental backups in separate directories.
+
+###### [ `-strategy` ]
+
+Specify the type of back up to perform:
+
+- `only-meta` back up metastore data only, including users, roles, databases, continuous queries, and retention policies. This option does not back up shards.
+- `full` back up metastore and shard data
+- `incremental` back up metastore and shard data that have changed since the last incremental backup. If there are no existing incremental backups, the system automatically performs a full backup.
 
 Resources: [Back up and restore InfluxDB Enterprise](/enterprise_influxdb/v1.8/administration/backup-and-restore/)
 
