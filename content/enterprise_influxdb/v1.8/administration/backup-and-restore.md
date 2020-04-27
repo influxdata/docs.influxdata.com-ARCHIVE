@@ -42,7 +42,7 @@ Use the `backup` and `restore` utilities to back up and restore between `influxd
 
 A backup creates a copy of the [metastore](/influxdb/v1.8/concepts/glossary/#metastore) and [shard](/influxdb/v1.8/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
 
-Or, back up **only the cluster metastore** using the `-strategy only-meta` [backup option](#syntax).
+Or, back up **only the cluster metastore** using the `-strategy only-meta` backup option. For more information, see [perform a metastore only backup](#perform-a-metastore-only-backup).
 
 All backups include a manifest, a JSON file describing what was collected during the backup.
 The filenames reflect the UTC timestamp of when the backup was created, for example:
@@ -78,7 +78,9 @@ for a complete list of the global `influxd-ctl` options.
 
 ##### Backup options
 
-- `-db <string>`: the name of the single database to back up
+###### `-db <string>`
+
+Name of the single database to back up
 - `-from <TCP-address>`: the data node TCP address to prefer when backing up
 - `-strategy`: select the backup strategy to apply during backup
     - `incremental`: _**(Default)**_ backup only data added since the previous backup.
@@ -89,7 +91,7 @@ for a complete list of the global `influxd-ctl` options.
 - `-rp <string>`: the name of the single retention policy to back up (must specify `-db` with `-rp`)
 - `-shard <unit>`: the ID of the single shard to back up
 
-##### Examples
+### Backup examples
 
 Store the following incremental backups in different directories.
 The first backup specifies `-db myfirstdb` and the second backup specifies
@@ -110,9 +112,7 @@ influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 influxd-ctl backup -db myfirstdb ./myfirstdb-allrp-backup
 ```
 
-#### Examples
-
-##### Perform an incremental backup
+#### Perform an incremental backup
 
 Perform an incremental backup into the current directory with the command below.
 If there are any existing backups the current directory, the system performs an incremental backup.
@@ -137,7 +137,7 @@ $ ls
 20160803T222310Z.meta      20160803T222310Z.s2.tar.gz  20160803T222310Z.s4.tar.gz
 ```
 
-##### Perform a full backup
+#### Perform a full backup
 
 Perform a full backup into a specific directory with the command below.
 The directory must already exist.
@@ -161,7 +161,7 @@ Backed up to backup_dir in 51.388233ms, transferred 333793 bytes
 20170130T184058Z.s2.tar.gz
 ```
 
-##### Perform an incremental backup on a single database
+#### Perform an incremental backup on a single database
 
 Point at a remote meta server and back up only one database into a given directory (the directory must already exist):
 
@@ -180,7 +180,7 @@ $ ls ./telegrafbackup
 20160803T222811Z.manifest  20160803T222811Z.meta  20160803T222811Z.s4.tar.gz
 ```
 
-##### Perform a metastore only backup
+#### Perform a metastore only backup
 
 Perform a meta store only backup into a specific directory with the command below.
 The directory must already exist.
