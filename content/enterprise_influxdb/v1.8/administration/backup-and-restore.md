@@ -55,7 +55,7 @@ Backups can be full, metastore only, or incremental, and they are incremental by
 
 - **Full backups** create a copy of the metastore and shard data.
 - **Incremental backups** create a copy of the metastore and shard data that have changed since the last incremental backup. If there are no existing incremental backups, the system automatically performs a complete backup.
-- **Metastore only** create a copy of the metastore data only.
+- **Metastore only backups** create a copy of the metastore data only.
 
 Restoring different types of backups requires different syntax.
 To prevent issues with [restore](#restore-utility), keep full backups, metastore only backups, and incremental backups in separate directories.
