@@ -31,7 +31,6 @@ For details on changes incorporated from the InfluxDB OSS release, see
 ### Bug fixes
 
 - Update the Anti-Entropy (AE) service to ignore expired shards.
-- Prevent a nonce mismatch (for example, when an `influx` process is restarted many times in short succession) by reducing the nonce specificity when checking an Azure Marketplace entitlement.
 
 ## v1.7.9 [2019-10-27]
 
