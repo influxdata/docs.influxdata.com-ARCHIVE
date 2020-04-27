@@ -16,6 +16,18 @@ This multi-part getting started guide walks through important concepts related t
 It covers querying time series data from InfluxDB using Flux, and introduces Flux syntax and functions.
 
 ## What you will need
+Choose from the following:
+
+- [InfluxDB Cloud 2.0](https://v2.docs.influxdata.com/v2.0/cloud/get-started/)
+- [InfluxDB OSS 2.0](https://v2.docs.influxdata.com/v2.0/get-started/)
+- [InfluxDB 1.7+](/influxdb/latest/)
+
+##### InfluxDB Cloud 2.0 and Open Source 2.0
+Flux is built into **InfluxDB Cloud 2.0** and **InfluxDB OSS 2.0**.
+Use Flux in the [Data Explorer](https://v2.docs.influxdata.com/v2.0/visualize-data/explore-metrics/#explore-data-with-flux-and-the-data-explorer),
+[Dashboards](https://v2.docs.influxdata.com/v2.0/visualize-data/dashboards/),
+[Tasks](https://v2.docs.influxdata.com/v2.0/process-data/), and
+[Variables](https://v2.docs.influxdata.com/v2.0/visualize-data/variables/).
 
 ##### InfluxDB v1.7+
 Flux v0.50 (technical preview) is built into InfluxDB v1.7 and can be used to query data stored in InfluxDB.

@@ -9,7 +9,7 @@ menu:
     parent: Administration
 ---
 
-To successfully upgrade InfluxDB Enterprise clusters to 1.7.9, complete the following steps:
+To successfully upgrade InfluxDB Enterprise clusters to 1.7.10, complete the following steps:
 
 1. [Back up your cluster](#back-up-your-cluster).
 2. [Upgrade meta nodes](#upgrade-meta-nodes).
@@ -40,13 +40,13 @@ Complete the following steps to upgrade meta nodes:
 ##### Ubuntu and Debian (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.9-c1.7.9_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta_1.7.10-c1.7.10_amd64.deb
 ```
 
 ##### RedHat and CentOS (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.9_c1.7.9.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 ### Install the meta node package
@@ -54,13 +54,13 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-meta-1.7.9_c1.7.9.x8
 ##### Ubuntu and Debian (64-bit)
 
 ```bash
-sudo dpkg -i influxdb-meta_1.7.9-c1.7.9_amd64.deb
+sudo dpkg -i influxdb-meta_1.7.10-c1.7.10_amd64.deb
 ```
 
 ##### RedHat and CentOS (64-bit)
 
 ```bash
-sudo yum localinstall influxdb-meta-1.7.9_c1.7.9.x86_64.rpm
+sudo yum localinstall influxdb-meta-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 ### Update the meta node configuration file
@@ -102,9 +102,9 @@ ID	TCP Address		Version
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.7.9_c1.7.9   # 1.7.9_c1.7.9 = 👍
-rk-upgrading-02:8091	1.7.9_c1.7.9
-rk-upgrading-03:8091	1.7.9_c1.7.9
+rk-upgrading-01:8091	1.7.10_c1.7.10   # 1.7.10_c1.7.10 = 👍
+rk-upgrading-02:8091	1.7.10_c1.7.10
+rk-upgrading-03:8091	1.7.10_c1.7.10
 ```
 
 Ensure that the meta cluster is healthy before upgrading the data nodes.
@@ -128,13 +128,13 @@ Complete the following steps to upgrade data nodes:
 ##### Ubuntu and Debian (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.9-c1.7.9_amd64.deb
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.7.10-c1.7.10_amd64.deb
 ```
 
 ##### RedHat and CentOS (64-bit)
 
 ```bash
-wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.9_c1.7.9.x86_64.rpm
+wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 ### Stop traffic to the data node
@@ -145,19 +145,19 @@ wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.7.9_c1.7.9.x8
 
 ### Install the data node package
 
-When you run the install command, you're prompted to keep or overwrite your current configuration file with the file for version 1.7.9. Enter `N` or `O` to keep your current configuration file. You'll make the configuration changes for version 1.7.9. in the next procedure, [Update the data node configuration file](#update-the-data-node-configuration-file).
+When you run the install command, you're prompted to keep or overwrite your current configuration file with the file for version 1.7.10. Enter `N` or `O` to keep your current configuration file. You'll make the configuration changes for version 1.7.10. in the next procedure, [Update the data node configuration file](#update-the-data-node-configuration-file).
 
 
 ##### Ubuntu and Debian (64-bit)
 
 ```bash
-sudo dpkg -i influxdb-data_1.7.9-c1.7.9_amd64.deb
+sudo dpkg -i influxdb-data_1.7.10-c1.7.10_amd64.deb
 ```
 
 ##### RedHat & CentOS (64-bit)
 
 ```bash
-sudo yum localinstall influxdb-data-1.7.9_c1.7.9.x86_64.rpm
+sudo yum localinstall influxdb-data-1.7.10_c1.7.10.x86_64.rpm
 ```
 
 ### Update the data node configuration file
@@ -229,16 +229,16 @@ The [`influxd-ctl` utility](/enterprise_influxdb/v1.7/administration/cluster-com
 Data Nodes
 ==========
 ID	TCP Address		Version
-4	rk-upgrading-01:8088	1.7.9_c1.7.9   # 1.7.9_c1.7.9 = 👍
-5	rk-upgrading-02:8088	1.7.9_c1.7.9
-6	rk-upgrading-03:8088	1.7.9_c1.7.9
+4	rk-upgrading-01:8088	1.7.10_c1.7.10   # 1.7.10_c1.7.10 = 👍
+5	rk-upgrading-02:8088	1.7.10_c1.7.10
+6	rk-upgrading-03:8088	1.7.10_c1.7.10
 
 Meta Nodes
 ==========
 TCP Address		Version
-rk-upgrading-01:8091	1.7.9_c1.7.9
-rk-upgrading-02:8091	1.7.9_c1.7.9
-rk-upgrading-03:8091	1.7.9_c1.7.9
+rk-upgrading-01:8091	1.7.10_c1.7.10
+rk-upgrading-02:8091	1.7.10_c1.7.10
+rk-upgrading-03:8091	1.7.10_c1.7.10
 ```
 
 If you have any issues upgrading your cluster, contact InfluxData support.

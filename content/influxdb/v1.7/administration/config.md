@@ -386,14 +386,12 @@ Environment variable: `INFLUXDB_DATA_MAX_INDEX_LOG_FILE_SIZE`
 
 #### `series-id-set-cache-size = 100`
 
-The size of the internal cache used in the TSI index to store previously
-calculated series results. Cached results will be returned quickly from the cache rather
-than needing to be recalculated when a subsequent query with a matching tag key-value
-predicate is executed.
-Setting this value to `0` will disable the cache, which may lead to query performance issues.
-This value should only be increased if it is known that the set of regularly used
-tag key-value predicates across all measurements for a database is larger than 100. An
-increase in cache size may lead to an increase in heap usage.
+Specifies the number of series ID sets to cache for the TSI index (by default, 100). Series IDs in a set refer to series that match on the same index predicate (tag filter). An example filter might be `region = west`. When the index plans a query, it produces a set for each tag filter in the query. These sets are then cached in the index.
+
+The series ID set is an LRU cache, so once the cache is full, the least recently used set is evicted. Cached results are returned quickly because they don’t need to be recalculated when a subsequent query with a matching tag filter is executed. For example, if a query includes `region = west`, the series IDs matching `region = west` are cached and subsequent queries that include `region = west` are retrieved from the cache.
+
+We recommend using the default setting. Changing this value to `0` disables the cache, which may lead to query performance issues.
+Increase this value only if you know the set of tag key-value predicates across all measurements for a database is larger than 100. Increasing the cache size may lead to an increase in heap usage.
 
 Environment variable: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
 

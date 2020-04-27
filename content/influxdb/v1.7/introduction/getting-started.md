@@ -20,8 +20,8 @@ for examples with the `curl` application.
 
 ## Creating a database
 
-If you've installed InfluxDB locally, the `influx` command should be available via the command line.
-Executing `influx` will start the CLI and automatically connect to the local InfluxDB instance
+If you've installed InfluxDB locally, the `influx` command is available via the command line.
+Execute `influx` to start the CLI and automatically connect to the local InfluxDB instance
 (assuming you have already started the server with `service influxdb start` or by running `influxd` directly).
 The output should look like this:
 
@@ -57,11 +57,12 @@ Throughout this guide, we'll use the database name `mydb`:
 > CREATE DATABASE mydb
 >
 ```
-
-> **Note:** After hitting enter, a new prompt appears and nothing else is displayed.
+> **Notes:**
+>
+* `default` is a [reserved InfluxQL keyword](/influxdb/v1.7/query_language/spec/#keywords) and cannot be used as a database name.
+* After hitting enter, a new prompt appears and nothing else is displayed.
 In the CLI, this means the statement was executed and there were no errors to display.
-There will always be an error displayed if something went wrong.
-No news is good news!
+If something goes wrong, an error is displayed. No news is good news!
 
 Now that the `mydb` database is created, we'll use the `SHOW DATABASES` statement
 to display all existing databases:
@@ -183,9 +184,7 @@ including support for Go-style regex. For example:
 ```sql
 > SELECT * FROM /.*/ LIMIT 1
 --
-> SELECT * FROM "cpu_load_short"
---
-> SELECT * FROM "cpu_load_short" WHERE "value" > 0.9
+> SELECT * FROM "cpu" WHERE "value" > 0.9
 ```
 
 This is all you need to know to write data into InfluxDB and query it back.

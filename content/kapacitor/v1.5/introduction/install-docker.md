@@ -4,7 +4,7 @@ title: Docker Install
 menu:
   kapacitor_1_5:
     weight: 70
-    parent: introduction
+    parent: Introduction
 ---
 
 

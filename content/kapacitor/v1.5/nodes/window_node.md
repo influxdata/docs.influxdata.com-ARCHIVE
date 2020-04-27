@@ -119,20 +119,16 @@ Property methods modify state on the calling node.
 They do not add another node to the pipeline, and always return a reference to the calling node.
 Property methods are marked using the `.` operator.
 
-
 ### Align
 
-If the `align` property is not used to modify the `window` node, then the
-window alignment is assumed to start at the time of the first data point it receives.
-If `align` property is set, the window time edges
-will be truncated to the `every` property (For example, if a data point's time
-is 12:06 and the `every` property is `5m` then the data point's window will range
-from 12:05 to 12:10).
+Set the `align` property to truncate the window time edges to the `every` property. For example, if a data point's time is 12:06 and the `every` property is `5m` then the data point's window ranges from 12:05 to 12:10).
 
+If the `align` property isn't used to modify the `window` node, the window alignment starts at the time the first data point is received.
 
 ```js
 window.align()
 ```
+> Note: When ingesting data at irregular intervals, we recommend using `window.align()` to group data.
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
 

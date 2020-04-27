@@ -316,6 +316,8 @@ ALTER RETENTION POLICY "1h.cpu" ON "mydb" DEFAULT
 ALTER RETENTION POLICY "policy1" ON "somedb" DURATION 1h REPLICATION 4
 ```
 
+> **Note:** To ensure data is successfully replicated across a cluster, the number of data nodes in a cluster **must be evenly divisible** by the replication factor.
+
 ### CREATE CONTINUOUS QUERY
 
 ```
@@ -419,6 +421,8 @@ CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2 DEFA
 -- Create a retention policy and specify the shard group duration.
 CREATE RETENTION POLICY "10m.events" ON "somedb" DURATION 60m REPLICATION 2 SHARD DURATION 30m
 ```
+
+> **Note:** To ensure data is successfully replicated across a cluster, the number of data nodes in a cluster **must be evenly divisible** by the replication factor.
 
 ### CREATE SUBSCRIPTION
 
@@ -772,7 +776,7 @@ REVOKE READ ON "mydb" FROM "jdoe"
 ### SELECT
 
 ```
-select_stmt = "SELECT" fields from_clause [ into_clause ] [ where_clause ]
+select_stmt = "SELECT" fields [ into_clause ] from_clause [ where_clause ]
               [ group_by_clause ] [ order_by_clause ] [ limit_clause ]
               [ offset_clause ] [ slimit_clause ] [ soffset_clause ] [ timezone_clause ] .
 ```

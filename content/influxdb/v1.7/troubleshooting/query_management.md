@@ -1,5 +1,5 @@
 ---
-title: InfluxDB query management
+title: InfluxQL query management
 
 menu:
   influxdb_1_7:
@@ -8,18 +8,13 @@ menu:
     parent: Troubleshooting
 ---
 
-With the InfluxDB query management features, users are able to
-identify currently-running queries,
-kill queries that are overloading their system,
-and prevent and halt the execution of inefficient queries with several configuration settings.
+Manage your InfluxQL queries using the following:
 
-<table style="width:100%">
-  <tr>
-    <td><a href="#list-currently-running-queries-with-show-queries">SHOW QUERIES</a></td>
-    <td><a href="#stop-currently-running-queries-with-kill-query">KILL QUERY</a></td>
-    <td><a href="#configuration-settings-for-query-management">Configuration Settings</a></td>
-  </tr>
-</table>
+- [SHOW QUERIES](#list-currently-running-queries-with-show-queries) to identify currently-running queries
+- [KILL QUERIES](#stop-currently-running-queries-with-kill-query) to stop queries overloading your system
+- [Configuration settings](#configuration-settings-for-query-management) to prevent and halt the execution of inefficient queries
+
+> The commands and configurations provided on this page are for **Influx Query Language (InfluxQL) only** -- **no equivalent set of Flux commands and configurations currently exists**. For the most current Flux documentation, see [Get started with Flux](/flux/v0.50/introduction/getting-started/).
 
 ## List currently-running queries with `SHOW QUERIES`
 
@@ -34,21 +29,29 @@ SHOW QUERIES
 
 #### Example
 
-```sql
+```
 > SHOW QUERIES
-qid	  query															               database		  duration
-37	   SHOW QUERIES																                	  100368u
-36	   SELECT mean(myfield) FROM mymeas   mydb        3s
+qid	  query                              database   duration   status
+---   -----                              --------   --------   ------
+37    SHOW QUERIES                                  100368u    running
+36    SELECT mean(myfield) FROM mymeas   mydb       3s         running
 ```
 
 ##### Explanation of the output
 
-- `qid`&emsp;&emsp;&emsp;&nbsp;The id number of the query. Use this value with [`KILL - QUERY`](/influxdb/v1.7/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
-- `query`&emsp;&emsp;&thinsp;&thinsp;The query text.  
-- `database`&emsp;The database targeted by the query.  
-- `duration`&emsp;The length of time that the query has been running.
-See [Query Language Reference](/influxdb/v1.7/query_language/spec/#durations)
-for an explanation of time units in InfluxDB databases.
+- `qid`: The id number of the query. Use this value with [`KILL - QUERY`](/influxdb/v1.7/troubleshooting/query_management/#stop-currently-running-queries-with-kill-query).  
+- `query`: The query text.  
+- `database`: The database targeted by the query.  
+- `duration`: The length of time that the query has been running.
+  See [Query Language Reference](/influxdb/v1.7/query_language/spec/#durations)
+  for an explanation of time units in InfluxDB databases.
+
+    {{% note %}}
+`SHOW QUERIES` may output a killed query and continue to increment its duration
+until the query record is cleared from memory.
+    {{% /note %}}
+
+- `status`: The current status of the query.
 
 ## Stop currently-running queries with `KILL QUERY`
 

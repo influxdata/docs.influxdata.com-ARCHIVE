@@ -10,9 +10,9 @@ menu:
 Enabling HTTPS secures the communication between clients and the InfluxDB
 server, and, in some cases, HTTPS verifies the authenticity of the InfluxDB server to clients.
 
-If you plan on sending requests to InfluxDB over a network, InfluxData
+If you plan on sending requests to InfluxDB over a public network, InfluxData
 [strongly recommends](/influxdb/v1.5/administration/security/)
-that you enable HTTPS.
+that you enable HTTPS.  Otherwise the data will be publicly available to any unauthenticated user.
 
 ## Requirements
 

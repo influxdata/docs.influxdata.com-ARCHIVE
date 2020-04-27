@@ -35,3 +35,8 @@ measurements = (bucket) =>
 
 _**Used functions:**
 [tagValues()](/flux/v0.50/stdlib/influxdb-v1/tagvalues)_
+
+<hr style="margin-top:4rem"/>
+
+##### Related InfluxQL functions and statements:
+[SHOW MEASUREMENTS](/influxdb/latest/query_language/schema_exploration#show-measurements)
