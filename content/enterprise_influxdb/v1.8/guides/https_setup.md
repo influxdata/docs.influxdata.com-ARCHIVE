@@ -221,7 +221,7 @@ With a self-signed certificate, you must also use the `-k` option to skip certif
     enterprise-meta-03:8091   1.x.y-c1.x.z
     ```
 
-    Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [`influx` command line interface](/influxdb/v1.7/tools/shell/):
+    Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [`influx` command line interface](/influxdb//tools/shell/):
 
     ```sh
     influx -ssl -host <domain_name>.com

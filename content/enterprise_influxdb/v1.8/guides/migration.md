@@ -3,7 +3,7 @@ title: Migrate InfluxDB OSS instances to InfluxDB Enterprise clusters
 description: >
   Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterprise cluster.
 aliases:
-  - /enterprise/v1.7/guides/migration/
+  - /enterprise//guides/migration/
 menu:
   enterprise_influxdb_1_8:
     name: Migrate InfluxDB OSS to Enterprise
@@ -271,7 +271,7 @@ node with other data nodes in the cluster.
 It may take a few minutes before the existing data is available.
 
 ## Rebalance the cluster
-1. Use the [ALTER RETENTION POLICY](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
+1. Use the [ALTER RETENTION POLICY](/influxdb//query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
    statement to increase the [replication factor](/enterprise_influxdb/v1.8/concepts/glossary/#replication-factor)
    on all existing retention polices to the number of data nodes in your cluster.
 2. [Rebalance your cluster manually](/enterprise_influxdb/v1.8/guides/rebalance/)
