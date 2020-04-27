@@ -1,5 +1,5 @@
 ---
-title: InfluxDB Enterprise 1.7 release notes
+title: InfluxDB Enterprise 1.8 release notes
 
 menu:
   enterprise_influxdb_1_8:
@@ -8,18 +8,30 @@ menu:
     parent: About the project
 ---
 
-## v1.7.10 [2020-02-07]
+## v1.8 [2020-04-27]
 
-The InfluxDB Enterprise 1.7.10 release builds on the InfluxDB OSS 1.7.10 release.
+The InfluxDB Enterprise 1.8 release builds on the InfluxDB OSS 1.8 release.
 For details on changes incorporated from the InfluxDB OSS release, see
-[InfluxDB OSS release notes](/influxdb/v1.7/about_the_project/releasenotes-changelog/).
+[InfluxDB OSS release notes](/influxdb/v1.8/about_the_project/releasenotes-changelog/).
 
 ### Features
-- Log when meta state file cannot be opened.
 
-### Bugfixes
-- Update `MaxShardGroupID` on meta update.
-- Don't reassign shard ownership when removing a data node.
+#### Back up meta data only
+
+- Add option to back up **meta data only** (users, roles, databases, continuous queries, and retention policies) using the new `-strategy` flag and `only meta` option: `influx ctl backup -strategy only meta </your-backup-directory>`.
+
+> **Note:** To restore a meta data backup, use the `restore -full` command and specify your backup manifest: `influxd-ctl restore -full </backup-directory/backup.manifest>`.
+
+#### Incremental and full backups
+
+- Add `incremental` and `full` backup options to the new `-strategy` flag in `influx ctl backup`:
+  - `influx ctl backup -strategy incremental`
+  - `influx ctl backup -strategy full`.
+
+### Bug fixes
+
+- Update the Anti-Entropy (AE) service to ignore expired shards.
+- Prevent a nonce mismatch (for example, when an `influx` process is restarted many times in short succession) by reducing the nonce specificity when checking an Azure Marketplace entitlement.
 
 ## v1.7.9 [2019-10-27]
 
