@@ -53,9 +53,9 @@ The filenames reflect the UTC timestamp of when the backup was created, for exam
 
 Backups can be full, metastore only, or incremental, and they are incremental by default:
 
-- **Full backups** create a copy of the metastore and shard data.
-- **Incremental backups** create a copy of the metastore and shard data that have changed since the last incremental backup. If there are no existing incremental backups, the system automatically performs a complete backup.
-- **Metastore only backups** create a copy of the metastore data only.
+- **Full backup**: Creates a copy of the metastore and shard data.
+- **Incremental backup**: Creates a copy of the metastore and shard data that have changed since the last incremental backup. If there are no existing incremental backups, the system automatically performs a complete backup.
+- **Metastore only backup**: Creates a copy of the metastore data only.
 
 Restoring different types of backups requires different syntax.
 To prevent issues with [restore](#restore-utility), keep full backups, metastore only backups, and incremental backups in separate directories.
