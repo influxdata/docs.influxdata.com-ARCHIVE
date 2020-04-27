@@ -16,17 +16,17 @@ For details on changes incorporated from the InfluxDB OSS release, see
 
 ### Features
 
-#### Back up meta data only
+#### **Back up meta data only**
 
 - Add option to back up **meta data only** (users, roles, databases, continuous queries, and retention policies) using the new `-strategy` flag and `only meta` option: `influx ctl backup -strategy only meta </your-backup-directory>`.
 
     > **Note:** To restore a meta data backup, use the `restore -full` command and specify your backup manifest: `influxd-ctl restore -full </backup-directory/backup.manifest>`.
 
-#### Incremental and full backups
+#### **Incremental and full backups**
 
 - Add `incremental` and `full` backup options to the new `-strategy` flag in `influx ctl backup`:
   - `influx ctl backup -strategy incremental`
-  - `influx ctl backup -strategy full`.
+  - `influx ctl backup -strategy full`
 
 ### Bug fixes
 
