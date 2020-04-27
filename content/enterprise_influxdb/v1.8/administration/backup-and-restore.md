@@ -78,9 +78,7 @@ for a complete list of the global `influxd-ctl` options.
 
 ##### Backup options
 
-###### `-db <string>`
-
-Name of the single database to back up
+- `-db <string>`: name of the single database to back up
 - `-from <TCP-address>`: the data node TCP address to prefer when backing up
 - `-strategy`: select the backup strategy to apply during backup
     - `incremental`: _**(Default)**_ backup only data added since the previous backup.
