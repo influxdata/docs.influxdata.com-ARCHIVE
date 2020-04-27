@@ -10,7 +10,7 @@ menu:
 ---
 
 InfluxDB Enterprise requires a functioning SMTP server to invite users to the console.
-If you’re working on Ubuntu 14.04 and are looking for an SMTP server to use for
+If you’re working on **Ubuntu 14.04+** and are looking for an SMTP server to use for
 development purposes, the following steps will get you up and running with [MailCatcher](https://mailcatcher.me/).
 
 Note that MailCatcher will NOT send actual emails, it merely captures email
