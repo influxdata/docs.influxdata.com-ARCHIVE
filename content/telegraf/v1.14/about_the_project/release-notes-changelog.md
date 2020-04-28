@@ -8,6 +8,20 @@ menu:
     parent: About the project
 ---
 
+## v1.14.12 [2020-04-28]
+
+### Bug fixes
+
+- Trim white space from instance tag in `sqlserver` input .
+- Use increased AWS Cloudwatch GetMetricData limit of 500 metrics per call.
+- Fix limit on dimensions in `azure_monitor` output.
+- Fix 64-bit integer to string conversion in `snmp` input.
+- Fix shard indices reporting in `elasticsearch` input plugin.
+- Ignore fields with Not a Number or Infinity floats in the JSON serializer.
+- Fix typo in name of `gc_cpu_fraction` field of the `kapacitor` input.
+- Don't retry create database when using database_tag if forbidden by the server in `influxdb` output.
+- Allow CR and FF inside of string fields in InfluxDB line protocol parser.
+
 ## v1.14.1 [2020-04-14]
 
 ### Bug fixes
