@@ -69,7 +69,7 @@ On the instance, install the `influx` command line tool via the InfluxDB open so
 
 ```
 wget https://dl.influxdata.com/influxdb/releases/influxdb_1.8.0_amd64.deb
-sudo dpkg -i influxdb_1.7.3_amd64.deb
+sudo dpkg -i influxdb_1.8.0_amd64.deb
 ```
 
 Now the InfluxDB Enterprise cluster can be accessed using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.
