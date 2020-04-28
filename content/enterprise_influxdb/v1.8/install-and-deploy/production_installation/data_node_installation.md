@@ -15,7 +15,7 @@ The next steps will get you up and running with the second essential component o
 your InfluxDB Enterprise cluster: the data nodes.
 
 If you have not set up your meta nodes, please visit
-[Installing meta nodes](/enterprise_influxdb//v1.8/install-and-deploy/production_installation/meta_node_installation/).
+[Installing meta nodes](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/meta_node_installation/).
 Bad things can happen if you complete the following steps without meta nodes.
 
 <br>
