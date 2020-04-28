@@ -22,11 +22,15 @@ For details on changes incorporated from the InfluxDB OSS release, see
 
     > **Note:** To restore a meta data backup, use the `restore -full` command and specify your backup manifest: `influxd-ctl restore -full </backup-directory/backup.manifest>`.
 
+For more information, see [Perform a metastore only backup](/enterprise_influxdb/v1.8/administration/backup-and-restore/#perform-a-metastore-only-backup).
+
 #### **Incremental and full backups**
 
 - Add `incremental` and `full` backup options to the new `-strategy` flag in `influx ctl backup`:
   - `influx ctl backup -strategy incremental`
   - `influx ctl backup -strategy full`
+
+For more information, see the [`influxd-ctl backup` syntax](/enterprise_influxdb/v1.8/administration/backup-and-restore/#syntax).
 
 ### Bug fixes
 
