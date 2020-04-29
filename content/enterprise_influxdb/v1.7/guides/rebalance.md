@@ -9,400 +9,200 @@ menu:
     parent: Guides
 ---
 
-## Introduction
+Manually rebalance an InfluxDB Enterprise cluster to ensure:
 
-This guide describes how to manually rebalance an InfluxDB Enterprise cluster.
-Rebalancing a cluster involves two primary goals:
-
-* Evenly distribute
-[shards](/influxdb/v1.7/concepts/glossary/#shard) across all data nodes in the
+- [Shards](/influxdb/v1.7/concepts/glossary/#shard) are evenly distributed across all data nodes in the
 cluster
-* Ensure that every
-shard is on *n* number of nodes, where *n* is determined by the retention policy's
-[replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor)
+- Every shard is on *n* number of nodes, where *n* is the [replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor).
 
-Rebalancing a cluster is essential for cluster health. Perform a rebalance if you add a new data node to your cluster.
+## Why rebalance?
 
-The proper rebalance path depends on the purpose of the new data node:
+**Rebalance a cluster any time you do one of the following:**
 
-- If you added a data node to expand the disk size of the cluster or increase write throughput, 
-follow the steps in [Rebalance Procedure 1](#rebalance-procedure-1-rebalance-a-cluster-to-create-space).
-- If you added a data node to increase data availability for queries and query throughput, 
-follow the steps in [Rebalance Procedure 2](#rebalance-procedure-2-rebalance-a-cluster-to-increase-availability).
+- Expand capacity and increase write throughput by adding a data node.
+- Increase availability and query throughput, by either:
+  - Adding data nodes and increasing the replication factor.
+  - Adjusting fully replicated data to partially replicated data. See [Full versus partial replication](#full-versus-partial-replication).
+- Add or remove a data node for any reason.
+- Adjust your replication factor for any reason.
 
-### Requirements
+### Full versus partial replication
 
-The following sections assume that you already added a new data node to the
-cluster, and they use the
-[`influxd-ctl` tool](/enterprise_influxdb/v1.7/administration/cluster-commands/) available on
-all meta nodes.
+When replication factor equals the number of data nodes, data is fully replicated to all data nodes in a cluster. Full replication means each node can respond to queries without communicating with other data nodes. A more typical configuration is a partial replication of data; for example, a replication factor of 2 with 4, 6, or 8 data nodes. Partial replication allows more series to be stored in a database.
+
+## Rebalance your cluster
 
 {{% warn %}}
-Before you begin, stop writing historical data to InfluxDB.
-Historical data have timestamps that occur at anytime in the past.
-Performing a rebalance while writing historical data can lead to data loss.
+Before you begin, do the following:
+
+- Stop writing data to InfluxDB. Rebalancing while writing data can lead to data loss.
+- Enable anti-entropy (AE) to ensure all shard data is successfully copied. To learn more about AE, see [Use Anti-Entropy service in InfluxDB Enterprise](/enterprise_influxdb/v1.7/administration/anti-entropy).
 {{% /warn %}}
 
-## Rebalance Procedure 1: Rebalance a cluster to create space
+After adding or removing data nodes from your cluster, complete the following steps to rebalance:
 
-For demonstration purposes, this procedures shows how to add a third
-data node to a previously two-data-node cluster that has a
-[replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) of
-two; alter the replication factor and data nodes as needed for your for your cluster.
+1. If applicable, [update the replication factor](#update-the-replication-factor).
+2. [Truncate hot shards](#truncate-hot-shards) (shards actively receiving writes).
+3. [Identify cold shards](#identify-cold-shards)
+4. [Copy cold shards to new data node](#copy-cold-shards-to-new-data-node)
+4. If you're expanding capacity to increase write throughput, [remove cold shards from an original data node](#remove-cold-shards-from-original-data-node).
+6. [Confirm the rebalance](#confirm-the-rebalance).
 
-> **Important:** The number of data nodes in a cluster **must be** evenly divisible by the replication factor.
+> **Important:** The number of data nodes in a cluster **must be evenly divisible** by the replication factor.
 For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes. A replication factor of 3 works with 3, 6, or 9 data nodes.
 
-After adding a data node, rebalance a cluster to expand the total disk capacity of the cluster.
-Safely move shards from one of the two original data nodes to the new data node.
+### Update the replication factor
 
-### Step 1: Truncate Hot Shards
+The following example shows how to increase the replication factor to `3`. Adjust the replication factor as needed for your cluster, ensuring the number of data nodes is evenly divisible by the replication factor.
 
-Hot shards actively receive writes.
-Performing any action on a hot shard can lead to data inconsistency within the
-cluster and require manual intervention.
+1. In InfluxDB [CLI](/influxdb/v1.7/tools/shell/), run the following query on any data node for each retention policy and database:
 
-To prevent data inconsistency, truncate hot shards before moving any shards
-across data nodes.
-Use the command below to create a new hot shard distributed across all data nodes in the cluster that the system writes new points to.
-Previous writes are stored in cold shards.
+    ```
+    > ALTER RETENTION POLICY "<retention_policy_name>" ON "<database_name>" REPLICATION 3
+    >
+    ```
+    If successful, no query results are returned. At this point, InfluxDB automatically distributes all new shards across the data nodes in the cluster with the correct number of replicas.
 
-```
-influxd-ctl truncate-shards
-```
+2. To verify the new replication factor, run the [`SHOW RETENTION POLICIES` query](/influxdb/v1.7/query_language/schema_exploration/#show-retention-policies):
 
-The expected ouput of this command is:
+    ```
+    > SHOW RETENTION POLICIES ON "telegraf"
 
-```
-Truncated shards.
-```
+    name     duration  shardGroupDuration  replicaN  default
+    ----     --------  ------------------  --------  -------
+    autogen  0s        1h0m0s              3 #       true
+    ```
 
-After truncating the shards, redistribute the cold shards as needed. New shards are evenly distributed across the cluster and require
-no further intervention.
+### Truncate hot shards
 
-### Step 2: Identify Cold Shards
+- In InfluxDB [CLI](/influxdb/v1.7/tools/shell/), run the following command:
+ 
+    ```sh
+    influxd-ctl truncate-shards
+    ``` 
+    A message confirms shards have been truncated. Previous writes are stored in cold shards and InfluxDB starts writing new points to a new hot shard.
+    New hot shards are automatically distributed across the cluster.
 
-Identify the cold shards to copy to the new data node and remove from one of the original two data nodes.
+### Identify cold shards
 
-The following command lists every shard in the cluster:
+1. In InfluxDB CLI, run following command to view every shard in the cluster:
 
-```
-influxd-ctl show-shards
-```
+        ```
+        influxd-ctl show-shards
+       
+    
+        Shards
+        ==========
+        ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
+        21   telegraf    autogen            2                  [...]   2020-01-26T18:00:00Z              [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088}]
+        22   telegraf    autogen            2                  [...]   2020-01-26T18:05:36.418734949Z*   [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088}]
+        24   telegraf    autogen            2                  [...]   2020-01-26T19:00:00Z              [{5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
+        ```
 
-The expected output is similar to the following:
+    This example shows three shards:
 
-```
-Shards
-==========
-ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
-21   telegraf    autogen            2                  [...]   2017-01-26T18:00:00Z              [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088}]
-22   telegraf    autogen            2                  [...]   2017-01-26T18:05:36.418734949Z*   [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088}]
-24   telegraf    autogen            2                  [...]   2017-01-26T19:00:00Z              [{5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
-```
+    - Shards are cold if their `End` timestamp occurs in the past. In this example, the current time is `2020-01-26T18:05:36.418734949Z`, so the first two shards are cold.
+    - Shard owners identify data nodes in a cluster. In this example, cold shards are on two data nodes: `enterprise-data-01:8088` and `enterprise-data-02:8088`.
+    - Truncated shards have an asterix (`*`) after timestamp. In this example, the second shard is truncated.
+    - Shards with an `End` timestamp in the future are hot shards. In this example, the third shard is the newly-created hot shard. The host shard owner includes one of the original data nodes (`enterprise-data-02:8088`) and the new data node
+    (`enterprise-data-03:8088`).
 
-The sample output includes three shards.
-The first two shards are cold shards.
-The timestamp in the `End` column occurs in the past (assume that the current
-time is just after `2017-01-26T18:05:36.418734949Z`), and the shards' owners
-are the two original data nodes: `enterprise-data-01:8088` and
-`enterprise-data-02:8088`.
-The second shard is the truncated shard; truncated shards have an asterix (`*`)
-on the timestamp in the `End` column.
+2. For each cold shard, note the shard `ID` and `Owners` or data node TCP name (for example, `enterprise-data-01:8088`).
 
-The third shard is the newly-created hot shard; the timestamp in the `End`
-column is in the future (again, assume that the current time is just after
-`2017-01-26T18:05:36.418734949Z`), and the shard's owners include one of the
-original data nodes (`enterprise-data-02:8088`) and the new data node
-(`enterprise-data-03:8088`).
-That hot shard and any subsequent shards require no attention during
-the rebalance process.
+3. Run the following command to determine the size of the shards in your cluster:
 
-Identify the cold shards that you'd like to move from one of the original two
-data nodes to the new data node.
-Take note of the cold shard's `ID` (for example: `22`) and the TCP address of
-one of its owners in the `Owners` column (for example:
-`enterprise-data-01:8088`).
+    ```sh
+       find /var/lib/influxdb/data/ -mindepth 3 -type d -exec du -h {} \;
+    ```
+    > To increase capacity on the original data nodes, move larger shards to the new data node. Note that moving shards impacts network traffic.
 
-> **Note:**
->
-Use the following command string to determine the size of the shards in
-your cluster:
->
-    find /var/lib/influxdb/data/ -mindepth 3 -type d -exec du -h {} \;
->
-In general, we recommend moving larger shards to the new data node to increase the
-available disk space on the original data nodes.
-Note that moving shards impacts network traffic.
+### Copy cold shards to new data node
 
-### Step 3: Copy Cold Shards
+1. In InfluxDB CLI, run the following command, specifying the `shard ID` to copy, the `source_TCP_name` of the original data node and `destination_TCP_name` of the new data node:
 
-Next, copy the relevant cold shards to the new data node with the syntax below.
-Repeat this command for every cold shard that you'd like to move to the
-new data node.
+    ```
+    influxd-ctl copy-shard <source_TCP_name> <destination_TCP_name> <shard_ID>
+    ```
+    A message appears confirming the shard was copied.
 
-```
-influxd-ctl copy-shard <source_TCP_address> <destination_TCP_address> <shard_ID>
-```
+2. Repeat step 1 for every cold shard you want to move to the new data node.
 
-Where `source_TCP_address` is the address that you noted in step 2,
-`destination_TCP_address` is the TCP address of the new data node, and `shard_ID`
-is the ID of the shard that you noted in step 2.
+3. Confirm copied shards display the TCP name of the new data node as an owner:
 
-The expected output of the command is:
-```
-Copied shard <shard_ID> from <source_TCP_address> to <destination_TCP_address>
-```
+    ```
+    influxd-ctl show-shards
+    ```
 
-### Step 4: Confirm the Copied Shards
+    Expected output shows copied shard now has three owners:
+    ```
+    Shards
+    ==========
+    ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
+    22   telegraf    autogen            2                  [...]   2017-01-26T18:05:36.418734949Z*   [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
+    ```
 
-Confirm that the TCP address of the new data node appears in the `Owners` column
-for every copied shard:
+Copied shards appear in the new data node shard directory: `/var/lib/influxdb/data/<database>/<retention_policy>/<shard_ID>`.
 
-```
-influxd-ctl show-shards
-```
+### Remove cold shards from original data node
 
-The expected output shows that the copied shard now has three owners:
-```
-Shards
-==========
-ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
-22   telegraf    autogen            2                  [...]   2017-01-26T18:05:36.418734949Z*   [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
-```
-
-In addition, verify that the copied shards appear in the new data node's shard
-directory and match the shards in the source data node's shard directory.
-Shards are located in
-`/var/lib/influxdb/data/<database>/<retention_policy>/<shard_ID>`.
-
-Here's an example of the correct output for shard `22`:
-```
-# On the source data node (enterprise-data-01)
-
-~# ls /var/lib/influxdb/data/telegraf/autogen/22
-000000001-000000001.tsm # 👍
-
-# On the new data node (enterprise-data-03)
-
-~# ls /var/lib/influxdb/data/telegraf/autogen/22
-000000001-000000001.tsm # 👍
-```
-
-Verify that every copied shard appears on the new data node both
-in the `influxd-ctl show-shards` output and in the shard directory.
-If a shard does not pass both of the tests above, repeat step 3.
-
-### Step 5: Remove Unnecessary Cold Shards
-
-Next, remove the copied shard from the original data node with the command below.
-Repeat this command for every cold shard that you'd like to remove from one of
-the original data nodes.
 **Removing a shard is an irrecoverable, destructive action; use this command with caution.**
 
-```
-influxd-ctl remove-shard <source_TCP_address> <shard_ID>
-```
+1. Run the following command, specifying the cold shard ID to remove and the source_TCP_name of one of the original data nodes:
 
-Where `source_TCP_address` is the TCP address of the original data node and
-`shard_ID` is the ID of the shard that you noted in step 2.
+    ```
+    influxd-ctl remove-shard <source_TCP_name> <shard_ID>
+    ```
+    
+    Expected output:
 
-The expected output of the command is:
-```
-Removed shard <shard_ID> from <source_TCP_address>
-```
+    ```
+    Removed shard <shard_ID> from <source_TCP_name>
+    ```
 
-### Step 6: Confirm the Rebalance
+2. Repeat step 1 to remove all cold shards from one of the original data nodes.
 
-For every relevant shard, confirm that the TCP address of the new data node and
-only one of the original data nodes appears in the `Owners` column:
+### Confirm the rebalance
 
-```
-influxd-ctl show-shards
-```
+- For each relevant shard, confirm the TCP name is correct by running the following command.
 
-The expected output shows that the copied shard now has only two owners:
-```
-Shards
-==========
-ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
-22   telegraf    autogen            2                  [...]   2017-01-26T18:05:36.418734949Z*   [{5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
-```
+    ```
+    influxd-ctl show-shards
+    ```
 
-That's it.
-You've successfully rebalanced your cluster; you expanded the available disk
-size on the original data nodes and increased the cluster's write throughput.
+    For example:
 
-## Rebalance Procedure 2: Rebalance a cluster to increase availability
+    - If you're **rebalancing to expand the capacity to increase write throughput**, verify the new data node and only one of the original data nodes appears in the `Owners` column:
 
-For demonstration purposes, the next steps assume that you added a third
-data node to a previously two-data-node cluster that has a
-[replication factor](/influxdb/v1.7/concepts/glossary/#replication-factor) of
-two; alter the replication factor and data nodes as needed for your cluster.
+        Expected output shows that the copied shard now has only two owners:
 
-> **Important:** The number of data nodes in a cluster **must be** evenly divisible by the replication factor.
-For example, a replication factor of 2 works with 2, 4, 6, or 8 data nodes. A replication factor of 3 works with 3, 6, or 9 data nodes.
+        ```
+        Shards
+        ==========
+        ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
+        22   telegraf    autogen            2                  [...]   2017-01-26T18:05:36.418734949Z*   [{5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
+        ```
 
-Rebalance a cluster to improve availability and query throughput by increasing the replication factor and
-safely copy shards from one of the two original data nodes to the new data node.
+    - If you're **rebalancing to increase data availability for queries and query throughput**, verify the TCP name of the new data node appears in the `Owners` column:
+       
+        Expected output shows that the copied shard now has three owners:
 
-### Step 1: Update the Retention Policy
+            ```
+            Shards
+            ==========
+            ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
+            22   telegraf    autogen            3                  [...]   2017-01-26T18:05:36.418734949Z*   [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
+            
+            In addition, verify that the copied shards appear in the new data node’s shard directory and match the shards in the source data node’s shard directory. 
+            Shards are located in `/var/lib/influxdb/data/<database>/<retention_policy>/<shard_ID>`.
 
-[Update](/influxdb/v1.7/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
-every retention policy to have a replication factor of three.
-This step ensures that the system automatically distributes all newly-created
-shards across the three data nodes in the cluster.
+            Here’s an example of the correct output for shard 22:
 
-**Important:** To successfully replicate data across a cluster, the number of data nodes **must be evenly divisible** by the replication factor.
+            # On the source data node (enterprise-data-01)
 
-Increase the replication factor to three by running the following query on any data node for each retention policy and database.
-Here, we use InfluxDB's [CLI](/influxdb/v1.7/tools/shell/) to execute the query:
+            ~# ls /var/lib/influxdb/data/telegraf/autogen/22
+            000000001-000000001.tsm # 
 
-```
-> ALTER RETENTION POLICY "<retention_policy_name>" ON "<database_name>" REPLICATION 3
->
-```
+            # On the new data node (enterprise-data-03)
 
-A successful `ALTER RETENTION POLICY` query returns no results.
-Use the
-[`SHOW RETENTION POLICIES` query](/influxdb/v1.7/query_language/schema_exploration/#show-retention-policies)
-to verify the new replication factor.
-
-Example:
-```
-> SHOW RETENTION POLICIES ON "telegraf"
-
-name     duration  shardGroupDuration  replicaN  default
-----     --------  ------------------  --------  -------
-autogen  0s        1h0m0s              3 #👍     true
-```
-
-### Step 2: Truncate Hot Shards
-
-Hot shards are shards that are currently receiving writes.
-Performing any action on a hot shard can lead to data inconsistency within the
-cluster which requires manual intervention from the user.
-
-To prevent data inconsistency, truncate hot shards before copying any shards
-to the new data node.
-The command below creates a new hot shard which is automatically distributed
-across the three data nodes in the cluster, and the system writes all new points
-to that shard.
-All previous writes are now stored in cold shards.
-
-```
-influxd-ctl truncate-shards
-```
-
-The expected ouput of this command is:
-
-```
-Truncated shards.
-```
-
-Once you truncate the shards, you can work on distributing the cold shards
-without the threat of data inconsistency in the cluster.
-Any hot or new shards are now automatically distributed across the cluster and
-require no further intervention.
-
-### Step 3: Identify Cold Shards
-
-In this step, you identify the cold shards that you will copy to the new data node.
-
-The following command lists every shard in your cluster:
-
-```
-influxd-ctl show-shards
-```
-
-The expected output is similar to the items in the codeblock below:
-
-```
-Shards
-==========
-ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
-21   telegraf    autogen            3                  [...]   2017-01-26T18:00:00Z              [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088}]
-22   telegraf    autogen            3                  [...]   2017-01-26T18:05:36.418734949Z*   [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088}]
-24   telegraf    autogen            3                  [...]   2017-01-26T19:00:00Z              [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
-```
-
-The sample output includes three shards.
-The first two shards are cold shards.
-The timestamp in the `End` column occurs in the past (assume that the current
-time is just after `2017-01-26T18:05:36.418734949Z`), and the shards' owners
-are the two original data nodes: `enterprise-data-01:8088` and
-`enterprise-data-02:8088`.
-The second shard is the truncated shard; truncated shards have an asterix (`*`)
-on the timestamp in the `End` column.
-
-The third shard is the newly-created hot shard; the timestamp in the `End`
-column is in the future (again, assume that the current time is just after
-`2017-01-26T18:05:36.418734949Z`), and the shard's owners include all three
-data nodes: `enterprise-data-01:8088`, `enterprise-data-02:8088`, and
-`enterprise-data-03:8088`.
-That hot shard and any subsequent shards require no attention during
-the rebalance process.
-
-Identify the cold shards that you'd like to copy from one of the original two
-data nodes to the new data node.
-Take note of the cold shard's `ID` (for example: `22`) and the TCP address of
-one of its owners in the `Owners` column (for example:
-`enterprise-data-01:8088`).
-
-### Step 4: Copy Cold Shards
-
-Next, copy the relevant cold shards to the new data node with the syntax below.
-Repeat this command for every cold shard that you'd like to move to the
-new data node.
-
-```
-influxd-ctl copy-shard <source_TCP_address> <destination_TCP_address> <shard_ID>
-```
-
-Where `source_TCP_address` is the address that you noted in step 3,
-`destination_TCP_address` is the TCP address of the new data node, and `shard_ID`
-is the ID of the shard that you noted in step 3.
-
-The expected output of the command is:
-```
-Copied shard <shard_ID> from <source_TCP_address> to <destination_TCP_address>
-```
-
-### Step 5: Confirm the Rebalance
-
-Confirm that the TCP address of the new data node appears in the `Owners` column
-for every copied shard:
-
-```
-influxd-ctl show-shards
-```
-
-The expected output shows that the copied shard now has three owners:
-```
-Shards
-==========
-ID   Database    Retention Policy   Desired Replicas   [...]   End                               Owners
-22   telegraf    autogen            3                  [...]   2017-01-26T18:05:36.418734949Z*   [{4 enterprise-data-01:8088} {5 enterprise-data-02:8088} {6 enterprise-data-03:8088}]
-```
-
-In addition, verify that the copied shards appear in the new data node's shard
-directory and match the shards in the source data node's shard directory.
-Shards are located in
-`/var/lib/influxdb/data/<database>/<retention_policy>/<shard_ID>`.
-
-Here's an example of the correct output for shard `22`:
-```
-# On the source data node (enterprise-data-01)
-
-~# ls /var/lib/influxdb/data/telegraf/autogen/22
-000000001-000000001.tsm # 👍
-
-# On the new data node (enterprise-data-03)
-
-~# ls /var/lib/influxdb/data/telegraf/autogen/22
-000000001-000000001.tsm # 👍
-```
-
-That's it.
-You've successfully rebalanced your cluster and increased data availability for
-queries and query throughput.
+            ~# ls /var/lib/influxdb/data/telegraf/autogen/22
+            000000001-000000001.tsm # 
