@@ -27,11 +27,12 @@ telegraf --input-filter cpu:mem:net:swap --output-filter influxdb:kafka config
 
 ## Configuration file locations
 
-The location of the configuration file can be set via the `--config` command
-line flag.
+Use the `--config` flag to specify the configuration file location:
 
-When the `--config-directory` command line flag is used, files ending with
-`.conf` in the specified directory will also be included in the Telegraf
+- Filename and path, for example: `--config /etc/default/telegraf`
+- Remote URL endpoint, for example: `--config "http://remote-URL-endpoint"`
+
+Use the `--config-directory` flag to include files ending with `.conf` in the specified directory in the Telegraf
 configuration.
 
 On most systems, the default locations are `/etc/telegraf/telegraf.conf` for
