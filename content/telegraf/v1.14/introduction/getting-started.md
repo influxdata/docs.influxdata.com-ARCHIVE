@@ -10,15 +10,13 @@ menu:
     parent: Introduction
 ---
 
-## Getting started with Telegraf
-
 Use Telegraf (an agent written in Go) to collect and write metrics into InfluxDB or other supported outputs.
 
 To get up and running, do the following:
 
 1. [Download and install Telegraf](#download-and-install-telegraf)
-2. [Configure Telegraf]
-3. [Start Telegraf service]
+2. [Configure Telegraf](#configure-telegraf)
+3. [Start Telegraf service](#start-telegraf-service)
 
 ## Download and install Telegraf
 
@@ -34,7 +32,7 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Linux debian and RPM packages: `/etc/telegraf/telegraf.conf`
 * Standalone Binary: see the next section for how to create a configuration file
 
-> **Note:** You can also specify a remote URL endpoint to pull a configuration file. See [Configuration file locations](/telegraf/v1.14/administration/configuration/#configuration-file-locations).
+> **Note:** You can also specify a remote URL endpoint to pull a configuration file from. See [Configuration file locations](/telegraf/v1.14/administration/configuration/#configuration-file-locations).
 
 ### Create and edit the configuration file
 
@@ -48,7 +46,7 @@ telegraf -sample-config -input-filter cpu:mem -output-filter influxdb > telegraf
 
 `cpu` and `mem` reads metrics about the system's cpu usage and memory usage, and then output this data to InfluxDB.
 
-## Start the Telegraf service
+## Start Telegraf service
 
 Start the Telegraf service and direct it to the relevant configuration file or URL to pull a configuration file from a remote endpoint:
 
