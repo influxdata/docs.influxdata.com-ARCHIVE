@@ -11,16 +11,22 @@ menu:
 ---
 
 ## Getting started with Telegraf
-Telegraf is an agent written in Go for collecting metrics and writing them into InfluxDB or other possible outputs.
-This guide will get you up and running with Telegraf.
-It walks you through the download, installation, and configuration processes, and it shows how to use Telegraf to get data into InfluxDB.
+
+Use Telegraf (an agent written in Go) to collect and write metrics into InfluxDB or other supported outputs.
+
+To get up and running, do the following:
+
+1. [Download and install Telegraf](#download-and-install-telegraf)
+2. [Configure Telegraf]
+3. [Start Telegraf service]
 
 ## Download and install Telegraf
+
 Follow the instructions in the Telegraf section on the [Downloads page](https://influxdata.com/downloads/).
 
 > **Note:** Telegraf will start automatically using the default configuration when installed from a deb package.
 
-## Configuring Telegraf
+## Configure Telegraf
 
 ### Configuration file location by installation type
 
@@ -28,21 +34,24 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 * Linux debian and RPM packages: `/etc/telegraf/telegraf.conf`
 * Standalone Binary: see the next section for how to create a configuration file
 
-### Creating and editing the configuration file
+> **Note:** You can also specify a remote URL endpoint to pull a configuration file. See [Configuration file locations](/telegraf/v1.14/administration/configuration/#configuration-file-locations).
 
-Before starting the Telegraf server you need to edit and/or create an initial configuration that specifies your desired [inputs](/telegraf/v1.14/plugins/inputs/) (where the metrics come from) and [outputs](/telegraf/v1.14/plugins/outputs/) (where the metrics go). There are [several ways](/telegraf/v1.14/administration/configuration/) to create and edit the configuration file.
-Here, we'll generate a configuration file and simultaneously specify the desired inputs with the `-input-filter` flag and the desired output with the `-output-filter` flag.
+### Create and edit the configuration file
 
-In the example below, we create a configuration file called `telegraf.conf` with two inputs:
-one that reads metrics about the system's cpu usage (`cpu`) and one that reads metrics about the system's memory usage (`mem`). We specify InfluxDB as the desired output.
+Before starting the Telegraf server, create or edit the initial configuration to specify your [inputs](/telegraf/v1.14/plugins/inputs/) (where the metrics come from) and [outputs](/telegraf/v1.14/plugins/outputs/) (where the metrics go). You can do this [several ways](/telegraf/v1.14/administration/configuration/).
+
+The following example shows how to create a configuration file called `telegraf.conf` and specify two inputs (`cpu` and `mem`) with the `-input-filter` flag and specify InfluxDB as the output with the `-output-filter` flag.
 
 ```bash
 telegraf -sample-config -input-filter cpu:mem -output-filter influxdb > telegraf.conf
 ```
 
+`cpu` and `mem` reads metrics about the system's cpu usage and memory usage, and then output this data to InfluxDB.
+
 ## Start the Telegraf service
 
-Start the Telegraf service and direct it to the relevant configuration file:
+Start the Telegraf service and direct it to the relevant configuration file or URL to pull a configuration file from a remote endpoint:
+
 ### macOS [Homebrew](http://brew.sh/)
 ```bash
 telegraf --config telegraf.conf
@@ -59,10 +68,11 @@ systemctl start telegraf
 ```
 
 ## Results
-Once Telegraf is up and running it will start collecting data and writing them to the desired output.
 
-Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below.
-Note that we used the default input and output configuration settings to get these data.
+Telegraf starts collecting and writing data to the specified output.
+
+Returning to our sample configuration, we show what the `cpu` and `mem` data looks like in InfluxDB below.
+Note that we used the default input and output configuration settings to get this data.
 
 * List all [measurements](/influxdb/v1.4/concepts/glossary/#measurement) in the `telegraf` [database](/influxdb/v1.4/concepts/glossary/#database):
 
@@ -122,8 +132,6 @@ time			               usage_idle
 2016-01-16T00:03:40Z	 98.63715928982245
 ```
 
-
 Notice that the timestamps occur at rounded ten second intervals (that is, `:00`, `:10`, `:20`, and so on) - this is a configurable setting.
 
-
-That's it! You now have the foundation for using Telegraf to collect metrics and write them to your output of choice.
+That's it! You ready to use Telegraf to collect metrics and write them to your output of choice.
