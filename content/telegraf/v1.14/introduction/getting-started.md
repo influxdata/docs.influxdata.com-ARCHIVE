@@ -10,7 +10,7 @@ menu:
     parent: Introduction
 ---
 
-Use Telegraf (an agent written in Go) to collect and write metrics into InfluxDB or other supported outputs.
+Use Telegraf to collect and write metrics into InfluxDB and other supported outputs.
 
 To get up and running, do the following:
 
@@ -38,10 +38,10 @@ Follow the instructions in the Telegraf section on the [Downloads page](https://
 
 Before starting the Telegraf server, create or edit the initial configuration to specify your [inputs](/telegraf/v1.14/plugins/inputs/) (where the metrics come from) and [outputs](/telegraf/v1.14/plugins/outputs/) (where the metrics go). You can do this [several ways](/telegraf/v1.14/administration/configuration/).
 
-The following example shows how to create a configuration file called `telegraf.conf` and specify two inputs (`cpu` and `mem`) with the `-input-filter` flag and specify InfluxDB as the output with the `-output-filter` flag.
+The following example shows how to create a configuration file called `telegraf.conf` and specify two inputs (`cpu` and `mem`) with the `--input-filter` flag and specify InfluxDB as the output with the `--output-filter` flag.
 
 ```bash
-telegraf -sample-config -input-filter cpu:mem -output-filter influxdb > telegraf.conf
+telegraf -sample-config --input-filter cpu:mem --output-filter influxdb > telegraf.conf
 ```
 
 `cpu` and `mem` reads metrics about the system's cpu usage and memory usage, and then output this data to InfluxDB.

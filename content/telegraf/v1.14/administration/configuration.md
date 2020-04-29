@@ -19,20 +19,20 @@ telegraf config > telegraf.conf
 ```
 
 To generate a configuration file with specific inputs and outputs, you can use the
-`-input-filter` and `-output-filter` flags:
+`--input-filter` and `-output-filter` flags:
 
 ```
-telegraf -input-filter cpu:mem:net:swap -output-filter influxdb:kafka config
+telegraf --input-filter cpu:mem:net:swap -output-filter influxdb:kafka config
 ```
 
 ## Configuration file locations
 
-Use the `-config` flag to specify the configuration file location:
+Use the `--config` flag to specify the configuration file location:
 
-- Filename and path, for example: `-config /etc/default/telegraf`
-- Remote URL endpoint, for example: `-config http://remote-URL-endpoint`
+- Filename and path, for example: `--config /etc/default/telegraf`
+- Remote URL endpoint, for example: `--config "http://remote-URL-endpoint"`
 
-Use the `-config-directory` flag to include files ending with `.conf` in the specified directory in the Telegraf
+Use the `--config-directory` flag to include files ending with `.conf` in the specified directory in the Telegraf
 configuration.
 
 On most systems, the default locations are `/etc/telegraf/telegraf.conf` for
