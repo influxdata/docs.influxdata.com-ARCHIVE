@@ -220,7 +220,7 @@ restore: DB metadata not changed. database may already exist
     ```
     > USE telegraf_bak
     > SELECT * INTO telegraf.autogen.:MEASUREMENT FROM /telegraf_bak.autogen_bak.*/ GROUP BY *
-    > DROP telegraf_bak
+    > DROP DATABASE telegraf_bak
     ```
 
 ### Backward compatible offline backup and restore (legacy format)
