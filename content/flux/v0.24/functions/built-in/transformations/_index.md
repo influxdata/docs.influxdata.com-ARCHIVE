@@ -17,4 +17,4 @@ There are different types of transformations categorized below:
 
 ## Generic transformations
 
-{{< function-list >}}
+{{< children type="functions" >}}

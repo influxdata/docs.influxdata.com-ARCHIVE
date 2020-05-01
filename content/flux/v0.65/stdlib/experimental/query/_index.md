@@ -18,7 +18,7 @@ Import the `experimental/query` package:
 import "experimental/query"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}
 
 ## inBucket()
 The primary function in this package is [`query.inBucket()`](/flux/v0.65/stdlib/experimental/query/inbucket/),

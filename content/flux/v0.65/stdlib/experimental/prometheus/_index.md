@@ -18,4 +18,4 @@ Import the `experimental/prometheus` package:
 import "experimental/prometheus"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

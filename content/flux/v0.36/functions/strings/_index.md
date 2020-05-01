@@ -17,4 +17,4 @@ Import the `strings` package:
 import "strings"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

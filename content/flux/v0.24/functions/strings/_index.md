@@ -18,4 +18,4 @@ import "strings"
 ```
 
 ## String functions
-{{< function-list >}}
+{{< children type="functions" >}}

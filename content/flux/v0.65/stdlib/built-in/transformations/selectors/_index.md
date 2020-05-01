@@ -17,7 +17,7 @@ The output table is different than the input table, but individual row values ar
 
 The following selector functions are available:
 
-{{< function-list >}}
+{{< children type="functions" >}}
 
 
 ### Selectors and aggregates

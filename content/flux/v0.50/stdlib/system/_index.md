@@ -17,4 +17,4 @@ Import the `system` package:
 import "system"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

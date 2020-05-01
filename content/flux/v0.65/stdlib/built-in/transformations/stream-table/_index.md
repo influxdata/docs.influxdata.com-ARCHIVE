@@ -15,7 +15,7 @@ aliases:
 Use stream and table functions to extract a table from a stream of tables and access its
 columns and records.
 
-{{< function-list >}}
+{{< children type="functions" >}}
 
 ##### Example stream and table functions
 ```js

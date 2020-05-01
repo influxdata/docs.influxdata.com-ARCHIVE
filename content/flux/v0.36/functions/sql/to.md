@@ -18,7 +18,7 @@ import "sql"
 sql.to(
   driverName: "mysql",
   dataSourceName: "username:password@tcp(localhost:3306)/dbname?param=value",
-  table: "ExampleTable"
+  table: "example_table"
 )
 ```
 
@@ -63,7 +63,7 @@ import "sql"
 sql.to(
   driverName: "mysql",
   dataSourceName: "user:password@tcp(localhost:3306)/db",
-  table: "ExampleTable"
+  table: "example_table"
 )
 ```
 
@@ -74,6 +74,6 @@ import "sql"
 sql.to(
   driverName: "postgres",
   dataSourceName: "postgresql://user:password@localhost",
-  table: "ExampleTable"
+  table: "example_table"
 )
 ```

@@ -19,4 +19,4 @@ current Flux runtime. Import the `runtime` package:
 import "runtime"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

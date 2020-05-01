@@ -18,4 +18,4 @@ Import the `experimental/bigtable` package:
 import "experimental/bigtable"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}
