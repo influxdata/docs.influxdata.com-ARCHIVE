@@ -1,10 +1,11 @@
 ---
 title: Monitor states
+seotitle: Monitor states and state changes in your events and metrics with Flux.
 description: Flux provides several functions to help monitor states and state changes in your data.
 menu:
   flux_0_65:
     name: Monitor states
-    parent: Guides
+    parent: Query with Flux
 weight: 20
 ---
 

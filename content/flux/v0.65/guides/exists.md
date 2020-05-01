@@ -1,13 +1,21 @@
 ---
 title: Check if a value exists
+seotitle: Use Flux to check if a value exists
+list_title: Exists
 description: >
   Use the Flux `exists` operator to check if an object contains a key or if that
   key's value is `null`.
 menu:
   flux_0_65:
-    name: Check if a value exists
-    parent: Guides
+    name: Exists
+    parent: Query with Flux
 weight: 20
+list_code_example: |
+  ##### Filter null values
+  ```js
+  data
+    |> filter(fn: (r) => exists r._value)
+  ```
 ---
 
 Use the Flux `exists` operator to check if an object contains a key or if that
@@ -26,7 +34,7 @@ exists p.height
 If you're just getting started with Flux queries, check out the following:
 
 - [Get started with Flux](/flux/v0.65/introduction/getting-started/) for a conceptual overview of Flux and parts of a Flux query.
-- [Execute queries](/flux/v0.65/guides/executing-queries/) to discover a variety of ways to run your queries.
+- [Execute queries](/flux/v0.65/guides/execute-queries/) to discover a variety of ways to run your queries.
 
 Use `exists` with row functions (
 [`filter()`](/flux/v0.65/stdlib/built-in/transformations/filter/),
@@ -34,9 +42,9 @@ Use `exists` with row functions (
 [`reduce()`](/flux/v0.65/stdlib/built-in/transformations/aggregates/reduce/))
 to check if a row includes a column or if the value for that column is `null`.
 
-#### Filter out null values
+#### Filter null values
 ```js
-from(bucket: "example-bucket")
+from(bucket: "db/rp")
   |> range(start: -5m)
   |> filter(fn: (r) => exists r._value)
 ```

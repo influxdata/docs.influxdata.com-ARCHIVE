@@ -1,0 +1,63 @@
+<svg version="1.1" id="timed-moving-average" style="margin: 1rem 0 3rem; max-width: 425px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 340 183" style="enable-background:new 0 0 340 183;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke-miterlimit:10; stroke: #9194a5;}
+	.st1{fill: #9194a5;}
+	.st2{font-family: 'Roboto'; font-weight: bold}
+	.st3{font-size:14px;}
+	.st4{fill:#D75189;fill-opacity:0.15;stroke:#D75189;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#DC4E58;stroke-miterlimit:10;}
+	.st6{fill:#D355BA;fill-opacity:0.15;stroke:#D355BA;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#D553A2;stroke-miterlimit:10;}
+	.st8{fill:#CE58EB;fill-opacity:0.15;stroke:#CE58EB;stroke-miterlimit:10;}
+	.st9{fill:none;stroke:#CE58EB;stroke-miterlimit:10;}
+	.st10{fill:#8971F2;fill-opacity:0.15;stroke:#8971F2;stroke-miterlimit:10;}
+	.st11{fill:none;stroke:#677EF5;stroke-miterlimit:10;}
+	.st12{fill:#458AF8;fill-opacity:0.15;stroke:#458AF8;stroke-miterlimit:10;}
+	.st13{fill:#00A3FF;fill-opacity:0.15;stroke:#00A3FF;stroke-miterlimit:10;}
+	.st14{fill:#458AF8;}
+	.st15{fill:#8971F2;}
+	.st16{fill:#CE58EB;}
+	.st17{fill:#D355BA;}
+	.st18{fill:#D75189;}
+	.st19{fill:#DC4E58;fill-opacity:0.15;stroke:#DC4E58;stroke-miterlimit:10;}
+	.st20{fill:#DC4E58;}
+	.st21{fill:none;stroke:#00A3FF;stroke-miterlimit:10;}
+</style>
+<line class="st0" x1="19.5" y1="153.28" x2="319.58" y2="153.28"/>
+<g>
+	<line class="st0" x1="19.5" y1="157.28" x2="19.5" y2="149.28"/>
+	<line class="st0" x1="69.51" y1="157.28" x2="69.51" y2="149.28"/>
+	<line class="st0" x1="119.52" y1="157.28" x2="119.52" y2="149.28"/>
+	<line class="st0" x1="169.54" y1="157.28" x2="169.54" y2="149.28"/>
+	<line class="st0" x1="219.55" y1="157.28" x2="219.55" y2="149.28"/>
+	<line class="st0" x1="269.56" y1="157.28" x2="269.56" y2="149.28"/>
+	<line class="st0" x1="319.58" y1="157.28" x2="319.58" y2="149.28"/>
+</g>
+<text transform="matrix(1 0 0 1 3.4638 177.0608)" class="st1 st2 st3">0:00</text>
+<text transform="matrix(1 0 0 1 53.791 177.0608)" class="st1 st2 st3">0:30</text>
+<text transform="matrix(1 0 0 1 105.0908 177.061)" class="st1 st2 st3">1:00</text>
+<text transform="matrix(1 0 0 1 155.4189 177.0608)" class="st1 st2 st3">1:30</text>
+<text transform="matrix(1 0 0 1 204.2617 177.0611)" class="st1 st2 st3">2:00</text>
+<text transform="matrix(1 0 0 1 254.5893 177.0605)" class="st1 st2 st3">2:30</text>
+<text transform="matrix(1 0 0 1 304.4472 177.061)" class="st1 st2 st3">3:00</text>
+<polyline class="st4" points="19.5,65.28 19.5,55.11 119.52,55.11 119.52,65.28 "/>
+<line class="st5" x1="119.52" y1="55.09" x2="119.52" y2="26.45"/>
+<polyline class="st6" points="69.51,80.86 69.51,70.69 169.54,70.69 169.54,80.86 "/>
+<line class="st7" x1="169.54" y1="70.64" x2="169.54" y2="26.45"/>
+<polyline class="st8" points="119.52,96.44 119.52,86.27 219.55,86.27 219.55,96.44 "/>
+<line class="st9" x1="219.55" y1="86.2" x2="219.55" y2="26.45"/>
+<polyline class="st10" points="169.54,112.02 169.54,101.85 269.56,101.85 269.56,112.02 "/>
+<line class="st11" x1="269.56" y1="101.75" x2="269.56" y2="26.45"/>
+<polyline class="st12" points="219.55,127.6 219.55,117.44 319.58,117.44 319.58,127.6 "/>
+<polyline class="st13" points="269.56,143.18 269.56,133.02 319.58,133.02 319.58,143.18 "/>
+<text transform="matrix(1 0 0 1 304.4474 15.9156)" class="st14 st2 st3">3:00</text>
+<text transform="matrix(1 0 0 1 254.5889 15.9156)" class="st15 st2 st3">2:30</text>
+<text transform="matrix(1 0 0 1 204.2616 15.9155)" class="st16 st2 st3">2:00</text>
+<text transform="matrix(1 0 0 1 155.4183 15.9157)" class="st17 st2 st3">1:30</text>
+<text transform="matrix(1 0 0 1 105.0907 15.9159)" class="st18 st2 st3">1:00</text>
+<polyline class="st19" points="19.23,49.7 19.23,39.53 69.24,39.53 69.24,49.7 "/>
+<line class="st5" x1="69.24" y1="39.53" x2="69.24" y2="26.52"/>
+<text transform="matrix(1 0 0 1 53.6409 15.991)" class="st20 st2 st3">0:30</text>
+<line class="st21" x1="319.58" y1="135.02" x2="319.58" y2="26.45"/>
+</svg>

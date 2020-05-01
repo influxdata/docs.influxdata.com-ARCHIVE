@@ -1,26 +1,32 @@
 ---
 title: Join data with Flux
+seotitle: Join data in InfluxDB with Flux
+list_title: Join
 description: This guide walks through joining data with Flux and outlines how it shapes your data in the process.
+
 menu:
   flux_0_65:
-    name: Join data
-    parent: Guides
-    weight: 5
+    name: Join
+    parent: Query with Flux
+weight: 10
+list_query_example: join
 ---
 
 The [`join()` function](/flux/v0.65/stdlib/built-in/transformations/join) merges two or more
-input streams whose values are equal on a set of common columns into a single output stream.
+input streams, whose values are equal on a set of common columns, into a single output stream.
 Flux allows you to join on any columns common between two data streams and opens the door
 for operations such as cross-measurement joins and math across measurements.
 
 To illustrate a join operation, use data captured by Telegraf and and stored in
-InfluxDB with a default TICK stack installation - memory usage and processes.
-
-> If using the [InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install/) or other
-> "Dockerized" instances of the TICK stack, these measurements may not be available.
+InfluxDB - memory usage and processes.
 
 In this guide, we'll join two data streams, one representing memory usage and the other representing the
 total number of running processes, then calculate the average memory usage per running process.
+
+If you're just getting started with Flux queries, check out the following:
+
+- [Get started with Flux](/flux/v0.65/introduction/getting-started/) for a conceptual overview of Flux and parts of a Flux query.
+- [Execute queries](/flux/v0.65/guides/execute-queries/) to discover a variety of ways to run your queries.
 
 ## Define stream variables
 In order to perform a join, you must have two streams of data.
@@ -32,7 +38,7 @@ This returns the amount of memory (in bytes) used.
 
 ###### memUsed stream definition
 ```js
-memUsed = from(bucket: "telegraf/autogen")
+memUsed = from(bucket: "db/rp")
   |> range(start: -5m)
   |> filter(fn: (r) =>
     r._measurement == "mem" and
@@ -46,7 +52,7 @@ memUsed = from(bucket: "telegraf/autogen")
 Table: keys: [_start, _stop, _field, _measurement, host]
                    _start:time                      _stop:time           _field:string     _measurement:string               host:string                      _time:time                  _value:int
 ------------------------------  ------------------------------  ----------------------  ----------------------  ------------------------  ------------------------------  --------------------------
-2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:50:00.000000000Z                 10956363056
+2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:50:00.000000000Z                 10956333056
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:50:10.000000000Z                 11014008832
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:50:20.000000000Z                 11373428736
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:50:30.000000000Z                 11001421824
@@ -57,7 +63,7 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:51:20.000000000Z                 11612774400
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:51:30.000000000Z                 11131961344
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:51:40.000000000Z                 11124805632
-2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:51:50.000000000Z                 11362464640
+2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:51:50.000000000Z                 11332464640
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:52:00.000000000Z                 11176923136
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:52:10.000000000Z                 11181068288
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:52:20.000000000Z                 11182579712
@@ -68,7 +74,7 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:53:10.000000000Z                 11227029504
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:53:20.000000000Z                 11201646592
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:53:30.000000000Z                 11227897856
-2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:53:40.000000000Z                 11360428928
+2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:53:40.000000000Z                 11330428928
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:53:50.000000000Z                 11347976192
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:54:00.000000000Z                 11368271872
 2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z                    used                     mem               host1.local  2018-11-06T05:54:10.000000000Z                 11269623808
@@ -86,7 +92,7 @@ This returns the number of running processes.
 
 ###### procTotal stream definition
 ```js
-procTotal = from(bucket: "telegraf/autogen")
+procTotal = from(bucket: "db/rp")
   |> range(start: -5m)
   |> filter(fn: (r) =>
     r._measurement == "processes" and
@@ -144,7 +150,7 @@ In the example below, `mem` is the alias for `memUsed` and `proc` is the alias f
 
 ##### `on`
 An array of strings defining the columns on which the tables will be joined.
-_**Both tables must have all columns defined in this list.**_
+_**Both tables must have all columns specified in this list.**_
 
 ```js
 join(
@@ -159,7 +165,7 @@ join(
 Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _start, _stop, host]
      _field_mem:string      _field_proc:string  _measurement_mem:string  _measurement_proc:string                     _start:time                      _stop:time               host:string                      _time:time              _value_mem:int             _value_proc:int
 ----------------------  ----------------------  -----------------------  ------------------------  ------------------------------  ------------------------------  ------------------------  ------------------------------  --------------------------  --------------------------
-                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:00.000000000Z                 10956363056                         470
+                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:00.000000000Z                 10956333056                         470
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:10.000000000Z                 11014008832                         470
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:20.000000000Z                 11373428736                         471
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:30.000000000Z                 11001421824                         470
@@ -170,7 +176,7 @@ Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _sta
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:51:20.000000000Z                 11612774400                         470
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:51:30.000000000Z                 11131961344                         470
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:51:40.000000000Z                 11124805632                         469
-                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:51:50.000000000Z                 11362464640                         471
+                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:51:50.000000000Z                 11332464640                         471
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:52:00.000000000Z                 11176923136                         471
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:52:10.000000000Z                 11181068288                         470
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:52:20.000000000Z                 11182579712                         470
@@ -181,7 +187,7 @@ Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _sta
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:10.000000000Z                 11227029504                         470
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:20.000000000Z                 11201646592                         470
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:30.000000000Z                 11227897856                         471
-                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:40.000000000Z                 11360428928                         471
+                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:40.000000000Z                 11330428928                         471
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:50.000000000Z                 11347976192                         471
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:54:00.000000000Z                 11368271872                         471
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:54:10.000000000Z                 11269623808                         470
@@ -205,16 +211,19 @@ Notice the output table includes the following columns:
 These represent the columns with values unique to the two input tables.
 
 ## Calculate and create a new table
-With the two streams of data joined into a single table, use the [`map()` function](/flux/v0.65/stdlib/built-in/transformations/map)
-to build a new table by mapping the existing `_time` column to a new `_time` column and dividing `_value_mem` by `_value_proc`
-and mapping it to a new `_value` column.
+With the two streams of data joined into a single table, use the
+[`map()` function](/flux/v0.65/stdlib/built-in/transformations/map)
+to build a new table by mapping the existing `_time` column to a new `_time`
+column and dividing `_value_mem` by `_value_proc` and mapping it to a
+new `_value` column.
 
 ```js
 join(tables: {mem:memUsed, proc:procTotal}, on: ["_time", "_stop", "_start", "host"])
   |> map(fn: (r) => ({
-    _time: r._time,
-    _value: r._value_mem / r._value_proc
-  }))
+      _time: r._time,
+      _value: r._value_mem / r._value_proc
+    })
+  )
 ```
 
 {{% truncate %}}
@@ -223,12 +232,12 @@ join(tables: {mem:memUsed, proc:procTotal}, on: ["_time", "_stop", "_start", "ho
 Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _start, _stop, host]
      _field_mem:string      _field_proc:string  _measurement_mem:string  _measurement_proc:string                     _start:time                      _stop:time               host:string                      _time:time                  _value:int
 ----------------------  ----------------------  -----------------------  ------------------------  ------------------------------  ------------------------------  ------------------------  ------------------------------  --------------------------
-                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:00.000000000Z                    23611346
+                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:00.000000000Z                    23311346
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:10.000000000Z                    23434061
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:20.000000000Z                    24147407
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:30.000000000Z                    23407280
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:40.000000000Z                    23423993
-                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:50.000000000Z                    23638173
+                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:50:50.000000000Z                    23338173
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:51:00.000000000Z                    23518229
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:51:10.000000000Z                    23600515
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:51:20.000000000Z                    24708030
@@ -240,13 +249,13 @@ Table: keys: [_field_mem, _field_proc, _measurement_mem, _measurement_proc, _sta
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:52:20.000000000Z                    23792722
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:52:30.000000000Z                    23861704
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:52:40.000000000Z                    23888340
-                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:52:50.000000000Z                    23836145
+                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:52:50.000000000Z                    23833145
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:00.000000000Z                    23941895
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:10.000000000Z                    23887296
-                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:20.000000000Z                    23836290
+                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:20.000000000Z                    23833290
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:30.000000000Z                    23838424
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:40.000000000Z                    24056112
-                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:50.000000000Z                    24093667
+                  used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:53:50.000000000Z                    24093367
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:54:00.000000000Z                    24136458
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:54:10.000000000Z                    23977922
                   used                   total                      mem                 processes  2018-11-06T05:50:00.000000000Z  2018-11-06T05:55:00.000000000Z  Scotts-MacBook-Pro.local  2018-11-06T05:54:20.000000000Z                    23982245

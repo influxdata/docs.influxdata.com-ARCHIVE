@@ -1,11 +1,12 @@
 ---
 title: Manipulate timestamps with Flux
+list_title: Manipulate timestamps
 description: >
   Use Flux to process and manipulate timestamps.
 menu:
   flux_0_65:
     name: Manipulate timestamps
-    parent: Guides
+    parent: Query with Flux
 weight: 20
 ---
 
@@ -14,6 +15,11 @@ Use Flux to process and manipulate timestamps to suit your needs.
 
 - [Convert timestamp format](#convert-timestamp-format)
 - [Time-related Flux functions](#time-related-flux-functions)
+
+If you're just getting started with Flux queries, check out the following:
+
+- [Get started with Flux](/flux/v0.65/introduction/getting-started/) for a conceptual overview of Flux and parts of a Flux query.
+- [Execute queries](/flux/v0.65/guides/execute-queries/) to discover a variety of ways to run your queries.
 
 ## Convert timestamp format
 
@@ -78,6 +84,7 @@ to return the current system time of the host machine in RFC3339 format.
 
 ```js
 import "system"
+
 system.time()
 ```
 
@@ -85,7 +92,6 @@ system.time()
 `system.time()` returns the time it is executed, so each instance of `system.time()`
 in a Flux script returns a unique value.
 {{% /note %}}
-
 
 ### Add a duration to a timestamp
 The [`experimental.addDuration()` function](/flux/v0.65/stdlib/experimental/addduration/)
@@ -107,12 +113,12 @@ experimental.addDuration(
 // Returns 2019-09-16T18:00:00.000000000Z
 ```
 
-### Subtract a duration from a timestamps
-The [`experimental.addDuration()` function](/flux/v0.65/stdlib/experimental/subduration/)
+### Subtract a duration from a timestamp
+The [`experimental.subDuration()` function](/flux/v0.65/stdlib/experimental/subduration/)
 subtracts a duration from a specified time and returns the resulting time.
 
 {{% warn %}}
-By using `experimental.addDuration()`, you accept the
+By using `experimental.subDuration()`, you accept the
 [risks of experimental functions](/flux/v0.65/stdlib/experimental/#use-experimental-functions-at-your-own-risk).
 {{% /warn %}}
 

@@ -7,7 +7,11 @@ menu:
   flux_0_65:
     name: Shape geo-temporal data
     parent: Geo-temporal data
-weight: 1
+weight: 301
+related:
+  - /flux/v0.65/stdlib/experimental/geo/
+  - /flux/v0.65/stdlib/experimental/geo/shapedata/
+  - /flux/v0.65/stdlib/experimental/geo/s2cellidtoken/
 list_code_example: |
   ```js
   import "experimental/geo"
@@ -32,24 +36,23 @@ Functions in the Geo package require the following data schema:
 - a **`lat` field** field containing the **latitude in decimal degrees** (WGS 84)
 - a **`lon` field** field containing the **longitude in decimal degrees** (WGS 84)
 
-<!--  -->
-- [Rename latitude and longitude fields](#rename-latitude-and-longitude-fields)
-- [Generate S2 cell ID tokens](#generate-s2-cell-id-tokens)  
-
-## Rename latitude and longitude fields
-Use [`map()`](/flux/v0.65/stdlib/built-in/transformations/map/) to rename
-existing latitude and longitude fields using other names.
+## Shape geo-temporal data
+If your data already contains latitude and longitude fields, use the
+[`geo.shapeData()`function](/flux/v0.65/stdlib/experimental/geo/shapedata/)
+to rename the fields to match the requirements of the Geo package, pivot the data
+into row-wise sets, and generate S2 cell ID tokens for each point.
 
 ```js
+import "experimental/geo"
+
 from(bucket: "example-bucket")
   |> range(start: -1h)
   |> filter(fn: (r) => r._measurement == "example-measurement")
-  |> map(fn: (r) => ({ r with
-    _field:
-      if r._field == "existingLatitudeField" then "lat"
-      else if r._field == "existingLongitudeField" then "lon"
-      else r._field
-  }))
+  |> geo.shapeData(
+    latField: "latitude",
+    lonField: "longitude",
+    level: 10
+  )
 ```
 
 ## Generate S2 cell ID tokens
@@ -61,7 +64,7 @@ Grid and S2 cell ID accuracy are defined by a [level](https://s2geometry.io/reso
 
 {{% note %}}
 To filter more quickly, use higher S2 Cell ID levels,
-but know that that higher levels increase [series cardinality](/influxdb/latest/concepts/glossary/#series-cardinality).
+but know that that higher levels increase [series cardinality](/influxdb/v1.8/concepts/glossary/#series-cardinality).
 {{% /note %}}
 
 The Geo package requires S2 cell IDs as tokens.
@@ -119,3 +122,8 @@ from(bucket: "example-bucket")
     s2_cell_id: geo.s2CellIDToken(point: {lon: r.lon, lat: r.lat}, level: 10)
   }))
 ```
+
+{{% note %}}
+The [`geo.shapeData()`function](/flux/v0.65/stdlib/experimental/geo/shapedata/)
+generates S2 cell ID tokens as well.
+{{% /note %}}

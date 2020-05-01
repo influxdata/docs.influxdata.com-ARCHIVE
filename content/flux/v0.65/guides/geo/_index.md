@@ -1,12 +1,21 @@
 ---
 title: Work with geo-temporal data
+list_title: Geo-temporal data
 description: >
   Use the Flux Geo package to filter geo-temporal data and group by geographic location or track.
 menu:
   flux_0_65:
     name: Geo-temporal data
-    parent: Guides
-weight: 10
+    parent: Query with Flux
+weight: 20
+list_code_example: |
+  ```js
+  import "experimental/geo"
+
+  sampleGeoData
+    |> geo.filterRows(region: {lat: 30.04, lon: 31.23, radius: 200.0})
+    |> geo.groupByArea(newColumn: "geoArea", level: 5)
+  ```
 ---
 
 Use the [Flux Geo package](/flux/v0.65/stdlib/experimental/geo) to
@@ -63,18 +72,18 @@ to write the data to a bucket, and then query the bucket with [`from()`](/flux/v
 
 ### Write sample data to InfluxDB with line protocol
 Use `curl` and the `influx write` command to write bird migration line protocol to InfluxDB.
-Replace `example-bucket` with your destination bucket:
+Replace `db/rp` with your destination bucket:
 
 ```sh
 curl https://raw.githubusercontent.com/influxdata/influxdb2-sample-data/master/bird-migration-data/bird-migration.line --output ./tmp-data
-influx write -b example-bucket @./tmp-data
+influx write -b db/rp @./tmp-data
 rm -f ./tmp-data
 ```
 
 Use Flux to query the bird migration data and assign it to the `sampleGeoData` variable:
 
 ```js
-sampleGeoData = from(bucket: "example-bucket")
+sampleGeoData = from(bucket: "db/rp")
   |> range(start: 2019-01-01T00:00:00Z, stop: 2019-12-31T23:59:59Z)
   |> filter(fn: (r) => r._measurement == "migration")
 ```

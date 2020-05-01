@@ -1,13 +1,24 @@
 ---
 title: Extract scalar values in Flux
+list_title: Extract scalar values
 description: >
   Use Flux stream and table functions to extract scalar values from Flux query output.
   This lets you, for example, dynamically set variables using query results.
 menu:
   flux_0_65:
     name: Extract scalar values
-    parent:  Guides
+    parent:  Query with Flux
 weight: 20
+list_code_example: |
+  ```js
+  scalarValue = {
+    _record =
+      data
+        |> tableFind(fn: key => true)
+        |> getRecord(idx: 0)
+    return _record._value
+  }
+  ```
 ---
 
 Use Flux [stream and table functions](/flux/v0.65/stdlib/built-in/transformations/stream-table/)
@@ -27,8 +38,8 @@ _The samples on this page use the [sample data provided below](#sample-data)._
 - The InfluxDB user interface (UI) does not currently support raw scalar output.
   Use [`map()`](/flux/v0.65/stdlib/built-in/transformations/map/) to add
   scalar values to output data.
-- The [Flux REPL ](/flux/v0.65/guides/executing-queries/#influx-cli-in-flux-mode)
-  does not currently support Flux stream and table functions (also known as "dynamic queries").
+- The [Flux REPL](/flux/v0.65/guides/execute-queries/#influx-cli) does not currently support
+  Flux stream and table functions (also known as "dynamic queries").
   See [#15321](https://github.com/influxdata/influxdb/issues/15231).
 {{% /warn %}}
 
@@ -45,7 +56,7 @@ You still must extract that table from the stream.
 
 Use [`tableFind()`](/flux/v0.65/stdlib/built-in/transformations/stream-table/tablefind/)
 to extract the **first** table whose [group key](/flux/v0.65/introduction/getting-started/#group-keys)
-values match the `fn` predicate function.
+values match the `fn` **predicate function**.
 The predicate function requires a `key` object, which represents the group key of
 each table.
 
@@ -140,8 +151,8 @@ sampleData
 ### Use an extracted row object
 Use a variable to store the extracted row object.
 In the example below, `tempInfo` represents the extracted row.
-Use [dot notation](/flux/v0.65/introduction/getting-started/syntax-basics/#objects)
-to reference keys in the object.
+Use [dot notation](/flux/v0.65/introduction/getting-started/syntax-basics/#objects) to reference
+keys in the object.
 
 ```js
 tempInfo = sampleData
@@ -218,8 +229,8 @@ The temperature was ${string(v: lastReported._value)}°F."
 
 The following sample data set represents fictional temperature metrics collected
 from three locations.
-It's formatted in **annotated CSV** and imported into the Flux query using the
-[`csv.from()` function](/flux/v0.65/stdlib/csv/from/).
+It's formatted in [annotated CSV](https://v2.docs.influxdata.com/v2.0/reference/syntax/annotated-csv/) and imported
+into the Flux query using the [`csv.from()` function](/flux/v0.65/stdlib/csv/from/).
 
 Place the following at the beginning of your query to use the sample data:
 
