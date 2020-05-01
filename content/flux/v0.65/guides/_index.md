@@ -1,10 +1,10 @@
 ---
-title: Flux guides
-description: Helpful guides that walk through both common and complex tasks and use cases for Flux.
+title: Query data with Flux
+description: Guides that walk through both common and complex queries and use cases for Flux.
+weight: 3
 menu:
   flux_0_65:
-    name: Guides
-    weight: 3
+    name: Query with Flux
 ---
 
 The following guides walk through both common and complex queries and use cases for Flux.
@@ -16,7 +16,7 @@ which represents a basic query that filters data by measurement and field.
 `data` is defined as:
 
 ```js
-data = from(bucket: "example-bucket")
+data = from(bucket: "db/rp")
   |> range(start: -1h)
   |> filter(fn: (r) =>
     r._measurement == "example-measurement" and
@@ -25,4 +25,10 @@ data = from(bucket: "example-bucket")
 ```
 {{% /note %}}
 
-{{< children >}}
+## Flux query guides
+
+{{< children type="anchored-list" pages="all" >}}
+
+---
+
+{{< children pages="all" readmore=true hr=true >}}

@@ -17,4 +17,4 @@ Import the `http` package:
 import "http"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

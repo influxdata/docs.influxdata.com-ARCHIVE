@@ -20,4 +20,4 @@ import "influxdata/influxdb/v1"
 ```
 
 ## InfluxDB v1 functions
-{{< function-list >}}
+{{< children type="functions" >}}

@@ -19,4 +19,4 @@ Import the `experimental/csv` package:
 import "experimental/csv"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

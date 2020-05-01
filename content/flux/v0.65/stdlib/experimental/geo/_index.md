@@ -20,7 +20,7 @@ Import the `experimental/geo` package:
 import "experimental/geo"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}
 
 ## Geo schema requirements
 The Geo package uses the Go implementation of the [S2 Geometry Library](https://s2geometry.io/).

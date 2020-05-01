@@ -1,16 +1,27 @@
 ---
-title: Group data with Flux
-description: This guide walks through grouping data with Flux by providing examples and illustrating how data is shaped throughout the process.
+title: Group data in InfluxDB with Flux
+list_title: Group
+description: >
+  Use the [`group()` function](/flux/v0.65/stdlib/built-in/transformations/group)
+  to group data with common values in specific columns.
 menu:
   flux_0_65:
-    name: Group data
-    parent: Guides
-    weight: 3
+    name: Group
+    parent: Query with Flux
+weight: 2
+aliases:
+  - /flux/v0.65/guides/grouping-data/
+list_query_example: group
 ---
 
-With Flux, data can be grouped by any column in your queried data set.
-"Grouping" is accomplished by partitioning data into tables where each row shares a common value for specified columns.
-This guide walks through grouping data in Flux with examples of how data is shaped in the process.
+With Flux, you can group data by any column in your queried data set.
+"Grouping" partitions data into tables in which each row shares a common value for specified columns.
+This guide walks through grouping data in Flux and provides examples of how data is shaped in the process.
+
+If you're just getting started with Flux queries, check out the following:
+
+- [Get started with Flux](/flux/v0.65/introduction/getting-started/) for a conceptual overview of Flux and parts of a Flux query.
+- [Execute queries](/flux/v0.65/guides/execute-queries/) to discover a variety of ways to run your queries.
 
 ## Group keys
 Every table has a **group key** – a list of columns which for which every row in the table has the same value.
@@ -41,26 +52,17 @@ dataStream
 
 The `group()` function has the following parameters:
 
-### by
-An explicit method for defining the group key with an array of strings.
-Only columns specified are included in the output group key.
+### columns
+The list of columns to include or exclude (depending on the [mode](#mode)) in the grouping operation.
 
-### except
-An implicit method for defining the group key with an array of strings.
-All columns **except** those specified are included in the output group key.
+### mode
+The method used to define the group and resulting group key.
+Possible values include `by` and `except`.
 
-### none
-A boolean that removes all grouping and outputs everything as a single table.
-
----
-
-_For more information, see the [`group()` function](/flux/v0.65/stdlib/built-in/transformations/group)._
-
----
 
 ## Example grouping operations
 To illustrate how grouping works, define a `dataSet` variable that queries System
-CPU usage from the `telegraf/autogen` bucket.
+CPU usage from the `db/rp` bucket.
 Filter the `cpu` tag so it only returns results for each numbered CPU core.
 
 ### Data set
@@ -68,7 +70,7 @@ CPU used by system operations for all numbered CPU cores.
 It uses a regular expression to filter only numbered cores.
 
 ```js
-dataSet = from(bucket: "telegraf/autogen")
+dataSet = from(bucket: "db/rp")
   |> range(start: -2m)
   |> filter(fn: (r) =>
     r._field == "usage_system" and
@@ -77,9 +79,11 @@ dataSet = from(bucket: "telegraf/autogen")
   |> drop(columns: ["host"])
 ```
 
-> This example drops the `host` column from the returned data since the CPU data
-> is only tracked for a single host and it simplifies the output tables.
-> Don't drop the `host` column if monitoring multiple hosts.
+{{% note %}}
+This example drops the `host` column from the returned data since the CPU data
+is only tracked for a single host and it simplifies the output tables.
+Don't drop the `host` column if monitoring multiple hosts.
+{{% /note %}}
 
 {{% truncate %}}
 ```
@@ -155,7 +159,7 @@ Table: keys: [_start, _stop, _field, _measurement, cpu]
 
 **Note that the group key is output with each table: `Table: keys: <group-key>`.**
 
-![Group example data set](/img/flux/grouping-data-set.png)
+![Group example data set](/img/grouping-data-set.png)
 
 ### Group by CPU
 Group the `dataSet` stream by the `cpu` column.
@@ -165,7 +169,8 @@ dataSet
   |> group(columns: ["cpu"])
 ```
 
-This won't actually change the structure of the data since it already has `cpu` in the group key and is therefore grouped by `cpu`.
+This won't actually change the structure of the data since it already has `cpu`
+in the group key and is therefore grouped by `cpu`.
 However, notice that it does change the group key:
 
 {{% truncate %}}
@@ -243,7 +248,7 @@ Table: keys: [cpu]
 
 The visualization remains the same.
 
-![Group by CPU](/img/flux/grouping-data-set.png)
+![Group by CPU](/img/grouping-data-set.png)
 
 ### Group by time
 Grouping data by the `_time` column is a good illustration of how grouping changes the structure of your data.
@@ -365,21 +370,23 @@ Table: keys: [_time]
 ```
 {{% /truncate %}}
 
-Because each timestamp is a structured as a separate table, when visualized, they appear as individual, unconnected points.
-Even though there are multiple records per timestamp, it will only visualize the last record of the table.
+Because each timestamp is structured as a separate table, when visualized, all
+points that share the same timestamp appear connected.
 
-![Group by time](/img/flux/grouping-by-time.png)
+![Group by time](/img/grouping-by-time.png)
 
-> With some further processing, you could calculate the average CPU usage across all CPUs per point
-> of time and group them into a single table, but we won't cover that in this example.
-> If you're interested in running and visualizing this yourself, here's what the query would look like:
->
+{{% note %}}
+With some further processing, you could calculate the average CPU usage across all CPUs per point
+of time and group them into a single table, but we won't cover that in this example.
+If you're interested in running and visualizing this yourself, here's what the query would look like:
+
 ```js
 dataSet
   |> group(columns: ["_time"])
   |> mean()
   |> group(columns: ["_value", "_time"], mode: "except")
 ```
+{{% /note %}}
 
 ## Group by CPU and time
 Group by the `cpu` and `_time` columns.
@@ -658,7 +665,7 @@ Table: keys: [_time, cpu]
 
 When visualized, tables appear as individual, unconnected points.
 
-![Group by CPU and time](/img/flux/grouping-by-cpu-time.png)
+![Group by CPU and time](/img/grouping-by-cpu-time.png)
 
 Grouping by `cpu` and `_time` is a good illustration of how grouping works.
 

@@ -162,7 +162,7 @@ csvData = csv.from(csv: rawCSV)
 sqlData = sql.from(
   driverName: "postgres",
   dataSourceName: "postgresql://user:password@localhost",
-  query:"SELECT * FROM ExampleTable"
+  query:"SELECT * FROM example_table"
 )
 data = from(bucket: "telegraf/autogen")
   |> range(start: -24h)

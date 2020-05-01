@@ -55,4 +55,4 @@ date.December  = 12
 ```
 
 ## Date and time functions
-{{< function-list >}}
+{{< children type="functions" >}}

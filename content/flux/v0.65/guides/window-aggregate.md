@@ -1,11 +1,18 @@
 ---
-title: How to window and aggregate data with Flux
-description: This guide walks through windowing and aggregating data with Flux and outlines how it shapes your data in the process.
+title: Window and aggregate data with Flux
+seotitle: Window and aggregate data in InfluxDB with Flux
+list_title: Window & aggregate
+description: >
+  This guide walks through windowing and aggregating data with Flux and outlines
+  how it shapes your data in the process.
 menu:
   flux_0_65:
-    name: Window and aggregate data
-    parent: Guides
-    weight: 5
+    name: Window & aggregate
+    parent: Query with Flux
+weight: 4
+aliases:
+  - /flux/0.65/guides/windowing-aggregating
+list_query_example: aggregate_window
 ---
 
 A common operation performed with time series data is grouping data into windows of time,
@@ -13,16 +20,23 @@ or "windowing" data, then aggregating windowed values into a new value.
 This guide walks through windowing and aggregating data with Flux and demonstrates
 how data is shaped in the process.
 
-> The following example is an in-depth walk through of the steps required to window and aggregate data.
-> The [`aggregateWindow()` function](#summing-up) performs these operations for you, but understanding
-> how data is shaped in the process helps to successfully create your desired output.
+If you're just getting started with Flux queries, check out the following:
+
+- [Get started with Flux](/flux/v0.65/introduction/getting-started/) for a conceptual overview of Flux and parts of a Flux query.
+- [Execute queries](/flux/v0.65/guides/execute-queries/) to discover a variety of ways to run your queries.
+
+{{% note %}}
+The following example is an in-depth walk-through of the steps required to window and aggregate data.
+The [`aggregateWindow()` function](#summing-up) performs these operations for you, but understanding
+how data is shaped in the process helps to successfully create your desired output.
+{{% /note %}}
 
 ## Data set
 For the purposes of this guide, define a variable that represents your base data set.
 The following example queries the memory usage of the host machine.
 
 ```js
-dataSet = from(bucket: "telegraf/autogen")
+dataSet = from(bucket: "db/rp")
   |> range(start: -5m)
   |> filter(fn: (r) =>
     r._measurement == "mem" and
@@ -31,10 +45,12 @@ dataSet = from(bucket: "telegraf/autogen")
   |> drop(columns: ["host"])
 ```
 
-> This example drops the `host` column from the returned data since the memory data
-> is only tracked for a single host and it simplifies the output tables.
-> Dropping the `host` column is column is optional and not recommended if monitoring memory
-> on multiple hosts.
+{{% note %}}
+This example drops the `host` column from the returned data since the memory data
+is only tracked for a single host and it simplifies the output tables.
+Dropping the `host` column is optional and not recommended if monitoring memory
+on multiple hosts.
+{{% /note %}}
 
 `dataSet` can now be used to represent your base data, which will look similar to the following:
 
@@ -49,7 +65,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:50:30.000000000Z             64.19951915740967
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:50:40.000000000Z              64.2122745513916
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:50:50.000000000Z             64.22209739685059
-2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:51:00.000000000Z              64.6366555480957
+2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:51:00.000000000Z              64.6336555480957
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:51:10.000000000Z             64.16516304016113
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:51:20.000000000Z             64.18349742889404
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:51:30.000000000Z             64.20474052429199
@@ -78,9 +94,12 @@ Table: keys: [_start, _stop, _field, _measurement]
 {{% /truncate %}}
 
 ## Windowing data
-Use the [`window()` function](/flux/v0.65/stdlib/built-in/transformations/window) to group your data based on time bounds.
-The most common parameter passed with the `window()` is `every` which defines the duration of time between windows.
-Other parameters are available, but for this example, window the base data set into one minute windows.
+Use the [`window()` function](/flux/v0.65/stdlib/built-in/transformations/window)
+to group your data based on time bounds.
+The most common parameter passed with the `window()` is `every` which
+defines the duration of time between windows.
+Other parameters are available, but for this example, window the base data
+set into one minute windows.
 
 ```js
 dataSet
@@ -106,7 +125,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 Table: keys: [_start, _stop, _field, _measurement]
                    _start:time                      _stop:time           _field:string     _measurement:string                      _time:time                  _value:float
 ------------------------------  ------------------------------  ----------------------  ----------------------  ------------------------------  ----------------------------
-2018-11-03T17:51:00.000000000Z  2018-11-03T17:52:00.000000000Z            used_percent                     mem  2018-11-03T17:51:00.000000000Z              64.6366555480957
+2018-11-03T17:51:00.000000000Z  2018-11-03T17:52:00.000000000Z            used_percent                     mem  2018-11-03T17:51:00.000000000Z              64.6336555480957
 2018-11-03T17:51:00.000000000Z  2018-11-03T17:52:00.000000000Z            used_percent                     mem  2018-11-03T17:51:10.000000000Z             64.16516304016113
 2018-11-03T17:51:00.000000000Z  2018-11-03T17:52:00.000000000Z            used_percent                     mem  2018-11-03T17:51:20.000000000Z             64.18349742889404
 2018-11-03T17:51:00.000000000Z  2018-11-03T17:52:00.000000000Z            used_percent                     mem  2018-11-03T17:51:30.000000000Z             64.20474052429199
@@ -154,9 +173,9 @@ Table: keys: [_start, _stop, _field, _measurement]
 ```
 {{% /truncate %}}
 
-When visualized in [Chronograf](/chronograf/latest/), each window table is displayed in a different color.
+When visualized in the InfluxDB UI, each window table is displayed in a different color.
 
-![Windowed data](/img/flux/simple-windowed-data.png)
+![Windowed data](/img/simple-windowed-data.png)
 
 ## Aggregate data
 [Aggregate functions](/flux/v0.65/stdlib/built-in/transformations/aggregates) take the values
@@ -199,7 +218,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 Table: keys: [_start, _stop, _field, _measurement]
                    _start:time                      _stop:time           _field:string     _measurement:string                  _value:float
 ------------------------------  ------------------------------  ----------------------  ----------------------  ----------------------------
-2018-11-03T17:53:00.000000000Z  2018-11-03T17:54:00.000000000Z            used_percent                     mem             64.39360975214641
+2018-11-03T17:53:00.000000000Z  2018-11-03T17:54:00.000000000Z            used_percent                     mem             64.39330975214641
 
 
 Table: keys: [_start, _stop, _field, _measurement]
@@ -218,7 +237,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 Because each data point is contained in its own table, when visualized,
 they appear as single, unconnected points.
 
-![Aggregated windowed data](/img/flux/simple-windowed-aggregate-data.png)
+![Aggregated windowed data](/img/simple-windowed-aggregate-data.png)
 
 ### Recreate the time column
 **Notice the `_time` column is not in the [aggregated output tables](#mean-output-tables).**
@@ -229,7 +248,7 @@ Also notice the `_start` and `_stop` columns still exist.
 These represent the lower and upper bounds of the time window.
 
 Many Flux functions rely on the `_time` column.
-To further process your data after an aggregate function, you need to add `_time` back in.
+To further process your data after an aggregate function, you need to re-add `_time`.
 Use the [`duplicate()` function](/flux/v0.65/stdlib/built-in/transformations/duplicate) to
 duplicate either the `_start` or `_stop` column as a new `_time` column.
 
@@ -264,7 +283,7 @@ Table: keys: [_start, _stop, _field, _measurement]
 Table: keys: [_start, _stop, _field, _measurement]
                    _start:time                      _stop:time           _field:string     _measurement:string                      _time:time                  _value:float
 ------------------------------  ------------------------------  ----------------------  ----------------------  ------------------------------  ----------------------------
-2018-11-03T17:53:00.000000000Z  2018-11-03T17:54:00.000000000Z            used_percent                     mem  2018-11-03T17:54:00.000000000Z             64.39360975214641
+2018-11-03T17:53:00.000000000Z  2018-11-03T17:54:00.000000000Z            used_percent                     mem  2018-11-03T17:54:00.000000000Z             64.39330975214641
 
 
 Table: keys: [_start, _stop, _field, _measurement]
@@ -292,8 +311,10 @@ dataSet
   |> window(every: inf)
 ```
 
->  Windowing requires a `_time` column which is why it's necessary to
-> [recreate the `_time` column](#recreate-the-time-column) after an aggregation.
+{{% note %}}
+Windowing requires a `_time` column which is why it's necessary to
+[recreate the `_time` column](#recreate-the-time-column) after an aggregation.
+{{% /note %}}
 
 ###### Unwindowed output table
 ```
@@ -303,14 +324,14 @@ Table: keys: [_start, _stop, _field, _measurement]
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:51:00.000000000Z             65.88549613952637
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:52:00.000000000Z             65.50651391347249
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:53:00.000000000Z             65.30719598134358
-2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:54:00.000000000Z             64.39360975214641
+2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:54:00.000000000Z             64.39330975214641
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:55:00.000000000Z             64.49386278788249
 2018-11-03T17:50:00.000000000Z  2018-11-03T17:55:00.000000000Z            used_percent                     mem  2018-11-03T17:55:00.000000000Z             64.49816226959229
 ```
 
 With the aggregate values in a single table, data points in the visualization are connected.
 
-![Unwindowed aggregate data](/img/flux/simple-unwindowed-data.png)
+![Unwindowed aggregate data](/img/simple-unwindowed-data.png)
 
 ## Summing up
 You have now created a Flux query that windows and aggregates data.

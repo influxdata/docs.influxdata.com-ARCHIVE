@@ -6,7 +6,11 @@ description: >
 menu:
   flux_0_65:
     parent: Geo-temporal data
-weight: 3
+weight: 302
+related:
+  - /flux/v0.65/stdlib/experimental/geo/
+  - /flux/v0.65/stdlib/experimental/geo/groupbyarea/
+  - /flux/v0.65/stdlib/experimental/geo/astracks/
 list_code_example: |
   ```js
   import "experimental/geo"
@@ -21,7 +25,7 @@ Use the `geo.groupByArea()` to group geo-temporal data by area and `geo.asTracks
 to group data into tracks or routes.
 
 - [Group data by area](#group-data-by-area)
-- [Group data by track or route](#group-data-by-track-or-route)
+- [Group data into tracks or routes](#group-data-by-track-or-route)
 
 ### Group data by area
 Use the [`geo.groupByArea()` function](/flux/v0.65/stdlib/experimental/geo/groupbyarea/)

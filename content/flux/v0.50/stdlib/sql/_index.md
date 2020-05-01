@@ -19,4 +19,4 @@ Import the `sql` package:
 import "sql"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

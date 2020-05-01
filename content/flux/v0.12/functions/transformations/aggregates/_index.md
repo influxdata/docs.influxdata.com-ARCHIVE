@@ -19,7 +19,7 @@ It windows and aggregates the data, then combines windowed tables into a single 
 ### Aggregate functions
 The following aggregate functions are available:
 
-{{< function-list category="Aggregates" menu="flux_0_12" >}}
+{{< children type="functions" >}}
 
 ### Aggregate selectors
 The following functions are both aggregates and selectors.

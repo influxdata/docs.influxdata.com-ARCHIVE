@@ -1,13 +1,19 @@
 ---
-title: Use conditional logic
+title: Query using conditional logic
+seotitle: Query using conditional logic in Flux
+list_title: Conditional logic
 description: >
   This guide describes how to use Flux conditional expressions, such as `if`,
   `else`, and `then`, to query and transform data.
 menu:
   flux_0_65:
-    name: Use conditional logic
-    parent: Guides
-weight: 9
+    name: Conditional logic
+    parent: Query with Flux
+weight: 20
+list_code_example: |
+  ```js
+  if color == "green" then "008000" else "ffffff"
+  ```
 ---
 
 Flux provides `if`, `then`, and `else` conditional expressions that allow for powerful and flexible Flux queries.

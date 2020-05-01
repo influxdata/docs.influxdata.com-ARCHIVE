@@ -98,6 +98,25 @@ a {
 		transition: color 0.2s ease;
 		color: @default-text-color;
 	}
+	.children-links {
+		h3 {
+			& > a > a:after {
+			content: '\ea43';
+			font-family: 'icomoon';
+			font-size: .75em;
+			font-weight: normal;
+			vertical-align: bottom;
+			display: inline;
+			margin-left: .5em;
+			opacity: .25;
+			transition: color .2s, opacity .2s;
+			color: @default-text-color;
+		  }
+			&:hover a > a:after {
+				opacity: 1;
+			}
+		}
+	}
 	p,li {
 		a {
 			code {

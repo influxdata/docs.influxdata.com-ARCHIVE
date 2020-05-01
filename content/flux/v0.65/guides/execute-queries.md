@@ -1,11 +1,13 @@
 ---
-title: Different ways to execute Flux queries
-description:
+title: Execute Flux queries
+description: Use the InfluxDB CLI, API, and the Chronograf Data Explorer to execute Flux queries.
 menu:
   flux_0_65:
     name: Execute Flux queries
-    parent: Guides
-    weight: 1
+    parent: Query with Flux
+weight: 1
+aliases:
+  - /flux/v0.65/guides/executing-queries/
 ---
 
 There are multiple ways to execute Flux queries with InfluxDB and Chronograf v1.7+.
