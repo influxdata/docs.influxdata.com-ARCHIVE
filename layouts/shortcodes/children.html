@@ -8,7 +8,7 @@
 {{ else if (eq $show "sections") }}
 	{{ .Scratch.Set "pages" .Page.Sections }}
 {{ else if (eq $show "pages") }}
-	{{ .Scratch.Set "pages" where .Page.Pages "Kind" "page" }}
+	{{ .Scratch.Set "pages" (where .Page.Pages "Kind" "page") }}
 {{ end }}
 
 {{ $pages := .Scratch.Get "pages" }}
@@ -69,6 +69,8 @@
 {{ else if (eq $type "functions") }}
 
 	<div class="children-links">
+		{{ .Scratch.Set "pages" (where .Page.Pages "Kind" "page") }}
+		{{ $pages := .Scratch.Get "pages" }}
 		<ul>
 		{{ range $pages.ByWeight }}
 			{{ $title := replaceRE `\ function` "" .Title }}

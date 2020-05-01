@@ -11,4 +11,4 @@ menu:
 Flux output functions yield results or send data to a specified output destination.
 The following output functions are are available:
 
-{{< function-list category="Outputs" menu="flux_0_12" >}}
+{{< children type="functions" >}}

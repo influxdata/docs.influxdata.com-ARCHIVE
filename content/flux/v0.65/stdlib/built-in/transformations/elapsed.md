@@ -5,7 +5,7 @@ menu:
   flux_0_65:
     name: elapsed
     parent: Transformations
-weight: 401
+    weight: 1
 aliases:
   - /flux/v0.65/functions/built-in/transformations/elapsed/
 ---
