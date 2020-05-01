@@ -1,7 +1,7 @@
 {{ $type := .Get "type" | default "articles" }}
 {{ $show := .Get "show" | default "all" }}
-{{ $readMore := .Get "readmore" | default false }}
-{{ $hr := .Get "hr" | default false }}
+{{ $readMore := .Get "readmore" | default "false" }}
+{{ $hr := .Get "hr" | default "false" }}
 
 {{ if eq $show "all" }}
 	{{ .Scratch.Set "pages" (union (where .Page.Pages "Kind" "page") .Page.Sections) }}
@@ -57,10 +57,10 @@
 				{{ end }}
 			{{ end }}
 
-			{{ if and (eq $readMore true) ( or (isset .Params "list_query_example") (isset .Params "list_code_example") ) }}
+			{{ if and (eq $readMore "true") ( or (isset .Params "list_query_example") (isset .Params "list_code_example") ) }}
 				<p style="text-align: right"><em><a href="{{ $url }}" target="{{ $target }}">Read more <span class="icon-chevron-right"></span></a></em></p>
 			{{ end }}
-			{{ if eq $hr true }}
+			{{ if eq $hr "true" }}
 				<hr />
 			{{ end }}
 	{{ end }}

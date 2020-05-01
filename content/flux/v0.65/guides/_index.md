@@ -31,4 +31,4 @@ data = from(bucket: "db/rp")
 
 ---
 
-{{< children pages="all" readmore=true hr=true >}}
+{{< children pages="all" readmore="true" hr="true" >}}
