@@ -43,6 +43,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   [Windows](#)
 {{% /tabs %}}
 {{< tab-content-container >}}
+<!---------- BEGIN Ubuntu & Debian ---------->
 {{% tab-content %}}
 For instructions on how to manually install the Debian package from a file, please see the [downloads page](https://influxdata.com/downloads/).
 
@@ -148,6 +149,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 For more advanced configuration details, see the
 [configuration documentation](/telegraf/v1.14/administration/configuration/).
 {{% /tab-content %}}
+<!---------- BEGIN RedHat & CentOS ---------->
 {{% tab-content %}}
   For instructions on how to manually install the RPM package from a file, please see the [downloads page](https://influxdata.com/downloads/).
 
@@ -198,6 +200,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 For more advanced configuration details, see the
 [configuration documentation](/telegraf/v1.14/administration/configuration/).
 {{% /tab-content %}}
+<!---------- BEGIN SLES & openSUSE ---------->
 {{% tab-content %}}
   There are RPM packages provided by openSUSE Build Service for SUSE Linux users:
 
@@ -228,6 +231,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 For more advanced configuration details, see the
 [configuration documentation](/telegraf/v1.14/administration/configuration/).
 {{% /tab-content %}}
+<!---------- BEGIN FreeBSD/PC-BSD ---------->
 {{% tab-content %}}
   Telegraf is part of the FreeBSD package system.
   It can be installed by running:
@@ -258,6 +262,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 For more advanced configuration details, see the
 [configuration documentation](/telegraf/v1.14/administration/configuration/).
 {{% /tab-content %}}
+<!---------- BEGIN macOS ---------->
 {{% tab-content %}}
   Users of macOS 10.8 and higher can install Telegraf using the [Homebrew](http://brew.sh/) package manager.
   Once `brew` is installed, you can install Telegraf by running:
@@ -299,6 +304,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 For more advanced configuration details, see the
 [configuration documentation](/telegraf/v1.14/administration/configuration/). 
 {{% /tab-content %}}
+<!---------- BEGIN Windows ---------->
 {{% tab-content %}}
   Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md) (Windows support is experimental):
   ```
