@@ -72,7 +72,7 @@ source /etc/lsb-release
 echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 {{% /code-tab-content %}}
-{{< /code-tabs-wrapper >}}  
+{{< /code-tabs-wrapper >}}
 
 **Debian:** Add the InfluxData repository with the following commands:
 
@@ -179,7 +179,7 @@ For more advanced configuration details, see the
   sudo yum install telegraf
   sudo systemctl start telegraf
   ```
-  
+
 {{% telegraf-verify %}}
 
 ## Configuration
@@ -210,7 +210,7 @@ For more advanced configuration details, see the
   # install latest telegraf
   zypper in telegraf
   ```
-  
+
 {{% telegraf-verify %}}
 
 ## Configuration
@@ -241,7 +241,7 @@ For more advanced configuration details, see the
   ```
 
   The configuration file is located at `/usr/local/etc/telegraf.conf` with examples in `/usr/local/etc/telegraf.conf.sample`.
-  
+
 {{% telegraf-verify %}}
 
 ## Configuration
@@ -286,6 +286,8 @@ For more advanced configuration details, see the
   telegraf -config /usr/local/etc/telegraf.conf
   ```
 
+{{% telegraf-verify %}}
+
 ## Configuration
 
 ### Create a configuration file with default input and output plugins.
@@ -302,27 +304,26 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 ```
 
 For more advanced configuration details, see the
-[configuration documentation](/telegraf/v1.14/administration/configuration/). 
+[configuration documentation](/telegraf/v1.14/administration/configuration/).
 {{% /tab-content %}}
 <!---------- BEGIN Windows ---------->
 {{% tab-content %}}
-  Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md) (Windows support is experimental):
-  ```
-  telegraf.exe -service install -config <path_to_config>
-  ```
+Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md):
+```
+telegraf.exe -service install -config <path_to_config>
+```
 
 ## Installation
-If you are performing a first time installation and followed the PowerShell commands provided on the 
+If you are performing a first time installation and followed the PowerShell commands provided on the
 [InfluxData download page](https://portal.influxdata.com/downloads), you have expanded the archive file into
-`C:\InfluxData\telegraf` (or another directory of your chosing).
+`C:\Program Files\InfluxData\telegraf-xxx` (or another directory of your chosing).
 
-The Telegraf ZIP archive file for Windows contains a default configuration file with an input plugin for capturing basic
-Windows System metrics enabled.  Specifically, the 
-[inputs.win_perf_counters](/telegraf/v1.14/plugins/plugin-list/#win_perf_counters) is enabled and it captures metrics 
+The Telegraf ZIP archive file for Windows contains a default configuration file with an input plugin for capturing basic Windows System metrics.
+Specifically, the [inputs.win_perf_counters](/telegraf/v1.14/plugins/plugin-list/#win_perf_counters) is enabled and it captures metrics
 from the following defined Windows Operating System objects:
 
 - Processor
-- LogicalDisk 
+- LogicalDisk
 - PhysicalDisk
 - Network Interface
 - System
@@ -330,59 +331,25 @@ from the following defined Windows Operating System objects:
 - Paging File
 
 ### Configure an Output Plugin
-Both the [InfluxDB v1](/telegraf/v1.14/plugins/plugin-list/#influxdb) and 
-[InfluxDB v2](/telegraf/v1.14/plugins/plugin-list/#influxdb_v2) Output plugins are contained within the default
-`telegraf.conf` file. The InfluxDB v1 plugin is configured and the InfluxDB v2 plugin is commented out using the `#` symbol.  
+Both the [InfluxDB v1](/telegraf/v1.14/plugins/plugin-list/#influxdb) and
+[InfluxDB v2](/telegraf/v1.14/plugins/plugin-list/#influxdb_v2) output plugins
+are contained within the default `telegraf.conf` file.
+The InfluxDB v1 plugin is configured and the InfluxDB v2 plugin is commented out using the `#` symbol.
 
 Before you start the Telegraf agent, you'll need to complete the configuration one of these plugins to send data to InfluxDB.
-Choose the appropriate plugin to configure based on the version of InfluxDB you'll be using.  
+Choose the appropriate plugin to configure based on the version of InfluxDB you'll be using.
 
-If you are not using InfluxDB v1, you need to comment it out by placing a `#` in front of the `[[outputs.influxdb]]` within
-the file. You can use a simple text editor like Notepad to edit these files.
-
-## Upgrade
-If you have already previously installed and configured Telegraf, you will want to preserve your existing `telegraf.conf` 
-file. 
-
-### Make a copy of the `telegraf.conf` file
-**Before downloading and extracting the latest Telegraf ZIP archive file for Windows**, use the following PowerShell command to make a copy of your existing `telegraf.conf` file.
-```
-copy telegraf.conf my_telegraf.conf
-```
-### Download the latest Telegraf ZIP archive file 
-Go to the [InfluxData download page](https://portal.influxdata.com/downloads) and use the `wget` command provided there to
-download the latest Telegraf ZIP archive file.
-
-### Expand the Telegraf ZIP archive file
-Use the following command in PowerShell to expand the Telegraf ZIP archive file replacing `<XXX>` with the specific version details for the version you've downloaded.
-```
-Expand-Archive .\telegraf-<XXX>_windows_amd64.zip -DestinationPath 'C:\InfluxData' -Force
-```
-
-The -Force option will overwrite the existing files with the latest version.
-
-### Swap the `telegraf.conf` files
-Within the `C:\InfluxData\telegraf` directory, the new telegraf executable (`telegraf.exe`) and a new telegraf configuration
-file (`telegraf.conf` should appear alongside your original telegraf configuration (`my_telegraf.conf`).
-
-You can now move these files around and restart the telegraf agent with your original configuration file.  The following
-PowerShell commands outline what to do.
-```
-move telegraf.conf telegraf.new_conf
-move my_telegraf.conf telegraf.conf
-```
-
-You can now restart your Telegraf agent.
+If you are not using InfluxDB v1, you need to comment it out by placing a `#` in front of the `[[outputs.influxdb]]` within the file.
+You can use a simple text editor like Notepad to edit these files.
 
 ## Configuration
 
-While the Telegraf ZIP archive file for Windows contains a recommended configuration file for capturing system metrics for 
-Windows hosts, Telegraf can be used to capture metrics and log information from a wide variety of sources.  
+While the Telegraf ZIP archive file for Windows contains a recommended configuration file for capturing system metrics for
+Windows hosts, Telegraf can be used to capture metrics and log information from a wide variety of sources.
 
-You can easily create a configuration file which contains ALL of the default values for ALL of the plugins that this 
-version of Telegraf supports.
+Use Telegraf to create a configuration file which contains ALL of the default values for ALL of the plugins supported by Telegraf.
 
-### Create a configuration file with default plugins configurations.
+### Create a configuration file with default plugins configurations
 
 Every plugin (input, output, processor, and aggregator) will be in the file, but most will be commented out.
 
@@ -392,17 +359,13 @@ Every plugin (input, output, processor, and aggregator) will be in the file, but
 
 ### Create a configuration file with specific inputs and outputs
 
-You can also be more selective about which plugins you wish to have in the generated configuration file
+You can also be more selective about which plugins you wish to have in the generated configuration file.
+
 ```
 telegraf.exe --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>[:<outputname>] config > telegraf_select.conf
 ```
 
-For more advanced configuration details, see the
-[configuration documentation](/telegraf/v1.14/administration/configuration/).  
+For more advanced configuration details, see the [configuration documentation](/telegraf/v1.14/administration/configuration/).
 {{% /tab-content %}}
 {{< /tab-content-container >}}
 {{< /tab-labels >}}
-
-
-
-
