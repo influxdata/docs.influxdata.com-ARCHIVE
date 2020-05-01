@@ -8,6 +8,23 @@ menu:
     parent: About the project
 ---
 
+## v1.8.4 [2020-04-30]
+
+- Fix misaligned tables when scrolling.
+
+## v1.8.3 [2020-04-23]
+
+### Bug Fixes
+
+- Fixed missing token subcommand.
+- Incomplete OAuth configurations now throw errors listing missing components.
+- Extend OAuth JWT timeout to match cookie lifespan.
+
+### Features
+
+- Added ability to ignore or verify custom OAuth certs.
+
+
 ## v1.8.2 [2020-04-13]
 
 ### Features
