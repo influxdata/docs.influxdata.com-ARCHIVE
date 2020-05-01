@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## v1.8.4 [2020-04-30]
+## v1.8.4 [2020-05-01]
 
 - Fix misaligned tables when scrolling.
 
