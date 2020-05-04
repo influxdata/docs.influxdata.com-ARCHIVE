@@ -17,7 +17,7 @@ For details on changes incorporated from the InfluxDB OSS release, see
 ### Features
 - Log when meta state file cannot be opened.
 
-### Bugfixes
+### Bug fixes
 - Update `MaxShardGroupID` on meta update.
 - Don't reassign shard ownership when removing a data node.
 
