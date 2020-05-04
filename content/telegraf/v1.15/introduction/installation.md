@@ -308,17 +308,14 @@ For more advanced configuration details, see the
 {{% /tab-content %}}
 <!---------- BEGIN Windows ---------->
 {{% tab-content %}}
-Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md):
-```
-telegraf.exe -service install -config <path_to_config>
-```
 
 ## Installation
+
 If you are performing a first time installation and followed the PowerShell commands provided on the
 [InfluxData download page](https://portal.influxdata.com/downloads), you have expanded the archive file into
 `C:\Program Files\InfluxData\telegraf-xxx` (or another directory of your chosing).
 
-The Telegraf ZIP archive file for Windows contains a default configuration file with an input plugin for capturing basic Windows System metrics.
+The Telegraf ZIP archive contains a default configuration file with an input plugin for capturing basic Windows system metrics.
 Specifically, the [inputs.win_perf_counters](/telegraf/v1.14/plugins/plugin-list/#win_perf_counters) is enabled and it captures metrics
 from the following defined Windows Operating System objects:
 
@@ -331,12 +328,13 @@ from the following defined Windows Operating System objects:
 - Paging File
 
 ### Configure an Output Plugin
+
 Both the [InfluxDB v1](/telegraf/v1.14/plugins/plugin-list/#influxdb) and
 [InfluxDB v2](/telegraf/v1.14/plugins/plugin-list/#influxdb_v2) output plugins
 are contained within the default `telegraf.conf` file.
 The InfluxDB v1 plugin is configured and the InfluxDB v2 plugin is commented out using the `#` symbol.
 
-Before you start the Telegraf agent, you'll need to complete the configuration one of these plugins to send data to InfluxDB.
+Before you start the Telegraf agent, you'll need to configure one of these plugins to send data to InfluxDB.
 Choose the appropriate plugin to configure based on the version of InfluxDB you'll be using.
 
 If you are not using InfluxDB v1, you need to comment it out by placing a `#` in front of the `[[outputs.influxdb]]` within the file.
@@ -366,6 +364,14 @@ telegraf.exe --input-filter <pluginname>[:<pluginname>] --output-filter <outputn
 ```
 
 For more advanced configuration details, see the [configuration documentation](/telegraf/v1.14/administration/configuration/).
+
+### Windows service
+
+Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md):
+```
+telegraf.exe -service install -config <path_to_config>
+```
+
 {{% /tab-content %}}
 {{< /tab-content-container >}}
 {{< /tab-labels >}}
