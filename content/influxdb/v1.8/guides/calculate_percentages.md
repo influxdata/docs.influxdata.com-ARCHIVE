@@ -109,6 +109,7 @@ Use the following query to calculate the percentage of the total weight each var
 accounts for at each given point in time.
 
 ```js
+
 from(bucket:"apple_stand/autogen")
       |> range(start: 2018-06-18T12:00:00Z, stop: 2018-06-19T04:35:00Z)
       |> filter(fn: (r) =>  r._measurement == "variety")
@@ -132,7 +133,7 @@ from(bucket:"apple_stand/autogen")
       |> filter(fn: (r) => r._measurement == "variety")
       |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value"
       |> window(every:1h)
-      |> map(fn: (r) => ({ r with _value: (mean(r._field) / mean(r.total_weight)) * 100.0 }))
+      |> map(fn: (r) => ({ r with _value: (mean(r._field) / mean(r.total_weight)) * 100.0 })
 ```
 
 _**Note the following about this query:**_
