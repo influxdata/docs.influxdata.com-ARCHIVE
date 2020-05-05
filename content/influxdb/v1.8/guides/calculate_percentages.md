@@ -35,7 +35,7 @@ Learn how to calculate a percentage using the following examples:
 
 ## Basic calculations within a query
 
-Flux supports the use of basic math operators such as `+`,`-`,`/`, `*`, `()`, etc. When performing any math operation, you must complete the following steps:
+When performing any math operation in a Flux query, you must complete the following steps:
 
 1. Specify the [bucket](/flux/latest/introduction/getting-started/#buckets) to query from.
 2. Filter your data by measurements, fields, and other applicable criteria.
@@ -43,7 +43,7 @@ Flux supports the use of basic math operators such as `+`,`-`,`/`, `*`, `()`, et
    - To query **from multiple** data sources, use the `join()` function.
    - To query **from the same** data source, use the `pivot()` function.
 
-For examples using the `join()` function to calculate percentages and more examples of calculating percentages, see [Calculate percentages with Flux] (/v2.0/query-data/flux/calculate-percentages/).
+For examples using the [`join()` function](flux/latest/stdlib/built-in/transformations/join) to calculate percentages and more examples of calculating percentages, see [Calculate percentages with Flux] (/flux/latest/guides/calculate-percentages/).
 
 #### Data variable
 
@@ -55,20 +55,22 @@ Here's how that looks in Flux:
 //query data over the past 15 minutes and store values for `field1` and `field2` in one row by time
 data = from(bucket:"<database>/<retention_policy>")
       |> range(start: now() -15m)
-      |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /fieldkey[1-2]/)
+      |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /field[1-2]/)
       |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
-Each row now contains the values necessary to perform a math operation. For example, to add two field keys, use the `data` variable created above, and then use `map()` to re-map values in each row.
+Each row now contains the values necessary to perform a math operation. For example, to add two field keys, start with the `data` variable created above, and then use `map()` to re-map values in each row.
 
 ```js
 data
- |> map(fn: (r) => ({ r with _value: fieldkey1 + r.field2}))
+ |> map(fn: (r) => ({ r with _value: r.field1 + r.field2}))
 ```
+
+> **Note:** Flux supports basic math operators such as `+`,`-`,`/`, `*`, and `()`. For example, to subtract `field2` from `field1`, you could change `+` to `-`.
 
 ## Calculate a percentage from two fields
 
-Use the `data` variable created above, and then use `map()` to divide one field by another, multiply by 100, and add a new `percent` field to store the percentage values in.
+Use the `data` variable created above, and then use the [`map()` function](/flux/latest/stdlib/built-in/transformations) to divide one field by another, multiply by 100, and add a new `percent` field to store the percentage values in.
 
 ```js
 data
