@@ -66,7 +66,7 @@ data
  |> map(fn: (r) => ({ r with _value: r.field1 + r.field2}))
 ```
 
-> **Note:** Flux supports basic math operators such as `+`,`-`,`/`, `*`, and `()`. For example, to subtract `field2` from `field1`, you could change `+` to `-`.
+> **Note:** Flux supports basic math operators such as `+`,`-`,`/`, `*`, and `()`. For example, to subtract `field2` from `field1`, change `+` to `-`.
 
 ## Calculate a percentage from two fields
 
