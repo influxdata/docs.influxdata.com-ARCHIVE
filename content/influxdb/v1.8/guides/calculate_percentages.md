@@ -132,7 +132,7 @@ from(bucket:"apple_stand/autogen")
       |> filter(fn: (r) => r._measurement == "variety")
       |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
       |> window(every:1h)
-      |> map(fn: (r) => ({ r with _value: (mean(r._field) / mean(r.total_weight)) * 100.0 })
+      |> map(fn: (r) => ({ r with _value: (mean(r._field) / mean(r.total_weight)) * 100.0 }))
 ```
 
 _**Note the following about this query:**_
