@@ -43,7 +43,7 @@ Flux supports the use of basic math operators such as `+`,`-`,`/`, `*`, `()`, et
    - To query **from multiple** data sources, use the `join()` function.
    - To query **from the same** data source, use the `pivot()` function.
 
-For examples using the `join()` function to calculate percentages and more examples of calculating percentages, see [Calculate percentage with Flux] (/v2.0/query-data/flux/calculate-percentages/).
+For examples using the `join()` function to calculate percentages and more examples of calculating percentages, see [Calculate percentages with Flux] (/v2.0/query-data/flux/calculate-percentages/).
 
 #### Data variable
 
