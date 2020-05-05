@@ -28,7 +28,7 @@ Use Flux or InfluxQL to calculate percentages in query.
 Learn how to calculate a percentage using the following examples:
 
 - [Basic calculations within a query](#basic-calculations-within-a-query)
-- [Calculate a percentage from two fields](#calculate-a-percentage-from-two)
+- [Calculate a percentage from two fields](#calculate-a-percentage-from-two-fields)
 - [Calculate a percentage using aggregate functions](#calculate-a-percentage-using-aggregate-functions)
 - [Calculate the percentage of total weight per apple variety](#calculate-the-percentage-of-total-weight-per-apple-variety)
 - [Calculate the aggregate percentage per variety](#calculate-the-aggregate-percentage-per-variety)
