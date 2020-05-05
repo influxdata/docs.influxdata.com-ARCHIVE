@@ -82,10 +82,9 @@ data
 
 ## Calculate a percentage using aggregate functions
 
-Aggregate functions must include the `aggregateWindow()` function to specify both the window of time to group data **and** the function used to aggregate data. Group and aggregate your data before pivoting the data into one row to calculate a percentage.
+Aggregate functions must include the [`aggregateWindow()` function](/flux/latest/stdlib/built-in/transformations/aggregates/aggregatewindow) to specify both the window of time to group data **and** the function used to aggregate data. Group and aggregate your data before pivoting the data into one row to calculate a percentage.
 
 ```js
-
 from(bucket:"<database>/<retention_policy>")
       |> range(start: now() -15m)
       |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /fieldkey[1-2]/)
@@ -109,7 +108,6 @@ Use the following query to calculate the percentage of the total weight each var
 accounts for at each given point in time.
 
 ```js
-
 from(bucket:"apple_stand/autogen")
       |> range(start: 2018-06-18T12:00:00Z, stop: 2018-06-19T04:35:00Z)
       |> filter(fn: (r) =>  r._measurement == "variety")
@@ -127,7 +125,6 @@ from(bucket:"apple_stand/autogen")
 Use the following query to calculate the average percentage of the total weight each variety accounts for per hour.
 
 ```js
-
 from(bucket:"apple_stand/autogen")
       |> range(start: 2018-06-18T00:00:00.00Z, stop: 2018-06-19T16:35:00.00Z)
       |> filter(fn: (r) => r._measurement == "variety")
