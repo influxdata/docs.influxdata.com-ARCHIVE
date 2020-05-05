@@ -113,7 +113,7 @@ accounts for at each given point in time.
 from(bucket:"apple_stand/autogen")
       |> range(start: 2018-06-18T12:00:00Z, stop: 2018-06-19T04:35:00Z)
       |> filter(fn: (r) =>  r._measurement == "variety")
-      |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value"
+      |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
       |> map(fn: (r) => ({ r with
         granny_smith: r.granny_smith / r.total_weight * 100.0 ,
         golden_delicious: r.golden_delicious / r.total_weight * 100.0 ,
@@ -130,7 +130,7 @@ With the apple stand data from the prior example, use the following query to cal
 from(bucket:"apple_stand/autogen")
       |> range(start: 2018-06-18T00:00:00.00Z, stop: 2018-06-19T16:35:00.00Z)
       |> filter(fn: (r) => r._measurement == "variety")
-      |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value"
+      |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
       |> window(every:1h)
       |> map(fn: (r) => ({ r with _value: (mean(r._field) / mean(r.total_weight)) * 100.0 })
 ```
