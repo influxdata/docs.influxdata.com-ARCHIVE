@@ -122,9 +122,9 @@ from(bucket:"apple_stand/autogen")
         braeburn: r.braeburn / r.total_weight * 100.0 ,}))
 ```
 
-## Calculate the aggregate percentage per variety
+## Calculate the average percentage of total weight per variety each hour
 
-Use the following query to calculate the average percentage of the total weight each variety accounts for per hour.
+With the apple stand data from the prior example, use the following query to calculate the average percentage of the total weight each variety accounts for per hour.
 
 ```js
 from(bucket:"apple_stand/autogen")
@@ -137,8 +137,7 @@ from(bucket:"apple_stand/autogen")
 
 _**Note the following about this query:**_
 
-- `windows()` aggregates data into 1 hour blocks. When using aggregate functions, we recommend explicitly limiting the time window. Otherwise, aggregate functions
-  are very resource-intensive.
+- `windows()` aggregates data into 1 hour blocks. When using [aggregate functions](/flux/v0.65/stdlib/built-in/transformations/aggregates/), we recommend explicitly limiting the time window. Otherwise, aggregate functions are very resource-intensive.
 - `mean()` averages data by 1 hour blocks
 
 {{% /tab-content %}}
