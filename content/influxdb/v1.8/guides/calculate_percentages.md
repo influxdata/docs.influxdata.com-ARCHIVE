@@ -54,7 +54,7 @@ Here's how that looks in Flux:
 ```js
 //query data over the past 15 minutes and store values for `field1` and `field2` in one row by time
 data = from(bucket:"<database>/<retention_policy>")
-      |> range(start: now() -15m)
+      |> range(start: -15m)
       |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /field[1-2]/)
       |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
@@ -88,7 +88,7 @@ Aggregate functions must include the [`aggregateWindow()` function](/flux/latest
 
 ```js
 from(bucket:"<database>/<retention_policy>")
-      |> range(start: now() -15m)
+      |> range(start: -15m)
       |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /fieldkey[1-2]/)
       |> aggregateWindow(every: 1m, fn:sum)
       |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
