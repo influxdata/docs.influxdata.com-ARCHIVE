@@ -87,7 +87,7 @@ data
 
 ## Calculate a percentage using aggregate functions
 
-Aggregate functions must include the [`aggregateWindow()` function](/flux/latest/stdlib/built-in/transformations/aggregates/aggregatewindow) to specify both the window of time to group data **and** the function used to aggregate data. Group and aggregate your data before pivoting the data into one row to calculate a percentage.
+Use [`aggregateWindow()`](/flux/latest/stdlib/built-in/transformations/aggregates/aggregatewindow) to window data by time and perform an aggregate function on each window.
 
 ```js
 from(bucket:"<database>/<retention_policy>")
