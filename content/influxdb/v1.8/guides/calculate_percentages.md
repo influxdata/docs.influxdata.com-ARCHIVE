@@ -47,16 +47,17 @@ For examples using the `join()` function to calculate percentages and more examp
 
 #### Data variable
 
-Because steps 1-3 are required for every math operation in Flux, we'll store the data from these steps in a `data` variable for reuse.
+To shorten examples, we'll store a basic Flux query in a `data` variable for reuse.
 
 Here's how that looks in Flux:
 
 ```js
-//query data over the past 15 minutes and store values for `field1` and `field2` in one row by time
-data = from(bucket:"<database>/<retention_policy>")
-      |> range(start: -15m)
-      |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /field[1-2]/)
-      |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+// Query data from the past 15 minutes pivot fields into columns so each row
+// contains values for each field
+data = from(bucket:"your_db/your_retention_policy")
+  |> range(start: -15m)
+  |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /field[1-2]/)
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
 Each row now contains the values necessary to perform a math operation. For example, to add two field keys, start with the `data` variable created above, and then use `map()` to re-map values in each row.
