@@ -1,6 +1,6 @@
 ---
 title: Calculate percentages in a query
-description: Percentages can be calculated using basic math operators available in InfluxQL or Flux. This guide walks through use-cases and examples of calculating percentages from two values in a single query.
+description: Calculate percentages using basic math operators available in InfluxQL or Flux. This guide walks through use-cases and examples of calculating percentages from two values in a single query.
 menu:
   influxdb_1_8:
     weight: 50
@@ -37,13 +37,13 @@ Learn how to calculate a percentage using the following examples:
 
 When performing any math operation in a Flux query, you must complete the following steps:
 
-1. Specify the [bucket](/flux/latest/introduction/getting-started/#buckets) to query from.
+1. Specify the [bucket](/flux/latest/introduction/getting-started/#buckets) to query from and the time range to query.
 2. Filter your data by measurements, fields, and other applicable criteria.
 3. Align values in one row (required to perform math in Flux) by using one of the following functions:
-   - To query **from multiple** data sources, use the `join()` function.
-   - To query **from the same** data source, use the `pivot()` function.
+   - To query **from multiple** data sources, use the [`join()` function](flux/latest/stdlib/built-in/transformations/join).
+   - To query **from the same** data source, use the [`pivot()` function](/flux/latest/stdlib/built-in/transformations/pivot/).
 
-For examples using the [`join()` function](flux/latest/stdlib/built-in/transformations/join) to calculate percentages and more examples of calculating percentages, see [Calculate percentages with Flux] (/flux/latest/guides/calculate-percentages/).
+For examples using the `join()` function to calculate percentages and more examples of calculating percentages, see [Calculate percentages with Flux](/flux/latest/guides/calculate-percentages/).
 
 #### Data variable
 
@@ -82,17 +82,19 @@ data
   }))
 ```
 
+>**Note:** In this example, `field1` and `field2` are float values, hence multiplied by 100.0. For integer values, multiply by 100 or use the `float()` function to cast integers to floats.
+
 ## Calculate a percentage using aggregate functions
 
 Aggregate functions must include the [`aggregateWindow()` function](/flux/latest/stdlib/built-in/transformations/aggregates/aggregatewindow) to specify both the window of time to group data **and** the function used to aggregate data. Group and aggregate your data before pivoting the data into one row to calculate a percentage.
 
 ```js
 from(bucket:"<database>/<retention_policy>")
-      |> range(start: -15m)
-      |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /fieldkey[1-2]/)
-      |> aggregateWindow(every: 1m, fn:sum)
-      |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-      |> map(fn: (r) => ({ r with _value: r.field1 / r.field2 * 100.0 }))
+  |> range(start: -15m)
+  |> filter(fn: (r) =>  r._measurement == "measurement_name" and r._field =~ /fieldkey[1-2]/)
+  |> aggregateWindow(every: 1m, fn:sum)
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> map(fn: (r) => ({ r with _value: r.field1 / r.field2 * 100.0 }))
 ```
 
 ## Calculate the percentage of total weight per apple variety
@@ -111,15 +113,15 @@ accounts for at each given point in time.
 
 ```js
 from(bucket:"apple_stand/autogen")
-      |> range(start: 2018-06-18T12:00:00Z, stop: 2018-06-19T04:35:00Z)
-      |> filter(fn: (r) =>  r._measurement == "variety")
-      |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-      |> map(fn: (r) => ({ r with
-        granny_smith: r.granny_smith / r.total_weight * 100.0 ,
-        golden_delicious: r.golden_delicious / r.total_weight * 100.0 ,
-        fuji: r.fuji / r.total_weight * 100.0 ,
-        gala: r.gala / r.total_weight * 100.0 ,
-        braeburn: r.braeburn / r.total_weight * 100.0 ,}))
+    |> range(start: 2018-06-18T12:00:00Z, stop: 2018-06-19T04:35:00Z)
+    |> filter(fn: (r) =>  r._measurement == "variety")
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> map(fn: (r) => ({ r with
+      granny_smith: r.granny_smith / r.total_weight * 100.0 ,
+      golden_delicious: r.golden_delicious / r.total_weight * 100.0 ,
+      fuji: r.fuji / r.total_weight * 100.0 ,
+      gala: r.gala / r.total_weight * 100.0 ,
+      braeburn: r.braeburn / r.total_weight * 100.0 ,}))
 ```
 
 ## Calculate the average percentage of total weight per variety each hour
@@ -128,17 +130,18 @@ With the apple stand data from the prior example, use the following query to cal
 
 ```js
 from(bucket:"apple_stand/autogen")
-      |> range(start: 2018-06-18T00:00:00.00Z, stop: 2018-06-19T16:35:00.00Z)
-      |> filter(fn: (r) => r._measurement == "variety")
-      |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-      |> window(every:1h)
-      |> map(fn: (r) => ({ r with _value: (mean(r._field) / mean(r.total_weight)) * 100.0 }))
+  |> range(start: 2018-06-18T00:00:00.00Z, stop: 2018-06-19T16:35:00.00Z)
+  |> filter(fn: (r) => r._measurement == "variety")
+  |> aggregateWindow(every:1h, fn: mean)
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> map(fn: (r) => ({ r with
+    granny_smith: r.granny_smith / r.total_weight * 100.0,
+    golden_delicious: r.golden_delicious / r.total_weight * 100.0,
+    fuji: r.fuji / r.total_weight * 100.0,
+    gala: r.gala / r.total_weight * 100.0,
+    braeburn: r.braeburn / r.total_weight * 100.0
+  }))
 ```
-
-_**Note the following about this query:**_
-
-- `windows()` aggregates data into 1 hour blocks. When using [aggregate functions](/flux/v0.65/stdlib/built-in/transformations/aggregates/), we recommend explicitly limiting the time window. Otherwise, aggregate functions are very resource-intensive.
-- `mean()` averages data by 1 hour blocks
 
 {{% /tab-content %}}
 
