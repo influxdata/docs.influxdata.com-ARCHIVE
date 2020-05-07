@@ -60,7 +60,7 @@ SSDs are strongly recommended, and we have had no reports of IOPS contention fro
 
 #### Use three and only three meta nodes
 
-Although technically the cluster can function with any number of meta nodes, the best pratice is to ALWAYS have an odd number of meta nodes.
+Although technically the cluster can function with any number of meta nodes, the best practice is to ALWAYS have an odd number of meta nodes.
 This allows the meta nodes to reach consensus.
 An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree.
 
