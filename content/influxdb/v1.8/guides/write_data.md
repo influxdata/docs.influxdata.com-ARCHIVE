@@ -5,7 +5,7 @@ menu:
   influxdb_1_8:
     weight: 10
     parent: Guides
-alises:
+aliases:
   - /influxdb/v1.8/guides/writing_data/
 ---
 
