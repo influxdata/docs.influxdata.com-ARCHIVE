@@ -28,9 +28,9 @@ influx [flags]
 | `-host`                     | HTTP address of InfluxDB (default: `http://localhost:8086`)                                           |
 | `-port`                     | Port to connect to                                                                                    |
 | `-socket`                   | Unix socket to connect to                                                                             |
-| `-database `database name`` | Database to connect to the server                                                                     |
-| `-password `password``      | Password to connect to the server. Leaving blank will prompt for password (--password '').            |
-| `-username `username`       | Username to connect to the server                                                                     |
+| `-database` | Database to connect to the server                                                                     |
+| `-password`      | Password to connect to the server. Leaving blank will prompt for password (--password '').            |
+| `-username`       | Username to connect to the server                                                                     |
 | `-ssl`                      | Use https for requests                                                                                |
 | `-unsafessl`                | Set this when connecting to the cluster using https                      |
 | `-execute`                  | Execute command and quit                                                                              |
