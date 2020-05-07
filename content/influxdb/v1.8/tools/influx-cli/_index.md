@@ -1,7 +1,5 @@
 ---
 title: influx - InfluxDB command line interface
-aliases:
-    - /influxdb/v1.8/tools/shell
 menu:
   influxdb_1_8:
     name: influx
