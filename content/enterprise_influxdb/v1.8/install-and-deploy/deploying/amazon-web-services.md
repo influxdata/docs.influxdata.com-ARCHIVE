@@ -2,7 +2,7 @@
 title: Deploy an InfluxDB Enterprise cluster on Amazon Web Services
 menu:
   enterprise_influxdb_1_8:
-    name: Deploy on Amazon Web Services
+    name: Deploy on AWS
     weight: 20
     parent: deploy-in-cloud-enterprise
 ---
@@ -11,7 +11,7 @@ InfluxData recommends using the Terraform [InfluxDB AWS Module](https://github.c
 
 ### InfluxDB AWS Module (Terraform)
 
-The [InfluxDB AWS Module] is the official module for deploying InfluxDB Enterprise on AWS using [Terraform](https://www.terraform.io/) and [Packer](https://www.packer.io/).
+The InfluxDB AWS Module is the official module for deploying InfluxDB Enterprise on AWS using [Terraform](https://www.terraform.io/) and [Packer](https://www.packer.io/).
 
 The InfluxDB AWS Module, maintained by [Gruntwork](http://www.gruntwork.io/), was written using a combination of Terraform and scripts (mostly bash) and includes automated tests, documentation, and examples.
 

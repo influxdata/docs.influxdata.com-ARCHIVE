@@ -3,8 +3,10 @@ title: Install and deploy InfluxDB Enterprise
 description: Install InfluxDB Enterprise to on-premise or cloud providers, including Google Cloud Platform and Amazon Web Services
 menu:
   enterprise_influxdb_1_7:
-    name: Install and deploy
+    name: Deploy in containers
+    identifier: deploy-in-cloud-enterprise
     weight: 30
+    parent: Install and deploy
 ---
 
 Here are the options available for installing and deploying InfluxDB Enterprise clusters.
