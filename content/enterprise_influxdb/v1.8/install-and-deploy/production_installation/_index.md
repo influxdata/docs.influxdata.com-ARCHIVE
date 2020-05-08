@@ -13,6 +13,7 @@ menu:
 
 >* [Install and deploy on Amazon Web Services (AWS)](/enterprise_influxdb/v1.8/install-and-deploy/deploying/aws/)
 >* [Install and deploy on Google Cloud Platform (GCP)](/enterprise_influxdb/v1.8/install-and-deploy/deploying/google-cloud-platform/)
+>* [Install and deploy on Microsoft Azure Cloud Platform (GCP)](/enterprise_influxdb/v1.8/install-and-deploy/deploying/azure/)
 
 > Deploying InfluxDB Enterprise on AWS or GCP gives you a production-ready environment.
 
