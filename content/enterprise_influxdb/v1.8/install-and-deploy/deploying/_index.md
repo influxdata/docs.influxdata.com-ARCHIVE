@@ -10,16 +10,18 @@ menu:
     parent: Install and deploy
 ---
 
-This section covers deploying InfluxDB Enterprise clusters in containers and cloud providers.
-For information on manually installing and configuring InfluxDB Enterprise clusters, see:
+Deploy InfluxDB Enterprise clusters in containers on the cloud provider of your choice.
 
-* [Install an InfluxDB Enterprise cluster for evaluation](/enterprise_influxdb/v1.8/install-and-deploy/quickstart_installation/)
-* [Install an InfluxDB Enterprise cluster for production](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/)
+## [Deploy on Amazon Web Services](/enterprise_influxdb/v1.8/install-and-deploy/deploying/amazon-web-services/)
 
-## [Deploy an InfluxDB Enterprise cluster on Google Cloud Platform](/enterprise_influxdb/v1.8/install-and-deploy/deploying/google-cloud-platform/)
+To deploy an InfluxDB Enterprise cluster or a multi-cluster architecture on Amazon Web Services, [Deploy an InfluxDB Enterprise cluster on Amazon Web Services](/enterprise_influxdb/v1.8/install-and-deploy/deploying/aws/).
 
-InfluxDB Enterprise is currently available on the Google Cloud Platform (GCP) as a bring-your-own-license (BYOL) offering. For information on deploying InfluxDB Enterprise clusters on Google Cloud Platform (GCP), see [Deploy an InfluxDB Enterprise cluster on Google Cloud Platform](/enterprise_influxdb/v1.8/install-and-deploy/deploying/google-cloud-platform/).
+## [Deploy on Google Cloud Platform](/enterprise_influxdb/v1.8/install-and-deploy/deploying/google-cloud-platform/)
 
-## [Deploy an InfluxDB Enterprise cluster on Amazon Web Services](/enterprise_influxdb/v1.8/install-and-deploy/deploying/amazon-web-services/)
+InfluxDB Enterprise is currently available on the Google Cloud Platform (GCP). For information on deploying InfluxDB Enterprise clusters on Google Cloud Platform (GCP), see [Deploy an InfluxDB Enterprise cluster on Google Cloud Platform](/enterprise_influxdb/v1.8/install-and-deploy/deploying/google-cloud-platform/).
 
-InfluxData recommends [using the Terraform InfluxDB AWS Module](/enterprise_influxdb/v1.8/install-and-deploy/deploying/amazon-web-services) to deploy a single InfluxDB Enterprise cluster or a multi-cluster architecture on Amazon Web Services.
+> To manually install InfluxDB Enterprise in your own environment, choose one of the following options:
+
+>* [Install for evaluation](/enterprise_influxdb/v1.8/install-and-deploy/quickstart_installation/)
+>* [Install for production](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/)
+

@@ -7,7 +7,7 @@ menu:
     name: Deploy on AWS
     identifier: deploy-on-aws
     weight: 30
-    parent: Install and deploy
+    parent: deploy-in-cloud-enterprise
 ---
 The following articles detail how to deploy InfluxDB clusters in AWS:
 
