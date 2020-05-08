@@ -42,7 +42,7 @@ Before deploying an InfluxDB Enterprise cluster on GCP, verify you have the foll
   - Network: Select a network for your cluster.
   - Subnetwork: Select a subnetwork for your cluster, if applicable.
 
-  > **Note:** The cluster is only accessible within the network (or subnetwork, if specified) where it's deployed.
+        > **Note:** The cluster is only accessible within the network (or subnetwork, if specified) where it's deployed.
 
 4. Adjust data node fields as needed, including:
 
@@ -50,7 +50,7 @@ Before deploying an InfluxDB Enterprise cluster on GCP, verify you have the foll
   - Data node machine type: Select the virtual machine type to use for data nodes (by default, 4 vCPUs). Use the down arrow to scroll through list. Notice the amount of memory available for the selected machine. To alter the number of cores and memory for your selected machine type, click the **Customize** link. For detail, see our recommended [hardware sizing guidelines](/influxdb/v1.7/guides/hardware_sizing/).
   - (Optional) By default, the data node disk type is SSD Persistent Disk and the disk size is 250 GB. To alter these defaults, click More and update if needed.
 
-  > **Note:** Typically, fields in collapsed sections don't need to be altered.
+        > **Note:** Typically, fields in collapsed sections don't need to be altered.
 
 5. Adjust meta node fields as needed, including:
 
