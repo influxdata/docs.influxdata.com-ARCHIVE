@@ -7,9 +7,6 @@ menu:
     parent: deploy-in-cloud-enterprise
 ---
 
-
-## Deploy an InfluxDB Enterprise cluster on Amazon Web Services
-
 InfluxData recommends using the Terraform [InfluxDB AWS Module](https://github.com/gruntwork-io/terraform-aws-influx)to deploy a single InfluxDB Enterprise cluster or a multi-cluster architecture on Amazon Web Services.
 
 ### InfluxDB AWS Module (Terraform)
