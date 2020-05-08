@@ -17,7 +17,7 @@ menu:
 > Deploying InfluxDB Enterprise on AWS or GCP gives you a production-ready environment.
 
 To evaluate InfluxDB Enterprise in a non-production environment, see
- [QuickStart installation](/enterprise_influxdb/v1.8/install-and-deploy/quickstart_installation). Note, if you use the QuickStart Installation, you **must reinstall** InfluxDB Enterprise with the Production installation below before using the product in a production environment. 
+ [QuickStart installation](/enterprise_influxdb/v1.8/install-and-deploy/quickstart_installation). Note, if you use the QuickStart installation, **reinstall** InfluxDB Enterprise with the Production installation below before using the product in a production environment.
 
 ## Production installation
 
