@@ -2,6 +2,7 @@
 title: Deploy an InfluxDB Enterprise cluster on Google Cloud Platform
 aliases:
     - /enterprise_influxdb/v1.7/other-options/google-cloud/
+    - /enterprise_influxdb/v1.7/deploying/google-cloud-platform/
 menu:
   enterprise_influxdb_1_7:
     name: Deploy on GCP
