@@ -1,6 +1,5 @@
 ---
 title: Installing Telegraf
-
 menu:
   telegraf_1_15:
     name: Installing
@@ -311,13 +310,15 @@ For more advanced configuration details, see the
 
 ## Installation
 
-If you are performing a first time installation and followed the PowerShell commands provided on the
-[InfluxData download page](https://portal.influxdata.com/downloads), you have expanded the archive file into
-`C:\Program Files\InfluxData\telegraf-xxx` (or another directory of your chosing).
+Download the Telegraf ZIP archive for Windows from the [InfluxData downloads page](https://portal.influxdata.com/downloads).
 
-The Telegraf ZIP archive contains a default configuration file with an input plugin for capturing basic Windows system metrics.
-Specifically, the [inputs.win_perf_counters](/telegraf/v1.14/plugins/plugin-list/#win_perf_counters) is enabled and it captures metrics
-from the following defined Windows Operating System objects:
+Extract the contents of the ZIP archive to `C:\Program Files\InfluxData\Telegraf`.
+
+### Configure an input plugin
+
+The Telegraf ZIP archive contains a default configuration file (`telegraf.conf`).
+The input plugin for capturing basic [Windows system metrics](/telegraf/v1.14/plugins/plugin-list/#win_perf_counters) is already activated.
+With this plugin, Telegraf monitors the following defined Windows Operating System objects:
 
 - Processor
 - LogicalDisk
@@ -327,51 +328,37 @@ from the following defined Windows Operating System objects:
 - Memory
 - Paging File
 
-### Configure an Output Plugin
-
-Both the [InfluxDB v1](/telegraf/v1.14/plugins/plugin-list/#influxdb) and
-[InfluxDB v2](/telegraf/v1.14/plugins/plugin-list/#influxdb_v2) output plugins
-are contained within the default `telegraf.conf` file.
-The InfluxDB v1 plugin is configured and the InfluxDB v2 plugin is commented out using the `#` symbol.
-
-Before you start the Telegraf agent, you'll need to configure one of these plugins to send data to InfluxDB.
-Choose the appropriate plugin to configure based on the version of InfluxDB you'll be using.
-
-If you are not using InfluxDB v1, you need to comment it out by placing a `#` in front of the `[[outputs.influxdb]]` within the file.
-You can use a simple text editor like Notepad to edit these files.
-
-## Configuration
-
-While the Telegraf ZIP archive file for Windows contains a recommended configuration file for capturing system metrics for
-Windows hosts, Telegraf can be used to capture metrics and log information from a wide variety of sources.
-
-Use Telegraf to create a configuration file which contains ALL of the default values for ALL of the plugins supported by Telegraf.
-
-### Create a configuration file with default plugins configurations
-
-Every plugin (input, output, processor, and aggregator) will be in the file, but most will be commented out.
-
-```
-.\telegraf.exe config > telegraf_latest.conf
-```
-
-### Create a configuration file with specific inputs and outputs
-
-You can also be more selective about which plugins you wish to have in the generated configuration file.
-
-```
-telegraf.exe --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>[:<outputname>] config > telegraf_select.conf
-```
-
+Telegraf can be used to capture metrics and log information from a wide variety of sources.
 For more advanced configuration details, see the [configuration documentation](/telegraf/v1.14/administration/configuration/).
 
-### Windows service
+### Configure an output plugin
+
+The `telegraf.conf` file included in the ZIP archive contains sections for configuring
+both the [InfluxDB v1](/telegraf/v1.14/plugins/plugin-list/#influxdb) and
+[InfluxDB v2](/telegraf/v1.14/plugins/plugin-list/#influxdb_v2) output plugins.
+
+Before you start the Telegraf agent, you must configure one of these plugins to send data to InfluxDB.
+Choose the appropriate plugin to configure based on the version of InfluxDB you are using.
+
+#### Writing data to InfluxDB 1.x
+
+Open `telegraf.conf` in a text editor and fill in the `database` field under `[[outputs.influxdb]]`.
+
+#### Writing data to InfluxDB 2.0
+
+Open `telegraf.conf` in a text editor and comment out the InfluxDB v1 plugin
+by placing a `#` in front of `[[outputs.influxdb]]`.
+Then remove the `#` in front of `[[outputs.influxdb_v2]]`.
+
+For detailed instructions on configuring Telegraf to write to InfluxDB 2.0, see
+[Enable and configure the InfluxDB v2 output plugin](/v2.0/write-data/use-telegraf/manual-config/#enable-and-configure-the-influxdb-v2-output-plugin).
+
+### Install Telegraf as a Windows service
 
 Install Telegraf as a [Windows service](https://github.com/influxdata/telegraf/blob/master/docs/WINDOWS_SERVICE.md):
-```
-telegraf.exe -service install -config <path_to_config>
-```
 
-{{% /tab-content %}}
+```
+.\telegraf.exe -service install -config <path_to_telegraf.conf>
+```
 {{< /tab-content-container >}}
 {{< /tab-labels >}}
