@@ -22,7 +22,7 @@ InfluxDB Enterprise is currently available on the Google Cloud Platform (GCP). F
 
 ## [Deploy on Azure Cloud Platform](/enterprise_influxdb/v1.8/install-and-deploy/deploying/azure/)
 
-InfluxDB Enterprise is currently available on the Azure Cloud Platform (GCP). For information on deploying InfluxDB Enterprise clusters on Azure, see [Deploy an InfluxDB Enterprise cluster on Azure Cloud Platform](/enterprise_influxdb/v1.8/install-and-deploy/deploying/azure/).
+InfluxDB Enterprise is currently available on the Azure Cloud Platform. For information on deploying InfluxDB Enterprise clusters on Azure, see [Deploy an InfluxDB Enterprise cluster on Azure Cloud Platform](/enterprise_influxdb/v1.8/install-and-deploy/deploying/azure/).
 
 > To manually install InfluxDB Enterprise in your own environment, choose one of the following options:
 
