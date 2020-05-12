@@ -317,7 +317,7 @@ Extract the contents of the ZIP archive to `C:\Program Files\InfluxData\Telegraf
 ### Configure an input plugin
 
 The Telegraf ZIP archive contains a default configuration file (`telegraf.conf`).
-The input plugin for capturing basic [Windows system metrics](/telegraf/v1.14/plugins/plugin-list/#win_perf_counters) is already activated.
+In this file, the input plugin for capturing basic [Windows system metrics](/telegraf/v1.14/plugins/plugin-list/#win_perf_counters) is already activated.
 With this plugin, Telegraf monitors the following defined Windows Operating System objects:
 
 - Processor
@@ -333,12 +333,12 @@ For more advanced configuration details, see the [configuration documentation](/
 
 ### Configure an output plugin
 
+Before you start the Telegraf agent, you must configure an output plugin to send data to InfluxDB.
+Choose the appropriate plugin based on the version of InfluxDB you are using.
+
 The `telegraf.conf` file included in the ZIP archive contains sections for configuring
 both the [InfluxDB v1](/telegraf/v1.14/plugins/plugin-list/#influxdb) and
 [InfluxDB v2](/telegraf/v1.14/plugins/plugin-list/#influxdb_v2) output plugins.
-
-Before you start the Telegraf agent, you must configure one of these plugins to send data to InfluxDB.
-Choose the appropriate plugin to configure based on the version of InfluxDB you are using.
 
 #### Writing data to InfluxDB 1.x
 
@@ -352,6 +352,15 @@ Then remove the `#` in front of `[[outputs.influxdb_v2]]`.
 
 For detailed instructions on configuring Telegraf to write to InfluxDB 2.0, see
 [Enable and configure the InfluxDB v2 output plugin](/v2.0/write-data/use-telegraf/manual-config/#enable-and-configure-the-influxdb-v2-output-plugin).
+
+### Start the agent
+
+Once configured, to begin sending metrics with Telegraf, run the following commands in PowerShell:
+
+```
+> cd C:\Program Files\InfluxData\Telegraf       # or wherever you extracted the ZIP
+> .\telegraf.exe -config <path_to_telegraf.conf>
+```
 
 ### Install Telegraf as a Windows service
 
