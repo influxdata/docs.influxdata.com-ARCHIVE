@@ -15,6 +15,12 @@ We recommend enabling Time Series Index (TSI) (step 3 of Upgrade to InfluxDB 1.7
 
 > **_Note:_** The default InfluxDB configuration continues to use in-memory indexes (`inmem`) (as in earlier versions).
 
+{{% note %}}
+### Upgrade to InfluxDB Enterprise
+To upgrade from InfluxDB OSS to InfluxDB Enterprise, [contact InfluxData Sales](https://www.influxdata.com/contact-sales/)
+and see [Migrate to InfluxDB Enterprise](/enterprise_influxdb/v1.7/guides/migration/).
+{{% /note %}}
+
 ## Upgrade to InfluxDB 1.7.x
 
 1. [Download](https://portal.influxdata.com/downloads) InfluxDB 1.7.x and [install the upgrade](/influxdb/v1.7/introduction/installation).

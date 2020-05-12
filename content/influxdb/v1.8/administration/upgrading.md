@@ -16,6 +16,12 @@ We recommend enabling Time Series Index (TSI) (step 3 of Upgrade to InfluxDB 1.8
 
 > **_Note:_** The default configuration continues to use TSM-based shards with in-memory indexes (as in earlier versions).
 
+{{% note %}}
+### Upgrade to InfluxDB Enterprise
+To upgrade from InfluxDB OSS to InfluxDB Enterprise, [contact InfluxData Sales](https://www.influxdata.com/contact-sales/)
+and see [Migrate to InfluxDB Enterprise](/enterprise_influxdb/latest/guides/migration/).
+{{% /note %}}
+
 ## Upgrade to InfluxDB 1.8.x
 
 1. [Download](https://portal.influxdata.com/downloads) InfluxDB version 1.8.x and [install the upgrade](/influxdb/v1.8/introduction/installation).
