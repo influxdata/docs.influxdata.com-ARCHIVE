@@ -1,5 +1,7 @@
 ---
 title: Deploy an InfluxDB Enterprise cluster on Amazon Web Services
+aliases:
+    - /enterprise_influxdb/v1.8/install-and-deploy/aws/setting-up-template/
 menu:
   enterprise_influxdb_1_8:
     name: Deploy on Amazon Web Services

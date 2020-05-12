@@ -2,7 +2,6 @@
 title: AWS configuration options
 aliases:
     - /enterprise_influxdb/v1.8/install-and-deploy/aws/config-options/
-    - /enterprise_influxdb/v1.8/install-and-deploy/deploying/aws/config-options/
 menu:
   enterprise_influxdb_1_8:
     name: AWS configuration options
