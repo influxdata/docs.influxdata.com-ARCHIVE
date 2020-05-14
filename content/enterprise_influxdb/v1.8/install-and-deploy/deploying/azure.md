@@ -28,27 +28,27 @@ To deploy InfluxDB Enterprise clusters on platforms other than Azure, see [Deplo
 
 3. Select the subscription to use for your InfluxDB Enterprise cluster. Then select a resource group and region where the cluster resources will be deployed.
 
-   **Tip:** If you do not know which resource group to use, we recommend creating a new one for the InfluxDB Enterprise cluster.
+    > **Tip:** If you do not know which resource group to use, we recommend creating a new one for the InfluxDB Enterprise cluster.
 
 4. In the Instance Details section, set the OS username and SSH authentication type you will use to access the cluster VMs. For password authentication, enter a username and password. For SSH public key authentication, copy an SSH public key. The cluster VMs are built from an Ubuntu base image.
 
 5. Click **Next: Cluster Configuration**, and then enter details including the InfluxDB admin username and password, the number of meta and data nodes, and the VM size for both meta and data nodes. We recommend using the default VM sizes and increasing the data node VM size if you anticipate needing more resources for your workload.
 
-> **Note:** Make sure to save the InfluxDB admin credentials. They will be required to access InfluxDB.
+    > **Note:** Make sure to save the InfluxDB admin credentials. They will be required to access InfluxDB.
 
 6. Click **Next: External Access & Chronograf**, and then do the following:
 
    - To create a separate instance to monitor the cluster and run [Chronograf](https://www.influxdata.com/time-series-platform/chronograf/), select **Yes**. Otherwise, select **No**.
 
-   > **Note:** Adding a Chronograf instance will also configure that instance as an SSH bastion. All cluster instances will only be accessible through the Chronograf instance.
+          > **Note:** Adding a Chronograf instance will also configure that instance as an SSH bastion. All cluster instances will only be accessible through the Chronograf instance.
 
    - Select the appropriate access for the InfluxDB load balancer: **External** to allow external Internet access; otherwise, select **Internal**.
 
-   {{% warn %}}The cluster uses HTTP by default. You must configure HTTPS after the cluster has been deployed.{{% /warn %}}
+        {{% warn %}}The cluster uses HTTP by default. You must configure HTTPS after the cluster has been deployed.{{% /warn %}}
 
 7. Click **Next: Review + create** to validate your cluster configuration details. If validation passes, your InfluxDB Enterprise cluster is deployed.
 
-> **Note:** Some Azure accounts may have vCPU quotas limited to 10 vCPUs available in certain regions. Selecting VM sizes larger than the default can cause a validation error for exceeding the vCPU limit for the region.
+    > **Note:** Some Azure accounts may have vCPU quotas limited to 10 vCPUs available in certain regions. Selecting VM sizes larger than the default can cause a validation error for exceeding the vCPU limit for the region.
 
 ## Access InfluxDB
 
