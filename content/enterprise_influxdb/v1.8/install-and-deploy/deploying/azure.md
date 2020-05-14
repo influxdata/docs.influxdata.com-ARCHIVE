@@ -30,7 +30,7 @@ To deploy InfluxDB Enterprise clusters on platforms other than Azure, see [Deplo
 
    **Tip:** If you do not know which resource group to use, we recommend creating a new one for the InfluxDB Enterprise cluster.
 
-4. In the Instance Details section, set the OS username and SSH authentication type you will use to access the cluster VMs. For password authentication, enter a username and password. For SSH public key authentication, copy an SSH public key. The cluster VMs built from an Ubuntu base image.
+4. In the Instance Details section, set the OS username and SSH authentication type you will use to access the cluster VMs. For password authentication, enter a username and password. For SSH public key authentication, copy an SSH public key. The cluster VMs are built from an Ubuntu base image.
 
 5. Click **Next: Cluster Configuration**, and then enter details including the InfluxDB admin username and password, the number of meta and data nodes, and the VM size for both meta and data nodes. We recommend using the default VM sizes and increasing the data node VM size if you anticipate needing more resources for your workload.
 
