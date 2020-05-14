@@ -33,21 +33,14 @@ window(
   stopColumn: "_stop",
   createEmpty: false
 )
-
-// OR
-
-window(
-  intervals: intervals(every: 5m, period: 5m, offset: 12h),
-  timeColumn: "_time",
-  startColumn: "_start",
-  stopColumn: "_stop",
-  createEmpty: false
-)
 ```
 
 ## Parameters
 
-> `every`,`period` or `intervals` is required.
+#### Calendar months and years
+`every`, `period`, and `offset` support all [valid duration units](/flux/v0.65/language/types/#duration-types),
+including **calendar months (`1mo`)** and **years (`1y`)**.
+{{% /note %}}
 
 ### every
 Duration of time between windows.
@@ -69,18 +62,6 @@ It can be negative, indicating that the offset goes backwards in time.
 Defaults to 0, which will align window end boundaries with the `every` duration.
 
 _**Data type:** Duration_
-
-### intervals
-A function that returns an interval generator, a set of intervals used as windows.
-
-_**Data type:** Function_
-
-###### Example interval generator function
-```js
-intervals(every:1d, period:8h, offset:9h)
-```
-
-> When `intervals` is used, `every`, `period`, and `start` cannot be used or need to be set to 0.
 
 ### timeColumn
 The column containing time.
@@ -111,8 +92,8 @@ _**Data type:** Boolean_
 #### Window data into 10 minute intervals
 ```js
 from(bucket:"telegraf/autogen")
-  |> range(start:-12h)
-  |> window(every:10m)
+  |> range(start: -12h)
+  |> window(every: 10m)
   // ...
 ```
 
@@ -120,11 +101,19 @@ from(bucket:"telegraf/autogen")
 The following windows data into 8 hour intervals starting at 9AM every day.
 ```js
 from(bucket:"telegraf/autogen")
-  |> range(start:-12h)
-  |> window(intervals: intervals(every:1d, period:8h, offset:9h))
+  |> range(start: -12h)
+  |> window(intervals: intervals(every: 1d, period: 8h, offset: 9h))
+```
+
+#### Window by calendar month
+```js
+from(bucket:"example-bucket")
+  |> range(start: -1y)
+  |> window(every: 1mo)
+  // ...
 ```
 
 <hr style="margin-top:4rem"/>
 
 ##### Related InfluxQL functions and statements:
-[GROUP BY time()](/influxdb/latest/query_language/data_exploration/#the-group-by-clause)
+[GROUP BY time()](/influxdb/latest/query_language/explore-data/#the-group-by-clause)
