@@ -24,15 +24,15 @@ To deploy InfluxDB Enterprise clusters on platforms other than Azure, see [Deplo
 
 1. Log in to your Azure Cloud Platform account and navigate to [InfluxData's InfluxDB Enterprise (Official Version) application](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/influxdata.influxdb-enterprise-cluster) on Azure Marketplace.
 
-2. Click **Get It Now**, read and agree to the terms of use, then **Continue**. Once in the Azure Portal, click **Create**.
+2. Click **Get It Now**, read and agree to the terms of use, and then click **Continue**. Once in the Azure Portal, click **Create**.
 
-3. Select the subscription to use for your InfluxDB Enterprise cluster. Then select select a resource group where the cluster resources will be deployed and a region.
+3. Select the subscription to use for your InfluxDB Enterprise cluster. Then select a resource group and region where the cluster resources will be deployed.
 
    **Tip:** If you do not know which resource group to use, we recommend creating a new one for the InfluxDB Enterprise cluster.
 
-4. In the Instance Details section, set the OS user name and SSH authentication type you will use to access the cluster VMs. For password authentication, enter a user name and password. For SSH public key authentication, copy an SSH public key. The cluster VMs built from an Ubuntu base image.
+4. In the Instance Details section, set the OS username and SSH authentication type you will use to access the cluster VMs. For password authentication, enter a username and password. For SSH public key authentication, copy an SSH public key. The cluster VMs built from an Ubuntu base image.
 
-5. Click **Next: Cluster Configuration**, and then enter details including the InfluxDB admin username and password, the number of meta and data nodes, and the VM size for both meta and data nodes. We recommend the default VM sizes and increasing the data node VM size if you anticipate needing more resources for your workload.
+5. Click **Next: Cluster Configuration**, and then enter details including the InfluxDB admin username and password, the number of meta and data nodes, and the VM size for both meta and data nodes. We recommend using the default VM sizes and increasing the data node VM size if you anticipate needing more resources for your workload.
 
 > **Note:** Make sure to save the InfluxDB admin credentials. They will be required to access InfluxDB.
 
@@ -44,7 +44,7 @@ To deploy InfluxDB Enterprise clusters on platforms other than Azure, see [Deplo
 
    - Select the appropriate access for the InfluxDB load balancer: **External** to allow external Internet access; otherwise, select **Internal**.
 
-   {{% warn %}}The cluster uses HTTP by default. The user must configure HTTPS after the cluster has been deployed.{{% /warn %}}
+   {{% warn %}}The cluster uses HTTP by default. You must configure HTTPS after the cluster has been deployed.{{% /warn %}}
 
 7. Click **Next: Review + create** to validate your cluster configuration details. If validation passes, your InfluxDB Enterprise cluster is deployed.
 
@@ -52,7 +52,7 @@ To deploy InfluxDB Enterprise clusters on platforms other than Azure, see [Deplo
 
 ## Access InfluxDB
 
-Once the cluster has been created, the InfluxDB API will be exposed at the IP address associated with the load balancer resource (`lb-influxdb`). If external access was configured during setup, the load balancer will be publically accesssible. Otherwise, the load balancer will only be accessible to the cluster's virtual network.
+Once the cluster has been created, the InfluxDB API is exposed at the IP address associated with the load balancer resource (`lb-influxdb`). If external access was configured during setup, the load balancer is publically accesssible. Otherwise, the load balancer is only accessible to the cluster's virtual network.
 
 Use the load balancer IP address and the InfluxDB admin credentials entered during the cluster creation to interact with InfluxDB Enterprise via the [`influx` CLI](https://docs.influxdata.com/influxdb/v1.8/tools/shell/) or use the InfluxDB's [query](https://docs.influxdata.com/influxdb/v1.8/guides/query_data/) and [write](https://docs.influxdata.com/influxdb/v1.8/guides/write_data/) HTTP APIs.
 
@@ -60,7 +60,7 @@ Use the load balancer IP address and the InfluxDB admin credentials entered duri
 
 The InfluxDB Enterprise cluster's VMs are only reachable within the virtual network using the SSH credentails provided during setup.
 
-If a Chronograf instance has been added to the cluster, the Chronograf instance will be publically accessible via SSH. The other VMs can then be reached from the Chronograf VM.
+If a Chronograf instance has been added to the cluster, the Chronograf instance is publically accessible via SSH. The other VMs can then be reached from the Chronograf VM.
 
 ### Next steps
 
