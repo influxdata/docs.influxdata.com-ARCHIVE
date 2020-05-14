@@ -37,6 +37,7 @@ window(
 
 ## Parameters
 
+{{% note %}}
 #### Calendar months and years
 `every`, `period`, and `offset` support all [valid duration units](/flux/v0.65/language/types/#duration-types),
 including **calendar months (`1mo`)** and **years (`1y`)**.
