@@ -23,4 +23,4 @@ Learn how to deploy a cluster on the Cloud provider of your choice:
 
    - [GCP](/enterprise_influxdb/v1.7/install-and-deploy/google-cloud-platform/)
    - [AWS](/enterprise_influxdb/v1.7/install-and-deploy/aws/)
-   - [Azure](/enterprise_influxdb/v1.8/install-and-deploy/deploying/azure/)
+   - [Azure](/enterprise_influxdb/v1.7/install-and-deploy/deploying/azure/)
