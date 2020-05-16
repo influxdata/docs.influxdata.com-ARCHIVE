@@ -11,10 +11,8 @@ menu:
 
 Complete the following steps to install an InfluxDB Enterprise cluster in your own environment:
 
-1. [Install InfluxDB Enterprise meta nodes](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/meta_node_installation/)
-2. [Install InfluxDB data nodes](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/data_node_installation/)
-3. [Install Chronograf](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/chrono_install/)
+1. [Install InfluxDB Enterprise meta nodes](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/meta_node_installation/)
+2. [Install InfluxDB data nodes](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/data_node_installation/)
+3. [Install Chronograf](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/chrono_install/)
 
-> **Note:** If you prefer not to install in your own environment, discover how to deploy InfluxDB Enterprise on a Cloud provider of your choice: [Azure](/enterprise_influxdb/v1.7/install-and-deploy/deploying/azure/), [GCP](/enterprise_influxdb/v1.7/install-and-deploy/deploying/google-cloud-platform/), or [AWS](/enterprise_influxdb/v1.7/install-and-deploy/deploying/aws/).
-
-> Deploying InfluxDB Enterprise on your Cloud provider give you a production-ready environment.
+> **Note:** If you prefer less maintenance, discover how to deploy InfluxDB Enterprise (production-ready) on a Cloud provider of your choice: [Azure](/enterprise_influxdb/v1.7/install-and-deploy/deploying/azure/), [GCP](/enterprise_influxdb/v1.7/install-and-deploy/deploying/google-cloud-platform/), or [AWS](/enterprise_influxdb/v1.7/install-and-deploy/aws/).

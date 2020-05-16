@@ -9,13 +9,16 @@ menu:
     weight: 70
 ---
 
-Install or deploy an InfluxDB Enterprise cluster in the environment of your choice.
+You decide where to install or deploy your InfluxDB Enterprise cluster:
 
-## Your own production environment
+- [Your own environment](#your-production-environment)
+- [Cloud provider of your choice](#cloud-provider-of-your-choice)
 
-Learn how to [install a cluster in your own production environment](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/).
+## Your production environment
 
-## Your Cloud provider
+Learn how to [install a cluster in your own environment](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/).
+
+## Cloud provider of your choice
 
 Learn how to deploy a cluster on the Cloud provider of your choice:
 
