@@ -1,35 +1,21 @@
 ---
-title: Installation options (⏰ Please Read!)
+title: Installation requirements
 aliases:
-  - /enterprise_influxdb/v1.7/introduction/meta_node_installation/
-  - /enterprise_influxdb/v1.7/introduction/data_node_installation/
+  - /enterprise_influxdb/v1.8/introduction/meta_node_installation/
+  - /enterprise_influxdb/v1.8/introduction/data_node_installation/
   - /chronograf/latest/introduction/installation
-  - /enterprise/v1.7/introduction/installation_guidelines/
+  - /enterprise/v1.8/introduction/installation_guidelines/
 menu:
-  enterprise_influxdb_1_7:
+  enterprise_influxdb_1_8:
     weight: 20
     parent: Introduction
 ---
 
-Please review the sections below before you begin working with InfluxDB Enterprise.
-
-## Which installation is right for me?
-
-Two options are described for installing InfluxDB Enterprise.
-
-The [QuickStart installation](/enterprise_influxdb/v1.7/quickstart_installation/) process is intended for users looking to quickly get up and running with InfluxDB Enterprise and for users who want to evaluate it.
-The QuickStart installation process **is not** intended for use
-in a production environment.
-
-The [Production installation](/enterprise_influxdb/v1.7/production_installation/) process is recommended for users intending to deploy the InfluxDB Enterprise installation in a production environment.
-
-> **Note:** If you install InfluxDB Enterprise with the QuickStart installation process you will need to reinstall InfluxDB Enterprise with the Production installation process before using the product in a production environment.
-
-There are [other installation options](/enterprise_influxdb/v1.7/install-and-deploy/) available to easily install an InfluxDB Enterprise cluster in select environments.
+Review the installation requirements below, and then check out available options to [Install and deploy InfluxDB Enterprise](/enterprise_influxdb/v1.8/install-and-deploy/).
 
 ## Requirements for InfluxDB Enterprise clusters
 
-For an overview of the architecture and concepts in an InfluxDB Enterprise Cluster, review [Clustering Guide](/enterprise_influxdb/v1.7/concepts/clustering/).
+For an overview of the architecture and concepts in an InfluxDB Enterprise Cluster, review [Clustering Guide](/enterprise_influxdb/v1.8/concepts/clustering/).
 
 For clusters using a license key and not a license file, all nodes must be able to contact `portal.influxdata.com`
 via port `80` or port `443`. Nodes that go more than four hours without connectivity to the Portal may experience license issues.
@@ -60,7 +46,7 @@ SSDs are strongly recommended, and we have had no reports of IOPS contention fro
 
 #### Use three and only three meta nodes
 
-Although technically the cluster can function with any number of meta nodes, the best pratice is to ALWAYS have an odd number of meta nodes.
+Although technically the cluster can function with any number of meta nodes, the best practice is to ALWAYS have an odd number of meta nodes.
 This allows the meta nodes to reach consensus.
 An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree.
 
