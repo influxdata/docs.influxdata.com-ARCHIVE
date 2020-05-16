@@ -5,7 +5,7 @@ aliases:
 - /enterprise_influxdb/v1.7/install-and-deploy/deploying/google-cloud-platform/
 menu:
   enterprise_influxdb_1_7:
-    name: Deploy in containers
+    name: Deploy in Cloud
     identifier: deploy-in-cloud-enterprise
     weight: 10
     parent: Install and deploy
