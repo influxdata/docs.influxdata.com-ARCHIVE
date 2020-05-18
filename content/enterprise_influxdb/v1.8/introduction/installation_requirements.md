@@ -11,16 +11,15 @@ menu:
     parent: Introduction
 ---
 
-Review the installation requirements below, and then check out available options to [Install and deploy InfluxDB Enterprise](/enterprise_influxdb/v1.8/install-and-deploy/).
+Review the installation requirements below, and then check out available options to [install and deploy InfluxDB Enterprise](/enterprise_influxdb/v1.8/install-and-deploy/).
 
 ## Requirements for InfluxDB Enterprise clusters
 
-For an overview of the architecture and concepts in an InfluxDB Enterprise Cluster, review [Clustering Guide](/enterprise_influxdb/v1.8/concepts/clustering/).
+For an overview of the architecture and concepts in an InfluxDB Enterprise Cluster, review the [Clustering Guide](/enterprise_influxdb/v1.8/concepts/clustering/).
 
-For clusters using a license key and not a license file, all nodes must be able to contact `portal.influxdata.com`
-via port `80` or port `443`. Nodes that go more than four hours without connectivity to the Portal may experience license issues.
+For clusters using a license key and not a license file, all nodes must be able to contact `portal.influxdata.com` via port `80` or port `443`. Nodes that go more than four hours without connectivity to the Portal may experience license issues.
 
-### Frequently Overlooked Requirements
+### Frequently overlooked requirements
 
 The following are the most frequently overlooked requirements when installing a cluster.
 
@@ -50,7 +49,7 @@ Although technically the cluster can function with any number of meta nodes, the
 This allows the meta nodes to reach consensus.
 An even number of meta nodes cannot achieve consensus because there can be no "deciding vote" cast between the nodes if they disagree.
 
-Therefore, the minumum number of meta nodes for a high availability (HA) installation is three. The typical HA installation for InfluxDB Enterprise deploys three meta nodes.
+Therefore, the minimum number of meta nodes for a high availability (HA) installation is three. The typical HA installation for InfluxDB Enterprise deploys three meta nodes.
 
 Aside from three being a magic number, a three meta node cluster can tolerate the permanent loss of a single meta node with no degradation in any function or performance.
 A replacement meta node can be added to restore the cluster to full redundancy.

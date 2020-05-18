@@ -12,7 +12,6 @@ menu:
 ---
 
 Review the installation requirements below, and then check out available options to [Install and deploy InfluxDB Enterprise](/enterprise_influxdb/v1.7/install-and-deploy/).
-
 ## Requirements for InfluxDB Enterprise clusters
 
 For an overview of the architecture and concepts in an InfluxDB Enterprise Cluster, review [Clustering Guide](/enterprise_influxdb/v1.7/concepts/clustering/).
