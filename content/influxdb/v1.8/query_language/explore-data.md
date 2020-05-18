@@ -3139,7 +3139,7 @@ With the [InfluxDB API](/influxdb/v1.8/tools/api/):
 A subquery is a query that is nested in the `FROM` clause of another query.
 Use a subquery to apply a query as a condition in the enclosing query.
 Subqueries offer functionality similar to nested functions and SQL
-[`HAVING` clauses](https://en.wikipedia.org/wiki/Having_(SQL\)).
+[`HAVING` clauses](https://en.wikipedia.org/wiki/Having_%28SQL%29).
 
 ### Syntax
 
