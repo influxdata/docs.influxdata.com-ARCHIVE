@@ -7,7 +7,7 @@ menu:
   enterprise_influxdb_1_7:
     name: Deploy on GCP
     weight: 30
-    parent: deploy-in-cloud-enterprise
+    parent: Install and deploy
 ---
 
 Complete the following steps to deploy an InfluxDB Enterprise cluster on Google Cloud Platform (GCP):

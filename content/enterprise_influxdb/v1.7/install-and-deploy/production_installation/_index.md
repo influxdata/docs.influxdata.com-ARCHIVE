@@ -1,11 +1,12 @@
 ---
 title: Install an InfluxDB Enterprise cluster to your own environment
+description: Install InfluxDB Enterprise on-premise in your own environment.
 aliases:
     - /enterprise_influxdb/v1.7/production_installation/
 menu:
   enterprise_influxdb_1_7:
     name: Install in your environment
-    weight: 20
+    weight: 70
     parent: Install and deploy
 ---
 

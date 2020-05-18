@@ -4,7 +4,7 @@ menu:
   enterprise_influxdb_1_7:
     name: Deploy on Azure
     weight: 20
-    parent: deploy-in-cloud-enterprise
+    parent: Install and deploy
 ---
 
 For deploying InfluxDB Enterprise clusters on Microsoft Azure cloud computing service, InfluxData provides an [InfluxDB Enterprise application](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/influxdata.influxdb-enterprise-cluster) on the [Azure Marketplace](https://azuremarketplace.microsoft.com/) that makes the installation and setup process easy and straightforward. Clusters are deployed through an Azure Marketplace subscription and are ready for production. Billing occurs through your Azure subscription.

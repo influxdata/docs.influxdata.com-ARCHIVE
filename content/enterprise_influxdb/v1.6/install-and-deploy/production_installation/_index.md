@@ -9,21 +9,16 @@ menu:
     parent: Install and deploy
 ---
 
-The Production Installation process is designed for users looking to deploy
-InfluxDB Enterprise in a production environment.
+Complete the following steps to install an InfluxDB Enterprise cluster in your own environment:
 
-If you wish to evaluate InfluxDB Enterprise in a non-production
-environment, feel free to follow the instructions outlined in the
-[QuickStart installation](/enterprise_influxdb/v1.6/install-and-deploy/quickstart_installation) section.
-Please note that if you install InfluxDB Enterprise with the QuickStart Installation process you
-will need to reinstall InfluxDB Enterprise with the Production Installation
-process before using the product in a production environment.
+## Your own environment
 
+Learn how to [install a cluster in your own environment](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/).
 
-## Production installation
+## Your cloud provider
 
-Follow the links below to get an InfluxDB Enterprise cluster up and running in a production environment.
+Learn how to deploy a cluster on the cloud provider of your choice:
 
-### [Step 1 - Install InfluxDB Enterprise meta nodes](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/meta_node_installation/)
-### [Step 2 - Install InfluxDB data nodes](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/data_node_installation/)
-### [Step 3 - Install Chronograf](/enterprise_influxdb/v1.6/install-and-deploy/production_installation/chrono_install/)
+   - [GCP](/enterprise_influxdb/v1.7/install-and-deploy/google-cloud-platform/)
+   - [AWS](/enterprise_influxdb/v1.7/install-and-deploy/aws/)
+   - [Azure](/enterprise_influxdb/v1.7/install-and-deploy/deploying/azure/)
