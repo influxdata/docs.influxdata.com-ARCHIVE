@@ -4,7 +4,7 @@ aliases:
     - /enterprise_influxdb/v1.6/production_installation/
 menu:
   enterprise_influxdb_1_6:
-    name: Install for production
+    name: Install in your environment
     weight: 20
     parent: Install and deploy
 ---

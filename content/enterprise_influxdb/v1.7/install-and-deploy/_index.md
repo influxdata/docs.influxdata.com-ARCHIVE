@@ -16,9 +16,9 @@ Install or deploy an InfluxDB Enterprise cluster in the environment of your choi
 
 Learn how to [install a cluster in your own production environment](/enterprise_influxdb/v1.7/install-and-deploy/production_installation/).
 
-## Your Cloud provider
+## Your cloud provider
 
-Learn how to deploy a cluster on the Cloud provider of your choice:
+Learn how to deploy a cluster on the cloud provider of your choice:
 
    - [GCP](/enterprise_influxdb/v1.7/install-and-deploy/google-cloud-platform/)
    - [AWS](/enterprise_influxdb/v1.7/install-and-deploy/aws/)

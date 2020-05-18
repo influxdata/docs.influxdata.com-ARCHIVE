@@ -6,7 +6,7 @@ menu:
   enterprise_influxdb_1_7:
     name: Step 3 - Install Chronograf
     weight: 30
-    parent: Install for production
+    parent: Install and deploy
     identifier: chrono_install
 ---
 

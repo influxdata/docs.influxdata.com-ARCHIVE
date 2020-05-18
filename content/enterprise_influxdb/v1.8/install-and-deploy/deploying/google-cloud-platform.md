@@ -5,7 +5,7 @@ aliases:
     - /enterprise_influxdb/v1.8/install-and-deploy/google-cloud-platform/
 menu:
   enterprise_influxdb_1_8:
-    name: Deploy on GCP
+    name: GCP
     weight: 30
     parent: deploy-in-cloud-enterprise
 ---

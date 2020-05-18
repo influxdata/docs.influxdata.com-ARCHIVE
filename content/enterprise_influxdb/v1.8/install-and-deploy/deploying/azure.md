@@ -2,7 +2,7 @@
 title: Deploy an InfluxDB Enterprise cluster on Azure Cloud Platform
 menu:
   enterprise_influxdb_1_8:
-    name: Deploy on Azure
+    name: Azure
     weight: 20
     parent: deploy-in-cloud-enterprise
 ---

@@ -6,7 +6,7 @@ menu:
   enterprise_influxdb_1_7:
     name: Step 2 - Install data nodes
     weight: 20
-    parent: Install for production
+    parent: Install and deploy
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
