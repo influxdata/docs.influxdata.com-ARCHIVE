@@ -1,5 +1,6 @@
 ---
 title: Install an InfluxDB Enterprise cluster in your own environment
+description: Install InfluxDB Enterprise in your own on-premise environment.
 aliases:
     - /enterprise_influxdb/v1.8/production_installation/
 menu:
