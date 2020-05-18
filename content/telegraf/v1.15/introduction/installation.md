@@ -355,10 +355,10 @@ For detailed instructions on configuring Telegraf to write to InfluxDB 2.0, see
 
 ### Start the agent
 
-Once configured, to begin sending metrics with Telegraf, run the following commands in PowerShell:
+Once configured, run the following commands in PowerShell to begin sending metrics with Telegraf:
 
 ```
-> cd C:\Program Files\InfluxData\Telegraf       # or wherever you extracted the ZIP
+> cd C:\Program Files\InfluxData\Telegraf        # path to extracted Telegraf directory
 > .\telegraf.exe -config <path_to_telegraf.conf>
 ```
 
