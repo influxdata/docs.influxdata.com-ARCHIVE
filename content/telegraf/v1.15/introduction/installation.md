@@ -15,9 +15,9 @@ Installation of the Telegraf package may require `root` or administrator privile
 
 ### Networking
 
-Telegraf offers multiple service [input plugins](/telegraf/v1.14/plugins/inputs/) that may
+Telegraf offers multiple service [input plugins](/telegraf/v1.15/plugins/inputs/) that may
 require custom ports.
-All port mappings can be modified through the configuration file (`telegraf.conf`).
+Modify port mappings through the configuration file (`telegraf.conf`).
 
 For Linux distributions, this file is located at `/etc/telegraf` for default installations.
 
@@ -146,7 +146,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 ```
 
 For more advanced configuration details, see the
-[configuration documentation](/telegraf/v1.14/administration/configuration/).
+[configuration documentation](/telegraf/v1.15/administration/configuration/).
 {{% /tab-content %}}
 <!---------- BEGIN RedHat & CentOS ---------->
 {{% tab-content %}}
@@ -197,7 +197,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 ```
 
 For more advanced configuration details, see the
-[configuration documentation](/telegraf/v1.14/administration/configuration/).
+[configuration documentation](/telegraf/v1.15/administration/configuration/).
 {{% /tab-content %}}
 <!---------- BEGIN SLES & openSUSE ---------->
 {{% tab-content %}}
@@ -228,7 +228,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 ```
 
 For more advanced configuration details, see the
-[configuration documentation](/telegraf/v1.14/administration/configuration/).
+[configuration documentation](/telegraf/v1.15/administration/configuration/).
 {{% /tab-content %}}
 <!---------- BEGIN FreeBSD/PC-BSD ---------->
 {{% tab-content %}}
@@ -259,7 +259,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 ```
 
 For more advanced configuration details, see the
-[configuration documentation](/telegraf/v1.14/administration/configuration/).
+[configuration documentation](/telegraf/v1.15/administration/configuration/).
 {{% /tab-content %}}
 <!---------- BEGIN macOS ---------->
 {{% tab-content %}}
@@ -303,7 +303,7 @@ telegraf --input-filter <pluginname>[:<pluginname>] --output-filter <outputname>
 ```
 
 For more advanced configuration details, see the
-[configuration documentation](/telegraf/v1.14/administration/configuration/).
+[configuration documentation](/telegraf/v1.15/administration/configuration/).
 {{% /tab-content %}}
 <!---------- BEGIN Windows ---------->
 {{% tab-content %}}
@@ -317,7 +317,7 @@ Extract the contents of the ZIP archive to `C:\Program Files\InfluxData\Telegraf
 ### Configure an input plugin
 
 The Telegraf ZIP archive contains a default configuration file (`telegraf.conf`).
-In this file, the input plugin for capturing basic [Windows system metrics](/telegraf/v1.14/plugins/plugin-list/#win_perf_counters) is already activated.
+In this file, the input plugin for capturing basic [Windows system metrics](/telegraf/v1.15/plugins/plugin-list/#win_perf_counters) is already activated.
 With this plugin, Telegraf monitors the following defined Windows Operating System objects:
 
 - Processor
@@ -328,17 +328,17 @@ With this plugin, Telegraf monitors the following defined Windows Operating Syst
 - Memory
 - Paging File
 
-Telegraf can be used to capture metrics and log information from a wide variety of sources.
-For more advanced configuration details, see the [configuration documentation](/telegraf/v1.14/administration/configuration/).
+Telegraf can capture metrics and log information from a wide variety of sources.
+For more advanced configuration details, see the [configuration documentation](/telegraf/v1.15/administration/configuration/).
 
 ### Configure an output plugin
 
-Before you start the Telegraf agent, you must configure an output plugin to send data to InfluxDB.
+Before you start the Telegraf agent, configure an output plugin to send data to InfluxDB.
 Choose the appropriate plugin based on the version of InfluxDB you are using.
 
 The `telegraf.conf` file included in the ZIP archive contains sections for configuring
-both the [InfluxDB v1](/telegraf/v1.14/plugins/plugin-list/#influxdb) and
-[InfluxDB v2](/telegraf/v1.14/plugins/plugin-list/#influxdb_v2) output plugins.
+both the [InfluxDB v1](/telegraf/v1.15/plugins/plugin-list/#influxdb) and
+[InfluxDB v2](/telegraf/v1.15/plugins/plugin-list/#influxdb_v2) output plugins.
 
 #### Writing data to InfluxDB 1.x
 
