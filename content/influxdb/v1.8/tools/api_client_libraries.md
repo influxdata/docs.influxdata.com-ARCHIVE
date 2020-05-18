@@ -20,10 +20,12 @@ InfluxDB client libraries are language-specific packages that integrate with the
 Functionality varies between client libraries. Refer to client libraries on GitHub for specifics regarding each client library.
 
 ### Arduino
+
 - [InfluxDB Arduino Client](https://github.com/tobiasschuerg/InfluxDB-Client-for-Arduino)
   - Contributed by [Tobias Schürg (tobiasschuerg)](https://github.com/tobiasschuerg)
 
-### #C
+### C#
+
 - [influxdb-client-csharp](https://github.com/influxdata/influxdb-client-csharp)
   - Maintained by [InfluxData](https://github.com/influxdata)
 
