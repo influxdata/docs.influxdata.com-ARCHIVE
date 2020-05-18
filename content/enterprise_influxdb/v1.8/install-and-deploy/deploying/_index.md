@@ -1,5 +1,5 @@
 ---
-title: Deploy InfluxDB Enterprise clusters in containers
+title: Deploy InfluxDB Enterprise clusters
 aliases:
     - /enterprise_influxdb/v1.8/other-options/
 menu:

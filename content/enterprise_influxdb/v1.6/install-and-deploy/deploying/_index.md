@@ -1,5 +1,5 @@
 ---
-title: Deploy InfluxDB Enterprise clusters in containers
+title: Deploy InfluxDB Enterprise clusters
 aliases:
     - /enterprise_influxdb/v1.6/other-options/
 menu:
@@ -10,7 +10,7 @@ menu:
     parent: Install and deploy
 ---
 
-This section covers deploying InfluxDB Enterprise clusters in containers and cloud providers.
+This section covers deploying InfluxDB Enterprise clusters on the cloud provider of your choice.
 For information on manually installing and configuring InfluxDB Enterprise clusters, see:
 
 * [Install an InfluxDB Enterprise cluster for evaluation](/enterprise_influxdb/v1.6/install-and-deploy/quickstart_installation/)
