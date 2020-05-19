@@ -267,7 +267,7 @@ The `SELECT` clause supports combining the `*` syntax with the `::` syntax.
 #### Select a specific field from a measurement and perform basic arithmetic
 
 ```sql
-> SELECT ("water_level" * 2) + 4 from "h2o_feet"
+> SELECT ("water_level" * 2) + 4 FROM "h2o_feet"
 
 name: h2o_feet
 --------------
@@ -744,7 +744,7 @@ If you request a query that has no timestamp to return, such as an [aggregation 
 ##### Group query results by more than one tag
 
 ```sql
-> SELECT MEAN("index") FROM "h2o_quality" GROUP BY location,randtag
+> SELECT MEAN("index") FROM "h2o_quality" GROUP BY "location","randtag"
 
 name: h2o_quality
 tags: location=coyote_creek, randtag=1
@@ -1750,17 +1750,17 @@ The codeblock below provides sample syntax for those queries:
 SELECT *
 INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>
-WHERE time > now() - 100w and time < now() - 90w GROUP BY *
+WHERE time > now() - 100w AND time < now() - 90w GROUP BY *
 
 SELECT *
 INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>}
-WHERE time > now() - 90w  and time < now() - 80w GROUP BY *
+WHERE time > now() - 90w AND < now() - 80w GROUP BY *
 
 SELECT *
 INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>
-WHERE time > now() - 80w  and time < now() - 70w GROUP BY *
+WHERE time > now() - 80w AND time < now() - 70w GROUP BY *
 ```
 
 #### Write the results of a query to a measurement
