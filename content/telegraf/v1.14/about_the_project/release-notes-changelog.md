@@ -8,6 +8,15 @@ menu:
     parent: About the project
 ---
 
+## v1.14.3 [2020-05-19]
+
+### Bug fixes
+
+- Use same timestamp for all objects in arrays in the `json` parser.
+- Handle multiple metrics with the same timestamp in `dedup` processor.
+- Fix reconnection of timed out HTTP2 connections `influxdb` outputs.
+- Fix negative value parsing in `impi_sensor` input.
+
 ## v1.14.2 [2020-04-28]
 
 ### Bug fixes
