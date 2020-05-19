@@ -44,8 +44,6 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
 {{< tab-content-container >}}
 <!---------- BEGIN Ubuntu & Debian ---------->
 {{% tab-content %}}
-For instructions on how to manually install the Debian package from a file, please see the [downloads page](https://influxdata.com/downloads/).
-
 Debian and Ubuntu users can install the latest stable version of Telegraf using the `apt-get` package manager.
 
 **Ubuntu:** Add the InfluxData repository with the following commands:
@@ -127,6 +125,18 @@ Or if your operating system is using systemd (Ubuntu 15.04+, Debian 8+):
 sudo apt-get update && sudo apt-get install telegraf
 sudo systemctl start telegraf
 ```
+
+**Install from a `.deb` file**:
+
+To manually install the Debian package from a `.deb` file:
+
+1. Download the latest Telegraf `.deb` release
+   from the Telegraf section of the [downloads page](https://influxdata.com/downloads/).
+2. Run the following command (making sure to supply the correct version number for the downloaded file):
+
+   ```sh
+   sudo sudo dpkg -i telegraf_1.<version>_amd64.deb
+   ```
 
 {{% telegraf-verify %}}
 
