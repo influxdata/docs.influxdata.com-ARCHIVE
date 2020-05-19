@@ -6,7 +6,7 @@ menu:
   enterprise_influxdb_1_6:
     name: Step 1 - Install meta nodes
     weight: 10
-    parent: Install for production
+    parent: Install in your environment
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
