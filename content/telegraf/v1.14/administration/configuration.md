@@ -113,8 +113,7 @@ Each plugin will sleep for a random time within jitter before collecting.
 This can be used to avoid many plugins querying things like sysfs at the
 same time, which can have a measurable effect on the system.
 * **flush_interval**: Default data flushing interval for all outputs.
-You should not set this below `interval`.
-Maximum `flush_interval` will be `flush_interval` + `flush_jitter`
+Maximum `flush_interval` is `flush_interval` + `flush_jitter`
 * **flush_jitter**: Jitter the flush interval by a random amount.
 This is primarily to avoid
 large write spikes for users running a large number of Telegraf instances.
