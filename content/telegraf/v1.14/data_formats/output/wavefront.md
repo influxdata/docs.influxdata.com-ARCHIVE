@@ -3,7 +3,7 @@ title: Wavefront output data format
 description: The Wavefront serializer formats and outputs data to the Wavefront Data Format.
 menu:
   telegraf_1_14:
-    name: Wavefront
+    name: Wavefront output
     weight: 60
     parent: Output data formats
 ---
