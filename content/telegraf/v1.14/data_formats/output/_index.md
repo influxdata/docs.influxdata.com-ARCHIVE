@@ -18,6 +18,7 @@ output plugins.
 * [JSON](/telegraf/v1.14/data_formats/output/json)
 * [ServiceNow Metrics](/telegraf/v1.14/data_formats/output/nowmetric)
 * [SplunkMetric](/telegraf/v1.14/data_formats/output/splunkmetric)
+* [Wavefront](/telegraf/v1.14/data_formats/output/wavefront)
 
 You will be able to identify the plugins with support by the presence of a
 `data_format` configuration option, for example, in the File (`file`) output plugin:
