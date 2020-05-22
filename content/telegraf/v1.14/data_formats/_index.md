@@ -10,11 +10,11 @@ This section covers the input data formats and output data formats used in the T
 
 ## [Telegraf input data formats](/telegraf/v1.14/data_formats/input/)
 
-[Telegraf input data formats](/telegraf/v1.14/data_formats/input/) supports parsing input data formats into metrics for InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard.
+[Telegraf input data formats](/telegraf/v1.14/data_formats/input/) (also known as parsers) supports parsing input data formats into metrics for InfluxDB Line Protocol, JSON, Graphite, Value, Nagios, Collectd, and Dropwizard.
 
 ## [Telegraf output data formats](/telegraf/v1.14/data_formats/output/)
 
-[Telegraf output data formats](/telegraf/v1.14/data_formats/output/) can serialize metrics into output data formats for InfluxDB Line Protocol, JSON, and Graphite.
+[Telegraf output data formats](/telegraf/v1.14/data_formats/output/) (also known as serializers) can serialize metrics into output data formats for InfluxDB Line Protocol, JSON, and Graphite, Carbon2, ServiceNow Metrics, Splunk Metrics, and Wavefront.
 
 ## [Telegraf template patterns](/telegraf/v1.14/data_formats/template-patterns/)
 
