@@ -32,7 +32,7 @@ The Wavefront serializer formats and outputs data to the [Wavefront Data Format]
 
 ### Metrics
 
-A Wavefront metric is equivalent to a single field value in a Telegraf measurement. The Wavefront metric name is: <measurement_name>.<field_name>. If a prefix is specified, it's honored. Only boolean and numeric metrics are serialized, other metric types generate an error.
+A Wavefront metric is equivalent to a single field value in a Telegraf measurement. The Wavefront metric name is: `<measurement_name>.<field_name>`. If a prefix is specified, it's honored. Only boolean and numeric metrics are serialized, other metric types generate an error.
 
 ### Example
 
