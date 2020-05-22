@@ -10,7 +10,7 @@ menu:
 
 The `form-urlencoded` data format parses `application/x-www-form-urlencoded` data, commonly used in the query string.
 
-A common use case is to pair it with [`http_listener_v2` input](telegraf/v1.14/plugins/plugin-list/#http_listener) plugin to parse request body or query parameters.
+A common use case is to pair it with [`http_listener_v2` input](/telegraf/v1.14/plugins/plugin-list/#http_listener) plugin to parse request body or query parameters.
 
 ## Configuration
 
