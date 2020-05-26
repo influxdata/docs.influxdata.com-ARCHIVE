@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: Form Urlencoded
     weight: 20
-    parent: Input data formats
+    parent: Input data formats (parsers)
 ---
 
 The `form-urlencoded` data format parses `application/x-www-form-urlencoded` data, commonly used in the query string.

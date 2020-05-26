@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: Carbon2
     weight: 10
-    parent: Output data formats
+    parent: Output data formats (serializers)
 ---
 
 The `carbon2` output data format (serializer) translates the Telegraf metric format to the [Carbon2 format](http://metrics20.org/implementations/).

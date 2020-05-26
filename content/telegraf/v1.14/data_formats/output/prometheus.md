@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: Prometheus
     weight: 20
-    parent: Output data formats
+    parent: Output data formats (serializers)
 ---
 
 The `prometheus` data format converts metrics into the Prometheus text exposition format. When used with the `prometheus` input, the input should use the `metric_version = 2` option to properly round trip metrics.
