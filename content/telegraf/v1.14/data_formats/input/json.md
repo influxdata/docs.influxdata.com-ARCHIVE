@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: JSON input
     weight: 70
-    parent: Input data formats
+    parent: Input data formats (parsers)
 ---
 
 

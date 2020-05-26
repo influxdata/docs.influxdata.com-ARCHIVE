@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: collectd
     weight: 10
-    parent: Input data formats
+    parent: Input data formats (parsers)
 ---
 
 The collectd input data format parses the collectd network binary protocol to create tags for host, instance, type, and type instance.  All collectd values are added as float64 fields.

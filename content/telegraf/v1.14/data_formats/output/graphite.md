@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: Graphite output
     weight: 20
-    parent: Output data formats
+    parent: Output data formats (serializers)
 ---
 
 The Graphite data format is serialized from Telegraf metrics using either the

@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: ServiceNow Metrics
     weight: 50
-    parent: Output data formats
+    parent: Output data formats (serializers)
 ---
 
 The ServiceNow Metrics output data format (serializer) outputs metrics in the [ServiceNow Operational Intelligence format](https://docs.servicenow.com/bundle/london-it-operations-management/page/product/event-management/reference/mid-POST-metrics.html).

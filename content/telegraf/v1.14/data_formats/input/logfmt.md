@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: logfmt
     weight: 80
-    parent: Input data formats
+    parent: Input data formats (parsers)
 ---
 
 The `logfmt` data format parses [logfmt] data into Telegraf metrics.
