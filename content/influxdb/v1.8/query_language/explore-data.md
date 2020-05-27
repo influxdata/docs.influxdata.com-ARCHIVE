@@ -707,7 +707,7 @@ SELECT_clause FROM_clause [WHERE_clause] GROUP BY [* | <tag_key>[,<tag_key]]
 The order of the [tag keys](/influxdb/v1.8/concepts/glossary/#tag-key) is irrelevant.
 
 If the query includes a [`WHERE` clause](#the-where-clause) the `GROUP BY`
-clause must appear after the `WHERE` clause.
+clause must appear after the `WHERE` clause. 
 
 Other supported features: [Regular Expressions](#regular-expressions)
 
