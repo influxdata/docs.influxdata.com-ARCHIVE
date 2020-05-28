@@ -106,9 +106,9 @@ This group includes the following properties:
 * `meta-addr`: Address of the influxdb-meta server.  A string containing its host and port. Host can be an IP Address or a domain name.  When using TLS the host part must contain the name used in the CN part of the server certificate.
 * `meta-use-tls`: Whether to connect to the influxdb-meta server over TLS or not. The default value is `false`.
 * `meta-ca`: Path to the certificate authority file for the InfluxDB Enterprise meta node.
-* `meta-cert` = Path to the (Kapacitor host?) certificate.
-* `meta-key` = Path to the certificate private key.
-* `meta-insecure-skip-verify` = (Is default `false`?) Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
+* `meta-cert`: Path to the PEM encoded certificate file.
+* `meta-key`: Path to the PEM encoded certificate private key.
+* `meta-insecure-skip-verify`: Default is `false`. Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
 
 Authentication configuration is explained in greater detail in
 [Authentication and Authorization](/enterprise_kapacitor/v1.5/administration/auth/).
