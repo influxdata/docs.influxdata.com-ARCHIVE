@@ -277,9 +277,9 @@ in the `[auth]` group.  These include:
 * `meta-addr`: Declares the address of the InfluxDB Enterprise meta node to connect to in order to access the user and permission store.
 * `meta-use-tls`: Declares whether to use TLS when communication with the influxdb-meta node or not.  Default is `false`.
 * `meta-ca`: Path to the certificate authority file for the InfluxDB Enterprise meta node.
-* `meta-cert` = Path to the (Kapacitor host?) certificate.
-* `meta-key` = Path to the certificate private key.
-* `meta-insecure-skip-verify` = (Is default `false`?) Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
+* `meta-cert`: Path to the PEM encoded certificate file.
+* `meta-key`: Path to the PEM encoded certificate private key.
+* `meta-insecure-skip-verify` = Default is `false`. Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
 
 Currently no alternative exists to using InfluxDB Enterprise meta nodes as the backend
 user and privilege store, so an address and port need to be supplied.
