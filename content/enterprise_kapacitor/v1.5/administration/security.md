@@ -74,9 +74,9 @@ Details on the following properties:
 * `meta-addr`: Address to the InfluxDB meta node API endpoint.  Note that if this endpoint is secured using TLS, then the host and domain name portion of this string must match the string specified in the CN field of the certificate.  Otherwise, Kapacitor will reject the certificate, terminate the credential verification transaction, and return `401` to all requests.
 * `meta-use-tls`: Sets up Kapacitor to connect to the InfluxDB Enterprise meta node using TLS/HTTPS.
 * `meta-ca`: Path to the certificate authority file for the InfluxDB Enterprise meta node.
-* `meta-cert` = Path to the (Kapacitor host?) certificate.
-* `meta-key` = Path to the certificate private key.
-* `meta-insecure-skip-verify` = (Is default `false`?) Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
+* `meta-cert`: Path to the PEM encoded certificate file.
+* `meta-key`: Path to the PEM encoded certificate private key.
+* `meta-insecure-skip-verify`: Default is `false`. Set to `true` to use TLS but skip chain and host verification. Must be `true` if using a self-signed certificate.
 
 More detailed information is available in
 [Authentication and authorization](/enterprise_kapacitor/v1.5/administration/auth/).  
