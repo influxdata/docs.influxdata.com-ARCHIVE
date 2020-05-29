@@ -56,4 +56,4 @@ Since many users will only care about their aggregates and not every single metr
 gathered, there is also a `drop_original` argument, which tells Telegraf to only
 emit the aggregates and not the original metrics.
 
-**Note:** Aggregator plugins only aggregate metrics within their periods (`now() - period`). Data with a timestamp earlier than `now() - period` cannot be included. If this is a feature that you need, please comment on this [GitHub issue](https://github.com/influxdata/telegraf/issues/1992).
+**Note:** Aggregator plugins only aggregate metrics within their periods (`now() - period`). Data with a timestamp earlier than `now() - period` cannot be included.
