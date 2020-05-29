@@ -56,7 +56,4 @@ Since many users will only care about their aggregates and not every single metr
 gathered, there is also a `drop_original` argument, which tells Telegraf to only
 emit the aggregates and not the original metrics.
 
-**NOTE** Since aggregator plugins only aggregate metrics within their periods,
-historical data is not supported. In other words, if your metric timestamp is more
-than `now() - period` in the past, it will not be aggregated. If this is a feature
-that you need, please comment on this [GitHub issue](https://github.com/influxdata/telegraf/issues/1992).
+**Note:** By default, when aggregating data, an aggregator plugin does not include historical data (data with a timestamp earlier than `now() - period`) . To aggregate historical data, set `allow_historical` to `true` when [configuring Telegraf](/telegraf/v1.14/administration/configuration/#configuration-file-locations/).
