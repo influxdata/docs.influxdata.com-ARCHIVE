@@ -30,8 +30,6 @@ You may need to replace a node in your InfluxDB Enterprise cluster, for example,
 
 **Data nodes** hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
 
-> **Tip:** If unexpected shard issues occur across data nodes (for example, AE is disabled or causing unexpected results), try [`copy-shard`](/enterprise_influxdb/v1.8/administration/cluster-commands/#copy-shard) to manually replace shards on a node.
-
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 
 ## Scenarios
@@ -342,6 +340,8 @@ ID  Database   Retention Policy  Desired Replicas  Shard Group  Start           
 Within the duration defined by [`anti-entropy.check-interval`](/enterprise_influxdb/v1.7/administration/config-data-nodes#check-interval-10m),
 the AE service will begin copying shards from other shard owners to the new node.
 The time it takes for copying to complete is determined by the number of shards copied and how much data is stored in each.
+
+> **Tip:** If unexpected shard issues occur (for example, when AE is disabled or causing unexpected results), try [`copy-shard`](/enterprise_influxdb/v1.8/administration/cluster-commands/#copy-shard) to manually replace shards on a node.
 
 ### 4. Check the `copy-shard-status`
 
