@@ -32,6 +32,8 @@ They hold information about which data nodes own which shards; information on wh
 
 **Data nodes** hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
 
+> **Tip:** If unexpected shard issues occur across data nodes (for example, AE is disabled or causing unexpected results), try [`copy-shard`](/enterprise_influxdb/v1.8/administration/cluster-commands/#copy-shard) to manually replace shards on a node.
+
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 
 ## Scenarios
