@@ -8,28 +8,40 @@ menu:
     parent: Guides
 ---
 
-## Introduction
+You may need to replace a node in your InfluxDB Enterprise cluster, for example, to update hardware. This guide describes how to replace both meta nodes and data nodes in a cluster:
 
-Nodes in an InfluxDB Enterprise cluster may need to be replaced at some point due to hardware needs, hardware issues, or something else entirely.
-This guide outlines processes for replacing both meta nodes and data nodes in an InfluxDB Enterprise cluster.
+- [Concepts](#concepts)
+- Scenarios:
+  - [Replace a node in a cluster with security enabled](#replace-a-node-in-a-cluster-with-security-enabled)
+  - [Replace a meta node in a functional cluster](#replace-a-meta-node-in-a-functional-cluster)
+  - [Replace an unresponsive meta node](#replace-an-unresponsive-meta-node)
+  - [Replace responsive and unresponsive data nodes in a cluster](#replace-responsive-and-unresponsive-data-nodes-in-a-cluster)
+  - [Reconnect a data node with a failed disk](#reconnect-a-data-node-with-a-failed-disk)
+  - [Replace meta nodes in an InfluxDB Enterprise cluster](#replace-meta-nodes-in-an-influxdb-enterprise-cluster)
+  - [Replace a data node in an InfluxDB Enterprise cluster](#replace-a-data-node-in-an-influxdb-enterprise-cluster)
+- Troubleshooting:
+  - [Cluster commands result in timeout without error](#cluster-commands-result-in-timeout-without-error)
+  - [Check your InfluxDB user permissions](#check-your-influxdb-user-permissions)
+  - [Check the network connection between nodes](#check-the-network-connection-between-nodes)
 
 ## Concepts
-Meta nodes manage and monitor both the uptime of nodes in the cluster as well as distribution of [shards](/influxdb/v1.7/concepts/glossary/#shard) among nodes in the cluster.
-They hold information about which data nodes own which shards; information on which the
-[anti-entropy](/enterprise_influxdb/v1.7/administration/anti-entropy/) (AE) process depends.
 
-Data nodes hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
+**Meta nodes** manage and monitor both the uptime of nodes in the cluster and distribution of [shards](/influxdb/v1.7/concepts/glossary/#shard) among nodes in the cluster. Meta nodes hold information about which data nodes own which shards; information that the [anti-entropy](/enterprise_influxdb/v1.7/administration/anti-entropy/) (AE) process depends on.
+
+**Data nodes** hold raw time-series data and metadata. Data shards are both distributed and replicated across data nodes in the cluster. The AE process runs on data nodes and references the shard information stored in the meta nodes to ensure each data node has the shards they need.
 
 `influxd-ctl` is a CLI included in each meta node and is used to manage your InfluxDB Enterprise cluster.
 
 ## Scenarios
 
-### Replacing nodes in clusters with security enabled
+### Replace a node in a cluster with security enabled
+
 Many InfluxDB Enterprise clusters are configured with security enabled, forcing secure TLS encryption between all nodes in the cluster.
 Both `influxd-ctl` and `curl`, the command line tools used when replacing nodes, have options that facilitate the use of TLS.
 
 #### `influxd-ctl -bind-tls`
-In order to manage your cluster over TLS, pass the `-bind-tls` flag with any `influxd-ctl` commmand.
+
+To manage your cluster over TLS, pass the `-bind-tls` flag with any `influxd-ctl` command.
 
 > If using a self-signed certificate, pass the `-k` flag to skip certificate verification.
 
@@ -55,19 +67,19 @@ curl [-k, --insecure] <url>
 curl -k https://localhost:8091/status
 ```
 
-### Replacing meta nodes in a functional cluster
+### Replace a meta node in a functional cluster
 
-If all meta nodes in the cluster are fully functional, simply follow the steps for [replacing meta nodes](#replacing-meta-nodes-in-an-influxdb-enterprise-cluster).
+If all meta nodes in the cluster are fully functional, complete the following steps to [replace a meta node](#replace-meta-nodes-in-an-influxdb-enterprise-cluster).
 
-### Replacing an unresponsive meta node
+### Replace an unresponsive meta node
 
-If replacing a meta node that is either unreachable or unrecoverable, you need to forcefully remove it from the meta cluster. Instructions for forcefully removing meta nodes are provided in the [step 2.2](#2-2-remove-the-non-leader-meta-node) of the [replacing meta nodes](#replacing-meta-nodes-in-an-influxdb-enterprise-cluster) process.
+If replacing a meta node that is either unreachable or unrecoverable, you must forcefully remove the node from the meta cluster. See [step 2.2](#2-2-remove-the-non-leader-meta-node) of the [replace meta nodes](#replace-meta-nodes-in-an-influxdb-enterprise-cluster) process.
 
-### Replacing responsive and unresponsive data nodes in a cluster
+### Replace responsive and unresponsive data nodes in a cluster
 
 The process of replacing both responsive and unresponsive data nodes is the same. Simply follow the instructions for [replacing data nodes](#replacing-data-nodes-in-an-influxdb-enterprise-cluster).
 
-### Reconnecting a data node with a failed disk
+### Reconnect a data node with a failed disk
 
 A disk drive failing is never a good thing, but it does happen, and when it does,
 all shards on that node are lost.
@@ -87,12 +99,11 @@ influxd-ctl update-data <data-node-tcp-bind-address> <data-node-tcp-bind-address
 influxd-ctl update-data enterprise-data-01:8088 enterprise-data-01:8088
 ```
 
-This will connect the `influxd` process running on the newly replaced disk to the cluster.
-The AE process will detect the missing shards and begin to sync data from other
+This connects the `influxd` process running on the newly replaced disk to the cluster.
+The AE process detects the missing shards and begins to sync data from other
 shards in the same shard group.
 
-
-## Replacing meta nodes in an InfluxDB Enterprise cluster
+## Replace meta nodes in an InfluxDB Enterprise cluster
 
 [Meta nodes](/enterprise_influxdb/v1.7/concepts/clustering/#meta-nodes) together form a [Raft](https://raft.github.io/) cluster in which nodes elect a leader through consensus vote.
 The leader oversees the management of the meta cluster, so it is important to replace non-leader nodes before the leader node.
@@ -162,7 +173,7 @@ influxd-ctl remove-meta enterprise-meta-02:8091
 
 > **For unresponsive or unrecoverable meta nodes:**
 
->If the meta process is not running on the node you are trying to remove or the node is neither reachable nor recoverable, use the `-force` flag.
+> If the meta process is not running on the node you are trying to remove or the node is neither reachable nor recoverable, use the `-force` flag.
 When forcefully removing a meta node, you must also pass the `-tcpAddr` flag with the TCP and HTTP bind addresses of the node you are removing.
 
 ```bash
@@ -258,7 +269,7 @@ curl localhost:8091/status | jq
 Remove the old leader node and replace it by following steps [2.1-2.4](#2-1-provision-a-new-meta-node).
 The minimum number of meta nodes you should have in your cluster is 3.
 
-## Replacing data nodes in an InfluxDB Enterprise cluster
+## Replace a data node in an InfluxDB Enterprise cluster
 
 [Data nodes](/enterprise_influxdb/v1.7/concepts/clustering/#data-nodes) house all raw time series data and metadata.
 The process of replacing data nodes is as follows:
@@ -361,7 +372,7 @@ add-data: operation timed out with error:
 
 #### Check your InfluxDB user permissions
 
-In order to add or remove nodes to or from a cluster, your user must have `AddRemoveNode` permissions.
+To add or remove nodes to or from a cluster, your user must have `AddRemoveNode` permissions.
 Attempting to manage cluster nodes without the appropriate permissions results
 in a timeout with no accompanying error.
 
