@@ -10,19 +10,19 @@ menu:
 
 You may need to replace a node in your InfluxDB Enterprise cluster, for example, to update hardware. This guide describes how to replace both meta nodes and data nodes in a cluster:
 
-- Concepts
+- [Concepts](#concepts)
 - Scenarios:
-  - Replace a node in a cluster with security enabled
-  - Replace a meta node in a functional cluster
-  - Replace an unresponsive meta node
-  - Replace responsive and unresponsive data nodes in a cluster
-  - Reconnect a data node with a failed disk
-  - Replace meta nodes in an InfluxDB Enterprise cluster
-  - Replace a data node in an InfluxDB Enterprise cluster
+  - [Replace a node in a cluster with security enabled](#replace-a-node-in-a-cluster-with-security-enabled)
+  - [Replace a meta node in a functional cluster](#replace-a-meta-node-in-a-functional-cluster)
+  - [Replace an unresponsive meta node](#replace-an-unresponsive-meta-node)
+  - [Replace responsive and unresponsive data nodes in a cluster](#replace-responsive-and-unresponsive-data-nodes-in-a-cluster)
+  - [Reconnect a data node with a failed disk](#reconnect-a-data-node-with-a-failed-disk)
+  - [Replace meta nodes in an InfluxDB Enterprise cluster](#replace-meta-nodes-in-an-influxdb-enterprise-cluster)
+  - [Replace a data node in an InfluxDB Enterprise cluster](#replace-a-data-node-in-an-influxdb-enterprise-cluster)
 - Troubleshooting:
-  - Cluster commands result in timeout without error
-  - Check your InfluxDB user permissions
-  - Check the network connection between nodes
+  - [Cluster commands result in timeout without error](#cluster-commands-result-in-timeout-without-error)
+  - [Check your InfluxDB user permissions](#check-your-influxdb-user-permissions)
+  - [Check the network connection between nodes](#check-the-network-connection-between-nodes)
 
 ## Concepts
 
