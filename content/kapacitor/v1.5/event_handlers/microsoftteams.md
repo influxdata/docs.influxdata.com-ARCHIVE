@@ -8,27 +8,41 @@ menu:
     parent: event-handlers
 ---
 
-[Microsoft Teams](https://www.microsoft.com/en-us/microsoft-365/microsoft-teams/group-chat-software) is a widely used "digital workspace" that facilitates communication among team members. Complete the following steps to configure Kapacitor to send alert messages to one or more Microsoft Teams channels:
+[Microsoft Teams](https://www.microsoft.com/en-us/microsoft-365/microsoft-teams/group-chat-software) is a widely used "digital workspace" that facilitates communication among team members. To configure Kapacitor to send alerts to one or more Microsoft Teams channels, do the following:
 
-## Configure Teams
+- [Set up Teams event handler](#set-up-teams-event-handler)
+  - [Configuration options](#configuration-options)
+  - [Handler file options](#handler-file-options)
+  - [Example Teams handler file](#example-teams-handler-file)
+- [Send an alert to Teams](#send-an-alert-to-teams)
 
-1. Open your `kapacitor.conf` fileSet configuration options (and see default [option](#options) values) for the Microsoft Teams event
-handler in your `kapacitor.conf` file. Below is an example configuration:
+## Set up Teams event handler
+
+1. Log in to Teams, and then [create a new incoming webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/connectors#setting-up-a-custom-incoming-webhook) for a Teams channel.
+2. In your `kapacitor.conf` file, add a `[teams]` section with [configuration options](#Teams-configuration-options) for the Microsoft Teams event
+handler, including the incoming webhook URL as the `channelurl`. For example:
 
 ```toml
-[[teams]]
+[teams]
   enabled = true
-  channelurl =  "https://outlook.office.com/webhook/..."
+  default = true
+  channel-url =  "https://outlook.office.com/webhook/..."
   global = true
   state-changes-only = true
 ```
 
-> Multiple Microsoft Team clients may be configured by repeating `[teams]` sections.
+3. To add multiple Microsoft Teams clients, repeat steps 1-2 to obtain a new web hook and add another `[teams]` sections in `kapacitor.conf`.
 The `channelurl` acts as a unique identifier for each configured Teams client.
+
+### Configuration options
 
 #### `enabled`
 
 Set to `true` to enable the Microsoft Teams event handler.
+
+#### `default`
+
+If there are multiple `teams` configurations, identify one as the default.
 
 #### `channelurl`
 
@@ -40,31 +54,21 @@ Set to true to send all alerts to Teams without explicitly specifying Microsoft 
 
 #### `state-changes-only`
 
-Sets to true to send alerts for state-changes-only.
+Set to true to send alerts for state-changes-only.
 _Only applies if `global` is `true`._
 
-## Options
+### Handler file options
 
-The following Microsoft Teams event handler options can be set in a
-[handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
+The following options can be set in a Microsoft Teams event [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.teams()` in a TICKscript.
 
 | Name       | Type   | Description                                                                                                                   |
 | ----       | ----   | -----------                                                                                                                   |
-| team       | string | Specifies which Team configuration to use when there are multiple.                                                            |
+| team       | string | Specifies which Team configuration to use when there are multiple configurations.                                             |
 | channel    | string | Teams channel to post messages to. If empty uses the channel from the configuration.                                          |
-| username   | string | Username of the Slack bot. If empty uses the username from the configuration.                                                 |
 
-## Send an alert to Teams
+### Example Teams handler file
 
-```js
-Example:
-|alert()
-.teams()
- .channelURL('https://outlook.office.com/webhook/...')
-```
-
-### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
@@ -72,32 +76,33 @@ kind: teams
 options:
   team: 'teams.microsoft.com/team/'
   channel: '#alerts'
-  username: 'kapacitor'
 ```
 
-### Example: TICKscript
+For information about using handler files, see [Add and use event handlers](/kapacitor/v1.5/event_handlers/#create-a-topic-handler-with-a-handler-file).
+
+## Example Teams alerts
+
+#### Send alert to Teams channel in configuration file
+
 ```js
-|alert()
-  // ...
-  .teams()
-    .team('teams.microsoft.com/team/')
-    .channel('#alerts')
-    .username('kapacitor')
+  stream
+    |alert()
+       .teams()
 ```
 
-## Set up Teams
+#### Send alert to Teams channel with webhook (overrides configuration file)
 
-To allow Kapacitor to send alerts to Teams, complete the following steps:
+```js
+  stream
+    |alert()
+       .teams()
+       .channelURL('https://outlook.office.com/webhook/...')
+```
 
-1. Log in to Teams, and then [create a new incoming webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/connectors#setting-up-a-custom-incoming-webhook) for a Teams channel.
-2. Add the incoming webhook URL as the `url` in the `[teams]` configuration section of your `kapacitor.conf`.
+Use the `.teams()` attribute in your TICKscripts to:
 
-## Use the Microsoft Teams event handler
-
-With one or more Teams event handlers enabled and configured in your
-`kapacitor.conf`, use the `.teams()` attribute in your TICKscripts to send
-alerts to Teams or define a Teams handler that subscribes to a topic and sends
-published alerts to Teams.
+- Send alerts to Teams
+- Define a Teams handler that subscribes to a topic and sends published alerts to Teams
 
 > To avoid posting a message every alert interval, use
 > [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
