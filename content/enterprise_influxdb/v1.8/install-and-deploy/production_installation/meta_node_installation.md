@@ -63,17 +63,18 @@ setting in the meta node configuration file.
 
 <br>
 # Meta node setup
-## Step 1: Modify the `/etc/hosts` File
+## Step 1: Add appropriate DNS entries for each of your servers
 
-Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
-file (the hostnames below are representative).
+Ensure that your servers' hostnames and IP addresses are added to your network's DNS environment.
+The addition of DNS entries and IP assignment is usually site and policy specific; contact your DNS administrator for assistance as necessary.
+Ultimately, use entries similar to the following (hostnames and domain IP addresses are representative).
 
+| Record Type |               Hostname                |                IP |
+|:------------|:-------------------------------------:|------------------:|
+| A           | ```enterprise-meta-01.mydomain.com``` | ```<Meta_1_IP>``` |
+| A           | ```enterprise-meta-02.mydomain.com``` | ```<Meta_2_IP>``` |
+| A           | ```enterprise-meta-03.mydomain.com``` | ```<Meta_3_IP>``` |
 
-```
-<Meta_1_IP> enterprise-meta-01
-<Meta_2_IP> enterprise-meta-02
-<Meta_3_IP> enterprise-meta-03
-```
 
 > **Verification steps:**
 >
@@ -83,10 +84,10 @@ servers are resolvable. Here is an example set of shell commands using `ping`:
     ping -qc 1 enterprise-meta-01
     ping -qc 1 enterprise-meta-02
     ping -qc 1 enterprise-meta-03
+>
 
-
-If there are any connectivity issues resolve them before proceeding with the
-installation.
+We highly recommend that each server be able to resolve the IP from the hostname alone as shown here.
+Resolve any connectivity issues before proceeding with the installation.
 A healthy cluster requires that every meta node can communicate with every other
 meta node.
 
