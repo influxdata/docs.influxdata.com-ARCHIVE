@@ -8,12 +8,11 @@ menu:
     parent: event-handlers
 ---
 
-[Microsoft Teams](https://www.microsoft.com/en-us/microsoft-365/microsoft-teams/group-chat-software) is a widely used "digital workspace" that facilitates communication among team members.
-Configure Kapacitor to send alert messages to a Microsoft Teams channel.
+[Microsoft Teams](https://www.microsoft.com/en-us/microsoft-365/microsoft-teams/group-chat-software) is a widely used "digital workspace" that facilitates communication among team members. Complete the following steps to configure Kapacitor to send alert messages to one or more Microsoft Teams channels:
 
-## Configuration
+## Configure Teams
 
-Set configuration options (and see default [option](#options) values) for the Microsoft Teams event
+1. Open your `kapacitor.conf` fileSet configuration options (and see default [option](#options) values) for the Microsoft Teams event
 handler in your `kapacitor.conf` file. Below is an example configuration:
 
 ```toml
@@ -22,13 +21,9 @@ handler in your `kapacitor.conf` file. Below is an example configuration:
   channelurl =  "https://outlook.office.com/webhook/..."
   global = true
   state-changes-only = true
-  ssl-ca = "/path/to/ca.crt"
-  ssl-cert = "/path/to/cert.crt"
-  ssl-key = "/path/to/private-key.key"
-  insecure-skip-verify = false
 ```
 
-> Multiple Microsoft Team clients may be configured by repeating `[[teams]]` sections.
+> Multiple Microsoft Team clients may be configured by repeating `[teams]` sections.
 The `channelurl` acts as a unique identifier for each configured Teams client.
 
 #### `enabled`
@@ -37,7 +32,7 @@ Set to `true` to enable the Microsoft Teams event handler.
 
 #### `channelurl`
 
-Set your Microsoft Team webhook URL to send messages and alerts.
+Specify the Microsoft Team webhook URL to send messages and alerts.
 
 #### `global`
 
@@ -48,23 +43,6 @@ Set to true to send all alerts to Teams without explicitly specifying Microsoft 
 Sets to true to send alerts for state-changes-only.
 _Only applies if `global` is `true`._
 
-#### `ssl-ca`
-
-Path to certificate authority file.
-
-#### `ssl-cert`
-
-Path to host certificate file.
-
-#### `ssl-key`
-
-Path to certificate private key file.
-
-#### `insecure-skip-verify`
-
-Use SSL but skip chain and host verification.
-_This is necessary if using a self-signed certificate._
-
 ## Options
 
 The following Microsoft Teams event handler options can be set in a
@@ -73,81 +51,64 @@ The following Microsoft Teams event handler options can be set in a
 
 | Name       | Type   | Description                                                                                                                   |
 | ----       | ----   | -----------                                                                                                                   |
-| workspace  | string | Specifies which Slack configuration to use when there are multiple.                                                           |
-| channel    | string | Slack channel in which to post messages. If empty uses the channel from the configuration.                                    |
+| team       | string | Specifies which Team configuration to use when there are multiple.                                                            |
+| channel    | string | Teams channel to post messages to. If empty uses the channel from the configuration.                                          |
 | username   | string | Username of the Slack bot. If empty uses the username from the configuration.                                                 |
-| icon-emoji | string | IconEmoji is an emoji name surrounded in ':' characters. The emoji image will replace the normal user icon for the slack bot. |
+
+## Send an alert to Teams
+
+```js
+Example:
+|alert()
+.teams()
+ .channelURL('https://outlook.office.com/webhook/...')
+```
 
 ### Example: handler file
 ```yaml
 id: handler-id
 topic: topic-name
-kind: slack
+kind: teams
 options:
-  workspace: 'workspace.slack.com'
+  team: 'teams.microsoft.com/team/'
   channel: '#alerts'
   username: 'kapacitor'
-  icon-emoji: ':smile:'
 ```
 
 ### Example: TICKscript
 ```js
 |alert()
   // ...
-  .slack()
-    .workspace('workspace.slack.com')
+  .teams()
+    .team('teams.microsoft.com/team/')
     .channel('#alerts')
     .username('kapacitor')
-    .iconEmoji(':smile:')
 ```
 
-## Slack Setup
-To allow Kapacitor to send alerts to Slack, login to your Slack workspace and
-[create a new incoming webhook](https://slack.com/services/new/incoming-webhook )
-for Kapacitor. Add the generated webhook URL as the `url` in the `[[slack]]`
-configuration section of your `kapacitor.conf`.
+## Set up Teams
 
-## Using the Slack event handler
-With one or more Slack event handlers enabled and configured in your
-`kapacitor.conf`, use the `.slack()` attribute in your TICKscripts to send
-alerts to Slack or define a Slack handler that subscribes to a topic and sends
-published alerts to Slack.
+To allow Kapacitor to send alerts to Teams, complete the following steps:
+
+1. Log in to Teams, and then [create a new incoming webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/connectors#setting-up-a-custom-incoming-webhook) for a Teams channel.
+2. Add the incoming webhook URL as the `url` in the `[teams]` configuration section of your `kapacitor.conf`.
+
+## Use the Microsoft Teams event handler
+
+With one or more Teams event handlers enabled and configured in your
+`kapacitor.conf`, use the `.teams()` attribute in your TICKscripts to send
+alerts to Teams or define a Teams handler that subscribes to a topic and sends
+published alerts to Teams.
 
 > To avoid posting a message every alert interval, use
 > [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly)
-> so only events where the alert changed state are sent to Slack.
+> so only events where the alert changed state are sent to Teams.
 
-The examples below use the following Slack configurations defined in the `kapacitor.conf`:
+### Send alerts to Teams from a TICKscript
 
-_**Slack settings in kapacitor.conf**_
-```toml
-[[slack]]
-  enabled = true
-  default = true
-  workspace = "alerts"
-  url = "https://hooks.slack.com/xxxx/xxxx/example1"
-  channel = "#alerts"
-  username = "AlertBot"
-  global = false
-  state-changes-only = false
+The following TICKscript uses the `.teams()` event handler to send the message,
+"Hey, check your CPU", to the `#alerts` Teams channel when idle CPU usage drops below 20%.
 
-[[slack]]
-  enabled = true
-  default = false
-  workspace = "error-reports"
-  url = "https://hooks.slack.com/xxxx/xxxx/example2"
-  channel = "#error-reports"
-  username = "StatsBot"
-  global = false
-  state-changes-only = false
-```
-
-### Send alerts to Slack from a TICKscript
-The following TICKscript uses the `.slack()` event handler to send the message,
-"Hey, check your CPU", to the `#alerts` Slack channel whenever idle CPU usage
-drops below 20%.
-
-_**slack-cpu-alert.tick**_  
+_**teams-cpu-alert.tick**_  
 ```js
 stream
   |from()
@@ -156,16 +117,15 @@ stream
     .warn(lambda: "usage_idle" < 20)
     .stateChangesOnly()
     .message('Hey, check your CPU')
-    .slack()   
-      .iconEmoji(':exclamation:')  
+    .teams()
 ```
 
-### Send alerts to Slack from a defined handler
+### Send alerts to Teams from a defined handler
 
-The following setup sends an alert to the `cpu` topic with the message,
+The following example sends an alert to the `cpu` topic with the message,
 "Hey, check your CPU".
 A Slack handler is added that subscribes to the `cpu` topic and publishes all
-alert messages to Slack.
+alert messages to Teams.
 
 Create a TICKscript that publishes alert messages to a topic.
 The TICKscript below sends an critical alert message to the `cpu` topic any time
@@ -211,7 +171,8 @@ Add the handler:
 kapacitor define-topic-handler slack_cpu_handler.yaml
 ```
 
-### Using multiple Slack configurations
+### Use multiple Slack configurations
+
 Kapacitor can use multiple Slack integrations, each identified by the value of
 the [`workspace`](#workspace) config. The TICKscript below illustrates how
 multiple Slack integrations can be used.
