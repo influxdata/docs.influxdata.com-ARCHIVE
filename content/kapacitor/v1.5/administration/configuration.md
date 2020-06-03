@@ -39,9 +39,7 @@ Four primary mechanisms for configuring different aspects of the Kapacitor servi
 
 ## Startup
 
-The Kapacitor daemon includes command line options that affect how it loads and
-runs.
-These include:
+To specify how to load and run the Kapacitor daemon, set the following command line options:
 
 * `-config`: Path to the configuration file.
 * `-hostname`: Hostname that will override the hostname specified in the configuration file.
@@ -53,31 +51,29 @@ These include:
 
 On POSIX systems, when the Kapacitor daemon starts as part of `systemd`, environment variables can be set in the file `/etc/default/kapacitor`.
 
-- Start Kapacitor as part of `systemd`:
+1. To start Kapacitor as part of `systemd`, do one of the following:
 
-  ```sh
-  $ sudo systemctl enable kapacitor
-  ```
+   -  ```sh
+    $ sudo systemctl enable kapacitor
+    ```
 
-- Start Kapacitor as part of `systemd` **and** start Kapacitor immediately:
+   -  ```sh
+    $ sudo systemctl enable kapacitor —-now
+    ```
 
-  ```sh
-  sudo systemctl enable kapacitor —-now
-  ```
+2. Define where the PID file and log file will be written:
 
-- Define where the PID file and log file will be written:
+   a. Add a line like the following into the `/etc/default/kapacitor` file:
 
-  1. Add a line like the following into the `/etc/default/kapacitor` file:
+    ```sh
+    KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor/logs/kapacitor.log"
+    ```
 
-  ```sh
-  KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor/logs/kapacitor.log"
-  ```
+    b. Restart Kapacitor:
 
-  2. Restart Kapacitor:
-
-  ```sh
-  sudo systemctl restart kapacitor
-  ```
+    ```sh
+    sudo systemctl restart kapacitor
+    ```
 
 The environment variable `KAPACITOR_OPTS` is one of a few special variables used
 by Kapacitor at startup.
@@ -96,7 +92,7 @@ kapacitord config
 A sample configuration file is also available in the Kapacitor code base.
 The most current version can be accessed on [github](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf).
 
-To get current configuration settings, you can use the Kapacitor HTTP API to get configuration values for settings that can be changed while the Kapacitor service is running. See [Retrieving the current configuration](/kapacitor/v1.5/working/api/#retrieving-the-current-configuration).
+Use the Kapacitor HTTP API to get current configuration settings and values that can be changed while the Kapacitor service is running. See [Retrieving the current configuration](/kapacitor/v1.5/working/api/#retrieving-the-current-configuration).
 
 ### TOML
 
@@ -145,9 +141,8 @@ including specific alert handlers and mechanisms for service discovery and data 
 
 ##### HTTP
 
-The Kapacitor service requires an HTTP connection and important
-HTTP properties,
-such as a bind address and the path to an HTTPS certificate,
+The Kapacitor service requires an HTTP connection. Important
+HTTP properties, such as a bind address and the path to an HTTPS certificate,
 are defined in the `[http]` table.
 
 **Example: The HTTP grouping**
