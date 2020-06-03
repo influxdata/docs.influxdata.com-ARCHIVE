@@ -63,17 +63,17 @@ On POSIX systems, when the Kapacitor daemon starts as part of `systemd`, environ
 
 2. Define where the PID file and log file will be written:
 
-   a. Add a line like the following into the `/etc/default/kapacitor` file:
+    a. Add a line like the following into the `/etc/default/kapacitor` file:
 
-    ```sh
-    KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor/logs/kapacitor.log"
-    ```
+       ```sh
+       KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor/logs/kapacitor.log"
+      ```
 
-    b. Restart Kapacitor:
+     b. Restart Kapacitor:
 
-    ```sh
-    sudo systemctl restart kapacitor
-    ```
+       ```sh
+       sudo systemctl restart kapacitor
+       ```
 
 The environment variable `KAPACITOR_OPTS` is one of a few special variables used
 by Kapacitor at startup.
