@@ -59,15 +59,15 @@ Functionality varies between client libraries. Refer to client libraries on GitH
 - [influxdb-client-ruby](https://github.com/influxdata/influxdb-client-ruby)
    - Maintained by [InfluxData](https://github.com/influxdata)
 
-## Use a client library
+## Install a client library
 
-Use an InfluxDB client library to integrate InfluxDB into your scripts and applications.
+To install a client library, refer to the client library documentation for detail. For example, to install the Python client library:
 
-1. Install the client library. Refer to the client library documentation for detail. For example, to install the Python client library:
+1. Install the client library.
 
-  ```sh
-      pip install influxd-client
-  ```
+   ```sh
+         pip install influxd-client
+   ```
 
 2. Ensure that InfluxDB is running. If running InfluxDB locally, visit http://localhost:8086. (If using InfluxDB Cloud, visit the URL of your InfluxDB Cloud UI.)
 
@@ -88,7 +88,7 @@ Use an InfluxDB client library to integrate InfluxDB into your scripts and appli
       token=token,
    ```
 
-  >**Note:** The database (and retention policy, if applicable) are converted to a [bucket](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket) data store compatible with InfluxDB 2.0.
+      >**Note:** The database (and retention policy, if applicable) are converted to a [bucket](https://v2. docs.influxdata.com/v2.0/reference/glossary/#bucket) data store compatible with InfluxDB 2.0.
   
 5. Instantiate a writer object using the client object and the write_api method. Use the `write_api` method to configure the writer object.
 
