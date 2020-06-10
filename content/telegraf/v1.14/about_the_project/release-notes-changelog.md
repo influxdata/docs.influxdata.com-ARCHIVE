@@ -50,7 +50,10 @@ Breaking changes are updates that may cause Telegraf plugins to fail or function
 - **Microsoft SQL Server** (`sqlserver`) input plugin: Renamed the `sqlserver_azurestats` measurement to `sqlserver_azure_db_resource_stats` to resolve an issue where numeric metrics were previously being reported incorrectly as strings.
 - **Date** (`date`) processor plugin: Now uses the UTC timezone when creating its tag. Previously, the local time was used.
 
-Support for SSL v3.0 is deprecated in this release (disabled prior to Go v1.13). Telegraf now uses Go's TLS library.
+{{% note %}}
+Support for SSL v3.0 is deprecated in this release.
+Telegraf now uses the [Go TLS library](https://golang.org/pkg/crypto/tls/).
+{{% /note %}}
 
 ### New plugins
 
