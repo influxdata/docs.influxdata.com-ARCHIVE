@@ -8,6 +8,24 @@ menu:
     parent: About the project
 ---
 
+## v1.14.4 [2020-06-09]
+
+### Bug fixes
+
+- Fix the `cannot insert the value NULL` error with the `PerformanceCounters` query in the `sqlServer` input plugin.
+- Fix a typo in the naming of `the gc_cpu_fraction` field in the `influxdb` input plugin.
+- Fix a numeric to bool conversion in the `converter` processor.
+- Fix an issue with the `influx` stream parser blocking when the data is in buffer.
+
+## v1.14.3 [2020-05-19]
+
+### Bug fixes
+
+- Use same timestamp for all objects in arrays in the `json` parser.
+- Handle multiple metrics with the same timestamp in `dedup` processor.
+- Fix reconnection of timed out HTTP2 connections `influxdb` outputs.
+- Fix negative value parsing in `impi_sensor` input.
+
 ## v1.14.2 [2020-04-28]
 
 ### Bug fixes
