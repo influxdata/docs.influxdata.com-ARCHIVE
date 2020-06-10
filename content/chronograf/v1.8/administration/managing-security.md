@@ -346,7 +346,7 @@ export HEROKU_ORGS=hill-valley-preservation-sociey,the-pinheads
 3. After completing the application provisioning within Azure AD, you can now complete the configuration with Chronograf.
    Using the metadata from your Azure AD instance, proceed to export the following environment variables:
 
-    Set the following environment variables in `/etc/default.chronograf`:
+    Set the following environment variables in `/etc/default/chronograf`:
 
     ```
     GENERIC_TOKEN_URL=https://login.microsoftonline.com/<<TENANT-ID>>/oauth2/token
@@ -402,7 +402,7 @@ The following environment variables (and corresponding command line options) are
 
 See [Enabling OpenID Connect with AD FS 2016](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/enabling-openid-connect-with-ad-fs) for a walk through of the server configuration.
 
-Exports for Chronograf (e.g. in `/etc/default.chronograf`):
+Exports for Chronograf (e.g. in `/etc/default/chronograf`):
 
 ```sh
 PUBLIC_URL="https://example.com:8888"
