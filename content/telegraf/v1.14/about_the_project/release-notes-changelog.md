@@ -11,10 +11,10 @@ menu:
 
 ### Bug fixes
 
-- Fixed the `cannot insert the value NULL` error with the `PerformanceCounters` query in the `sqlServer` input plugin.
-- Fixed a typo in the naming of `the gc_cpu_fraction` field in the `influxdb` input plugin.
-- Fixed a numeric to bool conversion in the `converter` processor.
-- Fixed an issue with the `influx` stream parser blocking when the data is in buffer.
+- Fix the `cannot insert the value NULL` error with the `PerformanceCounters` query in the `sqlServer` input plugin.
+- Fix a typo in the naming of `the gc_cpu_fraction` field in the `influxdb` input plugin.
+- Fix a numeric to bool conversion in the `converter` processor.
+- Fix an issue with the `influx` stream parser blocking when the data is in buffer.
 
 ## v1.14.3 [2020-05-19]
 
