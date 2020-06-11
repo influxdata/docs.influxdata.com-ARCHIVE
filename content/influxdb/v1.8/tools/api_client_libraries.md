@@ -61,7 +61,7 @@ Functionality varies between client libraries. Refer to client libraries on GitH
 
 ## Install and use a client library
 
-To install and use the Python client library, follow the [instructions below](#install-and-use-python-client-library). To install and use other client libraries, refer to the client library documentation for detail.
+To install and use the Python client library, follow the [instructions below](#install-and-use-the-python-client-library). To install and use other client libraries, refer to the client library documentation for detail.
 
 ### Install and use the Python client library
 
