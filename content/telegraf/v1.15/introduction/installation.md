@@ -324,6 +324,16 @@ Download the Telegraf ZIP archive for Windows from the [InfluxData downloads pag
 
 Extract the contents of the ZIP archive to `C:\Program Files\InfluxData\Telegraf`.
 
+##### Verify the integrity of the downloaded Telegraf binary (optional)
+
+To obtain the SHA256 hash for the Windows Telegraf download, use the following PowerShell command:
+
+```powershell
+CertUtil -hashfile <path to your download>/telegraf-1.<version>_windows_amd64.zip SHA256
+```
+
+Compare the output from this command to the hash listed on the downloads page to ensure the integrity of the download.
+
 ### Configure an input plugin
 
 The Telegraf ZIP archive contains a default configuration file (`telegraf.conf`).
