@@ -42,9 +42,9 @@ Flux evaluates statements in order and stops evaluating once a condition matches
 For example, given the following statement:
 
 ```js
-if r._value >= 95.0000001 and r._value <= 100.0 then "critical"
-else if r._value >= 85.0000001 and r._value <= 95.0 then "warning"
-else if r._value >= 70.0000001 and r._value <= 85.0 then "high"
+if r._value > 95.0000001 and r._value <= 100.0 then "critical"
+else if r._value > 85.0000001 and r._value <= 95.0 then "warning"
+else if r._value > 70.0000001 and r._value <= 85.0 then "high"
 else "normal"
 ```
 
