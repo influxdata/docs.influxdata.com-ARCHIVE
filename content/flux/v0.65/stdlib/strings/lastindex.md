@@ -20,7 +20,7 @@ _**Output data type:** Integer_
 ```js
 import "strings"
 
-strings.lastIndex(v: "go gopher", t: "go")
+strings.lastIndex(v: "go gopher", substr: "go")
 
 // returns 3
 ```
