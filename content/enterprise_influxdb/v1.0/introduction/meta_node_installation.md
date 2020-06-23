@@ -95,16 +95,16 @@ Entering the IP or hostname alone will lead to errors.
 
 > **Note:** `license-key` and `license-path` are mutually exclusive and one must remain set to the empty string.
 
-```
+```toml
 reporting-disabled = false
 bind-address = ""
-hostname = "<enterprise-meta-0x>" #✨
+hostname = "<enterprise-meta-0x>" # Enter the full hostname of the meta node
 
 [enterprise]
- registration-enabled = true #✨
- registration-server-url = "http://<web-console-server-IP>:3000" #✨
- license-key = "<your_license_key>" #✨ mutually exclusive with license-path
- license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+ registration-enabled = true # Set to 'true'
+ registration-server-url = "http://<web-console-server-IP>:3000" # Web console server hostname
+ license-key = "<your_license_key>" # Mutually exclusive with license-path
+ license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 ```
 
 ### 3. Start the meta node

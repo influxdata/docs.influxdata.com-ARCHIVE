@@ -34,7 +34,7 @@ The consensus service ensures consistency across the cluster for node membership
 #### Configuration:
 ```
 [meta]
-  enabled = true #✨
+  enabled = true 
   ...
   bind-address = "<IP>:8088"
   http-bind-address = "<IP>:8091"
@@ -42,7 +42,7 @@ The consensus service ensures consistency across the cluster for node membership
 ...
 
 [data]
-  enabled = false #✨
+  enabled = false 
 
 [http]
   ...
@@ -57,7 +57,7 @@ The data service stores the actual time series data and responds to queries abou
 #### Configuration:
 ```
 [meta]
-  enabled = false #✨
+  enabled = false 
   ...
   bind-address = "<IP>:8088"
   http-bind-address = "<IP>:8091"
@@ -65,7 +65,7 @@ The data service stores the actual time series data and responds to queries abou
 ...
 
 [data]
-  enabled = true #✨
+  enabled = true 
 
 [http]
   ...
@@ -79,7 +79,7 @@ Hybrid nodes run both the consensus and data services.
 #### Configuration:
 ```
 [meta]
-  enabled = true #✨
+  enabled = true 
   ...
   bind-address = "<IP>:8088"
   http-bind-address = "<IP>:8091"
@@ -87,7 +87,7 @@ Hybrid nodes run both the consensus and data services.
 ...
 
 [data]
-  enabled = true #✨
+  enabled = true 
 
 [http]
   ...

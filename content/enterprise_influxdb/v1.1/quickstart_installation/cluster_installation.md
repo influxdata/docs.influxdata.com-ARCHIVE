@@ -139,23 +139,23 @@ You must fully specify the protocol, IP or hostname, and port.
 Entering the IP or hostname alone will lead to errors.
 * `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
-```
+```toml
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<quickstart-cluster-0x>" #✨
+hostname="<quickstart-cluster-0x>"
 
 [enterprise]
   # Must be set to true to use the Enterprise Web UI
-  registration-enabled = true #✨
+  registration-enabled = true
 
   # Must include the protocol (http://)
-  registration-server-url = "http://<web-console-server-IP>:3000" #✨
+  registration-server-url = "http://<web-console-server-IP>:3000"
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 ```
 
 ### III. Start the Meta Service
@@ -236,11 +236,11 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 
 `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
-```
+```toml
 # Change this option to true to disable reporting.
 # reporting-disabled = false
 # bind-address = ":8088"
-hostname="<quickstart-cluster-0x>" #✨
+hostname="<quickstart-cluster-0x>"
 
 [enterprise]
   registration-enabled = false
@@ -248,11 +248,11 @@ hostname="<quickstart-cluster-0x>" #✨
   registration-server-url = ""
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # The path to a valid license file.  license-key and license-path are mutually exclusive,
   # use only one and leave the other blank.
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 
 [meta]
   # Where the cluster metadata is stored
@@ -260,7 +260,7 @@ hostname="<quickstart-cluster-0x>" #✨
 
 [...]
 
-[http] #✨
+[http]
   # Determines whether HTTP endpoint is enabled.
   # enabled = true
 
@@ -268,12 +268,12 @@ hostname="<quickstart-cluster-0x>" #✨
   # bind-address = ":8086"
 
   # Determines whether HTTP authentication is enabled.
-  auth-enabled = true #✨ this is recommended but not required
+  auth-enabled = true # Recommended, but not required
 
 [...]
 
   # The JWT auth shared secret to validate requests using JSON web tokens.
-  shared-secret = "long pass phrase used for signing tokens" #✨
+  shared-secret = "long pass phrase used for signing tokens"
 ```
 
 ### III. Start the Data Service
