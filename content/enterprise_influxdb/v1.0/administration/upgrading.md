@@ -203,8 +203,8 @@ bind-address = ""
 hostname = "enterprise-meta-01"
 
 [enterprise]
-  registration-enabled = true #✨
-  registration-server-url = "http://<web_console_hostname>:3000" #✨
+  registration-enabled = true
+  registration-server-url = "http://<web_console_hostname>:3000"
 
 [...]
 ```

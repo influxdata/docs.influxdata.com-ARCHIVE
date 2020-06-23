@@ -61,17 +61,17 @@ In `/etc/influx-enterprise/influx-enterprise.conf`, set:
 
 * `shared-secret` in the `[influxdb]` section to the same pass phrase that you used in your data node configuration files
 
-```
-url = "http://<your_server's_IP_address>:3000" #✨
+```toml
+url = "http://<your_server's_IP_address>:3000"
 
 hostname = "localhost"
 port = "3000"
 
-license-key = "<your_license_key>" #✨ mutually exclusive with license-file
-license-file = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+license-key = "<your_license_key>" # Mutually exclusive with license-file
+license-file = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 
 [influxdb]
-shared-secret = "long pass phrase used for signing tokens" #✨
+shared-secret = "long pass phrase used for signing tokens"
 
 [smtp]
 host = "localhost"
@@ -197,8 +197,8 @@ In addition to updating the first `url` setting, `license-key`, and
     [database]
     # Where is your database?
     # NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
-    url = "postgres://postgres:password@localhost:5432/enterprise" # ENV: DATABASE_URL ✨
-    # url = "sqlite3:///var/lib/influx-enterprise/enterprise.db" ✨
+    url = "postgres://postgres:password@localhost:5432/enterprise" # ENV: DATABASE_URL
+    # url = "sqlite3:///var/lib/influx-enterprise/enterprise.db"
 >
 If you’re using a non-SSL version of Postgres, add the `?sslmode=disable`
 option to the first `url` setting in the `[database]` section:

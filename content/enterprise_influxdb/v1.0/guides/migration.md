@@ -125,17 +125,17 @@ For the following settings in `/etc/influxdb/influxdb.conf`, set:
 * `auth-enabled` in the `[http]` section to true
 * `shared-secret` in the `[http]` section to your shared secret (you must manually add this setting for the Enterprise Web console to function)
 
-```
+```toml
 # Change this option to true to disable reporting.
 reporting-disabled = false
-hostname="your-hostname" #✨
+hostname="your-hostname" # enter your server's hostname
 meta-tls-enabled = false
 
 [enterprise]
 
 registration-enabled = false
 registration-server-url = ""
-license-key = "<your_license_key>" #✨
+license-key = "<your_license_key>" # Enter your InfluxDB Enterprise license key
 license-path = ""
 
 [meta]
@@ -151,13 +151,13 @@ dir = "/var/lib/influxdb/data"
 [http]
  enabled = true
  bind-address = ":8086"
- auth-enabled = true #✨
+ auth-enabled = true # Set to 'true' to enable authentication
  log-enabled = true
  write-tracing = false
  pprof-enabled = false
  https-enabled = false
  https-certificate = "/etc/ssl/influxdb.pem"
- shared-secret = "long pass phrase used for signing tokens" #✨
+ shared-secret = "long pass phrase used for signing tokens" # Enter your shared secret
 
 [...]
 

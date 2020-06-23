@@ -211,14 +211,14 @@ In each meta node’s configuration file (`/etc/influxdb/influxdb-meta.conf`), s
 * `registration-enabled` to `true`
 * `registration-server-url` to the hostname of the InfluxEnterprise Web Console
 
-```
+```toml
 reporting-disabled = false
 bind-address = ""
 hostname = "enterprise-meta-01"
 
 [enterprise]
-  registration-enabled = true #✨
-  registration-server-url = "http://<web_console_hostname>:3000" #✨
+  registration-enabled = true # Set to 'true'
+  registration-server-url = "http://<web_console_hostname>:3000" # Enter web console hostname
 
 [...]
 ```

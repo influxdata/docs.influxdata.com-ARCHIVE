@@ -167,9 +167,9 @@ In the example above, the system never queries the time range between 19:41:30 a
 The next two sections offer different ways to solve the missing interval problem.
 
 ### Change the frequency of batch creation
-New (✨) configuration settings:  
-`compute-runs-per-interval = 10 #✨`   
-`compute-no-more-than = "1m30s" #✨`   
+New configuration settings:  
+`compute-runs-per-interval = 10`   
+`compute-no-more-than = "1m30s"`   
 `recompute-previous-n = 2`  
 `recompute-no-older-than = "10m0s"`
 
@@ -200,11 +200,11 @@ SELECT MEAN(value) INTO "telegraf"."default".cq_30s FROM "telegraf"."default".cp
 Notice that because of the new frequency of batch creation, InfluxDB no longer misses the query that covers the time range from 19:41:30 through 19:42:00.
 
 ### Change the number of queries per batch
-New (✨) configuration settings:  
+New configuration settings:  
 `compute-runs-per-interval = 10`  
 `compute-no-more-than = "2m0s"`    
-`recompute-previous-n = 3 #✨`  
-`recompute-no-older-than = "10m0s" #✨`  
+`recompute-previous-n = 3`  
+`recompute-no-older-than = "10m0s"`  
 
 *InfluxDB generates 4 queries per batch of CQ 2.*
 
@@ -284,11 +284,11 @@ If you have lagged data, generating, at most, one query for a previous interval 
 The next section offers one way to adjust the configuration settings so that a query batch always includes a query for one previous time interval.
 
 ### Change the number queries per batch
-New (✨) configuration settings:  
+New configuration settings:  
 `compute-runs-per-interval = 10`  
 `compute-no-more-than = "2m0s"`   
-`recompute-previous-n = 1 #✨`  
-`recompute-no-older-than = 120m0s #✨`  
+`recompute-previous-n = 1`  
+`recompute-no-older-than = 120m0s`  
 
 *InfluxDB generates 2 queries per batch of CQ 3.*
 

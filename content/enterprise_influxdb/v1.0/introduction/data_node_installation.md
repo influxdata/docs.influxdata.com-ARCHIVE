@@ -107,28 +107,28 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 
 > **Note:** `license-key` and `license-path` are mutually exclusive and one must remain set to the empty string.
 
-```
+```toml
 # Change this option to true to disable reporting.
 # reporting-disabled = false
 # bind-address = ":8088"
-hostname="enterprise-data-0x" #✨
+hostname="enterprise-data-0x" # Set to the full hostname of the data node
 
 [enterprise]
 
 registration-enabled = false
 registration-server-url = ""
-license-key = "<your_license_key>" #✨ mutually exclusive with license-path
-license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+license-key = "<your_license_key>" # Mutually exclusive with license-path
+license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 
 [meta]
-dir = "/var/lib/influxdb/meta" # data nodes do require a local meta directory
+dir = "/var/lib/influxdb/meta" # Data nodes require a local meta directory
 
 [...]
 
-[http] #✨
+[http]
 # enabled = true
 # bind-address = ":8086"
-auth-enabled = true #✨ this is recommended but not required
+auth-enabled = true # Set to 'true' to enable authentication. Recommended, but not required.
 # log-enabled = true
 # write-tracing = false
 # pprof-enabled = false
@@ -137,7 +137,7 @@ auth-enabled = true #✨ this is recommended but not required
 #  https-private-key = ""
 #  max-row-limit = 10000
 #  max-connection-limit = 0
-shared-secret = "long pass phrase used for signing tokens" #✨
+shared-secret = "long pass phrase used for signing tokens" # Enter a shared secret
 #  realm = "InfluxDB"
 ```
 
