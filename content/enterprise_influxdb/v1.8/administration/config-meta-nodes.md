@@ -50,19 +50,16 @@ Environment variable: `INFLUXDB_HOSTNAME`
 #### `[enterprise]`
 
 The `[enterprise]` section contains the parameters for the meta node's
-registration with the [InfluxDB Enterprise License Portal](https://portal.influxdata.com/).
-
-
+registration with the [InfluxData portal](https://portal.influxdata.com/).
 
 #### `license-key = ""`
 
-The license key created for you on [InfluxPortal](https://portal.influxdata.com).
+The license key created for you on [InfluxData portal](https://portal.influxdata.com).
 The meta node transmits the license key to
 [portal.influxdata.com](https://portal.influxdata.com) over port 80 or port 443
 and receives a temporary JSON license file in return.
 The server caches the license file locally.
-You must use the [`license-path` setting](#license-path) if your server cannot
-communicate with [https://portal.influxdata.com](https://portal.influxdata.com).
+If your server cannot communicate with [https://portal.influxdata.com](https://portal.influxdata.com), you must use the [`license-path` setting](#license-path).
 
 Use the same key for all nodes in the same cluster.
 {{% warn %}}The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
@@ -78,7 +75,7 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_KEY`
 #### `license-path = ""`
 
 The local path to the permanent JSON license file that you received from InfluxData
-for instances that do not have access to the Internet.
+for instances that do not have access to the internet.
 To obtain a license file, contact [sales@influxdb.com](mailto:sales@influxdb.com).
 
 The license file must be saved on every server in the cluster, including meta nodes
