@@ -11,13 +11,16 @@ menu:
     parent: Introduction
 ---
 
-Review the installation requirements below, and then check out available options to [install and deploy InfluxDB Enterprise](/enterprise_influxdb/v1.8/install-and-deploy/).
+Review the installation requirements below, and then check out available options to [install and deploy InfluxDB Enterprise](/enterprise_influxdb/v1.8/install-and-deploy/). For an overview of the architecture and concepts in an InfluxDB Enterprise cluster, review [Clustering in InfluxDB Enterprise](/enterprise_influxdb/v1.8/concepts/clustering/).
 
 ## Requirements for InfluxDB Enterprise clusters
 
-For an overview of the architecture and concepts in an InfluxDB Enterprise Cluster, review the [Clustering Guide](/enterprise_influxdb/v1.8/concepts/clustering/).
+InfluxDB Enterprise clusters require a license. To use a license key, all nodes in the cluster must be able to contact https://portal.influxdata.com via port `80` or port `443`. If nodes in the cluster cannot communicate with https://portal.influxdata.com, you must use the `license-path` configuration setting. For more information, see [Enterprise license settings](/enterprise_influxdb/v1.8/administration/config-data-nodes/#enterprise-license-settings).
 
-For clusters using a license key and not a license file, all nodes must be able to contact `portal.influxdata.com` via port `80` or port `443`. Nodes that go more than four hours without connectivity to the Portal may experience license issues.
+Nodes attempt to download a new license file for the given key every four hours. If a node cannot connect to the server and retrieve a new license file, the node uses the existing license file. After a license expires, nodes have the following grace periods:
+
+- If [InfluxDB daemon (`influxd`)](/influxdb/v1.8/tools/influxd#sidebar) starts and fails to validate the license, the node has a 4-hour grace period.
+- If `influxd` starts and validates the license, and then a later license check fails, the node has a 14-day grace period.
 
 ### Frequently overlooked requirements
 

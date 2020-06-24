@@ -52,8 +52,6 @@ Environment variable: `INFLUXDB_HOSTNAME`
 The `[enterprise]` section contains the parameters for the meta node's
 registration with the [InfluxDB Enterprise License Portal](https://portal.influxdata.com/).
 
-
-
 #### `license-key = ""`
 
 The license key created for you on [InfluxPortal](https://portal.influxdata.com).
