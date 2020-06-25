@@ -28,7 +28,7 @@ id: handler-id
 topic: topic-name
 kind: aggregate
 options:
-  interval: 5m
+  interval: 300000000000
   topic: agg_5m
   message: '{{.Count}} new events in the last {{.Interval}}'
 ```
