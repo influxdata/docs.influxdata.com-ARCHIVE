@@ -18,7 +18,7 @@ The following aggregate event handler options can be set in a
 
 | Name     | Type            | Description                                                                                                   |
 | ----     | ----            | -----------                                                                                                   |
-| interval | duration string | How often to aggregate events.                                                                                |
+| interval | duration        | How often to aggregate events. Duration must be specified in nanoseconds.                                                                             |
 | topic    | string          | A topic into which to publish the aggregate events.                                                           |
 | message  | string          | A template string where `{{.Interval}}` and `{{.Count}}` are available for constructing a meaningful message. |
 
@@ -68,7 +68,7 @@ id: aggr_cpu_alerts_10m
 topic: cpu
 kind: aggregate
 options:
-  interval: 10m
+  interval: 600000000000
   topic: aggr_cpu
   message: '{{.Count}} CPU alerts in the last {{.Interval}}'
 ```
