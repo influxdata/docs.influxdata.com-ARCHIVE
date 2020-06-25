@@ -18,7 +18,7 @@ The following aggregate event handler options can be set in a
 
 | Name     | Type            | Description                                                                                                   |
 | ----     | ----            | -----------                                                                                                   |
-| interval | duration        | How often to aggregate events. Duration must be specified in nanoseconds.                                                                             |
+| interval | duration        | How often to aggregate events. Interval must be specified in nanoseconds.                                     |
 | topic    | string          | A topic into which to publish the aggregate events.                                                           |
 | message  | string          | A template string where `{{.Interval}}` and `{{.Count}}` are available for constructing a meaningful message. |
 
