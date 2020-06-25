@@ -369,7 +369,7 @@ Limit series returned within a specified shard group duration.
 
 ```sql
 // Returns all series in the current shard.
-> SHOW SERIES ON NOAA_water_database WHERE time < now() - 1m
+> SHOW SERIES ON NOAA_water_database WHERE time > now() - 1m
 
 key
 ---
@@ -386,7 +386,7 @@ The query above returns all series in the `NOAA_water_database` database in the 
 
 ```sql
 // Returns all series in shard groups that contain a timestamp in the last 28 days.
-> SHOW SERIES ON NOAA_water_database WHERE time < now() - 28d
+> SHOW SERIES ON NOAA_water_database WHERE time > now() - 28d
 
 key
 ---
