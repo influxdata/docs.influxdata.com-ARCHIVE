@@ -252,7 +252,7 @@ Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION`
 #### `max-concurrent-compactions = 0`
 
 The maximum number of concurrent full and level compactions that can run at one time.  
-A value of `0` (unlimited compactions) results in 50% of `runtime.GOMAXPROCS(0)` used at runtime, so when 50% of the CPUs aren't available, the system limits compactions.
+A value of `0` (unlimited compactions) results in 50% of `runtime.GOMAXPROCS(0)` used at runtime, so when 50% of the CPUs aren't available, compactions are limited.
 Any number greater than `0` limits compactions to that value.  
 This setting does not apply to cache snapshotting.
 
