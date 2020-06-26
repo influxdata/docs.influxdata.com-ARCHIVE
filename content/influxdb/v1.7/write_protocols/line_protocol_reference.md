@@ -252,7 +252,7 @@ In general, we recommend avoiding using InfluxQL keywords in your schema as
 it can cause
 [confusion](/influxdb/v1.7/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char) when querying the data.
 
-> **Note:** Avoid using the reserved tag keys `_field` and `_measurement`. If these tag keys are included, the associated point is discarded.
+> **Note:** Avoid using the reserved keys `_field` and `_measurement`. If these tag keys are included, the associated point is discarded.
 
 The keyword `time` is a special case.
 `time` can be a
