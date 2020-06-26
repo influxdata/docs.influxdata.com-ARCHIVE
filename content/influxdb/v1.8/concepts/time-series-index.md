@@ -26,7 +26,7 @@ InfluxDB actually looks like two databases in one, a time series data store and 
 
 ### Time-Structured Merge Tree (TSM)
 
-The Time-Structured Merge Tree (TSM) engine that InfluxData built in 2015 and continued enhancing in 2016 was an effort to solve the problem of getting maximum throughput, compression, and query speed for raw time series data.
+The Time-Structured Merge Tree (TSM) engine solves the problem of getting maximum throughput, compression, and query speed for raw time series data.
 Up until TSI, the inverted index was an in-memory data structure that was built during startup of the database based on the data in TSM.
 This meant that for every measurement, tag key-value pair, and field name, there was a lookup table in-memory to map those bits of metadata to an underlying time series.
 For users with a high number of ephemeral series, memory utilization continued increasing as new time series were created.
