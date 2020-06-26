@@ -45,6 +45,8 @@ The timestamp - supplied at the end of the line in Unix time in nanoseconds sinc
 If you do not specify a timestamp InfluxDB uses the server's local nanosecond timestamp in Unix epoch.
 Anything that has to do with time in InfluxDB is always UTC.
 
+> **Note:** Avoid using the following reserved tag keys: `_field`, `_measurement`, and `time`. If reserved tag keys are included, the associated point is discarded.
+
 ### Configure gzip compression
 
 InfluxDB supports gzip compression. To reduce network traffic, consider the following options: 
