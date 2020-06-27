@@ -133,6 +133,8 @@ Other supported features:
 [Basic cast operations](#data-types-and-cast-operations),
 [Regular expressions](#regular-expressions)
 
+> **Note:** The SELECT statement cannot include an aggregate function **and** a non-aggregate function, field key, or tag key. For more information, see [error about mixing aggregate and non-aggregate queries](/influxdb/v1.8/troubleshooting/errors/#error-parsing-query-mixing-aggregate-and-non-aggregate-queries-is-not-supported).
+
 #### `FROM` clause
 
 The `FROM` clause supports several formats for specifying a [measurement(s)](/influxdb/v1.8/concepts/glossary/#measurement):
@@ -417,7 +419,7 @@ SELECT_clause FROM_clause WHERE <conditional_expression> [(AND|OR) <conditional_
 The `WHERE` clause supports `conditional_expression`s on fields, tags, and
 timestamps.
 
->**Note** InfluxDB does not support using OR in the WHERE clause to specify multiple time ranges. For example, InfluxDB will return an empty response for the following query:
+>**Note** InfluxDB does not support using OR in the WHERE clause to specify multiple time ranges. For example, InfluxDB returns an empty response for the following query:
 
 `> SELECT * FROM "absolutismus" WHERE time = '2016-07-31T20:07:00Z' OR time = '2016-07-31T23:07:17Z'`
 
@@ -661,8 +663,12 @@ time                   level description
 
 # The GROUP BY clause
 
-The `GROUP BY` clause groups query results by a user-specified
-set of [tags](/influxdb/v1.8/concepts/glossary/#tag) or a time interval.
+The `GROUP BY` clause groups query results by:
+
+- one or more specified [tags](/influxdb/v1.8/concepts/glossary/#tag)
+- specified time interval
+
+>**Note:** You cannot use `GROUP BY` to group fields.
 
 <table style="width:100%">
   <tr>
@@ -683,9 +689,9 @@ set of [tags](/influxdb/v1.8/concepts/glossary/#tag) or a time interval.
 
 ## GROUP BY tags
 
-`GROUP BY <tag>` queries group query results by a user-specified set of [tags](/influxdb/v1.8/concepts/glossary/#tag).
+`GROUP BY <tag>` groups query results by one or more specified [tags](/influxdb/v1.8/concepts/glossary/#tag).
 
-Tired of reading? Check out this InfluxQL Short:
+Watch InfluxQL short about `GROUP BY` with tags:
 <br>
 <br>
 <iframe src="https://player.vimeo.com/video/200898048?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>

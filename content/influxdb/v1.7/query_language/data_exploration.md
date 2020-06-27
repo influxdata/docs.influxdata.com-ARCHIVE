@@ -131,7 +131,7 @@ Other supported features:
 [Basic cast operations](#data-types-and-cast-operations),
 [Regular expressions](#regular-expressions)
 
-> **Note:** The SELECT statement cannot include an aggregate function **and** a non-aggregate function, field key, or tag key. For more information, see [error about mixing aggregate and non-aggregate queries](/influxdb/v1.7/troubleshooting/errors/#error-parsing-query-mixing-aggregate-and-non-aggregate-queries-is-not-supported).
+> **Note:** The SELECT statement cannot include an aggregate function **and** a non-aggregate function, field key, or tag key. For more information, see [error about mixing aggregate and non-aggregate queries](/influxdb/v1.7/troubleshooting/errors/#error-parsing-query-mixing-aggregate-and-non-aggregate-queries-is-not-supported). 
 
 #### `FROM` clause
 
