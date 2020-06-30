@@ -7,6 +7,19 @@ menu:
     weight: 10
     parent: About the project
 ---
+
+## v1.14.5 [2020-06-30]
+
+### Bug fixes
+
+- Improve the performance of the `procstat` input.
+- Fix ping exit code handling on non-Linux operating systems.
+- Fix errors in output of the `sensors` command.
+- Prevent startup when tags have incorrect type in configuration file.
+- Fix panic with GJSON multiselect query in JSON parser.
+- Allow any key usage type on x509 certificate.
+- Allow histograms and summary types without buckets or quantiles in `prometheus_client` output.
+
 ## v1.14.4 [2020-06-09]
 
 ### Bug fixes
