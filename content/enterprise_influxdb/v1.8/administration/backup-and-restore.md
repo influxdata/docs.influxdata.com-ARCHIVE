@@ -225,9 +225,9 @@ In addition, restores to a new cluster drop any data in the new cluster's
 The restore does not write the existing cluster's `_internal` database to
 the new cluster.
 
-#### Syntax to restore from incremental and metadata-only backups
+#### Syntax to restore from incremental and metadata backups
 
-Use the syntax below to restore an incremental or metadata-only backup to a new cluster or an existing cluster.
+Use the syntax below to restore an incremental or metadata backup to a new cluster or an existing cluster.
 **The existing cluster must contain no data in the affected databases.**
 Performing a restore from an incremental backup requires the path to the incremental backup's directory.
 
@@ -236,8 +236,8 @@ influxd-ctl [global-options] restore [restore-options] <path-to-backup-directory
 ```
 
 {{% note %}}
-The existing cluster can have data in the `_internal` database, the database
-that the system creates by default.
+The existing cluster can have data in the `_internal` database (the database InfluxDB creates if
+[internal monitoring](/platform/monitoring/influxdata-platform/tools/measurements-internal) is enabled).
 The system automatically drops the `_internal` database when it performs a complete restore.
 {{% /note %}}
 
@@ -304,9 +304,9 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 83.892591ms, transferred 588800 bytes
 ```
 
-##### Restore from a metadata-only backup
+##### Restore from a metadata backup
 
-In this example, the `restore` command restores an metadata-only backup stored
+In this example, the `restore` command restores an metadata backup stored
 in the `metadata-backup/` directory.
 
 ```bash
@@ -396,7 +396,7 @@ time                  written
 
 ##### Restore writes information not part of the original backup
 
-If a [restore from an incremental backup](#syntax-to-restore-from-incremental-and-metadata-only-backups) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
+If a [restore from an incremental backup](#syntax-to-restore-from-incremental-and-metadata-backups) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
 Backups consist of a shard data backup and a metastore backup.
 The **shard data backup** contains the actual time series data: the measurements, tags, fields, and so on.
 The **metastore backup** contains user information, database names, retention policy names, shard metadata, continuous queries, and subscriptions.
