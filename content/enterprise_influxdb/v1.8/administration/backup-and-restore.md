@@ -306,7 +306,8 @@ Restored from my-incremental-backup/ in 83.892591ms, transferred 588800 bytes
 
 ##### Restore from a metadata-only backup
 
-In this example, the `restore` command restores an incremental backup stored in the `metadata-backup/` directory.
+In this example, the `restore` command restores an metadata-only backup stored
+in the `metadata-backup/` directory.
 
 ```bash
 # Syntax
