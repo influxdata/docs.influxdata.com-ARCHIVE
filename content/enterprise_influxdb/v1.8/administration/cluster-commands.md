@@ -830,6 +830,11 @@ Name of the single database to restore.
 Restore a backup that was created with the `-full` flag.
 A restore command with the `-full` flag requires the `path-to-backup-manifest-file`.
 
+{{% note %}}
+Restoring from a full backup **does not** restore metadata.
+To restore metadata, [restore a metadata backup](#restore-from-a-metadata-backup) separately.
+{{% /note %}}
+
 ###### [ `-list` ]
 
 Show the contents of the backup.
@@ -873,9 +878,9 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 83.892591ms, transferred 588800 bytes
 ```
 
-##### Restore from a metadata-only backup
+##### Restore from a metadata backup
 
-In this example, the `restore` command restores an metadata-only backup stored
+In this example, the `restore` command restores an metadata backup stored
 in the `metadata-backup/` directory.
 
 ```bash

@@ -336,6 +336,11 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 ```
 
+{{% note %}}
+Restoring from a full backup **does not** restore metadata.
+To restore metadata, [restore a metadata backup](#restore-from-a-metadata-backup) separately.
+{{% /note %}}
+
 ##### Restore from an incremental backup for a single database and give the database a new name
 
 ```bash
@@ -396,7 +401,9 @@ time                  written
 
 ##### Restore writes information not part of the original backup
 
-If a [restore from an incremental backup](#syntax-to-restore-from-incremental-and-metadata-backups) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
+If a [restore from an incremental backup](#syntax-to-restore-from-incremental-and-metadata-backups)
+does not limit the restore to the same database, retention policy, and shard specified by the backup command,
+the restore may appear to restore information that was not part of the original backup.
 Backups consist of a shard data backup and a metastore backup.
 The **shard data backup** contains the actual time series data: the measurements, tags, fields, and so on.
 The **metastore backup** contains user information, database names, retention policy names, shard metadata, continuous queries, and subscriptions.
