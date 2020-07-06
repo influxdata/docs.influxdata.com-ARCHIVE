@@ -68,7 +68,7 @@ To install and use the Python client library, follow the [instructions below](#i
 1. Install the Python client library.
 
     ```sh
-    pip install influxd-client
+    pip install influxdb-client
     ```
 
 2. Ensure that InfluxDB is running. If running InfluxDB locally, visit http://localhost:8086. (If using InfluxDB Cloud, visit the URL of your InfluxDB Cloud UI.)
