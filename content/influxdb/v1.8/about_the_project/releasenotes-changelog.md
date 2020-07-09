@@ -7,6 +7,24 @@ menu:
     parent: About the project
 ---
 
+## v1.8.1 [2020-07-09]
+
+### Features
+
+- Make field iterator planning.
+- Allow user-supplied HTTP headers.
+
+### Bug fixes
+
+- Fix to Flux `buckets()` function.
+- Defer closing of underlying `SeriesIDSetIterators`.
+- Disable series id set cache size by default.
+- Simplify Authorizer.
+- Wait to delete epoch before dropping shard.
+- Batch-write tombstone entries when dropping ordeleting.
+- Gracefully handle errors when creating snapshots.
+- Remove all Go 1.12 references from build.
+
 ## v1.8.0 [2020-4-13]
 
 ### Features
