@@ -8,6 +8,23 @@ menu:
     parent: About the project
 ---
 
+## v1.8.5 [2020-07-08]
+
+- Fix public-url generic OAuth configuration issue.
+- Fix crash when starting Chronograf built by Go 1.14 on Windows.
+- Keep dashboard's table sorting stable on data refresh.
+- Repair TICKscript editor scrolling on Firefox.
+- Better parse Flux CSV results.
+- Support `.Time.Unix` in alert message validation.
+- Fix error when viewing Flux raw data after edit.
+- Repair management of Kapacitor rules and TICKscripts.
+- Avoid undefined error when dashboard is not ready yet.
+- Fall back to point timestamp in log viewer.
+- Add global functions and string trimming to alert message validation.
+- Merge query results with unique column names.
+- Avoid exiting presentation mode when zooming out.
+- Avoid duplication of `csv.from` in functions list.
+
 ## v1.8.4 [2020-05-01]
 
 - Fix misaligned tables when scrolling.
