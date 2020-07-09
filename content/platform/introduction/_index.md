@@ -30,8 +30,8 @@ The **InfluxData 1.x platform** includes the following open source components ([
 
 The **InfluxDB 2.0 platform** consolidates components from the **InfluxData 1.x platform** into a single packaged solution, with added features and flexibility:
 
-  - [InfluxDB 2.0 beta](https://v2.docs.influxdata.com/v2.0/get-started/): open source platform solution in a single binary
-  - [InfluxDB Cloud 2.0](https://v2.docs.influxdata.com/v2.0/cloud/get-started/) (**commercial offering**): hosted cloud solution
+  - [InfluxDB 2.0 OSS](https://v2.docs.influxdata.com/v2.0/get-started/): open source platform solution in a single binary
+  - [InfluxDB Cloud 2.0](https://v2.docs.influxdata.com/v2.0/get-started/) (**commercial offering**): hosted cloud solution
 
 InfluxDB Enterprise 2.0 is in development.
 
@@ -147,4 +147,4 @@ To get started with the **InfluxData 1.x** platform, see
 [Installation and Configuration](/platform/installation)  
 [Getting Started](/platform/introduction/getting-started)
 
-To get started with the **InfluxDB 2.0** platform, see [**InfluxDB Cloud 2.0**](https://v2.docs.influxdata.com/v2.0/cloud/get-started/) or [**InfluxDB 2.0 beta**](https://v2.docs.influxdata.com/v2.0/get-started/).
+To get started with the **InfluxDB 2.0** platform, see [**InfluxDB Cloud 2.0**](https://v2.docs.influxdata.com/v2.0/get-started/) or [**InfluxDB 2.0 OSS**](https://v2.docs.influxdata.com/v2.0/get-started/).
