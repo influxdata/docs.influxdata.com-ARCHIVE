@@ -26,7 +26,10 @@ If your InfluxDB performance requires any of the following, a single node (Influ
 - more than 100 moderate queries per second ([see Query guides](#query-guidelines))
 - more than 10,000,000 [series cardinality](/influxdb/v1.8/concepts/glossary/#series-cardinality)
 
- We recommend InfluxDB Enterprise, which supports multiple data nodes (a cluster) across multiple server cores. InfluxDB Enterprise distributes multiple copies of your data across a cluster, providing high-availability and redundancy, so an unavailable node doesn't significantly impact the cluster. Please contact us at <sales@influxdb.com> for assistance tuning your system.
+We recommend InfluxDB Enterprise, which supports multiple data nodes (a cluster) across multiple server cores.
+InfluxDB Enterprise distributes multiple copies of your data across a cluster,
+providing high-availability and redundancy, so an unavailable node doesn’t significantly impact the cluster.
+Please [contact us](https://www.influxdata.com/contact-sales/) for assistance tuning your system.
 
 If you want a single node instance of InfluxDB that's fully open source, requires fewer writes, queries, and unique series than listed above, and do **not require** redundancy, we recommend InfluxDB OSS.
 

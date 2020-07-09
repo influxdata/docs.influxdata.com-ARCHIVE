@@ -6,13 +6,13 @@ cards:
     title: InfluxDB 2.0
     description: The latest version of the leading time series platform built for metrics and events, packaged as one solution.
     links:
-      - text: Get started with InfluxDB Cloud 2.0
+      - text: Start with InfluxDB Cloud
         type: absolute
-        href: https://v2.docs.influxdata.com/v2.0/cloud/get-started/
-      - text: Get started with InfluxDB 2.0 open source (beta)
+        href: https://v2.docs.influxdata.com/v2.0/get-started/#start-with-influxdb-cloud-2-0
+      - text: Start with InfluxDB 2.0 OSS
         type: absolute
-        href: https://v2.docs.influxdata.com/v2.0/get-started/
-      - text: Documentation (Cloud and open source)
+        href: https://v2.docs.influxdata.com/v2.0/get-started/#start-with-influxdb-oss
+      - text: InfluxDB 2.0 Documentation
         type: absolute
         href: https://v2.docs.influxdata.com/
 
