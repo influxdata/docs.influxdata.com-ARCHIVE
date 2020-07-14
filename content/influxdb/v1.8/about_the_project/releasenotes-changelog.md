@@ -16,15 +16,14 @@ menu:
 ### Performance improvements
 
 - InfluxQL query planner plans each field in parallel to improve planning time.
+- Improved performance of DELETE/DROP by batching tombstone writes.
 
 ### Bug fixes
 
 - Fix to Flux `buckets()` function causing a panic.
-- TSI: Defer closing of underlying `SeriesIDSetIterators`.
-- TSI: Disable series id set cache size by default.
+- TSI: Addressed a couple of edge cases which resulted in segfaults.
 - HTTP: Simplify Authorizer.
 - Wait to delete epoch before dropping shard.
-- Batch-write tombstone entries when dropping or deleting.
 - Improve error handling when creating snapshots.
 - Remove all Go 1.12 references from build.
 
