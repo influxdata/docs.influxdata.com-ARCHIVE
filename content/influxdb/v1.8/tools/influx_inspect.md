@@ -136,8 +136,8 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 
 ### `deletetsm`
 
-Use `deletetsm - measurement` to delete a measurement in a raw TSM file (from specified shards).
-Use  `deletetsm - sanitize` to remove all tag and field keys containing non-printable Unicode characters in a raw TSM file (from specified shards).
+Use `deletetsm -measurement` to delete a measurement in a raw TSM file (from specified shards).
+Use  `deletetsm -sanitize` to remove all tag and field keys containing non-printable Unicode characters in a raw TSM file (from specified shards).
 
 {{% warn %}} **Warning:** Use the `deletetsm` command only when your InfluxDB instance is offline (`influxd` service is not running).{{% /warn %}}
 
