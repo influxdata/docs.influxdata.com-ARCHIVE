@@ -30,7 +30,7 @@ Use one of the following commands to start Chronograf:
   service chronograf start
   ```
 
-- **mIf you built Chronograf from source:**
+- **If you built Chronograf from source:**
 
   ```bash
   $GOPATH/bin/chronograf
