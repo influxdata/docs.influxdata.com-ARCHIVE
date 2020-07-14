@@ -14,7 +14,7 @@ Chronograf offers a complete dashboard solution for visualizing your data and mo
 * Create custom dashboards from scratch by building queries in the Data Explorer, as described [below](#build-a-dashboard).
 * [Export a dashboard](/chronograf/latest/administration/import-export-dashboards/#export-a-dashboard) you create
 * Import a dashboard:
-  * When you want to [import an exported dashboard](/chronograf/v1.8/administration/import-export-dashboards/#importing-a-dashboard).
+  * When you want to [import an exported dashboard](/chronograf/v1.8/administration/import-export-dashboards/#import-a-dashboard).
   * When you add or update a connection in Chronograf. See [Dashboard templates](#dashboard-templates) for details.
 
 By the end of this guide, you'll be aware of the tools available to you for creating dashboards similar to this example:
