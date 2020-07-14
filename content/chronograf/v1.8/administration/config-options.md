@@ -101,7 +101,7 @@ Environment variable: `$CANNED_PATH`
 
 #### `--resources-path=`
 
-Path to directory o sources (.src), Kapacitor connections (.kap), and organizations (.org).
+Path to directory of sources (.src), Kapacitor connections (.kap), and organizations (.org).
 
 Default value: `/usr/share/chronograf/resources`
 
