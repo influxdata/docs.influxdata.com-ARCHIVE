@@ -25,7 +25,7 @@ All users can export a dashboard. To import a dashboard, a user must have an Adm
 ## Export a dashboard
 
 1. On the Dashboards page, hover over the dashboard you want to export, and then click the **Export**
-   button that appears to the right.
+   button on the right.
 
     <img src="/img/chronograf/v1.8/dashboard-export.png" alt="Exporting a Chronograf dashboard" style="width:100%;max-width:912px"/>
 
@@ -49,7 +49,7 @@ The newly imported dashboard is included in your list of dashboards.
 
 ### Reconciling unmatched sources
 
-If the data sources defined in the imported dashboard file do not match any of your local sources, reconcile each of the unmatched sources during the import process, and the click **Done**.
+If the data sources defined in the imported dashboard file do not match any of your local sources, reconcile each of the unmatched sources during the import process, and then click **Done**.
 
 ![Reconcile unmatched sources](/img/chronograf/v1.8/dashboard-import-reconcile.png)
 
