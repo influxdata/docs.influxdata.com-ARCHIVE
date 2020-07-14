@@ -63,5 +63,4 @@ After you configure OAuth 2.0 authentication, you can set up multiple organizati
 * [Managing organizations](/chronograf/v1.8/administration/managing-organizations/)
 * [Managing Chronograf users](/chronograf/v1.8/administration/managing-chronograf-users/)
 
-
 <!-- TODO ## Configuring Chronograf for InfluxDB Enterprise clusters) -->
