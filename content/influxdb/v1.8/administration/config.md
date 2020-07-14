@@ -682,6 +682,19 @@ This setting has no effect if [`auth-enabled`](#auth-enabled-false) is set to `f
 
 Environment variable: `INFLUXDB_HTTP_PING_AUTH_ENABLED`
 
+#### `http-headers`
+
+User-supplied [HTTP response headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers).
+Configure this section to return [security headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers#Security)
+such as `X-Frame-Options` or `Content Security Policy` where needed.
+
+Example:
+
+```toml
+[http.headers]
+  X-Frame-Options = "DENY"
+```
+
 #### `https-enabled = false`
 
 Determines whether HTTPS is enabled.

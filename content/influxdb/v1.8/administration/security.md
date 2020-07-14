@@ -36,6 +36,14 @@ HTTPS can also verify the authenticity of the InfluxDB server to connecting clie
 Resources:
 [Enabling HTTPS](/influxdb/v1.8/administration/https_setup/)
 
+## Configure security headers
+
+HTTP headers allow servers and clients to pass additional information along with requests.
+Certain headers help [enforce security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers#Security) properties.
+
+Resources:
+[Configure HTTP headers](/influxdb/v1.8/administration/config/#http-headers)
+
 ## Securing your host
 
 ### Ports
