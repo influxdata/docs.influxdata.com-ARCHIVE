@@ -63,7 +63,6 @@ Start the Chronograf service, and include any options after `chronograf`, where 
 
 > ***Note:*** Command line options take precedence over corresponding environment variables.
 
-
 ## Chronograf service options
 
 #### `--host=`
@@ -94,7 +93,7 @@ Environment variable: `$BOLT_PATH`
 
 #### `--canned-path=` | `-c`
 
-The path to the directory of [canned dashboards](/chronograf/latest/guides/using-precreated-dashboards) files.
+The path to the directory of [canned dashboard](/chronograf/latest/guides/using-precreated-dashboards) and [exported dashboard](/chronograf/latest/administration/import-export-dashboards/#export-a-dashboard) (.dashboard) files.
 
 Default value: `/usr/share/chronograf/canned`
 
@@ -102,7 +101,7 @@ Environment variable: `$CANNED_PATH`
 
 #### `--resources-path=`
 
-Path to directory of canned dashboards, sources, Kapacitor connections, and organizations.
+Path to directory o sources (.src), Kapacitor connections (.kap), and organizations (.org).
 
 Default value: `/usr/share/chronograf/resources`
 
