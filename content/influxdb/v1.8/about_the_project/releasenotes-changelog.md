@@ -11,18 +11,20 @@ menu:
 
 ### Features
 
-- Make field iterator planning.
-- Allow user-supplied HTTP headers.
+- Allow users to add custom HTTP response headers to comply with internal security policies.
+
+### Performance improvements
+
+- InfluxQL query planner plans each field in parallel to improve planning time.
+- Improved performance of DELETE/DROP by batching tombstone writes.
 
 ### Bug fixes
 
-- Fix to Flux `buckets()` function.
-- Defer closing of underlying `SeriesIDSetIterators`.
-- Disable series id set cache size by default.
-- Simplify Authorizer.
+- Fix to Flux `buckets()` function causing a panic.
+- TSI: Addressed a couple of edge cases which resulted in segfaults.
+- HTTP: Simplify Authorizer.
 - Wait to delete epoch before dropping shard.
-- Batch-write tombstone entries when dropping ordeleting.
-- Gracefully handle errors when creating snapshots.
+- Improve error handling when creating snapshots.
 - Remove all Go 1.12 references from build.
 
 ## v1.8.0 [2020-4-13]
