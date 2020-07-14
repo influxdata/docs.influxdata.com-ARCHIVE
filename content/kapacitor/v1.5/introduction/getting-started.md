@@ -46,16 +46,16 @@ To get started, do the following:
 
 2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure `[[outputs.influxd]]` to specify how to connect to InfluxDB and the destination database.
 
-```sh
-[[outputs.influxdb]]
-  ## InfluxDB url is required and must be in the following form: http/udp "://" host [ ":" port]
-  ## Multiple urls can be specified as part of the same cluster; only ONE url is written to each interval.
-  ## InfluxDB url
-  urls = ["http://localhost:8086"]
+    ```sh
+    [[outputs.influxdb]]
+    ## InfluxDB url is required and must be in the following form: http/udp "://" host [ ":" port]
+    ## Multiple urls can be specified as part of the same cluster; only ONE url is written to each interval.
+    ## InfluxDB url
+    urls = ["http://localhost:8086"]
 
-  ## The target database for metrics is required (Telegraf creates if one doesn't exist).
-  database = "telegraf"
-```
+    ## The target database for metrics is required (Telegraf creates if one doesn't exist).
+    database = "telegraf"
+    ```
 
 3. Run the following command to start Telegraf:
 
