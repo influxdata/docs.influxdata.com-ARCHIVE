@@ -13,7 +13,6 @@ This guide explains how to clone, or duplicate, a dashboard or a cell for use as
 
 Dashboards in Chronograf can be cloned (or copied) to be used to create a dashboard based on the original. Rather than building a new dashboard from scratch, you can clone a dashboard and make changes to the dashboard copy.
 
-
 ### To clone a dashboard
 
 1. On the **Dashboards** page, hover your cursor over the listing of the dashboard that you want to clone and click the **Clone** button that appears.
