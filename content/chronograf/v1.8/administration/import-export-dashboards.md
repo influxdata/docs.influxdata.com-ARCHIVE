@@ -10,8 +10,8 @@ menu:
 Chronograf makes it easy export and import dashboards. Recreate robust dashboards without having to manually configure them from the ground up.
 
 [Required user roles](#required-user-roles)  
-[Export a dashboard](#exporting-a-dashboard)  
-[Import a dashboard](#importing-a-dashboard)  
+[Export a dashboard](#export-a-dashboard)  
+[Import a dashboard](#import-a-dashboard)  
 
 ## Required user roles
 
