@@ -14,6 +14,7 @@ menu:
 Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterprise cluster.
 
 ## Prerequisites
+
 - An InfluxDB OSS instance running **InfluxDB 1.7.10 or later**.
 - An InfluxDB Enterprise cluster running **InfluxDB Enterprise 1.7.10 or later**
 - Network accessibility between the OSS instances and all data and meta nodes.
@@ -26,40 +27,46 @@ Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterpri
 - Requires downtime for the OSS instance
 {{% /warn %}}
 
-## To migrate to InfluxDB Enterprise
+## Migrate to InfluxDB Enterprise
+
 Complete the following tasks:
 
 1. [Upgrade InfluxDB to the latest version](#upgrade-influxdb-to-the-latest-version)
 2. [Set up InfluxDB Enterprise meta nodes](#set-up-influxdb-enterprise-meta-nodes)
 3. [Set up InfluxDB Enterprise data nodes](#set-up-influxdb-enterprise-data-nodes)
-4. [Upgrade the InfluxDB binary on your OSS instance](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise)
-5. [Add the upgraded OSS instance to the InfluxDB Enterprise cluster](#add-the-new-data-node-to-the-cluster)
-6. [Add existing data nodes back to the cluster](#add-existing-data-nodes-back-to-the-cluster)
-7. [Rebalance the cluster](#rebalance-the-cluster)
+4. Do one of the following:
+   - Migrate a large data set with zero downtime
+   - Migrate a smaller data set with downtime
 
-## Upgrade InfluxDB to the latest version
-Upgrade InfluxDB to the latest stable version before proceeding.
+### Upgrade InfluxDB to the latest version
+
+Upgrade InfluxDB to the latest stable version.
 
 - [Upgrade InfluxDB OSS](/influxdb/latest/administration/upgrading/)
-- [Upgrade InfluxDB Enterprise](/enterprise_influxdb/v1.8/administration/upgrading/)
+- [Upgrade InfluxDB Enterprise](/enterprise_influxdb/latest/administration/upgrading/)
 
-## Set up InfluxDB Enterprise meta nodes
+### Set up InfluxDB Enterprise meta nodes
+
 Set up all meta nodes in your InfluxDB Enterprise cluster.
 For information about installing and setting up meta nodes, see
 [Install meta nodes](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/meta_node_installation/).
 
 {{% note %}}
+
 #### Add the OSS instance to the meta /etc/hosts files
+
 When [modifying the `/etc/hosts` file](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/meta_node_installation/#step-1-modify-the-etc-hosts-file)
 on each meta node, include the IP and host name of your InfluxDB OSS instance so
 meta nodes can communicate with the OSS instance.
 {{% /note %}}
 
-## Set up InfluxDB Enterprise data nodes
+### Set up InfluxDB Enterprise data nodes
+
 If you don't have any existing data nodes in your InfluxDB Enterprise cluster,
 [skip to the next step](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise).
 
-### For each existing data node:
+#### For each existing data node:
+
 1. **Remove the data node from the InfluxDB Enterprise cluster**
 
     From a **meta** node in your InfluxDB Enterprise cluster, run:
@@ -97,7 +104,27 @@ If you don't have any existing data nodes in your InfluxDB Enterprise cluster,
     On each **data** node, add the IP and hostname of the OSS instance to the
     `/etc/hosts` file to allow the data node to communicate with the OSS instance.
 
-## Upgrade the InfluxDB OSS instance to InfluxDB Enterprise
+### Migrate a large data set with zero downtime
+
+1. Take a portable backup from OSS and restore on the cluster. See Online backup and restore (/influxdb/v1.8/administration/backup_and_restore/#online-backup-and-restore-for-influxdb-oss).
+2. Dual write data to both OSS and Enterprise.
+3. [Export data from OSS](/enterprise_influxdb/v1.8/administration/backup-and-restore/#exporting-data) from the time the backup was taken to the time the dual write started.
+For example, if you take the backup on 2020-07-19T00:00:00.000Z, and start writing data to Enterprise at 2020-07-19T23:59:59.999Z, you could run the following command:
+
+    ```sh
+    influx_inspect export -compress -start 2020-07-19T00:00:00.000Z -end 2020-07-19T23:59:59.999Z
+    ```
+    For more information, see [`-export`](/influxdb/v1.8/tools/influx_inspect#export).
+4. [Import data into Enterprise](/enterprise_influxdb/v1.8/administration/backup-and-restore/#importing-data).
+
+### Migrate a smaller data set with downtime
+
+1. [Upgrade the InfluxDB binary on your OSS instance](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise)
+2. [Add the upgraded OSS instance to the InfluxDB Enterprise cluster](#add-the-new-data-node-to-the-cluster)
+3. [Add existing data nodes back to the cluster](#add-existing-data-nodes-back-to-the-cluster)
+4. [Rebalance the cluster](#rebalance-the-cluster)
+
+#### Upgrade the InfluxDB OSS instance to InfluxDB Enterprise
 
 1. **Stop all writes to the InfluxDB OSS instance**
 2. **Stop the `influxdb` service on the InfluxDB OSS instance**
@@ -227,8 +254,8 @@ sudo systemctl start influxdb
     {{% /code-tab-content %}}
     {{< /code-tabs-wrapper >}}
 
+#### Add the new data node to the cluster
 
-## Add the new data node to the cluster
 After you upgrade your OSS instance to InfluxDB Enterprise, add the node to your Enterprise cluster.
 
 From a **meta** node in the cluster, run:
@@ -243,7 +270,8 @@ It should output:
 Added data node y at new-data-node-hostname:8088
 ```
 
-## Add existing data nodes back to the cluster
+#### Add existing data nodes back to the cluster
+
 If you removed any existing data nodes from your InfluxDB Enterprise cluster,
 add them back to the cluster.
 
@@ -270,7 +298,8 @@ Once added to the cluster, InfluxDB synchronizes data stored on the upgraded OSS
 node with other data nodes in the cluster.
 It may take a few minutes before the existing data is available.
 
-## Rebalance the cluster
+#### Rebalance the cluster
+
 1. Use the [ALTER RETENTION POLICY](/influxdb/v1.8/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
    statement to increase the [replication factor](/enterprise_influxdb/v1.8/concepts/glossary/#replication-factor)
    on all existing retention polices to the number of data nodes in your cluster.
