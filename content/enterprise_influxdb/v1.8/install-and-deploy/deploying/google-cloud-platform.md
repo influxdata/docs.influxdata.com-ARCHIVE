@@ -71,27 +71,27 @@ Access the cluster's IP address from the GCP network (or subnetwork) specified w
 
 1. In the GCP Cloud Shell or `gcloud` CLI, create a new instance to access the InfluxDB Enterprise cluster.
 
-  ```
-  gcloud compute instances create influxdb-access --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud
-  ```
+    ```
+    gcloud compute instances create influxdb-access --image-family ubuntu-1804-lts --image-project ubuntu-os-cloud
+    ```
 
 2. SSH into the instance.
 
-  ```
-  gcloud compute ssh influxdb-access
-  ```
+    ```
+    gcloud compute ssh influxdb-access
+    ```
 
 3. On the instance, install the `influx` command line tool via the InfluxDB open source package.
 
-  ```
-  wget https://dl.influxdata.com/influxdb/releases/influxdb_1.8.10_amd64.deb
-  sudo dpkg -i influxdb_1.8.0_amd64.deb
-  ```
+    ```
+    wget https://dl.influxdata.com/influxdb/releases/influxdb_1.8.10_amd64.deb
+    sudo dpkg -i influxdb_1.8.0_amd64.deb
+    ```
 
 4. Access the InfluxDB Enterprise cluster using the following command with "Admin username", "Admin password", and "Connection internal IP" values from the deployment screen substituted for `<value>`.
 
-  ```
-  influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "CREATE DATABASE test"
+    ```
+    influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "CREATE DATABASE test"
 
-  influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "SHOW DATABASES"
-  ```
+    influx -username <Admin username> -password <Admin password> -host <Connection internal IP> -execute "SHOW DATABASES"
+    ```
