@@ -8,7 +8,7 @@ menu:
 
 ## v1.5.6 [2020-07-28]
 
-This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.5 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.6 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
 
 ## v1.5.5 [2020-04-22]
 
