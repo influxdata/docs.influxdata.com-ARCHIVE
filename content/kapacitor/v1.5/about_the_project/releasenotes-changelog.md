@@ -11,8 +11,7 @@ menu:
 
 - Add [Microsoft Teams event handler](/kapacitor/1.5/event_handlers/microsoftteams/), thanks @mmindenhall!
 - Add [Discord event handler](/kapacitor/1.5/event_handler/discord/), thanks @mattnotmitt!
-- Update release checksums (used to verify release bits haven't been tampered with) from MD5 (Message Digest, 128-bit digest) to SHA-256 (Secure Hash Algorithm 2, 256-bit digest).
-- Add support for TLS 1.3.
+- Add [support for TLS 1.3](/kapacitor/v1.5/administration/configuration//#transport-layer-security-tls-settings).
 
 ### Bug fixes
 
