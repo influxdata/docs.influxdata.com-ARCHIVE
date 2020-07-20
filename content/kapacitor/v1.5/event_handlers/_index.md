@@ -21,6 +21,7 @@ syntax for officially supported Kapacitor event handlers.
 
 [Aggregate](/kapacitor/v1.5/event_handlers/aggregate/)  
 [Alerta](/kapacitor/v1.5/event_handlers/alerta/)  
+[Discord](/kapacitor/v1.5/event_handlers/discord/)  
 [Email](/kapacitor/v1.5/event_handlers/email/)  
 [Exec](/kapacitor/v1.5/event_handlers/exec/)  
 [Hipchat](/kapacitor/v1.5/event_handlers/hipchat/)  
