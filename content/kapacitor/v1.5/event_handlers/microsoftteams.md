@@ -23,14 +23,14 @@ menu:
 2. In your `kapacitor.conf` file, add a `[teams]` section with [configuration options](#Teams-configuration-options) for the Microsoft Teams event
 handler, including the incoming webhook URL as the `channelurl`. For example:
 
-```toml
-[teams]
-  enabled = true
-  default = true
-  channel-url =  "https://outlook.office.com/webhook/..."
-  global = true
-  state-changes-only = true
-```
+  ```toml
+  [teams]
+    enabled = true
+    default = true
+    channel-url =  "https://outlook.office.com/webhook/..."
+    global = true
+    state-changes-only = true
+  ```
 
 3. To add multiple Microsoft Teams clients, repeat steps 1-2 to obtain a new web hook and add another `[teams]` section in `kapacitor.conf`.
 The `channelurl` acts as a unique identifier for each configured Teams client.
