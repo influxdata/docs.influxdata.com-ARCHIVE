@@ -5,6 +5,26 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.6 [2020-07-17]
+
+## Features
+
+- Add [Microsoft Teams event handler](/kapacitor/1.5/event_handlers/microsoftteams/), thanks @mmindenhall!
+- Add [Discord event handler](/kapacitor/1.5/event_handler/discord/), thanks @mattnotmitt!
+- Update release checksums (used to verify release bits haven't been tampered with) from MD5 (Message Digest, 128-bit digest) to SHA-256 (Secure Hash Algorithm 2, 256-bit digest).
+- Add support for TLS 1.3.
+
+### Bug fixes
+
+- Fix UDF agent Python 3.0 issues, thanks @elohmeier!
+- Add `scraper_test` package to fix discovery service lost configuration (`discovery.Config`), thanks @flisky!
+- Use `systemd` for Amazon Linux 2.
+- Correct issue with `go vet` invocation in `.hooks/pre-commit` file that caused the hook to fail, thanks @mattnotmitt!
+- Update `build.py` to support `arm64`, thanks @povlhp!
+- Fix panic when setting a zero interval for ticker, which affected deadman and stats nodes.
+- Fix a panic on int div-by-zero and return an error instead.
+- Fix issue that caused Kapacitor to ignore the `pushover().userKey('')` TICKScript operation.
+
 ## v1.5.5 [2020-04-20]
 
 ## Breaking changes
