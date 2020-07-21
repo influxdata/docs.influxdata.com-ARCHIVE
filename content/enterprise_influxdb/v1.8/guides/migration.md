@@ -15,8 +15,13 @@ Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterpri
 
 ## Prerequisites
 
-- An InfluxDB OSS instance running **InfluxDB 1.7.10 or later**.
-- An InfluxDB Enterprise cluster running **InfluxDB Enterprise 1.7.10 or later**
+- InfluxDB OSS instance of **InfluxDB 1.7.10 or later**.
+- InfluxDB Enterprise cluster running **InfluxDB Enterprise 1.7.10 or later**
+
+{{% note %}}
+Make sure your version of OSS and Enterprise is the same, for example, InfluxDB 1.8 and InfluxDB Enterprise 1.8.
+{{% /note %}}
+ InfluxDB OSS instance running An InfluxDB Enterprise cluster running
 - Network accessibility between the OSS instances and all data and meta nodes.
 
 {{% warn %}}
