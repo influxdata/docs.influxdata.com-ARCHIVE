@@ -24,7 +24,7 @@ Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterpri
 
 - Deletes data in existing InfluxDB Enterprise data nodes
 - Transfers all users from the OSS instance to the InfluxDB Enterprise cluster
-- Requires downtime for the OSS instance
+
 {{% /warn %}}
 
 ## Migrate to InfluxDB Enterprise
@@ -35,8 +35,15 @@ Complete the following tasks:
 2. [Set up InfluxDB Enterprise meta nodes](#set-up-influxdb-enterprise-meta-nodes)
 3. [Set up InfluxDB Enterprise data nodes](#set-up-influxdb-enterprise-data-nodes)
 4. Do one of the following:
-   - Migrate a large data set with zero downtime
-   - Migrate a smaller data set with downtime
+   - [Migrate a data set with zero downtime](#migrate-a-data-set-with-zero-downtime). This method lets you move data between OSS to Enterprise as you're testing the migration.
+   - [Migrate a data set with downtime](#migrate-a-data-set-with-downtime). This method is useful if you're not able to run a portable backup, for example, for any of the following reasons:
+     - Data set exceeds a certain size (roughly 10 databases or more, or more than 500 shards per database)
+     - Hardware requirements aren't available
+     - Time constraints
+
+     {{% note %}}
+     With this method, you cannot move data from Enterprise back to OSS.
+     {{% /note %}}
 
 ### Upgrade InfluxDB to the latest version
 
@@ -104,20 +111,38 @@ If you don't have any existing data nodes in your InfluxDB Enterprise cluster,
     On each **data** node, add the IP and hostname of the OSS instance to the
     `/etc/hosts` file to allow the data node to communicate with the OSS instance.
 
-### Migrate a large data set with zero downtime
+### Migrate a data set with zero downtime
 
-1. Take a portable backup from OSS and restore on the cluster. See Online backup and restore (/influxdb/v1.8/administration/backup_and_restore/#online-backup-and-restore-for-influxdb-oss).
-2. Dual write data to both OSS and Enterprise.
-3. [Export data from OSS](/enterprise_influxdb/v1.8/administration/backup-and-restore/#exporting-data) from the time the backup was taken to the time the dual write started.
-For example, if you take the backup on 2020-07-19T00:00:00.000Z, and start writing data to Enterprise at 2020-07-19T23:59:59.999Z, you could run the following command:
+1. Take a portable backup from OSS:
 
     ```sh
-    influx_inspect export -compress -start 2020-07-19T00:00:00.000Z -end 2020-07-19T23:59:59.999Z
+     influxd backup -portable -host <IP address>:8088 /tmp/mysnapshot
     ```
-    For more information, see [`-export`](/influxdb/v1.8/tools/influx_inspect#export).
-4. [Import data into Enterprise](/enterprise_influxdb/v1.8/administration/backup-and-restore/#importing-data).
 
-### Migrate a smaller data set with downtime
+    For more information, see [`-backup`](/influxdb/v1.8/administration/backup_and_restore/#backup)
+2. Restore on the cluster by running the following:
+
+    ```sh
+    influxd restore -portable  [ -host <host:port> ] <path-to-backup-files>
+    ```
+
+    For more information, see [`-restore`](/influxdb/v1.8/administration/backup_and_restore/#restore)
+3. Dual write to both OSS and Enterprise. See [Write data with the InfluxDB API] (https://docs.influxdata.com/influxdb/v1.8/guides/write_data/). This keeps the OSS and cluster active for testing and acceptance work.
+4. [Export data from OSS](/enterprise_influxdb/v1.8/administration/backup-and-restore/#exporting-data) from the time the backup was taken to the time the dual write started.
+For example, if you take the backup on 2020-07-19T00:00:00.000Z, and started writing data to Enterprise at 2020-07-19T23:59:59.999Z, you could run the following command:
+
+    ```sh
+    influx_inspect export -compress -start 2020-07-19T00:00:00.000Z -end 2020-07-19T23:59:59.999Z`
+    ```
+    
+    For more information, see [`-export`](/influxdb/v1.8/tools/influx_inspect#export).
+5. [Import data into Enterprise](/enterprise_influxdb/v1.8/administration/backup-and-restore/#importing-data).
+6. Verify data is successfully migrated. To review your data, see how to:
+   - [Query data with the InfluxDB API](https://docs.influxdata.com/influxdb/v1.8/guides/query_data/#sidebar)
+   - [View data in Chronograf](https://docs.influxdata.com/chronograf/v1.8/)
+7. Stop writing data to OSS.
+
+### Migrate a data set with downtime
 
 1. [Upgrade the InfluxDB binary on your OSS instance](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise)
 2. [Add the upgraded OSS instance to the InfluxDB Enterprise cluster](#add-the-new-data-node-to-the-cluster)
