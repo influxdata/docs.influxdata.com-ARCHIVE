@@ -18,9 +18,9 @@ Migrate a running instance of InfluxDB open source (OSS) to an InfluxDB Enterpri
 - InfluxDB OSS instance of **InfluxDB 1.7.10 or later**.
 - InfluxDB Enterprise cluster running **InfluxDB Enterprise 1.7.10 or later**
 
-    {{% note %}}
-    Make sure your version of OSS and Enterprise is the same, for example, InfluxDB 1.8 and InfluxDB Enterprise 1.8.
-    {{% /note %}}
+  {{% note %}}
+  Make sure your OSS and Enterprise version is the same, for example, InfluxDB 1.8 and InfluxDB Enterprise 1.8.
+  {{% /note %}}
 
 - Network accessibility between the OSS instances and all data and meta nodes.
 
