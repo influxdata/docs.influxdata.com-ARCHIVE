@@ -52,6 +52,12 @@ to average values within time windows.
 Flux's [`window()` function](/flux/v0.65/stdlib/built-in/transformations/window) partitions records based on a time value.
 Use the `every` parameter to define a duration of time for each window.
 
+{{% note %}}
+#### Calendar months and years
+`every` supports all [valid duration units](/flux/v0.65/language/types/#duration-types),
+including **calendar months (`1mo`)** and **years (`1y`)**.
+{{% /note %}}
+
 For this example, window data in five minute intervals (`5m`).
 
 ```js

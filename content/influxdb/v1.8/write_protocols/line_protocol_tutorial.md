@@ -62,6 +62,9 @@ In the example, the measurement name is `weather`.
 The [tag(s)](/influxdb/v1.8/concepts/glossary/#tag) that you want to include
 with your data point.
 Tags are optional in line protocol.
+
+> **Note:** Avoid using the reserved keys `_field`, `_measurement`, and `time`. If reserved keys are included as a tag or field key, the associated point is discarded.
+
 Notice that the measurement and tag set are separated by a comma and no spaces.
 
 Separate tag key-value pairs with an equals sign `=` and no spaces:

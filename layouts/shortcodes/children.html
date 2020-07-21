@@ -1,4 +1,7 @@
+{{ $type := .Get "type" | default "articles" }}
 {{ $show := .Get "show" | default "all" }}
+{{ $readMore := .Get "readmore" | default "false" }}
+{{ $hr := .Get "hr" | default "false" }}
 
 {{ if eq $show "all" }}
 	{{ .Scratch.Set "pages" (union (where .Page.Pages "Kind" "page") .Page.Sections) }}
@@ -10,12 +13,94 @@
 
 {{ $pages := .Scratch.Get "pages" }}
 
-{{ range $pages.ByWeight }}
-	{{ $id := replaceRE "[^a-z0-9]" "-" (lower .Title) }}
-	<h2 id='#{{ $id }}'><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-	<p>
-		{{- if .Description }}{{- .Description | markdownify -}}
-		{{ else }}{{- .Summary | markdownify -}}
-		{{ end -}}
-	</p>
+{{ if eq $type "articles" }}
+	<div class="children-links">
+		{{ range $pages.ByWeight }}
+			{{ $title := cond ( isset .Params "list_title" ) .Params.list_title .Title }}
+			{{ $url := cond ( isset .Params "external_url" ) .Params.external_url .RelPermalink }}
+			{{ $target := cond ( isset .Params "external_url" ) "_blank" "" }}
+			{{ $id := replaceRE "[^a-z0-9]" "-" (lower $title) }}
+			<h3 id="{{ $id }}"><a href="{{ $url }}" target="{{ $target }}">{{ $title }}</a></h3>
+			<p>
+				{{- if .Description }}{{- .Description | markdownify -}}
+				{{ else }}{{- .Summary | markdownify -}}
+				{{ end -}}
+			</p>
+			{{ if .Params.list_image }}
+				{{ $img := .Params.list_image }}
+				{{ if (fileExists ( print "/static" $img )) }}
+					{{ with (imageConfig ( print "/static" $img )) }}
+						{{ $imageWidth := div .Width 3 }}
+						<img src='{{ $img }}' width='{{ $imageWidth }}' />
+					{{ end }}
+				{{ else }}
+					<img src='{{ $img }}'/>
+				{{ end }}
+			{{ end }}
+			{{ if .Params.list_code_example }}
+				{{ .Params.list_code_example | markdownify }}
+			{{ end }}
+
+			{{ if .Params.list_query_example }}
+				{{ range (index .Site.Data.query_examples .Params.list_query_example) }}
+					{{ .code | markdownify }}
+					<div class="flex-wrapper">
+						<div class="flex-container half">
+							<h6>Input:</h6>
+							{{ .input | markdownify }}
+						</div>
+						<div class="flex-container half">
+							<h6>Output:</h6>
+							{{ .output | markdownify }}
+						</div>
+					</div>
+				{{ end }}
+			{{ end }}
+
+			{{ if and (eq $readMore "true") ( or (isset .Params "list_query_example") (isset .Params "list_code_example") ) }}
+				<p style="text-align: right"><em><a href="{{ $url }}" target="{{ $target }}">Read more <span class="icon-chevron-right"></span></a></em></p>
+			{{ end }}
+			{{ if eq $hr "true" }}
+				<hr />
+			{{ end }}
+	{{ end }}
+	</div>
+
+{{ else if (eq $type "functions") }}
+
+	<div class="children-links">
+		{{ .Scratch.Set "pages" (where .Page.Pages "Kind" "page") }}
+		{{ $pages := .Scratch.Get "pages" }}
+		<ul>
+		{{ range $pages.ByWeight }}
+			{{ $title := replaceRE `\ function` "" .Title }}
+			<li><a href="{{ .RelPermalink }}">{{ if .Params.list_title }}{{ .Params.list_title }}{{ else }}{{ $title }}{{ end }}</a></li>
+		{{ end }}
+		</ul>
+	</div>
+
+{{ else if (eq $type "list") }}
+
+	<div class="children-links">
+		<ul>
+		{{ range $pages.ByWeight }}
+			{{ $title := cond ( isset .Params "list_title" ) .Params.list_title .Title }}
+		  {{ $url := cond ( isset .Params "external_url" ) .Params.external_url .RelPermalink }}
+			{{ $target := cond ( isset .Params "external_url" ) "_blank" "" }}
+			{{ $note := cond ( isset .Params "list_note" ) (print "<span class='list-note'>" .Params.list_note "</span>") "" }}
+			<li><a href="{{ $url }}" target="{{ $target }}">{{ $title }}</a> {{ $note | markdownify }}</li>
+		{{ end }}
+		</ul>
+	</div>
+
+{{ else if (eq $type "anchored-list") }}
+
+	<ul>
+	{{ range $pages.ByWeight }}
+		{{ $title := cond ( isset .Params "list_title" ) .Params.list_title .Title }}
+		{{ $id := replaceRE "[^a-z0-9]" "-" (lower $title) }}
+		<li><a href="#{{ $id }}">{{ $title }}</a></li>
+	{{ end }}
+	</ul>
+
 {{ end }}

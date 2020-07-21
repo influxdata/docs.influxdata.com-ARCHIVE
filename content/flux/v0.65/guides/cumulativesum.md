@@ -1,12 +1,15 @@
 ---
 title: Query cumulative sum
+seotitle: Query cumulative sum in Flux
+list_title: Cumulative sum
 description: >
   Use the `cumulativeSum()` function to calculate a running total of values.
 weight: 10
 menu:
   flux_0_65:
-    parent: Guides
-    name: Query the cumulative sum
+    parent: Query with Flux
+    name: Cumulative sum
+list_query_example: cumulative_sum
 ---
 
 Use the [`cumulativeSum()` function](/flux/v0.65/stdlib/built-in/transformations/cumulativesum/)
@@ -46,7 +49,7 @@ data
   |> cumulativeSum()
 ```
 
-### Use cumulativeSum() with aggregateWindow()
+## Use cumulativeSum() with aggregateWindow()
 [`aggregateWindow()`](/flux/v0.65/stdlib/built-in/transformations/aggregates/aggregatewindow/)
 segments data into windows of time, aggregates data in each window into a single
 point, then removes the time-based segmentation.

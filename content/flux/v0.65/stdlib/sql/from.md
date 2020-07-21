@@ -70,7 +70,7 @@ import "sql"
 sql.from(
  driverName: "mysql",
  dataSourceName: "user:password@tcp(localhost:3306)/db",
- query:"SELECT * FROM ExampleTable"
+ query:"SELECT * FROM example_table"
 )
 ```
 
@@ -81,7 +81,7 @@ import "sql"
 sql.from(
   driverName: "postgres",
   dataSourceName: "postgresql://user:password@localhost",
-  query:"SELECT * FROM ExampleTable"
+  query:"SELECT * FROM example_table"
 )
 ```
 
@@ -99,6 +99,6 @@ import "sql"
 sql.from(
   driverName: "sqlite3",
   dataSourceName: "file:/path/to/test.db?cache=shared&mode=ro",
-  query:"SELECT * FROM ExampleTable"
+  query:"SELECT * FROM example_table"
 )
 ```

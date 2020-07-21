@@ -117,12 +117,10 @@ If there are any existing backups the current directory, the system performs an 
 If there aren't any existing backups in the current directory, the system performs a backup of all data in InfluxDB.
 
 ```bash
+# Syntax
 influxd-ctl backup .
-```
 
-Output:
-
-```bash
+# Example
 $ influxd-ctl backup .
 Backing up meta data... Done. 421 bytes transferred
 Backing up node 7ba671c7644b:8088, db telegraf, rp autogen, shard 4... Done. Backed up in 903.539567ms, 307712 bytes transferred
@@ -141,18 +139,16 @@ Perform a full backup into a specific directory with the command below.
 The directory must already exist.
 
 ```bash
+# Sytnax
 influxd-ctl backup -full <path-to-backup-directory>
-```
 
-Output:
-
-```bash
+# Example
 $ influxd-ctl backup -full backup_dir
 Backing up meta data... Done. 481 bytes transferred
 Backing up node <hostname>:8088, db _internal, rp monitor, shard 1... Done. Backed up in 33.207375ms, 238080 bytes transferred
 Backing up node <hostname>:8088, db telegraf, rp autogen, shard 2... Done. Backed up in 15.184391ms, 95232 bytes transferred
 Backed up to backup_dir in 51.388233ms, transferred 333793 bytes
-~# ls backup_dir
+$ ls backup_dir
 20170130T184058Z.manifest
 20170130T184058Z.meta
 20170130T184058Z.s1.tar.gz
@@ -164,12 +160,10 @@ Backed up to backup_dir in 51.388233ms, transferred 333793 bytes
 Point at a remote meta server and back up only one database into a given directory (the directory must already exist):
 
 ```bash
+# Syntax
 influxd-ctl -bind <metahost>:8091 backup -db <db-name> <path-to-backup-directory>
-```
 
-Output:
-
-```bash
+# Example
 $ influxd-ctl -bind 2a1b7a338184:8091 backup -db telegraf ./telegrafbackup
 Backing up meta data... Done. 318 bytes transferred
 Backing up node 7ba671c7644b:8088, db telegraf, rp autogen, shard 4... Done. Backed up in 997.168449ms, 399872 bytes transferred
@@ -184,12 +178,10 @@ Perform a meta store only backup into a specific directory with the command belo
 The directory must already exist.
 
 ```bash
+# Syntax
 influxd-ctl backup -strategy only-meta <path-to-backup-directory>
-```
 
-Output:
-
-```bash
+# Example
 $ influxd-ctl backup -strategy only-meta backup_dir
 Backing up meta data... Done. 481 bytes transferred
 Backed up to backup_dir in 51.388233ms, transferred 481 bytes
@@ -233,19 +225,21 @@ In addition, restores to a new cluster drop any data in the new cluster's
 The restore does not write the existing cluster's `_internal` database to
 the new cluster.
 
-#### Syntax to restore from an incremental backup
+#### Syntax to restore from incremental and metadata backups
 
-Use the syntax below to restore an incremental backup to a new cluster or an existing cluster.
-Note that the existing cluster must contain no data in the affected databases.*
+Use the syntax below to restore an incremental or metadata backup to a new cluster or an existing cluster.
+**The existing cluster must contain no data in the affected databases.**
 Performing a restore from an incremental backup requires the path to the incremental backup's directory.
 
 ```bash
 influxd-ctl [global-options] restore [restore-options] <path-to-backup-directory>
 ```
 
-\* The existing cluster can have data in the `_internal` database, the database
-that the system creates by default.
+{{% note %}}
+The existing cluster can have data in the `_internal` database (the database InfluxDB creates if
+[internal monitoring](/platform/monitoring/influxdata-platform/tools/measurements-internal) is enabled).
 The system automatically drops the `_internal` database when it performs a complete restore.
+{{% /note %}}
 
 ##### Global options
 
@@ -297,12 +291,10 @@ for a complete list of the global `influxd-ctl` options.
 ##### Restore from an incremental backup
 
 ```bash
+# Syntax
 influxd-ctl restore <path-to-backup-directory>
-```
 
-Output:
-
-```bash
+# Example
 $ influxd-ctl restore my-incremental-backup/
 Using backup directory: my-incremental-backup/
 Using meta backup: 20170130T231333Z.meta
@@ -312,15 +304,30 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 83.892591ms, transferred 588800 bytes
 ```
 
+##### Restore from a metadata backup
+
+In this example, the `restore` command restores an metadata backup stored
+in the `metadata-backup/` directory.
+
+```bash
+# Syntax
+influxd-ctl restore <path-to-backup-directory>
+
+# Example
+$ influxd-ctl restore metadata-backup/
+Using backup directory: metadata-backup/
+Using meta backup: 20200101T000000Z.meta
+Restoring meta data... Done. Restored in 21.373019ms, 1 shards mapped
+Restored from my-incremental-backup/ in 19.2311ms, transferred 588 bytes
+```
+
 ##### Restore from a `-full` backup
 
 ```bash
+# Syntax
 influxd-ctl restore -full <path-to-manifest-file>
-```
 
-Output:
-
-```bash
+# Example
 $ influxd-ctl restore -full my-full-backup/20170131T020341Z.manifest
 Using manifest: my-full-backup/20170131T020341Z.manifest
 Restoring meta data... Done. Restored in 9.585639ms, 1 shards mapped
@@ -329,15 +336,18 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-full-backup in 58.58301ms, transferred 569344 bytes
 ```
 
+{{% note %}}
+Restoring from a full backup **does not** restore metadata.
+To restore metadata, [restore a metadata backup](#restore-from-a-metadata-backup) separately.
+{{% /note %}}
+
 ##### Restore from an incremental backup for a single database and give the database a new name
 
 ```bash
+# Syntax
 influxd-ctl restore -db <src> -newdb <dest> <path-to-backup-directory>
-```
 
-Output:
-
-```bash
+# Example
 $ influxd-ctl restore -db telegraf -newdb restored_telegraf my-incremental-backup/
 Using backup directory: my-incremental-backup/
 Using meta backup: 20170130T231333Z.meta
@@ -391,7 +401,9 @@ time                  written
 
 ##### Restore writes information not part of the original backup
 
-If a [restore from an incremental backup](#syntax-to-restore-from-an-incremental-backup) does not limit the restore to the same database, retention policy, and shard specified by the backup command, the restore may appear to restore information that was not part of the original backup.
+If a [restore from an incremental backup](#syntax-to-restore-from-incremental-and-metadata-backups)
+does not limit the restore to the same database, retention policy, and shard specified by the backup command,
+the restore may appear to restore information that was not part of the original backup.
 Backups consist of a shard data backup and a metastore backup.
 The **shard data backup** contains the actual time series data: the measurements, tags, fields, and so on.
 The **metastore backup** contains user information, database names, retention policy names, shard metadata, continuous queries, and subscriptions.

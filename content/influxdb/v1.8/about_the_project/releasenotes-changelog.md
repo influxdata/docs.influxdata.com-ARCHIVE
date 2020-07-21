@@ -7,6 +7,26 @@ menu:
     parent: About the project
 ---
 
+## v1.8.1 [2020-07-14]
+
+### Features
+
+- Allow users to add custom HTTP response headers to comply with internal security policies.
+
+### Performance improvements
+
+- InfluxQL query planner plans each field in parallel to improve planning time.
+- Improved performance of DELETE/DROP by batching tombstone writes.
+
+### Bug fixes
+
+- Fix to Flux `buckets()` function causing a panic.
+- TSI: Addressed a couple of edge cases which resulted in segfaults.
+- HTTP: Simplify Authorizer.
+- Wait to delete epoch before dropping shard.
+- Improve error handling when creating snapshots.
+- Remove all Go 1.12 references from build.
+
 ## v1.8.0 [2020-4-13]
 
 ### Features
@@ -65,6 +85,18 @@ while readying your implementation for a move to InfluxDB 2.0 Cloud when you're 
 - Fix bugs in `-compact-series-file` flag.
 - Fix a SIGSEGV when accessing `tsi` active log.
 - Verify precision in write requests.
+
+## v1.7.10 [2020-02-07]
+
+### Bug fixes
+- Fix failing corrupt data file renaming process.
+- Make shard digests safe for concurrent use.
+- Fix defect in TSI index where negative equality filters (`!=`) could result in no matching series.
+- Fix compaction logic on infrequent cache snapshots which resulted in frequent full
+  compactions rather than [level compactions](/influxdb/v1.7/concepts/storage_engine/#compactions).
+- Fix for series key block data being truncated when read into an empty buffer.
+  Ensure all block data is returned.
+- During compactions, skip TSM files with block read errors from previous compactions.
 
 ## v1.7.9 [2019-10-27]
 

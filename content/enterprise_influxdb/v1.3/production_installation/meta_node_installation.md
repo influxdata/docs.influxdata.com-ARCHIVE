@@ -125,14 +125,14 @@ The `license-key` and `license-path` settings are mutually exclusive and one mus
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<enterprise-meta-0x>" #✨
+hostname="<enterprise-meta-0x>" 
 
 [enterprise]
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 ```
 
 ### III. Start the meta service

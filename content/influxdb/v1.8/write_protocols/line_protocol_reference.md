@@ -43,7 +43,7 @@ InfluxDB line protocol informs InfluxDB of the data's measurement, tag set, fiel
 
 | Datatype     | Element(s)  | Description  |
 | :----------- | :------------------------ |:------------ |
-| Float | Field values |  IEEE-754 64-bit floating-point numbers. This is the default numerical type. Examples: `1`, `1.0`, `1.e+78`, `1.E+78`. |
+| Float | Field values |  Default numerical type. IEEE-754 64-bit floating-point numbers (except NaN or +/- Inf). Examples: `1`, `1.0`, `1.e+78`, `1.E+78`. |
 | Integer | Field values | Signed 64-bit integers (-9223372036854775808 to 9223372036854775807). Specify an integer with a trailing `i` on the number. Example: `1i`. |
 | String | Measurements, tag keys, tag values, field keys, field values | Length limit 64KB. |
 | Boolean | Field values | Stores TRUE or FALSE values.<br><br>TRUE write syntax:`[t, T, true, True, TRUE]`.<br><br>FALSE write syntax:`[f, F, false, False, FALSE]` |
@@ -248,6 +248,8 @@ as [identifier](/influxdb/v1.8/concepts/glossary/#identifier) names.
 In general, we recommend avoiding using InfluxQL keywords in your schema as
 it can cause
 [confusion](/influxdb/v1.8/troubleshooting/errors/#error-parsing-query-found-expected-identifier-at-line-char) when querying the data.
+
+> **Note:** Avoid using the reserved keys `_field` and `_measurement`. If these keys are included as a tag or field key, the associated point is discarded.
 
 The keyword `time` is a special case.
 `time` can be a

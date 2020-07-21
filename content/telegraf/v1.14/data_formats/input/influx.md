@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: InfluxDB Line Protocol input
     weight: 60
-    parent: Input data formats
+    parent: Input data formats (parsers)
 ---
 
 There are no additional configuration options for InfluxDB [line protocol][]. The

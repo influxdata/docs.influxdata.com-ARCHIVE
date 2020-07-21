@@ -20,4 +20,4 @@ Import the `experimental/http` package:
 import "experimental/http"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

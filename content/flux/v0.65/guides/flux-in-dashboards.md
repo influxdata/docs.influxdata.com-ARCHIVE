@@ -1,11 +1,13 @@
 ---
-title: How to use Flux in Chronograf dashboards
-description: This guide walks through using Flux queries in Chronograf dashboard cells, what template variables are available, and how to use them.
+title: Use Flux in Chronograf dashboards
+description: >
+  This guide walks through using Flux queries in Chronograf dashboard cells,
+  what template variables are available, and how to use them.
 menu:
   flux_0_65:
     name: Use Flux in dashboards
-    parent: Guides
-    weight: 1
+    parent: Query with Flux
+weight: 30
 ---
 
 [Chronograf](/chronograf/latest/) is the web user interface for managing for the
@@ -124,7 +126,7 @@ dataSet
 The `autoInterval` template variable represents the refresh interval of the dashboard
 and is controlled by the refresh interval dropdown.
 It's typically used to align window intervals created in
-[windowing and aggregation](/flux/v0.65/guides/windowing-aggregating) operations with dashboard refreshes.
+[windowing and aggregation](/flux/v0.65/guides/window-aggregate) operations with dashboard refreshes.
 
 ```js
 dataSet

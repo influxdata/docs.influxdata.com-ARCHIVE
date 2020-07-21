@@ -18,7 +18,7 @@ _**Output data type:** Boolean_
 ```js
 import "strings"
 
-strings.hasSuffix(v: "go gopher", t: "go")
+strings.hasSuffix(v: "go gopher", prefix: "go")
 
 // returns false
 ```
@@ -30,7 +30,7 @@ The string value to search.
 
 _**Data type:** String_
 
-### t
+### prefix
 The suffix to search for.
 
 _**Data type:** String_
@@ -40,5 +40,5 @@ _**Data type:** String_
 import "strings"
 
 data
-  |> filter(fn:(r) => strings.hasSuffix(v: r.metric, t: "_count" ))
+  |> filter(fn:(r) => strings.hasSuffix(v: r.metric, prefix: "_count" ))
 ```

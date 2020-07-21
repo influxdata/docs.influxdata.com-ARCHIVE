@@ -1,16 +1,16 @@
 ---
-title: Deploy the TICK stack in containers
+title: Deploy the TICK stack
 description: Easy ways to deploy the TICK stack on the platform you use.
 menu:
   platform:
-    name: Deploy InfluxData Platform in containers
+    name: Deploy InfluxData Platform
     identifier: deploy-platform
     weight: 22
     parent: install-and-deploy-platform
 ---
 
 There are multiple ways to deploy the InfluxData Platform (also known
-as the TICK stack) in containers. See if one of the following container-based
+as the TICK stack). See if one of the following container-based
 installation options meets your requirements.
 
 ## Deploy the InfluxData Platform in Docker containers

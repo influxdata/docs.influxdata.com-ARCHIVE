@@ -39,7 +39,6 @@ The `influx_inspect` commands are summarized here, with links to detailed inform
 * [`verify-seriesfile`](#verify-seriesfile): Verifies the integrity of series files.
 * [`verify-tombstone`](#verify-tombstone): Verifies the integrity of tombstones.
 
-
 ### `buildtsi`
 
 Builds TSI (Time Series Index) disk-based shard index files and associated series files.
@@ -58,7 +57,6 @@ influx_inspect buildtsi -datadir <data_dir> -waldir <wal_dir> [ options ]
 ```
 > **Note:** Use the `buildtsi` command with the user account that you are going to run the database as,
 > or ensure that the permissions match after running the command.
-
 
 #### Options
 
@@ -114,7 +112,6 @@ Flag to enable output in verbose mode.
 
 The directory for the WAL (Write Ahead Log) files.
 
-
 #### Examples
 
 ##### Converting all shards on a node
@@ -139,7 +136,8 @@ $ influx_inspect buildtsi -database stress -shard 1 -datadir ~/.influxdb/data -w
 
 ### `deletetsm`
 
-Bulk deletes a measurement from a raw TSM file.
+Use `deletetsm -measurement` to delete a measurement in a raw TSM file (from specified shards).
+Use `deletetsm -sanitize` to remove all tag and field keys containing non-printable Unicode characters in a raw TSM file (from specified shards).
 
 {{% warn %}} **Warning:** Use the `deletetsm` command only when your InfluxDB instance is offline (`influxd` service is not running).{{% /warn %}}
 
@@ -156,31 +154,36 @@ When specifying the path, wildcards (`*`) can replace one or more characters.
 
 #### Options
 
-Optional arguments are in brackets.
+Either the `-measurement` or `-sanitize` flag is required.
 
 ##### `-measurement`
 
 The name of the measurement to delete from TSM files.
 
-##### [ `-sanitize` ]
+##### `-sanitize`
 
-Flag to remove all keys containing non-printable Unicode characters.
+Flag to remove all keys containing non-printable Unicode characters from TSM files.
 
-##### [ `-v` ]
+##### `-v`
 
-Flag to enable verbose logging.
+Optional. Flag to enable verbose logging.
 
 #### Examples
 
 ##### Delete a measurement from a single shard
 
-```
-./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/1384/*.tsm
-```
-##### Delete a measurement from all shards in the database
+Delete the measurement `h2o_feet` from a single shard.
 
 ```
-./influx_inspect deletetsm -sanitize /influxdb/data/location/autogen/*/*.tsm
+./influx_inspect deletetsm -measurement h2o_feet /influxdb/data/location/autogen/1384/*.tsm
+```
+
+##### Delete a measurement from all shards in the database
+
+Delete the measurement `h2o_feet` from all shards in the database.
+
+```
+./influx_inspect deletetsm -measurement h2o_feet /influxdb/data/location/autogen/*/*.tsm
 ```
 
 ### `dumptsi`

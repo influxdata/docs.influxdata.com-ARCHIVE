@@ -267,7 +267,7 @@ View the default configuration settings with the `influxd config` command.
 Otherwise the data will be publicly available to any unauthenticated user. The default settings do **NOT** enable 
 authentication and authorization. Further, authentication and authorization should not be solely relied upon to prevent access
 and protect data from malicious actors. If additional security or compliance features are desired, InfluxDB should be run 
-behind a third-party service. Review the [authentication and authorization](/administration/authentication_and_authorization/) 
+behind a third-party service. Review the [authentication and authorization](/influxdb/v1.8/administration/authentication_and_authorization/) 
 settings.
 
 Most of the settings in the local configuration file

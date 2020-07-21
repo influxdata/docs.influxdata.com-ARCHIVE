@@ -42,6 +42,12 @@ To learn why, see [Match parameter names](/flux/v0.65/language/data-model/#match
 ### every
 The duration of windows.
 
+{{% note %}}
+#### Calendar months and years
+`every` supports all [valid duration units](/flux/v0.65/language/types/#duration-types),
+including **calendar months (`1mo`)** and **years (`1y`)**.
+{{% /note %}}
+
 _**Data type:** Duration_
 
 ### fn
@@ -79,34 +85,45 @@ Defaults to `true`.
 _**Data type:** Boolean_
 
 ## Examples
+The examples below use a `data` variable to represent a filtered data set.
 
-###### Using an aggregate function with default parameters
 ```js
-from(bucket: "telegraf/autogen")
-  |> range(start: 1h)
+data = from(bucket: "example-bucket")
+  |> range(start: -1h)
   |> filter(fn: (r) =>
     r._measurement == "mem" and
     r._field == "used_percent")
+```
+
+##### Use an aggregate function with default parameters
+The following example uses the default parameters of the
+[`mean()` function](/flux/v0.65/stdlib/built-in/transformations/aggregates/mean/)
+to aggregate time-based windows:
+
+```js
+data
   |> aggregateWindow(
     every: 5m,
     fn: mean
   )
 ```
-###### Specify parameters of the aggregate function
+##### Specify parameters of the aggregate function
 To use functions that don't provide defaults for required parameters with `aggregateWindow()`,
-define an anonymous function with `column` and `tables` parameters that pipe-forward
+define an anonymous function with `column` and `tables` parameters that pipes-forward
 tables into the aggregate or selector function with all required parameters defined:
 
 ```js
-from(bucket: "telegraf/autogen")
-  |> range(start: 1h)
-  |> filter(fn: (r) =>
-    r._measurement == "mem" and
-    r._field == "used_percent")
+data
   |> aggregateWindow(
     every: 5m,
     fn: (column, tables=<-) => tables |> quantile(q: 0.99, column:column)
   )
+```
+
+##### Window and aggregate by calendar month
+```js
+data
+  |> aggregateWindow(every: 1mo, fn: mean)
 ```
 
 ## Function definition
@@ -123,4 +140,4 @@ aggregateWindow = (every, fn, columns=["_value"], timeColumn="_stop", timeDst="_
 
 ##### Related InfluxQL functions and statements:
 [InfluxQL aggregate functions](/influxdb/latest/query_language/functions/#aggregations)  
-[GROUP BY time()](/influxdb/latest/query_language/data_exploration/#the-group-by-clause)  
+[GROUP BY time()](/influxdb/latest/query_language/explore-data/#the-group-by-clause)  

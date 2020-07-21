@@ -122,6 +122,13 @@ Tags are optional.
 You don't need to have tags in your data structure, but it's generally a good idea to make use of them because, unlike fields, tags are indexed.
 This means that queries on tags are faster and that tags are ideal for storing commonly-queried metadata.
 
+Avoid using the following reserved keys:
+* `_field`
+* `_measurement`
+* `time`
+
+If reserved keys are used as a tag or field key, the associated point is discarded.
+
 > **Why indexing matters: The schema case study**
 
 > Say you notice that most of your queries focus on the values of the field keys `honeybees` and `butterflies`:

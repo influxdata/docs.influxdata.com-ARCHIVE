@@ -122,20 +122,20 @@ Entering the IP or hostname alone will lead to errors.
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<enterprise-meta-0x>" #✨
+hostname="<enterprise-meta-0x>" 
 
 [enterprise]
   # Must be set to true to use the Enterprise Web UI
-  registration-enabled = true #✨
+  registration-enabled = true 
 
   # Must include the protocol (http://)
-  registration-server-url = "http://<web-console-server-IP>:3000" #✨
+  registration-server-url = "http://<web-console-server-IP>:3000" 
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 ```
 
 ### III. Start the Meta Service

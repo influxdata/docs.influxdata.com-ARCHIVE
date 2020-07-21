@@ -130,14 +130,14 @@ The `license-key` and `license-path` settings are mutually exclusive and one mus
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<quickstart-cluster-0x>" #✨
+hostname="<quickstart-cluster-0x>"
 
 [enterprise]
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 ```
 
 > **Note:** The `hostname` in the configuration file must match the `hostname` in your server's `/etc/hosts` file.
@@ -200,19 +200,19 @@ Second, in `/etc/influxdb/influxdb.conf`, set:
 The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 {{% /warn %}}
 
-```
+```toml
 # Change this option to true to disable reporting.
 # reporting-disabled = false
 # bind-address = ":8088"
-hostname="<quickstart-cluster-0x>" #✨
+hostname="<quickstart-cluster-0x>"
 
 [enterprise]
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # The path to a valid license file.  license-key and license-path are mutually exclusive,
   # use only one and leave the other blank.
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 
 [meta]
   # Where the cluster metadata is stored
@@ -228,12 +228,12 @@ hostname="<quickstart-cluster-0x>" #✨
   # bind-address = ":8086"
 
   # Determines whether HTTP authentication is enabled.
-  auth-enabled = true #✨ this is recommended but not required
+  auth-enabled = true # Recommended, but not required
 
 [...]
 
   # The JWT auth shared secret to validate requests using JSON web tokens.
-  shared-secret = "long pass phrase used for signing tokens" #✨
+  shared-secret = "long pass phrase used for signing tokens"
 ```
 > **Note:** The `hostname` in the configuration file must match the `hostname` in your server's `/etc/hosts` file.
 

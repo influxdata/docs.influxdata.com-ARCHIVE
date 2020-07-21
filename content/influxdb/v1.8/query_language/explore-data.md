@@ -133,6 +133,8 @@ Other supported features:
 [Basic cast operations](#data-types-and-cast-operations),
 [Regular expressions](#regular-expressions)
 
+> **Note:** The SELECT statement cannot include an aggregate function **and** a non-aggregate function, field key, or tag key. For more information, see [error about mixing aggregate and non-aggregate queries](/influxdb/v1.8/troubleshooting/errors/#error-parsing-query-mixing-aggregate-and-non-aggregate-queries-is-not-supported).
+
 #### `FROM` clause
 
 The `FROM` clause supports several formats for specifying a [measurement(s)](/influxdb/v1.8/concepts/glossary/#measurement):
@@ -267,7 +269,7 @@ The `SELECT` clause supports combining the `*` syntax with the `::` syntax.
 #### Select a specific field from a measurement and perform basic arithmetic
 
 ```sql
-> SELECT ("water_level" * 2) + 4 from "h2o_feet"
+> SELECT ("water_level" * 2) + 4 FROM "h2o_feet"
 
 name: h2o_feet
 --------------
@@ -417,7 +419,7 @@ SELECT_clause FROM_clause WHERE <conditional_expression> [(AND|OR) <conditional_
 The `WHERE` clause supports `conditional_expression`s on fields, tags, and
 timestamps.
 
->**Note** InfluxDB does not support using OR in the WHERE clause to specify multiple time ranges. For example, InfluxDB will return an empty response for the following query:
+>**Note** InfluxDB does not support using OR in the WHERE clause to specify multiple time ranges. For example, InfluxDB returns an empty response for the following query:
 
 `> SELECT * FROM "absolutismus" WHERE time = '2016-07-31T20:07:00Z' OR time = '2016-07-31T23:07:17Z'`
 
@@ -661,8 +663,12 @@ time                   level description
 
 # The GROUP BY clause
 
-The `GROUP BY` clause groups query results by a user-specified
-set of [tags](/influxdb/v1.8/concepts/glossary/#tag) or a time interval.
+The `GROUP BY` clause groups query results by:
+
+- one or more specified [tags](/influxdb/v1.8/concepts/glossary/#tag)
+- specified time interval
+
+>**Note:** You cannot use `GROUP BY` to group fields.
 
 <table style="width:100%">
   <tr>
@@ -683,9 +689,9 @@ set of [tags](/influxdb/v1.8/concepts/glossary/#tag) or a time interval.
 
 ## GROUP BY tags
 
-`GROUP BY <tag>` queries group query results by a user-specified set of [tags](/influxdb/v1.8/concepts/glossary/#tag).
+`GROUP BY <tag>` groups query results by one or more specified [tags](/influxdb/v1.8/concepts/glossary/#tag).
 
-Tired of reading? Check out this InfluxQL Short:
+Watch InfluxQL short about `GROUP BY` with tags:
 <br>
 <br>
 <iframe src="https://player.vimeo.com/video/200898048?title=0&byline=0&portrait=0" width="60%" height="250px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -744,7 +750,7 @@ If you request a query that has no timestamp to return, such as an [aggregation 
 ##### Group query results by more than one tag
 
 ```sql
-> SELECT MEAN("index") FROM "h2o_quality" GROUP BY location,randtag
+> SELECT MEAN("index") FROM "h2o_quality" GROUP BY "location","randtag"
 
 name: h2o_quality
 tags: location=coyote_creek, randtag=1
@@ -1067,7 +1073,7 @@ for details on the `time_interval`.
 
 The `offset_interval` is a
 [duration literal](/influxdb/v1.8/query_language/spec/#durations).
-It shifts forward or back tje InfluxDB database's preset time boundaries.
+It shifts forward or back the InfluxDB database's preset time boundaries.
 The `offset_interval` can be positive or negative.
 
 ##### `fill(<fill_option>)`
@@ -1750,17 +1756,17 @@ The codeblock below provides sample syntax for those queries:
 SELECT *
 INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>
-WHERE time > now() - 100w and time < now() - 90w GROUP BY *
+WHERE time > now() - 100w AND time < now() - 90w GROUP BY *
 
 SELECT *
 INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>}
-WHERE time > now() - 90w  and time < now() - 80w GROUP BY *
+WHERE time > now() - 90w AND < now() - 80w GROUP BY *
 
 SELECT *
 INTO <destination_database>.<retention_policy_name>.<measurement_name>
 FROM <source_database>.<retention_policy_name>.<measurement_name>
-WHERE time > now() - 80w  and time < now() - 70w GROUP BY *
+WHERE time > now() - 80w AND time < now() - 70w GROUP BY *
 ```
 
 #### Write the results of a query to a measurement
@@ -2623,13 +2629,13 @@ The whitespace between `-` or `+` and the [duration literal](/influxdb/v1.8/quer
 
 #### `duration_literal`
 
-`u` or `µ`&emsp;microseconds
-`ms`&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;milliseconds
-`s`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;seconds
-`m`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;minutes
-`h`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;hours
-`d`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;days
-`w`&nbsp;&nbsp;&emsp;&emsp;&emsp;&nbsp;weeks
+- microseconds: `u` or `µ`
+- milliseconds: `ms`
+- seconds`s`
+- minutes`m`
+- hours:`h`
+- days:`d`
+- weeks:`w`
 
 ### Examples
 
@@ -3139,7 +3145,7 @@ With the [InfluxDB API](/influxdb/v1.8/tools/api/):
 A subquery is a query that is nested in the `FROM` clause of another query.
 Use a subquery to apply a query as a condition in the enclosing query.
 Subqueries offer functionality similar to nested functions and SQL
-[`HAVING` clauses](https://en.wikipedia.org/wiki/Having_(SQL\)).
+[`HAVING` clauses](https://en.wikipedia.org/wiki/Having_%28SQL%29).
 
 ### Syntax
 

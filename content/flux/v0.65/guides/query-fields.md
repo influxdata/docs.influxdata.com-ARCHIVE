@@ -1,13 +1,24 @@
 ---
 title: Query fields and tags
+seotitle: Query fields and tags in InfluxDB using Flux
 description: >
-    Use the `filter()` function to query data based on fields, tags, or any other column value.
+    Use the [`filter()` function](/flux/v0.65/stdlib/built-in/transformations/filter/) to query data based on fields, tags, or any other column value.
     `filter()` performs operations similar to the `SELECT` statement and the `WHERE`
     clause in InfluxQL and other SQL-like query languages.
-weight: 2
+weight: 1
 menu:
   flux_0_65:
-    parent: Guides
+    parent: Query with Flux
+list_code_example: |
+  ```js
+  from(bucket: "db/rp")
+    |> range(start: -1h)
+    |> filter(fn: (r) =>
+        r._measurement == "example-measurement" and
+        r._field == "example-field" and
+        r.tag == "example-tag"
+    )
+  ```
 ---
 
 Use the [`filter()` function](/flux/v0.65/stdlib/built-in/transformations/filter/)
@@ -16,8 +27,8 @@ to query data based on fields, tags, or any other column value.
 clause in InfluxQL and other SQL-like query languages.
 
 ## The filter() function
-`filter()` has an `fn` parameter that expects a predicate function,
-an anonymous function comprised of one or more predicate expressions.
+`filter()` has an `fn` parameter that expects a **predicate function**,
+an anonymous function comprised of one or more **predicate expressions**.
 The predicate function evaluates each input row.
 Rows that evaluate to `true` are **included** in the output data.
 Rows that evaluate to `false` are **excluded** from the output data.
@@ -55,7 +66,7 @@ and `filter()` represent the most basic Flux query:
 3. Use `filter()` to identify what rows of data to output.
 
 ```js
-from(bucket: "example-bucket")
+from(bucket: "db/rp")
   |> range(start: -1h)
   |> filter(fn: (r) =>
       r._measurement == "example-measurement" and

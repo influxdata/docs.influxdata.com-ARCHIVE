@@ -13,4 +13,4 @@ weight: 1
 Flux's built-in input functions define sources of data or display information about data sources.
 The following input functions are available:
 
-{{< function-list >}}
+{{< children type="functions" >}}

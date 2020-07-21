@@ -1,13 +1,25 @@
 ---
 title: Query SQL data sources
 seotitle: Query SQL data sources with InfluxDB
+list_title: Query SQL data
 description: >
   The Flux `sql` package provides functions for working with SQL data sources.
   Use `sql.from()` to query SQL databases like PostgreSQL and MySQL
 menu:
   flux_0_65:
-    parent: Guides
-    weight: 20
+    parent: Query with Flux
+    list_title: SQL data
+weight: 20
+list_code_example: |
+  ```js
+  import "sql"
+
+  sql.from(
+    driverName: "postgres",
+    dataSourceName: "postgresql://user:password@localhost",
+    query: "SELECT * FROM example_table"
+  )
+  ```
 ---
 
 The [Flux](/flux/v0.65) `sql` package provides functions for working with SQL data sources.

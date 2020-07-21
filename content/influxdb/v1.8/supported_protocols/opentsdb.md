@@ -21,4 +21,7 @@ The `write-consistency-level` can also be set. If any write operations do not me
 
 The OpenTSDB input also performs internal batching of the points it receives, as batched writes to the database are more efficient. The default _batch size_ is 1000, _pending batch_ factor is 5, with a _batch timeout_ of 1 second. This means the input will write batches of maximum size 1000, but if a batch has not reached 1000 points within 1 second of the first point being added to a batch, it will emit that batch regardless of size. The pending batch factor controls how many batches can be in memory at once, allowing the input to transmit a batch, while still building other batches.
 
-Content from [README](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/outputs/opentsdb/README.md) on GitHub.
+## Telegraf OpenTSDB output plugin
+The [Telegraf OpenTSDB output plugin](https://github.com/influxdata/telegraf/blob/release-1.11/plugins/outputs/opentsdb/README.md)
+outputs OpenTSDB protocol to an OpenTSDB endpoint.
+Use the plugin to write to InfluxDB or other OpenTSDB-compatible endpoints.

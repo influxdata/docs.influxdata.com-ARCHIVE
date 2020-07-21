@@ -20,4 +20,4 @@ Import the `json` package:
 import "json"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

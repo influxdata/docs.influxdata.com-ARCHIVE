@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: Value
     weight: 100
-    parent: Input data formats
+    parent: Input data formats (parsers)
 ---
 
 

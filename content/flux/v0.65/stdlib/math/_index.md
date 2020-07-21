@@ -44,4 +44,4 @@ math.maxuint  = 1<<64 - 1
 ```
 
 ## Mathematical functions
-{{< function-list >}}
+{{< children type="functions" >}}

@@ -1,13 +1,16 @@
 ---
 title: Find percentile and quantile values
+seotitle: Query percentile and quantile values in Flux
+list_title: Percentile & quantile
 description: >
   Use the `quantile()` function to return all values within the `q` quantile or
   percentile of input data.
 weight: 10
 menu:
   flux_0_65:
-    parent: Guides
-    name: Query percentiles & quantiles
+    parent: Query with Flux
+    name: Percentile & quantile
+list_query_example: quantile
 ---
 
 Use the [`quantile()` function](/flux/v0.65/stdlib/built-in/transformations/aggregates/quantile/)
@@ -37,12 +40,12 @@ If calculating the `0.5` quantile or 50th percentile:
 {{% flex-content %}}
 **Given the following input table:**
 
-| _time | _value |
-| ----- |:------:|
-| 0001  | 1.0    |
-| 0002  | 1.0    |
-| 0003  | 2.0    |
-| 0004  | 3.0    |
+| _time                | _value |
+|:-----                | ------:|
+| 2020-01-01T00:01:00Z | 1.0    |
+| 2020-01-01T00:02:00Z | 1.0    |
+| 2020-01-01T00:03:00Z | 2.0    |
+| 2020-01-01T00:04:00Z | 3.0    |
 {{% /flex-content %}}
 {{% flex-content %}}
 **`estimate_tdigest` returns:**
@@ -63,12 +66,12 @@ If calculating the `0.5` quantile or 50th percentile:
 {{% flex-content %}}
 **Given the following input table:**
 
-| _time | _value |
-| ----- |:------:|
-| 0001  | 1.0    |
-| 0002  | 1.0    |
-| 0003  | 2.0    |
-| 0004  | 3.0    |
+| _time                | _value |
+|:-----                | ------:|
+| 2020-01-01T00:01:00Z | 1.0    |
+| 2020-01-01T00:02:00Z | 1.0    |
+| 2020-01-01T00:03:00Z | 2.0    |
+| 2020-01-01T00:04:00Z | 3.0    |
 {{% /flex-content %}}
 {{% flex-content %}}
 **`exact_mean` returns:**
@@ -89,19 +92,19 @@ If calculating the `0.5` quantile or 50th percentile:
 {{% flex-content %}}
 **Given the following input table:**
 
-| _time | _value |
-| ----- |:------:|
-| 0001  | 1.0    |
-| 0002  | 1.0    |
-| 0003  | 2.0    |
-| 0004  | 3.0    |
+| _time                | _value |
+|:-----                | ------:|
+| 2020-01-01T00:01:00Z | 1.0    |
+| 2020-01-01T00:02:00Z | 1.0    |
+| 2020-01-01T00:03:00Z | 2.0    |
+| 2020-01-01T00:04:00Z | 3.0    |
 {{% /flex-content %}}
 {{% flex-content %}}
 **`exact_selector` returns:**
 
-| _time | _value |
-| ----- |:------:|
-| 0002  | 1.0    |
+| _time                | _value |
+|:-----                | ------:|
+| 2020-01-01T00:02:00Z | 1.0    |
 {{% /flex-content %}}
 {{< /flex >}}
 
@@ -142,7 +145,7 @@ data
 [`aggregateWindow()`](/flux/v0.65/stdlib/built-in/transformations/aggregates/aggregatewindow/)
 segments data into windows of time, aggregates data in each window into a single
 point, and then removes the time-based segmentation.
-It is primarily used to [downsample data](/v2.0/process-data/common-tasks/downsample-data/).
+It is primarily used to downsample data.
 
 To specify the [quantile calculation method](#select-a-method-for-calculating-the-quantile) in
 `aggregateWindow()`, use the [full function syntax](/flux/v0.65/stdlib/built-in/transformations/aggregates/aggregatewindow/#specify-parameters-of-the-aggregate-function):

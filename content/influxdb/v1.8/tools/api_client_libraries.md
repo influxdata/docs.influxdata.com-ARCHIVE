@@ -20,10 +20,12 @@ InfluxDB client libraries are language-specific packages that integrate with the
 Functionality varies between client libraries. Refer to client libraries on GitHub for specifics regarding each client library.
 
 ### Arduino
+
 - [InfluxDB Arduino Client](https://github.com/tobiasschuerg/InfluxDB-Client-for-Arduino)
   - Contributed by [Tobias Schürg (tobiasschuerg)](https://github.com/tobiasschuerg)
 
-### #C
+### C\#
+
 - [influxdb-client-csharp](https://github.com/influxdata/influxdb-client-csharp)
   - Maintained by [InfluxData](https://github.com/influxdata)
 
@@ -57,47 +59,49 @@ Functionality varies between client libraries. Refer to client libraries on GitH
 - [influxdb-client-ruby](https://github.com/influxdata/influxdb-client-ruby)
    - Maintained by [InfluxData](https://github.com/influxdata)
 
-## Use a client library
+## Install and use a client library
 
-Use an InfluxDB client library to integrate InfluxDB into your scripts and applications.
+To install and use the Python client library, follow the [instructions below](#install-and-use-the-python-client-library). To install and use other client libraries, refer to the client library documentation for detail.
 
-1. Install the client library. Refer to the client library documentation for detail. For example, to install the Python client library:
+### Install and use the Python client library
 
-  ```sh
-      pip install influxd-client
-  ```
+1. Install the Python client library.
+
+    ```sh
+    pip install influxdb-client
+    ```
 
 2. Ensure that InfluxDB is running. If running InfluxDB locally, visit http://localhost:8086. (If using InfluxDB Cloud, visit the URL of your InfluxDB Cloud UI.)
 
 3. In your program, import the client library and use it to write data to InfluxDB. For example:
 
-  ```sh
-     import influxdb_client
-     from influxdb_client.client.write_api import SYNCHRONOUS
-  ```
+    ```sh
+    import influxdb_client
+    from influxdb_client.client.write_api import SYNCHRONOUS
+    ```
 
-4. Define your database and token variables, and create a client and writer object. The InfluxDBClient object takes 2 parameters: `url` and `token`.
+4. Define your database and token variables, and create a client and writer object. The InfluxDBClient object takes 2 parameters: `url` and `token`
 
-   ```sh
-      database = "<my-db>"
-      token = "<my-token>"
-      client = influxdb_client.InfluxDBClient(
-      url="http://localhost:8086",
-      token=token,
-   ```
+    ```sh
+    database = "<my-db>"
+    token = "<my-token>"
+    client = influxdb_client.InfluxDBClient(
+    url="http://localhost:8086",
+    token=token,
+    ```
 
-  >**Note:** The database (and retention policy, if applicable) are converted to a [bucket](https://v2.docs.influxdata.com/v2.0/reference/glossary/#bucket) data store compatible with InfluxDB 2.0.
+    > **Note:** The database (and retention policy, if applicable) are converted to a [bucket](https://v2. docs.influxdata.com/v2.0/reference/glossary/#bucket) data store compatible with InfluxDB 2.0.
   
 5. Instantiate a writer object using the client object and the write_api method. Use the `write_api` method to configure the writer object.
 
-   ```sh
-      client = influxdb_client.InfluxDBClient(url=url, token=token)
-      write_api = client.write_api(write_options=SYNCHRONOUS)
-   ```
+    ```sh
+    client = influxdb_client.InfluxDBClient(url=url, token=token)
+    write_api = client.write_api(write_options=SYNCHRONOUS)
+    ```
 
 6. Create a point object and write it to InfluxDB using the write method of the API writer object. The write method requires three parameters: database, (optional) retention policy, and record.
 
-  ```sh 
-      p = influxdb_client.Point("my_measurement").tag("location", "Prague").field("temperature", 25.3)
-       write_api.write(database:rp, record=p)
-  ```
+    ```sh 
+    p = influxdb_client.Point("my_measurement").tag("location", "Prague").field("temperature", 25.3)
+    write_api.write(database:rp, record=p)
+    ```

@@ -46,63 +46,63 @@ To get started, do the following:
 
 2. In the Telegraf configuration file (`/etc/telegraf/telegraf.conf`), configure `[[outputs.influxd]]` to specify how to connect to InfluxDB and the destination database.
 
-```sh
-[[outputs.influxdb]]
-  ## InfluxDB url is required and must be in the following form: http/udp "://" host [ ":" port]
-  ## Multiple urls can be specified as part of the same cluster; only ONE url is written to each interval.
-  ## InfluxDB url
-  urls = ["http://localhost:8086"]
+    ```sh
+    [[outputs.influxdb]]
+    ## InfluxDB url is required and must be in the following form: http/udp "://" host [ ":" port]
+    ## Multiple urls can be specified as part of the same cluster; only ONE url is written to each interval.
+    ## InfluxDB url
+    urls = ["http://localhost:8086"]
 
-  ## The target database for metrics is required (Telegraf creates if one doesn't exist).
-  database = "telegraf"
-```
+    ## The target database for metrics is required (Telegraf creates if one doesn't exist).
+    database = "telegraf"
+    ```
 
 3. Run the following command to start Telegraf:
 
-```
-$ sudo systemctl start telegraf
-```
+    ```
+    $ sudo systemctl start telegraf
+    ```
 
     InfluxDB and Telegraf are now running on localhost.
 
 4. After a minute, run the following command to use the InfluxDB API to query for the Telegraf data:
 
-```bash
-$ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT mean(usage_idle) FROM cpu'
-```
+    ```bash
+    $ curl -G 'http://localhost:8086/query?db=telegraf' --data-urlencode 'q=SELECT mean(usage_idle) FROM cpu'
+    ```
 
     Results similar to the following appear:
 
-```
-{"results":[{"statement_id":0,"series":[{"name":"cpu","columns":["time","mean"],"values":[["1970-01-01T00:00:00Z",91.82304336748372]]}]}]}
-```
+    ```
+    {"results":[{"statement_id":0,"series":[{"name":"cpu","columns":["time","mean"],"values":[["1970-01-01T00:00:00Z",91.82304336748372]]}]}]}
+    ```
 
 ## Start Kapacitor
 
 1. Run the following command to generate a Kapacitor configuration file:
 
-```bash
-kapacitord config > kapacitor.conf
-```
+    ```bash
+    kapacitord config > kapacitor.conf
+    ```
     By default, the Kapacitor configuration file is saved in `/etc/kapacitor/kapacitor.conf`. If you save the file to another location, specify the location when starting Kapacitor.
 
     > The Kapacitor configuration is a [TOML](https://github.com/toml-lang/toml) file. Inputs configured for InfluxDB also work for Kapacitor.
 
 2. Start the Kapacitor service:
 
-```bash
-$ sudo systemctl start kapacitor
-```
+    ```bash
+    $ sudo systemctl start kapacitor
+    ```
 
     Because InfluxDB is running on `http://localhost:8086`, Kapacitor finds it during start up and creates several [subscriptions](/kapacitor/v1.5/administration/subscription-management/) on InfluxDB.
     Subscriptions tell InfluxDB to send data to Kapacitor.
 
 3. (Optional) To view log data, run the following command:
 
-```
-$ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
+    ```
+    $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
 
-```
+    ```
 
     Kapacitor listens on an HTTP port and posts data to InfluxDB. Now, InfluxDB streams data from Telegraf to Kapacitor.
 
@@ -111,11 +111,11 @@ $ sudo tail -f -n 128 /var/log/kapacitor/kapacitor.log
 - At the beginning of a TICKscript, specify the database and retention policy
 that contain data:
 
-```js
-dbrp "telegraf"."autogen"
+    ```js
+    dbrp "telegraf"."autogen"
 
-// ...
-```
+    // ...
+    ```
 
     When Kapacitor receives data from a database and retention policy that matches those
     specified, Kapacitor executes the TICKscript.
@@ -130,25 +130,25 @@ Triggering an alert is a common Kapacitor use case. The database and retention p
 
 1. Copy the following TICKscript into a file called `cpu_alert.tick`:
 
-```js
-dbrp "telegraf"."autogen"
+    ```js
+    dbrp "telegraf"."autogen"
 
-stream
-    // Select the CPU measurement from the `telegraf` database.
-    |from()
-        .measurement('cpu')
-    // Triggers a critical alert when the CPU idle usage drops below 70%
-    |alert()
-        .crit(lambda: int("usage_idle") <  70)
-        // Write each alert to a file.
-        .log('/tmp/alerts.log')
-```
+    stream
+        // Select the CPU measurement from the `telegraf` database.
+        |from()
+            .measurement('cpu')
+        // Triggers a critical alert when the CPU idle usage drops below 70%
+        |alert()
+            .crit(lambda: int("usage_idle") <  70)
+            // Write each alert to a file.
+            .log('/tmp/alerts.log')
+    ```
 
 2. In the command line, use the `kapacitor` CLI to define the task using the `cpu_alert.tick` TICKscript:
 
-```bash
-kapacitor define cpu_alert -tick cpu_alert.tick
-```
+    ```bash
+    kapacitor define cpu_alert -tick cpu_alert.tick
+    ```
 
     > If the database and retention policy aren't included in the TICKscript (for example, `dbrp "telegraf"."autogen"`), use the `kapacitor define` command with the `-dbrp` flag followed by <DBNAME>"."<RETENTION_POLICY>" to specify them when adding the task.
 
@@ -162,16 +162,16 @@ kapacitor define cpu_alert -tick cpu_alert.tick
 
 4. (Optional) Use the `show` command to view details about the task:
 
-```
-$ kapacitor show cpu_alert
-ID: cpu_alert
-Error:
-Template:
-Type: stream
-Status: disabled
-Executing: false
-...
-```
+    ```
+    $ kapacitor show cpu_alert
+    ID: cpu_alert
+    Error:
+    Template:
+    Type: stream
+    Status: disabled
+    Executing: false
+    ...
+    ```
 
 4. To ensure log files and communication channels aren't spammed with alerts, [test the task](#test-the-task).
 5. Enable the task to start processing the live data stream:
@@ -184,43 +184,43 @@ Executing: false
 
 6. Run the `show` command to verify the task is receiving data and behaving as expected:
 
-```bash
-$ kapacitor show cpu_alert
-|from()
-// Information about the state of the task and any error it may have encountered.
-ID: cpu_alert
-Error:
-Type: stream
-Status: Enabled
-Executing: true
-Created: 04 May 16 21:01 MDT
-Modified: 04 May 16 21:04 MDT
-LastEnabled: 04 May 16 21:03 MDT
-Databases Retention Policies: [""."autogen"]
+    ```bash
+    $ kapacitor show cpu_alert
+    |from()
+    // Information about the state of the task and any error it may have encountered.
+    ID: cpu_alert
+    Error:
+    Type: stream
+    Status: Enabled
+    Executing: true
+    Created: 04 May 16 21:01 MDT
+    Modified: 04 May 16 21:04 MDT
+    LastEnabled: 04 May 16 21:03 MDT
+    Databases Retention Policies: [""."autogen"]
 
-// Displays the version of the TICKscript that Kapacitor has stored in its local database.
-TICKscript:
-stream
-    // Select just the cpu me
-        .measurement('cpu')
-    |alert()
-        .crit(lambda: "usage_idle" <  70)
-        // Whenever we get an alert write it to a file.
-        .log('/tmp/alerts.log')
+    // Displays the version of the TICKscript that Kapacitor has stored in its local database.
+    TICKscript:
+    stream
+        // Select just the cpu me
+            .measurement('cpu')
+        |alert()
+            .crit(lambda: "usage_idle" <  70)
+            // Whenever we get an alert write it to a file.
+            .log('/tmp/alerts.log')
 
-DOT:
-digraph asdf {
-graph [throughput="0.00 points/s"];
+    DOT:
+    digraph asdf {
+    graph [throughput="0.00 points/s"];
 
-stream0 [avg_exec_time_ns="0" ];
-stream0 -> from1 [processed="12"];
+    stream0 [avg_exec_time_ns="0" ];
+    stream0 -> from1 [processed="12"];
 
-from1 [avg_exec_time_ns="0" ];
-from1 -> alert2 [processed="12"];
+    from1 [avg_exec_time_ns="0" ];
+    from1 -> alert2 [processed="12"];
 
-alert2 [alerts_triggered="0" avg_exec_time_ns="0" ];
-}
-```
+    alert2 [alerts_triggered="0" avg_exec_time_ns="0" ];
+    }
+    ```
 
 Returns a [graphviz dot](http://www.graphviz.org) formatted tree that shows the data processing pipeline defined by the TICKscript and key-value associative array entries with statistics about each node and links along an edge to the next node also including associative array statistical information. The *processed* key in the link/edge members indicates the number of data points that have passed along the specified edge of the graph.
 
@@ -477,6 +477,7 @@ batch
         .crit(lambda: "mean" < 70)
         .log('/tmp/batch_alerts.log')
 ```
+
 1. Copy the script above into the file `batch_cpu_alert.tick`.
 
 2. Define the task:
@@ -501,8 +502,8 @@ batch
     rid=b82d4034-7d5c-4d59-a252-16604f902832
     ```
 
-This records the last 20 minutes of batches using the query in the `batch_cpu_alert` task.
-In this case, since the `period` is 5 minutes, the last 4 batches are recorded and saved.
+    This records the last 20 minutes of batches using the query in the `batch_cpu_alert` task.
+    In this case, since the `period` is 5 minutes, the last 4 batches are recorded and saved.
 
 5. Replay the batch recording the same way:
 

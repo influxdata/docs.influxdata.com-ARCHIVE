@@ -11,4 +11,4 @@ menu:
 Flux type conversion functions convert columns of the input table into a specific data type.
 The following type conversion functions are available:
 
-{{< function-list category="Type conversions" menu="flux_0_7" >}}
+{{< children type="functions" >}}

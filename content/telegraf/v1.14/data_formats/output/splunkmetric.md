@@ -5,7 +5,7 @@ menu:
   telegraf_1_14:
     name: SplunkMetric
     weight: 60
-    parent: Output data formats
+    parent: Output data formats (serializers)
 ---
 
 The SplunkMetric serializer formats and outputs the metric data in a format that can be consumed by a Splunk metrics index.
@@ -13,7 +13,7 @@ It can be used to write to a file using the file output, or for sending metrics 
 
 If you're using the HTTP output, this serializer knows how to batch the metrics so you don't end up with an HTTP POST per metric.
 
-Th data is output in a format that conforms to the specified Splunk HEC JSON format as found here:
+The data is output in a format that conforms to the specified Splunk HEC JSON format as found here:
 [Send metrics in JSON format](http://dev.splunk.com/view/event-collector/SP-CAAAFDN).
 
 An example event looks like:

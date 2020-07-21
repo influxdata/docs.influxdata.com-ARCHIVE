@@ -58,12 +58,48 @@
     <!-- Crazy Egg tracking tools -->
     <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0080/4231.js" async="async"></script>
 
+    <!-- Marketo -->
+    <script type="text/javascript">
+    (function() {
+      var didInit = false;
+      function initMunchkin() {
+        if(didInit === false) {
+          didInit = true;
+          Munchkin.init('972-GDU-533');
+        }
+      }
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = '//munchkin.marketo.net/munchkin.js';
+      s.onreadystatechange = function() {
+        if (this.readyState == 'complete' || this.readyState == 'loaded') {
+          initMunchkin();
+        }
+      };
+      s.onload = initMunchkin;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+    </script>
+
+    <!-- Engagio -->
+    <script type="text/javascript" charset="utf-8">
+      var _eiq = _eiq || [];
+      var _engagio_settings = {
+        accountId: "e9b11baeb0d0dda444c3105e7cf0877955e378ca"
+      };
+      (function() {
+        var ei = document.createElement('script'); ei.type = 'text/javascript'; ei.async = true;
+        ei.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'web-analytics.engagio.com/js/ei.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ei, s);
+      })();
+    </script>
+
     <script src="/js/vendor/js.cookie.js" type="text/javascript"></script>
     <script src="/js/docs-themes.js" type="text/javascript"></script>
     <script src="/js/docs-chronograf-url.js" type="text/javascript"></script>
     <script type="text/javascript">
         set_style_from_cookie();
-
     </script>
 </head>
 

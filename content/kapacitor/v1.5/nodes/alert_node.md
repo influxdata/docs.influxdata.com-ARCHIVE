@@ -34,6 +34,7 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 | **[crit](#crit)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the CRITICAL alert level. An empty value indicates the level is invalid and is skipped.  |
 | **[critReset](#critreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for resetting the CRITICAL alert level to lower level.  |
 | **[details](#details)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Template for constructing a detailed HTML message for the alert. The same template data is available as the AlertNode.Message property, in addition to a Message field that contains the rendered Message value.  |
+| **[discord](#discord)&nbsp;(&nbsp;)** | Send the alert to Discord. |
 | **[durationField](#durationfield)&nbsp;(&nbsp;`value`&nbsp;`string`)** | Optional field key to add the alert duration to the data. The duration is always in units of nanoseconds.  |
 | **[email](#email)&nbsp;(&nbsp;`to`&nbsp;`...string`)** | Email the alert data.  |
 | **[exec](#exec)&nbsp;(&nbsp;`executable`&nbsp;`string`,&nbsp;`args`&nbsp;`...string`)** | Execute a command whenever an alert is triggered and pass the alert data over STDIN in JSON format.  |
@@ -138,6 +139,7 @@ option, `global`, that indicates that all alerts implicitly use the handler.
 | Handler                       | Description                                                                           |
 | -------                       | -----------                                                                           |
 | [Alerta](#alerta)             | Post alert message to Alerta.                                                         |
+| [Discord](#discord)           | Post alert message to Discord channel.                                                |
 | [email](#email)               | Send and email with alert data.                                                       |
 | [exec](#exec)                 | Execute a command passing alert data over STDIN.                                      |
 | [HipChat](#hipchat)           | Post alert message to HipChat room.                                                   |
@@ -364,6 +366,29 @@ Value: {{ index .Fields "value" }}
 
 ```js
 alert.details(value string)
+```
+
+<a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>
+
+### Discord
+
+Send the alert to Discord.
+Detailed configuration options and setup instructions are provided in the
+[Discord Event Handler](/kapacitor/v1.5/event_handlers/discord/) article.
+
+_**Example kapacitor.conf**_
+```toml
+[discord]
+  enabled = true
+  url = "https://discordapp.com/api/webhooks/xxxxxxxxxxxxxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+_**Example TICKscript**_
+```js
+stream
+  |alert()
+    .discord()
+      .embedTitle('Alert!')
 ```
 
 <a class="top" href="javascript:document.getElementsByClassName('article-heading')[0].scrollIntoView();" title="top"><span class="icon arrow-up"></span></a>

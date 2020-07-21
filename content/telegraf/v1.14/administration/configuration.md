@@ -113,8 +113,7 @@ Each plugin will sleep for a random time within jitter before collecting.
 This can be used to avoid many plugins querying things like sysfs at the
 same time, which can have a measurable effect on the system.
 * **flush_interval**: Default data flushing interval for all outputs.
-You should not set this below `interval`.
-Maximum `flush_interval` will be `flush_interval` + `flush_jitter`
+Maximum `flush_interval` is `flush_interval` + `flush_jitter`
 * **flush_jitter**: Jitter the flush interval by a random amount.
 This is primarily to avoid
 large write spikes for users running a large number of Telegraf instances.
@@ -185,10 +184,10 @@ The inverse of `namepass`.  If a match is found the point is discarded. This
 is tested on points after they have passed the `namepass` test.
 * **fieldpass**:
 An array of glob pattern strings.  Only fields whose field key matches a
-pattern in this list are emitted.  Not available for outputs.
+pattern in this list are emitted.
 * **fielddrop**:
 The inverse of `fieldpass`. Fields with a field key matching one of the
-patterns will be discarded from the point.  Not available for outputs.
+patterns will be discarded from the point.
 * **tagpass**:
 A table mapping tag keys to arrays of glob pattern strings.  Only points
 that contain a tag key in the table and a tag value matching one of its

@@ -5,7 +5,7 @@ menu:
   influxdb_1_8:
     weight: 10
     parent: Guides
-alises:
+aliases:
   - /influxdb/v1.8/guides/writing_data/
 ---
 
@@ -54,6 +54,8 @@ Both tag keys and tag values are strings.
 - **Fields (required)**: Field keys are required and are always strings, and, [by default](/influxdb/v1.8/write_protocols/line_protocol_reference/#data-types), field values are floats.
 - **Timestamp**: Supplied at the end of the line in Unix time in nanoseconds since January 1, 1970 UTC - is optional. If you do not specify a timestamp, InfluxDB uses the server's local nanosecond timestamp in Unix epoch.
 Time in InfluxDB is in UTC format by default.
+
+> **Note:** Avoid using the following reserved keys: `_field`, `_measurement`, and `time`. If reserved keys are included as a tag or field key, the associated point is discarded.
 
 ### Configure gzip compression
 

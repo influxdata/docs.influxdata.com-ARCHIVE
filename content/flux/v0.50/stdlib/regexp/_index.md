@@ -20,4 +20,4 @@ regular expression functionality. Import the `regexp` package.
 import "regexp"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

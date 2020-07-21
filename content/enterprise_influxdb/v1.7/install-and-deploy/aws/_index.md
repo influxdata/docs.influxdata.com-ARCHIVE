@@ -2,6 +2,7 @@
 title: Deploy InfluxDB Enterprise clusters in AWS
 aliases:
     - /enterprise_influxdb/v1.7/other-options/
+    - /enterprise_influxdb/v1.7/install-and-deploy/deploying/aws/
 menu:
   enterprise_influxdb_1_7:
     name: Deploy on AWS

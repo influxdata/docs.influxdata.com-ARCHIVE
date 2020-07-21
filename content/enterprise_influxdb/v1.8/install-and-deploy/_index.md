@@ -1,19 +1,27 @@
 ---
 title: Install and deploy InfluxDB Enterprise
-description: Install InfluxDB Enterprise to on-premise or cloud providers, including Google Cloud Platform and Amazon Web Services
+description: Install InfluxDB Enterprise to on-premise or cloud providers, including Google Cloud Platform, Amazon Web Services, and Azure.
+aliases:
+- /enterprise_influxdb/v1.8/install-and-deploy/deploying/
 menu:
   enterprise_influxdb_1_8:
     name: Install and deploy
-    weight: 30
+    weight: 70
 ---
 
-Here are the options available for installing and deploying InfluxDB Enterprise clusters.
+Install or deploy your InfluxDB Enterprise cluster in the environment of your choice:
 
+- [Your own environment](#your-production-environment)
+- [Your cloud provider](#your-cloud-provider)
 
-## [Install an InfluxDB Enterprise cluster for evaluation](/enterprise_influxdb/v1.8/install-and-deploy/quickstart_installation/)
+## Your production environment
 
-Covers steps to install an InfluxDB Enterprise cluster using two physical servers with five cluster nodes. This installation is not intended for production environments, but provides a simpler installation for evaluation and learning.
+Learn how to [install a cluster in your own environment](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/).
 
-## [Install an InfluxDB Enterprise cluster for production](/enterprise_influxdb/v1.8/install-and-deploy/production_installation/)
+## Your cloud provider
 
-Covers steps to install an InfluxDB Enterprise cluster for production use.
+Learn how to deploy a cluster on the cloud provider of your choice:
+
+   - [GCP](/enterprise_influxdb/v1.8/install-and-deploy/deploying/google-cloud-platform/)
+   - [AWS](/enterprise_influxdb/v1.8/install-and-deploy/deploying/aws/)
+   - [Azure](/enterprise_influxdb/v1.8/install-and-deploy/deploying/azure/)

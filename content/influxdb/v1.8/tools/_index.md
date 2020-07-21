@@ -16,9 +16,9 @@ This section covers the available tools for interacting with InfluxDB.
 
 The InfluxDB command line interface (`influx`) includes commands to manage many aspects of InfluxDB, including databases, organizations, users, and tasks.
 
-## [`influxd` command line interface (CLI)](/influxdb/v1.8/tools/influxd-cli/)
+## [`influxd` command](/influxdb/v1.8/tools/influxd)
 
-The `influxd` command line interface (CLI) starts and runs all the processes necessary for InfluxDB to function.
+The `influxd` command starts and runs all the processes necessary for InfluxDB to function.
 
 ## [InfluxDB API client libraries](/influxdb/v1.8/tools/api_client_libraries/)
 

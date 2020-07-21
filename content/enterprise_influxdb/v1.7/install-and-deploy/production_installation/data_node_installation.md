@@ -6,7 +6,7 @@ menu:
   enterprise_influxdb_1_7:
     name: Step 2 - Install data nodes
     weight: 20
-    parent: Install for production
+    parent: Install in your environment
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
@@ -158,15 +158,15 @@ The `license-key` and `license-path` settings are mutually exclusive and one mus
 # Change this option to true to disable reporting.
 # reporting-disabled = false
 # bind-address = ":8088"
-hostname="<enterprise-data-0x>" #✨
+hostname="<enterprise-data-0x>" 
 
 [enterprise]
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # The path to a valid license file.  license-key and license-path are mutually exclusive,
   # use only one and leave the other blank.
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 
 [meta]
   # Where the cluster metadata is stored
@@ -185,12 +185,12 @@ hostname="<enterprise-data-0x>" #✨
   # bind-address = ":8086"
 
   # Determines whether HTTP authentication is enabled.
-  auth-enabled = true #✨ this is recommended but not required
+  auth-enabled = true # Recommended, but not required
 
 [...]
 
   # The JWT auth shared secret to validate requests using JSON web tokens.
-  shared-secret = "long pass phrase used for signing tokens" #✨
+  shared-secret = "long pass phrase used for signing tokens" 
 ```
 
 ### III. Start the data service

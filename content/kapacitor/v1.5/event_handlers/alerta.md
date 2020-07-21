@@ -37,7 +37,7 @@ Default Alerta authentication token.
 
 #### `token-prefix`
 Default token prefix.
-_If you are on older versions of Alerta you may need to change this to "Key"._
+_If you receive invalid token errors, you may need to change this to "Key"._
 
 #### `environment`
 Default Alerta environment.

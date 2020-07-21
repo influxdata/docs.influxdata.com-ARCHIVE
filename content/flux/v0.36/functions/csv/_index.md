@@ -18,4 +18,4 @@ import "csv"
 ```
 
 ## CSV functions
-{{< function-list >}}
+{{< children type="functions" >}}

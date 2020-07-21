@@ -6,8 +6,7 @@ menu:
   enterprise_influxdb_1_7:
     name: Step 3 - Install Chronograf
     weight: 30
-    parent: Install for production
-    identifier: chrono_install
+    parent: Install in your environment
 ---
 
 Now that you've installed the meta nodes and data nodes, you are ready to install Chronograf

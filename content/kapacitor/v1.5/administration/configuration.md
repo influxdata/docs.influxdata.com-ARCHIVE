@@ -7,7 +7,6 @@ menu:
     parent: administration
 ---
 
-### Contents
  * [Startup](#startup)
  * [Kapacitor configuration file](#the-kapacitor-configuration-file)
  * [Kapacitor environment variables](#kapacitor-environment-variables)
@@ -39,9 +38,7 @@ Four primary mechanisms for configuring different aspects of the Kapacitor servi
 
 ## Startup
 
-The Kapacitor daemon includes command line options that affect how it loads and
-runs.
-These include:
+To specify how to load and run the Kapacitor daemon, set the following command line options:
 
 * `-config`: Path to the configuration file.
 * `-hostname`: Hostname that will override the hostname specified in the configuration file.
@@ -53,31 +50,29 @@ These include:
 
 On POSIX systems, when the Kapacitor daemon starts as part of `systemd`, environment variables can be set in the file `/etc/default/kapacitor`.
 
-- Start Kapacitor as part of `systemd`:
+1. To start Kapacitor as part of `systemd`, do one of the following:
 
-  ```sh
-  $ sudo systemctl enable kapacitor
-  ```
+   -  ```sh
+    $ sudo systemctl enable kapacitor
+    ```
 
-- Start Kapacitor as part of `systemd` **and** start Kapacitor immediately:
+   -  ```sh
+    $ sudo systemctl enable kapacitor —-now
+    ```
 
-  ```sh
-  sudo systemctl enable kapacitor —-now
-  ```
+2. Define where the PID file and log file will be written:
 
-- Define where the PID file and log file will be written:
+    a. Add a line like the following into the `/etc/default/kapacitor` file:
 
-  1. Add a line like the following into the `/etc/default/kapacitor` file:
+       ```sh
+       KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor/logs/kapacitor.log"
+      ```
 
-  ```sh
-  KAPACITOR_OPTS="-pidfile=/home/kapacitor/kapacitor.pid -log-file=/home/kapacitor/logs/kapacitor.log"
-  ```
+     b. Restart Kapacitor:
 
-  2. Restart Kapacitor:
-
-  ```sh
-  sudo systemctl restart kapacitor
-  ```
+       ```sh
+       sudo systemctl restart kapacitor
+       ```
 
 The environment variable `KAPACITOR_OPTS` is one of a few special variables used
 by Kapacitor at startup.
@@ -96,7 +91,7 @@ kapacitord config
 A sample configuration file is also available in the Kapacitor code base.
 The most current version can be accessed on [github](https://github.com/influxdata/kapacitor/blob/master/etc/kapacitor/kapacitor.conf).
 
-To get current configuration settings, you can use the Kapacitor HTTP API to get configuration values for settings that can be changed while the Kapacitor service is running. See [Retrieving the current configuration](/kapacitor/v1.5/working/api/#retrieving-the-current-configuration).
+Use the Kapacitor HTTP API to get current configuration settings and values that can be changed while the Kapacitor service is running. See [Retrieving the current configuration](/kapacitor/v1.5/working/api/#retrieving-the-current-configuration).
 
 ### TOML
 
@@ -141,13 +136,12 @@ The four basic properties of the Kapacitor service include:
 Table groupings and arrays of tables follow the basic properties and include essential and optional features,
 including specific alert handlers and mechanisms for service discovery and data scraping.
 
-#### Essential tables
+### Essential tables
 
-##### HTTP
+#### HTTP
 
-The Kapacitor service requires an HTTP connection and important
-HTTP properties,
-such as a bind address and the path to an HTTPS certificate,
+The Kapacitor service requires an HTTP connection. Important
+HTTP properties, such as a bind address and the path to an HTTPS certificate,
 are defined in the `[http]` table.
 
 **Example: The HTTP grouping**
@@ -171,24 +165,25 @@ are defined in the `[http]` table.
 ...
 ```
 
-##### Transport Layer Security (TLS) settings
+#### Transport Layer Security (TLS) settings
 
 If the TLS configuration settings is not specified, Kapacitor supports all of the cipher suite IDs listed and all of the TLS versions implemented in the [Constants section of the Go `crypto/tls` package documentation](https://golang.org/pkg/crypto/tls/#pkg-constants), depending on the version of Go used to build InfluxDB.
 Use the `SHOW DIAGNOSTICS` command to see the version of Go used to build Kapacitor.
 
-###### `ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",]`
+##### `ciphers = [ TLS_AES_128_GCM_SHA256", "TLS_AES_256_GCM_SHA384", "TLS_CHACHA20_POLY1305_SHA256"]`
 
 Determines the available set of cipher suites. For a list of available ciphers, which depends on the version of Go, see https://golang.org/pkg/crypto/tls/#pkg-constants. 
 You can use the query `SHOW DIAGNOSTICS` to see the version of Go used to build Kapacitor. 
 If not specified, uses the default settings from Go's crypto/tls package.
 
-###### `min-version = "tls1.2"`
+##### `min-version = "tls1.3"`
 
-Minimum version of the tls protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
+Minimum version of the tls protocol that will be negotiated. Valid values include: `tls1.0`, `tls1.1`, `tls1.2`, and `tls1.3`. If not specified, uses the default settings from the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants).
+In this example, `tls1.0` specifies the minimum version as TLS 1.0.
 
-###### `max-version = "tls1.2"`
+##### `max-version = "tls1.3"`
 
-Maximum version of the tls protocol that will be negotiated. If not specified, uses the default settings from the Go `crypto/tls` package.
+Maximum version of the tls protocol that will be negotiated. IValid values include: `tls1.0`, `tls1.1`, `tls1.2`, and `tls1.3`. If not specified, uses the default settings from the [Go `crypto/tls` package](https://golang.org/pkg/crypto/tls/#pkg-constants).
 
 ##### Recommended configuration for "modern compatibility"
 
@@ -198,20 +193,17 @@ Our recommended TLS configuration settings for `ciphers`, `min-version`, and `ma
 InfluxData's recommended TLS settings for "modern compatibility" are specified in the following configuration settings example.
 
 ```toml
-ciphers = [ "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
-            "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
-            "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
-            "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
-            "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
-            "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+ciphers = [ "TLS_AES_128_GCM_SHA256",
+"TLS_AES_256_GCM_SHA384",
+"TLS_CHACHA20_POLY1305_SHA256"
 ]
 
-min-version = "tls1.2"
+min-version = "tls1.3"
 
-max-version = "tls1.2"
+max-version = "tls1.3"
 ```
 
-> **Important:*** The order of the cipher suite IDs in the `ciphers` setting determines which algorithms are selected by priority. The TLS `min-version` and the `max-version` settings restrict support to TLS 1.2.
+> **Important:*** The order of the cipher suite IDs in the `ciphers` setting determines which algorithms are selected by priority. The TLS `min-version` and the `max-version` settings in the example above restrict support to TLS 1.3.
 
 ##### Config override
 
@@ -566,6 +558,7 @@ document.
 The following handlers are currently supported:
 
 * [Alerta](/kapacitor/v1.5/event_handlers/alerta/): Sending alerts to Alerta.
+* [Discord](/kapacitor/v1.5/event_handlers/discord/): Sending alerts to Discord.
 * [Email](/kapacitor/v1.5/event_handlers/email/): To send alerts by email.
 * [HipChat](/kapacitor/v1.5/event_handlers/hipchat/): Sending alerts to the HipChat service.
 * [Kafka](/kapacitor/v1.5/event_handlers/kafka/): Sending alerts to an Apache Kafka cluster.

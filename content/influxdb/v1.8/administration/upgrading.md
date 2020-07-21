@@ -16,6 +16,13 @@ We recommend enabling Time Series Index (TSI) (step 3 of Upgrade to InfluxDB 1.8
 
 > **_Note:_** The default configuration continues to use TSM-based shards with in-memory indexes (as in earlier versions).
 
+{{% note %}}
+### Upgrade to InfluxDB Enterprise
+
+To upgrade from InfluxDB OSS to InfluxDB Enterprise, [contact InfluxData Sales](https://www.influxdata.com/contact-sales/)
+and see [Migrate to InfluxDB Enterprise](/enterprise_influxdb/latest/guides/migration/).
+{{% /note %}}
+
 ## Upgrade to InfluxDB 1.8.x
 
 1. [Download](https://portal.influxdata.com/downloads) InfluxDB version 1.8.x and [install the upgrade](/influxdb/v1.8/introduction/installation).
@@ -30,25 +37,18 @@ We recommend enabling Time Series Index (TSI) (step 3 of Upgrade to InfluxDB 1.8
 
     c. Delete shard `index` directories (by default, located at `/<shard_ID>/index`).
 
-    d. Convert TSM-based shards to TSI-based shards by running the [influx_inspect buildtsi](/influxdb/v1.8/tools/influx_inspect/#buildtsi) command.
+    d. Build TSI by running the [influx_inspect buildtsi](/influxdb/v1.8/tools/influx_inspect/#buildtsi) command.
 
-    > **Note** Run the buildtsi command using the user account that you are going to run the database as, or ensure that the permissions match afterward.
+    > **Note** Run the `buildtsi` command using the user account that you are going to run the database as, or ensure that the permissions match afterward.
 
 4. Restart the `influxdb` service.
 
-## Switch between TSM and TSI indexes
+## Switch index types
 
-After upgrading to InfluxDB 1.8.x, switch between using the TSM index and the TSI index as needed.
+Switch index types at any time by doing one of the following:
 
-### To switch from TSM to TSI
-
-Complete step 3 and 4 in [Upgrade to InfluxDB 1.8.x](#upgrade-to-influxdb-1-7-x).
-
-### To switch from TSI to TSM
-
-1. In the InfluxDB configuration file, set `index-version = "inmem"`.
-2. Delete all shard `index` directories (by default, located at `/<shard_ID>/index`).
-3. Restart the `influxdb` service.
+- To switch from to `inmem` to `tsi1`, complete steps 3 and 4 above in [Upgrade to InfluxDB 1.8.x](#upgrade-to-influxdb-1.8.x).
+- To switch from to `tsi1` to `inmem`, change `tsi1` to `inmem` by completing steps 3a-3c and 4 above in [Upgrade to InfluxDB 1.8.x](#upgrade-to-influxdb-1.8.x).
 
 ## Downgrade InfluxDB
 

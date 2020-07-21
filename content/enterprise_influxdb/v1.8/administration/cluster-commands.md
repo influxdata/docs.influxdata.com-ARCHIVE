@@ -233,8 +233,12 @@ Added meta node 3 at cluster-meta-node-03:8091
 
 ### `backup`
 
-Creates a backup of a cluster's [metastore](/influxdb/v1.8/concepts/glossary/#metastore) and [shard](/influxdb/v1.8/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory. To back up only the cluster metastore, use the `-strategy` flag with the `only-meta` option.
-Backups are incremental by default; they create a copy of the metastore and shard data that have changed since the previous incremental backup.
+Creates a backup of a cluster's [metastore](/influxdb/v1.8/concepts/glossary/#metastore)
+and [shard](/influxdb/v1.8/concepts/glossary/#shard) data at that point in time
+and stores the copy in the specified directory.
+To back up only the cluster metastore, use the `-strategy` flag with the `only-meta` option.
+Backups are incremental by default; they create a copy of the metastore and shard
+data that have changed since the previous incremental backup.
 If there are no existing incremental backups, the system automatically performs a complete backup.
 
 #### Syntax
@@ -798,7 +802,9 @@ Restore a [backup](#backup) to an existing cluster or a new cluster.
 
 > **Note:** The existing cluster must contain no data in the databases affected by the restore.
 
-Restore supports both full backups and incremental backups; the syntax for a restore differs depending on the backup type.
+Restore supports both full, incremental, and metadata-only backups.
+The syntax for restoring full backups differs from the syntax for restoring
+incremental and metadata backups.
 
 #### Syntax
 
@@ -806,10 +812,10 @@ Restore supports both full backups and incremental backups; the syntax for a res
 influxd-ctl restore [ -db <db_name> | -full | -list | -newdb <newdb_name> | -newrf <newrf_integer> | -newrp <newrp_name> | -rp <rp_name> | shard <shard_ID> ] ( <path-to-backup-manifest-file> | <path-to-backup-directory> )
 ```
 
-The `restore` command must specify either the `path-to-backup-manifest-file` or the `path-to-backup-directory`.
-If the restore uses the `-full` argument, specify the `path-to-backup-manifest-file`.
-If the restore doesn't use the `-full` argument, specify the `<path-to-backup-directory>`.
-
+To restore from a [**full backup**](#backup), include the `-full` argument and provide
+the path to the backup manifest (`/path/to/backups/backup.manifest`).
+To restore from an **incremental or metadata** backup, provide the path to the directory
+that contains the backup files (`/path/to/backups`).
 
 ##### Arguments
 
@@ -823,6 +829,11 @@ Name of the single database to restore.
 
 Restore a backup that was created with the `-full` flag.
 A restore command with the `-full` flag requires the `path-to-backup-manifest-file`.
+
+{{% note %}}
+Restoring from a full backup **does not** restore metadata.
+To restore metadata, [restore a metadata backup](#restore-from-a-metadata-backup) separately.
+{{% /note %}}
 
 ###### [ `-list` ]
 
@@ -865,6 +876,20 @@ Restoring meta data... Done. Restored in 21.373019ms, 1 shards mapped
 Restoring db telegraf, rp autogen, shard 2 to shard 2...
 Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Restored shard 2 into shard 2 in 61.046571ms, 588800 bytes transferred
 Restored from my-incremental-backup/ in 83.892591ms, transferred 588800 bytes
+```
+
+##### Restore from a metadata backup
+
+In this example, the `restore` command restores an metadata backup stored
+in the `metadata-backup/` directory.
+
+```bash
+$ influxd-ctl restore metadata-backup/
+
+Using backup directory: metadata-backup/
+Using meta backup: 20200101T000000Z.meta
+Restoring meta data... Done. Restored in 21.373019ms, 1 shards mapped
+Restored from my-incremental-backup/ in 19.2311ms, transferred 588 bytes
 ```
 
 ##### Restore from a full backup

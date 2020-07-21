@@ -128,23 +128,23 @@ Entering the IP or hostname alone will lead to errors.
 * `license-key` in the `[enterprise]` section to the license key you received on InfluxPortal **OR** `license-path` in the `[enterprise]` section to the local path to the JSON license file you received from InfluxData. The `license-key` and `license-path` settings are mutually exclusive and one must remain set to the empty string.
 
 
-```
+```toml
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<enterprise-meta-0x>" #✨
+hostname="<enterprise-meta-0x>"
 
 [enterprise]
   # Must be set to true to use the Enterprise Web UI
-  registration-enabled = true #✨
+  registration-enabled = true
 
   # Must include the protocol (http://)
-  registration-server-url = "http://<web-console-server-IP>:3000" #✨
+  registration-server-url = "http://<web-console-server-IP>:3000"
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 ```
 
 ### 6. Start the data node

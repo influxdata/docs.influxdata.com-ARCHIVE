@@ -21,17 +21,19 @@ syntax for officially supported Kapacitor event handlers.
 
 [Aggregate](/kapacitor/v1.5/event_handlers/aggregate/)  
 [Alerta](/kapacitor/v1.5/event_handlers/alerta/)  
+[Discord](/kapacitor/v1.5/event_handlers/discord/)  
 [Email](/kapacitor/v1.5/event_handlers/email/)  
 [Exec](/kapacitor/v1.5/event_handlers/exec/)  
 [Hipchat](/kapacitor/v1.5/event_handlers/hipchat/)  
 [Kafka](/kapacitor/v1.5/event_handlers/kafka/)  
-[Log](/kapacitor/v1.5/event_handlers/log/)  
+[Log](/kapacitor/v1.5/event_handlers/log/)
+[Microsoft Teams](/kapacitor/v1.5/event_handlers/microsoftteams/)
 [MQTT](/kapacitor/v1.5/event_handlers/mqtt/)  
 [Opsgenie](/kapacitor/v1.5/event_handlers/opsgenie/)  
 [Pagerduty](/kapacitor/v1.5/event_handlers/pagerduty/)  
 [Post](/kapacitor/v1.5/event_handlers/post/)  
-[Publish](/kapacitor/v1.5/event_handlers/publish/)   
-[Pushover](/kapacitor/v1.5/event_handlers/pushover/)   
+[Publish](/kapacitor/v1.5/event_handlers/publish/)
+[Pushover](/kapacitor/v1.5/event_handlers/pushover/)
 [Sensu](/kapacitor/v1.5/event_handlers/sensu/)  
 [Slack](/kapacitor/v1.5/event_handlers/slack/)  
 [Snmptrap](/kapacitor/v1.5/event_handlers/snmptrap/)  
@@ -45,7 +47,8 @@ syntax for officially supported Kapacitor event handlers.
 > you are familiar with the setup process for a specific event handler, please
 > feel free to [contribute](https://github.com/influxdata/docs.influxdata.com/blob/master/CONTRIBUTING.md).
 
-## Configuring Event Handlers
+## Configure event handlers
+
 Required and default configuration options for most event handlers are
 configured in your Kapacitor configuration file, `kapacitor.conf`.
 _The default location for this is `/etc/kapacitor/kapacitor.conf`, but may be
@@ -55,21 +58,22 @@ Many event handlers provide options that can be defined in a TICKscript or in a
 handler file while some can only be configured in a handler file.
 These configurable options are outlined in the documentation for each handler.
 
-## Adding and using event handlers
-If necessary, enable the desired event handler in your `kapacitor.conf`. Once
-enabled, you can create use the handler in two different ways.
+## Add and use event handlers
 
-1. [Create a topic handler with a handler file](#handler-file).
-2. [Use the handler in your TICKscripts](#tickscript).
+Enable the event handler in your `kapacitor.conf` if applicable. Once
+enabled, do one of the following:
+
+- [Create a topic handler with a handler file](#create-a-topic-handler-with-a-handler-file), and then [add the handler](#add-the-handler).
+- [Use a handler in a TICKscripts](#use-a-handler-in-a-tickscripts).
 
     > **Note:** Not all event handlers can be used in TICKscripts.
 
-### Handler file
+### Create a topic handler with a handler file
+
 An event handler file is a simple YAML or JSON file that contains information
 about the handler.
-Though many handlers can be added in a TICKscript, this can become combersome
-when managing multiple handlers.
-Handler files allow you to add and use handlers outside of TICKscripts.
+Although many handlers can be added in a TICKscript, managing multiple handlers in TICKscripts can be cumbersome.
+Handler files let you add and use handlers outside of TICKscripts.
 For some handler types, using handler files is the only option.
 
 The handler file contains the following:
@@ -80,13 +84,12 @@ The handler file contains the following:
   of the handler.
 - **Topic**<span style="color: #ff9e46; font-style: italic;">\*</span>: The topic
   to which the handler subscribes.
-- **Match**: A lambda expression to filter matching alerts. By default all alerts
+- **Match**: A lambda expression to filter matching alerts. By default, all alerts
   match. Learn more about [match expressions](/kapacitor/v1.5/working/alerts/#match-expressions).
 - **Kind**<span style="color: #ff9e46; font-style: italic;">\*</span>: The kind of
   handler.
 - **Options**: Configurable options determined by the handler kind. If none are
-  provided, default values defined for the handler in the `kapacitor.conf` will
-  be used.
+  provided, default values defined for the handler in the `kapacitor.conf` are used.
 
 ```yaml
 id: handler-id
@@ -98,6 +101,7 @@ options:
 ```
 
 #### Add the handler
+
 Use the Kapacitor CLI to define a new handler with a handler file:
 
 ```bash
@@ -108,7 +112,8 @@ kapacitor define-topic-handler <handler-file-name>
 kapacitor define-topic-handler slack_cpu_handler.yaml
 ```
 
-### TICKscript
+### Use a handler in a TICKscript
+
 Many event handlers can be used directly in TICKscripts to send events.
 This is generally done with handlers that send messages to third-parties. Below
 is an example TICKscript that publishes CPU alerts to Slack using the `.slack()`
@@ -125,6 +130,5 @@ stream
 ```
 
 > Events are sent to handlers if the alert is in a state other than ‘OK’ or the
-alert just changed to the ‘OK’ state from a non ‘OK’ state (a.k.a. the alert
-recovered). Using the [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly) property events will only be
-sent to handlers if the alert changed state.
+alert just changed to the ‘OK’ state from a non ‘OK’ state (the alert
+recovered). Use the [AlertNode.StateChangesOnly](/kapacitor/v1.5/nodes/alert_node/#statechangesonly) property to send events to handlers only if the alert state changes.

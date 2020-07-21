@@ -379,9 +379,9 @@ CLI example:
 >
 * The user value must be wrapped in double quotes if it starts with a digit, is an InfluxQL keyword, contains a hyphen and or includes any special characters, for example: `!@#$%^&*()-`
 * The password [string](/influxdb/v1.8/query_language/spec/#strings) must be wrapped in single quotes.
-* Do not include the single quotes when authenticating requests.
-
-> For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
+  Do not include the single quotes when authenticating requests.
+  We recommend avoiding the single quote (`'`) and backslash (`\`) characters in passwords.
+  For passwords that include these characters, escape the special character with a backslash (e.g. (`\'`) when creating the password and when submitting authentication requests.
 >
 * Repeating the exact `CREATE USER` statement is idempotent. If any values change the database will return a duplicate user error. See GitHub Issue [#6890](https://github.com/influxdata/influxdb/pull/6890) for details.
 >
@@ -476,12 +476,13 @@ CLI example:
 >
 ```
 
-  {{% note %}}
+{{% note %}}
+**Note:** The password [string](/influxdb/v1.8/query_language/spec/#strings) must be wrapped in single quotes.
+Do not include the single quotes when authenticating requests.
 
-  **Note:** The password [string](/influxdb/v1.8/query_language/spec/#strings) must be wrapped in single quotes. Do not include the single quotes when authenticating requests. For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
-
-  {{% /note %}}
-
+We recommend avoiding the single quote (`'`) and backslash (`\`) characters in passwords
+For passwords that include these characters, escape the special character with a backslash (e.g. (`\'`) when creating the password and when submitting authentication requests.
+{{% /note %}}
 
 ##### `DROP` a user
 

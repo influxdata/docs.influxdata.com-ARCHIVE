@@ -33,7 +33,7 @@ To use them, import the `experimental` package.
 import "experimental"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}
 
 ## Experimental packages
 Experimental packages require different import paths than base experimental functions.

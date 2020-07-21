@@ -3,9 +3,9 @@ title: Wavefront input data format
 description: Use the Wavefront input data format to parse Wavefront data into Telegraf metrics.
 menu:
   telegraf_1_14:
-    name: Wavefront
+    name: Wavefront parser
     weight: 110
-    parent: Input data formats
+    parent: Input data formats (parsers)
 ---
 
 The Wavefront input data format parse Wavefront data into Telegraf metrics.

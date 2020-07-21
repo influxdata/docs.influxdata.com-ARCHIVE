@@ -13,7 +13,7 @@ The output table is different than the input table, but individual row values ar
 
 The following selector functions are available:
 
-{{< function-list category="Selectors" menu="flux_0_12" >}}
+{{< children type="functions" >}}
 
 
 ### Selectors and aggregates

@@ -6,7 +6,10 @@ menu:
   flux_0_65:
     name: Filter by region
     parent: Geo-temporal data
-weight: 2
+weight: 302
+related:
+  - /flux/v0.65/stdlib/experimental/geo/
+  - /flux/v0.65/stdlib/experimental/geo/filterrows/
 list_code_example: |
   ```js
   import "experimental/geo"

@@ -18,4 +18,4 @@ Import the `experimental/mqtt` package:
 import "experimental/mqtt"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

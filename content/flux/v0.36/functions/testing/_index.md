@@ -18,4 +18,4 @@ import "testing"
 ```
 
 ## Testing functions
-{{< function-list >}}
+{{< children type="functions" >}}

@@ -18,4 +18,4 @@ Import the `experimental/aggregate` package:
 import "experimental/aggregate"
 ```
 
-{{< function-list >}}
+{{< children type="functions" >}}

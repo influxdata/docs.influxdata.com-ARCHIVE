@@ -12,4 +12,4 @@ Flux functions primarily retrieve, shape and transform, then output data, howeve
 there are functions available that serve other purposes.
 The following functions are are available but don't fit within other function categories:
 
-{{< function-list category="Miscellaneous" menu="flux_0_7" >}}
+{{< children type="functions" >}}

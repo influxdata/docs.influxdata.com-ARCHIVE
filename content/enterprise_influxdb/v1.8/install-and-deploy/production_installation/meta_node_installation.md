@@ -6,7 +6,7 @@ menu:
   enterprise_influxdb_1_8:
     name: Step 1 - Install meta nodes
     weight: 10
-    parent: Install for production
+    parent: Install in your environment
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
@@ -63,17 +63,18 @@ setting in the meta node configuration file.
 
 <br>
 # Meta node setup
-## Step 1: Modify the `/etc/hosts` File
+## Step 1: Add appropriate DNS entries for each of your servers
 
-Add your servers' hostnames and IP addresses to **each** cluster server's `/etc/hosts`
-file (the hostnames below are representative).
+Ensure that your servers' hostnames and IP addresses are added to your network's DNS environment.
+The addition of DNS entries and IP assignment is usually site and policy specific; contact your DNS administrator for assistance as necessary.
+Ultimately, use entries similar to the following (hostnames and domain IP addresses are representative).
 
+| Record Type |               Hostname                |                IP |
+|:------------|:-------------------------------------:|------------------:|
+| A           | ```enterprise-meta-01.mydomain.com``` | ```<Meta_1_IP>``` |
+| A           | ```enterprise-meta-02.mydomain.com``` | ```<Meta_2_IP>``` |
+| A           | ```enterprise-meta-03.mydomain.com``` | ```<Meta_3_IP>``` |
 
-```
-<Meta_1_IP> enterprise-meta-01
-<Meta_2_IP> enterprise-meta-02
-<Meta_3_IP> enterprise-meta-03
-```
 
 > **Verification steps:**
 >
@@ -83,10 +84,10 @@ servers are resolvable. Here is an example set of shell commands using `ping`:
     ping -qc 1 enterprise-meta-01
     ping -qc 1 enterprise-meta-02
     ping -qc 1 enterprise-meta-03
+>
 
-
-If there are any connectivity issues resolve them before proceeding with the
-installation.
+We highly recommend that each server be able to resolve the IP from the hostname alone as shown here.
+Resolve any connectivity issues before proceeding with the installation.
 A healthy cluster requires that every meta node can communicate with every other
 meta node.
 
@@ -154,14 +155,14 @@ The `license-key` and `license-path` settings are mutually exclusive and one mus
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<enterprise-meta-0x>" #✨
+hostname="<enterprise-meta-0x>" 
 
 [enterprise]
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-key = "<your_license_key>" #✨ mutually exclusive with license-path
+  license-key = "<your_license_key>" # Mutually exclusive with license-path
 
   # license-key and license-path are mutually exclusive, use only one and leave the other blank
-  license-path = "/path/to/readable/JSON.license.file" #✨ mutually exclusive with license-key
+  license-path = "/path/to/readable/JSON.license.file" # Mutually exclusive with license-key
 ```
 
 ### III. Start the meta service
