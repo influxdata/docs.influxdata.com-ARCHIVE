@@ -35,12 +35,12 @@ menu:
 
 ### Features
 
-- The logparser input is deprecated, use the tail input with data_format = "grok" as a replacement.
-- The cisco_telemetry_gnmi input has been renamed to gnmi to better reflect its general support for gNMI devices.
-- Several fields used primarily for debugging have been removed from the splunkmetric serializer, if you are making use of these fields they can be added back with the tag option.
-- Telegraf's --test mode now runs processors and aggregators before printing metrics.
-- Official packages now built with Go 1.14.5.
-- When updating the Debian package you will no longer be prompted to merge the telegraf.conf file, instead the new version will be installed to /etc/telegraf/telegraf.conf.sample. The tar and zip packages now include the version in the top level directory.
+- The `logparser` input plugin is deprecated. Use the `tail` input with `data_format = "grok"` as a replacement.
+- The `cisco_telemetry_gnmi` input has been renamed to `gnmi` to better reflect its general support for gNMI devices.
+- Several fields used primarily for debugging have been removed from the `splunkmetric` serializer. If you are making use of these fields they can be added back with the tag option.
+- Telegraf's `--test` mode runs processors and aggregators before printing metrics.
+- Official packages built with Go 1.14.5.
+- When updating the Debian package, you will no longer be prompted to merge the `telegraf.conf` file. Instead, the new version will be installed to `/etc/telegraf/telegraf.conf.sample`. The `tar` and `zip` packages now include the version in the top-level directory.
 
 ## v1.14.5 [2020-06-30]
 
