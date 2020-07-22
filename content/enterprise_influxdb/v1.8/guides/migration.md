@@ -40,19 +40,15 @@ Complete the following tasks:
 2. [Set up InfluxDB Enterprise meta nodes](#set-up-influxdb-enterprise-meta-nodes)
 3. [Set up InfluxDB Enterprise data nodes](#set-up-influxdb-enterprise-data-nodes)
 4. Do one of the following:
-   - [Migrate a data set with zero downtime](#migrate-a-data-set-with-zero-downtime). This method lets you move data between OSS to Enterprise as you're testing the migration.
-   - [Migrate a data set with downtime](#migrate-a-data-set-with-downtime). This method is useful if you're not able to run a portable backup, for example, for any of the following reasons:
+   - [Migrate a data set with zero downtime](#migrate-a-data-set-with-zero-downtime). This method lets you move data between OSS and Enterprise as you're testing the migration.
+   - [Migrate a data set with downtime](#migrate-a-data-set-with-downtime). With this method, you cannot move data from Enterprise back to OSS. This method is useful if you're not able to run a portable backup, for example, for any of the following reasons:
      - Data set exceeds a certain size (roughly 10 databases or more, or more than 500 shards per database)
      - Hardware requirements aren't available
      - Time constraints
 
-     {{% note %}}
-     With this method, you cannot move data from Enterprise back to OSS.
-     {{% /note %}}
-
 ### Upgrade InfluxDB to the latest version
 
-Upgrade InfluxDB to the latest stable version.
+Upgrade InfluxDB OSS and InfluxDB Enterprise to the latest stable version. Make sure the OSS and Enterprise version is the same.
 
 - [Upgrade InfluxDB OSS](/influxdb/latest/administration/upgrading/)
 - [Upgrade InfluxDB Enterprise](/enterprise_influxdb/latest/administration/upgrading/)
@@ -75,7 +71,7 @@ meta nodes can communicate with the OSS instance.
 ### Set up InfluxDB Enterprise data nodes
 
 If you don't have any existing data nodes in your InfluxDB Enterprise cluster,
-[skip to the next step](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise).
+[skip this step].
 
 #### For each existing data node:
 
@@ -145,16 +141,17 @@ For example, if you take the backup on 2020-07-19T00:00:00.000Z, and started wri
 6. Verify data is successfully migrated. To review your data, see how to:
    - [Query data with the InfluxDB API](https://docs.influxdata.com/influxdb/v1.8/guides/query_data/#sidebar)
    - [View data in Chronograf](https://docs.influxdata.com/chronograf/v1.8/)
-7. Stop writing data to OSS.
+7. [Stop writes and remove OSS](#stop-writes-and-remove-oss).
 
 ### Migrate a data set with downtime
 
-1. [Upgrade the InfluxDB binary on your OSS instance](#upgrade-the-influxdb-oss-instance-to-influxdb-enterprise)
-2. [Add the upgraded OSS instance to the InfluxDB Enterprise cluster](#add-the-new-data-node-to-the-cluster)
-3. [Add existing data nodes back to the cluster](#add-existing-data-nodes-back-to-the-cluster)
-4. [Rebalance the cluster](#rebalance-the-cluster)
+1. [Stop writes and remove OSS](#stop-writes-and-remove-oss)
+2. [Back up OSS configuration](#back-up-oss-configuration)
+3. [Add the upgraded OSS instance to the InfluxDB Enterprise cluster](#add-the-new-data-node-to-the-cluster)
+4. [Add existing data nodes back to the cluster](#add-existing-data-nodes-back-to-the-cluster)
+5. [Rebalance the cluster](#rebalance-the-cluster)
 
-#### Upgrade the InfluxDB OSS instance to InfluxDB Enterprise
+#### Stop writes and remove OSS
 
 1. **Stop all writes to the InfluxDB OSS instance**
 2. **Stop the `influxdb` service on the InfluxDB OSS instance**
@@ -201,12 +198,14 @@ sudo yum remove influxdb
     {{% /code-tab-content %}}
     {{< /code-tabs-wrapper >}}
 
-4. **Back up your InfluxDB OSS configuration file**
+#### Back up OSS configuration
+
+1. **Back up your InfluxDB OSS configuration file**
 
     If you have custom configuration settings for InfluxDB OSS, back up and save your configuration file.
     **Without a backup, you'll lose custom configuration settings when updating the InfluxDB binary.**
 
-5. **Update the InfluxDB binary**
+2. **Update the InfluxDB binary**
 
     > Updating the InfluxDB binary overwrites the existing configuration file.
     > To keep custom settings, back up your configuration file.
@@ -230,7 +229,7 @@ sudo yum localinstall influxdb-data-1.8.0_c1.8.0.x86_64.rpm
     {{% /code-tab-content %}}
     {{< /code-tabs-wrapper >}}
 
-6. **Update the configuration file**
+3. **Update the configuration file**
 
     In `/etc/influxdb/influxdb.conf`, set:
 
@@ -260,12 +259,12 @@ Transfer any custom settings from the backup of your OSS configuration file
 to the new Enterprise configuration file.
     {{% /note %}}
 
-7. **Update the `/etc/hosts` file**
+4. **Update the `/etc/hosts` file**
 
     Add all meta and data nodes to the `/etc/hosts` file to allow the OSS instance
     to communicate with other nodes in the InfluxDB Enterprise cluster.
 
-8. **Start the data node**
+5. **Start the data node**
 
     {{< code-tabs-wrapper >}}
     {{% code-tabs %}}
