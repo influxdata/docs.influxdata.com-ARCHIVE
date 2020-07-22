@@ -4,7 +4,7 @@ description: The Microsoft Teams event handler lets you send Kapacitor alerts to
 menu:
   kapacitor_1_5:
     name: Microsoft Teams
-    weight: 1500
+    weight: 750
     parent: event-handlers
 ---
 
