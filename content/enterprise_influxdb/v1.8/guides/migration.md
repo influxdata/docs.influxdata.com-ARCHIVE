@@ -41,7 +41,7 @@ Complete the following tasks:
 3. [Set up InfluxDB Enterprise data nodes](#set-up-influxdb-enterprise-data-nodes)
 4. Do one of the following:
    - [Migrate a data set with zero downtime](#migrate-a-data-set-with-zero-downtime). This method lets you move data between OSS and Enterprise as you're testing the migration.
-   - [Migrate a data set with downtime](#migrate-a-data-set-with-downtime). With this method, you cannot move data from Enterprise back to OSS. This method is useful if you're not able to run a portable backup, for example, for any of the following reasons:
+   - [Migrate a data set with downtime](#migrate-a-data-set-with-downtime). Note, with this method, you cannot move data from Enterprise back to OSS. This method is useful if you're not able to run a portable backup, for example, for any of the following reasons:
      - Data set exceeds a certain size (roughly 10 databases or more, or more than 500 shards per database)
      - Hardware requirements aren't available
      - Time constraints
