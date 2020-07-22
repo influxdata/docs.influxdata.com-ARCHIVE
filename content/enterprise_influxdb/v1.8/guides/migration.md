@@ -121,14 +121,14 @@ If you don't have any existing data nodes in your InfluxDB Enterprise cluster,
     ```
 
     For more information, see [`-backup`](/influxdb/v1.8/administration/backup_and_restore/#backup)
-2. Restore on the cluster by running the following:
+2. Restore the backup on the cluster by running the following:
 
     ```sh
     influxd restore -portable  [ -host <host:port> ] <path-to-backup-files>
     ```
 
     For more information, see [`-restore`](/influxdb/v1.8/administration/backup_and_restore/#restore)
-3. Dual write to both OSS and Enterprise. See [Write data with the InfluxDB API] (https://docs.influxdata.com/influxdb/v1.8/guides/write_data/). This keeps the OSS and cluster active for testing and acceptance work.
+3. Dual write to both OSS and Enterprise. See [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v1.8/guides/write_data/). This keeps the OSS and cluster active for testing and acceptance work.
 4. [Export data from OSS](/enterprise_influxdb/v1.8/administration/backup-and-restore/#exporting-data) from the time the backup was taken to the time the dual write started.
 For example, if you take the backup on 2020-07-19T00:00:00.000Z, and started writing data to Enterprise at 2020-07-19T23:59:59.999Z, you could run the following command:
 
