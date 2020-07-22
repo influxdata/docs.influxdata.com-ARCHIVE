@@ -584,7 +584,7 @@ input:
   - name: InfiniBand
     id: infiniband
     description: |
-      The InfiniBand input plugin gathers statistics for all InfiniBand devices and ports on the system. 
+      The InfiniBand input plugin gathers statistics for all InfiniBand devices and ports on the system.
       Counters are stored in `/sys/class/infiniband/<dev>/port/<port>/counters/`.
     introduced: 1.14.0
     tags: [linux, systems]
@@ -918,8 +918,8 @@ input:
   - name: Monit
     id: monit
     description: |
-      The Monit input plugin gathers metrics and status information about local processes, remote hosts, files, 
-      file systems, directories, and network interfaces managed and watched by Monit. To use this plugin, 
+      The Monit input plugin gathers metrics and status information about local processes, remote hosts, files,
+      file systems, directories, and network interfaces managed and watched by Monit. To use this plugin,
       enable the [HTTPD TCP port](https://mmonit.com/monit/documentation/monit.html#TCP-PORT) in Monit.
     introduced: 1.14.0
     tags: [linux, macos, windows, systems, networking]
@@ -1946,7 +1946,7 @@ output:
       Syslog messages are formatted according to RFC 5424.
     introduced: 1.11.0
     tags: [linux, macos, windows, logging]
-    
+
   - name: Warp10
     id: warp10
     description: |
@@ -2070,7 +2070,7 @@ processor:
       The Date processor plugin adds the metric timestamp as a human readable tag.
     introduced: 1.12.0
     tags: [linux, macos, windows]
-    
+
   - name: Dedup
     id: dedup
     description: |
@@ -2159,9 +2159,16 @@ processor:
     id: s2geo
     description: |
       The S2 Geo processor plugin adds tags with an S2 cell ID token of a specified [cell level](https://s2geometry.io/resources/s2cell_statistics.html).
-      Tags are used in Flux `experimental/geo` functions. 
+      Tags are used in Flux `experimental/geo` functions.
       Specify `lat` and `lon` field values with WGS-84 coordinates in decimal degrees.
     introduced: 1.14.0
+    tags: [linux, macos, windows]
+
+  - name: Starlark
+    id: starlark
+    description: |
+      The Starlark processor plugin calls a [Starlark](https://github.com/google/starlark-go/blob/master/doc/spec.md) function for each matched metric, allowing for custom programmatic metric processing.
+    introduced: 1.15
     tags: [linux, macos, windows]
 
   - name: Strings
@@ -2203,7 +2210,7 @@ processor:
   - name: Template
     id: template
     description: |
-      The Template processor plugin applies a Go template to metrics to generate a new tag. 
+      The Template processor plugin applies a Go template to metrics to generate a new tag.
       Primarily used to create a tag for dynamic routing to multiple output plugins
       or to an output specific routing option. The template has access to each metric's measurement name,
       tags, fields, and timestamp using the interface in [template_metric.go](https://github.com/influxdata/telegraf/blob/release-1.14/plugins/processors/template/template_metric.go).
