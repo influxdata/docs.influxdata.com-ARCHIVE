@@ -1045,6 +1045,13 @@ input:
     introduced: 1.9.0
     tags: [linux, macos, windows, servers, web]
 
+- name: NGINX Stream STS
+    id: nginx_sts
+    description: |
+        The NGINX Plus API input plugin gathers NGINX status using external virtual host traffic status.
+    introduced: 1.15.0
+    tags: [linux, macos, windows, servers, web]
+
   - name: NGINX Upstream Check
     id: nginx_upstream_check
     description: |
@@ -1276,6 +1283,13 @@ input:
       URI and adds the statistics to InfluxDB.
     introduced: 0.10.3
     tags: [linux, macos, windows, servers, web]
+
+  - name: Redfish
+    id: redfish
+    description: |
+      The Redfish input plugin gathers metrics and status information of hardware servers for which [DMTF's Redfish](https://redfish.dmtf.org/) is enabled.
+    introduced: 1.15.0
+    tags: [linux, macos, windows, servers, networking]
 
   - name: Redis
     id: redis
@@ -1744,6 +1758,13 @@ output:
     introduced: 1.12.0
     tags: [linux, macos, windows, systems]
 
+  - name: Execd
+    id: exec
+    description: |
+        The Execd output plugin runs an external program as a daemon.
+    introduced: 1.15.0
+    tags: [linux, macos, windows, systems]
+
   - name: File
     id: file
     description: |
@@ -1870,6 +1891,13 @@ output:
       The NATS Output output plugin writes to a (list of) specified NATS instance(s).
     introduced: 1.1.0
     tags: [linux, macos, windows, messaging]
+
+  - name: New Relic
+    id: newrelic
+    description: |
+      The New Relic output plugin writes to New Relic insights using the [Metric API](https://docs.newrelic.com/docs/data-ingest-apis/get-data-new-relic/metric-api/introduction-metric-api).
+    introduced: 1.15.0
+    tags: [linux, macos, windows, applications, web]
 
   - name: NSQ
     id: nsq
@@ -2078,6 +2106,13 @@ processor:
     introduced: 1.14.0
     tags: [linux, macos, windows]
 
+  - name: Defaults
+    id: defaults
+    description: |
+      The Defaults processor plugin allows you to ensure certain fields will always exist with a specified default value on your metrics.
+    introduced: 1.15.0
+    tags: [linux, macos, windows]
+
   - name: Enum
     id: enum
     description: |
@@ -2090,6 +2125,27 @@ processor:
       The processor supports explicit configuration of a destination field.
       By default the source field is overwritten.
     introduced: 1.8.0
+    tags: [linux, macos, windows]
+
+  - name: Execd
+    id: execd
+    description: |
+      The `execd` processor plugin aruns an external program as a separate process. It pipes metrics into the process's STDIN and reads processed metrics from its STDOUT.
+    introduced: 1.15.0
+    tags: [linux, macos, windows]
+
+  - name: Filepath
+    id: filepath
+    description: |
+      The `filepath` processor plugin maps certain Go functions from [path/filepath](https://golang.org/pkg/path/filepath/) onto tag and field values.
+    introduced: 1.15.0
+    tags: [linux, macos, windows]
+
+  - name: Network Interface Name
+    id: ifname
+    description: |
+      The Network Interface Name processor plugin looks up network interface names using SNMP.
+    introduced: 1.15.0
     tags: [linux, macos, windows]
 
   - name: Override
@@ -2133,6 +2189,13 @@ processor:
     introduced: 1.12.0
     tags: [linux, macos, windows]
 
+  - name: Port Name Lookup
+    id: port_name
+    description: |
+      The Port Name Lookup processor plugin converts a tag containing a well-known port number to the registered service name.
+    introduced: 1.15.0
+    tags: [linux, macos, windows]
+
   - name: Printer
     id: printer
     description: |
@@ -2155,6 +2218,13 @@ processor:
     introduced: 1.8.0
     tags: [linux, macos, windows]
 
+  - name: Reverse DNS
+    id: reverse_dns
+    description: |
+      The Reverse DNS processor plugin processor does a reverse-dns lookup on tags (or fields) with IPs in them.
+    introduced: 1.15.0
+    tags: [linux, macos, windows]
+
   - name: S2 Geo
     id: s2geo
     description: |
@@ -2168,7 +2238,7 @@ processor:
     id: starlark
     description: |
       The Starlark processor plugin calls a [Starlark](https://github.com/google/starlark-go/blob/master/doc/spec.md) function for each matched metric, allowing for custom programmatic metric processing.
-    introduced: 1.15
+    introduced: 1.15.0
     tags: [linux, macos, windows]
 
   - name: Strings
