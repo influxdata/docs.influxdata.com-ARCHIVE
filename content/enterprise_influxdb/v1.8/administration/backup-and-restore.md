@@ -36,8 +36,6 @@ InfluxDB Enterprise supports backing up and restoring data in a cluster, a singl
 
 Use the `backup` and `restore` utilities to back up and restore between `influxd` instances with the same versions or with only minor version differences. For example, you can backup from 1.7.3 and restore on 1.8.0.
 
->**Note:** For large datasets (100s of gigabytes of data or more), you might need to use the [export and import method](#exporting-and-importing-data) method.
-
 ### Backup utility
 
 A backup creates a copy of the [metastore](/influxdb/v1.8/concepts/glossary/#metastore) and [shard](/influxdb/v1.8/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
@@ -424,7 +422,7 @@ for [restoring from a full backup](#syntax-to-restore-from-a-full-backup).
 
 ## Exporting and importing data
 
-For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. However, when working with data volumes 100s of gigabytes or more, the standard backup and restore utilities may not adequately handle the volumes of data in your application.  
+For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. However, when working with data volumes 100s of gigabytes or more, the standard backup and restore utilities may not adequately handle the volumes of data in your application. 
 
 As an alternative to the standard backup and restore utilities, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. These commands can be executed manually or included in shell scripts that run the export and import operations at scheduled intervals (example below).
 

@@ -376,7 +376,7 @@ for [restoring from a full backup](#syntax-to-restore-from-a-full-backup).
 
 ## Export and import commands
 
-When working with data volumes 100s of gigabytes or more, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. Execute these commands manually or include them in shell scripts to run at scheduled intervals.
+When working with data volumes 100s of gigabytes or more, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. Execute these commands manually or include them in shell scripts to run at scheduled intervals. 
 
 ### Export data
 
