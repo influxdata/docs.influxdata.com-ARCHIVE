@@ -8,8 +8,17 @@ menu:
     parent: About the project
 ---
 
+## v1.15.1 [2020-07-22]
+
+### Bug fixes
+
+- Fix architecture in non-amd64 deb and rpm packages.
 
 ## v1.15.0 [2020-07-22]
+
+{{% warn %}}
+Critical bug that impacted non-amd64 packages was introduced in 1.15.0. **Do not install this release.** Instead, install 1.15.1, which includes the features, new plugins, and bug fixes below.
+{{% /warn %}}
 
 ### Breaking changes
 
@@ -46,6 +55,86 @@ Breaking changes are updates that may cause Telegraf plugins to fail or function
 - Telegraf's `--test` mode runs processors and aggregators before printing metrics.
 - Official packages built with Go 1.14.5.
 - When updating the Debian package, you will no longer be prompted to merge the `telegraf.conf` file. Instead, the new version will be installed to `/etc/telegraf/telegraf.conf.sample`. The `tar` and `zip` packages now include the version in the top-level directory.
+- Allow per input overriding of `collection_jitter` and `precision`.
+- Deploy Telegraf configuration as `telegraf.conf.sample`.
+- Use Docker log timestamp as metric time.
+- Apply ping deadline to DNS lookup.
+- Support multiple templates for graphite serializers.
+- Add configurable separator graphite serializer and output.
+- Add support for SIGUSR1 to trigger flush.
+- Add support for once mode that writes to outputs and exits.
+- Run processors and aggregators during test mode.
+- Add timezone configuration to CSV parser.
+
+
+#### Input plugin updates
+
+- **Ceph Storage** (`ceph`): Add support for MDS and RGW sockets.
+- **ECS** (`ecs`): Add v3 metadata support.
+- **Fibaro** (`fibaro`): Add support for battery-level monitoring.
+- **File** (`file`):
+  - Support UTF-16.
+  - Exclude `csv_timestamp_column` and `csv_measurement_column` from fields.
+- **HTTP** (`http`): Add reading bearer token.
+- **HTTP Listener v2** (`http_listener_v2`): Add ability to specify HTTP headers as tags.
+- **HTTP Response** (`http_response`):
+  - Add authentication support.
+  - Allow collection of HTTP headers.
+  - Add ability to collect response body as field.
+- **Icinga 2** (`icinga2`):
+  - Fix source field.
+  - Add tag for server hostname.
+- **InfluxDB Listener** (`influxdb_listener`): Add option to save retention policy as tag.
+- **IPtables** (`iptables`): Extract target as a tag for each rule.
+- **Kibana** (`kibana`): Fix `json unmarshal` error.
+- **Kubernetes Inventory** (`kube_inventory`): Add ability to add selectors as tags.
+- **Mem** (`mem`): Add laundry on FreeBSD.
+- **Microsoft SQL Server** (`sqlserver`):
+  - Add `VolumeSpace` query.
+  - Add `cpu` query.
+  - Add counter type to `perfmon` collector.
+  - Improve compatibility with older server versions.
+  - Fix typo in `total_elapsed_time_ms` field.
+- **Modbus** (`modbus`):
+  - Add support for 64-bit integer types.
+  - Add retry when replica is busy.
+  - Add ability to specify measurement per register.
+- **MongoDB** (`monogdb`):
+  - Add commands stats.
+  - Add additional fields.
+  - Add cluster state integer.
+  - Add option to disable cluster status.
+  - Add additional conccurrent transaction information.
+- **NVIDIA SMI** (`nvidia_smi`): Add video codec stats.
+- **Procstat** (`procstat`):
+  - Improve performance.
+  - Fix memory leak.
+- **S.M.A.R.T.** (`smart`): Add missing `nvme` attributes.
+- **SNMP Trap** (`snmp_trap`): Add SNMPv3 trap support.
+- **System** (`system`): Fix incorrect uptime when clock is adjusted.
+- **Tail** (`tail`): Support UTF-16.
+
+#### Output plugin updates
+
+- **Enum** (`enum`): Add integer mapping support.
+
+#### Processor plugin updates
+
+- **Date** (`date`):
+  - Add field creation.
+  - Add integer unix time support.
+- **Wavefront** (`wavefront`): Add `truncate_tags` setting.
+
+
+### Bug fixes
+- Fix ability to write metrics to CloudWatch with IMDSv1 disabled.
+- Fix vSphere 6.7 missing data issue.
+- Fix gzip support in `socket_listener` with tcp sockets.
+- Fix interval drift when `round_interval` is set in agent.
+- Fix incorrect uptime when clock is adjusted.
+- Remove trailing backslash from tag keys/values in `influx` serializer.
+- Fix incorrect Azure SQL DB server properties.
+- Send metrics in FIFO order.
 
 ## v1.14.5 [2020-06-30]
 
