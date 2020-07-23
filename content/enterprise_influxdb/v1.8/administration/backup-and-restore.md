@@ -422,7 +422,7 @@ for [restoring from a full backup](#syntax-to-restore-from-a-full-backup).
 
 ## Exporting and importing data
 
-For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. However, when working with data volumes 100s of gigabytes or more, the standard backup and restore utilities may not adequately handle the volumes of data in your application.  
+For most InfluxDB Enterprise applications, the [backup and restore utilities](#backup-and-restore-utilities) provide the tools you need for your backup and restore strategy. However, in some cases, the standard backup and restore utilities may not adequately handle the volumes of data in your application.  
 
 As an alternative to the standard backup and restore utilities, use the InfluxDB `influx_inspect export` and `influx -import` commands to create backup and restore procedures for your disaster recovery and backup strategy. These commands can be executed manually or included in shell scripts that run the export and import operations at scheduled intervals (example below).
 
