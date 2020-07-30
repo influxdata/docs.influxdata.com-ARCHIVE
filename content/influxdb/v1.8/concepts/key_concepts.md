@@ -123,6 +123,7 @@ You don't need to have tags in your data structure, but it's generally a good id
 This means that queries on tags are faster and that tags are ideal for storing commonly-queried metadata.
 
 Avoid using the following reserved keys:
+
 * `_field`
 * `_measurement`
 * `time`
