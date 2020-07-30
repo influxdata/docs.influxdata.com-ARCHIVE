@@ -237,7 +237,7 @@ When months are added to a date times and the resulting date is past the end of 
 
 A _date and time literal_ represents a specific moment in time.
 It has a date part, a time part and a time offset part.
-The format follows the [RFC 3639](https://tools.ietf.org/html/rfc3639) specification.
+The format follows the [RFC 3339](https://tools.ietf.org/html/rfc3339) specification.
 The time is optional.
 When it is omitted, the time is assumed to be midnight for the default location.
 The `time_offset` is optional.
