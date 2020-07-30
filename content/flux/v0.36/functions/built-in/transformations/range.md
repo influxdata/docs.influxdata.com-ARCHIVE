@@ -43,7 +43,7 @@ Absolute stop times are defined using timestamps.
 
 _**Data type:** Duration or Timestamp_
 
-> Flux only honors [RFC3639 timestamps](/flux/v0.36/language/types#timestamp-format)
+> Flux only honors [RFC3339 timestamps](/flux/v0.36/language/types#timestamp-format)
 > and ignores dates and times provided in other formats.
 
 ## Examples
