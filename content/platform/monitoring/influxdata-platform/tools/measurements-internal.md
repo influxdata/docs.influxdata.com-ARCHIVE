@@ -56,7 +56,7 @@ A **counter** is a cumulative metric that represents a single monotonically incr
 Counters only increase (except on reset).
 All counters reset to zero when InfluxDB restarts.
 
-#### Guage
+#### Gauge
 A **gauge** is a metric that represents a single numerical value that can arbitrarily go up or down.
 
 ## InfluxDB \_internal measurements and fields
