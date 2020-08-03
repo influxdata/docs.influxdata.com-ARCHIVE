@@ -49,6 +49,16 @@ Use the [InfluxDB OSS Monitor dashboard](/platform/monitoring/influxdata-platfor
 or the [InfluxDB Enterprise Monitor dashboard](/platform/monitoring/influxdata-platform/monitoring-dashboards/#monitor-influxdb-enterprise)
 to visualize InfluxDB `_internal` metrics.
 
+## Metric types
+
+#### Counter
+A **counter** is a cumulative metric that represents a single monotonically increasing counter.
+Counters only increase (except on reset).
+All counters reset to zero when InfluxDB restarts.
+
+#### Guage
+A **gauge** is a metric that represents a single numerical value that can arbitrarily go up or down.
+
 ## InfluxDB \_internal measurements and fields
 {{% truncate %}}
 - [ae](#ae-enterprise-only) (Enterprise only)
@@ -242,14 +252,26 @@ The measurement statistics related to the Anti-Entropy (AE) engine in InfluxDB E
 #### bytesRx
 The number of bytes received by the data node.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### errors
 The total number of anti-entropy jobs that have resulted in errors.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### jobs
 The total number of jobs executed by the data node.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### jobsActive
 The number of active (currently executing) jobs.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 ---
 
@@ -260,23 +282,41 @@ The tags on the series indicate the source host of the stat.
 #### copyShardReq
 The number of internal requests made to copy a shard from one data node to another.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### createIteratorReq
 The number of read requests from other data nodes in the cluster.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### expandSourcesReq
 The number of remote node requests made to find measurements on this node that match a particular regular expression.
 Indicates a SELECT from a regex initiated on a different data node, which then sent an internal request to this node.
 There is not currently a statistic tracking how many queries with a regex, instead of a fixed measurement, were initiated on a particular node.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### fieldDimensionsReq
 The number of remote node requests for information about the fields and associated types, and tag keys of measurements on this data node.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### iteratorCostReq
 The number of internal requests for iterator cost.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### removeShardReq
 The number of internal requests to delete a shard from this data node.
 Exclusively incremented by use of the `influxd-ctl remove shard` command.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeShardFail
 The total number of internal write requests from a remote node that failed.
@@ -288,11 +328,20 @@ Depending on what went wrong, in most circumstances Node B would also increment 
 If Node A had the shard locally, there would be no internal request to write data
 to a remote node, so `writeShardFail` would not be incremented.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeShardPointsReq
 The number of points in every internal write request from any remote node, regardless of success.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeShardReq
 The number of internal write requests from a remote data node, regardless of success.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -302,10 +351,16 @@ The measurement statistics related to continuous queries (CQs).
 #### queryFail
 The total number of continuous queries that executed but failed.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### queryOk
 The total number of continuous queries that executed successfully.
 Note that this value may be incremented in some cases where a CQ is initiated
 but does not actually run, for example, due to misconfigured resample intervals.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -314,12 +369,15 @@ but does not actually run, for example, due to misconfigured resample intervals.
 #### numMeasurements
 The current number of measurements in the specified database.
 
-The series cardinality values are estimates, based on [HyperLogLog++ (HLL++)](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go).
-The numbers returned by the estimates when there are thousands or millions of
-measurements or series should be accurate within a relatively small margin of error.
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### numSeries
 The current series cardinality of the specified database.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 The series cardinality values are estimates, based on [HyperLogLog++ (HLL++)](https://github.com/influxdata/influxdb/blob/master/pkg/estimator/hll/hll.go).
 The numbers returned by the estimates when there are thousands or millions of
 measurements or series should be accurate within a relatively small margin of error.
@@ -343,9 +401,15 @@ node doesn't exist and has to be created, and the "subsystem" created successful
 If HH files are on disk for a remote node at process startup, the branch that
 increments this stat will not be reached.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeShardReqPoints
 The number of write requests for each point in the initial request to the hinted
 handoff engine for a remote node.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -372,6 +436,9 @@ Say at startup there were 1000 bytes still enqueued in HH from the previous run 
 Immediately after a restart, both `bytesRead` and `bytesWritten` are set to zero.
 Assuming HH is properly depleted, and no future writes require HH, then the stats will read 1000 bytes read and 0 bytes written.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 >**Note:** Resets to zero after crash or restart, even if the HH queue was non-empty.
 
 #### bytesWritten
@@ -379,10 +446,16 @@ The total number of bytes written to the hinted handoff queue.
 Note that this statistic only tracks bytes written during the lifecycle of the current process.
 Upon restart or a crash, this statistic resets to zero, even if the hinted handoff queue was not empty.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### queueBytes
 The total number of bytes remaining in the hinted handoff queue.
 This statistic should accurately and absolutely track the number of bytes of encoded
 data waiting to be sent to the remote node.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 This statistic should remain correct across restarts, unlike `bytesRead` and `bytesWritten` (see [#780](https://github.com/influxdata/docs.influxdata.com/issues/780)).
 
@@ -391,27 +464,51 @@ The total number of segments in the hinted handoff queue. The HH queue is a sequ
 This is a coarse-grained statistic that roughly represents the amount of data queued for a remote node.
 The `queueDepth` values can give you a sense of when a queue is growing or shrinking.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### writeBlocked
 The number of writes blocked because the number of concurrent HH requests exceeds the limit.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeDropped
 The number of writes dropped from the HH queue because the write appeared to be corrupted.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeNodeReq
 The total number of write requests that succeeded in writing a batch to the destination node.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeNodeReqFail
 The total number of write requests that failed in writing a batch of data from the
 hinted handoff queue to the destination node.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeNodeReqPoints
-The total number of points successfully written from the HH queue to the destination node fr
+The total number of points successfully written from the HH queue to the destination node.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeShardReq
 The total number of every write batch request enqueued into the hinted handoff queue.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeShardReqPoints
 The total number of points enqueued into the hinted handoff queue.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -443,18 +540,26 @@ Immediately after a restart, both `bytesRead` and `bytesWritten` are set to zero
 Assuming HH is properly depleted, and no future writes require HH, then the stats
 will read 1000 bytes read and 0 bytes written.
 
->**Note:** Resets to zero after crash or restart, even if the HH queue was non-empty.
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
+>**Note:** Resets to zero after crash or restart, even if the HH queue was non-empty.
 
 #### bytesWritten
 The total number of bytes written to the hinted handoff queue.
 Note that this statistic only tracks bytes written during the lifecycle of the current process.
 Upon restart or a crash, this statistic resets to zero, even if the hinted handoff queue was not empty.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### queueBytes
 The total number of bytes remaining in the hinted handoff queue.
 This statistic should accurately and absolutely track the number of bytes of encoded
 data waiting to be sent to the remote node.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 This statistic should remain correct across restarts, unlike `bytesRead` and `bytesWritten`
 (see [#780](https://github.com/influxdata/docs.influxdata.com/issues/780)).
@@ -464,27 +569,51 @@ The total number of segments in the hinted handoff queue. The HH queue is a sequ
 This is a coarse-grained statistic that roughly represents the amount of data queued for a remote node.
 The `queueDepth` values can give you a sense of when a queue is growing or shrinking.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### writeBlocked
 The number of writes blocked because the number of concurrent HH requests exceeds the limit.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeDropped
 The number of writes dropped from the HH queue because the write appeared to be corrupted.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeNodeReq
 The total number of write requests that succeeded in writing a batch to the destination node.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeNodeReqFail
 The total number of write requests that failed in writing a batch of data from the
 hinted handoff queue to the destination node.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeNodeReqPoints
-The total number of points successfully written from the HH queue to the destination node fr
+The total number of points successfully written from the HH queue to the destination nod.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeShardReq
 The total number of every write batch request enqueued into the hinted handoff queue.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeShardReqPoints
 The total number of points enqueued into the hinted handoff queue.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -495,71 +624,140 @@ The `httpd` measurement stores fields related to the InfluxDB HTTP server.
 The number of HTTP requests that were aborted due to authentication being required,
 but not supplied or incorrect.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### clientError
 The number of HTTP responses due to client errors, with a `4XX` HTTP status code.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### fluxQueryReq
 The number of Flux query requests served.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### fluxQueryReqDurationNs
 The duration (wall-time), in nanoseconds, spent executing Flux query requests.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### pingReq
 The number of times InfluxDB HTTP server served the `/ping` HTTP endpoint.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### pointsWrittenDropped
 The number of points dropped by the storage engine.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### pointsWrittenFail
 The number of points accepted by the HTTP `/write` endpoint, but unable to be persisted.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### pointsWrittenOK
 The number of points accepted by the HTTP `/write` endpoint and persisted successfully.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### promReadReq
 The number of read requests to the Prometheus `/read` endpoint.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### promWriteReq
 The number of write requests to the Prometheus `/write` endpoint.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### queryReq
 The number of query requests.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### queryReqDurationNs
 The total query request duration, in nanosecond (ns).
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### queryRespBytes
 The total number of bytes returned in query responses.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### recoveredPanics
 The total number of panics recovered by the HTTP handler.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### req
 The total number of HTTP requests served.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### reqActive  
 The number of currently active requests.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### reqDurationNs
 The duration (wall time), in nanoseconds, spent inside HTTP requests.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### serverError
 The number of HTTP responses due to server errors.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### statusReq
 The number of status requests served using the HTTP `/status` endpoint.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeReq
 The number of write requests served using the HTTP `/write` endpoint.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeReqActive
 The number of currently active write requests.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeReqBytes
 The total number of bytes of line protocol data received by write requests, using the HTTP `/write` endpoint.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeReqDurationNs
 The duration (wall time), in nanoseconds, of write requests served using the `/write` HTTP endpoint.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -570,11 +768,20 @@ The `queryExecutor` statistics related to usage of the Query Executor of the Inf
 #### queriesActive
 The number of active queries currently being handled.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 ##### queriesExecuted
 The number of queries executed (started).
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### queriesFinished
 The number of queries that have finished executing.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### queryDurationNs
 The duration (wall time), in nanoseconds, of every query executed.
@@ -582,8 +789,14 @@ If one query took 1000 ns from start to finish, and another query took 500 ns
 from start to finish and ran before the first query finished, the statistic
 would increase by 1500.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### recoveredPanics
 The number of panics recovered by the Query Executor.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -594,38 +807,74 @@ The `rpc` measurement statistics are related to the use of RPC calls within Infl
 #### idleStreams
 The number of idle multiplexed streams across all live TCP connections.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### liveConnections
 The current number of live TCP connections to other nodes.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### liveStreams
 The current number of live multiplexed streams across all live TCP connections.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### rpcCalls
 The total number of RPC calls made to remote nodes.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### rpcFailures
 The total number of RPC failures, which are RPCs that did not recover.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### rpcReadBytes
 The total number of RPC bytes read.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### rpcRetries
 The total number of RPC calls that retried at least once.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### rpcWriteBytes
 The total number of RPC bytes written.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### singleUse
 The total number of single-use connections opened using Dial.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### singleUseOpen
 The number of single-use connections currently open.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### totalConnections
 The total number of TCP connections that have been established.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### totalStreams
 The total number of streams established.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -640,93 +889,170 @@ It also includes the low-level type information used by the [Go reflect package]
 #### Alloc
 The currently allocated number of bytes of heap objects.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### Frees
 The cumulative number of freed (live) heap objects.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### HeapAlloc
 The size, in bytes, of all heap objects.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### HeapIdle
 The number of bytes of idle heap objects.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### HeapInUse
 The number of bytes in in-use spans.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### HeapObjects
 The number of allocated heap objects.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### HeapReleased
 The number of bytes of physical memory returned to the OS.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### HeapSys
 The number of bytes of heap memory obtained from the OS.
 Measures the amount of virtual address space reserved for the heap.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### Lookups
 The number of pointer lookups performed by the runtime.
 Primarily useful for debugging runtime internals.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### Mallocs
 The total number of heap objects allocated.
 The total number of live objects is [Frees](#frees).
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### NumGC
 The number of completed GC (garbage collection) cycles.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### NumGoroutine
 The total number of Go routines.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### PauseTotalNs
 The total duration, in nanoseconds, of total GC (garbage collection) pauses.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### Sys
 The total number of bytes of memory obtained from the OS.
 Measures the virtual address space reserved by the Go runtime for the heap,
 stacks, and other internal data structures.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### TotalAlloc
 The total number of bytes allocated for heap objects.
 This statistic does not decrease when objects are freed.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
 ### shard
 The `shard` measurement statistics are related to working with shards in InfluxDB OSS and InfluxDB Enterprise.
 
+The shard measurement includes one additional tag:
+
+- **indexType:** The type of index `inmem` or `tsi1`.
+
 #### diskBytes
 The size, in bytes, of the shard, including the size of the data directory and the WAL directory.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### fieldsCreate
 The number of fields created.
 
-#### indexType
-The type of index `inmem` or `tsi1`.
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### seriesCreate
 Then number of series created.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeBytes
 The number of bytes written to the shard.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writePointsDropped
 The number of requests to write points t dropped from a write.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 Also, `http.pointsWrittentDropped` incremented when a point is dropped from a write
 (see [#780](https://github.com/influxdata/docs.influxdata.com/issues/780)).
 
 #### writePointsErr
 The number of requests to write points that failed to be written due to errors.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writePointsOk
 The number of points written successfully.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeReq
 The total number of write requests.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeReqErr
 The total number of write requests that failed due to errors.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeReqOk
 The total number of successful write requests.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -736,11 +1062,20 @@ The `subscriber` measurement statistics are related to the usage of InfluxDB sub
 #### createFailures
 The number of subscriptions that failed to be created.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### pointsWritten  
 The total number of points that were successfully written to subscribers.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeFailures  
 The total number of batches that failed to be written to subscribers.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -766,6 +1101,9 @@ The duration, in milliseconds, since the cache was last snapshotted at sample ti
 This statistic indicates how busy the cache is.
 Large numbers indicate a cache which is idle with respect to writes.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### cachedBytes
 The total number of bytes that have been written into snapshots.
 This statistic is updated during the creation of a snapshot.
@@ -778,16 +1116,28 @@ is entering the cache and rate at which is being purged from the cache.
 If the entry rate exceeds the exit rate for a sustained period of time,
 there is an issue that needs to be addressed.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### diskBytes
 The size, in bytes, of on-disk snapshots.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### memBytes
 The size, in bytes, of in-memory cache.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### snapshotCount
 The current level (number) of active snapshots.
 In a healthy system, this number should be between 0 and 1. A system experiencing
 transient write errors might expect to see this number rise.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### WALCompactionTimeMs
 The duration, in milliseconds, that the commit lock is held while compacting snapshots.
@@ -797,14 +1147,26 @@ The ratio of the difference between the start and end "WALCompactionTime" values
 for an interval divided by the length of the interval provides an indication of
 how much of maximum cache throughput is being consumed.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeDropped
 The total number of writes dropped due to timeouts.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeErr
 The total number of writes that failed.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeOk
 The total number of successful writes.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -815,89 +1177,176 @@ engine with compressed blocks.
 #### cacheCompactionDuration  
 The duration (wall time), in nanoseconds, spent in cache compactions.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### cacheCompactionErr
 The number of cache compactions that have failed due to errors.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### cacheCompactions  
 The total number of cache compactions that have ever run.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### cacheCompactionsActive
 The number of cache compactions that are currently running.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### tsmFullCompactionDuration
 The duration (wall time), in nanoseconds, spent in full compactions.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### tsmFullCompactionErr
 The total number of TSM full compactions that have failed due to errors.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### tsmFullCompactionQueue
 The current number of pending TMS Full compactions.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### tsmFullCompactions
 The total number of TSM full compactions that have ever run.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### tsmFullCompactionsActive
 The number of TSM full compactions currently running.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### tsmLevel1CompactionDuration
 The duration (wall time), in nanoseconds, spent in TSM level 1 compactions.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### tsmLevel1CompactionErr
 The total number of TSM level 1 compactions that have failed due to errors.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### tsmLevel1CompactionQueue
 The current number of pending TSM level 1 compactions.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### tsmLevel1Compactions
 The total number of TSM level 1 compactions that have ever run.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### tsmLevel1CompactionsActive
 The number of TSM level 1 compactions that are currently running.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### tsmLevel2CompactionDuration
 The duration (wall time), in nanoseconds, spent in TSM level 2 compactions.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### tsmLevel2CompactionErr
 The number of TSM level 2 compactions that have failed due to errors.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### tsmLevel2CompactionQueue
 The current number of pending TSM level 2 compactions.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### tsmLevel2Compactions
 The total number of TSM level 2 compactions that have ever run.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### tsmLevel2CompactionsActive  
 The number of TSM level 2 compactions that are currently running.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### tsmLevel3CompactionDuration  
 The duration (wall time), in nanoseconds, spent in TSM level 3 compactions.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### tsmLevel3CompactionErr
 The number of TSM level 3 compactions that have failed due to errors.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### tsmLevel3CompactionQueue  
 The current number of pending TSM level 3 compactions.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### tsmLevel3Compactions
 The total number of TSM level 3 compactions that have ever run.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### tsmLevel3CompactionsActive
 The number of TSM level 3 compactions that are currently running.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### tsmOptimizeCompactionDuration
 The duration (wall time), in nanoseconds, spent during TSM optimize compactions.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### tsmOptimizeCompactionErr
 The total number of TSM optimize compactions that have failed due to errors.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### tsmOptimizeCompactionQueue
 The current number of pending TSM optimize compactions.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### tsmOptimizeCompactions
 The total number of TSM optimize compactions that have ever run.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### tsmOptimizeCompactionsActive
 The number of TSM optimize compactions that are currently running.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 ---
 
@@ -907,8 +1356,14 @@ The `tsm1_filestore` measurement statistics are related to the usage of the TSM 
 #### diskBytes
 The size, in bytes, of disk usage by the TSM file store.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### numFiles
 The total number of files in the TSM file store.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 ---
 
@@ -918,14 +1373,26 @@ The `tsm1_wal` measurement statistics are related to the usage of the TSM Write 
 #### currentSegmentDiskBytes
 The current size, in bytes, of the segment disk.
 
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
+
 #### oldSegmentDiskBytes
 The size, in bytes, of the segment disk.
+
+**Data type:** Integer  
+**Metric type:** [Gauge](#gauge)
 
 #### writeErr
 The number of writes that failed due to errors.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeOK
 The number of writes that succeeded.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 ---
 
@@ -939,13 +1406,22 @@ point (points parse correctly, correct authentication provided, etc.).
 After these checks, this statistic should be incremented regardless of source
 (HTTP, UDP, `_internal` stats, OpenTSDB plugin, etc.).
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### pointReqHH (Enterprise only)
 The total number of points received for write by this node and then enqueued into
 hinted handoff for the destination node.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### pointReqLocal (Enterprise only)
 The total number of point requests that have been attempted to be written into a
 shard on the same (local) node.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### pointReqRemote (Enterprise only)
 The total number of points received for write by this node but needed to be forwarded into a shard on a remote node.
@@ -953,31 +1429,55 @@ The `pointReqRemote` statistic is incremented immediately before the remote writ
 which only happens if HH doesn't exist for that node.
 Then if the write attempt fails, we check again if HH exists, and if so, add the point to HH instead.  
 This statistic does not distinguish between requests that are directly written to
-the destination node versus enqueued into the hinted handoff queue for the destination node.  
+the destination node versus enqueued into the hinted handoff queue for the destination node.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### req
 The total number of batches of points requested to be written to this node.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### subWriteDrop
 The total number of batches of points that failed to be sent to the subscription dispatcher.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### subWriteOk
 The total number of batches of points that were successfully sent to the subscription dispatcher.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeDrop
 The total number of write requests for points that have been dropped due to timestamps
 not matching any existing retention policies.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeError
 The total number of batches of points that were not successfully written,
 due to a failure to write to a local or remote shard.
 
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
+
 #### writeOk
 The total number of batches of points written at the requested consistency level.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writePartial (Enterprise only)
 The total number of batches of points written to at least one node but did not meet
 the requested consistency level.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
 
 #### writeTimeout
 The total number of write requests that failed to complete within the default write timeout duration.
@@ -985,3 +1485,6 @@ This could indicate severely reduced or contentious disk I/O or a congested netw
 For a single write request that comes in over HTTP or another input method, `writeTimeout`
 will be incremented by 1 if the entire batch is not written within the timeout period,
 regardless of whether the points within the batch can be written locally or remotely.
+
+**Data type:** Integer  
+**Metric type:** [Counter](#counter)
