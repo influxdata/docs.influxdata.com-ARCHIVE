@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## v1.15.2 [2020-07-31]
+## v1.15.2 [2020-08-03]
 
 - Fix RPM `/var/log/telegraf` permissions.
 - Fix tail following on end of file.
