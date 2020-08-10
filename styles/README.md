@@ -26,4 +26,4 @@ To turn on watching: `$ gulp watch`
 - `gulp-cleanCSS` used for minification
 - `gulp-watch` used to auto-build when changes are detected in /styles
 - `gulp-sourcemaps` generates CSS sourcemaps, exposes LESS styles inside Chrome dev tools
-- `gulp-livereload` Save the straing on your fingers!
+- `gulp-livereload` Save the strain on your fingers!
