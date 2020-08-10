@@ -39,10 +39,6 @@ _For information about downloading and installing Chronograf v1.7, see [Chronogr
 
 ---
 
-![Flux Builder](/img/flux/flux-builder.png)
-
----
-
 _If you're using Docker, the [InfluxData Sandbox](/platform/install-and-deploy/deploying/sandbox-install)
 will install the latest version of each component of the TICK stack._
 
@@ -108,8 +104,6 @@ but as you're getting started, we recommend using the following:
 Chronograf's Data Explorer makes it easy to write your first Flux script and visualize the results.
 To use Chronograf's Flux UI, open the **Data Explorer** and to the right of the source
 dropdown above the graph placeholder, select **Flux** as the source type.
-
-![Flux in the Data Explorer](/img/flux/flux-builder-start.gif)
 
 This will provide **Schema**, **Script**, and **Functions** panes.
 The Schema pane allows you to explore your data.
