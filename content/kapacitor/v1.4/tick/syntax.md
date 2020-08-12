@@ -519,7 +519,7 @@ For more specific information, see [Alert node](/kapacitor/v1.4/nodes/alert_node
 Within lambda expressions it is possible to use stateless conversion functions to convert values between types.
 
    * `bool()` - converts a string, int64 or float64 to Boolean.
-   * `int()` - converts a string, float64, Boolean or duration type to an int64.
+   * `int()` - converts a string, float64 or Boolean to an int64.
    * `float()` - converts a string, int64 or Boolean to float64.
    * `string()` - converts an int64, float64, Boolean or duration value to a string.
    * `duration()` - converts an int64, float64 or string to a duration type.
