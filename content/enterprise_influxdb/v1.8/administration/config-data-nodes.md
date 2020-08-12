@@ -258,6 +258,19 @@ This setting does not apply to cache snapshotting.
 
 Environmental variable: `INFLUXDB_DATA_CACHE_MAX_CONCURRENT_COMPACTIONS`
 
+#### `compact-throughput = "48m"`
+
+The rate limit, in bytes per second, that we will allow TSM compactions to write to disk. The default value for this is '48 minutes'.
+Note that short bursts are allowed to happen at a possibly larger value, set by `compact-throughput-burst`.
+
+Environment variable: `INFLUXDB_DATA_COMPACT_THROUGHPUT`  
+
+#### `compact-throughput-burst = "48m"`
+
+The rate limit, in bytes per second, that we allow TSM compactions to write to disk. The default value for this is '48 minutes'.
+
+Environment variable: `INFLUXDB_DATA_COMPACT_THROUGHPUT_BURST`  
+
 #### `compact-full-write-cold-duration = "4h"`
 
 The duration at which the TSM engine will compact all TSM files in a shard if it hasn't received a write or delete.
