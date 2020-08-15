@@ -74,7 +74,6 @@ Ultimately, use entries similar to the following (hostnames and domain IP addres
 |:------------|:-------------------------------------:|------------------:|
 | A           | ```enterprise-data-01.mydomain.com``` | ```<Data_1_IP>``` |
 | A           | ```enterprise-data-02.mydomain.com``` | ```<Data_2_IP>``` |
-```
 
 > **Verification steps:**
 >
