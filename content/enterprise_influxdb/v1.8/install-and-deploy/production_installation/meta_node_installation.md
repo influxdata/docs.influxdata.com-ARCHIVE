@@ -61,7 +61,10 @@ If the meta nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
 you'll need to set the `license-path` setting instead of the `license-key`
 setting in the meta node configuration file.
 
-<br>
+#### User account
+
+The installation package creates an `influxdb` user used to run the influxdb meta service. The `influxdb` user also owns certain files needed to start the service. In some cases, local policies may prevent the local user account from being created and the service fails to start. Contact your systems administrator for assistance with this requirement.
+
 # Meta node setup
 ## Step 1: Add appropriate DNS entries for each of your servers
 
