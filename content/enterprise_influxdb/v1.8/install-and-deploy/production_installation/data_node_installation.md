@@ -33,9 +33,9 @@ See the
 [Clustering guide](/enterprise_influxdb/v1.8/concepts/clustering/#optimal-server-counts)
 for more on cluster architecture.
 
-### Other requirements
+## Other requirements
 
-#### License key or file
+### License key or file
 
 InfluxDB Enterprise requires a license key **OR** a license file to run.
 Your license key is available at [InfluxPortal](https://portal.influxdata.com/licenses).
@@ -43,7 +43,7 @@ Contact support at the email we provided at signup to receive a license file.
 License files are required only if the nodes in your cluster cannot reach
 `portal.influxdata.com` on port `80` or `443`.
 
-#### Networking
+### Networking
 
 Data nodes communicate over ports `8088`, `8089`, and `8091`.
 
@@ -53,18 +53,19 @@ If the data nodes cannot reach `portal.influxdata.com` on port `80` or `443`,
 you'll need to set the `license-path` setting instead of the `license-key`
 setting in the data node configuration file.
 
-#### Load balancer
+### Load balancer
 
 InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
 data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.8/tools/api/)).
 
-#### User account
+### User account
 
-The installation package creates user `influxdb` that is used to run the influxdb data service.  `influxdb` user also owns  certain files that are needed for the service to start successfully.  In some cases, local policies may prevent the local user account from being created and the service fails to start.  Contact your systems administrator for assistance with this requirement.
+The installation package creates an `influxdb` user to run the influxdb data service. The `influxdb` user owns files required for the service to start successfully. In some cases, local policies may prevent the local user account from being created and the service fails to start. Contact your systems administrator for assistance with this requirement.
 
-# Data node setup
-## Step 1: Add appropriate DNS entries for each of your servers
+## Data node setup
+
+### Step 1: Add appropriate DNS entries for each of your servers
 
 Ensure that your servers' hostnames and IP addresses are added to your network's DNS environment.
 The addition of DNS entries and IP assignment is usually site and policy specific; contact your DNS administrator for assistance as necessary.
@@ -90,27 +91,27 @@ We highly recommend that each server be able to resolve the IP from the hostname
 Resolve any connectivity issues before proceeding with the installation.
 A healthy cluster requires that every meta node and data node in a cluster be able to communicate.
 
-## Step 2: Set up, configure, and start the data node services
+### Step 2: Set up, configure, and start the data node services
 
 Perform the following steps on each data node.
 
-### I. Download and install the data service
+#### I. Download and install the data service
 
-#### Ubuntu and Debian (64-bit)
+##### Ubuntu and Debian (64-bit)
 
 ```bash
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data_1.8.0-c1.8.0_amd64.deb
 sudo dpkg -i influxdb-data_1.8.0-c1.8.0_amd64.deb
 ```
 
-#### RedHat and CentOS (64-bit)
+##### RedHat and CentOS (64-bit)
 
 ```bash
 wget https://dl.influxdata.com/enterprise/releases/influxdb-data-1.8.0_c1.8.0.x86_64.rpm
 sudo yum localinstall influxdb-data-1.8.0_c1.8.0.x86_64.rpm
 ```
 
-#### Verify the authenticity of release download (recommended)
+##### Verify the authenticity of release download (recommended)
 
 For added security, follow these steps to verify the signature of your InfluxDB download with `gpg`.
 
@@ -139,7 +140,7 @@ For added security, follow these steps to verify the signature of your InfluxDB 
     gpg: Good signature from "InfluxDB Packaging Service <support@influxdb.com>" [unknown]
     ```
 
-### II. Edit the data node configuration files
+#### II. Edit the data node configuration files
 
 First, in `/etc/influxdb/influxdb.conf`:
 
@@ -195,7 +196,7 @@ hostname="<enterprise-data-0x>"
   shared-secret = "long pass phrase used for signing tokens"
 ```
 
-### III. Start the data service
+#### III. Start the data service
 
 On sysvinit systems, enter:
 
@@ -225,7 +226,7 @@ If you do not see the expected output, the process is either not launching or is
 If you see the expected output, repeat for the remaining data nodes.
 Once all data nodes have been installed, configured, and launched, move on to the next section to join the data nodes to the cluster.
 
-## Join the data nodes to the cluster
+### Join the data nodes to the cluster
 
 {{% warn %}}You should join your data nodes to the cluster only when you are adding a brand new node,
 either during the initial creation of your cluster or when growing the number of data nodes.
