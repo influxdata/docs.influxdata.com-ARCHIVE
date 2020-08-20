@@ -7,6 +7,12 @@ menu:
     parent: About the project
 ---
 
+## v1.8.2 [2020-08-20]
+
+### Bug fixes
+
+- Revert configuration change to `DefaultSeriesIDSetCacheSize` that caused some environments to experience increased memory usage.
+
 ## v1.8.1 [2020-07-14]
 
 ### Features
