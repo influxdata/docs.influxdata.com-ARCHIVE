@@ -15,6 +15,9 @@ menu:
 
 ## v1.8.1 [2020-07-14]
 
+{{% warn %}} **Warning:** Bug that potentially increased memory usage was introduced in 1.8.1. **Do not install this release**, install [v1.8.2](#v1-8-2-2020-08-13), which includes the features, performance improvements, and bug fixes below.
+{{% /warn %}}
+
 ### Features
 
 - Allow users to add custom HTTP response headers to comply with internal security policies.
