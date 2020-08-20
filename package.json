@@ -20,7 +20,7 @@
     "less": "^3.10.3"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "boom": "^7.3.0",
     "bounce": "^1.2.3",
     "brace-expansion": "^1.1.11",
