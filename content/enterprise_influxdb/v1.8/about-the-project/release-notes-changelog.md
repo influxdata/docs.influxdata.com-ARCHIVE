@@ -16,7 +16,7 @@ For details on changes incorporated from the InfluxDB OSS release, see
 
 ### Features
 
-- Allow out-of-order writes. 
+- Allow out-of-order writes.
 
 ## v1.8 [2020-04-27]
 
