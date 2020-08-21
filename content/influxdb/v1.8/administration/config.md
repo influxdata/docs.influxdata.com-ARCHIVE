@@ -313,14 +313,14 @@ Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
 #### `compact-throughput = "48m"`
 
-The rate limit, in bytes per second, that we will allow TSM compactions to write to disk. The default value for this is '48 minutes'.
+The maximum number of bytes per seconds TSM compactions write to disk. Default is `"48m"` (48 million).
 Note that short bursts are allowed to happen at a possibly larger value, set by `compact-throughput-burst`.
 
 Environment variable: `INFLUXDB_DATA_COMPACT_THROUGHPUT`  
 
 #### `compact-throughput-burst = "48m"`
 
-The rate limit, in bytes per second, that we allow TSM compactions to write to disk. The default value for this is '48 minutes'.
+The maximum number of bytes per seconds TSM compactions write to disk during brief bursts. Default is `"48m"` (48 million).
 
 Environment variable: `INFLUXDB_DATA_COMPACT_THROUGHPUT_BURST`  
 
