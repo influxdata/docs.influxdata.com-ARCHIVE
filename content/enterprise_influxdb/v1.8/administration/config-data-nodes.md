@@ -503,6 +503,12 @@ The maximum number of bytes to write to a shard in a single request.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_BATCH_SIZE`
 
+#### `max-pending-writes = 1024`
+
+The maximum number of incoming pending writes allowed in the hinted handoff queue.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_PENDING_WRITES`
+
 #### `dir = "/var/lib/influxdb/hh"`
 
 The hinted handoff directory where the durable queue will be stored on disk.
