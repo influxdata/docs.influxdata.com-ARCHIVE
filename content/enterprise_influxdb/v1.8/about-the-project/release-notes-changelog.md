@@ -21,8 +21,7 @@ For details on changes incorporated from the InfluxDB OSS release, see
 - Allow out-of-order writes. This change adds a configuration option in the `[cluster]` section called
 `allow-out-of-order-writes`, which defaults to `false`. See [allow-out-of-order-writes](/enterprise_influxdb/v1.8/administration/config-data-nodes#allow-out-of-order-false) for more detail.
 - Log reason for entering hinted handoff.
-- Add verbose flag to `influxd-ctl show-shards`.
-- Clean up temporary directories.
+- Add a verbose flag to [`influxd-ctl show-shards`](/enterprise_influxdb/v1.8/administration/cluster-commands/#show-shards). This option provides more information about each shard owner, including the state (hot/cold), last modified date and time, and size on disk.
 
 ### Bug fixes
 
@@ -32,6 +31,7 @@ For details on changes incorporated from the InfluxDB OSS release, see
 - Clean up temporary directories when an error occurs during `processCreateShardSnapshotRequest()` and log errors returned by `os.RemoveAll()`.
 - Fix Scanner#Advance failure when a single segment is corrupt.
 - Write hinted handoff segment entries atomically.
+- Ensure clean up of temporary directories.
 
 ## v1.8 [2020-04-27]
 
