@@ -8,6 +8,34 @@ menu:
     parent: About the project
 ---
 
+## v1.8.2 [2020-08-24]
+
+The InfluxDB Enterprise 1.8.2 release builds on the InfluxDB OSS 1.8.2 and 1.8.1 releases.
+Due to a defect in InfluxDB OSS 1.8.1, InfluxDB Enterprise 1.8.1 was not released.
+This release resolves the defect and includes the features and bug fixes listed below.
+For details on changes incorporated from the InfluxDB OSS release, see
+[InfluxDB OSS release notes](/influxdb/v1.8/about_the_project/releasenotes-changelog/).
+
+### Features
+
+#### Hinted handoff improvements
+
+- Allow out-of-order writes. This change adds a configuration option `allow-out-of-order-writes` to the `[cluster]` section of the data node configuration file. This setting defaults to `false` to match the existing behavior. There are some important operational considerations to review before turning this on. But, the result is enabling this option reduces the time required to drain the hinted handoff queue and increase throughput during recovery. See [allow-out-of-order-writes](/enterprise_influxdb/v1.8/administration/config-data-nodes#allow-out-of-order-false) for more detail.
+- Make the number of pending writes configurable. This change adds a configuration option in the `[hinted-handoff]` section called `max-pending-writes`, which defaults to `1024`. See [max-pending-writes](/enterprise_influxdb/v1.8/administration/config-data-nodes#max-pending-writes-1024) for more detail.
+- Update the hinted handoff queue to ensure various entries to segment files occur atomically. Prior to this change, entries were written to disk in three separate writes (len, data, offset). If the process stopped in the middle of any of those writes, the hinted handoff segment file was left in an invalid state.
+- In certain scenarios, the hinted-handoff queue would fail to drain. Upon node startup, the queue segment files are now verified and truncated if any are corrupted. Some additional logging has been added when a node starts writing to the hinted handoff queue as well.
+- Update the hinted handoff queue to ensure that various entries to segment files occur atomically. Prior to this change, entries were written to disk in three separate writes (len, data, offset). If the process stopped in the middle of any of those writes, the hinted handoff segment file was left in an invalid state.
+
+#### `influxd-ctl` CLI improvements
+
+- Add a verbose flag to [`influxd-ctl show-shards`](/enterprise_influxdb/v1.8/administration/cluster-commands/#show-shards). This option provides more information about each shard owner, including the state (hot/cold), last modified date and time, and size on disk.
+
+### Bug fixes
+
+- Resolve a cluster read service issue that caused a panic. Previously, if no tags keys or values were read, the cluster read service returned a nil cursor. Now, an empty cursor is returned.
+- LDAP configuration: `GroupSearchBaseDNs`, `SearchFilter`, `GroupMembershipSearchFilter`, and `GroupSearchFilter` values in the LDAP section of the configuration file are now all escaped.
+- Eliminate orphaned, temporary directories when an error occurs during `processCreateShardSnapshotRequest()` and provide useful log information regarding the reason a temporary directory is created.
+
 ## v1.8 [2020-04-27]
 
 The InfluxDB Enterprise 1.8 release builds on the InfluxDB OSS 1.8 release.

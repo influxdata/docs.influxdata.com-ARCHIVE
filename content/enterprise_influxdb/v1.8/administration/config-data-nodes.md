@@ -399,6 +399,25 @@ so it is unlikely that changing this value will measurably improve performance b
 
 Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_STREAMS`
 
+#### `allow-out-of-order = "false"`
+
+By default, this option is set to false and writes are processed in the order that they are received. This means
+if any points are in the hinted handoff (HH) queue for a shard, all incoming points must go into the HH queue.
+
+If this option is set to true, writes are allowed to process in an order that differs from the order they were received.
+This can reduce the time required to drain the HH queue and increase throughput during recovery.
+**Do not enable if your use case involves updating points.** Updating a point means the measurement name, tag keys,
+and timestamp are the same as a previous write and only the value is different.
+
+Allowing out of order writes when updating points may cause incorrect values. For example,
+if the point `cpu v=1.0 1234` arrives on `node1` and attempts to replicate on `node2`
+but `node2` is down, `node1` writes the point to its local HH queue. If `node2` comes back online
+and a new point `cpu v=20. 1234` arrives at `node1` and updates the original point, the updated point
+is sent to `node2` (bypassing the HH queue). Because the updated point arrives at `node2` before the
+original point, and second point value is stored before the original point value.
+
+Environment variable: `INFLUXDB_CLUSTER_ALLOW_OUT_OF_ORDER`
+
 #### `shard-reader-timeout = "0"`
 
 The default timeout set on shard readers.
@@ -496,6 +515,12 @@ Controls the hinted handoff (HH) queue, which allows data nodes to temporarily c
 The maximum number of bytes to write to a shard in a single request.
 
 Environment variable: `INFLUXDB_HINTED_HANDOFF_BATCH_SIZE`
+
+#### `max-pending-writes = 1024`
+
+The maximum number of incoming pending writes allowed in the hinted handoff queue.
+
+Environment variable: `INFLUXDB_HINTED_HANDOFF_MAX_PENDING_WRITES`
 
 #### `dir = "/var/lib/influxdb/hh"`
 
