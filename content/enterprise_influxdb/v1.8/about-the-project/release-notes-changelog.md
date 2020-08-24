@@ -10,14 +10,27 @@ menu:
 
 ## v1.8.2 [2020-08-24]
 
-The InfluxDB Enterprise 1.8.2 release builds on the InfluxDB OSS 1.8.2 and 1.8.1 releases. 
-Due to a defect in OSS 1.8.1, Enterprise 1.8.1 was not released. This release resolves the defect.
+The InfluxDB Enterprise 1.8.2 release builds on the InfluxDB OSS 1.8.2 and 1.8.1 releases.
+Due to a defect in InfluxDB OSS 1.8.1, InfluxDB Enterprise 1.8.1 was not released.
+This release resolves the defect and includes the features and bug fixes listed below.
 For details on changes incorporated from the InfluxDB OSS release, see
 [InfluxDB OSS release notes](/influxdb/v1.8/about_the_project/releasenotes-changelog/).
 
 ### Features
 
 - Allow out-of-order writes.
+- Log reason for entering hinted handoff.
+- Add verbose flag to `influxd-ctl show-shards`.
+- Clean up temporary directories.
+
+### Bug fixes
+
+- Resolve a cluster read service issue that caused a panic. Previously, if no tags keys or values were read, the cluster read service returned a nil cursor. Now, an empty cursor is returned.
+- Escape `GroupSearchBaseDNs`, `SearchFilter`,
+`GroupMembershipSearchFilter`, and `GroupSearchFilter` values in the ldap section of the configuration file.
+- Clean up temporary directories when an error occurs during `processCreateShardSnapshotRequest()` and log errors returned by `os.RemoveAll()`.
+- Fix Scanner#Advance failure when a single segment is corrupt.
+- Write hinted handoff segment entries atomically.
 
 ## v1.8 [2020-04-27]
 
