@@ -22,7 +22,7 @@ For details on changes incorporated from the InfluxDB OSS release, see
 `allow-out-of-order-writes`, which defaults to `false`. See [allow-out-of-order-writes](/enterprise_influxdb/v1.8/administration/config-data-nodes#allow-out-of-order-false) for more detail.
 - Log reason for entering hinted handoff.
 - Add a verbose flag to [`influxd-ctl show-shards`](/enterprise_influxdb/v1.8/administration/cluster-commands/#show-shards). This option provides more information about each shard owner, including the state (hot/cold), last modified date and time, and size on disk.
-- Make number of pending writes configurable. This change adds a configuration option in the `[hinted-handoff]` section called `max-pending-writes`, which defaults to `1024`. See [max-pending-writes](/enterprise_influxdb/v1.8/administration/config-data-nodes#max-pending-writes-1024) for more detail.
+- Make the number of pending writes configurable. This change adds a configuration option in the `[hinted-handoff]` section called `max-pending-writes`, which defaults to `1024`. See [max-pending-writes](/enterprise_influxdb/v1.8/administration/config-data-nodes#max-pending-writes-1024) for more detail.
 
 ### Bug fixes
 
