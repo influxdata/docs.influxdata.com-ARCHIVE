@@ -10,7 +10,8 @@ menu:
 
 ## v1.8.2 [TBD]
 
-The InfluxDB Enterprise 1.8.2 release builds on the InfluxDB OSS 1.8.2 and 1.8.1 releases.
+The InfluxDB Enterprise 1.8.2 release builds on the InfluxDB OSS 1.8.2 and 1.8.1 releases. 
+Due to a defect in OSS 1.8.1, Enterprise 1.8.1 was not released. This release resolves the defect.
 For details on changes incorporated from the InfluxDB OSS release, see
 [InfluxDB OSS release notes](/influxdb/v1.8/about_the_project/releasenotes-changelog/).
 
