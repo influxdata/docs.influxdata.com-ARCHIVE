@@ -18,7 +18,8 @@ For details on changes incorporated from the InfluxDB OSS release, see
 
 ### Features
 
-- Allow out-of-order writes.
+- Allow out-of-order writes. This change adds a configuration option in the `[cluster]` section called
+`allow-out-of-order-writes`, which defaults to `false`. See [allow-out-of-order-writes](/enterprise_influxdb/v1.8/administration/config-data-nodes#allow-out-of-order-false) for more detail.
 - Log reason for entering hinted handoff.
 - Add verbose flag to `influxd-ctl show-shards`.
 - Clean up temporary directories.
