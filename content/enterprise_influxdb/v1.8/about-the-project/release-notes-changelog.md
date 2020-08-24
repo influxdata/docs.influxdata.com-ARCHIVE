@@ -8,7 +8,7 @@ menu:
     parent: About the project
 ---
 
-## v1.8.2 [TBD]
+## v1.8.2 [2020-08-24]
 
 The InfluxDB Enterprise 1.8.2 release builds on the InfluxDB OSS 1.8.2 and 1.8.1 releases. 
 Due to a defect in OSS 1.8.1, Enterprise 1.8.1 was not released. This release resolves the defect.
