@@ -1116,7 +1116,7 @@ _**Example TICKscript**_
 stream
   |alert()
     .snmpTrap('1.3.6.1.2.1.1')
-      .data('1.3.6.1.2.1.1.6', 'i', '{{ index .Field "value" }}')
+      .data('1.3.6.1.2.1.1.6', 'i', '{{ index .Fields "value" }}')
       .data('1.3.6.1.2.1.1.7', 's', '{{ .Message }}')
 ```
 
