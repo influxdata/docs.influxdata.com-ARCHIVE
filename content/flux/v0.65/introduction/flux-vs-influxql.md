@@ -172,7 +172,7 @@ auxData = join(tables: {csv: csvData, sql: sqlData}, on: ["sensor_id"])
 enrichedData = join(tables: {data: data, aux: auxData}, on: ["sensor_id"])
 
 enrichedData
-  |> yeild(name: "enriched_data")
+  |> yield(name: "enriched_data")
 ```
 
 ---
