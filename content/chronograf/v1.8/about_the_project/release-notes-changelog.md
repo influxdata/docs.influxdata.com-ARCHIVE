@@ -20,7 +20,7 @@ menu:
 - Sort namespaces by database and retention policy.
 - Make MySQL protoboard more useful by using derivatives for counter values.
 - Add HTTP security headers.
-- Resolve an issue that caused existing data to be overwritten where there were multiple results for a specific time. Now, all query results are successfully shown in the Table visualization.
+- Resolve an issue that caused existing data to be overwritten when there were multiple results for a specific time. Now, all query results are successfully shown in the Table visualization.
 - Resolve an issue that prevented boolean field and tag values from being displayed. Now, field and tag values are printed in tickscript logs.
 
 ## v1.8.5 [2020-07-08]
