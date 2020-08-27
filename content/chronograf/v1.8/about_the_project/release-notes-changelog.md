@@ -8,6 +8,21 @@ menu:
     parent: About the project
 ---
 
+## v1.8.6 [2020-08-27]
+
+### Features
+
+- Upgrade Dockerfile to use Alpine 3.12.
+
+### Bug Fixes
+
+- Escape tag values in Query Builder.
+- Sort namespaces by database and retention policy.
+- Make MySQL protoboard more useful by using derivatives for counter values.
+- Add HTTP security headers.
+- Resolve an issue that caused existing data to be overwritten when there were multiple results for a specific time. Now, all query results are successfully shown in the Table visualization.
+- Resolve an issue that prevented boolean field and tag values from being displayed. Now, field and tag values are printed in TICKscript logs.
+
 ## v1.8.5 [2020-07-08]
 
 - Fix public-url generic OAuth configuration issue.
