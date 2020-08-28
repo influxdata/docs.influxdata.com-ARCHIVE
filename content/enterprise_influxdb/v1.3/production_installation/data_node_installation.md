@@ -57,7 +57,7 @@ setting in the data node configuration file.
 
 InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
-data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.3/tools/api/)).
+data nodes on port `8086` (the default port for the [HTTP API](https://docs.influxdata.com/influxdb/v1.3/tools/api/)).
 
 <br>
 # Data node setup

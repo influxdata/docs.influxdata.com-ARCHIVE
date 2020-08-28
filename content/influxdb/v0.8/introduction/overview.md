@@ -13,7 +13,7 @@ That means once you install it there's nothing else to manage (like Redis, ZooKe
 
 InfluxDB is targeted at use cases for DevOps, metrics, sensor data, and real-time analytics.
 It arose from our need for a database like this on more than a few previous products we've built.
-You can [read more about our journey from SaaS application to open source time series database](/blog/2014/09/26/one-year-of-influxdb-and-the-road-to-1_0.html).
+You can [read more about our journey from SaaS application to open source time series database](https://www.influxdata.com/blog/one-year-of-influxdb-and-the-road-to-1-0/).
 
 ## Key Features
 
@@ -49,7 +49,7 @@ group by time(30s)
 select mean(value) from merge(/.*az\.1.*\.cpu/) group by time(1h)
 ```
 
-There's much more, have a look at the [getting started guide](getting_started.html) to see some examples.
+There's much more, have a look at the [getting started guide](/influxdb/v0.8/introduction/getting_started/) to see some examples.
 
 ## Design Goals
 

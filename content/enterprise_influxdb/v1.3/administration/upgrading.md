@@ -54,7 +54,7 @@ trigger a final incremental backup before proceeding with the upgrade.
 {{% warn %}}
 **NOTE:** Ensure you have sufficient disk space before triggering the backup!
 {{% /warn %}}
-The following command uses the [version 1.2 backup syntax](https://docs.influxdata.com/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax)
+The following command uses the [version 1.2 backup syntax](/enterprise_influxdb/v1.2/guides/backup-and-restore/#syntax)
 to create an incremental backup of your cluster and stores that backup in the current directory.
 
 ```
@@ -62,7 +62,7 @@ influxd-ctl backup .
 ```
 
 Otherwise, create a full backup before proceeding.
-The following command uses the [backup syntax originally introduced in version 1.2](https://docs.influxdata.com/enterprise_influxdb/v1.3/guides/backup-and-restore/#syntax)
+The following command uses the [backup syntax originally introduced in version 1.2](/enterprise_influxdb/v1.3/guides/backup-and-restore/#syntax)
 to create a full backup of your cluster and to store that backup in the current directory.
 
 ```
@@ -215,7 +215,7 @@ Follow the links for more information about those options.
 {{% warn %}}
 **NOTE:** As part of the changes associated with InfluxDB Enterprise 1.3, the hinted handoff queue is now segmented by node and
 shard. See
-[Release Notes/Change Log](https://docs.influxdata.com/enterprise_influxdb/v1.3/about-the-project/release-notes-changelog/#v1-3-0-2017-06-21).
+[Release Notes/Change Log](/enterprise_influxdb/v1.3/about-the-project/release-notes-changelog/#v1-3-0-2017-06-21).
 As a result, when you restart data nodes, you will see log messages indicating that there is a "protocol" issue writing points
 from the hinted handoff queue between 1.2 and 1.3 nodes. These will resolve themselves after all of the data nodes have been
 upgraded.

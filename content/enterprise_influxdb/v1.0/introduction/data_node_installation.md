@@ -30,7 +30,7 @@ The data processes can run on the same or different servers.
 For high availability and redundancy your cluster should have at least two
 data nodes.
 See the
-[Clustering Guide](/enterprise_influxdb/v1.0/concepts/clustering.md#optimal-server-counts)
+[Clustering Guide](/enterprise_influxdb/v1.0/concepts/clustering#optimal-server-counts)
 for more on cluster architecture.
 
 The data node servers will need to be able to reach `portal.influxdata.com`
@@ -42,7 +42,7 @@ the configuration section describes how to use a license file.
 ports `8088`, `8089`, and `8091`.
 In a clustered setup you’ll want to configure a load balancer to send client
 traffic to the data nodes on port `8086`, the default port for the
-[HTTP API](https://docs.influxdata.com/influxdb/v1.0/tools/api/) for writing and
+[HTTP API](/influxdb/v1.0/tools/api/) for writing and
 querying data.
 
 # Data Node Setup

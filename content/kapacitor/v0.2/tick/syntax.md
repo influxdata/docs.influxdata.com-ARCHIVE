@@ -53,7 +53,7 @@ Triple single quoted strings with no escaping.
 
 TICKscript supports durations literals.
 They are of the form of an InfluxQL duration literals.
-See https://influxdb.com/docs/v0.9/query_language/spec.html#literals
+See /influxdb/v0.9/query_language/spec.html#literals
 
 Duration literals specify a length of time.
 An integer literal followed immediately (with no spaces) by a duration unit listed below is interpreted as a duration literal.

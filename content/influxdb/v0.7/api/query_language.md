@@ -8,7 +8,7 @@ menu:
 
 InfluxDB features a SQL like query language, only used for querying data.
 The HTTP API has endpoints for writing data and performing other database administration tasks.
-The only exception to this is [continuous queries](continuous_queries.html), which perpetually write their results into one or more time series.
+The only exception to this is [continuous queries](/influxdb/v0.7/api/continuous_queries/), which perpetually write their results into one or more time series.
 
 ## Getting a List of Time Series
 
@@ -176,12 +176,6 @@ series and remove it from the list of series in a database use the
 drop series response_times
 ```
 
-### Note about Delete Performance
-
-Currently, deletes are not very efficient.
-If you want to quickly evict old data, the best way to do that is by dropping a shard.
-For more [information on shards go here](../advanced_topics/sharding_and_storage.html).
-
 ## The Where Clause
 
 We've already seen the where clause for selecting time ranges and a specific point.
@@ -214,7 +208,7 @@ You can chain logic together using `and` and `or` and you can separate using `(`
 ## Group By
 
 The group by clause in InfluxDB is used not only for grouping by given values, but also for grouping by given time buckets.
-You'll always be pairing this up with [a function](aggregate_functions.html) in the `select` clause.
+You'll always be pairing this up with [a function](/influxdb/v0.7/api/aggregate_functions/) in the `select` clause.
 Here are a few examples to illustrate how group by works.
 
 ```sql

@@ -15,8 +15,6 @@ Procedures to backup data created by InfluxDB and to restore from a backup.
 
 ## [Differences between InfluxDB 1.2 and 1.1](/influxdb/v1.2/administration/differences/)
 
-## [Differences between InfluxDB 1.2 and versions prior to 1.1](/influxdb/v1.2/administration/previous_differences/)
-
 ## [Upgrading](/influxdb/v1.2/administration/upgrading/)
 
 Information about upgrading from previous versions of InfluxDB

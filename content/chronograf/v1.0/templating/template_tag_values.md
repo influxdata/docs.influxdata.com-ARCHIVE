@@ -10,7 +10,7 @@ menu:
 
 The following section will show you how to create a tag value template on a
 graph.
-If you'd like to follow along, see [Getting Started with Telegraf](https://docs.influxdata.com/telegraf/v1.0/introduction/getting-started-telegraf/) to get the data we use in this section.
+If you'd like to follow along, see [Getting Started with Telegraf](/telegraf/v1.0/introduction/getting_started/) to get the data we use in this section.
 
 ### Template tag values with `tmplTagValue()`
 

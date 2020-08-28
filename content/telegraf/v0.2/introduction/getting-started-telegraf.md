@@ -59,7 +59,7 @@ Once Telegraf is up and running it'll start collecting data and writing them to 
 Returning to our sample configuration, we show what the `cpu` and `mem` data look like in InfluxDB below.
 Note that we used the default plugin and output configuration settings to get these data.
 
-* List all [measurements](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#measurement) in the `telegraf` [database](https://docs.influxdata.com/influxdb/v0.9/concepts/glossary/#database):
+* List all [measurements](/influxdb/v0.9/concepts/glossary/#measurement) in the `telegraf` [database](/influxdb/v0.9/concepts/glossary/#database):
 
 ```bash
 > SHOW MEASUREMENTS

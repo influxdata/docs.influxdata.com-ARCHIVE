@@ -11,7 +11,7 @@ menu:
 ---
 
 InfluxDB Enterprise offers highly scalable clusters on your infrastructure
-and a management UI ([using Chronograf](https://docs.influxdata.com/chronograf/latest) for working with clusters.
+and a management UI ([using Chronograf](/{{< latest "chronograf" >}}/) for working with clusters.
 The Production Installation process is designed for users looking to
 deploy InfluxDB Enterprise in a production environment.
 The following steps will get you up and running with the first essential component of
@@ -125,7 +125,7 @@ The `license-key` and `license-path` settings are mutually exclusive and one mus
 ```
 # Hostname advertised by this host for remote addresses.  This must be resolvable by all
 # other nodes in the cluster
-hostname="<enterprise-meta-0x>" 
+hostname="<enterprise-meta-0x>"
 
 [enterprise]
   # license-key and license-path are mutually exclusive, use only one and leave the other blank

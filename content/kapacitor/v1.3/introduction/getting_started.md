@@ -17,7 +17,7 @@ Do not worry about installing anything at this point.  Instructions are found be
 
 The following applications will be required:
 
-* [InfluxDB](/influxdb/v1.3/)  - While Kapacitor does not require InfluxDB, it is the easiest integration to setup and so it will be used in this guide.
+* [InfluxDB](/{{< latest "influxdb" >}}/)  - While Kapacitor does not require InfluxDB, it is the easiest integration to setup and so it will be used in this guide.
 InfluxDB >= 1.3.x will be needed.
 * [Telegraf](/telegraf/v1.3/) - Telegraf >= 1.3.x will be required.
 * [Kapacitor](/kapacitor/v1.3/) - The latest Kapacitor binary and installation packages for most OSes can be found at the [downloads](https://influxdata.com/downloads/#kapacitor) page.
@@ -45,7 +45,7 @@ The TICKStack services can be installed to run on the host machine as a part of 
 
 If you would like to explore using Docker deployments of these components, [check out these instructions.](/kapacitor/v1.3/introduction/install-docker/)
 
-<!-- Install [InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/), [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) and [Kapacitor](/kapacitor/v1.3/introduction/installation/), on the same host, using the Linux system packages (`.deb`,`.rpm`) if available. -->
+<!-- Install [InfluxDB](/{{< latest "influxdb" >}}/introduction/installation/), [Telegraf](/{{< latest "telegraf" >}}/introduction/installation/) and [Kapacitor](/kapacitor/v1.3/introduction/installation/), on the same host, using the Linux system packages (`.deb`,`.rpm`) if available. -->
 
 The applications InfluxDB, Telegraf and Kapacitor will need to be installed in that order and on the same host.
 
@@ -54,7 +54,7 @@ All examples will assume that Kapacitor is running on `http://localhost:9092` an
 InfluxDB + Telegraf
 -------------------
 
-Install [InfluxDB](https://docs.influxdata.com/influxdb/latest/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
+Install [InfluxDB](/{{< latest "influxdb" >}}/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
 
 Start InfluxDB using systemctl:
 
@@ -100,7 +100,7 @@ zář 01 14:47:44 algonquin influxd[14778]: [I] 2017-09-01T12:47:44Z Storing sta
 
 <!--- The following is a simple Telegraf configuration file that will send just cpu metrics to InfluxDB: -->
 
-Next install [Telegraf](https://docs.influxdata.com/telegraf/latest/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
+Next install [Telegraf](/{{< latest "telegraf" >}}/introduction/installation/) using the Linux system packages (`.deb`,`.rpm`) if available.
 
 Once Telegraf is installed and started, it will, as configured by default, send system metrics to InfluxDB, which automatically creates the 'telegraf' database.
 

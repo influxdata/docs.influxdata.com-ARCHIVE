@@ -38,4 +38,4 @@ The `influx` output data format outputs metrics into [InfluxDB Line Protocol][li
   influx_uint_support = false
 ```
 
-[line protocol]: /influxdb/latest/write_protocols/line_protocol_tutorial/
+[Line protocol]{/{{< latest "influxdb" >}}/write_protocols/line_protocol_tutorial/

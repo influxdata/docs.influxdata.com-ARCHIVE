@@ -115,4 +115,4 @@ Those measurements serve to illuminate query functionality in [Schema Exploratio
 
 
 The `h2o_feet` measurement is the only measurement that contains the NOAA data.
-Please note that the `level description` field isn't part of the original NOAA data - we snuck it in there for the sake of having a field key with a special character and string [field values](../../concepts/glossary/#field-value).
+Please note that the `level description` field isn't part of the original NOAA data - we snuck it in there for the sake of having a field key with a special character and string [field values](/influxdb/v1.2/concepts/glossary/#field-value).

@@ -35,7 +35,7 @@ The Cluster Admin account has all [cluster-specific permissions](/enterprise_inf
 
 We recommend calling this account `ClusterAdmin`.
 Note that you will need to authenticate with the `ClusterAdmin` username and
-password if you're interacting with your InfluxEnterprise cluster [outside](https://docs.influxdata.com/influxdb/v1.1/tools/) of the
+password if you're interacting with your InfluxEnterprise cluster [outside](/influxdb/v1.1/tools/) of the
 web console.
 
 ![Create Cluster Admin](/img/enterprise/create_cluster_admin_1.png)

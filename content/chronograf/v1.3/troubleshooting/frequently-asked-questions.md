@@ -86,7 +86,7 @@ See the [Telegraf Configuration](https://github.com/influxdata/telegraf/blob/mas
 
 ## How do I connect Chronograf to an InfluxEnterprise cluster?
 
-The connection details form requires additional information when connecting Chronograf to an [InfluxEnterprise cluster](https://docs.influxdata.com/enterprise_influxdb/v1.2/).
+The connection details form requires additional information when connecting Chronograf to an [InfluxEnterprise cluster](/enterprise_influxdb/v1.2/).
 
 When you enter InfluxDB's HTTP bind address in the `Connection String` input, Chronograf automatically checks if that InfluxDB instance is a data node.
 If it is a data node, Chronograf automatically adds the `Meta Service Connection URL` input to the connection details form.
@@ -122,10 +122,10 @@ Show the time-series' single most recent value.
 
 ![Cluster connection details](/img/chronograf/v1.3/faq-viz-single.png)
 
-If a cell's query includes a [`GROUP BY` tag](/influxdb/v1.3/query_language/data_exploration/#group-by-tags) clause, Chronograf sorts the different [series](/influxdb/v1.3/concepts/glossary/#series) lexicographically and shows the most recent [field value](/influxdb/v1.3/concepts/glossary/#field-value) associated with the first series.
-For example, if a query groups by the `name` [tag key](/influxdb/v1.3/concepts/glossary/#tag-key) and `name` has two [tag values](/influxdb/v1.3/concepts/glossary/#tag-value) (`chronelda` and `chronz`), Chronograf shows the most recent field value associated with the `chronelda` series.
+If a cell's query includes a [`GROUP BY` tag](/{{< latest "influxdb" >}}/query_language/data_exploration/#group-by-tags) clause, Chronograf sorts the different [series](/{{< latest "influxdb" >}}/concepts/glossary/#series) lexicographically and shows the most recent [field value](/{{< latest "influxdb" >}}/concepts/glossary/#field-value) associated with the first series.
+For example, if a query groups by the `name` [tag key](/{{< latest "influxdb" >}}/concepts/glossary/#tag-key) and `name` has two [tag values](/{{< latest "influxdb" >}}/concepts/glossary/#tag-value) (`chronelda` and `chronz`), Chronograf shows the most recent field value associated with the `chronelda` series.
 
-If a cell's query includes more than one [field key](/influxdb/v1.3/concepts/glossary/#field-key) in the [`SELECT` clause](/influxdb/v1.3/query_language/data_exploration/#select-clause), Chronograf returns the most recent field value associated with the first field key in the `SELECT` clause.
+If a cell's query includes more than one [field key](/{{< latest "influxdb" >}}/concepts/glossary/#field-key) in the [`SELECT` clause](/{{< latest "influxdb" >}}/query_language/data_exploration/#select-clause), Chronograf returns the most recent field value associated with the first field key in the `SELECT` clause.
 For example, if a query's `SELECT` clause is `SELECT "chronogiraffe","chronelda"`, Chronograf shows the most recent field value associated with the `chronogiraffe` field key.
 
 ### Line+Stat
@@ -159,11 +159,11 @@ If you configure the setting to an interval that's greater than one minute, Chro
 
 ## Why is my query's field key order inconsistent?
 
-In versions 1.3.0-1.3.1, Chronograf doesn't preserve the order of the items in the [`SELECT` clause](/influxdb/v1.3/query_language/data_exploration/#the-basic-select-statement) in query editor mode.
+In versions 1.3.0-1.3.1, Chronograf doesn't preserve the order of the items in the [`SELECT` clause](/{{< latest "influxdb" >}}/query_language/data_exploration/#the-basic-select-statement) in query editor mode.
 Chronograf may change the order of the items in the `SELECT` clause after it executes the query and populates the cell with the query results.
 
 This issue affects the [SingleStat](#singlestat) and [Line+Stat](#line-stat) graph types.
-If a cell's query includes more than one [field key](/influxdb/v1.3/concepts/glossary/#field-key) in the `SELECT` clause, Chronograf returns the most recent stat associated with the first field key in the `SELECT` clause.
+If a cell's query includes more than one [field key](/{{< latest "influxdb" >}}/concepts/glossary/#field-key) in the `SELECT` clause, Chronograf returns the most recent stat associated with the first field key in the `SELECT` clause.
 If you sorted the field keys in your query to rely on that behavior, it is important to note that Chronograf may change that order when it executes your query.
 
 This is a [known issue](https://github.com/influxdata/chronograf/issues/1158) and it is fixed in versions 1.3.2.0+.

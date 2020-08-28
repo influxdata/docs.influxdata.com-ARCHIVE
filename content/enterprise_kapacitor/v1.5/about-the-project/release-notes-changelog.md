@@ -8,7 +8,7 @@ menu:
 
 ## v1.5.5 [2020-04-22]
 
-This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.5 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.5 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](https://docs.influxdata.comhttps://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
 
 ### Breaking changes
 
@@ -16,7 +16,7 @@ This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.5 release. For
 
 ## v1.5.4 [2020-01-16]
 
-This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.4 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.4 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](https://docs.influxdata.comhttps://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
 
 ## Features
 
@@ -25,7 +25,7 @@ This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.4 release. For
 
 ## v1.5.3 [2019-06-18]
 
-This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.3 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.3 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](https://docs.influxdata.comhttps://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
 
 ### Breaking changes
 
@@ -50,7 +50,7 @@ failed to create handler: could not verify liveness of topic owners: status of 4
 - Update build script to correctly change file ownership in order to make `rpm` verification pass on RH-based systems.
 
 ## v1.5.2 [2018-12-12]
-*Includes features and bug fixes from [Kapacitor 1.5.3](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-3-2019-06-18).*
+*Includes features and bug fixes from [Kapacitor 1.5.3](https://docs.influxdata.comhttps://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-3-2019-06-18).*
 
 ### Features
 - Ensure all owner nodes are alive before creating/updating/deleting topic handlers.
@@ -61,10 +61,10 @@ failed to create handler: could not verify liveness of topic owners: status of 4
 - Update build script to correctly change file ownership in order to make rpm verification pass on RH-based systems.
 
 ## v1.5.2 [2018-12-12]
-*Includes features and bug fixes from [Kapacitor 1.5.2](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-2-2018-12-12).*
+*Includes features and bug fixes from [Kapacitor 1.5.2](https://docs.influxdata.comhttps://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-2-2018-12-12).*
 
 ## v1.5.1 [2018-08-06]
-*Includes features and bug fixes from [Kapacitor 1.5.1](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-1-2018-08-06).*
+*Includes features and bug fixes from [Kapacitor 1.5.1](https://docs.influxdata.comhttps://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-1-2018-08-06).*
 
 ### Bug fixes
 
@@ -74,7 +74,7 @@ failed to create handler: could not verify liveness of topic owners: status of 4
   This change fixes the unintended behavior.
 
 ## v1.5.0 [2018-05-22]
-*Includes features and bug fixes from [Kapacitor 1.5.0](/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-0-2018-05-17).*
+*Includes features and bug fixes from [Kapacitor 1.5.0](https://docs.influxdata.comhttps://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/#v1-5-0-2018-05-17).*
 
 ### Bug fixes
 - Fix match condition being lost through rpc layer.

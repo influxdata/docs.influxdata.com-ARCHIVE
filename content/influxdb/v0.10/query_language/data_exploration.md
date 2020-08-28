@@ -301,7 +301,7 @@ time			               mean
 ```
 
 **GROUP BY time intervals**  
-[`COUNT()`](../query_language/functions.html#count) the number of `water_level` points between August 18, 2015 at midnight and September 18 at 5:00pm at two day intervals:
+[`COUNT()`](/influxdb/v0.10/query_language/functions/#count) the number of `water_level` points between August 18, 2015 at midnight and September 18 at 5:00pm at two day intervals:
 ```sql
 > SELECT COUNT(water_level) FROM h2o_feet WHERE time >= '2015-08-18T00:00:00Z' AND time <= '2015-09-18T17:00:00Z' AND location='coyote_creek' GROUP BY time(2d)
 ```

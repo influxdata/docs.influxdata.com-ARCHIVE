@@ -11,7 +11,7 @@ menu:
 ## Upgrading from 0.7 to 0.8
 
 Version 0.8 of InfluxDB made some changes to how the underlying storage works.
-We also introduced [shard spaces](sharding_and_storage.html).
+We also introduced [shard spaces](/influxdb/v0.8/advanced_topics/sharding_and_storage/).
 In order to upgrade to 0.8 you'll have to do a few things to get your data moved over and take advantage of these new features.
 
 The first thing you should do is back up your data.

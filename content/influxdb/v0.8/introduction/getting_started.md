@@ -7,7 +7,7 @@ menu:
     parent: introduction
 ---
 
-Now that you've [installed InfluxDB](installation.html) you're ready to start doing awesome things.
+Now that you've [installed InfluxDB](/influxdb/v0.8/introduction/installation/) you're ready to start doing awesome things.
 There are many client libraries available for InfluxDB, but in this section we're going to use the built in user interface to get started quickly.
 
 ## Logging in and creating your first database
@@ -209,13 +209,13 @@ influxdb.writeSeries([cpuSeries, eventSeries]);
 ```
 
 `influxdb` is the javascript library that is available in that window.
-Go [here for more info on using the InfluxDB javascript library](../client_libraries/javascript.html).
+Go [here for more info on using the InfluxDB javascript library](/influxdb/v0.8/client_libraries/javascript/).
 But for now, let's run some queries:
 
 Get the average of `cpu_idle` in 30 minute windows for the last day:
 
 ```sql
-select mean(value) from cpu_idle 
+select mean(value) from cpu_idle
 group by time(30m) where time > now() - 1d
 ```
 
@@ -224,8 +224,8 @@ group by time(30m) where time > now() - 1d
 Get the average of `cpu_idle` for `server1` in 30 minute windows for the last day:
 
 ```sql
-select mean(value) from cpu_idle 
-group by time(30m) 
+select mean(value) from cpu_idle
+group by time(30m)
 where time > now() - 1d and hostName = 'server1'
 ```
 
@@ -240,7 +240,7 @@ select count(value) from cpu_idle where time > now() - 1h
 Get the number of `customer_events` in 10 minute windows for the last day:
 
 ```sql
-select count(customerId) from customer_events 
+select count(customerId) from customer_events
 where time > now() - 1d group by time(10m)
 ```
 
@@ -249,7 +249,7 @@ where time > now() - 1d group by time(10m)
 Find the unique customer ids from `customer_events` for the last hour:
 
 ```sql
-select distinct(customerId) as customerId from customer_events 
+select distinct(customerId) as customerId from customer_events
 where time > now() - 1h
 ```
 
@@ -265,6 +265,6 @@ where time > now() - 4h
 
 The visualization for this one is off, but you can see the data returned in the table.
 
-Now that you've gone through a quick intro to some of the things InfluxDB can do, you may want to pick up one of your favorite client libraries or take a look at the [InfluxDB query language guide](../api/query_language.html).
+Now that you've gone through a quick intro to some of the things InfluxDB can do, you may want to pick up one of your favorite client libraries or take a look at the [InfluxDB query language guide](/influxdb/v0.8/api/query_language/).
 
-Or take a look at building some [beautiful InfluxDB dashboards with Grafana](../ui/grafana.html).
+Or take a look at building some [beautiful InfluxDB dashboards with Grafana](/influxdb/v0.8/ui/grafana/).

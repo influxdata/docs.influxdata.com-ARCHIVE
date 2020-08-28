@@ -105,7 +105,7 @@ Referencing the example above, in general:
 
 Building on this comparison of database terminology,
 InfluxDB's [continuous queries](/influxdb/v0.10/query_language/continuous_queries/)
-and [replication policies](/influxdb/v0.10/administration/administration/) are
+and [replication policies](/influxdb/v0.10/administration/) are
 similar to stored procedures in an SQL database.
 They're specified once and then performed regularly and automatically.
 

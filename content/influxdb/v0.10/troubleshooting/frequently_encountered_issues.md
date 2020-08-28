@@ -228,7 +228,7 @@ No: `SELECT 'bikes_available' FROM 'bikes' WHERE 'station_id'="9"`
 
 No: `SELECT * from cr@zy where p^e='2'`
 
-See the [Query Syntax](/influxdb/v0.10/query_language/query_syntax/) page for more information.
+See the [Query Syntax](/influxdb/v0.10/query_language/data_exploration/) page for more information.
 
 ## Missing data after creating a new `DEFAULT` retention policy
 When you create a new `DEFAULT` retention policy (RP) on a database, the data written to the old `DEFAULT` RP remain in the old RP.

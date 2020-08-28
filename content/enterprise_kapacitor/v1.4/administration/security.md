@@ -32,7 +32,7 @@ enabled on publicly exposed APIs.  These include the user and other APIs of
 the InfluxDB meta nodes.  It may also include enabling authentication to these
 nodes.  
 
-Seting up security in InfluxDB Enterprise is covered in [Managing security in InfluxDB Enterprise](/enterprise_influxdb/v1.5/administration/security/).
+Seting up security in InfluxDB Enterprise is covered in [Managing security in InfluxDB Enterprise](https://docs.influxdata.com/enterprise_influxdb/v1.5/administration/security/).
 
 #### Securing InfluxDB meta nodes
 
@@ -150,7 +150,7 @@ requirement.
 
 The API port may need to be exposed for client applications.  It features the
 same TLS security measures as
-[Kapacitor OSS](/kapacitor/v1.4/administration/security/#kapacitor-security)
+[Kapacitor OSS](https://docs.influxdata.com/kapacitor/v1.4/administration/security/#kapacitor-security)
 and also features an authentication and authorization handler. For more information,
 see [Authentication and authorization](/enterprise_kapacitor/v1.4/administration/auth/).
 

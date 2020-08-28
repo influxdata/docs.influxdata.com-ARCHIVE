@@ -8,7 +8,7 @@ aliases:
   - /chronograf/v1.4/guides/transition-web-admin-interface/
 ---
 
-Versions 1.3 and later of [InfluxDB](/influxdb/latest/) and [InfluxEnterprise](/enterprise/latest/) do not support the [web admin interface](/influxdb/latest/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
+Versions 1.3 and later of [InfluxDB](/{{< latest "influxdb" >}}/) and [InfluxEnterprise](/{{< latest "enterprise_influxdb" >}}/) do not support the [web admin interface](/influxdb/v1.2/tools/web_admin/), the builtin user interface for writing and querying data in InfluxDB.
 Chronograf replaces the web admin interface with improved tooling for querying data, writing data, and database management.
 
 The following sections describe the Chronograf features that relate to the web admin interface:
@@ -23,7 +23,7 @@ The following sections describe the Chronograf features that relate to the web a
 ### Web admin interface
 
 In the web admin interface, users chose the target database in the top right corner and selected from a set of query templates in the `Query Templates` dropdown.
-The templates included queries with no user-provided values (example: [`SHOW MEASUREMENTS`](/influxdb/latest/query_language/schema_exploration/#show-measurements)) and queries with user-provided values (example: [`SHOW TAG KEYS FROM "<measurement_name>"`](/influxdb/latest/query_language/schema_exploration/#show-tag-keys)).
+The templates included queries with no user-provided values (example: [`SHOW MEASUREMENTS`](/{{< latest "influxdb" >}}/query_language/schema_exploration/#show-measurements)) and queries with user-provided values (example: [`SHOW TAG KEYS FROM "<measurement_name>"`](/{{< latest "influxdb" >}}/query_language/schema_exploration/#show-tag-keys)).
 
 ![WAI Query Templates](/img/chronograf/v1.4/g-admin-webtemplates.png)
 
@@ -39,7 +39,7 @@ Note that unlike the web admin interface, Chronograf does not have a database dr
 
 ### Web admin interface
 
-To write data to InfluxDB, users selected the target database in the top right corner, clicked the `Write Data` icon, and entered their [line protocol](/influxdb/latest/concepts/glossary/#line-protocol) in the text input:
+To write data to InfluxDB, users selected the target database in the top right corner, clicked the `Write Data` icon, and entered their [line protocol](/{{< latest "influxdb" >}}/concepts/glossary/#line-protocol) in the text input:
 
 ![WAI Writing Data](/img/chronograf/v1.4/g-admin-write.png)
 
@@ -55,7 +55,7 @@ Next, enter your line protocol in the main text box and click the `Write` button
 
 ### Web admin interface
 
-In the web admin interface, the `Query Template` dropdown was the only way to manage databases and [retention policies](/influxdb/latest/concepts/glossary/#retention-policy-rp) (RP):
+In the web admin interface, the `Query Template` dropdown was the only way to manage databases and [retention policies](/{{< latest "influxdb" >}}/concepts/glossary/#retention-policy-rp) (RP):
 
 ![WAI DBRP Management](/img/chronograf/v1.4/g-admin-webdbrp.png)
 
@@ -80,7 +80,7 @@ In the web admin interface, the `Query Template` dropdown was the only way to ma
 ### Chronograf
 
 In Chronograf, the `Admin` page includes a complete interface for user management.
-The `Admin` page supports both InfluxDB OSS users and InfluxEnterprise users; see the [User Management](/chronograf/latest/administration/user-management/) page for more information.
+The `Admin` page supports both InfluxDB OSS users and InfluxEnterprise users; see the [User Management](/chronograf/v1.4/administration/managing-influxdb-users/) page for more information.
 The `Admin` page allows users to:
 
 * View, create, and delete users

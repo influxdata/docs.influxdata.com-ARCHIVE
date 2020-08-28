@@ -241,7 +241,7 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
 ###  dir = "/var/lib/influxdb/meta"
 
-The location of the meta directory which stores the [metastore](/influxdb/v1.3/concepts/glossary/#metastore).
+The location of the meta directory which stores the [metastore](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#metastore).
 
 Environment variable: `INFLUXDB_META_DIR`
 
@@ -316,7 +316,7 @@ Environment variable: `INFLUXDB_META_ANNOUNCEMENT_EXPIRATION`
 
 ### retention-autocreate = true
 
-Automatically creates a default [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+Automatically creates a default [retention policy](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
 The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
 The system targets the `autogen` RP when a write or query does not specify an RP.
 Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
@@ -389,7 +389,7 @@ The default duration of the leases that data nodes acquire from the meta nodes.
 Leases automatically expire after the `lease-duration` is met.
 
 Leases ensure that only one data node is running something at a given time.
-For example, [Continuous Queries](/influxdb/v1.3/concepts/glossary/#continuous-query-cq)
+For example, [Continuous Queries](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#continuous-query-cq)
 (CQ) use a lease so that all data nodes aren't running the same CQs at once.
 
 Environment variable: `INFLUXDB_META_LEASE_DURATION`
@@ -412,7 +412,7 @@ Environment variable: `INFLUXDB_META_INTERNAL_SHARED_SECRET`
 
 The InfluxDB Enterprise data node configuration settings overlap significantly
 with the settings in InfluxDB OSS.
-Where possible, the following sections link to the [configuration documentation](/influxdb/v1.3/administration/config/)
+Where possible, the following sections link to the [configuration documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/)
 for InfluxDB's OSS.
 
 > **Note:**
@@ -429,7 +429,7 @@ All commented-out settings will be determined by the internal defaults.
 
 ### reporting-disabled = false
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#reporting-disabled-false).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#reporting-disabled-false).
 
 ### bind-address = ":8088"
 
@@ -499,11 +499,11 @@ Environment variable: `INFLUXDB_ENTERPRISE_LICENSE_PATH`
 
 ## [meta]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#meta).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#meta).
 
 ###  dir = "/var/lib/influxdb/meta"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#dir-var-lib-influxdb-meta).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#dir-var-lib-influxdb-meta).
 Note that data nodes do require a local meta directory.
 
 Environment variable: `INFLUXDB_META_DIR`
@@ -537,7 +537,7 @@ Environment variable: `INFLUXDB_META_META_INTERNAL_SHARED_SECRET`
 
 ###  retention-autocreate = true
 
-Automatically creates a default [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
+Automatically creates a default [retention policy](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#retention-policy-rp) (RP) when the system creates a database.
 The default RP (`autogen`) has an infinite duration, a shard group duration of seven days, and a replication factor set to the number of data nodes in the cluster.
 The system targets the `autogen` RP when a write or query does not specify an RP.
 Set this option to `false` to prevent the system from creating the `autogen` RP when the system creates a database.
@@ -546,23 +546,23 @@ Environment variable: `INFLUXDB_META_RETENTION_AUTOCREATE`
 
 ###  logging-enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#logging-enabled-true).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#logging-enabled-true).
 
 Environment variable: `INFLUXDB_META_LOGGING_ENABLED`
 
 ## [data]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#data).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#data).
 
 ###  dir = "/var/lib/influxdb/data"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#dir-var-lib-influxdb-data).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#dir-var-lib-influxdb-data).
 
 Environment variable: `INFLUXDB_DATA_DIR`
 
 ###  wal-dir = "/var/lib/influxdb/wal"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#wal-dir-var-lib-influxdb-wal).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#wal-dir-var-lib-influxdb-wal).
 
 Environment variable: `INFLUXDB_DATA_WAL_DIR`
 
@@ -576,43 +576,43 @@ Environment variable: `INFLUXDB_DATA_WAL_FSYNC_DELAY`
 
 ###  query-log-enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#query-log-enabled-true).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#query-log-enabled-true).
 
 Environment variable: `INFLUXDB_DATA_QUERY_LOG_ENABLED`
 
 ###  cache-max-memory-size = 1073741824
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#cache-max-memory-size-1073741824).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#cache-max-memory-size-1073741824).
 
 Environment variable: `INFLUXDB_DATA_CACHE_MAX_MEMORY_SIZE`
 
 ###  cache-snapshot-memory-size = 26214400
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#cache-snapshot-memory-size-26214400).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#cache-snapshot-memory-size-26214400).
 
 Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_MEMORY_SIZE`
 
 ###  cache-snapshot-write-cold-duration = "10m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#cache-snapshot-write-cold-duration-10m).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#cache-snapshot-write-cold-duration-10m).
 
 Environment variable: `INFLUXDB_DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION`
 
 ###  compact-full-write-cold-duration = "4h0m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#compact-full-write-cold-duration-4h).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#compact-full-write-cold-duration-4h).
 
 Environment variable: `INFLUXDB_DATA_COMPACT_FULL_WRITE_COLD_DURATION`
 
 ###  max-series-per-database = 1000000
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#max-series-per-database-1000000).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#max-series-per-database-1000000).
 
 Environment variable: `INFLUXDB_DATA_MAX_SERIES_PER_DATABASE`
 
 ###  max-values-per-tag = 100000
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#max-values-per-tag-100000).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#max-values-per-tag-100000).
 
 Environment variable: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
@@ -625,7 +625,7 @@ Environment variable: `INFLUXDB_DATA_INDEX_VERSION`
 
 ### max-concurrent-compactions = 0
 
-The maximum number of concurrent full and level [compactions](/influxdb/v1.3/concepts/storage_engine/#compactions)
+The maximum number of concurrent full and level [compactions](https://docs.influxdata.com/influxdb/v1.3/concepts/storage_engine/#compactions)
 that can run at one time.  A value of 0 results in runtime.GOMAXPROCS(0) used at runtime.
 This setting does not apply to cache snapshotting.
 
@@ -633,14 +633,14 @@ Environment variable: `INFLUXDB_DATA_MAX_CONCURRENT_COMPACTIONS`
 
 ###  trace-logging-enabled = false
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#trace-logging-enabled-false).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#trace-logging-enabled-false).
 
 Environment variable: `INFLUXDB_DATA_TRACE_LOGGING_ENABLED`
 
 ## [cluster]
 
 Controls how data is shared across shards and the options for [query
-management](/influxdb/v1.3/troubleshooting/query_management/).
+management](https://docs.influxdata.com/influxdb/v1.3/troubleshooting/query_management/).
 
 ###  dial-timeout = "1s"
 
@@ -666,43 +666,43 @@ Environment variable: `INFLUXDB_CLUSTER_CLUSTER_TRACING`
 
 ###  write-timeout = "10s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#write-timeout-10s).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#write-timeout-10s).
 
 Environment variable: `INFLUXDB_CLUSTER_WRITE_TIMEOUT`
 
 ###  max-concurrent-queries = 0
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#max-concurrent-queries-0).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#max-concurrent-queries-0).
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_CONCURRENT_QUERIES`
 
 ###  query-timeout = "0"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#query-timeout-0s).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#query-timeout-0s).
 
 Environment variable: `INFLUXDB_CLUSTER_QUERY_TIMEOUT`
 
 ###  log-queries-after = "0"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#log-queries-after-0s).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#log-queries-after-0s).
 
 Environment variable: `INFLUXDB_CLUSTER_LOG_QUERIES_AFTER`
 
 ###  max-select-point = 0
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#max-select-point-0).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#max-select-point-0).
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_SELECT_POINT`
 
 ###  max-select-series = 0
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#max-select-series-0).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#max-select-series-0).
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_SELECT_SERIES`
 
 ###  max-select-buckets = 0
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#max-select-buckets-0).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#max-select-buckets-0).
 
 Environment variable: `INFLUXDB_CLUSTER_MAX_SELECT_BUCKETS`
 
@@ -720,68 +720,68 @@ Environment variable: `INFLUXDB_CLUSTER_POOL_MAX_IDLE_STREAMS`
 
 ## [retention]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#retention).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#retention).
 
 ###  enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#enabled-true).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#enabled-true).
 
 Environment variable: `INFLUXDB_RETENTION_ENABLED`
 
 ###  check-interval = "30m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#check-interval-30m0s).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#check-interval-30m0s).
 
 Environment variable: `INFLUXDB_RETENTION_CHECK_INTERVAL`
 
 ## [shard-precreation]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#shard-precreation).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#shard-precreation).
 
 ###  enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#enabled-true-1).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#enabled-true-1).
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_ENABLED`
 
 ###  check-interval = "10m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#check-interval-10m).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#check-interval-10m).
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_CHECK_INTERVAL`
 
 ###  advance-period = "30m0s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#advance-period-30m).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#advance-period-30m).
 
 Environment variable: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
 ## [monitor]
 
-By default, InfluxDB writes system monitoring data to the `_internal` database. If that database does not exist, InfluxDB creates it automatically. The `DEFAULT` retention policy on the `internal` database is seven days. To change the default seven-day retention policy, you must [create](/influxdb/v1.3/query_language/database_management/#retention-policy-management) it.
+By default, InfluxDB writes system monitoring data to the `_internal` database. If that database does not exist, InfluxDB creates it automatically. The `DEFAULT` retention policy on the `internal` database is seven days. To change the default seven-day retention policy, you must [create](https://docs.influxdata.com/influxdb/v1.3/query_language/database_management/#retention-policy-management) it.
 
 For InfluxDB Enterprise production systems, InfluxData recommends including a dedicated InfluxDB (OSS) monitoring instance for monitoring InfluxDB Enterprise cluster nodes.
 
 * On the dedicated InfluxDB monitoring instance, set `store-enabled = false` to avoid potential performance and storage issues.
 * On each InfluxDB cluster node, install a Telegraf input plugin and Telegraf output plugin configured to report data to the dedicated InfluxDB monitoring instance.
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#monitor).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#monitor).
 
 ###  store-enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#store-enabled-true).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#store-enabled-true).
 
 Environment variable: `INFLUXDB_MONITOR_STORE_ENABLED`
 
 ###  store-database = "\_internal"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#store-database-internal).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#store-database-internal).
 
 Environment variable: `INFLUXDB_MONITOR_STORE_DATABASE`
 
 ###  store-interval = "10s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#store-interval-10s).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#store-interval-10s).
 
 Environment variable: `INFLUXDB_MONITOR_STORE_INTERVAL`
 
@@ -791,17 +791,17 @@ Environment variable: `INFLUXDB_MONITOR_REMOTE_COLLECT_INTERVAL`
 
 ## [subscriber]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#subscriber).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#subscriber).
 
 ###  enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#enabled-true-3).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#enabled-true-3).
 
 Environment variable: `INFLUXDB_SUBSCRIBER_ENABLED`
 
 ###  http-timeout = "30s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#http-timeout-30s).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#http-timeout-30s).
 
 Environment variable: `INFLUXDB_SUBSCRIBER_HTTP_TIMEOUT`
 
@@ -828,59 +828,59 @@ Environment variable: `INFLUXDB_SUBSCRIBER_WRITE_BUFFER_SIZE`
 
 ## [http]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#http).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#http).
 
 ###  enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#enabled-true-4).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#enabled-true-4).
 
 Environment variable: `INFLUXDB_HTTP_ENABLED`
 
 ###  bind-address = ":8086"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#bind-address-8086).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#bind-address-8086).
 
 Environment variable: `INFLUXDB_HTTP_BIND_ADDRESS`
 
 ###  auth-enabled = false
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#auth-enabled-false).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#auth-enabled-false).
 
 Environment variable: `INFLUXDB_HTTP_AUTH_ENABLED`
 
 ###  log-enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#log-enabled-true).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#log-enabled-true).
 
 Environment variable: `INFLUXDB_HTTP_LOG_ENABLED`
 
 ###  write-tracing = false
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#write-tracing-false).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#write-tracing-false).
 
 Environment variable: `INFLUXDB_HTTP_WRITE_TRACING`
 
 ### pprof-enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#pprof-enabled-true).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#pprof-enabled-true).
 
 Environment variable: `INFLUXDB_HTTP_PPROF_ENABLED`
 
 ###  https-enabled = false
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#https-enabled-false).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#https-enabled-false).
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_ENABLED`
 
 ###  https-certificate = "/etc/ssl/influxdb.pem"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#https-certificate-etc-ssl-influxdb-pem).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#https-certificate-etc-ssl-influxdb-pem).
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_CERTIFICATE`
 
 ###  https-private-key = ""
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#https-private-key).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#https-private-key).
 
 Environment variable: `INFLUXDB_HTTP_HTTPS_PRIVATE_KEY`
 
@@ -894,13 +894,13 @@ Environment variable: `INFLUXDB_HTTP_MAX_ROW_LIMIT`
 
 ###  max-connection-limit = 0
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#max-connection-limit-0).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#max-connection-limit-0).
 
 Environment variable: `INFLUXDB_HTTP_MAX_CONNECTION_LIMIT`
 
 ###  shared-secret = ""
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#shared-secret).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#shared-secret).
 
 This setting is required and must match on each data node if the cluster is using the InfluxDB Enterprise Web Console.
 
@@ -908,7 +908,7 @@ Environment variable: `INFLUXDB_HTTP_SHARED_SECRET`
 
 ###  realm = "InfluxDB"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#realm-influxdb).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#realm-influxdb).
 
 Environment variable: `INFLUXDB_HTTP_REALM`
 
@@ -924,39 +924,39 @@ Environment variable: `INFLUXDB_HTTP_BIND_SOCKET`
 
 ## [[graphite]]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#graphite).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#graphite).
 
 ## [[collectd]]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#collectd).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#collectd).
 
 ## [[opentsdb]]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#opentsdb).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#opentsdb).
 
 ## [[udp]]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#udp).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#udp).
 
 ## [continuous_queries]
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#continuous-queries).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#continuous-queries).
 
 ###  log-enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#log-enabled-true-1).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#log-enabled-true-1).
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED`
 
 ###  enabled = true
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#enabled-true-4).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#enabled-true-4).
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_ENABLED`
 
 ###  run-interval = "1s"
 
-See the [OSS documentation](/influxdb/v1.3/administration/config/#run-interval-1s).
+See the [OSS documentation](https://docs.influxdata.com/influxdb/v1.3/administration/config/#run-interval-1s).
 
 Environment variable: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 

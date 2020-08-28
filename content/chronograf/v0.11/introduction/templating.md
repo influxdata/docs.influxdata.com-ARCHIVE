@@ -13,7 +13,7 @@ Easily modify the time range and [tag values](/influxdb/v0.10/concepts/glossary/
 ## Templating a visualization
 
 The following sections will show you how to create template variables on a graph.
-If you'd like to follow along, see [Getting Started with Telegraf](https://docs.influxdata.com/telegraf/v0.11/introduction/getting-started-telegraf/) to get the data we use in this section.
+If you'd like to follow along, see [Getting Started with Telegraf](/telegraf/v0.11/introduction/getting-started-telegraf/) to get the data we use in this section.
 
 ### Template time range with `tmplTime()`
 

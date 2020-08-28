@@ -15,7 +15,7 @@ Telegraf is able to serialize metrics into the following output data formats:
 1. [Graphite](#graphite)
 
 Telegraf metrics, like InfluxDB
-[points](https://docs.influxdata.com/influxdb/v0.10/write_protocols/line/),
+[points](/influxdb/v0.10/write_protocols/line/),
 are a combination of four basic parts:
 
 1. Measurement Name

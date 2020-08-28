@@ -91,14 +91,14 @@ We'll call our graph `Average idle CPU usage`.
 Click the `Save` button.
 
 3.
-Choose the server, [database](/influxdb/v1.5/concepts/glossary/#database), and [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) that you want to work with:
+Choose the server, [database](/{{< latest "influxdb" >}}/concepts/glossary/#database), and [retention policy](/{{< latest "influxdb" >}}/concepts/glossary/#retention-policy-rp) that you want to work with:
 <br>
 <br>
 ![Server Tray](/img/chronograf/server-tray.png)
 
     In this example, we're working with the the server `InfluxDB-1`, the database `telegraf`, and the retention policy `default`.
 
-To create a [query](https://influxdb.com/docs/v0.9/concepts/glossary.html#query), you can either use the query builder or, if you're already familiar with InfluxQL, you can manually enter the query in the text input.
+To create a [query](/influxdb/v0.9/concepts/glossary/#query), you can either use the query builder or, if you're already familiar with InfluxQL, you can manually enter the query in the text input.
 Note that once you manually enter the query, the query builder becomes unavailable for use and the time range in the top right corner becomes void.
 The next steps create a query with the query builder.
 <br>

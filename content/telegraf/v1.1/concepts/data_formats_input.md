@@ -17,7 +17,7 @@ Telegraf is able to parse the following input data formats into metrics:
 1. [Nagios](#nagios) (exec input only)
 
 Telegraf metrics, like InfluxDB
-[points](/influxdb/latest/concepts/glossary/#point),
+[points](/{{< latest "influxdb" >}}/concepts/glossary/#point),
 are a combination of four basic parts:
 
 1. Measurement Name

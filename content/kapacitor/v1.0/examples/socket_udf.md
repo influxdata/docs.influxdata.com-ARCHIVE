@@ -643,7 +643,7 @@ custom anomaly detection algorithms, or simply a system to "massage" your data a
 
 If you want to learn more, here are a few places to start:
 
-* Modify the mirror UDF, to function like the [DefaultNode](https://docs.influxdata.com/kapacitor/v1.0/nodes/default_node/).
+* Modify the mirror UDF, to function like the [DefaultNode](/kapacitor/v1.0/nodes/default_node/).
 	Instead of always overwriting a field, only set it if the field is not absent.
 	Also add support for setting tags as well as fields.
 * Change the mirror UDF to work on batches instead of streams.

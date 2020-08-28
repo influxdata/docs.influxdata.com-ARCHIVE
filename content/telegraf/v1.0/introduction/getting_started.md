@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Telegraf
 aliases:
-    - telegraf/v1.0/introduction/getting-started-telegraf/
+    - telegraf/v1.0/introduction/getting-started/
 menu:
   telegraf_1_0:
     name: Getting Started

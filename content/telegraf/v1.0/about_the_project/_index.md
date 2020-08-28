@@ -7,7 +7,7 @@
      identifier: about_the_project
      weight: 50
 ---
-## [Release Notes/Changelog](/telegraf/v1.0/about_the_project/release-notes-changelog/)
+## [Release Notes/Changelog](/telegraf/v1.0/about_the_project/changelog/)
 
 ## [Contributing](https://github.com/influxdata/telegraf/blob/master/CONTRIBUTING.md)
 

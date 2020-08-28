@@ -15,7 +15,7 @@ However, there are a few things that will remain the same in the new implementat
 
 Shards are distributed throughout an InfluxDB cluster.
 A shard holds the data for any number of time series for a contiguous block of time.
-The length of time and which series are mapped to a shard is determined by the [shard spaces](../advanced_topics/sharding_and_storage.html#databases-and-shard-spaces).
+The length of time and which series are mapped to a shard is determined by the [shard spaces](/influxdb/v0.8/advanced_topics/sharding_and_storage/#databases-and-shard-spaces).
 
 Currently, if you want to distribute data across a cluster, you need to set the split on your shard spaces to be > 1.
 The ideal number for split is probably `number_of_servers / replication_factor`.

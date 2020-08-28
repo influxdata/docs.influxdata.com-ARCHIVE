@@ -1,0 +1,3 @@
+{{- $product := .Get 0 -}}
+{{- $latestVersion := index $.Site.Data.default_versions (print $product "_semver") -}}
+{{ $product }}/{{ $latestVersion }}

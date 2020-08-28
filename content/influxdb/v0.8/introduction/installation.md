@@ -68,7 +68,7 @@ sudo /etc/init.d/influxdb start
 
 ## InfluxDB 0.8.8 Installation
 
-## OS 
+## OS
 
 XInstallation of version 0.8.8 on macOS 10.8 and higher is available through [Homebrew](http://brew.sh/) [Tap](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/brew-tap.md).
 
@@ -117,4 +117,4 @@ Then start the daemon by running:
 sudo /etc/init.d/influxdb start
 ```
 
-<a href="getting_started.html"><font size="6"><b>Now get started!</b></font></a>
+<a href="/influxdb/v0.8/introduction/getting_started/"><font size="6"><b>Now get started!</b></font></a>

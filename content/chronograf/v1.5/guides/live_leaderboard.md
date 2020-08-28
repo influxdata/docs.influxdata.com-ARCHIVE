@@ -40,7 +40,7 @@ Add the following settings the `[[udp]]` secton in  your Kapacitor configuration
     retention-policy = "autogen"
 ```
 
-Using this configuration, Kapacitor will listen on port `9100` for UDP packets in [Line Protocol](/influxdb/v1.5/write_protocols/line_protocol_tutorial/) format.
+Using this configuration, Kapacitor will listen on port `9100` for UDP packets in [Line Protocol](/{{< latest "influxdb" >}}/write_protocols/line_protocol_tutorial/) format.
 Incoming data will be scoped to be in the `game.autogen` database and retention policy.
 Restart Kapacitor so that the UDP listener service starts.
 

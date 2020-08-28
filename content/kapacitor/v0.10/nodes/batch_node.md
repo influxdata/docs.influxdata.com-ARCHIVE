@@ -91,7 +91,7 @@ Can specify one time dimension.
 
 This property adds a `GROUP BY` clause to the query 
 so all the normal behaviors when quering InfluxDB with a `GROUP BY` apply. 
-More details: https://influxdb.com/docs/v0.9/query_language/data_exploration.html#the-group-by-clause 
+More details: /influxdb/v0.9/query_language/data_exploration/#the-group-by-clause 
 
 Example: 
 

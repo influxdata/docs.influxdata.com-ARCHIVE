@@ -11,7 +11,7 @@ menu:
 There are no additional configuration options for InfluxDB [line protocol][]. The
 InfluxDB metrics are parsed directly into Telegraf metrics.
 
-[line protocol]: /influxdb/latest/write_protocols/line/
+[Line protocol](/{{< latest "influxdb" >}}/write_protocols/
 
 ### Configuration
 

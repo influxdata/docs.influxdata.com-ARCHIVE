@@ -212,6 +212,6 @@ influxd-ctl show
 ### 2. Rebalance the cluster
 
 Increase the [replication factor](/enterprise_influxdb/v1.0/concepts/glossary/#replication-factor) on all existing retention polices to the number of data nodes in your cluster.
-You can do this with [ALTER RETENTION POLICY](https://docs.influxdata.com/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
+You can do this with [ALTER RETENTION POLICY](/influxdb/v1.0/query_language/database_management/#modify-retention-policies-with-alter-retention-policy).
 
 Next, [rebalance](/enterprise_influxdb/v1.0/features/web-console-features/#cluster-rebalancing) your cluster using the `Rebalance` button on the `Tasks` page.

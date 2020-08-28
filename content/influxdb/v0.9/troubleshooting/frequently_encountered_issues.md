@@ -366,7 +366,7 @@ Identifiers are database names, retention policy names, user names, measurement 
 	Write: `INSERT wacky va\"ue=4`  
 	Applicable query: `SELECT "va\"ue" FROM wacky`
 
-See the [Line Protocol Syntax](https://influxdb.com/docs/v0.9/write_protocols/write_syntax/) page for more information.
+See the [Line Protocol Syntax](/influxdb/v0.9/write_protocols/write_syntax/) page for more information.
 
 # Administration
 ## Single quoting the password string

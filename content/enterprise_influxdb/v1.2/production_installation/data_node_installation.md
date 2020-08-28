@@ -30,7 +30,7 @@ Note that there is no requirement for each data node to run on its own
 server.
 
 See the
-[Clustering Guide](/enterprise_influxdb/v1.2/concepts/clustering.md#optimal-server-counts)
+[Clustering Guide](/enterprise_influxdb/v1.2/concepts/clustering/#optimal-server-counts)
 for more on cluster architecture.
 
 ### Other Requirements

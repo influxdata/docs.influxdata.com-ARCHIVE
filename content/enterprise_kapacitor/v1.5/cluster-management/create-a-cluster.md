@@ -45,7 +45,7 @@ or cluster from which data is received.
 #### 2. No load balancers
 Members of a Kapacitor cluster **should not** be placed behind a load-balancer.
 InfluxDB needs direct access to all members of the cluster in order to copy written data to each.
-_The [Kapacitor subscriptions](/kapacitor/v1.5/administration/subscription-management/)
+_The [Kapacitor subscriptions](https://docs.influxdata.com/kapacitor/v1.5/administration/subscription-management/)
 documentation outlines how InfluxDB sends data to Kapacitor via subscriptions._
 
 #### 3. Know the size of your cluster before starting
@@ -68,7 +68,7 @@ The basic installation steps for Kapacitor Enterprise cluster are:
 #### Hostname configuration
 In order for Kapacitor Enterprise members to communicate with each other,
 they need to be able resolve each other's addresses.
-The [`hostname`](/kapacitor/v1.5/administration/configuration/#organization) setting
+The [`hostname`](https://docs.influxdata.com/kapacitor/v1.5/administration/configuration/#organization) setting
 for each Kapacitor Enterprise member is the DNS or IP of the member.
 All other Kapacitor Enterprise members need to be able to resolve and access that address.
 
@@ -298,14 +298,14 @@ Member ID                               Gossip Address RPC Address    API Addres
 13eeefdd-41b5-453f-928e-cb9c55fd2a5d    kapacitor-2:9090   kapacitor-2:9091   kapacitor-2:9092   worker alive
 ```
 
-> If decommissioning the Kapacitor server, be sure to [remove its subscription from InfluxDB](/influxdb/latest/administration/subscription-management/#remove-subscriptions).
+> If decommissioning the Kapacitor server, be sure to [remove its subscription from InfluxDB](https://docs.influxdata.com/influxdb/v1.5/administration/subscription-management/#remove-subscriptions).
 > InfluxDB does not know if the server will come back or not and will continue to
 > attempt to send data to the removed member unless its subscription is manually removed.
 
 ## Cluster data ingestion
 The primary methods for writing data to Kapacitor are using
-[subscriptions](/kapacitor/v1.5/administration/subscription-management/) or directly
-[using the Kapacitor API `/kapacitor/v1/write` endpoint](/kapacitor/v1.5/working/api/#writing-data).
+[subscriptions](https://docs.influxdata.com/kapacitor/v1.5/administration/subscription-management/) or directly
+[using the Kapacitor API `/kapacitor/v1/write` endpoint](https://docs.influxdata.com/kapacitor/v1.5/working/api/#writing-data).
 
 ### Sequentially or in parallel
 When writing directly to the Kapacitor API, send requests to all nodes in your Kapacitor Enterprise cluster.
@@ -354,7 +354,7 @@ kapacitor define-topic-handler ./handler-file.yml
 
 #### What is not shared?
 **Tasks and task templates**  
-[TICKscripts](/kapacitor/v1.5/tick/introduction/) are used to define Kapacitor tasks and task templates.
+[TICKscripts](https://docs.influxdata.com/kapacitor/v1.5/tick/introduction/) are used to define Kapacitor tasks and task templates.
 Kapacitor does not replicate tasks defined on one member to other members of the cluster.
 Tasks must be defined manually on each member on which you intend them to run.
 
@@ -362,7 +362,7 @@ Tasks must be defined manually on each member on which you intend them to run.
 All data written to InfluxDB is copied to members of your Kapacitor cluster where
 Kapacitor can manipulate, transform, and act on it.
 If a task transforms data, those changes are isolated to the that specific member
-unless they are [written back to InfluxDB](/kapacitor/v1.5/nodes/influx_d_b_out_node/).
+unless they are [written back to InfluxDB](https://docs.influxdata.com/kapacitor/v1.5/nodes/influx_d_b_out_node/).
 Anything written to InfluxDB will propagate to other members of your Kapacitor cluster.
 
 ### Eventual consistency

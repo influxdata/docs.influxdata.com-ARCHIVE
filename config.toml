@@ -6394,12 +6394,12 @@ parent = "inputs"
   name = "Contributing"
   identifier = "contributing"
   weight = 70
-  url = "/influxdb/v0.8/contributing/"
+  url = ""
 [[menu.influxdb_08]]
   name = "Other Libraries and Tools"
   identifier = "tools"
   weight = 80
-  url = "/influxdb/v0.8/tools/"
+  url = ""
 
 # InfluxDB v0.8 Sub-Menu - UI
 [[menu.influxdb_08]]
@@ -6665,12 +6665,12 @@ parent = "inputs"
   name = "Contributing"
   identifier = "contributing"
   weight = 80
-  url = "/influxdb/v0.7/contributing/"
+  url = ""
 [[menu.influxdb_07]]
   name = "Other Libraries and Tools"
   identifier = "tools"
   weight = 90
-  url = "/influxdb/v0.7/tools/"
+  url = ""
 
 # InfluxDB v0.7 Sub-Menu - UI
 [[menu.influxdb_07]]
@@ -6863,12 +6863,12 @@ parent = "inputs"
   name = "Contributing"
   identifier = "contributing"
   weight = 70
-  url = "/influxdb/v0.6/contributing/"
+  url = ""
 [[menu.influxdb_06]]
   name = "Other Libraries and Tools"
   identifier = "tools"
   weight = 80
-  url = "/influxdb/v0.6/tools/"
+  url = ""
 
 # InfluxDB v0.6 Sub-Menu - UI
 [[menu.influxdb_06]]

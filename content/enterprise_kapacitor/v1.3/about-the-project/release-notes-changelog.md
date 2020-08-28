@@ -27,7 +27,7 @@ menu:
 ## v1.3.0 [2017-06-19]
 
 > ***Note:*** This release builds off of the 1.3 release of Kapacitor. Please see the [Kapacitor release
-> notes](https://docs.influxdata.com/kapacitor/v1.3/about_the_project/releasenotes-changelog/) for more information about the Kapacitor release.
+> notes](/kapacitor/v1.3/about_the_project/releasenotes-changelog/) for more information about the Kapacitor release.
 
 With this release, Kapacitor Enterprise can be clustered and will deduplicate alerts generated within the cluster.
 

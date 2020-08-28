@@ -146,7 +146,7 @@ batch
 
 Kapacitor is a powerful tool, if you need more power use it.
 If not keep using CQs until you do.
-For more information and help writing TICKscripts from InfluxQL queries take a looks at these [docs](https://docs.influxdata.com/kapacitor/latest/nodes/influx_q_l_node/) on the InfluxQL node in Kapacitor.
+For more information and help writing TICKscripts from InfluxQL queries take a looks at these [docs](/kapacitor/v0.13/nodes/influx_q_l_node/) on the InfluxQL node in Kapacitor.
 Every function available in the InfluxDB query language is available in Kapacitor, so you can convert any query into a Kapacitor TICKscript.
 
 

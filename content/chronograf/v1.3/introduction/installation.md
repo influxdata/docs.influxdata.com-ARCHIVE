@@ -38,7 +38,7 @@ A single Chronograf instance can support several InfluxDB instances or InfluxEnt
 
 * [Getting Started](/chronograf/v1.3/introduction/getting-started/) offers setup instructions for using Chronograf with an InfluxDB instance
 * [Monitor an InfluxEnterprise Cluster](/chronograf/v1.3/guides/monitor-an-influxenterprise-cluster/) offers setup instructions for using Chronograf with an InfluxEnterprise Cluster
-* [InfluxDB Documentation](/influxdb/v1.3/)
+* [InfluxDB Documentation](/{{< latest "influxdb" >}}/)
 * [InfluxEnterprise Documentation](/enterprise_influxdb/v1.3/)
 
 #### Telegraf (recommended)
