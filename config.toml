@@ -43,11 +43,6 @@ SectionPagesMenu = "products"
   identifier = "enterprise_kapacitor"
   weight = 50
   url = "/enterprise_kapacitor/"
-[[menu.products]]
-  name = "Flux"
-  identifier = "flux"
-  weight = 60
-  url = "/flux/"
 
   # InfluxDB v1.4 Menu
   [[menu.influxdb_1_4]]

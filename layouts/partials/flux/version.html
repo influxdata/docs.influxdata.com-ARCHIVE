@@ -1,9 +1,0 @@
-{{ if not (or (in .RelPermalink .Site.Data.default_versions.flux_semver) (eq .RelPermalink "/flux/")) }}
-<div class="old-version">
-  {{ if or (in .RelPermalink "v0.6") (in .RelPermalink "v0.7") (in .RelPermalink "v0.8") }}
-      <strong>Warning!</strong> This page documents an earlier version of Flux, which is no longer actively developed. <a href="/flux/{{ .Site.Data.default_versions.flux_semver }}/">Flux {{ .Site.Data.default_versions.flux_semver }}</a> is the most recent stable version of Flux.
-  {{ else }}
-      <strong>Warning!</strong> This page documents an earlier version of Flux, which is no longer actively developed. <a href="/flux/{{ .Site.Data.default_versions.flux_semver }}/{{ if isset .Params "newversionredirect" }}{{ .Params.newversionredirect }}{{else}}{{ substr .RelPermalink (len (index (findRE "^/.*?/+.*?/" .RelPermalink) 0)) }}{{end}}">Flux {{ .Site.Data.default_versions.flux_semver }}</a> is the most recent stable version of Flux.
-  {{ end }}
-</div>
-{{ end }}

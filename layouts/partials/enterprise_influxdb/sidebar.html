@@ -1,8 +1,5 @@
 <div class="sidebar--toggle" id="sidebar--toggle">InfluxDB Enterprise Contents</div>
 <aside class="sidebar" id="sidebar">
-  <section class="sidebar--section">
-    {{ partial "support-ad.html" . }}
-  </section>
   {{ $currentNode := . }}
   {{ range .Site.Menus.enterprise_influxdb }}
     {{ if (in $currentNode.Permalink .URL) }}
@@ -66,7 +63,7 @@
   {{end}}
   <section class="sidebar--section">
     <div class="sidebar--section-title">
-      <a href="/enterprise_influxdb/">InfluxDB Enterprise versions</a>
+      <a href="/enterprise_influxdb/">Archived InfluxDB Enterprise versions</a>
     </div>
     <ul>
       {{ range .Site.Menus.enterprise_influxdb }}

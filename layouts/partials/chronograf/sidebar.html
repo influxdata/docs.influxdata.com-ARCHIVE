@@ -1,8 +1,5 @@
 <div class="sidebar--toggle" id="sidebar--toggle">Chronograf Contents</div>
 <aside class="sidebar" id="sidebar">
-  <section class="sidebar--section">
-    {{ partial "support-ad.html" . }}
-  </section>
   {{ $currentNode := . }}
   {{ range .Site.Menus.chronograf }}
     {{ if (in $currentNode.Permalink .URL) }}
@@ -66,7 +63,7 @@
   {{end}}
   <section class="sidebar--section">
     <div class="sidebar--section-title">
-      <a href="/chronograf/">Chronograf versions</a>
+      <a href="/chronograf/">Archived Chronograf versions</a>
     </div>
     <ul>
       {{ range sort .Site.Menus.chronograf }}
