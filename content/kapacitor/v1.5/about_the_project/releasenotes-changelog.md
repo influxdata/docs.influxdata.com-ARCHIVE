@@ -5,6 +5,17 @@ menu:
     parent: about_the_project
 ---
 
+## v1.5.7 [2020-08-27]
+
+## Features
+
+- Add templating for the url in the `httpPost` node and the `alert().post()` node.
+- Upgrade `github.com/gorhill/cronexpr`, thanks @wuguanyu!
+
+### Bug fixes
+
+- Added missing err check of a buf scanner, thanks @johncming!
+
 ## v1.5.6 [2020-07-17]
 
 ## Features
