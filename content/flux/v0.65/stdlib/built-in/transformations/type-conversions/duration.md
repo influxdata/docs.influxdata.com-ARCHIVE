@@ -32,9 +32,15 @@ _**Data type:** String | Integer | Uinteger_
 {{% /note %}}
 
 ## Examples
+
+{{% note %}}
+Flux does not support duration column types.
+The example below converts an integer to a duration and stores the value as a string.
+{{% /note %}}
+
 ```js
 from(bucket: "sensor-data")
   |> range(start: -1m)
   |> filter(fn:(r) => r._measurement == "system" )
-  |> map(fn:(r) => ({ r with uptime: duration(v: r.uptime) }))
+  |> map(fn:(r) => ({ r with uptime: string(v: duration(v: r.uptime)) }))
 ```
