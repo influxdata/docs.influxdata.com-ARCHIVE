@@ -22,7 +22,7 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 
 | Chaining method | Description |
 |:---------|:---------|
-| **alert&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts. <br> <br>To set GET path parameters or URLs dynamically on a per-window or per-group basis, use the following **template**: `httpPost('localhost/{{ .Name }}/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')` <br> <br>|
+| **alert&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts. <br> <br>To set GET path parameters or URLs dynamically on a per-window or per-group basis, use the following **template**, replacing `host` with your hostname and `cpu` with your tags: `httpPost('localhost/{{ .Name }}/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')` <br> <br>|
 
 ### Property methods
 
