@@ -9,7 +9,7 @@ menu:
 
 ## Features
 
-- Add templating for the url in the `httpPost` node and the `alert().post()` node.
+- Add templating for the URL in the [`httpPost` node]() and the [`alert().post()` node]().
 - Upgrade `github.com/gorhill/cronexpr`, thanks @wuguanyu!
 
 ### Bug fixes
