@@ -18,12 +18,11 @@ See [AlertNode.Info](/kapacitor/v1.5/nodes/alert_node/#info),
 [AlertNode.Warn](/kapacitor/v1.5/nodes/alert_node/#warn),
 and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 
-
 ### Constructor
 
 | Chaining method | Description |
 |:---------|:---------|
-| **alert&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts.  |
+| **alert&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts. <br> <br>To set GET path parameters or URLs dynamically on a per-window or per-group basis, use the following **template**: `httpPost('localhost/{{ .Name }}/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')` <br> <br>|
 
 ### Property methods
 

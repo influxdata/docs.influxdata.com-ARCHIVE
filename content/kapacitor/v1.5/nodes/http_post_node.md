@@ -44,7 +44,7 @@ stream
 
 | Chaining Method                                  | Description |
 |:----------------                                 |:----------- |
-| **httpPost&nbsp;(&nbsp;`url`&nbsp;`...string`)** | Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint. HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an endpoint property method. <br> <br>To set GET parameter paths or URLs dynamically on a per-window or per-group basis, use the following **template**: `httpPost('localhost/{{ .Name }}/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')`|
+| **httpPost&nbsp;(&nbsp;`url`&nbsp;`...string`)** | Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint. HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an endpoint property method. <br> <br>To set GET parameter paths or URLs dynamically on a per-window or per-group basis, use the following **template**: `httpPost('localhost/{{ .Name }}/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')`<br><br>|
 
 ### Property Methods
 
