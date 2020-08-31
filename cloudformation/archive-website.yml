@@ -1,0 +1,286 @@
+###############################################################################
+### AWS Cloudformation Template
+### InfluxData Documentation Website Hosting and Deployment
+###############################################################################
+AWSTemplateFormatVersion: 2010-09-09
+Description: >
+  Cloudformation template to stand up the AWS resources for hosting the
+  InfluxData documentation archive website created using Hugo. Cloudfront
+  distribution is used to cache requests to an S3 bucket configured as a static
+  website.
+
+###############################################################################
+Parameters:
+###############################################################################
+
+  AcmCertificateArn:
+    Type: String
+    Description: >
+      The ARN of the SSL certificate to use for the CloudFront distribution.
+
+  DomainName:
+    Type: String
+    Description: The docs archive website domain name.
+    Default: archive.docs.influxdata.com
+
+###############################################################################
+Outputs:
+###############################################################################
+
+  DocsProdBucketArn:
+    Description: The ARN of the S3 bucket hosting the static content.
+    Value: !GetAtt DocsArchiveBucket.Arn
+
+  DocsCircleCIDeployAccessKeyId:
+    Description: The access key ID for CircleCI deployment to S3.
+    Value: !Ref DocsCircleCIDeployAccessKey
+
+  DocsCircleCIDeploySecretAccessKey:
+    Description: The secret access key for CircleCI deployment to S3.
+    Value: !GetAtt DocsCircleCIDeployAccessKey.SecretAccessKey
+
+###############################################################################
+Resources:
+###############################################################################
+
+  DocsCloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref DomainName
+        DefaultCacheBehavior:
+          TargetOriginId: !Ref DocsArchiveBucket
+          ViewerProtocolPolicy: redirect-to-https
+          DefaultTTL: 2592000
+          Compress: true
+          ForwardedValues:
+            QueryString: false
+          LambdaFunctionAssociations:
+            - EventType: origin-request
+              LambdaFunctionARN: !Ref DocsArchiveOriginRequestRewriteLambdaVersion
+        DefaultRootObject: '/'
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: 300
+            ErrorCode: 403
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+        Enabled: true
+        HttpVersion: http2
+        Origins:
+          - Id: !Ref DocsArchiveBucket
+            DomainName: !Join [ "", [ !Ref DocsArchiveBucket, ".s3.amazonaws.com" ] ]
+            S3OriginConfig:
+              OriginAccessIdentity:
+                !Sub "origin-access-identity/cloudfront/${DocsCloudFrontOriginAccessIdentity}"
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          AcmCertificateArn: !Ref AcmCertificateArn
+          MinimumProtocolVersion: TLSv1.1_2016
+          SslSupportMethod: sni-only
+      Tags:
+        - Key: Domain
+          Value: !Ref DomainName
+
+  DocsCloudFrontOriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Sub 'CloudFront Origin Access Identity for ${DomainName}'
+
+  DocsArchiveBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          -
+            ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      Tags:
+        - Key: Domain
+          Value: !Ref DomainName
+
+  DocsArchiveBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref DocsArchiveBucket
+      PolicyDocument:
+        Statement:
+          -
+            Effect: Allow
+            Action:
+              - s3:GetObject
+            Resource: !Sub "arn:aws:s3:::${DocsArchiveBucket}/*"
+            Principal:
+              CanonicalUser: !GetAtt DocsCloudFrontOriginAccessIdentity.S3CanonicalUserId
+
+  DocsArchiveOriginRequestRewriteLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: Lambda function performing request URI rewriting.
+      Code:
+        ZipFile: |
+          'use strict';
+
+          const path = require('path');
+
+          const latestVersions = {
+            'influxdb': 'v1.2',
+            'telegraf': 'v1.8',
+            'chronograf': 'v1.5',
+            'kapacitor': 'v1.3',
+            'enterprise_influxdb': 'v1.3',
+            'enterprise_kapacitor': 'v1.5',
+            };
+
+          exports.handler = (event, context, callback) => {
+
+            function permanantRedirect(condition, newUri) {
+              if (condition) {
+                return callback(null, {
+                  status: '301',
+                    statusDescription: 'Moved Permanently',
+                    headers: {
+                      'location': [{
+                        key: 'Location',
+                        value: newUri,
+                      }],
+                      'cache-control': [{
+                        key: 'Cache-Control',
+                        value: "max-age=3600"
+                      }],
+                    },
+                });
+              }
+            }
+
+            const { request } = event.Records[0].cf;
+            const parsedPath = path.parse(request.uri);
+            const indexPath = 'index.html';
+            const validExtensions = {
+                '.html': true,
+                '.css': true,
+                '.js': true,
+                '.xml': true,
+                '.png': true,
+                '.gif': true,
+                '.jpg': true,
+                '.ico': true,
+                '.svg': true,
+                '.csv': true,
+                '.txt': true,
+                '.lp': true,
+                '.json': true,
+                '.rb': true,
+                '.eot': true,
+                '.ttf': true,
+                '.woff': true,
+                '.woff2': true,
+                '.otf': true,
+                '.zip': true,
+                '.tar': true,
+                '.gz': true,
+                '.map': true,
+              };
+
+            // Remove index.html from path
+            permanantRedirect(request.uri.endsWith('index.html'), request.uri.substr(0, request.uri.length - indexPath.length));
+
+            // If file has a valid extension, return the request unchanged
+            if (validExtensions[parsedPath.ext]) {
+              callback(null, request);
+            }
+
+            ////////////////////// START PRODUCT-SPECIFIC REDIRECTS //////////////////////
+
+            ////////////////////////// Latest version redirects //////////////////////////
+            permanantRedirect(/\/influxdb\/latest/.test(request.uri), request.uri.replace(/\/latest/, `/${latestVersions['influxdb']}`));
+            permanantRedirect(/\/telegraf\/latest/.test(request.uri), request.uri.replace(/\/latest/, `/${latestVersions['telegraf']}`));
+            permanantRedirect(/\/chronograf\/latest/.test(request.uri), request.uri.replace(/\/latest/, `/${latestVersions['chronograf']}`));
+            permanantRedirect(/\/kapacitor\/latest/.test(request.uri), request.uri.replace(/\/latest/, `/${latestVersions['kapacitor']}`));
+            permanantRedirect(/\/enterprise_influxdb\/latest/.test(request.uri), request.uri.replace(/\/latest/, `/${latestVersions['enterprise_influxdb']}`));
+            permanantRedirect(/\/enterprise_kapacitor\/latest/.test(request.uri), request.uri.replace(/\/latest/, `/${latestVersions['enterprise_kapacitor']}`));
+
+            /////////////////////// END PRODUCT-SPECIFIC REDIRECTS ///////////////////////
+
+            // Redirect to the a trailing slash
+            permanantRedirect(!request.uri.endsWith('/'), request.uri + '/');
+
+            // Use index.html if the path doesn't have an extension
+            // or if the version number is parsed as an extension.
+            let newUri;
+
+            if (parsedPath.ext === '' || /\.\d*/.test(parsedPath.ext)) {
+              newUri = path.join(parsedPath.dir, parsedPath.base, indexPath);
+            } else {
+              newUri = request.uri;
+            }
+
+            // Replace the received URI with the URI that includes the index page
+            request.uri = newUri;
+
+            // Return to CloudFront
+            // request.uri = request.uri + indexPath;
+            callback(null, request);
+          };
+
+      Handler: index.handler
+      MemorySize: 128
+      Role: !Sub ${DocsArchiveOriginRequestRewriteLambdaRole.Arn}
+      Runtime: nodejs12.x
+      Tags:
+        - Key: Domain
+          Value: !Ref DomainName
+
+  DocsArchiveOriginRequestRewriteLambdaVersion:
+    Type: AWS::Lambda::Version
+    Properties:
+      FunctionName: !Ref DocsArchiveOriginRequestRewriteLambda
+      Description: !Sub "URL rewriting for ${DomainName}"
+
+  DocsArchiveOriginRequestRewriteLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action: sts:AssumeRole
+            Principal:
+              Service:
+                - edgelambda.amazonaws.com
+                - lambda.amazonaws.com
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  DocsCircleCIDeployUser:
+    Type: AWS::IAM::User
+    Properties:
+      Policies:
+        - PolicyName: giveaccesstoupdatedocsbuckets
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetBucketLocation
+                Resource:
+                  - !Sub "arn:aws:s3:::${DocsArchiveBucket}"
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                  - s3:DeleteObject
+                Resource:
+                  - !Sub "arn:aws:s3:::${DocsArchiveBucket}/*"
+              - Effect: Allow
+                Action:
+                  - cloudfront:GetDistribution
+                  - cloudfront:CreateInvalidation
+                Resource: "*"
+
+  DocsCircleCIDeployAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref DocsCircleCIDeployUser
