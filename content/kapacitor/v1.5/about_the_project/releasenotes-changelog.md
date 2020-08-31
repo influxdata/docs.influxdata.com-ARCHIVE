@@ -14,7 +14,7 @@ menu:
 
 ### Bug fixes
 
-- Added missing err check of a buf scanner, thanks @johncming!
+- Add missing `err` check of a buffer scanner, thanks @johncming!
 
 ## v1.5.6 [2020-07-17]
 
