@@ -11,11 +11,13 @@ menu:
 The post event handler posts JSON encoded data to an HTTP endpoint.
 
 ## Configuration
+
 Configuration as well as default [option](#options) values for the post event
 handler are set in your `kapacitor.conf`.
 Below is an example configuration:
 
 ### Post Settings in kapacitor.conf
+
 ```toml
 [[httppost]]
   endpoint = "example"
@@ -29,40 +31,49 @@ Below is an example configuration:
 ```
 
 #### `endpoint`
+
 Name of a configured HTTP POST endpoint that acts as an identifier for `[[httppost]]`
 configurations when multiple are present.
 _Endpoints are identifiers only. They are not appended to HTTP POST URLs._
 
 #### `url`
+
 The URL to which the alert data will be posted.
 
 #### `headers`
+
 Set of extra header values to set on the POST request.
 
 #### `basic-auth`
+
 Set of authentication credentials to set on the POST request.
 
 #### `alert-template`
-Alert template for constructing a custom HTTP body.
+
+Alert template for constructing a custom HTTP body or url.
 Alert templates are only used with post [alert](/kapacitor/v1.5/nodes/alert_node/)
 handlers as they consume alert data.
 _Skip to [alert templating](#alert-templates)._
 
 #### `alert-template-file`
+
 Absolute path to an alert template file.
 _Skip to [alert templating](#alert-templates)._
 
 #### `row-template`
-Row template for constructing a custom HTTP body.
+
+Row template for constructing a custom HTTP body or url.
 Row templates are only used with the [httpPost node](/kapacitor/v1.5/nodes/http_post_node/)
 pipeline nodes as they consume a row at a time.
 _Skip to [row templating](#row-templates)._
 
 #### `row-template-file`
+
 Absolute path to a row template file.
 _Skip to [row templating](#row-templates)._
 
 ### Defining configuration options with environment variables
+
 The `endpoint`, `url`, and `headers` configuration options can be defined with
 environment variables:
 
@@ -74,6 +85,7 @@ KAPACITOR_HTTPPOST_0_HEADERS_Example2 = "header2"
 ```
 
 ### Configuring and using multiple HTTP POST endpoints
+
 The `kapacitor.conf` supports multiple `[[httppost]]` sections.
 The [`endpoint`](#endpoint) configuration option of each acts as a unique identifier for that specific configuration.
 To use a specific `[[httppost]]` configuration with the Post alert handler,
@@ -109,6 +121,7 @@ KAPACITOR_HTTPPOST_1_HEADERS_Example2 = "header2"
 ```
 
 ## Options
+
 The following post event handler options can be set in a
 [handler file](/kapacitor/v1.5/event_handlers/#handler-file) or when using
 `.post()` in a TICKscript.
@@ -171,6 +184,7 @@ options:
 ```
 
 ## Using the Post event handler
+
 The post event handler can be used in both TICKscripts and handler files to post
 alert and HTTP POST data to an HTTP endpoint.
 The examples below deal with alerts and use the same `[[httppost]]` configuration
@@ -186,6 +200,7 @@ _**HTTP POST settings in kapacitor.conf**_
 ```
 
 ### Post alerts from a TICKscript
+
 The following TICKscripts use the `.post()` event handler to post the message,
 "Hey, check your CPU", whenever idle CPU usage drops below 10%.
 
@@ -220,8 +235,8 @@ stream
       .skipSSLVerification()
 ```
 
-
 ### Post alerts from a defined handler
+
 The following setup sends an alert to the `cpu` topic with the message, "Hey,
 check your CPU".
 A post handler is added that subscribes to the `cpu` topic and posts all alert
@@ -269,13 +284,14 @@ Add the handler:
 kapacitor define-topic-handler post_cpu_handler.yaml
 ```
 
-
 ## Post templating
-The post event handler allows you to customize the content and structure of
+
+The post event handler lets you customize the content and structure of
 POSTs with alert and row templates.
 
 ### Alert templates
-Alert templates are used to construct a custom HTTP body.
+
+Use alert templates to construct a custom HTTP body or URL.
 They are only used with post [alert](/kapacitor/v1.5/nodes/alert_node/) handlers
 as they consume alert data.
 Templates are defined either inline in the `kapacitor.conf` using the
@@ -298,20 +314,22 @@ have access to the following fields:
 | .Recoverable   | Indicates whether or not the alert is auto-recoverable.       |
 
 #### Inline alert template
+
 _**kapacitor.conf**_
 ```toml
 [[httppost]]
-  endpoint = "example"
-  url = "http://example.com/path"
+  endpoint = "host"
+  url = "host={{index .ID \"host\"}}{{range .Duration}} {{index . "time"}} {{index . "value"}}{{end}}"
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
 ```
 
 #### Alert template file
+
 _**kapacitor.conf**_
 ```toml
 [[httppost]]
-  endpoint = "example"
-  url = "http://example.com/path"
+  endpoint = "host"
+  url = "host={{index .ID \"host\"}}{{range .Duration}} {{index . "time"}} {{index . "value"}}{{end}}"
   alert-template-file = "/etc/templates/alert.html"
 ```
 
@@ -321,7 +339,8 @@ _**/etc/templates/alert.html**_
 ```
 
 ### Row templates
-Row templates are used to construct a custom HTTP body.
+
+Use row templates to construct a custom HTTP body or URL.
 They are only used with [httpPost](/kapacitor/v1.5/nodes/http_post_node/)
 handlers as they consume a row at a time.
 Templates are defined either inline in the `kapacitor.conf` using the
@@ -338,20 +357,22 @@ have access to the following fields:
 | .Values | A list of values; each a map containing a "time" key for the time of the point and keys for all other fields on the point. |
 
 #### Inline row template
+
 _**kapacitor.conf**_
 ```toml
 [[httppost]]
-  endpoint = "example"
-  url = "http://example.com/path"
+  endpoint = "host"
+  url = "host={{index .Tags \"host\"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}"
   row-template = '{{.Name}} host={{index .Tags "host"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}'
 ```
 
 #### Row template file
+
 _**kapacitor.conf**_
 ```toml
 [[httppost]]
-  endpoint = "example"
-  url = "http://example.com/path"
+  endpoint = "host"
+  url = "host={{index .Tags \"host\"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}"
   row-template-file = "/etc/templates/row.html"
 ```
 
