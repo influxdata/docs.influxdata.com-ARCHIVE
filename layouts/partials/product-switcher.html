@@ -27,8 +27,8 @@
     <div class="navbar--dropdown-dismiss" id="navbar--dropdown-dismiss"></div>
     <ul class="navbar--product-menu" id="navbar--product-menu">
       {{ range .Site.Menus.products }}
-        <li><a class="navbar--product" href="{{ .URL }}{{ index $.Site.Data.default_versions (print .Identifier "_semver") }}/">
-          {{ .Name }} <span class="version-range">≤ {{ index (last 1 (index $.Site.Data.versions .Identifier)) 0 }}</span>
+        <li><a class="navbar--product" href="{{ .URL }}">
+          {{ .Name }}
         </a></li>
       {{ end }}
     </ul>
