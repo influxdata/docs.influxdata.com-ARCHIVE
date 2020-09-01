@@ -9,7 +9,9 @@ menu:
 
 ## Features
 
-- Add templating for the URL in the [`httpPost` node]() and the [`alert().post()` node]().
+- Add templating for URLs in the [`httpPost` node](/kapacitor/v1.5/nodes/http_post_node/) and the [`alert` node](/kapacitor/v1.5/nodes/alert_node/). To set up an template:
+  - For the `alert` node, see [alert templates](/kapacitor/v1.5/event_handlers/post/#alert-templates).
+  - For the `http post` node see [row templates](/kapacitor/v1.5/event_handlers/post/#row-templates).
 - Upgrade `github.com/gorhill/cronexpr`, thanks @wuguanyu!
 
 ### Bug fixes
@@ -20,8 +22,8 @@ menu:
 
 ## Features
 
-- Add [Microsoft Teams event handler](/kapacitor/1.5/event_handlers/microsoftteams/), thanks @mmindenhall!
-- Add [Discord event handler](/kapacitor/1.5/event_handler/discord/), thanks @mattnotmitt!
+- Add [Microsoft Teams event handler](/kapacitor/v1.5/event_handlers/microsoftteams/), thanks @mmindenhall!
+- Add [Discord event handler](/kapacitor/v1.5/event_handler/discord/), thanks @mattnotmitt!
 - Add [support for TLS 1.3](/kapacitor/v1.5/administration/configuration/#transport-layer-security-tls-settings).
 
 ### Bug fixes
