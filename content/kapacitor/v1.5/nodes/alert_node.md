@@ -22,7 +22,7 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 
 | Chaining method | Description |
 |:---------|:---------|
-| **alert&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts. <br> <br>To set GET path parameters or URLs dynamically on a per-window or per-group basis, use the following **template**, replacing `host` with your hostname and `cpu` with your tags: `httpPost('localhost/{{ .Name }}/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')` <br> <br>|
+| **alert&nbsp;(&nbsp;)** | Create an alert node, which can trigger alerts. <br> <br>To dynamically construct a custom HTTP body or URL, use an [**alert template**](/kapacitor/v1.5/event_handlers/post/#alert-templates). For example, `httpPost('localhost/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')`. <br> <br>|
 
 ### Property methods
 
@@ -72,8 +72,6 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 | **[victorOps](#victorops)&nbsp;(&nbsp;)** | Send alert to VictorOps. |
 | **[warn](#warn)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for the WARNING alert level. An empty value indicates the level is invalid and is skipped.  |
 | **[warnReset](#warnreset)&nbsp;(&nbsp;`value`&nbsp;`ast.LambdaNode`)** | Filter expression for resetting the WARNING alert level to lower level.  |
-
-
 
 ### Chaining methods
 [Alert](#alert),
@@ -128,7 +126,6 @@ and [AlertNode.Crit](/kapacitor/v1.5/nodes/alert_node/#crit) below.
 
 ---
 
-
 #### Available event handlers
 
 Different event handlers can be configured for each [AlertNode.](/kapacitor/v1.5/nodes/alert_node/)
@@ -158,7 +155,6 @@ option, `global`, that indicates that all alerts implicitly use the handler.
 | [tcp](#tcp)                   | Send data to a specified address via raw TCP.                                         |
 | [Telegram](#telegram)         | Post alert message to Telegram client.                                                |
 | [VictorOps](#victorops)       | Send alert to VictorOps.                                                              |
-
 
 #### Alert event data
 

@@ -319,7 +319,7 @@ _**kapacitor.conf**_
 ```toml
 [[httppost]]
   endpoint = "host"
-  url = "host={{index .ID \"host\"}}{{range .Duration}} {{index . "time"}} {{index . "value"}}{{end}}"
+  url = "host={{index .ID \"host\"}}{{index . "time"}}{{end}}}"
   alert-template = "{{.Message}}:{{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
 ```
 
@@ -329,7 +329,7 @@ _**kapacitor.conf**_
 ```toml
 [[httppost]]
   endpoint = "host"
-  url = "host={{index .ID \"host\"}}{{range .Duration}} {{index . "time"}} {{index . "value"}}{{end}}"
+  url = "host={{index .ID \"host\"}}{{index . "time"}}{{end}}"
   alert-template-file = "/etc/templates/alert.html"
 ```
 

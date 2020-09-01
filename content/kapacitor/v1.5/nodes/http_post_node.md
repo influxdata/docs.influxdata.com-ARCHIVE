@@ -44,7 +44,7 @@ stream
 
 | Chaining Method                                  | Description |
 |:----------------                                 |:----------- |
-| **httpPost&nbsp;(&nbsp;`url`&nbsp;`...string`)** | Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint. HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an endpoint property method. <br> <br>To set GET path parameters or URLs dynamically on a per-window or per-group basis, use the following **template**: `httpPost('localhost/{{ .Name }}/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')`<br><br>|
+| **httpPost&nbsp;(&nbsp;`url`&nbsp;`...string`)** | Creates an HTTP Post node that POSTS received data to the provided HTTP endpoint. HttpPost expects 0 or 1 arguments. If 0 arguments are provided, you must specify an endpoint property method.<br> <br>To dynamically construct a custom HTTP body or URL, use a [**row template**](/kapacitor/v1.5/event_handlers/post/#row-templates        ). For example, `httpPost('localhost/?host={{ index .Tags "host"}}&cpu={{ index .Tags "cpu" }}')`.
 
 ### Property Methods
 
