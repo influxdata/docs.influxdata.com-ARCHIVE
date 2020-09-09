@@ -2,9 +2,14 @@
   <img src="/static/img/influx-logo-cubo-dark.png" width="200">
 </p>
 
-# InfluxData Documentation
+# Looking for latest InfluxData Docs Repo
+### Go here ->> [docs-v2](https://github.com/influxdata/docs-v2)
+### Live docs are here --> [docs.influxdata.com](https://docs.influxdata.com)
 
-This repository powers [docs.influxdata.com](https://docs.influxdata.com), which
+
+# Archive of InfluxData 1.x Documentation
+
+This repository powers [archive.docs.influxdata.com](https://archive.docs.influxdata.com), which
 includes documentation for the following InfluxData projects:
 
 * [InfluxData Platform](https://docs.influxdata.com/platform/introduction/)
