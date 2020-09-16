@@ -1597,7 +1597,7 @@ the seasonal adjustment parameter is invalid and is confusing the algorithm.
 
 In the following example we'll apply `HOLT_WINTERS()` to the data in the
 `NOAA_water_database`, and we'll show the results using
-[Chronograf](https://docs.influxdata.com/chronograf/v1.0/) visualizations.
+[Chronograf](/chronograf/v1.0/) visualizations.
 
 **Raw Data**
 

@@ -10,7 +10,7 @@ menu:
 
 # Overview
 
-Kapacitor Enterprise installations are very similar to [open source Kapacitor](/kapacitor/latest/)
+Kapacitor Enterprise installations are very similar to [open source Kapacitor](/{{< latest "kapacitor" >}}/)
 but require a an Enterprise license key and include extra configuration options.
 
 The basic installation steps are:
@@ -45,7 +45,7 @@ kapacitord config
 ```
 
 Use the example configuration to create your own custom `kapacitor.conf`.
-Update the [essential information](/kapacitor/v1.5/administration/configuration/#organization)
+Update the [essential information](https://docs.influxdata.com/kapacitor/v1.5/administration/configuration/#organization)
 to suit your specific installation.
 
 ### Provide your enterprise license key

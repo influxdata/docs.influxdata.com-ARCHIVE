@@ -148,7 +148,7 @@ When performing queries with a `group by time(...)` interval, the time will be i
 The time precision of the epoch returned in the `time` column can be specified via the `time_precision` query parameter.
 It can be set to either `s` for seconds, `ms` for milliseconds, or `u` for microseconds.
 
-Now that you know how to read and write data, let's take a look at the [InfluxDB query language](query_language.html) to see what you can do.
+Now that you know how to read and write data, let's take a look at the [InfluxDB query language](/influxdb/v0.7/api/query_language/) to see what you can do.
 
 ### Pretty-Printed Results
 

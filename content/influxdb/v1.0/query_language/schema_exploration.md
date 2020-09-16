@@ -331,7 +331,7 @@ The measurement `average_temperature` doesn't have the tag key `randtag` so Infl
 
 ## Explore field keys with `SHOW FIELD KEYS`
 The `SHOW FIELD KEYS` query returns the [field keys](/influxdb/v1.0/concepts/glossary/#field-key)
-and [field value](/influxdb/v1.0/concepts/glossary/#field-value) data [types](/influxdb/v1.0/write_protocols/write_syntax/#data-types) across each measurement in the database.
+and [field value](/influxdb/v1.0/concepts/glossary/#field-value) data [types](/influxdb/v1.0/write_protocols/line_protocol_reference/#data-types) across each measurement in the database.
 It takes the following form, where the `FROM` clause is optional:
 
 ```sql

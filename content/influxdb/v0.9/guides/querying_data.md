@@ -1,7 +1,5 @@
 ---
 title: Querying Data
-alias:
-  -/docs/v0.9/query_language/querying_data/
 menu:
   influxdb_09:
     weight: 10

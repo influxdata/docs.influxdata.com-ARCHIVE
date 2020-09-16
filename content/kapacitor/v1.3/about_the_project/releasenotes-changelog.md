@@ -70,7 +70,7 @@ Create the below snippet as the file `/tmp/prom/localhost.json`:
 Start the Prometheues node_exporter locally.
 
 Now startup Kapacitor and it will discover the localhost:9100 node_exporter target and begin scrapping it for metrics.
-For more details on the scraping and discovery systems see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/pull_metrics/scraping-and-discovery/).
+For more details on the scraping and discovery systems see the full documentation [here](/kapacitor/v1.3/pull_metrics/scraping-and-discovery/).
 
 The second major feature with this release, are changes to the alert topic system.
 The previous release introduce this new system as a technical preview, with this release the alerting service has been simplified.
@@ -108,7 +108,7 @@ For example to define the above aggregate handler on the system topic use this c
 kapacitor define-handler system aggregate_by_1m.yaml
 ```
 
-For more details on the alerting system see the full documentation [here](https://docs.influxdata.com/kapacitor/v1.3/alerts).
+For more details on the alerting system see the full documentation [here](/kapacitor/v1.3/alerts).
 
 
 ### Features
@@ -211,7 +211,7 @@ stream
 ```
 
 The API exposes endpoints to query the state of each alert and endpoints for configuring alert handlers.
-See the [API docs](https://docs.influxdata.com/kapacitor/latest/api/api/) for more details.
+See the [API docs](/kapacitor/v1.3/api/api/) for more details.
 The kapacitor CLI has been updated with commands for defining alert handlers.
 
 This release introduces a new feature where you can window based off the number of points instead of their time.
@@ -239,7 +239,7 @@ As a result existing alert nodes will now remember the state of alerts after res
 
 >NOTE: The new alerting features are being released under technical preview.
 This means breaking changes may be made in later releases until the feature is considered complete.
-See the [API docs on technical preview](https://docs.influxdata.com/kapacitor/v1.2/api/api/#technical-preview) for specifics of how this effects the API.
+See the [API docs on technical preview](/kapacitor/v1.2/api/api/#technical-preview) for specifics of how this effects the API.
 
 ### Features
 
@@ -298,7 +298,7 @@ stream
 
 New API endpoints have been added to be able to configure InfluxDB clusters and alert handlers dynamically without needing to restart the Kapacitor daemon.
 Along with the ability to dynamically configure a service, API endpoints have been added to test the configurable services.
-See the [API docs](https://docs.influxdata.com/kapacitor/latest/api/api/) for more details.
+See the [API docs](/kapacitor/v1.3/api/api/) for more details.
 
 >NOTE: The `connect_errors` stat from the query node was removed since the client changed, all errors are now counted in the `query_errors` stat.
 

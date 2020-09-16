@@ -14,11 +14,11 @@ This guide describes how to manually rebalance an InfluxDB Enterprise cluster.
 Rebalancing a cluster involves two primary goals:
 
 * Evenly distribute
-[shards](/influxdb/v1.3/concepts/glossary/#shard) across all data nodes in the
+[shards](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard) across all data nodes in the
 cluster
 * Ensure that every
 shard is on N number of nodes, where N is determined by the retention policy's
-[replication factor](/influxdb/v1.3/concepts/glossary/#replication-factor)
+[replication factor](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#replication-factor)
 
 Rebalancing a cluster is essential for cluster health.
 Perform a rebalance if you add a new data node to your cluster.
@@ -45,7 +45,7 @@ Performing a rebalance while writing historical data can lead to data loss.
 
 For demonstration purposes, the next steps assume that you added a third
 data node to a previously two-data-node cluster that has a
-[replication factor](/influxdb/v1.3/concepts/glossary/#replication-factor) of
+[replication factor](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#replication-factor) of
 two.
 This rebalance procedure is applicable for different cluster sizes and
 replication factors, but some of the specific, user-provided values will depend
@@ -243,7 +243,7 @@ size on the original data nodes and increased the cluster's write throughput.
 
 For demonstration purposes, the next steps assume that you added a third
 data node to a previously two-data-node cluster that has a
-[replication factor](/influxdb/v1.3/concepts/glossary/#replication-factor) of
+[replication factor](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#replication-factor) of
 two.
 This rebalance procedure is applicable for different cluster sizes and
 replication factors, but some of the specific, user-provided values will depend
@@ -256,14 +256,14 @@ safely copy shards from one of the two original data nodes to the new data node.
 
 ### Step 1: Update the Retention Policy
 
-[Update](/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
+[Update](https://docs.influxdata.com/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy)
 every retention policy to have a replication factor of three.
 This step ensures that the system automatically distributes all newly-created
 shards across the three data nodes in the cluster.
 
 The following query increases the replication factor to three.
 Run the query on any data node for each retention policy and database.
-Here, we use InfluxDB's [CLI](/influxdb/v1.3/tools/shell/) to execute the query:
+Here, we use InfluxDB's [CLI](https://docs.influxdata.com/influxdb/v1.3/tools/shell/) to execute the query:
 
 ```
 > ALTER RETENTION POLICY "<retention_policy_name>" ON "<database_name>" REPLICATION 3
@@ -272,7 +272,7 @@ Here, we use InfluxDB's [CLI](/influxdb/v1.3/tools/shell/) to execute the query:
 
 A successful `ALTER RETENTION POLICY` query returns no results.
 Use the
-[`SHOW RETENTION POLICIES` query](/influxdb/v1.3/query_language/schema_exploration/#show-retention-policies)
+[`SHOW RETENTION POLICIES` query](https://docs.influxdata.com/influxdb/v1.3/query_language/schema_exploration/#show-retention-policies)
 to verify the new replication factor.
 
 Example:

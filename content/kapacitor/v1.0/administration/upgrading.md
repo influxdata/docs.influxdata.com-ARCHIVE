@@ -17,7 +17,7 @@ to upgrade from a v0.12 instance.  These changes are:
 * [Changes to CLI](#changes-to-cli)
 
 > NOTE: You must now use the correct `.`, `|` and `@` operators for property, chain and UDF methods respectively.
-See [this](https://docs.influxdata.com/kapacitor/v0.12/introduction/upgrading/#tickscript-chain-operator) for more details.
+See [this](/kapacitor/v0.12/introduction/upgrading/#tickscript-chain-operator) for more details.
 
 ## Changes to Storage
 

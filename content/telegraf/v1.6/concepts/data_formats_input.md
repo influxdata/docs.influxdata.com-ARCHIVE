@@ -13,13 +13,13 @@ Telegraf is able to parse the following input data formats into metrics:
 1. [InfluxDB Line Protocol](#influxdb-line-protocol)
 2. [JSON](#json-data-format)
 3. [Graphite](#graphite-data-format)
-4. [Value](value), ie: 45 or "booyah"
+4. [Value](#value), ie: 45 or "booyah"
 5. [Nagios](#nagios-data-format)
 6. [Collectd](#collectd-data-format)
 7. [Dropwizard](#dropwizard-data-format)
 
 Telegraf metrics, like InfluxDB
-[points](/influxdb/latest/write_protocols/line_protocol_tutorial/),
+[points](/{{< latest "influxdb" >}}/write_protocols/line_protocol_tutorial/),
 are a combination of four basic parts:
 
 1. Measurement name
@@ -27,7 +27,7 @@ are a combination of four basic parts:
 3. Fields
 4. Timestamp
 
-These four parts are easily defined when using the [InfluxDB Line Protocol](/influxdb/latest/write_protocols/line_protocol_reference/) as a data format.
+These four parts are easily defined when using the [InfluxDB Line Protocol](/{{< latest "influxdb" >}}/write_protocols/line_protocol_reference/) as a data format.
 Other data formats may require more advanced configuration to create usable Telegraf metrics.
 
 Plugins such as the Exec (`exec`) input plugin and the Kafka Consumer (`kafka_consumer`) input plugin parse textual data. Up until now,
@@ -489,7 +489,7 @@ You can also change the path to the `typesdb` or add additional `typesdb` using
 
 # Dropwizard data format
 
-The Dropwizard format can parse the JSON representation of a single Dropwizard metric registry. By default, tags are parsed from metric names as if they were actual influxdb line protocol keys (`measurement<,tag_set>`) which can be overridden by defining custom [measurement & tag templates](./DATA_FORMATS_INPUT.md#measurement--tag-templates). All field value types are supported, `string`, `number` and `boolean`.
+The Dropwizard format can parse the JSON representation of a single Dropwizard metric registry. By default, tags are parsed from metric names as if they were actual influxdb line protocol keys (`measurement<,tag_set>`) which can be overridden by defining custom [measurement & tag templates](#measurement--tag-templates). All field value types are supported, `string`, `number` and `boolean`.
 
 A typical JSON of a Dropwizard metric registry:
 

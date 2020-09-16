@@ -28,7 +28,7 @@ Performing a rebalance is useful if you've recently adjusted a retention policy'
 Rebalancing a cluster:
 
 * Allocates existing
-[shards](https://docs.influxdata.com/influxdb/v1.1/concepts/glossary/#shard)
+[shards](/influxdb/v1.1/concepts/glossary/#shard)
 such that each data node has roughly the same number of shards.
 * Ensures that all existing data adhere to the
 relevant replication factor.

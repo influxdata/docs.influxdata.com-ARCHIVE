@@ -91,7 +91,7 @@ You can always return to the `Servers` page by clicking on the gear in the top r
 ## Create your first Visualization
 It's time to graph your data.
 In the next steps, we'll create an example graph that shows the average idle CPU percentage grouped by CPU tag and by one minute time intervals.
-If you'd like to follow along, see [Getting Started with Telegraf](https://docs.influxdata.com/telegraf/v0.12/introduction/getting-started-telegraf/) to get the data we use in this section.
+If you'd like to follow along, see [Getting Started with Telegraf](/telegraf/v0.12/introduction/getting-started-telegraf/) to get the data we use in this section.
 
 1.
 Click `+` and name your graph in the `New Graph` window.
@@ -101,7 +101,7 @@ We'll call our graph `Average idle CPU usage`.
 Click the `Save` button.
 
 3.
-Choose the server, [database](/influxdb/v1.5/concepts/glossary/#database), and [retention policy](/influxdb/v1.5/concepts/glossary/#retention-policy-rp) that you want to work with:
+Choose the server, [database](/{{< latest "influxdb" >}}/concepts/glossary/#database), and [retention policy](/{{< latest "influxdb" >}}/concepts/glossary/#retention-policy-rp) that you want to work with:
 <br>
 <br>
 ![Server Tray](/img/chronograf/v0.11/server-tray.png)

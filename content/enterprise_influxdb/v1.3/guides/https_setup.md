@@ -167,7 +167,7 @@ enterprise-meta-03:8091   1.x.y-c1.x.z
 ```
 
 
-Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.3/tools/shell/):
+Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](https://docs.influxdata.com/influxdb/v1.3/tools/shell/):
 ```
 influx -ssl -host <domain_name>.com
 ```
@@ -310,7 +310,7 @@ enterprise-meta-03:8091   1.x.y-c1.x.z
 ```
 
 
-Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](/influxdb/v1.3/tools/shell/):
+Next, verify that HTTPS is working by connecting to InfluxDB Enterprise with the [CLI tool](https://docs.influxdata.com/influxdb/v1.3/tools/shell/):
 ```
 influx -ssl -unsafeSsl -host <domain_name>.com
 ```

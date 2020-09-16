@@ -334,7 +334,7 @@ This section controls InfluxDB's [system self-monitoring](https://github.com/inf
 By default, InfluxDB writes the data to the `_internal` database.
 If that database does not exist, InfluxDB creates it automatically.
 The `DEFAULT` retention policy on the `_internal` database is seven days.
-If you want to use a retention policy other than the seven-day retention policy, you must [create](/influxdb/v0.10/administration/administration/#retention-policy-management) it.
+If you want to use a retention policy other than the seven-day retention policy, you must [create](/influxdb/v0.10/administration/#retention-policy-management) it.
 
 ### store-enabled = true
 

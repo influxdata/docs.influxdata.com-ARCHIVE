@@ -32,7 +32,7 @@ InfluxDB can handle tens of thousands or even hundreds of thousands of different
 
 In the 0.9.0 release there will be support for tags.
 There will be a migration tool to move from the above schema type, to a tagged representation.
-Read more about the [InfluxDB 0.9.0 release here](/blog/2014/12/08/clustering_tags_and_enhancements_in_0_9_0.html).
+Read more about the [InfluxDB 0.9.0 release here](https://www.influxdata.com/blog/clustering-tags-and-enhancements-to-come-in-0-9-0/).
 
 The best way to structure things is to have many series and a single column named `value` or something consistent across all series.
 For the names, encode like above with a consistent separator like `.` or `_`.

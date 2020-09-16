@@ -1,7 +1,5 @@
 ---
 title: Continuous Queries
-aliases:
-  - /docs/v0.9/concepts/continuous_queries.html
 menu:
   influxdb_010:
     weight: 40

@@ -1,73 +1,50 @@
 {{ partial "header.html" . }}
 <div class="homepage">
-
+  {{ partial "archive-notice.html" }}
 	<div class="cards-oss">
-
-	<div class="homepage--card card-platform">
-		<div class="homepage--card-container">
-			<h1 class="homepage--card-title">InfluxData Platform</h1>
-			<p class="homepage--card-description">The leading time series platform built for metrics and events.</p>
-			<a class="btn" href="/platform/introduction">Start Here</a>
-		</div>
-		<div class="homepage--card-mask"></div>
-	</div>
 
 	{{ range .Site.Data.home_cards.cards }}
 		{{ if eq .category "oss" }}
 		<div class="homepage--card card-{{ .id }}">
 			<div class="homepage--card-container">
-				{{ if eq .id "influxdb2" }}
-					<a class="homepage--card-title" href="https://v2.docs.influxdata.com/" target="_blank">{{ .title }}</a>
-				{{ else }}
-					<a class="homepage--card-title" href="/{{ .id }}/{{ index $.Site.Data.default_versions (print .id "_semver") }}/">{{ .title }}</a>
-				{{ end }}
-				<p class="homepage--card-description">
-					{{ .description }}
-
-					{{ $defaultVersion := (print .id "_semver") }}
-					{{ $component := .id }}
-
-					{{ range .links }}
-						{{ if eq .type "relative" }}
-							<br/><a class="homepage--card-link" href="/{{ $component }}/{{ index $.Site.Data.default_versions $defaultVersion }}{{ .href }}">{{ .text }}</a>
-						{{ else }}
-							<br/><a class="homepage--card-link" href="{{ .href }}" target="_blank">{{ .text }}</a>
-						{{ end }}
-					{{ end }}
-				</p>
+        <a class="homepage--card-title" href="/{{ .id }}/">{{ .title }}</a>
+				<div class="homepage--card-description">
+          <p>{{ .description }}</p>
+          <ul>
+            {{ $project := .id }}
+            {{ range sort (index $.Site.Data.versions .id) "value" "desc" }}
+  						<li><a href="/{{ $project }}/{{ . }}">{{ . }}</a></li>
+  					{{ end }}
+          </ul>
+        </div>
 			</div>
-			<div class="homepage--card-mask"></div>
 		</div>
 		{{ end }}
 	{{ end }}
 
-</div>
+  </div>
 
-<div class="cards-enterprise">
-{{ range .Site.Data.home_cards.cards }}
-	{{ if eq .category "enterprise" }}
-	<div class="homepage--card card-{{ .id }}">
-		<div class="homepage--card-container">
-			<a class="homepage--card-title" href="/{{ .id }}/{{ index $.Site.Data.default_versions (print .id "_semver") }}/">{{ .title }}</a>
-			<p class="homepage--card-description">
-				{{ .description }}
+  <div class="cards-enterprise">
+  {{ range .Site.Data.home_cards.cards }}
+  	{{ if eq .category "enterprise" }}
+    <div class="homepage--card card-{{ .id }}">
+      <div class="homepage--card-container">
+        <a class="homepage--card-title" href="/{{ .id }}/">{{ .title }}</a>
+        <div class="homepage--card-description">
+          <p>{{ .description }}</p>
+          <ul>
+            {{ $project := .id }}
+            {{ range sort (index $.Site.Data.versions .id) "value" "desc" }}
+              <li><a href="/{{ $project }}/{{ . }}">{{ . }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  	{{ end }}
+  {{ end }}
+  </div>
 
-				{{ $defaultVersion := (print .id "_semver") }}
-				{{ $component := .id }}
-
-				{{ range .links }}
-					{{ if eq .type "relative" }}
-						<br/><a class="homepage--card-link" href="/{{ $component }}/{{ index $.Site.Data.default_versions $defaultVersion }}{{ .href }}">{{ .text }}</a>
-					{{ else }}
-						<br/><a class="homepage--card-link" href="{{ .href }}" target="_blank">{{ .text }}</a>
-					{{ end }}
-				{{ end }}
-			</p>
-		</div>
-		<div class="homepage--card-mask"></div>
-	</div>
-	{{ end }}
-{{ end }}
 </div>
 
 {{ partial "footer.html" . }}

@@ -8,7 +8,7 @@ menu:
 ---
 
 
-Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
+Chronograf provides a user interface for [Kapacitor](/{{< latest "kapacitor" >}}/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
 Chronograf alert rules correspond to Kapacitor tasks that are designed specifically to
 trigger alerts whenever data stream values rise above or fall below
 designated thresholds.
@@ -27,11 +27,11 @@ By the end of this guide, you'll have a Chronograf alert rule that sends an aler
 You've already downloaded and installed each component of the TICK stack (Telegraf, InfluxDB, Chronograf, and Kapacitor).
 To follow along, the Telegraf instance must be configured to collect data with the InfluxDB [system statistics](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) input plugin and write data to your InfluxDB instance.
 
-You've already [configured your Kapacitor instance in Chronograf](/chronograf/latest/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
-The [Getting Started](/chronograf/latest/introduction/getting-started/) guide offers step-by-step instructions for each of those requirements.
+You've already [configured your Kapacitor instance in Chronograf](/chronograf/v1.4/introduction/getting-started/#4-connect-chronograf-to-kapacitor).
+The [Getting Started](/chronograf/v1.4/introduction/getting-started/) guide offers step-by-step instructions for each of those requirements.
 
-You have a working Slack instance and have configured it as an [event handler](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) in Chronograf.
-See the [Configure Kapacitor Event Handlers](/chronograf/latest/guides/configure-kapacitor-event-handlers/) guide for detailed configuration instructions.
+You have a working Slack instance and have configured it as an [event handler](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf) in Chronograf.
+See the [Configure Kapacitor Event Handlers](/chronograf/v1.4/guides/configure-kapacitor-event-handlers/) guide for detailed configuration instructions.
 
 ## Configure a Chronograf alert rule
 
@@ -57,9 +57,9 @@ For this example, the rule is named `Idle CPU Usage`:
 Choose the data that you want the alert rule to work with.
 Navigate through the `Databases`, `Measurements`, `Fields`, and `Tags` tabs to select the relevant data.
 
-In this example, we select the `telegraf` [database](/influxdb/latest/concepts/glossary/#database) and the `autogen` [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/influxdb/latest/concepts/glossary/#measurement), the `usage_idle` [field](/influxdb/latest/concepts/glossary/#field), and no [tags](/influxdb/latest/concepts/glossary/#tag).
-The result is the InfluxQL [query](/influxdb/latest/concepts/glossary/#query) in the image below.
-Notice that Chronograf automatically sets a time range in the [`WHERE` clause](/influxdb/latest/query_language/data_exploration/#the-where-clause).
+In this example, we select the `telegraf` [database](/{{< latest "influxdb" >}}/concepts/glossary/#database) and the `autogen` [retention policy](/{{< latest "influxdb" >}}/concepts/glossary/#retention-policy-rp), the `cpu` [measurement](/{{< latest "influxdb" >}}/concepts/glossary/#measurement), the `usage_idle` [field](/{{< latest "influxdb" >}}/concepts/glossary/#field), and no [tags](/{{< latest "influxdb" >}}/concepts/glossary/#tag).
+The result is the InfluxQL [query](/{{< latest "influxdb" >}}/concepts/glossary/#query) in the image below.
+Notice that Chronograf automatically sets a time range in the [`WHERE` clause](/{{< latest "influxdb" >}}/query_language/data_exploration/#the-where-clause).
 Don't modify that for now; the time range is discussed in step four.
 
 ![Select your data](/img/chronograf/v1.4/g-kap-ts.png)
@@ -100,18 +100,18 @@ In practice, you'd set the threshold number to better match the patterns in your
 ### Step 5: Select the event handler and configure the alert message
 
 The `Alert Message` section on the Rule Configuration page determines where the system sends the alert (the event handler) and the text that accompanies the alert (the alert message).
-Chronograf supports several [event handlers](/chronograf/latest/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
+Chronograf supports several [event handlers](/chronograf/v1.4/troubleshooting/frequently-asked-questions/#what-kapacitor-event-handlers-are-supported-in-chronograf).
 Here, we choose to send alerts to Slack, specifically to the existing `#chronocats` channel.
 
 The alert message is the text that accompanies an alert.
 In this example, the alert message is `Your idle CPU usage is {{.Level}} at {{ index .Fields "value" }}. 😸`.
 `{{.Level}}` is a template that evaluates to `CRITICAL` when the `usage_idle` data initially dip below 80% and `OK` when the `usage_idle` data first return to 80% or above.
-The `{{ index .Fields "value" }}` template prints the relevant [field value](/influxdb/latest/concepts/glossary/#field-value) that triggered the alert.
+The `{{ index .Fields "value" }}` template prints the relevant [field value](/{{< latest "influxdb" >}}/concepts/glossary/#field-value) that triggered the alert.
 
 ![Specify event handler and alert message](/img/chronograf/v1.4/g-kap-alertmessage.png)
 
 > **Note:**
-There's no need to include a Slack channel in the `Alert Message` section if you specified a default channel in the [initial Slack configuration](/chronograf/latest/guides/configure-kapacitor-event-handlers/).
+There's no need to include a Slack channel in the `Alert Message` section if you specified a default channel in the [initial Slack configuration](/chronograf/v1.4/guides/configure-kapacitor-event-handlers/).
 If you did not include a default channel in the initial configuration or if you'd like to send alerts to a non-default channel, specify an alternative Slack channel in this section.
 
 ### Step 6: Save the alert rule
@@ -146,7 +146,7 @@ In this example, it's the `#chronocats` channel.
 Assuming the first step was successful, `#chronograf` should reveal at least two alert messages:
 
 * The first alert message indicates that your idle CPU usage was `CRITICAL`, that is, it dipped below `80%`.
-The specific [field value](/influxdb/latest/concepts/glossary/#field-value) that triggered the alert is `69.59999999998138`.
+The specific [field value](/{{< latest "influxdb" >}}/concepts/glossary/#field-value) that triggered the alert is `69.59999999998138`.
 * The second alert message indicates that your idle CPU usage returned to an `OK` level of `80%` or above.
 The specific field value that triggered the alert is `99.0981963931105`.
 

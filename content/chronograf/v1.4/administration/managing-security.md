@@ -149,7 +149,7 @@ The following steps will guide you in configuring Chronograf to support GitHub O
 
     * [`--github-client-id=`](/chronograf/v1.4/administration/configuration/#github-client-id)
     * [`--github-client-secret=`](/chronograf/v1.4/administration/configuration/#github-client-secret)
-    * [`--token_secret=`](/chronograf/v1.4/administration/config-options.md#--token-secret---t)
+    * [`--token_secret=`](/chronograf/v1.4/administration/config-options#--token-secret---t)
 
 #### Optional GitHub organizations
 
@@ -183,7 +183,7 @@ Optionally, you can restrict access to specific domains using the following envi
 
 * `GOOGLE_DOMAINS` (Google domains)
 
-For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.4/config-options#google-oauth-2-0-authentication-options).
+For details on Chronograf command line options and environment variables, see [Google OAuth 2.0 authentication options](/chronograf/v1.4/administration/config-options#google-oauth-2-0-authentication-options).
 
 
 #### Creating Google OAuth 2.0 applications
@@ -221,7 +221,7 @@ The following steps will guide you in configuring Google OAuth 2.0 authorization
     * [`--google-client-id=`](/chronograf/v1.4/administration/configuration/#google-client-id)
     * [`--google-client-secret=`](/chronograf/v1.4/administration/configuration/#google-client-secret)
     * [`--public-url=`](/chronograf/v1.4/administration/configuration/#public-url)
-    * [`--token_secret=`](chronograf/v1.4/administration/config-options.md#--token-secret---t)
+    * [`--token_secret=`](/chronograf/v1.4/administration/config-options#-token-secret-t)
 
 #### Optional Google domains
 
@@ -247,7 +247,7 @@ The following steps will guide you in configuring Auth0 OAuth 2.0 authorization 
     * **Regular Web Applications** as the type of application.
     * **Token Endpoint Authentication** set to **None**.
     * **Allowed Callback URLs**: `https://www.example.com/oauth/auth0/callback` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-options/#general-authentication-options) of your Chronograf instance)
-    * **Allowed Logout URLs**: `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-option/#general-authentication-options) of your Chronograf instance)
+    * **Allowed Logout URLs**: `https://www.example.com` (substituting `example.com` with the [`PUBLIC_URL`](/chronograf/v1.4/administration/config-options/#general-authentication-options) of your Chronograf instance)
     * ["OIDC Conformant"](https://auth0.com/docs/api-auth/intro#how-to-use-the-new-flows).
 
 2. Set the Chronograf environment variables (or corresponding command line options) based on your Auth0 client credentials:

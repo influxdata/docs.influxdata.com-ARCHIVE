@@ -195,7 +195,7 @@ The added meta node has the hostname `cluster-meta-node-03` and runs on port `80
 
 #### backup
 
-Creates a backup of a cluster's [metastore](/influxdb/v1.3/concepts/glossary/#metastore) and [shard](/influxdb/v1.3/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
+Creates a backup of a cluster's [metastore](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#metastore) and [shard](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
 Backups are incremental by default; they create a copy of the metastore and shard data that have changed since the previous incremental backup.
 If there are no existing incremental backups, the system automatically performs a complete backup.
 ```
@@ -213,7 +213,7 @@ Options:
 &emsp;&emsp;&emsp;Perform a [full](/enterprise_influxdb/v1.3/guides/backup-and-restore/#backup) backup.
 
 `-rp <retention-policy>`:
-&emsp;&emsp;&emsp;The name of the single [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) to back up (requires the `-db` flag).
+&emsp;&emsp;&emsp;The name of the single [retention policy](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#retention-policy-rp) to back up (requires the `-db` flag).
 
 `-shard <shard-id>`:
 &emsp;&emsp;&emsp;The ID of the single shard to back up.
@@ -273,7 +273,7 @@ The command performs a full backup of the cluster and stores the backup in the e
 
 #### copy-shard
 
-Copies a [shard](/influxdb/v1.3/concepts/glossary/#shard) from a source data node to a destination data node.
+Copies a [shard](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard) from a source data node to a destination data node.
 ```
 copy-shard <data-node-source-TCP-address> <data-node-destination-TCP-address> <shard-id>
 ```
@@ -294,7 +294,7 @@ The command copies the shard with the id `22` from the data node running at `clu
 
 #### copy-shard-status
 
-Shows all in-progress [copy shard](#copy-shard) operations, including the shard's source node, destination node, database, [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp), shard id, total size, current size, and the operation's start time.
+Shows all in-progress [copy shard](#copy-shard) operations, including the shard's source node, destination node, database, [retention policy](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#retention-policy-rp), shard id, total size, current size, and the operation's start time.
 ```
 copy-shard-status
 ```
@@ -658,16 +658,16 @@ A restore command with the `-full` flag requires the `path-to-backup-manifest-fi
 &emsp;&emsp;&emsp;The name of the new database to restore to (must specify with `-db`).
 
 `-newrf <int>`
-&emsp;&emsp;&emsp;The new [replication factor](/influxdb/v1.3/concepts/glossary/#replication-factor) to restore to (this is capped to the number of data nodes in the cluster).
+&emsp;&emsp;&emsp;The new [replication factor](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#replication-factor) to restore to (this is capped to the number of data nodes in the cluster).
 
 `-newrp <string>`
-&emsp;&emsp;&emsp;The name of the new [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp) to restore to (must specify with `-rp`).
+&emsp;&emsp;&emsp;The name of the new [retention policy](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#retention-policy-rp) to restore to (must specify with `-rp`).
 
 `-rp <string>`
 &emsp;&emsp;&emsp;The name of the single retention policy to restore.
 
 `-shard <unit>`
-&emsp;&emsp;&emsp;The [shard](/influxdb/v1.3/concepts/glossary/#shard) ID to restore.
+&emsp;&emsp;&emsp;The [shard](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard) ID to restore.
 
 Resources: [Backup and Restore](/enterprise_influxdb/v1.3/guides/backup-and-restore/#restore)
 
@@ -737,7 +737,7 @@ Every node is using InfluxDB Enterprise version `1.3.x-c1.3.x`.
 
 #### show-shards
 
-Shows the cluster's existing [shards](/influxdb/v1.3/concepts/glossary/#shard), including the shard's id, database, [retention policy](/influxdb/v1.3/concepts/glossary/#retention-policy-rp), desired number of copies, [shard group](/influxdb/v1.3/concepts/glossary/#shard-group), start time, end time, expiry time and [data node](/enterprise_influxdb/v1.3/concepts/glossary/#data-node) owners.
+Shows the cluster's existing [shards](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard), including the shard's id, database, [retention policy](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#retention-policy-rp), desired number of copies, [shard group](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard-group), start time, end time, expiry time and [data node](/enterprise_influxdb/v1.3/concepts/glossary/#data-node) owners.
 ```
 show-shards
 ```
@@ -823,7 +823,7 @@ The command returns an error because the command doesn't use JWT authentication.
 
 #### truncate-shards
 
-Truncates hot [shards](/influxdb/v1.3/concepts/glossary/#shard), that is, shards that cover the time range that includes the current time ([`now()`](/influxdb/v1.3/concepts/glossary/#now)).
+Truncates hot [shards](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard), that is, shards that cover the time range that includes the current time ([`now()`](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#now)).
 `truncate-shards` creates a new shard and the system writes all new points to that shard.
 
 ```
@@ -833,9 +833,9 @@ truncate-shards [-delay <duration>]
 Options:
 
 `-delay <duration>`
-&emsp;&emsp;&emsp;Determines when to truncate shards after [`now()`](/influxdb/v1.3/concepts/glossary/#now).
+&emsp;&emsp;&emsp;Determines when to truncate shards after [`now()`](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#now).
 By default, the tool sets the delay to one minute.
-The `duration` is an integer followed by a [duration unit](/influxdb/v1.3/query_language/spec/#durations).
+The `duration` is an integer followed by a [duration unit](https://docs.influxdata.com/influxdb/v1.3/query_language/spec/#durations).
 
 Resources: [Cluster Rebalance](/enterprise_influxdb/v1.3/guides/rebalance/)
 
@@ -883,4 +883,4 @@ After running `influxd-ctl truncate-shards` and waiting three minutes, the outpu
 The `influx` tool, also known as the Command Line Interface (CLI), is available on all [data nodes](/enterprise_influxdb/v1.3/concepts/glossary/#data-node).
 Use `influx` to write data to your cluster, query data interactively, and view query output in different formats.
 
-The complete description of the `influx` tool is available in the [InfluxDB OSS documentation](/influxdb/v1.3/tools/shell/).
+The complete description of the `influx` tool is available in the [InfluxDB OSS documentation](https://docs.influxdata.com/influxdb/v1.3/tools/shell/).

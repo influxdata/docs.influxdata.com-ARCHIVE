@@ -1,0 +1,6 @@
+{{ $product := .Get 0 }}
+<ul>
+  {{ range sort (index $.Site.Data.versions $product) "value" "desc" }}
+    <li><a href="/{{ $product }}/{{ . }}">{{ . }}</a></li>
+  {{ end }}
+</ul>

@@ -18,18 +18,18 @@ The primary use cases for backup/restore are:
 
 Currently, InfluxDB Enterprise supports backups and restores for all data in the
 cluster; a single database; a single database and retention policy; and a
-single [shard](/influxdb/v1.3/concepts/glossary/#shard).
+single [shard](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard).
 
-> **Note:** Backups are not interchangeable between [ InfluxDB OSS](/influxdb/v1.3/) and InfluxDB Enterprise.
+> **Note:** Backups are not interchangeable between [ InfluxDB OSS](https://docs.influxdata.com/influxdb/v1.3/) and InfluxDB Enterprise.
 You cannot restore an OSS backup to an InfluxDB Enterprise data node, nor can you restore
 an InfluxDB Enterprise backup to an InfluxDB OSS instance.
 >
 If you are working with InfluxDB OSS, please see the [Backup
-and restore documentation](/influxdb/v1.3/administration/backup_and_restore/) in the InfluxDB OSS documentation.
+and restore documentation](https://docs.influxdata.com/influxdb/v1.3/administration/backup_and_restore/) in the InfluxDB OSS documentation.
 
 ## Backup
 
-A backup creates a copy of the [metastore](/influxdb/v1.3/concepts/glossary/#metastore) and [shard](/influxdb/v1.3/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
+A backup creates a copy of the [metastore](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#metastore) and [shard](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#shard) data at that point in time and stores the copy in the specified directory.
 All backups also include a manifest, a JSON file describing what was collected during the backup.
 The filenames reflect the UTC timestamp of when the backup was created, for example:
 
@@ -149,19 +149,19 @@ $ ls ./telegrafbackup
 ## Restore
 
 Restore a backup to an existing cluster or a new cluster.
-By default, a restore writes to databases using the backed-up data's [replication factor](/influxdb/v1.3/concepts/glossary/#replication-factor).
+By default, a restore writes to databases using the backed-up data's [replication factor](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#replication-factor).
 An alternate replication factor can be specified with the `-newrf` flag when restoring a single database.
 Restore supports both `-full` backups and incremental backups; the syntax for
 a restore differs depending on the backup type.
 
 > #### Restores from an existing cluster to a new cluster
 Restores from an existing cluster to a new cluster restore the existing cluster's
-[users](/influxdb/v1.3/concepts/glossary/#user), roles,
-[databases](/influxdb/v1.3/concepts/glossary/#database), and
-[continuous queries](/influxdb/v1.3/concepts/glossary/#continuous-query-cq) to
+[users](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#user), roles,
+[databases](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#database), and
+[continuous queries](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#continuous-query-cq) to
 the new cluster.
 >
-They do not restore Kapacitor [subscriptions](/influxdb/v1.3/concepts/glossary/#subscription).
+They do not restore Kapacitor [subscriptions](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#subscription).
 In addition, restores to a new cluster drop any data in the new cluster's
 `_internal` database and begin writing to that database anew.
 The restore does not write the existing cluster's `_internal` database to
@@ -304,7 +304,7 @@ Copying data to <hostname>:8088... Copying data to <hostname>:8088... Done. Rest
 Restored from my-incremental-backup/ in 56.623615ms, transferred 588800 bytes
 ```
 
-Then, in the [`influx` client](/influxdb/v1.3/tools/shell/), use an [`INTO` query](/influxdb/v1.3/query_language/data_exploration/#relocate-data) to copy the data from the new database into the existing `telegraf` database:
+Then, in the [`influx` client](https://docs.influxdata.com/influxdb/v1.3/tools/shell/), use an [`INTO` query](https://docs.influxdata.com/influxdb/v1.3/query_language/data_exploration/#relocate-data) to copy the data from the new database into the existing `telegraf` database:
 
 ```
 $ influx

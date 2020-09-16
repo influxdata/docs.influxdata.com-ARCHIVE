@@ -7,7 +7,7 @@ menu:
     parent: Guides
 ---
 
-Chronograf provides a user interface for [Kapacitor](/kapacitor/latest/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
+Chronograf provides a user interface for [Kapacitor](/{{< latest "kapacitor" >}}/), InfluxData's processing framework for creating alerts, running ETL jobs, and detecting anomalies in your data.
 This guide offers insights into how Kapacitor interacts with Chronograf and introduces advanced Kapacitor usage within Chronograf.
 
 ### Content
@@ -18,9 +18,9 @@ This guide offers insights into how Kapacitor interacts with Chronograf and intr
 ## Alert History management
 
 Chronograf stores the information on the Alert History page as time series data in InfluxDB.
-It stores it in the `chronograf` database and in the `alerts` [measurement](/influxdb/latest/concepts/glossary/#measurement).
-By default, this data is subject to an infinite [retention policy](/influxdb/latest/concepts/glossary/#retention-policy-rp) (RP), that is, InfluxDB stores them forever.
-Users who expect to have a large number of alerts and users who do not want to store their alert history forever may want to shorten the [duration](/influxdb/latest/concepts/glossary/#duration) of that retention policy.
+It stores it in the `chronograf` database and in the `alerts` [measurement](/{{< latest "influxdb" >}}/concepts/glossary/#measurement).
+By default, this data is subject to an infinite [retention policy](/{{< latest "influxdb" >}}/concepts/glossary/#retention-policy-rp) (RP), that is, InfluxDB stores them forever.
+Users who expect to have a large number of alerts and users who do not want to store their alert history forever may want to shorten the [duration](/{{< latest "influxdb" >}}/concepts/glossary/#duration) of that retention policy.
 
 ### Modifying the retention policy in Chronograf
 
@@ -34,7 +34,7 @@ In the Databases tab:
 #### Step 2: Enter a different duration
 
 The minimum allowable duration is one hour (`1h`) and the maximum is infinite (`INF`).
-See the InfluxDB documentation for the list of [acceptable duration units](/influxdb/latest/query_language/spec/#duration-units).
+See the InfluxDB documentation for the list of [acceptable duration units](/{{< latest "influxdb" >}}/query_language/spec/#duration-units).
 
 #### Step 3: Click the green check mark to save your changes
 
@@ -54,7 +54,7 @@ The fourth alert, which occurred on the same day at 16:58:50, is outside the pre
 
 Chronograf creates Kapacitor tasks using the information that you provide on the Rule Configuration page.
 It uses that information to communicate with Kapacitor and populate Chronograf alert pages.
-Pre-existing tasks, or [TICKscripts](/kapacitor/latest/tick/), that you created and enabled on your Kapacitor instance without using Chronograf, have limited functionality in the user interface.
+Pre-existing tasks, or [TICKscripts](/{{< latest "kapacitor" >}}/tick/), that you created and enabled on your Kapacitor instance without using Chronograf, have limited functionality in the user interface.
 
 In Chronograf, you can:
 

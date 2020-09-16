@@ -285,7 +285,7 @@ Related entries: [tag](/influxdb/v1.0/concepts/glossary/#tag), [tag key](/influx
 The date and time associated with a point.
 All time in InfluxDB is UTC.
 
-For how to specify time when writing data, see [Write Syntax](/influxdb/v1.0/write_protocols/write_syntax/).
+For how to specify time when writing data, see [Write Syntax](/influxdb/v1.0/write_protocols/line_protocol_reference/).
 For how to specify time when querying data, see [Data Exploration](/influxdb/v1.0/query_language/data_exploration/#time-syntax-in-queries).
 
 Related entries: [point](/influxdb/v1.0/concepts/glossary/#point)

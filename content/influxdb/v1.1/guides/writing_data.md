@@ -7,7 +7,7 @@ menu:
     parent: guides
 ---
 
-There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v1.1/tools/shell/), [client libraries](/influxdb/v1.1/clients/api/) and plugins for common data formats such as [Graphite](/influxdb/v1.1/write_protocols/graphite/).
+There are many ways to write data into InfluxDB including the [command line interface](/influxdb/v1.1/tools/shell/), [client libraries](/influxdb/v1.1/tools/api_client_libraries/) and plugins for common data formats such as **Graphite**.
 Here we'll show you how to create a database and write data to it using the built-in HTTP API.
 
 ## Creating a database using the HTTP API
@@ -62,7 +62,7 @@ cpu_load_short,direction=in,host=server01,region=us-west value=2.0 1422568543702
 ### Writing points from a file
 ---
 Write points from a file by passing `@filename` to `curl`.
-The data in the file should follow InfluxDB's [line protocol syntax](/influxdb/v1.1/write_protocols/write_syntax/).
+The data in the file should follow InfluxDB's [line protocol syntax](/influxdb/v1.1/write_protocols/line_protocol_reference/).
 
 Example of a properly-formatted file (`cpu_data.txt`):  
 <br>

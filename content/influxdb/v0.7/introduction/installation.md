@@ -61,4 +61,4 @@ Then start the daemon by running:
 sudo /etc/init.d/influxdb start
 ```
 
-<a href="getting_started.html"><font size="6"><b>Now get started!</b></font></a>
+<a href="/influxdb/v0.7/introduction/getting_started/"><font size="6"><b>Now get started!</b></font></a>

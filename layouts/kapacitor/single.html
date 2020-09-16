@@ -8,13 +8,12 @@
 		</div>
 	</section>
 	{{ end }}
+  {{ partial "archive-notice.html" }}
 	<section class="article-section">
 		<div class="article-content">
-			{{ partial "kapacitor/version.html" . }}
 			{{ .Content }}
 		</div>
 	</section>
-	{{ partial "kapacitor/contribute.html" . }}
 </article>
 {{ partial "footer.html" . }}
-{{ partial "chronograf-url-settings.html" . }}
+

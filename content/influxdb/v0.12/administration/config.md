@@ -64,7 +64,7 @@ All configuration options listed below are set to their default value.
 
 ### reporting-disabled = false
 
-InfluxData, the company, relies on reported data from running nodes primarily to track the adoption rates of different InfluxDB versions. This data helps InfluxData support the continuing development of InfluxDB. 
+InfluxData, the company, relies on reported data from running nodes primarily to track the adoption rates of different InfluxDB versions. This data helps InfluxData support the continuing development of InfluxDB.
 
 The `reporting-disabled` option toggles the reporting of data every 24 hours to `usage.influxdata.com`. Each report includes a randomly-generated identifier, OS, architecture, InfluxDB version, and the number of [databases](/influxdb/v0.12/concepts/glossary/#database), [measurements](/influxdb/v0.12/concepts/glossary/#measurement), and unique [series](/influxdb/v0.12/concepts/glossary/#series). Setting this option to `true` will disable reporting.
 
@@ -143,7 +143,7 @@ Larger numbers may yield better compression but could incur a performance peanal
 ## [cluster]
 
 This section contains configuration options for query management.
-For more on managing queries, see [Query Management](/v0.12/troubleshooting/query_management/).
+For more on managing queries, see [Query Management](/influxdb/v0.12/troubleshooting/query_management/).
 
 ### max-concurrent-queries = 0
 

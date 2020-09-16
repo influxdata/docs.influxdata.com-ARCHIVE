@@ -19,7 +19,7 @@ menu:
 
 <br/>
 Kapacitor Enterprise configuration shares the same principles as those presented
-in the [configuring Kapacitor](/kapacitor/v1.4/administration/configuration/)
+in the [configuring Kapacitor](https://docs.influxdata.com/kapacitor/v1.4/administration/configuration/)
 documentation of the Kapacitor OSS version.
 In Kapacitor Enterprise, however, there are new grouping identifiers that pertain
 to features specific to enterprise deployments.

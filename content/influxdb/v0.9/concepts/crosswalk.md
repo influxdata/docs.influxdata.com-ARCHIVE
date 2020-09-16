@@ -102,7 +102,7 @@ Referencing the example above, in general:
 * InfluxDB fields (`#_foodships`) are like unindexed columns in an SQL database.
 * InfluxDB points (for example, `2015-04-16T12:00:00Z	5`) are similar to SQL rows.
 
-Building on this comparison of database terminology, InfluxDB's [continuous queries](/influxdb/v0.9/query_language/continuous_queries/) and [replication policies](/influxdb/v0.9/administration/administration/) are similar to stored procedures in an SQL database.
+Building on this comparison of database terminology, InfluxDB's [continuous queries](/influxdb/v0.9/query_language/continuous_queries/) and [replication policies](/influxdb/v0.9/administration/) are similar to stored procedures in an SQL database.
 They're specified once and then performed regularly and automatically.
 
 Of course, there are some major disparities between SQL databases and InfluxDB.

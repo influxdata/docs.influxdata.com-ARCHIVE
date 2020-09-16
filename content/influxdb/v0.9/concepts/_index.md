@@ -14,15 +14,11 @@ A useful overview of the InfluxDB time series data structure and how it affects 
 
 ## [Design Insights and Tradeoffs](/influxdb/v0.9/concepts/schema_and_data_layout/)
 
-A brief treatment of some of the performance tradeoffs made during the design phase of InfluxDB 
+A brief treatment of some of the performance tradeoffs made during the design phase of InfluxDB
 
 ## [HTTP API Endpoints](/influxdb/v0.9/concepts/api/)
 
 The list of InfluxDB's HTTP API endpoints and the parameters they accept.
-
-## [Clustering](/influxdb/v0.9/concepts/clustering/)
-
-An explanation of how an InfluxDB cluster works.
 
 ## [Storage Engine](/influxdb/v0.9/concepts/storage_engine/)
 

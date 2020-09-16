@@ -240,7 +240,7 @@ CREATE USER <username> WITH PASSWORD '<password>'
 > CREATE USER todd WITH PASSWORD 'influxdb41yf3'
 >
     ```
-    > **Note:** The password [string](/influxdb/v0.10/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes.
+    > **Note:** The password [string](/influxdb/v0.10/query_language/data_exploration/#string-literals-single-quoted) must be wrapped in single quotes.
 Do not include the single quotes when authenticating requests.
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 
@@ -321,7 +321,7 @@ SET PASSWORD FOR <username> = '<password>'
 >
     ```
 
-    > **Note:** The password [string](/influxdb/v0.10/query_language/query_syntax/#string-literals-single-quoted) must be wrapped in single quotes.
+    > **Note:** The password [string](/influxdb/v0.10/query_language/data_exploration/#string-literals-single-quoted) must be wrapped in single quotes.
 Do not include the single quotes when authenticating requests.
 > For passwords that include a single quote or a newline character, escape the single quote or newline character with a backslash both when creating the password and when submitting authentication requests.
 

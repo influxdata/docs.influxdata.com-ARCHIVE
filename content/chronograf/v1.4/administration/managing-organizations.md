@@ -22,7 +22,7 @@ menu:
 
 > ***Note:*** Support for organizations and distinct users with role-based access control is new in Chronograf 1.4.
 >
-> For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/).
+> For information about the new user roles and SuperAdmin status, see [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users/).
 
 A Chronograf organization is a collection of Chronograf users who share common Chronograf-owned resources, including dashboards, InfluxDB connections, and Kapacitor connections. Organizations can be used to represent companies, functional units, projects, or teams. Chronograf users can be members of multiple organizations.
 
@@ -67,8 +67,8 @@ You can configure existing and new organizations in the **Organizations** tab of
 
 See the following pages for more information about managing Chronograf users and security:
 
-* [Managing Chronograf users](/chronograf/latest/administration/managing-chronograf-users/)
-* [Managing security](/chronograf/latest/administration/managing-security/)
+* [Managing Chronograf users](/chronograf/v1.4/administration/managing-chronograf-users/)
+* [Managing security](/chronograf/v1.4/administration/managing-security/)
 
 ## Mapping organizations
 

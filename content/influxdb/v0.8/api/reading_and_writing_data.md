@@ -172,7 +172,7 @@ either `s` for seconds, `ms` for milliseconds, or `u` for
 microseconds.
 
 Now that you know how to read and write data, let's take a look at the
-[InfluxDB query language](query_language.html) to see what you can do.
+[InfluxDB query language](/influxdb/v0.8/api/query_language/) to see what you can do.
 
 ### Pretty-Printed Results
 

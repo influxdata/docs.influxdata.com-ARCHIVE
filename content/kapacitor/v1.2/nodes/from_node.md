@@ -226,7 +226,7 @@ node.truncate(value time.Duration)
 Filter the current stream using the given expression. 
 This expression is a Kapacitor expression. Kapacitor 
 expressions are a superset of InfluxQL WHERE expressions. 
-See the [expression](https://docs.influxdata.com/kapacitor/latest/tick/expr/) docs for more information. 
+See the [expression](/kapacitor/v1.2/tick/expr/) docs for more information. 
 
 Multiple calls to the Where method will `AND` together each expression. 
 

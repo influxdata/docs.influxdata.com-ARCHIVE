@@ -74,7 +74,7 @@ We will update this release note with operational steps once the utility is avai
 ## v1.3.5 [2017-08-29]
 
 This release builds off of the 1.3.5 release of InfluxDB OSS.
-Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-3-5-2017-08-29) for more information about the OSS releases.
+Please see the OSS [release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-3-5-2017-08-29) for more information about the OSS releases.
 
 ## v1.3.4 [2017-08-23]
 
@@ -150,11 +150,11 @@ The admin UI is removed and unusable in this release. The `[admin]` configuratio
 ## v1.2.5 [2017-05-16]
 
 This release builds off of the 1.2.4 release of InfluxDB OSS.
-Please see the OSS [release notes](/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-2-4-2017-05-08) for more information about the OSS releases.
+Please see the OSS [release notes](https://docs.influxdata.com/influxdb/v1.3/about_the_project/releasenotes-changelog/#v1-2-4-2017-05-08) for more information about the OSS releases.
 
 #### Bugfixes
 
-- Fix issue where the [`ALTER RETENTION POLICY` query](/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) does not update the default retention policy.
+- Fix issue where the [`ALTER RETENTION POLICY` query](https://docs.influxdata.com/influxdb/v1.3/query_language/database_management/#modify-retention-policies-with-alter-retention-policy) does not update the default retention policy.
 - Hinted-handoff: remote write errors containing `partial write` are considered droppable.
 - Fix the broken `influxd-ctl remove-data -force` command.
 - Fix security escalation bug in subscription management.
@@ -210,8 +210,8 @@ This change only affects users who have disabled the `retention-autocreate` opti
 ##### Other
 <br>
 
-- Return partial results for the [`SHOW TAG VALUES` query](/influxdb/v1.3/query_language/schema_exploration/#show-tag-values) even if the cluster includes an unreachable data node
-- Return partial results for the [`SHOW MEASUREMENTS` query](/influxdb/v1.3/query_language/schema_exploration/#show-measurements) even if the cluster includes an unreachable data node
+- Return partial results for the [`SHOW TAG VALUES` query](https://docs.influxdata.com/influxdb/v1.3/query_language/schema_exploration/#show-tag-values) even if the cluster includes an unreachable data node
+- Return partial results for the [`SHOW MEASUREMENTS` query](https://docs.influxdata.com/influxdb/v1.3/query_language/schema_exploration/#show-measurements) even if the cluster includes an unreachable data node
 - Prevent a panic when the system files to process points
 - Ensure that cluster hostnames can be case insensitive
 - Update the `retryCAS` code to wait for a newer snapshot before retrying
@@ -249,7 +249,7 @@ To disable the auto-creation of retention policies, set `retention-autocreate` t
 - Add support for [incremental backups](/enterprise_influxdb/v1.3/guides/backup-and-restore/)
 - Automatically remove any deleted shard groups from the data store
 - Uncomment the section headers in the default [configuration file](/enterprise_influxdb/v1.3/administration/configuration/)
-- Add InfluxQL support for [subqueries](/influxdb/v1.3/query_language/data_exploration/#subqueries)
+- Add InfluxQL support for [subqueries](https://docs.influxdata.com/influxdb/v1.3/query_language/data_exploration/#subqueries)
 
 #### Cluster-specific Bugfixes
 
@@ -262,11 +262,11 @@ To disable the auto-creation of retention policies, set `retention-autocreate` t
 - Remove an unused configuration option (`dir`) from the backend
 - Fix a panic around processing remote writes
 - Return an error if a remote write has a field conflict
-- Drop points in the hinted handoff that (1) have field conflict errors (2) have [`max-values-per-tag`](/influxdb/v1.3/administration/config/#max-values-per-tag-100000) errors
+- Drop points in the hinted handoff that (1) have field conflict errors (2) have [`max-values-per-tag`](https://docs.influxdata.com/influxdb/v1.3/administration/config/#max-values-per-tag-100000) errors
 - Remove the deprecated `influxd-ctl force-leave` command
 - Fix issue where CQs would stop running if the first meta node in the cluster stops
 - Fix logging in the meta httpd handler service
-- Fix issue where subscriptions send duplicate data for [Continuous Query](/influxdb/v1.3/query_language/continuous_queries/) results
+- Fix issue where subscriptions send duplicate data for [Continuous Query](https://docs.influxdata.com/influxdb/v1.3/query_language/continuous_queries/) results
 - Fix the output for `influxd-ctl show-shards`
 - Send the correct RPC response for `ExecuteStatementRequestMessage`
 
@@ -464,4 +464,4 @@ Backup and restore has been updated to fix issues and refine existing capabiliti
 The Enterprise Web Console has officially been deprecated and will be eliminated entirely by the end of 2017.
 No additional features will be added and no additional bug fix releases are planned.
 
-For browser-based access to InfluxDB Enterprise, [Chronograf](/chronograf/latest/introduction) is now the recommended tool to use.
+For browser-based access to InfluxDB Enterprise, [Chronograf](/{{< latest "chronograf" >}}/introduction) is now the recommended tool to use.

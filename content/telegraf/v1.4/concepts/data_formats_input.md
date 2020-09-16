@@ -18,7 +18,7 @@ Telegraf is able to parse the following input data formats into metrics:
 1. [Collectd](#collectd)
 
 Telegraf metrics, like InfluxDB
-[points](https://docs.influxdata.com/influxdb/v0.10/write_protocols/line/),
+[points](/influxdb/v0.10/write_protocols/line/),
 are a combination of four basic parts:
 
 1. Measurement Name

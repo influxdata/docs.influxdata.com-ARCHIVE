@@ -46,7 +46,7 @@ The `503` errors should stop showing up in the logs once you
 ## Why am I seeing a `409` error in some of my data node logs?
 
 When you create a
-[Continuous Query (CQ)](/influxdb/v1.3/concepts/glossary/#continuous-query-cq)
+[Continuous Query (CQ)](https://docs.influxdata.com/influxdb/v1.3/concepts/glossary/#continuous-query-cq)
 on your cluster every data node will ask for the CQ lease.
 Only one data node can accept the lease.
 That data node will have a `200` in its logs.

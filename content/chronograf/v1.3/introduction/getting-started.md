@@ -55,7 +55,7 @@ So far so good! You're ready to move on to the next section. Note that there's n
 
 ## Kapacitor Setup
 
-[Kapacitor](https://docs.influxdata.com/kapacitor/v1.3/) is the data processing platform of the TICK stack.
+[Kapacitor](/kapacitor/v1.3/) is the data processing platform of the TICK stack.
 Kapacitor is responsible for creating and sending alerts in Chronograf.
 
 #### 1. Download and Install Kapacitor
@@ -86,7 +86,7 @@ Get http://localhost:9092/kapacitor/v1/tasks?dot-view=attributes&fields=type&fie
 
 ## Telegraf Setup
 
-[Telegraf](https://docs.influxdata.com/telegraf/v1.3/) is the metrics gathering agent in the TICK stack.
+[Telegraf](/telegraf/v1.3/) is the metrics gathering agent in the TICK stack.
 For the purposes of this guide, we set up Telegraf to collect [system stats](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/system) data on your machine and write those metrics to your existing InfluxDB instance.
 
 > In a production environment, Telegraf would be installed on your servers and would point the output to an InfluxDB instance on a separate machine.

@@ -9,9 +9,9 @@ menu:
 
 Follow the links below for more information.
 
-## [Chronograf release notes](/chronograf/latest/about_the_project/release-notes-changelog/)
+## [Chronograf release notes](/chronograf/v1.4/about_the_project/release-notes-changelog/)
 
-The [Chronograf release notes](/chronograf/latest/about_the_project/release-notes-changelog/) includes details about features, bug fixes, and breaking changes for current and earlier Chronograf OSS releases.
+The [Chronograf release notes](/chronograf/v1.4/about_the_project/release-notes-changelog/) includes details about features, bug fixes, and breaking changes for current and earlier Chronograf OSS releases.
 
 ## [Contributing to Chronograf](https://github.com/influxdata/chronograf/blob/master/CONTRIBUTING.md)
 

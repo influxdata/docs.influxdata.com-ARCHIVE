@@ -58,7 +58,7 @@ setting in the meta node and data node configuration files.
 
 InfluxDB Enterprise does not function as a load balancer.
 You will need to configure your own load balancer to send client traffic to the
-data nodes on port `8086` (the default port for the [HTTP API](/influxdb/v1.3/tools/api/)).
+data nodes on port `8086` (the default port for the [HTTP API](https://docs.influxdata.com/influxdb/v1.3/tools/api/)).
 
 ## Step 1: Modify the `/etc/hosts` file in each of your servers
 
@@ -190,7 +190,7 @@ First, in `/etc/influxdb/influxdb.conf`, uncomment:
 * `shared-secret` in the `[http]` section and set it to a long pass phrase that will be used to sign tokens for intra-cluster communication. This value needs to be consistent across all data nodes.
 
 > **Note:** When you enable authentication, InfluxDB only executes HTTP requests that are sent with valid credentials.
-See the [authentication section](/influxdb/latest/administration/authentication_and_authorization/#authentication) for more information.
+See the [authentication section](https://docs.influxdata.com/influxdb/v1.3/administration/authentication_and_authorization/#authentication) for more information.
 
 Second, in `/etc/influxdb/influxdb.conf`, set:
 

@@ -10,7 +10,7 @@ menu:
 
 The following sections will show you how to create time range template on a
 graph.
-If you'd like to follow along, see [Getting Started with Telegraf](https://docs.influxdata.com/telegraf/v0.13/introduction/getting-started-telegraf/) to get the data we use in this section.
+If you'd like to follow along, see [Getting Started with Telegraf]((/{{< latest "chronograf" >}}/introduction/getting-started/) to get the data we use in this section.
 
 ### Template time range with `tmplTime()`
 
