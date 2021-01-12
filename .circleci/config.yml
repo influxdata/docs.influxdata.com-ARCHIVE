@@ -1,0 +1,67 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:erbium
+        environment:
+          HUGO_VERSION: "0.59.1"
+          S3DEPLOY_VERSION: "2.3.5"
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - install-{{ .Environment.CACHE_VERSION }}-{{ checksum ".circleci/config.yml" }}
+            - install-{{ .Environment.CACHE_VERSION }}-
+      - run:
+          name: Make bin folder
+          command: mkdir -p $HOME/bin
+      - run:
+          name: Install Hugo
+          command: ./deploy/ci-install-hugo.sh
+      - run:
+          name: Install s3deploy
+          command: ./deploy/ci-install-s3deploy.sh
+      - save_cache:
+          key: install-{{ .Environment.CACHE_VERSION }}-{{ checksum ".circleci/config.yml" }}
+          paths:
+            - /home/circleci/bin
+      - run:
+          name: Hugo Build
+          command: $HOME/bin/hugo -v --minify --destination workspace/public
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - public
+
+  deploy:
+    docker:
+      - image: circleci/golang:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - install-{{ .Environment.CACHE_VERSION }}-{{ checksum ".circleci/config.yml" }}
+            - install-{{ .Environment.CACHE_VERSION }}-
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: Deploy to S3
+          command: $HOME/bin/s3deploy -source=workspace/public/ -bucket=$BUCKET -region=$REGION -distribution-id=$CF_DISTRIBUTION_ID
+      - run:
+          name: Post in Slack
+          command: >
+            export COMMIT_INFO="$(git log -1 --format='%n>>>%s%n%b%n_<https://github.com/influxdata/docs.influxdata.com-ARCHIVE/commit/%H|Commit %h> - by %an_')"; curl -X POST --data-urlencode "payload={\"username\": \"Doc the Docs Bot\", \"text\": \"The \*docs archive\* successfully deployed! :greeny_peeny:\n\n $COMMIT_INFO\", \"icon_emoji\": \":doc_green:\"}" $SLACK_DOCS_WEBHOOK_URL
+          when: on_success
+
+workflows:
+  version: 1
+  build:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
