@@ -6,6 +6,14 @@ menu:
     parent: About the Project
 ---
 
+## v1.5.8 [2020-1-27]
+
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.8 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](https://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+
+## v1.5.7 [2020-10-26]
+
+This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.7 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](https://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+
 ## v1.5.6 [2020-07-17]
 
 This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.6 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](https://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
