@@ -6,7 +6,7 @@ menu:
     parent: About the Project
 ---
 
-## v1.5.8 [2020-1-27]
+## v1.5.8 [2020-2-08]
 
 This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.8 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](https://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
 
