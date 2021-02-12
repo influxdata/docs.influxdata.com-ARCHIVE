@@ -8,7 +8,7 @@ menu:
 
 ## v1.5.8 [2020-1-27]
 
-This Kapacitor Enterprise release builds on the Kapacitor OSS 1.5.8 release. For details on changes incorporated from the Kapacitor OSS release, see [Kapacitor OSS release notes](https://docs.influxdata.com/kapacitor/v1.5/about_the_project/releasenotes-changelog/).
+> **Warning:** If you've installed this release, please roll back to v1.5.7 as soon as possible. This release introduced a regression in batch tasks that may cause data loss.
 
 ## v1.5.7 [2020-10-26]
 
