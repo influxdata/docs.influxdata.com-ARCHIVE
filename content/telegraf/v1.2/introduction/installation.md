@@ -45,7 +45,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   For Ubuntu users, add the InfluxData repository with the following commands:
 
   ```bash
-  curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+  curl -sL https://repos.influxdata.com/influxdata-archive_compat.key | sudo apt-key add -
   source /etc/lsb-release
   echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
   ```
@@ -53,7 +53,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   For Debian users, add the InfluxData repository with the following commands:
 
   ```bash
-  curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+  curl -sL https://repos.influxdata.com/influxdata-archive_compat.key | sudo apt-key add -
   source /etc/os-release
   test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
   test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
@@ -84,7 +84,7 @@ aren't synchronized with NTP, the timestamps on the data can be inaccurate.
   baseurl = https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
   enabled = 1
   gpgcheck = 1
-  gpgkey = https://repos.influxdata.com/influxdb.key
+  gpgkey = https://repos.influxdata.com/influxdata-archive_compat.key
   EOF
   ```
 
