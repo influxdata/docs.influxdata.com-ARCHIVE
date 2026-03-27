@@ -15,7 +15,7 @@
     "bcrypt": "^5.0.0",
     "boom": "^7.3.0",
     "bounce": "^1.2.3",
-    "brace-expansion": "^1.1.12",
+    "brace-expansion": "^1.1.13",
     "braces": "^3.0.3",
     "browserslist": "^4.16.1",
     "cryptiles": "^4.1.3",
